@@ -58,6 +58,39 @@ public String format(Date date) {
 3. **ThreadLocal 的 initialValue()**：如何实现延迟初始化？（重写 `initialValue()` 或使用 `withInitial()` 静态方法，只有在第一次 get 时才会创建对象）。
 4. **伪共享问题**：虽然较少问，但高性能场景下需注意，ThreadLocal 的随机 Hash 种子设计部分考虑了缓存行对齐以减少冲突。
 
+## 技术原理
+
+ThreadLocal 的"线程隔离"看似简单，底层实现却有几个关键设计：
+
+- **每个 Thread 持有独立的 ThreadLocalMap**：Thread 类内部有一个 `ThreadLocal.ThreadLocalMap` 字段。调用 `threadLocal.get()` 时，实际是先拿到当前线程 `Thread.currentThread`，再从它的 `threadLocals` 字段里以 `this`（ThreadLocal 实例本身）为 key 查找 value。所以数据是存在 Thread 对象上，而非 ThreadLocal 对象上——ThreadLocal 只是 key。
+- **弱引用 key 防部分泄漏**：ThreadLocalMap 的 Entry 继承 WeakReference，key 是 ThreadLocal 实例的弱引用。当 ThreadLocal 实例无强引用时，GC 会回收 key（变成 null），但 value 仍是强引用。如果线程不死（如线程池），这些 `key=null` 的 value 永远无法访问却无法回收，这就是经典的 ThreadLocal 内存泄漏。
+- **线性探测法解决哈希冲突**：ThreadLocalMap 用开放寻址（线性探测）而非链表法处理冲突。设置魔数 `0x61c88647`（黄金分割）让 hash 分布均匀，减少冲突。
+- **InheritableThreadLocal 的父子传递**：普通 ThreadLocal 无法传给子线程。InheritableThreadLocal 在 Thread 创建时，把父线程的 `inheritableThreadLocals` 复制到子线程，但线程池场景下线程复用，这个机制失效，需用 TransmittableThreadLocal 阿里开源方案。
+
+## 代码示例
+
+线程池下正确使用 ThreadLocal（含 remove 防泄漏 + 上下文传递）：
+
+```java
+private static final ThreadLocal<UserContext> CTX = new ThreadLocal<>();
+
+executor.submit(() -> {
+    try {
+        CTX.set(currentUser);           // 设置线程局部变量
+        service.process();              // 整个调用链都能 CTX.get() 拿到，无需层层传参
+    } finally {
+        CTX.remove();                   // 必须清理，否则线程池复用时残留 + 内存泄漏
+    }
+});
+```
+
+## 注意事项
+
+1. **必须手动 remove**：线程池场景下线程复用，用完 ThreadLocal 必须 `finally { threadLocal.remove(); }`，否则数据残留会污染下一个任务，还导致内存泄漏。
+2. **线程池下 InheritableThreadLocal 失效**：线程池线程是复用的，创建时机不确定，InheritableThreadLocal 的父子传递不可靠，需用 TransmittableThreadLocal。
+3. **异步线程要手动传递上下文**：MDC 在异步场景下 TraceId 会丢失，需用 TaskDecorator 或手动包装 Runnable 传递。
+4. **避免存大对象**：每个线程一份副本，大对象会导致内存膨胀，尤其是线程数多的场景。
+
 ## 记忆要点
 
 - 核心定义：提供线程局部变量，每个线程拥有独立副本，以空间换时间实现无锁并发。

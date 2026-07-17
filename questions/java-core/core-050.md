@@ -64,6 +64,68 @@ tags: []
 *   **TCP实战**：在文件传输服务中，必须使用 TCP。例如，我们曾在实现一个分布式日志收集组件时，初期尝试 UDP 传输日志，结果发现网络拥塞时日志大量丢失且无法恢复，最终改用 TCP 并结合批量压缩发送解决了数据完整性问题。
 *   **UDP实战**：在王者荣耀等 MOBA 游戏中，通常使用 UDP 传输角色位置和技能释放数据。因为几毫秒的延迟比丢掉一帧画面更不可接受；为了解决 UDP 的不可靠性，应用层通常会实现自定义的重传和校验机制（如 KCP 协议）。
 
+## 技术原理
+
+- **TCP 的可靠传输机制（核心）**：TCP 通过四个机制保证可靠——①**序列号 + ACK**：每个字节有序列号，接收方按序重组，丢失则不发 ACK；②**超时重传**：发送方启动定时器，超时未收到 ACK 就重传；③**滑动窗口（流量控制）**：接收方在 ACK 中通告"我还能收 N 字节"（window size），发送方据此控制发送速率，避免淹没接收方；④**拥塞控制**：慢启动、拥塞避免、快重传、快恢复——感知网络拥塞（丢包）时主动降速，避免网络崩溃。
+- **三次握手与四次挥手**：握手 SYN/SYN-ACK/ACK——双方协商初始序列号、确认双方收发能力。挥手 FIN/ACK/FIN/ACK（四次）——TCP 是全双工的，A 不发了但 B 可能还在发，所以 A 的 FIN 和 B 的 FIN 要分开确认。四次挥手后有 2MSL 的 TIME_WAIT，确保最后的 ACK 到达 B，并让旧连接的延迟报文消亡。
+- **面向字节流 vs 面向报文**：TCP 把应用层数据看作**无边界的字节流**——发送 100 字节和接收方收到的"两次 50 字节"是等价的，应用要自己做"粘包/拆包"处理（如 HTTP 用 Content-Length、\r\n\r\n 分隔）。UDP 保留**报文边界**——发送方一次 send 100 字节，接收方一次 recv 就是完整的 100 字节，不会拆分也不会合并。这是 TCP/UDP 编程模型的核心差异。
+- **UDP 的"无服务"哲学**：UDP 只在 IP 上加了**端口复用**和**校验和**，其他什么也不做——不建连、不保序、不重传、不流控。这种"极简"让 UDP 开销极低（首部仅 8 字节 vs TCP 20 字节）、延迟极低（无握手）、支持广播/多播。需要可靠性的应用（如 QUIC、KCP）在 UDP 之上自行实现重传和拥塞控制，避免 TCP 内核态的僵化。
+
+## 对比/选型
+
+| 维度 | TCP | UDP |
+|------|-----|-----|
+| 连接 | 面向连接（三次握手） | 无连接 |
+| 可靠性 | 可靠（序列号+ACK+重传） | 不可靠（尽力而为） |
+| 有序性 | 保证有序 | 不保证 |
+| 传输单元 | 字节流（无边界） | 报文（有边界） |
+| 首部开销 | 20~60 字节 | 8 字节 |
+| 流量/拥塞控制 | 有（滑动窗口、慢启动） | 无 |
+| 通信模式 | 点对点（1对1） | 1对1/1对多/多对多（广播/多播） |
+| 典型应用 | HTTP/HTTPS/FTP/SMTP | DNS/视频/游戏/QUIC |
+
+## 代码示例
+
+```java
+// ===== TCP 服务端（可靠传输，面向字节流）=====
+try (ServerSocket server = new ServerSocket(8080)) {
+    Socket client = server.accept();           // 三次握手建立连接
+    InputStream in = client.getInputStream();
+    byte[] buf = new byte[1024];
+    int n;
+    // 注意：TCP 是字节流，一次 read 不一定读完一条消息
+    // 需要应用层协议（如先读长度再读 body）处理粘包
+    while ((n = in.read(buf)) != -1) {
+        String msg = new String(buf, 0, n);    // 可能是半个消息，也可能粘了多条
+        process(msg);
+    }
+}
+
+// ===== UDP 服务端（无连接，面向报文）=====
+DatagramSocket socket = new DatagramSocket(9090);
+byte[] buf = new byte[1024];
+DatagramPacket packet = new DatagramPacket(buf, buf.length);
+while (true) {
+    socket.receive(packet);                     // 一次收一个完整报文
+    String msg = new String(packet.getData(), 0, packet.getLength());
+    process(msg);                               // 不保证有序，可能丢包
+    // 应用层自行实现重传（如 KCP 协议）
+}
+
+// ===== HTTP/3 基于 UDP（QUIC）的演进 =====
+// HTTP/2 over TCP 队头阻塞：一个流丢包，所有流阻塞
+// HTTP/3 over QUIC(UDP)：每个流独立，丢包不影响其他流
+// 且 QUIC 在 UDP 上实现了类似 TCP 的可靠 + 拥塞控制，但更灵活
+```
+
+## 常见坑/注意事项
+
+- **TCP 的队头阻塞（Head-of-Line Blocking）**：一个字节丢失会阻塞后续所有字节（即使后续字节已到达）。HTTP/2 的多路复用让这个问题更严重——一个流丢包，所有流都卡。HTTP/3 用 QUIC（基于 UDP）解决，每个流独立重传。
+- **TIME_WAIT 堆积**：主动关闭方进入 2MSL（默认 60s）的 TIME_WAIT，高并发短连接服务器会堆积大量 TIME_WAIT 耗尽端口。对策：开启 `SO_REUSEADDR`/`SO_REUSEPORT`、缩短 MSL、用长连接或连接池。
+- **UDP 的应用层可靠性**：UDP 不可靠，但实时性场景（游戏、视频）需要部分可靠性。要在应用层实现——KCP（快速重传）、WebRTC 的 NACK/FEC、QUIC 的 ACK 机制。不要裸用 UDP 做关键业务。
+- **NAT 穿透的差异**：UDP 的 NAT 映射会超时（30s~5min 无流量就失效），需 keepalive。TCP 的连接保持更稳定。P2P（如 WebRTC）用 UDP + STUN/TURN 穿透。
+- **TCP 的拥塞控制算法选择**：Linux 默认 cubic，BBR（Google）在高延迟/丢包链路上性能更好（如跨地域）。`net.ipv4.tcp_congestion_control=bbr` 开启，但需内核 4.9+。生产环境 A/B 测试再切换。
+
 ## 记忆要点
 
 - 连接与可靠性：TCP面向连接且可靠（三次握手），UDP无连接且不可靠。

@@ -62,6 +62,68 @@ def dpo_loss(policy_chosen_logps, policy_rejected_logps, ref_chosen_logps, ref_r
 2. beta (temperature) 参数如何调整？它对训练有何影响？
 3. 相比PPO，DPO在处理长上下文时有哪些潜在劣势？
 
+## 技术原理
+
+DPO 的核心数学洞察是：RLHF 的最优策略本身就隐含了奖励函数，所以可以反向求解把 RM 消去。推导链条如下：
+
+- **从 RLHF 目标到闭式解**：RLHF 优化 `max E[r(x,y)] - β·KL(π‖π_ref)`，即在最大化奖励的同时约束策略不偏离参考模型太远。这是一个带 KL 约束的凸优化问题，有闭式解：`π*(y|x) ∝ π_ref(y|x) · exp(r(x,y)/β)`。
+- **反解奖励函数**：对闭式解两边取对数并移项，得到 `r(x,y) = β·log(π*(y|x)/π_ref(y|x)) + β·log Z(x)`。这一步是关键——它说明奖励函数可以用策略模型和参考模型的对数比显式表达，RM 被隐式包含在策略里了。
+- **代入 Bradley-Terry 模型**：人类偏好服从 `P(y_w ≻ y_l) = σ(r(y_w) - r(y_l))`，把上一步的奖励表达式代入，奖励项中的 `Z(x)` 在做差时被消掉，得到纯策略形式的损失：`L = -log σ(β·log(π(y_w)/π_ref(y_w)) - β·log(π(y_l)/π_ref(y_l)))`。
+- **为什么能跳过 RM**：传统 RLHF 需要先训练 RM 再用 PPO 优化策略（两阶段，需 Critic 估计 advantage）；DPO 把两阶段合一，直接用偏好对算 log-ratio 差值更新策略，省了 RM 和 Critic，显存占用大幅降低，还避开了 Reward Hacking（模型钻 RM 漏洞刷高分）。
+
+## 注意事项
+
+1. **参考模型 π_ref 不可省**：π_ref 用于计算 KL 散度约束，防止策略偏离过远导致退化。不加约束模型会无限制拉大 chosen/rejected 概率差，产生不可读的输出。
+2. **beta 参数调节**：β 控制 KL 约束强度，β 大则约束强（策略接近参考模型，保守），β 小则约束弱（策略自由探索，激进）。通常 β=0.1 是起点，太小易过拟合偏好数据。
+3. **标注噪声导致伪发散**：chosen 和 rejected 质量相近时，模型可能只抬 chosen 不压 rejected，实战中需在损失里加 margin 或对 log-ratio 做 clip 增强鲁棒性。
+4. **长上下文劣势**：DPO 对长序列的对数概率计算更敏感，相比 PPO 在超长上下文场景下可能训练不稳定，需配合长度归一化。
+
+## 对比表
+
+| 维度 | PPO（传统 RLHF） | DPO | IPO | KTO |
+|:---|:---|:---|:---|:---|
+| **是否需 RM** | 需要（两阶段） | 不需要（隐式消去） | 不需要 | 不需要 |
+| **是否需 Critic** | 需要 | 不需要 | 不需要 | 不需要 |
+| **数据形式** | 偏好对 + 标量奖励 | Chosen/Rejected 对 | Chosen/Rejected 对 | 单条 + 好坏标签 |
+| **Reward Hacking** | 易发 | 避免 | 避免 | 避免 |
+| **显存占用** | 高（4 模型） | 低（2 模型） | 低 | 低 |
+| **训练稳定性** | 差（PPO 敏感） | 好 | 更好（防过拟合） | 好 |
+
+## 代码示例
+
+```python
+# DPO 训练完整流程（PyTorch 风格）
+import torch
+import torch.nn.functional as F
+
+def compute_dpo_loss(policy_model, ref_model, batch, beta=0.1):
+    """
+    batch: {chosen_input_ids, rejected_input_ids, ...}
+    policy_model: 当前训练的策略模型
+    ref_model: 冻结的参考模型（防偏离过远）
+    """
+    # 1. 计算策略模型对 chosen/rejected 的对数概率
+    policy_chosen_logps = compute_logps(policy_model, batch['chosen'])
+    policy_rejected_logps = compute_logps(policy_model, batch['rejected'])
+
+    # 2. 计算参考模型的对数概率（不更新梯度）
+    with torch.no_grad():
+        ref_chosen_logps = compute_logps(ref_model, batch['chosen'])
+        ref_rejected_logps = compute_logps(ref_model, batch['rejected'])
+
+    # 3. DPO 隐式奖励差（核心公式）
+    pi_ratio = policy_chosen_logps - policy_rejected_logps
+    ref_ratio = ref_chosen_logps - ref_rejected_logps
+    logits = beta * (pi_ratio - ref_ratio)
+
+    # 4. 二元交叉熵：拉大 chosen 与 rejected 的概率差
+    loss = -F.logsigmoid(logits).mean()
+    return loss
+
+# 标注噪声鲁棒性：对 log-ratio 做 clip 防伪发散
+logits = beta * torch.clamp(pi_ratio - ref_ratio, min=-5, max=5)
+```
+
 ## 记忆要点
 
 - DPO核心：利用RLHF最优策略闭式解，将Reward模型隐式消去

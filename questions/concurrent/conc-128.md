@@ -42,6 +42,86 @@ ThreadPoolExecutor的7个参数：
 3. **`allowCoreThreadTimeOut` 设置为 true 后，线程池的行为会有什么变化？**
 4. **使用不同类型的 `workQueue` 对线程池的运行有什么影响？**（考察有界/无界队列对流量控制和 OOM 的影响）
 
+## 技术原理
+
+线程池 7 个参数的设计目标是**在资源有限的前提下，平滑处理流量峰谷**。理解参数的关键是搞懂任务提交后的流转逻辑（这是面试高频考点）：
+
+- **任务提交后的执行顺序（核心逻辑，易错点）**：
+  1. 若当前线程数 < `corePoolSize`，**创建新核心线程**执行任务（即使队列有空闲）。
+  2. 若线程数已达 corePoolSize，**把任务放入 `workQueue`** 排队。
+  3. 若队列满了，且线程数 < `maximumPoolSize`，**创建非核心线程**执行任务。
+  4. 若队列满且线程数达 maximumPoolSize，**触发 `handler` 拒绝策略**。
+
+  注意：不是"先创建到最大线程数再入队"，而是"先入队，队列满了才扩容到 max"。这个顺序导致用 `LinkedBlockingQueue`（无界队列）时 maximumPoolSize 永远不会生效（队列永远不满），是常见踩坑点。
+
+- **keepAliveTime 针对非核心线程**：非核心线程空闲超过 keepAliveTime 会被回收。核心线程默认不回收（除非 `allowCoreThreadTimeOut=true`）。这是为了在流量低谷时释放资源、流量高峰时快速扩容。
+- **拒绝策略的四种内置实现**：
+  - `AbortPolicy`（默认）：抛 `RejectedExecutionException`，让调用方感知。
+  - `CallerRunsPolicy`：让提交任务的线程自己执行（背压，降低提交速度）。
+  - `DiscardPolicy`：静默丢弃新任务。
+  - `DiscardOldestPolicy`：丢弃队列最老的任务，腾位置给新任务。
+
+## 代码示例
+
+手动创建线程池（阿里规范要求，避免 Executors 的 OOM 风险）：
+
+```java
+import java.util.concurrent.*;
+
+public class ThreadPoolDemo {
+    public static void main(String[] args) {
+        int cpuCores = Runtime.getRuntime().availableProcessors();
+
+        // 手动创建，7 个参数全部显式指定
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(
+            cpuCores + 1,                    // corePoolSize: CPU 密集型 N+1
+            cpuCores * 2,                     // maximumPoolSize: IO 密集型上限 2N
+            60L, TimeUnit.SECONDS,            // keepAliveTime: 非核心线程空闲 60s 回收
+            new ArrayBlockingQueue<>(1000),   // workQueue: 有界队列，防 OOM
+            new ThreadFactory() {             // threadFactory: 自定义线程名便于排查
+                private int count = 0;
+                public Thread newThread(Runnable r) {
+                    return new Thread(r, "biz-pool-" + (count++));
+                }
+            },
+            // 拒绝策略：CallerRunsPolicy 让提交方自己跑，形成背压
+            new ThreadPoolExecutor.CallerRunsPolicy()
+        );
+
+        // 监控（生产必备）
+        System.out.printf("活跃线程: %d, 队列堆积: %d, 已完成: %d%n",
+            pool.getActiveCount(),
+            pool.getQueue().size(),
+            pool.getCompletedTaskCount());
+
+        for (int i = 0; i < 10000; i++) {
+            try {
+                pool.execute(() -> doBusinessLogic());
+            } catch (RejectedExecutionException e) {
+                // CallerRunsPolicy 不会抛，AbortPolicy 才会；这里兜底
+                System.err.println("任务被拒，降级处理");
+            }
+        }
+        pool.shutdown();
+    }
+
+    static void doBusinessLogic() { /* ... */ }
+}
+```
+
+```java
+// 阿里规范明确禁止的写法（OOM 风险）：
+// Executors.newFixedThreadPool(10)    -> 队列是 LinkedBlockingQueue（无界），任务堆积 OOM
+// Executors.newCachedThreadPool()     -> 最大线程数 Integer.MAX_VALUE，创建过多线程 OOM
+```
+
+## 注意事项
+
+- **不要用 Executors 创建线程池**：`FixedThreadPool` 用无界队列，任务堆积导致 OOM；`CachedThreadPool` 最大线程数无上限，创建过多线程也 OOM。必须手动 `new ThreadPoolExecutor` 并指定有界队列。
+- **队列选型决定行为**：`ArrayBlockingQueue`（有界）能触发扩容到 max；`LinkedBlockingQueue`（默认无界）让 max 永远不生效；`SynchronousQueue`（无容量）让任务直接交给线程，core 满立即扩容（CachedThreadPool 用的就是这个）。
+- **corePoolSize 配置按任务类型**：CPU 密集型（计算、加密）配 N+1，多出 1 个应对偶发阻塞；IO 密集型（网络、磁盘）配 2N 甚至更多，因为线程大量时间在等 IO，多线程能提高 CPU 利用率。
+- **必须配置监控和告警**：生产环境线程池要监控活跃线程数、队列堆积数、拒绝次数，队列堆积超阈值告警，否则流量洪峰时静默拒绝任务会导致业务故障。
+
 ## 记忆要点
 
 - 7参数口诀：核心、最大、存活时、计时单位、任务队列、线程工厂、拒绝策略

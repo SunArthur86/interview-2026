@@ -60,6 +60,47 @@ memory_points:
     System.out.println(s2.getBytes().length); // 取决于默认 charset，通常 utf-8 为 6
     ```
 
+## 技术原理
+
+**final 修饰不可继承**
+`String` 类被 `final` 修饰，是最终类，无法被继承。这样设计有两点考量：一是安全性，String 作为 HashMap 的 key、方法参数、类加载器资源名等被广泛使用，若可被继承，子类可能重写方法破坏不可变性，导致安全漏洞（如权限校验被绕过）；二是高效性，不可变性使得 JVM 可以安全地实现字符串常量池、缓存 hashCode、在多线程间共享而无需同步。
+
+**JDK8 底层是 char[]**
+JDK 1.8 及之前，String 底层用 `private final char[] value` 存储，每个 char 占 2 个字节（UTF-16）。对于大量纯英文、数字、JSON 等拉丁字符场景，2 字节是浪费的——实际上 1 个字节就够。这种设计在内存敏感的应用（如缓存大量字符串）中开销明显。
+
+**JDK9 底层改为 byte[]，节省内存**
+JDK 9 引入 Compact Strings（JEP 254），底层改为 `private final byte[] value` 配合 `private final byte coder` 字段。`coder` 为 0 表示 Latin-1 编码（1 字节/字符），为 1 表示 UTF-16 编码（2 字节/字符）。String 构造时会自动检测内容，纯 Latin 字符走 1 字节压缩存储。实测在典型 Web 应用中，堆内字符串内存占用下降 30%~50%。
+
+## 代码示例
+
+```java
+// JDK 8 源码片段
+private final char value[];     // 固定 2 字节/字符
+
+// JDK 9+ 源码片段
+private final byte[] value;     // 根据 coder 决定 1 或 2 字节
+private final byte coder;       // 0=Latin-1, 1=UTF-16
+```
+
+```java
+// JDK 9+ 压缩特性验证
+String s1 = "test";          // Latin-1，占 4 字节
+String s2 = "测试";          // UTF-16，占 4 字节（2 字符 × 2）
+// 内部通过反射观察 coder 字段
+Field f = String.class.getDeclaredField("coder");
+f.setAccessible(true);
+System.out.println(f.getByte(s1)); // 0 (LATIN1)
+System.out.println(f.getByte(s2)); // 1 (UTF16)
+```
+
+## 注意事项
+
+- 核心结论：String 类被 final 修饰，故为最终类，无法被继承。
+- JDK8 及之前：底层固定使用 char[] 数组，每个字符占 2 字节，存英文浪费。
+- JDK9 及之后：底层改为 byte[] 数组，搭配 coder 标识动态选择压缩编码。
+- 设计原因：大部分堆内字符串数据为纯拉丁字母，改 byte[] 节省近半内存。
+- 第三方库若通过反射直接访问 String 内部 `value` 字段，在 JDK 9+ 会因类型变更（char[]→byte[]）而报错，需升级库版本。
+
 ## 记忆要点
 
 - 核心结论：String类被final修饰，故为最终类，无法被继承。

@@ -65,6 +65,59 @@ memory_points:
    allFutures.thenApply(v -> new DetailDto(userFuture.join(), ordersFuture.join())).join();
    ```
 
+## 技术原理
+
+**Lambda：简化代码写法**
+Lambda 表达式是函数式编程的入口，用于替代冗长的匿名内部类。它本质上是一个函数式接口（只有一个抽象方法的接口，如 `Runnable`、`Comparator`、`Predicate`）的实例。编译后通过 `invokedynamic` 指令动态绑定，性能接近甚至优于匿名内部类（避免生成额外的 .class 文件）。
+
+**Stream：集合流式操作**
+Stream API 提供了对集合的声明式、链式操作，支持 filter、map、reduce、collect 等。它分中间操作（lazy，如 filter/map）和终端操作（eager，如 collect/forEach），中间操作会合并优化。Stream 还原生支持 parallelStream 并行流（基于 ForkJoinPool），在 CPU 密集型批量处理时可显著提速。
+
+**Optional：优雅防空指针**
+`Optional<T>` 是一个容器对象，用于显式表达"值可能为空"。相比直接返回 null 让调用方踩 NPE，Optional 强制调用方显式处理缺失场景（orElse/orElseGet/orElseThrow）。配合 map/flatMap 可以优雅地链式处理多层嵌套对象的 null 判断，消除重复的 `if (x != null)` 代码。
+
+**新日期 API：线程安全且语义清晰**
+`java.time` 包取代了老旧的 `Date`/`Calendar`（后者是可变的、线程不安全的、月份从 0 开始）。`LocalDate`/`LocalTime`/`LocalDateTime` 是不可变且线程安全的，`Instant` 表示时间戳，`Duration`/`Period` 表示时间间隔，API 设计符合人体工程学。
+
+## 代码示例
+
+```java
+// 1. Stream 链式处理 + Optional 防 NPE
+List<String> adults = users.stream()
+    .filter(u -> u.getAge() >= 18)
+    .map(User::getName)
+    .sorted()
+    .collect(Collectors.toList());
+
+// Optional 链式处理多层嵌套（消除 5 处 if-null）
+String city = Optional.ofNullable(order)
+    .map(Order::getUser)
+    .map(User::getAddress)
+    .map(Address::getCity)
+    .orElse("Unknown");
+```
+
+```java
+// 2. CompletableFuture 异步编排（并行查询合并结果）
+CompletableFuture<User> userF = CompletableFuture.supplyAsync(
+    () -> userDao.findById(userId));
+CompletableFuture<List<Order>> ordersF = CompletableFuture.supplyAsync(
+    () -> orderService.findOrders(userId));
+
+CompletableFuture.allOf(userF, ordersF)        // 等两个任务都完成
+    .thenApply(v -> new DetailDto(
+        userF.join(), ordersF.join()))          // 合并结果
+    .join();
+```
+
+## 注意事项
+
+- 两大基石：Lambda 表达式（简化代码）与 Stream API（函数式处理集合）。
+- 防 NPE 利器：Optional 容器，优雅链式处理多层嵌套对象的 null 判断。
+- 接口增强：引入 default 方法让接口能具备默认实现，完美解决向后兼容问题。
+- 异步与时间：CompletableFuture 实现多任务编排，java.time 包提供更安全的全新日期 API。
+- parallelStream 共用公共 ForkJoinPool，长时间阻塞任务会拖垮其他并行流，建议自定义线程池。
+
 ## 记忆要点
 
 - 两大基石：Lambda表达式（简化代码）与Stream API（函数式处理集合）。

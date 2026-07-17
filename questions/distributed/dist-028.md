@@ -52,6 +52,76 @@ memory_points:
 2. **XA 协议是强一致还是最终一致？**（提示：XA 是基于 2PC 的强一致性协议，但性能较差）。
 3. **解决分布式事务的方案有哪些？**（提示：TCC、Saga、本地消息表、Seata 等）。
 
+## 技术原理
+
+分布式事务的核心难点是**在网络不可靠、节点可能宕机的环境下，让分散在多个节点的操作保持 ACID**。不同方案在"一致性强度"和"性能"间做不同权衡：
+
+- **2PC/XA 的强一致与性能代价**：
+  - **准备阶段**：协调者问所有参与者"能否提交"，参与者执行事务但只写 undo/redo 不提交，**锁住资源**，返回 yes/no。
+  - **提交阶段**：全 yes 则发 commit，任一 no 或超时则发 rollback。
+  - **缺陷**：准备阶段持有资源锁直到第二阶段结束，高并发下锁等待严重；协调者宕机会让所有参与者阻塞（单点故障）；网络分区时部分参与者收不到 commit 导致数据不一致。
+- **TCC（Try-Confirm-Cancel）的最终一致**：把每个操作拆成三个接口——Try（预留资源，如冻结余额）、Confirm（真正扣减）、Cancel（解冻）。一阶段就提交本地事务释放锁，性能高；代价是业务侵入大（每个服务要写三个接口），且要处理 Confirm/Cancel 的重试和幂等。
+- **Seata AT（无侵入主流方案）**：
+  - 一阶段：各分支本地事务提交并释放本地锁，同时把"修改前镜像"和"修改后镜像"存到 undo_log 表。
+  - 二阶段：全部成功则异步删除 undo_log；有失败则根据 undo_log 的前镜像**自动生成反向 SQL 补偿回滚**。
+  - 优势是业务零侵入（只加 `@GlobalTransactional` 注解），代价是全局锁（TC 协调器管理）和短暂读写不一致。
+- **本地消息表（最终一致，最轻量）**：本地事务 + 消息表写入放在同一个本地事务里保证原子性，后台定时扫描消息表发 MQ，下游消费后 ack。适合跨系统异步通知（支付成功发短信），不要求强一致。
+
+## 代码示例
+
+Seata AT 模式（互联网主流，无侵入）：
+
+```java
+import io.seata.spring.annotation.GlobalTransactional;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OrderService {
+    @Autowired private StockFeignClient stockClient;
+    @Autowired private OrderMapper orderMapper;
+    @Autowired private PointsFeignClient pointsClient;
+
+    // @GlobalTransactional 开启全局事务，AT 模式自动生成回滚镜像
+    @GlobalTransactional(name = "create-order", timeoutMills = 60000, rollbackFor = Exception.class)
+    public void createOrder(OrderDTO dto) {
+        // 1. 扣库存（远程调用库存服务，Seata 自动记录前/后镜像到 undo_log）
+        stockClient.deduct(dto.getProductId(), dto.getCount());
+        // 2. 创建订单（本地事务，Seata 拦截 SQL 生成反向回滚 SQL）
+        orderMapper.insert(dto);
+        // 3. 加积分（远程调用积分服务）
+        pointsClient.add(dto.getUserId(), dto.getAmount());
+        // 任一步抛异常，Seata TC 自动协调所有分支用 undo_log 回滚
+    }
+}
+```
+
+```java
+// TCC 模式（高侵入高性能，金融场景）
+@LocalTCC
+public interface StockTccAction {
+    @TwoPhaseBusinessAction(name = "deductStock",
+        commitMethod = "confirm", rollbackMethod = "cancel")
+    boolean tryDeduct(BusinessActionContext ctx,
+                      @BusinessActionContextParameter(paramName = "productId") Long productId,
+                      @BusinessActionContextParameter(paramName = "count") Integer count);
+
+    boolean confirm(BusinessActionContext ctx);   // 真正扣减
+    boolean cancel(BusinessActionContext ctx);    // 解冻
+}
+// Try 阶段冻结库存（available_stock -= count, frozen_stock += count）
+// Confirm 阶段扣减冻结（frozen_stock -= count）
+// Cancel 阶段解冻（frozen_stock -= count, available_stock += count）
+// Confirm/Cancel 必须幂等（可能被重试）
+```
+
+## 注意事项
+
+- **强一致（2PC/XA）在互联网场景基本不用**：全局锁导致并发度极低，高并发下会拖垮整个链路。仅在传统金融核心（如银行核心账务）等并发量低但强一致要求极高的场景使用。
+- **TCC 的 Confirm/Cancel 必须幂等**：网络抖动会导致 TC 重试调用，若不幂等会重复扣减/解冻。用业务流水号 + 状态机保证幂等。
+- **Seata AT 有短暂读写不一致**：一阶段提交后、二阶段回滚前的窗口期，其他事务可能读到"将被回滚"的中间状态。对强一致读敏感的场景要配合全局锁或读已提交隔离。
+- **本地消息表要处理重复消费**：MQ 可能重复投递，下游消费必须幂等（用唯一键去重）。消息表扫描 + MQ 发送要有重试和死信处理。
+- **空回滚和悬挂问题（TCC）**：Try 请求因网络丢失但 Cancel 先到达时，要能识别"空回滚"（没 Try 就 Cancel）；Try 延迟到达 Cancel 之后时形成"悬挂"（业务已结束又 Try），要靠事务记录表防止。
+
 ## 记忆要点
 
 - 一句话定义：跨多个网络节点的事务，需协调多方资源保证全局要么全成功要么全失败

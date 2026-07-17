@@ -61,6 +61,51 @@ try {
 }
 ```
 
+## 技术原理
+
+**Error 代表 JVM 级严重错误**
+`Error` 及其子类（如 `OutOfMemoryError`、`StackOverflowError`、`VirtualMachineError`）表示 JVM 自身出现严重故障，程序通常无法恢复。例如 OOM 说明堆内存耗尽，`StackOverflowError` 说明栈深度超限。这类错误不应该在业务代码中 try-catch 捕获，因为即使捕获也无法保证后续逻辑的正确性，正确做法是让 JVM 终止并重启，或通过 JVM 参数、代码优化从根本上预防。
+
+**Exception 代表程序可处理的异常**
+`Exception` 是业务可处理的异常，分为受检异常（Checked Exception，除 RuntimeException 外）和非受检异常（RuntimeException 及其子类）。受检异常在编译期强制要求 try-catch 或 throws，如 `IOException`、`SQLException`，通常表示外部环境问题；非受检异常通常是代码逻辑错误，如 `NullPointerException`、`IllegalArgumentException`，编译器不强制处理，往往需要修正代码而非捕获。
+
+**Throwable 是异常捕获机制的根基**
+所有 `throw` 和 `catch` 的对象都必须是 `Throwable` 的子类。它提供了 `getMessage()` 获取错误描述、`getCause()` 获取根因、`printStackTrace()` 打印调用栈、`getStackTrace()` 编程式访问栈帧等核心方法，是 Java 异常处理体系的统一入口。
+
+## 代码示例
+
+```java
+// 1. 保留异常链：抛出业务异常时传入原异常
+try {
+    userDao.findById(id);
+} catch (SQLException e) {
+    // 错误写法：throw new BusinessException("查询失败") —— 丢失了根因
+    // 正确写法：保留原始异常，便于生产排查 Root Cause
+    throw new ResourceNotFoundException("用户查询失败, id=" + id, e);
+}
+```
+
+```java
+// 2. 自定义异常体系
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message, Throwable cause) {
+        super(message, cause);   // 传入 cause 保留异常链
+    }
+}
+// 受检异常则继承 Exception
+public class BizCheckedException extends Exception {
+    public BizCheckedException(String msg) { super(msg); }
+}
+```
+
+## 注意事项
+
+- 继承体系：Throwable 是顶级父类，仅有 Error 和 Exception 两个核心子类。
+- 异常分类：受检异常必须 try-catch，而 RuntimeException 非受检异常常为代码逻辑错误。
+- Error 处理：OOM 等 Error 属于 JVM 严重故障不可恢复，不建议在业务代码中捕获。
+- 保留异常链：抛出自定义业务异常时必须传入原异常 e，避免吞掉底层 Root Cause 排查线索。
+- 常用 API：getMessage() 获取简述，而 printStackTrace() 常用于直接打印详细调用栈（生产环境建议用日志框架替代）。
+
 ## 记忆要点
 
 - 继承体系：Throwable是顶级父类，仅有Error和Exception两个核心子类
