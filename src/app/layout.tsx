@@ -3,13 +3,13 @@ import ClientBootstrap from '@/components/ClientBootstrap';
 import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Java 面试题库',
-  description: '精选 Java 后端高频面试题，涵盖 Java 核心、并发、JVM、Spring、数据库、中间件、分布式、场景设计，含费曼快学、第一性原理、遗忘曲线智能复习。',
+  title: '面试题库 2026',
+  description: '2734 道精选面试题，合并 AI / Java / 大厂 JD 三大方向，含费曼快学、第一性原理、结构化回答、视频脚本、苏格拉底式追问、遗忘曲线智能复习。',
   manifest: '/interview-2026/manifest.json',
 };
 
 export const viewport: Viewport = {
-  themeColor: '#f89820',
+  themeColor: '#0071e3',
   width: 'device-width',
   initialScale: 1,
 };
