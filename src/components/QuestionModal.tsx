@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import type { Question } from '@/lib/types';
 import { APP_CONFIG } from '@/lib/config';
 import { useStore } from '@/lib/store';
+import { useAnswer } from '@/lib/useAnswer';
 import QuestionContent from './QuestionContent';
 import { showToast } from './Toast';
 
@@ -24,6 +25,13 @@ export default function QuestionModal({ q, index, total, onPrev, onNext, onClose
   const isFav = favorites.includes(q.id);
   const basePath = process.env.NODE_ENV === 'production' ? '/interview-2026' : '';
 
+  // Lazy-load the full answer from per-category JSON
+  const { answer: fullAnswer, loading: answerLoading } = useAnswer(q);
+  const fullQ = useMemo<Question>(() => ({
+    ...q,
+    answer: fullAnswer || q.answer,
+  }), [q, fullAnswer]);
+
   useEffect(() => {
     markViewed(q.id);
     document.body.style.overflow = 'hidden';
@@ -42,7 +50,7 @@ export default function QuestionModal({ q, index, total, onPrev, onNext, onClose
   }, [handleKey]);
 
   const handleCopy = () => {
-    const text = `Q: ${q.question}\n\nA: ${q.answer.replace(/[#*`>]/g, '').slice(0, 2000)}\n\n来源: ${APP_CONFIG.githubUrl}`;
+    const text = `Q: ${q.question}\n\nA: ${fullQ.answer.replace(/[#*`>]/g, '').slice(0, 2000)}\n\n来源: ${APP_CONFIG.githubUrl}`;
     navigator.clipboard?.writeText(text).then(() => showToast('答案已复制到剪贴板'));
   };
 
@@ -75,7 +83,15 @@ export default function QuestionModal({ q, index, total, onPrev, onNext, onClose
 
         {/* Body */}
         <div className="modal-body">
-          <QuestionContent q={q} onFollowUp={onFollowUp} />
+          {answerLoading ? (
+            <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-tertiary)' }}>
+              <div className="modal-spinner" />
+              <style>{`.modal-spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+              加载中...
+            </div>
+          ) : (
+            <QuestionContent q={fullQ} onFollowUp={onFollowUp} />
+          )}
         </div>
 
         {/* Footer toolbar */}
