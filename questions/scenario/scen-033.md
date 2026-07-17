@@ -1,0 +1,154 @@
+---
+id: scen-033
+difficulty: L2
+category: scenario
+subcategory: 支付与交易
+tags:
+- 库存扣减
+- 防超卖
+- Redis
+- 乐观锁
+- 分段库存
+- 异步扣减
+feynman:
+  essence: Redis防超卖、MQ异步落库、分段降热点。
+  analogy: 像热门景区限流：先发预约码（Redis），入园后系统慢慢核销（DB），分时段入场分流。
+  first_principle: 如何在超高并发下保证数据准确且系统不崩？
+  key_points:
+  - Redis原子扣减（Lua/DECR）防超卖
+  - MQ异步扣DB，削峰填谷
+  - 分段库存减少热点Key冲突
+  - 定时任务或回滚补偿保障一致性
+follow_up:
+- 分段库存如何实现？
+- Redis和DB库存不一致怎么办？
+- 如何处理库存热点问题？
+memory_points:
+- 时机选择：下单减（防超卖但易占库存）、付款减（防占库存但易超卖）、预扣减（最佳平衡推荐）
+- 防超卖核心：Redis+Lua脚本原子性检查并扣减，或DB乐观锁WHERE num>0影响行数判断
+- 高并发优化：热点SKU用分段库存（拆成多片并行扣减降低锁冲突），随机路由避免头部竞争
+- 最终一致：Redis预扣成功后发MQ异步扣DB，超时未支付则定时任务回滚Redis与DB库存
+---
+
+# 如何设计一个库存扣减系统？防超卖、支持高并发、最终一致。
+
+【场景分析】
+库存扣减场景：电商下单扣库存、秒杀扣库存、预售扣库存。
+
+**实战案例**：在双11大促中，曾因Redis预热数据脚本故障导致部分SKU库存未加载，瞬间流量击穿DB造成主从延迟，后引入“库存分片+本地缓存”解决热点问题。
+
+【扣减时机】
+1. 下单减库存：下单即扣 → 防超卖最强，但有恶意占库存风险
+2. 付款减库存：付款时扣 → 避免占库存，但可能超卖
+3. 预扣库存：下单预扣 + 超时释放 → 平衡方案（推荐）
+
+**对比表格：扣减方案选型**
+
+| 方案 | 实现难度 | 并发性能 | 一致性 | 适用场景 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Redis Lua** | 低 | 极高 | 弱一致性（需异步回写） | 秒杀、高并发抢购 |
+| **DB乐观锁** | 低 | 中（行锁竞争） | 强一致性 | 普通商品、库存少 |
+| **DB悲观锁** | 低 | 低 | 强一致性 | 严格扣减、非高并发 |
+| **分段库存** | 高 | 极高（并行） | 最终一致 | 热点商品大库存 |
+
+【防超卖方案】
+1. Redis原子扣减：
+   ```lua
+   local stock = tonumber(redis.call('GET', KEYS[1]))
+   if stock > 0 then
+     redis.call('DECR', KEYS[1])
+     return 1
+   else
+     return 0
+   end
+   ```
+2. DB乐观锁：
+   ```sql
+   UPDATE stock SET num = num - 1 WHERE sku_id = ? AND num > 0
+   ```
+   - 影响行数=0说明库存不足
+3. DB悲观锁：
+   ```sql
+   SELECT * FROM stock WHERE sku_id=? FOR UPDATE
+   -- 检查并扣减
+   ```
+   - 并发性差
+
+【高并发架构】
+1. 分段库存（推荐）：
+   - 将1000件库存拆成10段×100件
+   - 每段独立扣减（并行）
+   - 减少热点Key冲突
+2. 异步扣减：
+   - Redis预扣 → MQ异步扣DB库存
+   - 前端展示"库存预留成功"
+3. 库存预热：
+   - 活动前将库存同步到Redis
+   - 多机房各自缓存
+
+**代码示例（Redis分段库存扣减逻辑）**：
+```java
+// 尝试在随机分片扣减，降低单点压力
+public boolean deductStock(String skuId, int quantity) {
+    int totalSegments = 10;
+    String keyPrefix = "stock:" + skuId + ":seg:";
+    // 随机打乱顺序尝试，避免头部竞争
+    List<Integer> segments = shuffle(IntStream.range(0, totalSegments).boxed());
+    for (int seg : segments) {
+        String key = keyPrefix + seg;
+        Long remaining = redisTemplate.opsForValue().decrement(key, quantity);
+        if (remaining != null && remaining >= 0) {
+            return true; // 扣减成功，发送MQ更新DB
+        }
+        // 回滚刚才的扣减
+        redisTemplate.opsForValue().increment(key, quantity);
+    }
+    return false; // 所有分片均不足
+}
+```
+
+【库存回退】
+- 超时未支付：定时任务回退库存
+- 订单取消：实时回退
+- 退款：回退库存
+
+【一致性保障】
+- Redis扣减成功 → MQ → DB扣减
+- DB扣减失败 → 补偿 → Redis回滚
+- 定时全量校验Redis vs DB库存
+
+【分库分表】
+- 按SKU ID分片
+- 热点商品独立分片
+- 读写分离
+
+## 记忆要点
+
+- 时机选择：下单减（防超卖但易占库存）、付款减（防占库存但易超卖）、预扣减（最佳平衡推荐）
+- 防超卖核心：Redis+Lua脚本原子性检查并扣减，或DB乐观锁WHERE num>0影响行数判断
+- 高并发优化：热点SKU用分段库存（拆成多片并行扣减降低锁冲突），随机路由避免头部竞争
+- 最终一致：Redis预扣成功后发MQ异步扣DB，超时未支付则定时任务回滚Redis与DB库存
+
+## 结构化回答
+
+
+**30 秒电梯演讲：** 像热门景区限流：先发预约码（Redis），入园后系统慢慢核销（DB），分时段入场分流。
+
+**展开框架：**
+1. **Redis原子扣** — 减（Lua/DECR）防超卖
+2. **MQ异步扣DB** — MQ异步扣DB，削峰填谷
+3. **分段库存减少热点** — 分段库存减少热点Key冲突
+
+**收尾：** 分段库存如何实现？
+
+
+## 视频脚本
+
+> 预计时长：2 分钟 | 由浅入深
+
+| 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
+|------|----------|----------|----------|
+| 0:00 | 标题卡：库存扣减系统 | "库存扣减系统，一分钟讲透。" | 开场钩子 |
+| 0:35 | 生活类比动画 | "打个比方——像热门景区限流：先发预约码(Redis)，入园后系统慢慢核销(DB)，分时段入场分流。" | 核心类比 |
+| 1:10 | 概念定义动画 | "一句话：Redis防超卖、MQ异步落库、分段降热点。" | 核心定义 |
+| 1:50 | Redis原子扣减( 图解 | "Redis原子扣减(Lua/DECR)防超卖。" | Redis原子扣减( |

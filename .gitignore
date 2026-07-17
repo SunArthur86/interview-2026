@@ -1,0 +1,14 @@
+.DS_Store
+node_modules
+.next
+out
+*.tsbuildinfo
+.env*.local
+__pycache__/
+*.pyc
+_*.py
+images/
+books/
+.venv/
+*.pdf
+*.epub
