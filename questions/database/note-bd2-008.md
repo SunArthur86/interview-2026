@@ -222,6 +222,39 @@ ORDER BY id LIMIT 20;
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SLOW(["慢SQL告警<br/>响应慢/CPU高"]):::start --> ENABLE[开启慢查询日志<br/>slow_query_log]
+    ENABLE --> COLLECT[(收集慢SQL<br/>long_query_time=1s)]:::storage
+    COLLECT --> EXPLAIN[EXPLAIN分析执行计划]
+    EXPLAIN --> CHECK{关键指标检查}:::decision
+    CHECK -->|type=ALL| FULL[全表扫描 红灯]:::error
+    CHECK -->|key=NULL| NOIDX[未走索引<br/>需建索引]
+    CHECK -->|rows过大| MANY[扫描行数过多<br/>优化条件]
+    CHECK -->|Extra Using filesort| SORT[文件排序<br/>需覆盖索引]
+    CHECK -->|Extra Using temporary| TMP[临时表<br/>改写SQL]
+    FULL --> OPT{优化方向}:::decision
+    NOIDX --> OPT
+    MANY --> OPT
+    OPT -->|加索引| IDX["WHERE/JOIN/ORDER BY列建索引<br/>遵循最左前缀"]
+    OPT -->|改写SQL| REW[避免SELECT *<br/>limit分页 避免子查询]
+    OPT -->|表设计| TBL[大表分区分表<br/>冗余反范式]
+    OPT -->|加缓存| CACHE2[Redis缓存热点<br/>减少DB压力]
+    IDX --> VERIFY[验证 EXPLAIN再次分析]
+    REW --> VERIFY
+    TBL --> VERIFY
+    CACHE2 --> VERIFY
+    VERIFY --> FAST([性能达标 QPS提升]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 多表JOIN：优先让小表/结果集驱动大表，必须带上ON条件以避免产生笛卡尔积

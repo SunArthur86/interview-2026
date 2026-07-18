@@ -220,6 +220,32 @@ Var(Q·K) = d_k  →  Var(Q·K/√d_k) = 1
 4. **复杂度**：O(n²·d)，n是序列长度——这是FlashAttention等优化的动机
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    IN([输入序列 X<br/>维度 d_model]) --> SPLIT[切分多头<br/>h 个头 每头 d_k=d/h]
+    SPLIT --> Q[Query 投影<br/>Q = X·W_Q]
+    SPLIT --> K[Key 投影<br/>K = X·W_K]
+    SPLIT --> V[Value 投影<br/>V = X·W_V]
+
+    Q --> SCORE[注意力分数<br/>Score = Q · K^T]
+    K --> SCORE
+    SCORE --> SCALE[缩放<br/>Score / √d_k<br/>防止梯度消失]
+    SCALE --> SOFT[Softmax 归一化<br/>得到注意力权重]
+    SOFT --> WEIGHT[加权求和<br/>Output = 权重 · V]
+    V --> WEIGHT
+    WEIGHT --> CONCAT[多头拼接 Concat]
+    CONCAT --> OUTPROJ[线性投影 W_O]
+    OUTPROJ --> OUT([注意力输出])
+
+    style IN fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style SCALE fill:#FF9800,color:#fff
+    style SOFT fill:#9C27B0,color:#fff
+    style WEIGHT fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - QKV本质：Q是搜索词，K是匹配标签，V是实际内容。

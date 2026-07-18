@@ -116,6 +116,29 @@ public void updateHotScore(String keyword, int viewCount) {
 3. **时间衰减因子**：λ 参数如何动态调整？（答：通过配置中心动态下发，根据全站流量峰谷调整衰减速度）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    IN([输入: 如何设计微博热搜榜单系统？实时统计热搜词并排序。]):::start --> CORE[核心处理逻辑]
+    CORE --> CHK{关键判断}:::decision
+    CHK -->|条件A| A[处理路径A]
+    CHK -->|条件B| B[处理路径B]
+    CHK -->|异常| ERR["异常处理/降级"]:::error
+    A --> STORE[("状态/数据存储")]:::storage
+    B --> STORE
+    STORE --> OUT[输出结果]:::success
+    CORE --> FEAT{关键特性}:::decision
+    FEAT -->|优势| ADV1["性能/效率提升"]
+    FEAT -->|约束| ADV2["边界条件/注意事项"]:::async
+    classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - Lambda双层架构：Flink实时窗口初算 + Spark离线全量修正防误差

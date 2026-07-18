@@ -101,6 +101,45 @@ public void handleFollower(Follower f, long lastZxid) {
   │               │
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    INIT([集群启动]) --> FOLLOW[全部 Follower<br/>term=0]
+
+    FOLLOW --> TIMEOUT{选举超时<br/>随机 150-300ms}
+    TIMEOUT --> CAND[升级 Candidate<br/>term++ 自投一票]
+    CAND --> REQ[RequestVote RPC<br/>携带 term+日志索引]
+    REQ --> VOTE{多数派同意?<br/>>= N/2+1}
+    VOTE -->|是| LEADER[成为 Leader<br/>心跳维持权威]
+    VOTE -->|否 发现更高 term| FOLLOW
+    VOTE -->|否 分票| CAND
+
+    LEADER --> HEART[周期发心跳<br/>AppendEntries 空]
+    HEART --> FOLLOW2[Follower 重置计时器]
+
+    LEADER --> WRITE([客户端写请求])
+    WRITE --> LOG[追加本地日志<br/>uncommitted]
+    LOG --> REPL[AppendEntries 复制<br/>给所有 Follower]
+    REPL --> MAJ{多数持久化?<br/>>= N/2+1}
+    MAJ -->|是| COMMIT[Commit 本地<br/>应用到状态机]
+    MAJ -->|否 等待| REPL
+    COMMIT --> RESP[响应客户端]
+    COMMIT --> NOTIFY[下次 AppendEntries<br/>通知 Follower commit]
+    NOTIFY --> APPLY[Follower apply]
+
+    LEADER -. 网络分区 .-> SPLIT[少数派分区<br/>无法提交]
+    SPLIT -. 合并 .-> TERM_CHECK{比较 term}
+    TERM_CHECK -->|旧 leader term 低| STEP_DOWN[退位回滚未提交日志]
+    STEP_DOWN --> FOLLOW
+
+    style INIT fill:#4CAF50,color:#fff
+    style LEADER fill:#FF9800,color:#fff
+    style COMMIT fill:#2196F3,color:#fff
+    style VOTE fill:#9C27B0,color:#fff
+    style STEP_DOWN fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 核心定义：ZAB 是专为 ZooKeeper 设计的原子广播与崩溃恢复一致性协议

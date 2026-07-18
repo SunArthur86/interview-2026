@@ -241,6 +241,54 @@ ZGC 的本质突破是用**染色指针把引用修正摊到并发阶段**：
 4. **低延迟 GC 下还会 Full GC 吗？**——理论上 ZGC 无 Full GC，但极端情况（分配速率远超回收速率、并发失败）会退化为 STW 串行回收，此时几乎等于 OOM。监控 `allocation_rate_mb_s` 是关键。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 Java 源码 .java]):::start
+    Javac[javac 编译<br/>词法/语法/语义分析]:::process
+    ClassFile[.class 字节码文件<br/>常量池/方法表]:::store
+    ClassLoad[类加载子系统<br/>ClassLoader]:::process
+    LoadPhase[加载 Loading<br/>读取字节流]:::process
+    LinkPhase[链接 Linking<br/>验证/准备/解析]:::process
+    ParentQ{{双亲委派?<br/>向上委托}}:::decision
+    BootClass[BootStrap 加载<br/>rt.jar 核心类]:::process
+    AppClass[AppClassLoader<br/>加载应用类]:::process
+    InitPhase[初始化 Initialization<br/>执行 <clinit>]:::process
+    Runtime[运行时数据区]:::process
+    Heap[(堆 Heap<br/>对象/数组 GC 区)]:::store
+    Method[(方法区<br/>类元信息/常量)]:::store
+    Stack[(虚拟机栈<br/>栈帧/局部变量)]:::store
+    NativeStack[(本地方法栈<br/>JNI)]:::store
+    PC[(程序计数器 PC)]:::store
+    Alloc[对象分配 Eden]:::process
+    GcQ{{GC 触发?<br/>Eden 满/老年代满}}:::decision
+    YoungGC[Young GC<br/>复制算法]:::process
+    OldGC[Old GC / Full GC<br/>标记-整理]:::process
+    CollectorQ{{GC 收集器?<br/>G1/ZGC/CMS}}:::decision
+    G1[G1 Region 化<br/>可预测暂停]:::process
+    ZGC[ZGC 染色指针<br/><10ms STW]:::process
+    Final([✅ 字节码执行完成]):::start
+
+    Start --> Javac --> ClassFile --> ClassLoad
+    ClassLoad --> LoadPhase --> LinkPhase --> ParentQ
+    ParentQ -->|核心类| BootClass --> InitPhase
+    ParentQ -->|应用类| AppClass --> InitPhase
+    InitPhase --> Runtime
+    Runtime --> Heap & Method & Stack & NativeStack & PC
+    Heap --> Alloc --> GcQ
+    GcQ -->|Eden 满| YoungGC --> Alloc
+    GcQ -->|Old 满| OldGC --> CollectorQ
+    CollectorQ -->|默认 9+| G1 --> Final
+    CollectorQ -->|大堆低延迟| ZGC --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到G1、ZGC、Shenandoah 如何做低延迟选型，我的理解是——低延迟 GC 的本质是把"对象移动"和"业务线程执行"并发化——读屏障/写屏障接管引用修正，让 STW 只剩下几次极短的初始标记和再标记，从而把"停顿"从"跟堆大小成正比"变成"跟堆大小无关"。打个比方，像搬家：G1 是"分区小搬家公司"挑值钱的房间先搬；ZGC 是"染色搬家法"——给每个家具贴颜色标签，搬家工人和你在房间里走动同时进行，靠标签识别哪些家具正在搬。你在屋里几乎感觉不到停顿。

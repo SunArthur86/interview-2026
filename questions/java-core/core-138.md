@@ -76,6 +76,37 @@ public void demo() {
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    CLS([定义父类Animal<br/>方法speak]):::start --> SUB1[子类Dog extends Animal<br/>override speak: 汪汪]
+    CLS --> SUB2[子类Cat extends Animal<br/>override speak: 喵喵]
+    SUB1 --> REF1[父类引用指向子类对象<br/>Animal a = new Dog]
+    SUB2 --> REF2[Animal b = new Cat]
+    REF1 --> CALL[a.speak 方法调用]
+    REF2 --> CALL
+    CALL --> BIND{绑定方式}:::decision
+    BIND -->|编译期 静态分派| STATIC[重载overload<br/>按引用类型选择]
+    BIND -->|运行期 动态分派| DYN[重写override<br/>按实际对象类型选择]:::async
+    STATIC --> OVLD[方法签名不同<br/>参数列表决定]
+    DYN --> VTBL[查对象头中的虚方法表vtable<br/>定位实际子类方法]:::storage
+    VTBL --> INVK[调用Dog.speak 输出汪汪]
+    OVLD --> RES([结果返回]):::success
+    INVK --> RES
+    CALL --> TRIPLE{多态三要素}:::decision
+    TRIPLE -->|继承/实现| T1["extends/implements"]
+    TRIPLE -->|方法重写| T2["@Override"]
+    TRIPLE -->|父类引用指向子类| T3[向上转型upcast]
+    T1 --> APP["应用: 策略模式/模板方法/集合框架<br/>List list = new ArrayList"]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 因为需要继承、重写和向上转型，所以多态能在运行时执行子类的具体实现。

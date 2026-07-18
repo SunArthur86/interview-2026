@@ -298,6 +298,43 @@ RAGAS拆解评估:
 **面试加分点**：提到HyDE（Hypothetical Document Embedding）——先让LLM生成一个假设答案，用假设答案做向量检索，因为"答案"和"文档"的语义空间比"问题"和"文档"更近；提到RRF（Reciprocal Rank Fusion）是更简单但效果略逊的归一化方法；提到Anthropic的Contextual Retrieval在切分时用LLM给每个chunk生成上下文摘要，进一步解决chunk断裂问题；提到最先进的RAG系统还会加入知识图谱增强（GraphRAG），通过实体关系提升复杂推理能力。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([用户 Query 提问]) --> PQ[Query 预处理<br/>改写/扩展/HyDE/Multi-Query]
+    PQ --> QE[Query Embedding<br/>bge-m3/te3 向量化]
+    QE --> VDB[(向量数据库<br/>Milvus/Qdrant<br/>HNSW 索引)]
+
+    subgraph OFFLINE["离线索引阶段"]
+    DOC[原始文档<br/>PDF/Word/HTML] --> PARSE[文档解析<br/>unstructured/PyMuPDF]
+    PARSE --> CHUNK[文本切片<br/>固定/递归/语义<br/>256-512 tokens + Overlap]
+    CHUNK --> EMB[Embedding 向量化<br/>768/1024/1536 维]
+    EMB --> INS[(写入向量库<br/>+原文+元数据)]
+    end
+    INS -. 同构索引 .-> VDB
+
+    VDB --> RET[向量相似度检索<br/>Top-K 召回<br/>余弦/IP 距离]
+    RET --> BM{是否混合检索?}
+    BM -->|是| HYBRID[BM25 关键词<br/>+ 向量融合 RRF]
+    BM -->|否| RR[Rerank 重排序]
+    HYBRID --> RR
+    RR -->|Cross-Encoder 精排| TOPN[Top-N 截断<br/>应对 Lost-in-Middle]
+    TOPN --> CTX[上下文组装<br/>元数据过滤/压缩]
+    CTX --> PROMPT[Prompt 模板<br/>System+Context+Question]
+    PROMPT --> LLM[LLM 生成<br/>GPT-4/Claude/Qwen]
+    LLM --> ANS[回答 + 引用溯源]
+
+    ANS -. 失败回溯 .-> PQ
+
+    style Q fill:#4CAF50,color:#fff
+    style ANS fill:#2196F3,color:#fff
+    style VDB fill:#FF9800,color:#fff
+    style INS fill:#FF9800,color:#fff
+    style RR fill:#9C27B0,color:#fff
+    style LLM fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 四大优化：语义切分加桥接、Query改写加过滤、混合检索加重排、监控加指标。

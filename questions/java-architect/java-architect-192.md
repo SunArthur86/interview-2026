@@ -364,6 +364,57 @@ module com.jd.ordersystem.order {
 4. **ArchUnit 怎么用？**——把架构规则写成可执行测试。如"订单模块不能访问库存模块的 internal 包"，CI 自动跑。违规 PR 合并不了。规则包括：模块间依赖、分层（Controller 不直接调 Repository）、命名规范（*Api 是公开接口）。
 5. **模块化单体 vs 微服务？**——模块化单体保留单体部署/事务简单性，又有模块边界清晰性，适合 20-50 人团队。微服务解决独立扩缩容/发版/技术栈，但引入网络/事务/调试复杂性。模块化是微服务前置条件——内部边界都划不清，拆服务只会更乱。先模块化沉淀边界，再按需拆服务。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 SQL 请求到达]):::start
+    Parser[解析器 Parser<br/>词法/语法分析]:::process
+    AST[生成抽象语法树 AST]:::process
+    Preproc[预处理器<br/>语义检查 + 权限]:::process
+    Optimizer[优化器 Optimizer]:::process
+    CostQ{{基于代价选择?<br/>CBO}}:::decision
+    IdxScan[索引扫描<br/>range/ref]:::process
+    FullScan[全表扫描<br/>ALL]:::warn
+    Execute[执行器 Executor<br/>调用存储引擎接口]:::process
+    EngineQ{{存储引擎?<br/>InnoDB/MyISAM}}:::decision
+    InnoDB[InnoDB 引擎]:::process
+    BufferPool[Buffer Pool<br/>内存缓冲池]:::store
+    HitQ{{页命中 Buffer Pool?}}:::decision
+    ReadDisk[从磁盘读取页<br/>随机 IO]:::warn
+    RedoLog[(redo log<br/>WAL 先写日志)]:::store
+    BinLog[(binlog<br/>主从复制)]:::store
+    UndoLog[(undo log<br/>事务回滚/MVCC)]:::store
+    CommitQ{{是否提交事务?<br/>2PC}}:::decision
+    TwoPhase[Prepare → 写 redo<br/>→ 写 binlog → Commit]:::process
+    Crash[宕机崩溃恢复<br/>redo 重放 + binlog 校验]:::danger
+    Final([✅ 返回结果集]):::start
+
+    Start --> Parser --> AST --> Preproc --> Optimizer
+    Optimizer --> CostQ
+    CostQ -->|有合适索引| IdxScan --> Execute
+    CostQ -->|无索引/全表| FullScan --> Execute
+    Execute --> EngineQ
+    EngineQ -->|默认| InnoDB --> BufferPool
+    EngineQ -->|旧版| FullScan
+    BufferPool --> HitQ
+    HitQ -->|命中| Execute
+    HitQ -->|未命中| ReadDisk --> BufferPool
+    InnoDB -.修改.-> UndoLog
+    InnoDB -.修改.-> RedoLog
+    InnoDB -.提交.-> BinLog
+    Execute --> CommitQ
+    CommitQ -->|是| TwoPhase --> Final
+    CommitQ -->|崩溃| Crash --> RedoLog
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 单体系统的死法不是太大，而是边界混乱——所有模块互相依赖、共享数据库、改一处动全身。模块化的核心是用强制的物理边界（Java Module System / Maven 多模块 / Spring Modulith）替代自觉的逻辑边界，让领域边界从约定变成编译期约束。能编译通过 ≠ 边界清晰，能防止跨领域乱调用的边界才是真模块化

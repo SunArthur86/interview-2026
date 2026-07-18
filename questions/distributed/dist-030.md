@@ -103,6 +103,46 @@ public void retryNotify() {
 3. **3PC 相比 2PC 到底解决了什么问题？**（提示：主要解决了协调者故障后参与者的阻塞问题，但引入了网络分区导致数据不一致的风险）。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    BIZ([业务场景<br/>跨库/跨服务]) --> CHOICE{一致性要求}
+
+    CHOICE -->|强一致 牺牲可用| STRONG[2PC/3PC<br/>XA 协议<br/>Seata XA]
+    CHOICE -->|最终一致 高可用| EVENT[基于消息<br/>本地消息表/MQ]
+    CHOICE -->|业务补偿| TCC[Try-Confirm-Cancel<br/>业务级两阶段]
+    CHOICE -->|长流程业务| SAGA[Saga<br/>正向+补偿编排]
+
+    STRONG --> XA_FLOW[Prepare→Commit/Abort<br/>资源管理器加锁]
+    XA_FLOW --> XA_RISK[性能差 阻塞<br/>不适合高并发]
+
+    EVENT --> LOCAL[本地事务写消息表<br/>业务与消息同库]
+    LOCAL --> MQ[投递 MQ<br/>RocketMQ 事务消息]
+    MQ --> CONSUMER[消费者幂等消费<br/>失败重试]
+    CONSUMER --> CONSIST[最终一致]
+
+    TCC --> TRY[Try 资源预留<br/>冻结库存/预扣款]
+    TRY --> CONFIRM{所有 Try 成功?}
+    CONFIRM -->|是| CFM[Confirm 真实执行]
+    CONFIRM -->|否| CNL[Cancel 释放预留]
+    CFM --> CONSIST
+    CNL --> CONSIST
+
+    SAGA --> FLOW[编排 T1→T2→T3]
+    FLOW --> CHK{某步失败?}
+    CHK -->|否| DONE([完成])
+    CHK -->|是| COMP[C1←C2←C3<br/>反向补偿]
+    COMP --> DONE
+
+    style BIZ fill:#4CAF50,color:#fff
+    style DONE fill:#2196F3,color:#fff
+    style TCC fill:#FF9800,color:#fff
+    style SAGA fill:#9C27B0,color:#fff
+    style EVENT fill:#009688,color:#fff
+    style COMP fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 柔性事务基于BASE理论，牺牲强一致性（ACID），换取高可用和最终一致性

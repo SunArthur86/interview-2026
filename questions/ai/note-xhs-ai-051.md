@@ -197,6 +197,40 @@ INT4 何时不一定快：
 4. **评测方法论**：强调控制变量——固定模型/输入输出/并发度/采样参数
 5. **工程选型**：给出按场景选型建议而非一概而论
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    FP16([FP16 原始权重]) --> ANALYZE[分析权重分布<br/>找缩放因子 Scale]
+    ANALYZE --> METHOD{量化方法}
+
+    METHOD -->|PTQ 训后量化| CALI[校准数据集<br/>统计激活分布]
+    METHOD -->|QAT 训练感知| TRAIN[插入伪量化节点<br/>微调恢复精度]
+
+    CALI --> Q1[INT8 量化<br/>W8A8 对称/非对称]
+    CALI --> Q2[GPTQ<br/>二阶 Hessian 逐层补偿]
+    CALI --> Q3[AWQ<br/>激活感知保护重要权重]
+
+    TRAIN --> Q4[INT4 量化<br/>NF4 + FP16 组合<br/>QLoRA 用]
+
+    Q1 --> EVAL{精度损失评估}
+    Q2 --> EVAL
+    Q3 --> EVAL
+    Q4 --> EVAL
+    EVAL -->|可接受| DEPLOY[部署推理<br/>显存降 4-8x]
+    EVAL -->|不可接受| ADJUST[调粒度/混合精度]
+    ADJUST --> ANALYZE
+
+    DEPLOY --> SPEED[推理加速<br/>INT 算子更快]
+    SPEED --> OUT([服务上线])
+
+    style FP16 fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style DEPLOY fill:#009688,color:#fff
+    style Q4 fill:#FF9800,color:#fff
+    style ADJUST fill:#F44336,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** INT4不一定比FP16更快。INT4减少了权重占用和HBM读取，在memory-bound的Decode阶段通常更快；但INT4的Kernel可能需要解包、反量化到FP16再计算，额外操作可能抵消收益。

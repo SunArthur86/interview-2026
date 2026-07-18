@@ -117,6 +117,29 @@ encryptedData += cipher.final('hex');
 3. **中间人攻击**：在非对称加密阶段，如何防止黑客拦截并发送自己的公钥？（引出数字证书的概念）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PL([发送方: 明文数据]):::start --> GEN[生成临时会话密钥<br/>Session Key随机数]
+    GEN --> SYM[对称加密AES<br/>用Session Key加密明文]
+    SYM --> CPH[密文Ciphertext<br/>加密速度快]
+    PL2([接收方: RSA公钥]):::start --> ENC[非对称加密RSA<br/>用公钥加密Session Key]
+    ENC --> SKC[加密后的会话密钥]
+    CPH --> TRANS(("传输通道: TLS/SSL")):::storage
+    SKC --> TRANS
+    TRANS --> RCV([接收方收到密文+加密会话密钥])
+    RCV --> DEC1[用RSA私钥<br/>解密得到Session Key]:::async
+    DEC1 --> DEC2[用Session Key<br/>AES解密密文]
+    DEC2 --> ORIG([恢复原始明文]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 非对称加密慢但能安全交换密钥，而对称加密快适合数据传输，因各有优劣所以采用混合加密

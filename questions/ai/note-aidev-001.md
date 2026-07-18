@@ -164,6 +164,40 @@ experiment = {
 ```
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    FP16([FP16 原始权重]) --> ANALYZE[分析权重分布<br/>找缩放因子 Scale]
+    ANALYZE --> METHOD{量化方法}
+
+    METHOD -->|PTQ 训后量化| CALI[校准数据集<br/>统计激活分布]
+    METHOD -->|QAT 训练感知| TRAIN[插入伪量化节点<br/>微调恢复精度]
+
+    CALI --> Q1[INT8 量化<br/>W8A8 对称/非对称]
+    CALI --> Q2[GPTQ<br/>二阶 Hessian 逐层补偿]
+    CALI --> Q3[AWQ<br/>激活感知保护重要权重]
+
+    TRAIN --> Q4[INT4 量化<br/>NF4 + FP16 组合<br/>QLoRA 用]
+
+    Q1 --> EVAL{精度损失评估}
+    Q2 --> EVAL
+    Q3 --> EVAL
+    Q4 --> EVAL
+    EVAL -->|可接受| DEPLOY[部署推理<br/>显存降 4-8x]
+    EVAL -->|不可接受| ADJUST[调粒度/混合精度]
+    ADJUST --> ANALYZE
+
+    DEPLOY --> SPEED[推理加速<br/>INT 算子更快]
+    SPEED --> OUT([服务上线])
+
+    style FP16 fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style DEPLOY fill:#009688,color:#fff
+    style Q4 fill:#FF9800,color:#fff
+    style ADJUST fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 核心框架：从效率、质量、成本、体验、安全五个维度量化AI收益

@@ -368,6 +368,55 @@ def react_agent(event, max_steps=5):
 3. 欺诈 case 库——每次新型欺诈确认后，把 case（特征、推理链、判定结果）写入知识库，作为 Agent 的 few-shot examples 和离线评估集，让 Agent 持续学习新型手法。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 应用容器化部署]):::start
+    Code[源代码]:::process
+    Dockerfile[编写 Dockerfile<br/>基础镜像+依赖]:::process
+    Build[构建镜像<br/>docker build]:::process
+    Image[(镜像仓库<br/>Registry)]:::store
+    K8sCluster[K8s 集群<br/>控制面+数据面]:::process
+    APIServer[API Server<br/>唯一入口]:::process
+    Deploy[创建 Deployment<br/>声明式 YAML]:::process
+    SchedulerQ{{调度决策?<br/>Scheduler}}:::decision
+    Filter[预选 Filter<br/>资源/亲和性]:::process
+    Score[优选 Score<br/>打分排序]:::process
+    Bind[绑定到 Node<br/>更新 Pod]:::process
+    Kubelet[Kubelet<br/>节点代理]:::process
+    PullImage[拉取镜像<br/>CRI 接口]:::process
+    Container[创建容器<br/>containerd]:::process
+    ProbeQ{{健康探针?<br/>Liveness/Readiness}}:::decision
+    Liveness[Liveness Probe<br/>失败重启]:::process
+    Readiness[Readiness Probe<br/>就绪接流量]:::process
+    RestartQ{{容器崩溃?}}:::decision
+    Restart[重启策略<br/>Always]:::process
+    ScaleQ{{HPA 自动扩缩?<br/>CPU/QPS}}:::decision
+    Scale[水平扩缩<br/>动态调整副本]:::process
+    Service[Service 服务<br/>稳定 ClusterIP]:::process
+    Ingress[Ingress 入口<br/>七层路由]:::process
+    Final([✅ 服务对外可用]):::start
+
+    Start --> Code --> Dockerfile --> Build --> Image
+    K8sCluster --> APIServer --> Deploy --> SchedulerQ
+    Image -.拉取.-> PullImage
+    SchedulerQ --> Filter --> Score --> Bind
+    Bind --> Kubelet --> PullImage --> Container --> ProbeQ
+    ProbeQ -->|存活| Liveness --> RestartQ
+    ProbeQ -->|就绪| Readiness --> ScaleQ
+    RestartQ -->|崩溃| Restart --> Container
+    RestartQ -->|正常| ScaleQ
+    ScaleQ -->|高峰| Scale --> Service
+    ScaleQ -->|平稳| Service
+    Service --> Ingress --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到如何用 AI Agent 改造风控系统，我的理解是——用 AI Agent 改造风控系统，把"固定 DAG 决策"升级为"Agent 自主编排"——LLM 做意图理解+工具调用，规则和模型变成 Agent 的工具，决策更灵活、配置更自然。打个比方，传统风控像自动售货机（按钮→固定流程），AI Agent 风控像便利店店员（理解需求→灵活组合商品→应对新场景）。

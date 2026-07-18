@@ -169,6 +169,44 @@ def slot_filling(text, intent):
 3. **意图+槽位配合**：识别意图后还要提取参数，是完整的 NLU
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TASK([业务任务]) --> ANA[任务分析<br/>输入/输出/约束]
+    ANA --> TPL{选择模板}
+
+    TPL -->|分类/抽取| FEW[Few-Shot<br/>给样例示范]
+    TPL -->|推理/数学| COT[Chain-of-Thought<br/>think step by step]
+    TPL -->|结构化输出| SCHEMA[JSON Schema<br/>Function Call]
+    TPL -->|多步规划| REACT[ReAct<br/>Thought+Action]
+
+    FEW --> COMBINE[组合策略<br/>Role+Context+Instruction+Format]
+    COT --> COMBINE
+    SCHEMA --> COMBINE
+    REACT --> COMBINE
+
+    COMBINE --> PARAM[生成参数调优]
+    PARAM --> T[Temperature<br/>0 事实性 / 0.7 创意]
+    PARAM --> TP[Top-P 核采样<br/>控制多样性]
+    PARAM --> TK[Top-K<br/>限制候选词]
+
+    PARAM --> GEN[LLM 生成]
+    GEN --> VALID{输出校验}
+    VALID -->|格式错| REPAIR[修复重试<br/>反馈错误给 LLM]
+    REPAIR --> GEN
+    VALID -->|内容不达标| ITER[迭代改 prompt]
+    ITER --> COMBINE
+    VALID -->|通过| OUT([稳定输出])
+
+    style TASK fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style GEN fill:#009688,color:#fff
+    style VALID fill:#FF9800,color:#fff
+    style REPAIR fill:#F44336,color:#fff
+    style ITER fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 意图定义：将用户口语化输入映射到系统预定义的标准动作类别

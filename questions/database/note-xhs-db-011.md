@@ -208,6 +208,35 @@ MongoDB 确实适合半结构化文档存储，但要看整体架构。如果系
 四步设计法：一、定主存——按数据可靠性、查询复杂度、事务需求选 MySQL/PostgreSQL（关系型）或 MongoDB（文档型），主存必须可靠；二、定缓存——按读 QPS 和数据特点选 Redis 类型（String 缓存对象、ZSet 缓存排行、Hash 缓存字段）；三、定一致性策略——默认 Cache Aside + TTL 兜底，强一致场景加 binlog 订阅删缓存或 Write Through；四、定降级方案——缓存宕机降级读 DB、DB 宕机降级读缓存，保证可用性。这套方法论适用于所有"缓存层"设计，核心是"主存保可靠、缓存保性能、降级保可用"。面试时遇到"Redis + MySQL 怎么配合"，按这四步答，逻辑清晰。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    W([写请求更新数据]):::start --> CHO{更新策略}:::decision
+    CHO -->|先更新DB再删缓存| UDD[Update DB then Delete Cache<br/>推荐 Canal]
+    CHO -->|先删缓存再更新DB| DCD[Delete Cache then Update DB<br/>有并发问题]
+    CHO -->|Cache Aside 旁路| CA[读miss查DB回写<br/>写时删缓存]
+    UDD --> DEL1[删除Redis缓存]
+    DEL1 --> MQ[("消息队列/Canal binlog<br/>保证最终一致")]:::storage
+    DCD --> UPD[更新DB]
+    UPD --> DELAY{并发问题}:::decision
+    DELAY -->|是 读写并发| BUG[旧数据被回写<br/>缓存脏数据]:::error
+    DELAY -->|否| OK1[正常一致]
+    MQ --> RETRY{删除失败?}:::decision
+    RETRY -->|是| RTY["重试/死信队列<br/>订阅binlog补偿"]
+    RETRY -->|否| DONE([缓存与DB一致]):::success
+    RTY --> DONE
+    CA --> READ{读请求?}:::decision
+    READ -->|缓存miss| DB1[查DB并回写Redis]:::async
+    READ -->|缓存hit| RTN[直接返回]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 结构化回答
 
 

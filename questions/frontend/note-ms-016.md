@@ -383,6 +383,54 @@ interface ABTestConfig {
 AI-Native 桌面前端的质量评估，**不能照搬传统 Web 前端的纯性能思维**。三维模型的核心洞察是：AI 产品引入了"产出质量"和"业务效果"两个全新维度，且三个维度之间相互制约——提高 AI 质量可能降低响应速度，优化性能可能牺牲功能深度。**好的 AI 前端不是在单一维度上极致优化，而是在三维约束中找到最优平衡点。** 最终判断标准只有一个：用户是否真正通过产品完成了任务并采纳了 AI 的产出。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 Java 源码 .java]):::start
+    Javac[javac 编译<br/>词法/语法/语义分析]:::process
+    ClassFile[.class 字节码文件<br/>常量池/方法表]:::store
+    ClassLoad[类加载子系统<br/>ClassLoader]:::process
+    LoadPhase[加载 Loading<br/>读取字节流]:::process
+    LinkPhase[链接 Linking<br/>验证/准备/解析]:::process
+    ParentQ{{双亲委派?<br/>向上委托}}:::decision
+    BootClass[BootStrap 加载<br/>rt.jar 核心类]:::process
+    AppClass[AppClassLoader<br/>加载应用类]:::process
+    InitPhase[初始化 Initialization<br/>执行 <clinit>]:::process
+    Runtime[运行时数据区]:::process
+    Heap[(堆 Heap<br/>对象/数组 GC 区)]:::store
+    Method[(方法区<br/>类元信息/常量)]:::store
+    Stack[(虚拟机栈<br/>栈帧/局部变量)]:::store
+    NativeStack[(本地方法栈<br/>JNI)]:::store
+    PC[(程序计数器 PC)]:::store
+    Alloc[对象分配 Eden]:::process
+    GcQ{{GC 触发?<br/>Eden 满/老年代满}}:::decision
+    YoungGC[Young GC<br/>复制算法]:::process
+    OldGC[Old GC / Full GC<br/>标记-整理]:::process
+    CollectorQ{{GC 收集器?<br/>G1/ZGC/CMS}}:::decision
+    G1[G1 Region 化<br/>可预测暂停]:::process
+    ZGC[ZGC 染色指针<br/><10ms STW]:::process
+    Final([✅ 字节码执行完成]):::start
+
+    Start --> Javac --> ClassFile --> ClassLoad
+    ClassLoad --> LoadPhase --> LinkPhase --> ParentQ
+    ParentQ -->|核心类| BootClass --> InitPhase
+    ParentQ -->|应用类| AppClass --> InitPhase
+    InitPhase --> Runtime
+    Runtime --> Heap & Method & Stack & NativeStack & PC
+    Heap --> Alloc --> GcQ
+    GcQ -->|Eden 满| YoungGC --> Alloc
+    GcQ -->|Old 满| OldGC --> CollectorQ
+    CollectorQ -->|默认 9+| G1 --> Final
+    CollectorQ -->|大堆低延迟| ZGC --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 记忆要点
 
 - 传统指标不够用：需构建「体验 × 业务 × AI质量」三维评价体系

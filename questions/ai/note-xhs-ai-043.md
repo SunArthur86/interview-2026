@@ -219,6 +219,37 @@ lora_config = LoraConfig(
 4. **数据增强**：对风格数据做增强——改写、截断、拼接，增加多样性。但要小心：增强后的数据可能偏离原始风格，需要人工抽检
 5. **LoRA merge策略**：微调完成后，可以把LoRA权重merge到基础模型中（推理时不再需要额外的适配器），也可以保持分离（方便切换/回退）——生产中建议分离，方便A/B测试
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    BASE([预训练基座模型<br/>权重 W 冻结]) --> FREEZE[冻结原始权重<br/>不更新不存梯度]
+    FREEZE --> LOW[低秩分解<br/>W + ΔW = W + B·A]
+    LOW --> INIT[B,A 初始化<br/>A 随机 B 为 0<br/>启动时 ΔW=0]
+    INIT --> TARGET[注入目标层<br/>Q/K/V/O Projection]
+
+    subgraph QLORA["QLoRA 优化 (NF4)"]
+    BASE --> NF4[基座权重量化 NF4<br/>4-bit 存储]
+    NF4 --> FP16[计算时反量化 FP16<br/>前向/反向]
+    FP16 --> GRAD[梯度只在 LoRA 层<br/>显存大幅降低]
+    end
+
+    TARGET --> FWD[前向传播<br/>y = Wx + BAx]
+    QLORA --> FWD
+    FWD --> LOSS[计算 Loss]
+    LOSS --> BACK[反向传播<br/>只更新 B,A]
+    BACK --> OPT[Optimizer<br/>只存 LoRA 参数状态]
+    OPT --> MERGE{部署时}
+    MERGE -->|合并 W'=W+BA| COMBINED[合并权重<br/>零额外延迟]
+    MERGE -->|保持分离| ADAPTER[多 Adapter 切换<br/>一份基座多任务]
+
+    style BASE fill:#4CAF50,color:#fff
+    style FREEZE fill:#9C27B0,color:#fff
+    style COMBINED fill:#2196F3,color:#fff
+    style NF4 fill:#FF9800,color:#fff
+    style OPT fill:#009688,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** LoRA/QLoRA微调人设的核心挑战是「学到风格但不遗忘通用能力」——数据集质量比数量重要，需要清洗+混合训练+评估三管齐下。

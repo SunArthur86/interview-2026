@@ -93,6 +93,38 @@ String getNode(String key) {
 3. **Hash 环的“倾斜”问题是什么？**：即使有虚拟节点，如果某个真实节点的性能较差或者 Hash 算法分布不均，仍可能导致该节点承担过多流量。解决方法是动态调整虚拟节点权重（高性能节点分配更多虚拟节点）。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    DATA([数据 Key]) --> HASH1[Hash 函数<br/>CRC32/MurmurHash]
+    HASH1 --> RING((哈希环<br/>0 ~ 2^32-1))
+    RING --> FIND[顺时针找<br/>最近的节点]
+
+    NODE_INIT[物理节点<br/>A B C] --> PLACE[Hash 到环上位置]
+    PLACE --> RING
+
+    VN[虚拟节点<br/>每节点 150 个副本] --> HASH2[分散 Hash]
+    HASH2 --> RING
+    VN -. 解决倾斜 .-> RING
+
+    FIND --> OWNER([归属节点<br/>负责此 Key])
+
+    ADD([新增节点 D]) --> HASH3[Hash 到环]
+    HASH3 --> RING
+    RING --> MIGRATE[只迁移 D 逆时针到<br/>下一节点之间的数据]
+    MIGRATE --> MINIMAL([最小数据迁移<br/>仅受影响段])
+
+    DEL([节点 B 宕机]) --> RM[B 的数据顺时针<br/>落到下一个节点 C]
+    RM --> FAILOVER([自动接管])
+
+    style DATA fill:#4CAF50,color:#fff
+    style OWNER fill:#2196F3,color:#fff
+    style RING fill:#FF9800,color:#fff
+    style VN fill:#9C27B0,color:#fff
+    style MIGRATE fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 因为解决取模算法扩缩容导致全量缓存失效，所以引入一致性Hash环

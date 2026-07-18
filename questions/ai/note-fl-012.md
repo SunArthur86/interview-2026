@@ -123,6 +123,44 @@ memory_points:
 - **Redis 集群的雪崩**：不仅是 key 过期，主节点宕机切换期间也会"雪崩"——需要熔断降级保护
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([读请求]) --> C_CHK{缓存命中?}
+    C_CHK -->|命中| HIT[直接返回<br/>快]
+    C_CHK -->|未命中| DB_Q[查数据库]
+    DB_Q --> FOUND{找到?}
+    FOUND -->|是| FILL[回填缓存]
+    FOUND -->|否| RET([返回空])
+
+    FILL --> RESP([返回数据])
+    HIT --> RESP
+
+    REQ -. Cache Aside 标准模式 .-> C_CHK
+
+    PEN([缓存穿透<br/>查不存在的 key]) --> BF{布隆过滤器}
+    BF -->|不存在| REJECT_P[直接拒绝<br/>不查 DB]
+    BF -->|可能存在| C_CHK
+    PEN -. 缓存空值 .-> FILL_NULL[缓存 null 短 TTL]
+
+    BREAK([缓存击穿<br/>热点 key 失效]) --> MUTEX{分布式锁<br/>单线程重建}
+    MUTEX -->|拿到| REBUILD[查 DB 回填<br/>其他等待]
+    MUTEX -->|未拿到| SLEEP[短暂等待重试]
+    BREAK -. 永不过期 .-> BG[后台异步更新]
+
+    AVA([缓存雪崩<br/>大量 key 同时失效]) --> TTL_J[过期时间加随机抖动]
+    AVA --> MULTIL[多级缓存<br/>本地+Redis]
+    AVA --> LIMIT[限流降级<br/>保护 DB]
+
+    style REQ fill:#4CAF50,color:#fff
+    style RESP fill:#2196F3,color:#fff
+    style HIT fill:#009688,color:#fff
+    style BF fill:#FF9800,color:#fff
+    style MUTEX fill:#9C27B0,color:#fff
+    style REJECT_P fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 穿透(查不存在)解法：缓存空值短TTL，配合布隆过滤器前置拦截挡掉恶意请求

@@ -99,6 +99,35 @@ while (true) {
 3. **糊涂窗口综合征 (SWS)**：如何避免微小数据包的传输？（接收方延迟确认，发送方 Nagle 算法）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    SND([发送方Sender]):::start --> BUF[发送缓冲区<br/>已发送未确认+待发送]
+    BUF --> WN["按cwnd/rwnd<br/>划分四个窗口区域"]
+    WN --> W1[1.已确认<br/>可滑出窗口]:::success
+    WN --> W2[2.已发送未确认<br/>等待ACK]:::async
+    WN --> W3[3.可发送未发送<br/>可用窗口]:::decision
+    WN --> W4[4.不可发送<br/>超出窗口]:::storage
+    W3 --> SEG[封装TCP段 携带Seq]
+    SEG --> NET((网络传输)):::storage
+    NET --> RCV[接收方Receiver]
+    RCV --> RW{按序到达?}:::decision
+    RW -->|失序| CACHE[缓存失序段<br/>发送重复ACK]:::async
+    RW -->|按序| APP[提交应用层]
+    APP --> ACK[回送ACK+更新rwnd<br/>告知剩余接收窗口]
+    ACK --> NET
+    NET --> RCV2[发送方收到ACK]
+    RCV2 --> SLIDE[窗口前沿滑动<br/>移除已确认段]
+    SLIDE --> W3
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心目的：接收方通告剩余缓冲区大小，防止被发送方淹没(点对点)

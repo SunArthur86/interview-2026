@@ -425,6 +425,54 @@ public OrderVO queryOrder(Long userId, Long orderId) {
 4. **GTID 复制是什么？**——Global Transaction ID，每个事务有全局唯一 ID（server_uuid:transaction_id）。相比传统基于 binlog 位点的复制，GTID 让 failover 更简单（从库自动找未同步的事务），主从切换不用手动算位点。MySQL 5.6+ 支持，生产推荐开启。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 应用发起读请求]):::start
+    App[应用层<br/>查询数据]:::client
+    CacheHitQ{{缓存命中?}}:::decision
+    ReturnCache["直接返回缓存数据<br/>O(1) 低延迟"]:::process
+    MissDB{缓存未命中}:::decision
+    QueryDB[查询数据库<br/>执行 SQL]:::process
+    PenetrateQ{{是否为恶意请求?<br/>查询不存在的 key}}:::decision
+    BloomFilter[布隆过滤器拦截<br/>+ 缓存空值]:::process
+    BreakDownQ{{热点 key 失效?<br/>缓存击穿}}:::decision
+    Mutex[加互斥锁<br/>单线程回源]:::process
+    AvalancheQ{{大批 key 同时过期?<br/>缓存雪崩}}:::decision
+    TTLJitter[随机 TTL<br/>+ 多级缓存]:::process
+    WriteBackQ{{是否回写缓存?}}:::decision
+    WriteCache[写入 Redis<br/>设置 TTL]:::process
+    BigKeyCheck{{大 Key / 热 Key?}}:::decision
+    SplitKey[拆分大 Key<br/>本地缓存热 Key]:::process
+    DB[(MySQL 主从<br/>持久化数据)]:::store
+    Cache[(Redis Cluster<br/>分片缓存)]:::store
+    Final([✅ 返回结果]):::start
+    Alarm[告警 + 限流降级]:::danger
+
+    Start --> App --> CacheHitQ
+    CacheHitQ -->|命中| ReturnCache --> BigKeyCheck
+    BigKeyCheck -->|是| SplitKey --> Final
+    BigKeyCheck -->|否| Final
+    CacheHitQ -->|未命中| MissDB --> PenetrateQ
+    PenetrateQ -->|是| BloomFilter --> Alarm
+    PenetrateQ -->|否| BreakDownQ
+    BreakDownQ -->|是| Mutex --> QueryDB
+    BreakDownQ -->|否| AvalancheQ
+    AvalancheQ -->|是| TTLJitter --> QueryDB
+    AvalancheQ -->|否| QueryDB
+    QueryDB --> DB --> WriteBackQ
+    WriteBackQ -->|是| WriteCache --> Cache --> ReturnCache
+    WriteBackQ -->|否| ReturnCache
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到读写分离、主从延迟与一致性兜底，我的理解是——读写分离的本质是"写主库、读从库，用多个从库分摊读压力"。核心矛盾是主从复制延迟——写主库后从库异步同步有秒级延迟，导致"写完立即读不到"。兜底方案按一致性强度选：强一致场景走主库、容忍延迟用缓存过渡、跨机房用半同步复制。打个比方，像报社的"主编辑部 + 各地印刷厂"。记者写稿交主编辑部（写主库），各地印刷厂同步印刷（从库复制）。但同步有延迟（运输时间），可能出现"刚交稿去当地买报纸发现还没印"（写后读不到）。解法：重要新闻指定看主编辑部原稿（读主库），或等印刷完成通知（等待复制完成）。

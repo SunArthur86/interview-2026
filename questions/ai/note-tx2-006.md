@@ -160,6 +160,42 @@ Rerank（cross-encoder）→ top-5（精排）
 - **混合检索的工程实现**：Milvus/Qdrant/Weaviate 都原生支持混合检索（一个 API 同时查 BM25 + 向量）
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([用户 Query]) --> SPLIT[双路并行检索]
+
+    SPLIT --> VEC[向量检索路<br/>语义相似]
+    SPLIT --> BM[BM25 检索路<br/>关键词精确匹配]
+
+    VEC --> QE[Query Embedding]
+    QE --> ANN[(ANN 索引<br/>HNSW/IVF)]
+    ANN --> V_TOP[Top-K1 语义召回<br/>擅长同义/泛化]
+
+    BM --> TOK[分词 + TF-IDF]
+    TOK --> INV[(倒排索引)]
+    INV --> B_TOP[Top-K2 关键词召回<br/>擅长专名/型号/代码]
+
+    V_TOP --> FUSION{融合策略}
+    B_TOP --> FUSION
+    FUSION -->|RRF 倒数排名| RRF[1/(k+rank)<br/>无需归一化分数<br/>鲁棒性强]
+    FUSION -->|加权线性| WEIGHT[α·vec + β·bm25<br/>需分数归一化<br/>调参敏感]
+    FUSION -->|级联| CAS[先向量粗筛<br/>再 BM25 精排]
+
+    RRF --> FINAL[融合 Top-N]
+    WEIGHT --> FINAL
+    CAS --> FINAL
+    FINAL --> RR[Rerank 精排]
+    RR --> CTX[组装上下文]
+
+    style Q fill:#4CAF50,color:#fff
+    style CTX fill:#2196F3,color:#fff
+    style VEC fill:#FF9800,color:#fff
+    style BM fill:#9C27B0,color:#fff
+    style RRF fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - BM25重字面精确匹配（专有名词/数字），向量重语义近似匹配（同义/跨语言），两者互补

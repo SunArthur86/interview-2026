@@ -218,6 +218,34 @@ result = app.invoke({"user_input": "订机票+叫车+酒店"})
 4. **工具优先级**：当多个工具都匹配用户意图时（如搜索引擎 vs 知识库），需要优先级机制——可以基于历史成功率、响应延迟、用户偏好动态排序
 5. **Java后端转型误区**：Java开发者习惯用策略模式/责任链模式做调度，但这些是编译期确定的——Agent场景需要运行时动态决策，ReAct/Plan-and-Solve是更合适的范式
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    GOAL([用户目标输入]) --> OBS0[Observe 感知<br/>读取输入/记忆/状态]
+    OBS0 --> PLAN[Planner 规划<br/>LLM 拆解任务步骤]
+    PLAN --> MEM_R[(Memory 记忆<br/>短期:Context<br/>长期:向量库)]
+    MEM_R --> DECIDE{是否调用工具?}
+    DECIDE -->|否 直接回答| LLM_THINK[LLM 推理思考<br/>CoT/ReAct]
+    DECIDE -->|是 需外部能力| TOOL[Tool Use 工具调用<br/>Function Call/MCP/Skill]
+    TOOL --> EXEC[Executor 执行<br/>search/calc/API]
+    EXEC --> RES{执行结果}
+    RES -->|失败| FB[Fallback 降级<br/>同类工具替换/重试]
+    FB --> OBS0
+    RES -->|成功| OBS1[Observe 观察结果<br/>拼回上下文]
+    OBS1 --> CHK{达到目标 or<br/>max_steps?}
+    CHK -->|否| PLAN
+    CHK -->|是| ANS([最终结果交付])
+    LLM_THINK --> CHK
+
+    style GOAL fill:#4CAF50,color:#fff
+    style ANS fill:#2196F3,color:#fff
+    style TOOL fill:#FF9800,color:#fff
+    style FB fill:#F44336,color:#fff
+    style MEM_R fill:#9C27B0,color:#fff
+    style PLAN fill:#009688,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 多工具冲突不能只靠if-else硬编码——需要用ReAct（推理+行动循环）或Plan-and-Solve（先规划再执行）让LLM动态决策工具选择和执行顺序。

@@ -289,6 +289,44 @@ Why 5: 为什么 Review 和测试都没拦住？
 4. **故障分级怎么定？**——P0（全站不可用/资金损失/数据泄露，CTO 级响应）；P1（核心功能不可用，主管级响应）；P2（部分功能异常/性能下降，oncall 响应）；P3（体验问题/个别 case，工单处理）。分级决定响应级别、复盘深度、通知范围。
 5. **行动项怎么保证落地？**——owner 制（明确负责人）+ deadline（明确期限）+ 验证指标（可量化完成标准）+ 闭环跟踪（周会 review 进度，超期升级）+ 复盘会检查上次完成率。机制化行动项（监控/CI/规范）优于"下次注意"。完成率 > 80% 才算复盘有效。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 文档/查询入库]):::start
+    Crawl[数据采集<br/>爬虫/数据库]:::process
+    Clean[清洗去重<br/>HTML 标签]:::process
+    Tokenize[分词<br/>IK/标准分词器]:::process
+    Analysis[语言处理<br/>小写/词干化/同义词]:::process
+    IndexBuild[构建倒排索引<br/>Term → DocList]:::process
+    Store[(索引存储<br/>Segment 段)]:::store
+    Query[用户查询]:::process
+    ParseQ[Query Parser<br/>解析布尔/短语]:::process
+    IdxQ{{查询类型?}}:::decision
+    TermQ[Term Query<br/>精确匹配]:::process
+    MatchQ[Match Query<br/>分词后 OR]:::process
+    BoolQ[Bool Query<br/>must/should/filter]:::process
+    PhraseQ[Phrase Query<br/>位置临近]:::process
+    Retrieve[倒排表合并<br/>AND/OR 交集]:::process
+    Score[相关性打分<br/>TF-IDF / BM25]:::process
+    Rerank[二次排序<br/>业务权重]:::process
+    Highlight[高亮匹配片段]:::process
+    Final([✅ 返回结果集]):::start
+
+    Start --> Crawl --> Clean --> Tokenize --> Analysis --> IndexBuild --> Store
+    Query --> ParseQ --> IdxQ
+    IdxQ -->|精确| TermQ --> Retrieve
+    IdxQ -->|模糊| MatchQ --> Retrieve
+    IdxQ -->|组合| BoolQ --> Retrieve
+    IdxQ -->|短语| PhraseQ --> Retrieve
+    Retrieve --> Score --> Rerank --> Highlight --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 事故复盘不是追责会，是学习会。根因分析用 5-Whys 逼近系统性根因（不是某人的失误，而是系统为什么允许这个失误发生）。复盘的价值在于把一次性教训变成机制（监控/告警/规范/演练），让同类事故不再发生。blameless 文化是前提——不追究个人，否则没人敢说真话

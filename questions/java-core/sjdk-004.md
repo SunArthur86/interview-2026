@@ -82,6 +82,39 @@ public double area(Shape shape) {
    编译时影响为主（类型检查），运行时会有极小的元数据开销，但 JVM 优化通常可以忽略不计。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    INS([插入新节点]):::start --> CMP[与根节点比较]
+    CMP --> DEC{新值 vs 当前节点}:::decision
+    DEC -->|小于| LEFT[进入左子树]
+    DEC -->|大于| RIGHT[进入右子树]
+    DEC -->|等于 不允许重复| DUP[忽略或更新<br/>避免重复键]:::error
+    LEFT --> CHL{左子树为空?}:::decision
+    RIGHT --> CHR{右子树为空?}:::decision
+    CHL -->|是| PL[作为左孩子插入]
+    CHL -->|否| CMP
+    CHR -->|是| PR[作为右孩子插入]
+    CHR -->|否| CMP
+    PL --> BAL{插入后是否失衡?}:::decision
+    PR --> BAL
+    BAL -->|是 AVL/红黑树| ROT["触发旋转LL/RR/LR/RL<br/>或变色保持平衡"]:::async
+    BAL -->|否 普通BST| KEEP[无需调整]
+    ROT --> OK([树保持有序]):::success
+    KEEP --> OK
+    OK --> SEARCH[中序遍历得有序序列<br/>支持范围查找]
+    SEARCH --> PERF{性能}:::decision
+    PERF -->|平衡树| OLOGN["查找/插入 O log n"]
+    PERF -->|退化成链表| ON[最坏O n 需自平衡]:::error
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 本质：在全开放与final全封闭间提供第三选项，精确控制继承树范围

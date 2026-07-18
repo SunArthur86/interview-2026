@@ -190,6 +190,39 @@ print(prof.key_averages().table(sort_by="cuda_memory_usage", row_limit=10))
 **面试加分点**：提到 `torch.cuda.memory_summary()` 获取详细显存分配报告；提到vLLM的profile_run功能可以自动测量显存峰值并设置安全余量；提到KV Cache量化(FP8/INT8)是最新的研究方向（如KIVI、FlexGen）；提到推理框架选择也很关键——vLLM和SGLang对显存管理远优于原生HuggingFace Transformers。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    OOM([大模型推理 OOM]) --> DIAG{定位原因}
+
+    DIAG -->|权重显存| W_MEM[模型权重过大<br/>7B FP16=14GB]
+    DIAG -->|KV Cache| KV_MEM[长上下文 KV 膨胀<br/>batch×seq×layer×2×d]
+    DIAG -->|激活值| ACT[激活中间张量<br/>峰值显存]
+    DIAG -->|碎片| FRAG[显存碎片<br/>分配失败但总量够]
+
+    W_MEM --> W_FIX[权重量化<br/>INT8/INT4/NF4]
+    KV_MEM --> KV_FIX[KV 优化<br/>PagedAttention/量化/Offload]
+    ACT --> ACT_FIX[减小 batch<br/>梯度检查点]
+    FRAG --> FRAG_FIX[显存池化<br/>PyTorch alloc config]
+
+    W_FIX --> DEPLOY
+    KV_FIX --> DEPLOY
+    ACT_FIX --> DEPLOY
+    FRAG_FIX --> DEPLOY
+
+    DEPLOY[部署策略组合] --> MON{监控推理时}
+    MON -->|TPOT 高| OFFL[Offload 到 CPU<br/>用速度换显存]
+    MON -->|吞吐低| BATCH[Continuous Batching<br/>提升 GPU 利用率]
+    MON -->|稳定| OK([服务稳定])
+
+    style OOM fill:#F44336,color:#fff
+    style OK fill:#4CAF50,color:#fff
+    style W_FIX fill:#009688,color:#fff
+    style KV_FIX fill:#FF9800,color:#fff
+    style OFFL fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 排查顺口溜：权重定大小，KV吃变量，并发最吃紧，最后查激活

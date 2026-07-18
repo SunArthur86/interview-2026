@@ -92,6 +92,46 @@ if (semaphore.tryAcquire()) { // 非阻塞尝试获取
 2. **忘记释放 Semaphore 许可**：如果在 `acquire()` 后的业务逻辑中抛出异常且未在 `finally` 中 `release()`，会导致许可证泄漏，最终导致线程池“假死”。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    LOCK([线程请求锁]) --> CAS{CAS 抢锁<br/>state 0→1}
+    CAS -->|成功| OWN[当前线程持有<br/>设 exclusiveOwnerThread]
+    CAS -->|失败| ACQ[acquire 入队]
+
+    ACQ --> ENQ[自旋入队<br/>CLH 双向队列]
+    ENQ --> NODE[封装 Node 节点<br/>线程引用+状态]
+    NODE --> PRED[找前驱 predecessor]
+    PRED --> CHK_PRED{前驱是 head?<br/>head 是哨兵}
+    CHK_PRED -->|是| RETRY[再次 tryAcquire]
+    CHK_PRED -->|否| PARK
+
+    RETRY --> CAS2{CAS 抢到?}
+    CAS2 -->|是| HEAD[自己设为 head<br/>出队运行]
+    CAS2 -->|否| PARK
+
+    PARK[shouldParkAfterFailedAcquire<br/>设置前驱 SIGNAL] --> BLOCK[LockSupport.park<br/>线程挂起]
+    BLOCK --> WAKE{被唤醒}
+    WAKE --> RETRY
+
+    OWN --> UNLOCK([unlock])
+    UNLOCK -> REL[tryRelease<br/>state-1]
+    REL --> ZERO{state == 0?}
+    ZERO -->|否 重入| KEEP_OWN[保持持有]
+    ZERO -->|是| UNPARK[找 head 后继<br/>LockSupport.unpark]
+    UNPARK --> FREE([锁释放])
+
+    FAIR([公平锁]) -. 排队先来后到 .-> ACQ
+    UNFAIR([非公平锁]) -. 抢占插队 .-> CAS
+
+    style LOCK fill:#4CAF50,color:#fff
+    style OWN fill:#2196F3,color:#fff
+    style PARK fill:#9C27B0,color:#fff
+    style UNPARK fill:#009688,color:#fff
+    style BLOCK fill:#FF9800,color:#fff
+```
+
 ## 记忆要点
 
 - CountDownLatch：一次性减法计数器，用于主线程等待 N 个子任务全部完成

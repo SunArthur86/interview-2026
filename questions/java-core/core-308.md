@@ -93,6 +93,35 @@ void pure_user_calc() {
 3. **零拷贝与上下文切换**：为什么 mmap 和 sendfile 能减少上下文切换次数？
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    APP([用户进程运行]):::start --> USR[用户态 Ring3<br/>权限受限]
+    USR --> EXEC[执行普通指令<br/>访问用户空间内存]
+    EXEC --> NEED{需要特权操作?}:::decision
+    NEED -->|否| LOOP[继续用户态执行]
+    NEED -->|是 系统调用/中断/异常| TRAP["触发trap指令<br/>软中断 int 0x80/syscall"]
+    TRAP --> SW[切换到内核态 Ring0<br/>保存现场 切换栈]
+    SW --> KER["内核处理<br/>访问硬件/文件/网络"]
+    KER --> RT[执行完成<br/>恢复现场]
+    RT --> RET[返回用户态<br/>继续执行下一条指令]
+    RET --> LOOP
+    LOOP --> NEXT{继续运行?}:::decision
+    NEXT -->|是| EXEC
+    NEXT -->|否 结束| EXIT([进程退出]):::success
+    TRAP --> TYPES{进入内核态的场景}:::decision
+    TYPES -->|系统调用| SC["read/write/open<br/>主动请求"]
+    TYPES -->|异常| EXC["缺页/除零<br/>被动触发"]
+    TYPES -->|外部中断| IRQ["时钟/网卡/键盘<br/>硬件事件"]:::async
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 区别对比：用户态权限低只能受限访问，核心态权限高能管硬件和所有内存。

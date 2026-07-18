@@ -125,6 +125,42 @@ public class ConsumerController {
 3. **雪崩效应与缓存**：如果注册中心宕机，客户端还能调用吗？（答：可以，客户端通常会缓存服务列表，但无法感知新服务下线）。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PROVIDER([服务提供者<br/>启动]) --> REG[注册到注册中心<br/>ZK/Nacos/Eureka]
+    REG --> HB[定时发心跳<br/>5-10s]
+    HB --> REGISTRY[(注册中心<br/>服务列表)]
+
+    CONSUMER([服务消费者]) --> SUB[订阅服务列表]
+    SUB --> REGISTRY
+    REGISTRY --> PUSH[推送变更<br/>Watch/长轮询]
+    PUSH --> LOCAL_CACHE[本地缓存实例列表]
+
+    CONSUMER --> CALL[发起调用]
+    CALL --> LB[客户端负载均衡<br/>Ribbon/LoadBalancer]
+    LB --> PICK[选实例<br/>RR/加权/最少连接]
+    PICK --> REQ[发请求]
+    REQ --> PROVIDER
+
+    PROVIDER -. 心跳超时 .-> EVICT[注册中心剔除]
+    EVICT --> NOTIFY[通知消费者]
+    NOTIFY --> UPDATE[更新本地缓存<br/>熔断该实例]
+
+    PROVIDER -. 优雅停机 .-> DEREG[主动注销<br/>注册中心标记下线]
+    DEREG --> DRAIN[等待 in-flight 请求<br/>处理完关闭]
+
+    CP_ZK([ZK/etcd<br/>CP 强一致]) -. 选举型 .-> REGISTRY
+    AP_NACOS([Nacos/Eureka<br/>AP 高可用]) -. 心跳型 .-> REGISTRY
+
+    style PROVIDER fill:#4CAF50,color:#fff
+    style CONSUMER fill:#009688,color:#fff
+    style REGISTRY fill:#FF9800,color:#fff
+    style EVICT fill:#F44336,color:#fff
+    style DEREG fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 核心价值：解决微服务实例 IP 频繁变动问题，实现服务调用的动态解耦

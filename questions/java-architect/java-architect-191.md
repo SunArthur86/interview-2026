@@ -391,6 +391,53 @@ public void reconcile() {
 4. **数据迁移怎么保证一致？**——CDC（Debezium/Canal）实时同步 binlog；双写期新老并行；每小时对账 diff 监控（>0.1% 暂停切流，>1% 自动回滚）；diff 自动修复（从老 DB 重同步）。对账是迁移期的生命线。
 5. **Facade 路由怎么做？**——Spring Cloud Gateway/Nginx 按路径/Header 路由。如 `/api/order/query/**` 走新系统，`/api/v1/**` 走老系统。灰度通过 Header（`X-Migrate-Version: v2`）控制流量比例，10% 用户带 v2 走新系统。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 SpringBoot 启动<br/>main 方法]):::start
+    SpringApplication[SpringApplication.run<br/>启动入口]:::process
+    PrepareEnv[准备 Environment<br/>加载 application.yml]:::process
+    ContextQ{{应用上下文?<br/>Servlet/Reactive}}:::decision
+    ServletCtx[AnnotationConfigCtx<br/>传统 MVC]:::process
+    ReactiveCtx[ReactiveWebCtx<br/>WebFlux]:::process
+    Refresh[refresh 刷新容器<br/>核心入口]:::process
+    BeanFactory[BeanFactory<br/>IoC 容器]:::store
+    BeanDef[BeanDefinition<br/>扫描 @Component/@Bean]:::process
+    ScanQ{{配置方式?<br/>注解/XML}}:::decision
+    AnnoScan[ComponentScan<br/>ClassPathBeanDefinitionScanner]:::process
+    XmlScan[XmlBeanDefinitionReader<br/>解析 XML]:::process
+    Instantiate[实例化 Bean<br/>反射 newInstance]:::process
+    Populate[属性填充<br/>依赖注入 @Autowired]:::process
+    AwareQ{{实现 Aware 接口?}}:::decision
+    Aware[BeanNameAware / ContextAware<br/>回调注入]:::process
+    InitQ{{自定义初始化?}}:::decision
+    PostConstruct[@PostConstruct<br/>初始化方法]:::process
+    AOPQ{{需要 AOP 增强?<br/>切面 @Aspect}}:::decision
+    Proxy[创建动态代理<br/>JDK/CGLIB]:::process
+    ProxyChain[代理链<br/>MethodInvocation]:::process
+    Final([✅ Bean 就绪 可用]):::start
+
+    Start --> SpringApplication --> PrepareEnv --> ContextQ
+    ContextQ -->|传统| ServletCtx --> Refresh
+    ContextQ -->|响应式| ReactiveCtx --> Refresh
+    Refresh --> BeanFactory --> BeanDef --> ScanQ
+    ScanQ -->|注解| AnnoScan --> Instantiate
+    ScanQ -->|XML| XmlScan --> Instantiate
+    Instantiate --> Populate --> AwareQ
+    AwareQ -->|是| Aware --> InitQ
+    AwareQ -->|否| InitQ
+    InitQ -->|是| PostConstruct --> AOPQ
+    InitQ -->|否| AOPQ
+    AOPQ -->|是| Proxy --> ProxyChain --> Final
+    AOPQ -->|否| Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 绞杀者模式（Strangler Fig Pattern，Martin Fowler 提出）是改造遗留系统的安全方法——不一次性重写，而是用 Facade 路由渐进迁移：新功能在新系统实现，旧功能逐步替换，每步可回滚。名字来自热带的绞杀榕——新树环绕老树生长，逐步取代老树，最终老树枯萎。本质是用可逆的小步替换不可逆的大重写

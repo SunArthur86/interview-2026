@@ -208,6 +208,40 @@ model.print_trainable_parameters()
 **面试加分点**：提到QLoRA论文(Dettmers et al., 2023)证明QLoRA效果与全参16bit微调相当（差距<1%）；提到GA-QoRA(Qi et al.)在QLoRA基础上用GQA进一步优化；提到LoRA的alpha参数控制适配器的影响力(scale = alpha/r)；提到推理时可以将LoRA权重合并回基础模型(merge_and_unload)实现零额外推理开销。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    FP16([FP16 原始权重]) --> ANALYZE[分析权重分布<br/>找缩放因子 Scale]
+    ANALYZE --> METHOD{量化方法}
+
+    METHOD -->|PTQ 训后量化| CALI[校准数据集<br/>统计激活分布]
+    METHOD -->|QAT 训练感知| TRAIN[插入伪量化节点<br/>微调恢复精度]
+
+    CALI --> Q1[INT8 量化<br/>W8A8 对称/非对称]
+    CALI --> Q2[GPTQ<br/>二阶 Hessian 逐层补偿]
+    CALI --> Q3[AWQ<br/>激活感知保护重要权重]
+
+    TRAIN --> Q4[INT4 量化<br/>NF4 + FP16 组合<br/>QLoRA 用]
+
+    Q1 --> EVAL{精度损失评估}
+    Q2 --> EVAL
+    Q3 --> EVAL
+    Q4 --> EVAL
+    EVAL -->|可接受| DEPLOY[部署推理<br/>显存降 4-8x]
+    EVAL -->|不可接受| ADJUST[调粒度/混合精度]
+    ADJUST --> ANALYZE
+
+    DEPLOY --> SPEED[推理加速<br/>INT 算子更快]
+    SPEED --> OUT([服务上线])
+
+    style FP16 fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style DEPLOY fill:#009688,color:#fff
+    style Q4 fill:#FF9800,color:#fff
+    style ADJUST fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 4bit冻结+16bit训练：NF4量化冻结原权重，仅训练fp16的LoRA低秩矩阵。

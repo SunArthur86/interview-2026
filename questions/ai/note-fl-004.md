@@ -115,6 +115,40 @@ Claude Code 还支持 `memory/` 子目录写入小记忆文件，用 frontmatter
 - **memory 污染问题**：如果 auto memory 写太多低价值内容，反而干扰主任务 → 需要"遗忘机制"（定期清理低引用记忆）
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    IN([用户输入/对话]) --> ENR[Encoder 编码<br/>向量化]
+    ENR --> SHORT[短期记忆<br/>Context Window<br/>当前会话窗口]
+    ENR --> WORK[工作记忆<br/>任务中间状态<br/>scratchpad]
+    ENR --> LONG[(长期记忆<br/>向量数据库<br/>跨会话)]
+
+    SHORT --> RETR[检索召回<br/>向量相似度 Top-K]
+    LONG --> RETR
+    WORK --> RETR
+    RETR --> RERANK[Rerank 精排<br/>时间衰减+重要性加权]
+    RERANK --> CTX[组装上下文 Prompt]
+    CTX --> LLM[LLM 决策生成]
+    LLM --> ACTION[输出/工具调用]
+
+    ACTION --> WRITE{是否值得持久化?}
+    WRITE -->|高分 重要| SCORE[重要性评分<br/>LLM 打分]
+    WRITE -->|低分 噪声| DROP[丢弃/过期 TTL]
+    SCORE --> DEDUP[去重 + 关联已有记忆]
+    DEDUP --> LONG
+
+    ACTION --> UPDATE[更新工作记忆]
+    UPDATE --> WORK
+
+    style IN fill:#4CAF50,color:#fff
+    style LLM fill:#009688,color:#fff
+    style LONG fill:#9C27B0,color:#fff
+    style SHORT fill:#2196F3,color:#fff
+    style WORK fill:#FF9800,color:#fff
+    style DROP fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 三层记忆：项目级(CLAUDE.md进git) > 用户级(~不进git) > 会话级(内存关窗即丢)

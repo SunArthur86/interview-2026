@@ -187,6 +187,55 @@ Agent 的测试要专门设计：
 3. 评测平台——所有 Agent 的"黄金集/影子流量/在线审计"在统一平台跑，标准化评测指标（准确率/资损率/自动化率）。新 Agent 上线必须过评测。
 4. 模型层抽象——底层 LLM 可插拔（如换 GLM-5/GPT），Agent 框架与具体模型解耦。模型升级时所有 Agent 受益。把 Agent 从"每场景一个项目"变成"平台 + 配置"，这是 AI 工程化的核心。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 应用容器化部署]):::start
+    Code[源代码]:::process
+    Dockerfile[编写 Dockerfile<br/>基础镜像+依赖]:::process
+    Build[构建镜像<br/>docker build]:::process
+    Image[(镜像仓库<br/>Registry)]:::store
+    K8sCluster[K8s 集群<br/>控制面+数据面]:::process
+    APIServer[API Server<br/>唯一入口]:::process
+    Deploy[创建 Deployment<br/>声明式 YAML]:::process
+    SchedulerQ{{调度决策?<br/>Scheduler}}:::decision
+    Filter[预选 Filter<br/>资源/亲和性]:::process
+    Score[优选 Score<br/>打分排序]:::process
+    Bind[绑定到 Node<br/>更新 Pod]:::process
+    Kubelet[Kubelet<br/>节点代理]:::process
+    PullImage[拉取镜像<br/>CRI 接口]:::process
+    Container[创建容器<br/>containerd]:::process
+    ProbeQ{{健康探针?<br/>Liveness/Readiness}}:::decision
+    Liveness[Liveness Probe<br/>失败重启]:::process
+    Readiness[Readiness Probe<br/>就绪接流量]:::process
+    RestartQ{{容器崩溃?}}:::decision
+    Restart[重启策略<br/>Always]:::process
+    ScaleQ{{HPA 自动扩缩?<br/>CPU/QPS}}:::decision
+    Scale[水平扩缩<br/>动态调整副本]:::process
+    Service[Service 服务<br/>稳定 ClusterIP]:::process
+    Ingress[Ingress 入口<br/>七层路由]:::process
+    Final([✅ 服务对外可用]):::start
+
+    Start --> Code --> Dockerfile --> Build --> Image
+    K8sCluster --> APIServer --> Deploy --> SchedulerQ
+    Image -.拉取.-> PullImage
+    SchedulerQ --> Filter --> Score --> Bind
+    Bind --> Kubelet --> PullImage --> Container --> ProbeQ
+    ProbeQ -->|存活| Liveness --> RestartQ
+    ProbeQ -->|就绪| Readiness --> ScaleQ
+    RestartQ -->|崩溃| Restart --> Container
+    RestartQ -->|正常| ScaleQ
+    ScaleQ -->|高峰| Scale --> Service
+    ScaleQ -->|平稳| Service
+    Service --> Ingress --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 交易系统有大量长尾场景靠人工，如何用 AI 自动化又不影响核心确定性？简单说就是——用 AI Agent 改造交易系统是"把规则硬编码的业务决策换成 LLM 推理+工具调用"。Agent = LLM + 工具 + 记忆；安全：工具校验+额度+人工兜底。

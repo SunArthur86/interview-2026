@@ -129,6 +129,39 @@ public class MergeSort {
 *   **考点 3**：如何在单链表上实现归并排序？（考察链表归并无需额外空间，只需修改指针的特性）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ARR([原始数组n个元素]):::start --> DEC{"n > 1?"}:::decision
+    DEC -->|否 已有序| RTN([返回单个元素]):::success
+    DEC -->|是| SPL[对半切分<br/>left=0~mid right=mid~n-1]
+    SPL --> R1[递归排序左半]
+    SPL --> R2[递归排序右半]
+    R1 --> MERGE[合并两个有序子数组]
+    R2 --> MERGE
+    MERGE --> TWOP["双指针i/j分别指向<br/>左右子数组首元素"]
+    TWOP --> CMP{"arr[i] <= arr[j]?"}:::decision
+    CMP -->|是| TA["#quot;k++ = arr[i++"]<br/>左元素先入结果"]
+    CMP -->|否| TB["#quot;k++ = arr[j++"]<br/>右元素先入结果"]
+    TA --> NXT{一方遍历完?}:::decision
+    TB --> NXT
+    NXT -->|否| CMP
+    NXT -->|是| TAIL[剩余元素直接追加]
+    TAIL --> COPY[复制回原数组]
+    COPY --> DONE([排序完成]):::success
+    DEC --> PRO{性能分析}:::decision
+    PRO --> T["时间复杂度<br/>最好/最坏/平均 O n log n"]
+    PRO --> S[空间复杂度<br/>O n 需辅助数组]:::error
+    PRO --> ST[稳定性 稳定<br/>相等元素顺序不变]:::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心三步曲：选基准（Pivot）、分区排列（小的放左大的放右）、递归排序左右子序列

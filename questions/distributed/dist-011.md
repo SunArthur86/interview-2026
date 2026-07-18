@@ -71,6 +71,47 @@ server {
 - **Apache**：模块丰富，历史悠久的七层代理。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([客户端请求]) --> LB[负载均衡器]
+
+    LB --> STRATEGY{调度策略}
+    STRATEGY -->|轮询| RR[Round Robin<br/>依次分配]
+    STRATEGY -->|加权| WRR[Weighted RR<br/>按机器性能配比]
+    STRATEGY -->|随机| RND[Random<br/>概率均衡]
+    STRATEGY -->|最少连接| LC[Least Connections<br/>实时负载感知]
+    STRATEGY -->|IP Hash| IPH[IP Hash<br/>会话保持]
+    STRATEGY -->|一致性 Hash| CH[Consistent Hash<br/>虚拟节点最小迁移]
+
+    RR --> NODES[后端节点池]
+    WRR --> NODES
+    RND --> NODES
+    LC --> NODES
+    IPH --> NODES
+    CH --> NODES
+
+    NODES --> HEALTH{健康检查}
+    HEALTH -->|健康| ROUTE[转发请求]
+    HEALTH -->|异常| EVICT[剔除节点<br/>故障转移]
+    EVICT --> LB
+
+    ROUTE --> TIER{层级}
+    TIER -->|L4 传输层| L4LVS[LVS/硬件<br/>IP+端口 改包<br/>DR/NAT/TUN/FNAT]
+    TIER -->|L7 应用层| L7NG[Nginx/HAProxy<br/>HTTP 头/Cookie/URL<br/>路由+鉴权+限流]
+
+    L4LVS --> UP([上游服务])
+    L7NG --> UP
+
+    style REQ fill:#4CAF50,color:#fff
+    style UP fill:#2196F3,color:#fff
+    style CH fill:#FF9800,color:#fff
+    style L4LVS fill:#9C27B0,color:#fff
+    style L7NG fill:#009688,color:#fff
+    style EVICT fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 一句话定义：工作在应用层，通过解析 HTTP 报文内容（如 URL/Header）进行流量分发

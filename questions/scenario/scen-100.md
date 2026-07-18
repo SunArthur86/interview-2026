@@ -100,6 +100,38 @@ User (Client)       Server (Backend)          Message Queue    DB/Cache
    - 降级：直接查询 MySQL 订单表。虽然 MySQL 压力大，但秒杀结束后流量峰值已过，可以承受。或者返回 "系统繁忙"，让用户稍后再试。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SA([发送方A]):::start --> WS1["建立长连接<br/>WebSocket/TCP"]
+    WS1 --> AUTH1[登录鉴权<br/>获取connectionId]
+    AUTH1 --> SEND[A发送消息<br/>携带接收方B+content]
+    SEND --> GW[消息网关<br/>按B的ID路由]
+    GW --> SRV[消息服务<br/>处理消息]
+    SRV --> SEQ[生成全局递增序列号<br/>保证顺序]
+    SEQ --> STORE2[(消息存储<br/>MySQL+HBase+ES搜索)]:::storage
+    STORE2 --> ONLINE{B在线?}:::decision
+    ONLINE -->|是 同一网关| PUSH2[实时推送给B<br/>WebSocket frame]
+    ONLINE -->|是 不同网关| ROUTE[通过用户路由表<br/>找到B所在网关推送]
+    ONLINE -->|否 离线| OFF[("离线存储<br/>Redis/MQ待推送")]:::storage
+    PUSH2 --> RB([接收方B收到])
+    OFF --> NOTIFY[B下次上线时<br/>拉取未读消息]
+    ROUTE --> RB
+    RB --> ACK[已读回执<br/>更新已读位置]
+    ACK --> READ{群聊?}::::decision
+    READ -->|是 群消息| GROUP["写扩散/收件箱<br/>每个成员seq独立"]
+    READ -->|否 单聊| DONE2([消息送达完成]):::success
+    GROUP --> DONE2
+    STORE2 --> SEARCH[(ES建立索引<br/>支持历史搜索)]:::storage
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 秒杀通知两方案：前端指数退避轮询(查Redis)，WebSocket全双工主动推送(体验最佳)

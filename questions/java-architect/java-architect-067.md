@@ -488,6 +488,54 @@ public class AppealService {
 3. **怎么处理跨文化审核（不同地区标准不同）？**——地区化规则（沙特严/欧美松），按用户地区适用不同审核标准。多语言 AI + 本地化人工审。
 4. **审核和版权保护的关系？**——版权（盗版/抄袭）是审核的一环。AI 检测重复内容（指纹比对），疑似侵权的转人工/版权方确认。京东原创保护：AI 查重 + 版权方投诉通道。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 Java 源码 .java]):::start
+    Javac[javac 编译<br/>词法/语法/语义分析]:::process
+    ClassFile[.class 字节码文件<br/>常量池/方法表]:::store
+    ClassLoad[类加载子系统<br/>ClassLoader]:::process
+    LoadPhase[加载 Loading<br/>读取字节流]:::process
+    LinkPhase[链接 Linking<br/>验证/准备/解析]:::process
+    ParentQ{{双亲委派?<br/>向上委托}}:::decision
+    BootClass[BootStrap 加载<br/>rt.jar 核心类]:::process
+    AppClass[AppClassLoader<br/>加载应用类]:::process
+    InitPhase[初始化 Initialization<br/>执行 <clinit>]:::process
+    Runtime[运行时数据区]:::process
+    Heap[(堆 Heap<br/>对象/数组 GC 区)]:::store
+    Method[(方法区<br/>类元信息/常量)]:::store
+    Stack[(虚拟机栈<br/>栈帧/局部变量)]:::store
+    NativeStack[(本地方法栈<br/>JNI)]:::store
+    PC[(程序计数器 PC)]:::store
+    Alloc[对象分配 Eden]:::process
+    GcQ{{GC 触发?<br/>Eden 满/老年代满}}:::decision
+    YoungGC[Young GC<br/>复制算法]:::process
+    OldGC[Old GC / Full GC<br/>标记-整理]:::process
+    CollectorQ{{GC 收集器?<br/>G1/ZGC/CMS}}:::decision
+    G1[G1 Region 化<br/>可预测暂停]:::process
+    ZGC[ZGC 染色指针<br/><10ms STW]:::process
+    Final([✅ 字节码执行完成]):::start
+
+    Start --> Javac --> ClassFile --> ClassLoad
+    ClassLoad --> LoadPhase --> LinkPhase --> ParentQ
+    ParentQ -->|核心类| BootClass --> InitPhase
+    ParentQ -->|应用类| AppClass --> InitPhase
+    InitPhase --> Runtime
+    Runtime --> Heap & Method & Stack & NativeStack & PC
+    Heap --> Alloc --> GcQ
+    GcQ -->|Eden 满| YoungGC --> Alloc
+    GcQ -->|Old 满| OldGC --> CollectorQ
+    CollectorQ -->|默认 9+| G1 --> Final
+    CollectorQ -->|大堆低延迟| ZGC --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 内容审核是平台的合规底线——UGC（用户生成内容）必须审核才能发布，否则违规内容（黄/暴/政/假）导致平台被封。核心挑战是海量内容（百万级/天）vs 审核准确。解法是人机协同——AI 先审（快，过滤 90% 明显合规/违规），人工复审（准，处理 10% 模糊的）。三层架构：机器初筛（AI 模型）→ 人工复审（审核员）→ 申诉仲裁（高级审核）

@@ -241,6 +241,44 @@ class Observability:
 3. **知道主流方案**：AutoGen/CrewAI/LangGraph 各有侧重，选型体现工程判断
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    USER([用户请求]) --> GW[Orchestrator<br/>主 Agent 编排器]
+    GW --> MODE{协作模式}
+
+    MODE -->|串行 Pipeline| S1[Agent A<br/>意图理解]
+    S1 --> S2[Agent B<br/>信息检索]
+    S2 --> S3[Agent C<br/>结果生成]
+
+    MODE -->|并行 Fan-out| P1[Agent A 检索]
+    MODE -->|并行 Fan-out| P2[Agent B 计算]
+    MODE -->|并行 Fan-out| P3[Agent C 校验]
+    P1 --> AGG[Aggregator 汇总]
+    P2 --> AGG
+    P3 --> AGG
+
+    MODE -->|仲裁 Debate| D1[Agent A 方案1]
+    MODE -->|仲裁 Debate| D2[Agent B 方案2]
+    D1 --> JUDGE[Judge Agent 仲裁]
+    D2 --> JUDGE
+
+    S3 --> SHARED[(共享状态<br/>Blackboard/MQ)]
+    AGG --> SHARED
+    JUDGE --> SHARED
+    SHARED --> SYNC{状态一致?}
+    SYNC -->|冲突| NEG[协商/优先级裁决]
+    NEG --> SHARED
+    SYNC -->|一致| OUT([汇总输出])
+
+    style USER fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style GW fill:#FF9800,color:#fff
+    style SHARED fill:#9C27B0,color:#fff
+    style JUDGE fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 一句话本质：多Agent平台就是Agent的“操作系统”（类比K8s之于容器）

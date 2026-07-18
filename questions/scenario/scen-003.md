@@ -111,6 +111,38 @@ return {1, amount}
 3. **幂等性**：用户疯狂点击按钮，如何防止抢到多个？（Lua 脚本中先用 Set/Bitmap 记录 `hset red_packet_id user_id 1`，若已存在则直接返回错误）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    U([用户点击秒杀按钮]):::start --> JS[前端按钮置灰<br/>校验+限频5s一次]
+    JS --> GW["API网关<br/>IP/用户限流令牌桶"]
+    GW --> GOK{通过限流?}:::decision
+    GOK -->|否| BLOCK["返回繁忙/排队"]:::error
+    GOK -->|是| CPT{需验证码?}:::decision
+    CPT -->|是 防机器人| CV["滑块/图形验证码"]
+    CPT -->|否| SVC[秒杀服务]
+    CV --> SVC
+    SVC --> RPRE[查Redis预热库存<br/>Lua原子扣减]
+    RPRE --> RDEC{扣减成功?}:::decision
+    RDEC -->|否 库存<=0| SOLD[售罄提示+熔断]:::error
+    RDEC -->|是| ENQ[发送MQ消息 异步下单]
+    ENQ --> Q[(消息队列<br/>削峰填谷)]:::storage
+    Q --> CONSUMER[订单消费者]
+    CONSUMER --> DBOP[MySQL执行下单<br/>乐观锁version兜底]
+    DBOP --> DBOK{DB扣减成功?}:::decision
+    DBOK -->|是| ORDER[生成订单 返回成功]
+    DBOK -->|否 超卖兜底| COMP[回滚Redis补偿<br/>订单失败]
+    ORDER --> PAY[引导用户支付<br/>15分钟未支付取消]
+    PAY --> NOTIFY([支付成功 异步通知]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 金额拆分：必记微信二倍均值法，公式=随机(0.01, 剩余金额/剩余人数×2)

@@ -88,6 +88,47 @@ memory_points:
 4. **限流后的策略**：是直接拒绝 429，还是排队？（高并发场景建议直接拒绝，排队会堆积线程导致网关 OOM）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([请求到达]):::start --> ALG{限流算法}:::decision
+    ALG -->|计数器固定窗口| CNT[单位时间内计数<br/>超阈值拒绝]
+    ALG -->|滑动窗口| SW[细分窗口平滑统计<br/>解决临界问题]:::async
+    ALG -->|漏桶| LB["固定速率漏水<br/>超出容量丢弃/排队"]
+    ALG -->|令牌桶| TB[固定速率发令牌<br/>拿到才处理 允许突发]
+    CNT --> CBUG{临界问题?}:::decision
+    CBUG -->|是 窗口切换瞬间| SURGE[2倍流量冲击<br/>需滑动窗口补救]:::error
+    CBUG -->|否| PASS1[放行]
+    SW --> STAT[Redis ZSET统计<br/>score=时间戳]
+    STAT --> CHK1{窗口内数量?}:::decision
+    CHK1 -->|超阈值| DROP1[拒绝 429 Too Many]
+    CHK1 -->|未超| PASS2[放行]
+    LB --> QUEUE[请求入桶<br/>队列缓冲]
+    QUEUE --> RATE[匀速消费<br/>超出容量溢出]
+    RATE --> CHK2{桶满?}:::decision
+    CHK2 -->|是| DROP2[拒绝]
+    CHK2 -->|否| PASS3[排队处理]
+    TB --> TOKEN[(令牌桶<br/>定时添加令牌)]:::storage
+    TOKEN --> TAKE{有令牌?}:::decision
+    TAKE -->|是| CONSUME[消耗1个令牌 放行]
+    TAKE -->|否| DROP3["拒绝/等待"]:::error
+    PASS1 --> DONE([请求被处理]):::success
+    PASS2 --> DONE
+    PASS3 --> DONE
+    CONSUME --> DONE
+    REQ --> LEV{限流层级}:::decision
+    LEV -->|网关限流| GW["Nginx/Spring Cloud Gateway"]
+    LEV -->|应用限流| APP["Sentinel/Resilience4j"]
+    LEV -->|分布式限流| DIST[Redis+Lua 原子操作]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 千万并发需分层限流：CDN/Nginx层(L3)拦截恶意流量，网关层(L4)做精确业务限流

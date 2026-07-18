@@ -404,6 +404,40 @@ vLLM在通用场景持平或略优（更成熟的kernel优化）
 - **Speculative Decoding**：推测解码，用小模型加速大模型推理，vLLM/SGLang都支持
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([推理请求<br/>多轮对话]) --> PREC[Prefix Cache 命中?<br/>公共前缀复用]
+    PREC -->|命中| REUSE[复用历史 KV Cache<br/>跳过重新计算]
+    PREC -->|未命中| COMPUTE[计算所有 token 的 K/V]
+
+    COMPUTE --> STORE[KV Cache 存储<br/>每个 Transformer 层]
+    REUSE --> STORE
+
+    STORE --> MEM_CHECK{显存足够?}
+    MEM_CHECK -->|否| OFFLOAD[Offloading<br/>溢出到 CPU/SSD]
+    MEM_CHECK -->|是| PAGED
+
+    OFFLOAD --> PAGED
+    subgraph PAGED["vLLM PagedAttention"]
+    BLOCK[逻辑 Block 分块<br/>类似虚拟内存页表] --> MAP[Block Table 映射<br/>非连续物理显存]
+    MAP --> SHARED[共享 Block<br/>同一前缀多请求复用]
+    end
+
+    PAGED --> BATCH[Continuous Batching<br/>动态拼 batch]
+    BATCH --> DECODE[逐 token 解码]
+    DECODE --> APPEND[新 token 的 K/V<br/>追加到 Cache]
+    APPEND --> OUT([输出 token<br/>循环直到 EOS])
+
+    style REQ fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style REUSE fill:#009688,color:#fff
+    style PAGED fill:#FF9800,color:#fff
+    style OFFLOAD fill:#F44336,color:#fff
+    style BATCH fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - vLLM核心：PagedAttention将显存按页分配，彻底消除内存碎片提升至95%

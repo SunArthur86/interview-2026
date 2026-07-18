@@ -109,6 +109,34 @@ void lock_critical_memory(void *addr, size_t len) {
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    P([进程独享虚拟地址空间]):::start --> SEG[虚拟地址空间划分]
+    SEG --> UAREA["用户空间 0~3GB<br/>代码/数据/堆/栈"]
+    SEG --> KAREA[内核空间 3~4GB<br/>所有进程共享]
+    UAREA --> CODE[.text 代码段 只读]
+    UAREA --> DATA[.data 已初始化全局变量]
+    UAREA --> BSS[.bss 未初始化全局变量]
+    UAREA --> HEAP["堆 heap 向上增长<br/>malloc/new分配"]
+    UAREA --> MMAP["mmap映射区<br/>文件/共享内存"]
+    UAREA --> STACK["栈 stack 向下增长<br/>局部变量/函数帧"]
+    P --> MMU[MMU: 虚拟地址→物理地址]
+    MMU --> PGTBL[(多级页表<br/>占用少内存)]:::storage
+    PGTBL --> TLB[TLB缓存热门映射]
+    TLB --> REF([访问物理内存RAM]):::success
+    HEAP --> DEM[请求分页<br/>按需分配 实际内存可超物理]:::async
+    DEM --> SWP[内存不足时<br/>换出到Swap交换区]
+    SWP --> BEN[每个进程4GB独立空间<br/>实际共用物理内存]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心思想：屏蔽物理内存离散，为进程提供连续且独立的逻辑地址空间。

@@ -333,6 +333,54 @@ capabilityRegistry.search("USER", "basic")
 3. **中台失败常见原因？**——过度膨胀（业务差异塞进来成大泥球）、过度抽象（模型空洞无法用）、组织不支持（没有 CTO 背书，业务线不配合）、团队能力不足（平台工程能力不够）。
 4. **中台怎么量化收益？**——platform_reuse_rate（原子能力被复用的比例）、time_to_market（新业务接入中台后上线周期缩短）、redundant_service_count（重复服务减少数）、cost_saving（机器和人力成本节省）。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 Java 源码 .java]):::start
+    Javac[javac 编译<br/>词法/语法/语义分析]:::process
+    ClassFile[.class 字节码文件<br/>常量池/方法表]:::store
+    ClassLoad[类加载子系统<br/>ClassLoader]:::process
+    LoadPhase[加载 Loading<br/>读取字节流]:::process
+    LinkPhase[链接 Linking<br/>验证/准备/解析]:::process
+    ParentQ{{双亲委派?<br/>向上委托}}:::decision
+    BootClass[BootStrap 加载<br/>rt.jar 核心类]:::process
+    AppClass[AppClassLoader<br/>加载应用类]:::process
+    InitPhase[初始化 Initialization<br/>执行 <clinit>]:::process
+    Runtime[运行时数据区]:::process
+    Heap[(堆 Heap<br/>对象/数组 GC 区)]:::store
+    Method[(方法区<br/>类元信息/常量)]:::store
+    Stack[(虚拟机栈<br/>栈帧/局部变量)]:::store
+    NativeStack[(本地方法栈<br/>JNI)]:::store
+    PC[(程序计数器 PC)]:::store
+    Alloc[对象分配 Eden]:::process
+    GcQ{{GC 触发?<br/>Eden 满/老年代满}}:::decision
+    YoungGC[Young GC<br/>复制算法]:::process
+    OldGC[Old GC / Full GC<br/>标记-整理]:::process
+    CollectorQ{{GC 收集器?<br/>G1/ZGC/CMS}}:::decision
+    G1[G1 Region 化<br/>可预测暂停]:::process
+    ZGC[ZGC 染色指针<br/><10ms STW]:::process
+    Final([✅ 字节码执行完成]):::start
+
+    Start --> Javac --> ClassFile --> ClassLoad
+    ClassLoad --> LoadPhase --> LinkPhase --> ParentQ
+    ParentQ -->|核心类| BootClass --> InitPhase
+    ParentQ -->|应用类| AppClass --> InitPhase
+    InitPhase --> Runtime
+    Runtime --> Heap & Method & Stack & NativeStack & PC
+    Heap --> Alloc --> GcQ
+    GcQ -->|Eden 满| YoungGC --> Alloc
+    GcQ -->|Old 满| OldGC --> CollectorQ
+    CollectorQ -->|默认 9+| G1 --> Final
+    CollectorQ -->|大堆低延迟| ZGC --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 中台变成大泥球的根因是边界失守——所有业务线的需求都往中台塞，公共模型为了兼容所有场景越抽象越空洞，最终一个 UserCenter 服务承载 200+ 接口，改一个字段影响全公司。解法是能力 + 编排分层：中台沉淀稳定原子能力（用户查询、库存扣减），业务线自己做差异化编排（大促的库存策略 vs 日常的库存策略），中台不碰业务差异

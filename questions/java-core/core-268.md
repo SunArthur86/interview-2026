@@ -113,6 +113,40 @@ class GzipCompressDecorator extends InputStreamDecorator {
 | **典型应用** | Java IO 流, Python 装饰器 | RPC 动态代理, 防火墙代理 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    CMP([Component抽象组件<br/>定义operation接口]):::start --> CONC[ConcreteComponent<br/>具体实现]
+    CMP --> DEC[Decorator 抽象装饰器<br/>持有Component引用]
+    DEC --> DEC1[ConcreteDecoratorA<br/>增强功能+状态]
+    DEC --> DEC2[ConcreteDecoratorB<br/>增强功能+行为]
+    CONC --> WRAP[运行时动态包装]
+    DEC1 --> WRAP
+    DEC2 --> WRAP
+    WRAP --> CHAIN{多层装饰}:::decision
+    CHAIN -->|第1层| L1[A装饰B]
+    CHAIN -->|第2层| L2[C装饰A B]
+    CHAIN -->|第N层| LN[层层包装 像洋葱]
+    L1 --> CALL[调用最外层operation]
+    L2 --> CALL
+    LN --> CALL
+    CALL --> INVK[逐层向前转发<br/>每层添加自己的增强]
+    INVK --> CORE[最终调用ConcreteComponent<br/>原始功能]
+    CORE --> RETURN[逐层返回 增强叠加]
+    RETURN --> DONE([客户端拿到增强结果]):::success
+    CMP --> APP{Java经典应用}:::decision
+    APP -->|IO流| IO[BufferedInputStream<br/>包装FileInputStream]
+    APP -->|Spring| SPR["BeanWrapper<br/>事务/AOP装饰"]
+    APP -->|Servlet| SERV[HttpServletRequestWrapper]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心定义：结构型模式，包裹原对象，不修改接口下动态增加新功能。

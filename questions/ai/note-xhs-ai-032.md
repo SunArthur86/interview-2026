@@ -167,6 +167,39 @@ model_path = quantize_gptq(model, w_bit=4, desc_act=False)
 4. **灰度发布**：止血后变更的参数应该通过灰度发布验证——先对10%流量应用新配置，确认稳定后再全量
 5. **事故复盘**：每次OOM事故都要做post-mortem——记录触发场景、处置步骤、影响范围、改进措施，形成runbook供未来参考
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    OOM([大模型推理 OOM]) --> DIAG{定位原因}
+
+    DIAG -->|权重显存| W_MEM[模型权重过大<br/>7B FP16=14GB]
+    DIAG -->|KV Cache| KV_MEM[长上下文 KV 膨胀<br/>batch×seq×layer×2×d]
+    DIAG -->|激活值| ACT[激活中间张量<br/>峰值显存]
+    DIAG -->|碎片| FRAG[显存碎片<br/>分配失败但总量够]
+
+    W_MEM --> W_FIX[权重量化<br/>INT8/INT4/NF4]
+    KV_MEM --> KV_FIX[KV 优化<br/>PagedAttention/量化/Offload]
+    ACT --> ACT_FIX[减小 batch<br/>梯度检查点]
+    FRAG --> FRAG_FIX[显存池化<br/>PyTorch alloc config]
+
+    W_FIX --> DEPLOY
+    KV_FIX --> DEPLOY
+    ACT_FIX --> DEPLOY
+    FRAG_FIX --> DEPLOY
+
+    DEPLOY[部署策略组合] --> MON{监控推理时}
+    MON -->|TPOT 高| OFFL[Offload 到 CPU<br/>用速度换显存]
+    MON -->|吞吐低| BATCH[Continuous Batching<br/>提升 GPU 利用率]
+    MON -->|稳定| OK([服务稳定])
+
+    style OOM fill:#F44336,color:#fff
+    style OK fill:#4CAF50,color:#fff
+    style W_FIX fill:#009688,color:#fff
+    style KV_FIX fill:#FF9800,color:#fff
+    style OFFL fill:#9C27B0,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** OOM紧急处置是推理服务线上事故的标准止血流程——从最小影响的参数调整开始，逐步加码，每步验证后再进下一步——像急诊分诊。

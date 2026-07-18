@@ -248,6 +248,39 @@ SYSTEM_PROMPT = """
 4. **超时设计的坑**：Java后端习惯用同步超时，但LLM工具调用经常涉及异步操作（如爬虫、API调用）——需要设计async timeout + callback机制，不能简单套用同步超时
 5. **熔断器模式**：当某个工具的连续失败率>50%时，自动熔断该工具（5分钟内不再调用），直接走降级路径——这避免了故障工具拖垮整个Agent
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([用户提问]) --> CHK1{知识是否在训练集?}
+    CHK1 -->|否 长尾/最新| RAG[触发 RAG 检索<br/>外挂知识库]
+    CHK1 -->|是 但不确定| CONF[置信度评估<br/>logit 不确定性]
+    CHK1 -->|是 高置信| GEN[直接生成]
+
+    RAG --> CTX[组装上下文 Prompt]
+    CONF --> LOW_C{置信度低?}
+    LOW_C -->|是| REFUSE[明确拒绝/澄清<br/>"我不确定"]
+    LOW_C -->|否| GEN
+    CTX --> GEN
+
+    GEN --> POST[后处理校验]
+    POST --> FACT[事实核查<br/>对照检索文档]
+    POST --> SCHEMA[格式校验<br/>JSON Schema]
+    FACT --> HALL{检测到幻觉?}
+    SCHEMA --> HALL
+    HALL -->|是| REGEN[重新生成<br/>换 prompt/降温度]
+    REGEN --> GEN
+    HALL -->|否| CIT[引用溯源标注]
+    CIT --> ANS([可信回答])
+
+    style Q fill:#4CAF50,color:#fff
+    style ANS fill:#2196F3,color:#fff
+    style RAG fill:#009688,color:#fff
+    style REFUSE fill:#FF9800,color:#fff
+    style HALL fill:#F44336,color:#fff
+    style REGEN fill:#9C27B0,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 模型幻觉调用不存在的API是Agent最危险的线上事故——需要三层防护：Schema校验拦截+白名单限制+降级兜底——LLM像一个过度自信的实习生。

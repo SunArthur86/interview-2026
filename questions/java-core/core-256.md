@@ -89,6 +89,39 @@ fi
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    FS([文件系统核心职责]):::start --> ORG["组织存储空间<br/>块/簇管理"]
+    FS --> NAM[命名空间<br/>目录树结构]
+    FS --> META["元数据管理<br/>inode/属性"]
+    FS --> ACCESS[访问控制<br/>权限rwx]
+    FS --> RELI["可靠性<br/>日志/冗余"]
+    ORG --> FREE["空闲块位图/组<br/>位图bitmap/空闲链表"]
+    ORG --> ALLOC["分配策略<br/>连续/链式/索引"]
+    NAM --> DIR[目录结构<br/>dentry缓存加速]
+    NAM --> HARD[硬链接<br/>多个路径指向同inode]
+    NAM --> SYML[软链接<br/>独立inode指向路径]
+    META --> INO["inode: 权限/时间/大小<br/>直接+间接块指针"]
+    ACCESS --> MODE[rwxrwxrwx 模式位]
+    ACCESS --> ACL[ACL精细权限<br/>多用户多组]
+    RELI --> JNL[日志Journal<br/>先写日志再改数据]
+    RELI --> COW["写时复制CoW<br/>ZFS/Btrfs 快照"]
+    RELI --> RAID["RAID冗余<br/>镜像/校验"]
+    JNL --> TYPES{文件系统类型}:::decision
+    TYPES -->|本地| EXT["ext4/xfs<br/>Linux主流"]
+    TYPES -->|网络| NFS["NFS/SMB<br/>远程挂载"]
+    TYPES -->|分布式| DFS["HDFS/Ceph<br/>海量存储"]
+    TYPES -->|内存| TMPFS[tmpfs<br/>内存虚拟盘]:::async
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 一句话定义：操作系统在存储设备上组织文件的方法和数据结构。

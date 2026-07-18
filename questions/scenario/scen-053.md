@@ -130,6 +130,40 @@ public class ConfigChangeListener {
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ3([查询请求]):::start --> L1C["浏览器/APP本地缓存<br/>HTTP Cache-Control"]
+    L1C --> L1H{命中?}:::decision
+    L1H -->|是| RTN3[直接返回 零网络]:::success
+    L1H -->|否| CDN[CDN边缘节点<br/>静态资源就近]
+    CDN --> CDNH{命中?}:::decision
+    CDNH -->|是| RTN4[就近返回 快]:::success
+    CDNH -->|否| NG2[Nginx本地缓存<br/>proxy_cache]
+    NG2 --> NGH{命中?}:::decision
+    NGH -->|是| RTN5[返回 减少回源]:::success
+    NGH -->|否| APP2["应用本地缓存<br/>Caffeine/Guava"]
+    APP2 --> APH{命中?}:::decision
+    APH -->|是| RTN6[JVM内返回 纳秒级]::::success
+    APH -->|否| REDIS3[Redis分布式缓存]
+    REDIS3 --> RDH{命中?}:::decision
+    RDH -->|是| RTN7[返回 微秒级]:::success
+    RDH -->|否| DB3[(MySQL数据库<br/>源头数据)]:::storage
+    DB3 --> BACK3[回写多级缓存<br/>设置TTL防雪崩]:::async
+    BACK3 --> RTN8([返回数据]):::success
+    REQ3 --> SYNC{缓存更新策略}:::decision
+    SYNC -->|Cache Aside| CA2[读miss回写<br/>写时删除]
+    SYNC -->|binlog订阅| BIN3[Canal监听DB<br/>异步刷新各级]
+    SYNC -->|定时刷新| TM2[定时任务主动刷新<br/>热点数据]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心功能：支持多环境隔离、灰度发布（按IP/标签推送）、版本回滚与权限审计。

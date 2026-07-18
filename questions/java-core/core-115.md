@@ -109,6 +109,34 @@ gcc main.o -o main
 **常见场景** | 嵌入式设备、内核模块、无依赖环境 | GUI 应用、服务器、操作系统服务 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SRC([Hello.java 源文件]):::start --> LEX[词法分析 Lexer<br/>源码→Token流]
+    LEX --> PARSE[语法分析 Parser<br/>构建AST抽象语法树]
+    PARSE --> SEMA["语义分析<br/>类型检查/符号表/注解处理"]
+    SEMA --> CHK{编译错误?}:::decision
+    CHK -->|是| ERR[报错终止 javac退出]:::error
+    CHK -->|否| GEN[生成字节码 .class]
+    GEN --> CLS[(Hello.class<br/>JVM字节码文件)]:::storage
+    CLS --> LOAD["类加载器ClassLoader<br/>加载/链接/初始化"]
+    LOAD --> VERIFY[字节码验证<br/>确保安全合法]
+    VERIFY --> PREP[准备阶段<br/>静态变量分配默认值]
+    PREP --> INIT[执行&lt;clinit&gt;<br/>静态变量赋值+静态块]
+    INIT --> JIT{执行模式}:::decision
+    JIT -->|解释执行| INTERP[逐条解释字节码<br/>启动快但慢]
+    JIT -->|JIT编译热点| HOT["热点探测→编译本地码<br/>优化内联/逃逸分析"]:::async
+    INTERP --> RUN([JVM运行时]):::success
+    HOT --> RUN
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 四步曲：预处理(展开宏) -> 编译(生汇编) -> 汇编(生机器码.o) -> 链接(组合)

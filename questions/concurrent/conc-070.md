@@ -118,6 +118,54 @@ tags: []
 2. **select 的 1024 限制**：很多人误以为 select 限制是操作系统层面的硬限制。实际上这个限制通常是编译时常量 `FD_SETSIZE`（默认 1024）。修改并重新编译内核可以改变这个值，但性能会因线性遍历进一步下降。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    CLIENT([客户端连接]) --> SERVER
+
+    subgraph BIO["BIO 模型 (一连接一线程)"]
+    BIO_ACCEPT[Acceptor<br/>每连接开一线程] --> BIO_BLOCK[InputStream.read<br/>阻塞等待数据]
+    BIO_BLOCK --> BIO_THREAD[线程空等浪费<br/>万连接万线程爆炸]
+    end
+
+    BIO -.演进.-> NIO
+
+    subgraph NIO["NIO 多路复用 (单线程多连接)"]
+    NIO_CHAN[Channel 双向通道<br/>非阻塞] --> NIO_BUF[Buffer 缓冲区<br/>读写都过 Buffer]
+    NIO_CHAN --> SEL[Selector 选择器<br/>epoll/kqueue 底层]
+    SEL --> REG_EV[注册感兴趣事件<br/>OP_ACCEPT/READ/WRITE/CONNECT]
+    REG_EV --> SELECT_LOOP[select 轮询<br/>返回就绪事件集合]
+    SELECT_LOOP --> DISP[分发处理<br/>仅处理就绪 Channel]
+    DISP --> NO_BLOCK[无数据不阻塞<br/>去服务其他连接]
+    end
+
+    NIO --> REACTOR
+
+    subgraph REACTOR["Reactor 模式"]
+    R1[单 Reactor 单线程<br/>Acceptor+Handler 同线程] --> R2[单 Reactor 多线程<br/>Handler 用线程池]
+    R2 --> R3[主从 Reactor<br/>Main accept / Sub IO]
+    end
+
+    REACTOR --> NETTY
+
+    subgraph NETTY["Netty 实现"]
+    BOSS[BossGroup<br/>处理 Accept] --> WORKER[WorkerGroup<br/>处理 IO 读写]
+    WORKER --> PIPELINE[ChannelPipeline<br/>责任链 Handler]
+    PIPELINE --> BYTEBUF[ByteBuf 池化<br/>读写索引分离]
+    end
+
+    ZERO_COPY([零拷贝 Zero Copy]) --> SENDFILE[FileChannel.transferTo<br/>sendfile 系统调用]
+    ZERO_COPY --> MMAP[mmap 文件映射<br/>用户态直接访问]
+
+    style CLIENT fill:#4CAF50,color:#fff
+    style BIO_BLOCK fill:#F44336,color:#fff
+    style SEL fill:#FF9800,color:#fff
+    style WORKER fill:#009688,color:#fff
+    style BOSS fill:#9C27B0,color:#fff
+    style ZERO_COPY fill:#2196F3,color:#fff
+```
+
 ## 记忆要点
 
 - IO分两阶段：等数据到达内核缓冲区，再从内核缓冲区拷贝到用户空间。

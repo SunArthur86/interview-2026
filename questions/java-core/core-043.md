@@ -104,6 +104,36 @@ client := &http.Client{
 3. **与 TCP Keep-Alive 的区别**：HTTP Keep-Alive 和 TCP 层的 SO_KEEPALIVE 有什么不同？（答案：HTTP Keep-Alive 是应用层复用连接，TCP Keep-Alive 是传输层心跳检测，用于死连接排查）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([两者混淆对比]):::start --> TK[TCP Keepalive<br/>传输层]
+    Q --> HK[HTTP Keep-Alive<br/>应用层]
+    TK --> TK1[探测对端是否存活<br/>防止半开连接]
+    TK --> TK2[默认7200s空闲后<br/>每75s探测 共9次]
+    TK --> TK3[系统级参数<br/>tcp_keepalive_time]
+    TK2 --> TK4{对端无响应?}:::decision
+    TK4 -->|是| DEAD[判定对端死亡<br/>关闭连接]:::error
+    TK4 -->|否| ALIVE[连接保活<br/>避免NAT超时]:::success
+    HK --> HK1[复用TCP连接<br/>避免每次握手]
+    HK --> HK2["请求头Connection: keep-alive<br/>默认开启 HTTP/1.1"]
+    HK --> HK3[服务端设置timeout<br/>超时主动关闭]
+    HK2 --> HK4{是否继续请求?}:::decision
+    HK4 -->|是| REUSE[复用连接发新请求<br/>省RTT]:::async
+    HK4 -->|否 Connection: close| END[关闭连接]
+    TK1 --> REL{关系}:::decision
+    HK1 --> REL
+    REL -->|独立| IND[两者互不依赖<br/>可单独开启]
+    REL -->|互补| COMP[HTTP层复用业务<br/>TCP层保活底层]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心定义：TCP连接复用机制，一次握手可进行多次HTTP请求响应

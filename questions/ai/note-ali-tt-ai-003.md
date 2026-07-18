@@ -326,6 +326,34 @@ Agent明确不能做的事：
 
 抽象成"分层客服 Agent 框架"：意图路由（FAQ/RAG/Agent/人工）可配、各层的 prompt 模板可配、知识库管理后台可复用、Trace 和评估看板通用。沉淀"各行业（电商/金融/教育）的意图体系""知识库的切分与更新 SOP""转人工阈值调优经验"，新行业接入时按模板配置 + 灌行业知识，复用 80% 的工程框架。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    GOAL([用户目标输入]) --> OBS0[Observe 感知<br/>读取输入/记忆/状态]
+    OBS0 --> PLAN[Planner 规划<br/>LLM 拆解任务步骤]
+    PLAN --> MEM_R[(Memory 记忆<br/>短期:Context<br/>长期:向量库)]
+    MEM_R --> DECIDE{是否调用工具?}
+    DECIDE -->|否 直接回答| LLM_THINK[LLM 推理思考<br/>CoT/ReAct]
+    DECIDE -->|是 需外部能力| TOOL[Tool Use 工具调用<br/>Function Call/MCP/Skill]
+    TOOL --> EXEC[Executor 执行<br/>search/calc/API]
+    EXEC --> RES{执行结果}
+    RES -->|失败| FB[Fallback 降级<br/>同类工具替换/重试]
+    FB --> OBS0
+    RES -->|成功| OBS1[Observe 观察结果<br/>拼回上下文]
+    OBS1 --> CHK{达到目标 or<br/>max_steps?}
+    CHK -->|否| PLAN
+    CHK -->|是| ANS([最终结果交付])
+    LLM_THINK --> CHK
+
+    style GOAL fill:#4CAF50,color:#fff
+    style ANS fill:#2196F3,color:#fff
+    style TOOL fill:#FF9800,color:#fff
+    style FB fill:#F44336,color:#fff
+    style MEM_R fill:#9C27B0,color:#fff
+    style PLAN fill:#009688,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 智能客服Agent的核心是"准确回答+可控边界"。需要从三个维度设计：上下文管理（防token爆炸）、可控性（防死循环/权限滥用）、可靠性（防幻觉/错误输出）。在客服场景中还需额外考虑：输入规范化、意图识别分流。

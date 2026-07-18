@@ -373,6 +373,54 @@ AQS 的第一性：**所有同步器（锁、信号量、闭锁）本质都是"s
 4. **StampedLock 是什么？**——JDK 8 引入，支持乐观读（tryOptimisticRead 无锁读，读时校验 stamp 是否失效），读多写少场景性能优于 ReentrantReadWriteLock。缺点是不可重入、不支持 Condition。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 Java 源码 .java]):::start
+    Javac[javac 编译<br/>词法/语法/语义分析]:::process
+    ClassFile[.class 字节码文件<br/>常量池/方法表]:::store
+    ClassLoad[类加载子系统<br/>ClassLoader]:::process
+    LoadPhase[加载 Loading<br/>读取字节流]:::process
+    LinkPhase[链接 Linking<br/>验证/准备/解析]:::process
+    ParentQ{{双亲委派?<br/>向上委托}}:::decision
+    BootClass[BootStrap 加载<br/>rt.jar 核心类]:::process
+    AppClass[AppClassLoader<br/>加载应用类]:::process
+    InitPhase[初始化 Initialization<br/>执行 <clinit>]:::process
+    Runtime[运行时数据区]:::process
+    Heap[(堆 Heap<br/>对象/数组 GC 区)]:::store
+    Method[(方法区<br/>类元信息/常量)]:::store
+    Stack[(虚拟机栈<br/>栈帧/局部变量)]:::store
+    NativeStack[(本地方法栈<br/>JNI)]:::store
+    PC[(程序计数器 PC)]:::store
+    Alloc[对象分配 Eden]:::process
+    GcQ{{GC 触发?<br/>Eden 满/老年代满}}:::decision
+    YoungGC[Young GC<br/>复制算法]:::process
+    OldGC[Old GC / Full GC<br/>标记-整理]:::process
+    CollectorQ{{GC 收集器?<br/>G1/ZGC/CMS}}:::decision
+    G1[G1 Region 化<br/>可预测暂停]:::process
+    ZGC[ZGC 染色指针<br/><10ms STW]:::process
+    Final([✅ 字节码执行完成]):::start
+
+    Start --> Javac --> ClassFile --> ClassLoad
+    ClassLoad --> LoadPhase --> LinkPhase --> ParentQ
+    ParentQ -->|核心类| BootClass --> InitPhase
+    ParentQ -->|应用类| AppClass --> InitPhase
+    InitPhase --> Runtime
+    Runtime --> Heap & Method & Stack & NativeStack & PC
+    Heap --> Alloc --> GcQ
+    GcQ -->|Eden 满| YoungGC --> Alloc
+    GcQ -->|Old 满| OldGC --> CollectorQ
+    CollectorQ -->|默认 9+| G1 --> Final
+    CollectorQ -->|大堆低延迟| ZGC --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到锁升级、AQS 与高并发临界区优化，我的理解是——锁升级的本质是"用最小开销拿到锁"——无竞争用 CAS（偏向锁/轻量级锁），短竞争自旋等待（轻量级锁），长竞争才进入内核挂起（重量级锁）。AQS 则是 JUC 锁的"脚手架"：用 state 变量 + CLH 等待队列，让 ReentrantLock/Semaphore/CountDownLatch 共享同一套框架。打个比方，锁升级像停车场管理：偏向锁是"专属车位写你名字，没竞争直接停"；轻量级锁是"车位没锁但有人抢，先原地等几秒（自旋）"；重量级锁是"排队拿号，保安（操作系统）叫号进"。AQS 是停车场的"号牌系统"——state 是剩余车位数，CLH 队列是等号的车队。

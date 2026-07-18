@@ -204,6 +204,40 @@ sync_binlog = 1  -- 每次提交都fsync binlog (推荐)
 5. **分布式事务2PC vs MySQL内部2PC**：MySQL内部的2PC是InnoDB和Server层之间的协调，而分布式XA是多个资源管理器之间的协调，但原理类似
 
 
+
+## 核心流程图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as 协调者 Coordinator
+    participant P1 as 参与者1 Participant
+    participant P2 as 参与者2 Participant
+    Note over C,P2: === 阶段一: 准备阶段 Prepare/Voting ===
+    C->>P1: prepare 询问能否提交
+    C->>P2: prepare 询问能否提交
+    P1->>P1: 执行事务 写undo/redo log<br/>不提交
+    P2->>P2: 执行事务 写undo/redo log<br/>不提交
+    P1-->>C: YES 已准备就绪
+    P2-->>C: YES 已准备就绪
+    Note over C: 协调者收集所有响应
+    alt 全部YES
+        Note over C,P2: === 阶段二: 提交阶段 Commit ===
+        C->>P1: commit 正式提交
+        C->>P2: commit 正式提交
+        P1->>P1: 提交事务 释放锁
+        P2->>P2: 提交事务 释放锁
+        P1-->>C: ACK
+        P2-->>C: ACK
+        Note over C: 事务完成
+    else 任一NO 或超时
+        C->>P1: rollback 回滚
+        C->>P2: rollback 回滚
+        P1-->>C: ACK
+        P2-->>C: ACK
+        Note over C: 事务终止
+    end
+```
 ## 结构化回答
 
 **30 秒电梯演讲：** 两阶段提交是MySQL保证redo log和binlog一致性的协议：先写redo log(prepare)→再写binlog→最后提交redo log(commit)。

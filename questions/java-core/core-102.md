@@ -95,6 +95,40 @@ public class BizException extends RuntimeException {
 3. **性能影响**：异常处理对性能有何影响？异常堆栈填充的开销？（创建异常对象和填充堆栈非常耗时，不要用异常控制流程）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ROOT([Throwable 根类]):::start --> ERR[Error 错误<br/>JVM级 程序无法处理]
+    ROOT --> EXC[Exception 异常<br/>程序可处理]
+    ERR --> OOM[OutOfMemoryError<br/>内存溢出]
+    ERR --> SOF["StackOverflowError<br/>栈溢出/深递归"]
+    ERR --> VMERR[VirtualMachineError<br/>JVM崩溃]
+    EXC --> RNT[RuntimeException 运行时异常<br/>非受检 unchecked]
+    EXC --> CHK[其他Exception 受检<br/>checked 编译期强制]
+    RNT --> NPE[NullPointerException 空指针]
+    RNT --> IDX[IndexOutOfBoundsException 越界]
+    RNT --> CLS[ClassNotFoundException 类找不到]
+    RNT --> CAST[ClassCastException 类型转换]
+    RNT --> ARITH[ArithmeticException 算术异常]
+    CHK --> IOE[IOException IO异常]
+    CHK --> SQLE[SQLException 数据库异常]
+    CHK --> FILE[FileNotFoundException]
+    NPE --> HAND{处理策略}:::decision
+    IOE --> HAND
+    HAND -->|受检异常| TRY[必须try-catch或throws<br/>编译期强制]
+    HAND -->|运行时异常| COD["编程时主动防御<br/>前置判空/校验"]:::async
+    HAND -->|自定义异常| CST["extends RuntimeException/Exception<br/>携带业务码"]
+    TRY --> GLB["全局异常处理器<br/>@ControllerAdvice"]:::success
+    COD --> GLB
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 顶层体系：Throwable 分为 Error 和 Exception 两大核心分支

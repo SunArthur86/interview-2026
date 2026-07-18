@@ -436,6 +436,65 @@ public class OrderService {
 4. **分库分表后事务怎么办？**——跨库事务用分布式事务方案（Saga/TCC/可靠消息，见 018 题）。设计原则：把强相关的数据放同一分片（单库事务），跨分片用最终一致。如订单和订单项按 user_id 同分片（单库事务），订单和库存跨服务用 Saga。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 客户端发起请求]):::start
+    Producer[Producer 生产者<br/>发送消息]:::client
+    DecideSync{发送模式?<br/>同步/异步/单向}:::decision
+    Sync[同步发送<br/>阻塞等待 ACK]:::process
+    Async[异步发送<br/>回调通知]:::process
+    Oneway[单向发送<br/>不等响应]:::warn
+    RetryQ{是否收到 ACK?}:::decision
+    Retry[重试 N 次<br/>+ 幂等去重]:::process
+    DLQ[多次失败 → 死信队列 DLQ]:::danger
+    Broker[Broker 主节点<br/>写 PageCache]:::broker
+    FlushQ{刷盘策略?}:::decision
+    SyncFlush[同步刷盘 SYNC_FLUSH<br/>落盘后才返回]:::process
+    AsyncFlush[异步刷盘<br/>后台异步落盘]:::warn
+    ReplicaQ{复制策略?}:::decision
+    SyncRep[同步复制 SYNC_MASTER<br/>等 Slave 落盘]:::process
+    AsyncRep[异步复制<br/>Master 立即返回]:::warn
+    Persist[(磁盘 + 多副本<br/>持久化存储)]:::store
+    Consumer[Consumer 消费者<br/>拉取消息]:::client
+    OffsetQ{Offset 提交方式?}:::decision
+    AutoCommit[自动提交<br/>风险:业务异常也消费]:::warn
+    ManualCommit[手动提交<br/>业务成功后再 ACK]:::process
+    Business[执行业务逻辑]:::process
+    BizQ{业务是否成功?}:::decision
+    Reconsume[消费失败 → 重试<br/>RECONSUME_LATER]:::process
+    Final([✅ 消息消费完成]):::start
+
+    Start --> Producer --> DecideSync
+    DecideSync -->|高可靠| Sync --> Broker
+    DecideSync -->|高吞吐| Async --> Broker
+    DecideSync -->|日志类| Oneway --> Broker
+    Broker --> FlushQ
+    FlushQ -->|金融级| SyncFlush --> ReplicaQ
+    FlushQ -->|性能优先| AsyncFlush --> ReplicaQ
+    ReplicaQ -->|强一致| SyncRep --> Persist
+    ReplicaQ -->|弱一致| AsyncRep --> Persist
+    Persist --> Consumer --> OffsetQ
+    OffsetQ -->|不推荐| AutoCommit --> Business
+    OffsetQ -->|推荐| ManualCommit --> Business
+    Business --> BizQ
+    BizQ -->|成功| ManualCommit --> Final
+    BizQ -->|失败| Reconsume --> Consumer
+    Producer -.ACK 超时/失败.-> RetryQ
+    RetryQ -->|<N 次| Retry --> Producer
+    RetryQ -->|>=N 次| DLQ
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef broker fill:#f59e0b,stroke:#b45309,color:#fff;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到分库分表路由、扩容与全局 ID，我的理解是——分库分表的本质是"把单机存不下的数据按维度拆到多个库表，用哈希或范围路由分散负载"。路由维度选 user_id（按用户拆，单用户数据在一个分片），扩容用"倍数翻倍"（2 库→4 库→8 库，路由算法不变只改模数），全局 ID 用雪花算法（时间戳+机器号+序列号，趋势递增且全局唯一）。打个比方，僉店的仓储管理。单仓库装不下时，按"收件人地区"分到多个仓库（按维度分片）。北京仓放北京用户的货（路由），扩容时把北京仓再拆东城西城仓（倍数扩容，地区编号不变只是细分）。每个包裹有全国唯一物流单号（全局 ID），不会因为多仓而重复。

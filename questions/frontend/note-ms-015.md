@@ -737,6 +737,54 @@ function loadValidationConfig(): Map<string, RuleConfig> {
 这套方案的收益是：在文件到达后端 AI 服务之前，前端已经拦截了 80%+ 的明显错误（格式错误、文件损坏、明显不相关），大幅节省了 Token 成本和用户等待时间，同时通过分层提示策略保证了优秀的用户体验——不让用户觉得被"管得太死"。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务端启动]):::start
+    BossGroup[BossGroup<br/>Accept 线程]:::process
+    WorkerGroup[WorkerGroup<br/>IO 处理线程]:::process
+    Bind[绑定端口<br/>ServerSocketChannel]:::process
+    EventLoop[EventLoop<br/>单线程 Selector 轮询]:::process
+    Selector[(Selector<br/>多路复用器)]:::store
+    IOModelQ{{IO 模型?<br/>select/poll/epoll}}:::decision
+    Epoll[epoll 边缘触发<br/>事件驱动 高性能]:::process
+    SelectIO[select 水平触发<br/>跨平台]:::process
+    AcceptEvent[OP_ACCEPT 事件<br/>新连接到达]:::process
+    Register[注册到 Worker<br/>SocketChannel]:::process
+    ReadEvent[OP_READ 事件<br/>数据可读]:::process
+    Pipeline[Pipeline 处理链<br/>责任链模式]:::process
+    Decoder[Decoder 解码器<br/>解决粘包/半包]:::process
+    Handler[业务 Handler<br/>处理业务逻辑]:::process
+    Encoder[Encoder 编码器<br/>序列化响应]:::process
+    ZeroCopyQ{{是否零拷贝?<br/>FileRegion}}:::decision
+    ZeroCopy[sendfile/mmap<br/>减少内核态拷贝]:::process
+    WriteBack[写回 Channel]:::process
+    BackPressureQ{{背压?<br/>写缓冲区高水位}}:::decision
+    BackPressure[isWritable=false<br/>自动降级]:::warn
+    Final([✅ 响应返回客户端]):::start
+
+    Start --> BossGroup --> Bind --> EventLoop
+    EventLoop --> Selector --> IOModelQ
+    IOModelQ -->|Linux| Epoll --> AcceptEvent
+    IOModelQ -->|通用| SelectIO --> AcceptEvent
+    AcceptEvent --> Register --> WorkerGroup
+    WorkerGroup --> ReadEvent --> Pipeline
+    Pipeline --> Decoder --> Handler --> Encoder
+    Encoder --> ZeroCopyQ
+    ZeroCopyQ -->|大文件| ZeroCopy --> WriteBack
+    ZeroCopyQ -->|否| WriteBack
+    WriteBack --> BackPressureQ
+    BackPressureQ -->|高水位| BackPressure --> Final
+    BackPressureQ -->|正常| Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 记忆要点
 
 - 核心策略快速失败：在前端尽早拦截错误，避免浪费后端算力和用户时间

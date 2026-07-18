@@ -89,6 +89,44 @@ Queue 是 Java 集合框架中表示队列的接口，继承自 Collection，遵
    - 它不存储元素，直接传递。常用于 `Executors.newCachedThreadPool` 中，任务提交后直接交给线程执行，若无空闲线程则创建新线程，起到“握手”传递的作用。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REF([CPU访问页P]):::start --> TLB["查TLB/页表"]
+    TLB --> H{P在内存?}:::decision
+    H -->|是 命中| UPD["更新访问位/时间<br/>LRU更新链表"]:::success
+    H -->|否 缺页| PF[触发Page Fault]
+    PF --> FREE{有空闲页框?}:::decision
+    FREE -->|是| LOAD1[直接加载页P到空闲框]
+    FREE -->|否| ALG{选择置换算法}:::decision
+    ALG -->|FIFO| FIFO[队列先进先出<br/>淘汰最早进入的页]
+    ALG -->|LRU| LRU["淘汰最久未访问<br/>链表/计数器"]
+    ALG -->|LFU| LFU[淘汰访问次数最少]
+    ALG -->|Clock 时钟| CLOCK[循环扫描访问位<br/>二次机会]:::async
+    ALG -->|OPT 最佳| OPT[理论最优 不可实现<br/>作为对比基准]
+    FIFO --> VCT{Belady异常?}:::decision
+    VCT -->|是 FIFO特有| BAD[增加页框 缺页率反升]:::error
+    VCT -->|否 LRU无此问题| OK[性能稳定]
+    LRU --> EVICT[选出牺牲页]
+    CLOCK --> EVICT
+    LFU --> EVICT
+    EVICT --> MOD{牺牲页是否修改?}:::decision
+    MOD -->|是 dirty=1| WRITE[写回磁盘swap<br/>额外IO开销]:::async
+    MOD -->|否 dirty=0| DISC[直接丢弃无需IO]
+    WRITE --> LOAD2[加载页P到腾出的页框]
+    DISC --> LOAD2
+    LOAD1 --> ACC([访问完成]):::success
+    LOAD2 --> ACC
+    UPD --> ACC
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心接口：继承 Collection，遵循 FIFO（先进先出），分普通队列与双端队列 Deque

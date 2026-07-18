@@ -311,6 +311,44 @@ public class ToolResultSanitizer {
 5. **"如果整个Agent系统被攻破了（LLM被成功注入并调用了危险工具），怎么快速止损？"**
    → 工具调用审计+实时告警+自动熔断（检测到异常行为立即暂停Agent）+ 回滚机制
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TASK([业务任务]) --> ANA[任务分析<br/>输入/输出/约束]
+    ANA --> TPL{选择模板}
+
+    TPL -->|分类/抽取| FEW[Few-Shot<br/>给样例示范]
+    TPL -->|推理/数学| COT[Chain-of-Thought<br/>think step by step]
+    TPL -->|结构化输出| SCHEMA[JSON Schema<br/>Function Call]
+    TPL -->|多步规划| REACT[ReAct<br/>Thought+Action]
+
+    FEW --> COMBINE[组合策略<br/>Role+Context+Instruction+Format]
+    COT --> COMBINE
+    SCHEMA --> COMBINE
+    REACT --> COMBINE
+
+    COMBINE --> PARAM[生成参数调优]
+    PARAM --> T[Temperature<br/>0 事实性 / 0.7 创意]
+    PARAM --> TP[Top-P 核采样<br/>控制多样性]
+    PARAM --> TK[Top-K<br/>限制候选词]
+
+    PARAM --> GEN[LLM 生成]
+    GEN --> VALID{输出校验}
+    VALID -->|格式错| REPAIR[修复重试<br/>反馈错误给 LLM]
+    REPAIR --> GEN
+    VALID -->|内容不达标| ITER[迭代改 prompt]
+    ITER --> COMBINE
+    VALID -->|通过| OUT([稳定输出])
+
+    style TASK fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style GEN fill:#009688,color:#fff
+    style VALID fill:#FF9800,color:#fff
+    style REPAIR fill:#F44336,color:#fff
+    style ITER fill:#9C27B0,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 防止AI Agent被恶意Prompt注入的核心是多层防护：输入层过滤（关键词/模式检测）、系统层隔离（系统指令与用户输入分离）、工具层管控（权限最小化+高危确认）、输出层校验（结果合法性检查）。

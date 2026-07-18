@@ -148,6 +148,47 @@ memory_points:
 2. **认为静态内部类是“懒加载”但忽略了类加载时机**：虽然利用了类加载机制实现延迟加载，但如果外部类加载器加载了 Holder 类（虽然通常不会主动加载），实例就会被创建。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    THREAD_A([线程 A]) --> WA[工作内存<br/>本地缓存副本]
+    THREAD_B([线程 B]) --> WB[工作内存<br/>本地缓存副本]
+
+    MAIN[(主内存 Main Memory<br/>共享变量)]
+    WA <-. read/load .-> MAIN
+    WB <-. read/load .-> MAIN
+    WA <-. store/write .-> MAIN
+    WB <-. store/write .-> MAIN
+
+    VIS([可见性问题]) --> INVIS[A 改了 B 看不到<br/>CPU 缓存/L1]
+    VIS --> VOL[解决: volatile<br/>强制刷主存 + 禁缓存]
+
+    ORD([有序性问题]) --> REORD[指令重排<br/>编译器/CPU 优化]
+    REORD --> HAP[解决: happens-before<br/>定义内存屏障]
+
+    HAP_RULE[happens-before 规则] --> HB1[程序顺序: 同线程内前→后]
+    HAP_RULE --> HB2[volatile 写→后续读]
+    HAP_RULE --> HB3[锁释放→后续加锁]
+    HAP_RULE --> HB4[线程 start→其 run]
+    HAP_RULE --> HB5[线程终结→join 返回]
+    HAP_RULE --> HB6[传递性 A→B B→C 则 A→C]
+
+    VOL --> BAR[内存屏障<br/>LoadLoad/StoreStore<br/>LoadStore/StoreLoad]
+    BAR --> SEMI[语义层面<br/>保证可见+禁止重排]
+
+    ATOMIC([原子性问题]) --> COMPOUND[i++ 非原子<br/>读-改-写三步]
+    ATOMIC --> AT_CL[Atomic 类<br/>CAS 保证]
+
+    style THREAD_A fill:#4CAF50,color:#fff
+    style THREAD_B fill:#009688,color:#fff
+    style MAIN fill:#FF9800,color:#fff
+    style VIS fill:#F44336,color:#fff
+    style ORD fill:#F44336,color:#fff
+    style VOL fill:#9C27B0,color:#fff
+    style BAR fill:#2196F3,color:#fff
+```
+
 ## 记忆要点
 
 - 核心三要素：私有构造、私有静态变量、公有静态访问方法。

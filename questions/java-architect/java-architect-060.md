@@ -477,6 +477,57 @@ public class ChannelReconcileService {
 3. **账户余额为什么用 BigDecimal 不用 double？**——double 有精度丢失（0.1+0.2≠0.3），金融场景必须精确。BigDecimal 任意精度，适合金额计算。
 4. **怎么做账户的"日终结算"？**——日终跑批：冻结所有交易 → 跑全量对账 → 计算利息/手续费 → 生成日报表 → 解冻。结算期间账户只读不可交易。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 SQL 请求到达]):::start
+    Parser[解析器 Parser<br/>词法/语法分析]:::process
+    AST[生成抽象语法树 AST]:::process
+    Preproc[预处理器<br/>语义检查 + 权限]:::process
+    Optimizer[优化器 Optimizer]:::process
+    CostQ{{基于代价选择?<br/>CBO}}:::decision
+    IdxScan[索引扫描<br/>range/ref]:::process
+    FullScan[全表扫描<br/>ALL]:::warn
+    Execute[执行器 Executor<br/>调用存储引擎接口]:::process
+    EngineQ{{存储引擎?<br/>InnoDB/MyISAM}}:::decision
+    InnoDB[InnoDB 引擎]:::process
+    BufferPool[Buffer Pool<br/>内存缓冲池]:::store
+    HitQ{{页命中 Buffer Pool?}}:::decision
+    ReadDisk[从磁盘读取页<br/>随机 IO]:::warn
+    RedoLog[(redo log<br/>WAL 先写日志)]:::store
+    BinLog[(binlog<br/>主从复制)]:::store
+    UndoLog[(undo log<br/>事务回滚/MVCC)]:::store
+    CommitQ{{是否提交事务?<br/>2PC}}:::decision
+    TwoPhase[Prepare → 写 redo<br/>→ 写 binlog → Commit]:::process
+    Crash[宕机崩溃恢复<br/>redo 重放 + binlog 校验]:::danger
+    Final([✅ 返回结果集]):::start
+
+    Start --> Parser --> AST --> Preproc --> Optimizer
+    Optimizer --> CostQ
+    CostQ -->|有合适索引| IdxScan --> Execute
+    CostQ -->|无索引/全表| FullScan --> Execute
+    Execute --> EngineQ
+    EngineQ -->|默认| InnoDB --> BufferPool
+    EngineQ -->|旧版| FullScan
+    BufferPool --> HitQ
+    HitQ -->|命中| Execute
+    HitQ -->|未命中| ReadDisk --> BufferPool
+    InnoDB -.修改.-> UndoLog
+    InnoDB -.修改.-> RedoLog
+    InnoDB -.提交.-> BinLog
+    Execute --> CommitQ
+    CommitQ -->|是| TwoPhase --> Final
+    CommitQ -->|崩溃| Crash --> RedoLog
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 账户系统是金融级基础设施——钱不能多也不能少。核心是复式记账（有借必有贷，借贷必相等）+ 流水不可篡改（追加写+哈希链）+ 实时对账（余额=流水汇总）。账户余额不是直接更新的数字，而是流水汇总的结果——每一笔交易记一条流水（借/贷），余额 = 初始余额 + SUM(流水)。这样任何余额都可由流水重算验证，资金可追溯

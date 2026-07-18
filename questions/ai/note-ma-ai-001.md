@@ -250,6 +250,44 @@ class AutoRun:
 5. **强调Source of Truth** — 源码是真相，知识库是缓存
 6. **提到Human-in-the-loop** — 展示对AI辅助开发边界的理解
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    USER([用户请求]) --> GW[Orchestrator<br/>主 Agent 编排器]
+    GW --> MODE{协作模式}
+
+    MODE -->|串行 Pipeline| S1[Agent A<br/>意图理解]
+    S1 --> S2[Agent B<br/>信息检索]
+    S2 --> S3[Agent C<br/>结果生成]
+
+    MODE -->|并行 Fan-out| P1[Agent A 检索]
+    MODE -->|并行 Fan-out| P2[Agent B 计算]
+    MODE -->|并行 Fan-out| P3[Agent C 校验]
+    P1 --> AGG[Aggregator 汇总]
+    P2 --> AGG
+    P3 --> AGG
+
+    MODE -->|仲裁 Debate| D1[Agent A 方案1]
+    MODE -->|仲裁 Debate| D2[Agent B 方案2]
+    D1 --> JUDGE[Judge Agent 仲裁]
+    D2 --> JUDGE
+
+    S3 --> SHARED[(共享状态<br/>Blackboard/MQ)]
+    AGG --> SHARED
+    JUDGE --> SHARED
+    SHARED --> SYNC{状态一致?}
+    SYNC -->|冲突| NEG[协商/优先级裁决]
+    NEG --> SHARED
+    SYNC -->|一致| OUT([汇总输出])
+
+    style USER fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style GW fill:#FF9800,color:#fff
+    style SHARED fill:#9C27B0,color:#fff
+    style JUDGE fill:#009688,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** Multi-Agent将复杂任务拆分给多个专职Agent协作完成（如PRD→Design→Task→Code→Test），而非一个全能Agent包揽。用Markdown中间产物传递上下文，每个Agent职责单一。

@@ -109,6 +109,33 @@ def get_data():
 | **请求/响应模型** | 一问一答 | 逻辑简单 | 无法由服务器主动推送 | WebSocket, HTTP/2 Server Push, SSE |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    HTTP([HTTP协议本质特征]):::start --> P1[无状态stateless<br/>每次请求相互独立]
+    HTTP --> P2[无连接<br/>请求-响应一次完成]
+    HTTP --> P3[基于TCP<br/>默认80端口]
+    HTTP --> P4[请求-响应模型<br/>客户端主动]
+    HTTP --> P5[文本协议<br/>人类可读]
+    P1 --> CON1["优点: 简单易扩展<br/>缺点: 需Cookie/Session维持状态"]:::decision
+    CON1 --> SOL1[Cookie: 客户端存储<br/>Set-Cookie响应头]
+    CON1 --> SOL2[Session: 服务端存储<br/>JSESSIONID Cookie关联]
+    P2 --> SOL3[Keep-Alive复用连接<br/>弥补无连接开销]
+    P3 --> SOL4["握手3次+挥手4次<br/>HTTP/3改用UDP"]
+    P4 --> SOL5[WebSocket升级后<br/>支持双向推送]
+    SOL1 --> SEC{安全考量}:::decision
+    SEC -->|明文传输风险| HTTPS[升级HTTPS<br/>TLS加密+证书]:::async
+    SEC -->|Cookie被窃取| FLAG[HttpOnly+Secure+SameSite]
+    HTTPS --> DONE([安全可靠HTTP]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 协议简述：HTTP是Web基石，默认无状态且明文传输，简单灵活易扩展

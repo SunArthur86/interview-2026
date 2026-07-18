@@ -92,6 +92,31 @@ public String buildUrl(String baseUrl, String query) throws UnsupportedEncodingE
 3. **URN 的应用场景**：P2P 下载中的磁力链接（Magnet URI）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ID([资源标识问题]):::start --> URI["URI 统一资源标识符<br/>定位/命名 两种形式"]
+    URI --> URL["URL 统一资源定位符<br/>强调#quot;在哪里#quot;"]
+    URI --> URN["URN 统一资源名称<br/>强调#quot;叫什么#quot;"]
+    URL --> SC["scheme协议: http/https"]
+    SC --> AU["authority: //user:pass@host:port"]
+    AU --> PT["path路径 /api/user"]
+    PT --> QR[query: ?name=abc&age=18]
+    QR --> FR[fragment: #section1<br/>仅浏览器本地使用]
+    URN --> URNEX[urn:isbn:0451450523<br/>永久标识不依赖位置]
+    QR --> ENC{特殊字符处理}:::decision
+    ENC -->|未编码| BUG["& / = / 空格<br/>导致解析歧义"]:::error
+    ENC -->|URL编码| SAFE[百分号编码%20<br/>空格→%20 中文→UTF8]
+    SAFE --> REQ([浏览器构造HTTP请求]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 概念对比：URI强调资源标识，而URL不仅标识还侧重提供具体的网络定位路径

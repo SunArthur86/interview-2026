@@ -303,6 +303,32 @@ ReAct + 外部记忆能缓解爆炸，但解决不了"长任务规划"问题。R
 
 固化成"Agent 范式选型决策树"：按任务步数和动态性分流，每类给出推荐范式 + 典型 case。沉淀"ReAct 的上下文压缩策略库"（Observation 摘要/外部记忆/滑动窗口）和"Plan & Execute 的 replan 规则模板"（触发条件/replan 范围/防死循环）。配套框架代码（ReAct runner 和 PlanAndExecute runner），新 Agent 开发时按决策树选范式 + 套框架，不从头造。把"哪些任务不适合 Agent（该用规则/传统代码）"也沉淀进来，避免过度 AI 化。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([复杂问题输入]) --> PROMPT[Prompt 注入<br/>Let's think step by step]
+    PROMPT --> THOUGHT[Thought 思考<br/>LLM 推理当前步]
+    THOUGHT --> NEED{需要外部信息?}
+    NEED -->|否 纯推理| REASON[Chain-of-Thought<br/>逐步推导]
+    NEED -->|是 需事实/计算| ACTION[Action 行动<br/>调用工具/API]
+    ACTION --> OBS[Observation 观察<br/>获取工具结果]
+    OBS --> LOOP{是否足够回答?}
+    REASON --> LOOP
+    LOOP -->|否 继续推理| THOUGHT
+    LOOP -->|是| FINAL[Final Answer<br/>输出最终答案]
+    FINAL --> REFLECT{自我反思<br/>Reflexion?}
+    REFLECT -->|发现错误| THOUGHT
+    REFLECT -->|验证通过| DONE([任务完成])
+
+    style Q fill:#4CAF50,color:#fff
+    style DONE fill:#2196F3,color:#fff
+    style THOUGHT fill:#009688,color:#fff
+    style ACTION fill:#FF9800,color:#fff
+    style OBS fill:#9C27B0,color:#fff
+    style REFLECT fill:#FFC107,color:#000
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** ReAct是"边想边做"——每一步先思考再行动再观察，适合动态不确定的任务；Plan & Execute是"先规划后执行"——先生成完整计划再逐步执行，适合目标明确的多步任务。两者不是互斥关系，而是互补配合使用。

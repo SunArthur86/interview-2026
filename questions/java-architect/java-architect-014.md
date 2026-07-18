@@ -315,6 +315,65 @@ Nacos 配置层级（优先级从高到低）：
 4. **服务网格（Istio）会取代注册中心吗？**——不会取代，是融合。Istio 把服务发现下沉到 Sidecar（Envoy），应用代码无感知（不用 SDK）。但 Istio 本身还需要一个"控制面"维护服务→Pod 列表的映射（通常是 K8s API Server 或 Consul/Nacos）。传统 SDK 注册中心（Nacos/Dubbo）在非 K8s 场景仍是主流。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 客户端发起请求]):::start
+    Producer[Producer 生产者<br/>发送消息]:::client
+    DecideSync{发送模式?<br/>同步/异步/单向}:::decision
+    Sync[同步发送<br/>阻塞等待 ACK]:::process
+    Async[异步发送<br/>回调通知]:::process
+    Oneway[单向发送<br/>不等响应]:::warn
+    RetryQ{是否收到 ACK?}:::decision
+    Retry[重试 N 次<br/>+ 幂等去重]:::process
+    DLQ[多次失败 → 死信队列 DLQ]:::danger
+    Broker[Broker 主节点<br/>写 PageCache]:::broker
+    FlushQ{刷盘策略?}:::decision
+    SyncFlush[同步刷盘 SYNC_FLUSH<br/>落盘后才返回]:::process
+    AsyncFlush[异步刷盘<br/>后台异步落盘]:::warn
+    ReplicaQ{复制策略?}:::decision
+    SyncRep[同步复制 SYNC_MASTER<br/>等 Slave 落盘]:::process
+    AsyncRep[异步复制<br/>Master 立即返回]:::warn
+    Persist[(磁盘 + 多副本<br/>持久化存储)]:::store
+    Consumer[Consumer 消费者<br/>拉取消息]:::client
+    OffsetQ{Offset 提交方式?}:::decision
+    AutoCommit[自动提交<br/>风险:业务异常也消费]:::warn
+    ManualCommit[手动提交<br/>业务成功后再 ACK]:::process
+    Business[执行业务逻辑]:::process
+    BizQ{业务是否成功?}:::decision
+    Reconsume[消费失败 → 重试<br/>RECONSUME_LATER]:::process
+    Final([✅ 消息消费完成]):::start
+
+    Start --> Producer --> DecideSync
+    DecideSync -->|高可靠| Sync --> Broker
+    DecideSync -->|高吞吐| Async --> Broker
+    DecideSync -->|日志类| Oneway --> Broker
+    Broker --> FlushQ
+    FlushQ -->|金融级| SyncFlush --> ReplicaQ
+    FlushQ -->|性能优先| AsyncFlush --> ReplicaQ
+    ReplicaQ -->|强一致| SyncRep --> Persist
+    ReplicaQ -->|弱一致| AsyncRep --> Persist
+    Persist --> Consumer --> OffsetQ
+    OffsetQ -->|不推荐| AutoCommit --> Business
+    OffsetQ -->|推荐| ManualCommit --> Business
+    Business --> BizQ
+    BizQ -->|成功| ManualCommit --> Final
+    BizQ -->|失败| Reconsume --> Consumer
+    Producer -.ACK 超时/失败.-> RetryQ
+    RetryQ -->|<N 次| Retry --> Producer
+    RetryQ -->|>=N 次| DLQ
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef broker fill:#f59e0b,stroke:#b45309,color:#fff;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到Spring Cloud 服务注册、发现与配置治理，我的理解是——服务注册与发现的本质是"把实例地址从静态配置变成运行时动态注册表"——每个实例启动时向注册中心上报 IP:Port+元数据，调用方按服务名拉取实例列表并本地缓存，再用负载均衡挑一个。配置治理是"把配置从打包进镜像剥离成运行时可热更新的外部输入"，通过配置中心下发 + 客户端长轮询/监听实现秒级生效。打个比方，像公司的"企业通讯录 + HR 系统"。注册中心是通讯录（谁在哪个工位随时更新），配置中心是 HR 公告板（薪酬政策变了全员秒级通知）。员工离职（实例下线）通讯录自动删条目，调岗（实例迁移）通讯录自动更新工位，业务不用改通讯录表。

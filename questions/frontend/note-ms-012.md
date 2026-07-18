@@ -481,6 +481,55 @@ interface ShareableReplay {
 结果回放从"工具产品"升级为"教练产品"的关键基础设施。核心价值不只是"看 AI 怎么做的"，而是"让用户学会 AI 是怎么想的"——分步回看建立理解，分支重跑激发探索，分享复盘沉淀组织知识。这是 AI-Native 桌面产品与普通工具的本质差异。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 调用方发起 RPC 调用]):::start
+    Proxy[客户端代理 Stub<br/>屏蔽网络细节]:::process
+    Invoke[Invoker 调用链<br/>Filter 拦截]:::process
+    ClusterQ{{集群容错策略?<br/>Cluster}}:::decision
+    Failover[Failover 失败重试<br/>默认]:::process
+    Failfast[Failfast 快速失败]:::warn
+    Forking[Forking 并行调用]:::process
+    Router[Router 路由<br/>按规则筛选 provider]:::process
+    LBQ{{负载均衡策略?<br/>LoadBalance}}:::decision
+    Random[Random 随机<br/>默认]:::process
+    RoundRobin[RoundRobin 轮询]:::process
+    ConsistentHash[一致性 Hash<br/>相同参数同一台]:::process
+    Registry[(注册中心<br/>Nacos/ZK)]:::store
+    Subscribe[订阅 provider 列表<br/>推送变更]:::process
+    Serialize[序列化请求<br/>Hessian/Protobuf]:::process
+    Network[网络传输<br/>Netty 长连接]:::process
+    Server[服务端 Invoker<br/>解包请求]:::process
+    Filter[服务端 Filter<br/>前置处理]:::process
+    Reflect[反射调用真实方法<br/>业务执行]:::process
+    ResultQ{{业务执行结果?}}:::decision
+    Success[序列化响应<br/>返回]:::process
+    Exception[包装异常<br/>RpcException]:::danger
+    Final([✅ 调用方拿到结果]):::start
+
+    Start --> Proxy --> Invoke --> ClusterQ
+    ClusterQ -->|默认| Failover --> Router
+    ClusterQ -->|快速失败| Failfast --> Router
+    ClusterQ -->|并行| Forking --> Router
+    Router --> LBQ
+    LBQ -->|默认| Random --> Serialize
+    LBQ -->|轮询| RoundRobin --> Serialize
+    LBQ -->|亲和| ConsistentHash --> Serialize
+    Registry -.推送.-> Subscribe --> Router
+    Serialize --> Network --> Server --> Filter --> Reflect --> ResultQ
+    ResultQ -->|成功| Success --> Final
+    ResultQ -->|失败| Exception --> Failover
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 记忆要点
 
 - 价值定位：AI黑盒需透明化，回放是产品从工具升级为教练的核心

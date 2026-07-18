@@ -93,6 +93,32 @@ for _ in range(10): # 模拟收到 10 个 ACK
 3. **为什么不是收到 ACK 就加 1 MSS？**：如果在拥塞避免阶段仍然指数增长，一旦达到接近带宽上限，网络流量会瞬间溢出，导致剧烈丢包。线性增长能提供足够的反馈时间让发送方感知到拥塞信号（如 ACK 延迟增加或丢弃）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    APP([应用层数据]):::start --> CHO{传输需求}:::decision
+    CHO -->|需要可靠传输| TCP[TCP 传输控制协议]
+    CHO -->|需要实时/低延迟| UDP[UDP 用户数据报协议]
+    TCP --> CONN[面向连接<br/>三次握手建立]
+    CONN --> SEQ[数据分seq编号<br/>保证顺序]
+    SEQ --> ACK[确认重传机制<br/>丢包自动重传]
+    ACK --> FLOW[流量控制sliding window<br/>拥塞控制]
+    FLOW --> HDP[头部20字节<br/>开销大]
+    HDP --> TCPAPP["Web/邮件/文件传输<br/>HTTP/FTP/SMTP"]:::success
+    UDP --> NC[无连接<br/>直接发送]
+    NC --> BEST[尽力而为<br/>不保证可靠]
+    BEST --> NH[头部仅8字节<br/>开销小]
+    NH --> MC["支持广播/多播<br/>一对多"]
+    MC --> UDPAPP["视频直播/语音/DNS<br/>实时性高容忍丢包"]:::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 触发标志：当cwnd达到慢启动门限(ssthresh)时切入本阶段

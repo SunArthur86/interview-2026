@@ -109,6 +109,38 @@ try (Arena arena = Arena.ofConfined()) {
 | **安全性** | 可访问任意内存地址，极易导致 JVM Crash | 提供访问边界检查，类型安全 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    JAVA([Java调用本地C库]):::start --> CHO{方案选型}:::decision
+    CHO -->|传统JNI| JNI[JNI Java Native Interface<br/>编写.h生成.c 编译]
+    CHO -->|FFM JDK21| FFM[Foreign Function & Memory API<br/>纯Java调用]
+    JNI --> HEADER[javac -h 生成头文件]
+    HEADER --> NATIVE["手写C/C++实现<br/>jniEnv调用"]
+    NATIVE --> COMPILE["编译成.so/.dll<br/>平台相关"]
+    COMPILE --> LOAD[System.loadLibrary<br/>绑定native方法]
+    LOAD --> CONS1[缺点: 易内存泄漏<br/>平台耦合 API复杂]:::error
+    FFM --> LINK[Linker.nativeLinker<br/>获取本地链接器]
+    LINK --> LOOKUP[SymbolLookup查找函数<br/>库路径+函数名]
+    LOOKUP --> HANDLE2[FunctionHandle 方法句柄<br/>描述C函数签名]
+    HANDLE2 --> INVK2[invoke执行调用<br/>类型安全]
+    FFM --> MEM[MemorySegment 内存段<br/>安全访问堆外内存]
+    MEM --> ALLOC["SemanticAllocator<br/>分配/释放受控"]
+    ALLOC --> ARENA[Arena作用域<br/>自动释放避免泄漏]:::async
+    INVK2 --> ADV[优点: 无需C代码<br/>类型安全 内存可控]
+    ARENA --> ADV
+    ADV --> USE{典型应用}:::decision
+    USE ->|调用C库| CLIB["libc/OpenGL/CUDA<br/>无需包装"]
+    USE ->|零拷贝| ZERO[堆外内存<br/>直接与本地代码共享]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 一句话定义：FFM是JDK替代JNI的全新方案，提供高效且类型安全的本地代码调用与堆外内存管理

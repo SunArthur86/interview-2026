@@ -71,6 +71,39 @@ ZGC 利用 64 位指针的闲置位存储颜色信息，实现并发整理。
    因为大部分对象朝生夕死，年轻代 GC 频繁且只需扫描少量区域，避免了全堆扫描的高昂 Barrier 成本。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    HEAP([JVM堆内存]):::start --> CHO{GC算法选择}:::decision
+    CHO -->|G1| G1[Region分区+SATB<br/>停顿~200ms 主流]
+    CHO -->|ZGC| ZGC["着色指针+读屏障<br/>停顿<10ms JDK11+"]
+    CHO -->|Shenandoah| SH["Brooks指针+并发回收<br/>停顿<10ms JDK12+"]
+    ZGC --> COLORD[(着色指针Colored Pointers<br/>64位指针高位存状态)]:::storage
+    COLORD --> MARK[并发标记<br/>标识存活对象]
+    MARK --> RELOC[并发转移<br/>复制存活对象]
+    RELOC --> REMAP[并发重映射<br/>更新引用]
+    ZGC --> BARRIER[读屏障Load Barrier<br/>访问时修复指针]
+    BARRIER --> CONCURRENT[核心阶段全并发<br/>STW仅根扫描]::::async
+    SH --> BROOKS[(Brooks指针<br/>每个对象额外1字头)]:::storage
+    BROOKS --> CONC2[并发整理内存<br/>压缩避免碎片]
+    G1 --> YOUNG["Young GC<br/>Eden+S0/S1 复制"]
+    YOUNG --> MIXED[Mixed GC<br/>回收年轻代+部分老年代Region]
+    MIXED --> FULL{内存严重不足?}:::decision
+    FULL -->|是| FULLGC[Full GC STW长<br/>应避免]:::error
+    FULL -->|否| STABLE[稳定运行]:::success
+    CHO --> CRITERIA{选型标准}:::decision
+    CRITERIA -->|低延迟优先| LOW["ZGC/Shenandoah<br/>金融/游戏/实时"]
+    CRITERIA -->|吞吐量优先| THR["Parallel GC<br/>批处理/离线计算"]
+    CRITERIA -->|平衡| BAL[G1 JDK9默认<br/>通用服务]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 定位：ZGC与Shenandoah都是主打亚毫秒级停顿的并发低延迟垃圾收集器

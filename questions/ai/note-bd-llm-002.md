@@ -396,6 +396,46 @@ if __name__ == "__main__":
 5. **评测的统计显著性**：当评测集较小时（<100条Query），各模型间的指标差异可能在统计噪声范围内。建议报告95%置信区间（Bootstrap重采样），避免过度解读微小差异。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TXT([文本输入<br/>Query 或 Doc]) --> TOK[Tokenize 分词]
+    TOK --> MODEL{Embedding 模型}
+
+    MODEL -->|BERT 系| BERT[Encoder<br/>双向注意力]
+    MODEL -->|BGE 系列| BGE[对比学习训练<br/>+ 负样本挖掘]
+    MODEL -->|E5/GTE| CONTRAST[多阶段对比<br/>弱监督→微调]
+    MODEL -->|LLM-based| LLM_EM[LLM 最后一层<br/>隐藏状态池化]
+
+    BERT --> POOL[Pool 池化<br/>Mean/CLS/Attention]
+    BGE --> POOL
+    CONTRAST --> POOL
+    LLM_EM --> POOL
+
+    POOL --> NORM[L2 归一化<br/>单位向量]
+    NORM --> VEC[稠密向量<br/>768/1024/1536 维]
+    VEC --> STORE[(向量库<br/>HNSW/IVF 索引)]
+
+    VEC --> SIM[相似度计算]
+    Q_VEC([Query 向量]) --> SIM
+    SIM --> METRIC{距离度量}
+    METRIC -->|Cosine 余弦| COS[方向相似度<br/>最常用]
+    METRIC -->|IP 内积| IP[已归一化时<br/>等价余弦]
+    METRIC -->|L2 欧氏| L2[绝对距离<br/>敏感幅度]
+
+    COS --> RANK[排序 Top-K]
+    IP --> RANK
+    L2 --> RANK
+    RANK --> OUT([召回结果])
+
+    style TXT fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style VEC fill:#FF9800,color:#fff
+    style STORE fill:#9C27B0,color:#fff
+    style COS fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 第一定律：因为Embedding是系统的第一道信息瓶颈，所以质量差会导致后续模块彻底失效(Garbage In)

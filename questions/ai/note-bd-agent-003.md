@@ -130,6 +130,34 @@ memory_points:
 4. **成本意识**：提到Token成本控制和延迟优化
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    GOAL([用户目标输入]) --> OBS0[Observe 感知<br/>读取输入/记忆/状态]
+    OBS0 --> PLAN[Planner 规划<br/>LLM 拆解任务步骤]
+    PLAN --> MEM_R[(Memory 记忆<br/>短期:Context<br/>长期:向量库)]
+    MEM_R --> DECIDE{是否调用工具?}
+    DECIDE -->|否 直接回答| LLM_THINK[LLM 推理思考<br/>CoT/ReAct]
+    DECIDE -->|是 需外部能力| TOOL[Tool Use 工具调用<br/>Function Call/MCP/Skill]
+    TOOL --> EXEC[Executor 执行<br/>search/calc/API]
+    EXEC --> RES{执行结果}
+    RES -->|失败| FB[Fallback 降级<br/>同类工具替换/重试]
+    FB --> OBS0
+    RES -->|成功| OBS1[Observe 观察结果<br/>拼回上下文]
+    OBS1 --> CHK{达到目标 or<br/>max_steps?}
+    CHK -->|否| PLAN
+    CHK -->|是| ANS([最终结果交付])
+    LLM_THINK --> CHK
+
+    style GOAL fill:#4CAF50,color:#fff
+    style ANS fill:#2196F3,color:#fff
+    style TOOL fill:#FF9800,color:#fff
+    style FB fill:#F44336,color:#fff
+    style MEM_R fill:#9C27B0,color:#fff
+    style PLAN fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 落地排序：Workflow Agent最易落地，RAG最成熟，Multi-Agent/自主Agent最难

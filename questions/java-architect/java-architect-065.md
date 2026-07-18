@@ -446,6 +446,54 @@ public class FeatureReconciliationService {
 3. **怎么做特征重要性分析？**——模型内置（XGBoost feature_importance）、SHAP 值（特征贡献）、Permutation Importance（打乱特征看效果下降）。低重要性特征剔除（降维）。
 4. **特征存储选型？**——低延迟查询 Redis（KV 特征）、向量近邻 Milvus（Embedding）、离线仓库 Hive/Parquet（训练）、特征平台 Feast（统一管理）。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 应用发起读请求]):::start
+    App[应用层<br/>查询数据]:::client
+    CacheHitQ{{缓存命中?}}:::decision
+    ReturnCache["直接返回缓存数据<br/>O(1) 低延迟"]:::process
+    MissDB{缓存未命中}:::decision
+    QueryDB[查询数据库<br/>执行 SQL]:::process
+    PenetrateQ{{是否为恶意请求?<br/>查询不存在的 key}}:::decision
+    BloomFilter[布隆过滤器拦截<br/>+ 缓存空值]:::process
+    BreakDownQ{{热点 key 失效?<br/>缓存击穿}}:::decision
+    Mutex[加互斥锁<br/>单线程回源]:::process
+    AvalancheQ{{大批 key 同时过期?<br/>缓存雪崩}}:::decision
+    TTLJitter[随机 TTL<br/>+ 多级缓存]:::process
+    WriteBackQ{{是否回写缓存?}}:::decision
+    WriteCache[写入 Redis<br/>设置 TTL]:::process
+    BigKeyCheck{{大 Key / 热 Key?}}:::decision
+    SplitKey[拆分大 Key<br/>本地缓存热 Key]:::process
+    DB[(MySQL 主从<br/>持久化数据)]:::store
+    Cache[(Redis Cluster<br/>分片缓存)]:::store
+    Final([✅ 返回结果]):::start
+    Alarm[告警 + 限流降级]:::danger
+
+    Start --> App --> CacheHitQ
+    CacheHitQ -->|命中| ReturnCache --> BigKeyCheck
+    BigKeyCheck -->|是| SplitKey --> Final
+    BigKeyCheck -->|否| Final
+    CacheHitQ -->|未命中| MissDB --> PenetrateQ
+    PenetrateQ -->|是| BloomFilter --> Alarm
+    PenetrateQ -->|否| BreakDownQ
+    BreakDownQ -->|是| Mutex --> QueryDB
+    BreakDownQ -->|否| AvalancheQ
+    AvalancheQ -->|是| TTLJitter --> QueryDB
+    AvalancheQ -->|否| QueryDB
+    QueryDB --> DB --> WriteBackQ
+    WriteBackQ -->|是| WriteCache --> Cache --> ReturnCache
+    WriteBackQ -->|否| ReturnCache
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 推荐系统的核心难题不是模型（模型公开可复现），而是特征一致性——离线训练用的特征和在线预测用的特征必须完全一致，否则模型在线效果崩。一致性陷阱：离线用历史全量数据算特征（如近 30 天点击数），在线用实时流算（同一特征但数据窗口/计算逻辑微妙不同），导致离线训练的模型在线预测时特征值偏移，模型效果骤降。架构核心是统一特征平台 + 在线离线特征对齐

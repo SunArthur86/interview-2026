@@ -123,6 +123,40 @@ memory_points:
 4. **边缘触发**：接入层如何快速感知机房故障并切断流量？（健康检查失败阈值、自动熔断机制）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    USER2([用户访问]):::start --> GSLB["全局负载均衡GSLB<br/>DNS/HTTPDNS智能解析"]
+    GSLB --> REGION{就近接入}:::decision
+    REGION -->|北京机房| BJ[(北京数据中心<br/>完整服务+数据)]:::storage
+    REGION -->|上海机房| SH[(上海数据中心<br/>完整服务+数据)]:::storage
+    REGION -->|广州机房| GZ[(广州数据中心<br/>完整服务+数据)]:::storage
+    BJ --> SYNC2{数据同步}:::decision
+    SH --> SYNC2
+    GZ --> SYNC2
+    SYNC2 -->|异步最终一致| ASYNC["Otter/DTS<br/>秒级延迟"]
+    SYNC2 -->|强一致| STRONG["同步复制<br/>Paxos/Raft"]
+    ASYNC --> CONFLICT{写冲突?}:::decision
+    CONFLICT -->|是 同一记录多地写| RESOLVE["按时间戳/业务规则<br/>冲突解决"]
+    CONFLICT -->|否 单元化| UNIT[按用户ID分片<br/>同一用户固定一地写]
+    UNIT --> MASTER3[每用户单写主节点<br/>避免双主冲突]:::success
+    REGION --> DOWN2{机房故障?}:::decision
+    DOWN2 -->|是 整机房挂| FAILOVER3[GSLB切换流量<br/>DNS收敛到其他机房]
+    DOWN2 -->|否| NORMAL3[正常服务]
+    FAILOVER3 --> RECOVER[故障机房恢复<br/>增量数据补偿]
+    USER2 --> CORE{核心挑战}:::decision
+    CORE -->|数据同步延迟| DELAY[业务容忍<br/>秒级延迟]
+    CORE -->|流量分配| TRAFFIC[基于用户地理位置<br/>就近接入]
+    CORE -->|单元化部署| CELL[按用户维度拆分<br/>故障隔离]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 同城与异地对比：同城双活延迟低可强同步，异地多活因延迟高(>10ms)难点在数据一致

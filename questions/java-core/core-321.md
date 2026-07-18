@@ -120,6 +120,37 @@ public boolean equals(Object obj) {
 | 约定合规性 | 违反（hashCode 不一致） | 违反（equals 不一致） | 符合规范 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    HSK([对象放入HashMap]):::start --> HC[调用hashCode 求桶位置]
+    HC --> IDX[计算index = n-1 & hash]
+    IDX --> BKT[(定位到桶)]:::storage
+    BKT --> SAME{同桶有元素?}:::decision
+    SAME -->|否| INS[直接插入]:::success
+    SAME -->|是 hash相同| EQ[调用equals逐一比较]
+    EQ --> EQRES{equals返回true?}:::decision
+    EQRES -->|是 同一逻辑对象| UPD[替换value<br/>视为已存在]
+    EQRES -->|否 hash碰撞不同对象| APP["链表/红黑树追加"]:::async
+    INS --> OK([完成]):::success
+    UPD --> OK
+    APP --> OK
+    HC --> RULE{必须遵守的契约}:::decision
+    RULE -->|1| R1[equals相等<br/>hashCode必须相等]
+    RULE -->|2| R2[hashCode相等<br/>equals不一定相等 碰撞]
+    RULE -->|3| R3[对象未变 多次调用<br/>hashCode稳定不变]
+    RULE -->|4| R4[重写equals<br/>必须重写hashCode]
+    R4 --> BAD{只重写equals?}:::decision
+    BAD -->|是 不重写hashCode| BUG[同逻辑对象hash不同<br/>散列到不同桶→逻辑错误]:::error
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 契约铁律：equals相等，hashCode必相等；hashCode相等，equals不一定相等。

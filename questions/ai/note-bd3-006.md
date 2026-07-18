@@ -181,6 +181,48 @@ training_args = TrainingArguments(
 **面试加分点**：提到Megatron-LM的TP+PP组合可以将14B模型放在8×V100-32GB上训练；提到Flash Attention减少激活值存储（IO-aware的精确注意力）；提到CPU offloading将优化器状态放在CPU内存中，用PCIe带宽换取GPU显存。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    INPUT([用户输入/数据]) --> PRE[预处理<br/>清洗/分词/向量化]
+    PRE --> MODEL[大模型/算法核心<br/>推理优化]
+
+    MODEL --> INFER{推理模式}
+    INFER -->|预训练知识| PARAM[参数化知识<br/>权重中静态]
+    INFER -->|外部增强| NON_PARAM[非参数化<br/>检索/工具/记忆]
+
+    PARAM --> GEN[生成/决策]
+    NON_PARAM --> GEN
+
+    GEN --> POST[后处理<br/>格式化/校验/引用]
+    POST --> OUTPUT([结果输出])
+
+    EVAL([质量评估]) --> E1[准确率 Accuracy]
+    EVAL --> E2[延迟 Latency]
+    EVAL --> E3[成本 Token Cost]
+    EVAL --> E4[幻觉率 Hallucination]
+
+    EVAL --> ITER{达标?}
+    ITER -->|否| TUNE[调优<br/>Prompt/微调/RAG]
+    TUNE --> MODEL
+    ITER -->|是| DEPLOY([部署上线])
+
+    DEPLOY --> MONITOR[监控<br/>日志/Trace/告警]
+    MONITOR --> ITER
+
+    OPTIM([工程优化]) --> LAT[推理加速<br/>KV Cache/量化/PagedAttention]
+    OPTIM --> CACHE_S[缓存层<br/>语义缓存/结果复用]
+    OPTIM --> GUARD[护栏 Guardrails<br/>输入输出过滤]
+
+    style INPUT fill:#4CAF50,color:#fff
+    style OUTPUT fill:#2196F3,color:#fff
+    style MODEL fill:#009688,color:#fff
+    style TUNE fill:#FF9800,color:#fff
+    style DEPLOY fill:#9C27B0,color:#fff
+    style EVAL fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 参数显存乘以16：AdamW混合精度训练中，每参数需16Bytes(权重2+梯度2+优化器状态12)。

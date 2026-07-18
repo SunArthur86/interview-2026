@@ -108,6 +108,29 @@ memory_points:
    - 必须将 Body 的内容（或 Body 的 Hash）参与签名计算。任何字节的变动都会导致签名不一致。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    IN([输入: 如何设计一个防接口重放攻击的方案？]):::start --> CORE[核心处理逻辑]
+    CORE --> CHK{关键判断}:::decision
+    CHK -->|条件A| A[处理路径A]
+    CHK -->|条件B| B[处理路径B]
+    CHK -->|异常| ERR["异常处理/降级"]:::error
+    A --> STORE[("状态/数据存储")]:::storage
+    B --> STORE
+    STORE --> OUT[输出结果]:::success
+    CORE --> FEAT{关键特性}:::decision
+    FEAT -->|优势| ADV1["性能/效率提升"]
+    FEAT -->|约束| ADV2["边界条件/注意事项"]:::async
+    classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 三要素防重放：时间戳(Timestamp)保时效、随机数(Nonce)保唯一、签名(Signature)防篡改

@@ -67,6 +67,32 @@ Active Side (e.g. Client)       Passive Side (e.g. Server)
 4.  **MSL 典型值**：Linux 默认通常为 30秒 或 60秒，因此 TIME_WAIT 默认为 60秒 或 120秒。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    A([主动关闭方: 发送FIN]):::start --> B[进入FIN_WAIT_1]
+    B --> C[被动方回ACK]
+    C --> D[主动方进入FIN_WAIT_2<br/>等待对端FIN]
+    D --> E[被动方发FIN]
+    E --> F[主动方回ACK<br/>进入TIME_WAIT状态]:::async
+    F --> G{为什么等待2MSL?}:::decision
+    G -->|原因1: 防止ACK丢失| R1[若最后的ACK丢失<br/>被动方重发FIN]
+    R1 --> R2[主动方需保持socket<br/>才能重发ACK]
+    G -->|原因2: 防止旧报文干扰| O1[让本次连接的所有报文<br/>在网络中消亡]
+    O1 --> O2[MSL=最大报文生存时间<br/>2MSL确保往返消亡]
+    R2 --> W[等待2*MSL 默认60秒]
+    O2 --> W
+    W --> CLOSE([进入CLOSED 释放端口资源]):::success
+    F -.->|副作用| ISSUE["大量短连接→TIME_WAIT堆积<br/>解决: SO_REUSEADDR/缩短MSL"]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - MSL定义：报文在网络中的最大生存时间。

@@ -487,6 +487,57 @@ public class TransferService {
 4. **死锁根因和修复方向？**——根因是加锁顺序相反（事务 A 先锁 X 再锁 Y，事务 B 先锁 Y 再锁 X）。修复：(1) 统一加锁顺序（小 ID 先锁）；(2) 缩短事务（事务里不做 RPC）；(3) 补索引（避免范围锁扩大）；(4) 降隔离级别（RC 无间隙锁）；(5) 拆批（大事务拆小）；(6) 死锁重试（幂等兜底）；(7) 热点串行化（队列/分片锁）。
 5. **死锁是 bug 吗？**——不是。死锁是 InnoDB 的正常保护机制（wait-for graph 检测 + 自动回滚，比超时快）。偶发死锁业务侧重试即可。但频繁死锁是业务设计问题（加锁顺序不一致），必须修根因。架构师要控制死锁频率（告警阈值 < 10 次/分钟），不能简单调大 `innodb_lock_wait_timeout` 掩盖问题。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 SQL 请求到达]):::start
+    Parser[解析器 Parser<br/>词法/语法分析]:::process
+    AST[生成抽象语法树 AST]:::process
+    Preproc[预处理器<br/>语义检查 + 权限]:::process
+    Optimizer[优化器 Optimizer]:::process
+    CostQ{{基于代价选择?<br/>CBO}}:::decision
+    IdxScan[索引扫描<br/>range/ref]:::process
+    FullScan[全表扫描<br/>ALL]:::warn
+    Execute[执行器 Executor<br/>调用存储引擎接口]:::process
+    EngineQ{{存储引擎?<br/>InnoDB/MyISAM}}:::decision
+    InnoDB[InnoDB 引擎]:::process
+    BufferPool[Buffer Pool<br/>内存缓冲池]:::store
+    HitQ{{页命中 Buffer Pool?}}:::decision
+    ReadDisk[从磁盘读取页<br/>随机 IO]:::warn
+    RedoLog[(redo log<br/>WAL 先写日志)]:::store
+    BinLog[(binlog<br/>主从复制)]:::store
+    UndoLog[(undo log<br/>事务回滚/MVCC)]:::store
+    CommitQ{{是否提交事务?<br/>2PC}}:::decision
+    TwoPhase[Prepare → 写 redo<br/>→ 写 binlog → Commit]:::process
+    Crash[宕机崩溃恢复<br/>redo 重放 + binlog 校验]:::danger
+    Final([✅ 返回结果集]):::start
+
+    Start --> Parser --> AST --> Preproc --> Optimizer
+    Optimizer --> CostQ
+    CostQ -->|有合适索引| IdxScan --> Execute
+    CostQ -->|无索引/全表| FullScan --> Execute
+    Execute --> EngineQ
+    EngineQ -->|默认| InnoDB --> BufferPool
+    EngineQ -->|旧版| FullScan
+    BufferPool --> HitQ
+    HitQ -->|命中| Execute
+    HitQ -->|未命中| ReadDisk --> BufferPool
+    InnoDB -.修改.-> UndoLog
+    InnoDB -.修改.-> RedoLog
+    InnoDB -.提交.-> BinLog
+    Execute --> CommitQ
+    CommitQ -->|是| TwoPhase --> Final
+    CommitQ -->|崩溃| Crash --> RedoLog
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 线上频繁死锁告警，我不会背"死锁是互相等待"这种概念，而是能拿出一条完整的证据链把现场还原出来——`SHOW ENGINE INNODB STATUS` 拿第一现场，`performance_schema.data_lock_waits` 还原锁等待图，`events_statements_history_long` 把事务 ID 映射回 SQL，最后定位到"哪两类业务 SQL 加锁顺序相反形成环"，对症修复。死锁本身是 InnoDB 正常的保护机制，但频繁死锁一定是业务设计有问题。

@@ -100,6 +100,46 @@ public class OrderService {
 3. **请举例说明最终一致性的应用场景？**（提示：抖音点赞数更新、电商订单状态同步、DNS 解析）。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    DIST([分布式系统]) --> CAP{CAP 三选二}
+
+    CAP --> C[一致性 Consistency<br/>所有节点同一时刻<br/>数据一致]
+    CAP --> A[可用性 Availability<br/>每个请求都收到<br/>非错误响应]
+    CAP --> P[分区容错 Partition Tolerance<br/>网络分区时<br/>系统仍能运行]
+
+    P -. 网络必然分区 .-> MUST[P 必选]
+    MUST --> CHOICE{C vs A?}
+
+    CHOICE -->|选 C 牺牲 A| CP[CP 系统<br/>分区时阻塞<br/>等数据一致]
+    CHOICE -->|选 A 牺牲 C| AP[AP 系统<br/>分区时返回旧数据<br/>最终一致]
+
+    CP --> CP_EG[ZooKeeper/etcd<br/>HBase/关系型 DB<br/>强一致场景]
+    AP --> AP_EG[Cassandra/Dynamo<br/>Eureka/Nacos 默认<br/>高可用场景]
+
+    AP --> BASE
+    subgraph BASE["BASE 理论 AP 的实践"]
+    BA[Basically Available<br/>基本可用 降级]
+    SOFT[Soft State<br/>软状态 接受中间态]
+    EVEN[Eventually Consistent<br/>最终一致 重试补偿]
+    end
+
+    TRADEOFF([工程权衡]) --> BIZ_C[金融/库存<br/>选 CP 宁可阻塞]
+    TRADEOFF --> BIZ_A[社交/推荐<br/>选 AP 容忍旧数据]
+    TRADEOFF --> HYBRID[混合架构<br/>核心 CP + 周边 AP]
+
+    CHOICE2([互联网主流]) --> AP_PLUS[AP + BASE<br/>高可用优先<br/>补偿换一致]
+
+    style DIST fill:#4CAF50,color:#fff
+    style CP fill:#FF9800,color:#fff
+    style AP fill:#009688,color:#fff
+    style P fill:#9C27B0,color:#fff
+    style BASE fill:#2196F3,color:#fff
+    style TRADEOFF fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 理论定位：是对CAP中AP的延伸，解决互联网高并发下强一致性难题。

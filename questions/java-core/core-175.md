@@ -110,6 +110,39 @@ XACK stream:mystream mygroup 1643720000000-0
 4.  **Pipeline**：Pipeline 也是为了解决网络往返（RTT）问题，它和多线程 IO 有什么区别？（Pipeline 是客户端批量发送命令，一次 IO；多线程 IO 是服务端并行处理多个 IO 请求）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    R([Redis五大数据类型]):::start --> STR[String 字符串]
+    R --> HS2[Hash 哈希表]
+    R --> LST[List 列表]
+    R --> SET2[Set 集合]
+    R --> ZSET[ZSet 有序集合]
+    STR --> STR1["单值缓存<br/>验证码/商品库存"]
+    STR --> STR2[对象JSON缓存<br/>用户信息]
+    STR --> STR3["计数器 incr<br/>点赞数/阅读量"]:::async
+    STR --> STR4[分布式锁<br/>setnx+expire]
+    STR --> STR5[Bitmap签到<br/>底层就是String]
+    HS2 --> HS1[对象字段存储<br/>用户属性 商品详情]
+    HS2 --> HS2A["购物车<br/>userId→{skuId:num}"]
+    LST --> L1[消息队列<br/>lpush+brpop]
+    LST --> L2["最新N条<br/>朋友圈/文章列表"]
+    LST --> L3[操作日志栈]
+    SET2 --> S1["标签/共同好友<br/>sinter交集"]
+    SET2 --> S2[去重<br/>UV统计 抽奖 srandmember]
+    SET2 --> S3["黑名单/白名单"]
+    ZSET --> Z1["排行榜<br/>score排序 游戏/热搜"]
+    ZSET --> Z2[延时队列<br/>score=到期时间戳]:::async
+    ZSET --> Z3[范围查找<br/>滑动窗口限流]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心结论：6.0前纯单线程；6.0后网络IO多线程，命令执行仍单线程。

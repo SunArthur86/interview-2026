@@ -373,6 +373,51 @@ mysql -P 3307 -e "SELECT COUNT(*) FROM trade.orders;"   # 验证可读
 4. **数据库高可用和缓存高可用（Redis 哨兵/Cluster）思路一样吗？**——思路类似（冗余 + failover），但数据库更复杂。数据库切换要保证数据一致性（主从复制延迟、数据校验），Redis 哨兵切换相对简单（数据可丢失容忍）。数据库备份恢复是重头戏（全量+binlog+演练），Redis 用 AOF/RDB 持久化相对轻量。本质差异是"数据重要性"——数据库是最终数据源（丢了无法恢复），Redis 是缓存（丢了从 DB 重建）。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务注册与发现]):::start
+    Provider[服务提供者<br/>启动]:::process
+    Register[注册到注册中心<br/>写临时节点]:::process
+    Registry[(注册中心<br/>Nacos/ZK/etcd)]:::store
+    Consumer[服务消费者<br/>启动]:::process
+    Subscribe[订阅服务列表<br/>拉取+长轮询]:::process
+    Cache[本地缓存<br/>provider 列表]:::process
+    Heartbeat[心跳上报<br/>5s 周期]:::process
+    HealthQ{{健康检查?}}:::decision
+    Healthy[节点健康<br/>保留注册]:::process
+    Unhealthy[节点故障<br/>摘除]:::warn
+    Push[推送变更<br/>消费者更新]:::process
+    ElectionQ{{一致性协议?<br/>CP/AP}}:::decision
+    Raft[Raft<br/>强一致 CP]:::process
+    Distro[Distro<br/>最终一致 AP]:::process
+    SplitQ{{网络分区?}}:::decision
+    Minor[少数派不可用<br/>CP]:::warn
+    Major[多数派可用<br/>保证一致]:::process
+    Failover[消费者容错<br/>本地缓存兜底]:::process
+    Config[配置中心<br/>动态配置]:::process
+    Final([✅ 服务发现稳定]):::start
+
+    Start --> Provider --> Register --> Registry
+    Consumer --> Subscribe --> Registry --> Cache
+    Provider --> Heartbeat --> HealthQ
+    HealthQ -->|健康| Healthy
+    HealthQ -->|故障| Unhealthy --> Push
+    Registry --> ElectionQ
+    ElectionQ -->|强一致| Raft --> SplitQ
+    ElectionQ -->|高可用| Distro --> Failover
+    SplitQ -->|分区| Minor
+    SplitQ -->|正常| Major
+    Push --> Failover --> Config --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到数据库高可用、备份恢复与演练，我的理解是——数据库高可用的本质是"用冗余换可用——主库宕机有备库顶，机房故障有异地容灾"。备份恢复的本质是"用副本换数据安全——逻辑备份（mysqldump）保快照，物理备份（Percona XtraBackup）保一致性页，binlog 保增量"。演练的本质是"用模拟换信心——不演练的预案是纸上谈兵，故障时才发现备份不可用或恢复太慢"。打个比方，僉银行的安防体系。冗余是"总行+分行多个金库，一个被抢其他照常营业"（主备/多活）；备份是"账目每天拍照存档（全量），每小时记流水（增量），存到异地金库"（备份策略）；演练是"每月模拟金库被抢，测试备用金库能几小时恢复营业"（容灾演练）。没有演练，真被抢了才发现备用金库钥匙丢了（备份恢复不了）。

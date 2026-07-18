@@ -211,6 +211,44 @@ class CustomBenchmark:
 4. **实践**: 自建领域评估集 > 通用Benchmark，持续更新测试用例"
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SYS([RAG/LLM 系统]) --> BUILD[构建评测集<br/>Golden Q-A pairs]
+    BUILD --> SPLIT{评测维度}
+
+    SPLIT -->|检索质量| RET_MET[Recall@K<br/>正确 chunk 是否在 Top-K]
+    SPLIT -->|检索质量| PREC[Precision@K<br/>Top-K 中相关比例]
+    SPLIT -->|生成质量| FAITH[Faithfulness<br/>回答是否忠于上下文]
+    SPLIT -->|生成质量| REL[Answer Relevancy<br/>回答是否切题]
+    SPLIT -->|端到端| EM[Exact Match<br/>精确匹配率]
+    SPLIT -->|端到端| HUM[人工评分<br/>Likert 5 分]
+
+    RET_MET --> FRAME
+    PREC --> FRAME
+    FAITH --> FRAME
+    REL --> FRAME
+    EM --> FRAME
+    HUM --> FRAME
+
+    FRAME[RAGAS / TruLens<br/>自动化评测框架] --> SCORE[计算各项得分]
+    SCORE --> DIAG{定位瓶颈}
+    DIAG -->|检索低| FIX_RET[优化切片/Embedding<br/>增加 Rerank]
+    DIAG -->|忠实度低| FIX_GEN[优化 Prompt<br/>降温度/强约束]
+    DIAG -->|切题低| FIX_Q[Query 改写<br/>HyDE/Multi-Query]
+
+    FIX_RET --> SYS
+    FIX_GEN --> SYS
+    FIX_Q --> SYS
+
+    style SYS fill:#4CAF50,color:#fff
+    style FRAME fill:#009688,color:#fff
+    style FIX_RET fill:#FF9800,color:#fff
+    style FIX_GEN fill:#9C27B0,color:#fff
+    style FIX_Q fill:#2196F3,color:#fff
+```
+
 ## 记忆要点
 
 - Benchmark分类记三点：基础能力(MMLU/HumanEval)、Agent能力(GAIA/ToolBench)、安全对齐。

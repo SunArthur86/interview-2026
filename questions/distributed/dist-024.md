@@ -88,6 +88,37 @@ server.3=192.168.1.3:2888:3888:observer
 3. **Observer 如何连接集群？**：在配置 Observer 时，通常可以指定其跟随的 Follower 列表（`server.x=...:observer` 配置中隐含），Observer 会连接到这些节点进行数据同步。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([请求进入]) --> INPUT[输入处理<br/>原始请求]
+    INPUT --> CORE{核心判断}
+    CORE -->|正常路径| NORMAL[主流程执行<br/>遵循 CAP/BASE 约束]
+    CORE -->|异常路径| ABNORMAL[异常分支<br/>故障转移/重试]
+
+    NORMAL --> COORD[协调者/主节点<br/>统一调度]
+    COORD --> REPLICATE[数据复制<br/>多副本一致性]
+    REPLICATE --> CONSISTENCY{一致性协议}
+    CONSISTENCY -->|强一致 CP| STRONG[Raft/Paxos/ZAB<br/>多数派 quorum]
+    CONSISTENCY -->|最终一致 AP| EVENTUAL[异步复制<br/>Dynamo/Cassandra]
+
+    ABNORMAL --> TIMEOUT[超时检测]
+    TIMEOUT --> RETRY[指数退避重试]
+    RETRY --> FAIL_FAST[快速失败<br/>触发降级]
+
+    NORMAL --> OBS[可观测性<br/>Trace/Metric/Log]
+    ABNORMAL --> OBS
+    OBS --> RESP([返回响应])
+
+    style REQ fill:#4CAF50,color:#fff
+    style RESP fill:#2196F3,color:#fff
+    style STRONG fill:#FF9800,color:#fff
+    style EVENTUAL fill:#9C27B0,color:#fff
+    style FAIL_FAST fill:#F44336,color:#fff
+    style COORD fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 核心作用：只处理读请求以扩展集群性能，跨机房部署降低异地访问延迟。

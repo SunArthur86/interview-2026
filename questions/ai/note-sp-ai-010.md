@@ -174,6 +174,43 @@ class DecoderLayer(nn.Module):
 4. **训练vs推理**：训练时teacher forcing可并行，推理时逐词自回归
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    IN([输入序列<br/>tokens]) --> EMB[Token Embedding<br/>+ 位置编码 Positional]
+    EMB --> ENC
+
+    subgraph ENC["Encoder 编码器 x N"]
+    E1[Multi-Head Self-Attention<br/>Q/K/V 投影] --> E2[Scaled Dot-Product<br/>softmax QK^T / √dk]
+    E2 --> E3[加权求和 V]
+    E3 --> E4[Add & Norm<br/>残差+LayerNorm]
+    E4 --> E5[Feed-Forward<br/>两层 MLP]
+    E5 --> E6[Add & Norm]
+    end
+
+    ENC --> MEM[(K/V Cache<br/>编码记忆)]
+
+    MEM --> DEC
+    subgraph DEC["Decoder 解码器 x N"]
+    D1[Masked Self-Attention<br/>因果掩码防看未来] --> D2[Add & Norm]
+    D2 --> D3[Cross-Attention<br/>Query 来自 Decoder<br/>K/V 来自 Encoder]
+    D3 --> D4[Add & Norm]
+    D4 --> D5[Feed-Forward]
+    D5 --> D6[Add & Norm]
+    end
+
+    DEC --> LINEAR[Linear 投影<br/>到词表大小]
+    LINEAR --> SOFT[Softmax<br/>概率分布]
+    SOFT --> OUT([输出下一个 token])
+
+    style IN fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style E2 fill:#FF9800,color:#fff
+    style D3 fill:#9C27B0,color:#fff
+    style SOFT fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - Transformer双核：Encoder负责双向看全句提取特征，Decoder负责单向看前文生成文本。

@@ -102,6 +102,38 @@ byte[] bytes = user.toByteArray();
 | **适用场景** | 浏览器接口、配置文件 | 遗留系统、文档 | 高性能内部通信、存储 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PROTO([.proto定义文件<br/>message结构]):::start --> CMP[protoc编译器]
+    CMP --> GEN["生成各语言代码<br/>Java/Python/C++"]
+    CMP --> CHK{编译检查}:::decision
+    CHK -->|字段编号冲突| ERR[编译失败]:::error
+    CHK -->|合法| DESC[生成二进制描述符]
+    GEN --> OBJ[运行时构造对象<br/>Builder模式]
+    OBJ --> SER[序列化 toByteArray]
+    SER --> ENC[字段按编号编码<br/>varint + length-delimited]
+    ENC --> CMPCT[(紧凑二进制<br/>省空间 反序列化快)]:::storage
+    CMPCT --> NET[("网络/RPC传输")]:::storage
+    NET --> DES[反序列化 parseFrom]
+    DES --> READ["按字段编号读取<br/>未知字段跳过/保留"]
+    READ --> OBJ2[重建对象]
+    OBJ2 --> APP([业务使用]):::success
+    ENC --> ADV{优势}:::decision
+    ADV -->|1| S1[体积小 比JSON小3-10倍]
+    ADV -->|2| S2[解析快 无字符串解析]
+    ADV -->|3| S3[强类型 编译期检查]
+    ADV -->|4| S4["前向/后向兼容<br/>新增字段不影响旧版本"]:::async
+    ADV -->|劣势| W1[不可读 二进制需工具<br/>schema维护成本]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心优势：Protobuf采用二进制格式与TLV结构，体积比JSON小3~10倍，解析极快。

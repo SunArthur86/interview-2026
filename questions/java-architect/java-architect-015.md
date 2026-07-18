@@ -467,6 +467,54 @@ spring:
 4. **网关为什么用 Netty 而不是 Tomcat？**——网关是 IO 密集型（大量转发），Tomcat 同步阻塞每请求一线程，万级并发要万级线程（内存和上下文切换扛不住）。Netty 异步非阻塞少量 EventLoop 线程处理大量连接，吞吐量高 10 倍。代价是编程模型复杂（Reactor 链式，调试困难）。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 应用发起读请求]):::start
+    App[应用层<br/>查询数据]:::client
+    CacheHitQ{{缓存命中?}}:::decision
+    ReturnCache["直接返回缓存数据<br/>O(1) 低延迟"]:::process
+    MissDB{缓存未命中}:::decision
+    QueryDB[查询数据库<br/>执行 SQL]:::process
+    PenetrateQ{{是否为恶意请求?<br/>查询不存在的 key}}:::decision
+    BloomFilter[布隆过滤器拦截<br/>+ 缓存空值]:::process
+    BreakDownQ{{热点 key 失效?<br/>缓存击穿}}:::decision
+    Mutex[加互斥锁<br/>单线程回源]:::process
+    AvalancheQ{{大批 key 同时过期?<br/>缓存雪崩}}:::decision
+    TTLJitter[随机 TTL<br/>+ 多级缓存]:::process
+    WriteBackQ{{是否回写缓存?}}:::decision
+    WriteCache[写入 Redis<br/>设置 TTL]:::process
+    BigKeyCheck{{大 Key / 热 Key?}}:::decision
+    SplitKey[拆分大 Key<br/>本地缓存热 Key]:::process
+    DB[(MySQL 主从<br/>持久化数据)]:::store
+    Cache[(Redis Cluster<br/>分片缓存)]:::store
+    Final([✅ 返回结果]):::start
+    Alarm[告警 + 限流降级]:::danger
+
+    Start --> App --> CacheHitQ
+    CacheHitQ -->|命中| ReturnCache --> BigKeyCheck
+    BigKeyCheck -->|是| SplitKey --> Final
+    BigKeyCheck -->|否| Final
+    CacheHitQ -->|未命中| MissDB --> PenetrateQ
+    PenetrateQ -->|是| BloomFilter --> Alarm
+    PenetrateQ -->|否| BreakDownQ
+    BreakDownQ -->|是| Mutex --> QueryDB
+    BreakDownQ -->|否| AvalancheQ
+    AvalancheQ -->|是| TTLJitter --> QueryDB
+    AvalancheQ -->|否| QueryDB
+    QueryDB --> DB --> WriteBackQ
+    WriteBackQ -->|是| WriteCache --> Cache --> ReturnCache
+    WriteBackQ -->|否| ReturnCache
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到网关鉴权、路由、限流与灰度发布，我的理解是——网关的本质是"南北向流量的统一策略执行点"——把鉴权、限流、路由、灰度、协议转换这些横切关注点从后端服务剥离，集中在一个数据平面执行。它用"反向代理 + 过滤器链"模型，每个请求按序穿过 Filter Chain，可前置短路（鉴权失败/限流命中直接返回）也可后置处理（响应改写）。打个比方，像写字楼的"大堂安保 + 前台"。访客（请求）先过安保闸机（鉴权）→ 前台登记分流到不同楼层（路由）→ 高峰期货梯限流放行（限流）→ VIP 走专用电梯（灰度）。后端业务（楼层租户）不用关心安保，专心做业务。一旦安保规则变了（鉴权策略调整），只改大堂不用通知每个租户。

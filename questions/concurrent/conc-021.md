@@ -93,6 +93,43 @@ if (lock1.tryLock()) {
     - 数据库通常有死锁检测机制。当检测到死锁时，数据库会根据策略（如回滚代价最小）选择其中一个事务作为牺牲品，抛出异常并回滚，以解除死锁。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    T_A([线程 A]) --> L1[持有锁 1]
+    T_B([线程 B]) --> L2[持有锁 2]
+    L1 --> REQ1[请求锁 2]
+    L2 --> REQ2[请求锁 1]
+
+    REQ1 --> WAIT2[等待 B 释放]
+    REQ2 --> WAIT1[等待 A 释放]
+    WAIT2 --> CYCLE([循环等待<br/>死锁形成])
+    WAIT1 --> CYCLE
+
+    COND([死锁四必要条件]) --> C1[互斥 Mutex]
+    COND --> C2[持有并等待<br/>Hold & Wait]
+    COND --> C3[不可剥夺<br/>No Preemption]
+    COND --> C4[循环等待<br/>Circular Wait]
+
+    CYCLE --> DIAG{诊断排查}
+    DIAG --> JSTACK[jstack 抓栈<br/>Found Java-level deadlock]
+    DIAG --> JVISUAL[jconsole/jvisualvm<br/>图形化检测]
+    DIAG --> ARTHAS[Arthas thread -b<br/>找阻塞源头]
+    DIAG --> MXBEAN[ThreadMXBean<br/>findMonitorDeadlockedThreads]
+
+    PREVENT([预防策略]) --> FIX_C2[破坏持有等待<br/>一次性申请所有锁]
+    PREVENT --> FIX_C4[破坏循环等待<br/>固定加锁顺序]
+    PREVENT --> TRY_LOCK[tryLock 超时<br/>避免无限等待]
+    PREVENT --> DETECT[运行时检测<br/>死锁回滚恢复]
+
+    style T_A fill:#4CAF50,color:#fff
+    style T_B fill:#009688,color:#fff
+    style CYCLE fill:#F44336,color:#fff
+    style JSTACK fill:#FF9800,color:#fff
+    style FIX_C4 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 一句话定义：保护临界区的同步机制，保证同一时刻仅一个线程访问

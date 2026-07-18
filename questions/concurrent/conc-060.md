@@ -92,6 +92,43 @@ executor.submit(() -> {
 4. **避免存大对象**：每个线程一份副本，大对象会导致内存膨胀，尤其是线程数多的场景。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SET([threadLocal.set value]) --> CUR[获取当前线程<br/>Thread.currentThread]
+    CUR --> MAP[读 thread.threadLocals<br/>ThreadLocalMap]
+    MAP --> ENTRY[WeakReference<br/>key=ThreadLoal 弱引用]
+    ENTRY --> V_STRONG[value 强引用]
+
+    SET --> DONE_SET([写入完成])
+
+    GET([threadLocal.get]) --> CUR
+    CUR --> MAP
+    MAP --> LOOK{找到 entry?}
+    LOOK -->|key 还在| RET_V([返回 value])
+    LOOK -->|key 被回收| LEAK[过期 entry<br/>需主动清理]
+
+    POOL([线程池场景<br/>线程复用]) --> NEVER_DIE[核心线程不死<br/>ThreadLocalMap 永驻]
+    NEVER_DIE --> LEAK_RISK([内存泄漏<br/>value 无法回收])
+
+    LEAK_RISK --> FIX{防护措施}
+    FIX -->|用完显式清理| REMOVE[threadLocal.remove<br/>try-finally]
+    FIX -->|扫描清理| EXPUNGE[get/set 时触发<br/>expungeStaleEntry]
+
+    INHERIT([InheritableThreadLocal<br/>父子线程继承]) --> COPY_PARENT[子线程创建时<br/>复制父 Map]
+    COPY_PARENT --> TRANS([跨线程传递])
+
+    TTL([TransmittableThreadLocal<br/>线程池场景]) -. 包装 Runnable .-> TRANS
+
+    style SET fill:#4CAF50,color:#fff
+    style RET_V fill:#2196F3,color:#fff
+    style ENTRY fill:#FF9800,color:#fff
+    style LEAK_RISK fill:#F44336,color:#fff
+    style REMOVE fill:#009688,color:#fff
+    style TTL fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 核心定义：提供线程局部变量，每个线程拥有独立副本，以空间换时间实现无锁并发。

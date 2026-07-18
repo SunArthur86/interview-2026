@@ -111,6 +111,45 @@ def build_plan(llm_response):
 2. **忽略计划的Cost预估**：规划时仅考虑逻辑可行性，未评估Token消耗、时间成本或API调用费用，导致任务执行到一半因资源耗尽而中断。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 用户 Query 输入]):::start
+    InputGuard[输入安全过滤<br/>敏感词/Prompt 注入]:::process
+    Router[Router 路由<br/>意图识别]:::process
+    NeedRAGQ{{需要外部知识?<br/>RAG}}:::decision
+    DirectLLM[直接调用 LLM<br/>参数化知识]:::process
+    Embed[Query Embedding<br/>向量编码]:::process
+    VectorDB[(向量数据库<br/>Milvus/Chroma)]:::store
+    Retrieve[Top-K 检索召回<br/>语义相似度]:::process
+    Rerank[Cross-Encoder 重排<br/>精排 Top-N]:::process
+    Context[组装上下文<br/>System + Context + Query]:::process
+    NeedToolQ{{需要工具调用?<br/>Tool/Function Call}}:::decision
+    ToolSelect[LLM 输出 JSON<br/>name + arguments]:::process
+    ToolExec[宿主执行 Tool<br/>API/DB/函数]:::process
+    ToolResult[结果回填<br/>注入 Context]:::process
+    MultiStepQ{{多步推理?<br/>ReAct/Plan}}:::decision
+    ReActLoop[Reason→Act→Observe<br/>迭代循环]:::process
+    LLM[LLM 推理生成<br/>流式输出 Token]:::process
+    OutputGuard[输出过滤<br/>合规/毒性检测]:::process
+    Final([✅ 返回最终回答]):::start
+
+    Start --> InputGuard --> Router --> NeedRAGQ
+    NeedRAGQ -->|闲聊/参数知识| DirectLLM --> NeedToolQ
+    NeedRAGQ -->|事实型问答| Embed --> VectorDB --> Retrieve --> Rerank --> Context --> NeedToolQ
+    NeedToolQ -->|是| ToolSelect --> ToolExec --> ToolResult --> MultiStepQ
+    NeedToolQ -->|否| MultiStepQ
+    MultiStepQ -->|是| ReActLoop --> LLM
+    MultiStepQ -->|否| LLM
+    LLM --> OutputGuard --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 记忆要点
 
 - 规划模式：ReAct（循环推理）、Plan-and-Solve（先规划后执行）、ToT（树探索）

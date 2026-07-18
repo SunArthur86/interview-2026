@@ -79,6 +79,43 @@ try {
 4. **Key 为什么设为弱引用**：如果不设为弱引用会怎样？（如果 Key 是强引用，只要线程不销毁，ThreadLocal 对象就无法被回收，造成 Key 的内存泄漏）
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SET([threadLocal.set value]) --> CUR[获取当前线程<br/>Thread.currentThread]
+    CUR --> MAP[读 thread.threadLocals<br/>ThreadLocalMap]
+    MAP --> ENTRY[WeakReference<br/>key=ThreadLoal 弱引用]
+    ENTRY --> V_STRONG[value 强引用]
+
+    SET --> DONE_SET([写入完成])
+
+    GET([threadLocal.get]) --> CUR
+    CUR --> MAP
+    MAP --> LOOK{找到 entry?}
+    LOOK -->|key 还在| RET_V([返回 value])
+    LOOK -->|key 被回收| LEAK[过期 entry<br/>需主动清理]
+
+    POOL([线程池场景<br/>线程复用]) --> NEVER_DIE[核心线程不死<br/>ThreadLocalMap 永驻]
+    NEVER_DIE --> LEAK_RISK([内存泄漏<br/>value 无法回收])
+
+    LEAK_RISK --> FIX{防护措施}
+    FIX -->|用完显式清理| REMOVE[threadLocal.remove<br/>try-finally]
+    FIX -->|扫描清理| EXPUNGE[get/set 时触发<br/>expungeStaleEntry]
+
+    INHERIT([InheritableThreadLocal<br/>父子线程继承]) --> COPY_PARENT[子线程创建时<br/>复制父 Map]
+    COPY_PARENT --> TRANS([跨线程传递])
+
+    TTL([TransmittableThreadLocal<br/>线程池场景]) -. 包装 Runnable .-> TRANS
+
+    style SET fill:#4CAF50,color:#fff
+    style RET_V fill:#2196F3,color:#fff
+    style ENTRY fill:#FF9800,color:#fff
+    style LEAK_RISK fill:#F44336,color:#fff
+    style REMOVE fill:#009688,color:#fff
+    style TTL fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 核心原理：每个线程内部维护 ThreadLocalMap，以 ThreadLocal 为 Key 隔离数据，实现无锁并发。

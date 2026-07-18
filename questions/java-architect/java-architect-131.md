@@ -434,6 +434,54 @@ public class BackChannelLogoutController {
 4. **refresh_token 续期怎么处理 SSO？**——access_token 过期用 refresh_token 续，不需要用户重新登录（保持 SSO）。但 refresh_token 也有过期时间（如 7 天），过期后用户要重新登录。
 5. **IdP 高可用怎么部署？**——多副本部署（K8s 多 pod）+ 共享存储（数据库 + infinispan/redis cache session）+ 负载均衡 + 跨机房容灾。session 不能存本地（粘性会限制水平扩展）。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务端启动]):::start
+    BossGroup[BossGroup<br/>Accept 线程]:::process
+    WorkerGroup[WorkerGroup<br/>IO 处理线程]:::process
+    Bind[绑定端口<br/>ServerSocketChannel]:::process
+    EventLoop[EventLoop<br/>单线程 Selector 轮询]:::process
+    Selector[(Selector<br/>多路复用器)]:::store
+    IOModelQ{{IO 模型?<br/>select/poll/epoll}}:::decision
+    Epoll[epoll 边缘触发<br/>事件驱动 高性能]:::process
+    SelectIO[select 水平触发<br/>跨平台]:::process
+    AcceptEvent[OP_ACCEPT 事件<br/>新连接到达]:::process
+    Register[注册到 Worker<br/>SocketChannel]:::process
+    ReadEvent[OP_READ 事件<br/>数据可读]:::process
+    Pipeline[Pipeline 处理链<br/>责任链模式]:::process
+    Decoder[Decoder 解码器<br/>解决粘包/半包]:::process
+    Handler[业务 Handler<br/>处理业务逻辑]:::process
+    Encoder[Encoder 编码器<br/>序列化响应]:::process
+    ZeroCopyQ{{是否零拷贝?<br/>FileRegion}}:::decision
+    ZeroCopy[sendfile/mmap<br/>减少内核态拷贝]:::process
+    WriteBack[写回 Channel]:::process
+    BackPressureQ{{背压?<br/>写缓冲区高水位}}:::decision
+    BackPressure[isWritable=false<br/>自动降级]:::warn
+    Final([✅ 响应返回客户端]):::start
+
+    Start --> BossGroup --> Bind --> EventLoop
+    EventLoop --> Selector --> IOModelQ
+    IOModelQ -->|Linux| Epoll --> AcceptEvent
+    IOModelQ -->|通用| SelectIO --> AcceptEvent
+    AcceptEvent --> Register --> WorkerGroup
+    WorkerGroup --> ReadEvent --> Pipeline
+    Pipeline --> Decoder --> Handler --> Encoder
+    Encoder --> ZeroCopyQ
+    ZeroCopyQ -->|大文件| ZeroCopy --> WriteBack
+    ZeroCopyQ -->|否| WriteBack
+    WriteBack --> BackPressureQ
+    BackPressureQ -->|高水位| BackPressure --> Final
+    BackPressureQ -->|正常| Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** OAuth2.1 是 OAuth2.0 的整理 + 安全补丁——强制 PKCE、废弃 implicit/password grant、明确 scope 规范。OIDC（OpenID Connect）是 OAuth2.0 的认证扩展层——OAuth2 解决授权（access token 能调什么 API），OIDC 解决认证（id token 证明用户是谁）。企业 SSO 用 OIDC 把多个内部系统统一到身份提供商（IdP），用户一次登录拿到 id token，所有系统都信任，不再各自维护账号

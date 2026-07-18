@@ -117,6 +117,40 @@ public void process() {
 4. **海量任务调度性能**：如果有 10 万个定时任务每秒触发，调度中心会成为瓶颈吗？（会，通常需要水平扩展调度中心，或使用网格计算架构如 PowerJob 将调度分散）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TASK(["延迟任务提交<br/>订单/通知/重试"]):::start --> CALC[计算触发时间戳<br/>triggerTime=now+delay]
+    CALC --> STORE{存储方案}:::decision
+    STORE -->|Redis ZSet| ZS[zadd key score=triggerTime<br/>member=taskId]
+    STORE -->|RocketMQ| RMQ[MessageDelayLevel<br/>18个固定级别]
+    STORE -->|Kafka| KAF[时间轮+Topic<br/>需自实现]
+    STORE -->|MySQL| SQL["定时扫表<br/>where trigger_time<=now"]
+    STORE -->|时间轮| HW[HashedWheelTimer<br/>Netty内存级]
+    ZS --> SCAN["定时扫描<br/>score<=now"]
+    RMQ --> DELAY[MQ内部按级别暂存<br/>到时投递]
+    KAF --> SCAN
+    SQL --> SCAN
+    HW --> TICK[每tick推进指针<br/>到期任务回调]
+    SCAN --> POP[取出到期任务<br/>zrem原子删除]
+    POP --> EXEC[执行任务业务逻辑]
+    DELAY --> EXEC
+    TICK --> EXEC
+    EXEC --> RES{执行成功?}:::decision
+    RES -->|是| DONE([任务完成]):::success
+    RES -->|否 失败| RETRY[记录重试次数<br/>指数退避重新入队]
+    RETRY --> DLQ{超过最大次数?}:::decision
+    DLQ -->|是| DEAD[进入死信队列<br/>告警人工介入]:::error
+    DLQ -->|否| CALC
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 单机痛点：多实例@Scheduled会重复执行甚至DB死锁，所以需引入分布式调度

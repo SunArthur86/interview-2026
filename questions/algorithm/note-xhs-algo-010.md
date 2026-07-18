@@ -183,6 +183,49 @@ int[] dfs(TreeNode root) {
 5. **边界条件处理完整** — length=0和length=1单独处理
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 接到算法题]):::start
+    Understand[理解题意<br/>边界/输入/输出]:::process
+    Example[举例验证<br/>手算样例]:::process
+    BruteForce[暴力解<br/>朴素思路]:::process
+    Analyze[复杂度分析<br/>时间/空间]:::process
+    AcceptQ{{"复杂度可接受?<br/>O(n²)→O(n)"}}:::decision
+    Optimize[优化方向]:::process
+    PatternQ{{数据结构/算法模式?}}:::decision
+    HashPattern[Hash 表<br/>空间换时间]:::process
+    TwoPointer[双指针/滑窗<br/>区间问题]:::process
+    DPSearch[DFS/BFS<br/>图/树/回溯]:::process
+    DP[动态规划<br/>状态转移]:::process
+    Greedy[贪心<br/>局部最优]:::process
+    DivideConquer[分治<br/>递归拆分]:::process
+    Implement[编码实现]:::process
+    EdgeQ{{边界情况?}}:::decision
+    Edge[空输入/极大值/负数<br/>特判]:::process
+    Test[测试用例验证<br/>正常/异常/性能]:::process
+    Final([✅ AC 通过]):::start
+
+    Start --> Understand --> Example --> BruteForce --> Analyze --> AcceptQ
+    AcceptQ -->|是| Implement
+    AcceptQ -->|否| Optimize --> PatternQ
+    PatternQ -->|查找/计数| HashPattern --> Implement
+    PatternQ -->|数组/字符串| TwoPointer --> Implement
+    PatternQ -->|连通/路径| DPSearch --> Implement
+    PatternQ -->|最优子结构| DP --> Implement
+    PatternQ -->|无后效| Greedy --> Implement
+    PatternQ -->|可分解| DivideConquer --> Implement
+    Implement --> EdgeQ
+    EdgeQ -->|有| Edge --> Test
+    EdgeQ -->|无| Test
+    Test --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 沿街排列的房屋每间有不同金额，不能偷相邻两间，求最大收益。本质是每个位置做二选一决策：偷当前+跳过下一间 vs 不偷当前。

@@ -83,6 +83,42 @@ ZooKeeper 锁流程:
 4. **数据库乐观锁 vs 分布式锁**：扣减库存场景下，利用数据库的 `update stock set num=num-1 where id=1 and num>0` 是一种基于乐观锁的无锁方案，但容易导致行锁竞争激烈，连接池耗尽。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    C1([客户端 A 加锁]) --> SET[Redis SETNX<br/>key + 唯一 value + TTL]
+    SET --> OK1{返回 OK?}
+    OK1 -->|是 拿到锁| BIZ[执行临界区业务]
+    OK1 -->|否 锁被占| RETRY[退避重试/快速失败]
+
+    BIZ --> FIN[业务完成]
+    FIN --> LUA[Lua 脚本释放<br/>校验 value + DEL 原子]
+    LUA --> REL{释放成功?}
+    REL -->|是| FREE([锁释放])
+    REL -->|否 已被他人抢占| WARN[告警 异常]
+
+    TTL_NOTE([TTL 到期]) -. 自动释放 .-> FREE
+    BIZ -. 业务超时 .-> WATCH
+
+    subgraph WATCH["WatchDog 续期 (Redisson)"]
+    DOG[后台线程每 TTL/3 续期] --> EXT[检查持有者<br/>原子 EXPIRE]
+    EXT --> ALIVE{仍持有?}
+    ALIVE -->|是| DOG
+    ALIVE -->|否 进程崩溃| STOP[停止续期 锁自然过期]
+    end
+
+    REDLOCK([Redlock]) -. 多节点 quorum .-> SET
+    CP([ZK/etcd CP 锁<br/>基于临时节点+Watch]) -. 强一致 .-> SET
+
+    style C1 fill:#4CAF50,color:#fff
+    style FREE fill:#2196F3,color:#fff
+    style SET fill:#FF9800,color:#fff
+    style LUA fill:#009688,color:#fff
+    style DOG fill:#9C27B0,color:#fff
+    style WARN fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 单机Redis锁指令：SET key NX PX，且释放必须用Lua保证原子性

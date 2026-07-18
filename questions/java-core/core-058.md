@@ -75,6 +75,37 @@ DNS解析是将域名转换为IP地址的过程。整个流程涉及浏览器、
 4. **DNS解析为什么使用UDP**：虽然也支持TCP（主要用在区域传送），但普通查询主要用UDP是因为包小、速度快。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    U([用户输入 www.example.com]):::start --> LC[查浏览器DNS缓存]
+    LC --> H1{本地命中?}:::decision
+    H1 -->|是| IP1[直接返回IP]:::success
+    H1 -->|否| OS[查操作系统DNS缓存]
+    OS --> H2{OS命中?}:::decision
+    H2 -->|是| IP1
+    H2 -->|否| LH[查本地hosts文件]
+    LH --> H3{hosts命中?}:::decision
+    H3 -->|是| IP1
+    H3 -->|否| RD[向本地DNS服务器<br/>递归查询]
+    RD --> ROOT[查询根域名服务器.<br/>返回TLD NS地址]
+    ROOT --> TLD[查询顶级域.com NS<br/>返回权威NS地址]
+    TLD --> AUTH[查询example.com权威服务器<br/>返回最终A记录]
+    AUTH --> RTN[本地DNS缓存结果<br/>返回浏览器]
+    RTN --> H4{是否CDN调度?}:::decision
+    H4 -->|是| CDN[根据用户EDNS<br/>返回最近CDN节点IP]:::async
+    H4 -->|否| IP2([拿到目标IP]):::success
+    CDN --> IP2
+    IP1 --> IP2
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 本地排查：先查浏览器缓存和系统Hosts文件，未命中找本地DNS。

@@ -481,6 +481,65 @@ public void checkLocalTransaction(MessageExt msg) {
 4. **为什么不用 2PC 的变体（3PC）？**——3PC（Three-Phase Commit）引入 CanCommit 阶段 + 超时机制，解决 2PC 的协调者单点和阻塞问题。但 3PC 仍有数据不一致风险（网络分区时参与者超时提交但协调者要回滚），且多一轮往返性能更差。实际工程中 3PC 几乎不用，互联网用 TCC/Saga 替代。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 客户端发起请求]):::start
+    Producer[Producer 生产者<br/>发送消息]:::client
+    DecideSync{发送模式?<br/>同步/异步/单向}:::decision
+    Sync[同步发送<br/>阻塞等待 ACK]:::process
+    Async[异步发送<br/>回调通知]:::process
+    Oneway[单向发送<br/>不等响应]:::warn
+    RetryQ{是否收到 ACK?}:::decision
+    Retry[重试 N 次<br/>+ 幂等去重]:::process
+    DLQ[多次失败 → 死信队列 DLQ]:::danger
+    Broker[Broker 主节点<br/>写 PageCache]:::broker
+    FlushQ{刷盘策略?}:::decision
+    SyncFlush[同步刷盘 SYNC_FLUSH<br/>落盘后才返回]:::process
+    AsyncFlush[异步刷盘<br/>后台异步落盘]:::warn
+    ReplicaQ{复制策略?}:::decision
+    SyncRep[同步复制 SYNC_MASTER<br/>等 Slave 落盘]:::process
+    AsyncRep[异步复制<br/>Master 立即返回]:::warn
+    Persist[(磁盘 + 多副本<br/>持久化存储)]:::store
+    Consumer[Consumer 消费者<br/>拉取消息]:::client
+    OffsetQ{Offset 提交方式?}:::decision
+    AutoCommit[自动提交<br/>风险:业务异常也消费]:::warn
+    ManualCommit[手动提交<br/>业务成功后再 ACK]:::process
+    Business[执行业务逻辑]:::process
+    BizQ{业务是否成功?}:::decision
+    Reconsume[消费失败 → 重试<br/>RECONSUME_LATER]:::process
+    Final([✅ 消息消费完成]):::start
+
+    Start --> Producer --> DecideSync
+    DecideSync -->|高可靠| Sync --> Broker
+    DecideSync -->|高吞吐| Async --> Broker
+    DecideSync -->|日志类| Oneway --> Broker
+    Broker --> FlushQ
+    FlushQ -->|金融级| SyncFlush --> ReplicaQ
+    FlushQ -->|性能优先| AsyncFlush --> ReplicaQ
+    ReplicaQ -->|强一致| SyncRep --> Persist
+    ReplicaQ -->|弱一致| AsyncRep --> Persist
+    Persist --> Consumer --> OffsetQ
+    OffsetQ -->|不推荐| AutoCommit --> Business
+    OffsetQ -->|推荐| ManualCommit --> Business
+    Business --> BizQ
+    BizQ -->|成功| ManualCommit --> Final
+    BizQ -->|失败| Reconsume --> Consumer
+    Producer -.ACK 超时/失败.-> RetryQ
+    RetryQ -->|<N 次| Retry --> Producer
+    RetryQ -->|>=N 次| DLQ
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef broker fill:#f59e0b,stroke:#b45309,color:#fff;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到分布式事务 Saga、TCC 与可靠消息，我的理解是——分布式事务的本质是"跨多个独立资源管理器（DB/MQ）达成一致"——XA 用两阶段锁定资源（强一致但阻塞），TCC 用业务层 Try/Confirm/Cancel 模拟两阶段（强一致但侵入），Saga 用正向操作+补偿操作序列化执行（最终一致低侵入），可靠消息用本地消息表+幂等消费实现最终一致（最轻量）。选型本质是在"一致性强度"和"性能/侵入性"之间权衡。打个比方，像多方签字的合同流程。XA 是"所有人坐一桌，同时签字才生效"（强一致但等人到齐很慢）；TCC 是"每人先签字预留（Try），全部确认后才盖公章（Confirm），任一反悔就撕掉预留（Cancel）"；Saga 是"按顺序签字，谁反悔就倒着走补偿已签的"；可靠消息是"A 签完拍照发群（发消息），B 收到也签，最终大家都签完"（最终一致）。

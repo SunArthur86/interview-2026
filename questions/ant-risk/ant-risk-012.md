@@ -287,6 +287,51 @@ String decision = (String) runner.execute(rule, ctx, null, false, true);
 5. 故障复盘——把这次"R999 规则调外部 API 导致 300ms → 决策超时"的 trace 截图、规则配置、白名单方案存知识库，作为"规则不能含 IO"的标准案例。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务注册与发现]):::start
+    Provider[服务提供者<br/>启动]:::process
+    Register[注册到注册中心<br/>写临时节点]:::process
+    Registry[(注册中心<br/>Nacos/ZK/etcd)]:::store
+    Consumer[服务消费者<br/>启动]:::process
+    Subscribe[订阅服务列表<br/>拉取+长轮询]:::process
+    Cache[本地缓存<br/>provider 列表]:::process
+    Heartbeat[心跳上报<br/>5s 周期]:::process
+    HealthQ{{健康检查?}}:::decision
+    Healthy[节点健康<br/>保留注册]:::process
+    Unhealthy[节点故障<br/>摘除]:::warn
+    Push[推送变更<br/>消费者更新]:::process
+    ElectionQ{{一致性协议?<br/>CP/AP}}:::decision
+    Raft[Raft<br/>强一致 CP]:::process
+    Distro[Distro<br/>最终一致 AP]:::process
+    SplitQ{{网络分区?}}:::decision
+    Minor[少数派不可用<br/>CP]:::warn
+    Major[多数派可用<br/>保证一致]:::process
+    Failover[消费者容错<br/>本地缓存兜底]:::process
+    Config[配置中心<br/>动态配置]:::process
+    Final([✅ 服务发现稳定]):::start
+
+    Start --> Provider --> Register --> Registry
+    Consumer --> Subscribe --> Registry --> Cache
+    Provider --> Heartbeat --> HealthQ
+    HealthQ -->|健康| Healthy
+    HealthQ -->|故障| Unhealthy --> Push
+    Registry --> ElectionQ
+    ElectionQ -->|强一致| Raft --> SplitQ
+    ElectionQ -->|高可用| Distro --> Failover
+    SplitQ -->|分区| Minor
+    SplitQ -->|正常| Major
+    Push --> Failover --> Config --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到风控规则引擎怎么设计？用什么实现？怎么让规则动态生效，我的理解是——规则引擎把"业务策略"从代码里解耦成"配置化规则"，运营可动态调，避免改代码上线，是风控决策的核心组件。打个比方，规则引擎像一个"如果...那么..."的查询机：输入用户特征（年龄、金额、设备），按预设规则匹配，输出风险决策（放行/拦截/复核）。规则可配置不用改代码。

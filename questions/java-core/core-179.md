@@ -93,6 +93,38 @@ Ethernet Header + IP Packet + FCS (以太网帧)
     ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    APP([应用层数据]):::start --> SEG["加TCP/UDP头<br/>Segment段"]
+    SEG --> PKT["加IP头<br/>Packet包 含源/目的IP"]
+    PKT --> FRM["加帧头/帧尾<br/>Frame帧 含MAC地址"]
+    FRM --> BIT[转为比特流<br/>物理层传输]
+    BIT --> NIC1[源网卡发送]
+    NIC1 --> ROUTE{路由转发}:::decision
+    ROUTE -->|同网段| ARP[ARP广播查MAC<br/>直接送达]
+    ROUTE -->|跨网段| GW[发给默认网关<br/>逐跳路由]
+    GW --> HOP[每个路由器<br/>查路由表 TTL-1]
+    HOP --> TTL{TTL=0?}:::decision
+    TTL -->|是| DROP[丢弃包 ICMP超时]:::error
+    TTL -->|否| CONT[继续转发]
+    CONT --> DST[到达目的网段]
+    ARP --> DST
+    DST --> NIC2[目的网卡接收]
+    NIC2 --> LIFT[逐层解封装]
+    LIFT --> APP2[应用层收到数据]:::success
+    PKT --> FRAG{包大于MTU?}:::decision
+    FRAG -->|是 1500字节| FG[IP分片 fragmentation<br/>目标重组]
+    FRAG -->|否| PASS[直接封装]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 模型结构：自下而上四层依次为网络接口、网络、传输、应用层。

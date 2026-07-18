@@ -369,6 +369,48 @@ def choose_method(task_type, resources, data):
 - **其他变体**：KTO（Kahneman-Tversky，只需好/坏标签无需成对）、IPO、ORPO
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    BASE([预训练基座<br/>Next-Token 预测]) --> SFT
+
+    subgraph SFT["阶段1: SFT 监督微调"]
+    SFT_DATA[指令-回答对<br/>高质量人工标注] --> SFT_LOSS[监督交叉熵<br/>学习指令遵循]
+    SFT_LOSS --> SFT_MODEL[SFT 模型<br/>会听话但可能不安全]
+    end
+
+    SFT --> RM
+
+    subgraph RM["阶段2: Reward Model 奖励模型"]
+    RM_DATA[多回答排序数据<br/>A > B > C] --> RM_TRAIN[学习打分<br/>r(prompt, response)]
+    RM_TRAIN --> RM_MODEL[Reward Model]
+    end
+
+    RM --> RL
+
+    subgraph RL["阶段3: RLHF/PPO 强化对齐"]
+    PROMPT[采样 Prompt] --> GEN[SFT 模型生成多个回答]
+    GEN --> SCORE[Reward Model 打分]
+    SCORE --> ADV[优势估计 Advantage<br/>相对基线]
+    ADV --> PPO[PPO 策略梯度<br/>+ KL 惩罚防漂移]
+    PPO --> ALIGNED[对齐模型<br/>符合人类偏好]
+    end
+
+    ALIGNED --> DPO
+
+    subgraph DPO["替代: DPO 直接偏好优化"]
+    DPO_DATA[偏好对 (chosen, rejected)] --> DPO_LOSS[直接优化 logit 差<br/>无需 RM]
+    DPO_LOSS --> DPO_MODEL[DPO 模型<br/>简化流程]
+    end
+
+    style BASE fill:#4CAF50,color:#fff
+    style ALIGNED fill:#2196F3,color:#fff
+    style DPO_MODEL fill:#009688,color:#fff
+    style RM_MODEL fill:#FF9800,color:#fff
+    style PPO fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 四者对比：PPO需Critic四模型，GRPO组内相对去Critic，DAPO动态采样解耦，DPO离线无需RM

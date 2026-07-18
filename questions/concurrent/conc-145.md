@@ -99,6 +99,41 @@ System.out.println(maxAccumulator.get()); // 输出 200
 ```
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    UPDATE([更新变量 V]) --> READ[读取当前值 A<br/>V 的值]
+    READ --> CALC[计算新值 B<br/>业务逻辑]
+    CALC --> CMPXCHG{cmpxchg<br/>CPU 原子指令}
+
+    CMPXCHG --> LOOP{V == A?}
+    LOOP -->|是 未被改| SWAP[原子写入 B<br/>返回成功]
+    LOOP -->|否 被改了| FAIL[CAS 失败<br/>数据竞争]
+
+    FAIL --> RETRY{重试次数<br/>< 阈值?}
+    RETRY -->|是| READ
+    RETRY -->|否 退避| BACKOFF[退避 yield<br/>或转重量级锁]
+
+    SWAP --> DONE([更新完成])
+
+    NOTE([ABA 问题<br/>A→B→A]) -. 误判未变化 .-> LOOP
+    NOTE --> VERSION[加版本号<br/>AtomicStampedReference]
+    VERSION --> LOOP
+
+    LONG([AtomicLong 高并发]) --> HOT[单点 CAS 竞争激烈<br/>缓存行颠簸]
+    HOT --> LONGADDER[LongAdder<br/>分段 Cell 数组]
+    LONGADDER --> SPREAD[不同线程操作<br/>不同 Cell]
+    SPREAD --> SUM[sum 时累加<br/>空间换时间]
+
+    style UPDATE fill:#4CAF50,color:#fff
+    style DONE fill:#2196F3,color:#fff
+    style SWAP fill:#009688,color:#fff
+    style FAIL fill:#F44336,color:#fff
+    style NOTE fill:#FF9800,color:#fff
+    style LONGADDER fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 对比 ReadWriteLock：StampedLock 不可重入，且引入了性能极高的乐观读机制。

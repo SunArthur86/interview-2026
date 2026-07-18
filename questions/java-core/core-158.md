@@ -94,6 +94,33 @@ String response = stub.sayHello("World");
 | **适用场景** | Java 间纯远程调用，简单内部系统 | 复杂的微服务架构，异构系统通信 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SRV([服务端发布远程对象]):::start --> EXP[UnicastRemoteObject.exportObject<br/>生成Stub代理]
+    EXP --> REG2[RMI Registry注册表<br/>bind name→Stub]
+    REG2 --> WAT[等待客户端调用]
+    CLT([客户端 lookup]):::start --> LOOK[Naming.lookup 查Registry]
+    LOOK --> STUB[获得Stub代理对象]
+    STUB --> INV[调用Stub方法<br/>序列化参数]
+    INV --> NET[(网络传输 JRMP协议<br/>默认端口1099)]:::storage
+    NET --> SKEL[服务端Skeleton<br/>反序列化参数]
+    SKEL --> REAL[调用真实远程对象方法]
+    REAL --> RESULT[返回结果]
+    RESULT --> SER[序列化返回值]
+    SER --> NET2[(网络回传)]:::storage
+    NET2 --> STUB2[Stub反序列化结果]
+    STUB2 --> CLT2([客户端拿到返回值]):::success
+    EXP --> GC[DGC分布式GC<br/>租约机制防对象回收]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 一句话定义：跨JVM的RPC机制，将远程调用伪装成本地方法执行

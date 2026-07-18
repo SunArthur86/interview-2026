@@ -139,6 +139,40 @@ layer_config = {
 4. **量化感知**：vLLM 0.4+和SGLang都支持KV Cache FP8量化，提及框架版本和实现细节（如vLLM的`kv_cache_dtype`参数）
 5. **监控指标**：量化后要监控困惑度（PPL）变化、生成重复率、长文本连贯性，不能只看吞吐提升
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([推理请求<br/>多轮对话]) --> PREC[Prefix Cache 命中?<br/>公共前缀复用]
+    PREC -->|命中| REUSE[复用历史 KV Cache<br/>跳过重新计算]
+    PREC -->|未命中| COMPUTE[计算所有 token 的 K/V]
+
+    COMPUTE --> STORE[KV Cache 存储<br/>每个 Transformer 层]
+    REUSE --> STORE
+
+    STORE --> MEM_CHECK{显存足够?}
+    MEM_CHECK -->|否| OFFLOAD[Offloading<br/>溢出到 CPU/SSD]
+    MEM_CHECK -->|是| PAGED
+
+    OFFLOAD --> PAGED
+    subgraph PAGED["vLLM PagedAttention"]
+    BLOCK[逻辑 Block 分块<br/>类似虚拟内存页表] --> MAP[Block Table 映射<br/>非连续物理显存]
+    MAP --> SHARED[共享 Block<br/>同一前缀多请求复用]
+    end
+
+    PAGED --> BATCH[Continuous Batching<br/>动态拼 batch]
+    BATCH --> DECODE[逐 token 解码]
+    DECODE --> APPEND[新 token 的 K/V<br/>追加到 Cache]
+    APPEND --> OUT([输出 token<br/>循环直到 EOS])
+
+    style REQ fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style REUSE fill:#009688,color:#fff
+    style PAGED fill:#FF9800,color:#fff
+    style OFFLOAD fill:#F44336,color:#fff
+    style BATCH fill:#9C27B0,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** KV Cache量化是在显存容量和生成质量之间做权衡——用更少的bit存储注意力中间状态，换取更大的batch size和吞吐。

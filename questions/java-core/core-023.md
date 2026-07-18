@@ -84,6 +84,35 @@ public class SignatureDemo {
 3. **证书的作用**：如何确保拿到的公钥确实是服务器的，而不是中间人的？（引入数字证书 CA）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PL([发送方: 原始消息M]):::start --> H1["哈希函数SHA-256/MD5<br/>定长摘要生成"]
+    H1 --> DG["消息摘要Digest<br/>128/256位固定长度"]
+    DG --> SK["发送方私钥Private Key<br/>RSA/ECDSA加密摘要"]
+    SK --> SIG[生成数字签名<br/>附在消息后发送]
+    SIG --> CH((网络传输通道)):::storage
+    PL --> CH
+    CH --> RCV([接收方收到 M+签名]):::start
+    RCV --> H2[同样哈希函数<br/>对M重新计算摘要Hm]
+    RCV --> VRF[用发送方公钥<br/>解密签名得到Hs]
+    H2 --> CMP{Hm == Hs ?}:::decision
+    VRF --> CMP
+    CMP -->|相等| OK[验证通过<br/>消息完整+身份可信+不可否认]:::success
+    CMP -->|不等| FAIL[验证失败<br/>消息被篡改或伪造]:::error
+    OK --> CER{是否需要CA背书?}:::decision
+    CER -->|是| CA[CA数字证书<br/>公钥绑定身份]
+    CER -->|否| DONE([完成]):::success
+    CA --> DONE
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 摘要(如SHA-256)提取内容唯一指纹，保证数据完整性防篡改

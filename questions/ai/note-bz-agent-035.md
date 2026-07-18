@@ -217,6 +217,37 @@ def validate_result(result, schema):
 3. **预防+治理**：既要有事后治理（重试/降级），也要有事前预防（超时/熔断/限流）
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([用户 Query]) --> CTX[组装上下文<br/>System+History+Question]
+    CTX --> LLM[LLM 推理]
+    LLM --> DEC{是否需要工具?}
+    DEC -->|否| ANS([直接文本回答])
+    DEC -->|是| SCHEMA[读取工具 Schema<br/>Function Call/MCP]
+    SCHEMA --> MATCH[参数匹配填充<br/>JSON Schema 校验]
+    MATCH --> VALID{参数合法?}
+    VALID -->|否| REASK[反馈错误<br/>让 LLM 重新生成]
+    REASK --> LLM
+    VALID -->|是| DISPATCH[调度执行<br/>超时/重试/熔断]
+    DISPATCH --> EXEC[调用真实工具 API]
+    EXEC --> RESULT{执行结果}
+    RESULT -->|成功| OBS[Observation 拼回上下文]
+    RESULT -->|失败 N 次| FALL[Fallback<br/>同类工具替换/降级]
+    FALL --> OBS
+    OBS --> LLM
+    RESULT -->|危险操作| HITL[Human-in-the-Loop<br/>人工审批]
+    HITL --> OBS
+
+    style Q fill:#4CAF50,color:#fff
+    style ANS fill:#2196F3,color:#fff
+    style LLM fill:#009688,color:#fff
+    style EXEC fill:#FF9800,color:#fff
+    style FALL fill:#F44336,color:#fff
+    style HITL fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 容错四级防线：L1重试(瞬时错) → L2降级(服务挂) → L3换方案(回传LLM重选) → L4告知(不可恢复)

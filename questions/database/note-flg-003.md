@@ -262,6 +262,34 @@ POST /orders/_search?scroll=1m
    → 强事务需求(ES不支持事务) / 数据量很小(MySQL够用) / 只需精确查询(不需要全文搜索) / 频繁更新(ES更新成本高)
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TX([事务执行]):::start --> BUF[修改Buffer Pool数据页]
+    BUF --> DIRTY[标记页为dirty<br/>延迟刷盘]
+    BUF --> UNDO[(undo log 回滚日志<br/>记录修改前旧值)]:::storage
+    BUF --> REDO[(redo log 重做日志<br/>记录修改后新值 WAL先写)]:::storage
+    REDO --> FS[顺序写磁盘 fsync<br/>保证持久性]
+    UNDO --> FS
+    TX --> BIN[("binlog 二进制日志<br/>Server层 记录SQL/行变更")]:::storage
+    REDO --> TWOP{两阶段提交 2PC}:::decision
+    BIN --> TWOP
+    TWOP --> PREPARE[1. redo log prepare状态]
+    PREPARE --> WRITE_BIN[2. 写binlog]
+    WRITE_BIN --> COMMIT2[3. redo log commit状态]
+    COMMIT2 --> OK(["崩溃恢复依据<br/>保证redo/binlog一致"]):::success
+    UNDO --> PURPOSE1["作用: 回滚/MVCC版本链"]
+    REDO --> PURPOSE2[作用: 崩溃恢复 持久性]
+    BIN --> PURPOSE3["作用: 主从复制/数据恢复"]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 结构化回答
 
 **30 秒电梯演讲：** ES解决MySQL不擅长的全文搜索+多维聚合+模糊匹配场景。数据同步的核心挑战是"近实时一致性"——通过Canal监听MySQL binlog增量同步到ES，再配合定时全量补偿，达到秒级延迟的数据一致性。

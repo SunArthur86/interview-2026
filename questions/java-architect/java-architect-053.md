@@ -379,6 +379,54 @@ public class KmsKeyService {
 3. **时间戳为什么用秒不用毫秒？**——秒级精度足够（5 分钟窗口），且不同语言/系统的时间戳单位一致（Java 毫秒，Go 秒），秒级避免单位混乱。
 4. **国密算法什么时候用？**——政务/金融/国企合规要求用国密（SM2/SM3/SM4）。SM2 替代 RSA（非对称），SM3 替代 SHA256（哈希），SM4 替代 AES（对称）。京东金融部分接口支持国密。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 应用发起读请求]):::start
+    App[应用层<br/>查询数据]:::client
+    CacheHitQ{{缓存命中?}}:::decision
+    ReturnCache["直接返回缓存数据<br/>O(1) 低延迟"]:::process
+    MissDB{缓存未命中}:::decision
+    QueryDB[查询数据库<br/>执行 SQL]:::process
+    PenetrateQ{{是否为恶意请求?<br/>查询不存在的 key}}:::decision
+    BloomFilter[布隆过滤器拦截<br/>+ 缓存空值]:::process
+    BreakDownQ{{热点 key 失效?<br/>缓存击穿}}:::decision
+    Mutex[加互斥锁<br/>单线程回源]:::process
+    AvalancheQ{{大批 key 同时过期?<br/>缓存雪崩}}:::decision
+    TTLJitter[随机 TTL<br/>+ 多级缓存]:::process
+    WriteBackQ{{是否回写缓存?}}:::decision
+    WriteCache[写入 Redis<br/>设置 TTL]:::process
+    BigKeyCheck{{大 Key / 热 Key?}}:::decision
+    SplitKey[拆分大 Key<br/>本地缓存热 Key]:::process
+    DB[(MySQL 主从<br/>持久化数据)]:::store
+    Cache[(Redis Cluster<br/>分片缓存)]:::store
+    Final([✅ 返回结果]):::start
+    Alarm[告警 + 限流降级]:::danger
+
+    Start --> App --> CacheHitQ
+    CacheHitQ -->|命中| ReturnCache --> BigKeyCheck
+    BigKeyCheck -->|是| SplitKey --> Final
+    BigKeyCheck -->|否| Final
+    CacheHitQ -->|未命中| MissDB --> PenetrateQ
+    PenetrateQ -->|是| BloomFilter --> Alarm
+    PenetrateQ -->|否| BreakDownQ
+    BreakDownQ -->|是| Mutex --> QueryDB
+    BreakDownQ -->|否| AvalancheQ
+    AvalancheQ -->|是| TTLJitter --> QueryDB
+    AvalancheQ -->|否| QueryDB
+    QueryDB --> DB --> WriteBackQ
+    WriteBackQ -->|是| WriteCache --> Cache --> ReturnCache
+    WriteBackQ -->|否| ReturnCache
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 接口签名解决防篡改（请求内容不能被中间人改），防重放解决防复用（截获的请求不能被重发）。签名用 HMAC-SHA256（密钥+请求体+时间戳算摘要），防重放用 nonce（一次性随机数）+ timestamp（时间窗口）。敏感数据保护用 TLS 传输加密 + 字段级加密（AES）+ 脱敏存储（手机号哈希）

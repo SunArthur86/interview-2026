@@ -237,6 +237,32 @@ def break_loop(agent, loop_info, strategy="reflect"):
 4. **根因分析**：循环的根因通常是Prompt不清晰/工具描述歧义/模型推理能力不足
 5. **工程化防护**：最大轮次+Token上限+超时控制+成本监控的多维度兜底
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([复杂问题输入]) --> PROMPT[Prompt 注入<br/>Let's think step by step]
+    PROMPT --> THOUGHT[Thought 思考<br/>LLM 推理当前步]
+    THOUGHT --> NEED{需要外部信息?}
+    NEED -->|否 纯推理| REASON[Chain-of-Thought<br/>逐步推导]
+    NEED -->|是 需事实/计算| ACTION[Action 行动<br/>调用工具/API]
+    ACTION --> OBS[Observation 观察<br/>获取工具结果]
+    OBS --> LOOP{是否足够回答?}
+    REASON --> LOOP
+    LOOP -->|否 继续推理| THOUGHT
+    LOOP -->|是| FINAL[Final Answer<br/>输出最终答案]
+    FINAL --> REFLECT{自我反思<br/>Reflexion?}
+    REFLECT -->|发现错误| THOUGHT
+    REFLECT -->|验证通过| DONE([任务完成])
+
+    style Q fill:#4CAF50,color:#fff
+    style DONE fill:#2196F3,color:#fff
+    style THOUGHT fill:#009688,color:#fff
+    style ACTION fill:#FF9800,color:#fff
+    style OBS fill:#9C27B0,color:#fff
+    style REFLECT fill:#FFC107,color:#000
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** ReAct循环中Agent可能陷入"思考→行动→观察→思考"的无效死循环——反复调用同一工具或产生相同推理。检测方法是跟踪工具调用序列和推理内容，发现重复模式后通过强制跳出/注入新Prompt/限制最大轮次来中断。

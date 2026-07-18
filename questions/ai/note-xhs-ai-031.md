@@ -161,6 +161,40 @@ eBPF挂载点:
 4. **A/B测试可观测**：不同模型版本/量化策略上线时，需要对比监控指标变化，不能只看单点指标
 5. **Prometheus+Grafana模板**：提及具体dashboard面板设计——KV Cache热力图（哪些block被频繁访问）、时间序列趋势图、实时告警面板
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([推理请求<br/>多轮对话]) --> PREC[Prefix Cache 命中?<br/>公共前缀复用]
+    PREC -->|命中| REUSE[复用历史 KV Cache<br/>跳过重新计算]
+    PREC -->|未命中| COMPUTE[计算所有 token 的 K/V]
+
+    COMPUTE --> STORE[KV Cache 存储<br/>每个 Transformer 层]
+    REUSE --> STORE
+
+    STORE --> MEM_CHECK{显存足够?}
+    MEM_CHECK -->|否| OFFLOAD[Offloading<br/>溢出到 CPU/SSD]
+    MEM_CHECK -->|是| PAGED
+
+    OFFLOAD --> PAGED
+    subgraph PAGED["vLLM PagedAttention"]
+    BLOCK[逻辑 Block 分块<br/>类似虚拟内存页表] --> MAP[Block Table 映射<br/>非连续物理显存]
+    MAP --> SHARED[共享 Block<br/>同一前缀多请求复用]
+    end
+
+    PAGED --> BATCH[Continuous Batching<br/>动态拼 batch]
+    BATCH --> DECODE[逐 token 解码]
+    DECODE --> APPEND[新 token 的 K/V<br/>追加到 Cache]
+    APPEND --> OUT([输出 token<br/>循环直到 EOS])
+
+    style REQ fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style REUSE fill:#009688,color:#fff
+    style PAGED fill:#FF9800,color:#fff
+    style OFFLOAD fill:#F44336,color:#fff
+    style BATCH fill:#9C27B0,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** KV Cache可观测体系是推理服务的健康仪表盘——从显存利用率到业务SLA，四层监控金字塔确保问题无处遁形——像汽车仪表盘：资源层=油量表（显存）。

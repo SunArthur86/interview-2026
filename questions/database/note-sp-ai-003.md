@@ -176,6 +176,38 @@ while True:
 4. **选型建议**：根据场景推荐Redis/Kafka/RabbitMQ
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([Queue接口 继承Collection]):::start --> OP{操作分类}:::decision
+    OP -->|抛异常| TH["add/remove/element"]
+    OP -->|返回特殊值| RV["offer/poll/peek"]
+    TH --> ADD[add 失败抛IllegalStateException]
+    TH --> RM[remove 队空抛NoSuchElementException]
+    TH --> EL[element 查看队首 失败抛异常]
+    RV --> OFFER[offer 入队 失败返回false]
+    RV --> POLL[poll 出队 队空返回null]
+    RV --> PEEK[peek 查看队首 空返回null]
+    OFFER --> IMPL{实现类}:::decision
+    POLL --> IMPL
+    PEEK --> IMPL
+    IMPL -->|基本| BQ["LinkedList / ArrayDeque"]
+    IMPL -->|阻塞| BLKQ[BlockingQueue子接口]
+    IMPL -->|并发| CONQ[ConcurrentLinkedQueue<br/>CAS无锁]
+    BLKQ --> ABQ[ArrayBlockingQueue<br/>有界数组+ReentrantLock]
+    BLKQ --> LBQ[LinkedBlockingQueue<br/>链表 两把锁分离]
+    BLKQ --> PBQ[PriorityBlockingQueue<br/>堆 优先级]
+    BLKQ --> DQ[DelayQueue<br/>延时到期才能取]
+    BLKQ --> SQ[SynchronousQueue<br/>无容量 直接传递]:::async
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心功能口诀：缓存、锁、计数、排行、消息队列

@@ -104,6 +104,34 @@ public abstract class BaseDao<T> {
 | 性能开销 | 无额外开销 | inline 函数可能导致代码量增加 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SRC([源码: List&lt;String&gt; list]):::start --> CMP[javac编译]
+    CMP --> ERASE[类型擦除<br/>擦除为原生类型List]
+    ERASE --> RES[字节码: List list<br/>元素视为Object]
+    RES --> BRIDGE{方法签名冲突?}:::decision
+    BRIDGE -->|是 子类重写泛型方法| BDG[生成桥接方法bridge<br/>合成方法维护多态]:::async
+    BRIDGE -->|否 普通使用| CAST[编译器自动插入checkcast<br/>读取时强转]
+    CAST --> RT[运行时: List&lt;String&gt;与List&lt;Integer&gt;<br/>是同一个Class]:::storage
+    RT --> LIM{擦除带来的限制}:::decision
+    LIM -->|1| L1[运行时无法获取泛型类型<br/>new T 不允许]
+    LIM -->|2| L2[基本类型不能做泛型参数<br/>需包装类]
+    LIM -->|3| L3[instanceof无法判断泛型<br/>只能判断原始类型]
+    LIM -->|4| L4["静态字段/方法<br/>不能使用类的泛型参数"]
+    LIM -->|5| L5[异常类不能泛型化]
+    SRC --> SOL{运行时需要泛型信息?}:::decision
+    SOL -->|反射| REF[getGenericSuperClass<br/>从父类签名提取]
+    SOL -->|显式传Class| CLS[传Class&lt;T&gt;参数<br/>TypeToken方案]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心原理：编译期生效，运行时擦除。无界变Object，有界变上界。

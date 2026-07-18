@@ -112,6 +112,41 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 | **调试难度** | 线程栈支离破碎，难以追踪 | 保留线程调用树，Stack Trace 清晰直观 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PARENT([父任务启动]):::start --> SCOPE[StructuredTaskScope<br/>开作用域]
+    SCOPE --> SPAWN[启动多个子虚拟线程]
+    SPAWN --> T1[子任务1: 查用户服务]
+    SPAWN --> T2[子任务2: 查订单服务]
+    SPAWN --> T3[子任务3: 查商品服务]
+    T1 --> WAIT_ALL[scope.join 等待所有子任务]
+    T2 --> WAIT_ALL
+    T3 --> WAIT_ALL
+    WAIT_ALL --> POLICY{关闭策略 ShutdownPolicy}:::decision
+    POLICY -->|AwaitAll| AA[全部等待<br/>收集所有结果]
+    POLICY -->|ShutdownOnSuccess| SOS[任一成功则取消其他<br/>竞速场景]:::async
+    POLICY -->|ShutdownOnFailure| SOF[任一失败则取消其他<br/>原子性场景]
+    SOS --> CANCEL[scope.shutdown<br/>取消未完成子任务]
+    SOF --> CANCEL
+    AA --> AGG[汇总所有子结果]
+    CANCEL --> HANDLE[处理结果或异常]
+    AGG --> HANDLE
+    HANDLE --> EXIT([作用域退出<br/>所有子线程必然结束]):::success
+    SCOPE --> BENEFIT{核心价值}:::decision
+    BENEFIT ->|1 可观测性| OBS[子任务生命周期<br/>绑定父作用域]
+    BENEFIT ->|2 错误传播| ERR_PROP[子任务异常<br/>自动上报父]
+    BENEFIT ->|3 取消传播| CAN[父取消→子全部取消<br/>无泄漏]
+    BENEFIT ->|4 资源释放| REL[作用域结束<br/>资源必然释放]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 一句话定义：将并发任务视为一个单元，生命周期与代码块绑定，消灭孤儿线程

@@ -121,6 +121,40 @@ public class RateLimitFilter implements GlobalFilter {
 4. **配置一致性**：多网关实例下，如何保证限流配置同步更新？（依赖配置中心的高可用推送机制，网关本地缓存规则作为兜底）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ2([服务调用请求]):::start --> CB{熔断器状态}:::decision
+    CB -->|CLOSED 关闭 正常| CALL[发起远程调用]
+    CALL --> RES{调用结果}:::decision
+    RES -->|成功| SUCC2[返回结果<br/>成功计数++]
+    RES -->|失败/超时| FAIL2[失败计数++]
+    SUCC2 --> RATE{"失败率>阈值?"}:::decision
+    FAIL2 --> RATE
+    RATE -->|是 50%| OPEN[切换到OPEN 打开<br/>拒绝所有请求]::::error
+    RATE -->|否| CLOSED2[保持CLOSED]
+    CB -->|OPEN 打开 熔断中| REJECT2[快速失败<br/>走降级逻辑 fallback]
+    REJECT2 --> DEGRADE{降级策略}:::decision
+    DEGRADE -->|默认值| DEF["返回缓存/默认数据"]
+    DEGRADE -->|限流| RL2[部分请求拒绝]
+    DEGRADE -->|人工兜底| MAN["静态页面/提示"]
+    DEF --> RTN2([业务可用 但功能降级]):::success
+    CB -->|HALF_OPEN 半开试探| PROBE[放行少量探测请求]
+    PROBE --> PROBERES{探测结果?}:::decision
+    PROBERES -->|成功 恢复| CLOSE3[切换回CLOSED<br/>恢复全量]
+    PROBERES -->|失败 仍有问题| BACK[切回OPEN<br/>继续熔断]
+    OPEN --> TIMER[等待冷却时间<br/>5~30s]
+    TIMER --> HALF[切换到HALF_OPEN]
+    HALF --> PROBE
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 限流算法选型：全局/用户用固定或滑动窗口，网络突发流量用令牌桶匀速

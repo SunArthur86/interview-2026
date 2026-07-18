@@ -103,6 +103,41 @@ memory_points:
 4. **实时性**：如何实现实时推荐？（Flink实时计算用户短期兴趣画像，更新Embedding）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    USER([用户访问APP]):::start --> REQ["推荐请求<br/>携带userId/deviceId"]
+    REQ --> RECALL[召回Recall<br/>从亿级item初筛千级]
+    RECALL --> STRATEGY{召回策略}:::decision
+    STRATEGY -->|协同过滤| CF["基于用户/物品相似<br/>UserCF/ItemCF"]
+    STRATEGY -->|内容召回| CB["基于标签/向量<br/>item embedding"]
+    STRATEGY -->|热门/新品| HOT["运营配置/实时热度"]
+    STRATEGY -->|深度学习| DL[DSSM双塔模型<br/>向量近邻检索]:::async
+    CF --> MERGE[多路召回合并<br/>去重约1000个候选]
+    CB --> MERGE
+    HOT --> MERGE
+    DL --> MERGE
+    MERGE --> FILTER["粗排过滤<br/>已读/地域/合规"]
+    FILTER --> RANK{排序阶段}:::decision
+    RANK -->|粗排| ROUGH[简单模型<br/>千→百 快]
+    RANK -->|精排| FINE2[复杂深度模型<br/>百→几十 准]
+    FINE2 --> FEATURE[特征工程<br/>用户画像+物品特征+上下文]
+    FEATURE --> MODEL["训练好的模型<br/>DIN/DeepFM/多任务"]
+    MODEL --> SCORE2["计算CTR/CVR预测分"]
+    SCORE2 --> RERANK["重排序Re-rank<br/>多样性/新鲜度/业务规则"]
+    RERANK --> RTN([返回Top-N推荐列表]):::success
+    RTN --> FB["用户行为反馈<br/>点击/停留/购买"]
+    FB --> LOG[(日志收集 Kafka<br/>样本回流)]:::storage
+    LOG --> TRAIN["模型离线/在线训练<br/>持续迭代优化"]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 四层漏斗架构：召回（海量到千级）、粗排（千到百，轻量快）、精排（百到十，深模预估）、重排（打散去重）

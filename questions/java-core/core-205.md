@@ -140,6 +140,43 @@ void putVal(int hash, K key, V value) {
 | **扩容后位置** | 重新计算 Hash | **原位置 或 原位置 + oldCap** |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PUT([put key,value]):::start --> HASH[计算hash key.hashCode ^ 高16位扰动]
+    HASH --> IDX[计算桶位置<br/>index = n-1 & hash]
+    IDX --> TAB{数组table为空?}:::decision
+    TAB -->|是 首次put| RSZ[resize 初始化容量16<br/>阈值12]
+    TAB -->|否| NODE[定位到桶 i]
+    RSZ --> NODE
+    NODE --> EMPTY{桶为空?}:::decision
+    EMPTY -->|是| INS[新建Node放入桶]:::success
+    EMPTY -->|否| HEAD{首节点key相同?}:::decision
+    HEAD -->|是 hash&&equals| REPL[替换value 返回旧值]
+    HEAD -->|否 树化?| TREE{链表长度≥8 && table≥64?}:::decision
+    TREE -->|是| TREEIFY[转红黑树TreeNode<br/>插入并平衡]:::async
+    TREE -->|否| LIST[遍历链表尾插法 JDK8]
+    TREEIFY --> NEW[树节点插入完成]
+    LIST --> TAIL{找到相同key?}:::decision
+    TAIL -->|是| REPL
+    TAIL -->|否| APP[链表尾部追加新Node]
+    INS --> SIZE[modCount++ size++]
+    REPL --> SIZE
+    NEW --> SIZE
+    APP --> SIZE
+    SIZE --> BIG{"size > threshold?"}:::decision
+    BIG -->|是| RSZ2[resize 扩容2倍<br/>rehash迁移]:::async
+    BIG -->|否| DONE([插入完成 null]):::success
+    RSZ2 --> DONE
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - put四步曲：算Hash -> 定索引 -> 处理冲突 -> 判扩容。

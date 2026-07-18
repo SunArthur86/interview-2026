@@ -93,6 +93,33 @@ func handler(w http.ResponseWriter, r *http.Request) {
 3. **为什么 HTTP/1.1 实际上并不能实现真正的多路复用**？（这是 HTTP/2 的特性）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    HTTP(["HTTP/1.1主要特性"]):::start --> F1[长连接Persistent<br/>默认keep-alive]
+    HTTP --> F2[管道化Pipelining<br/>请求可并发发送]
+    HTTP --> F3[虚拟主机Host头<br/>同IP多域名]
+    HTTP --> F4[分块传输chunked<br/>流式响应]
+    HTTP --> F5["缓存控制<br/>Cache-Control/ETag"]
+    F1 --> BEN1[省去频繁握手<br/>降低延迟]:::success
+    F2 --> LIMIT1{响应须按序返回}:::decision
+    LIMIT1 -->|队头阻塞HOL| CON1[慢响应阻塞后续<br/>浏览器6连接并发补救]:::error
+    F3 --> VHS[服务器路由分发<br/>基于Host]
+    F4 --> STREAM[未知Content-Length<br/>支持动态生成]
+    F5 --> COND[协商缓存If-None-Match<br/>304减少带宽]:::async
+    BEN1 --> UPG{需要更强性能?}:::decision
+    UPG -->|是| H2["升级HTTP/2<br/>多路复用+二进制分帧"]
+    UPG -->|否| KEEP["继续使用HTTP/1.1"]
+    H2 --> H3["升级HTTP/3<br/>基于QUIC/UDP"]:::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 长连接：默认开启keep-alive，复用TCP连接省去了频繁握手开销。

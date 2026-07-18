@@ -112,6 +112,37 @@ memory_points:
    - 会。下次重连时会从上次确认的 offset 重新拉取，必须设计幂等性。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    P([Producer生产者]):::start --> SEND[发送消息]
+    SEND --> MQ[("Broker消息中间件<br/>Kafka/RocketMQ")]:::storage
+    MQ --> TOPIC[(Topic主题<br/>逻辑分类)]
+    TOPIC --> PART[(Partition分区<br/>并行消费单位)]
+    PART --> REPL[(副本Replica<br/>主从同步保证高可用)]:::storage
+    PART --> C([Consumer消费者])
+    C --> GROUP{消费组}:::decision
+    GROUP -->|广播| BC[每个组都收到<br/>配置更新场景]
+    GROUP -->|集群| CL[每个分区只一个消费者<br/>负载均衡]:::async
+    CL --> BIZ[业务处理]
+    BIZ --> ACK{处理结果}:::decision
+    ACK -->|成功| COMMIT[提交offset<br/>记录消费进度]
+    ACK -->|失败| RETRY["重试/死信队列"]
+    COMMIT --> NEXT([继续消费下一条]):::success
+    MQ --> USAGE{核心作用}:::decision
+    USAGE -->|解耦| DC[生产消费分离<br/>互不影响]
+    USAGE -->|异步| AS[提高响应速度<br/>写消息即返回]
+    USAGE -->|削峰| PK[大促流量缓冲<br/>保护下游]
+    P -.->|保证可靠| RELI[生产确认+持久化+消费确认]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 生产者保不丢：同步发送带重试，结合本地消息表保障与DB的事务最终一致。

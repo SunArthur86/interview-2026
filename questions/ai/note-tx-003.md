@@ -424,6 +424,43 @@ def evaluate_skill(skill: BaseSkill, test_cases: list) -> SkillMetrics:
 5. **面试加分点：** 提到 MCP（Model Context Protocol）——Skill 的工具依赖声明可以基于 MCP 标准化，实现跨 Agent 框架的 Skill 复用。这是 Agent 生态的发展方向。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    USER([用户请求]) --> AGENT[Agent 控制循环]
+    AGENT --> DECIDE{LLM 决策<br/>需要什么能力}
+
+    DECIDE --> FC[Function Call<br/>函数级 直接调用]
+    DECIDE --> SKILL[Skill<br/>能力封装 Prompt+代码<br/>渐进式披露]
+    DECIDE --> MCP[MCP 协议<br/>标准化工具服务<br/>跨应用复用]
+
+    FC --> INVOKE[直接 invoke 函数]
+    SKILL --> SELECT[选择 Skill<br/>按描述匹配]
+    MCP --> CONN[连接 MCP Server<br/>stdio/SSE 传输]
+
+    SELECT --> LOAD[加载 Skill 指导<br/>注入 Prompt]
+    CONN --> DISC[发现 tools/resources<br/>动态注册]
+
+    LOAD --> EXEC[执行<br/>可能多步]
+    INVOKE --> EXEC
+    DISC --> EXEC
+
+    EXEC --> OBS[Observation]
+    OBS --> AGENT
+
+    REG([开发者注册]) -.-> SKILL
+    REG -.-> MCP
+    SKILL <-. 复用 .-> APP2[其他 Agent 应用]
+    MCP <-. 复用 .-> APP3[Claude/其他客户端]
+
+    style USER fill:#4CAF50,color:#fff
+    style AGENT fill:#009688,color:#fff
+    style FC fill:#FF9800,color:#fff
+    style SKILL fill:#9C27B0,color:#fff
+    style MCP fill:#2196F3,color:#fff
+```
+
 ## 记忆要点
 
 - 层级定位：Skill是高于Tool、低于Agent的复合能力工作流编排。

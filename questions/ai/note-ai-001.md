@@ -232,6 +232,32 @@ for d_k in d_k_values:
 5. **从第一性原理理解：** 面试官追问深层问题时，可以从信息论角度补充——Softmax 温度参数和 $\sqrt{d_k}$ 缩放在数学上等价，都是调节输出分布的"锐度"。注意力分布的熵应在适当范围内：太尖锐（退化为 hard attention）则梯度差，太平坦（退化为 mean pooling）则表达力弱。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    IN([输入序列 X<br/>维度 d_model]) --> SPLIT[切分多头<br/>h 个头 每头 d_k=d/h]
+    SPLIT --> Q[Query 投影<br/>Q = X·W_Q]
+    SPLIT --> K[Key 投影<br/>K = X·W_K]
+    SPLIT --> V[Value 投影<br/>V = X·W_V]
+
+    Q --> SCORE[注意力分数<br/>Score = Q · K^T]
+    K --> SCORE
+    SCORE --> SCALE[缩放<br/>Score / √d_k<br/>防止梯度消失]
+    SCALE --> SOFT[Softmax 归一化<br/>得到注意力权重]
+    SOFT --> WEIGHT[加权求和<br/>Output = 权重 · V]
+    V --> WEIGHT
+    WEIGHT --> CONCAT[多头拼接 Concat]
+    CONCAT --> OUTPROJ[线性投影 W_O]
+    OUTPROJ --> OUT([注意力输出])
+
+    style IN fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style SCALE fill:#FF9800,color:#fff
+    style SOFT fill:#9C27B0,color:#fff
+    style WEIGHT fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 因为点积方差随$d_k$线性增长，导致Softmax进入饱和区引发梯度消失，所以需除以根号$d_k$。

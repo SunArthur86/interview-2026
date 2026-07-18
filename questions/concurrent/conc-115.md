@@ -90,6 +90,48 @@ public void put(T x) throws InterruptedException {
 - **公平锁吞吐低**：公平锁要维护队列顺序，线程切换多，除饥饿敏感场景外默认用非公平。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ENTER([线程进入<br/>monitorenter]) --> MARK[读对象头<br/>Mark Word]
+    MARK --> L0{当前锁状态}
+
+    L0 -->|无锁| BIAS_EN{偏向开启?<br/>JDK 15 后默认关}
+    BIAS_EN -->|是| BIAS[偏向锁<br/>记录线程 ID<br/>CAS 一次]
+    BIAS_EN -->|否| THIN
+
+    BIAS --> CONTEND1{其他线程竞争?}
+    CONTEND1 -->|否 单线程| KEEP_BIAS[保持偏向<br/>零开销]
+    CONTEND1 -->|是| REVOK[撤销偏向<br/>safepoint]
+
+    REVOK --> THIN[轻量级锁<br/>Thin Lock]
+    THIN --> COPY[复制 Mark Word<br/>到栈帧 Lock Record]
+    COPY --> CAS_SPIN[CAS 替换 Mark Word<br/>指向 Lock Record]
+    CAS_SPIN --> SPIN_OK{CAS 成功?}
+    SPIN_OK -->|是| RUN_T[持有轻量级锁<br/>自旋]
+    SPIN_OK -->|否 自旋<br/>超过阈值| INFLATE
+
+    RUN_T --> BLOCK2{新线程竞争?}
+    BLOCK2 -->|是 自旋等待| SPIN_W[自适应自旋<br/>Spin-Wait]
+    SPIN_W --> GIVEUP{自旋成功?}
+    GIVEUP -->|是| RUN_T
+    GIVEUP -->|否| INFLATE[锁膨胀<br/>重量级锁]
+
+    INFLATE --> MUTEX[OS Mutex<br/>ObjectMonitor]
+    MUTEX --> WAIT_Q[进入 EntryList<br/>内核态阻塞]
+    WAIT_Q --> WAKE[被唤醒重新竞争]
+    WAKE --> MUTEX
+
+    ENTER --> EXIT([monitorexit<br/>释放])
+    style ENTER fill:#4CAF50,color:#fff
+    style EXIT fill:#2196F3,color:#fff
+    style BIAS fill:#009688,color:#fff
+    style THIN fill:#FF9800,color:#fff
+    style MUTEX fill:#F44336,color:#fff
+    style INFLATE fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 一句话总览：Java锁是按设计思想、实现机制、特性等多维度的分类统称

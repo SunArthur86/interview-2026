@@ -82,6 +82,47 @@ if (currentTime < lastTimestamp) {
 4. **时间戳位耗尽**：41位时间戳大约能用69年，如何解决架构级的长久性？（可以在位数未耗尽前修改业务逻辑，如增加Epoch位）。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    NEED([需要分布式 ID]) --> CHOOSE{选型}
+
+    CHOOSE -->|UUID| UUID[UUID v4<br/>128bit 随机]
+    UUID --> PROS1[优点: 本地生成 无冲突]
+    UUID --> CONS1[缺点: 无序 长 索引差]
+
+    CHOOSE -->|数据库自增| DB[MySQL AUTO_INCREMENT]
+    DB --> PROS2[优点: 简单 单调递增]
+    DB --> CONS2[缺点: 单点瓶颈 并发受限]
+
+    CHOOSE -->|号段模式| SEG[DB 取号段<br/>每次取 1000 缓存]
+    SEG --> PROS3[优点: 减少 DB 访问<br/>高性能]
+    SEG --> CONS3[缺点: 重启浪费号段]
+
+    CHOOSE -->|雪花算法| SNOW[Snowflake<br/>64bit: 时间+机器+序列]
+    SNOW --> PROS4[优点: 趋势递增<br/>本地生成]
+    SNOW --> CONS4[缺点: 时钟回拨问题]
+
+    SNOW --> CLK{时钟回拨?<br/>NTP 同步导致}
+    CLK -->|回拨小| WAIT2[休眠等待<br/>追平时间]
+    CLK -->|回拨大| EXT[借用机器位<br/>或报警兜底]
+    CLK -->|使用 NTP| SMOOTH[平滑 slew 模式<br/>不跳变]
+
+    CHOOSE -->|Redis| REDIS_ID[INCR/INCRBY<br/>原子自增]
+    REDIS_ID --> PROS5[优点: 高性能 有序]
+    REDIS_ID --> CONS5[缺点: 依赖 Redis<br/>持久化风险]
+
+    PROS1 --> DEC([业务决策<br/>看有序性/性能/依赖])
+    CONS4 --> DEC
+
+    style NEED fill:#4CAF50,color:#fff
+    style DEC fill:#2196F3,color:#fff
+    style SNOW fill:#FF9800,color:#fff
+    style SEG fill:#9C27B0,color:#fff
+    style CLK fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 时钟回拨原因：NTP同步或手动修改导致时间倒退，引发ID重复

@@ -89,6 +89,36 @@ public enum EnumSingleton {
 3. **ClassLoader**：不同的类加载器可能会加载同一个类多次，导致单例失效，如何处理？（通常由同一个类加载器加载或指定上下文类加载器）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    NEED([需要单例的场景]):::start --> CHO{选哪种实现?}:::decision
+    CHO -->|饿汉式| EH[类加载时初始化<br/>static final]
+    CHO -->|懒汉式| LZ[首次调用getInstance<br/>才初始化]
+    CHO -->|双重检查| DCL[volatile + synchronized<br/>推荐]
+    CHO -->|静态内部类| IC[Holder模式<br/>类加载机制保证线程安全]
+    CHO -->|枚举| ENM[enum天然单例<br/>防反射防序列化]
+    EH --> USE{资源是否重?}:::decision
+    USE -->|轻量可提前| AP1["配置/日志/连接池<br/>启动即用"]:::success
+    USE -->|重量级 IO/DB| BAD1[启动慢 内存浪费<br/>改用懒加载]:::error
+    LZ --> SYN{线程安全?}:::decision
+    SYN -->|是 加synchronized| SAFE1[每次调用加锁<br/>性能差]:::error
+    SYN -->|否| RISK[多线程下创建多个实例<br/>违反单例]:::error
+    DCL --> APP1[延迟加载+高性能<br/>JDK5+ 推荐]
+    IC --> APP2[延迟加载+无锁<br/>最佳实践]
+    ENM --> APP3[Effective Java推荐<br/>最简洁安全]
+    APP1 --> SC["典型应用<br/>Runtime/Logger/DataSource"]:::success
+    APP2 --> SC
+    APP3 --> SC
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心场景：资源共享(配置/缓存)、资源控制(数据库/线程池)、全局统一(日志)

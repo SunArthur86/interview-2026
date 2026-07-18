@@ -80,6 +80,42 @@ int main() {
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SRC(["源代码 .java/.c"]):::start --> CMP[编译器处理]
+    CMP --> CHK{编译通过?}:::decision
+    CHK -->|否 语法/类型错误| ERR[编译失败 修复后重试]:::error
+    CHK -->|是| BIN["目标文件<br/>JVM字节码 / 机器码"]
+    BIN --> LD[加载器载入内存]
+    LD --> SEGC[代码段.text 只读]
+    LD --> SEGD["数据段.data/.bss<br/>全局/静态变量"]
+    LD --> OS[操作系统创建进程<br/>分配虚拟地址空间]
+    OS --> PC[初始化PC寄存器<br/>指向main入口]
+    PC --> FETCH[取指令 Fetch]
+    FETCH --> DEC2[解码 Decode]
+    DEC2 --> EXEC[执行 Execute]
+    EXEC --> WB[写回 WriteBack<br/>更新寄存器]
+    WB --> STK{是否栈帧?}:::decision
+    STK -->|方法调用| PUSH["压栈帧 局部变量/操作数栈"]
+    STK -->|返回| POP[弹栈 返回上层]
+    PUSH --> NXT{下一条指令?}:::decision
+    POP --> NXT
+    NXT --> JMP{"跳转/循环/异常?"}:::decision
+    JMP -->|是 修改PC| FETCH
+    JMP -->|否 PC自增| FETCH
+    FETCH --> EXIT{进程结束?}:::decision
+    EXIT -->|是| DONE([回收资源 退出]):::success
+    EXIT -->|否 继续| FETCH
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 宏观流程：源代码经编译链接为可执行文件，Shell 加载至内存，CPU 读取指令并输出。

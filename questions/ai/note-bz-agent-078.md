@@ -261,6 +261,39 @@ GPU选型：
 3. **vLLM 是标杆**：PagedAttention+连续批处理是推理引擎的核心技术
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([并发推理请求]) --> GW[API 网关<br/>鉴权/限流/计费]
+    GW --> QUEUE[请求队列<br/>优先级调度]
+    QUEUE --> ROUTER[路由分发]
+
+    ROUTER --> CACHE{Prefix Cache<br/>命中?}
+    CACHE -->|命中| HIT[复用 KV Cache<br/>跳过 prefill]
+    CACHE -->|未命中| PREFILL[Prefill 阶段<br/>并行计算 prompt]
+
+    HIT --> DECODE
+    PREFILL --> DECODE[Decode 阶段<br/>逐 token 自回归]
+
+    DECODE --> BATCH[Continuous Batching<br/>动态拼组请求]
+    BATCH --> GPU[GPU 推理<br/>Tensor Parallel 多卡]
+    GPU --> STREAM[流式输出<br/>SSE/WebSocket]
+    STREAM --> CLIENT([客户端 token 流])
+
+    QUEUE -. 高负载 .-> CB[熔断降级<br/>排队过长返回降级话术]
+    CB --> GW
+    GPU -. 失败 .-> RETRY[指数退避重试<br/>切换备模型]
+    RETRY --> QUEUE
+
+    style REQ fill:#4CAF50,color:#fff
+    style CLIENT fill:#2196F3,color:#fff
+    style HIT fill:#009688,color:#fff
+    style BATCH fill:#FF9800,color:#fff
+    style CB fill:#F44336,color:#fff
+    style RETRY fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 四层优化框架：应用层减Token、推理层提效率、模型层减参数、部署层搞基建

@@ -134,6 +134,52 @@ def assemble_context(persona, memory_summary, recent, user_input, budget):
 3. **多角色/群聊场景上下文怎么管？**——按发言者分轨 + 各自摘要 + 聚合窗口；群聊还要做相关性筛选，避免无关发言占窗口。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 客户端请求分布式系统]):::start
+    Gateway[API 网关<br/>入口路由]:::process
+    Coordinator[协调者 Coordinator<br/>2PC/3PC/TCC]:::process
+    PhaseQ{{一致性协议?<br/>CAP 权衡}}:::decision
+    CP[CP 强一致<br/>Raft/Paxos]:::process
+    AP[AP 最终一致<br/>Gossip/Dynamo]:::process
+    PartitionQ{{网络分区?<br/>Network Partition}}:::decision
+    Minority[少数派降级<br/>拒绝服务]:::warn
+    Majority[多数派继续<br/>保证一致]:::process
+    Replica[多副本写入<br/>Leader → Followers]:::process
+    QuorumQ{{Quorum 写策略?}}:::decision
+    WQAll[W=All 同步所有副本<br/>强一致 低可用]:::process
+    WQMajority[W=Majority<br/>平衡]:::process
+    VectorClock[向量时钟<br/>冲突检测]:::process
+    ConflictQ{{写冲突?}}:::decision
+    LWW[Last Write Wins<br/>时间戳定序]:::process
+    Merge[业务合并<br/>CRDT/手动解决]:::process
+    Compensate[补偿事务 TCC<br/>Try-Confirm-Cancel]:::process
+    MQ[(消息队列<br/>最终一致性)]:::store
+    Final([✅ 全局一致状态]):::start
+
+    Start --> Gateway --> Coordinator --> PhaseQ
+    PhaseQ -->|强一致| CP --> PartitionQ
+    PhaseQ -->|高可用| AP --> Replica
+    PartitionQ -->|是| Minority
+    PartitionQ -->|否| Majority --> Replica
+    Replica --> QuorumQ
+    QuorumQ -->|强一致| WQAll --> VectorClock
+    QuorumQ -->|平衡| WQMajority --> VectorClock
+    VectorClock --> ConflictQ
+    ConflictQ -->|无冲突| MQ --> Final
+    ConflictQ -->|有冲突| LWW --> Final
+    ConflictQ -->|复杂| Merge --> Final
+    PhaseQ -.跨服务.-> Compensate --> MQ
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到长上下文与会话管理怎么设计，我的理解是——长上下文管理是在有限 token 窗口里，决定哪些对话该留、哪些该压缩、哪些该丢，让角色既不失忆又不爆 token 的工程博弈。打个比方，像一本戏的场记本——舞台只能摆有限道具（token 窗口），导演要决定哪些最近台词铺在台上（滑动窗口）、哪些旧情节压成一页摘要（压缩）、哪些直接归档（长期记忆）。

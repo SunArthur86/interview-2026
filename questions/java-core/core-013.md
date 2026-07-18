@@ -110,6 +110,41 @@ int main() {
 3. **缺页中断**：缺页中断属于“内中断”还是“外中断”？处理流程是怎样的？（页表项为无效 -> 触发中断 -> OS 调度磁盘 IO -> 更新页表 -> 恢复指令执行）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    P([程序生成虚拟地址VA]):::start --> SP["CPU分段/分页单元"]
+    SP --> SEG{是否启用分段?}:::decision
+    SEG -->|是| STB[查段表Segment Table<br/>基址+界限+权限]
+    SEG -->|否纯分页| PG[地址切分: 页号+页内偏移]
+    STB --> BC{段界限检查}:::decision
+    BC -->|越界| TRAP1[触发段越界异常<br/>Segmentation Fault]:::error
+    BC -->|合法| LIN[线性地址生成]
+    LIN --> PG
+    PG --> TLB[查TLB快表<br/>页号→物理页框]
+    TLB --> TH{TLB命中?}:::decision
+    TH -->|命中| PHYS[直接拼接物理地址]
+    TH -->|未命中| PT[遍历多级页表Page Table]
+    PT --> PV{页表有效位P=1?}:::decision
+    PV -->|P=0缺页| DF[缺页中断Page Fault]
+    PV -->|P=1| CAC[更新TLB缓存]
+    DF --> DISK[从磁盘Swap区加载到空闲页框]:::storage
+    DISK --> REP{内存已满?}:::decision
+    REP -->|是| LRU["执行页面置换LRU/FIFO<br/>选牺牲页换出"]:::async
+    REP -->|否| LOAD[写入物理页框 更新PTE]
+    LRU --> LOAD
+    LOAD --> CAC
+    CAC --> PHYS
+    PHYS --> MEM[访问物理内存RAM]:::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 分页定长无外部碎片，分段变长有外部碎片

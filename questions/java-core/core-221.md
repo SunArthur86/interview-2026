@@ -106,6 +106,39 @@ Map<Long, Order> snapshot = ((TreeMap<Long, Order>) recentOrders).headMap(tenMin
 | **适用场景** | 快速查找，高频读写 | 需要排序/范围查询 | 需要保持插入顺序/LRU |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PUT([put key,value]):::start --> CMP[比较key<br/>Comparator或Comparable]
+    CMP --> ROOT{根节点为空?}:::decision
+    ROOT -->|是| NEW[新建根节点<br/>颜色黑]:::success
+    ROOT -->|否| SRH[从根开始二分查找]
+    SRH --> LOOP{cmp结果}:::decision
+    LOOP -->|cmp<0| LT[进入左子树]
+    LOOP -->|cmp>0| RT[进入右子树]
+    LOOP -->|cmp=0 找到相同key| UPD[替换value 返回旧值]:::success
+    LT --> LEAF{子节点为空?}:::decision
+    RT --> LEAF
+    LEAF -->|是| INS[新建红色节点插入<br/>作为孩子]
+    LEAF -->|否| SRH
+    INS --> CHK{红黑树性质检查}:::decision
+    NEW --> DONE([完成]):::success
+    CHK -->|父黑 平衡| OK[无需调整]
+    CHK -->|父红 叔红| C1[变色 父叔变黑 爷变红<br/>向上递归]
+    CHK -->|父红 叔黑| C2["旋转 LL/RR/LR/RL<br/>+变色"]
+    C1 --> CHK
+    C2 --> OK
+    OK --> DONE
+    UPD --> DONE
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 底层结构：基于红黑树（自平衡二叉查找树）实现，Key 强制有序（自然排序或 Comparator）

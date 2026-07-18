@@ -210,6 +210,54 @@ Starter 的设计哲学是"约定优于配置，但允许 escape hatch"。大部
 
 沉淀成 starter 设计规范。第一，所有 `@Bean` 方法必须加 `@ConditionalOnMissingBean(value=具体类型.class)`，不能只靠方法名。第二，`AutoConfiguration.imports` 文件路径和类名要在 README 里明确写，新人 copy-paste 不会错。第三，starter 必须集成 `spring-boot-configuration-processor`，CI 里检查 `additional-spring-configuration-metadata.json` 是否生成。第四，写一个 `StarterTest`——用 `ApplicationContextRunner` 自动化测试 starter 在"用户没定义 Bean""用户定义了 Bean""配置缺省"三种场景下的行为，作为回归测试。第五，每次 starter 发版，在测试环境用 `--debug` 看 Conditions Evaluation Report，确认没有意外的 NEGATIVE_MATCH。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务端启动]):::start
+    BossGroup[BossGroup<br/>Accept 线程]:::process
+    WorkerGroup[WorkerGroup<br/>IO 处理线程]:::process
+    Bind[绑定端口<br/>ServerSocketChannel]:::process
+    EventLoop[EventLoop<br/>单线程 Selector 轮询]:::process
+    Selector[(Selector<br/>多路复用器)]:::store
+    IOModelQ{{IO 模型?<br/>select/poll/epoll}}:::decision
+    Epoll[epoll 边缘触发<br/>事件驱动 高性能]:::process
+    SelectIO[select 水平触发<br/>跨平台]:::process
+    AcceptEvent[OP_ACCEPT 事件<br/>新连接到达]:::process
+    Register[注册到 Worker<br/>SocketChannel]:::process
+    ReadEvent[OP_READ 事件<br/>数据可读]:::process
+    Pipeline[Pipeline 处理链<br/>责任链模式]:::process
+    Decoder[Decoder 解码器<br/>解决粘包/半包]:::process
+    Handler[业务 Handler<br/>处理业务逻辑]:::process
+    Encoder[Encoder 编码器<br/>序列化响应]:::process
+    ZeroCopyQ{{是否零拷贝?<br/>FileRegion}}:::decision
+    ZeroCopy[sendfile/mmap<br/>减少内核态拷贝]:::process
+    WriteBack[写回 Channel]:::process
+    BackPressureQ{{背压?<br/>写缓冲区高水位}}:::decision
+    BackPressure[isWritable=false<br/>自动降级]:::warn
+    Final([✅ 响应返回客户端]):::start
+
+    Start --> BossGroup --> Bind --> EventLoop
+    EventLoop --> Selector --> IOModelQ
+    IOModelQ -->|Linux| Epoll --> AcceptEvent
+    IOModelQ -->|通用| SelectIO --> AcceptEvent
+    AcceptEvent --> Register --> WorkerGroup
+    WorkerGroup --> ReadEvent --> Pipeline
+    Pipeline --> Decoder --> Handler --> Encoder
+    Encoder --> ZeroCopyQ
+    ZeroCopyQ -->|大文件| ZeroCopy --> WriteBack
+    ZeroCopyQ -->|否| WriteBack
+    WriteBack --> BackPressureQ
+    BackPressureQ -->|高水位| BackPressure --> Final
+    BackPressureQ -->|正常| Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 怎么让框架"开箱就是用"且能按需装配？简单说就是——Spring Boot 自动装配是"约定优于配置"。spring.factories（旧）/AutoConfiguration.imports（2.7…；@ConditionalOnXxx 控制装配条件。

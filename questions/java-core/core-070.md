@@ -113,6 +113,45 @@ new Thread(() -> {
 | **适用场景** | 内存敏感、需要严格限流的场景 | 高并发吞吐、任务量不可预估的场景 | 异步任务快速交接（如 CachedThreadPool） |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    subgraph PROD [生产者线程]
+        P1([生产者1]):::start
+        P2([生产者2]):::start
+    end
+    subgraph CONS [消费者线程]
+        C1([消费者1]):::start
+        C2([消费者2]):::start
+    end
+    P1 --> PUT[put 阻塞入队]
+    P2 --> PUT
+    PUT --> LK{队列状态判断}:::decision
+    LK -->|已满 ArrayBlockingQueue有界| FULL[notFull.await<br/>线程阻塞挂起]:::error
+    LK -->|未满| ENQ[ReentrantLock加锁<br/>元素入队尾]
+    FULL --> NOTIFY[notFull.signal<br/>唤醒后等待]
+    NOTIFY --> ENQ
+    ENQ --> SIG[notEmpty.signal<br/>唤醒等待的消费者]:::async
+    SIG --> Q[("底层: 数组/链表/堆")]:::storage
+    Q --> TAKE[take 阻塞出队]
+    C1 --> TAKE
+    C2 --> TAKE
+    TAKE --> LK2{队列状态判断}:::decision
+    LK2 -->|为空| EMPTY[notEmpty.await<br/>线程阻塞挂起]:::error
+    LK2 -->|非空| DEQ[ReentrantLock加锁<br/>取队首元素]
+    EMPTY --> SIG2[notEmpty.signal]:::async
+    SIG2 --> DEQ
+    DEQ --> SIG3[notFull.signal<br/>唤醒生产者]
+    SIG3 --> PROC[消费处理]:::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心特性：队列空时取阻塞，队列满时存阻塞，天然解耦生产者与消费者

@@ -106,6 +106,46 @@ public class SafeThreadLocal<T> {
 ```
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TASK([提交任务]) --> CHK1{当前线程数<br/>< corePoolSize?}
+    CHK1 -->|是| CORE[创建核心线程<br/>立即执行]
+    CHK1 -->|否| CHK2{队列未满?}
+    CHK2 -->|是| ENQ[入队等待<br/>LinkedBlockingQueue<br/>或 SynchronousQueue]
+    CHK2 -->|否| CHK3{当前线程数<br/>< maxPoolSize?}
+    CHK3 -->|是| NON_CORE[创建非核心线程<br/>立即执行]
+    CHK3 -->|否 已达上限| REJECT{触发拒绝策略}
+
+    REJECT -->|AbortPolicy| ABORT[抛 RejectedExecutionException<br/>默认]
+    REJECT -->|CallerRunsPolicy| CALLER[调用线程自己跑<br/>背压降速]
+    REJECT -->|DiscardPolicy| DISCARD[静默丢弃新任务]
+    REJECT -->|DiscardOldest| OLD[丢弃队列最老任务<br/>腾位置给新的]
+
+    CORE --> RUN[runWorker 循环<br/>getTask 取任务]
+    NON_CORE --> RUN
+    ENQ --> RUN
+    RUN --> IDLE{空闲超时?}
+    IDLE -->|非核心 且 超时| RECYCLE[回收线程]
+    IDLE -->|核心 默认不超时| KEEP[保持存活]
+    IDLE -->|allowCoreThreadTimeOut=true| RECYCLE
+
+    RUN --> EXEC_T[执行任务 run]
+    EXEC_T --> AFTER[afterExecute 钩子]
+    AFTER --> RUN
+
+    SHUTDOWN([shutdown]) --> STOP_Q[停止接收新任务]
+    SHUTDOWN --> DRAIN[处理完队列任务]
+    STOP([shutdownNow]) --> INTERRUPT[中断所有线程<br/>返回未执行任务]
+
+    style TASK fill:#4CAF50,color:#fff
+    style EXEC_T fill:#2196F3,color:#fff
+    style ABORT fill:#F44336,color:#fff
+    style CALLER fill:#009688,color:#fff
+    style RECYCLE fill:#FF9800,color:#fff
+```
+
 ## 记忆要点
 
 - 结构：每个 Thread 持有 ThreadLocalMap，而 Map 的 Key 是弱引用，Value 是强引用。

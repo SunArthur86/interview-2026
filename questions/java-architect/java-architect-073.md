@@ -396,6 +396,51 @@ groups:
 4. **治理规则漏迁会怎样？**——最典型是 timeout。Dubbo 默认 1s，Feign 默认 60s。漏配会让慢依赖耗尽线程池引发雪崩。每条规则要逐条对照迁移 + 压测验证。
 5. **注册中心怎么平滑切换？**——先 Dubbo 注册中心从 ZK 切 Nacos（Dubbo 3.x 原生支持），再框架迁移。注册中心先行降低风险。过渡期可双注册中心（分号分隔），最后摘除 ZK。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务注册与发现]):::start
+    Provider[服务提供者<br/>启动]:::process
+    Register[注册到注册中心<br/>写临时节点]:::process
+    Registry[(注册中心<br/>Nacos/ZK/etcd)]:::store
+    Consumer[服务消费者<br/>启动]:::process
+    Subscribe[订阅服务列表<br/>拉取+长轮询]:::process
+    Cache[本地缓存<br/>provider 列表]:::process
+    Heartbeat[心跳上报<br/>5s 周期]:::process
+    HealthQ{{健康检查?}}:::decision
+    Healthy[节点健康<br/>保留注册]:::process
+    Unhealthy[节点故障<br/>摘除]:::warn
+    Push[推送变更<br/>消费者更新]:::process
+    ElectionQ{{一致性协议?<br/>CP/AP}}:::decision
+    Raft[Raft<br/>强一致 CP]:::process
+    Distro[Distro<br/>最终一致 AP]:::process
+    SplitQ{{网络分区?}}:::decision
+    Minor[少数派不可用<br/>CP]:::warn
+    Major[多数派可用<br/>保证一致]:::process
+    Failover[消费者容错<br/>本地缓存兜底]:::process
+    Config[配置中心<br/>动态配置]:::process
+    Final([✅ 服务发现稳定]):::start
+
+    Start --> Provider --> Register --> Registry
+    Consumer --> Subscribe --> Registry --> Cache
+    Provider --> Heartbeat --> HealthQ
+    HealthQ -->|健康| Healthy
+    HealthQ -->|故障| Unhealthy --> Push
+    Registry --> ElectionQ
+    ElectionQ -->|强一致| Raft --> SplitQ
+    ElectionQ -->|高可用| Distro --> Failover
+    SplitQ -->|分区| Minor
+    SplitQ -->|正常| Major
+    Push --> Failover --> Config --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** Dubbo 到 SCA（Spring Cloud Alibaba）的迁移本质是通信协议（Dubbo TCP vs HTTP/Feign）+ 注册发现（Zookeeper/Nacos）+ 治理能力（Dubbo SPI vs SCA 生态）三件事的切换。风险不在框架本身，而在迁移过程中新老框架并存调用、注册中心数据不一致、治理规则失效三类问题

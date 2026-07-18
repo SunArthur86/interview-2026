@@ -92,6 +92,38 @@ net.ipv4.tcp_syn_retries = 2
 3.  **全连接队列与半连接队列**：握手过程中涉及的两个队列长度限制及溢出行为（`net.core.somaxconn`, `tcp_max_syn_backlog`）。
 
 
+
+## 核心流程图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: === 三次握手 建立连接 ===
+    C->>S: SYN, seq=x
+    Note right of C: CLOSED→SYN_SENT
+    S->>C: SYN+ACK, seq=y, ack=x+1
+    Note right of S: LISTEN→SYN_RCVD
+    C->>S: ACK, seq=x+1, ack=y+1
+    Note right of C: →ESTABLISHED
+    Note right of S: →ESTABLISHED
+    Note over C,S: === 双向数据传输 ===
+    C->>S: 业务数据
+    S->>C: 业务数据
+    Note over C,S: === 四次挥手 断开连接 ===
+    C->>S: FIN, seq=u
+    Note right of C: ESTABLISHED→FIN_WAIT_1
+    S->>C: ACK, ack=u+1
+    Note right of S: →CLOSE_WAIT 半关闭
+    Note right of C: →FIN_WAIT_2
+    S->>C: FIN, seq=w
+    Note right of S: →LAST_ACK
+    C->>S: ACK, seq=u+1, ack=w+1
+    Note right of C: →TIME_WAIT 等2MSL
+    Note right of C: →CLOSED
+    Note right of S: →CLOSED
+```
 ## 记忆要点
 
 - 握手流程：C发SYN(x) -> S回SYN+ACK(y) -> C发ACK(y+1)。

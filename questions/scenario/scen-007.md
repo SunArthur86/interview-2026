@@ -114,6 +114,37 @@ func (s *PushService) BatchPush(roomID string, msgs []Message) {
 3. **广播风暴**：百万人的直播间，一条弹幕要推百万次，CPU 直接打满怎么办？（答：使用组播协议优化内网传输；或者按用户等级分层，对普通用户进行采样/丢弃）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    AUTHOR([作者发布动态]):::start --> SAVE["写入动态DB<br/>MySQL/HBase"]
+    SAVE --> FANOUT{推送模式}:::decision
+    FANOUT -->|推模式 Push| PUSH[写扩散: 遍历粉丝<br/>写入每个粉丝收件箱Redis ZSet]
+    FANOUT -->|拉模式 Pull| PULL[读扩散: 用户拉取时<br/>实时聚合关注人最新动态]
+    FANOUT -->|推拉结合| HYBRID[普通用户推<br/>大V拉 综合方案]:::async
+    PUSH --> INBOX[(粉丝收件箱<br/>Redis ZSet score=时间)]:::storage
+    PULL --> QUERY[用户打开Feed时<br/>查关注人最新N条]
+    HYBRID --> BIGV{大V判断}:::decision
+    BIGV -->|是 粉丝多| LAZY[不推 拉模式<br/>避免写爆炸]
+    BIGV -->|否 普通用户| PUSH
+    INBOX --> READ([读者打开首页]):::start
+    QUERY --> READ
+    READ --> PAGINATE[分页查询收件箱<br/>score倒序 时间线]
+    PAGINATE --> MERGE{推拉混合?}:::decision
+    MERGE -->|是| MGR[合并: 收件箱+大V实时拉取<br/>按时间排序]
+    MERGE -->|否| SIMPLE[直接返回收件箱]
+    MGR --> FILTER["内容过滤/去重<br/>已读标记"]
+    SIMPLE --> FILTER
+    FILTER --> DISPLAY([展示Feed列表]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 架构链路：长连接接入→按房间隔离的Topic→消费推送给用户，连接路由存Redis。

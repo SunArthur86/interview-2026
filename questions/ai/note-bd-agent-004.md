@@ -223,6 +223,43 @@ async def agent_execute(task: str):
 4. **与Function Calling对比**：MCP是协议层标准，Function Calling是调用机制
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    USER([用户请求]) --> AGENT[Agent 控制循环]
+    AGENT --> DECIDE{LLM 决策<br/>需要什么能力}
+
+    DECIDE --> FC[Function Call<br/>函数级 直接调用]
+    DECIDE --> SKILL[Skill<br/>能力封装 Prompt+代码<br/>渐进式披露]
+    DECIDE --> MCP[MCP 协议<br/>标准化工具服务<br/>跨应用复用]
+
+    FC --> INVOKE[直接 invoke 函数]
+    SKILL --> SELECT[选择 Skill<br/>按描述匹配]
+    MCP --> CONN[连接 MCP Server<br/>stdio/SSE 传输]
+
+    SELECT --> LOAD[加载 Skill 指导<br/>注入 Prompt]
+    CONN --> DISC[发现 tools/resources<br/>动态注册]
+
+    LOAD --> EXEC[执行<br/>可能多步]
+    INVOKE --> EXEC
+    DISC --> EXEC
+
+    EXEC --> OBS[Observation]
+    OBS --> AGENT
+
+    REG([开发者注册]) -.-> SKILL
+    REG -.-> MCP
+    SKILL <-. 复用 .-> APP2[其他 Agent 应用]
+    MCP <-. 复用 .-> APP3[Claude/其他客户端]
+
+    style USER fill:#4CAF50,color:#fff
+    style AGENT fill:#009688,color:#fff
+    style FC fill:#FF9800,color:#fff
+    style SKILL fill:#9C27B0,color:#fff
+    style MCP fill:#2196F3,color:#fff
+```
+
 ## 记忆要点
 
 - 核心架构：Agent Runtime挂载Skill，底层通过MCP Client连接标准化外部Server

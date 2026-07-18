@@ -227,6 +227,44 @@ class Solution:
    → 改用迭代中序遍历(Morris遍历可以做到O(1)空间)
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 文档/查询入库]):::start
+    Crawl[数据采集<br/>爬虫/数据库]:::process
+    Clean[清洗去重<br/>HTML 标签]:::process
+    Tokenize[分词<br/>IK/标准分词器]:::process
+    Analysis[语言处理<br/>小写/词干化/同义词]:::process
+    IndexBuild[构建倒排索引<br/>Term → DocList]:::process
+    Store[(索引存储<br/>Segment 段)]:::store
+    Query[用户查询]:::process
+    ParseQ[Query Parser<br/>解析布尔/短语]:::process
+    IdxQ{{查询类型?}}:::decision
+    TermQ[Term Query<br/>精确匹配]:::process
+    MatchQ[Match Query<br/>分词后 OR]:::process
+    BoolQ[Bool Query<br/>must/should/filter]:::process
+    PhraseQ[Phrase Query<br/>位置临近]:::process
+    Retrieve[倒排表合并<br/>AND/OR 交集]:::process
+    Score[相关性打分<br/>TF-IDF / BM25]:::process
+    Rerank[二次排序<br/>业务权重]:::process
+    Highlight[高亮匹配片段]:::process
+    Final([✅ 返回结果集]):::start
+
+    Start --> Crawl --> Clean --> Tokenize --> Analysis --> IndexBuild --> Store
+    Query --> ParseQ --> IdxQ
+    IdxQ -->|精确| TermQ --> Retrieve
+    IdxQ -->|模糊| MatchQ --> Retrieve
+    IdxQ -->|组合| BoolQ --> Retrieve
+    IdxQ -->|短语| PhraseQ --> Retrieve
+    Retrieve --> Score --> Rerank --> Highlight --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 验证BST 就是 检查每个节点是否满足"左子树所有节点 < 当前节点 < 右子树所有节点"。打个比方，就像查字典的页码——左边所有页码必须比当前页小，右边所有页码必须比当前页大。不能只看相邻页，因为中间穿插的页也可能乱序。

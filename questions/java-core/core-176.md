@@ -84,6 +84,35 @@ System.out.println(s3 == s4);
 3. **String 为什么不可变？**：安全性（如网络参数、文件路径）、线程安全、Hash 缓存、常量池实现基础。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    NEW(["String s = #quot;abc#quot;"]):::start --> JMM["在堆中创建对象<br/>final char["]/byte[] value]
+    JMM --> FINAL[value数组final<br/>不可重新赋值]
+    FINAL --> IMM["内容不可变<br/>#quot;abc#quot;永远等于#quot;abc#quot;"]
+    IMM --> BEN{不可变带来的好处}:::decision
+    BEN -->|1 线程安全| TS[多线程共享无需同步<br/>天然不可变]
+    BEN -->|2 hashCode缓存| HC[计算一次缓存<br/>适合做Map的key]
+    BEN -->|3 字符串常量池| POOL[相同字面量复用<br/>节省内存]:::async
+    BEN -->|4 安全性| SEC[作为参数传递<br/>不可被恶意修改]
+    BEN -->|5 不可变支持| SUB["substring/concat<br/>返回新对象 不改原对象"]
+    POOL --> EQ{s == s2 ?}:::decision
+    EQ -->|字面量 字面量| Y[true 同一引用]:::success
+    EQ -->|new String new String| N[false 堆中新对象]:::error
+    EQ -->|intern| IN[手动入池<br/>返回常量池引用]
+    NEW --> MOD{需要频繁修改?}:::decision
+    MOD -->|否| USE_S[继续用String]
+    MOD -->|是 拼接循环| SB[改用StringBuilder<br/>避免创建大量中间对象]
+    SB --> BUF["可变char["] 缓冲区<br/>append高效]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心特性：类与底层value数组均final修饰，故天然线程安全且不可变。

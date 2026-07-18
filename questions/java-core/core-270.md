@@ -87,6 +87,33 @@ server {
 3.  **自签名证书的信任链？**：自签名证书既是根证书也是服务器证书，除非手动导入信任库，否则无法通过验证。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ROOT([Root CA 根证书<br/>自签名 内置操作系统]):::start --> ISSUE1[签发中间CA<br/>私钥签名]
+    ISSUE1 --> MID[Intermediate CA<br/>中间证书<br/>有效期较短]
+    MID --> ISSUE2[签发服务器证书]
+    ISSUE2 --> SVR[www.example.com<br/>服务器终端证书]
+    SVR --> SEND[握手时发送<br/>服务器证书+中间证书]
+    SEND --> CLT([客户端收到证书链]):::start
+    CLT --> CHK1[验证服务器证书签名<br/>用中间CA公钥]
+    CHK1 --> CHK2[验证中间证书签名<br/>用Root CA公钥]
+    CHK2 --> CHK3[验证到Root<br/>检查是否在受信根列表]
+    CHK3 --> TRUST{信任链完整?}:::decision
+    TRUST -->|是| EX["校验域名/有效期/用途<br/>吊销列表CRL/OCSP"]
+    TRUST -->|否 中断链| FAIL[证书不可信<br/>浏览器警告]:::error
+    EX --> OK{各项校验通过?}:::decision
+    OK -->|是| TLS[TLS握手成功<br/>建立加密通道]:::success
+    OK -->|否 过期/域名不符| FAIL
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 三级结构：根CA(内置) -> 中间CA(中继签发) -> 服务器证书(底层)。

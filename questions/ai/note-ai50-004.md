@@ -153,6 +153,43 @@ pairs = [(query, doc['content'][:512]) for doc in candidates]
 **结论**: Reranker通常能提升15-20个百分点的Recall@5，是RAG系统从60分到80分的关键组件。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([用户 Query]) --> QE[Query 向量化]
+    QE --> VDB[(向量库 ANN)]
+    VDB --> RECALL[Bi-Encoder 粗召回<br/>向量相似度 Top-50]
+
+    RECALL --> PROB{召回质量问题}
+    PROB -->|精度低 噪声多| RR[Rerank 精排]
+    PROB -->|精确匹配弱| BM25[BM25 关键词补充<br/>RRF 融合]
+    BM25 --> RR
+
+    RR --> CE[Cross-Encoder<br/>Query+Doc 联合编码]
+    CE --> INTER[捕获细粒度交互<br/>比双塔精度高]
+    INTER --> SCORE[逐个打分排序]
+    SCORE --> CUT{截断策略}
+    CUT -->|Top-K 固定| FIXED[Top-5 注入]
+    CUT -->|分数阈值| THRESH[过滤低于阈值]
+    CUT -->|拐点检测| ELBOW[得分骤降处截断]
+    FIXED --> CTX
+    THRESH --> CTX[组装上下文]
+    ELBOW --> CTX
+
+    CTX --> COST{Token 成本可控?}
+    COST -->|否| CASCADE[级联 Rerank<br/>轻量→重量]
+    COST -->|是| PROMPT[注入 Prompt]
+    CASCADE --> PROMPT
+    PROMPT --> LLM[LLM 生成]
+
+    style Q fill:#4CAF50,color:#fff
+    style LLM fill:#2196F3,color:#fff
+    style CE fill:#FF9800,color:#fff
+    style RECALL fill:#9C27B0,color:#fff
+    style CASCADE fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 原因：向量检索（双塔模型）Query与Doc独立编码缺乏深层交互，导致语义相近但答非所问。

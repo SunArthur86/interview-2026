@@ -405,6 +405,65 @@ public class SeckillAntiFraud {
 3. **秒杀怎么保证公平（先到先得）？**——MQ 是先进先出（FIFO），先扣库存成功的先入队，消费方按顺序创单。但网络延迟可能导致"先到的后入队"，公平性是相对的。绝对公平要用"排队号"（发号器）。
 4. **秒杀商品怎么和正常商品共用库存？**——通常秒杀商品独立库存（专供秒杀活动），不和正常销售共用。共用的话秒杀会把库存抢光，正常用户买不到。秒杀活动结束后剩余库存回归正常池。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 客户端发起请求]):::start
+    Producer[Producer 生产者<br/>发送消息]:::client
+    DecideSync{发送模式?<br/>同步/异步/单向}:::decision
+    Sync[同步发送<br/>阻塞等待 ACK]:::process
+    Async[异步发送<br/>回调通知]:::process
+    Oneway[单向发送<br/>不等响应]:::warn
+    RetryQ{是否收到 ACK?}:::decision
+    Retry[重试 N 次<br/>+ 幂等去重]:::process
+    DLQ[多次失败 → 死信队列 DLQ]:::danger
+    Broker[Broker 主节点<br/>写 PageCache]:::broker
+    FlushQ{刷盘策略?}:::decision
+    SyncFlush[同步刷盘 SYNC_FLUSH<br/>落盘后才返回]:::process
+    AsyncFlush[异步刷盘<br/>后台异步落盘]:::warn
+    ReplicaQ{复制策略?}:::decision
+    SyncRep[同步复制 SYNC_MASTER<br/>等 Slave 落盘]:::process
+    AsyncRep[异步复制<br/>Master 立即返回]:::warn
+    Persist[(磁盘 + 多副本<br/>持久化存储)]:::store
+    Consumer[Consumer 消费者<br/>拉取消息]:::client
+    OffsetQ{Offset 提交方式?}:::decision
+    AutoCommit[自动提交<br/>风险:业务异常也消费]:::warn
+    ManualCommit[手动提交<br/>业务成功后再 ACK]:::process
+    Business[执行业务逻辑]:::process
+    BizQ{业务是否成功?}:::decision
+    Reconsume[消费失败 → 重试<br/>RECONSUME_LATER]:::process
+    Final([✅ 消息消费完成]):::start
+
+    Start --> Producer --> DecideSync
+    DecideSync -->|高可靠| Sync --> Broker
+    DecideSync -->|高吞吐| Async --> Broker
+    DecideSync -->|日志类| Oneway --> Broker
+    Broker --> FlushQ
+    FlushQ -->|金融级| SyncFlush --> ReplicaQ
+    FlushQ -->|性能优先| AsyncFlush --> ReplicaQ
+    ReplicaQ -->|强一致| SyncRep --> Persist
+    ReplicaQ -->|弱一致| AsyncRep --> Persist
+    Persist --> Consumer --> OffsetQ
+    OffsetQ -->|不推荐| AutoCommit --> Business
+    OffsetQ -->|推荐| ManualCommit --> Business
+    Business --> BizQ
+    BizQ -->|成功| ManualCommit --> Final
+    BizQ -->|失败| Reconsume --> Consumer
+    Producer -.ACK 超时/失败.-> RetryQ
+    RetryQ -->|<N 次| Retry --> Producer
+    RetryQ -->|>=N 次| DLQ
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef broker fill:#f59e0b,stroke:#b45309,color:#fff;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 秒杀系统的核心矛盾是瞬时万级 QPS vs 资源有限——10 万人抢 1000 件手机，99% 的请求必须被快速拒绝（不能进核心链路）。架构三板斧：分层削峰（CDN→网关→应用→DB，每层过滤）、异步化（下单请求进 MQ 异步处理，同步只返回排队中）、热点隔离（秒杀独立部署，不连累主站）。核心是让 99% 的请求在前几层就被挡掉，只有真正能成交的请求才到 DB

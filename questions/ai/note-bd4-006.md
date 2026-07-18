@@ -176,6 +176,38 @@ Step 5: 社区检测 + 摘要 (Leiden算法)
 ```
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    DOC([原始文档库]) --> EXTRACT[LLM 抽取实体关系<br/>(主体, 关系, 客体)三元组]
+    EXTRACT --> GRAPH[(知识图谱<br/>节点=实体 边=关系)]
+    GRAPH --> COMM[社区检测<br/>Leiden/Louvain 算法]
+    COMM --> SUMM[LLM 生成社区摘要<br/>层次化汇总]
+
+    SUMM --> INDEX[(多层索引<br/>向量+图+社区)]
+
+    Q([用户 Query]) --> ROUTE{路由策略}
+    ROUTE -->|局部 实体| LOCAL[从实体出发<br/>找邻居子图]
+    ROUTE -->|全局 概括| GLOB[匹配社区摘要<br/>汇总多个社区]
+    ROUTE -->|混合| HYBRID[Local + Global<br/>结合细节与全局]
+
+    LOCAL --> MAP[Map-Reduce<br/>分片生成中间答案]
+    GLOB --> MAP
+    HYBRID --> MAP
+    MAP --> REDUCE[Reduce 汇总<br/>LLM 合成最终答案]
+    REDUCE --> OUT([带引用的回答])
+
+    DOC -.对比 .- VEC([普通向量 RAG<br/>扁平召回<br/>不擅长多跳推理])
+    style VEC fill:#bbb,color:#000
+
+    style Q fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style GRAPH fill:#FF9800,color:#fff
+    style COMM fill:#9C27B0,color:#fff
+    style MAP fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 向量RAG靠相似度匹配找局部Chunks，GraphRAG靠实体关系图遍历支持多跳推理

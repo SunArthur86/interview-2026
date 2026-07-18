@@ -153,6 +153,39 @@ K8s默认策略：
     *   *提示*：`maxSurge` (最大激增) 允许超过副本数的 Pod 数量；`maxUnavailable` (最大不可用) 允许不可用的 Pod 数量。快速发布通常调大 `maxSurge`；保守发布则调小 `maxUnavailable`。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    DOCKERFILE([Dockerfile构建脚本]):::start --> BUILD[docker build]
+    BUILD --> IMG[(镜像Image<br/>分层只读Layer)]:::storage
+    IMG --> PUSH["推送镜像仓库<br/>Docker Hub/Harbor"]
+    PUSH --> REG[(镜像仓库 Registry)]:::storage
+    REG --> PULL[目标机器docker pull]
+    PULL --> RUN[docker run 启动容器]
+    RUN --> CNT[容器Container<br/>可读写层+只读镜像层]
+    CNT --> NSP{隔离机制}:::decision
+    NSP -->|PID namespace| PID[进程隔离 独立PID]
+    NSP -->|NET namespace| NET[网络隔离 独立网卡]
+    NSP -->|MNT namespace| MNT[挂载点隔离]
+    NSP -->|UTS namespace| UTS[主机名隔离]
+    NSP -->|IPC namespace| IPC["信号量/消息队列隔离"]
+    NSP -->|USER namespace| USER[用户UID隔离]
+    NSP --> CG[Control Groups cgroups]
+    CG --> LIMIT["限制CPU/内存/IO<br/>资源配额"]
+    RUN --> UNIONFS{存储驱动}:::decision
+    UNIONFS -->|overlay2| OVER[联合挂载<br/>镜像层+容器层叠加]
+    OVER --> RW[容器层Copy-On-Write<br/>修改时复制到顶层]
+    CNT --> PORT[端口映射 -p 8080:80]
+    PORT --> ACCESS([外部访问容器服务]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 蓝绿部署：维护双倍资源的完整环境，通过路由秒级切换实现零停机与快速回滚。

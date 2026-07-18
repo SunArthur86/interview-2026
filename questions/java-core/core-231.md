@@ -114,6 +114,35 @@ app.get('/api/data', (req, res) => {
 | **优先级** | 高（若命中，不走协商） | 低（强缓存失效后才触发） |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    W([写请求更新数据]):::start --> CHO{更新策略}:::decision
+    CHO -->|先更新DB再删缓存| UDD[Update DB then Delete Cache<br/>推荐 Canal]
+    CHO -->|先删缓存再更新DB| DCD[Delete Cache then Update DB<br/>有并发问题]
+    CHO -->|Cache Aside 旁路| CA[读miss查DB回写<br/>写时删缓存]
+    UDD --> DEL1[删除Redis缓存]
+    DEL1 --> MQ[("消息队列/Canal binlog<br/>保证最终一致")]:::storage
+    DCD --> UPD[更新DB]
+    UPD --> DELAY{并发问题}:::decision
+    DELAY -->|是 读写并发| BUG[旧数据被回写<br/>缓存脏数据]:::error
+    DELAY -->|否| OK1[正常一致]
+    MQ --> RETRY{删除失败?}:::decision
+    RETRY -->|是| RTY["重试/死信队列<br/>订阅binlog补偿"]
+    RETRY -->|否| DONE([缓存与DB一致]):::success
+    RTY --> DONE
+    CA --> READ{读请求?}:::decision
+    READ -->|缓存miss| DB1[查DB并回写Redis]:::async
+    READ -->|缓存hit| RTN[直接返回]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 触发前提：强制缓存已失效，需向服务器询问资源是否更新

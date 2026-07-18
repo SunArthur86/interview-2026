@@ -85,6 +85,40 @@ tags: []
 3. 时间片轮转中，时间片太大或太小会有什么影响？
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    RQ([就绪队列中的进程]):::start --> SCHED[调度器Scheduler<br/>CPU调度]
+    SCHED --> ALG{调度算法}:::decision
+    ALG -->|FCFS 先来先服务| FCFS[按到达顺序执行<br/>简单但短作业等待长]
+    ALG -->|SJF 短作业优先| SJF[优先短作业<br/>平均等待最优 但可能饿生长作业]:::error
+    ALG -->|RR 时间片轮转| RR[每个进程分时间片<br/>公平 但切换开销大]
+    ALG -->|优先级调度| PRIO["静态/动态优先级<br/>低优先级可能饥饿"]
+    ALG -->|多级反馈队列 MLFQ| MLFQ[多个队列不同时间片<br/>动态调整 综合]:::async
+    FCFS --> CW{"是否阻塞/时间片到?"}:::decision
+    SJF --> CW
+    RR --> CW
+    PRIO --> CW
+    MLFQ --> CW
+    CW -->|时间片到/主动让出| YIELD[挂起 回就绪队列]
+    CW -->|阻塞IO/等待| BLOCK[进入阻塞队列<br/>等待事件]
+    CW -->|正常结束| TERM[释放资源 退出]:::success
+    YIELD --> RQ
+    BLOCK --> EVT{事件就绪?}:::decision
+    EVT -->|是 IO完成| RQ
+    EVT -->|否 继续等待| BLOCK
+    MLFQ --> PROMO{频繁让出CPU?}:::decision
+    PROMO -->|是 交互型| UP[提升优先级<br/>响应快]
+    PROMO -->|否 CPU密集| DOWN[降低优先级<br/>避免独占]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 口诀：先来先服务、短作业优先、时间片轮转、优先级、多级队列

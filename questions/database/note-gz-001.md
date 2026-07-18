@@ -172,6 +172,40 @@ kafka-consumer-groups --describe --group flink-consumer
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as 协调者 Coordinator
+    participant P1 as 参与者1 Participant
+    participant P2 as 参与者2 Participant
+    Note over C,P2: === 阶段一: 准备阶段 Prepare/Voting ===
+    C->>P1: prepare 询问能否提交
+    C->>P2: prepare 询问能否提交
+    P1->>P1: 执行事务 写undo/redo log<br/>不提交
+    P2->>P2: 执行事务 写undo/redo log<br/>不提交
+    P1-->>C: YES 已准备就绪
+    P2-->>C: YES 已准备就绪
+    Note over C: 协调者收集所有响应
+    alt 全部YES
+        Note over C,P2: === 阶段二: 提交阶段 Commit ===
+        C->>P1: commit 正式提交
+        C->>P2: commit 正式提交
+        P1->>P1: 提交事务 释放锁
+        P2->>P2: 提交事务 释放锁
+        P1-->>C: ACK
+        P2-->>C: ACK
+        Note over C: 事务完成
+    else 任一NO 或超时
+        C->>P1: rollback 回滚
+        C->>P2: rollback 回滚
+        P1-->>C: ACK
+        P2-->>C: ACK
+        Note over C: 事务终止
+    end
+```
 ## 记忆要点
 
 - 一句话区分：两者底层同用B+树，但MySQL主键是聚簇索引，而PgSQL全是非聚簇的Heap表

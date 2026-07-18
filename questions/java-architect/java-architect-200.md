@@ -476,6 +476,65 @@ Level 5: 预测规划（预测业务→前置架构）
 4. **漏斗分析怎么决定优化优先级？**——看流失绝对值（UV × 流失率），不是流失率。首页 100 万 UV 流失 40% = 40 万，支付 9.6 万 UV 流失 5% = 0.5 万。优先优化流失绝对值大的环节（首页 CDN），但支付环节"临门一脚"转化价值高也要关注。
 5. **怎么验证架构改进真的提升业务？**——A/B 测试。一半流量新架构、一半旧，对比 GMV/转化率，p < 0.05 才算显著。不看 A/B 的"改进"= 自嗨。架构师汇报用业务语言（GMV +1.2 亿）不用技术语言（QPS 10 万）。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 客户端发起请求]):::start
+    Producer[Producer 生产者<br/>发送消息]:::client
+    DecideSync{发送模式?<br/>同步/异步/单向}:::decision
+    Sync[同步发送<br/>阻塞等待 ACK]:::process
+    Async[异步发送<br/>回调通知]:::process
+    Oneway[单向发送<br/>不等响应]:::warn
+    RetryQ{是否收到 ACK?}:::decision
+    Retry[重试 N 次<br/>+ 幂等去重]:::process
+    DLQ[多次失败 → 死信队列 DLQ]:::danger
+    Broker[Broker 主节点<br/>写 PageCache]:::broker
+    FlushQ{刷盘策略?}:::decision
+    SyncFlush[同步刷盘 SYNC_FLUSH<br/>落盘后才返回]:::process
+    AsyncFlush[异步刷盘<br/>后台异步落盘]:::warn
+    ReplicaQ{复制策略?}:::decision
+    SyncRep[同步复制 SYNC_MASTER<br/>等 Slave 落盘]:::process
+    AsyncRep[异步复制<br/>Master 立即返回]:::warn
+    Persist[(磁盘 + 多副本<br/>持久化存储)]:::store
+    Consumer[Consumer 消费者<br/>拉取消息]:::client
+    OffsetQ{Offset 提交方式?}:::decision
+    AutoCommit[自动提交<br/>风险:业务异常也消费]:::warn
+    ManualCommit[手动提交<br/>业务成功后再 ACK]:::process
+    Business[执行业务逻辑]:::process
+    BizQ{业务是否成功?}:::decision
+    Reconsume[消费失败 → 重试<br/>RECONSUME_LATER]:::process
+    Final([✅ 消息消费完成]):::start
+
+    Start --> Producer --> DecideSync
+    DecideSync -->|高可靠| Sync --> Broker
+    DecideSync -->|高吞吐| Async --> Broker
+    DecideSync -->|日志类| Oneway --> Broker
+    Broker --> FlushQ
+    FlushQ -->|金融级| SyncFlush --> ReplicaQ
+    FlushQ -->|性能优先| AsyncFlush --> ReplicaQ
+    ReplicaQ -->|强一致| SyncRep --> Persist
+    ReplicaQ -->|弱一致| AsyncRep --> Persist
+    Persist --> Consumer --> OffsetQ
+    OffsetQ -->|不推荐| AutoCommit --> Business
+    OffsetQ -->|推荐| ManualCommit --> Business
+    Business --> BizQ
+    BizQ -->|成功| ManualCommit --> Final
+    BizQ -->|失败| Reconsume --> Consumer
+    Producer -.ACK 超时/失败.-> RetryQ
+    RetryQ -->|<N 次| Retry --> Producer
+    RetryQ -->|>=N 次| DLQ
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef broker fill:#f59e0b,stroke:#b45309,color:#fff;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 业务指标反推架构是架构师的高阶能力——从北极星指标（如 GMV、DAU、转化率）倒推技术架构应该具备什么能力。核心是建立指标→用户动作→系统动作→架构能力的因果链。例如 GMV 下降 10% → 定位到支付转化率下降 → 定位到支付接口 P99 延迟从 200ms 升到 800ms → 定位到 DB 慢查询 → 架构上需要读写分离 + 缓存。这是从业务语言翻译到技术语言的能力

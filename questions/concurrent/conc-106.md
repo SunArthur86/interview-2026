@@ -80,6 +80,42 @@ memory_points:
    - 协程是用户态轻量级线程，由程序自身调度，切换完全在用户态完成，不涉及内核态切换，开销远小于线程。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    T1([线程1]) --> ENTER{获取同步资源}
+    T2([线程2]) --> ENTER
+    T3([线程3]) --> ENTER
+
+    ENTER -->|竞争成功| CRITICAL[进入临界区<br/>独占执行]
+    ENTER -->|竞争失败| WAIT[阻塞/自旋等待]
+
+    CRITICAL --> OP[执行原子操作<br/>受保护代码]
+    OP --> RELEASE[释放资源<br/>唤醒等待者]
+    RELEASE --> NEXT{还有等待者?}
+    NEXT -->|是| WAKE[唤醒一个/全部]
+    NEXT -->|否| DONE([完成])
+    WAKE --> CRITICAL
+    WAIT --> CRITICAL
+
+    SAFETY([线程安全保证]) --> VIS2[可见性<br/>volatile/锁]
+    SAFETY --> ORD2[有序性<br/>happens-before]
+    SAFETY --> AT2[原子性<br/>synchronized/Atomic/CAS]
+
+    HAZARD([并发风险]) --> DEAD[死锁<br/>循环等待]
+    HAZARD --> LOST[可见性丢失<br/>CPU 缓存]
+    HAZARD --> RACE[竞态条件<br/>i++ 非原子]
+    HAZARD --> CONTEXT[上下文切换开销]
+
+    style T1 fill:#4CAF50,color:#fff
+    style T2 fill:#009688,color:#fff
+    style T3 fill:#9C27B0,color:#fff
+    style CRITICAL fill:#FF9800,color:#fff
+    style DONE fill:#2196F3,color:#fff
+    style HAZARD fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 基本定义：进程是资源分配的基本单位，线程是CPU调度的基本单位（轻量级进程）

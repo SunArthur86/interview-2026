@@ -351,6 +351,51 @@ WHERE TIME_TO_SEC(TIMEDIFF(NOW(), trx_started)) > 5;   -- 超过 5 秒的事务
 4. **跨服务事务怎么保证一致？**——@Transactional 管不了跨服务。方案：本地消息表（业务库写消息表，消息服务异步投递，消费方幂等）、Saga（长链路补偿）、TCC（Try-Confirm-Cancel 业务侵入）。生产优先本地消息表 + 幂等。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务注册与发现]):::start
+    Provider[服务提供者<br/>启动]:::process
+    Register[注册到注册中心<br/>写临时节点]:::process
+    Registry[(注册中心<br/>Nacos/ZK/etcd)]:::store
+    Consumer[服务消费者<br/>启动]:::process
+    Subscribe[订阅服务列表<br/>拉取+长轮询]:::process
+    Cache[本地缓存<br/>provider 列表]:::process
+    Heartbeat[心跳上报<br/>5s 周期]:::process
+    HealthQ{{健康检查?}}:::decision
+    Healthy[节点健康<br/>保留注册]:::process
+    Unhealthy[节点故障<br/>摘除]:::warn
+    Push[推送变更<br/>消费者更新]:::process
+    ElectionQ{{一致性协议?<br/>CP/AP}}:::decision
+    Raft[Raft<br/>强一致 CP]:::process
+    Distro[Distro<br/>最终一致 AP]:::process
+    SplitQ{{网络分区?}}:::decision
+    Minor[少数派不可用<br/>CP]:::warn
+    Major[多数派可用<br/>保证一致]:::process
+    Failover[消费者容错<br/>本地缓存兜底]:::process
+    Config[配置中心<br/>动态配置]:::process
+    Final([✅ 服务发现稳定]):::start
+
+    Start --> Provider --> Register --> Registry
+    Consumer --> Subscribe --> Registry --> Cache
+    Provider --> Heartbeat --> HealthQ
+    HealthQ -->|健康| Healthy
+    HealthQ -->|故障| Unhealthy --> Push
+    Registry --> ElectionQ
+    ElectionQ -->|强一致| Raft --> SplitQ
+    ElectionQ -->|高可用| Distro --> Failover
+    SplitQ -->|分区| Minor
+    SplitQ -->|正常| Major
+    Push --> Failover --> Config --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到Spring 事务传播、隔离级别与失效场景，我的理解是——Spring 事务的本质是"AOP 代理 + ThreadLocal 绑定 Connection"——通过动态代理在方法前后加 begin/commit/rollback，用 ThreadLocal 让同一事务的多条 SQL 共用一个 Connection。失效场景都源于"绕过了代理"或"异常被吞"。打个比方，像快递公司的"保价通道"：@Transactional 是给包裹贴保价标签，AOP 代理是快递员（必须经过它才能享受保价），ThreadLocal 是每个快递员自己的保价单（线程隔离）。你跳过快递员自己送（this 调用）、保价单写错类型（异常被吞）、或换快递员送（多线程），保价就失效。

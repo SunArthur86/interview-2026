@@ -95,6 +95,42 @@ XA PREPARE 'xid_01';
 3. **为什么 Seata 的 AT 模式不需要 2PC 这种强锁？**：Seata AT 模式利用 **Undo Log** 和 **全局锁**，在第一阶段先提交本地事务（释放本地锁），第二阶段通过异步回滚或反向补偿，实现了“最终一致”而非“强一致”，从而避免了
 
 
+## 核心流程图
+
+```mermaid
+sequenceDiagram
+    participant C as Coordinator 协调者
+    participant P1 as Participant 1
+    participant P2 as Participant 2
+    participant P3 as Participant 3
+
+    Note over C,P3: 阶段1: Prepare 准备阶段
+    C->>P1: prepare 询问能否提交
+    C->>P2: prepare
+    C->>P3: prepare
+    P1->>P1: 写 undo/redo 日志 加锁
+    P2->>P2: 写日志 加锁
+    P3-->>C: YES/NO
+
+    alt 所有参与者都 YES
+        Note over C,P3: 阶段2: Commit 提交阶段
+        C->>P1: commit
+        C->>P2: commit
+        C->>P3: commit
+        P1-->>C: ACK
+        P2-->>C: ACK
+        P3-->>C: ACK
+        C->>C: 事务完成
+    else 任一参与者 NO 或超时
+        C->>P1: abort/rollback
+        C->>P2: abort
+        P1-->>C: ACK
+        Note over C,P3: 全局回滚 释放锁
+    end
+
+    Note over C,P3: 2PC 缺点: 协调者单点/同步阻塞/数据不一致
+```
+
 ## 记忆要点
 
 - 两阶段指：一阶段准备（写日志锁资源不提交），二阶段提交（全部同意则Commit，否则Rollback）

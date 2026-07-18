@@ -284,6 +284,41 @@ class CounselingMemory:
 ```
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    INPUT([输入]) --> LC
+
+    subgraph LC["LangChain 生态"]
+    LC_CORE[LangChain Core<br/>抽象接口 Runnables] --> LC_LLM[LLM/Chat Wrapper<br/>统一模型调用]
+    LC_CORE --> LC_RETRIEVER[Retriever<br/>检索器抽象]
+    LC_CORE --> LC_PROMPT[Prompt Templates<br/>变量化模板]
+    LC_CORE --> LC_OUTPUT[Output Parser<br/>结构化解析]
+    end
+
+    LC --> LG[LangGraph<br/>图状态机]
+    LG --> NODES[节点 = Agent 动作]
+    NODES --> EDGES[边 = 条件流转]
+    EDGES --> STATE[共享 State<br/>TypedDict]
+    STATE --> CYCLE[支持循环/分支<br/>多 Agent 协作]
+    CYCLE --> CHECK[Checkpoint 持久化<br/>断点续跑/HITL]
+
+    LC --> LS[LangSmith<br/>可观测平台]
+    LS --> TRACE[Trace 全链路追踪<br/>每步输入输出]
+    LS --> EVAL[Eval 评测集<br/>自动化回归]
+    LS --> MON[Monitor 线上监控<br/>token 成本/延迟]
+
+    CYCLE --> DEPLOY([生产部署])
+    CHECK --> DEPLOY
+
+    style INPUT fill:#4CAF50,color:#fff
+    style DEPLOY fill:#2196F3,color:#fff
+    style LG fill:#FF9800,color:#fff
+    style LS fill:#9C27B0,color:#fff
+    style STATE fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 核心控制：用状态图（StateGraph）实现安全门控与阶段条件路由

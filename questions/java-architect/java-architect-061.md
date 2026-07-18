@@ -473,6 +473,55 @@ public class SettlementRetryService {
 3. **分账规则怎么测试？**——每条规则有单元测试（断言分账结果）+ 集成测试（多规则组合）+ 压测（千万订单验证性能）+ 灰度（新规则小流量验证）。
 4. **跨境结算和境内结算区别？**——跨境需汇率换算（实时汇率）+ 跨境支付通道（SWIFT/第三方）+ 合规（外汇申报/反洗钱）+ 时效慢（3-5 天 vs T+1）。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 用户下单]):::start
+    Cart[购物车<br/>选择商品]:::process
+    Settle[结算页<br/>确认收货/优惠]:::process
+    StockLock[预扣库存<br/>Redis Lua 原子]:::process
+    CouponQ{{使用优惠券?}}:::decision
+    Coupon[核销优惠券<br/>幂等校验]:::process
+    OrderCreate[生成订单<br/>状态:待支付]:::process
+    IdempKey[幂等键<br/>防止重复创建]:::process
+    Pay[发起支付<br/>微信/支付宝]:::process
+    PayCallback[支付回调<br/>异步通知]:::process
+    SignVerify[签名验证<br/>防伪造]:::process
+    PayQ{{支付结果?}}:::decision
+    PayFail[支付失败<br/>订单关闭]:::warn
+    PaySuccess[支付成功<br/>状态:已支付]:::process
+    MQ[(消息队列<br/>下游解耦)]:::store
+    Inventory[库存服务<br/>DB 真实扣减]:::process
+    Points[积分服务<br/>发放积分]:::process
+    Logistics[物流服务<br/>生成运单]:::process
+    Risk[风控服务<br/>反欺诈检测]:::process
+    RiskQ{{风控通过?}}:::decision
+    RiskReject[订单拦截<br/>退款]:::danger
+    Notify[消息通知<br/>短信/Push]:::process
+    Final([✅ 订单完成]):::start
+
+    Start --> Cart --> Settle --> StockLock --> CouponQ
+    CouponQ -->|是| Coupon --> OrderCreate
+    CouponQ -->|否| OrderCreate
+    OrderCreate --> IdempKey --> Risk
+    Risk --> RiskQ
+    RiskQ -->|通过| Pay
+    RiskQ -->|拦截| RiskReject
+    Pay --> PayCallback --> SignVerify --> PayQ
+    PayQ -->|失败| PayFail
+    PayQ -->|成功| PaySuccess --> MQ
+    MQ --> Inventory & Points & Logistics
+    Logistics --> Notify --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 

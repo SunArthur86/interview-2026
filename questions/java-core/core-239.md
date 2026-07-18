@@ -83,6 +83,36 @@ try (InputStream is = new BufferedInputStream(new FileInputStream("large.dat")))
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    APP(["读取文件/网络数据"]):::start --> NEW[创建InputStream<br/>FileInputStream等]
+    NEW --> READ[read 每次读1字节]
+    READ --> BUF{是否缓冲?}:::decision
+    BUF -->|否 直接读| SYS[每次read触发系统调用<br/>频繁切换内核态 性能差]:::error
+    BUF -->|是 装饰器| BIS[BufferedInputStream包装<br/>8KB缓冲区]
+    BIS --> PRE[预读填满缓冲区<br/>后续read直接从内存取]
+    PRE --> RET[返回字节 0~255<br/>-1表示EOF结束]
+    SYS --> RET
+    RET --> END{是否-1?}:::decision
+    END -->|否| LOOP[处理字节<br/>循环读取]
+    LOOP --> READ
+    END -->|是| CLOSE[关闭流 释放资源<br/>try-with-resources]:::async
+    CLOSE --> DONE([读取完成]):::success
+    NEW --> DEC{需要增强功能?}:::decision
+    DEC -->|缓冲| BIS
+    DEC -->|基本类型| DIS["DataInputStream<br/>readInt/readUTF"]
+    DEC -->|对象反序列化| OIS[ObjectInputStream<br/>readObject]
+    DEC -->|字节数组| BAIS[ByteArrayInputStream<br/>内存读取]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心架构：InputStream是顶层抽象基类，字节输入流采用装饰器模式

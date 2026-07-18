@@ -168,6 +168,39 @@ Layer 40 (深层): ███                  保留 10%
 4. **工程实现**：vLLM 0.5+开始支持部分稀疏注意力方案，提及与PagedAttention的兼容性
 5. **与KV Cache量化的叠加**：稀疏注意力（减少KV block数量）+量化（减少每个block的字节数）可以叠加使用，双重压缩
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([并发推理请求]) --> GW[API 网关<br/>鉴权/限流/计费]
+    GW --> QUEUE[请求队列<br/>优先级调度]
+    QUEUE --> ROUTER[路由分发]
+
+    ROUTER --> CACHE{Prefix Cache<br/>命中?}
+    CACHE -->|命中| HIT[复用 KV Cache<br/>跳过 prefill]
+    CACHE -->|未命中| PREFILL[Prefill 阶段<br/>并行计算 prompt]
+
+    HIT --> DECODE
+    PREFILL --> DECODE[Decode 阶段<br/>逐 token 自回归]
+
+    DECODE --> BATCH[Continuous Batching<br/>动态拼组请求]
+    BATCH --> GPU[GPU 推理<br/>Tensor Parallel 多卡]
+    GPU --> STREAM[流式输出<br/>SSE/WebSocket]
+    STREAM --> CLIENT([客户端 token 流])
+
+    QUEUE -. 高负载 .-> CB[熔断降级<br/>排队过长返回降级话术]
+    CB --> GW
+    GPU -. 失败 .-> RETRY[指数退避重试<br/>切换备模型]
+    RETRY --> QUEUE
+
+    style REQ fill:#4CAF50,color:#fff
+    style CLIENT fill:#2196F3,color:#fff
+    style HIT fill:#009688,color:#fff
+    style BATCH fill:#FF9800,color:#fff
+    style CB fill:#F44336,color:#fff
+    style RETRY fill:#9C27B0,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 稀疏注意力是在长上下文中只保留重要的KV Cache，丢弃不重要的，以恒定显存支持无限长对话——你在听一场3小时的会议。。

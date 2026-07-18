@@ -103,6 +103,48 @@ end
    - 熔断：目的防止雪崩，检测到下游不可用时自动断开调用。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([请求进入]) --> ALGO{限流算法}
+
+    ALGO -->|固定窗口| FW[Fixed Window<br/>每秒重置计数]
+    ALGO -->|滑动窗口| SW[Sliding Window<br/>细分子窗口加权]
+    ALGO -->|漏桶| LB[Leaky Bucket<br/>匀速出水 平滑流量]
+    ALGO -->|令牌桶| TB[Token Bucket<br/>匀速生 token<br/>允许突发]
+
+    FW --> CHK1{count < limit?}
+    SW --> CHK1
+    LB --> CHK1
+    TB --> CHK1
+
+    CHK1 -->|通过| PASS[放行]
+    CHK1 -->|超出| REJECT[拒绝/排队]
+
+    PASS --> DIST{部署位置}
+    REJECT --> DIST
+    DIST -->|单机| LOCAL[本地限流<br/>AtomicLong/Semaphore]
+    DIST -->|集群| CLUSTER[分布式限流<br/>Redis Lua 原子脚本]
+
+    CLUSTER --> REDIS[(Redis<br/>INCR + EXPIRE<br/>或令牌桶 Lua)]
+    REDIS --> FALLBACK{Redis 故障?}
+    FALLBACK -->|是| DEGRADE[降级本地限流<br/>保证可用性]
+    FALLBACK -->|否| ENFORCE[严格执行]
+
+    LOCAL --> RESP([限流决策])
+    CLUSTER --> RESP
+    DEGRADE --> RESP
+    ENFORCE --> RESP
+
+    style REQ fill:#4CAF50,color:#fff
+    style RESP fill:#2196F3,color:#fff
+    style TB fill:#FF9800,color:#fff
+    style CLUSTER fill:#9C27B0,color:#fff
+    style REJECT fill:#F44336,color:#fff
+    style DEGRADE fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 四大算法：固定窗口、滑动窗口、漏桶、令牌桶

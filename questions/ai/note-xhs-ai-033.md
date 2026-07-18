@@ -146,6 +146,42 @@ LIMIT 10;
 4. **pgvector生产部署**：PostgreSQL同时做向量检索和全文检索，减少了系统组件数量，对前端开发者更友好
 5. **RRF的k值调优**：k=60是经验值，k越小对高排名文档越敏感（更看重top-1），k越大越平缓（更看重整体排名）
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([用户 Query]) --> SPLIT[双路并行检索]
+
+    SPLIT --> VEC[向量检索路<br/>语义相似]
+    SPLIT --> BM[BM25 检索路<br/>关键词精确匹配]
+
+    VEC --> QE[Query Embedding]
+    QE --> ANN[(ANN 索引<br/>HNSW/IVF)]
+    ANN --> V_TOP[Top-K1 语义召回<br/>擅长同义/泛化]
+
+    BM --> TOK[分词 + TF-IDF]
+    TOK --> INV[(倒排索引)]
+    INV --> B_TOP[Top-K2 关键词召回<br/>擅长专名/型号/代码]
+
+    V_TOP --> FUSION{融合策略}
+    B_TOP --> FUSION
+    FUSION -->|RRF 倒数排名| RRF[1/(k+rank)<br/>无需归一化分数<br/>鲁棒性强]
+    FUSION -->|加权线性| WEIGHT[α·vec + β·bm25<br/>需分数归一化<br/>调参敏感]
+    FUSION -->|级联| CAS[先向量粗筛<br/>再 BM25 精排]
+
+    RRF --> FINAL[融合 Top-N]
+    WEIGHT --> FINAL
+    CAS --> FINAL
+    FINAL --> RR[Rerank 精排]
+    RR --> CTX[组装上下文]
+
+    style Q fill:#4CAF50,color:#fff
+    style CTX fill:#2196F3,color:#fff
+    style VEC fill:#FF9800,color:#fff
+    style BM fill:#9C27B0,color:#fff
+    style RRF fill:#009688,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 向量检索擅长语义匹配但精确匹配差，BM25擅长关键词匹配但语义理解差——单用任何一种都有盲区，混合检索取两者之长——向量检索像'意会型'图书管理员。

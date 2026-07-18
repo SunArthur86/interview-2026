@@ -310,6 +310,37 @@ class HierarchicalDialogueMemory:
 4. **当前内容常驻**：创作类Agent的"当前脚本"必须始终在context中——如果被摘要压缩了，LLM就看不到当前内容无法继续修改。这个设计细节是创作场景特有的
 5. **token预算管理**：总context预算 = 常驻(200) + 近期(1000) + 摘要(500) + 当前内容(500) = 2200 tokens。无论对话多长，token消耗恒定——这是系统稳定性的保证
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([用户 Query]) --> CTX[组装上下文<br/>System+History+Question]
+    CTX --> LLM[LLM 推理]
+    LLM --> DEC{是否需要工具?}
+    DEC -->|否| ANS([直接文本回答])
+    DEC -->|是| SCHEMA[读取工具 Schema<br/>Function Call/MCP]
+    SCHEMA --> MATCH[参数匹配填充<br/>JSON Schema 校验]
+    MATCH --> VALID{参数合法?}
+    VALID -->|否| REASK[反馈错误<br/>让 LLM 重新生成]
+    REASK --> LLM
+    VALID -->|是| DISPATCH[调度执行<br/>超时/重试/熔断]
+    DISPATCH --> EXEC[调用真实工具 API]
+    EXEC --> RESULT{执行结果}
+    RESULT -->|成功| OBS[Observation 拼回上下文]
+    RESULT -->|失败 N 次| FALL[Fallback<br/>同类工具替换/降级]
+    FALL --> OBS
+    OBS --> LLM
+    RESULT -->|危险操作| HITL[Human-in-the-Loop<br/>人工审批]
+    HITL --> OBS
+
+    style Q fill:#4CAF50,color:#fff
+    style ANS fill:#2196F3,color:#fff
+    style LLM fill:#009688,color:#fff
+    style EXEC fill:#FF9800,color:#fff
+    style FALL fill:#F44336,color:#fff
+    style HITL fill:#9C27B0,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** Function Calling准确率提升靠的是结构化工具描述+Few-shot示例+参数校验重试；长多轮对话压缩靠的是分层摘要+关键信息常驻+滚动窗口。

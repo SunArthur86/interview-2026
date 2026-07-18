@@ -363,6 +363,37 @@ ZeRO-3: 切分优化器状态 + 梯度 + 参数（省Nx，即FSDP）
 - **Ring Attention**：长序列场景的特殊并行，跨GPU分布式attention
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    BASE([预训练基座模型<br/>权重 W 冻结]) --> FREEZE[冻结原始权重<br/>不更新不存梯度]
+    FREEZE --> LOW[低秩分解<br/>W + ΔW = W + B·A]
+    LOW --> INIT[B,A 初始化<br/>A 随机 B 为 0<br/>启动时 ΔW=0]
+    INIT --> TARGET[注入目标层<br/>Q/K/V/O Projection]
+
+    subgraph QLORA["QLoRA 优化 (NF4)"]
+    BASE --> NF4[基座权重量化 NF4<br/>4-bit 存储]
+    NF4 --> FP16[计算时反量化 FP16<br/>前向/反向]
+    FP16 --> GRAD[梯度只在 LoRA 层<br/>显存大幅降低]
+    end
+
+    TARGET --> FWD[前向传播<br/>y = Wx + BAx]
+    QLORA --> FWD
+    FWD --> LOSS[计算 Loss]
+    LOSS --> BACK[反向传播<br/>只更新 B,A]
+    BACK --> OPT[Optimizer<br/>只存 LoRA 参数状态]
+    OPT --> MERGE{部署时}
+    MERGE -->|合并 W'=W+BA| COMBINED[合并权重<br/>零额外延迟]
+    MERGE -->|保持分离| ADAPTER[多 Adapter 切换<br/>一份基座多任务]
+
+    style BASE fill:#4CAF50,color:#fff
+    style FREEZE fill:#9C27B0,color:#fff
+    style COMBINED fill:#2196F3,color:#fff
+    style NF4 fill:#FF9800,color:#fff
+    style OPT fill:#009688,color:#fff
+```
+
 ## 记忆要点
 
 - 三者对比：DP切数据全量模型，TP层内切矩阵，PP层间切流水线

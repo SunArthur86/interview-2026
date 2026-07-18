@@ -89,6 +89,36 @@ public int getData() {
 3. **性能影响**：现代 JVM 对 finally 优化很好，一般无需担心性能，但在极端高频路径下可通过代码结构调整优化。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TRY([进入try块]):::start --> CODE[执行try内业务代码]
+    CODE --> CHK{是否抛出异常?}:::decision
+    CHK -->|无异常| FIN1[跳过catch<br/>直接执行finally]
+    CHK -->|抛出Throwable| MT{匹配catch类型?}:::decision
+    MT -->|是| CAT[执行对应catch块<br/>处理异常]
+    MT -->|否 未捕获| PROP[异常向上抛出<br/>finally仍会执行]
+    CAT --> FIN2[执行finally块]
+    PROP --> FIN2
+    FIN1 --> RET{finally含return?}:::decision
+    FIN2 --> RET
+    RET -->|是 覆盖try/catch的return| OVR[finally的return<br/>覆盖之前的返回值]:::error
+    RET -->|否 普通语句| NORM[finally执行完毕<br/>原return生效]
+    OVR --> CLR["资源关闭/锁释放<br/>建议放finally"]
+    NORM --> CLR
+    CLR --> SYSTEM{JVM退出情况?}:::decision
+    SYSTEM -->|System.exit / 进程崩溃| SKIP[finally不执行<br/>JVM直接终止]:::async
+    SYSTEM -->|线程中断/守护线程结束| SKIP2[可能不执行]
+    SYSTEM -->|正常| DONE([方法返回]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 执行机制：编译器会将finally代码块逻辑复制到try/catch的所有正常与异常出口路径

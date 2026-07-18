@@ -115,6 +115,46 @@ CompletableFuture<String> future = ...
    - `get()`：检查中断，抛出 `InterruptedException` (checked)。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    START([异步编排起点]) --> SA[supplyAsync<br/>异步执行 Supplier]
+    SA --> THREAD_POOL[Executor 线程池<br/>默认 ForkJoinPool]
+
+    SA --> CHAIN{链式编排}
+    CHAIN -->|同步转换| TA[thenApply<br/>上一步结果→新值<br/>同线程或调用线程]
+    CHAIN -->|异步转换| TAA[thenApplyAsync<br/>提交到线程池]
+    CHAIN -->|消费无返回| TA_C[thenAccept/thenRun]
+    CHAIN -->|组合两个| COMBINE[thenCombine<br/>合并两个 future]
+    CHAIN -->|依赖下一个| COMPOSE[thenCompose<br/>扁平化嵌套 future]
+
+    TA --> DEP{多任务协调}
+    DEP -->|全部完成| ALL[allOf<br/>等待所有<br/>f1∧f2∧f3]
+    DEP -->|任一完成| ANY[anyOf<br/>最快返回<br/>f1∨f2∨f3]
+
+    ALL --> NEXT[继续后续逻辑]
+    ANY --> NEXT
+
+    NEXT --> ERR{异常处理}
+    ERR -->|恢复| EXCEPT[exceptionally<br/>捕获返回默认值]
+    ERR -->|统一处理| HANDLE[handle<br/>(value, throwable)]
+    ERR -->|whenComplete| WC[记录日志<br/>不改结果]
+
+    EXCEPT --> RESULT([最终结果])
+    HANDLE --> RESULT
+
+    BLOCKING([阻塞获取]) --> GET[.get 阻塞<br/>需超时参数]
+    BLOCKING --> JOIN[.join 阻塞<br/>抛 RuntimeException]
+
+    style START fill:#4CAF50,color:#fff
+    style RESULT fill:#2196F3,color:#fff
+    style SA fill:#009688,color:#fff
+    style THREAD_POOL fill:#FF9800,color:#fff
+    style COMPOSE fill:#9C27B0,color:#fff
+    style EXCEPT fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 对比：supplyAsync 用于异步启动任务，而 runAsync 无返回值。

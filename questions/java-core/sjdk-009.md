@@ -104,6 +104,35 @@ public void correctProcess() {
 在某电商大促活动中，我们将原有的 Tomcat 线程池（200线程）升级为支持虚拟线程的 Web 容器。原本在并发 2000 QPS 时出现的“RejectExecutionException”彻底消失，在 8C16G 机器上轻松支撑 10,000+ QPS，且延迟 P99 从 500ms 降低到 50ms。但上线初期曾因遗留代码中大量使用 `synchronized` 导致 Carrier Thread 被耗尽，监控发现 CPU 利用率极低但吞吐上不去，排查后定位到是 Pinning 问题，替换为 ReentrantLock 后恢复。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TASK([大量IO任务]):::start --> CHO{并发模型}:::decision
+    CHO -->|平台线程 Platform Thread| PT[1:1 操作系统线程<br/>1MB栈 开销大]
+    CHO -->|虚拟线程 Virtual Thread| VT[JDK21<br/>M:N调度]
+    PT --> BLK1[IO阻塞时<br/>整个OS线程阻塞]:::error
+    VT --> CONT[Continuation延续体<br/>用户态保存栈帧]
+    CONT --> SCHED[(ForkJoinPool载体线程池<br/>默认CPU核心数)]:::storage
+    SCHED --> MOUNT[挂载Mount到载体线程]
+    MOUNT --> RUN[在载体线程上运行]
+    RUN --> IO{遇到IO阻塞?}:::decision
+    IO -->|是| UNMOUNT[卸载Unmount<br/>释放载体线程给其他VT]
+    IO -->|否 CPU密集| PIN[钉住pinned<br/>无法卸载 慎用synchronized]:::error
+    UNMOUNT --> WAIT2[等待IO完成<br/>不占OS线程]
+    WAIT2 --> READY[IO完成 重新入队]
+    READY --> SCHED
+    PIN --> DONE2[任务完成]:::success
+    RUN --> DONE2
+    VT --> ADV[百万级虚拟线程<br/>高并发IO场景<br/>代码同同步写法]:::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 本质：通过虚拟线程实现同步代码风格高并发，替代复杂的Reactive异步链

@@ -402,6 +402,54 @@ public CompletableFuture<Feature> fallback(String uid, Exception e) {
 3. 降级开关可观测——所有降级触发必须打日志 + 上报监控，并在 oncall 群告警，避免"静默降级"导致数据质量问题无人发现。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 应用发起读请求]):::start
+    App[应用层<br/>查询数据]:::client
+    CacheHitQ{{缓存命中?}}:::decision
+    ReturnCache["直接返回缓存数据<br/>O(1) 低延迟"]:::process
+    MissDB{缓存未命中}:::decision
+    QueryDB[查询数据库<br/>执行 SQL]:::process
+    PenetrateQ{{是否为恶意请求?<br/>查询不存在的 key}}:::decision
+    BloomFilter[布隆过滤器拦截<br/>+ 缓存空值]:::process
+    BreakDownQ{{热点 key 失效?<br/>缓存击穿}}:::decision
+    Mutex[加互斥锁<br/>单线程回源]:::process
+    AvalancheQ{{大批 key 同时过期?<br/>缓存雪崩}}:::decision
+    TTLJitter[随机 TTL<br/>+ 多级缓存]:::process
+    WriteBackQ{{是否回写缓存?}}:::decision
+    WriteCache[写入 Redis<br/>设置 TTL]:::process
+    BigKeyCheck{{大 Key / 热 Key?}}:::decision
+    SplitKey[拆分大 Key<br/>本地缓存热 Key]:::process
+    DB[(MySQL 主从<br/>持久化数据)]:::store
+    Cache[(Redis Cluster<br/>分片缓存)]:::store
+    Final([✅ 返回结果]):::start
+    Alarm[告警 + 限流降级]:::danger
+
+    Start --> App --> CacheHitQ
+    CacheHitQ -->|命中| ReturnCache --> BigKeyCheck
+    BigKeyCheck -->|是| SplitKey --> Final
+    BigKeyCheck -->|否| Final
+    CacheHitQ -->|未命中| MissDB --> PenetrateQ
+    PenetrateQ -->|是| BloomFilter --> Alarm
+    PenetrateQ -->|否| BreakDownQ
+    BreakDownQ -->|是| Mutex --> QueryDB
+    BreakDownQ -->|否| AvalancheQ
+    AvalancheQ -->|是| TTLJitter --> QueryDB
+    AvalancheQ -->|否| QueryDB
+    QueryDB --> DB --> WriteBackQ
+    WriteBackQ -->|是| WriteCache --> Cache --> ReturnCache
+    WriteBackQ -->|否| ReturnCache
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef client fill:#10b981,stroke:#047857,color:#fff;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到高可用三件套——限流、降级、超时重试，怎么设计，我的理解是——限流在入口截流（防过载）、降级在故障时兜底（保核心）、超时重试在调用层保护（防级联失败），三者是高可用系统的"防御工事"。打个比方，高可用三件套像城市防洪——限流是水闸（控制进水量）、降级是应急通道（核心功能保命）、超时重试是检查站（快速失败不死等）。

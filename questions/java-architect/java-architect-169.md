@@ -407,6 +407,59 @@ public class RefundReconciliation {
 3. **退款超时怎么办？**——不能假设成功（可能实际没退）也不能假设失败（可能退了只是回调延迟）。调渠道查询接口确认实际状态。查单也超时进人工。
 4. **部分退款优惠怎么分摊？**——按实付比例。订单 100 满减 20 实付 80，退一件原价 30 的商品，退款 = 30 × (80/100) = 24。不能按原价退 30（否则退款总额可能超实付）。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 多线程并发任务]):::start
+    Submit[提交任务到线程池<br/>execute / submit]:::process
+    CoreQ{{核心线程数满?<br/>corePoolSize}}:::decision
+    NewCore[创建核心线程<br/>立即执行]:::process
+    QueueQ{{工作队列满?<br/>workQueue}}:::decision
+    Enqueue[任务入队<br/>LinkedBlockingQueue]:::process
+    MaxQ{{达到最大线程数?<br/>maxPoolSize}}:::decision
+    NewWorker[创建非核心线程]:::process
+    RejectQ{{拒绝策略?<br/>RejectedHandler}}:::decision
+    Abort[AbortPolicy<br/>抛异常]:::danger
+    Caller[CallerRunsPolicy<br/>调用线程执行]:::process
+    Discard[DiscardPolicy<br/>丢弃]:::warn
+    Worker[Worker 线程<br/>循环 take 任务]:::process
+    SyncQ{{是否需要同步?<br/>共享资源}}:::decision
+    CAS[CAS 无锁操作<br/>compareAndSwap]:::process
+    Lock[加锁 synchronized / AQS]:::process
+    VolatileQ{{可见性需求?<br/>禁止指令重排}}:::decision
+    Volatile[volatile 修饰<br/>内存屏障]:::process
+    Final[业务执行完成]:::process
+    WaitQ{{是否需要等待?<br/>Future/Condition}}:::decision
+    Future[CompletableFuture<br/>异步编排]:::process
+    Done([✅ 任务完成]):::start
+
+    Start --> Submit --> CoreQ
+    CoreQ -->|否| NewCore --> Worker
+    CoreQ -->|是| QueueQ
+    QueueQ -->|否| Enqueue --> Worker
+    QueueQ -->|是| MaxQ
+    MaxQ -->|否| NewWorker --> Worker
+    MaxQ -->|是| RejectQ
+    RejectQ -->|默认| Abort
+    RejectQ -->|降级| Caller
+    RejectQ -->|容忍| Discard
+    Worker --> SyncQ
+    SyncQ -->|无锁| CAS --> Final
+    SyncQ -->|互斥| Lock --> VolatileQ
+    VolatileQ -->|是| Volatile --> Final
+    VolatileQ -->|否| Final
+    Final --> WaitQ
+    WaitQ -->|是| Future --> Done
+    WaitQ -->|否| Done
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 售后退款链路的本质是订单状态机的逆向流程 + 资金回流一致性。逆向流程：申请售后 → 审核 → 退货入库 → 退款，每步有状态机约束防止非法跳转。资金回流是核心难点：原路退回（微信/支付宝）要和支付渠道对接，退款可能失败（渠道超时/账户注销），必须幂等重试 + 对账兜底

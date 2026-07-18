@@ -81,6 +81,43 @@ memory_points:
     *   回答要点：实施有序资源分配策略，强制所有进程按照固定的顺序（如按地址升序或编号）申请资源。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    T_A([线程 A]) --> L1[持有锁 1]
+    T_B([线程 B]) --> L2[持有锁 2]
+    L1 --> REQ1[请求锁 2]
+    L2 --> REQ2[请求锁 1]
+
+    REQ1 --> WAIT2[等待 B 释放]
+    REQ2 --> WAIT1[等待 A 释放]
+    WAIT2 --> CYCLE([循环等待<br/>死锁形成])
+    WAIT1 --> CYCLE
+
+    COND([死锁四必要条件]) --> C1[互斥 Mutex]
+    COND --> C2[持有并等待<br/>Hold & Wait]
+    COND --> C3[不可剥夺<br/>No Preemption]
+    COND --> C4[循环等待<br/>Circular Wait]
+
+    CYCLE --> DIAG{诊断排查}
+    DIAG --> JSTACK[jstack 抓栈<br/>Found Java-level deadlock]
+    DIAG --> JVISUAL[jconsole/jvisualvm<br/>图形化检测]
+    DIAG --> ARTHAS[Arthas thread -b<br/>找阻塞源头]
+    DIAG --> MXBEAN[ThreadMXBean<br/>findMonitorDeadlockedThreads]
+
+    PREVENT([预防策略]) --> FIX_C2[破坏持有等待<br/>一次性申请所有锁]
+    PREVENT --> FIX_C4[破坏循环等待<br/>固定加锁顺序]
+    PREVENT --> TRY_LOCK[tryLock 超时<br/>避免无限等待]
+    PREVENT --> DETECT[运行时检测<br/>死锁回滚恢复]
+
+    style T_A fill:#4CAF50,color:#fff
+    style T_B fill:#009688,color:#fff
+    style CYCLE fill:#F44336,color:#fff
+    style JSTACK fill:#FF9800,color:#fff
+    style FIX_C4 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 核心定义：多进程因争夺资源造成互相等待，若无外力干涉将永远无法推进。

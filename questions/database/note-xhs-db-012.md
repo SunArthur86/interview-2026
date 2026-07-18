@@ -245,6 +245,43 @@ B+树三层确实能存千万级（约 2000 万行），但"能存"和"性能好
 五步设计法：一、判断必要性——先读写分离 + 索引优化 + 分区表，无效再分库分表（成本高）；二、选分片键——选查询频率最高的维度（通常 user_id），避免跨分片查询；三、解决跨维度查询——映射表、基因法、双写索引三选一；四、处理热点——大 V 单独分片、子分片、冷热分离；五、预留扩容方案——分片数选 2 的幂（2/4/8/16），扩容时翻倍迁移量减半。这套方法论也适用于其他分片场景（ES 分片、Kafka 分区），核心是"按业务查询模式选分片键 + 为长尾预留方案"。面试时遇到"如何分库分表"，按这五步答，逻辑完整。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SINGLE([单库单表瓶颈<br/>数据量过大 性能下降]):::start --> ANAL{瓶颈类型}:::decision
+    ANAL -->|写QPS高| WSP[分库<br/>水平拆分多个DB实例]
+    ANAL -->|单表数据多| TSP[分表<br/>单库拆多表]
+    ANAL -->|并发+数据双高| BOTH[分库+分表<br/>组合方案]
+    BOTH --> KEY{选择分片键}:::decision
+    KEY -->|用户ID| UID[用户维度分片<br/>同一用户数据同库]
+    KEY -->|订单ID| OID[订单维度<br/>需考虑跨用户查询]
+    KEY -->|时间| TM["按月/天分表<br/>冷热分离"]
+    KEY -->|短码Hash| HSH[均匀分布<br/>但范围查询难]
+    KEY --> HASH{分片策略}:::decision
+    HASH -->|取模 mod| MOD[user_id % 128<br/>分布均匀]
+    HASH -->|范围 range| RNG[id 0~100w库A<br/>100w~200w库B]
+    HASH -->|一致性哈希| CONS[节点增减影响小<br/>适合动态扩容]:::async
+    MOD --> ROUTE["分片路由<br/>ShardingSphere/MyCat"]
+    RNG --> ROUTE
+    CONS --> ROUTE
+    ROUTE --> EXEC[SQL下发到对应分片]
+    EXEC --> CROSS{跨分片?}:::decision
+    CROSS -->|否 单分片| FAST[单库查询 快]
+    CROSS -->|是 多分片聚合| SLOW["并行查各分片+Merge<br/>分布式Join/分页难"]::::error
+    CROSS --> ISS{衍生问题}:::decision
+    ISS -->|全局ID| GID[需分布式ID生成器]
+    ISS -->|跨库Join| DENORM["冗余字段/应用层关联"]
+    ISS -->|分布式事务| DT["Seata/最终一致"]
+    ISS -->|迁移| MIG[双写+数据同步工具]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 结构化回答
 
 **30 秒电梯演讲：** 分库分表就是把一张大表按某个字段（分片键）拆到多个数据库的多张表中。分片键选得好，大部分查询都能定位到单个分片；选不好，查询要广播到所有分片。

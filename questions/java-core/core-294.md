@@ -92,6 +92,29 @@ memory_points:
 4.  **安全性**：如果二维码被截图发给别人怎么办？（通常扫码后会显示具体 APP 的头像和信息，防止盲扫；或者 Token 极短时间失效）。
 
 
+
+## 核心流程图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant W as Web浏览器 PC
+    participant S as 服务端
+    participant D as 手机APP
+    W->>S: 1. 访问登录页 请求二维码
+    S->>S: 2. 生成临时token(uuid) 存Redis<br/>状态:待扫描 TTL:5min
+    S->>W: 3. 返回二维码图片 含token
+    Note over W: 显示二维码 等待扫描
+    D->>S: 4. APP扫描二维码 提交token+登录态
+    S->>S: 5. 验证token 存APP的用户ID<br/>状态:已确认待登录
+    S->>D: 6. 返回确认 提示授权登录
+    D->>S: 7. 用户点击确认授权
+    S->>S: 8. 生成PC端会话token<br/>状态:已登录
+    Note over W,D: 轮询或WebSocket
+    W->>S: 9. 轮询查token状态
+    S->>W: 10. 返回登录成功+会话凭证
+    W->>W: 11. 写Cookie 跳转主页
+```
 ## 记忆要点
 
 - 三端交互流转：PC请求生成UUID状态(待扫)、APP扫码改状态(已扫)、APP确认发Token(已确认)

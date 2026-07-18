@@ -442,6 +442,53 @@ ROI：
 4. **Service Mesh 适用边界？**——适用：多语言统一/细粒度流量控制/跨团队标准/mTLS。不适用：极致性能/简单架构/小团队。
 5. **Service Mesh 和 Spring Cloud 区别？**——SDK 模式（应用内治理，Java 限定）vs Sidecar 模式（基础设施治理，多语言）。可共存。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 SpringBoot 启动<br/>main 方法]):::start
+    SpringApplication[SpringApplication.run<br/>启动入口]:::process
+    PrepareEnv[准备 Environment<br/>加载 application.yml]:::process
+    ContextQ{{应用上下文?<br/>Servlet/Reactive}}:::decision
+    ServletCtx[AnnotationConfigCtx<br/>传统 MVC]:::process
+    ReactiveCtx[ReactiveWebCtx<br/>WebFlux]:::process
+    Refresh[refresh 刷新容器<br/>核心入口]:::process
+    BeanFactory[BeanFactory<br/>IoC 容器]:::store
+    BeanDef[BeanDefinition<br/>扫描 @Component/@Bean]:::process
+    ScanQ{{配置方式?<br/>注解/XML}}:::decision
+    AnnoScan[ComponentScan<br/>ClassPathBeanDefinitionScanner]:::process
+    XmlScan[XmlBeanDefinitionReader<br/>解析 XML]:::process
+    Instantiate[实例化 Bean<br/>反射 newInstance]:::process
+    Populate[属性填充<br/>依赖注入 @Autowired]:::process
+    AwareQ{{实现 Aware 接口?}}:::decision
+    Aware[BeanNameAware / ContextAware<br/>回调注入]:::process
+    InitQ{{自定义初始化?}}:::decision
+    PostConstruct[@PostConstruct<br/>初始化方法]:::process
+    AOPQ{{需要 AOP 增强?<br/>切面 @Aspect}}:::decision
+    Proxy[创建动态代理<br/>JDK/CGLIB]:::process
+    ProxyChain[代理链<br/>MethodInvocation]:::process
+    Final([✅ Bean 就绪 可用]):::start
+
+    Start --> SpringApplication --> PrepareEnv --> ContextQ
+    ContextQ -->|传统| ServletCtx --> Refresh
+    ContextQ -->|响应式| ReactiveCtx --> Refresh
+    Refresh --> BeanFactory --> BeanDef --> ScanQ
+    ScanQ -->|注解| AnnoScan --> Instantiate
+    ScanQ -->|XML| XmlScan --> Instantiate
+    Instantiate --> Populate --> AwareQ
+    AwareQ -->|是| Aware --> InitQ
+    AwareQ -->|否| InitQ
+    InitQ -->|是| PostConstruct --> AOPQ
+    InitQ -->|否| AOPQ
+    AOPQ -->|是| Proxy --> ProxyChain --> Final
+    AOPQ -->|否| Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** Service Mesh（服务网格）把服务间通信治理（流量路由/熔断/重试/加密/可观测）从应用层下沉到基础设施层（Sidecar 代理）。代表实现 Istio：Envoy 作为 Sidecar 接管进出 Pod 的流量，用 VirtualService/DestinationRule 等 CRD 配置治理策略。适用边界：① 多语言生态（治理能力统一）；② 跨团队统一治理；③ 细粒度流量控制（灰度/AB 测试）。不适用：① 极致性能场景（Sidecar 增加 1-3ms 延迟）；② 简单单体；③ 小团队（运维成本高）

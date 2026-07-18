@@ -237,6 +237,39 @@ class HallucinationDetector:
 3. **场景化容忍**：医疗零容忍vs闲聊高容忍——按风险分级防护
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([用户提问]) --> CHK1{知识是否在训练集?}
+    CHK1 -->|否 长尾/最新| RAG[触发 RAG 检索<br/>外挂知识库]
+    CHK1 -->|是 但不确定| CONF[置信度评估<br/>logit 不确定性]
+    CHK1 -->|是 高置信| GEN[直接生成]
+
+    RAG --> CTX[组装上下文 Prompt]
+    CONF --> LOW_C{置信度低?}
+    LOW_C -->|是| REFUSE[明确拒绝/澄清<br/>"我不确定"]
+    LOW_C -->|否| GEN
+    CTX --> GEN
+
+    GEN --> POST[后处理校验]
+    POST --> FACT[事实核查<br/>对照检索文档]
+    POST --> SCHEMA[格式校验<br/>JSON Schema]
+    FACT --> HALL{检测到幻觉?}
+    SCHEMA --> HALL
+    HALL -->|是| REGEN[重新生成<br/>换 prompt/降温度]
+    REGEN --> GEN
+    HALL -->|否| CIT[引用溯源标注]
+    CIT --> ANS([可信回答])
+
+    style Q fill:#4CAF50,color:#fff
+    style ANS fill:#2196F3,color:#fff
+    style RAG fill:#009688,color:#fff
+    style REFUSE fill:#FF9800,color:#fff
+    style HALL fill:#F44336,color:#fff
+    style REGEN fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 幻觉四种类型：事实编造、无视文档(忠实性)、逻辑错误、伪造来源

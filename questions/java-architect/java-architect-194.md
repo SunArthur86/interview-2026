@@ -394,6 +394,55 @@ P2 预案（分钟级生效）：切流 —— 需主管批准（影响大）
 4. **预案怎么分级？**——P0 限流/降级（秒级生效，自动触发或 oncall 一键，如 Sentinel QPS 上限）、P1 扩容（分钟级，oncall 决策，K8s HPA）、P2 切流（分钟级，主管批准，DNS/GLB 切换备用机房）。
 5. **预案为什么要演练？**——不演练的预案在真出事时执行不出来（脚本有 bug、人不熟练、依赖没准备好）。Chaos Engineering 理念：主动注入故障验证韧性。演练发现的问题在平时修，比大促当天手忙脚乱强。大促前至少演练 2 轮。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 调用方发起 RPC 调用]):::start
+    Proxy[客户端代理 Stub<br/>屏蔽网络细节]:::process
+    Invoke[Invoker 调用链<br/>Filter 拦截]:::process
+    ClusterQ{{集群容错策略?<br/>Cluster}}:::decision
+    Failover[Failover 失败重试<br/>默认]:::process
+    Failfast[Failfast 快速失败]:::warn
+    Forking[Forking 并行调用]:::process
+    Router[Router 路由<br/>按规则筛选 provider]:::process
+    LBQ{{负载均衡策略?<br/>LoadBalance}}:::decision
+    Random[Random 随机<br/>默认]:::process
+    RoundRobin[RoundRobin 轮询]:::process
+    ConsistentHash[一致性 Hash<br/>相同参数同一台]:::process
+    Registry[(注册中心<br/>Nacos/ZK)]:::store
+    Subscribe[订阅 provider 列表<br/>推送变更]:::process
+    Serialize[序列化请求<br/>Hessian/Protobuf]:::process
+    Network[网络传输<br/>Netty 长连接]:::process
+    Server[服务端 Invoker<br/>解包请求]:::process
+    Filter[服务端 Filter<br/>前置处理]:::process
+    Reflect[反射调用真实方法<br/>业务执行]:::process
+    ResultQ{{业务执行结果?}}:::decision
+    Success[序列化响应<br/>返回]:::process
+    Exception[包装异常<br/>RpcException]:::danger
+    Final([✅ 调用方拿到结果]):::start
+
+    Start --> Proxy --> Invoke --> ClusterQ
+    ClusterQ -->|默认| Failover --> Router
+    ClusterQ -->|快速失败| Failfast --> Router
+    ClusterQ -->|并行| Forking --> Router
+    Router --> LBQ
+    LBQ -->|默认| Random --> Serialize
+    LBQ -->|轮询| RoundRobin --> Serialize
+    LBQ -->|亲和| ConsistentHash --> Serialize
+    Registry -.推送.-> Subscribe --> Router
+    Serialize --> Network --> Server --> Filter --> Reflect --> ResultQ
+    ResultQ -->|成功| Success --> Final
+    ResultQ -->|失败| Exception --> Failover
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 大促保障的核心是用容量公式提前算、用压测验证算得对、用预案兜底算错了。容量红线 = (峰值 QPS × 安全系数) ÷ 单机容量，安全系数 1.5-2 倍。预案要分类（限流/降级/扩容/切流）、分级（P0/P1/P2）、可演练（不能等真出事才第一次执行）。大促不是赌博，是工程

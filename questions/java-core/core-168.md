@@ -76,6 +76,45 @@ User bob = userMap.get(1001L); // O(1) 快速定位
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    subgraph LIST [List体系]
+        L0([List特征]):::start
+        L0 --> L1[有序<br/>按插入顺序]
+        L0 --> L2[可重复<br/>允许相同元素]
+        L0 --> L3[索引访问<br/>get index]
+        L0 --> L4[允许null<br/>多个null]
+        L1 --> LA[ArrayList 数组]
+        L2 --> LB[LinkedList 链表]
+    end
+    subgraph MAP [Map体系]
+        M0([Map特征])
+        M0 --> M1[键值对<br/>key-value Entry]
+        M0 --> M2[key唯一<br/>value可重复]
+        M0 --> M3[按key查找<br/>O1 哈希]
+        M0 --> M4[key最多一个null<br/>HashMap允许]
+        M1 --> MA[HashMap]
+        M2 --> MB[TreeMap]
+        M3 --> MC[ConcurrentHashMap]
+    end
+    LA --> CMP{本质区别}:::decision
+    MA --> CMP
+    CMP -->|存储模型| DIFF1[List单列元素<br/>Map双列映射]
+    CMP -->|查询复杂度| DIFF2["List O(n)按值查<br/>Map O(1)按键查"]
+    CMP -->|迭代方式| DIFF3["List: for+索引/迭代器<br/>Map: entrySet/keySet"]
+    DIFF2 --> USE{应用场景}:::decision
+    USE -->|顺序集合| USEL["购物车/排行榜/历史记录"]
+    USE -->|KV映射| USEM["用户ID→对象/缓存/字典"]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 数据结构对比：List是单列集合允许重复且有序，Map是双列双列Key不可重复。

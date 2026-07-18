@@ -143,6 +143,35 @@ url=http://169.254.169.254/latest/meta-data/  # 云服务器元数据
 4. **SSRF 绕过内网检测**：攻击者可能会用 `http://0177.0.0.1` (8进制) 或 `http://[::]` (IPv6) 代替 127.0.0.1，如何防御？（答：必须将输入的 URL 域名解析为 IP 地址，然后将 IP 地址转换为标准的长整型数值进行范围比对，直接拦截私有网段）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    U([User用户]):::start --> ROLE[("Role角色<br/>如: 管理员/普通用户")]:::storage
+    ROLE --> PERM[(Permission权限<br/>如: user:create)]:::storage
+    PERM --> RES[("Resource资源<br/>如: /api/users POST")]:::storage
+    U --> AUTH{用户请求资源}:::decision
+    AUTH --> INTERCEPT["拦截器/网关<br/>提取用户身份Token"]
+    INTERCEPT --> LOAD[加载用户角色+权限<br/>缓存加速]
+    LOAD --> MATCH{权限匹配?}:::decision
+    MATCH -->|是 允许| ALLOW[放行 执行业务]:::success
+    MATCH -->|否 拒绝| DENY[返回403 Forbidden]:::error
+    ROLE --> ADV{RBAC扩展}:::decision
+    ADV -->|RBAC0| B0[基础: User-Role-Permission]
+    ADV -->|RBAC1| B1[角色继承<br/>Senior继承Junior权限]
+    ADV -->|RBAC2| B2["职责分离<br/>约束: 互斥角色/数量限制"]
+    ADV -->|RBAC3| B3[1+2 完整模型]
+    PERM --> ABAC{ABAC对比}:::decision
+    ABAC --> ATT[基于属性Attribute<br/>用户+资源+环境+动作]
+    ABAC --> FINE[细粒度<br/>适合复杂规则 灵活但复杂]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - SQL注入：因拼接SQL有风险，故强用参数化查询与ORM井号占位符。

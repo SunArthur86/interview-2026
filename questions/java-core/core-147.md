@@ -95,6 +95,34 @@ res.cookie('sessionId', sessionId, {
 3.  **分布式 Session**：在多服务器集群环境下，Session 如何共享？（Session 粘滞、集中式存储如 Redis）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    R1([首次请求<br/>无Cookie]):::start --> SRV[服务端处理请求<br/>创建会话]
+    SRV --> GEN["生成Session/用户数据<br/>生成Set-Cookie响应头"]
+    GEN --> SC["Set-Cookie: JSESSIONID=abc123;<br/>Path=/; HttpOnly; Secure; SameSite=Lax"]
+    SC --> R2([响应返回浏览器])
+    R2 --> STORE["浏览器存储Cookie<br/>按domain/path组织"]
+    STORE --> CHK{是否过期?}:::decision
+    CHK -->|Max-Age/Expires到期| DEL[删除Cookie]
+    CHK -->|未过期 持久/会话级| KEEP[保留Cookie]
+    KEEP --> R3([第二次请求同域]):::start
+    R3 --> SEND[自动携带Cookie请求头<br/>Cookie: JSESSIONID=abc123]
+    SEND --> SRV2[服务端读取Cookie<br/>识别Session恢复状态]
+    SRV2 --> BIZ[执行业务逻辑<br/>无需重复登录]
+    SEND --> SEC{安全风险}:::decision
+    SEC -->|XSS窃取| XSS[脚本读取Cookie<br/>HttpOnly阻止JS访问]:::error
+    SEC -->|CSRF伪造| CSRF[跨站请求携带Cookie<br/>SameSite=Strict防御]:::error
+    SEC -->|网络嗅探| SNIF[明文传输<br/>Secure仅HTTPS发送]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心四步：服务端下发响应头(Set-Cookie) -> 浏览器本地存储 -> 请求自动携带 -> 服务端读取识别。

@@ -470,6 +470,55 @@ kubectl rollout status deployment/order-service
 4. **回滚和重发布区别？**——回滚切回已知良好版本（秒级，已构建镜像）、重发布修 bug 再发（小时级，可能新 bug）。故障优先回滚。
 5. **灰度规则怎么做？**——按请求头（X-Gray-Release）、用户 ID 哈希（userId % 100 < 5）、地域、设备、租户维度。比金丝雀更细粒度。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 调用方发起 RPC 调用]):::start
+    Proxy[客户端代理 Stub<br/>屏蔽网络细节]:::process
+    Invoke[Invoker 调用链<br/>Filter 拦截]:::process
+    ClusterQ{{集群容错策略?<br/>Cluster}}:::decision
+    Failover[Failover 失败重试<br/>默认]:::process
+    Failfast[Failfast 快速失败]:::warn
+    Forking[Forking 并行调用]:::process
+    Router[Router 路由<br/>按规则筛选 provider]:::process
+    LBQ{{负载均衡策略?<br/>LoadBalance}}:::decision
+    Random[Random 随机<br/>默认]:::process
+    RoundRobin[RoundRobin 轮询]:::process
+    ConsistentHash[一致性 Hash<br/>相同参数同一台]:::process
+    Registry[(注册中心<br/>Nacos/ZK)]:::store
+    Subscribe[订阅 provider 列表<br/>推送变更]:::process
+    Serialize[序列化请求<br/>Hessian/Protobuf]:::process
+    Network[网络传输<br/>Netty 长连接]:::process
+    Server[服务端 Invoker<br/>解包请求]:::process
+    Filter[服务端 Filter<br/>前置处理]:::process
+    Reflect[反射调用真实方法<br/>业务执行]:::process
+    ResultQ{{业务执行结果?}}:::decision
+    Success[序列化响应<br/>返回]:::process
+    Exception[包装异常<br/>RpcException]:::danger
+    Final([✅ 调用方拿到结果]):::start
+
+    Start --> Proxy --> Invoke --> ClusterQ
+    ClusterQ -->|默认| Failover --> Router
+    ClusterQ -->|快速失败| Failfast --> Router
+    ClusterQ -->|并行| Forking --> Router
+    Router --> LBQ
+    LBQ -->|默认| Random --> Serialize
+    LBQ -->|轮询| RoundRobin --> Serialize
+    LBQ -->|亲和| ConsistentHash --> Serialize
+    Registry -.推送.-> Subscribe --> Router
+    Serialize --> Network --> Server --> Filter --> Reflect --> ResultQ
+    ResultQ -->|成功| Success --> Final
+    ResultQ -->|失败| Exception --> Failover
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+    classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 发布策略解决如何安全上线新版本。蓝绿是两套环境切流（瞬间切换 + 瞬间回滚）、金丝雀是小流量试错（1% → 10% → 100% 阶段放量）、灰度是按规则放量（用户/地域/设备维度）。三者核心都是先小范围验证再放量，出问题快速回滚

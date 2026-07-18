@@ -131,6 +131,40 @@ HashMap JDK 8 内部结构示意：
    | **节点类型** | Entry 类 | Node 类（TreeNode 继承 Node） |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    INIT([HashMap初始化<br/>table=null]):::start --> PUT[首次put 触发resize]
+    PUT --> SZ[容量16 负载因子0.75<br/>阈值12]
+    SZ --> ARR[("Node[] table<br/>数组+链表+红黑树")]:::storage
+    ARR --> IDX[index = n-1 & hash<br/>hash=hashCode^高16位]
+    IDX --> EMP{桶为空?}:::decision
+    EMP -->|是| N1[新建Node入桶]
+    EMP -->|否| KEY{首节点key相同?}:::decision
+    KEY -->|是 equals相等| REP[替换value]
+    KEY -->|否| TREE{"链表长度>=8 && 表长>=64?"}:::decision
+    TREE -->|是| TF[链表转红黑树<br/>查找O log n]:::async
+    TREE -->|否| APP[尾插法追加JDK8<br/>JDK7头插法会死循环]
+    APP --> LOOP{遍历找到相同key?}:::decision
+    LOOP -->|是| REP
+    LOOP -->|否| NEW[追加新Node]
+    NEW --> SIZE[size++ modCount++]
+    N1 --> SIZE
+    REP --> RET[返回oldValue]
+    SIZE --> BIG{"size > threshold?"}:::decision
+    BIG -->|是| RESIZE[扩容2倍<br/>重哈希迁移rehash]:::async
+    BIG -->|否| DONE([返回null]):::success
+    RESIZE --> DONE
+    TF --> SIZE
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 结构：数组+链表+红黑树。链表长度≥8且数组≥64才树化，节点≤6退化为链表

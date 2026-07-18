@@ -153,6 +153,36 @@ Java中不支持多继承，但是可以通过接口来实现
   3. final 修饰方法：⼦类不能覆盖这个方法
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REAL([现实世界问题]):::start --> ABS[抽象Abstraction<br/>提取核心特征]
+    ABS --> CLS[定义类Class<br/>属性+方法 模板]
+    CLS --> ENC["封装Encapsulation<br/>private+getter/setter"]
+    ENC --> IHV[隐藏内部细节<br/>暴露稳定接口]
+    CLS --> INH[继承Inheritance<br/>extends复用代码]
+    INH --> ISA[is-a关系<br/>Dog is an Animal]
+    CLS --> POLY[多态Polymorphism<br/>同一接口多种形态]
+    POLY --> OVLD[重载Overload<br/>编译期 静态]
+    POLY --> OVRR[重写Override<br/>运行期 动态]:::async
+    CLS --> OBJ[new创建对象<br/>实例化分配内存]
+    OBJ --> MSG[对象间消息传递<br/>方法调用]
+    MSG --> INTER[接口Interface<br/>定义契约规范]
+    INTER --> DECO[降低耦合<br/>面向接口编程]
+    DECO --> APP{设计原则}:::decision
+    APP --> SRP[单一职责<br/>一个类只做一件事]
+    APP --> OCP[开闭原则<br/>扩展开放 修改关闭]
+    APP --> LSP[里氏替换<br/>子类能替换父类]
+    APP --> DIP[依赖倒置<br/>依赖抽象非具体]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - OOP核心：先定数据结构（类），再写算法（方法），适合大规模开发

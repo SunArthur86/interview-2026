@@ -119,6 +119,36 @@ class MessageServer implements Subject {
 3. **执行顺序**：如果观察者的执行顺序有依赖（如 A 必须在 B 之前执行），简单的 List 顺序遍历是可控的，但在异步场景（如 Reactor/MQ）中顺序无法保证，设计时需避免观察者间的逻辑依赖。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SUB([Subject 被观察者主题]):::start --> STATE[维护内部状态]
+    STATE --> REG[registerObserver 注册观察者]
+    REG --> LIST[(观察者列表<br/>List Observer)]:::storage
+    LIST --> NOTIFY[状态变更时 notifyObservers]
+    NOTIFY --> LOOP[遍历所有观察者]
+    LOOP --> UPD[调用observer.update<br/>推送新状态]
+    UPD --> O1[ConcreteObserver1<br/>如: 数据图表]
+    UPD --> O2[ConcreteObserver2<br/>如: 邮件通知]
+    UPD --> O3[ConcreteObserver3<br/>如: 日志记录]
+    O1 --> REACT[各自响应处理]
+    O2 --> REACT
+    O3 --> REACT
+    REACT --> DONE([主题与观察者解耦<br/>一对多广播]):::success
+    REG --> MOD{模式变体}:::decision
+    MOD -->|推模型 push| PUSH[主题把数据推给观察者<br/>可能传无用数据]
+    MOD -->|拉模型 pull| PULL[观察者主动拉取需要的<br/>主题只通知事件]
+    MOD -->|事件总线 EventBus| BUS[Guava EventBus<br/>解耦更彻底]:::async
+    MOD -->|响应式 RxJava| RX["Observable/Flowable<br/>背压支持"]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 一句话定义：建立对象间一对多的依赖，当主题状态变化时，其观察者会收到通知。

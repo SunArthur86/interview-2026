@@ -456,6 +456,58 @@ public class RealtimeReconcileService {
 3. **怎么设计对账数据结构？**——对账明细表（业务单号/平台金额/渠道金额/差异类型/处理状态），支持按渠道/日期/差异类型查询。差异处理表（处理动作/操作人/时间/备注），留痕审计。
 4. **对账和 reconciliation（调节）的关系？**——对账（reconciliation）发现差异，调节（adjustment）处理差异。两者是"发现-处理"的闭环。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 需求分析<br/>明确场景与 QPS]):::start
+    Est[容量估算<br/>QPS/存储/带宽]:::process
+    Arch[架构概览<br/>分层设计]:::process
+    LayerQ{{架构分层?}}:::decision
+    Client[接入层<br/>APP/Web/小程序]:::process
+    Gateway[网关层<br/>鉴权/限流/路由]:::process
+    Service[服务层<br/>微服务集群]:::process
+    DataQ{{数据访问层?}}:::decision
+    Cache[(缓存层<br/>Redis 多级)]:::store
+    DB[(存储层<br/>MySQL 分库分表)]:::store
+    MQ[(消息队列<br/>异步解耦)]:::store
+    HAQ{{高可用方案?<br/>异地多活}}:::decision
+    SingleDC[单机房<br/>主从备份]:::warn
+    MultiDC[两地三中心<br/>单元化部署]:::process
+    ConsistencyQ{{一致性要求?}}:::decision
+    Strong[强一致<br/>2PC/同步复制]:::process
+    Eventual[最终一致<br/>异步补偿]:::process
+    ScaleQ{{扩展方式?}}:::decision
+    Vertical[垂直扩展<br/>升配]:::warn
+    Horizontal[水平扩展<br/>分片/集群]:::process
+    Monitor[监控告警<br/>全链路追踪]:::process
+    Final([✅ 系统设计完成]):::start
+
+    Start --> Est --> Arch --> LayerQ
+    LayerQ -->|前端| Client
+    LayerQ -->|网关| Gateway --> Service
+    LayerQ -->|业务| Service
+    Service --> DataQ
+    DataQ -->|热数据| Cache
+    DataQ -->|持久化| DB
+    DataQ -->|异步| MQ
+    Service --> HAQ
+    HAQ -->|初级| SingleDC
+    HAQ -->|高可用| MultiDC
+    HAQ --> ConsistencyQ
+    ConsistencyQ -->|交易类| Strong
+    ConsistencyQ -->|内容类| Eventual
+    Service --> ScaleQ
+    ScaleQ -->|短期| Vertical
+    ScaleQ -->|长期| Horizontal --> Monitor --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 对账是检查钱有没有算错打错，差错处理是发现错了怎么修。核心矛盾是系统再完美也会有差异（网络抖动/重复/掉单），必须有兜底机制保证资金安全。架构三板斧：双向比对（平台账 vs 渠道账，找出长款短款）、差错分类（可自动处理的 vs 需人工的）、资金兜底（挂账/冲正/补偿，确保账实相符）

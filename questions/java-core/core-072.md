@@ -86,6 +86,39 @@ System.out.println(a.add(b)); // 输出 0.3
 3. **switch 支持哪些类型？**：Java 5 起支持 enum；Java 7 起支持 String；仅支持 byte, short, char, int 及其包装类（会自动拆箱），不支持 long, float, double。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    JT([Java数据类型体系]):::start --> PRI[基本类型Primitive 8种]
+    JT --> REF[引用类型Reference]
+    PRI --> NUM[数值型]
+    PRI --> BOOL["boolean 1位 true/false"]
+    PRI --> CHR[char 2字节 Unicode字符]:::storage
+    NUM --> INT[整数型]
+    NUM --> FLT[浮点型]
+    INT --> B1[byte 1字节 -128~127]
+    INT --> S2[short 2字节]
+    INT --> I4[int 4字节 默认整型]
+    INT --> L8[long 8字节 L后缀]
+    FLT --> F4[float 4字节 F后缀 IEEE754]
+    FLT --> D8[double 8字节 默认浮点]
+    REF --> CLS["类class: String/Object"]
+    REF --> ARR["数组array: int["]/Object[]]
+    REF --> IF["接口interface: List/Map"]
+    B1 --> CACHE{包装类缓存机制}:::decision
+    CACHE -->|Integer Cache -128~127| SH[相同地址 ==为true]
+    CACHE -->|超出范围或new| NSH[不同对象 ==为false<br/>须用equals]:::error
+    SH --> AUT["自动装箱拆箱<br/>编译期 valueOf/xxxValue"]:::async
+    NSH --> AUT
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 四大分类：整型(默认int)、浮点型(默认double)、字符型(2字节)、布尔型

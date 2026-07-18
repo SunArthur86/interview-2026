@@ -191,6 +191,44 @@ def should_improve_hit1(hit1_score, hit3_score):
 4. **"多标签场景下，hit@K怎么定义？"**
    → 任意一个正确标签在Top-K中即算命中；也可用Precision@K(前K中正确标签比例)
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TASK([业务任务]) --> ANA[任务分析<br/>输入/输出/约束]
+    ANA --> TPL{选择模板}
+
+    TPL -->|分类/抽取| FEW[Few-Shot<br/>给样例示范]
+    TPL -->|推理/数学| COT[Chain-of-Thought<br/>think step by step]
+    TPL -->|结构化输出| SCHEMA[JSON Schema<br/>Function Call]
+    TPL -->|多步规划| REACT[ReAct<br/>Thought+Action]
+
+    FEW --> COMBINE[组合策略<br/>Role+Context+Instruction+Format]
+    COT --> COMBINE
+    SCHEMA --> COMBINE
+    REACT --> COMBINE
+
+    COMBINE --> PARAM[生成参数调优]
+    PARAM --> T[Temperature<br/>0 事实性 / 0.7 创意]
+    PARAM --> TP[Top-P 核采样<br/>控制多样性]
+    PARAM --> TK[Top-K<br/>限制候选词]
+
+    PARAM --> GEN[LLM 生成]
+    GEN --> VALID{输出校验}
+    VALID -->|格式错| REPAIR[修复重试<br/>反馈错误给 LLM]
+    REPAIR --> GEN
+    VALID -->|内容不达标| ITER[迭代改 prompt]
+    ITER --> COMBINE
+    VALID -->|通过| OUT([稳定输出])
+
+    style TASK fill:#4CAF50,color:#fff
+    style OUT fill:#2196F3,color:#fff
+    style GEN fill:#009688,color:#fff
+    style VALID fill:#FF9800,color:#fff
+    style REPAIR fill:#F44336,color:#fff
+    style ITER fill:#9C27B0,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** Hit@K表示正确答案在前K个预测结果中的比例。意图识别用hit@3而非hit@1，是因为用户表达往往模糊多义，正确意图可能排在第2或第3位，hit@3容许"前几名里有对的就算成功"，更贴近下游可补救的实际效果。

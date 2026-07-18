@@ -127,6 +127,33 @@ MySQL (Binlog)      Canal Server      Kafka           Consumer (ES)
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q([查询SQL执行]):::start --> PARSE["解析器Parser<br/>词法/语法/语义分析"]
+    PARSE --> OPT[优化器Optimizer<br/>基于成本CBO选择执行计划]
+    OPT --> IDX{是否走索引?}:::decision
+    IDX -->|是 二级索引| SI[扫描二级索引<br/>获取主键PK]
+    SI --> COV{是否覆盖索引?}:::decision
+    COV -->|是 所需列全在索引| DIRECT[直接返回<br/>无需回表]:::success
+    COV -->|否 缺列| BACK[回表: 用PK查聚簇索引<br/>获取完整行]:::async
+    BACK --> RES[组装结果集]
+    IDX -->|否 全表扫描| FULL[顺序扫描所有数据页<br/>慢 大表慎用]:::error
+    DIRECT --> RES
+    FULL --> RES
+    RES --> RTN([返回结果]):::success
+    OPT --> STATS[(统计信息直方图<br/>决定索引选择)]:::storage
+    STATS --> BAD{统计信息过期?}:::decision
+    BAD -->|是| WRONG[选错执行计划<br/>需analyze更新]:::error
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 弃用MySQL原因：模糊查无法走索引，且不支持分词与相关度（BM25）排序

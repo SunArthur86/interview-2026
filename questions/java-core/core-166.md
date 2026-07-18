@@ -130,6 +130,41 @@ while (it.hasNext()) {
 | **实战场景** | **绝大多数场景**，如查询列表、数据传输 | 很少使用，除非频繁在头尾操作（如队列/栈） |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    COL([Collection接口]):::start --> LST[List 有序可重复]
+    COL --> SET[Set 无序不可重复]
+    COL --> QUE[Queue 队列 FIFO]
+    LST --> AL[ArrayList<br/>数组 查询快]
+    LST --> LL[LinkedList<br/>双向链表 增删快]
+    LST --> VEC[Vector<br/>线程安全synchronized 已淘汰]
+    SET --> HS[HashSet<br/>基于HashMap]
+    SET --> LTS[LinkedHashSet<br/>保留插入顺序]
+    SET --> TS[TreeSet<br/>红黑树有序]
+    QUE --> PQ[PriorityQueue<br/>堆 优先级]
+    QUE --> DQ[Deque 双端队列]
+    DQ --> ARR[ArrayDeque<br/>数组实现 推荐]
+    DQ --> LL2[LinkedList<br/>也实现Deque]
+    MAP([Map接口 独立体系]):::start --> HM[HashMap<br/>数组+链表+红黑树]
+    MAP --> LHM["LinkedHashMap<br/>维护插入/LRU顺序"]
+    MAP --> TM[TreeMap<br/>红黑树按键排序]
+    MAP --> HTM[Hashtable<br/>古老线程安全 已淘汰]
+    MAP --> CHM["ConcurrentHashMap<br/>分段锁/CAS 高并发推荐"]:::async
+    HM --> CHO{选型决策}:::decision
+    CHO -->|线程不安全 单线程| APP1[默认选HashMap]
+    CHO -->|高并发| APP2[ConcurrentHashMap]:::success
+    CHO -->|需要排序| APP3[TreeMap]
+    CHO -->|保持插入顺序| APP4[LinkedHashMap]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 双大顶层接口：单值体系Collection，键值对体系Map，Map独立不继承Collection。

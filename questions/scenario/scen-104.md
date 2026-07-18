@@ -105,6 +105,36 @@ memory_points:
 4. **雪花算法 WorkerID 分配**：在 Docker/K8s 动态扩缩容环境下，如何保证 WorkerID 不冲突？（使用 ZooKeeper 持久顺序节点自动注册，或基于 IP Hash 生成，但需注意 IP 漂移）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    NEED([需要全局唯一ID]):::start --> REQ{"核心要求<br/>唯一/趋势递增/高性能"}
+    REQ --> CHO{方案选型}:::decision
+    CHO -->|UUID| U[UUID v4 128位<br/>无序 字符串]
+    CHO -->|数据库自增| AI[auto_increment<br/>单点瓶颈]
+    CHO -->|号段模式| SEG[Leaf-Segment<br/>DB号段+内存分配]
+    CHO -->|雪花算法| SNOW[Snowflake<br/>64位 时间+机器+序列]
+    CHO -->|Redis incr| RDI[INCR命令<br/>性能高 但依赖Redis]
+    U --> CONS1[优点: 本地生成 无中心<br/>缺点: 无序 占空间 索引差]:::error
+    AI --> CONS2[优点: 简单 递增<br/>缺点: 单点 性能瓶颈]:::error
+    SEG --> DB[(DB存储max_id+step<br/>预取号段到内存)]:::storage
+    DB --> MEM[内存原子分配ID<br/>号段用完再取]
+    MEM --> ADV1[优点: 高性能 趋势递增<br/>缺点: 依赖DB ID可预测]
+    SNOW --> BITS[64位: 1位符号+41位时间+10位机器+12位序列]
+    BITS --> GEN[各机器本地生成<br/>每ms可生成4096个]
+    GEN --> ADV2[优点: 高性能 去中心化 趋势递增<br/>缺点: 时钟回拨问题]:::success
+    GEN --> CLK{时钟回拨?}:::decision
+    CLK -->|是 系统时间倒退| SOLVE["等待/报错/借用未来位<br/>需特殊处理"]
+    CLK -->|否| OK2[正常生成]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - UUID无序太长致页分裂，仅做非主键Token；Snowflake趋势递增做业务主键

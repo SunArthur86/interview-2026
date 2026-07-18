@@ -91,6 +91,37 @@ public class AESUtil {
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PL([发送方: 明文]):::start --> KEY[共享密钥K<br/>发送方接收方相同]
+    KEY --> ALG{加密算法}:::decision
+    ALG -->|DES| DES[56位密钥 已不安全]
+    ALG -->|3DES| TDES[3次DES 168位 慢]
+    ALG -->|AES| AES["128/192/256位 主流推荐"]:::async
+    ALG -->|RC4| RC4[流加密 已被淘汰]
+    ALG -->|SM4| SM4[国密算法 中国标准]
+    AES --> ENC[加密: 明文+密钥+IV<br/>→密文]
+    ENC --> MODE{加密模式}:::decision
+    MODE -->|ECB 电子密码本| ECB[相同明文→相同密文<br/>不安全 暴露模式]:::error
+    MODE -->|CBC 密文分组链接| CBC[前块密文异或后块<br/>需IV 推荐已用]
+    MODE -->|CTR 计数器| CTR[并行加密 速度快<br/>流式加密]
+    MODE -->|GCM| GCM[带认证标签 AEAD<br/>防篡改 最推荐]:::success
+    CBC --> SEND[密文+IV 通过网络发送]
+    GCM --> SEND
+    SEND --> RCV([接收方收到密文])
+    RCV --> SAME[用相同密钥K解密]
+    SAME --> DEC[反向运算 恢复明文]
+    DEC --> ORIG([得到原始明文]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心：加密和解密使用同一个密钥，速度快，适合大数据量加解密

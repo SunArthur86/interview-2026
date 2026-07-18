@@ -159,6 +159,35 @@ memory_points:
 5. **binlog和redo log的区别本质**：redo log是"物理日志"（哪个页哪个偏移改成什么），binlog是"逻辑日志"（执行了什么操作）。物理日志恢复更快，逻辑日志跨引擎兼容
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    BR([浏览器发起HTTP请求]):::start --> DS[DispatcherServlet<br/>前端控制器接收]
+    DS --> HM[HandlerMapping<br/>解析RequestMapping注解]
+    HM --> EC{URL匹配成功?}:::decision
+    EC -->|否| N404[404 Not Found<br/>响应客户端]:::error
+    EC -->|是| HA[HandlerAdapter<br/>适配器调用Controller]
+    HA --> AN["解析方法注解<br/>@PathVariable/@RequestBody/@RequestParam"]
+    AN --> CONV[HandlerMethodArgumentResolver<br/>参数类型转换与绑定]
+    CONV --> CH{参数校验通过?}:::decision
+    CH -->|否 Valid失败| BEX[MethodArgumentNotValidException<br/>全局异常处理]:::error
+    CH -->|是| CTRL["Controller业务方法执行<br/>调用Service/Repository"]
+    CTRL --> RT{返回类型判断}:::decision
+    RT -->|ResponseBody / RestController| JACK[Jackson序列化为JSON]
+    RT -->|ModelAndView / 视图名| VR[ViewResolver视图解析器]
+    JACK --> WR[WriteResponseBodyAdvice<br/>响应体输出]
+    VR --> RD["渲染视图HTML/JSP/Thymeleaf"]
+    WR --> CL([客户端收到JSON响应]):::success
+    RD --> CL
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 结构化回答
 
 **30 秒电梯演讲：** 三种日志分别解决三个问题：redo log保证崩溃恢复（持久性），undo log保证回滚和MVCC（原子性+隔离性），binlog保证主从复制和数据归档。

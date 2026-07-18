@@ -108,6 +108,35 @@ while (true) {
 3. **Java NIO 对应哪种模型？**：在 Linux 上，Java NIO 的 `Selector` 底层默认使用 Epoll（JDK 1.5 update 10 之后），在 Mac 上使用 Kqueue，实现了对多路复用的跨平台封装。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    APP([应用调用IO多路复用]):::start --> SEL{机制选择}:::decision
+    SEL -->|select| SL[select: fd_set位图<br/>FD上限1024]
+    SEL -->|poll| PL[poll: pollfd数组<br/>无FD数量限制]
+    SEL -->|epoll| EP[epoll: 红黑树+就绪链表<br/>Linux专用]
+    SL --> CO1[拷贝全部fd到内核<br/>每次调用全量扫描]
+    PL --> CO2["拷贝pollfd数组到内核<br/>线性扫描O(n)"]
+    CO1 --> BL1["内核轮询所有fd<br/>复杂度O(n)"]
+    CO2 --> BL1
+    BL1 --> RET1[返回就绪fd数量<br/>应用需再次遍历]
+    EP --> CT[epoll_create 创建实例<br/>红黑树管理fd]:::async
+    CT --> ADD[epoll_ctl 注册fd<br/>关联回调函数]
+    ADD --> WAIT[epoll_wait 阻塞等待]
+    WAIT --> EVT[网卡中断→回调<br/>就绪fd加入就绪链表]:::success
+    EVT --> RET2["直接返回就绪fd<br/>复杂度O(1)~O(就绪数)"]
+    RET1 --> PR[应用处理IO事件]
+    RET2 --> PR
+    PR --> DONE([继续下一轮监听]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - IO多路复用演进：Select有1024上限且轮询，Poll突破限制但依然轮询(O(n))

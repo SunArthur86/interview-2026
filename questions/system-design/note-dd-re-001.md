@@ -263,6 +263,55 @@ public class LotteryService {
 4. **安全失败策略**：规则执行抛异常时应有兜底——默认拒绝（安全优先）还是默认放行（可用性优先），取决于业务场景。抽奖类建议默认拒绝。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 应用容器化部署]):::start
+    Code[源代码]:::process
+    Dockerfile[编写 Dockerfile<br/>基础镜像+依赖]:::process
+    Build[构建镜像<br/>docker build]:::process
+    Image[(镜像仓库<br/>Registry)]:::store
+    K8sCluster[K8s 集群<br/>控制面+数据面]:::process
+    APIServer[API Server<br/>唯一入口]:::process
+    Deploy[创建 Deployment<br/>声明式 YAML]:::process
+    SchedulerQ{{调度决策?<br/>Scheduler}}:::decision
+    Filter[预选 Filter<br/>资源/亲和性]:::process
+    Score[优选 Score<br/>打分排序]:::process
+    Bind[绑定到 Node<br/>更新 Pod]:::process
+    Kubelet[Kubelet<br/>节点代理]:::process
+    PullImage[拉取镜像<br/>CRI 接口]:::process
+    Container[创建容器<br/>containerd]:::process
+    ProbeQ{{健康探针?<br/>Liveness/Readiness}}:::decision
+    Liveness[Liveness Probe<br/>失败重启]:::process
+    Readiness[Readiness Probe<br/>就绪接流量]:::process
+    RestartQ{{容器崩溃?}}:::decision
+    Restart[重启策略<br/>Always]:::process
+    ScaleQ{{HPA 自动扩缩?<br/>CPU/QPS}}:::decision
+    Scale[水平扩缩<br/>动态调整副本]:::process
+    Service[Service 服务<br/>稳定 ClusterIP]:::process
+    Ingress[Ingress 入口<br/>七层路由]:::process
+    Final([✅ 服务对外可用]):::start
+
+    Start --> Code --> Dockerfile --> Build --> Image
+    K8sCluster --> APIServer --> Deploy --> SchedulerQ
+    Image -.拉取.-> PullImage
+    SchedulerQ --> Filter --> Score --> Bind
+    Bind --> Kubelet --> PullImage --> Container --> ProbeQ
+    ProbeQ -->|存活| Liveness --> RestartQ
+    ProbeQ -->|就绪| Readiness --> ScaleQ
+    RestartQ -->|崩溃| Restart --> Container
+    RestartQ -->|正常| ScaleQ
+    ScaleQ -->|高峰| Scale --> Service
+    ScaleQ -->|平稳| Service
+    Service --> Ingress --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 记忆要点
 
 - 结论：绝不能硬编码，因为规则与流程强耦合严重违反开闭原则（OCP）。

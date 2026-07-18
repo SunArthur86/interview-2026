@@ -114,6 +114,35 @@ app.get('/api/data', (req, res) => {
 | **适用场景** | 静态资源 (JS/CSS/图片) | HTML 文档或频繁变化的动态数据 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([CPU访问内存地址]):::start --> L1["L1 Cache 指令/数据<br/>几十KB 纳秒级"]
+    L1 --> H1{L1命中?}:::decision
+    H1 -->|是| R1[返回数据 延迟约1ns]:::success
+    H1 -->|否| L2[L2 Cache 多核共享<br/>几百KB]
+    L2 --> H2{L2命中?}:::decision
+    H2 -->|是| UP1[数据回填L1 返回]:::success
+    H2 -->|否| L3[L3 Cache<br/>几MB~几十MB]
+    L3 --> H3{L3命中?}:::decision
+    H3 -->|是| UP2["逐级回填L1/L2 返回"]:::success
+    H3 -->|否| MISS[Cache Miss<br/>触发硬件读内存]
+    MISS --> RAM[访问主内存DRAM<br/>约100ns]:::storage
+    RAM --> FILL[按Cache Line 64B<br/>加载并替换]
+    FILL --> REPL{Cache已满?}:::decision
+    REPL -->|是| EV["LRU/随机替换策略<br/>淘汰旧块"]:::async
+    REPL -->|否| INS[直接插入新块]
+    EV --> RTN([返回数据给CPU]):::success
+    INS --> RTN
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - HTTP缓存分强缓存与协商缓存，强缓存命中不发请求，协商缓存命中返回304

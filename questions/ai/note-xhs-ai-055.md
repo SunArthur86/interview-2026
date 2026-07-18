@@ -255,6 +255,43 @@ def validate_tool_args(tool_name, arguments):
 5. **"MCP的安全性怎么保证？LLM不会调用有危险的工具吗（如删除数据）？"**
    → 工具注册时标注安全等级，高危工具需要人工确认（Human-in-the-loop）
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    USER([用户请求]) --> AGENT[Agent 控制循环]
+    AGENT --> DECIDE{LLM 决策<br/>需要什么能力}
+
+    DECIDE --> FC[Function Call<br/>函数级 直接调用]
+    DECIDE --> SKILL[Skill<br/>能力封装 Prompt+代码<br/>渐进式披露]
+    DECIDE --> MCP[MCP 协议<br/>标准化工具服务<br/>跨应用复用]
+
+    FC --> INVOKE[直接 invoke 函数]
+    SKILL --> SELECT[选择 Skill<br/>按描述匹配]
+    MCP --> CONN[连接 MCP Server<br/>stdio/SSE 传输]
+
+    SELECT --> LOAD[加载 Skill 指导<br/>注入 Prompt]
+    CONN --> DISC[发现 tools/resources<br/>动态注册]
+
+    LOAD --> EXEC[执行<br/>可能多步]
+    INVOKE --> EXEC
+    DISC --> EXEC
+
+    EXEC --> OBS[Observation]
+    OBS --> AGENT
+
+    REG([开发者注册]) -.-> SKILL
+    REG -.-> MCP
+    SKILL <-. 复用 .-> APP2[其他 Agent 应用]
+    MCP <-. 复用 .-> APP3[Claude/其他客户端]
+
+    style USER fill:#4CAF50,color:#fff
+    style AGENT fill:#009688,color:#fff
+    style FC fill:#FF9800,color:#fff
+    style SKILL fill:#9C27B0,color:#fff
+    style MCP fill:#2196F3,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** MCP（Model Context Protocol）是大模型工具调用的标准通信协议，完整流程分四步：意图识别→参数提取与匹配→标准化封装调用→结果整理返回。

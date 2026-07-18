@@ -264,6 +264,48 @@ class DegradationChain:
 4. **降级的业务影响**：从70B降到7B模型，生成质量下降可能导致创作者不满——需要通知创作者"系统繁忙，使用快速模式生成"，而不是默默降级。透明度比质量更重要
 5. **监控指标**：批量AIGC需要监控的关键指标：MQ积压深度、端到端生成延迟（排队+推理）、降级触发率、GPU利用率、每千次生成成本——这些指标直接反映系统的健康度和经济效益
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    INPUT([用户输入/数据]) --> PRE[预处理<br/>清洗/分词/向量化]
+    PRE --> MODEL[大模型/算法核心<br/>system-design]
+
+    MODEL --> INFER{推理模式}
+    INFER -->|预训练知识| PARAM[参数化知识<br/>权重中静态]
+    INFER -->|外部增强| NON_PARAM[非参数化<br/>检索/工具/记忆]
+
+    PARAM --> GEN[生成/决策]
+    NON_PARAM --> GEN
+
+    GEN --> POST[后处理<br/>格式化/校验/引用]
+    POST --> OUTPUT([结果输出])
+
+    EVAL([质量评估]) --> E1[准确率 Accuracy]
+    EVAL --> E2[延迟 Latency]
+    EVAL --> E3[成本 Token Cost]
+    EVAL --> E4[幻觉率 Hallucination]
+
+    EVAL --> ITER{达标?}
+    ITER -->|否| TUNE[调优<br/>Prompt/微调/RAG]
+    TUNE --> MODEL
+    ITER -->|是| DEPLOY([部署上线])
+
+    DEPLOY --> MONITOR[监控<br/>日志/Trace/告警]
+    MONITOR --> ITER
+
+    OPTIM([工程优化]) --> LAT[推理加速<br/>KV Cache/量化/PagedAttention]
+    OPTIM --> CACHE_S[缓存层<br/>语义缓存/结果复用]
+    OPTIM --> GUARD[护栏 Guardrails<br/>输入输出过滤]
+
+    style INPUT fill:#4CAF50,color:#fff
+    style OUTPUT fill:#2196F3,color:#fff
+    style MODEL fill:#009688,color:#fff
+    style TUNE fill:#FF9800,color:#fff
+    style DEPLOY fill:#9C27B0,color:#fff
+    style EVAL fill:#F44336,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 夜间数万创作者批量生成是典型的潮汐流量场景——需要MQ削峰+任务分片+多级降级+幂等保证，不能让突发流量打爆推理集群——像双11的物流系统。

@@ -343,6 +343,53 @@ public class VipWeightRule extends AbstractRule {
 4. **回答 follow-up "责任链中途能不能终止"**：能。当前实现中任一规则返回 `false` 即终止。也可以设计更灵活的终止策略：`ABORT`（终止）、`CONTINUE`（继续）、`SKIP\_REMAINING`（跳过剩余规则但视为通过）三态返回值。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 SpringBoot 启动<br/>main 方法]):::start
+    SpringApplication[SpringApplication.run<br/>启动入口]:::process
+    PrepareEnv[准备 Environment<br/>加载 application.yml]:::process
+    ContextQ{{应用上下文?<br/>Servlet/Reactive}}:::decision
+    ServletCtx[AnnotationConfigCtx<br/>传统 MVC]:::process
+    ReactiveCtx[ReactiveWebCtx<br/>WebFlux]:::process
+    Refresh[refresh 刷新容器<br/>核心入口]:::process
+    BeanFactory[BeanFactory<br/>IoC 容器]:::store
+    BeanDef[BeanDefinition<br/>扫描 @Component/@Bean]:::process
+    ScanQ{{配置方式?<br/>注解/XML}}:::decision
+    AnnoScan[ComponentScan<br/>ClassPathBeanDefinitionScanner]:::process
+    XmlScan[XmlBeanDefinitionReader<br/>解析 XML]:::process
+    Instantiate[实例化 Bean<br/>反射 newInstance]:::process
+    Populate[属性填充<br/>依赖注入 @Autowired]:::process
+    AwareQ{{实现 Aware 接口?}}:::decision
+    Aware[BeanNameAware / ContextAware<br/>回调注入]:::process
+    InitQ{{自定义初始化?}}:::decision
+    PostConstruct[@PostConstruct<br/>初始化方法]:::process
+    AOPQ{{需要 AOP 增强?<br/>切面 @Aspect}}:::decision
+    Proxy[创建动态代理<br/>JDK/CGLIB]:::process
+    ProxyChain[代理链<br/>MethodInvocation]:::process
+    Final([✅ Bean 就绪 可用]):::start
+
+    Start --> SpringApplication --> PrepareEnv --> ContextQ
+    ContextQ -->|传统| ServletCtx --> Refresh
+    ContextQ -->|响应式| ReactiveCtx --> Refresh
+    Refresh --> BeanFactory --> BeanDef --> ScanQ
+    ScanQ -->|注解| AnnoScan --> Instantiate
+    ScanQ -->|XML| XmlScan --> Instantiate
+    Instantiate --> Populate --> AwareQ
+    AwareQ -->|是| Aware --> InitQ
+    AwareQ -->|否| InitQ
+    InitQ -->|是| PostConstruct --> AOPQ
+    InitQ -->|否| AOPQ
+    AOPQ -->|是| Proxy --> ProxyChain --> Final
+    AOPQ -->|否| Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 记忆要点
 
 - 核心机制：利用Spring将所有规则Bean注入List<IRule>，实现自动构建责任链。

@@ -115,6 +115,52 @@ def generate_cai_response(prompt, model, constitution):
 ```
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 客户端请求分布式系统]):::start
+    Gateway[API 网关<br/>入口路由]:::process
+    Coordinator[协调者 Coordinator<br/>2PC/3PC/TCC]:::process
+    PhaseQ{{一致性协议?<br/>CAP 权衡}}:::decision
+    CP[CP 强一致<br/>Raft/Paxos]:::process
+    AP[AP 最终一致<br/>Gossip/Dynamo]:::process
+    PartitionQ{{网络分区?<br/>Network Partition}}:::decision
+    Minority[少数派降级<br/>拒绝服务]:::warn
+    Majority[多数派继续<br/>保证一致]:::process
+    Replica[多副本写入<br/>Leader → Followers]:::process
+    QuorumQ{{Quorum 写策略?}}:::decision
+    WQAll[W=All 同步所有副本<br/>强一致 低可用]:::process
+    WQMajority[W=Majority<br/>平衡]:::process
+    VectorClock[向量时钟<br/>冲突检测]:::process
+    ConflictQ{{写冲突?}}:::decision
+    LWW[Last Write Wins<br/>时间戳定序]:::process
+    Merge[业务合并<br/>CRDT/手动解决]:::process
+    Compensate[补偿事务 TCC<br/>Try-Confirm-Cancel]:::process
+    MQ[(消息队列<br/>最终一致性)]:::store
+    Final([✅ 全局一致状态]):::start
+
+    Start --> Gateway --> Coordinator --> PhaseQ
+    PhaseQ -->|强一致| CP --> PartitionQ
+    PhaseQ -->|高可用| AP --> Replica
+    PartitionQ -->|是| Minority
+    PartitionQ -->|否| Majority --> Replica
+    Replica --> QuorumQ
+    QuorumQ -->|强一致| WQAll --> VectorClock
+    QuorumQ -->|平衡| WQMajority --> VectorClock
+    VectorClock --> ConflictQ
+    ConflictQ -->|无冲突| MQ --> Final
+    ConflictQ -->|有冲突| LWW --> Final
+    ConflictQ -->|复杂| Merge --> Final
+    PhaseQ -.跨服务.-> Compensate --> MQ
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 记忆要点
 
 - 定义：用宪法原则指导AI自我修正，减少人工标注依赖。

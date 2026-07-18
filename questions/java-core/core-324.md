@@ -113,6 +113,36 @@ Mark Word (32位 JVM) 布局随锁状态变化：
    - **收益下降**：现代 Java 程序普遍使用并发库，锁的竞争模式比早期更复杂，偏向锁“锁通常由一个线程持有”的假设在复杂系统中往往不成立。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    OBJ([对象头Mark Word]):::start --> FIRST{首次有线程访问?}:::decision
+    FIRST -->|是 单线程| BIAS[偏向锁 Biased<br/>记录线程ID 无竞争]
+    BIAS --> RUN1[同线程再次进入<br/>CAS比较线程ID 即可]
+    RUN1 --> COMP{出现第二个线程?}:::decision
+    COMP -->|否 仍是单线程| RUN1
+    COMP -->|是 竞争出现| LIGHT[轻量级锁 Lightweight<br/>撤销偏向 栈帧Lock Record]
+    LIGHT --> CAS[CAS自旋<br/>尝试设置Mark Word指针]
+    CAS --> SUCC{CAS成功?}:::decision
+    SUCC -->|是| RUN2[自旋持有锁<br/>无系统调用]
+    SUCC -->|否| SPIN[自适应自旋<br/>等待一定次数]
+    SPIN --> GIVEUP{超过自旋阈值?}:::decision
+    GIVEUP -->|否| CAS
+    GIVEUP -->|是 严重竞争| HEAVY[重量级锁 Heavyweight<br/>ObjectMonitor]
+    HEAVY --> OS[("内核态mutex<br/>等待队列park/unpark")]:::storage
+    OS --> BLK[未抢到锁的线程<br/>进入内核态阻塞]
+    BLK --> WAKE[锁释放时唤醒<br/>系统调用开销大]
+    WAKE --> DONE([执行临界区]):::success
+    BIAS -.->|JDK15+默认关闭| OFF[BiasedLocking已废弃<br/>直接进入轻量级锁]:::async
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 升级单向不可逆：无锁 → 偏向锁(记线程ID) → 轻量级锁(CAS+自旋) → 重量级锁(OS互斥量阻塞)

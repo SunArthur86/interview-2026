@@ -243,6 +243,39 @@ class KnowledgeUpdatePipeline:
 **面试加分点**：提到Post5原文中的RAG优化技巧——结构化语义切分+上下文桥接、Query扩写+语义相似度阈值、混合检索用LambdaMART做分数归一化；提到Contextual Retrieval(Anthropic 2024)在切分时给每个chunk加上文档级摘要作为上下文；提到评估chunk质量可以用RAGAS的Context Precision和Context Recall指标；提到Late Chunking（先对整文档做embedding再切分）是2024年新方向。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    DOC([原始文档<br/>正文+表格+图片]) --> PARSE[文档解析<br/>保留结构信息]
+    PARSE --> DETECT{内容类型?}
+
+    DETECT -->|纯文本| TXT[递归字符切分<br/>段落→句子→字符]
+    DETECT -->|Markdown| MD[语义切分<br/>按 H1/H2/H3 标题]
+    DETECT -->|表格| TBL[整表保留<br/>转 Markdown/HTML]
+    DETECT -->|代码| CODE[按函数/类边界<br/>保留完整语法单元]
+    DETECT -->|图片| IMG[OCR+描述<br/>关联周边上下文]
+
+    TXT --> SIZE{块大小控制}
+    MD --> SIZE
+    TBL --> SIZE
+    CODE --> SIZE
+    IMG --> SIZE
+
+    SIZE --> TARGET[目标 256-512 tokens<br/>过小: 语义碎片<br/>过大: 噪声稀释]
+    TARGET --> OVER[加 Overlap 10-20%<br/>避免边界切断事实]
+    OVER --> PARENT[父子文档结构<br/>小块检索大块给上下文]
+    PARENT --> META[附加元数据<br/>来源/页码/标题层级]
+    META --> EMB[Embedding 向量化]
+    EMB --> STORE[(写入向量库)]
+
+    style DOC fill:#4CAF50,color:#fff
+    style STORE fill:#2196F3,color:#fff
+    style TBL fill:#FF9800,color:#fff
+    size_note([过大→检索信号被平均<br/>过小→语义割裂]) -.-> SIZE
+    style PARENT fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 策略对比：固定切分易破坏语义，递归切分按段落-句子-逗号降级寻找最佳边界

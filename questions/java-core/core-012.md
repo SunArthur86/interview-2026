@@ -139,6 +139,31 @@ public class PerformanceProxy implements InvocationHandler {
 | **适用场景** | 逻辑简单，类少 | 面向接口编程 | 需代理无接口的类（如Controller） |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    CL([Client客户端调用]):::start --> P[Proxy代理对象<br/>实现相同接口]
+    P --> CH{调用类型判断}:::decision
+    CH -->|静态代理| SP[编译期生成代理类<br/>持有RealSubject引用]
+    CH -->|JDK动态代理| JP[JDK Proxy.newProxyInstance<br/>基于接口生成]
+    CH -->|CGLIB动态代理| CG[CGLIB Enhancer<br/>基于子类继承生成]
+    JP --> IH["InvocationHandler.invoke<br/>前置增强: 日志/权限/事务"]
+    CG --> MI["MethodInterceptor.intercept<br/>前置增强: 日志/权限/事务"]
+    SP --> RS
+    IH --> RS[RealSubject真实方法<br/>业务核心逻辑]
+    MI --> RS
+    RS --> POST["后置增强: 缓存/提交事务/统计"]
+    POST --> RET[返回结果给代理对象]
+    RET --> CL2([客户端拿到增强后的结果]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 三大角色：Subject接口、RealSubject真实主题、Proxy代理。

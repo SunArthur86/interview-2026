@@ -343,6 +343,51 @@ public class MyAutoConfiguration { }
 4. **application.yml 和 application.properties 哪个好？**——yml 层级清晰（适合复杂配置）、支持 Profile；properties 简单无格式坑、性能略好。现代项目多选 yml。注意 yml 不支持 @PropertySource 直接加载（要自定义）。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务注册与发现]):::start
+    Provider[服务提供者<br/>启动]:::process
+    Register[注册到注册中心<br/>写临时节点]:::process
+    Registry[(注册中心<br/>Nacos/ZK/etcd)]:::store
+    Consumer[服务消费者<br/>启动]:::process
+    Subscribe[订阅服务列表<br/>拉取+长轮询]:::process
+    Cache[本地缓存<br/>provider 列表]:::process
+    Heartbeat[心跳上报<br/>5s 周期]:::process
+    HealthQ{{健康检查?}}:::decision
+    Healthy[节点健康<br/>保留注册]:::process
+    Unhealthy[节点故障<br/>摘除]:::warn
+    Push[推送变更<br/>消费者更新]:::process
+    ElectionQ{{一致性协议?<br/>CP/AP}}:::decision
+    Raft[Raft<br/>强一致 CP]:::process
+    Distro[Distro<br/>最终一致 AP]:::process
+    SplitQ{{网络分区?}}:::decision
+    Minor[少数派不可用<br/>CP]:::warn
+    Major[多数派可用<br/>保证一致]:::process
+    Failover[消费者容错<br/>本地缓存兜底]:::process
+    Config[配置中心<br/>动态配置]:::process
+    Final([✅ 服务发现稳定]):::start
+
+    Start --> Provider --> Register --> Registry
+    Consumer --> Subscribe --> Registry --> Cache
+    Provider --> Heartbeat --> HealthQ
+    HealthQ -->|健康| Healthy
+    HealthQ -->|故障| Unhealthy --> Push
+    Registry --> ElectionQ
+    ElectionQ -->|强一致| Raft --> SplitQ
+    ElectionQ -->|高可用| Distro --> Failover
+    SplitQ -->|分区| Minor
+    SplitQ -->|正常| Major
+    Push --> Failover --> Config --> Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 聊到Spring Boot 自动配置原理与 starter 设计，我的理解是——自动配置的本质是"约定优于配置 + 条件化 Bean 注册"——starter 声明一组 Bean 定义，@Conditional 决定哪些生效，Spring Boot 根据类路径/属性/已存在 Bean 自动装配。让业务方加一个依赖就开箱即用。打个比方，像宜家家具的"智能套装"：你买一个"卧室套装"（starter），里面包含床、衣柜、床头柜（一组 Bean），但只有你卧室有窗户时才送窗帘（@ConditionalOnProperty），只有你已有床垫时才送床单（@ConditionalOnBean）。Spring Boot 的 AutoConfiguration 就是这套智能套装系统。

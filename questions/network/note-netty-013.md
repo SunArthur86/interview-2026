@@ -278,6 +278,54 @@ TCP 层面，channelInactive 触发时 TCP 可能还没完全关闭（处于 FIN
 五条经验：一、在 channelActive 做上线处理（记录、发握手）、channelInactive 做下线清理（释放资源、通知）；二、channelReadComplete 合并 flush——避免每条消息 flush 一次，批量 flush 提升吞吐；三、IdleStateHandler 做心跳超时——配置读空闲时间，userEventTriggered 里 close 无心跳的连接；四、exceptionCaught 兜底——Pipeline 末尾加 ExceptionHandler 统一处理异常，避免连接泄漏；五、自定义事件传控制信号——鉴权、限流等用 userEventTriggered，与业务数据分离。核心："理解生命周期事件序列，在正确的事件做正确的处理，是 Netty Handler 设计的基础，错误的事件处理会导致资源泄漏或业务异常。"
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 服务端启动]):::start
+    BossGroup[BossGroup<br/>Accept 线程]:::process
+    WorkerGroup[WorkerGroup<br/>IO 处理线程]:::process
+    Bind[绑定端口<br/>ServerSocketChannel]:::process
+    EventLoop[EventLoop<br/>单线程 Selector 轮询]:::process
+    Selector[(Selector<br/>多路复用器)]:::store
+    IOModelQ{{IO 模型?<br/>select/poll/epoll}}:::decision
+    Epoll[epoll 边缘触发<br/>事件驱动 高性能]:::process
+    SelectIO[select 水平触发<br/>跨平台]:::process
+    AcceptEvent[OP_ACCEPT 事件<br/>新连接到达]:::process
+    Register[注册到 Worker<br/>SocketChannel]:::process
+    ReadEvent[OP_READ 事件<br/>数据可读]:::process
+    Pipeline[Pipeline 处理链<br/>责任链模式]:::process
+    Decoder[Decoder 解码器<br/>解决粘包/半包]:::process
+    Handler[业务 Handler<br/>处理业务逻辑]:::process
+    Encoder[Encoder 编码器<br/>序列化响应]:::process
+    ZeroCopyQ{{是否零拷贝?<br/>FileRegion}}:::decision
+    ZeroCopy[sendfile/mmap<br/>减少内核态拷贝]:::process
+    WriteBack[写回 Channel]:::process
+    BackPressureQ{{背压?<br/>写缓冲区高水位}}:::decision
+    BackPressure[isWritable=false<br/>自动降级]:::warn
+    Final([✅ 响应返回客户端]):::start
+
+    Start --> BossGroup --> Bind --> EventLoop
+    EventLoop --> Selector --> IOModelQ
+    IOModelQ -->|Linux| Epoll --> AcceptEvent
+    IOModelQ -->|通用| SelectIO --> AcceptEvent
+    AcceptEvent --> Register --> WorkerGroup
+    WorkerGroup --> ReadEvent --> Pipeline
+    Pipeline --> Decoder --> Handler --> Encoder
+    Encoder --> ZeroCopyQ
+    ZeroCopyQ -->|大文件| ZeroCopy --> WriteBack
+    ZeroCopyQ -->|否| WriteBack
+    WriteBack --> BackPressureQ
+    BackPressureQ -->|高水位| BackPressure --> Final
+    BackPressureQ -->|正常| Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+    classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** Netty 的两个生命周期——Channel 生命周期描述"一个连接从注册到注销"的状态变迁（registered→active→inactive→unregistered）。

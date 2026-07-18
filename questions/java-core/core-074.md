@@ -95,6 +95,35 @@ ps -o pid,minflt,majflt,cmd -p <PID>
 4. **Swap 分区**：Swap 在何时触发？swappiness 参数的含义。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    P([进程访问虚拟地址]):::start --> MMU[MMU单元查页表]
+    MMU --> VMA["内核VMA虚拟内存区域<br/>代码段/数据段/堆/栈"]
+    VMA --> PGD[遍历4级页表<br/>PGD→PUD→PMD→PTE]
+    PGD --> PRE{页是否在内存?}:::decision
+    PRE -->|在内存 命中| PHY[返回物理地址<br/>访问RAM]:::success
+    PRE -->|不在内存 P=0| PF[触发缺页异常<br/>Page Fault]
+    PF --> TY{缺页类型}:::decision
+    TY -->|匿名页 首次分配| ANON[物理页框分配<br/>零页填充]:::async
+    TY -->|文件页| MAP[mmap文件映射<br/>从磁盘加载]
+    TY -->|COW写时复制| COW[复制页框<br/>父子分离]
+    ANON --> SWP{内存压力?}:::decision
+    MAP --> SWP
+    SWP -->|紧张| KSWAPD[kswapd内核线程<br/>LRU换出冷页到Swap]:::error
+    SWP -->|空闲| INS[更新PTE指向新页框]
+    KSWAPD --> INS
+    COW --> INS
+    INS --> PHY
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心目的：因为提供独立连续的逻辑地址，所以实现了进程间的内存隔离与扩充

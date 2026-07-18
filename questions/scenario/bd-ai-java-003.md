@@ -109,6 +109,41 @@ public Mono<ResponseEntity<TaskId>> runAgent(@RequestBody AgentRequest req) {
 1. **非确定性处理**：如何保证 Agent 输出的稳定性？答案：通过设定严格的 System Prompt、使用温度参数低的模型、以及引入“人工确认”机制来减少随机性。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    USER([用户请求]):::start --> CDN[CDN边缘加速<br/>静态资源就近返回]
+    CDN --> MISS{CDN命中?}:::decision
+    MISS -->|是| FAST[直接返回 首屏快]:::success
+    MISS -->|否 动态请求| LB["负载均衡器<br/>Nginx/LVS"]
+    LB --> GW["API网关<br/>鉴权/限流/路由"]
+    GW --> GOK{通过?}:::decision
+    GOK -->|否 鉴权/限流| REJECT["拒绝 401/429"]:::error
+    GOK -->|是| SVC[微服务集群<br/>业务逻辑处理]
+    SVC --> CACHE[多级缓存<br/>本地+Redis]
+    CACHE --> CHIT{命中?}:::decision
+    CHIT -->|是| RET1[返回缓存数据]:::success
+    CHIT -->|否| MQ2[发消息异步处理<br/>削峰解耦]
+    CHIT -->|否 同步| DB[查数据库MySQL分库分表]
+    DB --> WCK[回写各级缓存<br/>设置TTL]:::async
+    MQ2 --> CONSUMER["消费者处理<br/>写DB/计算"]
+    WCK --> RET2[返回结果]
+    CONSUMER --> RET2
+    RET1 --> LOG[日志收集 ELK]
+    RET2 --> LOG
+    LOG --> MON[(监控告警 Prometheus<br/>+链路追踪 SkyWalking)]:::storage
+    MON --> ALERT{指标异常?}:::decision
+    ALERT -->|是| NOTIFY["告警/熔断降级<br/>自动恢复"]::::async
+    ALERT -->|否| STABLE([系统稳定运行]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心对比：传统Web是确定性请求响应，AI Agent是概率性循环执行

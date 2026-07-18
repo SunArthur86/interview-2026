@@ -119,6 +119,37 @@ Logger logger = factory.createLogger();
 | **抽象工厂** | 多个 (对应产品族) | 多个 (多个等级) | 新增工厂类，但新增等级难 | 产品有家族概念（如跨平台UI） |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    CLT([客户端 需要对象]):::start --> Q[不想直接new<br/>解耦创建过程]
+    Q --> CHO{工厂模式选择}:::decision
+    CHO -->|简单工厂| SF[SimpleFactory<br/>一个工厂方法+switch]
+    CHO -->|工厂方法| FM[Factory Method<br/>每类产品一个工厂]
+    CHO -->|抽象工厂| AF[Abstract Factory<br/>创建产品族]
+    SF --> SF1[传type参数<br/>返回具体Product]
+    SF1 --> SF2[违反开闭原则<br/>新增产品需改工厂]:::error
+    FM --> FM1[定义Product接口<br/>每个具体产品对应具体工厂]
+    FM1 --> FM2[符合开闭原则<br/>扩展新产品加新类即可]
+    AF --> AF1[AbstractFactory接口<br/>创建多个相关产品]
+    AF1 --> AF2["UI主题: Win/Mac<br/>Button+TextBox+ScrollBar"]
+    FM2 --> PRD["具体产品 ProductA/B"]
+    AF2 --> PRD
+    SF2 --> PRD
+    PRD --> CLT2([客户端拿到对象<br/>不关心创建细节]):::success
+    CLT --> APP{应用场景}:::decision
+    APP -->|JDBC| JDBC[DriverManager.getConnection<br/>不同数据库不同驱动]
+    APP -->|Spring| SPI[BeanFactory.getBean<br/>IOC容器管理]
+    APP -->|日志| LOG["SLF4J LoggerFactory<br/>切换Logback/Log4j"]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 核心思想：封装对象创建过程，将对象的创建与使用解耦

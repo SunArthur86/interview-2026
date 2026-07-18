@@ -101,6 +101,46 @@ for (Integer key : map.keySet()) {
 - 它可能反映迭代器创建时的状态，也可能反映迭代过程中的部分修改，甚至可能反映创建后才插入的元素，但不保证一定反映所有修改。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PUT([put 调用]) --> HASH[计算 hash<br/>spread 高低位异或]
+    HASH --> INIT{table 初始化?}
+    INIT -->|是 多线程竞争| CAS_INIT[CAS 抢初始化<br/>sizeCtl 标记]
+    INIT -->|否| IDX[定位桶 bucket<br/>n-1 & hash]
+
+    IDX --> BUCKET[i]
+    BUCKET --> EMPTY{桶为空?}
+    EMPTY -->|是| CAS_N[CAS 写入新 Node<br/>无锁]
+    EMPTY -->|否| FH{节点类型}
+
+    FH -->|forwarding 迁移中| HELP[协助扩容<br/>helpTransfer]
+    FH -->|TreeBin 红黑树| TREE[加 synchronized<br/>树操作 putTreeVal]
+    FH -->|链表 Node| LIST[加 synchronized<br/>首节点锁]
+    LIST --> LEN{链表 ≥ 8?}
+    LEN -->|是 数组 ≥ 64| TREEIFY[转红黑树<br/>O(logn)]
+    LEN -->|是 数组 < 64| RESIZE2[先扩容不树化]
+    LEN -->|否| APPEND[尾插法追加]
+
+    CAS_N --> ADDCNT
+    TREE --> ADDCNT
+    APPEND --> ADDCNT
+    ADDCNT[addCount<br/>LongAdder 分段计数<br/>baseCount + CounterCell]
+
+    ADDCNT --> SIZE_CHK{size ≥ 阈值<br/>0.75 × capacity?}
+    SIZE_CHK -->|是| TRANSFER[多线程扩容 transfer<br/>步长 16 分段迁移]
+    SIZE_CHK -->|否| DONE([插入完成])
+    TRANSFER --> DONE
+
+    style PUT fill:#4CAF50,color:#fff
+    style DONE fill:#2196F3,color:#fff
+    style CAS_N fill:#009688,color:#fff
+    style LIST fill:#FF9800,color:#fff
+    style TREEIFY fill:#9C27B0,color:#fff
+    style TRANSFER fill:#F44336,color:#fff
+```
+
 ## 记忆要点
 
 - 底层原理：size() 使用 baseCount + CounterCell[] 累加，且统计过程无锁。

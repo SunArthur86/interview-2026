@@ -345,6 +345,40 @@ public class MemoryService {
 5. **"如果两个用户同时操作同一个订单（如夫妻共同订单），Agent怎么处理并发？"**
    → 工具调用加乐观锁，LLM感知到冲突后重试或告知用户"该订单正在被其他操作处理"
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    IN([用户输入/对话]) --> ENR[Encoder 编码<br/>向量化]
+    ENR --> SHORT[短期记忆<br/>Context Window<br/>当前会话窗口]
+    ENR --> WORK[工作记忆<br/>任务中间状态<br/>scratchpad]
+    ENR --> LONG[(长期记忆<br/>向量数据库<br/>跨会话)]
+
+    SHORT --> RETR[检索召回<br/>向量相似度 Top-K]
+    LONG --> RETR
+    WORK --> RETR
+    RETR --> RERANK[Rerank 精排<br/>时间衰减+重要性加权]
+    RERANK --> CTX[组装上下文 Prompt]
+    CTX --> LLM[LLM 决策生成]
+    LLM --> ACTION[输出/工具调用]
+
+    ACTION --> WRITE{是否值得持久化?}
+    WRITE -->|高分 重要| SCORE[重要性评分<br/>LLM 打分]
+    WRITE -->|低分 噪声| DROP[丢弃/过期 TTL]
+    SCORE --> DEDUP[去重 + 关联已有记忆]
+    DEDUP --> LONG
+
+    ACTION --> UPDATE[更新工作记忆]
+    UPDATE --> WORK
+
+    style IN fill:#4CAF50,color:#fff
+    style LLM fill:#009688,color:#fff
+    style LONG fill:#9C27B0,color:#fff
+    style SHORT fill:#2196F3,color:#fff
+    style WORK fill:#FF9800,color:#fff
+    style DROP fill:#F44336,color:#fff
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** 用Java实现AI Agent需要三部分：工具注册与调用框架（Tool Registry + Function Calling）、会话记忆管理（短期对话历史+长期向量记忆）。

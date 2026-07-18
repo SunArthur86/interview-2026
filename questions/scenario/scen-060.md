@@ -133,6 +133,38 @@ K8s API Server (Delete Pod)
    答：RefreshScope 是一个自定义的 Scope，当配置变更时，ContextRefresher 会触发该 Scope 缓存清理。下次访问 Bean 时，Spring 会重新创建 Bean 实例并绑定新的属性。注意这会导致 Bean 内部的状态丢失（除非通过 @ConfigurationProperties 绑定）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([用户请求]):::start --> DNS[DNS解析 多IP轮询]
+    DNS --> LB["负载均衡 LVS/F5<br/>四层流量分发"]
+    LB --> NGINX[Nginx 七层反向代理<br/>健康检查 故障剔除]
+    NGINX --> SVC[服务集群<br/>多实例部署]
+    SVC --> MASTER{主从模式?}:::decision
+    MASTER -->|是 主备| MS[主节点写 备节点同步<br/>主挂自动切换VIP]
+    MASTER -->|否 多活| MA[多节点同时服务<br/>无单点]
+    SVC --> FAIL{实例故障?}:::decision
+    FAIL -->|是| HEALTH[健康检查探针<br/>剔除故障实例]
+    FAIL -->|否| NORMAL[正常处理]:::success
+    HEALTH --> REROUTE[流量转移到健康实例]
+    REROUTE --> NORMAL
+    MS --> DOWN{主节点宕机?}:::decision
+    DOWN -->|是| FAILOVER[Keepalived VIP漂移<br/>Sentinel选主]
+    DOWN -->|否| NORMAL
+    FAILOVER --> ALERT[告警通知 运维介入]:::async
+    NORMAL --> METRIC{SLA指标}:::decision
+    METRIC -->|可用性 99.99%| SLA[年停机<53分钟<br/>核心系统目标]
+    METRIC -->|RTO 恢复时间| RTO[灾难到恢复服务<br/>分钟级]
+    METRIC -->|RPO 数据丢失| RPO[灾难到数据丢失量<br/>秒级 同步复制]
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 优雅上线：因JIT需预热，故延迟注册并先加载缓存，健康检查通过后再放量。

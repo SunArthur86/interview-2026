@@ -379,6 +379,53 @@ public class OrderController implements OrderApi {
 4. **OpenAPI 怎么描述分页？**——用 `nextCursor` 游标分页（避免 offset 大表性能问题），response 里 `x-page-next` 字段；或在 header 用 `Link: <url>; rel="next"`。
 5. **怎么自动生成 SDK？**——openapi-generator-cli 支持 50+ 语言，CI 流水线拉 YAML → generate → publish 到 Nexus/npm/PyPI。版本号和 OpenAPI version 一一对应。
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Start([🚀 SpringBoot 启动<br/>main 方法]):::start
+    SpringApplication[SpringApplication.run<br/>启动入口]:::process
+    PrepareEnv[准备 Environment<br/>加载 application.yml]:::process
+    ContextQ{{应用上下文?<br/>Servlet/Reactive}}:::decision
+    ServletCtx[AnnotationConfigCtx<br/>传统 MVC]:::process
+    ReactiveCtx[ReactiveWebCtx<br/>WebFlux]:::process
+    Refresh[refresh 刷新容器<br/>核心入口]:::process
+    BeanFactory[BeanFactory<br/>IoC 容器]:::store
+    BeanDef[BeanDefinition<br/>扫描 @Component/@Bean]:::process
+    ScanQ{{配置方式?<br/>注解/XML}}:::decision
+    AnnoScan[ComponentScan<br/>ClassPathBeanDefinitionScanner]:::process
+    XmlScan[XmlBeanDefinitionReader<br/>解析 XML]:::process
+    Instantiate[实例化 Bean<br/>反射 newInstance]:::process
+    Populate[属性填充<br/>依赖注入 @Autowired]:::process
+    AwareQ{{实现 Aware 接口?}}:::decision
+    Aware[BeanNameAware / ContextAware<br/>回调注入]:::process
+    InitQ{{自定义初始化?}}:::decision
+    PostConstruct[@PostConstruct<br/>初始化方法]:::process
+    AOPQ{{需要 AOP 增强?<br/>切面 @Aspect}}:::decision
+    Proxy[创建动态代理<br/>JDK/CGLIB]:::process
+    ProxyChain[代理链<br/>MethodInvocation]:::process
+    Final([✅ Bean 就绪 可用]):::start
+
+    Start --> SpringApplication --> PrepareEnv --> ContextQ
+    ContextQ -->|传统| ServletCtx --> Refresh
+    ContextQ -->|响应式| ReactiveCtx --> Refresh
+    Refresh --> BeanFactory --> BeanDef --> ScanQ
+    ScanQ -->|注解| AnnoScan --> Instantiate
+    ScanQ -->|XML| XmlScan --> Instantiate
+    Instantiate --> Populate --> AwareQ
+    AwareQ -->|是| Aware --> InitQ
+    AwareQ -->|否| InitQ
+    InitQ -->|是| PostConstruct --> AOPQ
+    InitQ -->|否| AOPQ
+    AOPQ -->|是| Proxy --> ProxyChain --> Final
+    AOPQ -->|否| Final
+
+    classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
+    classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+    classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+```
+
 ## 结构化回答
 
 **30 秒电梯演讲：** API 契约优先设计（Design-First）是指先写 OpenAPI 规范作为机器可读的契约，再生成桩代码、Mock、文档、SDK，最后双方按契约并行开发；OpenAPI 治理是在企业内部把契约版本化、兼容性校验、Linter 规则、Mock/Stub、文档中心、SDK 自动下发串成一条流水线，让契约成为服务端与客户端、上游与下游协作的唯一真相源（single source of truth）

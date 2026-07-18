@@ -84,6 +84,42 @@ CircuitBreaker cb = registry.circuitBreaker("paymentService");
 3. **熔断与重试的关系**：熔断打开期间，请求通常直接返回失败，一般不建议在熔断器拦截阶段进行自动重试（除非配置了特定的Fallback策略），以免加重恢复期的负载。
 
 
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ([请求进入]) --> STATE{断路器状态}
+
+    STATE -->|Closed 闭合| NORMAL[正常放行<br/>调用下游]
+    STATE -->|Open 断开| FAIL_FAST[快速失败<br/>执行降级逻辑]
+    STATE -->|Half-Open 半开| PROBE[放行单个试探请求]
+
+    NORMAL --> STAT[滑动窗口统计<br/>10s 滚动]
+    STAT --> CHK{失败率 > 阈值?<br/>>50% 且 req≥20}
+    CHK -->|否| NORMAL
+    CHK -->|是| TO_OPEN[切换 Open<br/>启动 Sleep Window]
+
+    TO_OPEN --> WAIT[等待 5s 冷却]
+    WAIT --> TO_HALF[切换 Half-Open]
+
+    PROBE --> RESULT{试探结果}
+    RESULT -->|成功| TO_CLOSED[切换 Closed<br/>重置计数器 恢复]
+    RESULT -->|失败| TO_OPEN2[切回 Open<br/>重新计时]
+
+    FAIL_FAST --> DEGRADE[降级策略<br/>默认值/缓存/友好提示]
+    DEGRADE --> RESP([返回降级响应])
+
+    TO_CLOSED --> NORMAL
+
+    style REQ fill:#4CAF50,color:#fff
+    style RESP fill:#2196F3,color:#fff
+    style TO_OPEN fill:#F44336,color:#fff
+    style TO_OPEN2 fill:#F44336,color:#fff
+    style TO_CLOSED fill:#009688,color:#fff
+    style TO_HALF fill:#FF9800,color:#fff
+    style DEGRADE fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 三态流转：Closed（正常） -> Open（熔断） -> Half_Open（探测）

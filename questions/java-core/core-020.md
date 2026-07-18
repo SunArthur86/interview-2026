@@ -108,6 +108,32 @@ void onCongestionEvent(TCPState& state, bool isTimeout) {
 3. **拥塞控制和流量控制的区别**：拥塞控制是全局性的，防止网络过载；流量控制是点对点的，防止发送方淹没接收方（滑动窗口机制）。
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ST([TCP连接建立<br/>cwnd=1 ssthresh=16]):::start --> SS[慢启动Slow Start<br/>每RTT cwnd翻倍]
+    SS --> CHK1{"cwnd >= ssthresh?"}:::decision
+    CHK1 -->|否 继续指数增长| SS
+    CHK1 -->|是| AV[拥塞避免Congestion Avoidance<br/>每RTT cwnd+1 线性增长]
+    AV --> LOSS{是否检测到丢包?}:::decision
+    LOSS -->|否| ACK[收到ACK 继续发送]
+    ACK --> AV
+    LOSS -->|3个重复ACK 快重传| FR["快恢复Fast Recovery<br/>ssthresh=cwnd/2<br/>cwnd=ssthresh+3"]
+    LOSS -->|RTO超时 重传| TO["严重拥塞<br/>ssthresh=cwnd/2<br/>cwnd=1"]
+    TO --> SS2[重新进入慢启动]
+    FR --> ACK2[收到新ACK<br/>cwnd=ssthresh]
+    SS2 --> AV2[再次进入拥塞避免]
+    ACK2 --> AV2
+    AV2 --> STABLE([稳定传输状态]):::success
+        classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+    classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
+    classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
+    classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+```
 ## 记忆要点
 
 - 拥塞信号分两种：超时代表严重拥堵，3次重复ACK代表轻微丢包
