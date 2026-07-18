@@ -177,6 +177,10 @@ def rl_probe(sft_checkpoint, steps=100):
   - RL probe gain: 做100步RL后reward有明显提升
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-zp2-001.svg" alt="如何判断 SFT 已经做到头了？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心认知：SFT只为求初始策略，并非最终最优，切莫死磕Loss下降

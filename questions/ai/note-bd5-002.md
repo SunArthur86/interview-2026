@@ -155,6 +155,10 @@ MCP方式:
 # 4. A/B测试: 新description先灰度, 监控调用率变化
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd5-002.svg" alt="Rules 和 Skills 有什么区别？为什么不把 Skills 的指导写进 Rules？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 概念对比：Rules是全局的行为约束，Skills是局部的执行能力

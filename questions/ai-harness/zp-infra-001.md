@@ -95,6 +95,10 @@ flowchart TD
     Choice -->|Per-column| GPTQ[GPTQ<br/>Hessian二阶补偿]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_zp-infra-001.svg" alt="【智谱Infra面经】按照量化粒度说明一下 SmoothQuant、AWQ、GPTQ 分别是什么粒度的？它们的作用流程是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - SmoothQuant：Per-channel/tensor。数学等价变换，将激活难度迁移至权重，适合W8A8。

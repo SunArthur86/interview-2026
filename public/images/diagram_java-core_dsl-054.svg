@@ -14,12 +14,59 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="60" y="110" width="320" height="170" rx="8" fill="#2196F311" stroke="#2196F3" stroke-width="2"/>
+<text x="220" y="136" font-size="15" fill="#2196F3" text-anchor="middle" font-weight="700">Docker（容器化）</text>
+<rect x="80" y="150" width="280" height="36" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="220" y="161" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">App + Libs + R</text>
+<text x="220" y="175" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">untime → 镜像</text>
+<rect x="80" y="194" width="280" height="36" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="220" y="205" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Namespace + Cg</text>
+<text x="220" y="219" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">roups 隔离</text>
+<rect x="80" y="238" width="280" height="32" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="220" y="247" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">比 VM 轻：共享</text>
+<text x="220" y="261" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">内核，秒级启动</text>
+<rect x="420" y="110" width="320" height="380" rx="8" fill="#4CAF5011" stroke="#4CAF50" stroke-width="2"/>
+<text x="580" y="136" font-size="15" fill="#4CAF50" text-anchor="middle" font-weight="700">Kubernetes（编排）</text>
+<rect x="440" y="154" width="280" height="100" rx="6" fill="#9C27B022" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="580" y="174" font-size="12" fill="#9C27B0" text-anchor="middle" font-weight="700">Master 控制面</text>
+<rect x="450" y="174" width="130" height="22" rx="3" fill="#FFFFFF" stroke="#9C27B0"/>
+<text x="515" y="190" font-size="10" fill="#9C27B0" text-anchor="middle">kube-apiserver</text>
+<rect x="590" y="174" width="130" height="22" rx="3" fill="#FFFFFF" stroke="#9C27B0"/>
+<text x="655" y="190" font-size="10" fill="#9C27B0" text-anchor="middle">etcd</text>
+<rect x="450" y="202" width="130" height="22" rx="3" fill="#FFFFFF" stroke="#9C27B0"/>
+<text x="515" y="218" font-size="10" fill="#9C27B0" text-anchor="middle">kube-scheduler</text>
+<rect x="590" y="202" width="130" height="22" rx="3" fill="#FFFFFF" stroke="#9C27B0"/>
+<text x="655" y="218" font-size="10" fill="#9C27B0" text-anchor="middle">kube-controller-manager</text>
+<rect x="440" y="264" width="280" height="120" rx="6" fill="#FF980022" stroke="#FF9800" stroke-width="1.5"/>
+<text x="580" y="284" font-size="12" fill="#FF9800" text-anchor="middle" font-weight="700">Worker Node</text>
+<rect x="450" y="284" width="130" height="22" rx="3" fill="#FFFFFF" stroke="#FF9800"/>
+<text x="515" y="300" font-size="10" fill="#FF9800" text-anchor="middle">kubelet</text>
+<rect x="590" y="284" width="130" height="22" rx="3" fill="#FFFFFF" stroke="#FF9800"/>
+<text x="655" y="300" font-size="10" fill="#FF9800" text-anchor="middle">kube-proxy</text>
+<rect x="450" y="312" width="130" height="22" rx="3" fill="#FFFFFF" stroke="#FF9800"/>
+<text x="515" y="328" font-size="10" fill="#FF9800" text-anchor="middle">Pod × N</text>
+<rect x="590" y="312" width="130" height="22" rx="3" fill="#FFFFFF" stroke="#FF9800"/>
+<text x="655" y="328" font-size="10" fill="#FF9800" text-anchor="middle">Container Runtime</text>
+<text x="580" y="410" font-size="12" fill="#4CAF50" text-anchor="middle" font-weight="700">核心概念</text>
+<circle cx="450" cy="426" r="4" fill="#4CAF50"/>
+<text x="464" y="430" font-size="11" fill="#37404F">Pod 最小调度单位</text>
+<circle cx="450" cy="444" r="4" fill="#4CAF50"/>
+<text x="464" y="448" font-size="11" fill="#37404F">Deployment 副本控制</text>
+<circle cx="450" cy="462" r="4" fill="#4CAF50"/>
+<text x="464" y="466" font-size="11" fill="#37404F">Service 服务发现</text>
+<circle cx="450" cy="480" r="4" fill="#4CAF50"/>
+<text x="464" y="484" font-size="11" fill="#37404F">Ingress 七层路由</text>
+<circle cx="450" cy="498" r="4" fill="#4CAF50"/>
+<text x="464" y="502" font-size="11" fill="#37404F">ConfigMap 配置</text>
+<text x="220" y="310" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">Dockerfile 指令</text>
+<circle cx="80" cy="326" r="4" fill="#2196F3"/>
+<text x="94" y="330" font-size="11" fill="#37404F">FROM 基础镜像</text>
+<circle cx="80" cy="348" r="4" fill="#2196F3"/>
+<text x="94" y="352" font-size="11" fill="#37404F">RUN 构建期执行</text>
+<circle cx="80" cy="370" r="4" fill="#2196F3"/>
+<text x="94" y="374" font-size="11" fill="#37404F">COPY/ADD 拷贝</text>
+<circle cx="80" cy="392" r="4" fill="#2196F3"/>
+<text x="94" y="396" font-size="11" fill="#37404F">CMD/ENTRYPOINT 启动</text>
+<circle cx="80" cy="414" r="4" fill="#2196F3"/>
+<text x="94" y="418" font-size="11" fill="#37404F">EXPOSE 暴露端口</text>
 </svg>

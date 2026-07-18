@@ -180,6 +180,10 @@ training_args = TrainingArguments(
 
 **面试加分点**：提到Megatron-LM的TP+PP组合可以将14B模型放在8×V100-32GB上训练；提到Flash Attention减少激活值存储（IO-aware的精确注意力）；提到CPU offloading将优化器状态放在CPU内存中，用PCIe带宽换取GPU显存。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-006.svg" alt="训练一个14B参数的FP16模型，理论上需要多少显存？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 参数显存乘以16：AdamW混合精度训练中，每参数需16Bytes(权重2+梯度2+优化器状态12)。

@@ -6,20 +6,48 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：大促保障的核心是&quot;用容量公式提前算、用压测验证算得对、用预案兜底算错了&quot;。容量红线 = (峰值 QPS × 安全系数) …</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="114" width="168" height="44" rx="8" fill="#2196F3"/>
+<text x="124" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">计数器
+Counter</text>
+<rect x="224" y="114" width="168" height="44" rx="8" fill="#FF9800"/>
+<text x="308" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">滑动窗口
+Sliding Window</text>
+<rect x="408" y="114" width="168" height="44" rx="8" fill="#4CAF50"/>
+<text x="492" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">漏桶
+Leaky Bucket</text>
+<rect x="592" y="114" width="168" height="44" rx="8" fill="#9C27B0"/>
+<text x="676" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">令牌桶
+Token Bucket</text>
+<rect x="40" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">固定窗口</text>
+<rect x="224" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">细分子窗口</text>
+<rect x="408" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">匀速流出</text>
+<rect x="592" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">匀速发令牌</text>
+<rect x="40" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">简单</text>
+<rect x="224" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">解决临界问题</text>
+<rect x="408" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">恒定速率</text>
+<rect x="592" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">允许突发</text>
+<rect x="40" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">临界点双倍流量</text>
+<rect x="224" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">内存中等</text>
+<rect x="408" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">突发流量堆积</text>
+<rect x="592" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Guava/Sentinel</text>
+<rect x="40" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">粗糙</text>
+<rect x="224" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Sentinel 默认</text>
+<rect x="408" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">保护下游</text>
+<rect x="592" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">主流方案</text>
 </svg>

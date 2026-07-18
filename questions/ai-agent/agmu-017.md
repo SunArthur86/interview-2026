@@ -109,6 +109,10 @@ def run_with_timeout_and_loop_check(step_func: Callable, max_steps: int = 20) ->
 2. 如何构建高质量的 Golden Set？除了人工标注，有没有自动化生成并清洗测试数据的方法？
 3. 在资源受限的情况下（如只有 GPT-3.5 可用做裁判），如何保证评估的客观性？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-017.svg" alt="多 Agent 的评估怎么做 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 评估分层进行：单元测单 Agent，集成测交互，E2E 测任务成功率。

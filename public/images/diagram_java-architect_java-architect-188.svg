@@ -14,12 +14,30 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="240" y="116" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="113" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">分级评审：核心链路/</text>
+<text x="400" y="131" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">数据迁移/外部接口必</text>
+<text x="400" y="149" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">评审；小改动走 PR re</text>
+<text x="400" y="167" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">view 轻流程</text>
+<rect x="240" y="194" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="400" y="200" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">RFC + ADR 是治理的&quot;</text>
+<text x="400" y="218" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">两件套&quot;：RFC 讨方案</text>
+<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">，ADR 记决策</text>
+<rect x="240" y="272" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="278" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">评审决议与上线门禁挂</text>
+<text x="400" y="296" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">钩（无 ADR 不上线）</text>
+<text x="400" y="314" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">，否则流于形式</text>
+<rect x="240" y="350" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="347" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">委员会 4-7 人：架构</text>
+<text x="400" y="365" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">师 + 资深开发 + SRE </text>
+<text x="400" y="383" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">+ 安全 + 业务（涉核</text>
+<text x="400" y="401" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">心链路时）</text>
+<rect x="240" y="428" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="434" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">评审否决率健康值 10-</text>
+<text x="400" y="452" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">20%，太低是走过场，</text>
+<text x="400" y="470" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">太高是预沟通不够</text>
+<line x1="400" y1="164" x2="400" y2="194" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="242" x2="400" y2="272" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="320" x2="400" y2="350" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="398" x2="400" y2="428" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

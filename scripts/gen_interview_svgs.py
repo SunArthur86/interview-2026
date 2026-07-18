@@ -30,6 +30,11 @@ import sys
 import importlib.util
 from pathlib import Path
 
+try:
+    import yaml
+except ImportError:
+    yaml = None
+
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = ROOT / 'scripts'
 IMG_DIR = ROOT / 'public' / 'images'
@@ -210,7 +215,7 @@ def tpl_agent(title, essence, body_top=110):
 
 def tpl_multi_tenant(title, essence, body_top=110):
     """多租户隔离。"""
-    return tpl_compare(title, essence, [
+    return jc.tpl_compare(title, essence, [
         ('独立数据库\nDB-per-Tenant', ['隔离最强', '成本最高', '大客户/金融', '独立 DB 实例', '合规友好']),
         ('独立 Schema\nSchema-per-Tenant', ['中间态', '同 DB 不同 Schema', '中等隔离', '中等成本', '中型客户']),
         ('共享 Schema\nShared-DB + tenant_id', ['成本最低', 'WHERE tenant_id=?', '逻辑隔离', '小客户', '邻居噪音风险']),
@@ -219,7 +224,7 @@ def tpl_multi_tenant(title, essence, body_top=110):
 
 def tpl_rate_limit(title, essence, body_top=110):
     """限流算法对比。"""
-    return tpl_compare(title, essence, [
+    return jc.tpl_compare(title, essence, [
         ('计数器\nCounter', ['固定窗口', '简单', '临界点双倍流量', '粗糙']),
         ('滑动窗口\nSliding Window', ['细分子窗口', '解决临界问题', '内存中等', 'Sentinel 默认']),
         ('漏桶\nLeaky Bucket', ['匀速流出', '恒定速率', '突发流量堆积', '保护下游']),
@@ -411,7 +416,7 @@ def tpl_shard(title, essence, body_top=110):
 
 def tpl_distributed_tx(title, essence, body_top=110):
     """分布式事务方案对比。"""
-    return tpl_compare(title, essence, [
+    return jc.tpl_compare(title, essence, [
         ('2PC\n两阶段提交', ['协调者+参与者', '强一致', '阻塞/性能差', '单点故障', 'XA 协议']),
         ('TCC\nTry-Confirm-Cancel', ['业务侵入', '最终一致', '性能好', '需幂等', 'Saga 替代']),
         ('本地消息表', ['异步确保', '业务表+消息表', '最终一致', '可靠', '主流方案']),
@@ -472,7 +477,7 @@ def tpl_circuit_breaker(title, essence, body_top=110):
 
 def tpl_security(title, essence, body_top=110):
     """安全架构。"""
-    return tpl_layers(title, essence, [
+    return jc.tpl_layers(title, essence, [
         ('接入层', ['DDoS 防护 / WAF / HTTPS / IP 黑白名单']),
         ('网关层', ['认证(JWT/OAuth2) / 鉴权(RBAC) / 防重放 / 限流']),
         ('应用层', ['SQL 注入参数化 / XSS 过滤 / CSRF Token / 越权校验']),
@@ -483,7 +488,7 @@ def tpl_security(title, essence, body_top=110):
 
 def tpl_perf_optimize(title, essence, body_top=110):
     """性能优化全景图。"""
-    return tpl_layers(title, essence, [
+    return jc.tpl_layers(title, essence, [
         ('前端层', ['CDN 加速 / 懒加载 / 资源压缩 / HTTP/2 多路复用']),
         ('网关层', ['限流 / 熔断 / 静态化 / Gzip / 连接池']),
         ('应用层', ['异步化 / 多级缓存 / 批量 / 池化 / 算法优化']),
@@ -592,7 +597,7 @@ def tpl_idempotent(title, essence, body_top=110):
 
 def tpl_cache_arch(title, essence, body_top=110):
     """多级缓存架构。"""
-    return tpl_pipeline(title, essence, [
+    return jc.tpl_pipeline(title, essence, [
         '浏览器缓存\nHTTP Cache-Control',
         'CDN 边缘缓存\n静态资源',
         'Nginx 缓存\nproxy_cache',
@@ -693,6 +698,44 @@ def select_extra_template(cat, title, essence, key_points, subcategory=''):
 # 主流程
 # ============================================================
 
+def _parse_fm_yaml(raw):
+    """用 PyYAML 严格解析 frontmatter，正确处理 feynman.key_points。"""
+    if yaml is None:
+        return None
+    m = re.match(r'^---\s*\n(.*?)\n---\s*\n', raw, re.DOTALL)
+    if not m:
+        return {}
+    try:
+        data = yaml.safe_load(m.group(1))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return None
+
+
+def _extract_essence_kps(fm_yaml, fm_simple):
+    """融合两种解析结果，提取 essence 和 key_points。
+    优先用 PyYAML（更准），降级用 simple 解析。"""
+    essence = ''
+    key_points = []
+    if fm_yaml:
+        fe = fm_yaml.get('feynman')
+        if isinstance(fe, dict):
+            if fe.get('essence'):
+                essence = str(fe['essence']).strip()
+            if isinstance(fe.get('key_points'), list):
+                key_points = [str(x) for x in fe['key_points'] if x]
+        if not essence and fm_yaml.get('essence'):
+            essence = str(fm_yaml['essence']).strip()
+        if not key_points and isinstance(fm_yaml.get('key_points'), list):
+            key_points = [str(x) for x in fm_yaml['key_points'] if x]
+    # 用 simple 兜底（不覆盖已有）
+    if not essence and fm_simple.get('essence'):
+        essence = str(fm_simple['essence']).strip()
+    if not key_points and isinstance(fm_simple.get('key_points'), list) and fm_simple['key_points']:
+        key_points = [str(x) for x in fm_simple['key_points'] if x]
+    return essence, key_points
+
+
 def process_file(md_path, category, write_md=True, overwrite=False):
     """处理单个 md 文件，生成 SVG 并更新 md。"""
     stem = md_path.stem
@@ -706,33 +749,17 @@ def process_file(md_path, category, write_md=True, overwrite=False):
         return ('skip', svg_name)
 
     raw = md_path.read_text(encoding='utf-8')
-    fm = jc.parse_frontmatter(raw)
+    fm_simple = jc.parse_frontmatter(raw)
+    fm_yaml = _parse_fm_yaml(raw)
+    fm = fm_yaml if fm_yaml else fm_simple
     title = jc.parse_title(raw) or fm.get('id', stem)
-    essence = ''
-    fe = fm.get('feynman')
-    if isinstance(fe, dict) and fe.get('essence'):
-        essence = str(fe['essence']).strip()
-    elif fm.get('essence'):
-        essence = str(fm.get('essence')).strip()
-    key_points = []
-    if isinstance(fe, dict) and isinstance(fe.get('key_points'), list):
-        key_points = [str(x) for x in fe['key_points'] if x]
-    elif isinstance(fm.get('key_points'), list):
-        key_points = [str(x) for x in fm['key_points'] if x]
-    subcategory = fm.get('subcategory', '') if isinstance(fm, dict) else ''
 
-    # 先用 jc 自带路由
-    sel = jc.select_template(fm.get('id', ''), title, essence, key_points)
+    essence, key_points = _extract_essence_kps(fm_yaml, fm_simple)
+    subcategory = fm.get('subcategory', '') or ''
+
+    # 对于 eng-practice / java-architect，补充路由优先（这些类有专门的架构主题）
     svg = None
-    if sel is not None:
-        fn, kw = sel
-        try:
-            svg = fn(title, essence, **kw)
-        except Exception:
-            svg = None
-
-    # 再用补充路由
-    if svg is None:
+    if category in ('eng-practice', 'java-architect'):
         ex = select_extra_template(category, title, essence, key_points, subcategory)
         if ex is not None:
             try:
@@ -740,12 +767,23 @@ def process_file(md_path, category, write_md=True, overwrite=False):
             except Exception:
                 svg = None
 
-    # 兜底
+    # 补充路由未命中，再用 jc 自带路由（适合 java-core 的具体技术主题）
     if svg is None:
+        sel = jc.select_template(fm.get('id', ''), title, essence, key_points)
+        if sel is not None:
+            fn, kw = sel
+            try:
+                svg = fn(title, essence, **kw)
+            except Exception:
+                svg = None
+
+    # 兜底：用 key_points 走通用流程图
+    if svg is None:
+        kps = key_points[:6] if key_points else ['核心要点1', '核心要点2', '核心要点3']
         try:
-            svg = jc.tpl_generic_collection_or_core(title, essence, key_points)
+            svg = jc.tpl_flow_vertical(title, essence, kps)
         except Exception:
-            svg = jc.tpl_flow_vertical(title, essence, key_points[:5] or ['核心要点1', '核心要点2', '核心要点3'])
+            svg = jc.tpl_generic_collection_or_core(title, essence, kps)
 
     IMG_DIR.mkdir(parents=True, exist_ok=True)
     svg_path.write_text(svg, encoding='utf-8')

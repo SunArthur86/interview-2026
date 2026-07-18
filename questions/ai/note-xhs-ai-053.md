@@ -247,3 +247,7 @@ class ParentChildChunker:
 | 0:50 | 固定分块问题示意图 | "固定分块问题——割裂语义、丢失跨段落关联、规则类文档被拆碎" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：切片大小选多大合适？256 token还是512 token？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-053.svg" alt="【高德AI面试】做文档切片的时候，怎么避免关键信息丢失？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

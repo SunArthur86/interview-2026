@@ -362,6 +362,10 @@ def forget(self, max_size: int = 10000):
 5. **Embedding + 关键词混合检索**：长期记忆不只靠向量相似度，还结合 BM25 关键词检索，解决向量模型对专有名词不敏感的问题
 6. **回答 follow-up**：长期记忆用 PgVector / Milvus 存储；防止错误信息写入靠多道置信度门 + 冲突检测 + 人工审核兜底；遗忘机制用 TTL + 重要性评分综合淘汰
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mt-agent-007.svg" alt="【美团面经】短期记忆和长期记忆有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心对比：短期记忆是“工作台”（高频读写、随任务结束过期），而长期记忆是“档案柜”（低频写入、跨会话永久保存）。

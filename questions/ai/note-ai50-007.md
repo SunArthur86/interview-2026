@@ -205,6 +205,10 @@ testset = generator.generate(
 | DeepEval | 类似pytest的单元测试 | CI/CD集成 |
 | 人工评估 | 最可靠 | 最终验收 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ai50-007.svg" alt="Ragas框架如何评估RAG系统中的幻觉？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大核心指标：忠实度、答案相关性、上下文精确率和召回率。

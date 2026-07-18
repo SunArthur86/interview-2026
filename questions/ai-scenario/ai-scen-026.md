@@ -140,6 +140,10 @@ flowchart TD
     I -.-> A
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-026.svg" alt="如何设计LLM的Token成本控制系统？在不降低用户体验的前提下削减50%以上成本。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 模型路由（核心）：简单任务用7B，复杂用GPT-4，整体成本可降50-70%。

@@ -210,6 +210,10 @@ Claude Code 的 Skill 机制：
 2. **强调"复用"**：Skill 的价值是"一次开发多次使用"，像软件库一样
 3. **提生态价值**：Skill 可分享可组合，是 Agent 生态的基础（类比 App 之于手机）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-036.svg" alt="什么是 Skill？Agent 架构中 Skill 的本质是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：Skill是可复用的能力模块，封装了Prompt+Tools+执行流程

@@ -307,6 +307,10 @@ agent.run("帮我订一张明天北京到上海的机票，靠窗")
 
 **答：** 当工具数量超过 20 个时，Function Call 面临「选择困难」——LLM 需要在巨大的工具列表中选对函数，准确率显著下降。MCP 通过工具发现和分组缓解了这个问题；Skills 则从根本上减少了 LLM 需要决策的粒度——从「选哪个函数」升级为「选哪个能力」，大幅降低决策复杂度。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mt-agent-004.svg" alt="【美团面经】Function Call到MCP到Skills的区别与优缺点？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 递进抽象关系：FunctionCall是原子级，MCP是协议级，Skills是能力级

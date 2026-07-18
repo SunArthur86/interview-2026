@@ -503,6 +503,10 @@ flowchart TD
     K --> C1
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bg-011.svg" alt="【八股总结】Agent 上下文窗口溢出怎么办？工具结果太长如何处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 截断策略：丢弃最早消息，保系统设定和近期对话，可按角色智能优先丢弃

@@ -286,6 +286,10 @@ class PromptInjectionDefense:
 2. **安全三层面**：输入(防注入)+输出(防泄露)+行为(权限控制)——立体防护
 3. **Prompt 注入是重点**：这是 LLM 特有的安全风险，要专门讲防护方案
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-079.svg" alt="大模型监控指标如何设计？安全防护方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 监控三维：业务看效果(完成/留存)、技术看性能(P99/首字延迟)、安全看风险(幻觉/违规)

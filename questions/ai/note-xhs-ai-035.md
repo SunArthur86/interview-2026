@@ -193,3 +193,7 @@ class Reranker:
 **候选人**：候选量小或业务对精度不敏感时可省，避免延迟和成本；候选质量极差时精排也救不回。
 **面试官**：Reranker有什么风险？
 **候选人**：延迟增加（cross-encoder慢）、成本上升、模型选型不当反降效果、与召回不一致排序错乱，需要评测集和延迟监控保障。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-035.svg" alt="【RAG混合检索】Reranker是什么？为什么需要精排？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

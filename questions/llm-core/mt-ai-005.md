@@ -92,6 +92,10 @@ def dpo_loss(policy_chosen_logps, policy_rejected_logps, ref_chosen_logps, ref_r
 | **训练稳定性** | 较差（超参数敏感，易 KL 散度发散） | 较好（本质是分类优化） |
 | **效果** | SOTA天花板（OpenAI 路线） | 接近 RLHF，性价比首选 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_mt-ai-005.svg" alt="【美团面经】说一说大模型后训练（Post-training）的流程？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心链路：SFT（指令微调）建立格式，接着训练奖励模型，最后用 RLHF 做人类对齐。

@@ -158,6 +158,10 @@ async def step(self, input):
 - CloudWeGo：高性能RPC框架(Kitex) + HTTP框架(Hertz)
 - 结合自研LLM网关，实现统一调度、限流、监控
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd4-004.svg" alt="什么是 Harness Engineering？Agent Harness 层包含哪些职责？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：包裹在Agent核心逻辑(LLM)外面的工程保障层

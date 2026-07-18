@@ -149,6 +149,10 @@ R: 自动解决率70%，年节省人力成本200万，
 2. **量化一切**：数字是最有力的证据——延迟、准确率、成本、规模
 3. **双价值**：技术深度（怎么做的）+ 业务价值（影响了什么）——两个都要有
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-089.svg" alt="如何将企业级 Agent 开发经验融入简历？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 拒绝职责堆砌，因为面试官只想看成就，所以用“设计/优化”替代“负责”并辅以量化数据

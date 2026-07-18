@@ -266,6 +266,10 @@ experiment_2026_06 = {
 - **大模型数据质量评估工具**：CCNet（Meta，网页质量打分）、datasketch（去重）、FairLLM（毒性检测）
 - **华为AI DC全栈**：昇腾NPU（算力）+ MindSpore（框架）+ 盘古大模型（模型）+ 数据湖（数据），面试可结合全栈视角谈
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-hw-003.svg" alt="【华为面经】AI DC 数据基础设施/数据湖在大模型训练中的角色 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：数据湖是集中存原始数据的系统，采用 Schema-on-Read 读取时定义结构。

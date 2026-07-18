@@ -260,6 +260,10 @@ def manage_token_budget(context, max_tokens=8000):
 2. **分层管理**：生产级方案是组合拳，不是单一方法
 3. **提"Token 预算"**：把上下文建模和成本控制结合，体现工程思维
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-024.svg" alt="多轮对话的上下文如何建模？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心矛盾：无限增长的对话轮次与有限的LLM上下文窗口之间的冲突

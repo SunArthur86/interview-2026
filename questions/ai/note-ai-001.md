@@ -231,6 +231,10 @@ for d_k in d_k_values:
 
 5. **从第一性原理理解：** 面试官追问深层问题时，可以从信息论角度补充——Softmax 温度参数和 $\sqrt{d_k}$ 缩放在数学上等价，都是调节输出分布的"锐度"。注意力分布的熵应在适当范围内：太尖锐（退化为 hard attention）则梯度差，太平坦（退化为 mean pooling）则表达力弱。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ai-001.svg" alt="Self-Attention 为什么除以根号 d_k？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 因为点积方差随$d_k$线性增长，导致Softmax进入饱和区引发梯度消失，所以需除以根号$d_k$。

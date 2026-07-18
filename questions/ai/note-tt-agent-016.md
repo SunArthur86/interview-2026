@@ -221,6 +221,10 @@ flowchart TD
     E --> Eval{"Eval流水线评估<br/>准确率回归测试"}
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tt-agent-016.svg" alt="怎么提升Function Call准确率？Prompt、Schema、Few-shot、异常重试四个维度优化方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 口诀法：四大维度全面提升调用准确率：决策树提示词、精确Schema、正反例示范、异常重试

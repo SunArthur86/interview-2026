@@ -174,6 +174,10 @@ Answer: 北京今天晴，气温25℃
 - **Reflexion**：ReAct + 反思，执行失败后反思原因再重试，自我进化
 - **LATS（Language Agent Tree Search）**：ToT + MCTS（蒙特卡洛树搜索），更系统的探索
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-002.svg" alt="【某讯面经】CoT / ReAct / ToT / Plan&amp;Verify 适用场景对比，项目怎么选型 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大范式定位：CoT纯推理、ReAct边想边做、ToT多路探索、Plan先全局后执行

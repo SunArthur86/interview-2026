@@ -106,6 +106,10 @@ flowchart TD
     Branch -->|并行| Parallel[并行投机<br/>高吞吐]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_zp-infra-005.svg" alt="【智谱Infra面经】Speculative Decoding / Medusa / EAGLE / PEARL 在推理加速中的实现细节？并行投机 vs 树状投机？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 基础投机：小模型Draft生成候选，大模型Target并行验证，猜对免费，保证分布一致。

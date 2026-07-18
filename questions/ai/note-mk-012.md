@@ -249,6 +249,10 @@ function createTemplateFromReplay(taskId: string): TaskTemplate {
 - **不能沉淀模板**：每次都从头写指令，优秀任务无法复用
 - **回放数据太大**：记录了所有中间token，导致存储和加载都很慢
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-012.svg" alt="【月之暗面面经】AI-Native 桌面产品怎样做结果回放，才能支持问题复盘和用户学习？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心双价值：面向开发者做问题复盘找Bug，面向普通用户做过程回放学习AI逻辑。

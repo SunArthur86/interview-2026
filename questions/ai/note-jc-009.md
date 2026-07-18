@@ -184,6 +184,10 @@ flowchart TD
     K --> A
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-jc-009.svg" alt="【阶跃星辰面经】BF16 和 FP16 两种精度有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 对比核心：FP16精度高（尾数10）但易溢出，BF16范围大（指数8同FP32）不易溢出

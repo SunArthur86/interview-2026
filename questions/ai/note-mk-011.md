@@ -249,6 +249,10 @@ class TaskResultBroadcaster {
 - **锁不过期**：窗口崩溃后锁不释放，其他窗口永远无法编辑
 - **长任务结果只通知发起窗口**：其他窗口的任务中心看不到最新状态
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-011.svg" alt="【月之暗面面经】如果桌面端支持多窗口协作，前端怎么避免不同窗口状态打架？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 状态分层模型：按重要程度分为强同步（事实数据）、弱同步（协作数据）、不同步（UI状态）。

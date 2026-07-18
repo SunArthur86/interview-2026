@@ -245,6 +245,10 @@ def parse_xml(raw):
 2. **原生 Structured Output**：能用模型原生能力就用，比纯 Prompt 约束可靠
 3. **错误反馈重试**：把解析错误告诉 LLM 让它修——这是"让 LLM 自我纠正"的实用技巧
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-072.svg" alt="如何稳定地让大模型输出符合业务规范的 JSON/XML 格式？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 口诀「约束+原生+兜底」三层保障：Prompt约束，原生API，后处理校验

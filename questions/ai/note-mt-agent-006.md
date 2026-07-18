@@ -459,6 +459,10 @@ class ContextEngineeringPipeline:
 
 **答：** Attention 机制是上下文工程的**理论基础**。Attention 权重本质上就是模型对上下文中各 token 的分配权重——上下文工程就是通过**优化输入信息排列**来引导 Attention 权重向关键信息倾斜。例如「Lost in the Middle」现象的本质是 Attention 对中间位置衰减；XML 标签结构化能提升 Attention 对区块边界的感知。理解 Attention 机制能指导我们设计更有效的上下文结构。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mt-agent-006.svg" alt="【美团面经】上下文工程是什么？解决了什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：对所有输入LLM的信息进行系统化设计、调度与压缩的工程实践。

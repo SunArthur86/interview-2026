@@ -143,6 +143,10 @@ flowchart TD
     F -- "Pre-merge>95%" --> H["允许代码合并"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-032.svg" alt="如何设计AI应用的Golden Set评测系统？构建高质量评测集，保障每次迭代不退化。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 构建流程：来源（线上日志/人工构造/对抗样本）→ 标注（评分细则）→ 分层。

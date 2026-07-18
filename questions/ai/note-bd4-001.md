@@ -159,6 +159,10 @@ fmt.Println("goroutine count:", runtime.NumGoroutine())
 - **P的mcache**：每个P有独立的mcache，小对象分配无需加锁，这是Go高性能分配的关键
 - **GOMAXPROCS过大**：P过多 → M过多 → OS线程过多 → 上下文切换开销激增 + cache miss增加
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd4-001.svg" alt="Golang 的 GMP 调度模型是什么？什么情况下会造成 goroutine 泄漏？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - GMP定义：G是协程，M是OS线程，P是持有本地队列的逻辑处理器

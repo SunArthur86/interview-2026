@@ -208,6 +208,10 @@ ANALYSIS_PROMPT = """
 2. **客服重边界**：客服 Prompt 最重要的是"不能做什么"和"兜底"
 3. **编程重验证**：编程 Prompt 要要求可运行代码+测试，体现严谨
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-069.svg" alt="不同场景下提示词怎么写？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大场景口诀：客服重边界兜底，技术重精确验证，创意重自由风格，分析重逻辑推导

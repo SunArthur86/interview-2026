@@ -276,6 +276,10 @@ def compensate(state):
 2. **子图模块化**：复杂流程拆成子图，可复用可维护——体现工程思维
 3. **补偿事务**：失败后的补偿是分布式系统的经典问题，能讲到说明有深度
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-065.svg" alt="LangGraph 的核心 Graph 如何设计？如何打造企业级复杂工作流？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 复杂工作流八大要素：状态/节点/分支/并行/子图/人工/容错/检查点

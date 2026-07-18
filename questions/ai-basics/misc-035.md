@@ -106,6 +106,10 @@ def build_safe_prompt(user_input: str, system_instruction: str):
 2. **追问**：如何设计一个“意图预检”模型来判断输入是否包含恶意指令，它与主模型之间存在哪些平衡点（如误杀率 vs 延迟）？
 3. **追问**：面对 Prompt Injection，为什么 LLM 也很容易中招，这与传统的 SQL 注入防御原理有何异同？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-035.svg" alt="什么是Prompt Injection攻击?如何防御 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：利用LLM顺从性，混淆开发者指令与用户内容的边界

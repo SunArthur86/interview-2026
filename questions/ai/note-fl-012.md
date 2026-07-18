@@ -122,6 +122,10 @@ memory_points:
 - **多级缓存一致性**：本地缓存（Caffeine）+ 分布式缓存（Redis），更新时本地缓存怎么失效（广播失效 / TTL 短）
 - **Redis 集群的雪崩**：不仅是 key 过期，主节点宕机切换期间也会"雪崩"——需要熔断降级保护
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-fl-012.svg" alt="【字节飞连面经】缓存穿透 / 击穿 / 雪崩：含义和解法，布隆过滤器 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 穿透(查不存在)解法：缓存空值短TTL，配合布隆过滤器前置拦截挡掉恶意请求

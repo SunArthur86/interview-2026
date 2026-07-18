@@ -235,3 +235,7 @@ def adaptive_retrieve(query, chat_history, llm, retriever):
 **候选人**：不行，指代未消解会跑偏，历史过长稀释当前query信号，必须先rewrite再检索。
 **面试官**：历史太长怎么办？
 **候选人**：近3-5轮拼接，超过窗口或延迟敏感时压缩成摘要，跨主题切换时清理旧上下文避免干扰。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-037.svg" alt="【RAG多轮对话】多轮对话怎么处理上下文？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

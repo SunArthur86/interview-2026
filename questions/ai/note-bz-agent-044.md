@@ -284,6 +284,10 @@ class Text2SQLSecurity:
 2. **Schema RAG**：表多时只给相关的，而非全塞——这是准确率的关键
 3. **安全治理**：只读权限+SQL 校验+脱敏，体现生产级思维
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-044.svg" alt="Text2SQL 在 Agent 里怎么用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定位：作为Agent的数据查询技能，将自然语言转为SQL查询并解读结果。

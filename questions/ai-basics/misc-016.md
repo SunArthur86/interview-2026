@@ -102,6 +102,10 @@ out = flash_attn_func(
 2. Flash Attention 支持Attention Mask吗？如何实现的？
 3. Flash Attention-3 在H100上使用了什么新的硬件特性（如Tensor Cores或TMA）？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-016.svg" alt="Flash Attention的原理是什么?为什么能同时加速和省显存 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：Tiling分块计算+在线Softmax，减少HBM读写

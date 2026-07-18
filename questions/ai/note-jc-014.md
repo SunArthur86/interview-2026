@@ -202,6 +202,10 @@ flowchart TD
     C4 --> D1
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-jc-014.svg" alt="【阶跃星辰面经】动态规划核心思想 + 最短路逆推子问题 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心思想：大问题拆子问题并存储解，空间换时间避免重复计算

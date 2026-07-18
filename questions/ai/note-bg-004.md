@@ -368,6 +368,10 @@ def choose_method(task_type, resources, data):
 - **DPO论文**：Stanford 2023，RLHF的偏好直接优化理论
 - **其他变体**：KTO（Kahneman-Tversky，只需好/坏标签无需成对）、IPO、ORPO
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bg-004.svg" alt="【八股总结】PPO、GRPO、DPO、DAPO 的基本原理 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四者对比：PPO需Critic四模型，GRPO组内相对去Critic，DAPO动态采样解耦，DPO离线无需RM

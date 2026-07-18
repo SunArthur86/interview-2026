@@ -221,6 +221,10 @@ class PriorityScheduler:
 2. **强调"事件驱动"**：现代 Agent（如 LangGraph）本质是事件驱动的状态机，这是理解框架底层的关键
 3. **LLM 是转换函数**：LLM 在调度中的角色是"决定状态转换"，而非执行——执行交给工具和事件循环
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-007.svg" alt="Agent 的底层调度逻辑是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 底层本质：Agent的调度逻辑是一个有限状态机（FSM）结合事件循环

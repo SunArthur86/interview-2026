@@ -211,6 +211,10 @@ AUDIT_EVENTS = [
 # 例：发现用户投诉"我的偏好被改了"→ 查审计日志 → 定位到哪次会话改的
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx4-002.svg" alt="设计多用户在线 Agent 长期记忆系统，用户前后说法矛盾产生记忆冲突怎么处理？多租户如何防止记忆泄露？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 记忆防冲突：新记忆不直接覆盖旧记忆，而是打废弃标并附加时间戳溯源

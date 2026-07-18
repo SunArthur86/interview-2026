@@ -532,6 +532,10 @@ class PostMortemPipeline:
 - **ReAct范式**：Reasoning + Acting，让LLM边推理边调用工具，是Agent的核心范式（参考ReAct论文）
 - **华为云AIOps实践**：华为自身的运维大模型方案，面试时可结合盘古运维大模型谈
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-hw-006.svg" alt="【华为面经】基于大模型设计服务器自动故障预警、排查和恢复系统 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心痛点：传统运维阈值告警滞后且排查慢，大模型旨在实现故障提前预测与自动恢复。

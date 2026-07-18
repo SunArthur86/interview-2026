@@ -6,20 +6,53 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：将对象实例化延迟到工厂子类。</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="60" y="110" width="680" height="50" rx="8" fill="#2196F3"/>
+<text x="400" y="142" font-size="15" fill="#FFFFFF" text-anchor="middle" font-weight="700">SOLID + 迪米特 + 合成复用 → 高内聚、低耦合</text>
+<rect x="60" y="180" width="160" height="140" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<circle cx="90" cy="210" r="20" fill="#4CAF50"/>
+<text x="90" y="216" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">S</text>
+<text x="140" y="208" font-size="13" fill="#4CAF50" font-weight="700">单一职责</text>
+<text x="140" y="226" font-size="9" fill="#546E7A">Single Responsibility</text>
+<text x="140" y="256" font-size="10" fill="#37404F" text-anchor="middle">一个类只做一件事</text>
+<rect x="235" y="180" width="160" height="140" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<circle cx="265" cy="210" r="20" fill="#2196F3"/>
+<text x="265" y="216" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">O</text>
+<text x="315" y="208" font-size="13" fill="#2196F3" font-weight="700">开闭原则</text>
+<text x="315" y="226" font-size="9" fill="#546E7A">Open-Closed</text>
+<text x="315" y="256" font-size="10" fill="#37404F" text-anchor="middle">对扩展开放，对修</text>
+<text x="315" y="270" font-size="10" fill="#37404F" text-anchor="middle">改关闭</text>
+<rect x="410" y="180" width="160" height="140" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<circle cx="440" cy="210" r="20" fill="#FF9800"/>
+<text x="440" y="216" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">L</text>
+<text x="490" y="208" font-size="13" fill="#FF9800" font-weight="700">里氏替换</text>
+<text x="490" y="226" font-size="9" fill="#546E7A">Liskov Substitution</text>
+<text x="490" y="256" font-size="10" fill="#37404F" text-anchor="middle">子类能完整替换父</text>
+<text x="490" y="270" font-size="10" fill="#37404F" text-anchor="middle">类</text>
+<rect x="585" y="180" width="160" height="140" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<circle cx="615" cy="210" r="20" fill="#9C27B0"/>
+<text x="615" y="216" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">I</text>
+<text x="665" y="208" font-size="13" fill="#9C27B0" font-weight="700">接口隔离</text>
+<text x="665" y="226" font-size="9" fill="#546E7A">Interface Segregation</text>
+<text x="665" y="256" font-size="10" fill="#37404F" text-anchor="middle">不依赖不需要的接</text>
+<text x="665" y="270" font-size="10" fill="#37404F" text-anchor="middle">口</text>
+<rect x="60" y="340" width="160" height="140" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<circle cx="90" cy="370" r="20" fill="#f44336"/>
+<text x="90" y="376" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">D</text>
+<text x="140" y="368" font-size="13" fill="#f44336" font-weight="700">依赖倒置</text>
+<text x="140" y="386" font-size="9" fill="#546E7A">Dependency Inversion</text>
+<text x="140" y="416" font-size="10" fill="#37404F" text-anchor="middle">依赖抽象，不依赖</text>
+<text x="140" y="430" font-size="10" fill="#37404F" text-anchor="middle">具体</text>
+<rect x="235" y="340" width="160" height="140" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<circle cx="265" cy="370" r="20" fill="#607D8B"/>
+<text x="265" y="376" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">LoD</text>
+<text x="315" y="368" font-size="13" fill="#607D8B" font-weight="700">迪米特法则</text>
+<text x="315" y="386" font-size="9" fill="#546E7A">Law of Demeter</text>
+<text x="315" y="416" font-size="10" fill="#37404F" text-anchor="middle">最少知道原则</text>
+<rect x="410" y="340" width="160" height="140" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<circle cx="440" cy="370" r="20" fill="#4CAF50"/>
+<text x="440" y="376" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">CARP</text>
+<text x="490" y="368" font-size="13" fill="#4CAF50" font-weight="700">合成复用</text>
+<text x="490" y="386" font-size="9" fill="#546E7A">Composite Reuse</text>
+<text x="490" y="416" font-size="10" fill="#37404F" text-anchor="middle">多用组合，少用继</text>
+<text x="490" y="430" font-size="10" fill="#37404F" text-anchor="middle">承</text>
 </svg>

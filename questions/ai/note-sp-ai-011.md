@@ -219,6 +219,10 @@ Var(Q·K) = d_k  →  Var(Q·K/√d_k) = 1
 3. **多头直觉**：不同头学习不同子空间的模式（语法/语义/指代等）
 4. **复杂度**：O(n²·d)，n是序列长度——这是FlashAttention等优化的动机
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sp-ai-011.svg" alt="自注意力机制的计算过程是怎样的？Q、K、V分别是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - QKV本质：Q是搜索词，K是匹配标签，V是实际内容。

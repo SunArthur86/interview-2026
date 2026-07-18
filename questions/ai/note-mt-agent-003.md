@@ -207,6 +207,10 @@ def agent_loop(question: str, max_steps: int = 10):
 
 > **一句话总结**：Agent = 感知+规划+记忆+行动的自主决策闭环；LLM Chain = 预定义管道中嵌入LLM计算单元。分水岭是——**谁拥有"下一步做什么"的决策权**。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mt-agent-003.svg" alt="【美团面经】简述Agent的基本架构组成，并解释其与传统LLM Chain的区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大架构模块：感知、规划、记忆、行动共同组成Agent闭环决策循环

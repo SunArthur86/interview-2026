@@ -6,20 +6,44 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：以字节为单位读取数据的输入流，适合处理二进制文件。</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="60" y="110" width="680" height="50" rx="8" fill="#9C27B0"/>
+<text x="400" y="142" font-size="15" fill="#FFFFFF" text-anchor="middle" font-weight="700">Lambda = 语法糖  →  运行期生成 invokedynamic + LambdaMetafactory</text>
+<text x="60" y="190" font-size="13" fill="#2196F3" font-weight="700" letter-spacing="0.5">JDK 内置函数式接口（java.util.function）</text>
+<rect x="60" y="210" width="130" height="80" rx="6" fill="#4CAF5022" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="125" y="234" font-size="11" fill="#4CAF50" text-anchor="middle" font-weight="700">Function&lt;T,R&gt;</text>
+<text x="125" y="256" font-size="10" fill="#37404F" text-anchor="middle">apply(T)→R</text>
+<text x="125" y="270" font-size="10" fill="#37404F" text-anchor="middle">转换</text>
+<rect x="200" y="210" width="130" height="80" rx="6" fill="#FF980022" stroke="#FF9800" stroke-width="1.5"/>
+<text x="265" y="234" font-size="11" fill="#FF9800" text-anchor="middle" font-weight="700">Predicate&lt;T&gt;</text>
+<text x="265" y="256" font-size="10" fill="#37404F" text-anchor="middle">test(T)→boole</text>
+<text x="265" y="270" font-size="10" fill="#37404F" text-anchor="middle">an</text>
+<text x="265" y="284" font-size="10" fill="#37404F" text-anchor="middle">断言</text>
+<rect x="340" y="210" width="130" height="80" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="405" y="234" font-size="11" fill="#2196F3" text-anchor="middle" font-weight="700">Consumer&lt;T&gt;</text>
+<text x="405" y="256" font-size="10" fill="#37404F" text-anchor="middle">accept(T)→voi</text>
+<text x="405" y="270" font-size="10" fill="#37404F" text-anchor="middle">d</text>
+<text x="405" y="284" font-size="10" fill="#37404F" text-anchor="middle">消费</text>
+<rect x="480" y="210" width="130" height="80" rx="6" fill="#9C27B022" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="545" y="234" font-size="11" fill="#9C27B0" text-anchor="middle" font-weight="700">Supplier&lt;T&gt;</text>
+<text x="545" y="256" font-size="10" fill="#37404F" text-anchor="middle">get()→T</text>
+<text x="545" y="270" font-size="10" fill="#37404F" text-anchor="middle">供给</text>
+<rect x="620" y="210" width="130" height="80" rx="6" fill="#f4433622" stroke="#f44336" stroke-width="1.5"/>
+<text x="685" y="234" font-size="11" fill="#f44336" text-anchor="middle" font-weight="700">BiFunction&lt;T,U,R&gt;</text>
+<text x="685" y="256" font-size="10" fill="#37404F" text-anchor="middle">双参转换</text>
+<text x="60" y="320" font-size="13" fill="#9C27B0" font-weight="700" letter-spacing="0.5">方法引用 4 种形式</text>
+<rect x="60" y="340" width="165" height="70" rx="6" fill="#4CAF5022" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="142" y="366" font-size="11" fill="#4CAF50" text-anchor="middle" font-weight="700">类::静态方法</text>
+<text x="142" y="392" font-size="11" fill="#263238" text-anchor="middle">Integer::parseInt</text>
+<rect x="235" y="340" width="165" height="70" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="317" y="366" font-size="11" fill="#2196F3" text-anchor="middle" font-weight="700">对象::实例方法</text>
+<text x="317" y="392" font-size="11" fill="#263238" text-anchor="middle">System.out::println</text>
+<rect x="410" y="340" width="165" height="70" rx="6" fill="#FF980022" stroke="#FF9800" stroke-width="1.5"/>
+<text x="492" y="366" font-size="11" fill="#FF9800" text-anchor="middle" font-weight="700">类::实例方法</text>
+<text x="492" y="392" font-size="11" fill="#263238" text-anchor="middle">String::length</text>
+<rect x="585" y="340" width="165" height="70" rx="6" fill="#9C27B022" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="667" y="366" font-size="11" fill="#9C27B0" text-anchor="middle" font-weight="700">类::new</text>
+<text x="667" y="392" font-size="11" fill="#263238" text-anchor="middle">User::new</text>
+<text x="400" y="450" font-size="14" fill="#4CAF50" text-anchor="middle" font-weight="700">Stream API 流水线：source → 中间操作(惰性) → 终止操作</text>
+<text x="400" y="478" font-size="12" fill="#607D8B" text-anchor="middle">filter / map / flatMap / sorted / distinct  |  collect / reduce / forEach / count</text>
+<text x="400" y="502" font-size="12" fill="#607D8B" text-anchor="middle">并行流 parallelStream：ForkJoinPool.commonPool()，注意线程安全与顺序</text>
 </svg>

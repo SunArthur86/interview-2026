@@ -287,6 +287,10 @@ class TaskCenter {
 - **不能跨窗口复用**：每个窗口各自维护任务列表，状态不同步
 - **没有追踪链路**：出了问题无法从产物追溯到输入和执行过程
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-009.svg" alt="【月之暗面面经】如果让你设计桌面 Agent 的任务中心，会有哪些关键对象？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心五大对象：Task(任务)、InputRef(输入引用)、Artifact(产物)、Permission(授权)、Notification(通知)。

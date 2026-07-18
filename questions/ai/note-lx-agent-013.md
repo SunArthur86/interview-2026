@@ -237,6 +237,10 @@ def _validate_transition(self, new_state: GlobalState):
 3. **超时兜底**：每个状态设置超时计时器，卡在某个状态超过30s自动重置为IDLE
 4. **测试策略**：用 property-based testing 验证所有状态转换组合的合法性
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-lx-agent-013.svg" alt="如果一个Agent要同时处理语音、文本和工具结果，状态机应该怎么设计才不容易乱？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 多模态并发易冲突：语音、文本、工具结果同时到达，必须设置事件优先级

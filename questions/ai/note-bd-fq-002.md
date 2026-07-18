@@ -170,6 +170,10 @@ class CrossModalRetriever:
 3. **实际工程**：双塔模型适合大规模检索（可预先建索引），Cross-Encoder适合精排但延迟高
 4. **与RAG结合**：对齐后图文可在同一向量库中检索，实现"以图搜文"和"以文搜图"
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-fq-002.svg" alt="多模态检索中，图像和文本向量不在同一空间时，如何实现对齐？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 问题本质：不同模态编码器输出空间不共享，直接计算相似度毫无意义

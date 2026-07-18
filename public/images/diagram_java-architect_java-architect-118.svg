@@ -4,7 +4,7 @@
 <rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
 <text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】线上线程泄漏与连接泄漏如何排查</text>
 <text x="28" y="552" font-size="0"></text>
-<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：线程泄漏与连接泄漏是 Java 服务\&quot;慢性死亡\&quot;的两大元凶。线程泄漏：创建后不复用、不回收，线程数无限增长（最终 O…</text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：线程泄漏与连接泄漏是 Java 服务&quot;慢性死亡&quot;的两大元凶。线程泄漏：创建后不复用、不回收，线程数无限增长（最终 OOM…</text>
 <!-- BODY_TOP=110 -->
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">

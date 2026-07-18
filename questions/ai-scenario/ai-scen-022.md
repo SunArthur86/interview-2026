@@ -135,6 +135,10 @@ flowchart TD
     Resp --> App
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-022.svg" alt="如何设计一个模型网关（Model Gateway）系统？统一管理多个LLM供应商的路由、限流和成本。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心职责：统一接口适配、智能路由（成本/能力/延迟）、流量治理、成本归因。

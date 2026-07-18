@@ -354,3 +354,7 @@ class HierarchicalDialogueMemory:
 **候选人**：不是，过度压缩丢关键信息导致答非所问、决策错误，要在token节省和信息保留间平衡，按任务调阈值。
 **面试官**：FC准确率怎么验证？
 **候选人**：FC测试集准确率、参数校验、badcase分析、必要时微调专用FC模型，配合重试和降级兜底。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-046.svg" alt="【快手AI大模型】Function Calling准确率怎么提升？长多轮对话怎么压缩？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

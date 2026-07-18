@@ -201,6 +201,10 @@ def classify_intent(query):
 - **客服知识库自动更新**：质检 Agent 发现的知识缺口自动补充到 RAG
 - **多模态客服**：图片（截图报错）+ 语音（电话）+ 文字，统一接入
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-016.svg" alt="【某讯面经】业务场景：某讯客服中心多智能体落地，设计思路 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心架构是编排器+子Agent：规则快而LLM准，混合做意图路由分发

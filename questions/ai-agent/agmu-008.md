@@ -101,6 +101,10 @@ flowchart TB
     Add3 --> Robust["鲁棒聚合"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-008.svg" alt="为什么光有投票不够 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心缺陷：Agent 意见不独立，易产生同质化幻觉，投票只是数人头非看证据。

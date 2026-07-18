@@ -247,6 +247,10 @@ Agent 编排
 - **自适应限流**：根据系统负载动态调整限流阈值（如 CPU/RT 自适应）
 - ** chaos engineering **：故意注入故障测试降级是否生效
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-013.svg" alt="【某讯面经】并发锁、熔断、限流、降级实现思路 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 限流挡超额流量：令牌桶允许突发，漏桶严格匀速，入口防过载选令牌桶

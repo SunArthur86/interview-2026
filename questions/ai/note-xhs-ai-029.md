@@ -192,3 +192,7 @@ class KVPrefetcher:
 **候选人**：离线批处理或低QPS在线用时间换显存值得；高并发在线搬运开销无法摊销TPOT不可接受，不如量化或分布式。
 **面试官**：怎么验证缓解方案有效？
 **候选人**：对比优化前后TPOT、profiler看搬运时间占比下降、压测P99长尾、监控显存确实省下来了。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-029.svg" alt="【AI Infra推理优化】Offloading到CPU/SSD为何拖慢TPOT？如何缓解？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

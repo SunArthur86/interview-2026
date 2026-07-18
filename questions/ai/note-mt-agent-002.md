@@ -316,6 +316,10 @@ asyncio.run(main())
 
 > **一句话总结**：混合架构 = 任务级master+sub保证控制力 + 信息级P2P保证效率。既不是纯workflow的死板，也不是纯master-slave的瓶颈，而是根据通信层级选择最合适的拓扑。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mt-agent-002.svg" alt="【美团面经】你的Agent项目用的是什么架构？master加sub Agent还是workflow？为什么这么选型？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 选型定调：因为单一模式有瓶颈，所以选用Workflow加Master的混合架构

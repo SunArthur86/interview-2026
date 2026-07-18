@@ -186,6 +186,10 @@ interface AnalyticsEvents {
 - **忽略重跑率**：任务"完成"了但用户不满意不断重跑，实际上体验很差
 - **不追踪上下文补充**：用户反复补充素材说明前置校验没做好，但如果不追踪就发现不了
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-016.svg" alt="【月之暗面面经】你会用哪些指标判断桌面 AI 产品前端做得好不好？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三层指标体系：北极星指标看业务（采纳率/完成率），体验指标看效率（重跑率/耗时），技术指标看质量。

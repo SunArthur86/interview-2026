@@ -129,6 +129,10 @@ flowchart TD
     J --> K[入库测试用例]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-045.svg" alt="如何设计一个AI测试生成系统？自动生成单元测试、API测试，提升测试覆盖率。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 架构四层：代码理解(AST/控制流)、测试策略(边界/异常)、生成层(LLM+Mock)、验证层(覆盖率/去重)。

@@ -246,6 +246,10 @@ ROI从高到低：
 2. **强调评估驱动**：没有评估的优化是盲目的——先建评估再优化
 3. **给优先级**：Rerank/查询改写/混合检索 ROI 最高，体现实战经验
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-047.svg" alt="RAG 可以从哪些细节深挖？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四层深挖：数据层(基础)、检索层(核心)、生成层(呈现)、评估层(驱动)。

@@ -220,3 +220,7 @@ class HallucinationGuardedRAG:
 | 0:50 | 检索层示意图 | "检索层——提升召回率(混合检索+重排序)、过滤低相关chunk、查询改写" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：检索召回率已经90%了，为什么还会有幻觉？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sp-001.svg" alt="如何限制RAG幻觉？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

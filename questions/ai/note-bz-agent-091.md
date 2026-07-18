@@ -218,6 +218,10 @@ class EvalLoop:
 2. **工具检索管理**：工具多时用 RAG 选子集，而非全塞——这是复杂 Agent 的关键
 3. **安全是底线**：高危操作必须人工确认+沙箱执行——生产级必备
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-091.svg" alt="实战：带工具调用的复杂 Agent 智能体怎么构建？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 因为10+工具全塞给LLM会导致幻觉与上下文溢出，所以必须用RAG思路动态检索并选择Top-K工具

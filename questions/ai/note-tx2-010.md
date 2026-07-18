@@ -225,6 +225,10 @@ context = short_term + long_term_profile + relevant
 - **Memory 的时效性**：不同记忆有不同 TTL（会话=30min，偏好=永久，价格=1个月）
 - **跨用户 Memory**：知识库类记忆可跨用户共享（如"退款政策"），个人记忆严格隔离
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-010.svg" alt="【某讯面经】设计 Agent 的 Memory 系统（短期+长期+向量记忆），如何避免上下文污染 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三层架构：短期存Redis当前会话，长期存DB跨会话画像，向量库存历史按语义召回

@@ -200,6 +200,10 @@ flowchart TD
     end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-020.svg" alt="如何设计一个AI销售助手？能理解客户需求、推荐产品、处理异议、引导成单。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心能力：SPIN提问挖掘需求，销售漏斗阶段识别，异议处理促单。

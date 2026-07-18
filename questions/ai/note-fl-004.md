@@ -114,6 +114,10 @@ Claude Code 还支持 `memory/` 子目录写入小记忆文件，用 frontmatter
 - **检索式记忆的工程实现**：把会话历史向量化存向量库，每轮按当前 query 召回 top-K 相关片段拼 prompt
 - **memory 污染问题**：如果 auto memory 写太多低价值内容，反而干扰主任务 → 需要"遗忘机制"（定期清理低引用记忆）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-fl-004.svg" alt="【字节飞连面经】Claude Code 的 Memory 机制：为什么分层？上下文过长怎么办？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三层记忆：项目级(CLAUDE.md进git) > 用户级(~不进git) > 会话级(内存关窗即丢)

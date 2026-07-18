@@ -108,6 +108,10 @@ flowchart LR
     A2 --> C
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_ai-basics-s002.svg" alt="交叉熵损失和均方误差有什么区别？什么时候用哪个？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - MSE：用于回归，假设误差高斯分布，梯度随误差减小而变慢。

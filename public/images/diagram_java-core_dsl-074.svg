@@ -6,20 +6,34 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：现代前端框架的核心特性与性能优化机制。</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="114" width="229" height="44" rx="8" fill="#2196F3"/>
+<text x="155" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">静态代理</text>
+<rect x="285" y="114" width="229" height="44" rx="8" fill="#FF9800"/>
+<text x="400" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">JDK 动态代理</text>
+<rect x="531" y="114" width="229" height="44" rx="8" fill="#4CAF50"/>
+<text x="645" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">CGLIB 动态代理</text>
+<rect x="40" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">编译期确定</text>
+<rect x="285" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">基于接口</text>
+<rect x="531" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">基于继承</text>
+<rect x="40" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">实现相同接口</text>
+<rect x="285" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Proxy.newProxyInstance</text>
+<rect x="531" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Enhancer.create</text>
+<rect x="40" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">需手写代理类</text>
+<rect x="285" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">InvocationHandler</text>
+<rect x="531" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">MethodInterceptor</text>
+<rect x="40" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">一个代理一个主题</text>
+<rect x="285" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Spring AOP 默认(有接口)</text>
+<rect x="531" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">不能代理 final 类/方法</text>
 </svg>

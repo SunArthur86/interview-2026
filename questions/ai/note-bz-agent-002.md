@@ -174,6 +174,10 @@ def react_agent(goal, memory, tools):
 2. **提"记忆最难"**：规划和工具相对成熟（靠强模型 + API 规范），记忆是最难工程化的（检索召回/用户隔离/遗忘策略）
 3. **能力分级**：弱 Agent（固定流程+少量工具）→ 强 Agent（动态规划+长期记忆+多工具）→ 自主 Agent（自主设目标）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-002.svg" alt="AI Agent 的核心能力有哪些？（规划、记忆、工具使用） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大能力口诀：规划（拆解任务）、记忆（保持状态）、工具（执行操作）

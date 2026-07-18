@@ -14,12 +14,45 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="330" y="130" width="180" height="60" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="420" y="144" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Context</text>
+<text x="420" y="160" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">持 Strategy 引</text>
+<text x="420" y="176" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">用</text>
+<rect x="330" y="220" width="180" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="420" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">&lt;&lt;interface&gt;&gt;</text>
+<text x="420" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Strategy</text>
+<line x1="420" y1="190" x2="420" y2="220" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="420" y="199" font-size="11" fill="#455A64" text-anchor="middle" font-weight="600">聚合</text>
+<rect x="60" y="300" width="220" height="60" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="170" y="323" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ConcreteStrate</text>
+<text x="170" y="337" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">gyA</text>
+<line x1="170" y1="300" x2="420" y2="270" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="310" y="300" width="220" height="60" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="420" y="323" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ConcreteStrate</text>
+<text x="420" y="337" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">gyB</text>
+<line x1="420" y1="300" x2="420" y2="270" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="560" y="300" width="220" height="60" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="670" y="323" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ConcreteStrate</text>
+<text x="670" y="337" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">gyC</text>
+<line x1="670" y1="300" x2="420" y2="270" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="60" y="390" width="680" height="160" rx="10" fill="#FFFFFF" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="80" y="414" font-size="13" fill="#4CAF50" font-weight="700">优势 / Spring 应用</text>
+<rect x="80" y="420" width="210" height="48" rx="6" fill="#4CAF5022" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="92" y="438" font-size="12" fill="#4CAF50" font-weight="700">消除 if/else</text>
+<text x="92" y="458" font-size="10" fill="#37404F">每个分支独立类</text>
+<rect x="305" y="420" width="210" height="48" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="317" y="438" font-size="12" fill="#2196F3" font-weight="700">开闭原则</text>
+<text x="317" y="458" font-size="10" fill="#37404F">新增策略不改原代码</text>
+<rect x="530" y="420" width="210" height="48" rx="6" fill="#FF980022" stroke="#FF9800" stroke-width="1.5"/>
+<text x="542" y="438" font-size="12" fill="#FF9800" font-weight="700">Spring 注入</text>
+<text x="542" y="458" font-size="10" fill="#37404F">@Autowired Map&lt;String,Strategy&gt;</text>
+<rect x="80" y="480" width="210" height="48" rx="6" fill="#9C27B022" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="92" y="498" font-size="12" fill="#9C27B0" font-weight="700">典型场景</text>
+<text x="92" y="518" font-size="10" fill="#37404F">支付/折扣/排序/路由</text>
+<rect x="305" y="480" width="210" height="48" rx="6" fill="#f4433622" stroke="#f44336" stroke-width="1.5"/>
+<text x="317" y="498" font-size="12" fill="#f44336" font-weight="700">Java 应用</text>
+<text x="317" y="518" font-size="10" fill="#37404F">Comparator / ThreadPoolExecutor 拒绝策略</text>
+<rect x="530" y="480" width="210" height="48" rx="6" fill="#607D8B22" stroke="#607D8B" stroke-width="1.5"/>
+<text x="542" y="498" font-size="12" fill="#607D8B" font-weight="700">替代方案</text>
+<text x="542" y="518" font-size="10" fill="#37404F">枚举 + 函数式接口</text>
 </svg>

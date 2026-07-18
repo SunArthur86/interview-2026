@@ -15,11 +15,18 @@
 </marker>
 </defs>
 <rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="135" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">新增选择器（如nth-ch</text>
+<text x="400" y="153" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ild）提高选择精准度</text>
 <rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="227" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">引入Flex和Grid布局，</text>
+<text x="400" y="245" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">解决复杂排版难题</text>
 <rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="319" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">支持渐变、圆角、阴影</text>
+<text x="400" y="337" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">、转换和动画效果</text>
+<rect x="240" y="392" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="411" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">支持媒体查询，实现响</text>
+<text x="400" y="429" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">应式设计基础</text>
 <line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="356" x2="400" y2="392" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

@@ -15,11 +15,26 @@
 </marker>
 </defs>
 <rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="108" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">避免不必要渲染：Reac</text>
+<text x="400" y="126" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">t.memo 浅比较 props</text>
+<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">，shouldComponentUpd</text>
+<text x="400" y="162" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ate/PureComponent 拦</text>
+<text x="400" y="180" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">截更新。</text>
 <rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="209" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">缓存计算与回调：useM</text>
+<text x="400" y="227" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">emo 缓存计算结果，us</text>
+<text x="400" y="245" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">eCallback 缓存函数引</text>
+<text x="400" y="263" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">用防止子组件更新。</text>
 <rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="310" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">列表优化：使用唯一的</text>
+<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600"> key 帮助 Diff 算法</text>
+<text x="400" y="346" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">复用 DOM 节点。</text>
+<rect x="240" y="392" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="393" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">代码拆分：React.lazy</text>
+<text x="400" y="411" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600"> 和 Suspense 实现路</text>
+<text x="400" y="429" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">由懒加载，减少初始加</text>
+<text x="400" y="447" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">载体积。</text>
 <line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="356" x2="400" y2="392" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

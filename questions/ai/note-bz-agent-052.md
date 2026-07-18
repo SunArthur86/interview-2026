@@ -233,6 +233,10 @@ def evaluate_embedding(test_cases, embedder, vector_db):
 2. **父子分块**：检索小块精准，返回大块上下文全——这是 RAG 进阶技巧
 3. **Embedding 可微调**：通用模型在专业领域效果差，微调是终极优化手段
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-052.svg" alt="Embedding 策略怎么定？如何构建高精度向量检索体系？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大要素：模型选型是基础，分块策略是关键，索引构建提效率，查询优化保召回。

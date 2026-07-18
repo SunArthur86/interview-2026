@@ -162,6 +162,10 @@ Draft模型不直接生成token，而是预测target模型的隐藏状态
 | **KV Cache** | 缓存历史Key/Value | 2-5x | ✅ |
 | **Continuous Batching** | 动态拼batch | 5-10x | ✅ |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-qh-001.svg" alt="什么是投机解码(Speculative Decoding)？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话原理：小模型串行快速猜Draft，大模型一次并行验Target，以时间换吞吐。

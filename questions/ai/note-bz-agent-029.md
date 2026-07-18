@@ -253,6 +253,10 @@ class DomainColdStart:
 2. **主动而非被动**：好的冷启动会主动提问获取信息，而非等数据自然积累
 3. **兜底优先**：冷启动阶段保证"可用"比"个性化"更重要——先解决有无，再优化好坏
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-029.svg" alt="对话系统的冷启动如何解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大冷启动场景：新用户无画像、新领域无知识、新功能无数据

@@ -224,6 +224,10 @@ flowchart TD
     T2 --> R
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-034.svg" alt="Agent Skill/工具过多，如何提升命中率？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 描述优化是基础：需写清功能、正反触发边界与参数示例，降低相似工具混淆

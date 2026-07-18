@@ -309,3 +309,7 @@ class DegradationChain:
 **候选人**：AIGC任务耗时几十秒到分钟级，同步占用连接、超时、阻塞用户；异步解耦提升吞吐和可靠性。
 **面试官**：降级策略怎么分？
 **候选人**：L1限流→L2降质量（小模型低分辨率）→L3降功能（占位默认）→L4熔断，按故障严重程度逐级降级保核心可用。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-045.svg" alt="【快手AI大模型】异步批量AIGC任务架构怎么设计？多级降级策略？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

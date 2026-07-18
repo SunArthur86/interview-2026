@@ -158,6 +158,10 @@ class DynamicModelRouter:
 3. **渐进式策略**：先全用32B保证质量 → 统计任务难度分布 → 对简单任务蒸馏7B → 逐步替换
 4. **A/B测试**：模型替换必须做A/B测试，监控准确率/满意度/投诉率变化
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tt-agent-019.svg" alt="7B和32B大模型选型逻辑，什么场景用小模型蒸馏部署？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 因果句：因为7B模型低延迟低成本，所以适合意图分类与实体提取等确定性结构化任务

@@ -255,3 +255,7 @@ RAG回答错误/不好
 **候选人**：看召回的doc是否包含答案——doc没答案是检索问题，doc有答案但生成没用是生成问题，用召回率@k和人工抽检分诊。
 **面试官**：换大embedding模型一定有用吗？
 **候选人**：不一定，如果问题在chunk切分或检索策略换模型没用；必须先定位根因再对症，配合评测集和A/B验证。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-036.svg" alt="【RAG优化】RAG效果不好怎么优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

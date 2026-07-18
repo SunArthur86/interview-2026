@@ -134,6 +134,10 @@ flowchart TD
     H --> I
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-050.svg" alt="如何设计一个AI多语言翻译系统？支持高质量翻译、实时翻译、领域适配。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心需求：高质量(信达雅)、低延迟、领域适配；架构：引擎层、上下文层、质量层、人机协作。

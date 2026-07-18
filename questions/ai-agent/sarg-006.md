@@ -118,6 +118,10 @@ flowchart TB
     Chroma --> Use3["用: 原型/小项目"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_sarg-006.svg" alt="向量数据库有哪些选择？各有什么特点？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Milvus 适合亿级大规模分布式，Pinecone 适合快速 MVP 免运维。

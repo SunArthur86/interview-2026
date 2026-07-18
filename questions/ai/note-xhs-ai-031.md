@@ -205,3 +205,7 @@ eBPF挂载点:
 **候选人**：会，频繁同步采集有开销；要用异步采样、聚合上报、内核级计数器，避免在推理热路径同步采集。
 **面试官**：只看显存占用够吗？
 **候选人**：不够，要组合命中率和淘汰率——占用高但命中率高是有效利用，占用高但低命中率高淘汰是浪费，单看会误判。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-031.svg" alt="【AI Infra推理优化】如何构建KV Cache可观测体系？关键指标有哪些？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

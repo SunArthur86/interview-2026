@@ -15,11 +15,16 @@
 </marker>
 </defs>
 <rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="135" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">状态码 304 Not Modif</text>
+<text x="400" y="153" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ied 表示命中</text>
 <rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="218" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">通过 Last-Modified/I</text>
+<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">f-Modified-Since 时</text>
+<text x="400" y="254" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">间比对</text>
 <rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="310" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">通过 ETag/If-None-Ma</text>
+<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">tch 内容指纹比对（优</text>
+<text x="400" y="346" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">先级更高）</text>
 <line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

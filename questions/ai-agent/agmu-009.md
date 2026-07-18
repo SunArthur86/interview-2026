@@ -93,6 +93,10 @@ class AgentStateMachine:
 1. **误区：状态机限制了 LLM 的灵活性**。实际上，状态机只是约束了“流程走向”，在具体的 Action 执行上，LLM 依然有巨大的发挥空间。
 2. **误区：将状态机等同于 LLM 的 System Prompt**。System Prompt 是软指令，LLM 可能不遵守；状态机是硬逻辑，强制流转。两者结合效果最佳。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-009.svg" alt="多 Agent 系统为什么推荐状态机而不是纯自然语言传递一切 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心优势：状态机提供可测试性、可观测性（明确卡在哪）及防跑偏护栏。

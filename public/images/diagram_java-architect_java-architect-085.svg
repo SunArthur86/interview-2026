@@ -14,12 +14,41 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="240" y="116" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="91" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">兼容性三分类：向后兼</text>
+<text x="400" y="109" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">容（Backward，老调用</text>
+<text x="400" y="127" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">方调新服务）、向前兼</text>
+<text x="400" y="145" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">容（Forward，新调用</text>
+<text x="400" y="163" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">方调老服务）、完全兼</text>
+<text x="400" y="181" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">容（两者都满足）</text>
+<rect x="240" y="180" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="400" y="173" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">破坏性变更：删字段、</text>
+<text x="400" y="191" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">改字段类型、改字段语</text>
+<text x="400" y="209" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">义、改必填性（可选→</text>
+<text x="400" y="227" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">必填）、收紧校验</text>
+<rect x="240" y="244" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="246" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">非破坏性变更：加可选</text>
+<text x="400" y="264" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">字段、加新接口、放宽</text>
+<text x="400" y="282" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">校验、加可选请求参数</text>
+<rect x="240" y="308" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="283" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">版本化策略：URL 版本</text>
+<text x="400" y="301" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">（/v1/v2）、Header </text>
+<text x="400" y="319" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">版本（Accept: applic</text>
+<text x="400" y="337" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ation/vnd.foo.v2+jso</text>
+<text x="400" y="355" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">n）、协议版本（proto</text>
+<text x="400" y="373" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600"> package）</text>
+<rect x="240" y="372" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="365" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">契约测试：Pact（消费</text>
+<text x="400" y="383" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">方驱动），CDC 验证提</text>
+<text x="400" y="401" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">供方满足所有消费方期</text>
+<text x="400" y="419" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">望</text>
+<rect x="240" y="436" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#607D8B" stroke-width="2"/>
+<text x="400" y="438" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">API 演进工具：OpenAP</text>
+<text x="400" y="456" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">I diff、protobuf buf</text>
+<text x="400" y="474" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600"> breaking 检测</text>
+<line x1="400" y1="156" x2="400" y2="180" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="220" x2="400" y2="244" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="284" x2="400" y2="308" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="348" x2="400" y2="372" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="412" x2="400" y2="436" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

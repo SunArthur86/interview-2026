@@ -150,6 +150,10 @@ flowchart TB
     class D11,D12,D13,D21,D22,D23,D24,D25,D31,D32,D33,D34 item
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-113.svg" alt="什么是锁的划分？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 两大划分维度：数据库角度（全局/表/行）对比程序员角度（乐观/悲观）

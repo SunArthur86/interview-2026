@@ -243,6 +243,10 @@ llm = LLM(model="llama-70b", tensor_parallel_size=4)  # 4卡张量并行
 2. **连续批处理**：动态插入移除请求，GPU 不空闲——吞吐提升关键
 3. **全栈优化**：引擎+算法+架构，系统性而非单点
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-083.svg" alt="大模型推理性能优化方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 推理三大瓶颈：显存带宽受限、KV Cache占显存、自回归生成导致串行

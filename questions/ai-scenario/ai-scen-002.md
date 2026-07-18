@@ -109,6 +109,10 @@ def hybrid_search(query_text, image_path):
 │      [Chunk Text] + [Image Base64] + [Metadata]                     │
            └───────────────────────────────┬─────────────────────────────────────┘
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-002.svg" alt="如何设计一个多模态 RAG 系统？支持图文混合检索，用户可以用文字搜索图片、用图片搜索相关文档。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 统一空间：使用CLIP等多模态模型将图文映射到同一向量空间，支持跨模态检索

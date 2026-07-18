@@ -218,6 +218,10 @@ flowchart TD
     G --> H["向量化入向量库"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-005.svg" alt="【某讯面经】文档分块四种方案优缺点：固定窗口、递归分割、语义分割、结构感知分块 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大方案对比：固定窗口最糙、递归分割最通用、语义分割最高质、结构感知最准

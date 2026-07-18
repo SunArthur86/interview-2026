@@ -182,6 +182,10 @@ Month 3 验收：
 - **没有回放和指标**：改完不知道好没好，因为没有度量手段
 - **推翻重建**：不尊重现有代码和设计，全部推翻重来——风险极高
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-019.svg" alt="【月之暗面面经】如果让你接手这类桌面产品，你前三个月先补哪三块？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 接手前三个月路线图：月一任务产物、月二授权上下文、月三回放质量

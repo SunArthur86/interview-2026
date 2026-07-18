@@ -247,6 +247,10 @@ compliance_metrics = {
 2. **三道防线**：规则(快)+模型(准)+人工(金标准)——分级审核
 3. **合规是法律要求**：不是"nice to have"，是"must have"——体现责任意识
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-080.svg" alt="如何保证大模型生成内容的合规性？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 合规四层防御：输入过滤防、模型对齐内化、输出审核查、流程审计追

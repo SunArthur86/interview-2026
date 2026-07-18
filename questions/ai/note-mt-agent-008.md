@@ -437,6 +437,10 @@ def demo_compression_savings():
 
 6. **真实工程数据**：在美团外卖调度场景中，多Agent协商机票/酒店预订时，未加循环检测前平均执行 47 步才收敛；加上监督Agent+步数限制后，平均 8 步收敛，准确率提升 15%。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mt-agent-008.svg" alt="【美团面经】多智能体如何解决无限循环或者信息冗余问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 问题本质：多智能体协作是分布式系统，因LLM不确定性，导致无限循环（死锁）与信息冗余（消息风暴）。

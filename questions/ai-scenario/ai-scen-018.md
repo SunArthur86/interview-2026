@@ -124,6 +124,10 @@ def process_audio_chunk(chunk: np.ndarray, current_state: str):
        ┌─────────┐              ┌──────────┐
        │  IDLE   │              │INTERRUPTED│ (停止
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-018.svg" alt="如何设计一个实时语音AI助手？支持语音输入、实时对话、语音输出，延迟控制在1秒以内。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心链路：VAD检测(50ms) → 流式ASR(200ms) → LLM首字(300ms) → TTS首包(200ms)。

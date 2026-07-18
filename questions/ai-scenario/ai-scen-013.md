@@ -117,6 +117,10 @@ def handle_approval(review_id, approved):
 1. **混淆人机交互与人工审核**：认为简单的“用户确认弹窗”就是HitL，真正的HitL通常涉及独立的风控系统、角色分离和审计追溯。
 2. **缺乏回退通道**：设计了人工拒绝的逻辑，但拒绝后没有引导Agent进行自我修正或提供备选方案，导致流程直接死结束。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-013.svg" alt="如何设计一个Human-in-the-Loop（人机协作）的AI Agent系统？在关键决策点引入人工审核。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 协作模式：先审后行（高风险）、先行后审（低风险）、影子模式（验证期）

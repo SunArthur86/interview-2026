@@ -236,6 +236,10 @@ class HallucinationDetector:
 2. **无法完全消除**：幻觉是概率模型固有特性，只能减少——实事求是
 3. **场景化容忍**：医疗零容忍vs闲聊高容忍——按风险分级防护
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-081.svg" alt="如何有效缓解 / 检测 / 抑制大模型幻觉？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 幻觉四种类型：事实编造、无视文档(忠实性)、逻辑错误、伪造来源

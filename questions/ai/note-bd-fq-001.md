@@ -199,6 +199,10 @@ def confidence_control(ocr_results: list, threshold: float = 0.85) -> dict:
 3. **业务理解**：不同场景（小说/表格/公式）的OCR噪声类型不同，纠错策略需定制化
 4. **成本意识**：规则层几乎零成本应优先，模型层按需触发，人工兜底控制比例在2-3%
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-fq-001.svg" alt="OCR结果有噪声或错误时，如何做纠错或提升解析质量？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四层纠错体系：规则粗筛(正则) -> 模型精修(语义) -> 多引擎投票 -> 置信度兜底(人工)

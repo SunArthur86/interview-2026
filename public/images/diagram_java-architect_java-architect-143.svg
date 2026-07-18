@@ -13,11 +13,11 @@
 </marker>
 </defs>
 <rect x="240" y="92" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="120" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="120" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">核心要点1</text>
 <rect x="240" y="184" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="212" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="212" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">核心要点2</text>
 <rect x="240" y="276" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="304" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="304" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">核心要点3</text>
 <line x1="400" y1="148" x2="400" y2="184" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="240" x2="400" y2="276" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

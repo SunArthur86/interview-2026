@@ -85,6 +85,10 @@ splitter = SemanticSplitterNodeParser(
 2. **Small-to-Big 策略**：除了 Parent-Child，还有检索 Sentence 索引但返回 Window 的做法，这和 Parent-Child 的区别是什么？(Parent-Child 粒度更大，Sentence 2 Window 更灵活)
 3. **RAG 中表格数据的处理**：上述文本分块策略对表格效果极差，如何处理？(需要将表格转为 Markdown 或 HTML 文本描述，或者使用多模态/专门的 Table Parsing)
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-026.svg" alt="RAG中的文档分块(Chunking)有哪些策略?如何选择最优策略 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 固定/递归分块简单但易截断语义；语义分块质量高但慢；结构化分块保留逻辑。

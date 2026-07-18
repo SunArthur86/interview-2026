@@ -86,6 +86,10 @@ llm = LLM(
 2. **PagedAttention 的计算复杂度**：在连续生成时，PagedAttention 相比传统显存管理在算子层面有哪些额外开销？(Block table 读取)
 3. **FlashAttention 的地位**：在长上下文优化中，FlashAttention (IO 意识) 是基础，其他策略主要解决的是显存容量和多卡扩展问题。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-023.svg" alt="处理100K+长上下文推理时,KV Cache和Attention如何优化 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - KV Cache优化：量化（INT4/8）、PagedAttention（分块）、Prefix Caching（共享）

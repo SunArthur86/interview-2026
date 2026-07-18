@@ -15,11 +15,19 @@
 </marker>
 </defs>
 <rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="135" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">作用域：仅在方法或代</text>
+<text x="400" y="153" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">码块内可见</text>
 <rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="218" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">访问：可访问外部类成</text>
+<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">员和局部变量（需fina</text>
+<text x="400" y="254" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">l）</text>
 <rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="319" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">使用：场景非常局限，</text>
+<text x="400" y="337" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">辅助逻辑封装</text>
+<rect x="240" y="392" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="411" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">编译：生成独立的clas</text>
+<text x="400" y="429" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">s文件</text>
 <line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="356" x2="400" y2="392" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

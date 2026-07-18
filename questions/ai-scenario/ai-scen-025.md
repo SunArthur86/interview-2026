@@ -147,6 +147,10 @@ def decide_route(prompt: str, context: dict):
 | **MediaPipe** | Google官方，集成度高 | Android/iOS/Web | GPU/NPU | TFLite (有限) |
 | **Core ML** | Apple生态原生性能 | iOS/macOS | ANE (NPU) | Core ML模型 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-025.svg" alt="如何设计端侧LLM部署方案？在手机或IoT设备上运行大语言模型。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心约束：内存受限（4-8GB），需INT4量化（1.5B模型约800MB）+KV Cache清理防OOM。

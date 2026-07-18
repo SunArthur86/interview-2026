@@ -114,6 +114,10 @@ flowchart LR
     D1 --> G[适合端到端任务]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_bd-ai-001.svg" alt="【字节面经】平常用什么AI编程工具？各自的特点和使用场景是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Copilot：行级/函数级补全，IDE深度集成，适合写样板代码和API调用。

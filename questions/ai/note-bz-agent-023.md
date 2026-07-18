@@ -185,6 +185,10 @@ memory_points:
 2. **按功能分类**：工作/短期/情景/语义/画像，比短期/长期二分更专业
 3. **实现是独立维度**：强调"向量库只是长期记忆的一种实现"，体现工程设计思维
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-023.svg" alt="&quot;短期记忆=上下文、长期记忆=向量库&quot;这样答对吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心纠偏：该说法错误混淆了“功能分类”与“技术实现”，显得缺乏深度

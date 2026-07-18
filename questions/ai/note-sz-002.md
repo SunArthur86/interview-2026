@@ -132,6 +132,10 @@ ADS:  ads_driver_efficiency_rank（司机效率榜）
 - **实时数仓（Lambda/Kappa）**：实时层用 Flink 写 DWD/DWS，离线层用 Spark 批，两者口径需对齐
 - **Data Mesh**：去中心化数仓，每个业务域自治，适合超大型组织
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sz-002.svg" alt="【神州专车面经】数仓怎么分层？为什么这么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 经典四层：ODS贴原样存、DWD清洗退维保明细、DWS主题聚合预计算、ADS高度定制出应用

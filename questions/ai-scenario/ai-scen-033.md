@@ -137,6 +137,10 @@ flowchart TD
     H --> J[计算Cohen Kappa一致性]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-033.svg" alt="如何设计LLM-as-Judge评测管道？用大模型自动评测其他模型的输出质量。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 评测模式：Pointwise（绝对评分）vs Pairwise（A/B对比，更稳定）。

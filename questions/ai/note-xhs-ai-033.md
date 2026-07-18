@@ -189,3 +189,7 @@ LIMIT 10;
 **候选人**：构造精确匹配query对比召回率，纯向量top-k常找不到型号/人名等精确答案，混合后召回率明显提升。
 **面试官**：混合检索有什么成本？
 **候选人**：维护两套索引、融合调参复杂、延迟增加、稀疏检索对分词敏感，需要评测集和badcase监控保障效果。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-033.svg" alt="【RAG混合检索】为什么不能只用向量检索？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

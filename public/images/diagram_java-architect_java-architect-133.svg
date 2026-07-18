@@ -6,20 +6,19 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：细粒度权限的核心痛点是&quot;规则散落在业务代码里，改一次要发版 + 全量回归&quot;。策略引擎（Policy Engine）把授权…</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="114" width="720" height="59" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="56" y="144" font-size="15" fill="#2196F3" font-weight="700" dominant-baseline="middle">接入层</text>
+<text x="170" y="144" font-size="13" fill="#263238" dominant="middle">DDoS 防护 / WAF / HTTPS / IP 黑白名单</text>
+<rect x="40" y="189" width="720" height="59" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="56" y="218" font-size="15" fill="#4CAF50" font-weight="700" dominant-baseline="middle">网关层</text>
+<text x="170" y="218" font-size="13" fill="#263238" dominant="middle">认证(JWT/OAuth2) / 鉴权(RBAC) / 防重放 / 限流</text>
+<rect x="40" y="264" width="720" height="59" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="56" y="294" font-size="15" fill="#FF9800" font-weight="700" dominant-baseline="middle">应用层</text>
+<text x="170" y="294" font-size="13" fill="#263238" dominant="middle">SQL 注入参数化 / XSS 过滤 / CSRF Token / 越权校验</text>
+<rect x="40" y="339" width="720" height="59" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="56" y="368" font-size="15" fill="#9C27B0" font-weight="700" dominant-baseline="middle">数据层</text>
+<text x="170" y="368" font-size="13" fill="#263238" dominant="middle">敏感字段加密(AES) / 脱敏 / 哈希(BCrypt) / KMS 密钥</text>
+<rect x="40" y="414" width="720" height="59" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="56" y="444" font-size="15" fill="#f44336" font-weight="700" dominant-baseline="middle">审计层</text>
+<text x="170" y="444" font-size="13" fill="#263238" dominant="middle">操作日志 / 行为审计 / 完整性校验 / 等保合规</text>
 </svg>

@@ -168,6 +168,10 @@ Stage 2: Transformer LM离线重打分（准，但不阻塞）
 3. **热词增强**：业务专有名词（产品名、人名）通过热词表增强，CER可降低2-3%
 4. **与LLM协同**：ASR的中间结果可以先送给LLM做意图预判，不等说完就开始准备回答
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-lx-agent-002.svg" alt="ASR选型怎么做，为什么不能只看字错率？流式ASR延迟由哪些环节决定？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心结论：CER 准确率只占一维，需综合考量 RTF、延迟、鲁棒性与并发

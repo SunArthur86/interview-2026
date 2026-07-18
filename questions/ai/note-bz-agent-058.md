@@ -243,6 +243,10 @@ class RAGEvalLoop:
 2. **faithfulness 最重要**：防幻觉是 RAG 的核心价值——答案必须忠于文档
 3. **按指标诊断**：不同指标组合指向不同问题——体现系统化排查能力
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-058.svg" alt="RAG 有哪些缺陷？如何用指标评估 RAG 系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 六大缺陷口诀：检索失败/噪音、LLM幻觉、上下文丢失、时效/矛盾信息

@@ -242,6 +242,10 @@ class KnowledgeUpdatePipeline:
 
 **面试加分点**：提到Post5原文中的RAG优化技巧——结构化语义切分+上下文桥接、Query扩写+语义相似度阈值、混合检索用LambdaMART做分数归一化；提到Contextual Retrieval(Anthropic 2024)在切分时给每个chunk加上文档级摘要作为上下文；提到评估chunk质量可以用RAGAS的Context Precision和Context Recall指标；提到Late Chunking（先对整文档做embedding再切分）是2024年新方向。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-012.svg" alt="如何确定Chunk的大小和切分策略？过大或过小分别会带来什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 策略对比：固定切分易破坏语义，递归切分按段落-句子-逗号降级寻找最佳边界

@@ -15,11 +15,18 @@
 </marker>
 </defs>
 <rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="135" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">通过permits明确指定</text>
+<text x="400" y="153" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">允许继承的子类</text>
 <rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="227" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">子类必须位于同一模块</text>
+<text x="400" y="245" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">或包中</text>
 <rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="319" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">子类必须是final、sea</text>
+<text x="400" y="337" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">led或non-sealed</text>
+<rect x="240" y="392" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="411" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">配合switch实现编译期</text>
+<text x="400" y="429" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">穷举检查</text>
 <line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="356" x2="400" y2="392" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

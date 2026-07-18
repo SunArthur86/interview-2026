@@ -241,6 +241,10 @@ llm_app_version = {
 2. **灰度+自动回滚**：灰度发布+指标监控自动回滚——保证线上稳定
 3. **A/B 测试数据驱动**：版本决策基于数据而非感觉
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-087.svg" alt="模型版本管理系统实现要点？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 管版五大件：权重、Prompt、数据集、系统配置、评估指标，缺一不可

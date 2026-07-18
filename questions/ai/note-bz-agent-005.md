@@ -202,6 +202,10 @@ metrics = {
 2. **提"LLM Gateway"**：模型路由层是多模型/降级/成本控制的关键组件
 3. **可观测是上线前提**：没有 Trace 和监控的 Agent 不敢上生产，因为概率性故障无法定位
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-005.svg" alt="企业级 Agent 如何搭建？必备组件有哪些？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质区别：Demo跑通即可，而企业级需满足千万级并发、SLA 99.9%+及完善容错

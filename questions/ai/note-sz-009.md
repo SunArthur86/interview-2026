@@ -196,6 +196,10 @@ flowchart TD
     J --> K[第四步:定位转化率掉落的具体环节]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sz-009.svg" alt="【神州专车面经】某城市某天订单量突然下降15%，怎么排查？给分析框架 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 排查零步：必须先确认数据准确性（埋点丢失或延迟），避免数据故障造成的虚惊一场

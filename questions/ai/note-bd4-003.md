@@ -149,6 +149,10 @@ LLM在生成过程中自问：
 - **最大检索轮数**：限制3-5轮，防止Agent无限循环
 - **超时控制**：总延迟控制在5s以内，超过则降级为Naive RAG结果
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd4-003.svg" alt="Agentic RAG 和普通 Naive RAG 的区别？什么时候需要 Agentic RAG？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 普通RAG单次检索直接生成，Agentic RAG以Agent为主导支持多轮迭代检索

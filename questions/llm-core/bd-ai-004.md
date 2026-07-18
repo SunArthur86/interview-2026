@@ -123,6 +123,10 @@ def build_context(query: str, session_id: str):
     }
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_bd-ai-004.svg" alt="【字节面经】对比OpenClaw/Hermes/Claude Code等Agent框架，从记忆机制、工具调用、上下文管理三个维度分析。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 记忆：Claude Code自动摘要压缩，Hermes结构化JSON记忆，OpenClaw事件溯源。

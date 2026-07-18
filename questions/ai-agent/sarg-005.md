@@ -112,6 +112,10 @@ flowchart TB
     Graph --> Benefit3["复杂关系推理"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_sarg-005.svg" alt="RAG有哪些进阶技术？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 查询优化：重写补全实体、HyDE 生成假设答案、多路查询覆盖语义。

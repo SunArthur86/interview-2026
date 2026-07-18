@@ -171,6 +171,10 @@ parser = PydanticOutputParser(pydantic_object=Person)
 2. **承认缺点**：抽象过度/版本不稳——体现批判性思维，不只吹
 3. **知道何时不用**：简单需求用 LangChain 过重，复杂生产用 LangGraph 更稳
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-060.svg" alt="LangChain 框架有哪些应用场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定位：大模型应用的“脚手架”，自身不提供LLM和向量库，只做统一封装

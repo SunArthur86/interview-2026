@@ -92,6 +92,10 @@ frontend_data = UserSchema(**mock_api_resp).model_dump(by_alias=False) # Standar
 2. 在极端情况下，两个 Agent 各执一词（前端认为 A 对，后端认为 B 对），仲裁机制如何设计？是引入“架构师 Agent”还是基于规则？
 3. 对于复杂的嵌套对象，JSON Schema 可能会非常长，如何优化 Token 消耗？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-016.svg" alt="多 Agent 会不会降低「一致性」(同一产品前后端接口对不上) - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 多 Agent 独立上下文易导致接口不一致，需单一契约源。

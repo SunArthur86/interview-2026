@@ -103,6 +103,10 @@ public void downloadFile(String url) {
 | **CyclicBarrier** | 同步屏障 | 等待线程数 | 可循环 (reset) | 多线程数据汇总 |
 | **ReentrantLock** | 独占模式 | 锁重入次数 (0/1+) | 可释放/重入 | 临界区保护 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-055.svg" alt="Semaphore信号量的原理和使用场景是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话原理：基于AQS共享模式，用state模拟许可，acquire减1而release加1

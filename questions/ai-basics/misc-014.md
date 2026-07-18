@@ -102,6 +102,10 @@ flowchart TD
     M --> N
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-014.svg" alt="预训练数据配比如何设计?代码数据为什么重要 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 配比口诀：英中代码四三二，数科多语各占一

@@ -282,3 +282,7 @@ class TaskTransaction:
 **候选人**：无数据依赖的可并行（查多个独立信息），有数据依赖的必须串行（先查询再用结果），用DAG识别依赖关系。
 **面试官**：LLM分解可靠吗？
 **候选人**：不一定，复杂任务可能分解出错或依赖识别不准，需要校验DAG无环、必要时人工确认或分步分解，配合失败回滚。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-042.svg" alt="【AI Agent工程】复合需求怎么判断任务执行先后顺序？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

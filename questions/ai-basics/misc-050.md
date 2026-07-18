@@ -124,6 +124,10 @@ def best_of_n_sampling(model, tokenizer, prompt, n_samples=5):
     return valid_candidates[0] if valid_candidates else candidates[0]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-050.svg" alt="Test-Time Compute Scaling是什么?为什么说它是推理模型的新范式 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定义：推理时增加计算量(思考时间/搜索)提升性能。

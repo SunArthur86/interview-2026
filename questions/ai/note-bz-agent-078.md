@@ -260,6 +260,10 @@ GPU选型：
 2. **模型路由最有效**：80%请求用小模型，成本降70%——ROI 最高
 3. **vLLM 是标杆**：PagedAttention+连续批处理是推理引擎的核心技术
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-078.svg" alt="如何降低大模型 API 推理延迟和成本？如何部署优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四层优化框架：应用层减Token、推理层提效率、模型层减参数、部署层搞基建

@@ -121,6 +121,10 @@ print(result.to_pandas())
 2. 如果RAG系统的上下文窗口有限，导致Context被截断，会主要影响哪个指标？（主要影响Context Recall，因为相关文档可能被截断；同时也可能影响Faithfulness，因为依据缺失导致模型被迫幻觉）
 3. 除了Ragas，如何进行端到端的用户满意度评估？（引入人工反馈RLHF，或根据用户点击率、点赞率等隐性指标构建Human Preference Metrics）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-031.svg" alt="如何评估RAG系统的质量?Ragas框架的核心指标有哪些 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Ragas核心指标：Context Precision(查准)、Context Recall(查全)、Faithfulness(忠实度)、Answer Relevancy(相关)。

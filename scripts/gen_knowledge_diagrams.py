@@ -24,8 +24,7 @@ ROOT = Path("/Users/sunqingguang/hermes/opt/projects/interview-2026")
 Q_DIR = ROOT / "questions"
 IMG_DIR = ROOT / "public" / "images"
 
-CATEGORIES = ["ant-risk", "biopharm", "boss-ai", "pdd-ai",
-              "pdd-content", "pdd-scm", "pdd-trade"]
+CATEGORIES = ["ai", "ai-harness", "concurrent"]
 
 # 色板
 GREEN = "#4CAF50"
@@ -411,9 +410,18 @@ def process_category(cat):
     files = sorted(cat_dir.glob("*.md"))
     n_svg = 0
     n_md = 0
+    n_skip = 0
     errs = []
     for f in files:
         try:
+            stem = f.stem  # e.g. ant-risk-001
+            svg_name = f"diagram_{cat}_{stem}.svg"
+            svg_path = IMG_DIR / svg_name
+            # 跳过已有 SVG 的文件(避免重复生成/覆盖)
+            if svg_path.exists():
+                n_skip += 1
+                continue
+
             text = f.read_text(encoding="utf-8")
             title = get_title(text)
             essence = get_essence(text)
@@ -421,9 +429,6 @@ def process_category(cat):
             if not kps:
                 kps = [title or "核心要点"]
 
-            stem = f.stem  # e.g. ant-risk-001
-            svg_name = f"diagram_{cat}_{stem}.svg"
-            svg_path = IMG_DIR / svg_name
             svg = build_svg(title, essence, kps)
             svg_path.write_text(svg, encoding="utf-8")
             n_svg += 1
@@ -432,7 +437,7 @@ def process_category(cat):
             n_md += 1
         except Exception as e:
             errs.append(f"{f.name}: {e}")
-    return len(files), n_svg, n_md, errs
+    return len(files), n_svg, n_md, n_skip, errs
 
 
 def main():
@@ -440,19 +445,21 @@ def main():
     total_files = 0
     total_svg = 0
     total_md = 0
+    total_skip = 0
     all_errs = []
     print("=" * 60)
     print("批量生成核心知识点 SVG 图")
     print("=" * 60)
     for cat in CATEGORIES:
-        nf, ns, nm, errs = process_category(cat)
+        nf, ns, nm, nsk, errs = process_category(cat)
         total_files += nf
         total_svg += ns
         total_md += nm
+        total_skip += nsk
         all_errs.extend(errs)
-        print(f"[{cat}] files={nf} svg={ns} md_updated={nm} errs={len(errs)}")
+        print(f"[{cat}] files={nf} svg={ns} md_updated={nm} skipped={nsk} errs={len(errs)}")
     print("-" * 60)
-    print(f"TOTAL files={total_files} svg={total_svg} md_updated={total_md}")
+    print(f"TOTAL files={total_files} svg={total_svg} md_updated={total_md} skipped={total_skip}")
     if all_errs:
         print("\nERRORS:")
         for e in all_errs:

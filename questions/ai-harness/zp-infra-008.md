@@ -125,6 +125,10 @@ flowchart TD
     Compute --> Tool
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_zp-infra-008.svg" alt="【智谱Infra面经】如何评估一个 CUDA Kernel 的优化空间？怎么判断它是计算 bound 还是内存 bound？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 计算公式：算术强度AI = FLOPs / Bytes，对比转折点判断Bound类型

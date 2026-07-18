@@ -15,11 +15,22 @@
 </marker>
 </defs>
 <rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="126" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">块级元素（div, p）：</text>
+<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">独占一行，可设宽高，</text>
+<text x="400" y="162" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">容纳各类元素</text>
 <rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="209" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">行内元素（span, a）</text>
+<text x="400" y="227" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">：不独占，宽高由内容</text>
+<text x="400" y="245" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">决定，仅容纳文本或行</text>
+<text x="400" y="263" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">内元素</text>
 <rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="310" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">通过 display 属性可</text>
+<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">相互转换（block, inl</text>
+<text x="400" y="346" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ine, inline-block）</text>
+<rect x="240" y="392" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="411" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">行内元素 margin/padd</text>
+<text x="400" y="429" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ing 上下不生效</text>
 <line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="356" x2="400" y2="392" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

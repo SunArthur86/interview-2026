@@ -267,6 +267,10 @@ def agent_step(state):
 4. **提到评估闭环**：从 A/B 测试到 Bad Case 收集再到迭代，体现"上线只是开始"的认知。
 5. **反问面试官**：贵团队在 Agent 落地中遇到的最大挑战是成本还是稳定性？——体现参与感。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx-006.svg" alt="【腾讯面经】科研场景和工业场景的 Agent 有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话总结：科研追求上限（能不能做到），工业保住下限（怎么稳定达标）。

@@ -135,6 +135,10 @@ class RateLimiter:
 3. **路由策略的冷启动**：如果缺乏历史数据，如何准确判断任务复杂度从而进行路由？
 4. **限流算法选择**：令牌桶 vs 漏桶，在应对突发流量（如Agent瞬间发起大量子任务）时有什么区别？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_bd-ai-015.svg" alt="【字节面经】如何降低推理成本？在多任务、多Agent系统中如何权衡效率和准确性？混合路由和限流器为什么重要？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 降本四策：混合路由(大小模型分流)、KV Cache(缓存注意力)、量化(INT4/8)、Continuous Batching(动态批处理)

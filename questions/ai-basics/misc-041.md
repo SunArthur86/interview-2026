@@ -101,6 +101,10 @@ if is_hallucination == "No":
 3. **如何量化评估幻觉？** 
    可以使用 FactScore（原子事实分解验证）、TrueTeacher（基于GPT-4的评估）或 RAGAS (Context Faithfulness) 等框架，将生成结果分解为原子事实并与知识库比对。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-041.svg" alt="大模型幻觉(Hallucination)的成因是什么?如何缓解 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 幻觉成因：训练数据偏差、解码策略随机性、目标追求概率而非真实性

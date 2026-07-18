@@ -623,6 +623,10 @@ llm_latency = Histogram("llm_latency_seconds", "LLM call latency",
 6. **可观测性**：降级不是终点，必须监控降级触发频率并告警
 7. **追问准备**：退避间隔如何设置（base_delay 和 max_delay）、半开状态如何设计（探测请求数）、如何监控降级频率（Prometheus 指标）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-llm-006.svg" alt="【字节面经】你在项目里遇到过大模型接口调用超时或限流的问题吗？怎么设计重试与降级机制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 系统定位：大模型API是不可控第三方依赖，因为存在超时与限流，所以必须构建多层容错链

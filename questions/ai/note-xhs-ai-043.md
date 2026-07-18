@@ -263,3 +263,7 @@ lora_config = LoraConfig(
 **候选人**：rank太小欠拟合学不到新风格、太大过拟合破坏基座，常见rank=8-64、alpha=rank的2倍，按任务调并用评测集验证。
 **面试官**：全参数微调一定比LoRA好吗？
 **候选人**：不一定，全参数更易灾难性遗忘、成本高、易过拟合；LoRA的低秩约束反而是正则化，某些场景更稳更优。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-043.svg" alt="【快手AI大模型】LoRA/QLoRA微调如何保证人设不崩坏、风格统一？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -100,6 +100,10 @@ def safe_tool_call(tool_name, arguments):
 2. **ReAct循环稳定性**：如果模型一直输出Thought但不调用Action，如何强制终止？（设定最大Thought迭代次数）
 3. **错误反馈机制**：工具执行失败后的Error Message如何设计才能让模型最快理解并纠错？（结构化错误码 + 自然语言解释）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_bd-ai-008.svg" alt="【字节面经】如何解决Agent的上下文漂移问题？如何防止工具调用出现幻觉？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 防漂移：每轮Prompt注入原始目标，N步后压缩总结，长任务拆短，外部监督Agent

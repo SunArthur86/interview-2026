@@ -202,6 +202,10 @@ Week 8: 模拟面试+查漏
 3. **知道 tradeoff**：不只说"用了什么"，还说"为什么/有什么代价"
 4. **保持学习**：Agent 领域变化快，面试官会问最近的新东西——体现持续学习
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-093.svg" alt="2026 年 Agent 智能体面试整体怎么准备？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四维备考框架：基础理论占40%，项目实战30%，系统设计20%，行业认知10%，因为基础是门槛，所以占比最高

@@ -109,6 +109,10 @@ def distillation_loss(student_logits, teacher_logits, labels, temperature=5.0, a
     return alpha * soft_loss + (1.0 - alpha) * hard_loss
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-047.svg" alt="知识蒸馏在大模型中如何应用?软标签和硬标签的区别是什么 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 硬标签：One-hot，信息量少，仅含正确答案。

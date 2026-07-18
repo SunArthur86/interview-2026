@@ -328,6 +328,10 @@ flowchart TD
     PC --> E
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bg-001.svg" alt="【八股总结】多领域数据混训如何避免某能力提升导致其他下降？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心问题：多领域混训因梯度方向冲突(cos<0)导致灾难性遗忘，一方提升另一方下降

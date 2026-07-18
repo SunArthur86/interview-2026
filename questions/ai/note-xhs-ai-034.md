@@ -198,3 +198,7 @@ fused = rrf_fusion(vector_top10, bm25_top10, k=60, top_n=20)
 **候选人**：分数尺度不同导致一个检索器主导或被淹没，不同query分布不同固定权重失效，RRF天然规避这个难题。
 **面试官**：RRF的k参数怎么调？
 **候选人**：k是平滑因子，k小看重top排名、k大更平滑，常见k=60，按业务query调并用评测集验证NDCG和召回率。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-034.svg" alt="【RAG混合检索】RRF是什么？为什么不用分数加权融合？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

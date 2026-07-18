@@ -121,6 +121,10 @@ flowchart TD
     I --> J[Attention 计算]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_mt-ai-003.svg" alt="【美团面经】DeepSeek 的 MLA 注意力是怎么做的？它可以直接用 RoPE 吗？为什么不能，做了哪些优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心机制：通过低秩压缩仅缓存极小的潜在向量，推理时上投影动态恢复，显存换计算。

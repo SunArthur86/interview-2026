@@ -256,6 +256,10 @@ async def smart_route(request):
 2. **快稳双路径**：简单走缓存（快），复杂走校验（稳），体现工程权衡
 3. **后台校验兜底**：快路径返回后异步校验，发现问题再修正，兼顾速度和安全
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-026.svg" alt="大模型应用如何保证实时性和多轮对话一致性？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 目标张力：引入缓存与小模型求实时性，与加严格校验求一致性存在天然矛盾

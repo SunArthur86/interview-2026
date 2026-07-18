@@ -261,6 +261,10 @@ async def hybrid_workflow(feature_request):
 2. **强调"实际混合"**：生产中很少单用一种，常是"并行调研→串行执行→仲裁审核"
 3. **提成本意识**：仲裁模式最贵，不能滥用；简单任务串行即可
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-016.svg" alt="多 Agent 协作有哪些模式？（串行、并行、仲裁三种） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 串行：前一个输出是后一个输入，顺序明确但无法并行易阻塞

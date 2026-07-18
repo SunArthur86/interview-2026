@@ -154,6 +154,10 @@ flowchart TD
     O --> L[大模型生成回答]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-fq-006.svg" alt="Rerank之后的截断策略是怎么设计的？为什么选这个K值？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大策略：固定K截断(可控易引入噪声)、得分阈值法(精准易零召回)、混合策略(双限兜底)

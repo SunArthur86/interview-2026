@@ -519,6 +519,10 @@ def process_figure(image_path: str, vlm_client) -> dict:
 5. **生产环境工具链推荐**：文档解析用 `unstructured` 或 `marker`（表格识别好）；切片用 LlamaIndex的`SentenceSplitter` + 自定义Table解析；PDF表格提取推荐 `camelot` 或 `pdfplumber`。
 6. **Late Chunking**（2024年新技术）：先对整个文档做Embedding（保留全局上下文），再做切片——通过延迟切片时机来保留文档级的上下文信息，在长文档检索中有显著优势。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-llm-003.svg" alt="【字节面经】如果用户的文档同时包含大段正文和密集的表格数据，你会采用统一的切片策略吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心结论：坚决不用统一切片！因为文本和表格的语义边界完全不同，所以混合切会导致严重信息损坏

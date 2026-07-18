@@ -131,6 +131,10 @@ def causal_self_attention(Q, K, V):
 
 **面试加分点**：提到GPT-4技术报告确认使用Decoder-only；提到LLaMA、Qwen、DeepSeek等主流开源模型全部采用Decoder-only；提到Prefix-LM（如GLM）作为Decoder-only的变体，在理解+生成混合任务上的折中方案。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-001.svg" alt="为什么当前主流生成式大模型几乎都采用Decoder-only架构？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 训练效率最高：Decoder做CLM是100%预测利用率，而Encoder的MLM仅15%参与Loss计算。

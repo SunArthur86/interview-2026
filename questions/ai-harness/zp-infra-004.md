@@ -107,6 +107,10 @@ flowchart TD
     Diagnose -->|头数过多| GQA[GQA减少头数]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_zp-infra-004.svg" alt="【智谱Infra面经】KV Cache 导致推理成本远高于预期，如何诊断和修复？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 诊断：显存碎片、预分配浪费(短请求占长空间)、前缀无法共享。

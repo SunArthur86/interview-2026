@@ -141,6 +141,10 @@ flowchart TD
     G -.->|闭环更新| A
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-049.svg" alt="如何设计一个AI教育辅导系统？个性化学习路径、智能答疑、自适应测试。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心价值：因材施教、即时反馈；关键设计：知识图谱依赖、苏格拉底式引导(不直接给答案)。

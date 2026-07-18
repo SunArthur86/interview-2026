@@ -15,11 +15,21 @@
 </marker>
 </defs>
 <rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="126" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Ajax基于XMLHttpReque</text>
+<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">st，回调地狱，配置繁</text>
+<text x="400" y="162" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">琐</text>
 <rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="218" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Fetch基于Promise，原</text>
+<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">生支持，更简洁但不自</text>
+<text x="400" y="254" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">带拦截器</text>
 <rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="310" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Axios基于Promise，支</text>
+<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">持请求/响应拦截、自</text>
+<text x="400" y="346" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">动JSON转换</text>
+<rect x="240" y="392" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="411" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Axios在浏览器端本质</text>
+<text x="400" y="429" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">也是封装XHR</text>
 <line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="356" x2="400" y2="392" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

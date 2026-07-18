@@ -95,6 +95,10 @@ flowchart TD
     G --> H[效果差十倍]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_bd-ai-010.svg" alt="【字节面经】Prompt Engineering的核心目标是什么？为什么模型会对同一件事，换个说法效果差十倍？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心目标：翻译意图为模型易理解形式，压缩概率分布，提高输出确定性

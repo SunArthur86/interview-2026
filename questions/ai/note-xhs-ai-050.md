@@ -239,3 +239,7 @@ Prefix Cache 淘汰决策因素
 **候选人**：固定system prompt+few-shot、多轮对话相同前缀收益最大；每次请求前缀都不同几乎无收益。
 **面试官**：Prefix Cache一定比普通KV Cache好吗？
 **候选人**：不一定，缓存管理和hash计算有开销，命中率低时反而浪费，要监控命中率和TTFT下降决定是否启用。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-050.svg" alt="【AI Infra面经】Prefix Cache 的工作原理？为什么不同于 KV Cache 的普通复用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -136,6 +136,10 @@ ensemble_retriever = EnsembleRetriever(
 )
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_mt-ai-011.svg" alt="【美团面经】请说说开发过的 AI 产品/功能是什么？用户需求是什么？最终结果如何？（STAR 回答框架） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - STAR框架：S背景讲清痛点，T目标量化指标，A方案突出难点解决，R结果带数据复盘

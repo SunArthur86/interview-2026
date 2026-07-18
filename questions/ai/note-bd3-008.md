@@ -194,6 +194,10 @@ PagedAttention:
 
 **面试加分点**：提到vLLM论文(Kwon et al., 2023, SOSP)；提到PagedAttention灵感来自OS的虚拟内存分页机制；提到Continuous Batching也称为Iteration-Level Batching；提到Prefix Caching可以加速多用户共享相同system prompt的场景；提到TensorRT-LLM也实现了类似优化（In-flight Batching）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-008.svg" alt="KV Cache的工作原理是什么？vLLM的PagedAttention和Continuous Batching解决了什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - KV Cache省算力：避免重复计算历史token，将推理复杂度从O(n³)降至O(n²)。

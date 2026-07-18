@@ -211,3 +211,7 @@ model_path = quantize_gptq(model, w_bit=4, desc_act=False)
 **候选人**：不对，重启丢现场下次还会复发；要先保留日志和监控现场再重启，优先用限流等无损手段止血。
 **面试官**：处置有什么次生风险？
 **候选人**：限流积压、降长度截断对话、切模型质量下降、重启短时不可用，要权衡并提前告知业务方，配合监控验证恢复。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-032.svg" alt="【AI Infra推理优化】OOM紧急处置优先级是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

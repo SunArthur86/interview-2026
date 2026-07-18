@@ -244,6 +244,10 @@ Function Calling（技术实现）：
 2. **原生 vs Prompt**：优先用原生 FC（更准更稳），不支持才用 prompt 工程
 3. **错误回传**：工具失败时把错误信息回传给 LLM，让它自主决定重试/换方案——这是"智能"的体现
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-032.svg" alt="LLM 工具调用（Tool Use）机制是什么？如何实践？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心机制闭环：LLM决策生成tool_call → 程序解析并真实执行 → 结果作为tool角色回传 → LLM总结生成最终回复

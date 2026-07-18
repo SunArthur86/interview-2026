@@ -220,6 +220,10 @@ class HybridSystem:
 
 **面试加分点**：提到微软的GraphRAG将知识图谱与RAG结合用于复杂推理；提到RAFT论文(2024)通过在训练数据中混入干扰文档来提升RAG鲁棒性；提到Tuning-playground模式（先RAG验证PMF，再微调优化体验）是产品迭代最佳实践；提到微调后的模型仍可以叠加RAG，两者是正交的增强手段而非互斥方案。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-014.svg" alt="RAG和微调应该如何取舍？什么情况下优先用RAG？什么情况下考虑微调？如何结合？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心决策：知识注入用RAG，能力获取(格式/风格/推理)用微调

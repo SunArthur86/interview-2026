@@ -6,50 +6,54 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：CAP 是&quot;分区容忍下，一致性和可用性二选一&quot;的定理——网络分区必然发生（P 必选），所以实际是 CP 还是 AP 的取…</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<text x="400" y="126" font-size="14" fill="#2196F3" text-anchor="middle" font-weight="700">CAP 定理</text>
-<circle cx="200" cy="160" r="36" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="200" y="154" font-size="14" fill="#2196F3" text-anchor="middle" font-weight="700">C</text>
-<text x="200" y="172" font-size="10" fill="#37404F" text-anchor="middle">一致性</text>
-<circle cx="120" cy="288.0" r="36" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
-<text x="120" y="282.0" font-size="14" fill="#4CAF50" text-anchor="middle" font-weight="700">A</text>
-<text x="120" y="300.0" font-size="10" fill="#37404F" text-anchor="middle">可用性</text>
-<circle cx="280" cy="288.0" r="36" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="280" y="282.0" font-size="14" fill="#FF9800" text-anchor="middle" font-weight="700">P</text>
-<text x="280" y="300.0" font-size="10" fill="#37404F" text-anchor="middle">分区容错</text>
-<line x1="200" y1="196" x2="145" y2="263.0" stroke="#607D8B" stroke-width="1.5"/>
-<line x1="200" y1="196" x2="255" y2="263.0" stroke="#607D8B" stroke-width="1.5"/>
-<line x1="156" y1="288.0" x2="244" y2="288.0" stroke="#607D8B" stroke-width="1.5"/>
-<text x="200" y="380" font-size="11" fill="#f44336" text-anchor="middle" font-weight="700">三选二（网络分区必选 P）</text>
-<rect x="400" y="150" width="340" height="170" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
-<text x="570" y="176" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">BASE (AP 系统妥协)</text>
-<circle cx="420" cy="202" r="14" fill="#9C27B0"/>
-<text x="420" y="207" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">BA</text>
-<text x="445" y="207" font-size="12" fill="#37404F">Basically Available 基本可用</text>
-<circle cx="420" cy="238" r="14" fill="#9C27B0"/>
-<text x="420" y="243" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">S</text>
-<text x="445" y="243" font-size="12" fill="#37404F">Soft State 软状态</text>
-<circle cx="420" cy="274" r="14" fill="#9C27B0"/>
-<text x="420" y="279" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">E</text>
-<text x="445" y="279" font-size="12" fill="#37404F">Eventually Consistent 最终一致</text>
-<text x="570" y="350" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">一致性级别（弱→强）</text>
-<rect x="410" y="370" width="70" height="40" rx="6" fill="#4CAF5022" stroke="#4CAF50"/>
-<text x="445" y="395" font-size="11" fill="#4CAF50" text-anchor="middle" font-weight="700">弱一致</text>
-<rect x="490" y="370" width="70" height="40" rx="6" fill="#2196F322" stroke="#2196F3"/>
-<text x="525" y="395" font-size="11" fill="#2196F3" text-anchor="middle" font-weight="700">最终一致</text>
-<line x1="484" y1="390" x2="490" y2="390" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="570" y="370" width="70" height="40" rx="6" fill="#FF980022" stroke="#FF9800"/>
-<text x="605" y="395" font-size="11" fill="#FF9800" text-anchor="middle" font-weight="700">强一致</text>
-<line x1="564" y1="390" x2="570" y2="390" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="650" y="370" width="70" height="40" rx="6" fill="#f4433622" stroke="#f44336"/>
-<text x="685" y="395" font-size="11" fill="#f44336" text-anchor="middle" font-weight="700">线性一致</text>
-<line x1="644" y1="390" x2="650" y2="390" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="400" y="450" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">一致性协议：Paxos / Raft (CP)  |  Gossip (AP)  |  2PC/3PC/TCC/Saga 分布式事务</text>
+<rect x="40" y="114" width="168" height="44" rx="8" fill="#2196F3"/>
+<text x="124" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">2PC
+两阶段提交</text>
+<rect x="224" y="114" width="168" height="44" rx="8" fill="#FF9800"/>
+<text x="308" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">TCC
+Try-Confirm-Cancel</text>
+<rect x="408" y="114" width="168" height="44" rx="8" fill="#4CAF50"/>
+<text x="492" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">本地消息表</text>
+<rect x="592" y="114" width="168" height="44" rx="8" fill="#9C27B0"/>
+<text x="676" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">Saga</text>
+<rect x="40" y="174" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">协调者+参与者</text>
+<rect x="224" y="174" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">业务侵入</text>
+<rect x="408" y="174" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">异步确保</text>
+<rect x="592" y="174" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">长事务拆分</text>
+<rect x="40" y="234" width="168" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">强一致</text>
+<rect x="224" y="234" width="168" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">最终一致</text>
+<rect x="408" y="234" width="168" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">业务表+消息表</text>
+<rect x="592" y="234" width="168" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">正反向补偿</text>
+<rect x="40" y="294" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">阻塞/性能差</text>
+<rect x="224" y="294" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">性能好</text>
+<rect x="408" y="294" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">最终一致</text>
+<rect x="592" y="294" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">最终一致</text>
+<rect x="40" y="354" width="168" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">单点故障</text>
+<rect x="224" y="354" width="168" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">需幂等</text>
+<rect x="408" y="354" width="168" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">可靠</text>
+<rect x="592" y="354" width="168" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">适合长流程</text>
+<rect x="40" y="414" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">XA 协议</text>
+<rect x="224" y="414" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Saga 替代</text>
+<rect x="408" y="414" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">主流方案</text>
+<rect x="592" y="414" width="168" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">状态机驱动</text>
 </svg>

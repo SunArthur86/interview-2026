@@ -95,6 +95,10 @@ Step 3: Input "!" (Need attention on "Hello World")
   K3, V3 (计算) ───────┼──► [ Concat: K1+K2+K3, ... ]
                       │       │
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-004.svg" alt="什么是KV Cache?它为什么能加速自回归生成?有什么代价 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 缓存历史Key/Value避免重复计算，每步只算新token的Q与缓存做Attention

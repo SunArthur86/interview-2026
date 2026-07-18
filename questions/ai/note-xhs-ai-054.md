@@ -266,3 +266,7 @@ def log_unanswered(query, retrieval_info):
 | 0:50 | 绝对禁止模型在无知识支撑时自示意图 | "绝对禁止模型在无知识支撑时自——尤其涉及报价/规则/政策场景" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：相似度阈值怎么设定？太高会误杀正常答案，太低会放过不相关内容？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-054.svg" alt="【高德AI面试】用户提问内容知识库完全没有覆盖，怎么处理？能让模型自由生成吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

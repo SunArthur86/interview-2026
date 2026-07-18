@@ -207,6 +207,10 @@ flowchart TD
     G -->|"是"| H["返回最长无重复子串长度"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-by-003.svg" alt="【字节面经】手撕：求字符串最长无重复字符子串的长度 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 算法框架：滑动窗口+哈希表，因为right遍历一次且left可跳变，所以时间复杂度为O(n)

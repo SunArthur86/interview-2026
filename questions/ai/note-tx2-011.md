@@ -215,6 +215,10 @@ def check_quota(user_id, max_daily_tokens=100000):
 - **会话亲和性（Sticky Session）**：负载均衡把同一用户路由到同一实例（减少 Redis 读取，但有单点风险）
 - **多租户架构**：DB 隔离（每租户独立DB）vs Schema 隔离 vs Row 隔离，按租户规模选
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-011.svg" alt="【某讯面经】高并发多用户会话隔离设计 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 会话隔离：每请求用ThreadLocal/ContextVars存用户ID，绝不共享全局上下文

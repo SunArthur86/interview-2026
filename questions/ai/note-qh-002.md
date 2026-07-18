@@ -160,6 +160,10 @@ A: 之后。Continuous batching先组装batch（决定哪些请求在当前itera
    cascade attention解决batch内的KV Cache冗余。
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-qh-002.svg" alt="VLM 的 Continuous Batching 是什么？Cascade Attention 在 Continuous Batch 之前还是之后做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Continuous Batching解决队头阻塞：因为每步动态移出已完成请求并加入新请求，所以GPU持续满载。

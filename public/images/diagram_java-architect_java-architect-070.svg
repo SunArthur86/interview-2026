@@ -6,37 +6,59 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：Flink 实时计算是&quot;数据流动时就算&quot;，和 Java 服务的协同是&quot;流处理 + 应用&quot;的组合——Flink 负责重计算…</text>
 <!-- BODY_TOP=110 -->
-<text x="60" y="126" font-size="13" fill="#2196F3" font-weight="700" letter-spacing="0.5">ACID 四大特性</text>
-<rect x="60" y="146" width="160" height="80" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
-<text x="140" y="174" font-size="15" fill="#4CAF50" text-anchor="middle" font-weight="700">A 原子性</text>
-<text x="140" y="200" font-size="11" fill="#37474F" text-anchor="middle">全部成功或全部回滚</text>
-<rect x="235" y="146" width="160" height="80" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="315" y="174" font-size="15" fill="#2196F3" text-anchor="middle" font-weight="700">C 一致性</text>
-<text x="315" y="200" font-size="11" fill="#37474F" text-anchor="middle">数据约束不被破坏</text>
-<rect x="410" y="146" width="160" height="80" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="490" y="174" font-size="15" fill="#FF9800" text-anchor="middle" font-weight="700">I 隔离性</text>
-<text x="490" y="200" font-size="11" fill="#37474F" text-anchor="middle">并发事务互不干扰</text>
-<rect x="585" y="146" width="160" height="80" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
-<text x="665" y="174" font-size="15" fill="#9C27B0" text-anchor="middle" font-weight="700">D 持久性</text>
-<text x="665" y="200" font-size="11" fill="#37474F" text-anchor="middle">提交后永久保存</text>
-<text x="60" y="266" font-size="13" fill="#9C27B0" font-weight="700" letter-spacing="0.5">四种隔离级别（→ 隔离性递增，性能递减）</text>
-<rect x="60" y="286" width="160" height="100" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
-<text x="140" y="308" font-size="11" fill="#f44336" text-anchor="middle" font-weight="700">READ UNCOMMITTED</text>
-<text x="140" y="332" font-size="13" fill="#263238" text-anchor="middle" font-weight="700">读未提交</text>
-<text x="140" y="358" font-size="10" fill="#546E7A" text-anchor="middle">脏读 / 不可重复读 / 幻读</text>
-<rect x="235" y="286" width="160" height="100" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="315" y="308" font-size="11" fill="#FF9800" text-anchor="middle" font-weight="700">READ COMMITTED</text>
-<text x="315" y="332" font-size="13" fill="#263238" text-anchor="middle" font-weight="700">读已提交</text>
-<text x="315" y="358" font-size="10" fill="#546E7A" text-anchor="middle">不可重复读 / 幻读</text>
-<rect x="410" y="286" width="160" height="100" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="490" y="308" font-size="11" fill="#2196F3" text-anchor="middle" font-weight="700">REPEATABLE READ</text>
-<text x="490" y="332" font-size="13" fill="#263238" text-anchor="middle" font-weight="700">可重复读
-MySQL 默认</text>
-<text x="490" y="358" font-size="10" fill="#546E7A" text-anchor="middle">幻读</text>
-<rect x="585" y="286" width="160" height="100" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
-<text x="665" y="308" font-size="11" fill="#4CAF50" text-anchor="middle" font-weight="700">SERIALIZABLE</text>
-<text x="665" y="332" font-size="13" fill="#263238" text-anchor="middle" font-weight="700">串行化</text>
-<text x="665" y="358" font-size="10" fill="#546E7A" text-anchor="middle">无（性能最差）</text>
-<text x="60" y="422" font-size="13" fill="#4CAF50" font-weight="700">7 大传播行为：REQUIRED(默认) / REQUIRES_NEW / NESTED / SUPPORTS / NOT_SUPPORTED / NEVER / MANDATORY</text>
-<text x="60" y="448" font-size="12" fill="#607D8B">@Transactional 失效场景：非 public / 自调用 / 异常被吞 / 默认只回滚 RuntimeException</text>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="40" y="190" width="100" height="60" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="90" y="213" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Producer</text>
+<text x="90" y="227" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">生产者</text>
+<rect x="160" y="120" width="480" height="180" rx="10" fill="#2196F311" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="144" font-size="14" fill="#2196F3" text-anchor="middle" font-weight="700">Kafka Cluster</text>
+<text x="180" y="170" font-size="11" fill="#9C27B0" font-weight="700">Topic: order-events  ·  Partition=3  ·  Replication=2</text>
+<rect x="180" y="186" width="140" height="100" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="250" y="224" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Broker 1</text>
+<text x="250" y="236" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Leader: P0</text>
+<text x="250" y="248" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Follower: P1</text>
+<rect x="330" y="186" width="140" height="100" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="224" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Broker 2</text>
+<text x="400" y="236" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Leader: P1</text>
+<text x="400" y="248" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Follower: P2</text>
+<rect x="480" y="186" width="140" height="100" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="550" y="224" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Broker 3</text>
+<text x="550" y="236" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Leader: P2</text>
+<text x="550" y="248" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Follower: P0</text>
+<line x1="140" y1="220" x2="180" y2="220" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="160" y="214" font-size="11" fill="#455A64" text-anchor="middle" font-weight="600">send</text>
+<rect x="160" y="320" width="480" height="70" rx="8" fill="#FF980011" stroke="#FF9800" stroke-width="2"/>
+<text x="180" y="342" font-size="12" fill="#FF9800" font-weight="700">Consumer Group: 各消费者各自消费不同分区</text>
+<rect x="200" y="350" width="120" height="30" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="260" y="359" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Consumer 1</text>
+<text x="260" y="371" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">← P0</text>
+<rect x="340" y="350" width="120" height="30" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="359" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Consumer 2</text>
+<text x="400" y="371" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">← P1</text>
+<rect x="480" y="350" width="120" height="30" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="540" y="359" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Consumer 3</text>
+<text x="540" y="371" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">← P2</text>
+<line x1="400" y1="300" x2="400" y2="320" stroke="#FF9800" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="304" font-size="11" fill="#FF9800" text-anchor="middle" font-weight="600">consume</text>
+<rect x="60" y="410" width="680" height="150" rx="8" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.5"/>
+<text x="80" y="434" font-size="13" fill="#607D8B" font-weight="700">核心机制</text>
+<circle cx="86" cy="456" r="5" fill="#4CAF50"/>
+<text x="100" y="460" font-size="12" fill="#37474F"><tspan fill="#4CAF50" font-weight="700">高吞吐：</tspan>顺序写盘 + 零拷贝(sendfile)</text>
+<circle cx="426" cy="456" r="5" fill="#2196F3"/>
+<text x="440" y="460" font-size="12" fill="#37474F"><tspan fill="#2196F3" font-weight="700">高可用：</tspan>副本机制 + ISR + Leader 选举</text>
+<circle cx="86" cy="492" r="5" fill="#FF9800"/>
+<text x="100" y="496" font-size="12" fill="#37474F"><tspan fill="#FF9800" font-weight="700">顺序保证：</tspan>单分区内有序，跨分区无序</text>
+<circle cx="426" cy="492" r="5" fill="#9C27B0"/>
+<text x="440" y="496" font-size="12" fill="#37474F"><tspan fill="#9C27B0" font-weight="700">Exactly-Once：</tspan>幂等+事务</text>
+<circle cx="86" cy="528" r="5" fill="#f44336"/>
+<text x="100" y="532" font-size="12" fill="#37474F"><tspan fill="#f44336" font-weight="700">Offset 管理：</tspan>__consumer_offsets</text>
+<circle cx="426" cy="528" r="5" fill="#607D8B"/>
+<text x="440" y="532" font-size="12" fill="#37474F"><tspan fill="#607D8B" font-weight="700">ZK/KRaft：</tspan>Kafka 3.x 去 ZK</text>
 </svg>

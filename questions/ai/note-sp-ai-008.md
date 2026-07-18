@@ -168,6 +168,10 @@ print(result["source_documents"])  # 引用来源
 3. **优化策略**：混合检索、重排序、Prompt约束等具体手段
 4. **评价维度**：不只是端到端准确率，还要评估检索和生成各环节
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sp-ai-008.svg" alt="RAG是什么？怎么构建？评价体系是什么？能不能确保100%准确率？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - RAG架构核心：离线建库（切分向量化），在线检索生成，二者通过Top-K向量召回结合。

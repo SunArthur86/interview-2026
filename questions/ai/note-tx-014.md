@@ -304,6 +304,10 @@ for batch in dataloader:
 
 > **面试核心**：梯度检查点不是"为了省显存就一定要用"——当 GPU 显存不是瓶颈时，标准反向传播更快。它是**显存瓶颈场景下的关键工具**，理解时间-空间权衡的本质比记住 API 更重要。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx-014.svg" alt="【腾讯面经】梯度检查点（Gradient Checkpointing）原理是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心矛盾：反向传播依赖前向激活值，而全部存储极耗显存

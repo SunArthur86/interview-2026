@@ -215,3 +215,7 @@ def should_improve_hit1(hit1_score, hit3_score):
 | 0:50 | hit@1过于严格示意图 | "hit@1过于严格——用户表达模糊时，模型可能把正确意图排到第2-3位" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：hit@3也不够高怎么办？怎么提升意图识别准确率？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sp-002.svg" alt="意图识别准确率为什么统计hit@3而不是hit@1？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

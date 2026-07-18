@@ -253,6 +253,10 @@ class SkillRegistry:
 2. **核心是"标准化"**：统一接口让 N×M 变 N+M，这是软件工程经典思想
 3. **提生态价值**：标准化催生 Skill 市场（类比 App Store），这是 Agent 生态的基础
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-041.svg" alt="如何基于统一规范实现&quot;万物皆可 Skill&quot;？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 万物指代：API、脚本、文档、SOP、外部服务等皆可封装为统一Skill。

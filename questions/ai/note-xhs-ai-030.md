@@ -212,3 +212,7 @@ Layer 40 (深层): ███                  保留 10%
 **候选人**：丢失关键历史信息导致幻觉、长尾case质量塌陷、与RAG/Function Calling交互可能出错，需要精确长程依赖的任务不能用。
 **面试官**：怎么评估质量损失？
 **候选人**：用LongBench/RULER长文档benchmark、needle-in-haystack测试、业务badcase分析，对比全注意力基线判断可接受度。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-030.svg" alt="【AI Infra推理优化】稀疏注意力方案怎么选？StreamingLLM vs H2O vs PyramidKV - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

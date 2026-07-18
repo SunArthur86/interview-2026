@@ -397,6 +397,10 @@ class SessionKVCacheManager:
 4. 提到注意力Sink现象——前几个token天然吸引注意力，不能丢弃
 5. 知道 KV Cache 的淘汰策略需要权衡：显存节省 vs 重算开销（Recomputation Cost）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-llm-016.svg" alt="【字节面经】KV Cache 的核心原理是什么？在多轮对话场景下，KV Cache 命中率低时你会怎么优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 原理：Attention计算中历史Token的K和V不变，缓存复用避免重复计算。

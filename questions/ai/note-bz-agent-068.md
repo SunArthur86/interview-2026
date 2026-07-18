@@ -225,6 +225,10 @@ Agent Prompt示例:
 2. **强调"边界"**：Agent Prompt 最重要的是定义"不能做什么"，而非"能做什么"
 3. **类比"岗位说明书"**：Agent Prompt 是给 Agent 的 job description，不是一次性指令
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-068.svg" alt="Agent 提示词和普通提示词差在哪？（四层结构） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 口诀「谁、能干啥、怎么干、底线」：四层即角色、能力边界、工具流程、输出安全

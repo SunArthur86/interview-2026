@@ -179,6 +179,10 @@ async def execute_with_progressive_disclosure(
 3. **动态K值**：简单需求预筛选Top-3，复杂需求Top-8，动态调整而非固定
 4. **Claude Code的实践**：Claude Code的Skill系统就是渐进式披露的典型案例——SKILL.md先给摘要，使用时才加载完整内容
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-lx-agent-012.svg" alt="Skill的渐进式披露是什么意思，为什么它能提升Agent的稳定性？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 全量加载导致Token爆炸和选择困难，渐进式按需加载提升准确率

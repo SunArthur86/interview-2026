@@ -210,6 +210,10 @@ class RAGPipeline:
 2. **强调检索是核心**：60%的效果由检索决定，生成只是锦上添花
 3. **模块化可替换**：每个组件可独立优化/升级，体现工程架构思维
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-046.svg" alt="RAG 系统的核心组件及工作逻辑？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 五大组件：索引器(数据向量化)、查询处理器(改写/扩展)、检索器(向量/BM25)、后处理器(重排/过滤)、生成器(带引用回答)。

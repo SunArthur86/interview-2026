@@ -271,6 +271,10 @@ print(f"分层奖励: {rewards}")
 
 4. **从 RLHF 到 RL for Agent 的思维转换：** RLHF 的奖励是回答质量；Memory Agent 的奖励是**决策质量**。面试时要强调这个区别——Agent 的奖励更复杂、更稀疏、更延迟，需要更精细的奖励设计。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx-001.svg" alt="【腾讯面经】Memory Agent 的奖励设计怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心痛点：记忆的奖励极其稀疏且延迟，需解决长周期归因难题。

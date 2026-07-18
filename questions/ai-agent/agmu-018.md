@@ -93,6 +93,10 @@ def human_in_the_loop_agent(agent_result, confidence_threshold=0.8):
 2. 如何量化“人机在环”带来的收益？即如何证明增加人工步骤比纯自动化更好？
 3. 在用户端体验上，如何优雅地处理“转人工”的过渡，不让用户感到系统正在“卡顿”或“由于错误而中断”？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-018.svg" alt="为什么需要「人机在环」 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 人机在环是高风险决策的安全防线，也是 RLHF 数据来源。

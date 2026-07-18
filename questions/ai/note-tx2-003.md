@@ -191,6 +191,10 @@ flowchart TD
     H --> D
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-003.svg" alt="【某讯面经】Function Calling 底层原理：模型如何学会输出结构化工具参数？SFT/RLHF 起什么作用 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质澄清：FC并非理解语义，而是学会了将自然语言按schema映射为结构化JSON

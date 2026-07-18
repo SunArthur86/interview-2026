@@ -168,6 +168,10 @@ def slot_filling(text, intent):
 2. **混合方案最实用**：规则(快)+LLM(准)结合，兼顾延迟和覆盖
 3. **意图+槽位配合**：识别意图后还要提取参数，是完整的 NLU
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-082.svg" alt="大模型意图识别是怎么做的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 意图定义：将用户口语化输入映射到系统预定义的标准动作类别

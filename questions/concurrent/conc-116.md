@@ -123,6 +123,10 @@ public void performTask() {
 3. **CAS 及 ABA 问题**：乐观锁底层 CAS 的实现原理（Unsafe 类）以及如何解决 ABA 问题（版本号/AtomicStampedReference）。
 4. **死锁排查**：如何使用 `jstack` 或 VisualVM 分析死锁日志。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-116.svg" alt="你知道Java中有哪些锁吗是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心分类：悲观对比乐观、公平对比非公平、可重入对比独占/共享

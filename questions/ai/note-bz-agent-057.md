@@ -219,6 +219,10 @@ class GraphRAGQuery:
 2. **承认成本高**：GraphRAG 构建贵更新难，不是银弹——只在需要时用
 3. **混合架构**：向量+图谱混合（简单走向量，复杂走图谱）是生产实践
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-057.svg" alt="什么场景必须用 GraphRAG？知识图谱如何构建和应用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 场景对比：向量RAG擅长局部事实提取，GraphRAG专攻多跳推理和全局摘要。

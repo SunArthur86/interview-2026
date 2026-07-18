@@ -91,6 +91,10 @@ def precompute_freqs_cis(dim: int, end: int, theta: float = 10000.0):
 3. **多维处理**：RoPE 如何应用到高维向量？(两两分组旋转，即 head_dim/2 次旋转)。
 4. **对比 ALiBi**：RoPE (加法在复数域/旋转) vs ALiBi (直接在 Attention Score 减去偏置) 的优劣。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-002.svg" alt="主流大模型使用的位置编码有哪些?RoPE的原理和优势是什么 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 主流方案：Sinusoidal（绝对）、Learned（绝对）、RoPE（相对，主流）。

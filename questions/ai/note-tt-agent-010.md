@@ -146,6 +146,10 @@ def sampling_review(agent_outputs: list, sample_rate: float = 0.05):
 3. **置信度校准**：模型输出的置信度可能不准（过度自信），需要用Platt Scaling或Temperature Scaling校准
 4. **持续优化**：统计人工审核通过率——如果通过率>95%，说明阈值太保守，可以调低；如果<50%，说明模型质量需提升
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tt-agent-010.svg" alt="Human-in-the-loop人工断点怎么设计？哪些环节需要人工介入审批？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 口诀法：人工断点四大核心环节：操作前确认、低置信审核、异常兜底、定期抽检

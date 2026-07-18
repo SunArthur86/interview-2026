@@ -92,6 +92,10 @@ optimized_qa = teleprompter.compile(QA(), trainset=train_data)
 2. **追问**：DSPy 的 `BootstrapFewShot` 和 `KNN` 优化器分别适用于什么场景？它们在选择示例时的核心差异是什么？
 3. **追问**：如果目标是优化一个多步骤的 Agent 流程（包含 RAG + 工具调用），DSPy 如何保证整体链路的端到端优化？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-037.svg" alt="DSPy框架的核心思想是什么?它如何自动优化Prompt - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心思想：声明式编程替代手写Prompt，将Prompt Engineering转为参数优化

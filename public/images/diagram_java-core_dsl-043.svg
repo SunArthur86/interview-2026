@@ -14,12 +14,24 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="240" y="116" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="131" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">DOCTYPE 简化，避免混</text>
+<text x="400" y="149" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">杂模式</text>
+<rect x="240" y="194" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="400" y="200" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">语义化标签（header/n</text>
+<text x="400" y="218" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">av等）利于 SEO 和无</text>
+<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">障碍</text>
+<rect x="240" y="272" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="287" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">新增 audio/video 媒</text>
+<text x="400" y="305" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">体播放</text>
+<rect x="240" y="350" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="365" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">本地存储、拖拽等新 A</text>
+<text x="400" y="383" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">PI 增强</text>
+<rect x="240" y="428" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="443" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">废弃纯表现元素（如 f</text>
+<text x="400" y="461" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ont, center）</text>
+<line x1="400" y1="164" x2="400" y2="194" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="242" x2="400" y2="272" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="320" x2="400" y2="350" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="398" x2="400" y2="428" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

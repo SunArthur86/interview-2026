@@ -136,6 +136,10 @@ flowchart TD
     style F stroke-dasharray: 5 5
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-037.svg" alt="如何设计一个AI视频分析系统？支持实时监控、内容审核、视频摘要。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 架构流程：接入层(抽帧) → 分析层(检测/识别) → 事件层(规则/异常)。

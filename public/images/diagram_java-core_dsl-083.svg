@@ -15,11 +15,23 @@
 </marker>
 </defs>
 <rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
+<text x="400" y="126" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">高性能：基于 Radix T</text>
+<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ree（基数树）路由，</text>
+<text x="400" y="162" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">速度快。</text>
 <rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
+<text x="400" y="209" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">中间件：核心机制，通</text>
+<text x="400" y="227" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">过 Use 方法注册，利</text>
+<text x="400" y="245" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">用 c.Next() 控制流程</text>
+<text x="400" y="263" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">传递。</text>
 <rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
+<text x="400" y="310" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">API 友好：提供 JSON</text>
+<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">、XML 等便捷方法，支</text>
+<text x="400" y="346" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">持参数绑定与验证。</text>
+<rect x="240" y="392" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="402" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">生态：社区活跃，插件</text>
+<text x="400" y="420" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">丰富，适合快速开发 A</text>
+<text x="400" y="438" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">PI 服务。</text>
 <line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="356" x2="400" y2="392" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

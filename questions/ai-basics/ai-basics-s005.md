@@ -107,6 +107,10 @@ def scaled_dot_product_attention(query, key, value, mask=None):
 2. **Self-Attention的时间复杂度是多少？**（答：O(N²·d)，主要来自QKᵀ矩阵乘法；N是序列长度）
 3. **如何降低Attention的计算复杂度？**（答：Sparse Attention, FlashAttention, Linear Attention等优化手段）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_ai-basics-s005.svg" alt="什么是注意力机制？为什么在NLP中有效？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心公式：Softmax(QK^T / √d_k) · V，除以√d_k是为了防止梯度饱和。

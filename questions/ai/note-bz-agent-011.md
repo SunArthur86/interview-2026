@@ -178,6 +178,10 @@ ReAct 特点：
 2. **强调"链式"**：子问题答案会喂给下一个子问题，形成信息链
 3. **知道局限**：不如 ReAct 灵活，分解质量依赖 LLM，分解错就全错
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-011.svg" alt="Self-Ask 框架是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心思想：让大模型自问自答，将复杂问题分解为一串子问题

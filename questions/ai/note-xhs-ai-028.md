@@ -183,3 +183,7 @@ layer_config = {
 **候选人**：逐层量化做消融，看每层量化对PPL和下游任务的影响，敏感度高的层保留高精度，形成混合精度方案。
 **面试官**：上线前怎么验证？
 **候选人**：回归集对比质量、A/B测线上指标、长文本压测稳定性、badcase监控，质量下降超阈值就回滚。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-028.svg" alt="【AI Infra推理优化】KV Cache量化如何选精度？质量下降怎么办？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

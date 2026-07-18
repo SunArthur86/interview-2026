@@ -195,6 +195,10 @@ flowchart TD
     Bad -.-> H["退化保护<br/>自动切换堆排保证 O"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-jc-013.svg" alt="【阶跃星辰面经】排序算法时间复杂度 + 快排原理与最坏情况 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 口诀记忆：选插冒 O(n²)，归排 O(n logn)；快排均 O(nlogn) 坏 O(n²)

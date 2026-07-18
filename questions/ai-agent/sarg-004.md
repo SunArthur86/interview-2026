@@ -102,6 +102,10 @@ sorted_docs = [doc for _, doc in sorted(zip(scores, candidates), reverse=True)]
 2.  在高并发场景下，Reranker 模型是 CPU 计算密集型，你会如何做推理加速或架构优化？（提示：量化 int8、批处理、独立 GPU 服务部署）
 3.  除了精度，Reranker 在处理“否定意图”时有什么天然优势？能否举例说明？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_sarg-004.svg" alt="什么是Reranking？为什么RAG需要它？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Rerank 是“先召回后精排”的两阶段架构，弥补向量检索的信息损失。

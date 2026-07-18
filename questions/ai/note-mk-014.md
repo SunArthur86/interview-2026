@@ -251,6 +251,10 @@ agentRegistry.register({
 - **差异散落在平台层**：Agent的特殊逻辑侵入共用组件，if-else越来越多
 - **没有能力描述**：用户不知道新Agent能做什么、接受什么输入
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-014.svg" alt="【月之暗面面经】如果产品要加更多 Agent，前端怎样保持扩展能力而不是越做越重？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 坚决反模式：拒绝一Agent一套UI，避免重复造轮子导致维护成本呈指数级增长。

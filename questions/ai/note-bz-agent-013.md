@@ -201,6 +201,10 @@ Reflexion的"Reflect" → 用CoT反思
 2. **区分 Zero/Few-shot**：Zero 加指令，Few 给示例，后者质量更高
 3. **强调"涌现"**：CoT 是大模型的涌现能力（>60B），小模型无效——这体现了规模的重要性
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-013.svg" alt="大模型思维链（CoT）原理是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：自回归生成，中间推理步骤为最终答案提供了上下文约束

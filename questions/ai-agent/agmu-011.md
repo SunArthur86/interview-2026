@@ -83,6 +83,10 @@ result = crew.kickoff()
 2. **内存共享**：不同 Agent 之间如何共享上下文？（答：主要通过 Task 的输出作为下一个 Task 的输入，或者共享短期记忆）。
 3. **执行机制**：CrewAI 是并行的吗？（答：默认 Sequential 是串行的，Hierarchical 中 Manager 可以并发派发，但需注意 LLM API 调用的并发限制）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-011.svg" alt="CrewAI 的「Crew」抽象解决什么问题 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Crew 抽象角色分工与任务依赖，降低 Prompt 心智负担。

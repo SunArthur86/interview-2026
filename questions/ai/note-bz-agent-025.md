@@ -279,6 +279,10 @@ class ShardedSessionManager:
 2. **异步持久化**：热存储同步写保证不丢，冷存储异步写不阻塞响应
 3. **提"流式输出"**：实时对话的体感延迟由首字延迟决定，而非总耗时
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-025.svg" alt="实时对话系统的状态管理方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三类状态：会话状态（高频读写）、上下文状态（中频组装）、业务状态（低频持久）

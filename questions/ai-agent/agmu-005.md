@@ -97,6 +97,10 @@ Start Discussion
 1. **误区：认为只要多轮讨论结果就会变好**。实际上，若基础模型能力不足或 Prompt 有偏差，讨论只会放大错误。
 2. **误区：依赖 Embedding 相似度作为唯一收敛指标**。在某些场景下，两个完全相反的观点向量相似度也可能很高，需结合语义一致性校验。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-005.svg" alt="民主讨论模式如何避免永远开不完会 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 硬终止：设置最大轮数、Token 预算、收敛阈值（观点相似度）。

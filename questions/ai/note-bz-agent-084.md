@@ -266,6 +266,10 @@ optimization_loop = {
 2. **问法扩展**：一个 FAQ 配多种问法变体——简单但有效的召回提升
 3. **人工协作不是失败**：优雅转人工是客服 Agent 的重要能力——20%转人工是正常的
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-084.svg" alt="智能客服 Agent 如何设计？FAQ 匹配算法怎么优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心路由是意图识别：分流至FAQ匹配、业务API、或人工接管

@@ -175,6 +175,10 @@ Step 5: 社区检测 + 摘要 (Leiden算法)
   将图分成社区 → 每个社区生成摘要 → 支持全局问答
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd4-006.svg" alt="GraphRAG 和普通向量 RAG 的区别？适合本地生活知识库吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 向量RAG靠相似度匹配找局部Chunks，GraphRAG靠实体关系图遍历支持多跳推理

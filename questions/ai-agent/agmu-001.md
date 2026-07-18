@@ -101,6 +101,10 @@ def research_team(topic):
 1. **过度设计**：并不是所有复杂的任务都需要多 Agent。很多时候，一个强大的单 Agent + 高质量的 System Prompt + Few-shot Examples 就能解决，且维护成本更低、响应更快。多 Agent 引入的通信开销和调试复杂度往往被低估。
 2. **通信噪音**：Agent 之间传递的自然语言对话如果不做结构化约束，很容易包含大量“废话”或无效信息，不仅浪费 Token，还可能导致下游 Agent 误解。应强制使用结构化数据（如 JSON Schema）进行 Agent 间的主要信息传递。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-001.svg" alt="单 Agent 和多 Agent 的本质区别是什么?什么时候该上多 Agent - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质区别：单 Agent 依赖涌现思维，多 Agent 依赖显式角色与结构化治理。

@@ -155,6 +155,10 @@ H5 [ 0.28 0.30 0.29 0.80 1.0  0.82 ]  ← 可合并为同一组
 
 **面试加分点**：提到LLaMA-2 70B使用GQA(num_kv_heads=8)而7B/13B仍用MHA；提到vLLM和TensorRT-LLM对GQA做了专门优化；提到GQA是当前开源大模型的事实标准（LLaMA-3、Qwen-2、Mistral、DeepSeek-V2等全部采用）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-003.svg" alt="请对比MHA、MQA、GQA三种注意力机制的区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - KV头数渐变缩：MHA全独立，MQA全共享，GQA分组共享折中两者。

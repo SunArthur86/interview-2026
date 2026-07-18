@@ -14,12 +14,27 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="240" y="116" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="127" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">核心是智能DNS解析和</text>
+<text x="400" y="145" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">边缘缓存</text>
+<rect x="240" y="180" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="400" y="191" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">命中缓存直接响应，未</text>
+<text x="400" y="209" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">命中才回源</text>
+<rect x="240" y="244" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="255" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">解决跨运营商和地域访</text>
+<text x="400" y="273" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">问慢的问题</text>
+<rect x="240" y="308" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="319" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">提升并发处理能力和用</text>
+<text x="400" y="337" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">户体验</text>
+<rect x="240" y="372" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="383" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">智能DNS指引用户访问</text>
+<text x="400" y="401" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">最近边缘节点</text>
+<rect x="240" y="436" width="320" height="40" rx="8" fill="#FFFFFF" stroke="#607D8B" stroke-width="2"/>
+<text x="400" y="447" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">命中缓存直接返回，未</text>
+<text x="400" y="465" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">命中则回源拉取</text>
+<line x1="400" y1="156" x2="400" y2="180" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="220" x2="400" y2="244" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="284" x2="400" y2="308" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="348" x2="400" y2="372" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="412" x2="400" y2="436" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

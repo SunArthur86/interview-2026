@@ -395,6 +395,10 @@ if __name__ == "__main__":
 4. **版本锁定**：生产环境务必锁定Embedding模型版本。一旦更换模型，所有历史向量必须全量重新编码，否则新旧向量不在同一语义空间。
 5. **评测的统计显著性**：当评测集较小时（<100条Query），各模型间的指标差异可能在统计噪声范围内。建议报告95%置信区间（Bootstrap重采样），避免过度解读微小差异。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-llm-002.svg" alt="【字节面经】不同的 Embedding 模型对检索质量影响很大，你是如何选型的？有没有做过对比评测？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 第一定律：因为Embedding是系统的第一道信息瓶颈，所以质量差会导致后续模块彻底失效(Garbage In)

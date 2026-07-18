@@ -132,6 +132,10 @@ def react_loop(query, tools, max_iterations=10):
     return "Maximum iterations reached."
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_bd-ai-006.svg" alt="【字节面经】Agent如何结合工具、知识、规划实现自主运行？请设计一个完整的执行链路。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心闭环：感知(组装上下文)→规划(任务分解)→行动(工具调用)→观察(结果解析)→决策

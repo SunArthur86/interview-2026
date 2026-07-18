@@ -241,3 +241,7 @@ INT4 何时不一定快：
 **候选人**：显存带宽瓶颈（batch大、长序列）时INT4省带宽更快；计算瓶颈且反量化开销大时可能更慢，必须实测对比。
 **面试官**：INT4的风险有哪些？
 **候选人**：质量下降（PPL升高）、数值稳定性、长尾badcase、kernel兼容性，必须过质量回归并监控质量指标，必要时混合精度。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-051.svg" alt="【AI Infra面经】消费级 GPU 部署量化模型，INT4 一定比 FP16 更快吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

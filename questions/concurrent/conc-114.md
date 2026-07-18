@@ -121,6 +121,10 @@ Gap:    (-∞,1]  (1,5]   (5,10]   (10,+∞)
 2. **主键自增机制**：`innodb_autoinc_lock_mode` 的不同值（0, 1, 2）对性能和 ID 连续性的影响。
 3. **幻读与间隙锁**：举例说明 Gap Lock 是如何防止幻读的（例如：插入不存在 ID 时被阻塞）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-114.svg" alt="什么是锁的种类？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 锁分两大维度：按粒度划分（全局/表/行）对比按行为划分（共享/排他）

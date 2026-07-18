@@ -192,6 +192,10 @@ similarity = cosine_similarity(text_feat, image_feat)
 | nDCG | 考虑排序质量的归一化指标 |
 | 模态覆盖率 | 最终结果中文本/图像的比例是否合理 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ai50-002.svg" alt="多模态检索中图文向量混合检索的权重分配 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三种方案：静态权重融合、查询意图动态路由、Reranker统一排序（工业主流）。

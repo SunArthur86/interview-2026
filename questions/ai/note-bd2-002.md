@@ -255,6 +255,10 @@ class ContextManager:
         return messages
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd2-002.svg" alt="Agent上下文窗口满了怎么办？有哪些压缩方式？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 滑动窗口：仅保留最近N轮，最简单但易丢早期关键信息。

@@ -215,6 +215,10 @@ def anti_hallucination_pipeline(query, vector_store):
     return checked
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ai50-006.svg" alt="防止大模型幻觉的工程和Prompt手段 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三层防线：输入层防发散、模型层降随机、输出层强校验。

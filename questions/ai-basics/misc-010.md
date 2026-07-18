@@ -112,6 +112,10 @@ class LoRALinear(nn.Module):
         return self.linear(x) + self.lora_up(self.lora_down(x)) * self.scaling
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-010.svg" alt="LoRA的原理是什么?rank r 如何选择?QLoRA做了什么改进 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - LoRA冻结原权重W，旁路加低秩矩阵BA，h=Wx+BAx，r通常取4-64

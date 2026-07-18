@@ -87,6 +87,10 @@ app = workflow.compile(checkpointer=memory)
 2. **循环控制**：AutoGen 如何防止无限对话？（答：通常通过设置 `max_consecutive_auto_reply` 参数）。
 3. **人机协作**：两者如何介入人工审核？（答：AutoGen 通过中断机制，LangGraph 通过特定的 interrupt 节点或边）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-010.svg" alt="AutoGen 和 LangGraph 多 Agent 有什么气质差异 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - AutoGen 重对话社交，LangGraph 重状态机与确定性。

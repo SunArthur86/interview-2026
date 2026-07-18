@@ -4,7 +4,7 @@
 <rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
 <text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】全链路压测如何避免污染生产数据</text>
 <text x="28" y="552" font-size="0"></text>
-<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：全链路压测在生产环境跑，最大风险是污染生产数据（产生假订单、扣真实库存、发假短信）。核心解法是\&quot;压测流量打影子资源\&quot;…</text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：全链路压测在生产环境跑，最大风险是污染生产数据（产生假订单、扣真实库存、发假短信）。核心解法是&quot;压测流量打影子资源&quot;——…</text>
 <!-- BODY_TOP=110 -->
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -14,55 +14,51 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="60" y="110" width="320" height="180" rx="10" fill="#2196F311" stroke="#2196F3" stroke-width="2"/>
-<text x="220" y="138" font-size="15" fill="#2196F3" text-anchor="middle" font-weight="700">Thread A</text>
-<rect x="90" y="160" width="260" height="50" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="220" y="178" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ThreadLocalMap</text>
-<text x="220" y="192" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(每个线程独有)</text>
-<rect x="90" y="230" width="75" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="128" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
-<text x="128" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_1</text>
-<text x="128" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
-<rect x="170" y="230" width="75" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="208" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
-<text x="208" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_2</text>
-<text x="208" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
-<rect x="250" y="230" width="75" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="288" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
-<text x="288" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_3</text>
-<text x="288" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
-<rect x="420" y="110" width="320" height="180" rx="10" fill="#FF980011" stroke="#FF9800" stroke-width="2"/>
-<text x="580" y="138" font-size="15" fill="#FF9800" text-anchor="middle" font-weight="700">Thread B</text>
-<rect x="450" y="160" width="260" height="50" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="580" y="178" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ThreadLocalMap</text>
-<text x="580" y="192" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(每个线程独有)</text>
-<rect x="450" y="230" width="75" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="488" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
-<text x="488" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_1</text>
-<text x="488" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
-<rect x="530" y="230" width="75" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="568" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
-<text x="568" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_2</text>
-<text x="568" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
-<rect x="610" y="230" width="75" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="648" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
-<text x="648" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_3</text>
-<text x="648" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
-<rect x="60" y="320" width="680" height="220" rx="10" fill="#FFFFFF" stroke="#9C27B0" stroke-width="1.5"/>
-<text x="400" y="346" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">关键特性</text>
-<rect x="80" y="354" width="320" height="44" rx="6" fill="#4CAF5022" stroke="#4CAF50" stroke-width="1.5"/>
-<text x="94" y="372" font-size="12" fill="#4CAF50" font-weight="700">数据隔离</text>
-<text x="94" y="390" font-size="11" fill="#37474F">每个线程独立副本，无并发问题</text>
-<rect x="420" y="354" width="320" height="44" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
-<text x="434" y="372" font-size="12" fill="#2196F3" font-weight="700">Entry 弱引用 Key</text>
-<text x="434" y="390" font-size="11" fill="#37474F">ThreadLocal 被 GC 后 key=null</text>
-<rect x="80" y="410" width="320" height="44" rx="6" fill="#f4433622" stroke="#f44336" stroke-width="1.5"/>
-<text x="94" y="428" font-size="12" fill="#f44336" font-weight="700">内存泄漏风险</text>
-<text x="94" y="446" font-size="11" fill="#37474F">value 强引用，需 remove() 释放</text>
-<rect x="420" y="410" width="320" height="44" rx="6" fill="#FF980022" stroke="#FF9800" stroke-width="1.5"/>
-<text x="434" y="428" font-size="12" fill="#FF9800" font-weight="700">InheritableThreadLocal</text>
-<text x="434" y="446" font-size="11" fill="#37474F">父子线程可继承值</text>
-<rect x="80" y="466" width="320" height="44" rx="6" fill="#9C27B022" stroke="#9C27B0" stroke-width="1.5"/>
-<text x="94" y="484" font-size="12" fill="#9C27B0" font-weight="700">典型应用</text>
-<text x="94" y="502" font-size="11" fill="#37474F">SimpleDateFormat / 数据库连接 / 用户上下文</text>
+<rect x="40" y="190" width="100" height="60" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="90" y="213" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Producer</text>
+<text x="90" y="227" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">生产者</text>
+<rect x="160" y="120" width="480" height="180" rx="10" fill="#2196F311" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="144" font-size="14" fill="#2196F3" text-anchor="middle" font-weight="700">Kafka Cluster</text>
+<text x="180" y="170" font-size="11" fill="#9C27B0" font-weight="700">Topic: order-events  ·  Partition=3  ·  Replication=2</text>
+<rect x="180" y="186" width="140" height="100" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="250" y="224" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Broker 1</text>
+<text x="250" y="236" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Leader: P0</text>
+<text x="250" y="248" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Follower: P1</text>
+<rect x="330" y="186" width="140" height="100" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="224" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Broker 2</text>
+<text x="400" y="236" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Leader: P1</text>
+<text x="400" y="248" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Follower: P2</text>
+<rect x="480" y="186" width="140" height="100" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="550" y="224" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Broker 3</text>
+<text x="550" y="236" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Leader: P2</text>
+<text x="550" y="248" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Follower: P0</text>
+<line x1="140" y1="220" x2="180" y2="220" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="160" y="214" font-size="11" fill="#455A64" text-anchor="middle" font-weight="600">send</text>
+<rect x="160" y="320" width="480" height="70" rx="8" fill="#FF980011" stroke="#FF9800" stroke-width="2"/>
+<text x="180" y="342" font-size="12" fill="#FF9800" font-weight="700">Consumer Group: 各消费者各自消费不同分区</text>
+<rect x="200" y="350" width="120" height="30" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="260" y="359" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Consumer 1</text>
+<text x="260" y="371" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">← P0</text>
+<rect x="340" y="350" width="120" height="30" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="359" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Consumer 2</text>
+<text x="400" y="371" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">← P1</text>
+<rect x="480" y="350" width="120" height="30" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="540" y="359" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Consumer 3</text>
+<text x="540" y="371" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">← P2</text>
+<line x1="400" y1="300" x2="400" y2="320" stroke="#FF9800" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="304" font-size="11" fill="#FF9800" text-anchor="middle" font-weight="600">consume</text>
+<rect x="60" y="410" width="680" height="150" rx="8" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.5"/>
+<text x="80" y="434" font-size="13" fill="#607D8B" font-weight="700">核心机制</text>
+<circle cx="86" cy="456" r="5" fill="#4CAF50"/>
+<text x="100" y="460" font-size="12" fill="#37474F"><tspan fill="#4CAF50" font-weight="700">高吞吐：</tspan>顺序写盘 + 零拷贝(sendfile)</text>
+<circle cx="426" cy="456" r="5" fill="#2196F3"/>
+<text x="440" y="460" font-size="12" fill="#37474F"><tspan fill="#2196F3" font-weight="700">高可用：</tspan>副本机制 + ISR + Leader 选举</text>
+<circle cx="86" cy="492" r="5" fill="#FF9800"/>
+<text x="100" y="496" font-size="12" fill="#37474F"><tspan fill="#FF9800" font-weight="700">顺序保证：</tspan>单分区内有序，跨分区无序</text>
+<circle cx="426" cy="492" r="5" fill="#9C27B0"/>
+<text x="440" y="496" font-size="12" fill="#37474F"><tspan fill="#9C27B0" font-weight="700">Exactly-Once：</tspan>幂等+事务</text>
+<circle cx="86" cy="528" r="5" fill="#f44336"/>
+<text x="100" y="532" font-size="12" fill="#37474F"><tspan fill="#f44336" font-weight="700">Offset 管理：</tspan>__consumer_offsets</text>
+<circle cx="426" cy="528" r="5" fill="#607D8B"/>
+<text x="440" y="532" font-size="12" fill="#37474F"><tspan fill="#607D8B" font-weight="700">ZK/KRaft：</tspan>Kafka 3.x 去 ZK</text>
 </svg>

@@ -302,6 +302,10 @@ class AgentLoop:
 5. **评估闭环**：不只讲怎么构建，还讲怎么评估和迭代——体现工程闭环思维。
 6. **坦诚挑战**：主动说"Agent 最大的挑战是稳定性——概率性输出导致不可预测"，然后讲你怎么应对（重试/降级/兜底/限流），比硬夸效果好得多。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx-007.svg" alt="【腾讯面经】你这个 Agent 项目怎么设计的？包含什么模块？Agent 整体运行流程是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 五大模块：接口层、编排引擎（大脑）、记忆、工具、安全与监控。

@@ -14,12 +14,28 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="240" y="116" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="113" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">清分（算钱）：按规则</text>
+<text x="400" y="131" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">把订单金额拆分给各方</text>
+<text x="400" y="149" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">（商家/平台/物流/营</text>
+<text x="400" y="167" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">销补贴）</text>
+<rect x="240" y="194" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="400" y="200" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">结算（付钱）：资金划</text>
+<text x="400" y="218" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">转，T+1 批量打款给商</text>
+<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">家</text>
+<rect x="240" y="272" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="278" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">批处理：大数据量跑批</text>
+<text x="400" y="296" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">（Spark/Flink 批），</text>
+<text x="400" y="314" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">日终全量清分</text>
+<rect x="240" y="350" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="356" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">准实时：增量清分（Fl</text>
+<text x="400" y="374" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ink 流），大额订单优</text>
+<text x="400" y="392" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">先结算</text>
+<rect x="240" y="428" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="443" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">分账规则引擎：佣金/</text>
+<text x="400" y="461" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">补贴/分摊规则配置化</text>
+<line x1="400" y1="164" x2="400" y2="194" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="242" x2="400" y2="272" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="320" x2="400" y2="350" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="398" x2="400" y2="428" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

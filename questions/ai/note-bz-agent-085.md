@@ -250,6 +250,10 @@ def evaluate_recall(test_cases):
 2. **混合检索+Rerank 是黄金组合**：先广召回(混合)再精选(Rerank)
 3. **父子分块**：解决"精准检索"和"上下文完整"的矛盾——进阶技巧
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-085.svg" alt="文档问答系统的检索召回率如何提升？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 提升召回五步走：查询改写优化、多路混合检索、Rerank精排、优化分块、调参

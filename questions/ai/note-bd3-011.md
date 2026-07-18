@@ -189,6 +189,10 @@ print(prof.key_averages().table(sort_by="cuda_memory_usage", row_limit=10))
 
 **面试加分点**：提到 `torch.cuda.memory_summary()` 获取详细显存分配报告；提到vLLM的profile_run功能可以自动测量显存峰值并设置安全余量；提到KV Cache量化(FP8/INT8)是最新的研究方向（如KIVI、FlexGen）；提到推理框架选择也很关键——vLLM和SGLang对显存管理远优于原生HuggingFace Transformers。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-011.svg" alt="大模型推理时遇到OOM问题，你会从哪些方面入手排查和解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 排查顺口溜：权重定大小，KV吃变量，并发最吃紧，最后查激活

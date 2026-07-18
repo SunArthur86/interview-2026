@@ -351,3 +351,7 @@ Agent明确不能做的事：
 | 1:30 | 客服场景额外维度示意图 | "客服场景额外维度——输入规范化、意图识别分流、职责边界" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：意图识别用什么模型？如何处理多意图和意图混淆？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ali-tt-ai-003.svg" alt="【阿里淘天AI二面】设计智能客服Agent，需要考虑哪些方面？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

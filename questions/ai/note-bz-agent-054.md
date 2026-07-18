@@ -177,6 +177,10 @@ relevant = [doc for doc in results if doc.similarity > 0.7]
 2. **归一化技巧**：归一化后点积=余弦但更快——体现工程优化
 3. **给阈值参考**：0.7 以上算相关，体现实战经验
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-054.svg" alt="向量间相似度如何计算？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 余弦相似度：只看向量方向不看模长，最常用，不受文本长度影响。

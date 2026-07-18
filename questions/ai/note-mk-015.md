@@ -214,6 +214,10 @@ async function quickReplace(oldRefId: string): Promise<void> {
 - **不展示内容摘要**：用户不知道文件里有什么，无法判断是否选对了
 - **忽略时效性**：用了过期数据做分析，结果不准确但用户不知道原因
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-015.svg" alt="【月之暗面面经】如果用户给了错误的文件上下文，前端怎样尽早发现并提示？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 两步校验机制：硬校验拦截致命错（格式不支持、空文件、无权限），软校验提示语义错（过期、跑题）。

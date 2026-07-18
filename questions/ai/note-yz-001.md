@@ -281,3 +281,7 @@ def break_loop(agent, loop_info, strategy="reflect"):
 **候选人**：不够，最大步数只兜底无法区分正常长任务和无效循环；要做进展检测和重复识别精准跳出，配合降级方案。
 **面试官**：误判跳出怎么办？
 **候选人**：正常长任务可能被误中断，要设计降级——人工介入、返回部分结果、让用户确认是否继续，并监控跳出准确率持续优化。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-yz-001.svg" alt="【宇树科技二面】ReAct 循环中，如何检测并跳出无效的&quot;思考—行动&quot;循环？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

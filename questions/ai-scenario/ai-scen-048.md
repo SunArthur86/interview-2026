@@ -119,6 +119,10 @@ def decide_transaction(user_features):
 | **Flink** | 毫秒级 (低) | 极高 | 原生支持 StateBackend | 实时反欺诈，复杂CEP |
 | **Kafka Streams** | 毫秒级 | 中 | 轻量级，依赖 Kafka | 简单流式ETL，日志清洗 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-048.svg" alt="如何设计一个AI金融风控系统？实时交易反欺诈、信用评分、反洗钱。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心要求：低延迟(<50ms)、高准确率、可解释；实时特征计算是关键(Flink/预聚合)。

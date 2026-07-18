@@ -262,3 +262,7 @@ result = app.invoke({"user_input": "订机票+叫车+酒店"})
 **候选人**：不一定，工具少且稳定、延迟敏感、可解释性要求高的场景if-else更优（确定性强延迟低），动态调度有延迟和不确定性。
 **面试官**：动态调度有什么风险？
 **候选人**：选错工具、延迟增加、可解释性差、依赖LLM能力、调试困难，需要调度准确率监控和if-else降级兜底。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-041.svg" alt="【AI Agent工程】多工具冲突除了if-else有什么动态调度方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -138,6 +138,10 @@ Tool ←─── LLM推理决策 ───→ 更新Memory
 3. **Tool Calling安全**：提到权限校验和超时控制
 4. **协同关系**：能画出四大能力的交互流程图
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-agent-002.svg" alt="AI Agent项目实际用到了哪些Agent技术能力？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大能力：Workflow编排控制流程，Memory防遗忘，RAG注知识，Tool连外部

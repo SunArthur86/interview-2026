@@ -6,37 +6,24 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：锁升级的本质是&quot;用最小开销拿到锁&quot;——无竞争用 CAS（偏向锁/轻量级锁），短竞争自旋等待（轻量级锁），长竞争才进入内核…</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<rect x="40" y="200" width="166" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
-<text x="123" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">无锁状态</text>
-<text x="123" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">new</text>
-<circle cx="58" cy="218" r="13" fill="#4CAF50"/>
-<text x="58" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">1</text>
-<rect x="224" y="200" width="166" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="308" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">偏向锁</text>
-<text x="308" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">单线程访问</text>
-<circle cx="242.5" cy="218" r="13" fill="#2196F3"/>
-<text x="242.5" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">2</text>
-<rect x="409" y="200" width="166" height="90" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="492" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">轻量级锁</text>
-<text x="492" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">CAS 自旋</text>
-<text x="492" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">多线程交替</text>
-<circle cx="427.0" cy="218" r="13" fill="#FF9800"/>
-<text x="427.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">3</text>
-<rect x="594" y="200" width="166" height="90" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
-<text x="677" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">重量级锁</text>
-<text x="677" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">OS Mutex</text>
-<text x="677" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">竞争激烈</text>
-<circle cx="611.5" cy="218" r="13" fill="#f44336"/>
-<text x="611.5" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text>
-<line x1="206" y1="245" x2="224" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="391" y1="245" x2="409" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="576" y1="245" x2="594" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="114" width="720" height="59" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="56" y="144" font-size="15" fill="#2196F3" font-weight="700" dominant-baseline="middle">乐观 vs 悲观</text>
+<text x="170" y="134" font-size="13" fill="#263238" dominant="middle">乐观锁：CAS / 版本号（适合读多）   悲观锁：synchro</text>
+<text x="170" y="150" font-size="13" fill="#263238" dominant="middle">nized / ReentrantLock（适合写多）</text>
+<rect x="40" y="189" width="720" height="59" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="56" y="218" font-size="15" fill="#4CAF50" font-weight="700" dominant-baseline="middle">公平 vs 非公平</text>
+<text x="170" y="210" font-size="13" fill="#263238" dominant="middle">公平锁：FIFO 排队，无饥饿   非公平锁：可插队，吞吐</text>
+<text x="170" y="226" font-size="13" fill="#263238" dominant="middle">量高</text>
+<rect x="40" y="264" width="720" height="59" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="56" y="294" font-size="15" fill="#FF9800" font-weight="700" dominant-baseline="middle">独占 vs 共享</text>
+<text x="170" y="284" font-size="13" fill="#263238" dominant="middle">独占锁：ReentrantLock / synchronized   共享锁：Rea</text>
+<text x="170" y="300" font-size="13" fill="#263238" dominant="middle">dWriteLock / Semaphore</text>
+<rect x="40" y="339" width="720" height="59" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="56" y="368" font-size="15" fill="#9C27B0" font-weight="700" dominant-baseline="middle">可重入 vs 不可重入</text>
+<text x="170" y="360" font-size="13" fill="#263238" dominant="middle">可重入锁：同线程可多次获取，避免死锁   不可重入：</text>
+<text x="170" y="376" font-size="13" fill="#263238" dominant="middle">再次获取会自死锁</text>
+<rect x="40" y="414" width="720" height="59" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="56" y="444" font-size="15" fill="#f44336" font-weight="700" dominant-baseline="middle">自旋锁</text>
+<text x="170" y="434" font-size="13" fill="#263238" dominant="middle">忙等待不阻塞，适合临界区短   自适应自旋：JVM 根据</text>
+<text x="170" y="450" font-size="13" fill="#263238" dominant="middle">历史决定时长</text>
 </svg>

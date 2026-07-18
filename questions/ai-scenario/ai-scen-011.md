@@ -111,6 +111,10 @@ def retrieve_context(query: str, user_id: str):
 1. **混淆RAG与长期记忆**：RAG通常针对通用的静态知识库，而Agent长期记忆是针对特定用户的动态个性化数据，设计时需区分权限和隔离性。
 2. **忽视记忆的反射机制**：认为记忆只是“存”和“取”，而忽略了Agent需要具备“反思”能力（即在任务结束后主动提炼重要信息写入长期记忆）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-011.svg" alt="如何设计AI Agent的记忆系统？支持短期对话记忆和长期知识积累。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三层架构：短期（滑动窗口）、工作（任务轨迹）、长期（向量+KV）

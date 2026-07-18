@@ -150,6 +150,10 @@ Var[S/√d_k] = Var[S] / d_k = d_k / d_k = 1  ✓
 
 **面试加分点**：提到这是Transformer原论文（Attention is All You Need, 2017）提出的标准做法；提到在低维度（d_k ≤ 64）时缩放影响较小，但在高维度（d_k ≥ 128）时至关重要；提到Flash Attention等高效实现中也保留了这一缩放。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-002.svg" alt="自注意力机制中为什么要除以√d_k？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原因防饱和：高维点积方差大(d_k)，导致Softmax输出逼近one-hot引发梯度消失。

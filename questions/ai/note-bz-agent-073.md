@@ -256,6 +256,10 @@ def test_behavior_control():
 2. **Few-shot 最有效**：示例比描述更有力——这是实战经验
 3. **不能 100%**：行为控制需配合后处理校验——体现实事求是
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-073.svg" alt="基于 Prompt 的模型行为控制技术？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 行为控制五维：角色、指令、示例、格式、安全

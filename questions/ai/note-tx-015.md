@@ -428,6 +428,10 @@ token 预算分配建议（以 8K context 为例）：
 
 > **面试核心**：这道题考察的不是"你会不会用 AI"，而是"你对 AI 的**局限性认知有多深**"。能说出具体的故障模式、调试方法、量化指标，远比说"AI 很强大我用了很多"有说服力。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx-015.svg" alt="【腾讯面经】代码 AI 生成比例多少？做 Agent 踩过哪些坑？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 数据坦诚：整体代码AI生成占60-70%，切忌夸大称90%以免被质疑审查不力

@@ -112,6 +112,10 @@ Tool调用          ★★★★☆      可靠性提升
 3. **场景化**：区分"能落地的"和"不能落地的"，并解释原因
 4. **务实路线**：推荐"特定场景优先落地"而非"一步到位做通用Agent"
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-agent-015.svg" alt="你对当下Agent能力怎么看待？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 成熟度盘点：任务拆解与Tool调用成熟，长程推理与自我纠错依然薄弱

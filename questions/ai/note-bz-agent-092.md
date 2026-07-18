@@ -214,6 +214,10 @@ COMPLIANCE = {
 2. **领域知识三注入**：RAG(灵活)+微调(深度)+Prompt(轻量)，按需选择
 3. **数字人全链路**：ASR→LLM→TTS→Avatar，延迟优化是关键——体现实战
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-092.svg" alt="实战：垂直领域智能体（AI 名师机器人/数字人）怎么落地？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 垂直与通用对比：垂直Agent要求专家级准确度与合规，通用偏普适，因为场景专精，所以必须引入专业人设与API

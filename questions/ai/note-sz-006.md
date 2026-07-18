@@ -192,6 +192,10 @@ flowchart TD
     G --> M[BI报表与聚合分析]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sz-006.svg" alt="【神州专车面经】事实表和维度表怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 事实表记录业务事件且长瘦高速增长（含外键度量），维度表存描述属性且短胖缓慢增长

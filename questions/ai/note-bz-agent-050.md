@@ -188,6 +188,10 @@ def evaluate_gap_resolution(test_cases):
 2. **双向对齐**：不只优化查询，也优化文档（加别名索引），体现全面性
 3. **Embedding 微调是终极方案**：有标注数据时，微调效果最好——但成本高，先用其他方案
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-050.svg" alt="如何解决 RAG 中的语义鸿沟问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：查询与文档语义相同但字面或向量不同，导致召回失败。

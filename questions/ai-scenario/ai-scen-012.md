@@ -110,6 +110,10 @@ def build_plan(llm_response):
 1. **过度依赖一次性规划**：认为LLM能一次性生成完美的DAG，实际上长链条任务的中间步骤极易出错，必须支持“边执行边修正”的增量规划。
 2. **忽略计划的Cost预估**：规划时仅考虑逻辑可行性，未评估Token消耗、时间成本或API调用费用，导致任务执行到一半因资源耗尽而中断。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-012.svg" alt="如何设计AI Agent的规划（Planning）与推理（Reasoning）引擎？让Agent能自主分解复杂任务。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 规划模式：ReAct（循环推理）、Plan-and-Solve（先规划后执行）、ToT（树探索）

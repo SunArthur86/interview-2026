@@ -109,6 +109,10 @@ flowchart TD
     CUDA --> Base[SM/Warp/Memory Coalescing]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_zp-infra-012.svg" alt="【智谱面经】大模型 Infra 岗位怎么准备？必看资料有哪些？面试考察重点是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 推理优化：KV Cache计算显存，PagedAttention解决碎片，量化(W4A16/W8A8)提速

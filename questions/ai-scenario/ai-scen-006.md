@@ -122,6 +122,10 @@ flowchart TD
     H --> I[输出Top-5结果送给LLM]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-006.svg" alt="如何设计RAG系统的混合检索方案？结合BM25关键词检索和Dense向量检索的优势。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - BM25负责精确匹配（ID/错误码），Dense负责语义理解（同义词/改写）

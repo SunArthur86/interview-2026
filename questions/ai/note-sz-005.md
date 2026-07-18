@@ -175,6 +175,10 @@ graph TD
     E --> E1["NTILE / CUME_DIST<br/>分桶与累计分布"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sz-005.svg" alt="【神州专车面经】开窗函数用过哪些？举个实际场景 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 语法记忆：函数() OVER (PARTITION BY 分组 ORDER BY 排序 ROWS BETWEEN 范围)

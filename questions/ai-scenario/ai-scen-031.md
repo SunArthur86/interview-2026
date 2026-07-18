@@ -126,6 +126,10 @@ flowchart TD
     I -.-> J["WORM存储介质<br/>(日志防篡改)"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-031.svg" alt="如何设计AI审计与合规系统？记录AI系统的完整决策链路，满足监管要求。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 审计数据：记录完整Prompt、工具调用链、Token消耗、引用来源。

@@ -97,6 +97,10 @@ flowchart LR
     B --> C["复杂度代价<br/>O(N²·d)"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-001.svg" alt="Transformer中的Self-Attention机制是什么?为什么比RNN更高效 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定义：序列中每个位置直接关注所有其他位置，计算加权求和。

@@ -114,6 +114,10 @@ class KVCache:
 3. **FlashAttention 对 KV Cache 有影响吗？**
    - FlashAttention 优化的是计算过程（减少 HBM 访问），不改变 KV Cache 的存储机制，但通常与其配套使用。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_ai-harness-s005.svg" alt="LLM中的KV Cache如何优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心认知：KV Cache是LLM推理显存大头（占比超80%），优化的本质是省显存提并发。

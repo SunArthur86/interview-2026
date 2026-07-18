@@ -223,6 +223,10 @@ flowchart TD
     D --> K
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-by-004.svg" alt="【字节面经】手撕：不大于 n 的最大值 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心策略：贪心+回溯，从高位到低位尽量填能填的最大数字

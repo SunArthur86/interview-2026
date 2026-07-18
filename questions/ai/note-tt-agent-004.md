@@ -202,6 +202,10 @@ async def _fallback(self, intent, plan, failed_step):
 3. **状态机优势**：可观测（每步有明确状态）、可恢复（崩溃后可从断点继续）、可审计（完整执行日志）
 4. **成本控制**：Repair只改有问题的步骤而非全部重做，Token消耗降低60%+
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tt-agent-004.svg" alt="简述Agent的Planner-Executor-Reflector闭环实现，工程如何用状态机管控？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 口诀法：规划Planner、执行Executor、反思Reflector构成核心闭环状态机

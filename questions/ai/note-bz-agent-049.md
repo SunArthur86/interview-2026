@@ -208,6 +208,10 @@ def evaluate_recall(test_cases):
 2. **混合检索是关键**：向量+BM25 互补，能覆盖单一方法的盲区
 3. **量化评估**：用 recall@k 指标衡量，而非凭感觉
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-049.svg" alt="如何提升 RAG 的检索召回率？（全链路优化） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 全链路四层优化：索引层、查询层、检索层、后处理层层层递进。

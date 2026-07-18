@@ -210,6 +210,10 @@ class CustomBenchmark:
 3. **局限**: Benchmark可能被针对性优化(刷分)，真实场景分布可能偏离测试集
 4. **实践**: 自建领域评估集 > 通用Benchmark，持续更新测试用例"
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd2-007.svg" alt="UTBench等Benchmark如何衡量模型生成效果？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Benchmark分类记三点：基础能力(MMLU/HumanEval)、Agent能力(GAIA/ToolBench)、安全对齐。

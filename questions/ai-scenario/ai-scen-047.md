@@ -136,6 +136,10 @@ flowchart TD
     I -.->|反馈优化| D1
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-047.svg" alt="如何设计一个AI医疗辅助诊断系统？支持医学影像分析、病历理解、辅助诊断建议。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心约束：极高准确性、可解释性、合规认证(NMPA/FDA)；AI仅辅助，医生做决策。

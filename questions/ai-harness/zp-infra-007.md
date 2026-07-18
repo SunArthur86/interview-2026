@@ -103,6 +103,10 @@ flowchart TD
     V3 --> Peak[接近理论峰值]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_zp-infra-007.svg" alt="【智谱Infra面经】FlashAttention 的核心原理是什么？v1/v2/v3 各有什么改进？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：Tiling分块计算+Online Softmax，避免读写HBM，将显存从O(N²)降至O(N)

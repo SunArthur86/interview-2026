@@ -214,6 +214,10 @@ flowchart TD
     style B3 fill:#9f9,stroke:#333,stroke-width:2px
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-jc-005.svg" alt="【阶跃星辰/字节面经】用 RL 训练 MoE 架构容易遇到哪些问题？GSPO 相比 GRPO 做了哪些优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - RL训MoE痛点：RL梯度扰动离散路由，加剧负载不均和路由震荡

@@ -14,12 +14,29 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="200" width="166" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="123" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">无锁状态</text>
+<text x="123" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">new</text>
+<circle cx="58" cy="218" r="13" fill="#4CAF50"/>
+<text x="58" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">1</text>
+<rect x="224" y="200" width="166" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="308" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">偏向锁</text>
+<text x="308" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">单线程访问</text>
+<circle cx="242.5" cy="218" r="13" fill="#2196F3"/>
+<text x="242.5" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">2</text>
+<rect x="409" y="200" width="166" height="90" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="492" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">轻量级锁</text>
+<text x="492" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">CAS 自旋</text>
+<text x="492" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">多线程交替</text>
+<circle cx="427.0" cy="218" r="13" fill="#FF9800"/>
+<text x="427.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">3</text>
+<rect x="594" y="200" width="166" height="90" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="677" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">重量级锁</text>
+<text x="677" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">OS Mutex</text>
+<text x="677" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">竞争激烈</text>
+<circle cx="611.5" cy="218" r="13" fill="#f44336"/>
+<text x="611.5" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text>
+<line x1="206" y1="245" x2="224" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="391" y1="245" x2="409" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="576" y1="245" x2="594" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

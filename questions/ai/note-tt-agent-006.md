@@ -141,6 +141,10 @@ def measure_stiffness(response: str, rag_context: str) -> float:
 3. **A/B测试**：对比"纯RAG模式"vs"RAG+个性化Prompt"的回复满意度差异
 4. **安全兜底**：当用户当前会话信息明显异常（如预算=0）时，不盲目遵循而是确认
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tt-agent-006.svg" alt="用户长期画像和当前会话信息冲突时，系统怎么处理？如何防止RAG内容导致模型回复僵硬？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 对比句：长期画像负责泛化补充，当前会话信息发生语义冲突时绝对优先

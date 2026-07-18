@@ -158,6 +158,10 @@ def table_to_markdown(table):
 3. **超大表格拆分**: 超过模型窗口的表格按行拆分，每段保留表头
 4. **版本管理**: PDF更新时增量处理，只重新解析变更页面
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ai50-001.svg" alt="工业PDF跨页大表格的切片处理策略 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心流水线：检测表格区域、跨页表格合并、切片豁免保护。

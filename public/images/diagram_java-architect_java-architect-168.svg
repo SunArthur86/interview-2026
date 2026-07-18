@@ -14,12 +14,33 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="240" y="116" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="104" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">三维拆单：商家维度（</text>
+<text x="400" y="122" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">不同 seller）、仓库</text>
+<text x="400" y="140" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">维度（不同仓库）、属</text>
+<text x="400" y="158" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">性维度（冷链/大件/危</text>
+<text x="400" y="176" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">险品）</text>
+<rect x="240" y="194" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="400" y="182" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">路由策略：就近原则（</text>
+<text x="400" y="200" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">距离最近的有货仓）、</text>
+<text x="400" y="218" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">成本最优（运费最低）</text>
+<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">、时效优先（最快到达</text>
+<text x="400" y="254" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">）</text>
+<rect x="240" y="272" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="269" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">拆单时机：下单后立即</text>
+<text x="400" y="287" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">拆（同步）或支付后拆</text>
+<text x="400" y="305" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">（异步，未支付不拆省</text>
+<text x="400" y="323" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">资源）</text>
+<rect x="240" y="350" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="356" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">合单：同一收货人+同</text>
+<text x="400" y="374" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">时段+同仓库的多个订</text>
+<text x="400" y="392" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">单合并发货省运费</text>
+<rect x="240" y="428" width="320" height="48" rx="8" fill="#FFFFFF" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="434" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">子单独立履约：每个子</text>
+<text x="400" y="452" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">单独立出库/配送/签收</text>
+<text x="400" y="470" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">，独立售后</text>
+<line x1="400" y1="164" x2="400" y2="194" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="242" x2="400" y2="272" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="320" x2="400" y2="350" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="398" x2="400" y2="428" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

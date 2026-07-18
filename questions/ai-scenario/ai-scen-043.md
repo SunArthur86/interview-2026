@@ -131,6 +131,10 @@ completion = llm.generate(build_fim_prompt(prefix, suffix))
 3. **长文本处理**：除了RAG，还有哪些Context压缩技术（如Summary、RoPE scaling）。
 4. **安全过滤**
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-043.svg" alt="如何设计一个AI代码助手（类似GitHub Copilot）？支持代码补全、生成、Bug修复。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 架构：上下文构建(跨文件/RAG) → 代码生成(FIM/Chat) → 质量检查。

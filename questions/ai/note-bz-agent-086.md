@@ -200,6 +200,10 @@ class TenantPerformanceIsolation:
 2. **分级隔离**：按租户重要度选不同级别——务实（非一刀切）
 3. **记忆也要隔离**：Agent 场景的记忆库必须 tenant_id+user_id 双重过滤
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-086.svg" alt="对话系统的多租户隔离方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 多租户四维隔离：数据、资源、安全、性能必须相互独立互不影响

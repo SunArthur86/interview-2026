@@ -105,6 +105,10 @@ Answer:"""
     return prompt
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-049.svg" alt="为什么LLM存在「Lost in the Middle」问题?如何缓解 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 现象：U型曲线，模型易忽略长上下文中间信息。

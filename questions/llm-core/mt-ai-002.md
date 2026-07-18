@@ -105,6 +105,10 @@ flowchart TD
     G --> I[计算高效 可并行]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_mt-ai-002.svg" alt="【美团面经】说一说 RoPE 的原理，为什么现在 RoPE 更受欢迎？还了解其他位置编码吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：通过旋转矩阵将绝对位置作用于 Q/K，相乘后内积自然包含相对位置信息。

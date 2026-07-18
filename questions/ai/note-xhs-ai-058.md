@@ -335,3 +335,7 @@ public class ToolResultSanitizer {
 | 0:50 | Prompt示意图 | "Prompt——Prompt注入分直接注入（用户输入恶意指令）和间接注入（文档/网页中嵌入恶意指令）" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：间接注入（文档中嵌入恶意指令）怎么防范？比直接注入更难检测？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-xhs-ai-058.svg" alt="【拼多多二面】AI Agent调用外部接口时，如何防止被恶意Prompt诱导执行危险操作？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

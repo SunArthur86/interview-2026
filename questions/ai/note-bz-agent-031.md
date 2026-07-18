@@ -175,6 +175,10 @@ flowchart TD
     E -->|"否"| U
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-031.svg" alt="Agent 怎么选工具？如何确保意图决策正确、选中合适工具？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心结论：工具选不准，90%是因为工具描述（能力+触发+反例）写得模糊不清

@@ -187,6 +187,10 @@ flowchart TD
     J -->|"*p = *q"| L["改变原地址存储的值<br/>指向保持不变"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-jc-008.svg" alt="【阶跃星辰面经】指针的定义是什么？指针本身占用多少字节？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定义：指针本身是个变量，其存储的值是另一个变量的内存地址

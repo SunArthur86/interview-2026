@@ -198,6 +198,10 @@ class AgentController:
 □ A/B Test: 新策略灰度对比
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ai50-011.svg" alt="没有Agent Harness大模型会遇到什么瓶颈？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心痛点：无Harness的Agent面临不可调试、不可复现、不可控三大黑洞

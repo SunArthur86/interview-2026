@@ -14,59 +14,41 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="40" y="200" width="87" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="84" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">SqlSession</text>
-<text x="84" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Factory</text>
-<text x="84" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">build(xml/</text>
-<text x="84" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">注解)</text>
-<circle cx="58" cy="218" r="13" fill="#2196F3"/>
-<text x="58" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">1</text>
-<rect x="145" y="200" width="87" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
-<text x="189" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">openSessio</text>
-<text x="189" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">n()</text>
-<text x="189" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">获取 SqlSe</text>
-<text x="189" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ssion</text>
-<circle cx="163.42857142857144" cy="218" r="13" fill="#4CAF50"/>
-<text x="163.42857142857144" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">2</text>
-<rect x="251" y="200" width="87" height="90" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="295" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">getMapper(</text>
-<text x="295" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">)</text>
-<text x="295" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">动态代理 J</text>
-<text x="295" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">DK</text>
-<circle cx="268.8571428571429" cy="218" r="13" fill="#FF9800"/>
-<text x="268.8571428571429" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">3</text>
-<rect x="356" y="200" width="87" height="90" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
-<text x="400" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">MapperProx</text>
-<text x="400" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">y.invoke()</text>
-<text x="400" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">→ SqlSess</text>
-<text x="400" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ion</text>
-<circle cx="374.28571428571433" cy="218" r="13" fill="#9C27B0"/>
-<text x="374.28571428571433" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text>
-<rect x="462" y="200" width="87" height="90" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
-<text x="505" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Executor </text>
-<text x="505" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">执行</text>
-<text x="505" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(Batch/Reu</text>
-<text x="505" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">se/Simple)</text>
-<circle cx="479.7142857142858" cy="218" r="13" fill="#f44336"/>
-<text x="479.7142857142858" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text>
-<rect x="567" y="200" width="87" height="90" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
-<text x="611" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">StatementH</text>
-<text x="611" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">andler</text>
-<text x="611" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理 SQL </text>
-<text x="611" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">参数</text>
-<circle cx="585.1428571428572" cy="218" r="13" fill="#607D8B"/>
-<text x="585.1428571428572" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">6</text>
-<rect x="673" y="200" width="87" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="716" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ResultSetH</text>
-<text x="716" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">andler</text>
-<text x="716" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">映射结果集</text>
-<text x="716" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600"> → POJO</text>
-<circle cx="690.5714285714287" cy="218" r="13" fill="#2196F3"/>
-<text x="690.5714285714287" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">7</text>
-<line x1="127" y1="245" x2="145" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="233" y1="245" x2="251" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="338" y1="245" x2="356" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="444" y1="245" x2="462" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="549" y1="245" x2="567" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="655" y1="245" x2="673" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="300" y="170" width="200" height="60" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="184" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">目标方法</text>
+<text x="400" y="200" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">UserService.ad</text>
+<text x="400" y="216" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">dUser()</text>
+<rect x="60" y="290" width="170" height="70" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="145" y="318" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@Before</text>
+<text x="145" y="332" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">前置通知</text>
+<line x1="145" y1="360" x2="400" y2="232" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="230" y="290" width="170" height="70" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="315" y="318" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@Around</text>
+<text x="315" y="332" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">环绕通知</text>
+<line x1="315" y1="360" x2="400" y2="232" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="400" y="290" width="170" height="70" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="485" y="311" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@AfterReturnin</text>
+<text x="485" y="325" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">g</text>
+<text x="485" y="339" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">返回通知</text>
+<line x1="485" y1="360" x2="400" y2="232" stroke="#FF9800" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="570" y="290" width="170" height="70" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="655" y="318" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@AfterThrowing</text>
+<text x="655" y="332" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">异常通知</text>
+<line x1="655" y1="360" x2="400" y2="232" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="60" y="390" width="170" height="70" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="145" y="418" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@After</text>
+<text x="145" y="432" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">后置通知(终)</text>
+<line x1="145" y1="460" x2="400" y2="232" stroke="#607D8B" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="60" y="390" width="680" height="110" rx="10" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.5"/>
+<text x="80" y="414" font-size="13" fill="#607D8B" font-weight="700">核心术语</text>
+<circle cx="80" cy="432" r="4" fill="#4CAF50"/>
+<text x="92" y="436" font-size="12" fill="#37474F">Aspect 切面 = 通知+切入点</text>
+<circle cx="420" cy="432" r="4" fill="#FF9800"/>
+<text x="432" y="436" font-size="12" fill="#37474F">Pointcut 切入点 = 哪些方法</text>
+<circle cx="80" cy="456" r="4" fill="#9C27B0"/>
+<text x="92" y="460" font-size="12" fill="#37474F">JoinPoint 连接点 = 方法执行点</text>
+<circle cx="420" cy="456" r="4" fill="#f44336"/>
+<text x="432" y="460" font-size="12" fill="#37474F">Weaving 织入 = 编译/类加载/运行期</text>
+<circle cx="80" cy="480" r="4" fill="#2196F3"/>
+<text x="92" y="484" font-size="12" fill="#37474F">底层：JDK 动态代理(接口) / CGLIB(类)</text>
 </svg>

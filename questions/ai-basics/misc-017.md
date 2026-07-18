@@ -107,6 +107,10 @@ flowchart TD
     L --> M[输出高质量训练集]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-017.svg" alt="大模型训练中为什么大量使用合成数据?合成数据有什么风险 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 使用场景：领域数据不足、SFT指令生成、偏好对构造

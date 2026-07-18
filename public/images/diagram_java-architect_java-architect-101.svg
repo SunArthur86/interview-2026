@@ -14,29 +14,45 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="40" y="200" width="166" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
-<text x="123" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">无锁状态</text>
-<text x="123" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">new</text>
-<circle cx="58" cy="218" r="13" fill="#4CAF50"/>
-<text x="58" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">1</text>
-<rect x="224" y="200" width="166" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="308" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">偏向锁</text>
-<text x="308" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">单线程访问</text>
-<circle cx="242.5" cy="218" r="13" fill="#2196F3"/>
-<text x="242.5" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">2</text>
-<rect x="409" y="200" width="166" height="90" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="492" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">轻量级锁</text>
-<text x="492" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">CAS 自旋</text>
-<text x="492" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">多线程交替</text>
-<circle cx="427.0" cy="218" r="13" fill="#FF9800"/>
-<text x="427.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">3</text>
-<rect x="594" y="200" width="166" height="90" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
-<text x="677" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">重量级锁</text>
-<text x="677" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">OS Mutex</text>
-<text x="677" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">竞争激烈</text>
-<circle cx="611.5" cy="218" r="13" fill="#f44336"/>
-<text x="611.5" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text>
-<line x1="206" y1="245" x2="224" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="391" y1="245" x2="409" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="576" y1="245" x2="594" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="60" y="130" width="220" height="160" rx="10" fill="#4CAF5011" stroke="#4CAF50" stroke-width="2"/>
+<text x="170" y="158" font-size="15" fill="#4CAF50" text-anchor="middle" font-weight="700">Metrics 指标</text>
+<text x="170" y="198" font-size="12" fill="#37474F" text-anchor="middle">数值聚合</text>
+<text x="170" y="214" font-size="12" fill="#37474F" text-anchor="middle">QPS/RT/错误率</text>
+<rect x="80" y="240" width="180" height="40" rx="6" fill="#4CAF5022" stroke="#4CAF50"/>
+<text x="170" y="265" font-size="12" fill="#4CAF50" text-anchor="middle" font-weight="600">Prometheus
++ Grafana</text>
+<rect x="290" y="130" width="220" height="160" rx="10" fill="#2196F311" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="158" font-size="15" fill="#2196F3" text-anchor="middle" font-weight="700">Logging 日志</text>
+<text x="400" y="198" font-size="12" fill="#37474F" text-anchor="middle">离散事件</text>
+<text x="400" y="214" font-size="12" fill="#37474F" text-anchor="middle">请求/异常明细</text>
+<rect x="310" y="240" width="180" height="40" rx="6" fill="#2196F322" stroke="#2196F3"/>
+<text x="400" y="265" font-size="12" fill="#2196F3" text-anchor="middle" font-weight="600">ELK
+(ES+Logstash)</text>
+<rect x="520" y="130" width="220" height="160" rx="10" fill="#FF980011" stroke="#FF9800" stroke-width="2"/>
+<text x="630" y="158" font-size="15" fill="#FF9800" text-anchor="middle" font-weight="700">Tracing 链路</text>
+<text x="630" y="198" font-size="12" fill="#37474F" text-anchor="middle">跨服务追踪</text>
+<text x="630" y="214" font-size="12" fill="#37474F" text-anchor="middle">TraceID 串联</text>
+<rect x="540" y="240" width="180" height="40" rx="6" fill="#FF980022" stroke="#FF9800"/>
+<text x="630" y="265" font-size="12" fill="#FF9800" text-anchor="middle" font-weight="600">SkyWalking
++ Zipkin</text>
+<rect x="60" y="320" width="680" height="220" rx="10" fill="#FFFFFF" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="400" y="344" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">协同使用：Metrics 报警 → Tracing 定位 → Logging 查因</text>
+<circle cx="86" cy="366" r="5" fill="#4CAF50"/>
+<text x="100" y="370" font-size="12" fill="#4CAF50" font-weight="700">黄金指标</text>
+<text x="100" y="386" font-size="11" fill="#37474F">延迟 / 流量 / 错误 / 饱和度（USE/RED 法则）</text>
+<circle cx="426" cy="366" r="5" fill="#2196F3"/>
+<text x="440" y="370" font-size="12" fill="#2196F3" font-weight="700">TraceID 注入</text>
+<text x="440" y="386" font-size="11" fill="#37474F">跨服务透传，串联一次完整请求</text>
+<circle cx="86" cy="416" r="5" fill="#FF9800"/>
+<text x="100" y="420" font-size="12" fill="#FF9800" font-weight="700">采样率</text>
+<text x="100" y="436" font-size="11" fill="#37474F">Tracing 1%-10% 采样，避免存储爆炸</text>
+<circle cx="426" cy="416" r="5" fill="#9C27B0"/>
+<text x="440" y="420" font-size="12" fill="#9C27B0" font-weight="700">告警分级</text>
+<text x="440" y="436" font-size="11" fill="#37474F">P0 电话 / P1 钉钉 / P2 邮件</text>
+<circle cx="86" cy="466" r="5" fill="#f44336"/>
+<text x="100" y="470" font-size="12" fill="#f44336" font-weight="700">SLO/SLI</text>
+<text x="100" y="486" font-size="11" fill="#37474F">错误预算驱动迭代</text>
+<circle cx="426" cy="466" r="5" fill="#607D8B"/>
+<text x="440" y="470" font-size="12" fill="#607D8B" font-weight="700">OpenTelemetry</text>
+<text x="440" y="486" font-size="11" fill="#37474F">统一标准协议</text>
 </svg>

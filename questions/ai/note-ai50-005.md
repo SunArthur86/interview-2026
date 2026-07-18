@@ -159,6 +159,10 @@ def semantic_chunk(text, max_chunk_size=512):
 | Markdown | 按标题层级 | 0 |
 | 对话记录 | 按对话轮次 | 5-10% |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ai50-005.svg" alt="文档切片为什么要有Overlap？它主要解决什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 目的：解决硬性切分导致的语义断裂，防止关键信息在切片交界处因缺少上下文而无法被理解。

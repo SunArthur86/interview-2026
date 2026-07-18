@@ -212,6 +212,10 @@ flowchart TD
     I --> J[推动开源生态]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_mt-ai-001.svg" alt="【美团面经】说一下 LLaMA 的结构吧，它在结构和训练上都做了哪些贡献？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 结构改进一：用 Pre-RMSNorm 替代后置 LayerNorm，因为梯度更稳定且计算更省时。

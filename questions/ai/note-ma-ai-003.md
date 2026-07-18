@@ -314,3 +314,7 @@ class MemoryManager:
 | 1:30 | 长期记忆示意图 | "长期记忆——项目知识、用户偏好、历史决策，持久化存储" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：短期记忆和长期记忆如何同步？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ma-ai-003.svg" alt="【后端开发二面】如何设计Agent Memory？长期记忆和短期记忆如何区分？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

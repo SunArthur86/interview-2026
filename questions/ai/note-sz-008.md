@@ -168,6 +168,10 @@ memory_points:
 - **多智能体仿真**：用仿真环境模拟司机行为，离线评估调度策略（避免线上 A/B 成本）
 - **地理围栏优化**：热点区域怎么划分（六边形 H3 / 网格 Geohash），影响预测粒度
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-sz-008.svg" alt="【神州专车面经】设计司机效率平台：帮助分区经理指导司机去热点区域待命 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 分层架构：数据层(实时+离线)支撑预测层，经推荐层匹配，最终在展示层看板闭环

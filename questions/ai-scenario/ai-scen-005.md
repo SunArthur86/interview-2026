@@ -116,6 +116,10 @@ flowchart TD
     D --> F[BM25倒排索引构建]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-005.svg" alt="在RAG系统中如何设计有效的Chunking策略？不同类型的文档应该用什么分块方法？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 固定大小适合通用，语义分块适合代码，递归字符分块兼顾结构与语义

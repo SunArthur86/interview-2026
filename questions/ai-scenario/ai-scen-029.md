@@ -126,6 +126,10 @@ flowchart TD
     G --> H
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-029.svg" alt="如何设计AI系统的PII脱敏与数据安全方案？满足GDPR等隐私法规要求。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 脱敏Pipeline：规则（正则）+ NER（模型）+ LLM（隐式PII），替换为占位符。

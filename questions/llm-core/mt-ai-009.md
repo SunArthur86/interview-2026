@@ -125,6 +125,10 @@ response = client.chat.completions.create(
 | **维护难度** | 无 (直接调 API) | 高 (需运维 KV Cache、显存等) |
 | **中文能力** | 优秀 | **Qwen/GLM 具有本土优势** |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_mt-ai-009.svg" alt="【美团面经】使用过的 AI 基座模型有什么？各自的特点和使用场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 选型决策看四维：能力(模态/推理) vs 成本(API/算力) vs 合规 vs 生态

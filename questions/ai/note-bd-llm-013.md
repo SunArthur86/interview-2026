@@ -373,6 +373,10 @@ flowchart LR
     F --> M[综合排序结果<br/>两路均靠前优先浮出]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-llm-013.svg" alt="【字节面经】稀疏检索和稠密检索的结果如何做融合排序？你了解 RRF 吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 动机：稀疏擅长精确匹配而稠密擅长语义，单检索有盲区需融合。

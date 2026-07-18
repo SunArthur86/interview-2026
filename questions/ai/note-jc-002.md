@@ -170,6 +170,10 @@ flowchart TD
     V -.-> S2
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-jc-002.svg" alt="【阶跃星辰面经】蒙特卡洛模拟与时序差分估计，核心差异在哪里 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 对比核心：MC无偏但方差大，TD有偏（bootstrap）但方差小

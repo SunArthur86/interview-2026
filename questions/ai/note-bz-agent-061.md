@@ -213,6 +213,10 @@ class ProductionRAGAgent:
 2. **LangGraph 是重点**：支持循环/分支/人工节点——这是生产级 Agent 的刚需
 3. **强调可观测**：没有 LangSmith 级别的 Trace，生产 Agent 无法调试
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-061.svg" alt="LangChain 1.2 生产级架构是什么样？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大生产级支柱：LCEL(声明式)、LangGraph(复杂工作流)、LangSmith(监控)、LangServe(部署)

@@ -108,6 +108,10 @@ flowchart TB
     Trade --> Large["大: 上下文完整<br/>检索噪声多"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_sarg-002.svg" alt="RAG的Chunking策略有哪些？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 固定长度：简单但易切断语义，需设置Overlap（10-20%）防止信息丢失

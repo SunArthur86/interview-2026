@@ -263,6 +263,10 @@ react_agent = graph.compile()
 2. **强调"图结构"优势**：可视化/可调试/支持循环分支——比代码 if-else 更清晰
 3. **人工节点是亮点**：interrupt 机制支持 Human-in-the-loop，这是生产刚需
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-064.svg" alt="如何基于 LangGraph 搭建一个 Agent 应用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心三要素：State(状态：流转数据)、Node(节点：执行动作)、Edge(边：流转控制)

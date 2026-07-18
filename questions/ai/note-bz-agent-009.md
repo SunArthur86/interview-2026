@@ -218,6 +218,10 @@ ReAct RAG局限：
 2. **用多跳问答举例**：这是最能体现 ReAct RAG 价值的场景，Naive RAG 做不到
 3. **提"检索即工具"**：把 retrieval 抽象为 tool，自然融入 ReAct 框架，设计优雅
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-009.svg" alt="ReAct RAG Agent 如何实现？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 对比Naive RAG：Naive是固定单次检索，ReAct RAG是动态按需多次检索

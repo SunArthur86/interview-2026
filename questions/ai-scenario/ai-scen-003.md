@@ -104,6 +104,10 @@ def verify_hallucination(answer, context):
                               ┌───────────────┐                            ┌───────────────┐
                               │   输出结果    │                            │  拒绝/降级    │
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-003.svg" alt="如何设计RAG系统的幻觉治理方案？确保生成的回答忠实于检索到的文档。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 预防层：混合检索+Rerank提升召回，设相关性阈值，不足时拒答

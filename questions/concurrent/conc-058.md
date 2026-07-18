@@ -118,6 +118,10 @@ class LockUpgradeDemo {
 | **轻量级锁** | 00 | 线程交替/短暂竞争 | 避免内核切换 (自旋) | 竞争激烈时 CPU 浪费 (自旋空转) |
 | **重量级锁** | 10 | 高并发激烈竞争 | 不浪费 CPU (线程挂起) | 用户态/内核态切换开销大 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-058.svg" alt="Synchronized 反向理解是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 反向推导：早期重量级锁依赖OS阻塞开销大，故需按竞争强度逐级优化

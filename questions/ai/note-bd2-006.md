@@ -245,6 +245,10 @@ def compare_single_vs_multi(test_cases):
 | 需要并行处理 | 多Agent | 同时执行独立子任务 |
 | 需要交叉验证 | 多Agent | 多视角减少错误 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd2-006.svg" alt="多Agent系统的工作流程和效果量化评估 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 评估维度记三层：个体指标(准确率/延迟)、系统指标(通信轮次/冲突率)、经济指标(总成本/ROI)。

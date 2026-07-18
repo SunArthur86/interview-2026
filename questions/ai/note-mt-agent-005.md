@@ -426,6 +426,10 @@ messages = build_full_prompt("1.2.0", {
 
 **答：** 会。研究表明 Prompt 中变量超过 8-10 个时，模型的注意力会分散，关键信息容易被「稀释」。最佳实践：① 按优先级排列（最重要的信息放在 Prompt 开头或结尾）；② 使用清晰的分隔符（`---`、XML 标签）区分不同区块；③ 定期用 LLM-as-Judge 评估各区块的贡献度，剪枝低效变量。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mt-agent-005.svg" alt="【美团面经】提示词模板是怎么构建的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 五要素结构：角色设定、变量化模板、上下文注入、Few-shot、格式约束

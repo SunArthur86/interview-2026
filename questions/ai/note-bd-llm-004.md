@@ -297,6 +297,10 @@ Query 向量
 5. **提及工程实践**：Milvus/Faiss 的参数配置、混合索引策略
 6. **追问准备**：HNSW 的 M/ef 参数调优、IVF 的 nlist/nprobe 选择、PQ 乘积量化原理
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-llm-004.svg" alt="【字节面经】HNSW 和 IVF-Flat 两种向量索引结构各有什么优缺点？在百万量级文档下你会如何选择？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三角权衡：因为绝对精度太慢，所以ANN算法在精度、速度、内存三者间做帕累托取舍

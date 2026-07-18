@@ -88,6 +88,10 @@ asyncio.run(main())
 1. **SOP 作用**：MetaGPT 中的 SOP 是如何实现的？（答：通过定义固定的 Prompt 模板和 Agent 执行顺序，强制每个角色只能输入/输出特定格式文档）。
 2. **成本问题**：如何控制 MetaGPT 的成本？（答：通常通过限制生成内容的长度，或者替换更小的模型给非核心角色）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-012.svg" alt="MetaGPT 适合直接上生产吗 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - MetaGPT 模拟软件公司 SOP，产出标准文档与代码。

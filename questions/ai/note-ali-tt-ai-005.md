@@ -350,3 +350,7 @@ Agent服务降级策略（从轻到重）：
 | 0:50 | 入口侧三板斧示意图 | "入口侧三板斧——限流(令牌桶/漏桶)、负载均衡(Nginx/LB)、削峰(消息队列异步化)" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：令牌桶和漏桶限流的区别？Agent服务适合哪种？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ali-tt-ai-005.svg" alt="【阿里淘天AI二面】Agent服务在电商大促时，流量大且有流量尖刺，如何解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

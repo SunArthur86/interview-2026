@@ -89,6 +89,10 @@ print(results["results"])
 └───────────────┘       └───────────────┘       └───────────────┘
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-042.svg" alt="大模型的主流评估基准有哪些?各自评估什么能力?有什么局限性 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 知识基准：MMLU（多学科）、C-EVAL（中文），考察广度，多为选择题

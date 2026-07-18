@@ -102,6 +102,10 @@ GQA (分组共享 - G=2):
 2. **性能瓶颈**：为什么减少 KV Cache 能提速？(解释 Compute-bound vs Memory-bound，大模型推理通常是 Memory-bound，减少访存量比减少计算量更关键)。
 3. **分组策略选择**：GQA 的分组数量 G 如何选取？(通常根据模型大小和 KV Cache 压缩率需求折中，如 40B 模型常用 G=8)。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-005.svg" alt="MHA、MQA、GQA三者有什么区别?为什么大模型倾向用GQA - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - MHA各头独立K/V，MQA全头共享一对K/V，GQA分组共享K/V

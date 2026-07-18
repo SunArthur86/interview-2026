@@ -127,6 +127,10 @@ flowchart TD
     end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_ai-basics-s003.svg" alt="什么是过拟合？如何防止？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定义：训练集表现好，测试集表现差，本质是学到了噪声而非规律。

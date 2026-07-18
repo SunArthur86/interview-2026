@@ -304,6 +304,10 @@ class FeedbackCollector {
 - **没有基线数据**：新上线的产物类型没有历史数据做对比基线
 - **反馈入口太重**：弹大表单让用户填，用户懒得填——应该一键👍/👎就够了
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-022.svg" alt="【月之暗面面经】如果桌面产物质量忽高忽低，前端能做哪些护栏？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 五层质量护栏：前置校验、AI自评、完整性检查、基线对比、用户反馈闭环

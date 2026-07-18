@@ -119,6 +119,10 @@ final_scores = alpha * bm25_norm + (1 - alpha) * vector_norm
 3. **混合检索在哪些场景下效果提升最明显？**
    - 专业术语多（如医疗、法律）、用户查询包含缩写、或需要同时处理语义和拼写错误的场景。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-027.svg" alt="什么是混合检索(Hybrid Search)?BM25和向量检索如何融合 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 混合检索=BM25(精确匹配)+向量(语义匹配)，互补短板。

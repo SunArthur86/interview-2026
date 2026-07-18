@@ -206,6 +206,10 @@ def dpo_loss(policy, ref, chosen_ids, rejected_ids, beta=0.1):
 
 **面试加分点**：提到DPO的β参数控制偏离参考模型的程度；提到IPO（Identity Preference Optimization）解决DPO过拟合问题；提到KTO（Kahneman-Tversky Optimization）只需要二元反馈（好/坏）而非偏好对；提到RLHF在复杂多轮对话中仍有优势。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-004.svg" alt="详细说明SFT、RLHF和DPO三种后训练方法的核心流程、适用场景和优缺点 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - SFT打基础：指令微调学格式，算交叉熵，是所有后训练必经的第一步。

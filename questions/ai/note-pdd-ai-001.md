@@ -248,3 +248,7 @@ class LLMHandler:
 | 1:30 | 小模型示意图 | "小模型——BERT/T5级别，CPU可推理，适合意图识别和分类" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：规则引擎如何维护？政策变更怎么办？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-pdd-ai-001.svg" alt="【拼多多 AI大模型开发】大模型 vs 小模型 vs 规则引擎的选型场景 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

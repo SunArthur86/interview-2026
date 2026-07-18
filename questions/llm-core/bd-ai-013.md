@@ -100,6 +100,10 @@ Query + [Docs]                 Query
 2. **数据配比**：做领域微调时，通用指令数据和领域数据的比例应该是多少？（通常 1:1 到 1:5，视任务难度而定，防止过拟合领域数据导致通用能力崩塌）
 3. **幻觉率对比**：RAG和微调谁的幻觉率更低？（RAG在事实准确性上通常优于微调，因为微调本质上还是在“背诵”，可能记错细节）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_bd-ai-013.svg" alt="【字节面经】微调（Fine-tuning）和RAG的使用场景有什么区别？什么场景必须微调？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话：学新知识用RAG(外挂)，学新能力/风格用微调(内化)

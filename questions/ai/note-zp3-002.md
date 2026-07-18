@@ -163,6 +163,10 @@ DPO数据量经验:
   - 质量远比数量重要
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-zp3-002.svg" alt="为什么做了 SFT 还要做 DPO？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - SFT天花板：只学模仿标准答案，无法表达A比B更好的偏好信息

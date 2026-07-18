@@ -90,6 +90,10 @@ memory_points:
 2. **追问**：如果要设计一个“通用型”Agent 的 System Prompt，如何平衡“通用性”和“特定任务的表现力”？
 3. **追问**：你提到“Let's think step by step”，在什么场景下这种 CoT（思维链）提示反而会降低模型性能？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-036.svg" alt="System Prompt设计的最佳实践是什么?如何设计有效的角色和约束 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 设计框架CREATE：Context背景、Role职责、Examples示例、Rules规则

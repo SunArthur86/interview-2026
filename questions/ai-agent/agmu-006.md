@@ -97,6 +97,10 @@ Blackboard Mode:           Message Queue:
 1. **误区：认为黑板模式就是共享数据库**。黑板模式强调的是“知识源对中心状态变化的被动响应”，而不仅仅是存储数据，缺少控制逻辑的共享数据库不是黑板模式。
 2. **误区：忽视读写分离的复杂性**。黑板模式中，专家既要读状态又要写状态，容易产生竞态条件，不同于 MQ 的单向流动，工程上处理难度更大。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-agent_agmu-006.svg" alt="黑板模式和消息队列有什么相似与不同 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心区别：黑板是共享状态（读写最新快照），MQ 是事件流（追加消费）。

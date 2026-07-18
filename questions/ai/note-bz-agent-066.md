@@ -305,6 +305,10 @@ result = await app.execute({"messages": [{"role": "user", "content": "..."}]})
 2. **讲清难点**：并行调度/状态一致性/中断恢复——这些是真做了才会遇到的
 3. **务实建议**：除非特殊需求，否则用 LangGraph 更划算——不自嗨
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-066.svg" alt="如何实现一个对标 LangGraph 的 AI Agents 框架？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心架构五模块：API接口层、图定义层、执行引擎、状态管理与持久化可观测

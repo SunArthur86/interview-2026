@@ -83,6 +83,10 @@ memory_points:
 3. **多线程与多进程的适用场景？**
    需要频繁通信、数据共享、低延迟切换选多线程；需要高隔离性、高容错性、利用多核并行计算选多进程。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-097.svg" alt="什么是线程基础？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 基本定义：进程是资源分配的基本单位，线程是CPU调度的基本单位（轻量级进程）

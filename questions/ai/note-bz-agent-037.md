@@ -185,6 +185,10 @@ class ProgressiveDisclosureSystem:
 2. **核心是"匹配需求"**：不是藏信息，而是给当前最需要的粒度
 3. **解决规模化问题**：工具/记忆越多，渐进式披露越重要——这是 Agent 规模化的关键
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-037.svg" alt="什么是渐进式披露（Progressive Disclosure）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心思想：按需给信息，避免一次性全塞导致上下文爆炸和关键信息被稀释

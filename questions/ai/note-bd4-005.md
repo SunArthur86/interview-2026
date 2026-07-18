@@ -170,6 +170,10 @@ class SemanticLoopDetector:
 - **Checkpoint恢复**：存储每步状态，异常后可从最后正常点恢复
 - **A/B对比**：监控循环检测的误杀率，避免拦截正常的复杂任务
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd4-005.svg" alt="Agent 出现无限循环或规划混乱怎么防？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 防御口诀：事前Prompt防漂移，事中硬限防死循环，事后语义防重复

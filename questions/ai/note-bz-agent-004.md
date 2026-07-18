@@ -220,6 +220,10 @@ metrics = {
 2. **分层选模型**：体现成本意识——简单任务用小模型，复杂任务才上大模型
 3. **稳定性是最大挑战**：Agent 是概率系统，要靠工程（重试/降级/兜底/监控）保证可用性
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-004.svg" alt="如何从 0 搭建一个 AI Agent？整体流程是怎样的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 最小MVP：1个LLM大脑 + 1个工具 + 1个ReAct循环，50行代码即可跑通

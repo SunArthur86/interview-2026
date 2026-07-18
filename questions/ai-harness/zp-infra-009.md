@@ -97,6 +97,10 @@ flowchart TD
     SGLang --> Prefix[自动共享前缀]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_zp-infra-009.svg" alt="【智谱Infra面经】vLLM 和 SGLang 有什么区别？各自的优势和适用场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - vLLM核心：PagedAttention分页管理KV，解决显存碎片，生态成熟适合通用推理

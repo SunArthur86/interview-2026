@@ -230,6 +230,10 @@ analysis = blackboard.read("research_data")  # writer读取使用
 2. **不止说优势**：要承认多 Agent 成本高、调试难，简单任务单 Agent 更好
 3. **提通信是关键**：Agent 间如何通信（消息总线/黑板）是架构设计的核心决策
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-015.svg" alt="如何设计一个多 Agent 协作系统架构？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 单Agent瓶颈：上下文有限、角色混淆、无法并行，多Agent实现专业化

@@ -14,12 +14,19 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="200" y1="140" x2="200" y2="450" stroke="#2196F3" stroke-width="2" stroke-dasharray="4,3"/>
+<line x1="600" y1="140" x2="600" y2="450" stroke="#FF9800" stroke-width="2" stroke-dasharray="4,3"/>
+<rect x="130" y="116" width="140" height="38" rx="8" fill="#2196F3"/>
+<text x="200" y="140" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">主动方</text>
+<rect x="530" y="116" width="140" height="38" rx="8" fill="#FF9800"/>
+<text x="600" y="140" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">被动方</text>
+<line x1="200" y1="190" x2="600" y2="190" stroke="#f44336" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="182" font-size="12" fill="#f44336" text-anchor="middle" font-weight="700">FIN=1, seq=u</text>
+<line x1="600" y1="260" x2="200" y2="260" stroke="#FF9800" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="252" font-size="12" fill="#FF9800" text-anchor="middle" font-weight="700">ACK=1, ack=u+1  (被动方进入 CLOSE_WAIT)</text>
+<line x1="600" y1="340" x2="200" y2="340" stroke="#9C27B0" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="332" font-size="12" fill="#9C27B0" text-anchor="middle" font-weight="700">FIN=1, seq=w  (被动方处理完毕)</text>
+<line x1="200" y1="410" x2="600" y2="410" stroke="#2196F3" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="402" font-size="12" fill="#2196F3" text-anchor="middle" font-weight="700">ACK=1, ack=w+1  (TIME_WAIT 2MSL 后关闭)</text>
+<text x="400" y="470" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">四次挥手 = 全双工关闭，TIME_WAIT 防止报文滞留</text>
 </svg>

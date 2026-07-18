@@ -173,6 +173,10 @@ def handle_conflict(new_memory: dict, conflict_memory: dict) -> str:
 3. **冲突日志**：记录所有冲突及解决方式，用于后续优化冲突检测阈值
 4. **优雅降级**：如果主动澄清过于频繁会打扰用户，设置澄清频率上限（如每5轮最多1次）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-fq-003.svg" alt="多轮对话中，如果不同轮次的记忆发生冲突，你如何处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四层解决策略：时间戳优先、置信度加权、版本化控制、主动向用户澄清

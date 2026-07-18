@@ -331,3 +331,7 @@ class AuditTrail:
 | 1:30 | 代码层面校验示意图 | "代码层面校验——TypeScript编译、ESLint、单元测试、E2E" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：Task Lock如何实现？锁的粒度是什么？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ma-ai-005.svg" alt="【后端开发二面】多个Agent并行开发如何保证代码一致性？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

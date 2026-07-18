@@ -119,6 +119,10 @@ def check_expert_balance(local_expert_counts):
 - **StepFun万亿MoE**：384专家，8+1共享架构，大规模并行下对通信库优化极深。
 - **MiniMax**：32专家，结合 ETP (Expert Tensor Parallelism) 降低通信量。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_xhs-infra-010.svg" alt="MoE（Mixture of Experts）训练中All-to-All通信瓶颈如何优化？专家负载不均衡怎么解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 通信瓶颈：All-to-All易拥塞。优化用EP+TP混合减少跨域，通信计算重叠，EDP分担负载。

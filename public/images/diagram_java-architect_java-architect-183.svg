@@ -6,20 +6,43 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：多租户 SaaS 的核心是&quot;tenant_id 隔离 + 套餐配额 + 限流降级&quot;。所有表带 tenant_id 字段实…</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<rect x="240" y="116" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
-<text x="400" y="144" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输入</text>
-<rect x="240" y="208" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-<text x="400" y="236" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理</text>
-<rect x="240" y="300" width="320" height="56" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
-<text x="400" y="328" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">输出</text>
-<line x1="400" y1="172" x2="400" y2="208" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="400" y1="264" x2="400" y2="300" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="114" width="229" height="44" rx="8" fill="#2196F3"/>
+<text x="155" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">独立数据库
+DB-per-Tenant</text>
+<rect x="285" y="114" width="229" height="44" rx="8" fill="#FF9800"/>
+<text x="400" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">独立 Schema
+Schema-per-Tenant</text>
+<rect x="531" y="114" width="229" height="44" rx="8" fill="#4CAF50"/>
+<text x="645" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">共享 Schema
+Shared-DB + tenant_id</text>
+<rect x="40" y="174" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">隔离最强</text>
+<rect x="285" y="174" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">中间态</text>
+<rect x="531" y="174" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">成本最低</text>
+<rect x="40" y="234" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">成本最高</text>
+<rect x="285" y="234" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">同 DB 不同 Schema</text>
+<rect x="531" y="234" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">WHERE tenant_id=?</text>
+<rect x="40" y="294" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">大客户/金融</text>
+<rect x="285" y="294" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">中等隔离</text>
+<rect x="531" y="294" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">逻辑隔离</text>
+<rect x="40" y="354" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">独立 DB 实例</text>
+<rect x="285" y="354" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">中等成本</text>
+<rect x="531" y="354" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">小客户</text>
+<rect x="40" y="414" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">合规友好</text>
+<rect x="285" y="414" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">中型客户</text>
+<rect x="531" y="414" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">邻居噪音风险</text>
 </svg>

@@ -403,6 +403,10 @@ vLLM在通用场景持平或略优（更成熟的kernel优化）
 - **TensorRT-LLM**：NVIDIA的推理框架，与硬件深度优化
 - **Speculative Decoding**：推测解码，用小模型加速大模型推理，vLLM/SGLang都支持
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bg-009.svg" alt="【八股总结】vLLM 和 SGLang 的核心原理与适用场景 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - vLLM核心：PagedAttention将显存按页分配，彻底消除内存碎片提升至95%

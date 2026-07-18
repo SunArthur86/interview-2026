@@ -207,6 +207,10 @@ flowchart LR
     end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-012.svg" alt="【某讯面经】Milvus/FAISS/Chroma 线上选型差异，大规模生产用哪个？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定位对比：FAISS是单机算法库，Chroma是轻量数据库，Milvus是分布式云原生数据库

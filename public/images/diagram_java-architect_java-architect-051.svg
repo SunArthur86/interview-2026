@@ -14,53 +14,48 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
 </marker>
 </defs>
-<rect x="330" y="120" width="140" height="50" rx="8" fill="#607D8B" stroke="#f44336" stroke-width="2"/>
-<text x="400" y="145" font-size="15" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">Throwable</text>
-<rect x="140" y="200" width="160" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
-<text x="220" y="217" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Error</text>
-<text x="220" y="233" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(JVM 错误)</text>
-<rect x="500" y="200" width="160" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="580" y="225" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Exception</text>
-<line x1="380" y1="170" x2="220" y2="200" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="420" y1="170" x2="580" y2="200" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="50" y="280" width="90" height="50" rx="8" fill="#f4433611" stroke="#f44336" stroke-width="2"/>
-<text x="95" y="300" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">OutOfMemoryErr</text>
-<text x="95" y="310" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">or</text>
-<line x1="220" y1="250" x2="95" y2="280" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
-<rect x="150" y="280" width="90" height="50" rx="8" fill="#f4433611" stroke="#f44336" stroke-width="2"/>
-<text x="195" y="300" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">StackOverflowE</text>
-<text x="195" y="310" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">rror</text>
-<line x1="220" y1="250" x2="195" y2="280" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
-<rect x="250" y="280" width="90" height="50" rx="8" fill="#f4433611" stroke="#f44336" stroke-width="2"/>
-<text x="295" y="300" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">NoClassDefFoun</text>
-<text x="295" y="310" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">dError</text>
-<line x1="220" y1="250" x2="295" y2="280" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
-<rect x="380" y="280" width="180" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
-<text x="470" y="283" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">RuntimeExcepti</text>
-<text x="470" y="298" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">on</text>
-<text x="470" y="312" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(运行期 非受检</text>
-<text x="470" y="327" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">)</text>
-<rect x="600" y="280" width="160" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
-<text x="680" y="298" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">IOException 等</text>
-<text x="680" y="312" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(编译期 受检)</text>
-<line x1="580" y1="250" x2="470" y2="280" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
-<line x1="620" y1="250" x2="680" y2="280" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="60" y="360" width="165" height="44" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
-<text x="142" y="376" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">NullPointerExc</text>
-<text x="142" y="388" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">eption</text>
-<line x1="470" y1="330" x2="142" y2="360" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
-<rect x="235" y="360" width="165" height="44" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
-<text x="318" y="376" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ClassCastExcep</text>
-<text x="318" y="388" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">tion</text>
-<line x1="470" y1="330" x2="317" y2="360" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
-<rect x="410" y="360" width="165" height="44" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
-<text x="492" y="376" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ArrayIndexOutO</text>
-<text x="492" y="388" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">fBounds</text>
-<line x1="470" y1="330" x2="492" y2="360" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
-<rect x="585" y="360" width="165" height="44" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
-<text x="668" y="376" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ArithmeticExce</text>
-<text x="668" y="388" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ption</text>
-<line x1="470" y1="330" x2="667" y2="360" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
-<text x="400" y="440" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">Checked 必须捕获/声明 throws；Unchecked 可不处理</text>
-<text x="400" y="468" font-size="12" fill="#607D8B" text-anchor="middle">finally 一定执行(System.exit 前)；try-with-resources 自动关闭</text>
+<rect x="50" y="170" width="110" height="60" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="105" y="193" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">客户端</text>
+<text x="105" y="207" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Web/App</text>
+<line x1="160" y1="200" x2="220" y2="200" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="220" y="140" width="360" height="90" rx="8" fill="#2196F3" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="160" font-size="14" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">API Gateway</text>
+<text x="400" y="177" font-size="14" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">(Spring Cloud </text>
+<text x="400" y="193" font-size="14" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">Gateway / Kong</text>
+<text x="400" y="210" font-size="14" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600"> / Nginx)</text>
+<rect x="50" y="260" width="160" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="130" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">路由 Routing</text>
+<text x="130" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">path/host 转发</text>
+<rect x="220" y="260" width="160" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="300" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">认证 Auth</text>
+<text x="300" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">JWT/OAuth2</text>
+<rect x="390" y="260" width="160" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="470" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">限流 RateLimit</text>
+<text x="470" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">令牌桶</text>
+<rect x="560" y="260" width="160" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="640" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">熔断 Circuit</text>
+<text x="640" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Sentinel</text>
+<rect x="50" y="330" width="160" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="130" y="349" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">日志监控</text>
+<text x="130" y="361" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">access log</text>
+<rect x="220" y="330" width="160" height="50" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="300" y="349" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">协议转换</text>
+<text x="300" y="361" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">HTTP→RPC</text>
+<rect x="390" y="330" width="160" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="470" y="349" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">灰度发布</text>
+<text x="470" y="361" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Header 路由</text>
+<rect x="560" y="330" width="160" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="640" y="349" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">负载均衡</text>
+<text x="640" y="361" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Ribbon/LB</text>
+<rect x="240" y="410" width="110" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="295" y="435" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">用户服务</text>
+<line x1="400" y1="230" x2="295" y2="410" stroke="#FF9800" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="370" y="410" width="110" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="425" y="435" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">订单服务</text>
+<line x1="400" y1="230" x2="425" y2="410" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="500" y="410" width="110" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="555" y="435" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">商品服务</text>
+<line x1="400" y1="230" x2="555" y2="410" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<text x="400" y="500" font-size="12" fill="#607D8B" text-anchor="middle">同步网关：Spring Cloud Gateway (Reactor)  |  异步网关：Kong (OpenResty/Lua)</text>
+<text x="400" y="522" font-size="12" fill="#607D8B" text-anchor="middle">核心价值：统一入口 / 解耦 / 横切关注点收敛</text>
 </svg>

@@ -315,6 +315,10 @@ if __name__ == "__main__":
    - **AI 生成的 bug 怎么调试？** 先让 AI 分析报错堆栈给出假设，人工验证假设是否正确，定位到根因后决定是自己修还是让 AI 修——安全相关 bug 必须人工修。
    - **AI 能完全替代程序员吗？** 短期内不能。AI 擅长"执行力"（把明确需求转化为代码），但不擅长"创造力"（架构设计、需求理解、业务决策）。未来程序员的角色会从"写代码的人"转变为"设计系统 + 指导 AI 写代码的人"。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mt-agent-009.svg" alt="【美团面经】你用了多少AI Coding来开发Agent系统？怎么用AI的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 回答策略：切忌抛出笼统百分比，必须按代码类型分层拆解AI参与度，展示方法论。

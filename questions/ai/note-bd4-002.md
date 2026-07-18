@@ -163,6 +163,10 @@ result = json.loads(response)  # 直接拿到结构化结果
 4. **Schema验证**：输出后用Pydantic/jsonschema校验，失败则重试
 5. **降级策略**：JSON解析失败→正则提取→规则兜底→人工客服
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd4-002.svg" alt="本地生活场景下怎么做意图识别与槽位填充(Slot Filling)？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大技术方案对比：规则+NER速度快泛化差，小模型微调需重训，LLM零样本启动灵活但延迟高

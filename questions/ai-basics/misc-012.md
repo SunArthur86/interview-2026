@@ -149,6 +149,10 @@ flowchart TD
     I --> J
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-012.svg" alt="DPO的数学推导核心是什么?为什么能跳过奖励模型 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - DPO核心：利用RLHF最优策略闭式解，将Reward模型隐式消去

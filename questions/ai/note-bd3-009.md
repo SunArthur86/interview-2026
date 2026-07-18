@@ -189,6 +189,10 @@ model.save_quantized("llama-2-7b-gptq")
 
 **面试加分点**：提到AWQ论文(Lin et al., 2023)的关键洞察——只有0.1%的权重是"saliency"的；提到GPTQ基于OBQ(Observation-Based Quantization)发展而来；提到GGUF(llama.cpp)是另一种量化格式，用k-quants方法更适合CPU推理；提到W4A16(仅权重量化)在A100上可以靠tensor core加速反量化，实际推理速度快于W8A8。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-009.svg" alt="请对比GPTQ和AWQ两种量化方法的原理、量化精度和推理速度差异 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 原理对比：GPTQ靠Hessian矩阵补偿误差，AWQ靠缩放因子保护1%显著权重

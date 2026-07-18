@@ -243,6 +243,10 @@ metrics = {
 
 **面试加分点**：提到混合检索（向量+BM25+重排序）可以缓解单一检索方式的退化；提到HNSW索引的`ef_construction`和`ef_search`参数会影响索引质量和查询性能；提到使用Canary查询集（100条标注好的query-doc pair）定期自动评估召回质量；提到双写策略（新旧索引并行运行一段时间）可以安全地进行embedding模型升级。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-013.svg" alt="RAG系统运行一段时间后召回效果变差，可能有哪些原因？如何设计知识更新机制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 退化主因：索引层HNSW参数退化与长期增量更新导致的碎片化

@@ -165,6 +165,10 @@ RAG知识库            召回率/精度优化、分块策略、混合检索
 2. **量化一切**：有数字的简历比没数字的强 10 倍
 3. **准备反思**：面试官爱问"如果重做你会怎么改"——有反思说明真理解了
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-088.svg" alt="Agent 简历项目怎么找到可以深挖的点？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 可深挖的本质是难点与量化，因为纯CRUD（如搭LangChain）面试官不感兴趣，而召回率升至85%才是亮点

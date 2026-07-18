@@ -218,6 +218,10 @@ class DiffRenderer {
 - **大产物用文本diff**：站点/PPT这种结构化产物用文本diff，信息量太大
 - **没有diff层级切换**：不能根据需要切换详细程度，要么太简略要么太详细
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-mk-013.svg" alt="【月之暗面面经】如何设计 AI 桌面端的产物 diff，既能给新手看，也能给高手看？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 金字塔三级分层：Level 1摘要级（新手）、Level 2结构化（经验者）、Level 3原始对比（极客）。

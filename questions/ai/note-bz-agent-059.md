@@ -215,6 +215,10 @@ memory_points:
 2. **全链路 + 数据**：讲清每环节 + 给出具体数字（recall从X到Y），显得真实
 3. **展现权衡思维**：不只说"用了什么"，还说"为什么这么选/有什么 tradeoff"
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-059.svg" alt="美团 Agent 二面：知识库检索会怎么问到底？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 高分策略：全链路梳理+每环节深挖优化+实战权衡（勿只答向量库）

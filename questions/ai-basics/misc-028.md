@@ -105,6 +105,10 @@ docs = [doc for _, doc in sorted(zip(scores, docs), key=lambda x: x[0], reverse=
 3. **如何处理Reranker的长文本限制？**
    - 切片处理或只截取关键部分（如标题和首段）。部分模型（如BGE-large）支持更长的上下文窗口。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-028.svg" alt="RAG中为什么需要Reranker?Cross-Encoder和Bi-Encoder有什么区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Reranker用于召回后的精排，提升Top-K质量，弥补向量检索语义理解不足。

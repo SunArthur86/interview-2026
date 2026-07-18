@@ -229,6 +229,10 @@ Trial 3:
 2. **强调"经验记忆"**：关键是反思结果存入记忆，跨尝试复用，这是普通重试做不到的
 3. **知道适用边界**：适合有明确反馈的任务（代码/数学），不适合主观任务——评估器是瓶颈
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-012.svg" alt="Thinking and Self-Reflection（思考与自我反思）框架？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心机制：Act(行动) -> Eval(评估) -> Reflect(反思)，失败后总结经验重试

@@ -274,6 +274,10 @@ def reliable_json_output(query, schema, max_retries=3):
 | +重试+自动修复 | ~99.5% | ~98% | 高 | 1.2× |
 | +Structured Output | ~99.9% | ~99% | 低 | 1× |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ai50-009.svg" alt="怎么保证大模型稳定输出JSON？格式不对怎么兜底？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心策略：模型原生约束+校验拦截+兜底修复的三层保障机制

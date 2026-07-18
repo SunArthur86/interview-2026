@@ -142,6 +142,10 @@ flowchart TD
     N --> O
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-006.svg" alt="BPE、WordPiece、SentencePiece分词算法有什么区别?为什么大模型多用BPE - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - BPE按频率自底向上合并，WordPiece按似然合并，SentencePiece把空格当字符处理

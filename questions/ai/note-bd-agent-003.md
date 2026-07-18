@@ -129,6 +129,10 @@ memory_points:
 3. **技术深度**：提到Runtime、Trace、错误恢复等工程化概念
 4. **成本意识**：提到Token成本控制和延迟优化
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd-agent-003.svg" alt="怎么看Agent技术发展方向？哪些更容易工程落地？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 落地排序：Workflow Agent最易落地，RAG最成熟，Multi-Agent/自主Agent最难

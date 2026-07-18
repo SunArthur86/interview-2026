@@ -222,6 +222,10 @@ async def agent_b():
 - **Blackboard 架构**：所有 Agent 共享一块"黑板"（共享状态），各自读写，经典的多 Agent 协作模式
 - **拍卖/竞标机制**：任务发布后多个 Agent 竞标，Manager 选最优，适合能力重叠场景
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-017.svg" alt="【某讯面经】多 Agent 协作中通信成本高怎么办？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 根源在于通信路径N²爆炸与同步阻塞，导致Token与延迟成本飙升

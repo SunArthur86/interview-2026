@@ -105,6 +105,10 @@ def init_llm_engine():
   2. 在极高并发下，vLLM的Scheduler调度开销是否会成为新的瓶颈？如果是，有哪些优化思路（如分离CUDA Graph）？
   3. 相比于TGI（Text Generation Inference），vLLM的迭代级调度在处理长尾延迟请求时有何不同？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-020.svg" alt="vLLM的核心技术创新是什么?为什么比HuggingFace推理快10倍 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - PagedAttention：KV Cache分块存储，消除显存碎片，利用率升至96%

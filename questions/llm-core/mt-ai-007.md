@@ -127,6 +127,10 @@ def top_k_top_p_filtering(logits, top_k=0, top_p=0.0, filter_value=-float('Inf')
 | **Top-P (Nucleus)** | 通用对话 (推荐) | 概率分布极平时可能截断过多 | P=0.9, T=0.7 |
 | **Contrastive Search** | 长文本生成 | 实现稍复杂，需调节 deg_penalty | penalty=0.5~1.0 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_llm-core_mt-ai-007.svg" alt="【美团面经】了解大模型的解码策略吗？简要说一说 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 两大流派：Greedy/Beam重确定易重复，Top-K/Top-P重多样防尾巴

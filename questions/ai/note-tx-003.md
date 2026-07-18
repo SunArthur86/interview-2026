@@ -423,6 +423,10 @@ def evaluate_skill(skill: BaseSkill, test_cases: list) -> SkillMetrics:
 
 5. **面试加分点：** 提到 MCP（Model Context Protocol）——Skill 的工具依赖声明可以基于 MCP 标准化，实现跨 Agent 框架的 Skill 复用。这是 Agent 生态的发展方向。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx-003.svg" alt="【腾讯面经】Skill 怎么设计的？为什么不用 Skill Creator（自动生成工具）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 层级定位：Skill是高于Tool、低于Agent的复合能力工作流编排。

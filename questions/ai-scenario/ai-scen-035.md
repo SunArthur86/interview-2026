@@ -126,6 +126,10 @@ flowchart TD
     G -- 关键指标下降>10% --> J[门禁失败, 阻断并回滚]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-035.svg" alt="如何设计CI中的AI质量门禁？在代码提交和发布前自动检测质量退化。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 触发条件：Prompt/模型/参数变更触发自动评测，防止质量退化。

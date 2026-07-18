@@ -185,6 +185,10 @@ flowchart LR
     P --> E
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-lx-agent-005.svg" alt="主Agent的意图识别应该怎么做，为什么单轮分类器经常不够用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大盲区：单轮分类器搞不定省略句、指代消解与隐式意图

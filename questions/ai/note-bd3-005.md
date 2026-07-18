@@ -207,6 +207,10 @@ model.print_trainable_parameters()
 
 **面试加分点**：提到QLoRA论文(Dettmers et al., 2023)证明QLoRA效果与全参16bit微调相当（差距<1%）；提到GA-QoRA(Qi et al.)在QLoRA基础上用GQA进一步优化；提到LoRA的alpha参数控制适配器的影响力(scale = alpha/r)；提到推理时可以将LoRA权重合并回基础模型(merge_and_unload)实现零额外推理开销。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bd3-005.svg" alt="QLoRA降低训练资源成本的核心逻辑是什么？为什么选择NF4与FP16的组合？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 4bit冻结+16bit训练：NF4量化冻结原权重，仅训练fp16的LoRA低秩矩阵。

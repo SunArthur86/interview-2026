@@ -6,54 +6,19 @@
 <text x="28" y="552" font-size="0"></text>
 <text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：配置、密钥、证书的安全发布核心是&quot;敏感数据与代码分离 + 动态注入 + 最小权限 + 全程加密 + 可审计&quot;。明文密钥进…</text>
 <!-- BODY_TOP=110 -->
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
-</marker>
-<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
-</marker>
-</defs>
-<rect x="40" y="110" width="350" height="350" rx="10" fill="#2196F311" stroke="#2196F3" stroke-width="2"/>
-<text x="215" y="138" font-size="15" fill="#2196F3" text-anchor="middle" font-weight="700">① TLS 握手（非对称加密）</text>
-<rect x="56" y="166" width="318" height="40" rx="6" fill="#FFFFFF" stroke="#2196F3" stroke-width="1.5"/>
-<circle cx="74" cy="186" r="11" fill="#2196F3"/>
-<text x="74" y="190" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">1</text>
-<text x="92" y="191" font-size="11" fill="#263238">ClientHello: SSL版本+随机数+加密套件</text>
-<rect x="56" y="216" width="318" height="40" rx="6" fill="#FFFFFF" stroke="#2196F3" stroke-width="1.5"/>
-<circle cx="74" cy="236" r="11" fill="#2196F3"/>
-<text x="74" y="240" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">2</text>
-<text x="92" y="241" font-size="11" fill="#263238">ServerHello: 选定套件+证书+随机数</text>
-<rect x="56" y="266" width="318" height="40" rx="6" fill="#FFFFFF" stroke="#2196F3" stroke-width="1.5"/>
-<circle cx="74" cy="286" r="11" fill="#2196F3"/>
-<text x="74" y="290" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">3</text>
-<text x="92" y="291" font-size="11" fill="#263238">客户端验证证书（CA 签名链）</text>
-<rect x="56" y="316" width="318" height="40" rx="6" fill="#FFFFFF" stroke="#2196F3" stroke-width="1.5"/>
-<circle cx="74" cy="336" r="11" fill="#2196F3"/>
-<text x="74" y="340" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text>
-<text x="92" y="341" font-size="11" fill="#263238">客户端生成 pre-master，用公钥加密</text>
-<rect x="56" y="366" width="318" height="40" rx="6" fill="#FFFFFF" stroke="#2196F3" stroke-width="1.5"/>
-<circle cx="74" cy="386" r="11" fill="#2196F3"/>
-<text x="74" y="390" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text>
-<text x="92" y="391" font-size="11" fill="#263238">双方基于 3 个随机数导出会话密钥</text>
-<rect x="410" y="110" width="350" height="350" rx="10" fill="#4CAF5011" stroke="#4CAF50" stroke-width="2"/>
-<text x="585" y="138" font-size="15" fill="#4CAF50" text-anchor="middle" font-weight="700">② 数据传输（对称加密）</text>
-<rect x="450" y="170" width="130" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
-<text x="515" y="195" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">客户端</text>
-<rect x="620" y="170" width="130" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
-<text x="685" y="195" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">服务器</text>
-<line x1="580" y1="205" x2="620" y2="205" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="600" y="199" font-size="11" fill="#455A64" text-anchor="middle" font-weight="600">密文 AES</text>
-<line x1="620" y1="230" x2="580" y2="230" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="600" y="224" font-size="11" fill="#455A64" text-anchor="middle" font-weight="600">密文 AES</text>
-<rect x="430" y="280" width="310" height="160" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="1.5"/>
-<text x="585" y="305" font-size="13" fill="#9C27B0" text-anchor="middle" font-weight="700">三大特性</text>
-<circle cx="450" cy="326" r="5" fill="#2196F3"/>
-<text x="464" y="330" font-size="12" fill="#37474F">机密性：加密防窃听</text>
-<circle cx="450" cy="354" r="5" fill="#4CAF50"/>
-<text x="464" y="358" font-size="12" fill="#37474F">完整性：MAC 防篡改</text>
-<circle cx="450" cy="382" r="5" fill="#FF9800"/>
-<text x="464" y="386" font-size="12" fill="#37474F">真实性：证书防冒充</text>
-<circle cx="450" cy="410" r="5" fill="#9C27B0"/>
-<text x="464" y="414" font-size="12" fill="#37474F">默认端口：443</text>
+<rect x="40" y="114" width="720" height="59" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="56" y="144" font-size="15" fill="#2196F3" font-weight="700" dominant-baseline="middle">接入层</text>
+<text x="170" y="144" font-size="13" fill="#263238" dominant="middle">DDoS 防护 / WAF / HTTPS / IP 黑白名单</text>
+<rect x="40" y="189" width="720" height="59" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="56" y="218" font-size="15" fill="#4CAF50" font-weight="700" dominant-baseline="middle">网关层</text>
+<text x="170" y="218" font-size="13" fill="#263238" dominant="middle">认证(JWT/OAuth2) / 鉴权(RBAC) / 防重放 / 限流</text>
+<rect x="40" y="264" width="720" height="59" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="56" y="294" font-size="15" fill="#FF9800" font-weight="700" dominant-baseline="middle">应用层</text>
+<text x="170" y="294" font-size="13" fill="#263238" dominant="middle">SQL 注入参数化 / XSS 过滤 / CSRF Token / 越权校验</text>
+<rect x="40" y="339" width="720" height="59" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="56" y="368" font-size="15" fill="#9C27B0" font-weight="700" dominant-baseline="middle">数据层</text>
+<text x="170" y="368" font-size="13" fill="#263238" dominant="middle">敏感字段加密(AES) / 脱敏 / 哈希(BCrypt) / KMS 密钥</text>
+<rect x="40" y="414" width="720" height="59" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="56" y="444" font-size="15" fill="#f44336" font-weight="700" dominant-baseline="middle">审计层</text>
+<text x="170" y="444" font-size="13" fill="#263238" dominant="middle">操作日志 / 行为审计 / 完整性校验 / 等保合规</text>
 </svg>

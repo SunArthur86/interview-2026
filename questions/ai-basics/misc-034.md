@@ -119,6 +119,10 @@ def robust_json_parse(text: str):
 2. **追问**：在流式输出场景下，如何实时校验和解析不完整的 JSON 片段而不阻塞响应？
 3. **追问**：对比 `json5` 和 `lark` 解析器，在处理 LLM 输出时的容错能力有何区别？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-basics_misc-034.svg" alt="如何设计结构化Prompt确保LLM稳定输出JSON?有哪些最佳实践 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心方法：优先用Function Calling或JSON Mode，通用法用Prompt+Schema

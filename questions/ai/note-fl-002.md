@@ -150,6 +150,10 @@ flowchart TD
     end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-fl-002.svg" alt="【字节飞连面经】怎么设计 Tool Calling？Schema 怎么定义？防危险工具？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 双层校验防幻觉：模型侧用JSON Schema写清Description，服务端用Pydantic强制解析参数类型

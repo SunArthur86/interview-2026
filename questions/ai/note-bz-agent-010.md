@@ -218,6 +218,10 @@ def hybrid_agent(goal):
 2. **提"模型分工"**：Planner 用强模型，Executor 用小模型，体现成本意识
 3. **混合更实用**：生产中常用"Plan 骨架 + ReAct 节点"，兼顾全局规划和局部灵活
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bz-agent-010.svg" alt="Plan-and-Execute（计划-执行）认知框架怎么工作？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心思想：先全局规划，后逐步执行，必要时重新规划

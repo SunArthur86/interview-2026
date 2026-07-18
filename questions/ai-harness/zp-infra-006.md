@@ -97,6 +97,10 @@ flowchart TD
     Match --> Save[显存带宽节省g倍]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_zp-infra-006.svg" alt="【智谱Infra面经】GLM-4 为什么选择 GQA？GQA vs MHA/MQA 的头数/维度权衡？KV Cache 节省多少？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - GQA优势：KV头数减少g倍(如8倍)，显存和带宽压力骤降，质量接近MHA远超MQA。

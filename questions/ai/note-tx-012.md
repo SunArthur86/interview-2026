@@ -445,6 +445,10 @@ GRPO 的精妙之处在于它用**最简洁的统计方法**替代了 PPO 中最
 
 面试核心表述：**GRPO 是 PPO 在 LLM 对齐场景下的工程优化，核心创新是用同一 prompt 的 G 个采样的组内统计量替代 Critic 网络做 baseline 估计，在不损失训练效果的前提下将显存开销减半。DeepSeek-R1 验证了 GRPO + 规则奖励可以实现纯 RL 驱动的推理能力涌现。**
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx-012.svg" alt="【腾讯面经】GRPO 算法的原理是什么？和 PPO 有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 对比定位：PPO需维护4个模型显存极高，而GRPO砍掉Critic省50%显存

@@ -97,6 +97,10 @@ flowchart TD
     GPU --> Speed[比HF快14-24倍]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai-harness_ai-harness-s001.svg" alt="vLLM的核心优化技术有哪些？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - PagedAttention：KV Cache 分块管理，消除显存碎片，利用率从 60% 提至 96%。

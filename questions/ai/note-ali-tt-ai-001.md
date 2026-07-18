@@ -327,3 +327,7 @@ ReAct + 外部记忆能缓解爆炸，但解决不了"长任务规划"问题。R
 | 0:50 | ReAct示意图 | "ReAct——ReAct = Observation-Thought-Action 循环，单步推理+执行，灵活但上下文易爆炸" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：ReAct的Thought步骤能否用Chain-of-Tho？" | 收尾与钩子 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-ali-tt-ai-001.svg" alt="【阿里淘天AI二面】介绍ReAct范式和Plan &amp; Execute范式？什么情况下用哪种？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

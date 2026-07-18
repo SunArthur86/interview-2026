@@ -225,6 +225,10 @@ A/B 测试：
 - **容量规划**：按 QPS 估算 LLM 调用量、token 消耗、向量库规模
 - **SLA 定义**：可用性（99.9%）、延迟（P99 < 5s）、质量（任务完成率 > 85%）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-008.svg" alt="【某讯面经】设计一个生产可用的 Agent 系统，从0到1怎么搭？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 五层架构：接入网关、LangGraph编排、模型与工具能力、多模态存储数据、Trace可观测

@@ -409,6 +409,10 @@ flowchart TD
     H --> D
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-bg-007.svg" alt="【八股总结】多轮 Agentic RL 何时停止 rollout？长尾轨迹如何处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 停止条件：给出最终答案(正常奖)、触发最大轮数/主动放弃(轻惩)、检测到死循环(重惩-0.5)

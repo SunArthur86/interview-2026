@@ -243,6 +243,10 @@ flowchart TD
     I --> G
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ai_note-tx2-004.svg" alt="【某讯面经】如何稳定让模型输出标准 JSON Schema？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 五层防御体系：Prompt提示→Schema设计→API限制→约束解码→后处理兜底
