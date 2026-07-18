@@ -114,6 +114,12 @@ server {
 }
 ```
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-021.svg" alt="Nginx如何实现反向代理和负载均衡？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 反向代理：隐藏真实后端，Nginx 作为统一代理接收并转发请求。

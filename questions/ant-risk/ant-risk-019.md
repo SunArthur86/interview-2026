@@ -387,3 +387,8 @@ flowchart TD
 | 0:40 | 内存结构示意图 | volatile 不保证原子性（i++ 仍不安全）。 | volatile 不保证原子性（i+ |
 | 1:05 | 模型训练流程图 | happens-before 8 大规则。 | happens-before 8 大规则 |
 | 2:30 | 总结卡 | 一句话记忆：volatile = 可见性 + 有序性（禁止重排），不保证原子性。 下期可以接着聊：volatile 和 synchronized 区别。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-019.svg" alt="【蚂蚁风控】volatile 原理？happens-before 是什么？单例双重检查为什么 volatile？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

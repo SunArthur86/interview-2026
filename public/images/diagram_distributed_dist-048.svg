@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">雪花算法的时钟回拨问题如何解决？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">解决时钟回拨导致的ID重复问题。</text>
+  <text x="400" y="125" text-anchor="middle" font-size="12" fill="#666" font-weight="700">重复消息来源</text>
+  <rect x="80" y="140" width="210" height="50" rx="6" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="185" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="#C62828">网络重试</text>
+  <text x="185" y="180" text-anchor="middle" font-size="10" fill="#C62828">Producer 重发</text>
+  <rect x="310" y="140" width="210" height="50" rx="6" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="415" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="#C62828">Consumer 重启</text>
+  <text x="415" y="180" text-anchor="middle" font-size="10" fill="#C62828">Offset 未提交</text>
+  <rect x="540" y="140" width="210" height="50" rx="6" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="645" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="#C62828">Rebalance</text>
+  <text x="645" y="180" text-anchor="middle" font-size="10" fill="#C62828">分区重分配</text>
+  <text x="400" y="230" text-anchor="middle" font-size="12" fill="#666" font-weight="700">幂等性实现方案</text>
+  <rect x="40" y="250" width="170" height="65" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="125" y="277" text-anchor="middle" font-size="12" font-weight="700" fill="#1565C0">唯一索引</text>
+  <text x="125" y="297" text-anchor="middle" font-size="10" fill="#1565C0">DB 兜底</text>
+  <rect x="225" y="250" width="170" height="65" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="310" y="277" text-anchor="middle" font-size="12" font-weight="700" fill="#2E7D32">Token 机制</text>
+  <text x="310" y="297" text-anchor="middle" font-size="10" fill="#2E7D32">防重令牌</text>
+  <rect x="410" y="250" width="170" height="65" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="495" y="277" text-anchor="middle" font-size="12" font-weight="700" fill="#E65100">状态机</text>
+  <text x="495" y="297" text-anchor="middle" font-size="10" fill="#E65100">状态流转校验</text>
+  <rect x="595" y="250" width="170" height="65" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="680" y="277" text-anchor="middle" font-size="12" font-weight="700" fill="#6A1B9A">乐观锁</text>
+  <text x="680" y="297" text-anchor="middle" font-size="10" fill="#6A1B9A">version 控制</text>
+  <text x="400" y="355" text-anchor="middle" font-size="12" fill="#666" font-weight="700">通用幂等流程</text>
+  <rect x="60" y="380" width="130" height="40" rx="6" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="125" y="405" text-anchor="middle" font-size="11" font-weight="700" fill="#37474F">请求</text>
+  <line x1="190" y1="400" x2="205" y2="400" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="205" y="380" width="130" height="40" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="270" y="405" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">查 Redis 标记</text>
+  <line x1="335" y1="400" x2="350" y2="400" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <polygon points="415,372 475,400 415,428 355,400" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="415" y="404" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">已处理?</text>
+  <line x1="480" y1="400" x2="495" y2="400" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="495" y="380" width="130" height="40" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="560" y="405" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">执行业务</text>
+  <line x1="625" y1="400" x2="640" y2="400" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="640" y="380" width="130" height="40" rx="6" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="705" y="405" text-anchor="middle" font-size="11" font-weight="700" fill="#6A1B9A">设标记</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">业务幂等：f(f(x)) = f(x)，靠唯一键/状态/版本拦截重复执行</text>
+</svg>

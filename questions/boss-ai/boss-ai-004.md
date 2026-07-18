@@ -213,3 +213,8 @@ flowchart TD
 | 0:40 | 流程图 | 客户端 seq + 服务端 ack + 离线消息存储 + 重传。 | 可靠性 |
 | 1:05 | 代码示例截图 | 单会话内单调递增 seq，按 seq 投递。 | 顺序 |
 | 2:30 | 总结卡 | 一句话记忆：可靠性三件套：唯一 ID 去重 + seq 排序 + ack 确认。 下期可以接着聊：WebSocket 怎么做心跳。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-004.svg" alt="【巨剧核 AI 陪伴】IM/消息系统怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

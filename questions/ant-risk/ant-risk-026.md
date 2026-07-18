@@ -427,3 +427,8 @@ flowchart TD
 | 0:40 | 概念结构示意图 | CPU 缓存/进程缓存/分布式缓存/CDN（少重复计算）。 | 缓存 |
 | 1:05 | 流程图 | 垂直（升硬件）vs 水平（加机器）。 | 扩容 |
 | 2:30 | 总结卡 | 一句话记忆：池化（复用）+ 缓存（少算）+ 扩容（加机器）+ 异步（少等）+ 队列（削峰）= 高并发五件套。 下期可以接着聊：缓存三大问题。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-026.svg" alt="【蚂蚁风控】高并发五件套——池化、缓存、扩容、异步、队列，怎么用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

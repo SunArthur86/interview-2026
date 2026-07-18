@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">文件预分配和文件预热</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="80" text-anchor="middle" font-size="13" fill="#607D8B">提前分配文件并锁定内存，消除运行时的分配抖动。</text>
+  <rect x="35" y="165" width="130" height="70" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="100" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">步骤 1</text>
+  <text x="100" y="214" text-anchor="middle" font-size="11" fill="#1565C0">AllocateMappedFi</text>
+  <line x1="165" y1="200" x2="335" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="335" y="165" width="130" height="70" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">步骤 2</text>
+  <text x="400" y="214" text-anchor="middle" font-size="11" fill="#E65100">文件预热通过 mlock 锁定内</text>
+  <line x1="465" y1="200" x2="635" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="635" y="165" width="130" height="70" rx="10" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="700" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#6A1B9A">步骤 3</text>
+  <text x="700" y="214" text-anchor="middle" font-size="11" fill="#6A1B9A">利用 madvise 建议 OS</text>
+  <text x="400" y="330" text-anchor="middle" font-size="12" fill="#666" font-weight="700">核心要点</text>
+  <text x="60" y="358" font-size="11" fill="#455A64">• AllocateMappedFileService 后台线程预分配下一个 CommitLog 文件</text>
+  <text x="60" y="380" font-size="11" fill="#455A64">• 文件预热通过 mlock 锁定内存，防止被交换到 swap</text>
+  <text x="60" y="402" font-size="11" fill="#455A64">• 利用 madvise 建议 OS 预读数据，减少缺页中断</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">横向流程：步骤 1 → N，节点颜色表示不同语义阶段</text>
+</svg>

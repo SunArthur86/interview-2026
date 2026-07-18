@@ -90,6 +90,10 @@ Follower 更新至 UPTODATE，开始对外服务
 2.  **半数机制的作用**：ZAB 协议要求所有事务 proposal 必须在半数以上节点提交成功。这保证了集群的一致性，同时也意味着 ZooKeeper 集群通常建议部署奇数台节点（如 3, 5, 7），以避免脑裂并利用少数服从多数原则。
 3.  **Zab 与 Paxos 的区别**：ZAB 是专为 ZooKeeper 设计的，主要是为了实现主备模式下的高可用和原子广播；Paxos 更通用，允许 Proposer 争抢，且 Basic Paxos 只能就单个值达成一致。ZAB 在崩溃恢复时会优先保证数据一致性，而 Paxos 侧重于达成共识的过程。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-123.svg" alt="投票机制是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Leader选举原则：优先比zxid（数据最新），其次比sid（编号最大）

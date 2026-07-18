@@ -139,6 +139,10 @@ flowchart TB
     class C1,C2,C3,C4,C5,C6,Chain,Pool cf
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-136.svg" alt="Future和CompletableFuture有什么区别？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Future痛点：get()阻塞、不支持链式回调、组合处理极其困难

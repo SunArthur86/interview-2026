@@ -87,6 +87,12 @@ ipvsadm -ln --connection
 | **NAT** | 私有网络，网关指向 LB | 低（只需改网关） | 容易（CIP 不变） | 一般（LB 瓶颈） | 小规模内部服务 |
 | **FULLNAT** | 路由可达（跨网段/机房） | 低（无特殊配置） | 困难（需 TOA/Proxy Protocol） | 较高（消耗 LB 内存） | 跨机房/云原生/大规模集群 |
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-004.svg" alt="LVS FULLNAT模式的工作原理是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：同时修改源 IP（CIP转DIP）和目的 IP（VIP转RIP），实现双向 NAT

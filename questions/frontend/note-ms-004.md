@@ -516,6 +516,9 @@ function rollback(taskId: string, version: number) {
 
 4. **可见性即信任**：用户最焦虑的不是 AI 做得好不好，而是"AI 到底看了我的哪些资料"。上下文面板的实时高亮（绿色=被引用，灰色=未引用）是建立信任的关键 UX。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-004.svg" alt="【月之暗面面经】多模态输入同时有网页、文档和本地截图时，桌面端该怎样做上下文管理？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心原则：上下文不是大数据池，而是分层引用系统

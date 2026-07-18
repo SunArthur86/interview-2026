@@ -79,6 +79,10 @@ thread.start();
 3. 为什么不推荐使用 `Thread.stop()`？
 4. `run()` 方法抛出异常后，线程处于什么状态？主线程能捕获到吗？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-030.svg" alt="什么是线程死亡（DEAD）？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定义：线程 run() 方法执行完毕的终止状态，生命周期彻底结束。

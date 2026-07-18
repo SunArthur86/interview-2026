@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="35" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">Linux 进程虚拟内存空间布局 (32位)</text>
+  
+  <rect x="200" y="60" width="400" height="50" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="400" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#607D8B">内核空间 (1GB)</text>
+  <text x="400" y="98" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">进程不可见, 需系统调用访问</text>
+  
+  <rect x="200" y="120" width="400" height="40" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="400" y="138" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#2196F3">栈段 (Stack)</text>
+  <text x="400" y="154" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#2196F3">局部变量/函数调用 (向下增长)</text>
+  
+  <line x1="400" y1="165" x2="400" y2="190" stroke="#607D8B" stroke-width="2" stroke-dasharray="4,4"/>
+  
+  <rect x="200" y="190" width="400" height="40" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="208" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#9C27B0">文件映射段 (mmap)</text>
+  <text x="400" y="224" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#9C27B0">动态库/共享内存</text>
+  
+  <line x1="400" y1="235" x2="400" y2="260" stroke="#607D8B" stroke-width="2" stroke-dasharray="4,4"/>
+  <path d="M 620 250 L 640 235 L 660 250" stroke="#4CAF50" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M 620 270 L 640 285 L 660 270" stroke="#FF9800" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="685" y="254" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#4CAF50">堆向上</text>
+  <text x="685" y="278" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#FF9800">栈向下</text>
+  
+  <rect x="200" y="260" width="400" height="60" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="282" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FF9800">堆段 (Heap)</text>
+  <text x="400" y="300" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">动态分配(new/malloc)</text>
+  <text x="400" y="316" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">风险: 易内存泄漏与碎片</text>
+  
+  <line x1="400" y1="325" x2="400" y2="350" stroke="#607D8B" stroke-width="2" stroke-dasharray="4,4"/>
+  
+  <rect x="200" y="350" width="195" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="297" y="370" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#4CAF50">BSS段</text>
+  <text x="297" y="388" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#4CAF50">未初始化全局变量</text>
+  
+  <rect x="405" y="350" width="195" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="502" y="370" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#4CAF50">数据段</text>
+  <text x="502" y="388" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#4CAF50">已初始化全局变量</text>
+  
+  <line x1="400" y1="405" x2="400" y2="425" stroke="#607D8B" stroke-width="2" stroke-dasharray="4,4"/>
+  
+  <rect x="200" y="425" width="400" height="45" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="400" y="445" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#2196F3">代码段</text>
+  <text x="400" y="462" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#2196F3">二进制指令 (只读)</text>
+  
+  <text x="160" y="305" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">0xFFFFFFFF</text>
+  <text x="160" y="115" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">0xC0000000</text>
+  <text x="160" y="450" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">0x00000000</text>
+  
+  <g transform="translate(610, 60)">
+    <rect width="130" height="30" fill="#F3E5F5" stroke="#9C27B0" rx="4"/>
+    <text x="65" y="20" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#9C27B0">关键: MMU地址翻译</text>
+  </g>
+  <g transform="translate(610, 95)">
+    <rect width="130" height="30" fill="#FFEBEE" stroke="#f44336" rx="4"/>
+    <text x="65" y="20" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">风险: 栈溢出覆盖</text>
+  </g>
+</svg>

@@ -92,6 +92,12 @@ String getNode(String key) {
 2. **如果不使用虚拟节点会怎样？**：在节点数量很少时，物理节点在 Hash 环上分布极不均匀，导致大量请求命中同一个节点，产生“热点”问题，无法发挥集群优势。
 3. **Hash 环的“倾斜”问题是什么？**：即使有虚拟节点，如果某个真实节点的性能较差或者 Hash 算法分布不均，仍可能导致该节点承担过多流量。解决方法是动态调整虚拟节点权重（高性能节点分配更多虚拟节点）。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-026.svg" alt="一致性Hash的原理和特性是什么？它在分布式系统中的应用？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 因为解决取模算法扩缩容导致全量缓存失效，所以引入一致性Hash环

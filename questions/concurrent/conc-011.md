@@ -103,6 +103,10 @@ public void run() {
 3. **`interrupt()` 与 `isInterrupted()` 的区别？**：`interrupt()` 是设置中断位（实例方法）；`isInterrupted()` 只是查询状态；`Thread.interrupted()` 是静态方法，查询并清除中断位。
 4. **为什么废弃 `suspend()` 和 `resume()`？**：`suspend()` 调用后线程不释放锁，容易导致死锁；`stop()` 则破坏数据一致性。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-011.svg" alt="Java终止线程有哪几种方式？为什么stop()被废弃？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 终止线程推荐 interrupt 和 volatile 标志位，严禁使用 stop()

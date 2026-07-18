@@ -441,3 +441,8 @@ AI Harness 解决的是"LLM 从 demo 到生产的工程化鸿沟"。直接调 AP
 | 1:20 | 推理优化对比图 | MCP Server 注册发现。 | 工具管理 |
 | 1:50 | 概念结构示意图 | token 监控、延迟、错误、幻觉率。 | 可观测性 |
 | 3:30 | 总结卡 | 一句话记忆：AI Harness = LLM 网关 + 推理优化 + 工具管理 + 可观测 + 评估闭环。 下期可以接着聊：LLM 网关做什么。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-033.svg" alt="【蚂蚁风控】AI Harness 工程化怎么设计？让 LLM 在生产稳定运行 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

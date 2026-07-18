@@ -221,3 +221,8 @@ flowchart TD
 | 1:04 | 流程图：箭头串联各环节 | 要点是：流程：文档切分→Embedding→向量库→检索→拼 prompt→LLM | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：供应链应用：规则问答、案例检索、运营助手 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-035.svg" alt="【拼多多供应链】RAG 怎么用在供应链？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

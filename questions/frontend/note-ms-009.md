@@ -136,6 +136,9 @@ flowchart TD
     Checkpoint -.->|崩溃恢复| Task
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-009.svg" alt="【月之暗面面经】如果让你设计桌面 Agent 的任务中心，会有哪些关键对象？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心对象五大件：Task(任务) + Artifact(产物) + Context(上下文) + Checkpoint(检查点) + Log(日志)

@@ -80,6 +80,12 @@ CAP理论：分布式系统不能同时满足一致性（C）、可用性（A）
 3. **Nacos/Eureka的区别**：Nacos支持AP和CP切换，而Eureka是纯AP设计（自我保护机制），ZooKeeper是CP设计。
 4. **配置中心选型**：为什么配置中心通常选CP？（因为配置错误比服务不可用更危险，必须保证所有节点配置一致）。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-046.svg" alt="CAP理论中如何选择CP还是AP？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 因为网络分区P必然发生，所以系统只能在C（一致性）和A（可用性）中二选一

@@ -87,6 +87,10 @@ memory_points:
 3. 单核 CPU 系统中，能否有多个进程处于运行状态？
 4. 引入进程是为了解决什么问题？它与线程的主要区别在调度层面的体现？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-032.svg" alt="什么是进程的状态有哪些？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大基本状态：就绪（等CPU）、运行（用CPU）、阻塞（等资源）。

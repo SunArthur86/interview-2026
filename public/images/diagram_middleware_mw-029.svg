@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">如何基于 Netty 实现一个 RPC 框架？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">利用Netty网络通信、动态代理和序列化实现远程透明调用。</text>
+  <rect x="300" y="165" width="200" height="70" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">注册中心</text>
+  <text x="400" y="214" text-anchor="middle" font-size="11" fill="#E65100">Registry · CP/AP</text>
+  <rect x="45" y="320" width="150" height="60" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="120" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">Provider-1</text>
+  <text x="120" y="364" text-anchor="middle" font-size="11" fill="#2E7D32">注册</text>
+  <rect x="325" y="320" width="150" height="60" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="400" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">Provider-2</text>
+  <text x="400" y="364" text-anchor="middle" font-size="11" fill="#2E7D32">注册</text>
+  <rect x="605" y="320" width="150" height="60" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="680" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">Provider-3</text>
+  <text x="680" y="364" text-anchor="middle" font-size="11" fill="#2E7D32">注册</text>
+  <rect x="45" y="80" width="150" height="60" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="120" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">Consumer</text>
+  <text x="120" y="124" text-anchor="middle" font-size="11" fill="#1565C0">订阅</text>
+  <line x1="190" y1="320" x2="350" y2="235" stroke="#FF9800" stroke-width="2" marker-end="url(#arro)"/>
+  <line x1="400" y1="320" x2="400" y2="235" stroke="#FF9800" stroke-width="2" marker-end="url(#arro)"/>
+  <line x1="610" y1="320" x2="450" y2="235" stroke="#FF9800" stroke-width="2" marker-end="url(#arro)"/>
+  <text x="280" y="280" font-size="10" font-weight="600" fill="#FF9800">注册/心跳</text>
+  <line x1="195" y1="140" x2="330" y2="175" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrg)"/>
+  <text x="225" y="125" font-size="10" font-weight="600" fill="#4CAF50">拉取实例列表</text>
+  <path d="M 270 130 Q 100 220 195 320" fill="none" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+  <text x="80" y="220" font-size="10" font-weight="600" fill="#2196F3">调用</text>
+  <rect x="540" y="100" width="220" height="80" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="650" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#6A1B9A">健康检查机制</text>
+  <text x="650" y="148" text-anchor="middle" font-size="11" fill="#6A1B9A">心跳续约 + 失效剔除</text>
+  <text x="650" y="165" text-anchor="middle" font-size="11" fill="#6A1B9A">Eureka AP · Nacos CP+AP</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Eureka/Nacos/ZK/Consul：服务上下线自动感知，Consumer 本地缓存实例列表</text>
+</svg>

@@ -205,3 +205,8 @@ flowchart TD
 | 1:20 | 模型量化对比表 | INT8/INT4 降显存换少量精度，多装请求。 | 量化 |
 | 1:50 | 概念结构示意图 | 攒多请求一次推理，GPU 利用率↑。 | 批处理 |
 | 3:30 | 总结卡 | 一句话记忆：vLLM：PagedAttention+连续批处理。 下期可以接着聊：PagedAttention 解决什么。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-026.svg" alt="【生物医药 AI】LLM 推理怎么优化（vLLM/KV Cache/量化/批处理）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

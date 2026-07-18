@@ -98,6 +98,10 @@ Object.wait() 流程：
                                                                └──────┬───────┘
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-014.svg" alt="sleep与wait 区别？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 类不同：sleep 来自 Thread，wait 来自 Object

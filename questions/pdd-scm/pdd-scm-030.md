@@ -249,3 +249,8 @@ flowchart TD
 | 1:04 | 红色警示框 + 反例代码 | 要点是：SLO/SLI/错误预算：可用性量化 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：跨团队：接口契约、联合演练、变更协同 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-030.svg" alt="【拼多多供应链】可观测性、稳定性治理、跨团队推进怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

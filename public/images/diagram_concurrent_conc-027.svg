@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#fafafa"/>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  
+  <text x="400" y="30" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#333" text-anchor="middle">用户程序与操作系统的关系</text>
+
+  <!-- 用户态分组框 -->
+  <rect x="40" y="60" width="720" height="150" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="65" y="85" font-family="system-ui" font-size="14" font-weight="700" fill="#1565C0">用户态 (Ring 3 - 权限低)</text>
+  
+  <!-- 用户程序 -->
+  <rect x="80" y="110" width="200" height="60" rx="8" fill="#ffffff" stroke="#2196F3" stroke-width="2"/>
+  <text x="180" y="135" font-family="system-ui" font-size="13" font-weight="700" fill="#1565C0" text-anchor="middle">应用程序 (用户程序)</text>
+  <text x="180" y="155" font-family="system-ui" font-size="11" fill="#546E7A" text-anchor="middle">业务逻辑执行者</text>
+  
+  <!-- 库函数/接口 -->
+  <rect x="330" y="110" width="140" height="60" rx="8" fill="#ffffff" stroke="#2196F3" stroke-width="2"/>
+  <text x="400" y="135" font-family="system-ui" font-size="13" font-weight="700" fill="#1565C0" text-anchor="middle">库函数 (glibc/API)</text>
+  <text x="400" y="155" font-family="system-ui" font-size="11" fill="#546E7A" text-anchor="middle">如 fopen, read, write</text>
+  
+  <!-- 系统调用接口 -->
+  <rect x="520" y="110" width="200" height="60" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="620" y="135" font-family="system-ui" font-size="13" font-weight="700" fill="#1565C0" text-anchor="middle">系统调用 (System Call)</text>
+  <text x="620" y="155" font-family="system-ui" font-size="11" fill="#546E7A" text-anchor="middle">软中断 int 0x80 / syscall</text>
+
+  <path d="M 280 140 L 325 140" fill="none" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M 470 140 L 515 140" fill="none" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- 状态切换连线 -->
+  <path d="M 400 170 L 400 230 L 580 230 L 580 260" fill="none" stroke="#FF9800" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arr)"/>
+  <rect x="410" y="200" width="160" height="20" fill="#ffffff" opacity="0.9"/>
+  <text x="490" y="215" font-family="system-ui" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">陷入内核态 (上下文切换)</text>
+
+  <!-- 内核态分组框 -->
+  <rect x="40" y="260" width="720" height="150" rx="10" fill="#FFEBEE" stroke="#f44336" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="65" y="285" font-family="system-ui" font-size="14" font-weight="700" fill="#C62828">内核态 (Ring 0 - 掌控一切)</text>
+
+  <!-- 操作系统 -->
+  <rect x="80" y="310" width="200" height="60" rx="8" fill="#ffffff" stroke="#f44336" stroke-width="2"/>
+  <text x="180" y="335" font-family="system-ui" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle">操作系统内核</text>
+  <text x="180" y="355" font-family="system-ui" font-size="11" fill="#546E7A" text-anchor="middle">魔术师/大管家</text>
+
+  <!-- 硬件资源 -->
+  <rect x="520" y="310" width="200" height="60" rx="8" fill="#ffffff" stroke="#f44336" stroke-width="2"/>
+  <text x="620" y="335" font-family="system-ui" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle">底层硬件资源</text>
+  <text x="620" y="355" font-family="system-ui" font-size="11" fill="#546E7A" text-anchor="middle">CPU / 内存 / 磁盘 / 网卡</text>
+
+  <path d="M 280 340 L 515 340" fill="none" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="400" y="330" font-family="system-ui" font-size="11" fill="#C62828" text-anchor="middle">统一分配与调度管理</text>
+
+  <rect x="150" y="440" width="500" height="40" rx="6" fill="#ECEFF1" stroke="#607D8B" stroke-width="1"/>
+  <text x="400" y="458" font-family="system-ui" font-size="12" font-weight="700" fill="#37474F" text-anchor="middle">核心理念：应用是顾客，系统是餐厅。</text>
+  <text x="400" y="473" font-family="system-ui" font-size="12" fill="#37474F" text-anchor="middle">App不能直接进厨房，必须通过服务员点菜请求资源。</text>
+</svg>

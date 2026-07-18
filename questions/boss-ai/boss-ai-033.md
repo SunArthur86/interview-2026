@@ -312,3 +312,8 @@ flowchart TD
 | 0:40 | 概念结构示意图 | 文本/图像/语音/视频各有模型。 | 多模态 |
 | 1:05 | 流程图 | 关键词+分类模型+LLM-Judge+人工分级。 | 管线 |
 | 2:30 | 总结卡 | 一句话记忆：双向：UGC 入审 + AIGC 出审。 下期可以接着聊：图像审核怎么做。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-033.svg" alt="【巨剧核 AI 陪伴】AI 内容审核系统怎么建（UGC/AIGC 双向）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

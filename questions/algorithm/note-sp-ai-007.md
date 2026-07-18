@@ -154,6 +154,9 @@ pop()    → 1从out弹出        搬运次数=0
 3. **不变式**：out_stack中的元素已经是FIFO顺序，不需要每次倒灌
 4. **负负得正**：LIFO + LIFO = FIFO，两次反转恢复原始顺序
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-sp-ai-007.svg" alt="怎么用两个栈实现队列？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 负负得正：因为栈是LIFO，所以两个栈串联倒灌两次即可实现队列的FIFO。

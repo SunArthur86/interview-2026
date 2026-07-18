@@ -414,3 +414,8 @@ flowchart TD
 | 0:40 | 监控大盘截图 | Counter（累加）/ Gauge（瞬时）/ Histogram（分布）。 | Metrics 三种 |
 | 1:05 | 概念结构示意图 | Trace（一次请求）/ Span（一次调用）/ Context（traceId 透传）。 | Trace 三个概念 |
 | 2:30 | 总结卡 | 一句话记忆：可观测性三支柱：Metrics + Logs + Traces。 下期可以接着聊：用过什么监控栈。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-020.svg" alt="【蚂蚁风控】分布式系统的全链路监控怎么做？可观测性三支柱？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

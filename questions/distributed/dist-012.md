@@ -124,6 +124,12 @@ public class ConsumerController {
 2. **健康检查机制**：服务挂了如何感知？（主动心跳 vs 被动 TCP 探测）。如果网络抖动导致心跳超时，如何避免误剔除？（容错阈值、指数退避）。
 3. **雪崩效应与缓存**：如果注册中心宕机，客户端还能调用吗？（答：可以，客户端通常会缓存服务列表，但无法感知新服务下线）。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-012.svg" alt="什么是服务注册发现？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心价值：解决微服务实例 IP 频繁变动问题，实现服务调用的动态解耦

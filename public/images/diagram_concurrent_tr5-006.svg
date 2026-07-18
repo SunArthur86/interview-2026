@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">W-TinyLFU 频率统计与三区缓冲机制</text>
+
+  <!-- LRU Path (Left) -->
+  <rect x="40" y="70" width="320" height="170" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="200" y="95" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#f44336">传统 LRU 缺陷</text>
+  <rect x="70" y="110" width="120" height="40" rx="8" fill="#fff" stroke="#f44336"/>
+  <text x="130" y="135" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">单次扫描冷数据</text>
+  <path d="M 130 150 L 130 165" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="70" y="170" width="120" height="40" rx="8" fill="#fff" stroke="#f44336"/>
+  <text x="130" y="195" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">抢占缓存位置</text>
+  <path d="M 190 130 L 240 130" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="240" y="110" width="100" height="40" rx="8" fill="#f44336"/>
+  <text x="290" y="135" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#fff">挤出高频热点</text>
+  <text x="200" y="225" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">(仅看时间局部性，易被污染)</text>
+
+  <!-- W-TinyLFU CMS (Right Top) -->
+  <rect x="440" y="70" width="320" height="80" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="600" y="95" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#2196F3">Count-Min Sketch (频率统计)</text>
+  <rect x="460" y="110" width="130" height="30" rx="8" fill="#fff" stroke="#2196F3"/>
+  <text x="525" y="130" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">极小内存哈希统计</text>
+  <path d="M 590 125 L 625 125" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="625" y="110" width="110" height="30" rx="8" fill="#fff" stroke="#2196F3"/>
+  <text x="680" y="130" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">定期右移(老化衰减)</text>
+
+  <!-- W-TinyLFU 3 Areas (Right Bottom) -->
+  <rect x="440" y="170" width="320" height="250" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="600" y="195" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#4CAF50">W-TinyLFU 分级区域 (三区设计)</text>
+
+  <!-- Window -->
+  <rect x="460" y="215" width="90" height="50" rx="8" fill="#FFF3E0" stroke="#FF9800"/>
+  <text x="505" y="235" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FF9800">Window</text>
+  <text x="505" y="255" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle">新数据缓冲(1%)</text>
+
+  <!-- Probation -->
+  <rect x="575" y="215" width="120" height="50" rx="8" fill="#ECEFF1" stroke="#607D8B"/>
+  <text x="635" y="235" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#607D8B">Probation</text>
+  <text x="635" y="255" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle">缓刑区试用(20%)</text>
+
+  <!-- Protected -->
+  <rect x="530" y="320" width="165" height="50" rx="8" fill="#4CAF50"/>
+  <text x="612" y="340" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">Protected (保护)</text>
+  <text x="612" y="360" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#fff">高频热点坐稳(80%)</text>
+
+  <!-- Arrows -->
+  <path d="M 550 240 L 575 240" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="562" y="232" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle">满降级</text>
+  <path d="M 635 265 L 612 320" stroke="#4CAF50" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="660" y="295" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#4CAF50">被再次访问晋升</text>
+  <path d="M 460 330 L 530 345" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="465" y="325" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="start" fill="#607D8B">阻挡突发扫描</text>
+
+  <!-- Bottom Legend -->
+  <rect x="440" y="445" width="130" height="25" rx="4" fill="#f44336"/>
+  <text x="505" y="462" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#fff">缓存污染风险</text>
+  <rect x="580" y="445" width="130" height="25" rx="4" fill="#4CAF50"/>
+  <text x="645" y="462" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#fff">核心优势与隔离</text>
+</svg>

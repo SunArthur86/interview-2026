@@ -188,3 +188,8 @@ flowchart TD
 | 0:40 | Elasticsearch 倒排索引图 | LLM 边生成边返回，首字延迟低。 | 流式响应（SSE/WebSocket） |
 | 1:05 | 概念结构示意图 | API Key/OAuth + 按租户/模型限流 + 配额。 | 鉴权限流 |
 | 2:30 | 总结卡 | 一句话记忆：RESTful 契约 + 流式（SSE）体感。 下期可以接着聊：SSE 和 WebSocket 怎么选。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-009.svg" alt="【生物医药 AI】AI 产品的 RESTful API 服务怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

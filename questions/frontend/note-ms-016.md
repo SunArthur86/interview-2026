@@ -382,6 +382,9 @@ interface ABTestConfig {
 
 AI-Native 桌面前端的质量评估，**不能照搬传统 Web 前端的纯性能思维**。三维模型的核心洞察是：AI 产品引入了"产出质量"和"业务效果"两个全新维度，且三个维度之间相互制约——提高 AI 质量可能降低响应速度，优化性能可能牺牲功能深度。**好的 AI 前端不是在单一维度上极致优化，而是在三维约束中找到最优平衡点。** 最终判断标准只有一个：用户是否真正通过产品完成了任务并采纳了 AI 的产出。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-016.svg" alt="【月之暗面面经】你会用哪些指标判断桌面 AI 产品前端做得好不好？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 传统指标不够用：需构建「体验 × 业务 × AI质量」三维评价体系

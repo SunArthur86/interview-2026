@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">HAProxy负载均衡器的特点和使用场景是什么？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">高性能的四层/七层负载均衡器，擅长流量分发和健康检查。</text>
+  <rect x="35" y="175" width="130" height="50" rx="10" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="100" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#37474F">客户端</text>
+  <text x="100" y="214" text-anchor="middle" font-size="11" fill="#37474F">Client</text>
+  <rect x="260" y="170" width="140" height="60" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="330" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">Load Balancer</text>
+  <text x="330" y="214" text-anchor="middle" font-size="11" fill="#E65100">负载均衡器</text>
+  <rect x="575" y="95" width="130" height="50" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="640" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">RS-1</text>
+  <text x="640" y="134" text-anchor="middle" font-size="11" fill="#1565C0">Real Server</text>
+  <rect x="575" y="175" width="130" height="50" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="640" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">RS-2</text>
+  <text x="640" y="214" text-anchor="middle" font-size="11" fill="#1565C0">Real Server</text>
+  <rect x="575" y="255" width="130" height="50" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="640" y="275" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">RS-3</text>
+  <text x="640" y="294" text-anchor="middle" font-size="11" fill="#1565C0">Real Server</text>
+  <line x1="165" y1="200" x2="260" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="220" x2="575" y2="120" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="220" x2="575" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="220" x2="575" y2="280" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="400" y="350" text-anchor="middle" font-size="12" fill="#666" font-weight="700">常见算法</text>
+  <rect x="60" y="370" width="135" height="50" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="127" y="390" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">轮询</text>
+  <text x="127" y="408" text-anchor="middle" font-size="9" fill="#1565C0">Round Robin</text>
+  <rect x="205" y="370" width="135" height="50" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="272" y="390" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">随机</text>
+  <text x="272" y="408" text-anchor="middle" font-size="9" fill="#1565C0">Random</text>
+  <rect x="350" y="370" width="135" height="50" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="417" y="390" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">加权</text>
+  <text x="417" y="408" text-anchor="middle" font-size="9" fill="#1565C0">Weighted</text>
+  <rect x="495" y="370" width="135" height="50" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="562" y="390" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">最少连接</text>
+  <text x="562" y="408" text-anchor="middle" font-size="9" fill="#1565C0">Least Conn</text>
+  <rect x="640" y="370" width="135" height="50" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="707" y="390" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">一致性哈希</text>
+  <text x="707" y="408" text-anchor="middle" font-size="9" fill="#1565C0">Consistent Hash</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">LVS/Nginx/Ribbon：四层（LVS DR/FULLNAT）vs 七层（Nginx 按请求分发）</text>
+</svg>

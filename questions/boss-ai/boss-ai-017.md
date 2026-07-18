@@ -251,3 +251,8 @@ flowchart TD
 | 0:40 | API 网关架构图 | 核心保命（强→弱→模板），非核心关停（视频生成暂停）。 | 降级 |
 | 1:05 | 概念结构示意图 | 连接/读取/总时长分级，LLM 首 token/全量分别设。 | 超时 |
 | 2:30 | 总结卡 | 一句话记忆：四道阀：限流/降级/超时/重试。 下期可以接着聊：LLM 网关怎么限流。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-017.svg" alt="【巨剧核 AI 陪伴】LLM 服务的限流/降级/超时/重试怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

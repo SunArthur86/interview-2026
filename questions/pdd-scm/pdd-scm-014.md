@@ -246,3 +246,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：G1：Region 化、可预测停顿（MaxGCPauseMillis）、Mixed GC | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：调优核心：减少 Full GC，让对象在 Minor GC 被回收 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-014.svg" alt="【拼多多供应链】JVM GC 原理？G1 怎么调优？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

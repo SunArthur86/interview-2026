@@ -80,6 +80,10 @@ t.start(); // 启动线程，进入就绪状态
 1. **调用 `run()` 而不是 `start()`**：直接调用 `run()` 只是普通的方法调用，不会在新的线程中执行，而是在当前主线程中串行执行。
 2. **认为线程一定比进程快**：在计算密集型场景下，过多的线程竞争 CPU 资源和锁，可能导致性能不如单线程或单进程。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-088.svg" alt="什么是多线程？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 根本定位：进程是资源分配的最小单位，而线程是CPU调度的最小单位。

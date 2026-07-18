@@ -122,6 +122,12 @@ public interface StockTccAction {
 - **本地消息表要处理重复消费**：MQ 可能重复投递，下游消费必须幂等（用唯一键去重）。消息表扫描 + MQ 发送要有重试和死信处理。
 - **空回滚和悬挂问题（TCC）**：Try 请求因网络丢失但 Cancel 先到达时，要能识别"空回滚"（没 Try 就 Cancel）；Try 延迟到达 Cancel 之后时形成"悬挂"（业务已结束又 Try），要靠事务记录表防止。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-028.svg" alt="什么是分布式事务？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：跨多个网络节点的事务，需协调多方资源保证全局要么全成功要么全失败

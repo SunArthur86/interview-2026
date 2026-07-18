@@ -89,6 +89,10 @@ flowchart TD
     I --> K["解决 @Contended 对齐"]
     L[一致性协议] --> N[MESI<br/>Modified/Exclusive/Shared/Invalid]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-004.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - CPU核心由运算器(ALU)、控制器(CU)、寄存器和多级缓存构成。

@@ -106,6 +106,10 @@ for (int i = 0; i < 100; i++) {
 1. **认为自旋锁一定好**：如果持有锁的线程执行时间很长，自旋线程会空转消耗大量 CPU，反而降低性能。
 2. **忽略 hashCode 的影响**：偏向锁状态下对象头没有空间存储 hashCode，一旦调用 hashCode，偏向锁被迫撤销，造成不必要的性能损耗。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-043.svg" alt="JVM中有哪些锁优化技术？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 升级方向：无锁 -> 偏向 -> 轻量级(自旋) -> 重量级(OS阻塞)，且不可降级

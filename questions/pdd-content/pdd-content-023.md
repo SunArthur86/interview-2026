@@ -272,3 +272,8 @@ CTR 下降要分层定位：
 | 1:30 | 流程图：输入→处理→输出 | 要点是：精排：DIN/DeepFM CTR | 关键机制 |
 | 2:09 | 代码片段 + 注释高亮 | 要点是：重排：多样性/广告 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——冷启动怎么做？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-content_pdd-content-023.svg" alt="【拼多多内容】Feed 推荐架构怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">allowCoreThreadTimeOut 线程生命周期</text>
+
+  <!-- State Machine -->
+  <ellipse cx="400" cy="80" rx="40" ry="20" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="400" y="85" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">新任务到达</text>
+
+  <path d="M 400 100 L 400 115" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+  <rect x="320" y="120" width="160" height="40" rx="8" fill="#E3F2FD" stroke="#2196F3"/>
+  <text x="400" y="145" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#2196F3">活跃运行中</text>
+
+  <path d="M 320 135 L 180 135" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="250" y="125" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle">执行完毕</text>
+
+  <rect x="80" y="115" width="140" height="40" rx="8" fill="#ECEFF1" stroke="#607D8B"/>
+  <text x="150" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">任务队列排队</text>
+
+  <path d="M 480 135 L 620 135" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="550" y="125" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle">无任务可执行</text>
+
+  <polygon points="700,100 760,135 700,170 640,135" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="700" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">空闲超时?</text>
+
+  <!-- Default Off -->
+  <rect x="60" y="200" width="300" height="180" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="210" y="225" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#607D8B">参数为 false (默认)</text>
+  <rect x="80" y="245" width="120" height="40" rx="8" fill="#fff" stroke="#607D8B"/>
+  <text x="140" y="270" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">等待新任务</text>
+  <path d="M 200 265 L 230 265" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="230" y="245" width="120" height="40" rx="8" fill="#607D8B"/>
+  <text x="290" y="270" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#fff">核心线程驻留</text>
+  <rect x="80" y="310" width="270" height="50" rx="8" fill="#fff" stroke="#f44336"/>
+  <text x="215" y="330" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">劣势: 长期空闲占用内存/OS线程</text>
+  <text x="215" y="348" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">优势: 响应极快无启动延迟</text>
+
+  <!-- Set True -->
+  <rect x="440" y="200" width="300" height="180" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="590" y="225" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#4CAF50">参数为 true (临时工)</text>
+  <rect x="460" y="245" width="120" height="40" rx="8" fill="#fff" stroke="#4CAF50"/>
+  <text x="520" y="270" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">超过生存期</text>
+  <path d="M 580 265 L 610 265" stroke="#4CAF50" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="610" y="245" width="120" height="40" rx="8" fill="#4CAF50"/>
+  <text x="670" y="270" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#fff">降为0并销毁</text>
+  <rect x="460" y="310" width="270" height="50" rx="8" fill="#fff" stroke="#9C27B0"/>
+  <text x="595" y="330" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#9C27B0">优势: 波谷释放资源，降低云成本</text>
+  <text x="595" y="348" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#9C27B0">限制: 队列非空时必留1个消费线程</text>
+
+  <path d="M 700 170 L 700 200" stroke="#4CAF50" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+  <!-- Bottom -->
+  <rect x="100" y="410" width="600" height="70" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="435" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#9C27B0">应用场景：明显的流量波峰波谷</text>
+  <text x="400" y="460" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">夜间开启此参数可缩减20-30%内存占用，突发流量时承担重新创建线程(系统调用)的微小延迟</text>
+</svg>

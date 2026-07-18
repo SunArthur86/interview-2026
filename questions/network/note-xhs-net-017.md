@@ -200,6 +200,9 @@ AI助手系统架构:
 5. **能说出gRPC缺点** — 调试不直观（二进制）、浏览器不支持原生调用、服务治理生态不如Dubbo成熟
 
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_network_note-xhs-net-017.svg" alt="【拼多多 Java服务端】AI助手项目接入层协议选型：HTTP vs gRPC" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** gRPC基于HTTP/2+Protobuf，适合微服务间高性能通信；HTTP/REST基于HTTP/1.1+JSON，适合对外API和前后端通信。打个比方，gRPC就像军队的加密对讲机——专用频段、压缩编码、双向通话，高效但需要双方都配设备；HTTP就像普通电话——通用、人话可读，但传输效率低。

@@ -219,3 +219,8 @@ FDE 培养效果从三个维度量化：
 | 1:30 | 流程图：输入→处理→输出 | 要点是：交易场景：端到端交付 | 关键机制 |
 | 2:09 | 代码片段 + 注释高亮 | 要点是：T 型：广度+一专深 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——FDE 会不会"样样通样样松"？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-039.svg" alt="【拼多多交易】FDE 解决方案怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

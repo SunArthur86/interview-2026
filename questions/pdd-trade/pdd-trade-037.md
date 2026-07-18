@@ -274,3 +274,8 @@ AI Infra 本质是**"把 GPU 当云资源来管"**——池化提利用率，调
 | 1:30 | 流程图：输入→处理→输出 | 要点是：训练平台：队列+隔离 | 关键机制 |
 | 2:09 | 监控大盘截图 + 指标曲线 | 要点是：弹性+计费+监控 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——GPU 怎么池化？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-037.svg" alt="【拼多多交易】AI Infra 怎么搭？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

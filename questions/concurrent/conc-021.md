@@ -92,6 +92,10 @@ if (lock1.tryLock()) {
 3.  **数据库死锁是如何处理的？**
     - 数据库通常有死锁检测机制。当检测到死锁时，数据库会根据策略（如回滚代价最小）选择其中一个事务作为牺牲品，抛出异常并回滚，以解除死锁。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-021.svg" alt="什么是什么情况下会产生死锁？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：保护临界区的同步机制，保证同一时刻仅一个线程访问

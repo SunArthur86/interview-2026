@@ -102,6 +102,10 @@ java -XX:+PrintSafepointStatistics -XX:PrintSafepointStatisticsCount=1 MyApp
 2. **什么是锁粗化？**：JVM 编译器会检测到一连串连续的操作都对同一个对象加锁，会将加锁范围扩展（粗化）到整个操作序列的外部，减少加锁解锁的次数。
 3. **什么是锁消除？**：JIT 编译器通过逃逸分析，如果发现某个对象只能被当前线程访问，根本不可能被其他线程引用，那么就会消除对该对象的 Synchronized 锁。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-017.svg" alt="什么是偏向锁（Biased Locking）？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：针对单线程重入优化的锁，在对象头 Mark Word 记录线程 ID

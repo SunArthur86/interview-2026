@@ -94,6 +94,12 @@ XA PREPARE 'xid_01';
 2. **2PC 在数据库中是如何落地的？**：对应 XA 协议。MySQL 的 XA 事务使用 `XA START`, `XA END`, `XA PREPARE`, `XA COMMIT/ROLLBACK` 命令。通常使用 `ResourceManager`（数据库）和 `TransactionManager`（应用服务器或中间件）来实现。
 3. **为什么 Seata 的 AT 模式不需要 2PC 这种强锁？**：Seata AT 模式利用 **Undo Log** 和 **全局锁**，在第一阶段先提交本地事务（释放本地锁），第二阶段通过异步回滚或反向补偿，实现了“最终一致”而非“强一致”，从而避免了
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-027.svg" alt="什么是两阶段提交（2PC）协议？有什么缺点？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 两阶段指：一阶段准备（写日志锁资源不提交），二阶段提交（全部同意则Commit，否则Rollback）

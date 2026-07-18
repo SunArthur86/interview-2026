@@ -248,3 +248,8 @@ flowchart TD
 | 1:30 | 流程图：输入→处理→输出 | 要点是：降级：超时放行+异步复核 | 关键机制 |
 | 2:09 | 代码片段 + 注释高亮 | 要点是：数据回流：交易行为→风控 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——风控决策放同步还是异步？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-025.svg" alt="【拼多多交易】交易和风控怎么联调？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

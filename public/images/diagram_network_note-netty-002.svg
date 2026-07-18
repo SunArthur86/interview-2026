@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">Java 三种 IO 模型 BIO / NIO / AIO 的区别？</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">BIO 是&quot;一对一专车&quot;（一个连接独占一个线程傻等），NIO 是&quot;定时巡检&quot;（一个线程轮流问所有连接有没有数据），AIO 是&quot;到货通知&quot;（操作系统读完数据主动…</text>
+
+  <rect x="40" y="80" width="220" height="320" rx="10" fill="b" stroke="#607D8B" stroke-width="2" opacity="0.4"/>
+  <rect x="40" y="80" width="220" height="40" rx="10" fill="#607D8B"/>
+  <rect x="40" y="110" width="220" height="10" fill="#607D8B"/>
+  <text x="150" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">BIO 阻塞</text>
+  <circle cx="55" cy="142" r="3" fill="#607D8B"/>
+  <text x="65" y="145" font-size="11.5" fill="#37474F">一连接一线程</text>
+  <circle cx="55" cy="174" r="3" fill="#607D8B"/>
+  <text x="65" y="177" font-size="11.5" fill="#37474F">同步阻塞傻等</text>
+  <circle cx="55" cy="206" r="3" fill="#607D8B"/>
+  <text x="65" y="209" font-size="11.5" fill="#37474F">线程爆炸</text>
+  <rect x="290" y="80" width="220" height="320" rx="10" fill="b" stroke="#2196F3" stroke-width="2" opacity="0.4"/>
+  <rect x="290" y="80" width="220" height="40" rx="10" fill="#2196F3"/>
+  <rect x="290" y="110" width="220" height="10" fill="#2196F3"/>
+  <text x="400" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">NIO 非阻塞</text>
+  <circle cx="305" cy="142" r="3" fill="#2196F3"/>
+  <text x="315" y="145" font-size="11.5" fill="#37474F">Selector 事件通知</text>
+  <circle cx="305" cy="174" r="3" fill="#2196F3"/>
+  <text x="315" y="177" font-size="11.5" fill="#37474F">一线程管多连接</text>
+  <circle cx="305" cy="206" r="3" fill="#2196F3"/>
+  <text x="315" y="209" font-size="11.5" fill="#37474F">Channel+Buffer+Selector</text>
+  <rect x="540" y="80" width="220" height="320" rx="10" fill="b" stroke="#FF9800" stroke-width="2" opacity="0.4"/>
+  <rect x="540" y="80" width="220" height="40" rx="10" fill="#FF9800"/>
+  <rect x="540" y="110" width="220" height="10" fill="#FF9800"/>
+  <text x="650" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">AIO 异步</text>
+  <circle cx="555" cy="142" r="3" fill="#FF9800"/>
+  <text x="565" y="145" font-size="11.5" fill="#37474F">OS 完成后回调</text>
+  <circle cx="555" cy="174" r="3" fill="#FF9800"/>
+  <text x="565" y="177" font-size="11.5" fill="#37474F">真正异步</text>
+  <circle cx="555" cy="206" r="3" fill="#FF9800"/>
+  <text x="565" y="209" font-size="11.5" fill="#37474F">Linux 用 epoll 模拟</text>
+  <text x="40" y="430" font-size="12" font-weight="700" fill="#37474F">本质：BIO=阻塞+一连接一线程→并发上万时线程爆炸</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#607D8B"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">BIO 阻塞</text>
+  <rect x="164" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="184" y="482" font-size="11" fill="#37474F">NIO 非阻塞</text>
+  <rect x="255" y="470" width="14" height="14" rx="3" fill="#FF9800"/>
+  <text x="275" y="482" font-size="11" fill="#37474F">AIO 异步</text>
+</svg>

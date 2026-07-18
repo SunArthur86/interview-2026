@@ -238,3 +238,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：隐藏列 trx_id + roll_pointer 维护版本链 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：RC 每次读建 read view；RR 首次读建后复用 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-012.svg" alt="【拼多多供应链】MySQL 事务隔离级别？MVCC 原理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

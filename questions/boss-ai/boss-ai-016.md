@@ -268,3 +268,8 @@ flowchart TD
 | 0:40 | 推理优化对比图 | FAQ 命中、语义缓存、热点角色人设。 | 结果缓存 |
 | 1:05 | 概念结构示意图 | 长任务（视频/TTS）入队、削峰填谷。 | 异步队列 |
 | 2:30 | 总结卡 | 一句话记忆：四板斧：池化/缓存/异步/扩容。 下期可以接着聊：LLM 连接池怎么做。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-016.svg" alt="【巨剧核 AI 陪伴】LLM 推理池化、缓存、异步、扩容怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

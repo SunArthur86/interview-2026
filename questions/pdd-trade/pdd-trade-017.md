@@ -195,3 +195,8 @@ flowchart TD
 | 0:12 | 核心概念图 + 关键词浮现 | 要点是：策略：消除促销/支付 if-else | 核心概念 |
 | 1:00 | 能力/参数拆解表 | 要点是：状态：订单状态机 | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-017.svg" alt="【拼多多交易】交易系统怎么用设计模式？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

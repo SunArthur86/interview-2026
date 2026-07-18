@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L8,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="35" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">共享锁与独占锁机制 (读写锁模型)</text>
+
+  <rect x="30" y="60" width="740" height="100" fill="#ECEFF1" rx="5" stroke="#607D8B" stroke-dasharray="4 4"/>
+  <text x="400" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#607D8B">JUC 同步器 ReentrantReadWriteLock</text>
+  <rect x="300" y="95" width="200" height="40" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="400" y="115" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#2196F3">Sync State (单个 int 变量)</text>
+  <text x="260" y="120" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">高 16 位 (读锁)</text>
+  <text x="540" y="120" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">低 16 位 (写锁)</text>
+  <line x1="380" y1="95" x2="380" y2="135" stroke="#607D8B" stroke-width="2"/>
+
+  <ellipse cx="400" cy="195" rx="60" ry="25" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="200" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#9C27B0">请求锁资源</text>
+
+  <polygon points="400,240 510,290 400,340 290,290" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="285" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#FF9800">判断类型</text>
+  <text x="400" y="305" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">TryAcquire/Shared</text>
+
+  <line x1="310" y1="270" x2="180" y2="370" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="230" y="310" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#4CAF50">读锁(共享)</text>
+  
+  <line x1="490" y1="270" x2="620" y2="370" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="570" y="310" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">写锁(独占)</text>
+
+  <rect x="60" y="370" width="240" height="60" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="180" y="390" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#4CAF50">允许多个线程并发持有</text>
+  <text x="180" y="410" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">规则: 读读不互斥</text>
+
+  <rect x="500" y="370" width="240" height="60" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="620" y="390" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#f44336">仅允许一个线程持有</text>
+  <text x="620" y="410" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">规则: 读写/写写互斥</text>
+
+  <path d="M 500 380 L 330 380" stroke="#f44336" stroke-width="2" fill="none" marker-end="url(#arr)" stroke-dasharray="5 5"/>
+  <text x="415" y="375" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">支持降级 (写->读)</text>
+
+  <path d="M 330 420 L 500 420" stroke="#607D8B" stroke-width="2" fill="none" marker-end="url(#arr)" stroke-dasharray="5 5" opacity="0.5"/>
+  <text x="415" y="435" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">禁止升级 (防死锁)</text>
+
+  <rect x="30" y="455" width="740" height="30" fill="#FFFFFF" stroke="none"/>
+  <rect x="50" y="465" width="15" height="10" fill="#E8F5E9" stroke="#4CAF50"/>
+  <text x="75" y="475" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">读读共享</text>
+  <rect x="160" y="465" width="15" height="10" fill="#FFEBEE" stroke="#f44336"/>
+  <text x="185" y="475" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">读写互斥</text>
+  <rect x="280" y="465" width="15" height="10" fill="#FFF3E0" stroke="#FF9800"/>
+  <text x="305" y="475" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">状态判断</text>
+  <rect x="390" y="465" width="15" height="10" fill="#E3F2FD" stroke="#2196F3"/>
+  <text x="415" y="475" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">AQS状态变量</text>
+</svg>

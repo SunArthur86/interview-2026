@@ -216,3 +216,8 @@ flowchart TD
 | 1:20 | 合规审计流程图 | 数据使用/AI决策全链路可追溯。 | 审计留痕 |
 | 1:50 | 概念结构示意图 | 隐私法/GMP/GCP/医疗器械监管。 | 医药合规 |
 | 3:30 | 总结卡 | 一句话记忆：全链路：数据/输入/输出/决策防护。 下期可以接着聊：Prompt 注入怎么防。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-034.svg" alt="【生物医药 AI】企业级 AI 安全合规怎么做（脱敏/注入防护/审计/医药合规）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

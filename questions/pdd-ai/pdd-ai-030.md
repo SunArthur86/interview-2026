@@ -457,3 +457,8 @@ flowchart TD
 | 1:30 | 流程图：箭头串联各环节 | 要点是：TraceId 全链路透传 | 关键机制 |
 | 2:09 | 代码片段 + 注释高亮 | 要点是：统一标准 + 共享平台 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——Metrics 和日志区别？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-030.svg" alt="【拼多多 AI 中台】可观测性和跨团队治理怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

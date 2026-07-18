@@ -278,3 +278,8 @@ public class TraceIdRunnable implements Runnable {
 | 0:15 | 线程池工作流程图 | 先说核心：线程池预先创建线程反复利用，用「核心线程数 + 队列 + 最大线程数 + 拒绝策略」四级兜底，应对流量洪峰。 | 核心定义 |
 | 0:30 | 概念结构示意图 | 核心线程 → 队列 → 非核心线程 → 拒绝。 | 任务提交 |
 | 1:30 | 总结卡 | 一句话记忆：提交顺序：核心线程 → 队列 → 非核心线程 → 拒绝（注意是先队列后扩容！）。 下期可以接着聊：线程数怎么设置。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-003.svg" alt="【蚂蚁风控】线程池的工作原理？拒绝策略有哪些？你们风控的线程池是怎么配置的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

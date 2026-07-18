@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">ChannelFuture 与 JDK Future 的区别？</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">JDK 的 Future 只能&quot;主动去问&quot;操作完没完（get() 阻塞死等或循环 isDone），非常繁琐；Netty 的 ChannelFuture 支持&quot;…</text>
+
+  <rect x="40" y="80" width="340" height="340" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <rect x="420" y="80" width="340" height="340" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="210" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#1565C0">JDK Future</text>
+  <text x="590" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#E65100">ChannelFuture</text>
+  <circle cx="400" cy="240" r="28" fill="#9C27B0"/>
+  <text x="400" y="246" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">VS</text>
+  <text x="60" y="138" font-size="11.5" fill="#1565C0">✓ 只能主动询问</text>
+  <text x="60" y="170" font-size="11.5" fill="#1565C0">✓ get() 阻塞死等</text>
+  <text x="60" y="202" font-size="11.5" fill="#1565C0">✓ 循环 isDone() 繁琐</text>
+  <text x="60" y="234" font-size="11.5" fill="#1565C0">✓ 轮询模式</text>
+  <text x="440" y="138" font-size="11.5" fill="#E65100">✓ 注册 Listener</text>
+  <text x="440" y="170" font-size="11.5" fill="#E65100">✓ 完成时回调</text>
+  <text x="440" y="202" font-size="11.5" fill="#E65100">✓ operateComplete()</text>
+  <text x="440" y="234" font-size="11.5" fill="#E65100">✓ 推送模式</text>
+  <text x="40" y="445" font-size="12" font-weight="700" fill="#37474F">本质：JDK Future=只能手动检查是否完成或阻塞等待(繁琐)</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">JDK Future</text>
+  <rect x="192" y="470" width="14" height="14" rx="3" fill="#FF9800"/>
+  <text x="212" y="482" font-size="11" fill="#37474F">ChannelFuture</text>
+</svg>

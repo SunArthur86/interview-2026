@@ -127,6 +127,10 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 2. **同步锁问题**：为什么建议用 ReentrantLock 替代 synchronized？（避免 Pinning 导致的 Carrier Thread 阻塞）
 3. **兼容性**：旧代码运行在虚拟线程上需要注意什么？（避免在 synchronized 中做 IO 操作）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-137.svg" alt="JDK 21 虚拟线程（Virtual Thread）的原理是什么？它和平台线程有什么本质区别？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质区别：平台1:1映射OS且创建成本高，虚拟N:M映射由JVM调度且极廉价

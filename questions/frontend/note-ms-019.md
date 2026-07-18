@@ -131,6 +131,9 @@ graph TD
     D --> D2["行为埋点与反馈大盘"]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-019.svg" alt="【月之暗面面经】如果让你接手这类桌面产品，你前三个月先补哪三块？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 首补桌面底座：摸透 Electron/Tauri 底层机制、多进程通信与内存优化

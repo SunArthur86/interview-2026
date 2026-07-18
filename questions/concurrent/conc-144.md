@@ -105,6 +105,10 @@ public class SafeThreadLocal<T> {
 }
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-144.svg" alt="ThreadLocal 的内存泄漏原理是什么？为什么在线程池中使用 ThreadLocal 特别危险？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 结构：每个 Thread 持有 ThreadLocalMap，而 Map 的 Key 是弱引用，Value 是强引用。

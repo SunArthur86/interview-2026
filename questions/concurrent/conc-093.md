@@ -87,6 +87,10 @@ memory_points:
 3.  **signal 和 broadcast 的区别？**
     *   回答要点：signal 只唤醒一个，效率高；broadcast 唤醒所有，容易造成“惊群效应”（大量线程竞争锁），但在特定场景下（如状态改变对所有线程可见）是必须的。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-093.svg" alt="什么是条件变量？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：用于通知线程状态改变，自身不是锁，但必须与互斥锁配合使用。

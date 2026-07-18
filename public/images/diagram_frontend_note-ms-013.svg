@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">如何设计 AI 桌面端的产物 diff，既能给新手看，也能给高手看？</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">分层Diff：新手看摘要级变化(改了什么/为什么)，高手看行级/Token级详细对比。可切换视图层级。</text>
+
+  <text x="400" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">分层 Diff：按需展开细节</text>
+  <rect x="60" y="130" width="340" height="90" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="230.0" y="172.0" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">摘要层 (新手)</text>
+  <text x="230.0" y="189.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">AI 改了什么 + 为什么</text>
+  <rect x="420" y="130" width="340" height="90" rx="8" fill="#9C27B0" stroke="#9C27B0" stroke-width="2"/>
+  <text x="590.0" y="172.0" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">行级/Token 层 (高手)</text>
+  <text x="590.0" y="189.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">精确对比</text>
+  <text x="40" y="270" font-size="13" font-weight="700" fill="#37474F">颜色标注</text>
+  <rect x="60" y="290" width="200" height="45" rx="8" fill="#4CAF50"/>
+  <text x="160" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">新增 +</text>
+  <rect x="300" y="290" width="200" height="45" rx="8" fill="#f44336"/>
+  <text x="400" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">删除 -</text>
+  <rect x="540" y="290" width="200" height="45" rx="8" fill="#FF9800"/>
+  <text x="640" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">修改 ~</text>
+  <rect x="60" y="370" width="340" height="60" rx="8" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+  <text x="230.0" y="397.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">选择性接受</text>
+  <text x="230.0" y="414.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">逐项 accept</text>
+  <rect x="420" y="370" width="340" height="60" rx="8" fill="#f44336" stroke="#f44336" stroke-width="2"/>
+  <text x="590.0" y="397.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">选择性拒绝</text>
+  <text x="590.0" y="414.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">逐项 reject</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">摘要</text>
+  <rect x="136" y="470" width="14" height="14" rx="3" fill="#9C27B0"/>
+  <text x="156" y="482" font-size="11" fill="#37474F">行级</text>
+  <rect x="192" y="470" width="14" height="14" rx="3" fill="#4CAF50"/>
+  <text x="212" y="482" font-size="11" fill="#37474F">新增</text>
+  <rect x="248" y="470" width="14" height="14" rx="3" fill="#f44336"/>
+  <text x="268" y="482" font-size="11" fill="#37474F">删除</text>
+</svg>

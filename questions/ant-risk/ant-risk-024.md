@@ -402,3 +402,8 @@ public RiskResult fuse(Event e, List<RuleResult> rules, ModelResult model) {
 | 1:20 | 流程图 | A/B、影子流量、灰度切流。 | 模型版本管理 |
 | 1:50 | 代码示例截图 | 每条决策有命中规则 + 模型分。 | 可解释性 |
 | 3:30 | 总结卡 | 一句话记忆：决策三路：名单（前置）+ 规则（专家）+ 模型（数据）。 下期可以接着聊：规则和模型冲突怎么处理。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-024.svg" alt="【蚂蚁风控】设计一个实时风控决策引擎，融合规则、模型、名单 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

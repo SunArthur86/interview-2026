@@ -85,6 +85,12 @@ Data:  x  y  z  w                Data:  x  y  z
 3. **Follower 宕机恢复**：Follower 重启后，如果日志落后太多，Leader 会发送 `InstallSnapshot RPC` 直接发送快照数据，而不是逐条发送日志。
 4. **成员变更**：直接修改集群配置可能导致出现两个 Majority（例如从3节点变更为4节点期间），导致脑裂。Raft 采用 **Joint Consensus（两阶段变更）** 或 **Single-server changes（单节点变更）** 来安全地在配置变更期间保持多数派一致性。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-051.svg" alt="Raft 协议的 Leader 选举和日志复制流程是什么？为什么比 Paxos 更容易理解？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大核心：Leader选举、日志复制、安全性

@@ -199,3 +199,8 @@ flowchart TD
 | 1:20 | 概念结构示意图 | Cross-Encoder 精排，提升精度。 | 重排 |
 | 1:50 | 流程图 | 复杂问题拆步串行检索。 | 多跳检索 |
 | 3:30 | 总结卡 | 一句话记忆：查询改写+多路召回提召回率。 下期可以接着聊：多跳检索怎么实现。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-023.svg" alt="【生物医药 AI】RAG 怎么进阶（召回率/重排/多跳/HyDE）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

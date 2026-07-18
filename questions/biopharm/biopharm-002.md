@@ -173,3 +173,8 @@ flowchart TD
 | 1:20 | 排序模型对比图 | 召回靠向量检索，精度靠重排模型（Cross-Encoder）。 | 召回靠向量检索 |
 | 1:50 | 概念结构示意图 | 每个生成句子要能溯源到具体文档段落。 | 引用回溯 |
 | 3:30 | 总结卡 | 一句话记忆：七步链路：解析→切分→Embedding→入库→检索→重排→生成。 下期可以接着聊：切分策略有哪些。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-002.svg" alt="【生物医药 AI】RAG 全链路怎么设计（解析到生成）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

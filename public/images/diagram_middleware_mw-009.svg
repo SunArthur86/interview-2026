@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">RPC通讯过程是怎样的？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">将本地调用转化为网络二进制传输，并通过ID匹配实现异步回调同步化。</text>
+  <rect x="60" y="120" width="280" height="280" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="200" y="148" text-anchor="middle" font-size="14" font-weight="700" fill="#1565C0">Consumer（调用方）</text>
+  <rect x="80" y="170" width="240" height="45" rx="4" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="200" y="189" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">业务代码</text>
+  <text x="200" y="206" text-anchor="middle" font-size="10" fill="#1565C0">调用本地方法</text>
+  <rect x="80" y="225" width="240" height="45" rx="4" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="200" y="244" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">动态代理</text>
+  <text x="200" y="261" text-anchor="middle" font-size="10" fill="#1565C0">屏蔽远程细节</text>
+  <rect x="80" y="280" width="240" height="45" rx="4" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="200" y="299" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">序列化</text>
+  <text x="200" y="316" text-anchor="middle" font-size="10" fill="#1565C0">对象 → 字节</text>
+  <rect x="80" y="335" width="240" height="45" rx="4" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="200" y="354" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">网络客户端</text>
+  <text x="200" y="371" text-anchor="middle" font-size="10" fill="#1565C0">Netty/HTTP</text>
+  <rect x="460" y="120" width="280" height="280" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="600" y="148" text-anchor="middle" font-size="14" font-weight="700" fill="#2E7D32">Provider（服务方）</text>
+  <rect x="480" y="170" width="240" height="45" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="600" y="189" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">网络服务端</text>
+  <text x="600" y="206" text-anchor="middle" font-size="10" fill="#2E7D32">接收请求</text>
+  <rect x="480" y="225" width="240" height="45" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="600" y="244" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">反序列化</text>
+  <text x="600" y="261" text-anchor="middle" font-size="10" fill="#2E7D32">字节 → 对象</text>
+  <rect x="480" y="280" width="240" height="45" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="600" y="299" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">反射调用</text>
+  <text x="600" y="316" text-anchor="middle" font-size="10" fill="#2E7D32">执行业务</text>
+  <rect x="480" y="335" width="240" height="45" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="600" y="354" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">返回结果</text>
+  <text x="600" y="371" text-anchor="middle" font-size="10" fill="#2E7D32">序列化回写</text>
+  <line x1="340" y1="240" x2="460" y2="240" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="460" y1="290" x2="340" y2="290" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="400" y="230" font-size="10" font-weight="600" fill="#FF9800">网络</text>
+  <text x="400" y="305" font-size="10" font-weight="600" fill="#FF9800">回写</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Dubbo/gRPC：代理透明化远程调用；序列化 + 注册中心 + 负载均衡</text>
+</svg>

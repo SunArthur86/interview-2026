@@ -736,6 +736,9 @@ function loadValidationConfig(): Map<string, RuleConfig> {
 
 这套方案的收益是：在文件到达后端 AI 服务之前，前端已经拦截了 80%+ 的明显错误（格式错误、文件损坏、明显不相关），大幅节省了 Token 成本和用户等待时间，同时通过分层提示策略保证了优秀的用户体验——不让用户觉得被"管得太死"。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-015.svg" alt="【月之暗面面经】如果用户给了错误的文件上下文，前端怎样尽早发现并提示？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心策略快速失败：在前端尽早拦截错误，避免浪费后端算力和用户时间

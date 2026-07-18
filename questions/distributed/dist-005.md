@@ -83,6 +83,12 @@ ipvsadm -a -t 192.168.0.100:80 -r 10.0.0.2:8080 -m -w 1
 service ipvsadm save
 ```
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-005.svg" alt="LVS NAT模式的工作原理是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：LB 作为 RS 网关，通过内核 Netfilter 实现 DNAT（请求）和 SNAT（响应）

@@ -178,3 +178,8 @@ memory_points:
 | 1:20 | 流程图 | RAG、工具市场、模型路由、Workflow 引擎沉淀为共享服务。 | 能力中台 |
 | 1:50 | API 网关架构图 | 鉴权限流计量 + 模型路由 + 流式 + 审计的统一入口。 | 统一网关 |
 | 3:30 | 总结卡 | 一句话记忆：五层架构：接入/编排/能力/数据/基础设施。 下期可以接着聊：多租户怎么隔离。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-011.svg" alt="【生物医药 AI】企业级 AI Agent 平台整体架构怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

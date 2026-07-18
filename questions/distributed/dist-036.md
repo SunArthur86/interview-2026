@@ -89,6 +89,12 @@ public synchronized long nextId() {
 2. **雪花算法的机器ID分配**：10位机器ID支持1024个节点。可以通过配置文件指定，或者利用ZooKeeper的顺序节点自动注册分配。
 3. **为什么Kafka的ID是有序的**？Kafka早期使用ZK生成，性能差；后期使用Snowflake算法，保证了Partition内的有序性和单调性。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-036.svg" alt="分布式ID有哪些生成方案？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 方案对比：UUID无序致页分裂，雪花算法趋势递增，号段模式严格递增。

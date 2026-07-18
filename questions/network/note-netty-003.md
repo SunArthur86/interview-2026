@@ -194,6 +194,9 @@ native transport 的局限：一、平台特定——Epoll 只在 Linux、KQueue
 三条经验：一、默认 NIO——跨平台、稳定、文档全，新项目首选；二、Linux 生产上 Epoll——性能提升 10-30% 且支持 TCP_FASTOPEN 等特性，通过 `<dependency>` 加 netty-transport-native-epoll 切换；三、EventLoop 不阻塞——无论 NIO 还是 Epoll，handler 都不能阻塞，否则整个 EventLoop 卡住。核心原则："按平台和性能需求选 transport，但编程模型一致（EventLoop + ChannelHandler），代码可平滑迁移。" 这套经验也适用于其他 native 加速场景（如 RocksDB 的 JNI、TensorRT 的 native 推理），核心是"在热点路径用 native，在通用路径用 Java"。
 
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_network_note-netty-003.svg" alt="为什么 Netty 使用 NIO 而不是 AIO？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** Netty 选 NIO 而非 AIO，本质是因为在 Linux（服务端主流 OS）上，AIO 是用 epoll 强行模拟出来的，并不比直接用 NIO(epoll) 快，反而带来额外复杂度和回调地狱。既然底层是同一个东西，不如直接用更简单可控的 NIO。

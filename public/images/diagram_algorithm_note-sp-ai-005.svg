@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">冒泡排序的时间复杂度？</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">冒泡排序最好O(n)已排序时，平均和最坏O(n²)，空间O(1)，是稳定排序</text>
+
+  <rect x="40" y="80" width="340" height="340" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <rect x="420" y="80" width="340" height="340" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="210" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#1565C0">时间复杂度</text>
+  <text x="590" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#E65100">空间与稳定性</text>
+  <circle cx="400" cy="240" r="28" fill="#9C27B0"/>
+  <text x="400" y="246" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">VS</text>
+  <text x="60" y="138" font-size="11.5" fill="#1565C0">✓ 最好 O(n) [已排序+flag]</text>
+  <text x="60" y="170" font-size="11.5" fill="#1565C0">✓ 平均 O(n²)</text>
+  <text x="60" y="202" font-size="11.5" fill="#1565C0">✓ 最坏 O(n²)</text>
+  <text x="440" y="138" font-size="11.5" fill="#E65100">✓ 空间 O(1) 原地排序</text>
+  <text x="440" y="170" font-size="11.5" fill="#E65100">✓ 稳定排序 (相等不交换)</text>
+  <text x="440" y="202" font-size="11.5" fill="#E65100">✓ 比较相邻元素</text>
+  <text x="40" y="445" font-size="12" font-weight="700" fill="#37474F">本质：最好O(n)当数组已排序（加flag优化）</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">时间复杂度</text>
+  <rect x="157" y="470" width="14" height="14" rx="3" fill="#FF9800"/>
+  <text x="177" y="482" font-size="11" fill="#37474F">空间与稳定性</text>
+</svg>

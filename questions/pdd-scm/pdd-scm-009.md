@@ -252,3 +252,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：状态后端（RocksDB）保存窗口累计 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：Checkpoint（Chandy-Lamport）保证 exactly-once | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-009.svg" alt="【拼多多供应链】Flink 怎么做实时计算？供应链的实时场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

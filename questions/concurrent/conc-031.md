@@ -94,6 +94,10 @@ System.out.println(t.getState()); // 输出 TIMED_WAITING
 3. 如何区分线程是处于“正在运行”还是“准备就绪”？
 4. `BLOCKED` 和 `WAITING` 的本质区别是什么？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-031.svg" alt="什么是线程的生命周期？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 六大状态口诀：新建、运行、阻塞、无限等待、限期等待、终止。

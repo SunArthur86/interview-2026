@@ -235,3 +235,8 @@ flowchart LR
 | 0:40 | 流程图 | LLM 原理/RAG/Agent/Tool Calling/MCP。 | 补 AI 认知 |
 | 1:05 | 代码示例截图 | 跑通 RAG→Agent→Workflow 全链路。 | 补 AI 实践 |
 | 2:30 | 总结卡 | 一句话记忆：后端能力是 AI 稀缺资产（90%是工程）。 下期可以接着聊：要补哪些 AI 知识。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-039.svg" alt="【生物医药 AI】Java/后端架构师怎么转 AI 工程（这份 JD 视角）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

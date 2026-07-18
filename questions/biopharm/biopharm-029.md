@@ -223,3 +223,8 @@ flowchart TD
 | 1:20 | 流程图 | 文献抽取+结构化数据库融合+人工校验。 | 图谱构建 |
 | 1:50 | 代码示例截图 | 向量检索+图谱查询融合，支持多跳推理。 | GraphRAG |
 | 3:30 | 总结卡 | 一句话记忆：实体抽取找节点，关系建模连边。 下期可以接着聊：实体/关系怎么抽取。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-029.svg" alt="【生物医药 AI】医药知识图谱怎么构建（实体/关系/GraphRAG）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

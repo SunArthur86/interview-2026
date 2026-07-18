@@ -212,3 +212,8 @@ flowchart TD
 | 1:20 | 流程图 | 敏捷开发+质量保障+合规。 | 研发 |
 | 1:50 | 代码示例截图 | 部署+集成+培训+验收。 | 交付 |
 | 3:30 | 总结卡 | 一句话记忆：全生命周期：需求→方案→研发→交付→运营。 下期可以接着聊：怎么挖真实需求。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-030.svg" alt="【生物医药 AI】B 端 AI Agent 全生命周期 FDE 怎么做（需求→交付→运营）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

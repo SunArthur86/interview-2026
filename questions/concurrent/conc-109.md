@@ -93,6 +93,10 @@ listen(server_fd, 5);
 3. 信号量解决了什么问题？
    - 解决了进程同步和互斥问题，防止多个进程同时访问共享资源导致的数据不一致。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-109.svg" alt="什么是进程通信？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心分类：管道、消息队列、共享内存、信号量、套接字

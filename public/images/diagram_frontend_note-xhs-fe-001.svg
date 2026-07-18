@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">AI 对话产品中 SSE 流式渲染如何优化？前端主线程被堵塞怎么解决？</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">AI对话产品的SSE流式渲染如果在前端主线程处理，每个token到达都触发DOM更新，会导致Long Task和FPS骤降。优化核心是把渲染逻辑移到Web W…</text>
+
+  <text x="40" y="92" font-size="13" font-weight="700" fill="#C62828">问题：每个 token → setState → 重渲染 → Long Task → 掉帧</text>
+  <rect x="40" y="120" width="200" height="70" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="140.0" y="152.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">SSE 数据流</text>
+  <text x="140.0" y="169.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">Last-Event-ID</text>
+  <rect x="280" y="120" width="220" height="70" rx="8" fill="#FF9800" stroke="#FF9800" stroke-width="2"/>
+  <text x="390.0" y="152.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Web Worker</text>
+  <text x="390.0" y="169.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">接收解析不阻塞主线程</text>
+  <rect x="540" y="120" width="220" height="70" rx="8" fill="#9C27B0" stroke="#9C27B0" stroke-width="2"/>
+  <text x="650.0" y="152.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">ReadableStream</text>
+  <text x="650.0" y="169.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">Buffer 批量更新</text>
+  <line x1="240" y1="155" x2="280" y2="155" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="500" y1="155" x2="540" y2="155" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="220" y="240" width="360" height="70" rx="8" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+  <text x="400.0" y="272.0" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">RequestAnimationFrame…</text>
+  <text x="400.0" y="289.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">不满一帧不刷</text>
+  <line x1="400" y1="190" x2="400" y2="240" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="400.0" y="210.0" text-anchor="middle" font-size="11" font-weight="600" fill="#607D8B">提交到主线程</text>
+  <rect x="280" y="350" width="240" height="50" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="400.0" y="372.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">UI 流畅渲染</text>
+  <text x="400.0" y="389.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">60 FPS</text>
+  <line x1="400" y1="310" x2="400" y2="350" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="40" y="445" font-size="12" font-weight="700" fill="#37474F">断线处理：Last-Event-ID 续传 + UI 淡入过渡无感知</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">SSE</text>
+  <rect x="143" y="470" width="14" height="14" rx="3" fill="#FF9800"/>
+  <text x="163" y="482" font-size="11" fill="#37474F">Worker</text>
+  <rect x="227" y="470" width="14" height="14" rx="3" fill="#9C27B0"/>
+  <text x="247" y="482" font-size="11" fill="#37474F">Buffer</text>
+  <rect x="311" y="470" width="14" height="14" rx="3" fill="#4CAF50"/>
+  <text x="331" y="482" font-size="11" fill="#37474F">RAF</text>
+</svg>

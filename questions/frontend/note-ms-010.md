@@ -145,6 +145,9 @@ flowchart TD
     S4 -.->|触发| E_Data
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-010.svg" alt="【月之暗面面经】本地索引、云端推理和产物导出是三段链路，前端怎样串起来？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 分层解耦架构：前端通过统一任务调度层串联三段链路，不相互阻塞

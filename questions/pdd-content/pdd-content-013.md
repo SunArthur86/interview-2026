@@ -249,3 +249,8 @@ Feign 超时但下游自测正常，常见根因排查：
 | 1:04 | 能力/参数拆解表 | 要点是：调用：Feign（接口） | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：负载：LoadBalancer | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——Feign 超时怎么配？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-content_pdd-content-013.svg" alt="【拼多多内容】Spring Cloud + Feign 服务治理（内容中台）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

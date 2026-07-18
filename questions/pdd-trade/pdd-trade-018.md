@@ -198,3 +198,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：BM25 打分（词频/文档长度/IDF） | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：中文分词 IK | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-018.svg" alt="【拼多多交易】ES 怎么做订单/商品搜索？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -84,6 +84,12 @@ public class GatewayConfig {
 2. **聚合服务的优缺点**：在网关聚合虽然减少了客户端请求，但会增加网关的复杂度和响应延迟（需等待最慢的服务返回）。通常建议在后端服务层聚合（BFF层），而非网关层做复杂业务聚合。
 3. **如何保证高可用**：网关挂了整个系统瘫痪，如何解决？（答：网关本身无状态，前面挂 LVS/Nginx 做四层负载均衡，实现热备）。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-014.svg" alt="微服务中API网关的作用是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：微服务统一流量入口，类似 Facade 模式，处理所有非业务横向关注点。

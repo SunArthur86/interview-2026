@@ -188,3 +188,8 @@ def route(req):
 | 1:20 | 成本优化对比表 | 批处理、KV Cache、量化、多模型复用 GPU。 | 推理优化 |
 | 1:50 | 概念结构示意图 | OpenAI 兼容协议屏蔽各供应商差异。 | 统一抽象 |
 | 3:30 | 总结卡 | 一句话记忆：三层：网关→推理→可观测。 下期可以接着聊：怎么屏蔽模型差异。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-014.svg" alt="【生物医药 AI】多模型路由与推理平台架构怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

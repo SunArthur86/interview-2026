@@ -251,3 +251,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：缓存：Caffeine + Redis 多级 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：扩容：无状态 HPA + 有状态分片 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——缓存击穿/穿透/雪崩怎么防？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-026.svg" alt="【拼多多交易】高并发四件套：池化/缓存/扩容/异步队列？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

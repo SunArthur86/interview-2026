@@ -97,6 +97,12 @@ public class CustomWeightedRule extends AbstractLoadBalancerRule {
 3.  **客户端负载均衡和服务端负载均衡的区别？**（答：客户端负载均衡（如 Ribbon）由消费者自己维护服务列表并选择；服务端（如 Nginx、LVS）由中心节点分配）
 4.  **如何自定义 Ribbon 策略？**（答：实现 `IRule` 接口或继承 `AbstractLoadBalancerRule`，配置为 Bean 或在配置文件中指定）
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-008.svg" alt="Ribbon内置的负载均衡策略是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 基础策略：轮询是默认策略，而随机策略适合海量请求下的大数均匀分布

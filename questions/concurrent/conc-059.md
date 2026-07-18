@@ -78,6 +78,10 @@ try {
 3. **InheritableThreadLocal**：如何实现子线程继承父线程的 ThreadLocal 值？（在创建新线程时，会将父线程的 ThreadLocalMap 复制一份到子线程，但这仅限于线程创建时刻，后续父线程修改对子线程不可见）
 4. **Key 为什么设为弱引用**：如果不设为弱引用会怎样？（如果 Key 是强引用，只要线程不销毁，ThreadLocal 对象就无法被回收，造成 Key 的内存泄漏）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-059.svg" alt="ThreadLocal的原理和使用场景是什么？内存泄漏问题？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：每个线程内部维护 ThreadLocalMap，以 ThreadLocal 为 Key 隔离数据，实现无锁并发。

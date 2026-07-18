@@ -161,6 +161,9 @@ flowchart TD
     H -- "true: 发生过交换" --> B
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-sp-ai-005.svg" alt="冒泡排序的时间复杂度？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 时间复杂度记口诀：最好O(n)，最坏平均皆O(n²)。因为未优化全遍历为n²，优化后一轮无交换提前终止为n。

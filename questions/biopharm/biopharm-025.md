@@ -178,3 +178,8 @@ LLMOps 本质是**"给概率性 AI 应用装上可度量、可监控、可迭代
 | 1:20 | 概念结构示意图 | 离线评测集 + 在线指标（质量/幻觉/满意度）。 | 评估 |
 | 1:50 | 监控大盘截图 | 性能/成本/质量/漂移，异常告警。 | 监控 |
 | 3:30 | 总结卡 | 一句话记忆：闭环：网关→推理→评估→监控→迭代。 下期可以接着聊：怎么建评测集。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-025.svg" alt="【生物医药 AI】AI Harness / LLMOps 全链路怎么搭？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

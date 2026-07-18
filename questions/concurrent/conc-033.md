@@ -85,6 +85,10 @@ renice +5 -p 1234
 3. 时间片轮转（RR）算法中，时间片大小的选择对系统性能有何影响？
 4. 为什么现代操作系统通常使用“多级反馈队列调度算法”？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-033.svg" alt="什么是进程调度？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定义：OS 决定哪个就绪进程获得 CPU，分为高（作业）、中（内存）、低（进程）三级调度。

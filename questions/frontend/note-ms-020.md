@@ -130,6 +130,9 @@ flowchart TD
     end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-020.svg" alt="【月之暗面面经】AI-Native 桌面产品从 Demo 到商用，前端最容易在哪些点翻车？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心矛盾：Demo重演示而商用重稳定，必须在内存泄漏与全局异常处做防御

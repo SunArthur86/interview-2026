@@ -443,3 +443,8 @@ flowchart TD
 | 1:20 | 模型量化对比表 | 自回归推理中间结果缓存。 | KV Cache |
 | 1:50 | 概念结构示意图 | 动态拼 batch 提升利用率。 | Continuous Batching |
 | 3:30 | 总结卡 | 一句话记忆：vLLM/PagedAttention：KV cache 分页管理，吞吐 5-10 倍。 下期可以接着聊：KV cache 占多少显存。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-034.svg" alt="【蚂蚁风控】LLM 推理怎么优化？vLLM 原理？怎么降本增效？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

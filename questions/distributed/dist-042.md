@@ -102,6 +102,12 @@ end
    - 降级：目的保核心，牺牲非核心功能（如关闭评论）。
    - 熔断：目的防止雪崩，检测到下游不可用时自动断开调用。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-042.svg" alt="常见的限流算法有哪些？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大算法：固定窗口、滑动窗口、漏桶、令牌桶

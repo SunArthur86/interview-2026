@@ -428,3 +428,8 @@ public class ConsistentHashBalancer {
 | 0:40 | 概念结构示意图 | 轮询/随机/最少连接/一致性哈希/权重。 | 算法 |
 | 1:05 | 流程图 | 线程池/信号量/集群/容器/物理。 | 隔离 |
 | 2:30 | 总结卡 | 一句话记忆：负载均衡：DNS/网关/服务端/RPC 层。 下期可以接着聊：一致性哈希解决什么问题。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-028.svg" alt="【蚂蚁风控】高可用——负载均衡、隔离、压测，怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

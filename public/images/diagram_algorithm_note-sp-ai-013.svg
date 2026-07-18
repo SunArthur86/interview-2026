@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">手撕二叉树目标和（LeetCode 113. 路径总和 II）</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">DFS回溯——进入节点加路径减目标和，叶子且和为0记录，递归左右，回溯移除</text>
+
+  <rect x="320" y="80" width="160" height="50" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="400.0" y="110.0" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">TreeNode</text>
+  <line x1="400" y1="130" x2="130" y2="175" stroke="#B0BEC5" stroke-width="1.5"/>
+  <polygon points="130,155.0 205.0,185 130,215.0 55.0,185" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/><text x="130" y="189" text-anchor="middle" font-size="11" fill="#455A64" font-weight="700">节点值</text>
+  <rect x="50" y="265" width="160" height="60" rx="8" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+  <text x="130.0" y="300.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">在(min,max)区间</text>
+  <line x1="130" y1="215" x2="130" y2="263" stroke="#4CAF50" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="130" x2="315" y2="175" stroke="#B0BEC5" stroke-width="1.5"/>
+  <polygon points="315,155.0 390.0,185 315,215.0 240.0,185" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/><text x="315" y="189" text-anchor="middle" font-size="11" fill="#455A64" font-weight="700">左子树</text>
+  <rect x="235" y="265" width="160" height="60" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="315.0" y="300.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">全部 &lt; 当前</text>
+  <line x1="315" y1="215" x2="315" y2="263" stroke="#2196F3" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="130" x2="500" y2="175" stroke="#B0BEC5" stroke-width="1.5"/>
+  <polygon points="500,155.0 575.0,185 500,215.0 425.0,185" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/><text x="500" y="189" text-anchor="middle" font-size="11" fill="#455A64" font-weight="700">右子树</text>
+  <rect x="420" y="265" width="160" height="60" rx="8" fill="#FF9800" stroke="#FF9800" stroke-width="2"/>
+  <text x="500.0" y="300.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">全部 &gt; 当前</text>
+  <line x1="500" y1="215" x2="500" y2="263" stroke="#FF9800" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="130" x2="685" y2="175" stroke="#B0BEC5" stroke-width="1.5"/>
+  <polygon points="685,155.0 760.0,185 685,215.0 610.0,185" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/><text x="685" y="189" text-anchor="middle" font-size="11" fill="#455A64" font-weight="700">中序</text>
+  <rect x="605" y="265" width="160" height="60" rx="8" fill="#9C27B0" stroke="#9C27B0" stroke-width="2"/>
+  <text x="685.0" y="300.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">严格递增</text>
+  <line x1="685" y1="215" x2="685" y2="263" stroke="#9C27B0" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="40" y="455" font-size="12" font-weight="700" fill="#37474F">DFS前序遍历访问每个节点</text>
+  
+</svg>

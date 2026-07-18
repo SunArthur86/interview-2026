@@ -96,6 +96,10 @@ memory_points:
    - `shutdown()`：不再接受新任务，等待已提交任务（包括队列中的）执行完。
    - `shutdownNow()`：不再接受新任务，尝试停止正在执行的任务（通过 `Thread.interrupt()`），并返回队列中未执行的任务列表。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-101.svg" alt="什么是线程池？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心作用：降低资源消耗、提高响应速度、提高线程可管理性

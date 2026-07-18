@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">MySQL的本地事务实现方案</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">利用Undo Log回滚、Redo Log持久化及锁机制保证ACID。</text>
+  <rect x="80" y="115" width="640" height="80" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="120" y="150" font-size="14" font-weight="700" fill="#1565C0">① 生产端</text>
+  <text x="120" y="172" font-size="11" fill="#1565C0">Ack 确认 / 事务消息</text>
+  <text x="460" y="150" font-size="11" font-weight="600" fill="#1565C0">同步发送 + 重试</text>
+  <rect x="80" y="225" width="640" height="80" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="120" y="260" font-size="14" font-weight="700" fill="#E65100">② Broker 存储</text>
+  <text x="120" y="282" font-size="11" fill="#E65100">同步刷盘 + 副本</text>
+  <text x="460" y="260" font-size="11" font-weight="600" fill="#E65100">主从同步复制</text>
+  <rect x="80" y="335" width="640" height="80" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="120" y="370" font-size="14" font-weight="700" fill="#2E7D32">③ 消费端</text>
+  <text x="120" y="392" font-size="11" fill="#2E7D32">手动提交 Offset</text>
+  <text x="460" y="370" font-size="11" font-weight="600" fill="#2E7D32">业务完成后再 ack</text>
+  <line x1="400" y1="195" x2="400" y2="225" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="305" x2="400" y2="335" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="400" y="435" text-anchor="middle" font-size="12" fill="#666" font-weight="700">可靠性 vs 性能：权衡取舍</text>
+  <text x="400" y="458" text-anchor="middle" font-size="11" fill="#666">同步刷盘 → 可靠性高但延迟高；异步刷盘 → 性能高但有丢数据风险</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">全链路防丢失：生产端 Ack + Broker 持久化 + 消费端手动 Offset 提交</text>
+</svg>

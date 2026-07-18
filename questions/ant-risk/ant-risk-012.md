@@ -309,3 +309,8 @@ String decision = (String) runner.execute(rule, ctx, null, false, true);
 | 0:40 | 流程图 | Drools DRL、QLExpress、Aviator、自研脚本。 | DSL |
 | 1:05 | 代码示例截图 | 构建网络，匹配所有规则。 | RETE 算法 |
 | 2:30 | 总结卡 | 一句话记忆：规则引擎 = 规则 DSL + 执行引擎 + 决策输出，解耦策略与代码。 下期可以接着聊：你用过什么规则引擎。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-012.svg" alt="【蚂蚁风控】讲一下风控规则引擎怎么设计？用什么实现？怎么让规则动态生效？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

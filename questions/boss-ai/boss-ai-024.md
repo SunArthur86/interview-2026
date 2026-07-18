@@ -281,3 +281,8 @@ flowchart TD
 | 0:40 | Tool Calling 流程图 | LLM 看到工具描述，自主选择调用。 | 工具发现 |
 | 1:05 | 安全防御架构图 | 参数校验 + 权限校验 + 调用 + 结果回填。 | 执行 |
 | 2:30 | 总结卡 | 一句话记忆：Tool Calling 三步：选择→执行→回填。 下期可以接着聊：工具描述怎么写。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-024.svg" alt="【巨剧核 AI 陪伴】Tool Calling 工程实践怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

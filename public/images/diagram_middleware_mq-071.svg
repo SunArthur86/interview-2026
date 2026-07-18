@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">mmap-文件内存映射</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">将磁盘文件直接映射到内存，省去内核态到用户态的数据拷贝</text>
+  <rect x="55" y="172" width="130" height="55" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="120" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">L1 本地缓存</text>
+  <text x="120" y="214" text-anchor="middle" font-size="11" fill="#2E7D32">Caffeine</text>
+  <rect x="265" y="172" width="130" height="55" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="330" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">L2 Redis</text>
+  <text x="330" y="214" text-anchor="middle" font-size="11" fill="#E65100">分布式缓存</text>
+  <rect x="475" y="172" width="130" height="55" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="540" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">DB</text>
+  <text x="540" y="214" text-anchor="middle" font-size="11" fill="#1565C0">MySQL</text>
+  <rect x="265" y="75" width="130" height="50" rx="10" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="330" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#6A1B9A">应用</text>
+  <text x="330" y="114" text-anchor="middle" font-size="11" fill="#6A1B9A">Application</text>
+  <line x1="330" y1="125" x2="180" y2="175" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrg)"/>
+  <line x1="400" y1="150" x2="395" y2="175" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrg)"/>
+  <line x1="460" y1="125" x2="600" y2="175" stroke="#FF9800" stroke-width="2" marker-end="url(#arro)"/>
+  <text x="230" y="145" font-size="10" font-weight="600" fill="#4CAF50">1.先查本地</text>
+  <text x="470" y="145" font-size="10" font-weight="600" fill="#FF9800">3.最终回源</text>
+  <text x="400" y="320" text-anchor="middle" font-size="12" fill="#666" font-weight="700">缓存三大问题与策略</text>
+  <rect x="100" y="345" width="200" height="55" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="200" y="368" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">Cache Aside</text>
+  <text x="200" y="386" text-anchor="middle" font-size="10" fill="#1565C0">旁路缓存 · 推荐</text>
+  <rect x="320" y="345" width="200" height="55" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="420" y="368" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">Read/Write Through</text>
+  <text x="420" y="386" text-anchor="middle" font-size="10" fill="#1565C0">读写穿透</text>
+  <rect x="540" y="345" width="200" height="55" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="640" y="368" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">Write Back</text>
+  <text x="640" y="386" text-anchor="middle" font-size="10" fill="#1565C0">异步回写</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">多级缓存：本地（快）→ Redis（共享）→ DB（持久），降低回源压力</text>
+</svg>

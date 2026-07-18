@@ -311,3 +311,8 @@ TiDB 确实解决了大表水平扩展，但有代价。TiDB 的点查 RT 比 My
 | 0:40 | B+ 树索引结构图 | 非叶子只存索引（多路）、叶子存数据、叶子双向链表。 | B+ 树 |
 | 1:05 | 概念结构示意图 | 联合索引 (a,b,c) 能用 a / a,b / a,b,c，不能跳过 b 直接用 c。 | 最左前缀 |
 | 2:30 | 总结卡 | 一句话记忆：聚簇索引叶子存整行，二级索引叶子存主键值（需回表）。 下期可以接着聊：为什么 MySQL 用 B+ 树不用 B 树或红黑树。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-008.svg" alt="【蚂蚁风控】MySQL 索引底层是什么？联合索引最左前缀怎么生效？EXPLAIN 怎么看？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

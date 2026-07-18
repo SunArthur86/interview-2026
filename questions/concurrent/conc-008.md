@@ -107,6 +107,10 @@ t.interrupt(); // 设置标志位，让 while 循环退出
 2. **LockSupport.park() 的响应**：处于 `park` 状态的线程被 `interrupt` 后，会立即返回（不抛异常），可以通过 `Thread.interrupted()` 判断。
 3. **不可中断的阻塞**：Java NIO 中的 `ServerSocketChannel.accept()` 或某些 IO 阻塞可能无法响应中断，需要关闭 Channel 来跳出阻塞。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-008.svg" alt="Interrupt方法结束线程是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质定义：interrupt是协作式终止，仅设置标志位而不强制stop

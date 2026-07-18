@@ -84,6 +84,10 @@ public class SafeStack<T> {
 2. **性能开销**：StampedReference 比 AtomicReference 多了一个 int 的开销，对性能影响大吗？
 3. **适用场景**：为什么还需要 AtomicMarkableReference？（有些场景不需要版本号，只需一个标记，开销更小）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-134.svg" alt="CAS的ABA问题是什么？如何解决？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 问题本质：值由A变B又变A，CAS无法感知中间变化而误判更新成功

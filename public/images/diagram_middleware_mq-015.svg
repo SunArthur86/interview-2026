@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">Kafka 中的长轮询</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">客户端阻塞等待，Broker条件满足或超时后响应</text>
+  <rect x="40" y="190" width="140" height="60" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="110" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">Producer</text>
+  <text x="110" y="234" text-anchor="middle" font-size="11" fill="#1565C0">生产者</text>
+  <rect x="280" y="140" width="240" height="220" rx="10" fill="#FFF8E1" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="165" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">Broker</text>
+  <line x1="295" y1="175" x2="505" y2="175" stroke="#FF9800" stroke-width="1"/>
+  <rect x="300" y="195" width="200" height="40" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="1.5"/>
+  <text x="400" y="220" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">Queue-1</text>
+  <rect x="300" y="245" width="200" height="40" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="1.5"/>
+  <text x="400" y="270" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">Queue-2</text>
+  <rect x="300" y="295" width="200" height="40" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="1.5"/>
+  <text x="400" y="320" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">Queue-3</text>
+  <rect x="595" y="155" width="130" height="50" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="660" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">Consumer-1</text>
+  <text x="660" y="194" text-anchor="middle" font-size="11" fill="#2E7D32">消费者</text>
+  <rect x="595" y="235" width="130" height="50" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="660" y="255" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">Consumer-2</text>
+  <text x="660" y="274" text-anchor="middle" font-size="11" fill="#2E7D32">消费者</text>
+  <line x1="180" y1="220" x2="275" y2="220" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="500" y1="215" x2="590" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="500" y1="265" x2="590" y2="270" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="225" y="210" font-size="10" font-weight="600" fill="#2196F3">发送</text>
+  <text x="525" y="195" font-size="10" font-weight="600" fill="#4CAF50">消费</text>
+  <text x="400" y="395" text-anchor="middle" font-size="12" fill="#666" font-weight="700">三大核心价值</text>
+  <rect x="200" y="410" width="140" height="50" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="270" y="432" text-anchor="middle" font-size="12" font-weight="700" fill="#6A1B9A">解耦</text>
+  <text x="270" y="450" text-anchor="middle" font-size="10" fill="#6A1B9A">Decouple</text>
+  <rect x="360" y="410" width="140" height="50" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="430" y="432" text-anchor="middle" font-size="12" font-weight="700" fill="#6A1B9A">异步</text>
+  <text x="430" y="450" text-anchor="middle" font-size="10" fill="#6A1B9A">Async</text>
+  <rect x="520" y="410" width="140" height="50" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="590" y="432" text-anchor="middle" font-size="12" font-weight="700" fill="#6A1B9A">削峰</text>
+  <text x="590" y="450" text-anchor="middle" font-size="10" fill="#6A1B9A">Peak Shaving</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Kafka/RocketMQ/RabbitMQ：生产 → Broker 暂存 → 消费，异步解耦削峰</text>
+</svg>

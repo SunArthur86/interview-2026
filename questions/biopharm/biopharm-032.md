@@ -233,3 +233,8 @@ flowchart TD
 | 0:40 | 概念结构示意图 | Thought-Action-Observation 循环，推理+工具调用。 | ReAct |
 | 1:05 | 流程图 | 给范例对齐格式/风格/逻辑。 | Few-shot |
 | 2:30 | 总结卡 | 一句话记忆：CoT 分步推理提准确率。 下期可以接着聊：CoT 为什么有效。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-032.svg" alt="【生物医药 AI】Prompt 工程怎么进阶（CoT/ReAct/Few-shot/结构化输出/版本管理）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

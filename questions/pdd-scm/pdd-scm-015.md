@@ -247,3 +247,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：TCC：Try-Confirm-Cancel，业务侵入大，强一致 | 能力拆解 |
 | 1:56 | 流程图：箭头串联各环节 | 要点是：Saga：长事务拆步骤+补偿，最终一致 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-015.svg" alt="【拼多多供应链】分布式事务怎么解决？下单扣库存跨服务怎么保证一致？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -229,3 +229,8 @@ flowchart LR
 | 0:12 | 核心概念图 + 关键词浮现 | 要点是：RDB：bgsave 全量快照，二进制压缩，恢复快但丢最后一段 | 核心概念 |
 | 1:00 | 能力/参数拆解表 | 要点是：AOF：append 写命令，everysec（折中），文本可读 | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-013.svg" alt="【拼多多供应链】Redis 持久化 RDB 和 AOF 怎么选？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

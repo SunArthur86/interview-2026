@@ -392,3 +392,8 @@ GNN 确实能学复杂图模式，但有局限。一是推理 RT——GNN 推理
 | 1:20 | 代码示例截图 | 邻居、度数、最短路径（图数据库 Neo4j/JanusGraph）。 | 在线查询 |
 | 1:50 | 对比表格 | 社区发现（Louvain）、中心度（PageRank）、路径（连通分量）。 | 离线分析 |
 | 3:30 | 总结卡 | 一句话记忆：关系网络 = 节点（实体）+ 边（关系）+ 图算法（拓扑分析）。 下期可以接着聊：图数据库选型。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-023.svg" alt="【蚂蚁风控】用图数据库做风控关系网络怎么设计？怎么发现团伙欺诈？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

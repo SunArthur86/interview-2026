@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+
+  <text x="400" y="30" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">有返回值线程 (Callable & Future)</text>
+  <text x="400" y="50" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">协作机制：定义任务 - 提交调度 - 异步获取</text>
+
+  <!-- 左侧：任务定义 -->
+  <rect x="40" y="80" width="160" height="300" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="120" y="105" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#9C27B0">1. 定义任务</text>
+  <rect x="60" y="125" width="120" height="60" rx="8" fill="#fff" stroke="#9C27B0"/>
+  <text x="120" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">Callable&lt;V&gt;</text>
+  <text x="120" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#607D8B">有返回值 V call()</text>
+  <rect x="60" y="205" width="120" height="60" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-dasharray="4"/>
+  <text x="120" y="230" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">Runnable</text>
+  <text x="120" y="248" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#607D8B">无返回值 run()</text>
+
+  <!-- 中间：线程池 -->
+  <rect x="320" y="80" width="160" height="300" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="105" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#FF9800">2. 提交调度</text>
+  <rect x="340" y="125" width="120" height="60" rx="8" fill="#fff" stroke="#FF9800"/>
+  <text x="400" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">ExecutorService</text>
+  <text x="400" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#607D8B">submit(callable)</text>
+  <ellipse cx="400" cy="230" rx="50" ry="25" fill="#fff" stroke="#FF9800"/>
+  <text x="400" y="235" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">Thread Pool</text>
+
+  <!-- 右侧：结果获取 -->
+  <rect x="600" y="80" width="160" height="300" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="680" y="105" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#2196F3">3. 异步获取</text>
+  <rect x="620" y="125" width="120" height="60" rx="8" fill="#fff" stroke="#2196F3"/>
+  <text x="680" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">Future&lt;V&gt;</text>
+  <text x="680" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#607D8B">持有结果句柄</text>
+  
+  <polygon points="680,210 740,240 680,270 620,240" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="680" y="237" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">get()</text>
+  <text x="680" y="252" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#f44336">阻塞等待结果</text>
+
+  <!-- 连线与交互 -->
+  <path d="M 180 155 L 340 155" stroke="#9C27B0" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <path d="M 460 155 L 620 155" stroke="#FF9800" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="540" y="145" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#FF9800">返回 Future</text>
+  <path d="M 620 240 L 450 240" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5" fill="none" marker-end="url(#arr)"/>
+  <text x="530" y="230" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#2196F3">异步/阻塞获取</text>
+
+  <!-- 图例 -->
+  <rect x="40" y="420" width="720" height="60" rx="8" fill="#fff" stroke="#ECEFF1"/>
+  <text x="60" y="445" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700">图例:</text>
+  <rect x="100" y="435" width="15" height="15" fill="#F3E5F5" stroke="#9C27B0"/><text x="122" y="447" font-family="system-ui,-apple-system,sans-serif" font-size="12">关键抽象</text>
+  <rect x="200" y="435" width="15" height="15" fill="#FFF3E0" stroke="#FF9800"/><text x="222" y="447" font-family="system-ui,-apple-system,sans-serif" font-size="12">调度执行</text>
+  <rect x="300" y="435" width="15" height="15" fill="#E3F2FD" stroke="#2196F3"/><text x="322" y="447" font-family="system-ui,-apple-system,sans-serif" font-size="12">流程数据</text>
+  <rect x="400" y="435" width="15" height="15" fill="#FFEBEE" stroke="#f44336"/><text x="422" y="447" font-family="system-ui,-apple-system,sans-serif" font-size="12">致命风险 (阻塞)</text>
+  <rect x="540" y="435" width="15" height="15" fill="#ECEFF1" stroke="#607D8B"/><text x="562" y="447" font-family="system-ui,-apple-system,sans-serif" font-size="12">对照组</text>
+  <text x="60" y="470" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f44336">最佳实践: 必须设置超时时间 future.get(timeout)，防止下游宕机导致主线程永久挂起。</text>
+</svg>

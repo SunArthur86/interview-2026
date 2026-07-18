@@ -101,6 +101,10 @@ TCP State Transition Diagram (Active Close Side)
 2. **tcp_tw_reuse 的风险**：虽然可以复用连接，但必须确保 MSL 已经过去，且仅适用于客户端（发起连接的一方），慎用于服务端，避免潜在的数据混淆。
 3. **大量 FIN_WAIT2 的原因**：通常是对端未发送 FIN（如应用逻辑挂起），需检查 `tcp_fin_timeout` 和对端应用代码。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-081.svg" alt="什么是主动方的优化？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 关闭方式：close是暴力全断开，shutdown是优雅关闭支持半关闭。

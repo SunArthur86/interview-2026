@@ -361,3 +361,8 @@ LLM-as-Judge 的可靠性要"多重校验 + 人工校准"。第一，**LLM-as-Ju
 | 1:30 | 监控大盘截图 + 指标曲线 | 要点是：监控：延迟/幻觉/满意度/成本 | 关键机制 |
 | 2:09 | 流程图：箭头串联各环节 | 要点是：Harness：全链路编排 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——Prompt 怎么版本管理？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-033.svg" alt="【拼多多 AI 中台】AI Harness 工程化（LLMOps 全链路）怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

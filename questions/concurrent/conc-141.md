@@ -117,6 +117,10 @@ final V putVal(K key, V value, boolean onlyIfAbsent) {
   - 多线程并发竞争时，分散更新到 `CounterCell` 数组的不同槽位。
   - 统计时累加 `baseCount` 和所有 `CounterCell` 的值，避免了热点竞争。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-141.svg" alt="ConcurrentHashMap 在 JDK 8 中的实现原理是什么？为什么从分段锁改成 CAS+synchronized？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 对比 JDK7：JDK8 移除 Segment 分段锁，改为 Node数组 + 链表/红黑树结构。

@@ -418,3 +418,8 @@ flowchart TD
 | 0:40 | 概念结构示意图 | 补全、多文件重构、调试、文档生成、测试编写。 | 使用场景 |
 | 1:05 | 流程图 | 精准描述、上下文管理、code review。 | 关键技巧 |
 | 2:30 | 总结卡 | 一句话记忆：Cursor（IDE 补全/Agent）+ Claude Code（终端执行）+ Copilot（补全）三件套。 下期可以接着聊：Cursor 和 Claude Code 怎么选。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-035.svg" alt="【蚂蚁风控】怎么用 AI 代码助手改造研发流程？提效多少？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

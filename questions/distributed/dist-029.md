@@ -95,6 +95,12 @@ Supplier<String> supplier = CircuitBreaker.decorateSupplier(cb, () -> commentSer
 2. **熔断和降级的触发条件分别是什么？**（提示：熔断主要看下游异常率或响应时，降级主要看系统整体负载或业务开关）。
 3. **Hystrix 和 Sentinel 的区别？**（提示：Hystrix 已停止维护，Sentinel 是阿里开源，控制台更强大，限流流控规则更丰富）。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-029.svg" alt="什么是服务熔断、服务降级？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 对比：熔断是保护自己不被下游拖垮（保险丝），降级是整体权衡弃车保帅（保核心）

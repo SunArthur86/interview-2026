@@ -155,6 +155,10 @@ flowchart TB
     class S1,S2,S3 sem
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-067.svg" alt="什么是AQS？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：Java并发包中实现锁与同步器的核心基础框架。

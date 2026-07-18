@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+
+  <text x="400" y="35" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">Java内置4种线程池特性与风险</text>
+  <text x="400" y="55" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">交通工具类比：公交、出租、专车、校车</text>
+
+  <!-- 核心组件抽象层 -->
+  <rect x="30" y="80" width="740" height="50" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="105" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#9C27B0">ThreadPoolExecutor (底层实现核心)</text>
+  <text x="400" y="122" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#333">生产规范：禁用 Executors，手动构建并指定有界队列与拒绝策略</text>
+
+  <!-- 第一列：Fixed -->
+  <rect x="40" y="160" width="170" height="210" rx="8" fill="#fff" stroke="#FF9800" stroke-width="2"/>
+  <rect x="40" y="160" width="170" height="30" rx="8" fill="#FF9800"/>
+  <text x="125" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">Fixed (公交)</text>
+  <text x="125" y="215" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">线程数固定</text>
+  <text x="125" y="235" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">core = max</text>
+  <rect x="60" y="260" width="130" height="30" rx="4" fill="#ECEFF1" stroke="#607D8B"/>
+  <text x="125" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#607D8B">无界 LinkedBlockingQueue</text>
+  <rect x="60" y="310" width="130" height="45" rx="4" fill="#FFEBEE" stroke="#f44336"/>
+  <text x="125" y="328" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">风险：任务堆积</text>
+  <text x="125" y="345" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">导致 OOM</text>
+
+  <!-- 第二列：Cached -->
+  <rect x="225" y="160" width="170" height="210" rx="8" fill="#fff" stroke="#FF9800" stroke-width="2"/>
+  <rect x="225" y="160" width="170" height="30" rx="8" fill="#FF9800"/>
+  <text x="310" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">Cached (出租)</text>
+  <text x="310" y="215" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">弹性扩容</text>
+  <text x="310" y="235" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">max = MAX_VALUE</text>
+  <rect x="245" y="260" width="130" height="30" rx="4" fill="#ECEFF1" stroke="#607D8B"/>
+  <text x="310" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#607D8B">SynchronousQueue</text>
+  <rect x="245" y="310" width="130" height="45" rx="4" fill="#FFEBEE" stroke="#f44336"/>
+  <text x="310" y="328" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">风险：并发突增</text>
+  <text x="310" y="345" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">耗尽 CPU/OOM</text>
+
+  <!-- 第三列：Single -->
+  <rect x="410" y="160" width="170" height="210" rx="8" fill="#fff" stroke="#FF9800" stroke-width="2"/>
+  <rect x="410" y="160" width="170" height="30" rx="8" fill="#FF9800"/>
+  <text x="495" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">Single (专车)</text>
+  <text x="495" y="215" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">单线程串行</text>
+  <text x="495" y="235" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">core = max = 1</text>
+  <rect x="430" y="260" width="130" height="30" rx="4" fill="#ECEFF1" stroke="#607D8B"/>
+  <text x="495" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#607D8B">无界 LinkedBlockingQueue</text>
+  <rect x="430" y="310" width="130" height="45" rx="4" fill="#FFEBEE" stroke="#f44336"/>
+  <text x="495" y="328" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">风险：任务堆积</text>
+  <text x="495" y="345" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">导致 OOM</text>
+
+  <!-- 第四列：Scheduled -->
+  <rect x="595" y="160" width="170" height="210" rx="8" fill="#fff" stroke="#FF9800" stroke-width="2"/>
+  <rect x="595" y="160" width="170" height="30" rx="8" fill="#FF9800"/>
+  <text x="680" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">Scheduled (校车)</text>
+  <text x="680" y="215" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">定时/周期性</text>
+  <text x="680" y="235" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">max = MAX_VALUE</text>
+  <rect x="615" y="260" width="130" height="30" rx="4" fill="#ECEFF1" stroke="#607D8B"/>
+  <text x="680" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#607D8B">DelayedWorkQueue</text>
+  <rect x="615" y="310" width="130" height="45" rx="4" fill="#FFEBEE" stroke="#f44336"/>
+  <text x="680" y="328" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">风险：无界线程</text>
+  <text x="680" y="345" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#f44336">导致 OOM</text>
+
+  <path d="M 400 130 L 400 155" stroke="#9C27B0" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+
+  <!-- 图例 -->
+  <rect x="40" y="410" width="725" height="60" rx="8" fill="#fff" stroke="#ECEFF1"/>
+  <text x="60" y="435" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700">图例:</text>
+  <rect x="100" y="425" width="15" height="15" fill="#F3E5F5" stroke="#9C27B0"/><text x="122" y="437" font-family="system-ui,-apple-system,sans-serif" font-size="12">抽象底层</text>
+  <rect x="200" y="425" width="15" height="15" fill="#FF9800"/><text x="222" y="437" font-family="system-ui,-apple-system,sans-serif" font-size="12">池分类</text>
+  <rect x="300" y="425" width="15" height="15" fill="#ECEFF1" stroke="#607D8B"/><text x="322" y="437" font-family="system-ui,-apple-system,sans-serif" font-size="12">队列类型</text>
+  <rect x="400" y="425" width="15" height="15" fill="#FFEBEE" stroke="#f44336"/><text x="422" y="437" font-family="system-ui,-apple-system,sans-serif" font-size="12">致命风险</text>
+  <text x="60" y="460" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f44336">避坑：阿里规范强制禁用 Executors，必须手动 new ThreadPoolExecutor 并使用有界队列(ArrayBlockingQueue)。</text>
+</svg>

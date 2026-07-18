@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="30" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">数据库并发控制策略 (三足鼎立)</text>
+
+  <g font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">
+    <rect x="40" y="60" width="720" height="300" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="1" stroke-dasharray="5,5"/>
+    <text x="400" y="80" font-weight="700" fill="#607D8B" font-size="14">隔离性与并发度的平衡</text>
+
+    <rect x="80" y="110" width="180" height="220" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+    <text x="170" y="140" font-weight="700" fill="#f44336" font-size="14">悲观锁</text>
+    <line x1="100" y1="150" x2="240" y2="150" stroke="#f44336" stroke-width="1"/>
+    <text x="170" y="175" fill="#444" font-weight="700">机制：</text>
+    <text x="170" y="195" fill="#555">读写互斥加锁</text>
+    <text x="170" y="215" fill="#555">for update</text>
+    <text x="170" y="250" fill="#444" font-weight="700">场景：</text>
+    <text x="170" y="270" fill="#555">写多读少</text>
+    <text x="170" y="290" fill="#555">冲突频繁</text>
+    <text x="170" y="315" font-size="11" fill="#f44336">[短事务防阻塞]</text>
+
+    <rect x="310" y="110" width="180" height="220" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+    <text x="400" y="140" font-weight="700" fill="#9C27B0" font-size="14">MVCC</text>
+    <line x1="330" y1="150" x2="430" y2="150" stroke="#9C27B0" stroke-width="1"/>
+    <text x="400" y="175" fill="#444" font-weight="700">机制：</text>
+    <text x="400" y="195" fill="#555">快照读</text>
+    <text x="400" y="215" fill="#555">undo log + read view</text>
+    <text x="400" y="250" fill="#444" font-weight="700">场景：</text>
+    <text x="400" y="270" fill="#555">读多写少</text>
+    <text x="400" y="290" fill="#555">读写不阻塞</text>
+    <text x="400" y="315" font-size="11" fill="#9C27B0">[RC/RR级别生效]</text>
+
+    <rect x="540" y="110" width="180" height="220" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+    <text x="630" y="140" font-weight="700" fill="#4CAF50" font-size="14">乐观锁</text>
+    <line x1="560" y1="150" x2="700" y2="150" stroke="#4CAF50" stroke-width="1"/>
+    <text x="630" y="175" fill="#444" font-weight="700">机制：</text>
+    <text x="630" y="195" fill="#555">版本号/CAS</text>
+    <text x="630" y="215" fill="#555">提交时校验重试</text>
+    <text x="630" y="250" fill="#444" font-weight="700">场景：</text>
+    <text x="630" y="270" fill="#555">读多写少</text>
+    <text x="630" y="290" fill="#555">冲突极少</text>
+    <text x="630" y="315" font-size="11" fill="#4CAF50">[where version=?]</text>
+  </g>
+
+  <g font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle">
+    <rect x="80" y="390" width="640" height="70" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+    <text x="400" y="415" font-weight="700" fill="#FF9800">秒杀扣减库存最佳实战</text>
+    <text x="400" y="440" fill="#333">放弃 select for update 悲观锁；使用 UPDATE stock SET num=num-1 WHERE id=1 AND num>0</text>
+    <text x="400" y="455" fill="#666" font-size="11">将并发冲突交由数据库层面的CAS机制处理，避免长事务阻塞</text>
+  </g>
+</svg>

@@ -183,6 +183,9 @@ int[] dfs(TreeNode root) {
 5. **边界条件处理完整** — length=0和length=1单独处理
 
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-xhs-algo-010.svg" alt="【拼多多 Java服务端】力扣198：打家劫舍" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** 沿街排列的房屋每间有不同金额，不能偷相邻两间，求最大收益。本质是每个位置做二选一决策：偷当前+跳过下一间 vs 不偷当前。

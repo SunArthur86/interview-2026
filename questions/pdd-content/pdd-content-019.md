@@ -275,3 +275,8 @@ flowchart TD
 | 0:12 | 核心概念图 + 关键词浮现 | 要点是：BIO：一连接一线程 | 核心概念 |
 | 1:00 | 能力/参数拆解表 | 要点是：NIO：Selector 多路复用 | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——Netty 怎么扛百万连接？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-content_pdd-content-019.svg" alt="【拼多多内容】Java IO 模型与 Netty 直播网关？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -229,3 +229,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：采购：谈判话术、合同审查、供应商沟通 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：客服：工单分类、自动回复、知识问答 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-032.svg" alt="【拼多多供应链】LLM 在商品/采购的具体应用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

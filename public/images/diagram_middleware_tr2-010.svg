@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">在处理 Kafka 消息积压时，如果仅仅增加消费者实例（Consumer）往往无效甚至导致 Rebalance 风暴。正确的紧急处理思路是什么？如何利用下游服务的容量来辅助清空积压？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">突破分区限制，通过转发消息和扩容下游实现倍速消费。</text>
+  <text x="400" y="125" text-anchor="middle" font-size="12" fill="#666" font-weight="700">问题定位 → 临时方案 → 根治方案</text>
+  <rect x="60" y="148" width="180" height="55" rx="10" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="150" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#C62828">现象</text>
+  <text x="150" y="189" text-anchor="middle" font-size="11" fill="#C62828">Lag 持续增长</text>
+  <rect x="310" y="148" width="180" height="55" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">定位瓶颈</text>
+  <text x="400" y="189" text-anchor="middle" font-size="11" fill="#E65100">Producer?Consumer?</text>
+  <rect x="560" y="148" width="180" height="55" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="650" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">根治</text>
+  <text x="650" y="189" text-anchor="middle" font-size="11" fill="#2E7D32">扩容 / 优化消费</text>
+  <line x1="240" y1="175" x2="310" y2="175" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="490" y1="175" x2="560" y2="175" stroke="#666" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="200" y="290" text-anchor="middle" font-size="12" fill="#666" font-weight="700">临时方案</text>
+  <rect x="100" y="300" width="180" height="55" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="190" y="322" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">消费降级</text>
+  <text x="190" y="340" text-anchor="middle" font-size="10" fill="#E65100">跳过非关键</text>
+  <rect x="300" y="300" width="180" height="55" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="390" y="322" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">扩 Partition</text>
+  <text x="390" y="340" text-anchor="middle" font-size="10" fill="#E65100">+ Consumer</text>
+  <text x="600" y="290" text-anchor="middle" font-size="12" fill="#666" font-weight="700">根治方案</text>
+  <rect x="480" y="300" width="100" height="55" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="530" y="322" text-anchor="middle" font-size="10" font-weight="700" fill="#2E7D32">水平扩容</text>
+  <text x="530" y="340" text-anchor="middle" font-size="9" fill="#2E7D32">Part=Cons</text>
+  <rect x="590" y="300" width="100" height="55" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="640" y="322" text-anchor="middle" font-size="10" font-weight="700" fill="#2E7D32">批量消费</text>
+  <text x="640" y="340" text-anchor="middle" font-size="9" fill="#2E7D32">pull 500</text>
+  <rect x="700" y="300" width="100" height="55" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="750" y="322" text-anchor="middle" font-size="10" font-weight="700" fill="#2E7D32">异步处理</text>
+  <text x="750" y="340" text-anchor="middle" font-size="9" fill="#2E7D32">多线程</text>
+  <rect x="60" y="390" width="680" height="80" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="400" y="415" text-anchor="middle" font-size="12" font-weight="700" fill="#1565C0">关键约束</text>
+  <text x="400" y="438" text-anchor="middle" font-size="11" fill="#1565C0">扩容前提：Consumer 数 ≤ Partition 数（否则多余 Consumer 空闲）</text>
+  <text x="400" y="458" text-anchor="middle" font-size="11" fill="#1565C0">注意：扩 Partition 会破坏分区内有序性</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">堆积本质：消费速率 &lt; 生产速率，根因多为慢 SQL/外部依赖/串行化</text>
+</svg>

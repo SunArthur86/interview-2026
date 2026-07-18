@@ -367,3 +367,8 @@ flowchart TD
 | 0:40 | 流程图 | 实例级 > 库级 > Schema > 表 > 行级。 | 隔离级别 |
 | 1:05 | 代码示例截图 | 消息队列、接口契约、限流熔断、读写分离。 | 解耦手段 |
 | 2:30 | 总结卡 | 一句话记忆：数据隔离 4 级：实例 > 库 > Schema > 行级，强度递减成本递减。 下期可以接着聊：多租户怎么实现。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-015.svg" alt="【蚂蚁风控】JD 提到&quot;数据隔离、系统解耦&quot;，你怎么理解？风控平台怎么做的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

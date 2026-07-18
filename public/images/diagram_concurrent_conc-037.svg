@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="30" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">Cassandra 一致性Hash环与虚拟节点</text>
+
+  <g font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">
+    <!-- Hash 环 -->
+    <circle cx="300" cy="260" r="130" fill="none" stroke="#2196F3" stroke-width="3" stroke-dasharray="10,5"/>
+    
+    <!-- 数据Key -->
+    <circle cx="240" cy="150" r="6" fill="#f44336"/>
+    <text x="240" y="135" font-weight="700" fill="#f44336">Data Key</text>
+    
+    <!-- 虚拟节点组 N1 -->
+    <circle cx="370" cy="165" r="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+    <circle cx="420" cy="270" r="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+    <circle cx="180" cy="300" r="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+    <text x="375" y="145" font-weight="700" fill="#4CAF50">物理节点A</text>
+    <text x="375" y="160" font-size="10" fill="#4CAF50">对应多个vnode</text>
+
+    <!-- 虚拟节点组 N2 -->
+    <circle cx="350" cy="370" r="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+    <circle cx="200" cy="210" r="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+    <circle cx="280" cy="380" r="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+    <text x="310" y="415" font-weight="700" fill="#9C27B0">物理节点B</text>
+
+    <!-- 路由方向 -->
+    <path d="M 245 155 A 115 115 0 0 1 363 162" fill="none" stroke="#f44336" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="300" y="130" font-size="11" fill="#f44336" font-weight="700">顺时针寻找归属</text>
+
+    <line x1="460" y1="160" x2="540" y2="90" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="460" y1="280" x2="540" y2="240" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="200" y1="380" x2="540" y2="390" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+  </g>
+
+  <g font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="start">
+    <rect x="540" y="50" width="220" height="110" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+    <text x="560" y="75" font-weight="700" fill="#4CAF50">虚拟节点优势</text>
+    <text x="560" y="100" fill="#444">1. 解决数据倾斜</text>
+    <text x="560" y="120" fill="#444">2. 均衡负载到全网</text>
+    <text x="560" y="140" fill="#444">3. 扩缩容数据并发迁</text>
+
+    <rect x="540" y="190" width="220" height="100" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+    <text x="560" y="215" font-weight="700" fill="#2196F3">一致性Hash特性</text>
+    <text x="560" y="240" fill="#444">1. 顺时针寻址路由</text>
+    <text x="560" y="260" fill="#444">2. 增删只影响相邻节点</text>
+    <text x="560" y="280" fill="#444">3. 最小化数据迁移量</text>
+
+    <rect x="540" y="320" width="220" height="100" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+    <text x="560" y="345" font-weight="700" fill="#f44336">雪崩风险与对策</text>
+    <text x="560" y="370" fill="#444">单节点宕机如无vnode</text>
+    <text x="560" y="390" fill="#444">负载直接压垮相邻节点</text>
+    <text x="560" y="410" font-size="11" fill="#f44336">引入vnode(默认256个)分散!</text>
+  </g>
+</svg>

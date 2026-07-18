@@ -392,3 +392,8 @@ flowchart TD
 | 1:30 | 流程图：输入→处理→输出 | 要点是：降级：兜底/小模型/关非核心 | 关键机制 |
 | 2:09 | 代码片段 + 注释高亮 | 要点是：重试：退避 + 上限 + 幂等 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——LLM 怎么按 token 限流？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-027.svg" alt="【拼多多 AI 中台】限流降级超时重试怎么做？LLM 网关怎么限流？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

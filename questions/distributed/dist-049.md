@@ -123,6 +123,12 @@ public void processPendingMessages() {
 3. **最终一致性的延迟边界**：虽然说是“最终”，但在工程上通常会定义SLA（如1秒内达到一致），如果超过这个时间就要告警。
 4. **刚性事务与柔性事务**：CP对应刚性事务（如2PC），AP对应柔性事务（如TCC、Saga、本地消息表）。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-049.svg" alt="CAP 定理和 BASE 理论的关系是什么？互联网架构为什么选择 AP+BASE？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - BASE是CAP中AP架构的工程延伸：基本可用、软状态、最终一致性

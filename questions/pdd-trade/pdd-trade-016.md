@@ -195,3 +195,8 @@ sequenceDiagram
 | 1:04 | 能力/参数拆解表 | 要点是：独占（ReentrantLock）/共享（Semaphore） | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：公平（先排队）/非公平（先抢再排） | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-016.svg" alt="【拼多多交易】AQS 原理？ReentrantLock 的公平/非公平？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

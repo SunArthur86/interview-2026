@@ -105,6 +105,10 @@ flowchart TD
     class Without,Reorder bad
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-132.svg" alt="什么是happens-before规则？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心作用：JMM中保证多线程间操作的可见性与有序性

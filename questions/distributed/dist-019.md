@@ -86,6 +86,12 @@ echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
 2. **IP 隧道的开销**：额外的 IP 封装会增加 MTU 长度，导致报文分片，可能影响性能。
 3. **RS 的配置细节**：如何处理 RS 上的路由表和 ARP 问题。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-019.svg" alt="LVS TUN模式的工作原理是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：通过 IP-in-IP 隧道技术再封装外层 IP 头，实现跨网段调度。

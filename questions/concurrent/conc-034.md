@@ -76,6 +76,10 @@ if (!success) {
 4. **offer(e) 在无界队列中会失败吗？**
    - 不会，无界队列（如 LinkedBlockingQueue 未指定容量时）理论上不会满，offer 永远返回 true（除非内存溢出）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-034.svg" alt="什么是阻塞队列的主要方法？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 口诀「抛异返值阻超时」：四大类策略对应不同失败处理场景

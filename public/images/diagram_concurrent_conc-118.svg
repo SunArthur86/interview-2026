@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L8,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="35" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">两个线程间共享数据机制</text>
+
+  <ellipse cx="400" cy="80" rx="70" ry="25" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="85" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#9C27B0">Thread A & B</text>
+
+  <line x1="350" y1="105" x2="150" y2="165" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="105" x2="400" y2="165" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="450" y1="105" x2="650" y2="165" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="60" y="165" width="180" height="80" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="150" y="190" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#2196F3">共享内存空间</text>
+  <text x="150" y="210" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">Volatile / Sync</text>
+  <text x="150" y="230" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">保证可见与原子</text>
+
+  <rect x="310" y="165" width="180" height="80" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="400" y="190" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#4CAF50">并发工具类</text>
+  <text x="400" y="210" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">Exchanger / Lock</text>
+  <text x="400" y="230" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">同步点交互</text>
+
+  <rect x="560" y="165" width="180" height="80" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="650" y="190" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#FF9800">流与队列传递</text>
+  <text x="650" y="210" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">BlockingQueue</text>
+  <text x="650" y="230" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">PipedStream</text>
+
+  <line x1="150" y1="245" x2="150" y2="285" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="245" x2="400" y2="285" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="650" y1="245" x2="650" y2="285" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <polygon points="150,285 250,335 150,385 50,335" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="150" y="330" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">是否可变?</text>
+  <text x="150" y="350" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">加锁保护</text>
+
+  <rect x="320" y="295" width="160" height="60" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="400" y="320" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">并发容器</text>
+  <text x="400" y="340" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">ConcurrentHashMap</text>
+
+  <rect x="570" y="295" width="160" height="60" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="650" y="320" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">生产消费模型</text>
+  <text x="650" y="340" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">解耦与异步</text>
+
+  <rect x="80" y="410" width="640" height="30" rx="5" fill="#FFEBEE" stroke="#f44336" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="400" y="430" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#f44336">易错警示: ThreadLocal 是线程隔离独享数据，绝对不属于线程间共享！</text>
+
+  <rect x="50" y="465" width="15" height="10" fill="#E3F2FD" stroke="#2196F3"/>
+  <text x="75" y="475" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">共享变量</text>
+  <rect x="160" y="465" width="15" height="10" fill="#E8F5E9" stroke="#4CAF50"/>
+  <text x="185" y="475" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">并发协同</text>
+  <rect x="280" y="465" width="15" height="10" fill="#FFF3E0" stroke="#FF9800"/>
+  <text x="305" y="475" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">判断处理</text>
+  <rect x="390" y="465" width="15" height="10" fill="#ECEFF1" stroke="#607D8B"/>
+  <text x="415" y="475" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">数据流转模型</text>
+</svg>

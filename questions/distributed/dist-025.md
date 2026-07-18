@@ -84,6 +84,12 @@ ZAB 并非完全照搬 Paxos，而是针对 ZooKeeper 的**主备架构**（Prim
 1. **Zxid 的结构及其作用？**：Zxid 是 64 位长整型，高 32 位是 `epoch`（每次 Leader 变更加 1），代表朝代；低 32 位是计数器。它既是事务 ID，也是时钟，用于判断数据新旧和排序。
 2. **为什么 ZooKeeper 集群节点数通常是奇数？**：
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-025.svg" alt="ZooKeeper的ZAB协议的工作流程是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 两大模式：正常运行的消息广播（半数 ACK 提交），异常时的崩溃恢复。

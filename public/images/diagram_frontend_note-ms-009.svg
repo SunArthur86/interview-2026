@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">如果让你设计桌面 Agent 的任务中心，会有哪些关键对象？</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">任务中心的关键对象：Task(任务)、Context(上下文)、Product(产物)、Permission(权限)、Log(日志)。</text>
+
+  <ellipse cx="400" cy="270" rx="100" ry="42" fill="#607D8B"/>
+  <text x="400" y="275" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">任务中心</text>
+  <line x1="140" y1="140" x2="400" y2="270" stroke="#B0BEC5" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="70" y="114" width="140" height="52" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="140.0" y="137.0" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Task</text>
+  <text x="140.0" y="154.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">id/状态/优先级</text>
+  <line x1="660" y1="140" x2="400" y2="270" stroke="#B0BEC5" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="590" y="114" width="140" height="52" rx="8" fill="#FF9800" stroke="#FF9800" stroke-width="2"/>
+  <text x="660.0" y="137.0" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Context</text>
+  <text x="660.0" y="154.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">引用/摘要/版本</text>
+  <line x1="80" y1="270" x2="400" y2="270" stroke="#B0BEC5" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="10" y="244" width="140" height="52" rx="8" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+  <text x="80.0" y="267.0" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Product</text>
+  <text x="80.0" y="284.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">类型/路径/预览</text>
+  <line x1="720" y1="270" x2="400" y2="270" stroke="#B0BEC5" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="650" y="244" width="140" height="52" rx="8" fill="#9C27B0" stroke="#9C27B0" stroke-width="2"/>
+  <text x="720.0" y="267.0" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Permission</text>
+  <text x="720.0" y="284.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">授权/操作粒度</text>
+  <line x1="140" y1="400" x2="400" y2="270" stroke="#B0BEC5" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="70" y="374" width="140" height="52" rx="8" fill="#f44336" stroke="#f44336" stroke-width="2"/>
+  <text x="140.0" y="397.0" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Log</text>
+  <text x="140.0" y="414.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">链路/耗时/成本</text>
+  <text x="40" y="455" font-size="12" font-weight="700" fill="#37474F">Task: id/状态/优先级/类型</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">Task</text>
+  <rect x="150" y="470" width="14" height="14" rx="3" fill="#FF9800"/>
+  <text x="170" y="482" font-size="11" fill="#37474F">Context</text>
+  <rect x="241" y="470" width="14" height="14" rx="3" fill="#4CAF50"/>
+  <text x="261" y="482" font-size="11" fill="#37474F">Product</text>
+  <rect x="332" y="470" width="14" height="14" rx="3" fill="#9C27B0"/>
+  <text x="352" y="482" font-size="11" fill="#37474F">Permission</text>
+</svg>

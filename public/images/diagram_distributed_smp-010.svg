@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">微服务监控需要关注哪些指标？如何构建可观测性体系？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">通过指标、日志、追踪全维度监控，洞察系统运行状态。</text>
+  <text x="400" y="125" text-anchor="middle" font-size="12" fill="#666" font-weight="700">一次请求的完整调用链（Trace = 多个 Span）</text>
+  <rect x="100" y="142" width="700" height="32" rx="4" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="110" y="160" font-size="11" font-weight="700" fill="#1565C0">Gateway</text>
+  <text x="110" y="173" font-size="9" fill="#1565C0">trace-id=abc</text>
+  <rect x="150" y="192" width="500" height="32" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="160" y="210" font-size="11" font-weight="700" fill="#E65100">Order-Svc</text>
+  <text x="160" y="223" font-size="9" fill="#E65100">span-id=1</text>
+  <rect x="200" y="242" width="250" height="32" rx="4" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="210" y="260" font-size="11" font-weight="700" fill="#6A1B9A">User-Svc</text>
+  <text x="210" y="273" font-size="9" fill="#6A1B9A">span-id=2</text>
+  <rect x="250" y="292" width="100" height="32" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="260" y="310" font-size="11" font-weight="700" fill="#2E7D32">DB</text>
+  <text x="260" y="323" font-size="9" fill="#2E7D32">span-id=3</text>
+  <line x1="50" y1="350" x2="770" y2="350" stroke="#90A4AE" stroke-width="1" marker-end="url(#arr)"/>
+  <text x="775" y="354" font-size="10" fill="#78909C">时间</text>
+  <rect x="60" y="380" width="680" height="90" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="400" y="405" text-anchor="middle" font-size="12" font-weight="700" fill="#37474F">核心概念</text>
+  <text x="80" y="428" font-size="11" fill="#37474F">• Trace：一次完整请求，全局唯一的 trace-id</text>
+  <text x="80" y="448" font-size="11" fill="#37474F">• Span：一次服务调用，span-id + parent-id 构成树形结构</text>
+  <text x="440" y="428" font-size="11" fill="#37474F">• 采样率：降低开销</text>
+  <text x="440" y="448" font-size="11" fill="#37474F">• Agent 上报：异步非阻塞</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">SkyWalking/Zipkin/Jaeger：自动埋点 + Trace 树还原，定位慢调用与错误</text>
+</svg>

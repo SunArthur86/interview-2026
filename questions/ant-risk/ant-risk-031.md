@@ -391,3 +391,8 @@ def react_agent(event, max_steps=5):
 | 1:20 | 流程图 | 决策 Agent、复核 Agent、解释 Agent 协作。 | Multi-Agent |
 | 1:50 | 代码示例截图 | 把规则引擎、模型、关系网络包装成 Agent 可调用的工具。 | 工具化 |
 | 3:30 | 总结卡 | 一句话记忆：Agent = LLM + 工具 + 记忆 + 规划。 下期可以接着聊：LLM 推理慢（秒级）怎么实时风控。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-031.svg" alt="【蚂蚁风控】如何用 AI Agent 改造风控系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -70,6 +70,12 @@ server {
 - **HAProxy**：功能强大，支持七层路由和 ACL 规则。
 - **Apache**：模块丰富，历史悠久的七层代理。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-011.svg" alt="什么是七层负载均衡（内容交换）？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：工作在应用层，通过解析 HTTP 报文内容（如 URL/Header）进行流量分发

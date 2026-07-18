@@ -113,6 +113,10 @@ SELECT * FROM information_schema.optimizer_trace;
 1. **缓存机制混淆**：误以为 MySQL 8.0 依然包含查询缓存，实际已被移除（现在更多指 Redis 等外部缓存）。
 2. **功能边界**：认为“分析器”会检查表和字段是否存在，实际上这是“预处理器”的工作；分析器主要负责语法和词法。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-065.svg" alt="一条SQL查询语句是如何执行的？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 执行六步曲：连接器 -> (查询缓存) -> 分析器 -> 优化器 -> 执行器 -> 存储引擎。

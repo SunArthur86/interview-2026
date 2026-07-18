@@ -241,3 +241,8 @@ flowchart TD
 | 0:40 | 概念结构示意图 | 可重试（超时/限流）/不可重试（参数错/鉴权）。 | 错误分类 |
 | 1:05 | 流程图 | 指数退避+抖动+上限+幂等。 | 重试策略 |
 | 2:30 | 总结卡 | 一句话记忆：统一接口（OpenAI 兼容）屏蔽异构。 下期可以接着聊：怎么统一不同模型的参数。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-022.svg" alt="【生物医药 AI】LLM 应用怎么工程化接入（多模型 SDK/错误处理/重试）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -645,6 +645,9 @@ def longest_substring_k_distinct(s: str, k: int) -> int:
 
 核心要点：**滑动窗口 + HashMap = O(n) 最优解**。面试中先讲清「left跳变」的单调性原理，再快速写出无Bug代码，最后主动提Follow-up展示深度。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-bd-llm-019.svg" alt="【字节面经】给定一个字符串流，实现一个滑动窗口，返回当前窗口内的最长不重复子串长度。" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心模型：双指针+HashMap。因为需实时O(1)操作，所以HashMap记录字符最后一次出现的位置。

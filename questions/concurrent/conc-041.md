@@ -91,6 +91,10 @@ if (semaphore.tryAcquire()) { // 非阻塞尝试获取
 1. **混淆 CountDownLatch 和 CyclicBarrier**：前者是外部线程等待内部线程完成（如裁判等运动员），后者是线程之间互相等待（如运动员互相等齐再出发）。
 2. **忘记释放 Semaphore 许可**：如果在 `acquire()` 后的业务逻辑中抛出异常且未在 `finally` 中 `release()`，会导致许可证泄漏，最终导致线程池“假死”。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-041.svg" alt="CyclicBarrier、CountDownLatch、Semaphore的区别和使用场景？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - CountDownLatch：一次性减法计数器，用于主线程等待 N 个子任务全部完成

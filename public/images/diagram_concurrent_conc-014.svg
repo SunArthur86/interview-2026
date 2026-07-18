@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="35" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">sleep() 与 wait() 执行流程对比</text>
+
+  <!-- Column 1: sleep (Thread) -->
+  <rect x="20" y="60" width="370" height="380" rx="12" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="205" y="85" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#2196F3">sleep() (属于 Thread)</text>
+  
+  <ellipse cx="205" cy="120" rx="45" ry="22" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="205" y="124" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#333">获取锁</text>
+  
+  <line x1="205" y1="142" x2="205" y2="168" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+  
+  <rect x="105" y="170" width="200" height="40" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="205" y="188" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#333">调用 sleep(ms)</text>
+  <text x="205" y="204" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#666">随处可用，无需同步块</text>
+  
+  <line x1="205" y1="210" x2="205" y2="240" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+  
+  <rect x="85" y="240" width="240" height="70" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="205" y="260" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#f44336">核心特征：不释放锁！</text>
+  <text x="205" y="278" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">进入 TIMED_WAITING 状态</text>
+  <text x="205" y="296" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">其他线程被阻塞，无法干活</text>
+  
+  <line x1="205" y1="310" x2="205" y2="340" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="220" y="328" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">超时自动唤醒</text>
+
+  <ellipse cx="205" cy="380" rx="55" ry="22" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="205" y="384" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#333">继续持有锁执行</text>
+
+  <text x="205" y="420" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#2196F3">场景：单纯暂停当前线程</text>
+
+  <!-- Column 2: wait (Object) -->
+  <rect x="410" y="60" width="370" height="380" rx="12" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="595" y="85" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#9C27B0">wait() (属于 Object)</text>
+
+  <ellipse cx="595" cy="120" rx="45" ry="22" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="595" y="124" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#333">获取锁</text>
+
+  <line x1="595" y1="142" x2="595" y2="168" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="495" y="170" width="200" height="40" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="595" y="188" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#333">调用 wait() / wait(ms)</text>
+  <text x="595" y="204" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#666">必须在 synchronized 块内</text>
+
+  <line x1="595" y1="210" x2="595" y2="240" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="475" y="240" width="240" height="70" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="595" y="260" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#f44336">核心特征：释放锁！</text>
+  <text x="595" y="278" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">进入 WAITING 状态，加入等待队列</text>
+  <text x="595" y="296" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">其他线程可获取锁并执行</text>
+
+  <line x1="595" y1="310" x2="595" y2="340" stroke="#607D8B" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="610" y="328" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#333">需 notify() 唤醒或超时</text>
+
+  <ellipse cx="595" cy="380" rx="55" ry="22" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="595" y="384" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#333">需重新竞争获取锁</text>
+
+  <text x="595" y="420" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#9C27B0">场景：线程间通信与协作</text>
+</svg>

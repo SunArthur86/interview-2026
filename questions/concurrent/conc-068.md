@@ -96,6 +96,10 @@ public class CasCounter {
 1. **原子性范围**：误认为 CAS 能保证代码块的原子性，它只能保证一个共享变量操作的原子性，复合操作（如 check-then-act）仍需同步处理。
 2. **完全无锁**：认为 `AtomicInteger` 是完全无锁的，在高并发极端情况下，其底层的 CAS 自旋也是一种“忙等待”，虽然比挂起线程轻量，但并非零开销。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-068.svg" alt="什么是CAS（比较并交换-乐观锁机制-锁自旋）？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：无锁乐观机制，当内存值V等于预期值E时，才更新为新值N（硬件级原子指令）。

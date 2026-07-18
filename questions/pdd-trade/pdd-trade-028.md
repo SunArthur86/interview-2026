@@ -242,3 +242,8 @@ flowchart TD
 | 1:30 | 流程图：箭头串联各环节 | 要点是：压测：全链路+影子库表+容量预估 | 关键机制 |
 | 2:09 | 代码片段 + 注释高亮 | 要点是：核心：均匀+不传染+知容量 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——负载均衡算法怎么选？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-028.svg" alt="【拼多多交易】负载均衡/隔离/压测怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

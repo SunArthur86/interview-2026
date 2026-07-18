@@ -99,6 +99,12 @@ public class OrderService {
 2. **BASE 理论解决了什么问题？**（提示：解决了大型分布式系统在高并发、高可用场景下无法满足 ACID 的困境，提供了理论依据）。
 3. **请举例说明最终一致性的应用场景？**（提示：抖音点赞数更新、电商订单状态同步、DNS 解析）。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-032.svg" alt="BASE理论是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 理论定位：是对CAP中AP的延伸，解决互联网高并发下强一致性难题。

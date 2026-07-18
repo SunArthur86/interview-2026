@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">详解：二个阶段</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">引入协调者，分两阶段锁定并提交事务，保证强一致性。</text>
+  <rect x="115" y="150" width="120" height="200" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <circle cx="175" cy="175" r="16" fill="#2196F3"/>
+  <text x="175" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1</text>
+  <text x="175" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">分两阶段：投票准</text>
+  <text x="175" y="244" text-anchor="middle" font-size="10" fill="#1565C0">备与执行提交/回</text>
+  <text x="175" y="260" text-anchor="middle" font-size="10" fill="#1565C0">滚。</text>
+  <rect x="265" y="150" width="120" height="200" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <circle cx="325" cy="175" r="16" fill="#FF9800"/>
+  <text x="325" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">2</text>
+  <text x="325" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">参与者需记录Un</text>
+  <text x="325" y="244" text-anchor="middle" font-size="10" fill="#E65100">do/Redo日</text>
+  <text x="325" y="260" text-anchor="middle" font-size="10" fill="#E65100">志。</text>
+  <rect x="415" y="150" width="120" height="200" rx="6" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <circle cx="475" cy="175" r="16" fill="#9C27B0"/>
+  <text x="475" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">3</text>
+  <text x="475" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#6A1B9A">任一节点拒绝或超</text>
+  <text x="475" y="244" text-anchor="middle" font-size="10" fill="#6A1B9A">时则全局回滚。</text>
+  <rect x="565" y="150" width="120" height="200" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <circle cx="625" cy="175" r="16" fill="#4CAF50"/>
+  <text x="625" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">4</text>
+  <text x="625" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">同步阻塞协议，强</text>
+  <text x="625" y="244" text-anchor="middle" font-size="10" fill="#2E7D32">一致性但性能差。</text>
+  <text x="400" y="400" text-anchor="middle" font-size="12" fill="#666" font-weight="700">各要点并列同等重要，共同支撑核心知识体系</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">柱状结构：每个柱代表一个独立核心点</text>
+</svg>

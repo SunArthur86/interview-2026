@@ -449,3 +449,8 @@ idempotency_key = hash(input + params + user_id)
 | 1:20 | 流程图 | DAG（如 ASR→LLM→TTS→渲染）有依赖有并行。 | 算子编排 |
 | 1:50 | 代码示例截图 | GPU 池化、优先级队列、抢占/预留。 | 资源调度 |
 | 3:30 | 总结卡 | 一句话记忆：异步任务三件套：task_id + 状态机 + 队列。 下期可以接着聊：任务超时怎么判定。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-028.svg" alt="【巨剧核 AI 陪伴】音视频 AI 生成工程怎么做（TTS/ASR/数字人/视频服务端编排）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

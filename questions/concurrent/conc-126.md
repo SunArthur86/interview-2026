@@ -70,6 +70,10 @@ Producer Thread          Consumer Thread
 3. **BlockingQueue 为什么不需要显式加锁即可保证线程安全？**（考察内部已封装的锁机制）
 4. **生产环境中如何选择合适的阻塞队列？**
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-126.svg" alt="说一说你对BlockingQueue的了解？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：满则阻塞写，空则阻塞读，专用于多线程安全传递数据

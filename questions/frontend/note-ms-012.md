@@ -480,6 +480,9 @@ interface ShareableReplay {
 
 结果回放从"工具产品"升级为"教练产品"的关键基础设施。核心价值不只是"看 AI 怎么做的"，而是"让用户学会 AI 是怎么想的"——分步回看建立理解，分支重跑激发探索，分享复盘沉淀组织知识。这是 AI-Native 桌面产品与普通工具的本质差异。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-012.svg" alt="【月之暗面面经】AI-Native 桌面产品怎样做结果回放，才能支持问题复盘和用户学习？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 价值定位：AI黑盒需透明化，回放是产品从工具升级为教练的核心

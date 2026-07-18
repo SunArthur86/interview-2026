@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="30" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">CopyOnWriteArrayList 读写分离机制</text>
+
+  <g font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">
+    <!-- 读路径 -->
+    <line x1="400" y1="130" x2="120" y2="240" stroke="#4CAF50" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="400" y1="130" x2="680" y2="240" stroke="#FF9800" stroke-width="2" marker-end="url(#arr)"/>
+    
+    <ellipse cx="400" cy="70" rx="90" ry="25" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+    <text x="400" y="75" font-weight="700" fill="#333" font-size="14">并发操作触发</text>
+
+    <!-- 读流程 -->
+    <rect x="60" y="260" width="160" height="200" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+    <text x="140" y="285" font-weight="700" fill="#4CAF50" font-size="14">读操作 (无锁)</text>
+    <line x1="80" y1="295" x2="200" y2="295" stroke="#4CAF50"/>
+    <text x="140" y="320" fill="#333" font-weight="700">1. 获取引用</text>
+    <text x="140" y="340" fill="#555">直接读取原数组</text>
+    <text x="140" y="370" fill="#333" font-weight="700">2. 读取数据</text>
+    <text x="140" y="390" fill="#555">volatile保证可见性</text>
+    <text x="140" y="420" fill="#4CAF50" font-size="11">[弱一致性]</text>
+    <text x="140" y="440" fill="#4CAF50" font-size="11">迭代基于旧快照</text>
+
+    <!-- 写流程 -->
+    <rect x="580" y="260" width="160" height="200" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+    <text x="660" y="285" font-weight="700" fill="#FF9800" font-size="14">写操作 (加锁)</text>
+    <line x1="600" y1="295" x2="720" y2="295" stroke="#FF9800"/>
+    <text x="660" y="320" fill="#333" font-weight="700">1. 独占加锁</text>
+    <text x="660" y="340" fill="#555">ReentrantLock</text>
+    <text x="660" y="370" fill="#333" font-weight="700">2. 数组拷贝</text>
+    <text x="660" y="390" fill="#555">复制出全新副本</text>
+    <text x="660" y="420" fill="#333" font-weight="700">3. 引用切换</text>
+    <text x="660" y="440" fill="#555">volatile覆盖旧引用</text>
+
+    <!-- 读写关系说明 -->
+    <rect x="260" y="270" width="280" height="130" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+    <text x="400" y="295" font-weight="700" fill="#9C27B0" font-size="14">读写分离核心机制</text>
+    <line x1="280" y1="305" x2="520" y2="305" stroke="#9C27B0"/>
+    <text x="400" y="330" fill="#333">读：永远在某一版本的数组上</text>
+    <text x="400" y="355" fill="#333">写：不影响读，隔离执行复制</text>
+    <text x="400" y="385" font-size="11" fill="#f44336">避坑：高频写或大数组极易OOM</text>
+  </g>
+</svg>

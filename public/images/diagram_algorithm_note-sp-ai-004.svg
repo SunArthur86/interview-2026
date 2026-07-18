@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">怎么判断链表相交？</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">双指针法——两个指针各走一遍两个链表，走过的路程相同，必然在交点相遇</text>
+
+  <rect x="60" y="140" width="260" height="60" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="190.0" y="175.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">链表A: a1→a2→c1→c2→c3</text>
+  <rect x="480" y="140" width="260" height="60" rx="8" fill="#FF9800" stroke="#FF9800" stroke-width="2"/>
+  <text x="610.0" y="175.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">链表B: b1→b2→c1→c2→c3</text>
+  <rect x="320" y="290" width="160" height="70" rx="8" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+  <text x="400.0" y="330.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">交点 c1</text>
+  <rect x="320" y="400" width="160" height="50" rx="8" fill="#9C27B0" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400.0" y="430.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">pA走完A走B，pB走完B走A</text>
+  <line x1="190" y1="200" x2="360" y2="290" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="610" y1="200" x2="440" y2="290" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="360" x2="400" y2="400" stroke="#4CAF50" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="400.0" y="375.0" text-anchor="middle" font-size="11" font-weight="600" fill="#4CAF50">相遇</text>
+  <text x="40" y="455" font-size="12" font-weight="700" fill="#37474F">关键点：pA走headA到头后走headB，pB走headB到头后走headA</text>
+  
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">CompletableFuture 线程调度与资源隔离</text>
+
+  <!-- Left Flow: thenApply -->
+  <rect x="50" y="70" width="320" height="220" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="210" y="95" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#607D8B">thenApply (栈内执行)</text>
+  <rect x="80" y="115" width="130" height="40" rx="8" fill="#fff" stroke="#607D8B"/>
+  <text x="145" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">Task 1 (执行)</text>
+  <path d="M 145 155 L 145 175" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="80" y="180" width="130" height="40" rx="8" fill="#fff" stroke="#607D8B"/>
+  <text x="145" y="205" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">Task 2 (复用同线程)</text>
+  <path d="M 210 135 L 290 135" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="250" y="125" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle">直接执行回调</text>
+  <rect x="250" y="180" width="110" height="40" rx="8" fill="#f44336"/>
+  <text x="305" y="200" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#fff">线程阻塞风险</text>
+  <text x="305" y="215" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#fff">同链路串行化</text>
+
+  <!-- Right Flow: thenApplyAsync -->
+  <rect x="430" y="70" width="320" height="220" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="590" y="95" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#2196F3">thenApplyAsync (显式调度)</text>
+  <rect x="460" y="115" width="130" height="40" rx="8" fill="#fff" stroke="#2196F3"/>
+  <text x="525" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">Task 1 (执行)</text>
+  <path d="M 525 155 L 525 175" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="460" y="180" width="130" height="40" rx="8" fill="#fff" stroke="#2196F3"/>
+  <text x="525" y="205" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">Task 2 (新任务)</text>
+  <path d="M 590 135 L 650 135" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="650" y="115" width="90" height="40" rx="8" fill="#FFF3E0" stroke="#FF9800"/>
+  <text x="695" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">投递至池</text>
+  <path d="M 695 155 L 695 180" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="610" y="180" width="130" height="40" rx="8" fill="#4CAF50"/>
+  <text x="675" y="205" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#fff">异步非阻塞</text>
+
+  <!-- Bulkhead Isolation -->
+  <rect x="50" y="310" width="700" height="160" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="335" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#9C27B0">自定义线程池资源隔离 (Bulkhead 舱壁模式)</text>
+  
+  <rect x="80" y="360" width="180" height="40" rx="8" fill="#fff" stroke="#9C27B0"/>
+  <text x="170" y="385" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">ForkJoinPool.commonPool()</text>
+  <path d="M 170 400 L 170 410" stroke="#f44336" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <rect x="80" y="415" width="180" height="40" rx="8" fill="#FFEBEE" stroke="#f44336"/>
+  <text x="170" y="435" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">共享池易互相饥饿</text>
+
+  <rect x="310" y="360" width="180" height="40" rx="8" fill="#E8F5E9" stroke="#4CAF50"/>
+  <text x="400" y="385" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#4CAF50">cpuPool (CPU密集型)</text>
+  <rect x="540" y="360" width="180" height="40" rx="8" fill="#E8F5E9" stroke="#4CAF50"/>
+  <text x="630" y="385" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#4CAF50">ioPool (IO密集型)</text>
+  <rect x="310" y="415" width="410" height="40" rx="8" fill="#ECEFF1" stroke="#607D8B"/>
+  <text x="515" y="435" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">独立队列与拒绝策略，按业务拆分互不影响</text>
+</svg>

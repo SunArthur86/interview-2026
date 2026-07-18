@@ -286,3 +286,8 @@ flowchart TD
 | 1:20 | 成本优化对比表 | 链式（A→B）/ 并行（A+B）/ 投票（多模型共识）。 | 协作模式 |
 | 1:50 | 概念结构示意图 | 贵模型小流量、便宜模型大流量、缓存复用。 | 成本优化 |
 | 3:30 | 总结卡 | 一句话记忆：MoE：路由+专家+融合。 下期可以接着聊：路由判错怎么办。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-025.svg" alt="【巨剧核 AI 陪伴】多模型编排进阶（MoE 思想/场景路由/成本）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

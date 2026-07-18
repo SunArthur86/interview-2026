@@ -112,6 +112,10 @@ flowchart TD
     class Got,Free ok
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-086.svg" alt="什么是可重入锁？它的实现原理是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定义：同一线程外层获锁后，内层仍能获取，不会阻塞自己。

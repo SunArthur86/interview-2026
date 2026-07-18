@@ -113,6 +113,10 @@ flowchart LR
     class NPE danger
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-064.svg" alt="volatile关键字的作用和原理是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大核心作用：保证可见性、禁止指令重排序，但不保证原子性。

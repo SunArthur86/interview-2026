@@ -290,3 +290,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：隔离：线程/信号量/机房/业务 | 能力拆解 |
 | 1:56 | 流程图：箭头串联各环节 | 要点是：压测：单机/集群/全链路 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——一致性 hash 解决什么？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-content_pdd-content-028.svg" alt="【拼多多内容】负载均衡/隔离/压测怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -236,6 +236,9 @@ public ListNode reverseKGroup(ListNode head, int k) {
    → 不能。递归的本质决定了空间O(n)。但可以用尾递归优化（Java不保证优化，C++/Rust可以）
 
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-xhs-algo-011.svg" alt="【拼多多一面】手撕算法：反转单链表" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** 反转链表就是将每个节点的next指针从指向后一个节点改为指向前一个节点。

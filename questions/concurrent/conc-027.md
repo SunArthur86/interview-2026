@@ -85,6 +85,10 @@ int main() {
 2.  **中断与系统调用的区别**：中断是硬件或软件发出的异步信号，系统调用是应用程序主动发起的同步请求。
 3.  **内核态与用户态的内存隔离**：内核空间具有最高权限，用户程序无法直接访问内核空间内存，防止系统崩溃。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-027.svg" alt="什么是用户程序与操作系统的关系？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心关系：服务请求（用户程序）与服务提供（操作系统），App 无法直接操作硬件。

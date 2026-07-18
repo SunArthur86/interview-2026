@@ -201,6 +201,9 @@ Worker Thread
 - **架构原则一句话**：消息流是 AI 的"输入输出管道"，但桌面端的产品骨架是**任务（Task）— 上下文（Context）— 产物（Artifact）** 三层，管道只是任务内的子模块
 - **能力边界意识**：桌面端做 AI 产品不是"加壳"，而是要重新设计状态模型、窗口模型、产物模型，这三层是架构核心
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-001.svg" alt="【月之暗面面经】AI-Native 桌面产品为什么不能只照搬 Web 聊天页？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - Web是单线消息流，桌面端是任务-上下文-产物三区架构

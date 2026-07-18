@@ -324,3 +324,8 @@ flowchart TD
 | 0:40 | 概念结构示意图 | 推理（Thought）+行动（Action）+观察（Observation）循环。 | ReAct |
 | 1:05 | 流程图 | 给范例引导风格/格式/思路。 | Few-shot |
 | 2:30 | 总结卡 | 一句话记忆：CoT：先推理再答。 下期可以接着聊：CoT 为什么有效。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-036.svg" alt="【巨剧核 AI 陪伴】Prompt 工程进阶（CoT/ReAct/Few-shot/结构化）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -253,6 +253,9 @@ flowchart TD
     E --> D
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-bd2-010.svg" alt="手撕：力扣146.LRU缓存（带输入输出版本）" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心结构：HashMap + 双向链表。因为要O(1)读写，所以用Map查位置，用链表保顺序。

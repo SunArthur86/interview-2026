@@ -641,6 +641,9 @@ export const useArtifactStore = defineStore('artifact', {
 - **产物面板和对话流的解耦**：对话流可以折叠/隐藏，用户直接在产物面板里操作；反过来产物面板里选中节点可以注入对话上下文——两者是双向联动但各自独立
 - **多产物组合场景**：一个任务可能同时产出网站 + 数据表格 + PPT，产物面板需要支持"产物间引用"（如 PPT 里引用表格的数据源），这是高级但加分的特性
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-003.svg" alt="【月之暗面面经】如果一个 Agent 会生成站点、表格和 PPT，前端怎样组织产物面板？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心定位：AI产物不是消息，而是结构化、可预览、有版本的工作对象

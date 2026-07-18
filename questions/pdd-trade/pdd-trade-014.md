@@ -195,3 +195,8 @@ flowchart TD
 | 0:12 | 核心概念图 + 关键词浮现 | 要点是：7 参数（core/max/keepAlive/queue/factory/handler/unit） | 核心概念 |
 | 1:00 | 能力/参数拆解表 | 要点是：提交顺序：核心→队列→非核心→拒绝（先队列后扩容） | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-014.svg" alt="【拼多多交易】线程池怎么配置？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

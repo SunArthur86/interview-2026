@@ -230,3 +230,8 @@ sequenceDiagram
 | 1:04 | 代码片段 + 关键行高亮 | 要点是：回滚：代码/配置/数据/流量 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：应急五步：发现→通知→定位→止损→恢复→复盘 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-029.svg" alt="【拼多多供应链】预案、回滚、应急响应怎么做？用钱学森理论审视 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

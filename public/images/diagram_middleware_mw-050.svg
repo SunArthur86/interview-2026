@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">ES 集群是如何分布式存储和查询的？分片、副本、选主各自解决什么问题？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">通过分片分担压力，通过副本保证可用，通过选主管理集群。</text>
+  <text x="400" y="125" text-anchor="middle" font-size="12" fill="#666" font-weight="700">垂直拆分 vs 水平拆分</text>
+  <rect x="60" y="145" width="320" height="120" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="220" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">垂直拆分</text>
+  <text x="220" y="195" text-anchor="middle" font-size="11" fill="#1565C0">按业务/字段拆分</text>
+  <rect x="80" y="215" width="85" height="40" rx="4" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="122" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#1565C0">User DB</text>
+  <rect x="180" y="215" width="85" height="40" rx="4" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="222" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#1565C0">Order DB</text>
+  <rect x="280" y="215" width="85" height="40" rx="4" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="322" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#1565C0">Item DB</text>
+  <rect x="420" y="145" width="320" height="120" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="580" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">水平拆分（Sharding）</text>
+  <text x="580" y="195" text-anchor="middle" font-size="11" fill="#2E7D32">按 hash/range 拆分</text>
+  <rect x="440" y="215" width="85" height="40" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="482" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#2E7D32">Shard-0</text>
+  <rect x="540" y="215" width="85" height="40" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="582" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#2E7D32">Shard-1</text>
+  <rect x="640" y="215" width="85" height="40" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="682" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#2E7D32">Shard-2</text>
+  <text x="400" y="300" text-anchor="middle" font-size="12" fill="#666" font-weight="700">分片键路由策略</text>
+  <rect x="60" y="320" width="170" height="55" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="145" y="343" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">hash 取模</text>
+  <text x="145" y="362" text-anchor="middle" font-size="10" fill="#E65100">均匀分布</text>
+  <rect x="240" y="320" width="170" height="55" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="325" y="343" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">range 范围</text>
+  <text x="325" y="362" text-anchor="middle" font-size="10" fill="#E65100">按时间/ID</text>
+  <rect x="420" y="320" width="170" height="55" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="505" y="343" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">一致性哈希</text>
+  <text x="505" y="362" text-anchor="middle" font-size="10" fill="#E65100">扩容影响小</text>
+  <rect x="600" y="320" width="170" height="55" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="685" y="343" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">基因法</text>
+  <text x="685" y="362" text-anchor="middle" font-size="10" fill="#E65100">避免广播</text>
+  <rect x="60" y="395" width="680" height="70" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="418" text-anchor="middle" font-size="12" font-weight="700" fill="#6A1B9A">引入分片后的新挑战</text>
+  <text x="400" y="440" text-anchor="middle" font-size="11" fill="#6A1B9A">跨片 Join 困难 · 分布式事务 · 全局唯一 ID · 扩容数据迁移</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">ShardingSphere/Vitess：客户端/代理模式屏蔽分片细节</text>
+</svg>

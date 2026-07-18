@@ -105,6 +105,10 @@ flowchart TB
     class M1,M2,M3,M4,M5 means
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-029.svg" alt="什么是线程安全？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：多线程并发访问时，无论调度顺序如何，都能保证行为的正确性（无数据竞争或脏读）。

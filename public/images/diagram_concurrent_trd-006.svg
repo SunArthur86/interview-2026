@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">ConcurrentHashMap size() 累加机制</text>
+
+  <!-- Left side: Synchronization -->
+  <rect x="50" y="70" width="300" height="360" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="200" y="95" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#2196F3">高并发更新机制 (写)</text>
+  
+  <rect x="80" y="115" width="240" height="40" rx="8" fill="#fff" stroke="#2196F3"/>
+  <text x="200" y="135" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">线程竞争写入数据</text>
+  <path d="M 200 155 L 200 165" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  
+  <rect x="80" y="170" width="240" height="40" rx="8" fill="#fff" stroke="#FF9800"/>
+  <text x="200" y="190" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">CAS 更新 baseCount</text>
+  <path d="M 200 210 L 200 220" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  
+  <polygon points="200,220 320,280 200,340 80,280" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="200" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-anchor="middle" fill="#f44336">CAS 是否失败?</text>
+  <path d="M 200 340 L 200 360" stroke="#f44336" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="210" y="355" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f44336">是 (发生竞争)</text>
+  
+  <rect x="80" y="365" width="240" height="50" rx="8" fill="#fff" stroke="#2196F3"/>
+  <text x="200" y="385" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">使用线程探针随机分散</text>
+  <text x="200" y="402" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">更新至 CounterCell[] 槽位</text>
+
+  <!-- Right side: sumCount -->
+  <rect x="450" y="70" width="300" height="360" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="600" y="95" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#4CAF50">sumCount() 弱一致性 (读)</text>
+  
+  <rect x="480" y="115" width="240" height="40" rx="8" fill="#fff" stroke="#4CAF50"/>
+  <text x="600" y="135" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">累加 baseCount + Cells[]</text>
+  <path d="M 600 155 L 600 165" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  
+  <polygon points="600,170 720,215 600,260 480,215" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="600" y="220" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">期间 modCount</text>
+  <text x="600" y="237" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">发生变化?</text>
+  <path d="M 600 260 L 600 275" stroke="#FF9800" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="610" y="270" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#FF9800">是 (检测到并发)</text>
+  
+  <rect x="480" y="280" width="240" height="40" rx="8" fill="#fff" stroke="#FF9800"/>
+  <text x="600" y="300" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle">最多重试 2 次</text>
+  <path d="M 600 320 L 600 335" stroke="#f44336" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="610" y="330" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f44336">极限保底策略</text>
+  
+  <rect x="480" y="340" width="240" height="50" rx="8" fill="#f44336"/>
+  <text x="600" y="362" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#fff">加锁全表(所有桶节点)</text>
+  <text x="600" y="380" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#fff">获取绝对准确值</text>
+  
+  <text x="600" y="415" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#4CAF50">权衡: 损失微小绝对实时性，</text>
+  <text x="600" y="430" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#4CAF50">换取极高的读取性能</text>
+</svg>

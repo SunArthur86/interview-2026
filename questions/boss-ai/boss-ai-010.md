@@ -266,3 +266,8 @@ flowchart TD
 | 0:40 | 限流算法对比图 | 核心保命（强模型→弱模型→模板），非核心关闭（视频生成暂停）。 | 降级 |
 | 1:05 | 监控大盘截图 | prompt 结果缓存/热点角色/用户画像，相似 query 命中。 | 缓存 |
 | 2:30 | 总结卡 | 一句话记忆：稳定性五件套：限流/降级/缓存/监控/预案。 下期可以接着聊：LLM 限流怎么设阈值。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-010.svg" alt="【巨剧核 AI 陪伴】服务稳定性与安全怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

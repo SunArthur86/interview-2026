@@ -430,3 +430,8 @@ def rag_answer(question, top_k=5):
 | 0:40 | 向量检索流程图 | Embedding → 向量检索 → 拼 prompt → LLM 生成。 | 流程 |
 | 1:05 | 向量嵌入示意图 | Milvus/Pinecone/Weaviate。 | 向量库 |
 | 2:30 | 总结卡 | 一句话记忆：RAG = 检索（向量库）+ 生成（LLM）。 下期可以接着聊：RAG 和微调怎么选。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-036.svg" alt="【蚂蚁风控】RAG 怎么用？风控系统的 RAG 应用 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

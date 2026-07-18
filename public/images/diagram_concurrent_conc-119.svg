@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L8,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+  <text x="400" y="35" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">秒杀系统高并发架构数据流</text>
+
+  <ellipse cx="400" cy="80" rx="70" ry="25" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="85" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#9C27B0">海量用户瞬时请求</text>
+
+  <line x1="400" y1="105" x2="400" y2="140" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="280" y="140" width="240" height="40" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="160" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#FF9800">前端限流与静态化 (答题/CDN)</text>
+
+  <line x1="400" y1="180" x2="400" y2="215" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="280" y="215" width="240" height="40" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="235" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#FF9800">网关拦截 (Uid频率/IP限制)</text>
+
+  <line x1="400" y1="255" x2="400" y2="290" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="280" y="290" width="240" height="40" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="400" y="310" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#2196F3">Redis Lua 原子扣减库存</text>
+
+  <polygon points="400,340 470,380 400,420 330,380" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="375" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">扣减结果</text>
+  <text x="400" y="395" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#FF9800">是否 &gt; 0 ?</text>
+
+  <line x1="330" y1="380" x2="170" y2="380" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="230" y="370" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">否 (拦截)</text>
+  
+  <line x1="470" y1="380" x2="630" y2="380" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="550" y="370" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#4CAF50">是 (放行)</text>
+
+  <rect x="60" y="350" width="140" height="60" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="130" y="375" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#f44336">直接返回失败</text>
+  <text x="130" y="395" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">快速熔断降级</text>
+
+  <rect x="600" y="350" width="140" height="60" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="670" y="375" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#4CAF50">写入 MQ 消息</text>
+  <text x="670" y="395" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="middle" fill="#607D8B">异步削峰填谷</text>
+
+  <line x1="670" y1="410" x2="670" y2="445" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="540" y="445" width="220" height="40" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="650" y="465" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#2196F3">DB 层乐观锁落单 (兜底)</text>
+
+  <rect x="30" y="460" width="480" height="30" fill="#FFFFFF" stroke="none"/>
+  <rect x="50" y="470" width="15" height="10" fill="#E8F5E9" stroke="#4CAF50"/>
+  <text x="75" y="480" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">成功/放行</text>
+  <rect x="160" y="470" width="15" height="10" fill="#FFEBEE" stroke="#f44336"/>
+  <text x="185" y="480" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">拒绝/失败</text>
+  <rect x="280" y="470" width="15" height="10" fill="#FFF3E0" stroke="#FF9800"/>
+  <text x="305" y="480" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">限流/判断</text>
+  <rect x="390" y="470" width="15" height="10" fill="#E3F2FD" stroke="#2196F3"/>
+  <text x="415" y="480" font-family="system-ui,-apple-system,sans-serif" font-size="12" text-anchor="start" fill="#607D8B">核心链路</text>
+</svg>

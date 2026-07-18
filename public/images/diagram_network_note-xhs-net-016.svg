@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">WebSocket 主要是用来做什么的？如何设计实现一个 WebSock…</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">WebSocket是一种全双工通信协议，通过HTTP握手升级后保持长连接，服务器可以随时主动推送数据。主要用于实时通信（聊天、推送、协同编辑）。</text>
+
+  <rect x="60" y="90" width="240" height="60" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="180.0" y="117.0" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">Client</text>
+  <text x="180.0" y="134.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">浏览器/移动端</text>
+  <rect x="500" y="90" width="240" height="60" rx="8" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+  <text x="620.0" y="117.0" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">Server</text>
+  <text x="620.0" y="134.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">Netty / @ServerEndpoint</text>
+  <line x1="300" y1="110" x2="500" y2="110" stroke="#2196F3" stroke-width="2" marker-end="url(#arrB)"/>
+  <text x="400.0" y="105.0" text-anchor="middle" font-size="11" font-weight="600" fill="#2196F3">HTTP Upgrade 101</text>
+  <line x1="500" y1="130" x2="300" y2="130" stroke="#FF9800" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arr)"/>
+  <text x="400.0" y="125.0" text-anchor="middle" font-size="11" font-weight="600" fill="#FF9800">全双工长连接</text>
+  <rect x="60" y="200" width="680" height="50" rx="8" fill="#9C27B0" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400.0" y="222.0" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">数据帧格式</text>
+  <text x="400.0" y="239.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">FIN + opcode + mask + payload</text>
+  <text x="40" y="290" font-size="13" font-weight="700" fill="#37474F">工程化要点</text>
+  <rect x="40" y="310" width="340" height="50" rx="8" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+  <text x="210.0" y="332.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Redis Pub/Sub</text>
+  <text x="210.0" y="349.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">集群广播</text>
+  <rect x="400" y="310" width="340" height="50" rx="8" fill="#FF9800" stroke="#FF9800" stroke-width="2"/>
+  <text x="570.0" y="332.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">心跳保活</text>
+  <text x="570.0" y="349.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">Ping/Pong</text>
+  <rect x="40" y="370" width="340" height="50" rx="8" fill="#f44336" stroke="#f44336" stroke-width="2"/>
+  <text x="210.0" y="392.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">断线重连</text>
+  <text x="210.0" y="409.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">指数退避</text>
+  <rect x="400" y="370" width="340" height="50" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="570.0" y="392.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">使用场景</text>
+  <text x="570.0" y="409.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">聊天/推送/协同</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">Client</text>
+  <rect x="164" y="470" width="14" height="14" rx="3" fill="#4CAF50"/>
+  <text x="184" y="482" font-size="11" fill="#37474F">Server</text>
+  <rect x="248" y="470" width="14" height="14" rx="3" fill="#9C27B0"/>
+  <text x="268" y="482" font-size="11" fill="#37474F">数据帧</text>
+</svg>

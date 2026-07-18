@@ -83,6 +83,10 @@ memory_points:
 4. **CAS 自旋锁与数据库乐观锁的区别？**
    概念相似（Compare-And-Swap），但 CAS 通常指 CPU 硬件指令或内存级操作（如 Java 的 AtomicInteger），而数据库乐观锁是基于 SQL 语句的逻辑判断，涉及磁盘 I/O 和网络交互。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-124.svg" alt="数据库悲观锁和乐观锁的原理和使用场景有哪些？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 思想对比：悲观锁操作前先加锁（写多），乐观锁提交时才检查（读多）

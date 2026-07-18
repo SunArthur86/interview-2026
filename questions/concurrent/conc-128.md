@@ -151,6 +151,10 @@ flowchart TD
     class R1,R2,R3,R4 reject
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-128.svg" alt="线程池的7个核心参数是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 7参数口诀：核心、最大、存活时、计时单位、任务队列、线程工厂、拒绝策略

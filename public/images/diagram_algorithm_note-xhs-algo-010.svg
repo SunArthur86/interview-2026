@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">力扣198：打家劫舍</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">沿街排列的房屋每间有不同金额，不能偷相邻两间，求最大收益。本质是每个位置做二选一决策：偷当前+跳过下一间 vs 不偷当前</text>
+
+  <rect x="40" y="180" width="131.2" height="80" rx="8" fill="#2196F3" stroke="#2196F3" stroke-width="2"/>
+  <text x="105.6" y="217.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">状态定义</text>
+  <text x="105.6" y="234.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">dp[i]含义</text>
+  <line x1="171.2" y1="220.0" x2="187.2" y2="220.0" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="179.2" y="215.0" text-anchor="middle" font-size="11" font-weight="600" fill="#607D8B">→</text>
+  <circle cx="52" cy="174" r="14" fill="#2196F3"/><text x="52" y="179" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">1</text>
+  <rect x="187.2" y="180" width="131.2" height="80" rx="8" fill="#FF9800" stroke="#FF9800" stroke-width="2"/>
+  <text x="252.79999999999998" y="217.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">转移方程</text>
+  <text x="252.79999999999998" y="234.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">dp[i]=f(dp[i-1])</text>
+  <line x1="318.4" y1="220.0" x2="334.4" y2="220.0" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="326.4" y="215.0" text-anchor="middle" font-size="11" font-weight="600" fill="#607D8B">→</text>
+  <circle cx="199.2" cy="174" r="14" fill="#FF9800"/><text x="199.2" y="179" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">2</text>
+  <rect x="334.4" y="180" width="131.2" height="80" rx="8" fill="#9C27B0" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400.0" y="217.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">初始值</text>
+  <text x="400.0" y="234.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">dp[0]/边界</text>
+  <line x1="465.59999999999997" y1="220.0" x2="481.59999999999997" y2="220.0" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="473.59999999999997" y="215.0" text-anchor="middle" font-size="11" font-weight="600" fill="#607D8B">→</text>
+  <circle cx="346.4" cy="174" r="14" fill="#9C27B0"/><text x="346.4" y="179" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">3</text>
+  <rect x="481.59999999999997" y="180" width="131.2" height="80" rx="8" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+  <text x="547.1999999999999" y="217.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">遍历顺序</text>
+  <text x="547.1999999999999" y="234.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">自底向上</text>
+  <line x1="612.8" y1="220.0" x2="628.8" y2="220.0" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="620.8" y="215.0" text-anchor="middle" font-size="11" font-weight="600" fill="#607D8B">→</text>
+  <circle cx="493.59999999999997" cy="174" r="14" fill="#4CAF50"/><text x="493.59999999999997" y="179" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">4</text>
+  <rect x="628.8" y="180" width="131.2" height="80" rx="8" fill="#f44336" stroke="#f44336" stroke-width="2"/>
+  <text x="694.4" y="217.0" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">优化</text>
+  <text x="694.4" y="234.0" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">空间压缩</text>
+  <circle cx="640.8" cy="174" r="14" fill="#f44336"/><text x="640.8" y="179" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">5</text>
+  <text x="40" y="320" font-size="13" font-weight="700" fill="#37474F">核心要点</text>
+  <circle cx="48" cy="339" r="4" fill="#2196F3"/>
+  <text x="60" y="342" font-size="11.5" fill="#37474F">状态定义：dp[i] = 前i家能偷到的最大金额</text>
+  <circle cx="48" cy="365" r="4" fill="#FF9800"/>
+  <text x="60" y="368" font-size="11.5" fill="#37474F">状态转移：dp[i] = max(dp[i-1], dp[i-2] + nums[i])</text>
+  <circle cx="48" cy="391" r="4" fill="#9C27B0"/>
+  <text x="60" y="394" font-size="11.5" fill="#37474F">空间优化：只需两个变量，O(1)空间</text>
+  <circle cx="48" cy="417" r="4" fill="#4CAF50"/>
+  <text x="60" y="420" font-size="11.5" fill="#37474F">边界条件：dp[0] = nums[0], dp[1] = max(nums[0], nums[1])</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">核心</text>
+  <rect x="136" y="470" width="14" height="14" rx="3" fill="#FF9800"/>
+  <text x="156" y="482" font-size="11" fill="#37474F">流程</text>
+  <rect x="192" y="470" width="14" height="14" rx="3" fill="#9C27B0"/>
+  <text x="212" y="482" font-size="11" fill="#37474F">输入</text>
+  <rect x="248" y="470" width="14" height="14" rx="3" fill="#4CAF50"/>
+  <text x="268" y="482" font-size="11" fill="#37474F">输出</text>
+</svg>

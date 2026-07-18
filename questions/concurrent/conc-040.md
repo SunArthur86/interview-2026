@@ -101,6 +101,10 @@ public void addBlacklist(String ip) {
 1. **误以为读操作完全不需要 volatile**：读操作虽然不需要锁，但必须通过 `volatile` 读取引用才能保证可见性，否则可能读到旧引用。
 2. **误以为适用于写多读少**：恰恰相反，任何写操作都会复制整个底层数组，写多会导致 CPU 和内存消耗巨大，应严格限制在读多写少场景。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-040.svg" alt="CopyOnWriteArrayList是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心机制：写时复制，写操作加 ReentrantLock 拷贝新数组，而读操作无锁

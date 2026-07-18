@@ -197,3 +197,8 @@ flowchart TD
 | 1:20 | 代码示例截图 | 每次决策的输入/模型/prompt/工具/引用全留痕。 | AI 决策可追溯 |
 | 1:50 | 监控大盘截图 | 输出质量、引用命中率、幻觉率。 | 幻觉与质量监控 |
 | 3:30 | 总结卡 | 一句话记忆：三支柱：日志/指标/链路。 下期可以接着聊：AI 怎么做链路追踪。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-020.svg" alt="【生物医药 AI】可观测性/治理/跨团队推进怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

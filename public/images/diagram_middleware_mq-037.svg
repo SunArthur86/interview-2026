@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">Controller选举流程源码分析</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">利用ZooKeeper临时节点实现多Broker竞争Controller。</text>
+  <ellipse cx="400" cy="170" rx="70" ry="36" fill="#FF9800" stroke="none"/>
+  <text x="400" y="174" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Leader</text>
+  <circle cx="220" cy="300" r="45" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="220" y="298" text-anchor="middle" font-size="12" font-weight="700" fill="#1565C0">Follower</text>
+  <text x="220" y="314" text-anchor="middle" font-size="10" fill="#1565C0">投票</text>
+  <circle cx="580" cy="300" r="45" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="580" y="298" text-anchor="middle" font-size="12" font-weight="700" fill="#1565C0">Follower</text>
+  <text x="580" y="314" text-anchor="middle" font-size="10" fill="#1565C0">投票</text>
+  <circle cx="400" cy="360" r="45" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="400" y="358" text-anchor="middle" font-size="12" font-weight="700" fill="#6A1B9A">Candidate</text>
+  <text x="400" y="374" text-anchor="middle" font-size="10" fill="#6A1B9A">发起选举</text>
+  <line x1="360" y1="195" x2="250" y2="275" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrg)"/>
+  <line x1="440" y1="195" x2="550" y2="275" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrg)"/>
+  <text x="280" y="240" font-size="10" font-weight="600" fill="#4CAF50">心跳/日志</text>
+  <text x="510" y="240" font-size="10" font-weight="600" fill="#4CAF50">心跳/日志</text>
+  <line x1="250" y1="280" x2="370" y2="200" stroke="#FF9800" stroke-width="2" marker-end="url(#arro)"/>
+  <line x1="550" y1="280" x2="430" y2="200" stroke="#FF9800" stroke-width="2" marker-end="url(#arro)"/>
+  <rect x="60" y="110" width="100" height="40" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="110" y="128" text-anchor="middle" font-size="11" font-weight="700" fill="#6A1B9A">Term 任期</text>
+  <text x="110" y="142" text-anchor="middle" font-size="9" fill="#8E24AA">逻辑时钟</text>
+  <rect x="640" y="110" width="120" height="40" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="700" y="128" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">多数派 Quorum</text>
+  <text x="700" y="142" text-anchor="middle" font-size="9" fill="#F57C00">N/2 + 1</text>
+  <text x="400" y="420" text-anchor="middle" font-size="11" fill="#666" font-weight="700">核心：Leader 写入 → 复制到多数派 Followers → Commit</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Raft/ZAB：Leader 选举 + 日志复制 + 多数派提交，Term 防脑裂</text>
+</svg>

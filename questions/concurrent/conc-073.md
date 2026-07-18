@@ -86,6 +86,10 @@ memory_points:
 1. **setDaemon 的时机**：必须在 `start()` 之前设置 `setDaemon(true)`。如果线程已经启动（状态不再是 NEW）再调用，JVM 会直接抛出 `IllegalThreadStateException`，且不会改变该线程的守护属性。
 2. **finally 块的执行幻觉**：很多人认为 `finally` 必定执行，但在守护线程中，如果 JVM 在执行 `try` 块时决定退出（如所有用户线程结束），`finally` 块中的代码将根本不会被调度执行。此外，`System.exit(0)` 也会强制跳过 `finally`（除非在 ShutdownHook 中）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-073.svg" alt="什么是Java守护线程（Daemon Thread）？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：后台服务线程，生命周期随用户线程消亡而终止（如GC线程）。

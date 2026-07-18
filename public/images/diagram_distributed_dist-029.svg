@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">什么是服务熔断、服务降级？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">熔断是自动开关防崩溃，降级是保核心弃非核心的应急策略。</text>
+  <rect x="90" y="195" width="180" height="70" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="180" y="225" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">Closed（关闭）</text>
+  <text x="180" y="244" text-anchor="middle" font-size="11" fill="#2E7D32">正常通过，统计失败率</text>
+  <rect x="530" y="195" width="180" height="70" rx="10" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="620" y="225" text-anchor="middle" font-size="13" font-weight="700" fill="#C62828">Open（打开）</text>
+  <text x="620" y="244" text-anchor="middle" font-size="11" fill="#C62828">熔断，快速失败</text>
+  <rect x="310" y="345" width="180" height="70" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="375" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">Half-Open（半开）</text>
+  <text x="400" y="394" text-anchor="middle" font-size="11" fill="#E65100">放行单请求试探</text>
+  <line x1="270" y1="230" x2="525" y2="230" stroke="#FF9800" stroke-width="2" marker-end="url(#arro)"/>
+  <text x="400" y="220" font-size="10" font-weight="600" fill="#FF9800">失败率 &gt; 阈值（50%）</text>
+  <line x1="620" y1="265" x2="470" y2="345" stroke="#607D8B" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="560" y="320" font-size="10" font-weight="600" fill="#888">休眠窗 5s 后</text>
+  <line x1="330" y1="360" x2="230" y2="270" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrg)"/>
+  <text x="220" y="330" font-size="10" font-weight="600" fill="#4CAF50">试探成功</text>
+  <line x1="470" y1="360" x2="580" y2="270" stroke="#f44336" stroke-width="2" marker-end="url(#arrr)"/>
+  <text x="540" y="330" font-size="10" font-weight="600" fill="#f44336">试探失败</text>
+  <text x="400" y="135" text-anchor="middle" font-size="12" fill="#666" font-weight="700">断路器三态闭环（Closed ⇄ Open ⇄ Half-Open）</text>
+  <rect x="550" y="408" width="380" height="62" rx="6" fill="#ffffff" stroke="#e0e0e0"/>
+  <text x="560" y="424" font-size="10" fill="#888" font-weight="700">图例</text>
+  <rect x="560" y="438" width="12" height="12" rx="2" fill="#4CAF50"/>
+  <text x="578" y="448" font-size="10" fill="#666">Closed 正常</text>
+  <rect x="560" y="454" width="12" height="12" rx="2" fill="#f44336"/>
+  <text x="578" y="464" font-size="10" fill="#666">Open 熔断</text>
+  <rect x="560" y="470" width="12" height="12" rx="2" fill="#FF9800"/>
+  <text x="578" y="480" font-size="10" fill="#666">Half-Open 探测</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Hystrix：滚动窗口统计失败率，半开态放行单请求验证恢复</text>
+</svg>

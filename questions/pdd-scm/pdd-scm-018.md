@@ -257,3 +257,8 @@ flowchart TD
 | 0:12 | 核心概念图 + 关键词浮现 | 要点是：策略模式：消除促销 if-else（满减/打折/直降各一个策略） | 核心概念 |
 | 1:00 | 能力/参数拆解表 | 要点是：工厂模式：封装对象创建（支付方式工厂） | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-018.svg" alt="【拼多多供应链】设计模式在供应链怎么用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

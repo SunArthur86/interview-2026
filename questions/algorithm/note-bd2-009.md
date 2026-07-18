@@ -165,6 +165,9 @@ def insert(intervals, newInterval):
     return result
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-bd2-009.svg" alt="手撕：力扣56.合并区间" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 第一步必须排序：因为区间乱序无法直接比较，所以先按起点进行排序。

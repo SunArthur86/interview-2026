@@ -86,6 +86,12 @@ backend www_back
 3. **健康检查机制**： Layer 4（仅检查端口连通性）与 Layer 7（发送 HTTP 请求检查状态码）检查的区别与配置。
 4. **性能调优**：`maxconn`、`nbproc` 以及系统层面的 `ulimit` 设置对并发能力的影响。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-018.svg" alt="HAProxy负载均衡器的特点和使用场景是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定位：提供高可用与负载均衡的代理软件，同时支持 TCP(4层)和 HTTP(7层)。

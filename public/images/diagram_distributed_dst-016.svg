@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">ACID 和 BASE 的区别与联系</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">ACID是单机强一致标准，BASE是分布式最终一致方案，两者理念相反。</text>
+  <polygon points="400,130 287,325 513,325" fill="none" stroke="#90A4AE" stroke-width="2" stroke-dasharray="6,3"/>
+  <circle cx="400" cy="130" r="50" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="400" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#1565C0">一致性</text>
+  <text x="400" y="144" text-anchor="middle" font-size="10" fill="#1565C0">Consistency</text>
+  <circle cx="287" cy="325" r="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="287" y="323" text-anchor="middle" font-size="12" font-weight="700" fill="#2E7D32">可用性</text>
+  <text x="287" y="339" text-anchor="middle" font-size="10" fill="#2E7D32">Availability</text>
+  <circle cx="513" cy="325" r="50" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="513" y="323" text-anchor="middle" font-size="12" font-weight="700" fill="#E65100">分区容错</text>
+  <text x="513" y="339" text-anchor="middle" font-size="10" fill="#E65100">Partition</text>
+  <text x="400" y="270" text-anchor="middle" font-size="12" font-weight="700" fill="#546E7A">三选二</text>
+  <text x="400" y="288" text-anchor="middle" font-size="10" fill="#78909C">CA / CP / AP</text>
+  <text x="60" y="410" font-size="11" fill="#455A64">• ACID用于传统数据库，追求强一致性、原子性。</text>
+  <text x="60" y="428" font-size="11" fill="#455A64">• BASE用于大型分布式系统，追求基本可用和最终一致。</text>
+  <text x="60" y="446" font-size="11" fill="#455A64">• BASE是CAP中AP方案的具体实现延伸。</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">CAP 定理：分布式系统网络分区不可避免，常在 C 与 A 间权衡</text>
+</svg>

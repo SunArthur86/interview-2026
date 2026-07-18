@@ -218,3 +218,8 @@ public class ReconcileJob {
 | 1:30 | 流程图：输入→处理→输出 | 要点是：自动平账：小额自动/大额人工 | 关键机制 |
 | 2:09 | 监控大盘截图 + 指标曲线 | 要点是：监控：差错率/未平账金额 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——长款怎么处理？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-024.svg" alt="【拼多多交易】对账系统怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

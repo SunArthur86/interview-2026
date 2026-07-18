@@ -124,6 +124,9 @@ flowchart TD
     end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-011.svg" alt="【月之暗面面经】如果桌面端支持多窗口协作，前端怎么避免不同窗口状态打架？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 主从架构隔离：主窗口管状态，子窗口只负责 UI 视图展示

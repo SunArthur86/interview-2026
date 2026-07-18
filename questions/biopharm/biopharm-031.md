@@ -252,3 +252,8 @@ flowchart TD
 | 1:20 | 概念结构示意图 | 倒排分桶，桶内搜索，省内存可分布式，需训练。 | IVF |
 | 1:50 | 流程图 | PQ/SQ 把向量压缩，省内存换少量精度。 | 量化压缩 |
 | 3:30 | 总结卡 | 一句话记忆：三角：召回率/速度/内存。 下期可以接着聊：HNSW 原理。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-031.svg" alt="【生物医药 AI】向量检索进阶怎么做（ANN/HNSW/IVF/量化）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

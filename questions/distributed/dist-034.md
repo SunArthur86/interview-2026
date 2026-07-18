@@ -94,6 +94,12 @@ try {
 2. **Redis主从切换问题**：为什么Redlock能解决？它要求大多数节点加锁成功，即使主从切换，只要原来的主还没恢复，新主也加不上锁（大部分节点已持有锁）。
 3. **ZooKeeper的羊群效应**：如果不监听前一个节点，而是监听锁节点本身，所有等待的节点都会被唤醒，造成风暴。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-034.svg" alt="分布式锁有哪些实现方案？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大方案：Redis(AP重性能)、ZooKeeper(CP重强一致)、数据库(简单易实现)。

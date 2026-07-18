@@ -503,6 +503,9 @@ ipcMain.on('permission:revoke', (_, permissionId) => {
 - **Agent 场景的特别挑战**：Agent 多步执行中可能自主决定访问文件，所以需要在 Agent 编排层注入权限检查点（per-step permission gate），而不是只在入口检查一次
 - **合规层面**：如果产品面向企业市场，权限日志是审计要求（SOC 2 / GDPR），访问日志必须持久化且不可篡改
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-002.svg" alt="【月之暗面面经】桌面 AI 产品接入本地文件和目录时，前端如何设计权限提示？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心矛盾：既要给AI文件能力，又要保障用户的知情与控制权

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">ScheduledThreadPoolExecutor</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">基于线程池的并发延时任务调度器</text>
+  <rect x="40" y="150" width="120" height="200" rx="6" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <circle cx="100" cy="175" r="16" fill="#2196F3"/>
+  <text x="100" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1</text>
+  <text x="100" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">支持多线程并发执</text>
+  <text x="100" y="244" text-anchor="middle" font-size="10" fill="#1565C0">行任务，互不影响</text>
+  <rect x="190" y="150" width="120" height="200" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <circle cx="250" cy="175" r="16" fill="#FF9800"/>
+  <text x="250" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">2</text>
+  <text x="250" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#E65100">任务异常不会导致</text>
+  <text x="250" y="244" text-anchor="middle" font-size="10" fill="#E65100">线程池退出，仅记</text>
+  <text x="250" y="260" text-anchor="middle" font-size="10" fill="#E65100">录错误</text>
+  <rect x="340" y="150" width="120" height="200" rx="6" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <circle cx="400" cy="175" r="16" fill="#9C27B0"/>
+  <text x="400" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">3</text>
+  <text x="400" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#6A1B9A">基于Delaye</text>
+  <text x="400" y="244" text-anchor="middle" font-size="10" fill="#6A1B9A">dWorkQue</text>
+  <text x="400" y="260" text-anchor="middle" font-size="10" fill="#6A1B9A">ue（优先队列）</text>
+  <text x="400" y="276" text-anchor="middle" font-size="10" fill="#6A1B9A">实现调度</text>
+  <rect x="490" y="150" width="120" height="200" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <circle cx="550" cy="175" r="16" fill="#4CAF50"/>
+  <text x="550" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">4</text>
+  <text x="550" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">相比Timer更</text>
+  <text x="550" y="244" text-anchor="middle" font-size="10" fill="#2E7D32">健壮，是Java</text>
+  <text x="550" y="260" text-anchor="middle" font-size="10" fill="#2E7D32"> 5+的推荐方案</text>
+  <rect x="640" y="150" width="120" height="200" rx="6" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <circle cx="700" cy="175" r="16" fill="#f44336"/>
+  <text x="700" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">5</text>
+  <text x="700" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#C62828">配置核心线程数为</text>
+  <text x="700" y="244" text-anchor="middle" font-size="10" fill="#C62828">1时等效于Tim</text>
+  <text x="700" y="260" text-anchor="middle" font-size="10" fill="#C62828">er</text>
+  <text x="400" y="400" text-anchor="middle" font-size="12" fill="#666" font-weight="700">各要点并列同等重要，共同支撑核心知识体系</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">柱状结构：每个柱代表一个独立核心点</text>
+</svg>

@@ -87,6 +87,10 @@ find . -name "*.java" -mtime -1 | xargs tar czf recent_code.tar.gz
 2. **软链接与硬链接**：`ln -s` (软链接) 和 `ln` (硬链接) 的区别是什么？删除源文件后各自的表现？
 3. **top 命令**：如何按 CPU 或 内存 占用率排序？Load Average 代表什么意思？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-004.svg" alt="什么是常用的Linux命令？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 日志排查：tail -f看实时，grep过滤关键词，wc -l做统计

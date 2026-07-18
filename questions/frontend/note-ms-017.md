@@ -270,6 +270,9 @@ Phase 4: 反向提问（5分钟）
 
 面试的本质不是考知识面，而是通过深度问题把候选人带到他的能力边界，然后看边界在哪里。AI-Native 桌面产品是一个新兴领域，真正有深度经验的人不多——**找到那些在交叉地带有真实思考的人，他们才是团队最需要的。**
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-017.svg" alt="【月之暗面面经】你如何判断候选人真的做过 AI-Native 桌面产品，而不是普通 Web 前端？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心甄别点：是否具备「系统级思维 × AI交互设计」的深度交叉经验

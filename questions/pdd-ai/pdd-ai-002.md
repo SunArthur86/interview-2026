@@ -239,3 +239,8 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：volatile 保证可见+禁排，不保证 i++ | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：AQS：CLH 队列 + state + 独占/共享模式 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——synchronized 和 Lock 区别？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-002.svg" alt="【拼多多 AI 中台】Java 并发三性与同步原语怎么用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

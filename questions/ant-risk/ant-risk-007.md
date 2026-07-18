@@ -291,3 +291,8 @@ public KeyResolver userKeyResolver() {
 | 0:40 | 限流算法对比图 | QPS、并发线程数、调用关系（链路）。 | 限流维度 |
 | 1:05 | Sentinel 规则配置截图 | Sentinel 用滑动窗口统计 + 信号量隔离；Hystrix 用桶计数 + 线程池隔离。 | Sentinel 用滑动窗口统计 + |
 | 2:30 | 总结卡 | 一句话记忆：熔断三态 CLOSED/OPEN/HALF_OPEN，恢复靠半开探测。 下期可以接着聊：Sentinel 和 Hystrix 区别。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-007.svg" alt="【蚂蚁风控】Spring Cloud 里的熔断和限流怎么实现的？Sentinel 原理？风控怎么用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

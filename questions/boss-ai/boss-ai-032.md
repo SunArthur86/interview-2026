@@ -486,3 +486,8 @@ DAG 描述：
 | 1:20 | 流程图 | 池化/优先级/抢占/弹性扩缩容。 | GPU 调度 |
 | 1:50 | 代码示例截图 | 全生命周期持久化，断点可恢复。 | 状态机 |
 | 3:30 | 总结卡 | 一句话记忆：任务平台 = 接入+调度+监控。 下期可以接着聊：GPU 怎么池化。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-032.svg" alt="【巨剧核 AI 陪伴】视频生成任务系统怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

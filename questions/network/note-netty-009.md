@@ -201,6 +201,9 @@ ctx 持有 Channel 引用，Channel 持有 EventLoop 引用（注册时绑定）
 四条经验：一、ctx 是 Handler 的"交互接口"——所有 Pipeline 交互（fire*、write、executor、alloc）都通过 ctx，不直接操作 channel；二、ctx vs channel.write——ctx.write 从当前点出发（跳过之前的 Outbound），channel.write 从 tail 出发（经过全部），按需选；三、fire* 不忘——Decoder 解码后要 ctx.fireChannelRead 传给下一个，漏了消息丢失；四、executor 跨线程——非 EventLoop 线程操作用 ctx.executor().execute 提交到 EventLoop，保证线程安全。核心："ctx 是 Handler 与 Pipeline 的胶水，正确使用 ctx 保证事件传递和线程安全。"
 
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_network_note-netty-009.svg" alt="ChannelHandlerContext 的作用是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** ChannelHandlerContext 是"ChannelHandler 与 ChannelPipeline 之间的桥梁"，它代表了 Handler 在 Pipeline 中的位置。通过 Channel 或 ChannelPipeline 触发的事件会从整个链头/尾传播；而通过 ChannelHandlerContext 触发的事件，只会从"当前 Handler 的下一个 Handler"开始传播——这让你能精准控制事件的传播范围。

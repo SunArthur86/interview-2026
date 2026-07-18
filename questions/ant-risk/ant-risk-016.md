@@ -351,3 +351,8 @@ feign:
 | 0:15 | Spring Bean 生命周期图 | 先说核心：Feign/Dubbo 把"远程 HTTP/RPC 调用"伪装成"本地方法调用"，底层封装了注册中心寻址、负载均衡、序列化、重试、熔断。 | 核心定义 |
 | 0:30 | RPC 调用流程图 | TCP 长连接 + 自定义协议 + SPI，性能比 HTTP 高。 | Dubbo |
 | 1:30 | 总结卡 | 一句话记忆：Feign = 动态代理 + HTTP + 整合 LoadBalancer/Sentinel。 下期可以接着聊：Feign 和 Dubbo 怎么选。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-016.svg" alt="【蚂蚁风控】微服务之间怎么调用？Feign 和 Dubbo 区别？怎么治理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

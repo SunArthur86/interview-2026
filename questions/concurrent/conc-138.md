@@ -128,6 +128,10 @@ class SimpleLock extends AbstractQueuedSynchronizer {
 2. **自旋为什么放弃**：为了避免 CPU 空转浪费资源，在自旋一定次数或检查到前驱状态非 SIGNAL 时，会主动 park 挂起。
 3. **Condition 实现**：AQS 的 ConditionObject 是如何利用等待队列的？（Condition 内部维护了一个单向队列，await 时将节点从 AQS 同步队列移至 Condition 队列，signal 时再转移回去）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-138.svg" alt="AQS（AbstractQueuedSynchronizer）的底层实现原理是什么？CLH 队列是如何工作的？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心基础：volatile int state表示同步状态，配合CAS实现原子修改

@@ -69,6 +69,10 @@ ThreadPoolExecutor safePool = new ThreadPoolExecutor(
 2. **参数对比**：它与 `newCachedThreadPool` 的核心区别（线程数量限制与队列类型）是什么？
 3. **线程复用**：池中的线程是如何实现复用的（即 `runWorker` 方法中的循环逻辑）？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-001.svg" alt="newFixedThreadPool是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 特性口诀：核心等于最大，默认不超时回收

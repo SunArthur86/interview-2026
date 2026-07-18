@@ -191,3 +191,8 @@ memory_points:
 | 0:40 | 流程图 | 流量分桶 + 实验配置 + 指标计算 + 显著性检验。 | 实验平台 |
 | 1:05 | 代码示例截图 | 北极星 + 核心指标 + 拆解指标 + 护栏指标。 | 指标体系 |
 | 2:30 | 总结卡 | 一句话记忆：埋点：事件模型 + 全量 + 分层。 下期可以接着聊：埋点点太多拖慢 App 怎么办。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-009.svg" alt="【巨剧核 AI 陪伴】数据埋点与实验平台怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

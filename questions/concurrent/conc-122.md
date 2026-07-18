@@ -64,6 +64,10 @@ memory_points:
 2. **CopyOnWriteArrayList 的迭代器为什么不抛出 ConcurrentModificationException**：因为迭代器操作的是创建迭代器时刻的那个“快照”数组，即使原数组被修改，迭代器引用的旧数组不变，这就是弱一致性。
 3. **ConcurrentHashMap 的 size() 方法如何实现**：JDK 7 是累加所有 Segment 的 size；JDK 8 使用 `baseCount` 和 `CounterCell` 数组，利用 CAS 累加，类似于 LongAdder 的实现，避免了热点竞争。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-122.svg" alt="什么是并发容器？Java 有哪些并发容器？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 并发容器对比同步容器：细粒度锁或CAS替代整表锁，迭代具备弱一致性防报错

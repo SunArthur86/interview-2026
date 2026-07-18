@@ -197,6 +197,9 @@ public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
 5. **主动分析复杂度** — O(min(N,M))不是O(N+M)，体现精确分析
 
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-xhs-algo-009.svg" alt="【拼多多 Java服务端】力扣617：合并两棵二叉树" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** 合并两棵二叉树：相同位置的节点值相加，不同位置的节点直接保留，用DFS递归同时遍历两棵树即可。

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">什么是Spring Boot Actuator？如何利用它进行生产级监控？</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">提供生产级别的监控端点，用于检查应用健康状态、指标和配置。</text>
+  <rect x="60" y="115" width="680" height="50" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="100" y="143" font-size="13" font-weight="700" fill="#1565C0">Metrics 指标</text>
+  <text x="330" y="143" font-size="12" font-weight="600" fill="#1565C0">Prometheus</text>
+  <text x="600" y="143" font-size="11" fill="#1565C0">数值时序 · QPS/RT/CPU</text>
+  <rect x="60" y="185" width="680" height="50" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="100" y="213" font-size="13" font-weight="700" fill="#E65100">Logging 日志</text>
+  <text x="330" y="213" font-size="12" font-weight="600" fill="#E65100">ELK/Loki</text>
+  <text x="600" y="213" font-size="11" fill="#E65100">事件记录 · 检索分析</text>
+  <rect x="60" y="255" width="680" height="50" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="100" y="283" font-size="13" font-weight="700" fill="#6A1B9A">Tracing 链路</text>
+  <text x="330" y="283" font-size="12" font-weight="600" fill="#6A1B9A">SkyWalking</text>
+  <text x="600" y="283" font-size="11" fill="#6A1B9A">调用链 · 拓扑图</text>
+  <rect x="60" y="325" width="680" height="50" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="100" y="353" font-size="13" font-weight="700" fill="#C62828">Alerting 告警</text>
+  <text x="330" y="353" font-size="12" font-weight="600" fill="#C62828">AlertManager</text>
+  <text x="600" y="353" font-size="11" fill="#C62828">阈值触发 · 钉钉/邮件</text>
+  <text x="400" y="410" text-anchor="middle" font-size="12" fill="#666" font-weight="700">SRE 四大黄金信号</text>
+  <rect x="80" y="425" width="160" height="45" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="160" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">延迟</text>
+  <text x="160" y="461" text-anchor="middle" font-size="10" fill="#2E7D32">Latency</text>
+  <rect x="255" y="425" width="160" height="45" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="335" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">流量</text>
+  <text x="335" y="461" text-anchor="middle" font-size="10" fill="#2E7D32">Traffic</text>
+  <rect x="430" y="425" width="160" height="45" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="510" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">错误</text>
+  <text x="510" y="461" text-anchor="middle" font-size="10" fill="#2E7D32">Errors</text>
+  <rect x="605" y="425" width="160" height="45" rx="6" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="685" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#2E7D32">饱和度</text>
+  <text x="685" y="461" text-anchor="middle" font-size="10" fill="#2E7D32">Saturation</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">可观测性三支柱：Metrics + Logging + Tracing 联动定位问题</text>
+</svg>

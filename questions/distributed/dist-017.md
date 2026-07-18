@@ -78,6 +78,12 @@ DNS中的域名使用句点分隔（如 `www.server.com`），句点代表了不
                            3.迭代查询开始              │ 本地DNS服务器 │
                            ◀──
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-017.svg" alt="DNS的工作原理和查询过程是怎样的？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：将难记的域名转换成机器通信 IP 地址的分布式数据库。

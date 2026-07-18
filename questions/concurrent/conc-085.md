@@ -147,6 +147,10 @@ memory_points:
 1. **认为双重检查锁只需要 `synchronized` 不需要 `volatile`**：忽略了指令重排序带来的半初始化对象风险。
 2. **认为静态内部类是“懒加载”但忽略了类加载时机**：虽然利用了类加载机制实现延迟加载，但如果外部类加载器加载了 Holder 类（虽然通常不会主动加载），实例就会被创建。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-085.svg" alt="什么是单例模式的6种实现？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心三要素：私有构造、私有静态变量、公有静态访问方法。

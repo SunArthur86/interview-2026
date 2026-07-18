@@ -338,3 +338,8 @@ flowchart TD
 | 1:20 | 代码示例截图 | 亲密度/信任度/共同记忆驱动长期深化。 | 关系演进 |
 | 1:50 | 对比表格 | 基于情绪/事件触发，不只被动回应。 | 主动关怀 |
 | 3:30 | 总结卡 | 一句话记忆：三层：识别+共情+演进。 下期可以接着聊：情绪识别怎么实现。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-035.svg" alt="【巨剧核 AI 陪伴】AI 陪伴的情感计算怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -220,3 +220,8 @@ flowchart TD
 | 0:40 | 概念结构示意图 | 变量插值（人设/记忆/输入）+ Jinja 式语法 + 强类型校验。 | 模板化 |
 | 1:05 | 流程图 | 流量分桶 → 不同 prompt → 业务指标对比 → 显著性检验。 | A/B 测试 |
 | 2:30 | 总结卡 | 一句话记忆：Prompt 即代码：版本化 + Review + 灰度。 下期可以接着聊：prompt 放代码里还是配置中心。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_boss-ai_boss-ai-006.svg" alt="【巨剧核 AI 陪伴】Prompt 管理工程怎么做（版本化/A-B/模板）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

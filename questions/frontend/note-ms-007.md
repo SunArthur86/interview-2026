@@ -1328,6 +1328,9 @@ NLParser 的 `confidence < 0.6` 时自动触发降级：调用 `buildCommandSugg
 **Q3: 两种输入的历史记录怎么统一管理？**
 每条历史记录存储完整 `Task`（含 `inputMode` 和 `rawInput`），额外计算 `commandEquivalent`（自然语言→命令转换）。展示时支持双模切换（查看命令表达或自然语言描述），回放时优先使用命令格式（更精确、不依赖 LLM 重新解析）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-007.svg" alt="【月之暗面面经】如果产品要支持命令式输入和自然语言输入并存，前端会怎么做？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心思路：输入方式是多面，任务执行是核心

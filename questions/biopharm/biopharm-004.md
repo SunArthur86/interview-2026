@@ -196,3 +196,8 @@ flowchart TD
 | 1:20 | 代码示例截图 | 关键步骤暂停等审批，合规必需。 | 人工节点（HITL） |
 | 1:50 | 对比表格 | 异常时的Saga式补偿事务。 | 超时/补偿/回滚 |
 | 3:30 | 总结卡 | 一句话记忆：DAG 管依赖，状态机管恢复，人工节点管合规。 下期可以接着聊：Workflow 引擎选型。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-004.svg" alt="【生物医药 AI】Workflow 引擎怎么设计（DAG/状态机/人工审批）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

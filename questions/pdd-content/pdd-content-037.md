@@ -354,3 +354,8 @@ GPU 利用率低的根因和对策：
 | 1:30 | 流程图：输入→处理→输出 | 要点是：数据：标注+特征+版本 | 关键机制 |
 | 2:09 | 代码片段 + 注释高亮 | 要点是：评测：benchmark+AB | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——GPU 怎么调度？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-content_pdd-content-037.svg" alt="【拼多多内容】AI Infra 平台怎么建设？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

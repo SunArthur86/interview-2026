@@ -353,3 +353,8 @@ Debezium 基于 Kafka Connect，吞吐和可靠性确实好，但有取舍。Deb
 | 0:15 | SQL EXPLAIN 截图 | 先说核心：MySQL 主从同步靠 binlog：主库把变更写 binlog，从库 IO 线程拉取写 relay log，SQL 线程回放，最终数据一致。 | 核心定义 |
 | 0:30 | 主从同步架构图 | Dump（主）+ IO/SQL（从）。 | 主从复制线程 |
 | 1:30 | 总结卡 | 一句话记忆：主从复制三线程：主库 Dump + 从库 IO + 从库 SQL。 下期可以接着聊：主从延迟怎么解决。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-018.svg" alt="【蚂蚁风控】MySQL 主从同步原理？binlog 是什么？Canal 怎么用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

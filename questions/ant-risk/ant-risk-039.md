@@ -449,3 +449,8 @@ public class ExplainableDecision {
 | 1:20 | 流程图 | 业务理解 + 技术深度 + 沟通 + 项目管理。 | 关键能力 |
 | 1:50 | 代码示例截图 | 降低 AI 项目失败率（70% AI 项目失败因业务-技术脱节）。 | 价值 |
 | 3:30 | 总结卡 | 一句话记忆：FDE = 业务理解 + 技术深度 + 沟通 + 项目管理。 下期可以接着聊：FDE 和产品经理区别。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_ant-risk_ant-risk-039.svg" alt="【蚂蚁风控】FDE 在风控 AI 项目中做什么？怎么落地一个 AI 风控解决方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

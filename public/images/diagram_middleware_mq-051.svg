@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="max-width:100%;height:auto;font-family:system-ui,-apple-system,'PingFang SC',sans-serif;">
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#666"/>
+    </marker>
+    <marker id="arrg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4CAF50"/>
+    </marker>
+    <marker id="arro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FF9800"/>
+    </marker>
+    <marker id="arrr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#f44336"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">自动创建主题的弊端</text>
+  <line x1="60" y1="52" x2="740" y2="52" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="400" y="82" text-anchor="middle" font-size="13" fill="#607D8B">避免生产环境自动创建 Topic 造成的单点负载不均。</text>
+  <rect x="70" y="190" width="160" height="60" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="150" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#1565C0">检测方</text>
+  <text x="150" y="234" text-anchor="middle" font-size="11" fill="#1565C0">Monitor</text>
+  <rect x="470" y="105" width="160" height="50" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="550" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">Node-1</text>
+  <text x="550" y="144" text-anchor="middle" font-size="11" fill="#2E7D32">健康</text>
+  <rect x="470" y="195" width="160" height="50" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="550" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#2E7D32">Node-2</text>
+  <text x="550" y="234" text-anchor="middle" font-size="11" fill="#2E7D32">健康</text>
+  <rect x="470" y="285" width="160" height="50" rx="10" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="550" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#C62828">Node-3</text>
+  <text x="550" y="324" text-anchor="middle" font-size="11" fill="#C62828">无响应</text>
+  <line x1="230" y1="215" x2="470" y2="140" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrg)"/>
+  <line x1="230" y1="220" x2="470" y2="220" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrg)"/>
+  <line x1="230" y1="230" x2="470" y2="305" stroke="#f44336" stroke-width="2" marker-end="url(#arrr)"/>
+  <text x="330" y="175" font-size="10" font-weight="600" fill="#4CAF50">ping</text>
+  <text x="330" y="250" font-size="10" font-weight="600" fill="#f44336">timeout</text>
+  <text x="400" y="390" text-anchor="middle" font-size="12" fill="#666" font-weight="700">检测时机与判定</text>
+  <rect x="100" y="405" width="200" height="50" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="200" y="425" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">周期心跳</text>
+  <text x="200" y="445" text-anchor="middle" font-size="10" fill="#E65100">每 3s ping</text>
+  <rect x="320" y="405" width="200" height="50" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="420" y="425" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">超时阈值</text>
+  <text x="420" y="445" text-anchor="middle" font-size="10" fill="#E65100">连续 3 次失败</text>
+  <rect x="540" y="405" width="200" height="50" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="640" y="425" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">标记下线</text>
+  <text x="640" y="445" text-anchor="middle" font-size="10" fill="#E65100">剔除实例列表</text>
+  <text x="400" y="486" text-anchor="middle" font-size="10" fill="#999" font-style="italic">心跳/Keepalive：周期探测 + 超时累计 + 自愈恢复（如 Eureka 90s）</text>
+</svg>

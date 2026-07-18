@@ -81,6 +81,10 @@ memory_points:
 3.  **什么是内核态和用户态？**
     *   回答要点：为了保护系统安全，CPU划分权限等级。内核态可执行所有指令，用户态受限，访问硬件必须切换到内核态。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-092.svg" alt="什么是操作系统基础？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - OS四大特征：并发(宏观交替)、并行(微观同时)、共享、虚拟、异步。

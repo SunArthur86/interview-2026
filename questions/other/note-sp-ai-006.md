@@ -172,6 +172,9 @@ asyncio.run(main())
 3. **PEP 703**：Python 3.13开始实验性支持可选GIL（自由线程）
 4. **选型公式**：CPU密集→进程，IO密集→协程，简单IO→线程
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_other_note-sp-ai-006.svg" alt="Python的GIL是什么？什么是进程？什么是协程？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - GIL本质是全局锁：因为保护引用计数，所以同一时刻仅单线程执行Python字节码。

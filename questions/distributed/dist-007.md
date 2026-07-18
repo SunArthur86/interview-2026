@@ -82,6 +82,12 @@ func (r *Raft) handleRPC(term uint64) {
 2.  **当 Follower 收到 Term 比自己大的 RPC 时会怎么做？**（答：更新自己的 Term 并转为 Follower）
 3.  **Term 和 Index 共同决定了什么？**（答：决定了日志的完整性，Index 相同 Term 更大的日志更新）
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-007.svg" alt="Raft算法中Term（任期）的作用是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 角色定义：Term 是连续递增的整数，充当 Raft 集群的「逻辑时钟」

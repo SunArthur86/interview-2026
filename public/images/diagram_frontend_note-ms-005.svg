@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#666"/></marker>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2196F3"/></marker>
+  </defs>
+  <rect width="800" height="500" rx="12" fill="#fafafa" stroke="#e0e0e0"/>
+  <text x="400" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#263238">Vue 做桌面 AI 产品时，哪些状态应该在页面层，哪些要上升到任务层？</text>
+  <text x="400" y="55" text-anchor="middle" font-size="12" fill="#78909C">输入框/浮层/选中态留页面层，任务状态/产物状态/文件索引上升到任务层。长任务不绑组件生命周期。</text>
+
+  <rect x="40" y="80" width="340" height="340" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <rect x="420" y="80" width="340" height="340" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="210" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#1565C0">页面层状态</text>
+  <text x="590" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#E65100">任务层状态</text>
+  <circle cx="400" cy="240" r="28" fill="#9C27B0"/>
+  <text x="400" y="246" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">VS</text>
+  <text x="60" y="138" font-size="11.5" fill="#1565C0">✓ 输入框/浮层</text>
+  <text x="60" y="170" font-size="11.5" fill="#1565C0">✓ 选中态/焦点</text>
+  <text x="60" y="202" font-size="11.5" fill="#1565C0">✓ 组件局部 UI</text>
+  <text x="440" y="138" font-size="11.5" fill="#E65100">✓ 任务状态/产物</text>
+  <text x="440" y="170" font-size="11.5" fill="#E65100">✓ 文件索引</text>
+  <text x="440" y="202" font-size="11.5" fill="#E65100">✓ 长任务(跨组件)</text>
+  <text x="40" y="445" font-size="12" font-weight="700" fill="#37474F">本质：输入框/浮层/选中态留页面层</text>
+  <text x="40" y="482" font-size="11" font-weight="600" fill="#455A64">图例：</text>
+  <rect x="80" y="470" width="14" height="14" rx="3" fill="#2196F3"/>
+  <text x="100" y="482" font-size="11" fill="#37474F">页面层状态</text>
+  <rect x="157" y="470" width="14" height="14" rx="3" fill="#FF9800"/>
+  <text x="177" y="482" font-size="11" fill="#37474F">任务层状态</text>
+</svg>

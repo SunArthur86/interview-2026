@@ -232,3 +232,8 @@ Starter 的设计哲学是"约定优于配置，但允许 escape hatch"。大部
 | 1:04 | 能力/参数拆解表 | 要点是：spring.factories（旧）/AutoConfiguration.imports（2.7+） | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：@ConditionalOnXxx 控制装配条件 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——怎么排查 Bean 没装配？。 | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-005.svg" alt="【拼多多 AI 中台】Spring Boot 自动装配原理与模型服务 Starter 怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

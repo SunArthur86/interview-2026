@@ -397,6 +397,9 @@ function progressiveGuidance(usageCount: number, expertise: string) {
 
 这套设计的关键成功因素是：(1) AI 能生成高质量的摘要和修改理由（`summary` + `rationale` 字段）；(2) 组件设计做到真正的渐进式展开而非页面跳转；(3) 性能优化到位，大文件 Diff 也不卡顿。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_frontend_note-ms-013.svg" alt="【月之暗面面经】如何设计 AI 桌面端的产物 diff，既能给新手看，也能给高手看？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心理念渐进式披露：同一份变更多分辨率呈现，按需选择查看深度

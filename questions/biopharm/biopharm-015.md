@@ -169,3 +169,8 @@ AI 决策留痕：每次决策记录
 | 1:20 | 概念结构示意图 | 数据敏感级 + 角色权限 + 最小授权。 | 权限分级 |
 | 1:50 | 流程图 | 数据从哪来、被谁用、AI 怎么决策、可追溯。 | 全链路审计 |
 | 3:30 | 总结卡 | 一句话记忆：合规底线：隐私法/GMP/GCP。 下期可以接着聊：脱敏有哪些方法。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_biopharm_biopharm-015.svg" alt="【生物医药 AI】医药垂直 AI 数据治理架构怎么设计（合规/隐私/溯源）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

@@ -102,6 +102,12 @@ public void retryNotify() {
 2. **本地消息表如何保证一致性？**（提示：利用本地事务保证业务操作和消息写入的原子性，配合定时任务重试）。
 3. **3PC 相比 2PC 到底解决了什么问题？**（提示：主要解决了协调者故障后参与者的阻塞问题，但引入了网络分区导致数据不一致的风险）。
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-030.svg" alt="什么是柔性事务？最大努力通知型事务是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 柔性事务基于BASE理论，牺牲强一致性（ACID），换取高可用和最终一致性

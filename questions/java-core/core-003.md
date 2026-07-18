@@ -156,6 +156,10 @@ flowchart TD
     P --> S[持久化+durable 队列]
     T[典型 MQ] --> U[RabbitMQ/Kafka/RocketMQ]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-003.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Topic交换器基于模式匹配，解决了Direct只能精确匹配的问题。

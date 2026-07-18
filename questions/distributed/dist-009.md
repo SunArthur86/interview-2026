@@ -83,6 +83,12 @@ server {
 2.  **URL 散列和 IP Hash 散列的区别？**（答：前者是基于请求内容分发，后者是基于请求来源分发）
 3.  **URL 散列有什么潜在风险？**（答：热点 URL 问题，即大量请求访问同一个 URL 导致单机过载）
 
+
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_distributed_dist-009.svg" alt="什么是URL散列？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：对请求的 URL 进行 Hash 计算并映射，将同一 URL 固定分发至同一 RS

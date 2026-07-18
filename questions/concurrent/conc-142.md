@@ -114,6 +114,10 @@ CompletableFuture<String> future = ...
    - `join()`：不检查中断，抛出 `CompletionException` (unchecked)。
    - `get()`：检查中断，抛出 `InterruptedException` (checked)。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-142.svg" alt="CompletableFuture 如何实现异步编排？supplyAsync/thenApply/thenCompose 的区别？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 对比：supplyAsync 用于异步启动任务，而 runAsync 无返回值。

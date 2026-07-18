@@ -78,6 +78,10 @@ memory_points:
 3. **线程栈溢出怎么办？**
    修改 `pthread_attr_setstacksize` 增大栈，或者优化递归深度/局部变量大小。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-098.svg" alt="什么是线程属性？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 分离状态：Joinable需手动回收防泄露，Detached终止后自动回收资源无法获取返回值

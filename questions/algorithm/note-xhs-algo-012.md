@@ -227,6 +227,9 @@ public int[] mergeKSortedArrays(int[][] arrays) {
    → 链表不需要预留空间，直接改指针即可（穿针引线）。数组需要考虑空间和覆盖
 
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_algorithm_note-xhs-algo-012.svg" alt="【拼多多二面】手撕算法：合并两个有序数组" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 
