@@ -49,51 +49,17 @@ memory_points:
 
 **JVM 进程内存各区详解**（L4 必须能逐区量化）：
 
-```
-┌────────────────── 容器 memory limit = 8 GB ──────────────────┐
-│                                                              │
-│  JVM 进程 RSS（Resident Set Size）≈ 7.0-7.5 GB               │
-│                                                              │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  1. Java 堆 Heap = 6 GB（MaxRAMPercentage=75）         │   │
-│  │     - Eden + Survivor + Old（G1 Region 或 ZGC）        │   │
-│  │     - 对象实例、数组                                    │   │
-│  └──────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  2. Metaspace = 256 MB（MaxMetaspaceSize=256m）       │   │
-│  │     - Klass 元信息、常量池、方法字节码                  │   │
-│  │     - 动态生成的 Class（CGLIB、Groovy、反射 Proxy）     │   │
-│  └──────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  3. 线程栈 = Xss × 线程数 = 512KB × 400 = 200 MB      │   │
-│  │     - 每线程独立栈（局部变量、调用帧）                   │   │
-│  │     - 线程数泄漏会导致栈内存暴涨                         │   │
-│  └──────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  4. 直接内存 = 512 MB（MaxDirectMemorySize=512m）      │   │
-│  │     - DirectByteBuffer（Netty、NIO）                   │   │
-│  │     - 堆外分配，不受堆管理，容易泄漏                    │   │
-│  └──────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  5. CodeCache = 240 MB（ReservedCodeCacheSize）        │   │
-│  │     - JIT 编译后的机器码                                 │   │
-│  │     - 满了触发 deoptimization（性能骤降）               │   │
-│  └──────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  6. GC overhead ≈ 900 MB（堆的 15%，G1/ZGC）           │   │
-│  │     - G1：Region 元数据、card table、remembered set    │   │
-│  │     - ZGC：barrier、colored pointer、mark bitmap        │   │
-│  │     - 并发标记的临时结构                                │   │
-│  └──────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  7. JVM 自身 = ~100 MB（libjvm.so、C++ 堆）            │   │
-│  └──────────────────────────────────────────────────────┘   │
-│                                                              │
-│  总和：6G + 256M + 200M + 512M + 240M + 900M + 100M ≈ 8.2G   │
-│  ⚠ 超过 8G limit！需要调小堆到 5.5G（MaxRAMPercentage=70）    │
-│                                                              │
-│  安全余量公式：limit - 各区总和 > limit × 25%（= 2G）          │
-└──────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    LIMIT["容器 memory limit = 8 GB<br/>JVM 进程 RSS ≈ 7.0-7.5 GB"]
+    LIMIT --> H["1. Java 堆 Heap = 6 GB MaxRAMPercentage=75<br/>Eden + Survivor + Old G1/ZGC<br/>对象实例、数组"]
+    LIMIT --> M["2. Metaspace = 256 MB MaxMetaspaceSize=256m<br/>Klass 元信息、常量池、方法字节码<br/>动态生成的 Class CGLIB/Groovy/反射 Proxy"]
+    LIMIT --> T["3. 线程栈 = Xss × 线程数 = 512KB × 400 = 200 MB<br/>每线程独立栈 局部变量、调用帧<br/>线程数泄漏会导致栈内存暴涨"]
+    LIMIT --> D["4. 直接内存 = 512 MB MaxDirectMemorySize=512m<br/>DirectByteBuffer Netty/NIO<br/>堆外分配 不受堆管理 容易泄漏"]
+    LIMIT --> C["5. CodeCache = 240 MB ReservedCodeCacheSize<br/>JIT 编译后的机器码<br/>满了触发 deoptimization 性能骤降"]
+    LIMIT --> G["6. GC overhead ≈ 900 MB 堆的 15% G1/ZGC<br/>G1 Region 元数据、card table、remembered set<br/>ZGC barrier、colored pointer、mark bitmap"]
+    LIMIT --> J["7. JVM 自身 ≈ 100 MB libjvm.so、C++ 堆"]
+    LIMIT --> WARN["⚠ 总和 ≈ 8.2G 超过 8G limit<br/>需调小堆到 5.5G MaxRAMPercentage=70<br/>安全余量 limit - 各区总和 > limit × 25% = 2G"]
 ```
 
 **不同规格的推荐配比**：

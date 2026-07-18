@@ -39,42 +39,17 @@ memory_points:
 
 **整体架构（数据流向图）：**
 
-```text
-┌──────────────────────────────────────────────────────────────────────────┐
-│                           Data Source (S3/DB)                             │
-└──────────────────────────────┬───────────────────────────────────────────┘
-                               │ (Ingestion Pipeline - Async)
-                               ▼
-┌──────────────────────────────────────────────────────────────────────────┐
-│                         Ingestion & Processing Layer                      │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐                │
-│  │ Parser       │───▶│ Chunking     │───▶│ Embedding    │                │
-│  │ (Unstructured)│   │ (Semantic/   │    │ Model (BGE)  │                │
-│  │              │   │  Recursive)  │    │ (GPU Batch)  │                │
-│  └──────────────┘    └──────────────┘    └──────┬───────┘                │
-│                                              │                         │
-│                                              │ Vector + Metadata       │
-│                                              ▼                         │
-│  ┌──────────────────────────────────────────────────────┐             │
-│  │             Vector Database (Milvus/Qdrant)           │             │
-│  │  ┌────────────────────────────────────────────────┐  │             │
-│  │  │ Index: HNSW / IVF_FLAT (Dense Vector)          │  │             │
-│  │  │ Metadata: Filter Index (Tenant/Time/ACL)       │  │             │
-│  │  └────────────────────────────────────────────────┘  │             │
-│  └──────────────────────────────────────────────────────┘             │
-└──────────────────────────────┬───────────────────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────────────────┐
-│                         Retrieval & Augmentation Layer                   │
-│  (Hybrid Search: Dense(BGE) + Sparse(BM25) -> Rerank(CrossEncoder))      │
-└──────────────────────────────┬───────────────────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────────────────┐
-│                           Generation Layer                               │
-│               (LLM + Context Window + Reference Citations)               │
-└──────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    DS[Data Source S3/DB] -->|Ingestion Pipeline Async| IPL[Ingestion & Processing Layer]
+    IPL --> P[Parser Unstructured]
+    P --> CH[Chunking Semantic/Recursive]
+    CH --> EM[Embedding Model BGE GPU Batch]
+    EM -->|Vector + Metadata| VDB[(Vector Database Milvus/Qdrant)]
+    VDB --- IDX[Index: HNSW / IVF_FLAT Dense Vector]
+    VDB --- MD[Metadata: Filter Index Tenant/Time/ACL]
+    VDB --> RAL[Retrieval & Augmentation Layer<br/>Hybrid Search: Dense BGE + Sparse BM25 -> Rerank CrossEncoder]
+    RAL --> GL[Generation Layer<br/>LLM + Context Window + Reference Citations]
 ```
 
 **核心设计细节：**

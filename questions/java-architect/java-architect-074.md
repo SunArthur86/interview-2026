@@ -48,38 +48,20 @@ memory_points:
 
 **JVM 在容器里的完整内存画像**（面试必画）：
 
+```mermaid
+flowchart TB
+    Container["容器 memory limit = 8 GB"]
+    Container --> JVM["JVM 进程总内存 ≈ 7.5 GB"]
+    Container --> Safe["安全余量 = 512 MB (留给 OS、cgroup)"]
+    JVM --> Heap["堆 Heap = 6 GB (75%)<br/>Eden + Survivor<br/>Old (G1 Region)<br/>-XX:MaxRAMPercentage=75"]
+    JVM --> Meta["Metaspace ≈ 256 MB<br/>类元信息、常量池<br/>-XX:MaxMetaspaceSize=256m"]
+    JVM --> Stack["线程栈 = 200×1MB = 200 MB<br/>200 个线程 × 1MB<br/>-Xss1m (默认 1MB/线程)"]
+    JVM --> Direct["直接内存 ≈ 512 MB<br/>DirectByteBuffer (Netty/NIO)<br/>-XX:MaxDirectMemorySize"]
+    JVM --> JIT["JIT + GC overhead ≈ 500 MB<br/>CodeCache、G1 内部<br/>-XX:ReservedCodeCacheSize"]
 ```
-┌────────────────── 容器 memory limit = 8 GB ──────────────────┐
-│                                                              │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │           JVM 进程总内存 ≈ 7.5 GB                    │   │
-│  │                                                      │   │
-│  │  ┌─────────────────────┐  堆 Heap = 6 GB (75%)       │   │
-│  │  │  Eden + Survivor    │  -XX:MaxRAMPercentage=75    │   │
-│  │  │  Old (G1 Region)    │                             │   │
-│  │  └─────────────────────┘                             │   │
-│  │  ┌─────────────────────┐  Metaspace ≈ 256 MB         │   │
-│  │  │  类元信息、常量池    │  -XX:MaxMetaspaceSize=256m │   │
-│  │  └─────────────────────┘                             │   │
-│  │  ┌─────────────────────┐  线程栈 = 200×1MB = 200 MB  │   │
-│  │  │  200 个线程 × 1MB    │  -Xss1m (默认 1MB/线程)    │   │
-│  │  └─────────────────────┘                             │   │
-│  │  ┌─────────────────────┐  直接内存 ≈ 512 MB          │   │
-│  │  │  DirectByteBuffer   │  -XX:MaxDirectMemorySize   │   │
-│  │  │  (Netty/NIO)        │                             │   │
-│  │  └─────────────────────┘                             │   │
-│  │  ┌─────────────────────┐  JIT + GC overhead ≈ 500 MB │   │
-│  │  │  CodeCache、G1 内部 │  -XX:ReservedCodeCacheSize │   │
-│  │  └─────────────────────┘                             │   │
-│  └──────────────────────────────────────────────────────┘   │
-│                                                              │
-│  ┌─────────────────────┐  安全余量 = 512 MB (留给 OS、cgroup)│
-│  └─────────────────────┘                                     │
-└──────────────────────────────────────────────────────────────┘
 
 关键：堆 6G + 元空间 256M + 线程栈 200M + 直接内存 512M + JIT/GC 500M = 7.46G
       + 余量 512M = 7.98G < 8G limit（刚好安全）
-```
 
 **OOMKilled vs Java OOM 对比**（面试必考）：
 

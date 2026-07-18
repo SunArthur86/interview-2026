@@ -66,32 +66,22 @@ DORA（DevOps Research and Assessment，Google《Accelerate》提出）是研发
 
 ### 2.1 DORA 指标采集架构
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                  数据源（事件流）                              │
-├──────────────────────────────────────────────────────────────┤
-│  GitHub/GitLab     Jenkins/GitLabCI    ArgoCD/K8s    监控/告警 │
-│  (commit/PR)        (CI 构建)         (部署事件)   (P0/P1)    │
-└─────┬──────────────────┬───────────────┬────────────┬────────┘
-      │ webhook          │ webhook       │ event      │ alert
-      ▼                  ▼               ▼            ▼
-┌──────────────────────────────────────────────────────────────┐
-│            事件总线（Kafka / 自建事件网关）                    │
-└────────────────────────────┬─────────────────────────────────┘
-                             │
-                             ▼
-┌──────────────────────────────────────────────────────────────┐
-│              效能指标计算引擎（按聚合规则算 DORA 四指标）       │
-│  - 部署频率：按服务/团队/天聚合 deploy 事件数                  │
-│  - 前置时间：deploy.time - first_commit.time                   │
-│  - 失败率：rollback_count / deploy_count                       │
-│  - MTTR：restored_at - alert_at                                │
-└────────────────────────────┬─────────────────────────────────┘
-                             │
-                             ▼
-┌──────────────────────────────────────────────────────────────┐
-│  看板（全局 → 团队 → 服务 → PR 四级下钻）                      │
-└──────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    GH["GitHub/GitLab<br/>(commit/PR)"]
+    JENKINS["Jenkins/GitLabCI<br/>(CI 构建)"]
+    ARGOCD["ArgoCD/K8s<br/>(部署事件)"]
+    MON["监控/告警<br/>(P0/P1)"]
+    BUS["事件总线<br/>(Kafka / 自建事件网关)"]
+    ENGINE["效能指标计算引擎<br/>按聚合规则算 DORA 四指标<br/>· 部署频率：按服务/团队/天聚合 deploy 事件数<br/>· 前置时间：deploy.time - first_commit.time<br/>· 失败率：rollback_count / deploy_count<br/>· MTTR：restored_at - alert_at"]
+    BOARD["看板<br/>(全局 → 团队 → 服务 → PR 四级下钻)"]
+
+    GH -- "webhook" --> BUS
+    JENKINS -- "webhook" --> BUS
+    ARGOCD -- "event" --> BUS
+    MON -- "alert" --> BUS
+    BUS --> ENGINE
+    ENGINE --> BOARD
 ```
 
 ### 2.2 指标计算代码（伪代码）

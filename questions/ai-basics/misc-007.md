@@ -48,30 +48,35 @@ SwiGLU 是由 Swish 激活函数与 GLU (Gated Linear Unit，门控线性单元)
 
 标准 FFN 和 SwiGLU 的数据流对比如下：
 
-```text
-标准 FFN (ReLU/GELU):          SwiGLU:
-┌───────────────┐             ┌──────────────────┐
-│   Input (x)   │             │    Input (x)     │
-└───────┬───────┘             └────────┬─────────┘
-        │                              │
-        ▼                              ├──────────────┐
-┌───────────────┐             ┌────────▼────────┐ │
-│  Linear (W1)  │             │  Linear (W_in) │ │
-└───────┬───────┘             └────────┬────────┘ │
-        │                              │           │
-        ▼                              ▼           ▼
-┌───────────────┐             ┌─────────────────────────┐
-│ Activation    │             │         Element-wise     │
-│ (GELU/ReLU)   │             │      Multiply (⊙)        │◄──────────┐
-└───────┬───────┘             └───────────┬─────────────┘           │
-        │                                  │                       │
-        ▼                                  │                   ┌───▼──────┐
-┌───────────────┐                          │                   │ Swish   │
-│  Linear (W2)  │                          │                   │ (xW_G)  │
-└───────┬───────┘                          ▼                   └───┬──────┘
-        │                    ┌───────────────────────┐           │
-        ▼                    │      Linear (W_out)   │           │
-┌───────────────┐            └───────────┬───────────┘           │
+```mermaid
+flowchart TB
+    subgraph ffn["标准 FFN（ReLU/GELU）"]
+        fin["Input (x)"]
+        fw1["Linear (W1)"]
+        fact["Activation（GELU/ReLU）"]
+        fw2["Linear (W2)"]
+        fout["Output"]
+        fin --> fw1
+        fw1 --> fact
+        fact --> fw2
+        fw2 --> fout
+    end
+    subgraph swiglu["SwiGLU"]
+        xin["Input (x)"]
+        win["Linear (W_in)"]
+        wg["Linear (W_G)"]
+        swish["Swish（xW_G）"]
+        mul["Element-wise Multiply（⊙）"]
+        wout["Linear (W_out)"]
+        xout["Output"]
+        xin --> win
+        xin --> wg
+        wg --> swish
+        win --> mul
+        swish --> mul
+        mul --> wout
+        wout --> xout
+    end
 ```
 
 **3. 对比分析 (为什么 SwiGLU 更好?)**

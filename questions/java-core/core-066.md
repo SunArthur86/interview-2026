@@ -55,29 +55,18 @@ tags: []
 
 HTTP 请求报文主要由**请求行**、**请求头**、**请求体**构成。
 
-```
-┌───────────────────────────────────────────────────────┐
-│                     HTTP 请求报文                       │
-├───────────────────────────────────────────────────────┤
-│  1. 请求行
-│     ┌──────────┬─────────────────────┬───────────────┐
-│     │ Method   │       URI           │   HTTP/1.1   │
-│     │ (GET)    │ (/index.html?...)  │              │
-│     └──────────┴─────────────────────┴───────────────┘
-├───────────────────────────────────────────────────────┤
-│  2. 请求头
-│     Host: www.example.com
-│     User-Agent: Mozilla/5.0...
-│     Accept: text/html
-│     Content-Type: application/json
-│     Cookie: sessionid=123456
-│     └ ... (更多 Key-Value 对)
-├───────────────────────────────────────────────────────┤
-│  3. 空行 (CRLF)                                        │
-├───────────────────────────────────────────────────────┤
-│  4. 请求体 (Body, 仅部分请求方法有)                     │
-│     { "username": "admin", "password": "123456" }     │
-└───────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    msg["HTTP 请求报文"]
+    line["1. 请求行<br/>Method GET · URI /index.html?... · HTTP/1.1"]
+    headers["2. 请求头<br/>Host: www.example.com · User-Agent: Mozilla/5.0... · Accept: text/html · Content-Type: application/json · Cookie: sessionid=123456 · ...（更多 Key-Value 对）"]
+    blank["3. 空行（CRLF）"]
+    body["4. 请求体（Body，仅部分请求方法有）<br/>{ 'username': 'admin', 'password': '123456' }"]
+
+    msg --- line
+    msg --- headers
+    msg --- blank
+    msg --- body
 ```
 
 #### 1. 请求行

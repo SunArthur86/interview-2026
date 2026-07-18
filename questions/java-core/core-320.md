@@ -54,27 +54,15 @@ NIO 的三大核心组件是 Buffer（缓冲区）、Channel（通道）和 Sele
 
 **NIO 通信架构流程图：**
 
-```
-┌───────────────────────────────────────────────────────────────┐
-│                           Client                                │
-├───────────────────────────────────────────────────────────────┤
-│  SocketChannel (Non-blocking)                                  │
-└───────────────────────────┬───────────────────────────────────┘
-                            │ (TCP Connection)
-                            ▼
-┌───────────────────────────────────────────────────────────────┐
-│                      Server (Selector Thread)                  │
-├───────────────────────────────────────────────────────────────┤
-│                                                                   │
-│  Selector (多路复用)                                              │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │ select() 阻塞等待                                        │   │
-│  │   ↓ (事件就绪)                                          │   │
-│  │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │   │
-│  │   │ Channel A   │  │ Channel B   │  │ Channel C   │    │   │
-│  │   │ (Read Ready)│  │ (Write Ready)│  │ (Accept)   │    │   │
-│  └───┴─────────────┴──┴─────────────┴──┴─────────────┘    │   │
-└───────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    Client["Client<br/>SocketChannel (Non-blocking)"] -->|"TCP Connection"| Selector
+    subgraph Server["Server (Selector Thread)"]
+        Selector["Selector (多路复用)<br/>select() 阻塞等待 → 事件就绪"]
+        Selector --> CA["Channel A<br/>(Read Ready)"]
+        Selector --> CB["Channel B<br/>(Write Ready)"]
+        Selector --> CC["Channel C<br/>(Accept)"]
+    end
 ```
 
 ---

@@ -30,27 +30,26 @@ memory_points:
 
 - **RAG (Retrieval-Augmented Generation) 流程:**
 
-```text
-┌──────────┐      ┌──────────────┐      ┌─────────────┐      ┌──────────┐
-│ 用户问题 │ ──► │ Query Rewrite│ ──► │ Vector Search│ ──► │ Rerank   │
-└──────────┘      └──────────────┘      └─────────────┘      └────┬─────┘
-                                                                   │
-                          ┌─────────────────────────────────────────┘
-                          ▼
-                  ┌───────────────┐
-                  │ Top-K Chunks  │
-                  └───────┬───────┘
-                          │
-                          ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         Prompt 构造                                    │
-│  [System Prompt] + [Retrieved Docs] + [User Question] + [History]      │
-└──────────────────────────────────────┬──────────────────────────────────┘
-                                       │
-                                       ▼
-┌──────────────┐               ┌──────────────┐               ┌──────────┐
-│   LLM 推理    │ ────────────► │ 答案后处理    │ ────────────► │ 最终答案  │
-└──────────────┘               └──────────────┘               └──────────┘
+```mermaid
+flowchart LR
+    q["用户问题"]
+    rewrite["Query Rewrite"]
+    vec["Vector Search"]
+    rerank["Rerank"]
+    topk["Top-K Chunks"]
+    prompt["Prompt 构造<br/>[System Prompt] + [Retrieved Docs] + [User Question] + [History]"]
+    llm["LLM 推理"]
+    post["答案后处理"]
+    ans["最终答案"]
+
+    q --> rewrite
+    rewrite --> vec
+    vec --> rerank
+    rerank --> topk
+    topk --> prompt
+    prompt --> llm
+    llm --> post
+    post --> ans
 ```
 
 - **优势:**

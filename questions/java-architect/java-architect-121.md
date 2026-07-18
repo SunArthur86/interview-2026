@@ -50,32 +50,16 @@ memory_points:
 
 **三探针是什么**：
 
-```
-Pod 生命周期：
-┌──────────────────────────────────────────────────────────────┐
-│ 启动期（Pending → ContainerCreating → Running）              │
-│                                                                │
-│ ┌────────────────────────────────────────┐                    │
-│ │ startup probe（启动探针）               │                    │
-│ │ - 判"启动完成"                          │                    │
-│ │ - 期间 liveness/readiness 不生效        │                    │
-│ │ - failureThreshold 大（覆盖 JVM 预热） │                    │
-│ └────────────────┬───────────────────────┘                    │
-│                  │ 成功                                         │
-│                  ▼                                              │
-│ ┌────────────────────────────────────────┐                    │
-│ │ liveness probe（存活探针）              │                    │
-│ │ - 判"存活"（死锁/僵死）                 │                    │
-│ │ - 失败 → 重启 Pod                       │                    │
-│ └────────────────────────────────────────┘                    │
-│                                                                │
-│ ┌────────────────────────────────────────┐                    │
-│ │ readiness probe（就绪探针）             │                    │
-│ │ - 判"能否接流量"                        │                    │
-│ │ - 失败 → 摘流量（从 Endpoints 移除）    │                    │
-│ │ - 不重启 Pod                            │                    │
-│ └────────────────────────────────────────┘                    │
-└──────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    start["启动期<br/>Pending → ContainerCreating → Running"]
+    startup["startup probe（启动探针）<br/>判"启动完成" · 期间 liveness/readiness 不生效 · failureThreshold 大（覆盖 JVM 预热）"]
+    liveness["liveness probe（存活探针）<br/>判"存活"（死锁/僵死） · 失败 → 重启 Pod"]
+    readiness["readiness probe（就绪探针）<br/>判"能否接流量" · 失败 → 摘流量（从 Endpoints 移除） · 不重启 Pod"]
+
+    start --> startup
+    startup -->|成功| liveness
+    startup -.->|成功后并行| readiness
 ```
 
 **三探针对比**（这张表面试必问）：

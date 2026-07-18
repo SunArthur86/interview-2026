@@ -39,28 +39,29 @@ memory_points:
 4. **Metric** - 评估函数，用于量化Prompt效果（如准确率、F1分数、Exact Match）。
 
 - **优化流程原理图:**
-```text
-┌─────────────────────────────────────────────────────────────┐
-│                        DSPy 优化流程                         │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph def["定义阶段"]
+        sig["Signature（Input/Output）"]
+        mod["Modules（Chain of Thought）"]
+    end
+    subgraph opt["优化阶段"]
+        tele["Teleprompter（Opt）"]
+        teacher["Teacher LLM<br/>（生成高质量 Traces）"]
+        metric["Metric（评估反馈）<br/>指导选择最佳示例"]
+    end
+    subgraph run["运行阶段"]
+        compiled["Compiled Prog（运行时）"]
+        student["Student LLM<br/>（最终推理）"]
+    end
 
-   [定义阶段]                [优化阶段]                   [运行阶段]
-┌───────────────┐          ┌───────────────────────┐       ┌───────────────┐
-│   Signature   │  ────>   │   Teleprompter (Opt)  │ ────> │ Compiled Prog │
-│ (Input/Output)│          │                       │       │    (运行时)   │
-└───────┬───────┘          └───────────┬───────────┘       └───────┬───────┘
-        │                             │                           │
-        ▼                             ▼                           ▼
-┌───────────────┐          ┌───────────────────────┐       ┌───────────────┐
-│   Modules     │          │    Teacher LLM        │       │   Student LLM │
-│ (Chain of Thought)│      │  (生成高质量Traces)   │       │   (最终推理)   │
-└───────────────┘          └───────────────────────┘       └───────────────┘
-                                │
-                                ▼
-                        ┌───────────────────────┐
-                        │   Metric (评估反馈)    │
-                        │  (指导选择最佳示例)     │
-                        └───────────────────────┘
+    sig --> tele
+    tele --> teacher
+    teacher --> metric
+    metric -.反馈.-> teacher
+    tele --> compiled
+    compiled --> student
+    mod -.-> tele
 ```
 
 - **优化示例代码:**

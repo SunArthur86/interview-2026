@@ -102,36 +102,34 @@ memory_points:
 在拆分过程中，最大的挑战在于数据的处理。不能简单地通过 JOIN 查询关联表，需要通过聚合根来保证数据的一致性边界。
 
 【架构演进图】
-```
-演进前：单体架构
-┌─────────────────────────────────────┐
-│  单体应用          │
-│  ┌───────┐  ┌───────┐  ┌───────┐  │
-│  │User   │  │Order  │  │Prod   │  │
-│  │Module │  │Module │  │Module │  │
-│  └───────┘  └───────┘  └───────┘  │
-│         └─────────┬─────────┘      │
-│               ┌───┴───┐           │
-│               │  DB   │           │
-│               └───────┘           │
-└─────────────────────────────────────┘
-              ↓ 迁移
-
-演进中：微服务架构
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  User Svc   │    │  Order Svc  │    │  Prod Svc   │
-│  ┌───────┐  │    │  ┌───────┐  │    │  ┌───────┐  │
-│  │ Logic │  │    │  │ Logic │  │    │  │ Logic │  │
-│  └───┬───┘  │    │  └───┬───┘  │    │  └───┬───┘  │
-└──────┼──────┘    └──────┼──────┘    └──────┼──────┘
-       │                 │                 │
-       ▼                 ▼                 ▼
-┌──────────┐      ┌──────────┐      ┌──────────┐
-│  User DB │      │Order DB  │      │ Prod DB  │
-└──────────┘      └──────────┘      └──────────┘
-       └─────────────────┬─────────────────┘
-                         │
-              (通过 Domain Event / RPC 交互)
+```mermaid
+flowchart TB
+    subgraph Before["演进前：单体架构"]
+        Monolith["单体应用"]
+        Monolith --> UM["User Module"]
+        Monolith --> OM["Order Module"]
+        Monolith --> PM["Prod Module"]
+        UM --> DB1["DB (共享)"]
+        OM --> DB1
+        PM --> DB1
+    end
+    DB1 --> Migrate[迁移]
+    subgraph After["演进中：微服务架构"]
+        USvc["User Svc"]
+        OSvc["Order Svc"]
+        PSvc["Prod Svc"]
+        USvc --> UL["Logic"]
+        OSvc --> OL["Logic"]
+        PSvc --> PL["Logic"]
+        USvc --> UDB["User DB"]
+        OSvc --> ODB["Order DB"]
+        PSvc --> PDB["Prod DB"]
+        USvc -.->|"Domain Event / RPC"| OSvc
+        OSvc -.->|"Domain Event / RPC"| PSvc
+    end
+    Migrate --> USvc
+    Migrate --> OSvc
+    Migrate --> PSvc
 ```
 
 ## 常见考点

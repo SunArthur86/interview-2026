@@ -36,35 +36,29 @@ memory_points:
 
 **整体架构：**
 
-```text
-┌─────────────────────────────────────────────────────────────────────────┐
-│                              Client Requests                              │
-└─────────────────────────────┬───────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        API Gateway (L7 LB)                               │
-│  (Auth / Rate Limit / Request Routing / Telemetry)                       │
-└─────────────────────────────┬───────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          Scheduler Controller                            │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐                    │
-│  │ Request      │  │ Prefix       │  │ Dynamic      │                    │
-│  │ Classifier   │──│ Analyzer     │──│ Batcher      │                    │
-│  │ (Agent/Chat) │  │ (Radix Tree) │  │ (Iterative)  │                    │
-│  └──────────────┘  └──────────────┘  └──────────────┘                    │
-└──────────┬──────────────────────────────┬───────────────────────┬──────────┘
-           │                              │                       │
-           ▼                              ▼                       ▼
-  ┌────────────────┐            ┌────────────────┐      ┌──────────────────┐
-  │   KV Cache     │            │  GPU Cluster   │      │  Worker Nodes    │
-  │   Manager      │            │  (vLLM/SGLang) │      │  (Host LLM)      │
-  │                │            │                │      │                  │
-  │ ┌────────────┐ │            │ ┌────────────┐ │      │ (Small Models)   │
-  │ │GPU HBM     │◄────────────┤ │Block Mgr   │ │      │                  │
-  │ │(Hot/Active)│ │    Swap    │ │(PagedAttn) │ │      └────────────
+```mermaid
+flowchart TD
+    REQ[Client Requests] --> GW["API Gateway L7 LB<br/>Auth / Rate Limit / Request Routing / Telemetry"]
+    GW --> SC
+    subgraph SC["Scheduler Controller"]
+        RC[Request Classifier Agent/Chat]
+        PA[Prefix Analyzer Radix Tree]
+        DB[Dynamic Batcher Iterative]
+        RC --> PA --> DB
+    end
+    SC --> KVM
+    SC --> GPU
+    SC --> WN
+    subgraph KVM["KV Cache Manager"]
+        HBM["GPU HBM Hot/Active"]
+    end
+    subgraph GPU["GPU Cluster vLLM/SGLang"]
+        BM[Block Mgr PagedAttn]
+    end
+    subgraph WN["Worker Nodes Host LLM"]
+        SM[Small Models]
+    end
+    BM -.->|Swap| HBM
 ```
 
 **1. 调度策略：Prefix Caching + Iterative Scheduling**
