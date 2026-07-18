@@ -85,6 +85,10 @@ try {
 | **容量** | 默认无界 (慎用 OOM) | 默认无界 (慎用 OOM) | 必须指定容量 (有界) |
 | **吞吐量** | 中等 (双向竞争锁) | 较高 (读写分离) | 一般 (锁粒度大) |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-052.svg" alt="LinkedBlockingDeque是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：基于链表的双向阻塞队列，头尾均可插入和移出元素

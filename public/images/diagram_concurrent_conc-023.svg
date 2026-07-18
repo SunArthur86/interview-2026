@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+
+  <text x="400" y="30" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">协同式调度 vs 抢占式调度</text>
+
+  <rect x="30" y="50" width="350" height="300" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="205" y="75" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#2196F3">协同式调度</text>
+  <text x="205" y="93" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#666">线程主动让出 CPU 控制权</text>
+
+  <ellipse cx="205" cy="130" rx="50" ry="20" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="205" y="135" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#4CAF50">Thread A 执行</text>
+
+  <polygon points="205,160 255,190 205,220 155,190" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="205" y="195" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FF9800">遇到阻塞?</text>
+
+  <rect x="50" y="240" width="120" height="50" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="110" y="262" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#4CAF50">是</text>
+  <text x="110" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#333">主动 yield</text>
+
+  <rect x="240" y="240" width="120" height="50" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="300" y="262" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#f44336">否</text>
+  <text x="300" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#333">死循环独占</text>
+
+  <ellipse cx="205" cy="320" rx="55" ry="22" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="205" y="325" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#607D8B">Thread B 获得CPU</text>
+
+  <path d="M 155 190 L 130 240" stroke="#4CAF50" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <path d="M 255 190 L 280 240" stroke="#f44336" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <path d="M 110 290 L 170 305" stroke="#4CAF50" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+  <rect x="420" y="50" width="350" height="300" rx="10" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="595" y="75" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#9C27B0">抢占式调度</text>
+  <text x="595" y="93" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#666">OS 强制剥夺 CPU 控制权</text>
+
+  <ellipse cx="595" cy="130" rx="50" ry="20" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="595" y="135" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#4CAF50">Thread A 执行</text>
+
+  <polygon points="595,160 645,190 595,220 545,190" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="595" y="195" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FF9800">时间片用完?</text>
+
+  <rect x="440" y="240" width="120" height="50" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="500" y="262" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#607D8B">强制中断</text>
+  <text x="500" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#333">保存上下文</text>
+
+  <rect x="630" y="240" width="120" height="50" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="690" y="262" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#607D8B">继续执行</text>
+  <text x="690" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#333">(下个时间片)</text>
+
+  <ellipse cx="595" cy="320" rx="55" ry="22" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="595" y="325" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#607D8B">Thread B 获得CPU</text>
+
+  <path d="M 545 190 L 520 240" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <path d="M 645 190 L 670 240" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <path d="M 500 290 L 550 305" stroke="#607D8B" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+  <rect x="30" y="370" width="740" height="105" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="50" y="395" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" fill="#333">语言应用与常见考点</text>
+  
+  <rect x="50" y="410" width="230" height="50" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="1"/>
+  <text x="65" y="430" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#FF9800">Java 虚拟线程</text>
+  <text x="65" y="448" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#555">JDK库遇IO主动挂载让出CPU</text>
+
+  <rect x="290" y="410" width="230" height="50" rx="6" fill="#FFF3E0" stroke="#FF9800" stroke-width="1"/>
+  <text x="305" y="430" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#FF9800">Go 协程 (GMP)</text>
+  <text x="305" y="448" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#555">函数调用处协同 + Sysmon抢占</text>
+
+  <rect x="530" y="410" width="220" height="50" rx="6" fill="#FFEBEE" stroke="#f44336" stroke-width="1"/>
+  <text x="545" y="430" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#f44336">致命风险</text>
+  <text x="545" y="448" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#555">纯计算死循环导致系统假死</text>
+
+</svg>

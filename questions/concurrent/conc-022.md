@@ -124,6 +124,10 @@ flowchart TD
     class Block,Park wait
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-022.svg" alt="什么是信号量？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四个必要条件：互斥、请求保持、不剥夺、循环等待（口诀：请勿剥夺循环）

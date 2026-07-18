@@ -101,6 +101,10 @@ try {
 | **条件变量** | 支持多个 `Condition` (精细唤醒) | 仅一个 (wait/notify) |
 | **性能** | JDK 6 后优化好，竞争激烈时更有优势 | JDK 6 后优化极好 (锁升级)，普通场景推荐 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-053.svg" alt="ReentrantLock的实现原理是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心骨架：ReentrantLock基于AQS实现，核心是volatile int state和CLH双向队列

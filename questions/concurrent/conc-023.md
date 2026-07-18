@@ -90,6 +90,10 @@ Thread.ofVirtual().start(() -> {
 3.  **Java 虚拟线程如何解决协同式调度的阻塞问题？**
     - Java 虚拟线程在 JDK 库层面进行了大量改造（如 Socket、File I/O）。当虚拟线程调用阻塞 API 时，JVM 并不会阻塞底层的 OS 线程，而是将虚拟线程挂起，并释放 Carrier 线程去执行其他虚拟线程。这种机制使得在高并发 I/O 场景下，少量的 Carrier 线程即可支撑百万级虚拟线程。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-023.svg" alt="什么是协同式调度？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：控制并发访问特定资源个数的同步器，本质是非负整数计数器

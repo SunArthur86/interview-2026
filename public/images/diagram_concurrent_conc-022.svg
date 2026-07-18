@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,10 L9,5 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+  <rect width="800" height="500" fill="#fafafa"/>
+
+  <text x="400" y="30" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#333">什么是信号量：工作原理与流程</text>
+
+  <rect x="20" y="50" width="760" height="280" rx="10" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="400" y="72" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#9C27B0">核心机制：控制并发访问的令牌计数器</text>
+
+  <ellipse cx="100" cy="120" rx="55" ry="22" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="100" y="125" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#4CAF50">T1 / T2 / T3</text>
+  <text x="100" y="145" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#666">请求访问资源</text>
+
+  <path d="M 155 120 L 195 120" stroke="#607D8B" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="175" y="113" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#FF9800">acquire</text>
+
+  <path d="M 195 150 L 155 150" stroke="#607D8B" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="175" y="165" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#FF9800">release</text>
+
+  <rect x="200" y="95" width="140" height="70" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+  <text x="270" y="120" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#2196F3">Semaphore</text>
+  <text x="270" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="13" text-anchor="middle" fill="#333">许可计数器</text>
+  <text x="270" y="158" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#4CAF50">Permits = 2</text>
+
+  <polygon points="400,90 470,130 400,170 330,130" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="400" y="125" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#FF9800">计数是否</text>
+  <text x="400" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#FF9800">大于0？</text>
+
+  <path d="M 340 120 L 400 120" stroke="#2196F3" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  
+  <path d="M 470 110 L 540 110" stroke="#4CAF50" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="505" y="103" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#4CAF50">是 (减1)</text>
+
+  <rect x="540" y="85" width="140" height="55" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="610" y="108" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#4CAF50">获取成功</text>
+  <text x="610" y="126" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#333">执行业务逻辑</text>
+
+  <path d="M 400 170 L 400 230" stroke="#f44336" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="430" y="200" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#f44336">否 (=0)</text>
+
+  <rect x="330" y="235" width="140" height="55" rx="8" fill="#FFEBEE" stroke="#f44336" stroke-width="2"/>
+  <text x="400" y="258" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#f44336">获取失败</text>
+  <text x="400" y="276" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#333">线程进入阻塞队列</text>
+
+  <path d="M 470 260 L 540 160" stroke="#FF9800" stroke-width="1.5" fill="none" marker-end="url(#arr)" stroke-dasharray="4,4"/>
+  <text x="525" y="215" font-family="system-ui,-apple-system,sans-serif" font-size="10" text-anchor="middle" fill="#FF9800">被唤醒重试</text>
+
+  <path d="M 610 140 L 610 310" stroke="#FF9800" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="645" y="225" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FF9800">执行完毕 (加1)</text>
+
+  <rect x="540" y="320" width="140" height="55" rx="8" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+  <text x="610" y="343" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#607D8B">归还许可</text>
+  <text x="610" y="361" font-family="system-ui,-apple-system,sans-serif" font-size="11" text-anchor="middle" fill="#333">放入连接池/资源池</text>
+
+  <rect x="20" y="355" width="760" height="110" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="40" y="380" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" fill="#333">核心特点与避坑指南</text>
+  
+  <rect x="40" y="395" width="340" height="55" rx="6" fill="#F3E5F5" stroke="#9C27B0" stroke-width="1"/>
+  <text x="55" y="415" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#9C27B0">本质：非负整数计数器</text>
+  <text x="55" y="433" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#555">不同于互斥锁，不强调归属权</text>
+  <text x="55" y="447" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#555">允许多个线程同时访问(资源数&gt;1)</text>
+
+  <rect x="420" y="395" width="340" height="55" rx="6" fill="#FFEBEE" stroke="#f44336" stroke-width="1"/>
+  <text x="435" y="415" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#f44336">致命风险：许可泄漏死锁</text>
+  <text x="435" y="433" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#555">非公平模式(默认)允许插队抢占</text>
+  <text x="435" y="447" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#555">release() 必须放在 finally 块中执行</text>
+
+</svg>

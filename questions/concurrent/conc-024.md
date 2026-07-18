@@ -110,6 +110,10 @@ $ vmstat 1                 # 观察 cs（context switch）列
 - **上下文切换有成本**：线程/进程过多时，CPU 大量时间耗在切换而非计算，反而降低吞吐。这是线程池要限制最大线程数的根本原因。
 - **异步带来确定性难题**：进程执行速度不可预知，导致竞态条件、死锁等问题。必须用锁、原子操作、内存屏障等同步原语保证正确性。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-024.svg" alt="什么是操作系统的特征？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大特征：并发、共享、虚拟、异步。并发和共享是最基本特征，互为存在条件。

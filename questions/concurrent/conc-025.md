@@ -79,6 +79,10 @@ thread.start();
 2.  **线程状态转换的具体触发条件**：如从 WAITING 到 RUNNABLE 需要什么操作（notify 或 interrupt）。
 3.  **Java 线程状态与操作系统线程状态的对应**：Java 的 RUNNABLE 包含了 OS 的 Ready 和 Running，以及部分 Waiting（如 I/O 阻塞在 Java 中通常仍视为 RUNNABLE）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_concurrent_conc-025.svg" alt="什么是新建状态（NEW）？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 定义：创建了线程对象但未调用 start()，此时仅分配内存无执行资源。
