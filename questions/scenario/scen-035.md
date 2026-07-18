@@ -122,6 +122,22 @@ public void sendNotification(User user, Message msg) {
 - 批量推送避开高峰（降低短信费率）
 - 推送频率限制降低用户关闭推送概率
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    BIZ[业务触发推送] --> API[统一接入API]
+    API --> MQ[(消息队列)]
+    MQ --> ROUTE[路由分发]
+    ROUTE --> APP[APP Push 优先]
+    APP -->|失败| SMS[短信降级]
+    SMS -->|失败| EMAIL[邮件兜底]
+    TAG[用户标签圈人] --> API
+    RC[厂商回执] --> RATE[到达率统计]
+    style APP fill:#d4edda
+```
+
 ## 记忆要点
 
 - 通道选型：APP长连接低成本，短信高成本极高到达率，邮件低干扰，站内信极低成本需登录

@@ -320,6 +320,28 @@ optimizer_llm = torch.optim.AdamW(
 - **Sophia**（Stanford 2023）：用Hessian对角线估计替代二阶动量，理论上更接近二阶方法，收敛更快
 - **学习率与batch size的关系**：大batch训练需线性放大学习率（sqrt scaling rule for Adam）
 
+## 流程图
+
+```mermaid
+flowchart LR
+    A["梯度计算<br/>Gradient"] --> B["一阶动量 m<br/>滑动平均(方向)"]
+    A --> C["二阶动量 v<br/>平方滑动平均(步长)"]
+    
+    B --> D{"偏差修正<br/>1-β^t"}
+    C --> D
+    
+    D --> E["自适应更新<br/>m̂ / √v̂"]
+    E --> F["Warmup + Cosine<br/>稳定初期与衰减"]
+    F --> G["大模型参数更新<br/>百亿/千亿参数"]
+
+    H["权重衰减 Weight Decay"] --> I["AdamW解耦<br/>直接作用于参数"]
+    I -.-> G
+
+    subgraph 优化器演进
+        J["SGD<br/>固定学习率"] --> K["Momentum<br/>引入惯性动量"] --> L["Adam<br/>自适应+动量"] --> M["AdamW<br/>解耦正则化"]
+    end
+```
+
 ## 记忆要点
 
 - 演进脉络：SGD 加惯性变 Momentum，再加自适应学习率演进至 Adam（动量+自适应）。

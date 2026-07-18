@@ -98,6 +98,15 @@ class BlockTable:
 2. **Continuous Batching 和 Static Batching 在调度策略上的本质区别？**（基于 Step vs 基于 Token 的时间片）
 3. **KV Cache 量化（INT8）对推理精度的具体影响在哪些场景最明显？**（通常在长文本、复杂推理任务中）
 
+```mermaid
+flowchart TD
+    Issue[推理成本高] --> Diagnose{诊断}
+    Diagnose -->|显存碎片| PA[PagedAttention<br/>40%到96%]
+    Diagnose -->|前缀无法共享| Radix[Radix Tree复用]
+    Diagnose -->|带宽瓶颈| Quant[KV量化FP8/INT8]
+    Diagnose -->|头数过多| GQA[GQA减少头数]
+```
+
 ## 记忆要点
 
 - 诊断：显存碎片、预分配浪费(短请求占长空间)、前缀无法共享。

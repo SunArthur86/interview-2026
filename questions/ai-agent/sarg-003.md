@@ -88,6 +88,25 @@ ensemble_retriever = EnsembleRetriever(
 3.  **如何评估 Embedding 是否适合我的数据？**
     构造一个包含“Query-正文档-负文档”的小规模测试集，计算 Recall@k 或 MRR 指标进行实测。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TB
+    Choose["选 Embedding 模型"] --> Factors["考量因素"]
+    Factors --> Lang["语言: 中/英/多语言"]
+    Factors --> Dim["维度: 768/1024/1536"]
+    Factors --> Domain["领域: 通用/代码/医疗"]
+    Factors --> MaxLen["最大长度"]
+    Factors --> Cost["成本/部署"]
+    Lang --> Models["主流模型"]
+    Models --> BGE["BGE (中/多语言)"]
+    Models --> OpenAI["OpenAI text-embedding"]
+    Models --> E5["E5 / GTE"]
+    Models --> Code2["Code: Voyage/code-"]
+    Choose --> Benchmark["基准: MTEB 排行榜"]
+```
+
 ## 记忆要点
 
 - 选型维度：语言支持（中文选BGE）、维度权衡（精度vs速度）、上下文长度

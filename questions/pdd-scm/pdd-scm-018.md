@@ -220,6 +220,33 @@ class FullReductionStrategy implements PromotionStrategy {
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["订单计算价格请求"] --> B["获取促销类型<br/>order.getPromoType"]
+    B --> C{"策略工厂路由<br/>strategies.get"}
+
+    C -- "FULL_REDUCTION" --> D["满减策略类<br/>FullReductionStrategy"]
+    C -- "DISCOUNT" --> E["打折策略类<br/>DiscountStrategy"]
+    C -- "GROUP_BUY" --> F["拼团策略类<br/>GroupBuyStrategy"]
+
+    D --> G["读取配置规则<br/>满100减20"]
+    E --> H["读取配置规则<br/>打8折"]
+
+    G --> I["执行统一接口方法<br/>calculatePrice"]
+    H --> I
+    F --> I
+    I --> J["输出最终价格<br/>记录策略日志"]
+
+    subgraph 组合装饰器
+        K["满减装饰器"]
+        L["叠加优惠券装饰器"]
+        I -. 多重优惠叠加 .-> K
+        K -.-> L
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

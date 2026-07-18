@@ -77,6 +77,23 @@ memory_points:
 2. **Few-shot 学习的样本选择策略？**：如何通过 Embedding 相似度从向量库中动态检索最相关的 Examples，而不是静态写死。
 3. **CoT 的局限性？**：在闭集任务中显式推理有时反而会引入噪音，如何判断何时该用 CoT。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[用户输入 Query] --> B{任务复杂度判断}
+    B -->|简单任务| C[基础Prompt: 角色设定/Few-shot]
+    B -->|复杂推理| D[CoT: 逐步分解思考]
+    B -->|工具调用| E[ReAct: 推理与行动循环]
+    C --> F[格式约束输出: JSON/Pydantic]
+    D --> G[Self-Consistency: 多次采样投票]
+    E --> H[外部API/数据库环境交互]
+    F --> I(结构化解析结果)
+    G --> I
+    H --> E
+    I --> J[LangChain/Git 模板化管理]
+```
+
 ## 记忆要点
 
 - 基础技巧：角色设定、任务分解、Few-shot（示例多样性）、输出格式约束、CoT。

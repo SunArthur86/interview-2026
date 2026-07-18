@@ -83,6 +83,28 @@ server {
 | **头部压缩** | HPACK (顺序依赖) | **QPACK** (支持乱序，防阻塞) |
 | **普及度** | 极高（现代浏览器默认支持） | 逐步增长（Google/Cloudflare 推进中） |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[HTTP 协议演进] --> B["HTTP/1.1"]
+    B --> B1[文本协议]
+    B --> B2[持久连接 Keep-Alive]
+    B --> B3[管线化 不实用]
+    B --> B4[队头阻塞 HOL]
+    A --> C["HTTP/2"]
+    C --> C1[二进制分帧]
+    C --> C2[多路复用<br/>一个 TCP 多请求]
+    C --> C3[头部压缩 HPACK]
+    C --> C4[服务器推送]
+    C --> C5[应用层 HOL 解决<br/>TCP 层仍 HOL]
+    A --> D["HTTP/3"]
+    D --> D1[基于 QUIC UDP]
+    D --> D2[彻底解决 HOL]
+    D --> D3[0-RTT 建联]
+    D --> D4[连接迁移<br/>IP 变化不断流]
+```
 ## 记忆要点
 
 - 核心变革：抛弃TCP，改用基于UDP的QUIC协议，彻底解决TCP层队头阻塞。

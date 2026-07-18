@@ -292,6 +292,20 @@ Metrics.counter("thread.pool.rejected").increment();   // 拒绝时 +1
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：为什么核心线程满了先进队列而不是先开非核心线程？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[业务请求] --> B{corePoolSize<br/>核心线程是否满?}
+    B -- 否 --> C[创建核心线程执行]
+    B -- 是 --> D{workQueue<br/>有界队列是否满?}
+    D -- 否 --> E[任务入队等待]
+    D -- 是 --> F{maximumPoolSize<br/>达到最大线程数?}
+    F -- 否 --> G[创建非核心线程执行]
+    F -- 是 --> H[触发拒绝策略]
+    H --> I[CallerRunsPolicy<br/>调用方执行反压降速]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

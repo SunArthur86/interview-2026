@@ -220,6 +220,30 @@ for line in f:
 5. **mmap**：随机访问大文件、多进程共享、追求极致性能时的选择
 6. **避坑**：永远不要 `readlines()` 大文件，不要 `read()` 不加参数
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph A[Python大文件读取方案对比]
+      direction LR
+      subgraph A1[方案一: 逐行迭代]
+        B1[文本文件<br/>for line in f] --> B2[空间复杂度 O1<br/>简洁高效]
+      end
+      subgraph A2[方案二: 分块读取]
+        C1[二进制文件<br/>read chunk_size] --> C2[无换行符场景<br/>自定义解析边界]
+      end
+      subgraph A3[方案三: 生成器管道]
+        D1[yield 惰性求值] --> D2[链式管道处理<br/>filter/map/sum]
+      end
+      subgraph A4[方案四: mmap映射]
+        E1[映射虚拟内存] --> E2[走内核页缓存<br/>零拷贝极速随机访问]
+      end
+      A1 -- 性能对比 --> A2
+      A2 -- 适用场景 --> A3
+      A3 -- 极致性能 --> A4
+    end
+```
+
 ## 记忆要点
 
 - 核心原则：坚决不用read()或readlines()全量加载，必须采用流式处理防OOM

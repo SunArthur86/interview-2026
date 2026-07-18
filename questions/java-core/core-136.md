@@ -122,6 +122,23 @@ public class BeanFactory {
 - **`getClass()` vs `.class` 在泛型擦除下的差异**：由于类型擦除，`List<String>.class` 编译不过（无法对泛型类型用 `.class`），只能用 `List.class`。但 `new ArrayList<String>().getClass()` 返回的是 `ArrayList.class`，可以拿到运行时实际类型。
 - **模块化系统（JPMS）下的新限制**：Java 9+ 引入模块系统后，跨模块反射访问需要 `--add-opens` 或 `opens` 声明，否则即使拿到了 Class 对象，反射调用非 public 成员也会抛 `InaccessibleObjectException`。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[ArrayList 扩容] --> B["add 时检查 size+1 > capacity"]
+    B --> C{需要扩容?}
+    C -->|否| D[直接 elementData size = e]
+    C -->|是| E["计算新容量<br/>oldCap + oldCap >> 1<br/>即 1.5 倍"]
+    E --> F{新容量是否足够?}
+    F -->|是| G[Arrays.copyOf 复制]
+    F -->|否| H[取 minCapacity 与 MAX_ARRAY_SIZE]
+    H --> G
+    G --> I[elementData 指向新数组]
+    I --> D
+    D --> J[size++]
+```
 ## 记忆要点
 
 - 口诀：对象getClass、类名.class、Class.forName

@@ -95,6 +95,14 @@ def flash_attn_impl(q, k, v):
 2. **FlashAttention 是如何利用 Softmax 的数学特性进行分块归约的？**（Softmax 是可分解的行归约操作）
 3. **v2 相比 v1 调整了线程块策略是为了解决什么问题？**（v1 并行度不足导致算力利用率不高，v2 通过调整 Tiling 策略提升并行度）
 
+```mermaid
+flowchart TD
+    Core[核心:Tiling+Online Softmax] --> V1[v1<br/>重计算换空间]
+    V1 --> V2[v2<br/>Warp级并行优化]
+    V2 --> V3[v3<br/>H100 TMA+FP8 Tensor Core]
+    V3 --> Peak[接近理论峰值]
+```
+
 ## 记忆要点
 
 - 核心原理：Tiling分块计算+Online Softmax，避免读写HBM，将显存从O(N²)降至O(N)

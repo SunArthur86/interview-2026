@@ -103,6 +103,29 @@ String extractKey(Payment payment) {
 | **获取集合首尾元素** | `list.get(0)`, `list.get(list.size()-1)` (需判空) | `list.getFirst()`, `list.getLast()` (统一接口) | 统一 `List/Deque/Set` API，无需类型转换 |
 | **多行 JSON** | `String s = "{\"key\": \"value\"}";` (转义地狱) | `String s = """{"key": "value"}""";` | 可读性强，接近原始格式 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[JDK 17-21 关键改进] --> B[JDK 17 LTS]
+    B --> B1[Sealed Classes 密封类]
+    B --> B2[Pattern Matching instanceof]
+    B --> B3[Records 增强]
+    B --> B4[Switch 模式匹配 预览]
+    A --> C[JDK 21 LTS]
+    C --> C1[Virtual Threads 虚拟线程]
+    C --> C2[Sequenced Collections]
+    C --> C3[Pattern Matching for switch 正式]
+    C --> C4[Generational ZGC 分代]
+    C --> C5[Structured Concurrency 预览]
+    D[API 改进] --> E[HashMap 内部优化]
+    D --> F[String.repeat/strip/isBlank]
+    D --> G[Stream toList/zipWith]
+    D --> H[Optional.orElseThrow 等]
+    I[GC 演进] --> J[Parallel/CMS 淘汰]
+    I --> K[G1 默认 ZGC 低延迟]
+```
 ## 记忆要点
 
 - 语法糖：文本块用三引号，简化JSON/SQL；Stream直接用toList()替代collect收集

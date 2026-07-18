@@ -181,6 +181,44 @@ Redis Cluster 是正解，但有适用前提：
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph 内存数据
+        A[Redis 主进程内存]
+    end
+
+    subgraph 持久化策略对比
+        B[RDB 二进制快照]
+        C[AOF 命令日志]
+        D[混合持久化 RDB+AOF]
+    end
+
+    subgraph AOF 刷盘配置
+        C1[always 最安全慢]
+        C2[everysec 折中丢1s]
+        C3[no OS决定]
+    end
+
+    subgraph 底层机制
+        E[fork 子进程 COW 复制]
+        F[AOF Rewrite 重写合并]
+        G[主进程 STW 卡顿]
+    end
+
+    A -->|全量定时| B
+    A -->|增量追加| C
+    A -->|4.0+生产推荐| D
+    C --> C1
+    C --> C2
+    C --> C3
+    B --> E
+    C --> F
+    E -->|复制页表阻塞| G
+    F -->|期间禁fsync丢数据| G
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

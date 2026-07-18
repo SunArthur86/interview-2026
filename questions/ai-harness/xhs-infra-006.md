@@ -130,6 +130,16 @@ __global__ void wmma_gemm(half *A, half *B, float *C, int M, int N, int K) {
 | **主要瓶颈** | Latency | Shared Memory Bandwidth / Bank Conflict | Register File Bandwidth |
 | **适用算子** | Element-wise, Reduction | 卷积, 小矩阵乘法 | 大矩阵乘法 (GEMM), Attention QKV |
 
+```mermaid
+flowchart TD
+    Matrix[矩阵乘法GEMM] --> Tile[Shared Memory Tiling]
+    Tile --> Coalescing[Coalescing合并访问]
+    Coalescing --> Padding[Padding消Bank Conflict]
+    Padding --> TC[Tensor Core<br/>WMMA API]
+    TC --> Pipe[Double Buffering<br/>异步加载]
+    Pipe --> Roofline[Roofline分析]
+```
+
 ## 记忆要点
 
 - 内存优化：Coalescing 合并访问，Shared Memory Tiling 分块复用，Padding 消除 Bank Conflict。

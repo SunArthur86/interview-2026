@@ -228,6 +228,31 @@ DB 乐观锁能防超卖，但扛不住大促并发：
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant Order as 订单服务
+    participant Redis as Redis
+    participant Lua as Lua原子脚本
+    participant DB as MySQL对账库
+    Order->>Lua: 提交扣减请求(order_id, sku_id)
+    Lua->>Redis: 查询stock_log Set防重
+    alt 已存在order_id
+        Lua-->>Order: 返回扣减成功(幂等)
+    else 无该记录
+        Lua->>Redis: 判断库存是否充足
+        alt 库存充足
+            Lua->>Redis: 原子扣减库存
+            Lua->>Redis: 记录order_id到Set
+            Lua-->>Order: 返回扣减成功
+            Order->>DB: 异步记录扣减流水(stock_log)
+        else 库存不足
+            Lua-->>Order: 返回库存不足
+        end
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

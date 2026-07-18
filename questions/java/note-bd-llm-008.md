@@ -292,6 +292,35 @@ python3.13t  # free-threaded build
 
 > GIL 保护引用计数，IO 操作时释放 → 大模型 API 调用是 IO 密集型，多线程/asyncio 有效；本地推理是 CPU 密集型，需 multiprocessing 绕过 GIL。选择方案的依据是：**任务在等还是在算**——等的用线程/协程，算的用进程。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph CPY[CPython 解释器内存管理]
+        A[Python 对象] --> B{ob_refcnt 引用计数}
+        B -->|多线程同时修改| C[竞态条件与内存泄漏]
+    end
+
+    subgraph SOL[解决方案]
+        C --> D[引入 GIL 全局解释器锁]
+    end
+
+    D --> E{运行状态检测}
+
+    subgraph IO[IO 密集型任务]
+        E -->|遇到阻塞如网络请求| F[主动释放 GIL]
+        F --> G[其他线程接管执行]
+        G --> H[大模型 API 调用并发提速]
+    end
+
+    subgraph CPU[CPU 密集型任务]
+        E -->|持续执行字节码| I[仅定时抢占切换 GIL]
+        I --> J[同一时刻仅单核满载]
+        J --> K[本地大模型推理多线程无效]
+        K --> L[改用 Multiprocessing 多进程绕过]
+    end
+```
+
 ## 记忆要点
 
 - 一句话定义：GIL是CPython的互斥锁，因保护引用计数，故同一时刻仅单线程执行字节码

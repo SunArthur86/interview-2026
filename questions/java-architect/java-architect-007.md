@@ -323,6 +323,24 @@ CompletableFuture<Data> result = CompletableFuture.anyOf(primary, secondary)
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：为什么默认 ForkJoinPool.commonPool 不能用？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[商品详情页请求] --> B[CompletableFuture.supplyAsync<br/>商品基础信息]
+    A --> C[CompletableFuture.supplyAsync<br/>价格数据]
+    A --> D[CompletableFuture.supplyAsync<br/>库存状态]
+    A --> E[CompletableFuture.supplyAsync<br/>评价推荐]
+    B --> F[显式业务线程池<br/>禁用 commonPool]
+    C --> F
+    D --> F
+    E --> F
+    F --> G[orTimeout 设置超时]
+    G --> H[exceptionally 异常兜底降级]
+    H --> I[allOf 扇入合并等待]
+    I --> J[MDC Wrap<br/>透传 traceId 上下文]
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

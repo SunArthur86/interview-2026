@@ -137,6 +137,33 @@ GAE 提供 A 的估计：
 - **V 网络的准确性**：GAE 依赖 V(s)，V 不准则 δ 都不准 → PPO 要同时训 Critic（V 网络）
 - **GRPO 为什么不用 GAE**：GRPO 用组内统计代替 V 网络，省了 Critic，但牺牲了 GAE 的多步融合优势
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph C["优势函数估计的两种极端"]
+        direction TB
+        T["1步TD估计<br/>(高偏差/低方差)"]
+        M["蒙特卡洛MC<br/>(低偏差/高方差)"]
+    end
+
+    G["GAE 指数加权融合<br/>融合所有 n 步 TD 误差"]
+
+    T -- "λ=0 退化" --> G
+    M -- "λ=1 退化" --> G
+
+    G -- "γ=0.99, λ=0.95<br/>偏差与方差的最优折中" --> P["计算优势 A<br/>平滑策略梯度"]
+
+    subgraph S["强化学习网络更新"]
+        direction LR
+        AC["Actor 网络<br/>(更新策略)"]
+        CR["Critic 网络<br/>(估计状态价值V)"]
+    end
+
+    CR -- "提供V算TD误差δ" --> G
+    P --> AC
+```
+
 ## 记忆要点
 
 - GAE本质是估计优势函数A的工程方法，为了平衡偏差与方差

@@ -74,6 +74,20 @@ memory_points:
 4. 运行 mvn compile 验证语法
 ```
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    U[用户提问] --> W[网页问答AI]
+    U --> ID[AI编程工具]
+    W --> CTX[单轮对话上下文]
+    ID --> CB[感知整个代码库]
+    ID --> FS[读写文件/执行命令]
+    FS --> DEV[秒级开发周期]
+    style ID fill:#d4edda
+```
+
 ## 记忆要点
 
 - 核心差异：编程工具有上下文感知，能读代码库，网页问答仅限片段。

@@ -344,6 +344,25 @@ JD 电商选 MySQL，到家配送选 PG。
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——PG 比 MySQL 强在哪？
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph A [PostgreSQL 适用场景]
+        direction TD
+        A1[复杂分析查询: 多表JOIN/CTE递归]
+        A2[地理空间计算: PostGIS/配送路线]
+        A3[半结构化存储: JSONB/GIN索引]
+    end
+    subgraph B [MySQL 适用场景]
+        direction TD
+        B1[简单OLTP: 高并发CRUD为主]
+        B2[分库分表: ShardingSphere成熟方案]
+        B3[团队生态: 运维资源丰富]
+    end
+    C{业务架构选型} --> A
+    C --> B
+```
 
 ## 视频脚本
 

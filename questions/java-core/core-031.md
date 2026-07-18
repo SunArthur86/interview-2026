@@ -134,6 +134,23 @@ class Context {
 | **ANTLR / JavaCC** | 复杂语言（SQL、JSON） | 高（生成词法/语法分析器） | 中（需重新生成代码） |
 | **Java Script Engine** | 动态脚本需求 | 中 | 极高（支持完整脚本语言） |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[解释器模式 Interpreter] --> B[给定语言 定义文法]
+    B --> C[每个规则用一个表达式类]
+    D[抽象表达式 Expression] --> E[interpret Context]
+    F[终结符表达式] --> G[变量/常量]
+    H[非终结符表达式] --> I[And/Or/Not 组合]
+    I --> J[递归组合表达式树]
+    E --> K[遍历 AST 解释执行]
+    L[应用] --> M[SQL 解析]
+    L --> N[正则引擎]
+    L --> O[SpEL Spring 表达式]
+    L --> P[规则引擎 Drools]
+```
 ## 记忆要点
 
 - 解释器模式是行为型设计模式，核心是定义文法并构建抽象语法树（AST）来解释特定语言

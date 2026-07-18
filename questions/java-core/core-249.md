@@ -83,6 +83,22 @@ class WeChatPayService implements PaymentAction, RefundAction {
 }
 ```
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[接口隔离原则 ISP] --> B[客户端不应依赖<br/>它不需要的方法]
+    B --> C[胖接口 Fat Interface]
+    C --> D[拆分为多个<br/>专用小接口]
+    E[反例] --> F[Worker 接口包含<br/>work + eat + sleep]
+    F --> G[Robot 实现<br/>被迫实现 eat/sleep]
+    H[正解] --> I[Workable/Eatable/Sleepable]
+    I --> J[Robot 只实现 Workable]
+    K[收益] --> L[降低耦合]
+    K --> M[提高内聚]
+    K --> N[便于复用]
+```
 ## 记忆要点
 
 - 核心定义：客户端不应被迫依赖它不需要的接口，大接口需拆分细化。

@@ -110,6 +110,24 @@ public class Application {
 2. **实际应用**：Spring 中的 `BeanFactory` 和 `FactoryBean` 分别接近哪种模式？
 3. **模式退化**：当抽象工厂中只有一个产品等级结构时，它是否退化为了工厂方法模式？
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[工厂模式] --> B[简单工厂<br/>一个工厂方法+switch]
+    A --> C[工厂方法<br/>每类产品对应一个工厂]
+    A --> D[抽象工厂<br/>产品族 多维度]
+    C --> E[抽象 Product]
+    C --> F[ConcreteProductA/B]
+    C --> G[Factory 接口<br/>createProduct]
+    C --> H[ConcreteFactoryA/B]
+    H --> F
+    D --> I[产品族: UI Light/Dark<br/>Button+Input+Checkbox]
+    J[开闭原则] --> K[新增产品加新类<br/>不改老代码]
+    L[应用] --> M[Spring BeanFactory]
+    L --> N[JDBC DriverManager]
+```
 ## 记忆要点
 
 - 产品维度不同：工厂方法针对单一产品结构（只造鼠标），抽象工厂针对多个产品族（造鼠标+键盘）

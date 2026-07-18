@@ -96,6 +96,38 @@ def run_evaluation(dataset):
 2. RAGAS等框架计算Faithfulness的原理是基于NLI（自然语言推理），如果LLM本身推理能力不足，评测指标的可信度如何保证？
 3. 如何评测RAG系统在面对"不知道"问题时拒绝回答的能力？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["构建Golden Set<br/>200-500条多维度样本"]
+    A --> B[RAG系统链路]
+    B --> C1[检索质量评测]
+    B --> C2[生成质量评测]
+    B --> C3[端到端E2E评测]
+
+    subgraph L1 ["检索层指标"]
+    C1 --> D1["Recall@K 上下文命中率"]
+    C1 --> D2["MRR 首位相关文档排名"]
+    C1 --> D3["NDCG@K 排序质量加权"]
+    end
+
+    subgraph L2 ["生成层指标 RAGAS"]
+    C2 --> E1["Faithfulness 忠实度 反幻觉"]
+    C2 --> E2["Answer Relevancy 答案相关性"]
+    C2 --> E3["Context Precision 噪声剔除率"]
+    end
+
+    subgraph L3 ["端到端体验"]
+    C3 --> F1["LLM-as-Judge GPT-4 CoT打分"]
+    C3 --> F2[人工评分与用户反馈点踩]
+    end
+
+    D1 --> G["CI/CD回归测试<br/>设定指标阈值如Recall>0.8阻断发布"]
+    E1 --> G
+    F1 --> G
+```
+
 ## 记忆要点
 
 - 评测分三层：检索层（Recall/MRR）、生成层（Faithfulness/Relevancy）、端到端

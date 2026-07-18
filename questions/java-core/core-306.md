@@ -131,6 +131,22 @@ public class PolymorphismDemo {
 | **灵活性** | 低 (类型需在编译期确定) | 高 (可动态扩展子类) |
 | **常见坑点** | 自动装箱与重载混淆 | 只有非 private/非 final/static 方法才生效 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java 多态] --> B[编译时多态<br/>方法重载 Overload]
+    A --> C[运行时多态<br/>方法重写 Override]
+    C --> D[动态分派<br/>基于实际类型]
+    D --> E[子类对象指向父类引用]
+    D --> F[虚方法表 vtable<br/>查实际类的方法]
+    G[前提] --> H[继承/实现]
+    G --> I[方法重写]
+    G --> J[父类引用指向子类对象]
+    K[经典案例] --> L[List list = new ArrayList]
+    K --> M[策略模式 注入不同实现]
+```
 ## 记忆要点
 
 - 编译时多态靠重载：因为编译期看参数类型，所以叫静态绑定。

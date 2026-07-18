@@ -87,6 +87,23 @@ public class Singleton {
 3.  **非静态内部类为什么不能有静态成员**？
     -   因为非静态内部类依赖外部类实例，而静态成员属于类层级，如果允许，将产生语义冲突（无需实例即可访问依赖于实例的东西）。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[静态内部类 Static Nested] --> B[static 修饰]
+    B --> C[不依赖外部实例]
+    B --> D[可直接 new Outer.Inner]
+    E[对比成员内部类] --> F[成员类持有 Outer this]
+    E --> G[静态类不持有<br/>节省内存]
+    H[典型场景] --> I[HashMap.Node<br/>不需要访问外部数据]
+    H --> J[单例模式<br/>静态内部类懒加载]
+    H --> K[Builder 模式]
+    L[优势] --> M[封装相关逻辑]
+    L --> N[避免对外暴露]
+    L --> O[与外部解耦]
+```
 ## 记忆要点
 
 - 独立性：不依赖外部类实例，可直接 new Outer.Inner() 创建

@@ -329,6 +329,31 @@ Java vs Python 在 AI 生态的权衡：
 
 **收尾：** 要学模型训练吗？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Java Engineer ["传统Java后端能力"]
+        A["高并发/分布式经验"]
+        B["系统架构稳定性治理"]
+    end
+    subgraph AI Stack ["AI应用层技术栈(补充学习)"]
+        C["Python原型与评测脚本"]
+        D["Prompt/RAG/Agent架构"]
+    end
+    A --> E["AI工程化主战场"]
+    B --> E
+    C --> D
+    D --> E
+    subgraph AI Engineering ["AI工程化主战场(发力点)"]
+        F["LLM高并发推理网关"]
+        G["Agent编排与状态管理"]
+        H["模型评测与数据闭环"]
+    end
+    E --> F
+    E --> G
+    E --> H
+```
 
 ## 视频脚本
 

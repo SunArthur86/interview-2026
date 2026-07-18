@@ -113,6 +113,22 @@ if (send_window == 0) {
 3. **糊涂窗口综合征（SWS）是什么？**
    - 当发送方发送极小的数据包（如1字节）或者接收方通告极小的窗口（如1字节），会导致网络效率极低。解决：发送方开启 Nagle 算法（积攒数据）；接收方延迟 ACK（等缓冲区有一定空间再通告）。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[TCP 滑动窗口] --> B[发送方窗口]
+    B --> C[已确认 Sent/ACKed]
+    B --> D[可发送 Sent UnACKed]
+    B --> E[可用 Not Sent Receivable]
+    B --> F[不可发送 Not Sent Not Receivable]
+    G[接收方窗口 rwnd] --> H[通告剩余缓冲]
+    H --> I[零窗口时<br/>发送方暂停发数据]
+    J[作用] --> K[流量控制<br/>避免压垮接收方]
+    J --> L[提升吞吐<br/>连续发多包不等待]
+    M[累计确认] --> N[ACK n 表示<br/>n 之前全部收到]
+```
 ## 记忆要点
 
 - 核心定义：接收方通过 TCP Header 的 Window 字段通告剩余缓冲区，发送方据此批量发送实现流量控制

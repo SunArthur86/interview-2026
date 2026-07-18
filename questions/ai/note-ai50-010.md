@@ -245,6 +245,32 @@ async def safe_agent_stream(query):
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 ```
 
+## 流程图
+
+```mermaid
+flowchart TD
+    U[用户提问] --> F[前端EventSource发起SSE请求]
+    F --> G[Nginx网关<br/>配置长连接与心跳]
+    G --> S[后端SSE接口]
+    S --> LC[LangChain Agent<br/>astream_events_v2]
+    
+    subgraph 事件解析与分发
+    LC -->|on_chat_model_stream| T1[Token增量流<br/>文字打字机渲染]
+    LC -->|on_tool_start| T2[Action工具卡片<br/>展示调用参数]
+    LC -->|on_tool_end| T3[Observation结果<br/>折叠展示返回]
+    LC -->|on_chain_end| T4[Done完成事件<br/>收尾结束]
+    end
+
+    T1 --> G
+    T2 --> G
+    T3 --> G
+    T4 --> G
+    G -->|持续推送data| F
+
+    F -.->|弱网断连携带Last-Event-ID| G
+    G -.->|断点续传重发事件| F
+```
+
 ## 记忆要点
 
 - 底层协议：基于SSE（Server-Sent Events）实现前端流式传输

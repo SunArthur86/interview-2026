@@ -218,6 +218,25 @@ JDK 8 的 computeIfAbsent 有个已知问题：如果加载函数内部又对同
 
 **收尾：** ConcurrentHashMap 为什么不允许 null？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 并发集合应用场景
+    A1["直播弹幕与送礼"] --> A2["ArrayBlockingQueue<br/>有界队列+背压"]
+    A3["本地热点缓存"] --> A4["ConcurrentHashMap<br/>节点级锁/CAS"]
+    A5["在线用户去重"] --> A6["CHM.newKeySet()<br/>原子计算"]
+    A7["监听器与路由管理"] --> A8["CopyOnWriteArrayList<br/>读无锁写复制"]
+    end
+    subgraph 底层机制
+    B1["读操作"] --> B2{"集合类型"}
+    B2 -->|"CHM/COW"| B3["无锁并发读"]
+    B4["写操作"] --> B2
+    B2 -->|"CHM"| B5["synchronized锁桶头节点"]
+    B2 -->|"ArrayBQ"| B6["ReentrantLock阻塞"]
+    B2 -->|"COW"| B7["复制新数组替换"]
+    end
+```
 
 ## 视频脚本
 

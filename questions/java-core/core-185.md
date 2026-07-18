@@ -102,6 +102,26 @@ location /api/ {
 | **Least Conn** | `least_conn` | 优先分配给连接数最少的服务器 | 长连接，请求处理时长差异大 |
 | **Hash** | `hash $key` | 对指定 key (如 uri) 哈希 | 缓存命中率要求高，动静分离 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[数字证书体系 PKI] --> B[CA 证书颁发机构]
+    B --> C[生成密钥对<br/>公钥+私钥]
+    C --> D[CSR 证书签名请求]
+    D --> E[CA 用私钥签名]
+    E --> F[颁发 X.509 证书<br/>含公钥+持有者+有效期+CA 签名]
+    G[校验链] --> H[浏览器收到证书]
+    H --> I[用 CA 公钥验签<br/>验证真伪]
+    I --> J[检查有效期/域名/吊销列表]
+    J --> K[校验通过 信任公钥]
+    L[信任根] --> M[操作系统/浏览器<br/>预装 Root CA]
+    M --> N[Root CA 签发 Intermediate]
+    N --> O[Intermediate 签发 End-Entity]
+    P[HTTPS/TLS] --> Q[服务端证书<br/>证明公钥归属]
+    R[证书吊销] --> S[CRL/OCSP]
+```
 ## 记忆要点
 
 - 核心定义：Nginx的ngx_http_proxy_module指令，用于反向代理与请求转发。

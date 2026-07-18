@@ -394,6 +394,35 @@ T2: 插入成功
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：MVCC 解决了幻读吗？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 当前读与写事务
+        A1[SELECT FOR UPDATE<br/>UPDATE/DELETE]
+        A1 -->|加X锁| A2[InnoDB行锁机制]
+        A2 -->|锁住记录/间隙| A3[聚簇索引最新数据]
+    end
+
+    subgraph 快照读事务
+        B1[普通 SELECT]
+        B1 -->|无锁| B2[MVCC 多版本控制]
+        B2 -->|生成| B3[ReadView 可见视图]
+    end
+
+    subgraph 底层数据与Undo版本链
+        C1[隐藏列 trx_id]
+        C2[隐藏列 roll_ptr]
+        C3[Undo Log 回滚日志<br/>旧版本数据快照]
+        C1 --- C2
+        C2 --> C3
+    end
+
+    A3 --> C1
+    B3 --> C1
+    B3 -->|沿指针寻找<br/>第一个可见版本| C3
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

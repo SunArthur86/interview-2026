@@ -75,6 +75,28 @@ model = SelfAttention(embed_dim=512, num_heads=8)
 output = model(input_tensor)
 ```
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph A["Self-Attention 核心流程"]
+        direction TB
+        A1["输入序列 X"] --> A2["线性变换生成 Q, K, V"]
+        A2 --> A3["计算相关性<br/>QKᵀ / √d_k"]
+        A3 --> A4["Softmax 归一化"]
+        A4 --> A5["加权聚合输出 V"]
+    end
+
+    subgraph B["对比 RNN 的优势"]
+        direction TB
+        B1["长距离依赖<br/>任意Token距离 O(1)"]
+        B2["高度并行<br/>矩阵运算无需等待"]
+    end
+
+    A5 --> B
+    B --> C["复杂度代价<br/>O(N²·d)"]
+```
+
 ## 记忆要点
 
 - 定义：序列中每个位置直接关注所有其他位置，计算加权求和。

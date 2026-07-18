@@ -92,6 +92,33 @@ sampling_params = SamplingParams(temperature=0.7, top_p=0.95, max_tokens=1024)
 outputs = llm.generate(prompts, sampling_params)
 ```
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Client[客户端请求] --> Gateway[API网关与统一鉴权]
+    Gateway --> LB[GPU感知负载均衡调度]
+
+    subgraph 缓存优化层
+        Prefix[系统Prompt前缀缓存] --> Cache{语义/KV命中?}
+    end
+
+    LB --> Cache
+    Cache -->|命中| Direct[直接返回缓存结果]
+    Cache -->|未命中| Batch[Continuous Batching 动态组批]
+
+    subgraph GPU推理引擎层
+        Batch --> Queue[队列管理防OOM]
+        Queue --> Opt[量化加速 INT4/FP16]
+        Opt --> Model[vLLM PagedAttention]
+        Model --> Spec[Speculative Decoding 小模型加速]
+    end
+
+    Spec --> Stream[流式输出 Streaming Tokens]
+    Direct --> Stream
+    Stream --> Client
+```
+
 ## 记忆要点
 
 - 核心引擎：vLLM（PagedAttention+Continuous Batching）或TensorRT-LLM。

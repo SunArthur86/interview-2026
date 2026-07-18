@@ -191,6 +191,22 @@ kafka.send("order-created", event);  // 不阻塞主流程
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    User[高并发请求] --> M[网关入口]
+    M --> N[多级缓存策略<br/>Caffeine+Redis]
+    N -- 命中 --> R[快速响应聚合]
+    N -- 未命中 --> O[线程/连接池]
+    O --> P[数据库查询]
+    P --> Q[异步并行拉取非核心数据<br/>CompletableFuture]
+    Q -- 超时降级 --> R
+    Q -- 正常返回 --> R
+    Q --> T[消息队列MQ解耦]
+    T --> U[下游异步业务处理]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

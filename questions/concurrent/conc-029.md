@@ -77,6 +77,34 @@ public class SafeCounter {
 3. 为什么 ConcurrentHashMap (JDK8) 放弃分段锁改用 CAS+synchronized？
 4. volatile 能保证线程安全吗？它与 Atomic 类的区别？
 
+### 线程安全分级与实现手段
+
+```mermaid
+flowchart TB
+    TS["线程安全"] --> L1["不可变<br/>(绝对安全)"]
+    TS --> L2["绝对线程安全<br/>(API 内部同步)"]
+    TS --> L3["相对线程安全<br/>(对象操作安全<br/>调用序列未必)"]
+    TS --> L4["线程兼容<br/>(本身不安全<br/>调用方同步)"]
+    TS --> L5["线程对立<br/>(即使同步也不安全)"]
+
+    L1 --> L1Ex["final / String / Integer"]
+    L2 --> L2Ex["AtomicInteger / ConcurrentHashMap"]
+    L3 --> L3Ex["Vector / Hashtable"]
+    L4 --> L4Ex["ArrayList / HashMap"]
+    L5 --> L5Ex["ThreadLocal 不同步共享"]
+
+    Means["实现手段"] --> M1["同步: synchronized / Lock"]
+    Means --> M2["无锁: CAS / Atomic"]
+    Means --> M3["隔离: ThreadLocal"]
+    Means --> M4["不可变: final / 副本"]
+    Means --> M5["并发容器: BlockingQueue"]
+
+    classDef level fill:#e8f5e9,stroke:#2e7d32
+    classDef means fill:#e3f2fd,stroke:#1565c0
+    class L1,L2,L3,L4,L5 level
+    class M1,M2,M3,M4,M5 means
+```
+
 ## 记忆要点
 
 - 核心定义：多线程并发访问时，无论调度顺序如何，都能保证行为的正确性（无数据竞争或脏读）。

@@ -391,6 +391,20 @@ public class PaymentProcessor {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——幂等 producer 的 PID 怎么来的？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Kafka内幕原子闭环
+        A["消费 Kafka<br/>拉取支付事件"] --> B["开启事务<br/>beginTransaction"]
+        B --> C["业务处理<br/>扣款逻辑"]
+        C --> D["生产新事件<br/>producer.send"]
+        D --> E["提交 Offset<br/>sendOffsetsToTransaction"]
+        E --> F["事务提交<br/>commitTransaction"]
+    end
+    F --> G{"跨系统边界<br/>写 MySQL"}
+    G -->|Kafka管不到| H["业务幂等兜底<br/>msg_id 唯一索引"]
+```
 
 ## 视频脚本
 

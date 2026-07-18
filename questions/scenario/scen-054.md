@@ -127,6 +127,21 @@ public Instance chooseByWeight(List<Instance> instances) {
 }
 ```
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SV[服务启动] --> REG[注册到注册中心]
+    REG --> HB[定时心跳上报]
+    HB --> REGDB[(注册表 AP模式)]
+    CON[消费者] --> SUB[订阅服务列表]
+    SUB --> CACHE[本地缓存]
+    CACHE --> CALL[负载均衡调用]
+    SV -->|宕机| RM[心跳超时摘除]
+    style REG fill:#d4edda
+```
+
 ## 记忆要点
 
 - 模式对比：客户端发现（如Nacos）重SDK负载均衡，服务端发现（如K8s）重代理转发。

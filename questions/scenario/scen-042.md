@@ -94,6 +94,23 @@ memory_points:
 - JVM监控
 - 依赖分析
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    APP[应用服务] --> M[Metrics 指标]
+    APP --> L[Logging 日志]
+    APP --> T[Tracing 链路]
+    M --> PR[(Prometheus)]
+    L --> ELK[(ELK)]
+    T --> SW[(SkyWalking)]
+    TID[TraceID] -.串联.-> M
+    TID -.串联.-> L
+    PR --> AL[告警]
+    style TID fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 监控三支柱：Metrics指标准实时的系统状态，Logging详尽的上下文日志，Tracing请求拓扑与耗时

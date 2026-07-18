@@ -78,6 +78,22 @@ sysctl -w net.ipv4.tcp_congestion_control=bbr
 | **bufferbloat** | 容易造成缓冲区膨胀 | 有效缓解缓冲区膨胀 | 较好缓解 |
 | **公平性** | 公平性较好 | 在某些场景下可能挤占传统算法流量 | 可能导致不公平 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[TCP 拥塞控制] --> B[cwnd 拥塞窗口]
+    A --> C[ssthresh 慢启动门限]
+    D[慢启动] --> E[cwnd 指数增长<br/>每 RTT 翻倍]
+    E --> F{cwnd ≥ ssthresh?}
+    F -->|否| E
+    F -->|是| G[拥塞避免<br/>线性增长 每 RTT +1]
+    G --> H{丢包/超时?}
+    H -->|超时| I[ssthresh = cwnd/2<br/>cwnd = 1<br/>回到慢启动]
+    H -->|3次重复ACK| J[快速重传+快速恢复<br/>ssthresh = cwnd/2<br/>cwnd = ssthresh]
+    J --> G
+```
 ## 记忆要点
 
 - 核心目的：控制发送方数据注入速率，防止过多数据填满网络导致过载。

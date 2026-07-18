@@ -164,6 +164,23 @@ query embedding → 找相似历史问答 → 相似度 > 阈值 → 返回
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：语义缓存怎么实现？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Request[用户提问] --> Router[模型路由器]
+    Router -->|简单问题| Small[小模型处理 降单价]
+    Router -->|复杂问题| Large[大模型处理]
+    Request --> SemanticCache{语义缓存命中?}
+    SemanticCache -->|是| ReturnCache[直接返回结果 降次数]
+    SemanticCache -->|否| Retrieve[RAG检索相关片段 降Token]
+    Small --> Generate[LLM生成回答]
+    Large --> Generate
+    Retrieve --> Generate
+    Generate --> Batch[(批处理池 提利用率)]
+    Batch --> Response[返回响应]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

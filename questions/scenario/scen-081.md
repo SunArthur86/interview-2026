@@ -126,6 +126,22 @@ end
 - 回滚失败数
 - 订单超时率
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PRE[秒杀前预热] --> SYNC[DB库存→Redis]
+    BUY[秒杀下单] --> LUA[Redis Lua原子递减]
+    LUA -->|库存>0| OK[扣减成功]
+    LUA -->|库存=0| FAIL[售罄]
+    OK --> ORDER[创建订单 异步落库]
+    ORDER --> WAIT[等待支付]
+    WAIT -->|超时未付| ROLL[延时队列回滚库存]
+    WAIT -->|支付完成| DONE[完成]
+    style LUA fill:#d4edda
+```
+
 ## 记忆要点
 
 - 核心思想：秒杀前DB数据双写校验预热进Redis，防DB被击穿。

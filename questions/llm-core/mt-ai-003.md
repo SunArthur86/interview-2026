@@ -106,6 +106,21 @@ def mla_attention(q, kv_cache):
     return softmax(scores) @ V
 ```
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[输入 x] --> B[下投影压缩]
+    B --> C[低维潜在向量 c]
+    C --> D[推理仅缓存 c]
+    C --> E[上投影恢复 KV]
+    C --> F[不能直接对 c 做 RoPE]
+    F --> G[位置信息丢失]
+    G --> H[解耦: 保留独立 RoPE 分支]
+    H --> I[内容 c + 位置 RoPE 拼接]
+    I --> J[Attention 计算]
+```
+
 ## 记忆要点
 
 - 核心机制：通过低秩压缩仅缓存极小的潜在向量，推理时上投影动态恢复，显存换计算。

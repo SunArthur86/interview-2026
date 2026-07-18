@@ -82,6 +82,36 @@ try {
 1. **混淆“可重入”与“可中断”**：synchronized 和 ReentrantLock 都是可重入的，但只有 ReentrantLock 支持可中断获取锁。
 2. **忘记 ReentrantLock 必须手动释放**：如果在业务逻辑中抛出异常且未在 `finally` 中释放，会导致其他线程永远无法获取锁。
 
+### 可重入锁 ReentrantLock 原理图
+
+```mermaid
+flowchart TD
+    Acq["线程获取锁"] --> TryAcq{"tryAcquire"}
+    TryAcq -->|"state==0"| CAS1["CAS: 0->1<br/>记录 owner 线程"]
+    TryAcq -->|"state>0 且 owner==当前线程"| Reentry["state+1<br/>重入计数"]
+
+    CAS1 --> Got["获取成功"]
+    Reentry --> Got
+
+    TryAcq -->|"state>0 且 owner!=当前线程"| Fail["获取失败"]
+    Fail --> Fair{"公平/非公平?"}
+    Fair -->|"公平"| HasPrev["检查队列有无前驱<br/>有则排队"]
+    Fair -->|"非公平(默认)"| TryCas["直接 CAS 抢锁<br/>抢不到再排队"]
+    HasPrev --> Enqueue["入 CLH 队列 park"]
+    TryCas --> Enqueue
+
+    Got --> Work["执行临界区(可嵌套 lock)"]
+    Work --> Rel["release: state-1"]
+    Rel --> Zero{"state==0?"}
+    Zero -->|"是"| Free["清 owner<br/>唤醒后继"]
+    Zero -->|"否"| Keep["保持持有<br/>等待下次 release"]
+
+    classDef ok fill:#e8f5e9,stroke:#2e7d32
+    classDef reentry fill:#e3f2fd,stroke:#1565c0
+    class CAS1,Reentry reentry
+    class Got,Free ok
+```
+
 ## 记忆要点
 
 - 定义：同一线程外层获锁后，内层仍能获取，不会阻塞自己。

@@ -112,6 +112,25 @@ public class FruitInfoUtil {
 | **能力** | 只能读取，无法修改结构 | 可生成新代码、修改 AST(需Lombok等Hack) |
 | **典型应用** | Spring DI, JUnit, Jackson | Lombok, MapStruct, Dagger |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[APT Annotation Processor] --> B[javac 编译阶段触发]
+    B --> C[扫描源码中的注解]
+    C --> D[Processor.process]
+    D --> E{是否生成新文件?}
+    E -->|是| F[生成 Java 源码/类文件]
+    E -->|否| G[仅校验/报错]
+    F --> H[参与下一轮编译]
+    H --> I[多轮 Round 循环]
+    I --> J[直到无新源文件]
+    K[典型场景] --> L["Lombok @Data 生成 getter"]
+    K --> M[ButterKnife/Dagger2]
+    K --> N[MapStruct Bean 映射]
+    O[优势] --> P[编译期检查<br/>零运行时开销]
+```
 ## 记忆要点
 
 - 两大分类：运行时靠反射解析，编译时靠Pluggable API生成代码。

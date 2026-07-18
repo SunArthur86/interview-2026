@@ -116,6 +116,23 @@ WHERE id = #{orderId} AND status = #{oldStatus} AND version = #{version}
    - 数据库层面的 `UPDATE` 结合乐观锁是第一道防线。
    - 第二道防线是利用分布式锁（Redis Lua脚本），状态变更前加锁 `order_lock:{orderId}`，处理完释放，确保串行化处理状态变更。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    INIT[待支付] -->|支付| PAID[已支付]
+    PAID -->|发货| SHIP[已发货]
+    SHIP -->|签收| DONE[已完成]
+    PAID -->|取消| CANC[已取消]
+    INIT -->|取消| CANC
+    SHIP -->|退款| REF[退款中]
+    EVT[非法事件] --> ERR[抛异常拒绝]
+    CONC[并发修改] --> LOCK[乐观锁版本号]
+    style DONE fill:#d4edda
+    style ERR fill:#ffcccc
+```
+
 ## 记忆要点
 
 - 核心定义法：用「状态+事件=下一状态」的合法转移Map表控制流转，非法抛异常。

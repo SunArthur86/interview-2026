@@ -109,6 +109,25 @@ err = conn.(*net.UDPConn).SetReadBuffer(10 << 20) // 10MB
 2. **伪首部作用**：计算校验和时加入伪首部是为了验证数据是否到达了正确的终点（IP和端口）。
 3. **URG 和 PSH 的区别**：URG 配合紧急指针处理带外数据，PSH 主要是通知接收方尽快推送到应用层。
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - 头部大小对比：UDP极其精简固定8字节，而TCP无选项时最小20字节

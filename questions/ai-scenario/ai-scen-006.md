@@ -98,6 +98,30 @@ def weighted_merge(bm25_results, dense_results, alpha=0.5):
 2. 如何解决混合检索带来的额外延迟问题？是否有做缓存或异步处理的策略？
 3. 对于多租户场景，如何保证混合检索在不同租户数据隔离下的公平性和性能？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[用户查询Query] --> B[Query意图分析与路由]
+    B --> C[Sparse稀疏检索路径]
+    B --> D[Dense稠密向量路径]
+    
+    subgraph S1 [BM25引擎]
+    C --> E1[Elasticsearch倒排索引<br/>IK中文分词器]
+    E1 --> F1[Top-50关键词匹配候选集<br/>精确匹配/错误码/专有名词]
+    end
+
+    subgraph S2 [Dense引擎]
+    D --> E2[Embedding模型向量化<br/>Query特征提取]
+    E2 --> F2[Milvus/Qdrant HNSW检索<br/>Top-50语义相似候选集]
+    end
+
+    F1 --> G["混合融合层 RRF倒数排名融合<br/>score = Σ 1/(k+rank_i), k=60"]
+    F2 --> G
+    G --> H["Cross-Encoder Reranker精排<br/>bge-reranker-v2-m3"]
+    H --> I[输出Top-5结果送给LLM]
+```
+
 ## 记忆要点
 
 - BM25负责精确匹配（ID/错误码），Dense负责语义理解（同义词/改写）

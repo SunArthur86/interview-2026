@@ -180,6 +180,37 @@ memory_points:
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：实体/关系怎么抽取？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph DataSources[多源数据采集]
+        A1["医学文献库"]
+        A2["临床结构化DB"]
+    end
+
+    subgraph Extraction[图谱构建流程]
+        B1["实体抽取(NER)<br/>药物/靶点/疾病"]
+        B2["关系抽取(RE)<br/>治疗/相互作用/引发"]
+        B3["融合对齐与人工校验<br/>证据等级/来源溯源"]
+    end
+
+    subgraph GraphRAG[图谱与RAG融合]
+        C1["医药知识图谱库<br/>Neo4j"]
+        C2["向量数据库<br/>文本Chunk特征"]
+        C3["GraphRAG检索<br/>多跳推理+语义召回"]
+    end
+
+    A1 --> B1
+    A2 --> B1
+    B1 --> B2
+    B2 --> B3
+    B3 --> C1
+    A1 --> C2
+    C1 --> C3
+    C2 --> C3
+```
+
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深

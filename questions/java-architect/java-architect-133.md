@@ -427,6 +427,38 @@ public class CedarAuthzService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——OPA 和 Spring Security 配合还是替代？
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph Biz[业务代码]
+        A[Java微服务调用 opa.check]
+    end
+    subgraph Engine[策略引擎模式]
+        B{部署模式选择}
+        C[In-process SDK 无网络开销]
+        D[独立服务 HTTP API]
+    end
+    subgraph Core[OPA 核心引擎]
+        E[输入: User + Action + Resource]
+        F[匹配 Rego 策略规则]
+        G[输出: Allow / Deny + 原因]
+    end
+    subgraph Mgmt[策略管理面]
+        H[Git 仓库存管 Rego 文件]
+        I[CI 流水线测试与编译]
+        J[Webhook 触发 Hot Reload]
+    end
+    A --> B
+    B --> C
+    B --> D
+    C --> E
+    D --> E
+    E --> F --> G
+    H --> I --> J
+    J -. 热加载策略 .-> C
+    J -. 推送策略 .-> D
+```
 
 ## 视频脚本
 

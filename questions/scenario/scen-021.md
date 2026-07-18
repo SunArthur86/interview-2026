@@ -83,6 +83,22 @@ memory_points:
 已有DB无额外组件：MySQL
 K8s生态：etcd
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    LOCK[获取锁] --> RD{选型}
+    RD -->|高并发| RS[Redis SET NX]
+    RD -->|强一致| ZK[ZooKeeper 临时节点]
+    RS --> WG[看门狗续期]
+    RS --> LK2[主从切换风险]
+    ZK --> REL[可靠 session级]
+    UNLOCK[释放锁] --> LUA[Lua+UUID 原子校验]
+    style ZK fill:#d4edda
+    style LK2 fill:#ffcccc
+```
+
 ## 记忆要点
 
 - 单机锁精髓：加锁设唯一ID（NX EX），解锁须Lua脚本校验防误删

@@ -473,6 +473,31 @@ spec:
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：训练和推理 GPU 怎么调度？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1[数据层]
+        A1[风控决策日志] --> A2[特征平台]
+        A3[标注数据Doccano] --> A2
+    end
+    subgraph S2[训练层]
+        B1[PyTorch/DeepSpeed] --> B2[Checkpoint管理]
+        A2 --> B1
+    end
+    subgraph S3[推理层]
+        C1[vLLM/PagedAttention] --> C2[INT8量化加速]
+        C2 --> C3[GPU多租户调度]
+    end
+    subgraph S4[监控评估层]
+        D1[在线推理监控] --> D2[数据漂移PSI告警]
+        D3[A/B测试评估] --> D4[触发模型重训]
+    end
+    B2 --> C1
+    C3 --> D1
+    D4 -.-> B1
+```
+
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深

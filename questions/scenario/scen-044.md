@@ -96,6 +96,23 @@ memory_points:
 - 向后兼容：老版本可读新数据
 - DDL变更：分多步（先加列不加约束 → 双写 → 切换 → 删旧列）
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    NEW[发布新版本] --> GW[网关/Feature Flag]
+    GW -->|5%| GRP1[灰度组1]
+    GW -->|25%| GRP2[灰度组2]
+    GW -->|100%| ALL[全量]
+    GRP1 --> MON[监控核心指标]
+    MON -->|异常| RB[自动回滚]
+    MON -->|正常| GRP2
+    DB[DB变更] --> COMP[向前向后兼容]
+    style RB fill:#ffcccc
+    style ALL fill:#d4edda
+```
+
 ## 记忆要点
 
 - 灰度策略：按流量比例或用户特征灰度，配合金丝雀(单实例)和蓝绿发布(新老并行)

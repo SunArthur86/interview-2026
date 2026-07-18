@@ -147,6 +147,27 @@ query → embedding → 在百万/亿级向量中找最相似的 top-k
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：HNSW 和 IVF 怎么选？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph 向量库选型决策
+        A(业务需求输入) --> B{核心约束权衡}
+        B -->|原型验证与中小规模| C[FAISS<br/>单机库无服务]
+        B -->|业务一体与千万级内| D[PGVector<br/>强事务一致性]
+        B -->|亿级海量文献| E[Milvus<br/>分布式专用库]
+        B -->|需要语义+全文检索| F[Elasticsearch<br/>混合检索 RRF融合]
+    end
+
+    C --> G[索引调参 HNSW/IVF]
+    D --> G
+    E --> G
+    F --> G
+
+    G --> H[预过滤与多租户隔离]
+    H --> I[量化压缩 PQ/SQ]
+```
+
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深

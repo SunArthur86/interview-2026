@@ -105,6 +105,24 @@ public class OuterClass {
 | **可定义静态成员** | 是 | 否 (JDK16+) | 否 | 否 |
 | **可见性** | 可设 public/private | 可设 public/private | 仅方法内 | 仅定义处 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java 内部类] --> B[成员内部类<br/>Member Inner]
+    A --> C[静态内部类<br/>Static Nested]
+    A --> D[局部内部类<br/>Local Inner]
+    A --> E[匿名内部类<br/>Anonymous]
+    B --> B1[持有外部类引用<br/>可访问外部成员]
+    C --> C1[不持有外部引用<br/>HashMap.Node 用此]
+    D --> D1[定义在方法内<br/>作用域局部]
+    E --> E1[实现接口或继承类<br/>回调/事件监听]
+    E --> E2[Lambda 简化]
+    F[典型应用] --> G[Builder 模式]
+    F --> H[HashMap Node 静态内部]
+    F --> I[回调函数]
+```
 ## 记忆要点
 
 - 四种类型：静态、成员、局部、匿名；口诀「静成局匿」对应不同作用域。

@@ -112,6 +112,22 @@ class MLA_Compute:
         return scores
 ```
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[KV Cache 优化] --> B[MQA 共享一组 KV]
+    A --> C[GQA 分组共享 KV]
+    A --> D[MLA 低秩压缩]
+    B --> B1[物理减少 KV 头]
+    C --> C1[分组折中]
+    D --> D1[数学低秩分解]
+    D1 --> D2[缓存维度极小]
+    D2 --> E[压缩比最高]
+    C1 --> F[平衡效果]
+    E --> G[DeepSeek 采用]
+```
+
 ## 记忆要点
 
 - MLA 核心：对全量 KV 进行数学低秩分解，推理时将矩阵吸收进 Q，大幅省显存。

@@ -114,6 +114,24 @@ public class SnowflakeIdGenerator {
 | **运维** | 需重启应用升级 | 可独立升级，对应用透明 |
 | **适用场景** | 高性能、微服务架构 | 异构语言、旧系统改造 |
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    GROW[订单日增千万] --> TH{超阈值?}
+    TH -->|单表千万/单库百G| SH[按user_id分片]
+    SH --> SH1[(分片1)]
+    SH --> SH2[(分片2)]
+    SH --> SHN[(分片N)]
+    HOT[热数据] --> MY[(MySQL)]
+    COLD[冷数据] --> ARC[归档存储]
+    SH --> AGG[聚合统计困难]
+    AGG --> DW[(数仓 离线汇总)]
+    style SH fill:#d4edda
+    style AGG fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 拆分阈值：因为单表超1000万或文件超100G引发深层IO瓶颈，所以需分片

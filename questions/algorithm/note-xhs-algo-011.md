@@ -247,6 +247,20 @@ public ListNode reverseKGroup(ListNode head, int k) {
 
 **收尾：** 这块我踩过坑——要不要深入聊：递归和迭代哪种更好？各有什么优缺点？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Start([开始: head传入]) --> Init["初始化<br/>prev=null, curr=head"]
+    Init --> Loop{"curr != null ?"}
+    Loop -- "是" --> SaveNext["1. 暂存下一个节点<br/>next = curr.next"]
+    SaveNext --> Reverse["2. 翻转指针<br/>curr.next = prev"]
+    Reverse --> MovePrev["3. 移动prev<br/>prev = curr"]
+    MovePrev --> MoveCurr["4. 移动curr<br/>curr = next"]
+    MoveCurr --> Loop
+    Loop -- "否" --> End(["结束: 返回 prev"])
+```
+
 ## 视频脚本
 
 > 预计时长：1 分 30 秒 | 由浅入深

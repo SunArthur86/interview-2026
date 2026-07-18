@@ -327,6 +327,32 @@ def reorderList_recursive(head):
 | 易错点 | 快慢指针终止条件、断开前后链表、合并时暂存 next |
 | 延伸 | 这题是「快慢指针」「反转链表」「合并链表」三个经典模板的组合 |
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Start([原始单链表]) --> Step1
+
+    subgraph Step1Group[Step 1: 快慢指针找中点]
+        Step1["slow走1步, fast走2步"] --> FindMid["slow停留在前半段尾部"]
+    end
+
+    FindMid --> Split["从中点处断开链表"]
+    Split --> Step2
+
+    subgraph Step2Group[Step 2: 反转后半段]
+        Step2["迭代反转指针指向"] --> Reversed["得到反转后的后半段"]
+    end
+
+    Reversed --> Step3
+
+    subgraph Step3Group[Step 3: 交错合并]
+        Step3["双指针交替连接"] --> Result["L0 -> Ln -> L1..."]
+    end
+
+    Result --> End([重排完成])
+```
+
 ## 记忆要点
 
 - 三步走口诀：找中点、转后半、交错合并。

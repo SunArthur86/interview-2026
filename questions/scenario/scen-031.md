@@ -89,6 +89,24 @@ memory_points:
 - 大多数场景用最终一致即可
 - 幂等是分布式事务的基础
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TX[分布式事务] --> CH{一致性要求?}
+    CH -->|强一致| TP[2PC]
+    CH -->|高性能侵入| TCC[Try-Confirm-Cancel]
+    CH -->|长流程| SG[Saga 正向+补偿]
+    CH -->|通用兜底| LMT[本地消息表]
+    TP --> BLK[阻塞 性能差]
+    TCC --> BUS[业务侵入]
+    SG --> FIN[最终一致]
+    LMT --> FIN
+    style FIN fill:#d4edda
+    style BLK fill:#ffcccc
+```
+
 ## 记忆要点
 
 - 方案口诀：2PC强一致阻塞性能差，TCC无锁高性能侵入大，Saga长事务需补偿，本地消息表简单最终一致

@@ -100,6 +100,28 @@ Redis 的 LRU 是**近似 LRU**：
 - **主从复制的过期**：从节点不主动删过期 key（等主节点 DEL 命令同步），导致从节点可能读到"过期但未删"的数据——读到后惰性删除
 - **Redis 7.0** 的多线程 I/O 对过期策略无影响（过期逻辑仍在主线程）
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Client[读写命令] --> Redis[(Redis)]
+    Redis --> Exp[过期策略组合]
+    Redis --> Evict[内存淘汰策略]
+
+    subgraph Exp [过期删除策略]
+        D1["定期删除<br/>每100ms抽样"] -->|遗漏兜底| D2["惰性删除<br/>访问时校验"]
+    end
+
+    subgraph Evict [内存淘汰策略]
+        E1["noeviction<br/>默认报错"]
+        E2["allkeys-lru<br/>近似采样保护活跃会话"]
+        E3["volatile-lru<br/>仅踢带TTL的Key"]
+    end
+
+    D2 -.->|内存依然满| Evict
+    E2 -->|"采样maxmemory-samples<br/>默认取5选最久未用"| Clear[腾出空间]
+```
+
 ## 记忆要点
 
 - 过期不立刻删：组合使用惰性删除(访问才查)与定期删除(100ms抽样)，避免阻塞主线程

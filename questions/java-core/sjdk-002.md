@@ -185,6 +185,24 @@ class NewStyle {
 - **Record 解构依赖组件顺序**：`Point(int x, int y)` 的 x、y 严格对应 Record 声明顺序，写反了不会报错但语义错误。
 - **sealed 类的 permits 列表要完整**：sealed 类必须列出所有允许的实现类，且这些类必须 `final` 或 `sealed` 或 `non-sealed`。漏一个会导致编译失败。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Pattern Matching] --> B["instanceof 增强"]
+    A --> C[switch 模式匹配]
+    D["instanceof"] --> E["if obj instanceof String s<br/>直接绑定变量 s"]
+    E --> F[流敏感类型缩窄<br/>Flow-Sensitive]
+    E --> G["&& 内进一步缩窄"]
+    C --> H["case Integer i ->"]
+    C --> I["case String s when s.length > 5"]
+    C --> J[case null 处理 null<br/>不再 NPE]
+    C --> K[配合密封类 穷尽检查]
+    L[收益] --> M[减少强制转换]
+    L --> N[代码更安全 更简洁]
+    L --> O[函数式风格增强]
+```
 ## 记忆要点
 
 - 核心目的：消除冗余的类型检查与强转，新instanceof直接绑定局部变量

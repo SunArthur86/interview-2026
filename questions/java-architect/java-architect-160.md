@@ -347,6 +347,29 @@ RAG 质量问题的根因定位链路：
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——cross-encoder 为什么比双塔准？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[用户Query] --> B[Embedding语义向量化]
+    A --> C[BM25关键词分词]
+    subgraph S1 [混合召回层]
+        B --> D[向量双塔召回Top-50]
+        C --> E[关键词倒排召回Top-50]
+        D --> F["RRF融合公式排序<br/>score = Σ 1/(60+rank)"]
+        E --> F
+    end
+    subgraph S2 [Cross-Encoder重排层]
+        F --> G[拼接Query与Doc过Transformer<br/>捕获细粒度交互特征]
+        G --> H[精准重排输出Top-5]
+    end
+    subgraph S3 [生成与置信度防线]
+        H --> I[LLM大模型生成回答与引用]
+        I --> J[置信度计算: logit熵+引用覆盖率]
+        J -- 置信度小于0.6 --> K[触发拒答并转人工客服]
+        J -- 置信度大于0.6 --> L[输出最终引用答案]
+    end
+```
 
 ## 视频脚本
 

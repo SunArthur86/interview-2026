@@ -111,6 +111,25 @@ RRF_score(d) = Σ 1 / (k + rank_i(d))   # k 通常取 60
 - **混合检索权重**：除了 RRF，还可以加权（`α·BM25 + (1-α)·Vector`），α 按场景调
 - **多跳查询**：复杂问题（"A 公司的 CEO 的母校在哪"）需要拆成子问题分别检索，即 Agentic RAG
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["用户 Query"] --> B["Query Rewrite<br/>查询改写"]
+    B --> C["混合检索"]
+    subgraph C ["混合检索"]
+        C1["BM25检索<br/>精确词面匹配"]
+        C2["向量检索<br/>Bi-encoder 语义匹配"]
+    end
+    C1 --> D["RRF 融合排名<br/>Reciprocal Rank Fusion"]
+    C2 --> D
+    D --> E["召回 Top-50<br/>保 Recall"]
+    E --> F["Rerank 精排<br/>Cross-encoder"]
+    F --> G["动态 Top-K<br/>阈值截断保 Precision"]
+    G --> H["LLM 上下文"]
+    H --> I["大模型生成回答"]
+```
+
 ## 记忆要点
 
 - RAG四件套：Query Rewrite改写、混合检索(BM25+向量)、Rerank精排、动态Top-K

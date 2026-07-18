@@ -331,6 +331,23 @@ public class JobIdempotentService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——分片策略怎么选？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[XXL-Job调度中心] -->|下发分片总数N| B(执行器集群)
+    subgraph C [分片抢占与执行流程]
+        B --> D[获取本地shardIndex]
+        D --> E{"Redis SETNX抢占锁<br/>lock:job:shard"}
+        E -- "抢锁成功" --> F[SQL分片查询 MOD/N]
+        E -- "抢锁失败" --> G[跳过本次执行]
+        F --> H[游标分批处理+Sleep削峰]
+        H --> I{业务层CAS幂等控制}
+        I --> J[看门狗定时续期租约]
+        J --> K[任务执行完成释放锁]
+    end
+    K --> L[(DB多节点并行更新)]
+```
 
 ## 视频脚本
 

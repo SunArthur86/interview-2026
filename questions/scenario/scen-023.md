@@ -106,6 +106,21 @@ if (sendResult.getSendStatus() == SendStatus.SEND_OK) {
 - 需要前端配合展示排队状态
 - 积压时间过长影响用户体验
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    U[用户秒杀请求] --> GW[网关]
+    GW --> PROD[Producer 快速入队]
+    PROD --> MQ[(消息队列 缓冲池)]
+    MQ --> CONS[Consumer 限速消费]
+    CONS --> DB[(数据库 写订单)]
+    U --> QUEUE[返回排队中]
+    CONS --> NOTIFY[通知结果]
+    style MQ fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 削峰本质：接入层令牌桶限流，MQ持久化缓冲，消费端按最大处理能力平滑拉取

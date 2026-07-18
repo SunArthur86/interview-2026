@@ -82,6 +82,20 @@ String val = lruCache.get("key1"); // 访问后，key1 会移至链表尾部
 2. **与 HashMap 性能对比**：LinkedHashMap 比 HashMap 慢吗？为什么？（答案：稍慢，因为需要维护双向链表指针，空间开销也略大，增加了 `before` 和 `after` 指针）。
 3. **线程安全性**：LinkedHashMap 是线程安全的吗？如何实现并发 LRU？（答案：非线程安全；并发场景可用 `Collections.synchronizedMap` 或 `ConcurrentHashMap` 配合双重检查锁，或使用 Caffeine/Guava Cache）。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A["LinkedHashMap<br/>HashMap + 双向链表"] --> B[数组桶 table]
+    B --> C[桶内节点 Entry]
+    C --> D{维护顺序类型?}
+    D -->|accessOrder=false| E[插入顺序<br/>head ↔ tail]
+    D -->|accessOrder=true| F[访问顺序 LRU<br/>访问后移到尾]
+    E --> G[遍历时按链表顺序输出]
+    F --> G
+    F --> H[可结合 removeEldestEntry<br/>实现 LRU 缓存]
+```
 ## 记忆要点
 
 - 底层结构：HashMap子类，额外维护双向链表记录数据顺序

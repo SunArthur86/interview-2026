@@ -222,6 +222,34 @@ Feed 库分片：
 
 **收尾：** 分片键怎么选？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1[路由层]
+        A[ShardingSphere解析SQL]
+        B{product_id Hash取模}
+    end
+    subgraph S2[物理分库 4个]
+        C1[DB0]
+        C2[DB1]
+        C3[DB2]
+        C4[DB3]
+    end
+    subgraph S3[异构与扩容保障]
+        D1[ES异构索引<br/>处理跨片查询]
+        D2[双写新老库<br/>不停机扩容机制]
+    end
+    A --> B
+    B -->|路由规则| C1
+    B -->|路由规则| C2
+    B -->|路由规则| C3
+    B -->|路由规则| C4
+    C1 -.->|分页/非主键查询兜底| D1
+    C2 -.->|分页/非主键查询兜底| D1
+    C3 -.->|4库扩32库| D2
+    C4 -.->|4库扩32库| D2
+```
 
 ## 视频脚本
 

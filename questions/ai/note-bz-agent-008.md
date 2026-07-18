@@ -205,6 +205,20 @@ response = client.chat.completions.create(
 2. **强调"交织"**：核心是推理与行动**交替**，而非串接——每步行动都基于上一步的观察
 3. **提"现代内化"**：现代 Agent 框架的 ReAct 已内化到 function calling，无需手写 Thought 解析
 
+## 流程图
+
+```mermaid
+flowchart TD
+    U["用户提问"] --> T["Thought: 推理当前状态"]
+    T --> A["Action: 选择并调用外部工具"]
+    A --> O["Observation: 获取工具返回结果"]
+    O --> F{"是否得到最终答案?"}
+    F -->|"否"| T
+    F -->|"是"| Ans["Finish: 输出回答"]
+    O -.->|"示例: 结果不满意"| P["切换策略/修改Query"]
+    P --> T
+```
+
 ## 记忆要点
 
 - 核心定义：ReAct = Reasoning + Acting，让大模型交替进行推理和行动

@@ -95,6 +95,27 @@ GPU 3:  [W3] [G3] [Os3]
 2. ZeRO-Offload 是如何利用CPU内存和NVLink/PCIe带宽的？
 3. 相比FSDP (Fully Sharded Data Parallel)，ZeRO有哪些异同？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[大模型训练显存优化] --> B[ZeRO Stage 1 切优化器状态]
+    A --> C[ZeRO Stage 2 再切梯度]
+    A --> D[ZeRO Stage 3 再切模型参数]
+
+    B --> E[模型 < 7B]
+    C --> F[模型 7B-70B]
+    D --> G[模型 > 70B 或多卡训练]
+
+    E --> H[约省 4 倍显存]
+    F --> I[约省 8 倍显存]
+    G --> J[省 N 倍显存 依赖卡数]
+
+    J --> K[动态 All-Gather 收集参数]
+    K --> L[通信代价增加 约为Stage2的1.5倍]
+    L --> M[实战: 可开启 CPU Offload 或 通信 overlap]
+```
+
 ## 记忆要点
 
 - ZeRO三级切分：Stage1切状态，Stage2切梯度，Stage3切参数

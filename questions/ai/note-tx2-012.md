@@ -190,6 +190,23 @@ results = collection.search(
 - **多向量检索**：ColBERT 风格（每个 token 一个向量），Milvus 2.4+ 支持
 - **向量库 + 关系库联动**：向量库做召回，Postgres 存结构化数据，按 id 关联
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph "向量库方案对比与选型"
+      direction TD
+      A["业务场景判断"] --> B{"核心需求评估"}
+      B -- "算法实验/单机离线" --> C["FAISS<br/>极致单机性能/无高可用"]
+      B -- "原型开发/本地知识库" --> D["Chroma<br/>轻量易用/规模上限低"]
+      B -- "大规模生产/亿级向量" --> E["Milvus<br/>分布式/多副本/高可用"]
+      E --> F{"索引选择权衡"}
+      F -- "要求高召回/内存充足" --> G["HNSW图索引"]
+      F -- "内存敏感/超大集群" --> H["IVF+PQ索引"]
+      F -- "超大规模磁盘存储" --> I["DiskANN索引"]
+    end
+```
+
 ## 记忆要点
 
 - 定位对比：FAISS是单机算法库，Chroma是轻量数据库，Milvus是分布式云原生数据库

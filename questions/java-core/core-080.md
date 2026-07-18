@@ -106,6 +106,27 @@ public class BizCheckedException extends Exception {
 - 保留异常链：抛出自定义业务异常时必须传入原异常 e，避免吞掉底层 Root Cause 排查线索。
 - 常用 API：getMessage() 获取简述，而 printStackTrace() 常用于直接打印详细调用栈（生产环境建议用日志框架替代）。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Throwable] --> B[Error 错误]
+    A --> C[Exception 异常]
+    B --> B1[OutOfMemoryError]
+    B --> B2[StackOverflowError]
+    B --> B3[VirtualMachineError]
+    C --> D[受检异常 CheckedException]
+    C --> E[非受检 RuntimeException]
+    D --> D1[IOException]
+    D --> D2[SQLException]
+    D --> D3[ClassNotFoundException]
+    E --> E1[NullPointerException]
+    E --> E2[IndexOutOfBoundsException]
+    E --> E3[ClassCastException]
+    D -.必须 try-catch/throws.-> F[编译期检查]
+    E -.可try-catch.-> G[运行期抛出]
+```
 ## 记忆要点
 
 - 继承体系：Throwable是顶级父类，仅有Error和Exception两个核心子类

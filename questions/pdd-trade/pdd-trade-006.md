@@ -182,6 +182,28 @@ Session 降级是高危场景，必须有测试和预案：
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[客户端输入账号密码] --> B(风控引擎: 校验设备/频次/异地)
+    B -->|安全| C(网关: 解析 HttpOnly Cookie 获取 SessionId)
+    C -->|无 SessionId| D[认证中心: 账号密码校验]
+    D --> E[生成 SessionId 并写入 Redis]
+    E --> F[下发 Set-Cookie: SessionId 返回客户端]
+    C -->|携带 SessionId| G[认证中心: 查询 Redis 校验有效性]
+    G -->|Session不存在或失效| D
+    G -->|Session有效| H[授权中心: 查 RBAC 用户权限表]
+    H --> I[请求下游业务接口]
+    subgraph Redis 集群
+        J[Session KV 存储空间]
+        K[踢人/封号黑名单 Set]
+    end
+    E -.-> J
+    G -.-> J
+    G -.-> K
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

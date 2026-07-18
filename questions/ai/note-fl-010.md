@@ -100,6 +100,22 @@ EXPIRE session:{user_id}:{conv_id} 1800   # 30 min
 - **大 Key 问题**：单个 Hash/Set 元素过多（>10万）会阻塞 Redis（操作是 O(N)），需要拆分
 - **Redis 7.0 引入 Stream**：比 List 更适合消息队列，支持消费组和 ACK
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Client[Agent服务] -->|读写状态| Redis[(Redis)]
+    subgraph S1 [Agent混合状态存储选型]
+        H["Hash<br/>扁平控制字段"] -->|"HSET/O(1)<br/>单字段更新省带宽"| K1["session:id"]
+        L["List/JSON String<br/>嵌套消息历史"] -->|"APPEND/整体读出"| K2["session:id:messages"]
+    end
+    Redis --> Z1["ZSet<br/>延时队列/时间戳排序"]
+    Redis --> S2["Set<br/>事件去重"]
+    Z1 --> ZD["底层双结构<br/>SkipList + HashTable"]
+    H --> HD["底层动态切换<br/>ziplist -> hashtable"]
+    K1 -.->|通过session_id关联| K2
+```
+
 ## 记忆要点
 
 - Agent状态首选Hash：支持字段级update省带宽，整体设TTL，优于String频繁全量读写

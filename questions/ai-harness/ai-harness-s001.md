@@ -87,6 +87,16 @@ outputs = llm.generate(["Hello, my name is", "The future of AI is"], sampling_pa
 3. **vLLM 如何处理 Prefix Caching 的失效？**
    - 引用计数管理，当所有引用该 Prefix 的请求结束后，释放对应的物理 Block。
 
+```mermaid
+flowchart TD
+    Request[推理请求] --> CB[Continuous Batching<br/>动态批处理]
+    CB --> PA[PagedAttention<br/>KV分块管理]
+    PA --> Block[(Block Size=16)]
+    Block --> PC[Prefix Caching<br/>复用System Prompt]
+    PC --> GPU[显存利用率96%]
+    GPU --> Speed[比HF快14-24倍]
+```
+
 ## 记忆要点
 
 - PagedAttention：KV Cache 分块管理，消除显存碎片，利用率从 60% 提至 96%。

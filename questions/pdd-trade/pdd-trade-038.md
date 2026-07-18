@@ -234,6 +234,34 @@ SLA：中台 RT < 50ms，可用性 99.99%
 
 **收尾：** 您想继续往深里聊吗——比如「中台和业务边界？」
 
+## 流程图
+
+```mermaid
+flowchart TD
+    B1[商品详情页业务] --> SDK[统一接入SDK与API]
+    B2[营销活动页业务] --> SDK
+    SDK --> AB[AB正交流量分桶路由]
+    AB --> Cap[AI能力服务层]
+
+    subgraph Platform [智能交易中台]
+        Cap --> M[召回/排序模型服务]
+        Cap --> S[搜索引擎能力]
+        Cap --> R[风控模型服务]
+
+        M --> F[特征平台API]
+
+        subgraph 数据与特征层
+            F --> RT[(秒级特征: Redis/Flink)]
+            F --> Min[(分钟级特征: 预聚合)]
+            F --> T1[(T+1特征: Spark/HBase)]
+        end
+
+        Cap --> Eval[离线评测与指标监控]
+    end
+
+    Eval -.->|模型迭代反馈| M
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

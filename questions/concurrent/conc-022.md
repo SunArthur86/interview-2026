@@ -93,6 +93,37 @@ public void accessLimitedResource() throws InterruptedException {
 3.  **`acquire(int permits)` 的应用场景？**
     - 用于处理批量资源的分配。例如数据库分库分表场景，一次查询可能需要同时获取 3 个分区的连接，此时可以一次性申请 3 个许可，避免部分成功导致的复杂回滚逻辑。
 
+### Semaphore 信号量工作流程
+
+```mermaid
+flowchart TD
+    Init(["初始化 permits=N"]) --> State["AQS state = N"]
+
+    Acq["线程 acquire()"] --> CAS1{"CAS: state>0?"}
+    CAS1 -->|"是"| Dec["state-1<br/>获取许可, 执行"]
+    CAS1 -->|"否"| Block["入队阻塞等待"]
+
+    Block --> Park["LockSupport.park"]
+    Dec --> Work["执行临界区"]
+
+    Rel["线程 release()"] --> Inc["state+1"]
+    Inc --> Wake["唤醒队首等待线程"]
+    Wake --> Retry["重试 CAS 获取"]
+
+    subgraph Scene["典型场景"]
+        S1["限流: 限制并发数"]
+        S2["资源池: 数据库连接池"]
+        S3["死锁避免: 资源配额控制"]
+    end
+
+    Dec -. 释放后 .-> Rel
+
+    classDef ok fill:#e8f5e9,stroke:#2e7d32
+    classDef wait fill:#fff3e0,stroke:#ef6c00
+    class Dec,Inc,Wake ok
+    class Block,Park wait
+```
+
 ## 记忆要点
 
 - 四个必要条件：互斥、请求保持、不剥夺、循环等待（口诀：请勿剥夺循环）

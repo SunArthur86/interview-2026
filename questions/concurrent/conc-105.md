@@ -78,6 +78,35 @@ public void put(String key, String value) {
 **7. 适用场景**
 适用于对共享数据的读操作频率远高于写操作的场景（如配置缓存、数据库数据读取）。
 
+### 读写锁状态转换图
+
+```mermaid
+flowchart LR
+    Free["空闲 state=0"] -->|"获取读锁"| Read["读锁持有<br/>state 高16位++"]
+    Free -->|"获取写锁"| Write["写锁持有<br/>state 低16位=1"]
+
+    Read -->|"更多读锁"| ReadMore["多读共享<br/>并发无阻塞"]
+    Read -->|"释放完"| Free
+
+    Write -->|"重入"| WriteRe["写锁可重入<br/>独占"]
+    Write -->|"释放"| Free
+
+    Read -->|"请求写锁"| WaitW["写线程排队等待<br/>避免写饥饿"]
+    Write -->|"请求读锁"| WaitR["读线程排队等待"]
+
+    WaitW -. 读全释放 .-> Write
+    WaitR -. 写释放 .-> Read
+
+    Apply["适用: 读多写少<br/>缓存/配置/元数据"]
+
+    classDef read fill:#e3f2fd,stroke:#1565c0
+    classDef write fill:#fce4ec,stroke:#c62828
+    classDef wait fill:#fff3e0,stroke:#ef6c00
+    class Read,ReadMore read
+    class Write,WriteRe write
+    class WaitW,WaitR wait
+```
+
 ## 记忆要点
 
 - 核心规则：读读共享（不互斥），读写互斥，写写互斥

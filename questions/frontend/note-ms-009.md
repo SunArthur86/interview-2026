@@ -124,6 +124,18 @@ function transition(task: Task, next: TaskStatus) {
 5. **状态机非法迁移防护** — 必须用迁移表约束合法跳转（如 succeeded 不能回到 running），防止 bug 导致状态混乱破坏数据一致性
 6. **Checkpoint 本地优先** — AI 桌面产品强调隐私和离线，Checkpoint 以本地磁盘为主，云端备份为辅且需用户主动触发，避免中间状态含敏感数据自动上云
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Task["聚合根 Task<br/>状态机调度"] -->|1:产生| Artifact["实体 Artifact<br/>产物管理"]
+    Task -->|2:携带| Context["字段 Context<br/>输入素材引用"]
+    Task -->|3:定期快照| Checkpoint["实体 Checkpoint<br/>断点续传恢复"]
+    Task -->|4:记录痕迹| Log["实体 Log<br/>审计与故障定位"]
+    Artifact -.->|多任务共享| SharedTask["其他 Task 引用"]
+    Checkpoint -.->|崩溃恢复| Task
+```
+
 ## 记忆要点
 
 - 核心对象五大件：Task(任务) + Artifact(产物) + Context(上下文) + Checkpoint(检查点) + Log(日志)

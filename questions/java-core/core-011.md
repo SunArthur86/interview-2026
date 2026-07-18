@@ -87,6 +87,24 @@ public class PerformanceProxy implements InvocationHandler {
 | **性能** | 生成代理快，执行稍慢（JDK8后优化显著） | 生成代理慢，执行快（适合单例） |
 | **依赖** | JDK 原生支持 | 需引入第三方库（Spring Core 已包含） |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[代理模式 Proxy] --> B[客户端 Client]
+    B --> C[代理对象 Proxy]
+    C --> D[真实对象 RealSubject]
+    C --> E[前置增强]
+    C --> F[后置增强]
+    E & F --> G[不改变原代码<br/>扩展功能]
+    H[分类] --> I[静态代理<br/>编译期生成]
+    H --> J[JDK 动态代理<br/>接口 + InvocationHandler]
+    H --> K[CGLIB 动态代理<br/>子类继承 + MethodInterceptor]
+    L[典型应用] --> M[Spring AOP 事务/日志]
+    L --> N[MyBatis Mapper]
+    L --> O[RPC 远程调用 Stub]
+```
 ## 记忆要点
 
 - 核心价值：通过代理实现控制访问与功能增强。

@@ -100,6 +100,23 @@ public class ReflectionDemo {
 2. **泛型反射**：如何获取 `List<String>` 中的 `String` 类型？（通过 `ParameterizedType.getActualTypeArguments()`）。
 3. **序列化原理**：FastJSON/Jackson 是如何通过反射解析 JSON 的？
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[反射机制] --> B[运行时获取类信息]
+    A --> C[动态创建对象/调用方法]
+    D[获取 Class 的 3 种方式] --> E["类名.class"]
+    D --> F["对象.getClass"]
+    D --> G["Class.forName 全限定名"]
+    B --> H[Field/Method/Constructor]
+    C --> I[setAccessible true<br/>突破访问控制]
+    J[应用场景] --> K[Spring IoC<br/>Bean 实例化]
+    J --> L[ORM 框架<br/>映射字段]
+    J --> M[动态代理 AOP]
+    N[性能注意] --> O[比直接调用慢<br/>可缓存 Method]
+```
 ## 记忆要点
 
 - 因为框架需解耦，所以利用反射运行时动态创建和注入对象

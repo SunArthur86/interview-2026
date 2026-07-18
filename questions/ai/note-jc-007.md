@@ -169,6 +169,27 @@ AdamW 修正：weight decay 直接作用在参数上，不和梯度耦合
 - **Lookahead**：Adam 的 wrapper，用"快慢两个优化器"提升泛化
 - **Sophia / Lion**：更新的优化器，声称比 Adam 更适合 LLM
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["参数 θ<br/>(Weights)"] --> B["前向传播计算Loss"]
+    B --> C["反向传播计算梯度 g_t"]
+    C --> D["指数移动平均 EMA"]
+    D --> E["一阶矩 m_t<br/>(方向/动量, β1=0.9)"]
+    D --> F["二阶矩 v_t<br/>(幅度/梯度平方, β2=0.95)"]
+    E --> G["偏差修正<br/>m_hat = m / (1-β1^t)"]
+    F --> H["偏差修正<br/>v_hat = v / (1-β2^t)"]
+    G --> I["计算自适应更新量<br/>Δθ = lr * m_hat / √v_hat"]
+    H --> I
+    I --> J["更新参数<br/>θ = θ - Δθ"]
+    J --> A
+
+    K["初期训练步数较小<br/>导致严重低估"] --> G
+    K --> H
+    L["LLM Warmup<br/>防初期发散"] --> A
+```
+
 ## 记忆要点
 
 - 核心本质：Adam = Momentum(一阶动量) + RMSProp(二阶矩)

@@ -116,6 +116,27 @@ def extract_chart_data(image_path):
 1. **版面分析缺失**：直接OCR会导致“左列标题对应右列数据”的错乱，必须先做版面分析。
 2. **过度依赖LLM结构化输出**：LLM输出的JSON可能不规范（如缺少引号、多出逗号），必须有强健的代码做解析和异常捕获，防止程序崩溃。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Data_Input[数据输入层]
+        A1[文档图像输入] --> A2[图像预处理/超分去噪]
+    end
+    subgraph Image_Proc[图像处理层]
+        B1[版面与表格分析] --> B2[OCR文字识别提取]
+        B2 --> B3[图表数据提取解析]
+    end
+    subgraph Multi_Modal[多模态理解层]
+        C1[MLLM大模型推理] --> C2[图文关联与语义问答]
+    end
+    A2 --> B1
+    A2 --> C1
+    B3 --> C1
+    C2 --> D[置信度校验与多模型投票]
+    D --> E[输出结构化JSON/CSV数据]
+```
+
 ## 记忆要点
 
 - 架构分层：图像处理(OCR/表格) → 多模态理解(MLLM) → 知识增强(RAG)。

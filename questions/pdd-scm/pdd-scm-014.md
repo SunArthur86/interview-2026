@@ -199,6 +199,42 @@ ZGC 适合"超大堆 + 超低延迟"场景（堆 > 32GB、停顿 < 10ms），供
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 内存分代
+        A[Eden 新生代分配]
+        B[Survivor 存活区]
+        C[Old 老年代]
+        D[Humongous 大对象区]
+    end
+
+    subgraph G1 垃圾回收
+        E[Young GC 新生代回收]
+        F[并发标记 IHOP阈值触发]
+        G[Mixed GC 增量回收老年代]
+        H[Full GC STW灾难退化]
+    end
+
+    subgraph 调优与监控
+        I[MaxGCPauseMillis=200ms 软目标]
+        J[GC 日志 jstat 监控]
+        K[Region 16M/32M 调整]
+    end
+
+    A -->|Minor GC| B
+    B -->|年龄达15晋升| C
+    A -->|超Region一半| D
+    C -->|占用达45%| F
+    F -->|回收价值最高| G
+    G -->|回收跟不上| H
+    D -->|拖慢回收| G
+    G --> I
+    E --> J
+    D --> K
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

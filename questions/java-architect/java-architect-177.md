@@ -386,6 +386,21 @@ public class GroupMessageService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——BitMap 怎么存？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A1["发送群消息"] --> B1{"群成员数量"}
+    B1 -- "小群(<500人)" --> C1["写扩散: 推送每人Inbox"]
+    B1 -- "大群(>=500人)" --> C2["读扩散: 仅存一份群消息表"]
+    C1 --> D1[("Redis INCR 生成递增 Seq")]
+    C2 --> D1
+    D1 --> E1["多端在线长连接推送"]
+    D1 --> E2["离线消息表存储"]
+    E2 --> E3["上线补发 seq > lastSeq"]
+    F1["用户点击阅读"] --> G1[("Redis BitMap<br/>conv:read:convId<br/>SETBIT 1")]
+    G1 --> H1["BitCount 统计未读数"]
+```
 
 ## 视频脚本
 

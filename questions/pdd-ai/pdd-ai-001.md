@@ -185,6 +185,23 @@ public void onConfig(PoolConfig cfg) {
 
 **收尾：** 您想继续往深里聊吗——比如「线程池怎么设置线程数？」
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[AI推理请求接入] --> B{线程池核心线程}
+    B -- 有空闲 --> D[执行任务]
+    B -- 无空闲 --> E[有界任务队列]
+    E -- 未满 --> F[任务排队等待]
+    E -- 已满 --> G{拒绝策略触发}
+    G --> H[CallerRunsPolicy反压]
+    D --> I[发起gRPC调用]
+    I --> J[Triton/vLLM引擎]
+    J --> K[Continuous Batching拼批]
+    K --> L[GPU资源执行推理]
+    L --> M[返回响应结果]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

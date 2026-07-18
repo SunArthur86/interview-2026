@@ -78,6 +78,29 @@ def weighted_vote(agent_votes, agent_weights):
 1. **误区：增加 Agent 数量一定能提高准确率**。根据“一致性悖论”，如果 Agent 的准确率低于 50%，增加数量反而会降低整体正确性。
 2. **误区：投票机制只看最终选项**。实际上，LLM 的推理过程更为重要，如果推理过程错误但选项碰巧正确，这种“蒙对”的情况应该被降权处理。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TB
+    Q["问题"] --> A1["Agent 1 回答"]
+    Q --> A2["Agent 2 回答"]
+    Q --> A3["Agent 3 回答"]
+    A1 --> Vote["多数投票"]
+    A2 --> Vote
+    A3 --> Vote
+    Vote --> Limit["投票不足场景"]
+    Limit --> Corr["相关性偏差<br/>同源训练致趋同"]
+    Limit --> Conf["置信度忽略<br/>少数正确被淹没"]
+    Limit --> Calib["未校准<br/>无法识别都错"]
+    Corr --> Add1["+ 多样性模型"]
+    Conf --> Add2["+ 置信度加权"]
+    Calib --> Add3["+ 外部验证工具"]
+    Add1 --> Robust["鲁棒聚合"]
+    Add2 --> Robust["鲁棒聚合"]
+    Add3 --> Robust["鲁棒聚合"]
+```
+
 ## 记忆要点
 
 - 核心缺陷：Agent 意见不独立，易产生同质化幻觉，投票只是数人头非看证据。

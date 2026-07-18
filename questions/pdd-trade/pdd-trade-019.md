@@ -146,6 +146,44 @@ Redis 存不下亿级用户的全量画像。亿级用户 × 每用户几 KB 画
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 数据源
+      A[用户行为日志]
+      B[订单交易记录]
+    end
+
+    subgraph 计算双轨架构
+      A --> C[实时Flink计算流]
+      B --> C
+      A --> D[离线Spark批处理]
+      B --> D
+    end
+
+    subgraph 存储分层
+      C --> E[Redis热缓存<br/>活跃用户RT<5ms]
+      D --> F[HBase冷存储<br/>亿级全量RT几十ms]
+      G[HBase RegionServer<br/>加盐防热点]
+      F --> G
+    end
+
+    subgraph 画像中台服务
+      E --> H[统一服务API<br/>ProfileService]
+      F --> H
+      H --> I[推荐系统]
+      H --> J[营销平台]
+      H --> K[风控系统]
+    end
+
+    subgraph 质量与评估
+      L[实时离线双跑对账] --> E
+      L --> F
+      M[A/B测试与准确率评估] --> H
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -111,6 +111,36 @@ def update_state_with_llm(user_input: str, current_state: BookingState) -> Booki
 - **指代消解**：处理“它”、“那个”等指代词，需结合实体链接技术将其映射到具体的槽位值上。
 - **省略恢复**：用户输入“
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 客户端交互
+        U[用户输入] --> N[NLU实体提取与指代消解]
+    end
+
+    subgraph 对话状态追踪 DST
+        N --> Update[更新对话状态]
+        Update --> Intent[当前意图]
+        Update --> Slots[槽位字典]
+        Update --> Topic[话题栈快照]
+    end
+
+    subgraph 上下文管理
+        Win[最近K轮完整对话] --> Summary[早期关键信息摘要]
+    end
+
+    Intent --> Check[缺槽检测]
+    Slots --> Check
+    Check -->|有缺失| Ask[单次关键信息追问与推荐]
+    Ask --> U
+    Check -->|无缺失| Task[执行任务并输出结果]
+    Task --> U
+
+    U -.->|语义相似度突降| Topic
+    Topic -.->|意图切换| Update
+```
+
 ## 记忆要点
 
 - 核心机制：DST（对话状态追踪），维护Intent、Slots、History、Topic Stack。

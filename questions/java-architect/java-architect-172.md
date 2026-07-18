@@ -291,6 +291,24 @@ public class ExperimentLogger {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——分流哈希为什么要带 layerId？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[用户请求] --> B[API网关<br/>携带 userId]
+    B --> C[配置中心<br/>Apollo/Nacos 实验配置]
+    C --> D[正交分层分流引擎]
+    subgraph 正交互斥模型
+        D --> E[Layer 1: UI层实验<br/>互斥域]
+        D --> F[Layer 2: 推荐层实验<br/>互斥域]
+        E --> G[hash userId+layerId % 100<br/>分桶命中]
+        F --> H[hash userId+layerId % 100<br/>分桶命中]
+    end
+    G --> I[实验组/对照组<br/>Header透传下游]
+    H --> I
+    I --> J[统计归因系统<br/>T检验p-value计算]
+    J --> K[SRM卡方检验<br/>样本比例异常监控]
+```
 
 ## 视频脚本
 

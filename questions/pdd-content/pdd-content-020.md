@@ -288,8 +288,32 @@ public class FeedFactory {
 
 **收尾：** 单例怎么实现？
 
+## 流程图
 
+```mermaid
+flowchart TD
+    A[内容审核请求] --> B[AuditStrategyFactory<br/>策略工厂自动收集]
+    B -- 根据类型路由 --> C{内容类型判断}
 
+    C -- 文本 --> D[TextAuditStrategy]
+    C -- 图片 --> E[ImageAuditStrategy]
+    C -- 视频 --> F[VideoAuditStrategy]
+    C -- 音频 --> G[AudioAuditStrategy]
+
+    D --> H[责任链审核流水线]
+    E --> H
+    F --> H
+    G --> H
+
+    subgraph Audit Chain
+        H --> I[规则引擎拦截]
+        I -- 通过 --> J[AI模型检测]
+        J -- 疑似违规 --> K[人工审核<br/>支持退回重审状态机]
+    end
+
+    L[评价发布事件] -- @Async异步 --> M[ES索引更新监听器]
+    L -- @Async独立线程池 --> N[通知商家监听器]
+```
 
 ## 视频脚本
 

@@ -197,6 +197,21 @@ class LlamaBlock(nn.Module):
 - **RMSNorm 不能直接替换 LayerNorm**：已训好的 LayerNorm 模型改成 RMSNorm 需要重训，权重不兼容。新项目从头训才考虑。
 - **Chinchilla 配比是"训练 token 数"，不是"数据集大小"**：去重后的有效 token 数才是关键，冗余数据等于浪费算力。Llama-2 训 2T tokens 用了 4.5T 原始数据（去重后约 2T）。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[LLaMA 架构] --> B[Decoder-only Transformer]
+    B --> C[Pre-Norm RMSNorm]
+    B --> D[SwiGLU FFN]
+    B --> E[RoPE 旋转位置编码]
+    B --> F[无 bias 偏置]
+    B --> G[SentencePiece BPE]
+    C & D & E & F & G --> H[训练贡献]
+    H --> I[开源 + 1T/15T 高质数据]
+    I --> J[推动开源生态]
+```
+
 ## 记忆要点
 
 - 结构改进一：用 Pre-RMSNorm 替代后置 LayerNorm，因为梯度更稳定且计算更省时。

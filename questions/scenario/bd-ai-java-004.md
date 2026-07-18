@@ -77,6 +77,21 @@ if (tokens > MAX_INPUT_TOKENS) {
 2. **Checkpoint 机制**：如果 Agent 中途崩溃，如何恢复？答案：利用 Event Memory 记录每一步的 State Snapshot（快照）。重启时，从最后一个成功的 Checkpoint 恢复 State 和 Prompt Context。
 3. **Token 优化细节**：在 Java 中如何高效管理 Token 统计？答案：可以使用 TikToken 的 Java 移植版（如 `jtokkit`）在发送请求前预计算 Token 数，动态截断 Context。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    GOAL[原始目标锚定] -->|每轮Prompt重申| AGENT[Agent 执行]
+    AGENT --> STM[短期记忆]
+    AGENT --> LTM[长期记忆]
+    STM -->|摘要替代历史| SUM[压缩上下文]
+    LTM -->|向量库检索| VDB[(Vector DB)]
+    SUM --> AGENT
+    VDB -->|按需召回| AGENT
+    style SUM fill:#d4edda
+```
+
 ## 记忆要点
 
 - 治漂移根因：每轮Prompt强制注入原始目标，并附“已完成列表”防重复执行

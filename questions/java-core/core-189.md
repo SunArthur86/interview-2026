@@ -72,6 +72,25 @@ data.removeIf("b"::equals);
 | **查找复杂度** | ArrayList O(1), LinkedList O(n) | HashSet O(1), TreeSet O(log n) | LinkedList O(1), ArrayDeque O(1) |
 | **典型场景** | 存储列表数据、返回结果集 | 去重（如标签 ID 列表）、关键字查询 | 消息队列、任务缓冲区、广度优先搜索 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Iterable 可迭代] --> B[Collection 集合根接口]
+    B --> C[List 有序可重复]
+    B --> D[Set 无序不重复]
+    B --> E[Queue 队列]
+    E --> F[Deque 双端队列]
+    C --> C1[ArrayList/LinkedList]
+    D --> D1[HashSet/TreeSet]
+    E --> E1[PriorityQueue]
+    F --> F1[ArrayDeque/LinkedList]
+    B --> G[核心方法]
+    G --> H[add/remove/size]
+    G --> I[contains/isEmpty]
+    G --> J[iterator/toArray]
+```
 ## 记忆要点
 
 - 一句话定义：Java单列集合的根接口，继承Iterable接口，存储不唯一的对象。

@@ -414,6 +414,20 @@ RocksDB 存大状态，增量 CP 省 IO。
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——Checkpoint 是什么？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[JobManager] -->|定期发射| B[Barrier检查点信号]
+    B --> C[Source: Kafka消费位点]
+    C -->|对齐Barrier| D[State Backend状态快照]
+    D --> E[Sink: 两阶段提交2PC]
+    E -->|预写事务| F[外部存储 MySQL/Redis]
+    A -->|统一确认| G[Checkpoint持久化成功]
+    G --> H[Sink正式Commit提交]
+    I[任务失败重启] -->|读取| G
+    G -->|重置消费位点| C
+```
 
 ## 视频脚本
 

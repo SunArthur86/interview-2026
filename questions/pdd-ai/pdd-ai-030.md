@@ -409,8 +409,41 @@ SLO 要基于"用户期望 + 历史数据 + 业务价值"综合定。第一，**
 
 **收尾：** Metrics 和日志区别？
 
+## 流程图
 
-
+```mermaid
+flowchart TD
+    subgraph 数据接入层
+        A1[Web/API 请求] --> A2[LLM 推理服务]
+        A3[Kafka 异步消息] --> A2
+    end
+    subgraph 可观测性三件套
+        B1[Metrics 指标<br/>QPS/P99延迟] --> B4[Prometheus 拉取存储]
+        B2[Logs 结构化日志<br/>TraceId嵌入] --> B5[ELK 日志集群]
+        B3[Traces 全链路追踪] --> B6[Jaeger 链路系统]
+    end
+    subgraph LLM 特殊监控维度
+        C1[效果: 幻觉率/点踩率] --> D[Grafana 聚合大盘]
+        C2[成本: Token/GPU消耗] --> D
+        C3[安全: 敏感词触发率] --> D
+    end
+    subgraph TraceId 异步透传机制
+        E1[HTTP Header<br/>X-B3-TraceId] --> E2[网关生成 TraceId]
+        E3[TaskDecorator<br/>ThreadLocal拷贝] --> E2
+        E4[Kafka Headers<br/>trace-id传递] --> E2
+    end
+    A2 --> B1
+    A2 --> B2
+    A2 --> B3
+    A2 --> C1
+    A2 --> C2
+    A2 --> C3
+    E2 --> A2
+    B4 --> D
+    B5 --> D
+    B6 --> D
+    D --> F[SLO 错误预算告警]
+```
 
 ## 视频脚本
 

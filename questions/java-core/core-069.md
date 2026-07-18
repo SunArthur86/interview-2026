@@ -106,6 +106,25 @@ try (OutputStreamWriter osw = new OutputStreamWriter(
 2. **缓冲流的核心优势？**：减少了底层系统调用的次数（如磁盘读写），通过内部字节数组缓冲区（默认 8KB）批量处理数据。
 3. **flush() 的作用？**：在输出流（特别是缓冲流）中，数据可能先在内存缓冲区，调用 `flush()` 强制将缓冲区数据写入目标，防止断电丢失。close() 方法通常会自动调用 flush()。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java IO 四大基类] --> B[InputStream 字节输入]
+    A --> C[OutputStream 字节输出]
+    A --> D[Reader 字符输入]
+    A --> E[Writer 字符输出]
+    B --> B1[FileInputStream]
+    B --> B2[BufferedInputStream 装饰]
+    C --> C1[FileOutputStream]
+    D --> D1[InputStreamReader 桥梁]
+    D --> D2[BufferedReader]
+    E --> E1[OutputStreamWriter]
+    B & C --> F[字节流 二进制 音视频]
+    D & E --> G[字符流 文本 防乱码]
+    H[设计模式] --> I[装饰器模式<br/>节点流+处理流]
+```
 ## 记忆要点
 
 - 四大基类：InputStream和OutputStream(字节)，Reader和Writer(字符)

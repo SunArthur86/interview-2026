@@ -98,6 +98,28 @@ public class QuickSort {
 3.  **Partition 实现**：除了挖坑填数，还可以用双指针交换法，熟悉如何写 Partition 函数是得分关键。
 4.  **小数组优化**：当递归到小区间（如 length < 7）时，可切换为插入排序，减少递归开销。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[快速排序 Quick Sort] --> B[分治策略]
+    B --> C[Step1 选基准 pivot]
+    B --> D["Step2 分区 Partition<br/>小左大右"]
+    B --> E[Step3 递归处理左右子序列]
+    F[基准选择] --> G[首元素/末元素]
+    G --> H[三数取中 优化]
+    G --> I[随机选择]
+    J[分区方法] --> K[挖坑填数法 Hoare]
+    J --> L[双指针交换法 Lomuto]
+    M[复杂度] --> N["平均 O n log n<br/>空间 O log n 递归栈"]
+    M --> O["最坏 O n²<br/>已排序+首元素 pivot"]
+    P[特性] --> Q[不稳定排序]
+    P --> R[常数因子小 实测最快]
+    S[优化] --> T["小数组切插入排序 n<7"]
+    S --> U[三路切分处理重复元素]
+    S --> V["JDK Arrays.sort 双轴快排"]
+```
 ## 记忆要点
 
 - 核心三步曲：选基准、分区排列、递归调用左右子序列

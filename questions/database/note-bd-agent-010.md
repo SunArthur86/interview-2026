@@ -169,6 +169,22 @@ SetNX不适用场景：
 3. **选型建议**：能根据业务特点推荐合适方案，而不是盲目选Redisson
 4. **RedLock认知**：提到RedLock解决主从切换丢锁问题（但争议较大，了解即可）
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SN[裸 SetNX 加锁] --> P1[过期时间难定]
+    SN --> P2[无自动续期]
+    SN --> P3[误删他人锁]
+    SN --> P4[不可重入]
+    RS[Redisson] --> S1[看门狗自动续期]
+    RS --> S2[Lua 校验+UUID 防误删]
+    RS --> S3[Hash 计数 可重入]
+    style SN fill:#ffcccc
+    style RS fill:#d4edda
+```
+
 ## 记忆要点
 
 - 三大问题：因为业务耗时不确定，所以过期时间难定；且无自动续期易致锁提前释放，存在删他人锁风险

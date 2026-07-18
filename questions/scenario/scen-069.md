@@ -126,6 +126,21 @@ public int drawLottery(List<Prize> prizes) {
 3. **随机数安全性**：`java.util.Random` 为什么不安全？（它是伪随机，可预测；应使用 `java.security.SecureRandom` 或操作系统提供的真随机源）
 4. **库存超卖问题**：Redis Lua 脚本中 `decr` 返回值小于 0 如何处理？（Lua 脚本中先判断当前库存，若 >0 则扣减并返回中奖 ID，否则返回保底奖品 ID，避免回滚开销）
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    U[用户抽奖] --> AU[登录态+设备指纹]
+    AU --> RL[限流防刷]
+    RL --> LUA[Lua脚本原子扣减]
+    LUA -->|有库存| PRZ[概率算法中奖]
+    LUA -->|无库存| FALL[降级/谢谢参与]
+    PRZ --> DEC[扣减奖品库存]
+    DEC --> REC[记录中奖]
+    style LUA fill:#d4edda
+```
+
 ## 记忆要点
 
 - 核心流程：风控限流 -> Lua脚本内（扣抽奖次数 + 算概率 + 扣奖品库存）保证原子性

@@ -116,6 +116,15 @@ def percentile_calibration(x: torch.Tensor, percentile: float = 99.9):
 2. **追问**：Percentile 中的百分比（如 99.9% 或 99.99%）是如何选定的？（答：这是超参数，通常通过验证集调优。99.9% 是经验值，太高会引入误差，太低无法过滤 Outlier）。
 3. **追问**：权重量化一般用哪种校准？（答：通常用 MinMax 或 Per-Channel Max，因为权重通常是正态分布，无明显长尾，MinMax 能保留完整信息且计算最快）。
 
+```mermaid
+flowchart TD
+    Tensor[激活/权重张量] --> Choice{校准算法}
+    Choice -->|绝对最大值| MinMax[MinMax<br/>对Outlier敏感]
+    Choice -->|分位数| Percentile[Percentile<br/>99.9%截断]
+    Choice -->|分布差异| KL[KL散度最小化]
+    Choice -->|数值误差| MSE[MSE最小化]
+```
+
 ## 记忆要点
 
 - MinMax：取绝对最大值定范围。对Outlier敏感，易导致正常数据压缩，适合权重。

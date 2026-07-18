@@ -102,6 +102,28 @@ User copy = mapper.readValue(mapper.writeValueAsString(originalUser), User.class
 | **JSON 转换** | 低 | 中 | 需无参构造/Getter/Setter | Web 开发，对象结构复杂 |
 | **Kryo/FST** | 中 | 极高 | 引入第三方库 | 高性能 RPC 场景 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[对象拷贝] --> B[浅拷贝 Shallow]
+    A --> C[深拷贝 Deep]
+    A --> D[引用拷贝 Reference]
+    D --> D1[只复制引用<br/>指向同一对象]
+    B --> B1[新建对象]
+    B --> B2[基本类型复制值]
+    B --> B3[引用类型复制引用<br/>共享内部对象]
+    B --> B4["Object.clone 默认浅拷贝"]
+    C --> C1[新建对象]
+    C --> C2[递归拷贝所有引用对象]
+    C --> C3[完全独立 互不影响]
+    E[深拷贝实现] --> F[实现 Cloneable 递归 clone]
+    E --> G[序列化/反序列化<br/>JSON/Protobuf]
+    E --> H["拷贝构造器"]
+    I[场景] --> J[不可变对象 配置快照]
+    I --> K[事件回放]
+```
 ## 记忆要点
 
 - 浅拷贝复制引用地址，深拷贝递归复制所有对象，两者核心差异在于引用字段是否独立。

@@ -93,6 +93,25 @@ for q in queries.split("\n"):
 2.  GraphRAG 需要预先构建图谱，对于每天更新的海量新闻类数据，如何设计增量更新的图谱构建流程以保证实时性？
 3.  Self-RAG 需要训练带有 Reflection Token 的模型，如果只有现有黑盒 API（如 GPT-4），如何模拟实现类似 Self-RAG 的“检索-评估-生成”循环？
 
+
+## 核心流程图
+
+```mermaid
+flowchart TB
+    Advanced["RAG 进阶技术"] --> Tech["技术栈"]
+    Tech --> HyDE["HyDE<br/>假设文档检索"]
+    Tech --> Multi["Multi-Query<br/>多查询扩展"]
+    Tech --> Rerank["Rerank 重排"]
+    Tech --> CRAG["Corrective RAG"]
+    Tech --> Agentic["Agentic RAG"]
+    Tech --> Graph["Graph RAG<br/>知识图谱"]
+    Tech --> MultiModal["多模态 RAG"]
+    Tech --> Adapt["自适应检索"]
+    HyDE --> Benefit["缩小 Query-Doc 语义鸿沟"]
+    Multi --> Benefit2["提升召回覆盖"]
+    Graph --> Benefit3["复杂关系推理"]
+```
+
 ## 记忆要点
 
 - 查询优化：重写补全实体、HyDE 生成假设答案、多路查询覆盖语义。

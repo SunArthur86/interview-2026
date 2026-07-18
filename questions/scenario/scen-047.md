@@ -92,6 +92,20 @@ SLO = 99.9%（一个月30天）
 - 自动化优先
 - 事后复盘文化
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    SLI[SLI 指标定义] --> SLO[SLO 目标值]
+    SLO --> ERR[错误预算 1-SLO]
+    ERR -->|未耗尽| REL[允许发布迭代]
+    ERR -->|耗尽| FREEZE[变更冻结]
+    SLO --> SLA[SLA 对外承诺]
+    style FREEZE fill:#ffcccc
+    style REL fill:#d4edda
+```
+
 ## 记忆要点
 
 - 概念递进：SLI是度量值，SLO是内部目标，SLA是对外承诺（SLO必须比SLA严格留缓冲）。

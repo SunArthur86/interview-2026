@@ -214,6 +214,30 @@ Redis 连接超时的根因通常不是 Redis 本身，是"连接池配置或网
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1[可观测性三支柱]
+        A[Prometheus指标] --> D[告警收敛去重]
+        B[ELK集中日志] --> D
+        C[SkyWalking链路追踪] --> D
+        D --> E[告警分级响应 P0/P1/P2]
+    end
+    subgraph S2[稳定性治理机制]
+        F[定义系统SLO目标] --> G[计算错误预算余额]
+        G --> H{预算是否充足}
+        H -- 充足 --> I[允许迭代发布]
+        H -- 耗尽 --> J[封板保障稳定性]
+    end
+    subgraph S3[跨团队协同运转]
+        K[接口契约先行] --> L[大促前联合演练]
+        L --> M[Blameless复盘改进]
+    end
+    E --> F
+    M --> F
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

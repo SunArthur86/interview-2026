@@ -96,6 +96,21 @@ Elasticsearch + Logstash/Fluentd + Kibana
 - 特定异常出现 → 告警
 - 日志量突增/突降 → 告警
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    APP[应用日志] --> AG[Agent 采集]
+    AG --> KF[(Kafka 缓冲)]
+    KF --> ES[(ES 按天索引)]
+    ES --> LCM[生命周期管理]
+    ES --> Q[全文检索/聚合]
+    TID[TraceID 结构化] --> AG
+    style KF fill:#ffe4b5
+    style ES fill:#d4edda
+```
+
 ## 记忆要点
 
 - 经典架构：采集层Filebeat → 缓冲层Kafka → 处理层Logstash → 存储层ES → 展示Kibana。

@@ -73,6 +73,22 @@ MOV [c], EAX   ; 控制器控制：将结果写回内存(或缓存)
 - **核心数**：多核可并行处理多个任务
 - **指令集**：x86（CISC）、ARM（RISC）等
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[CPU 多级缓存] --> B[寄存器 Registers<br/>1 cycle 最快]
+    B --> C[L1 Cache<br/>私有 1ns 32KB]
+    C --> D[L2 Cache<br/>私有 3-10ns 256KB]
+    D --> E[L3 Cache<br/>多核共享 10-30ns MB 级]
+    E --> F[主存 DRAM<br/>100ns GB 级]
+    F --> G[SSD/HDD 磁盘]
+    H[缓存行 Cache Line] --> I[64 字节为单元加载]
+    I --> J[伪共享 False Sharing<br/>多核改同缓存行]
+    I --> K["解决 @Contended 对齐"]
+    L[一致性协议] --> N[MESI<br/>Modified/Exclusive/Shared/Invalid]
+```
 ## 记忆要点
 
 - CPU核心由运算器(ALU)、控制器(CU)、寄存器和多级缓存构成。

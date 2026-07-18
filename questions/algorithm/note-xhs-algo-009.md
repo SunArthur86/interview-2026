@@ -208,6 +208,20 @@ public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
 
 **收尾：** 这块我踩过坑——要不要深入聊：如果要求不修改原始树（创建新节点），代码怎么改？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A{"同步遍历两棵树<br/>node1, node2"} --> B{"node1 为空?"}
+    B -- "是" --> C["返回 node2"]
+    B -- "否" --> D{"node2 为空?"}
+    D -- "是" --> E["返回 node1"]
+    D -- "否" --> F["节点值相加<br/>node1.val += node2.val"]
+    F --> G["递归合并左子树"]
+    G --> H["递归合并右子树"]
+    H --> I["返回 node1"]
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

@@ -217,6 +217,44 @@ LLM 结果缓存：
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：LLM 限流怎么设阈值？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Gateway [网关入口]
+        A1[高并发用户请求]
+        A2[网关层多级限流<br/>Token/QPS维度]
+    end
+
+    subgraph Protection [应用防护]
+        B1[热点结果缓存<br/>减少重复调用]
+        B2{系统负载状态}
+        B3[降级策略<br/>大模型切小模型/模板]
+        B4[异步队列削峰<br/>长任务入队]
+    end
+
+    subgraph Security [权限与合规]
+        C1[越权/RBAC鉴权]
+        C2[Prompt脱敏拦截<br/>防隐私注入LLM]
+    end
+
+    subgraph Monitor [监控与追溯]
+        D1[Prometheus黄金指标<br/>延迟/错误/饱和度]
+        D2[全链路Trace日志]
+        D3[告警分级触发<br/>P0电话/P1 IM/P2日报]
+    end
+
+    subgraph LLM [模型层]
+        E1[LLM推理服务]
+    end
+
+    A1 --> A2 --> B1 --> B2
+    B2 -- 过载 --> B3
+    B2 -- 正常 --> B4 --> C1 --> C2 --> E1
+    E1 --> D2
+    D2 --> D1 --> D3
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

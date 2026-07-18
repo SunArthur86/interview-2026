@@ -80,6 +80,34 @@ loss = ce_loss(logits, class_targets)
 2. **Hinge Loss vs Cross-Entropy？**（答：SVM用Hinge Loss关注支持向量（最大间隔），CE关注概率校准；CE更适合概率输出，Hinge适合硬分类）
 3. **二分类用Sigmoid还是Softmax？**（答：数学上等价，Softmax是Sigmoid的归一化形式；多分类必须用Softmax）
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph A["机器学习任务"]
+        direction TB
+        A1["预测连续值"]
+        A2["预测离散类别"]
+    end
+
+    subgraph B["均方误差 MSE"]
+        direction TB
+        B1["假设误差高斯分布"]
+        B2["梯度含导数项<br/>易陷平坦区收敛慢"]
+        B3["适用: 回归任务"]
+    end
+
+    subgraph C["交叉熵 Cross-Entropy"]
+        direction TB
+        C1["衡量概率分布差异"]
+        C2["配Softmax梯度<br/>直接为 (ŷ-y) 收敛快"]
+        C3["适用: 分类任务 (含LLM)"]
+    end
+
+    A1 --> B
+    A2 --> C
+```
+
 ## 记忆要点
 
 - MSE：用于回归，假设误差高斯分布，梯度随误差减小而变慢。

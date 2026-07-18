@@ -105,6 +105,36 @@ public boolean cancel(TransactionContext ctx, String accountNo) {
 - 追求高性能且高并发：Seata AT模式（需注意锁竞争）。
 - 强一致性敏感场景（如金融）：TCC
 
+### 分布式事务解决方案全景图
+
+```mermaid
+flowchart TB
+    Root["分布式事务解决方案"] --> Rigid["刚性事务(强一致)"]
+    Root --> Flex["柔性事务(最终一致)"]
+
+    Rigid --> XA["2PC / XA"]
+    Rigid --> ThreePC["3PC"]
+    XA --> XAFit["金融跨库<br/>吞吐低"]
+    ThreePC --> ThreePCFit["理论模型<br/>实际少用"]
+
+    Flex --> TCC["TCC<br/>Try-Confirm-Cancel"]
+    Flex --> Saga["Saga<br/>长事务补偿"]
+    Flex --> Async["异步确保<br/>本地消息表/MQ事务消息"]
+    Flex --> Notify["最大努力通知"]
+
+    TCC --> TCCFit["高并发核心<br/>侵入性强"]
+    Saga --> SagaFit["长流程编排<br/>无全局锁"]
+    Async --> AsyncFit["解耦高吞吐<br/>延迟容忍"]
+    Notify --> NotifyFit["对账兜底<br/>允许少量丢失"]
+
+    classDef root fill:#ede7f6,stroke:#5e35b1
+    classDef cat fill:#e8eaf6,stroke:#3949ab
+    classDef fit fill:#fff3e0,stroke:#ef6c00
+    class Root root
+    class Rigid,Flex cat
+    class XAFit,ThreePCFit,TCCFit,SagaFit,AsyncFit,NotifyFit fit
+```
+
 ## 记忆要点
 
 - 方案演进：2PC强一致但阻塞，TCC高性能但业务侵入，MQ/本地消息表保最终一致。

@@ -382,6 +382,24 @@ public void onRouteMessage(String data) {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——单机支撑多少连接？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A1["百万客户端"] -- "TCP握手" --> B1["Netty BossGroup<br/>接收连接"]
+    B1 --> C1{"连接限流校验"}
+    C1 -- "IP级(100) / 用户级(5)" --> D1["Netty WorkerGroup<br/>epoll多路复用"]
+    C1 -- "超限" --> C2["拒绝连接"]
+    D1 --> E1["路由表记录 userId -> 节点"]
+    E1 --> F1[("Redis 路由表")]
+    D1 -- "读空闲90s" --> G1["IdleStateHandler心跳探测"]
+    G1 -- "3次失败" --> G2["剔除死连接释放FD"]
+    H1["业务消息触发"] --> I1{"目标节点路由"}
+    I1 -- "本节点" --> J1["直接推送Channel"]
+    I1 -- "其他节点" --> J2["Kafka跨节点转发"]
+    D1 -- "Channel写缓冲超64KB" --> K1["背压: isWritable=false"]
+    K1 --> K2["丢弃降级防OOM"]
+```
 
 ## 视频脚本
 

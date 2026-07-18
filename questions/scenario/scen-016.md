@@ -113,6 +113,22 @@ return tasks
 | **RocketMQ** | 秒级 (特定级别) | 高 | 高 (磁盘) | 中 | 是 | 业务解耦、削峰填谷 |
 | **HashedWheelTimer**| 毫秒级 | 极高 | 低 | 低 | 否 | Netty 内部、超时控制 |
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ADD[添加延迟任务] --> TW[时间轮 TimeWheel]
+    TW -->|slot=到期时间| SLOT[槽位]
+    SLOT -->|轮询转动| FIRE[到期触发]
+    FIRE --> EXE[执行业务]
+    ADD --> ZS[Redis ZSet 小规模]
+    ADD --> PERSIST[(DB持久化兜底)]
+    EXE --> IDEM{幂等校验}
+    IDEM -->|已执行| SKIP[跳过]
+    style TW fill:#d4edda
+```
+
 ## 记忆要点
 
 - 方案对比：数据库轮询性能差，RocketMQ仅支持固定级别，时间轮重启即丢。

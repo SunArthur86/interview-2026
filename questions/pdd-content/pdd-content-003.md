@@ -212,6 +212,27 @@ Semaphore 是"并发数限流"（同时允许 100 个请求在跑），令牌桶
 
 **收尾：** 您想继续往深里聊吗——比如「ReentrantLock 怎么实现可重入？」
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph AQS核心机制
+        A1["volatile state"] --> A2["CAS 原子更新"]
+        A2 --> A3["CLH 双向队列"]
+        A3 --> A4["park/unpark 阻塞唤醒"]
+    end
+
+    subgraph AQS应用场景
+        B1["评价提交限流<br/>Semaphore"]
+        B2["直播开播等待<br/>CountDownLatch"]
+        B3["评价去重读写锁<br/>ReentrantReadWriteLock"]
+    end
+
+    A4 --> B1
+    A4 --> B2
+    A4 --> B3
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -92,6 +92,25 @@ public static void readFile(String path) throws IOException {
                                                        └─────────────┘
 ```
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[异常处理流程] --> B[try 块执行]
+    B --> C{是否抛出异常?}
+    C -->|否| D[正常执行 finally]
+    C -->|是| E[生成异常对象]
+    E --> F[匹配 catch 类型]
+    F --> G{命中?}
+    G -->|是| H[执行对应 catch]
+    G -->|否| I[异常向上抛出]
+    H --> D
+    I --> J[方法栈逐层传播]
+    J --> K{有方法处理?}
+    K -->|否| L[JVM 默认处理<br/>打印栈 结束线程]
+    D --> M[资源释放<br/>try-with-resources]
+```
 ## 记忆要点
 
 - 体系：Throwable 分 Error（不可抗力）和 Exception（可处理，含受检和非受检）。

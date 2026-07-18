@@ -101,6 +101,30 @@ class DeepNet(nn.Module):
 2. **LayerNorm vs BatchNorm**：为什么 Transformer 中用 LayerNorm 而不用 BatchNorm？（BatchNorm 依赖 batch size，且对序列长度敏感；LayerNorm 独立于 batch，更适合 NLP 动态序列）。
 3. **残差连接的本质**：除了缓解梯度消失，残差连接还让网络更容易学习恒等映射，解决了“退化问题”（即增加层数导致性能下降）。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["反向传播<br/>链式法则"] --> B["梯度连乘积<br/>∂L/∂W = σ'·W..."]
+    B --> C{"逐层梯度绝对值"}
+    C -->|"< 1 连乘N次"| D["梯度消失<br/>浅层参数不更新"]
+    C -->|"> 1 连乘N次"| E["梯度爆炸<br/>权重发散变NaN"]
+
+    subgraph F["缓解梯度消失方案"]
+        F1["ReLU激活函数<br/>(正区间导数恒为1)"]
+        F2["残差连接<br/>(y=F(x)+x 提供梯度旁路)"]
+        F3["BatchNorm/LayerNorm<br/>(归一化稳定分布)"]
+    end
+
+    subgraph G["缓解梯度爆炸方案"]
+        G1["梯度裁剪<br/>(限制梯度范数阈值)"]
+        G2["权重初始化<br/>(Xavier/He初始化)"]
+    end
+
+    D -.-> F
+    E -.-> G
+```
+
 ## 记忆要点
 
 - 本质原因：链式法则连乘，梯度<1导致消失，>1导致爆炸。

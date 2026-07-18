@@ -461,6 +461,20 @@ public class VaultKmsClient implements KmsClient {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——AES-GCM 为什么优于 AES-CBC？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[Java业务请求加密数据] --> B[本地生成临时数据密钥 DEK]
+    B --> C[AES-GCM 加密明文数据]
+    C --> D[生成密文与盲索引 Hash]
+    D --> E[调用 KMS API 加密 DEK]
+    E --> F[HashiCorp Vault 使用主密钥 KEK]
+    F --> G[返回加密后的 wrapped_DEK]
+    G --> H[数据库持久化密文与 wrapped_DEK]
+    I[90天自动触发] -.-> J[Vault 轮转生成新版本 KEK]
+    J -.-> K[新数据使用新KEK 旧数据按版本解密]
+```
 
 ## 视频脚本
 

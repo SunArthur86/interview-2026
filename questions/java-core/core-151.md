@@ -95,6 +95,29 @@ void transfer(Entry[] newTable, boolean rehash) {
 2.  **为什么 JDK 1.7 用头插法，1.8 改成尾插法？**：1.7 头插法认为后插入的数据被访问的概率更高（热点数据原理）；1.8 尾插法主要是为了解决并发死循环问题，并减少链表遍历的性能损耗。
 3.  **HashMap 在 JDK 1.8 中的其他并发问题**：虽然解决了死循环，但并发 put 仍可能导致数据丢失，多线程必须使用 `ConcurrentHashMap`。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[HashMap 键值对存取] --> B[计算 key 的 hashCode]
+    B --> C[扰动函数 hash]
+    C --> D["定位桶索引 (n-1) & hash"]
+    D --> E{桶位置是否为空?}
+    E -->|是| F[直接放入新 Node]
+    E -->|否| G{key 是否相等?<br/>hashCode+equals}
+    G -->|相等| H[覆盖旧 Value]
+    G -->|不相等| I[尾插法插入链表]
+    I --> J{链表长度 > 8<br/>且容量 ≥ 64?}
+    J -->|是| K["链表转红黑树<br/>O(log n)"]
+    J -->|否| L["保持链表<br/>O(n)"]
+    M{"元素数 > 容量×0.75?"} -->|是| N[扩容2倍 Rehash]
+    N --> O[元素重分布<br/>原位或原位+oldCap]
+    F --> M
+    H --> M
+    K --> M
+    L --> M
+```
 ## 记忆要点
 
 - 独有顽疾：JDK1.7多线程扩容并发执行transfer方法引发环形链表，导致CPU飙升100%

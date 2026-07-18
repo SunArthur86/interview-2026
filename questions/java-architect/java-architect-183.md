@@ -421,6 +421,21 @@ public class DegradeService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——怎么防数据串户？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[租户API请求] --> B[解析JWT获取tenant_id]
+    B --> C[TenantContext线程池隔离]
+    C --> D{令牌桶QPS限流检查}
+    D -- 超限 --> E[返回429 Retry-After]
+    D -- 放行 --> F{Redis检查套餐配额}
+    F -- 配额耗尽 --> G[按套餐降级: 拒绝/只读/计费]
+    F -- 配额充足 --> H[MyBatis拦截器注入tenant_id]
+    H --> I[(共享MySQL数据库)]
+    J[套餐配置Plan表] --> F
+    F -->|Lua原子统计INCR| K[(Redis计数器)]
+```
 
 ## 视频脚本
 

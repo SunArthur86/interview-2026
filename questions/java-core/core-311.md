@@ -149,6 +149,25 @@ class AsyncEventStation {
 | **可靠性** | 依赖于进程存活 | 依赖于进程存活 | 持久化，支持重试 |
 | **适用场景** | 简单单机事件逻辑 | 复杂单机内部解耦 | 微服务间通信 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[观察者模式 Observer] --> B[Subject 主题]
+    B --> C[持有 observers 列表]
+    B --> D[attach 注册]
+    B --> E[detach 注销]
+    B --> F[notify 通知]
+    F --> G[遍历调用 update]
+    G --> H[Observer A]
+    G --> I[Observer B]
+    G --> J[Observer C]
+    K[特点] --> L[松耦合<br/>主题不依赖具体观察者]
+    M[应用] --> N[事件总线 EventBus]
+    M --> O[RxJava/Reactor 响应流]
+    M --> P[Spring ApplicationEvent]
+```
 ## 记忆要点
 
 - 一句话定义：主题状态一变，自动通知多个依赖的观察者，实现一对多联动

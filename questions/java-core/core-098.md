@@ -103,6 +103,23 @@ String result = sb.toString();
 2. **intern() 机制**：JDK 6 与 JDK 7/8 中 `intern()` 的实现有何不同？（JDK 6 永久代，JDK 7+ 移至堆中；是否重复拷贝字符串的区别）。
 3. **`javap` 指令验证**：是否使用过 `javap -c` 查看字节码来验证字符串拼接底层使用的是 `StringBuilder`？
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A["字符串拼接 +"] --> B[编译期 javac 优化]
+    B --> C{常量拼接?}
+    C -->|是| D[直接合并为常量<br/>进入常量池]
+    C -->|否 变量参与| E[编译为 StringBuilder.append]
+    E --> F[循环内每次 new StringBuilder<br/>性能差]
+    G[推荐] --> H[循环用 StringBuilder]
+    G --> I[多线程用 StringBuffer<br/>线程安全]
+    G --> J[Java 9 invokedynamic<br/>JEP 280 字节精简]
+    K[String.concat] --> L[每次 new String<br/>不适合多次]
+    M[内存] --> N[常量池复用<br/>intern 加速比较]
+    O["String.join"] --> P[内部 StringBuilder<br/>简洁]
+```
 ## 记忆要点
 
 - 不可变性：字符串拼接本质是创建新的字符串对象

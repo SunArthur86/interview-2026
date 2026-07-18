@@ -89,6 +89,25 @@ Java 中所有的异常和错误都继承自 `Throwable` 类。
 3. **Spring 事务中异常未回滚是什么原因？**
    - 默认情况下，Spring 只在抛出 `RuntimeException` 或 `Error` 时回滚。如果抛出的是 Checked Exception（如自定义异常继承 `Exception`），事务默认不回滚，需指定 `@Transactional(rollbackFor = Exception.class)`。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[异常处理流程] --> B[try 块执行]
+    B --> C{是否抛出异常?}
+    C -->|否| D[正常执行 finally]
+    C -->|是| E[生成异常对象]
+    E --> F[匹配 catch 类型]
+    F --> G{命中?}
+    G -->|是| H[执行对应 catch]
+    G -->|否| I[异常向上抛出]
+    H --> D
+    I --> J[方法栈逐层传播]
+    J --> K{有方法处理?}
+    K -->|否| L[JVM 默认处理<br/>打印栈 结束线程]
+    D --> M[资源释放<br/>try-with-resources]
+```
 ## 记忆要点
 
 - 体系：Throwable 分为 Error 和 Exception，Exception 分为 Checked（受检）和 Unchecked（运行时）。

@@ -115,6 +115,15 @@ def scale_weights(layer, activation_scale):
 | **推理速度** | 中 (需Dequant) | 快 (Simulated Group Gemm) | 快 (Native INT8) | 最快 (Native FP8) |
 | **抗异常值能力** | 弱 (容易 outliers) | 强 (Scale化解) | 强 (Smooth迁移) | 强 (FP8动态范围) |
 
+```mermaid
+flowchart TD
+    Model[FP16模型] --> Choice{量化方案}
+    Choice -->|二阶梯度| GPTQ[GPTQ<br/>INT4精度高]
+    Choice -->|激活感知| AWQ[AWQ<br/>1%关键通道FP16]
+    Choice -->|迁移难度| Smooth[SmoothQuant<br/>W8A8]
+    Choice -->|硬件原生| FP8[FP8<br/>H100支持]
+```
+
 ## 记忆要点
 
 - GPTQ：基于二阶信息的 PTQ，INT4 精度好，通用性强，但推理有解码开销。

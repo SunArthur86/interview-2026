@@ -182,6 +182,27 @@ public class GlobalExceptionHandler {
 - **throws 通配 `throws Exception` 是反模式**：声明 `throws Exception` 让编译器检查失效，调用方不知道具体异常类型，无法精准处理。应声明具体的异常类。
 - **受检异常在 Lambda 中很难用**：`Function<T, R>` 等函数接口的 `apply` 不声明受检异常，Lambda 内 throw 受检异常会编译失败。实践上要么包装成 RuntimeException，要么用 `throwing-function` 之类的工具库。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Throwable] --> B[Error 错误]
+    A --> C[Exception 异常]
+    B --> B1[OutOfMemoryError]
+    B --> B2[StackOverflowError]
+    B --> B3[VirtualMachineError]
+    C --> D[受检异常 CheckedException]
+    C --> E[非受检 RuntimeException]
+    D --> D1[IOException]
+    D --> D2[SQLException]
+    D --> D3[ClassNotFoundException]
+    E --> E1[NullPointerException]
+    E --> E2[IndexOutOfBoundsException]
+    E --> E3[ClassCastException]
+    D -.必须 try-catch/throws.-> F[编译期检查]
+    E -.可try-catch.-> G[运行期抛出]
+```
 ## 记忆要点
 
 - 位置差异：throws在方法签名上，throw在方法体内部。

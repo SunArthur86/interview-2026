@@ -123,6 +123,32 @@ memory_points:
 - **Reward Hacking**：模型钻 RM 漏洞刷分（如输出 RM 偏好的特定词）→ 用 KL 惩罚 + 多 RM 集成缓解
 - **RLAIF**（Constitutional AI）：用 AI 代替人工标注偏好（Anthropic 的方法），降低标注成本
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["指令数据 (指令, 答案)"] --> B["阶段一: SFT模型<br/>(监督微调)"]
+    B --> C{"是否满足3H要求?<br/>(有用/无害/诚实)"}
+    C -- "否: 无法区分好坏回答" --> D["阶段二: 偏好对齐优化"]
+    subgraph DPO主流方案 ["DPO 直接偏好优化"]
+        E["偏好数据 (Prompt, Chosen, Rejected)"] --> F["基于Bradley-Terry模型<br/>直接推导最优策略"]
+        F --> G["Policy模型训练"]
+        F -.仅需前向计算.-> H["Reference模型 (冻结)"]
+    end
+    subgraph RLHF传统方案 ["RLHF 基于人类反馈的强化学习"]
+        I["偏好数据"] --> J["训练 Reward Model"]
+        J --> K["PPO 强化学习训练"]
+        K -.前向计算.-> L["Reference模型 (冻结)"]
+        K -.前向计算.-> J
+        K --> M["Value模型 (训练)"]
+    end
+    D --> DPO主流方案
+    D -.已淘汰.-> RLHF传统方案
+    G --> N["对齐人类偏好<br/>实现3H目标"]
+    M --> N
+    DPO主流方案 -.替代原因: 省显存/稳定.-> RLHF传统方案
+```
+
 ## 记忆要点
 
 - SFT 学格式模仿：数据是(指令, 答案)，难点在答案质量决定模型上限，但无法区分好坏。

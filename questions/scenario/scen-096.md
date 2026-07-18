@@ -106,6 +106,22 @@ INNER JOIN (
 3. **如果用户非要跳转到第 50000 页怎么办？**
    - 业务上限制（如提示 "结果过多，请缩小搜索范围"）；技术上引导用户使用搜索筛选条件缩小数据集。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    PAGE[分页查询] --> DEEP{深度分页?}
+    DEEP -->|否 OFFSET小| LIM[LIMIT OFFSET]
+    DEEP -->|是 OFFSET大| SLOW[全表扫描 慢]
+    SOL[解决方案] --> CUR[游标分页 记住末尾]
+    SOL --> SUBQ[覆盖索引子查询]
+    SOL --> ESA[ES search_after/scroll]
+    CUR --> FAST[性能恒定]
+    style SLOW fill:#ffcccc
+    style FAST fill:#d4edda
+```
+
 ## 记忆要点
 
 - 为何深分页慢：MySQL需扫描并回表大偏移量数据，再丢弃前页，引发IO暴增。

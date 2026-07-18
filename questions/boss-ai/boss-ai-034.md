@@ -260,6 +260,28 @@ AI 陪伴推荐：
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：HNSW 为什么快？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["用户输入<br/>文本/语音"] --> B["Embedding<br/>文本转向量"]
+    B --> C["向量检索"]
+    B --> D["BM25<br/>关键词检索"]
+    C --> E["Milvus/HNSW<br/>近似最近邻召回"]
+    D --> F["Elasticsearch<br/>结构化检索召回"]
+    E --> G["混合检索<br/>分数融合互补"]
+    F --> G
+    G --> H["Rerank 模型<br/>重排序提准"]
+    H --> I["Top-K 结果<br/>送入 LLM 生成"]
+
+    subgraph J ["ANN 加速底层机制"]
+        K["IVF<br/>倒排聚类"]
+        L["HNSW<br/>图结构跳表"]
+    end
+
+    J -.-> C
+```
+
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深

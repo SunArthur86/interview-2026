@@ -105,6 +105,24 @@ public class DatabaseLoggerFactory implements LoggerFactory {
 }
 ```
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[工厂模式] --> B[简单工厂<br/>一个工厂方法+switch]
+    A --> C[工厂方法<br/>每类产品对应一个工厂]
+    A --> D[抽象工厂<br/>产品族 多维度]
+    C --> E[抽象 Product]
+    C --> F[ConcreteProductA/B]
+    C --> G[Factory 接口<br/>createProduct]
+    C --> H[ConcreteFactoryA/B]
+    H --> F
+    D --> I[产品族: UI Light/Dark<br/>Button+Input+Checkbox]
+    J[开闭原则] --> K[新增产品加新类<br/>不改老代码]
+    L[应用] --> M[Spring BeanFactory]
+    L --> N[JDBC DriverManager]
+```
 ## 记忆要点
 
 - 核心思想：定义创建对象接口，将实例化推迟到具体工厂子类实现

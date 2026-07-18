@@ -357,6 +357,24 @@ ScopedValue 不依赖 carrier，作用域是栈帧属性，子任务通过 Struc
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——ScopedValue 真的能替代所有 ThreadLocal 吗？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["百万级虚拟线程并发"] --> B["ThreadLocal 导致<br/>内存爆炸"]
+    A --> C["InheritableThreadLocal<br/>carrier复用上下文错乱"]
+    B --> D["迁移至 ScopedValue"]
+    C --> D
+    D --> E["where 注入 userId/traceId"]
+    E --> F["StructuredTaskScope.fork"]
+    F --> G["子任务自动继承作用域"]
+    G --> H["run 块结束自动清理<br/>无 GC 压力"]
+    subgraph I ["保留 ThreadLocal 场景"]
+        I1["数据库连接"]
+        I2["事务管理"]
+        I3["Streaming Buffer"]
+    end
+```
 
 ## 视频脚本
 

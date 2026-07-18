@@ -186,6 +186,31 @@ LangGraph Studio：图可视化调试
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：Dify 能上生产吗？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Prototype [原型验证: Dify 低代码]
+        A1[拖拽可视化节点] --> A2[编排 RAG/简单 Agent]
+        A2 --> A3[验证业务流程价值]
+        A3 --> A4{需要深度定制?}
+    end
+    subgraph Production [生产部署: LangGraph 工程化]
+        B1[重写为图结构代码] --> B2[构建状态与节点逻辑]
+        B2 --> B3[复杂条件/循环节点]
+        B3 --> B4[接入生产级监控]
+        B4 --> B5[灰度发布与版本控制]
+    end
+    subgraph Engineering [低代码工程化补足]
+        C1[LLM 请求/输出日志]
+        C2[多版本 Prompt 管理]
+        C3[性能与质量监控]
+    end
+    A4 -- 否, 通用标准场景 --> C1
+    A4 -- 是, 强定制/复杂场景 --> B1
+    B5 -.-> C3
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -208,6 +208,29 @@ PGVector 本质是**"把向量检索集成进 PostgreSQL，让 OLTP 和向量检
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：HNSW 索引怎么建？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph Client [业务应用层]
+        A1[RAG 检索请求] --> A2[元数据过滤与向量相似度联合查询]
+    end
+    subgraph PG [PostgreSQL + PGVector]
+        B1[查询优化器] --> B2{执行计划选择}
+        B2 -- 预过滤下推 --> B3[WHERE 条件过滤行]
+        B3 --> B4[HNSW 索引向量检索]
+        B2 -- 纯向量 --> B4
+        B4 --> B5[业务表 JOIN 关联]
+    end
+    subgraph Storage [存储与一致性]
+        C1[业务 OLTP 事务日志] --> C2[向量列原子更新]
+        C2 --> C3[行级安全策略 RLS]
+    end
+    A2 --> B1
+    B5 --> A1
+    C2 -.-> B4
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

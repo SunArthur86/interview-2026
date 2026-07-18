@@ -90,6 +90,23 @@ public class NumericBox<T extends Number> {
 2.  **泛型数组问题**：为什么不能直接创建泛型数组 `List<String>[] listArray = new ArrayList<String>[10];`？因为泛型擦除会导致堆污染，可能破坏数组存储的类型检查机制。
 3.  **泛型异常**：不能直接抛出或捕获泛型类型的异常（如 `catch(T e)`），因为异常处理机制依赖于运行时类型检查，而泛型在运行时已被擦除。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java 泛型] --> B[类型参数化<br/>E T K V]
+    A --> C[编译期类型检查]
+    A --> D[类型擦除 Type Erasure]
+    D --> E["编译后擦除为 Object<br/>或上界 bound"]
+    D --> F[运行时无泛型信息]
+    D --> G[不能用 new T<br/>不能用泛型数组]
+    H[通配符] --> I["? extends T 上界<br/>只读 协变"]
+    H --> J["? super T 下界<br/>只写 逆变"]
+    K[PECS 原则] --> L[Provider extends<br/>Consumer super]
+    M[场景] --> N[集合类型安全]
+    M --> O[框架 API 抽象]
+```
 ## 记忆要点
 
 - 定义：本质是参数化类型，将类型作为参数传递（如 T, E, K, V）

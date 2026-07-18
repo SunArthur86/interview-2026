@@ -85,6 +85,24 @@ def semantic_cache_check(query, cache_dict, embed_model, threshold=0.95):
 2. **Semantic Cache 的相似度阈值如何设定？**：阈值过高导致缓存命中率低，过低可能导致答非所问，需结合业务场景调优。
 3. **Prompt Caching 的生效条件？**：通常要求前缀完全一致，因此设计中需将静态 System Prompt 放在最前面，动态变量放在最后面。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[客户端请求] --> B(Semantic Cache: Redis+Embedding)
+    B -->|命中缓存| C[直接返回历史答案]
+    B -->|未命中| D{Prompt 意图路由}
+    D -->|简单任务| E[小模型: Haiku/3.5]
+    D -->|复杂任务| F[大模型: GPT-4/Opus]
+    D -->|离线任务| G[Batch API 批量处理]
+    E --> H[上下文压缩: 滑动窗口/摘要]
+    F --> H
+    H --> I[Prompt Caching 缓存长前缀]
+    I --> J[降低单次请求 Token 成本]
+    C --> J
+    G --> J
+```
+
 ## 记忆要点
 
 - 模型路由：小模型处理简单任务，大模型处理复杂任务，先判后分。

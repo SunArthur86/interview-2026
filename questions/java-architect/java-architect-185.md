@@ -393,6 +393,31 @@ public class ReconcileService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——金额为什么不用 double？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph ExternalSource [外部汇率源]
+        S1[欧洲央行 ECB / 央行]
+    end
+
+    subgraph System [业务系统]
+        T1[定时拉取汇率任务]
+        T2[汇率表 rate + version]
+        T3[用户下单]
+        T4[冻结订单汇率快照<br/> order.rate + version]
+        T5[多时区处理<br/> DB存UTC / 展示转ZoneId]
+        T6[展示与支付<br/> BigDecimal计算]
+        T7[财务对账<br/> 折算基准币种USD]
+    end
+
+    S1 --> T1 --> T2
+    T3 --> T4
+    T2 --> T4
+    T4 --> T6
+    T5 -.时间转换.-> T6
+    T6 --> T7
+```
 
 ## 视频脚本
 

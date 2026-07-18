@@ -234,6 +234,32 @@ Redis Cluster 的分片是"按 key 分"，不是"按 key 内部字段分"。`mod
 
 **收尾：** 您想继续往深里聊吗——比如「Redis 为什么快？」
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Client[应用服务]
+        A1[特征提取请求]
+    end
+    subgraph RedisCluster[Redis Cluster 分片集群]
+        B1{CRC16路由}
+        B2[节点1: 用户特征 Hash]
+        B3[节点2: 模型推理结果]
+        B4[节点3: 限流 ZSet]
+        B1 -->|Slot 0-5460| B2
+        B1 -->|Slot 5461-10922| B3
+        B1 -->|Slot 10923-16383| B4
+    end
+    subgraph Storage[底层机制]
+        C1[RDB全量基线快照]
+        C2[AOF增量命令日志]
+        B2 -.-> C1
+        B2 -.-> C2
+    end
+    A1 --> B1
+    B3 -->|治理大Key| D1[业务层分桶: hot_sku:1...hot_sku:99]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

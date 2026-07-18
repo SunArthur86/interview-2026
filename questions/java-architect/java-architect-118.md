@@ -433,6 +433,24 @@ try (CloseableHttpResponse resp = httpClient.execute(request)) {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——线程泄漏和内存泄漏区别？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["业务请求<br/>进入"] --> B["try-catch<br/>异常路径"]
+    B --> C["borrow 资源<br/>未 close"]
+    C --> D["资源不归还"]
+    D --> E{"资源类型判断"}
+    E -->|Thread| F["newCachedThreadPool<br/>无上限创建"]
+    E -->|Connection| G["HikariCP<br/>active = max 阻塞"]
+    E -->|ThreadLocal| H["线程复用<br/>value 永久驻留"]
+    F --> I["jstack dump<br/>线程持有栈"]
+    G --> J["leakDetectionThreshold<br/>连接持有栈"]
+    H --> K["heap dump<br/>MAT 分析引用链"]
+    I --> L["try-with-resources<br/>自动 close/有界队列/remove"]
+    J --> L
+    K --> L
+```
 
 ## 视频脚本
 

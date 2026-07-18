@@ -406,6 +406,42 @@ public void autoRollback() {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：代码回滚和数据回滚冲突怎么办？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Monitor[监控告警]
+        A1[SRE黄金指标异常]
+        A2[风控决策失败率飙升]
+    end
+
+    subgraph Response[应急响应5步法]
+        B1[故障定级 P0/P1]
+        B2[故障定位与排查]
+        B3[快速止损恢复]
+        B4[根因深挖分析]
+        B5[复盘与预案沉淀]
+        B1 --> B2 --> B3 --> B4 --> B5
+    end
+
+    subgraph Rollback[止损策略选择]
+        C1[代码版本回滚]
+        C2[Nacos配置回滚]
+        C3[逆向SQL数据修复]
+        C4[跨机房流量切换]
+    end
+
+    subgraph Chaos[常态化保障]
+        D1[混沌工程演练]
+        D2[自动化触发器]
+    end
+
+    A1 & A2 --> B1
+    B3 --> C1 & C2 & C3 & C4
+    C1 & C2 --> D2
+    D1 -.-> B2
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

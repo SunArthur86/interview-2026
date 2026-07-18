@@ -80,6 +80,22 @@ func onDupAck(tc *TCPConn) {
 2. **快速重传和快速恢复的关系**：快速重传是基于重复 ACK 触发的重传机制，而快速恢复是紧接着重传后的窗口控制策略，两者通常配合使用（Reno 版本）。
 3. **TCP NewReno 对快速恢复的改进**：原始 Reno 在一个窗口内丢失多个包时处理不佳（进入超时），NewReno 引入了 Partial ACK（部分确认）机制，能持续重传多个丢失包而不必退出快速恢复。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[TCP 快速恢复 Fast Recovery] --> B[触发: 3 个重复 ACK]
+    B --> C[判定单个包丢失]
+    C --> D[进入快速重传]
+    D --> E["ssthresh = cwnd/2"]
+    E --> F["cwnd = ssthresh + 3<br/>收到 3 个冗余 ACK 说明 3 段已离开网络"]
+    F --> G[进入 Fast Recovery<br/>线性增长 每收一个冗余 ACK cwnd+1]
+    G --> H[收到新数据 ACK<br/>退出 Fast Recovery]
+    H --> I["cwnd = ssthresh<br/>进入拥塞避免"]
+    J[目的] --> K[避免回到慢启动<br/>不浪费带宽]
+    L[对比慢启动] --> M[超时才回 cwnd=1]
+```
 ## 记忆要点
 
 - 触发条件：连续收到3个重复ACK，判定为网络轻微拥塞

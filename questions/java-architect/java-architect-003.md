@@ -299,6 +299,22 @@ java -Xlog:class+load=info:file=classload.log -jar app.jar
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：为什么 JDBC 用 SPI 而不是直接 new？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[自定义 ClassLoader] -->|委派| B[AppClassLoader]
+    B -->|委派| C[PlatformClassLoader]
+    C -->|委派| D[Bootstrap ClassLoader]
+    D -->|加载核心类<br/>java.lang.String| E[返回 Class]
+    C -->|加载扩展类| E
+    B -->|加载应用类| E
+    A -->|打破委派<br/>插件隔离/热加载| F[独立加载业务类]
+    G[ServiceLoader] -->|SPI机制<br/>使用线程上下文类加载器| B
+    F -->|GC不可达| H[释放 ClassLoader 实例]
+    H -->|回收| I[清理 Metaspace]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

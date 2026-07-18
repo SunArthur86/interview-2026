@@ -113,6 +113,22 @@ orders
 - 多机房大屏数据同步
 - 大屏不可用时备选展示方式
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    DB[(业务DB)] --> CDC[CDC监听变更]
+    CDC --> KF[(Kafka)]
+    KF --> FL[Flink 窗口聚合]
+    FL --> RD[(Redis 指标缓存)]
+    RD --> WS[WebSocket 推送前端]
+    RD --> PULL[HTTP 轮询兜底]
+    FAIL[实时失败] --> CST[降级展示缓存]
+    style FL fill:#ffe4b5
+    style WS fill:#d4edda
+```
+
 ## 记忆要点
 
 - 核心痛点：大屏严禁直接联表查DB，必须走预聚合链路

@@ -99,6 +99,25 @@ LIMIT 5;
 2.  对于实时性要求极高的 RAG 系统（如毫秒级响应），你会如何设计向量库的缓存策略来避免重复的向量计算和 I/O 开销？
 3.  既然 pgvector 功能基础，为什么很多大厂仍然选择在 PostgreSQL 上通过插件扩展而非引入 Milvus？请从数据一致性、架构复杂度等角度分析。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TB
+    Choose["向量数据库选型"] --> Options["主流选项"]
+    Options --> Pinecone["Pinecone<br/>(托管 SaaS)"]
+    Options --> Milvus["Milvus<br/>(开源/分布式)"]
+    Options --> Weaviate["Weaviate"]
+    Options --> Qdrant["Qdrant<br/>(Rust/高性能)"]
+    Options --> Chroma["Chroma<br/>(轻量/本地)"]
+    Options --> PgVector["pgvector<br/>(Postgres 扩展)"]
+    Options --> FAISS["FAISS<br/>(库/非服务)"]
+    Choose --> Factors["考量: 规模/成本/<br/>运维/混合检索/元数据"]
+    Pinecone --> Use1["用: 快速上线"]
+    Milvus --> Use2["用: 大规模/自建"]
+    Chroma --> Use3["用: 原型/小项目"]
+```
+
 ## 记忆要点
 
 - Milvus 适合亿级大规模分布式，Pinecone 适合快速 MVP 免运维。

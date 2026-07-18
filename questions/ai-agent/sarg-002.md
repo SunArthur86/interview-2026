@@ -90,6 +90,24 @@ docs = text_splitter.create_documents([long_legal_text])
 3.  **针对表格数据应该怎么切分？**
     表格不建议随机切分，应将表格作为一个整体提取（如转为 Markdown 或 HTML），或者提取表头+每一行作为一个单独的语义块，以便精确检索特定数据。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TB
+    Doc["文档"] --> Chunk["Chunking 策略"]
+    Chunk --> Fixed["固定大小"]
+    Chunk --> Recursive["递归分割<br/>(按分隔符)"]
+    Chunk --> Semantic["语义分块<br/>(相似度断点)"]
+    Chunk --> DocStruct["文档结构<br/>(标题/段落)"]
+    Chunk --> Code["代码分块<br/>(函数/类)"]
+    Fixed --> Overlap["+ 重叠 Overlap"]
+    Recursive --> Overlap
+    Chunk --> Trade["权衡: 块大小"]
+    Trade --> Small["小: 检索精准<br/>上下文碎"]
+    Trade --> Large["大: 上下文完整<br/>检索噪声多"]
+```
+
 ## 记忆要点
 
 - 固定长度：简单但易切断语义，需设置Overlap（10-20%）防止信息丢失

@@ -632,6 +632,32 @@ public Product getHotProduct(Long skuId) {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：本地缓存和分布式缓存什么区别？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[应用请求] --> B[L1 Caffeine 本地缓存]
+    B -->|Miss 未命中| C[L2 Redis 分布式缓存]
+    C -->|Miss 未命中| D[L3 MySQL 数据库]
+    D -->|回种数据| C
+    C -->|回种数据| B
+    B -->|命中 返回| A
+
+    subgraph 数据更新一致性保证
+        E[数据更新请求] --> F[更新 MySQL 数据库]
+        F --> G[删除 Redis 缓存数据]
+        G --> H[发送 MQ 广播消息]
+        H --> I[所有应用实例消费]
+        I --> J[删除本地 Caffeine 缓存]
+    end
+
+    subgraph 异常防御处理
+        K[热点 Key 识别] --> L[多副本分散至不同分片]
+        M[缓存击穿] --> N[Redisson 互斥重建]
+        O[缓存雪崩] --> P[随机 TTL 过期时间]
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深

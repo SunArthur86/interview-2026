@@ -116,6 +116,29 @@ Edge（边）：下一步去哪
 - **LangGraph 的 Subgraph**：把复杂图拆成子图复用，类似函数调用
 - **并行 Node**：LangGraph 支持 fan-out/fan-in，多个 Node 并行执行后聚合结果
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A(["开始"]) --> B["Node_A: 意图分类"]
+    B --> C{"Conditional Edge<br/>条件路由"}
+    C -- "知识查询" --> D["Node_B: 检索知识库"]
+    C -- "高危操作" --> E["Node_C: 执行操作"]
+    D --> F{"检索结果足够?"}
+    F -- "否: 循环" --> B
+    F -- "是" --> G(["结束生成"])
+    E --> H["interrupt() 暂停"]
+    H --> I["人工审批确认"]
+    I -- "确认" --> G
+    I -- "拒绝" --> J(["终止"])
+    subgraph S ["CheckpointSaver 持久化"]
+      K[("Redis/Postgres<br/>State 状态快照")]
+    end
+    B -.-> K
+    D -.-> K
+    E -.-> K
+```
+
 ## 记忆要点
 
 - 选LangGraph因其为图抽象(状态机)，支持循环/分支/并行，LangChain只适合简单线性流

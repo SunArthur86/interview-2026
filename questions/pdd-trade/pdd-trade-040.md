@@ -246,6 +246,30 @@ Java 工程师转应用层是"扬长避短"——工程能力可直接复用（S
 
 **收尾：** 您想继续往深里聊吗——比如「要不要学数学/算法？」
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1[第一阶段：基础基石]
+        A1["大模型API调用"] --> A2["Prompt提示词工程"]
+    end
+    subgraph S2[第二阶段：实用场景]
+        B1["知识库向量检索"] --> B2["RAG检索增强生成"]
+    end
+    subgraph S3[第三阶段：复杂组合]
+        C1["Function Calling"] --> C2["多步推理与任务规划"] --> C3["Agent智能体系统"]
+    end
+    subgraph S4[第四阶段：工程化上线]
+        D1["Prompt版本管理"] --> D2["模型评估与监控"] --> D3["LLMOps大模型运维"]
+    end
+    S1 --> S2 --> S3 --> S4
+
+    style S1 fill:#e1f5fe
+    style S2 fill:#f3e5f5
+    style S3 fill:#e8f5e9
+    style S4 fill:#fff3e0
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

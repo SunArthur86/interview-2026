@@ -239,8 +239,24 @@ Kafka 的 exactly-once 是"事务（transactional producer）+ 幂等生产（id
 
 **收尾：** 怎么保证不丢？
 
+## 流程图
 
-
+```mermaid
+flowchart TD
+    subgraph 生产端
+    A1["评价提交服务"] --> A2["Producer<br/>acks=all"]
+    A3["直播互动事件"] --> A2
+    end
+    subgraph Kafka集群
+    A2 -->|"按 reviewId/liveId 路由"| B1[("Topic分区<br/>Partition 0-N")] -->|"多副本高可用"| B2[("Replica副本")] --> B3[("消费组位移<br/>手动提交ACK")]
+    end
+    subgraph 消费端
+    B3 --> C1["审核服务消费"]
+    C1 --> C2{"Redis幂等去重<br/>msgId + 长 TTL"}
+    C2 -->|"正常执行"| C3["写入DB与ES"]
+    C2 -->|"异常重投"| C4["死信队列DLQ"]
+    end
+```
 
 ## 视频脚本
 

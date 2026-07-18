@@ -176,8 +176,26 @@ AtomicInteger 在低并发（<1000 QPS）完全够用，但直播弹幕高峰能
 
 **收尾：** volatile 和 synchronized 区别？
 
+## 流程图
 
+```mermaid
+flowchart TD
+    J[Java内存模型JMM] --> V[volatile关键字修饰]
+    
+    V --> P1[内存屏障机制]
+    P1 --> R1[禁止指令重排序]
+    P1 --> R2[强制刷主存并失效副本]
+    R2 --> E1[保证多线程可见性]
 
+    V --> P2[复合操作非原子性]
+    P2 --> E2[直播点赞高频计数丢失]
+
+    E2 --> S1[方案一: AtomicInteger CAS]
+    E2 --> S2[方案二: LongAdder 分散热点]
+
+    R1 --> S3[应用场景: 单例DCL防半初始化对象NPE]
+    E1 --> S4[应用场景: 在线人数状态标志位]
+```
 
 ## 视频脚本
 

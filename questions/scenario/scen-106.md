@@ -96,6 +96,23 @@ memory_points:
 3. **ID 如何处理**：如果从自增 ID 变为了 Snowflake ID，迁移过程中如何处理冲突？（通常建议迁移前先修改代码生成 ID 策略，存量数据保留自增 ID，增量数据用 Snowflake，ID 类型改为 bigint/string 即可）。
 4. **BigKey 问题**：迁移过程中如果某个单表数据量巨大（亿级），如何避免对主库造成影响？（使用开源工具的流式读取/写入，限制传输速度，或者分批次迁移）。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    OLD[(老库)] --> DW[应用双写]
+    DW --> NEW[(新库)]
+    BIN[Binlog同步] --> NEW
+    NEW --> GRAY[灰度切读]
+    GRAY --> CHK{数据一致?}
+    CHK -->|是| FULL[全量切读]
+    CHK -->|否| FIX[修复+回滚预案]
+    EXP[倍数扩容] --> HALF[只迁一半数据]
+    style FULL fill:#d4edda
+    style FIX fill:#ffcccc
+```
+
 ## 记忆要点
 
 - 不停机扩容首选双写方案：代码改造双写新库旧库，工具全量同步历史数据

@@ -193,6 +193,39 @@ sampler = DistributedSampler(dataset, drop_last=True)
 - **gloo**：CPU 的集合通信后端，比 NCCL 慢但更稳
 - **Elastic Training（torchrun）**：自动处理 rank 挂掉重启，防止单点故障导致死锁
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Cluster1 [多GPU/多进程训练]
+        direction LR
+        R0["Rank 0 进程"]
+        R1["Rank 1 进程"]
+    end
+
+    subgraph Cluster2 [死锁四大触发源]
+        T1["NCCL通信调用顺序不一致"]
+        T2["数据负载不均导致同步点干等"]
+        T3["异常被静默吞没跳过同步点"]
+        T4["单卡内CUDA流依赖成环"]
+    end
+
+    T1 --> Block
+    T2 --> Block
+    T3 --> Block
+    T4 --> Block
+
+    Block["集合通信全局阻塞<br/>GPU利用率掉0且无报错"]
+
+    R0 -.->|"互相等待<br/>死锁卡死"| R1
+
+    Block --> S1["排查: NCCL_DEBUG日志"]
+    Block --> S2["排查: py-spy dump堆栈"]
+
+    S1 --> P["预防: 保证代码路径一致<br/>设置超时时间"]
+    S2 --> P
+```
+
 ## 记忆要点
 
 - 核心定义：多进程或流互相等待资源，导致 GPU 利用率掉 0 且不报错卡死

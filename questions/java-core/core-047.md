@@ -84,6 +84,21 @@ synchronized (lock) {
 3. **wait/notify 的锁要求**：调用 wait/notify 方法的前提条件是什么？（答案：必须在 synchronized 方法或代码块中，且必须获得该对象的 Monitor 锁，否则抛出 IllegalMonitorStateException）。
 4. **protected 方法**：Object 的 clone() 方法是 protected 的，有什么影响？（答案：意味着只有子类（且在同包下）或自身可以调用，外部类无法直接调用 `obj.clone()`，通常需要重写为 public）。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Object 类 所有类根基] --> B["hashCode 返回 int"]
+    A --> C["equals 默认比较引用"]
+    A --> D["toString<br/>默认 类名@hash"]
+    A --> E[getClass<br/>运行时 Class 对象]
+    A --> F[clone<br/>浅拷贝 protected]
+    A --> G[wait/notify/notifyAll<br/>线程通信]
+    H[equals+hashCode 契约] --> I[equals 相等<br/>hashCode 必相等]
+    H --> J[hashCode 相等<br/>equals 不一定相等]
+    K[finalize] --> L[JDK 9 已废弃<br/>不可靠]
+```
 ## 记忆要点
 
 - 比较契约：重写equals必须重写hashCode，因为HashMap需保证相等对象哈希值一致

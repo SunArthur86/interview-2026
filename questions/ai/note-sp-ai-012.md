@@ -177,6 +177,23 @@ def apply_rope(q, k, positions):
 3. **外推能力**：RoPE比可学习编码更适合长文本场景
 4. **最新趋势**：提到YaRN/NTK-aware等RoPE长度外推技术
 
+## 流程图
+
+```mermaid
+flowchart TD
+    I["词向量特征"] --> PE["注入位置编码"]
+    subgraph Types[位置编码方案对比]
+        direction TB
+        A["正弦位置编码<br/>绝对/无需训练/可外推"]
+        B["可学习位置编码<br/>绝对/需训练/长度固定"]
+        C["RoPE 旋转位置编码<br/>相对/无需训练/工程主流"]
+    end
+    PE --> Types
+    C --> M["注意力计算 Q·K^T<br/>点积自带相对位置信息"]
+    M --> Ext["长度外推优化<br/>YaRN / NTK-aware Scaling"]
+    Ext --> O["支持超长上下文推理"]
+```
+
 ## 记忆要点
 
 - 因注意力机制具排列不变性，模型无法区分词序，故需位置编码注入位置信息

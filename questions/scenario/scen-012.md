@@ -90,6 +90,20 @@ try {
 }
 ```
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    U[用户签到] --> K[Key: uid:年月]
+    K --> BIT[Bitmap 位图]
+    BIT -->|setbit offset 1| DAY[当日置1]
+    DAY -->|bitcount| CNT[连续签到天数]
+    DAY --> SYNC[异步落 MySQL]
+    SYNC --> STAT[月/年统计]
+    style BIT fill:#d4edda
+```
+
 ## 记忆要点
 
 - 核心结构：因为签到是状态布尔值，所以完美适配Redis Bitmap结构。

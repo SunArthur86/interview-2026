@@ -99,6 +99,23 @@ fmt.Println("Upload URL:", u)
 | **适用场景** | 单机应用 | 内网共享 | 公网云存储、海量文件 | 中小规模图片/视频 |
 | **成本** | 低 | 中 | 随量线性增长 | 中 |
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    UP[文件上传] --> MD5[计算文件指纹]
+    MD5 --> DEDUP{已存在?}
+    DEDUP -->|是| SEC[秒传 建引用]
+    DEDUP -->|否| CHUNK[分块上传]
+    CHUNK --> RSM[断点续传]
+    RSM --> STORE[多副本/纠删码存储]
+    META[元数据] --> MY[(MySQL+Redis)]
+    DOWN[下载请求] --> CDN[CDN加速]
+    STORE --> CDN
+    style SEC fill:#d4edda
+```
+
 ## 记忆要点
 
 - 架构分层：系统分为API接入鉴权、MySQL元数据管理与物理块存储三层。

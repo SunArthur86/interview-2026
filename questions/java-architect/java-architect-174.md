@@ -348,6 +348,20 @@ MySQL→ES 同步本质是跨系统数据复制，受 CAP 约束：
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——同步双写和异步 CDC 怎么选？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[商品中心<br/>写入数据] --> B[本地事务<br/>业务表+Outbox表]
+    B --> C[MySQL binlog<br/>数据变更记录]
+    C --> D[CDC组件<br/>Debezium监听]
+    D -->|按productId Hash| E[Kafka 消息队列<br/>保证分区内顺序]
+    E --> F[消费端批量处理<br/>bulk写入100-500条]
+    F --> G[Elasticsearch<br/>refresh_interval=1s]
+    G --> H[搜索引擎提供检索]
+    C --> I[T+1定时对账任务]
+    I -->|比对 MySQL vs ES count| J[差异数据补偿队列]
+```
 
 ## 视频脚本
 

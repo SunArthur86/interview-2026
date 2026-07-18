@@ -97,6 +97,15 @@ def verify_sampling(draft_tokens, target_logits, base_model_probs):
 2. **树状投机验证时 Attention Mask 是如何构造的？**（需构建稀疏 Mask 以并行计算所有候选路径）
 3. **Acceptance Rate 是什么？低于多少时投机解码会变成负优化？**（通常需 >50% 才能抵消并行计算开销）
 
+```mermaid
+flowchart TD
+    Base[基础投机<br/>Draft+Target] --> Branch{变体}
+    Branch -->|多头并行| Medusa[Medusa<br/>无需额外模型]
+    Branch -->|特征级| EAGLE[EAGLE<br/>接受率高]
+    Branch -->|树状| Tree[树状投机<br/>低延迟]
+    Branch -->|并行| Parallel[并行投机<br/>高吞吐]
+```
+
 ## 记忆要点
 
 - 基础投机：小模型Draft生成候选，大模型Target并行验证，猜对免费，保证分布一致。

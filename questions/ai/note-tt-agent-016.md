@@ -207,6 +207,20 @@ async def function_call_with_retry(
 3. **温度调参**：Function Call场景Temperature应设为0（确定性输出），避免随机性导致参数变化
 4. **模型选型**：GPT-4/Claude在Function Call上比开源模型好10-15%，但对成本敏感场景可用SFT微调小模型
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Start["用户意图输入"] --> P{"Prompt维度优化<br/>工具选择决策树"}
+    P --> S{"Schema精确化<br/>参数枚举与正则约束"}
+    S --> F{"Few-shot示范<br/>正反例与边界Case"}
+    F --> M["大模型生成<br/>工具调用请求"]
+    M --> R{"异常重试拦截<br/>解析失败/参数错误"}
+    R -- "重试成功" --> E["输出合法调用"]
+    R -- "重试超阈值" --> D["降级/转人工处理"]
+    E --> Eval{"Eval流水线评估<br/>准确率回归测试"}
+```
+
 ## 记忆要点
 
 - 口诀法：四大维度全面提升调用准确率：决策树提示词、精确Schema、正反例示范、异常重试

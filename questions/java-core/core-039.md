@@ -96,6 +96,28 @@ server {
 2. **HTTP/2.0 中的帧有哪些类型？**：DATA、HEADERS、PRIORITY、RST_STREAM（用于取消发送）、SETTINGS、PUSH_PROMISE 等。
 3. **为什么还需要 HTTP/3.0？**：HTTP/2.0 虽然解决了 HTTP 层阻塞，但基于 TCP，一旦丢包，TCP 重传机制会导致整个连接阻塞，无法利用剩余带宽。HTTP/3.0 基于 UDP (QUIC)，彻底解决了传输层的队头阻塞。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[HTTP 协议演进] --> B["HTTP/1.1"]
+    B --> B1[文本协议]
+    B --> B2[持久连接 Keep-Alive]
+    B --> B3[管线化 不实用]
+    B --> B4[队头阻塞 HOL]
+    A --> C["HTTP/2"]
+    C --> C1[二进制分帧]
+    C --> C2[多路复用<br/>一个 TCP 多请求]
+    C --> C3[头部压缩 HPACK]
+    C --> C4[服务器推送]
+    C --> C5[应用层 HOL 解决<br/>TCP 层仍 HOL]
+    A --> D["HTTP/3"]
+    D --> D1[基于 QUIC UDP]
+    D --> D2[彻底解决 HOL]
+    D --> D3[0-RTT 建联]
+    D --> D4[连接迁移<br/>IP 变化不断流]
+```
 ## 记忆要点
 
 - 传输格式：HTTP/1.1是文本而2.0是二进制分帧，解析更快更健壮

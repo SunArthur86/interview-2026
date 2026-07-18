@@ -74,6 +74,24 @@ names.sort(String::compareToIgnoreCase);
 | **作用域** | 可覆盖外部类的变量 | 局部变量必须隐式 final (Effectively Final) |
 | **适用范围** | 接口或抽象类 | 仅限函数式接口 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A["Lambda 表达式 Java 8"] --> B["(params) -> body"]
+    A --> C[本质: 函数式接口实例]
+    D[函数式接口] --> E[只有一个抽象方法]
+    E --> F["@FunctionalInterface 标注"]
+    G[内置接口] --> H["Predicate T boolean<br/>Filter 断言"]
+    G --> I["Consumer T void<br/>forEach 消费"]
+    G --> J["Function T R<br/>map 转换"]
+    G --> K["Supplier T<br/>工厂 延迟计算"]
+    L[特性] --> M[类型推断]
+    L --> N[访问 effectively final 变量]
+    O[实现机制] --> P["编译生成 invokedynamic<br/>运行时 LambdaMetafactory 绑定"]
+    O --> Q[不生成额外内部类]
+```
 ## 记忆要点
 
 - 本质是函数式接口的实例，实现函数作参数传递，使代码更简洁灵活。

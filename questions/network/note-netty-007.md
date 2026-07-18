@@ -228,6 +228,33 @@ JDK Future（如 FutureTask）设计为"轮询模型"——`future.isDone()` 检
 
 **收尾：** ChannelFutureListener 和 GenericFutureListener 的关系？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant BizThread as 业务线程
+    participant CF as ChannelFuture
+    participant EL as EventLoop线程
+    participant NettyIO as 底层IO操作
+
+    BizThread->>EL: 提交异步操作(如write)
+    EL-->>BizThread: 返回ChannelFuture占位符
+    BizThread->>CF: 注册addListener回调逻辑
+    Note over BizThread: 业务线程不阻塞<br/>无需手动轮询isDone
+
+    EL->>NettyIO: 执行网络读写
+    NettyIO-->>EL: 操作执行完毕
+    
+    alt 操作成功
+        EL->>CF: setSuccess (内部Promise写结果)
+        CF->>BizThread: 触发operationComplete回调
+        BizThread->>BizThread: 执行 isSuccess成功逻辑
+    else 操作失败
+        EL->>CF: setFailure (内部Promise写异常)
+        CF->>BizThread: 触发operationComplete回调
+        BizThread->>BizThread: 获取cause并执行异常逻辑
+    end
+```
 
 ## 视频脚本
 

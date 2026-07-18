@@ -118,6 +118,23 @@ public class AlipayCsvParser implements BillParser {
 - 差异数量超阈值 → 告警
 - 对账任务失败 → 立即告警
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    INT[内部订单流水] --> CLN[清洗格式化]
+    EXT[渠道账单] --> CLN
+    CLN --> MT[按流水号匹配]
+    MT --> CHK{金额一致?}
+    CHK -->|是| OK[平账]
+    CHK -->|否| DIFF[差异处理]
+    DIFF --> AUTO[自动补单]
+    DIFF --> MAN[人工介入]
+    style OK fill:#d4edda
+    style DIFF fill:#ffcccc
+```
+
 ## 记忆要点
 
 - 核心流程：拉取T+1账单 → 数据清洗对齐格式 → 全等匹配（交易号+金额+状态） → 差异生成报告

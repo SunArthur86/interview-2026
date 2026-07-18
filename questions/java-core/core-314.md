@@ -113,6 +113,29 @@ final V putVal(int hash, K key, V value) {
 1. **为什么阈值是8？** 红黑树节点大小是链表的2倍，泊松分布下链表长度达8概率极低（0.00000006），选择8是时空权衡
 2. **HashMap线程安全吗？** 不安全！JDK8虽修复了死循环，但仍有数据丢失风险，并发用 ConcurrentHashMap
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[HashMap 键值对存取] --> B[计算 key 的 hashCode]
+    B --> C[扰动函数 hash]
+    C --> D["定位桶索引 (n-1) & hash"]
+    D --> E{桶位置是否为空?}
+    E -->|是| F[直接放入新 Node]
+    E -->|否| G{key 是否相等?<br/>hashCode+equals}
+    G -->|相等| H[覆盖旧 Value]
+    G -->|不相等| I[尾插法插入链表]
+    I --> J{链表长度 > 8<br/>且容量 ≥ 64?}
+    J -->|是| K["链表转红黑树<br/>O(log n)"]
+    J -->|否| L["保持链表<br/>O(n)"]
+    M{"元素数 > 容量×0.75?"} -->|是| N[扩容2倍 Rehash]
+    N --> O[元素重分布<br/>原位或原位+oldCap]
+    F --> M
+    H --> M
+    K --> M
+    L --> M
+```
 ## 记忆要点
 
 - 结构大升级：JDK7是数组加链表，JDK8引入红黑树解决哈希碰撞退化

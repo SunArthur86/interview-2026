@@ -128,6 +128,27 @@ public class OrderService {
 | **依赖** | JDK 原生支持 | 需引入 CGLib/ASM 库 |
 | **常见限制** | 必须有接口 | 无法代理 private/final 方法 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[动态代理实现原理] --> B["JDK Proxy"]
+    A --> C[CGLib]
+    B --> D[基于反射<br/>运行时生成接口实现类]
+    D --> E[必须实现接口]
+    D --> F["核心 InvocationHandler.invoke"]
+    E --> G[只能代理接口方法]
+    C --> H[基于 ASM 字节码生成]
+    H --> I[运行时生成目标类子类]
+    I --> J[重写非 final 方法]
+    J --> K[不能代理 final 类/方法]
+    J --> L["MethodInterceptor.intercept"]
+    M[性能] --> N[JDK 1.8 后反射优化<br/>与 CGLib 接近]
+    O[Spring 选型] --> P["有接口默认 JDK<br/>SpringBoot 2.x 默认 CGLib"]
+    Q[避坑] --> R[this 自调用 不走代理<br/>事务/AOP 失效]
+    Q --> S[final 方法不会被增强]
+```
 ## 记忆要点
 
 - JDK代理：利用反射生成接口实现类，核心是InvocationHandler，因为基于接口所以类必须实现接口

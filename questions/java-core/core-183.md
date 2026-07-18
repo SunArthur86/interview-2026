@@ -91,6 +91,25 @@ tcpdump -i eth0 'tcp[tcpflags] & tcp-rst != 0 or tcp[tcpflags] & tcp-syn != 0' -
 | **重传粒度** | 重传最早未确认的段 | 重传丢失的段 | 仅重传真正丢失的段 | 
 | **性能影响** | 大 (吞吐量骤降) | 中等 | 小 (最高效) |
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - 四大机制：超时重传、快速重传、SACK、D-SACK，解决数据丢失恢复问题。

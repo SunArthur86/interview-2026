@@ -151,6 +151,28 @@ GRPO 的洞察：对同一 prompt，组内 mean(R) 就是 V 的天然估计！
 - **GRPO 的 KL 惩罚**：和 PPO 一样需要 KL 约束防止偏离参考模型太远
 - **DAPO**：GRPO 的改进版（字节），针对 RLHF 场景优化（动态采样、长度归一化）
 
+## 流程图
+
+```mermaid
+flowchart TD
+    P["输入 Prompt"] --> G["采样 G 个不同回答"]
+    G --> R["获取 G 个序列级回报 R"]
+
+    R --> M["计算组内均值 mean_R"]
+    R --> S["计算组内标准差 std_R"]
+
+    M --> C["构建 Baseline<br/>降低梯度方差, 不改期望"]
+    S --> C
+
+    R --> A["计算相对优势<br/>A_i = (R_i - mean_R) / std_R"]
+    C --> A
+
+    A --> U["更新 Actor 策略网络"]
+
+    style C fill:#f9f,stroke:#333,stroke-width:2px
+    style A fill:#bbf,stroke:#333,stroke-width:2px
+```
+
 ## 记忆要点
 
 - GRPO优势计算：同prompt采G个回答，A=(R-组均值)/组标准差

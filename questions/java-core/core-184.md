@@ -79,6 +79,23 @@ service UserService {
 | **JSON** | 文本格式，可读性强 | 最大 | 慢 | 跨语言调试，对性能要求不高 |
 | **Multiplexed** | 支持单端口多服务 | 中 | 快 | 一个 Server 暴露多个 Service 接口 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Thrift 序列化框架] --> B[IDL 接口定义语言]
+    B --> C[生成多语言代码]
+    D[架构分层] --> E[Transport 传输<br/>TCP/HTTP/Buffered]
+    D --> F[Protocol 协议<br/>二进制/压缩/JSON]
+    D --> G[Processor 处理<br/>分发到具体方法]
+    D --> H[Server 模型<br/>TSimpleServer/TThreadedServer/TNonblockingServer]
+    I[优势] --> J[紧凑二进制 高效]
+    I --> K[跨语言 支持 20+]
+    I --> L[IDC 内 RPC 首选]
+    M[对比] --> N[gRPC HTTP/2+Protobuf]
+    M --> O[Dubbo Hessian2/Kryo]
+```
 ## 记忆要点
 
 - 核心作用：IDL定义+生成跨语言代码，解决异构系统高效RPC通信。

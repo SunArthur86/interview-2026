@@ -215,6 +215,31 @@ T4: 线程A SET cache = 99  (旧值回填!)
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Client
+        R["读请求"]
+        W["写请求"]
+    end
+    subgraph App
+        L["Caffeine<br/>本地缓存"]
+        RA["Redis<br/>分布式缓存"]
+    end
+    subgraph DB_Layer
+        M[("MySQL")]
+        C["Canal<br/>订阅binlog"]
+    end
+    R --> L
+    L -- "miss" --> RA
+    RA -- "miss" --> M
+    W --> M
+    M --> C
+    C -- "异步清理" --> RA
+    C -- "广播失效" --> L
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

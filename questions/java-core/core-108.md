@@ -80,6 +80,27 @@ public BigDecimal calculateDiscount(BigDecimal originalPrice, double discountRat
 2.  **javadoc 编译选项**：如何指定编码（`-encoding`）、字符集（`-charset`）以及访问权限（`-public`, `-protected`, `-private`, `-package`）。
 3.  **Overriding 方法的注释继承**：子类重写父类方法时，若不写注释，javadoc 默认会继承父类的文档注释；若写了，则替换父类。如何使用 `{@inheritDoc}` 标签继承父类部分注释。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[文档注释 Javadoc] --> B["注释块 /** ... */"]
+    B --> C[位于类/方法/字段声明前]
+    D[常用标签] --> E["@param 参数说明"]
+    D --> F["@return 返回值说明"]
+    D --> G["@throws/@exception 异常说明"]
+    D --> H["@author 作者"]
+    D --> I["@version 版本号"]
+    D --> J["@see 参考"]
+    D --> K["@since 引入版本"]
+    D --> L["@deprecated 废弃说明"]
+    M[生成文档] --> N["javadoc -d doc Xxx.java"]
+    N --> O[输出 HTML API 文档]
+    P[价值] --> Q[规范团队接口]
+    P --> R[IDE 智能提示]
+    P --> S[Spring/SpringDoc 自动生成 API]
+```
 ## 记忆要点
 
 - 工具：因为配合javadoc工具，所以能生成HTML格式的API文档

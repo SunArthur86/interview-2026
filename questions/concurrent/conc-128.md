@@ -122,6 +122,35 @@ public class ThreadPoolDemo {
 - **corePoolSize 配置按任务类型**：CPU 密集型（计算、加密）配 N+1，多出 1 个应对偶发阻塞；IO 密集型（网络、磁盘）配 2N 甚至更多，因为线程大量时间在等 IO，多线程能提高 CPU 利用率。
 - **必须配置监控和告警**：生产环境线程池要监控活跃线程数、队列堆积数、拒绝次数，队列堆积超阈值告警，否则流量洪峰时静默拒绝任务会导致业务故障。
 
+### 线程池任务提交流程图
+
+```mermaid
+flowchart TD
+    Submit(["提交任务 execute"]) --> Q1{"当前线程数 < corePoolSize?"}
+    Q1 -->|"是"| Core["创建核心线程执行"]
+    Q1 -->|"否"| Q2{"workQueue 未满?"}
+    Q2 -->|"是"| Queue["入队等待"]
+    Q2 -->|"否"| Q3{"线程数 < maximumPoolSize?"}
+    Q3 -->|"是"| NonCore["创建非核心线程"]
+    Q3 -->|"否"| Reject["触发拒绝策略 handler"]
+
+    Reject --> R1["AbortPolicy 抛异常"]
+    Reject --> R2["CallerRunsPolicy 调用方执行"]
+    Reject --> R3["DiscardPolicy 丢弃"]
+    Reject --> R4["DiscardOldestPolicy 丢最老"]
+
+    NonCore -. 空闲超 keepAliveTime .-> Reclaim["回收非核心线程"]
+    Queue --> Idle["空闲线程 take 任务"]
+
+    Params["7参数:<br/>core / max / keepAliveTime / unit<br/>workQueue / threadFactory / handler"]
+
+    classDef core fill:#e8f5e9,stroke:#2e7d32
+    classDef reject fill:#ffebee,stroke:#c62828
+    classDef param fill:#e3f2fd,stroke:#1565c0
+    class Core param
+    class R1,R2,R3,R4 reject
+```
+
 ## 记忆要点
 
 - 7参数口诀：核心、最大、存活时、计时单位、任务队列、线程工厂、拒绝策略

@@ -97,6 +97,27 @@ d_model = 512, h = 8
 - **MQA / GQA**：Multi-Query Attention / Grouped-Query Attention，多个 head 共享 K/V，减少 KV cache 内存，提升推理速度
 - **KV Cache**：自回归生成时缓存已计算的 K/V，避免重复计算，是 LLM 推理优化的核心
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Input[输入Token序列] --> M["Multi-Head Attention<br/>多头并行注意力"]
+    Input --> QKV["线性变换生成 Q / K / V"]
+    QKV --> M
+    subgraph M [单头计算流程]
+        Q[K] --> Dot["点积 Q·K^T"]
+        Scale["除以 √d_k<br/>防梯度消失"] --> Dot
+        Dot --> Soft["Softmax归一化"]
+        Soft --> Mul["乘以 V 得到结果"]
+    end
+    M --> Arch{模型架构演进}
+    subgraph Arch [GPT vs BERT]
+        GPT["GPT: Decoder-only<br/>单向因果掩码"]
+        BERT["BERT: Encoder-only<br/>双向完形填空"]
+    end
+    Arch -->|Scaling Law友好| Modern["现代大模型统一架构<br/>支持Zero-shot与通用生成"]
+```
+
 ## 记忆要点
 
 - 公式核心：Attention = softmax(Q·K^T / √d_k) · V，除以√d_k是为防点积过大导致梯度消失。

@@ -444,6 +444,33 @@ AI 时代对 Java 后端工程师不是威胁，是机会：
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：Java 工程师转 AI 最大的坎？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[Java后端工程师] --> B{AI时代转型路径}
+    B --> S1
+    B --> S2
+    B --> S3
+    B --> S4
+    subgraph S1[Stage 1: 用AI工具]
+        A1[Cursor提效开发] --> A2[Prompt工程]
+    end
+    subgraph S2[Stage 2: 集成AI应用]
+        B1[LLM API调用] --> B2[RAG向量库检索]
+        B2 --> B3[Function Calling简单Agent]
+    end
+    subgraph S3[Stage 3: 工程化AI Infra]
+        C1[vLLM推理优化] --> C2[LLM网关多模型路由]
+        C2 --> C3[Agent编排平台设计]
+    end
+    subgraph S4[Stage 4: 设计AI解决方案]
+        D1[风控AI全链路架构] --> D2[监管合规可解释]
+        D2 --> D3[商业ROI评估]
+    end
+    S1 --> S2 --> S3 --> S4
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

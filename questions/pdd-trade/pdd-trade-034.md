@@ -211,6 +211,32 @@ FP8 的限制是硬件绑定。FP8 只有 H100/H200 原生支持，A100 是 FP16
 
 **收尾：** vLLM 为什么快？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Req([并发推理请求]) --> CB[Continuous Batching<br/>动态拼组请求]
+    CB --> Cache{命中前缀缓存?}
+
+    subgraph 引擎优化 [vLLM/PagedAttention]
+        Cache -->|是| Reuse[复用历史KV Cache]
+        Cache -->|否| Calc[注意力机制计算]
+        Reuse --> PA[PagedAttention<br/>按页管理无碎片显存]
+        Calc --> PA
+    end
+
+    PA --> Spec{投机解码开启?}
+    Spec -->|是| Draft[小模型生成草稿Token]
+    Draft --> Verify[大模型并行验证]
+    Spec -->|否| Direct[直接解码下一Token]
+    Verify --> Out([流式返回给用户])
+    Direct --> Out
+
+    subgraph 压缩与并行 [底层算力优化]
+        Quan[INT8/FP8量化压缩显存]
+        TP_TP[Tensor Parallel层内切GPU]
+    end
+```
 
 ## 视频脚本
 

@@ -99,6 +99,29 @@ users.add(new User("Alice")); // 重复，不会存入
 | **Null 键/值** | 允许 | 不允许 | 不允许 |
 | **迭代器** | Fail-Fast | Fail-Safe | Weakly Consistent |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java 集合框架] --> B[Collection 单列]
+    A --> C[Map 双列]
+    B --> D[List 有序可重复]
+    B --> E[Set 无序不重复]
+    B --> F[Queue 队列]
+    D --> D1[ArrayList]
+    D --> D2[LinkedList]
+    D --> D3[Vector]
+    E --> E1[HashSet]
+    E --> E2[LinkedHashSet]
+    E --> E3[TreeSet]
+    F --> F1[PriorityQueue]
+    F --> F2[ArrayDeque]
+    C --> C1[HashMap]
+    C --> C2[LinkedHashMap]
+    C --> C3[TreeMap]
+    C --> C4[ConcurrentHashMap]
+```
 ## 记忆要点
 
 - 两大顶级接口：Collection存单列（List/Set/Queue），Map存双列KV键值对。

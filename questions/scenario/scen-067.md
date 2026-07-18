@@ -111,6 +111,21 @@ return {newScore, rank}
 3. **同分排名逻辑**：ZSet 默认同分按字典序，若需按时间先后排名，如何实现？（Score 设计为 `原始分数 + 微小时间戳偏移量`，如 `score + (now - base)/1e9`）
 4. **分页查询深翻问题**：获取排名 100 万之后的用户，为什么慢？（ZSET 的 `ZRANGE` 复杂度与偏移量相关，深翻性能极差；应改为 `ZCOUNT` 统计或反向查询，避免大偏移量分页）
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ACT[用户行为加分] --> ZS[Redis ZSet]
+    ZS -->|score=分数| SORT[自动排序]
+    SORT --> TOP[Top N 查询]
+    MULTI[多维榜单 日/周/月] --> KEY[分Key存储]
+    BIG[亿级数据] --> BKT[分桶/冷热分离]
+    CHG[分数变更] --> MSG[消息驱动]
+    MSG --> WS[WebSocket 推送前端]
+    style ZS fill:#d4edda
+```
+
 ## 记忆要点
 
 - 核心结构：Redis ZSet天然排序，亿级数据因单Key过载，所以需分桶/分片ZSet分散压力

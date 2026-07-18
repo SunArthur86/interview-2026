@@ -77,6 +77,24 @@ for (int i = 0; i < 1000; i++) {
     - **注意**：如果 regex 是 `.` 或 `|` 等正则元字符，需要转义（`\.`）。末尾空串可能会被丢弃。
 - **`String trim()`**：返回去除字符串**首尾**空白字符的副本。注意不包含中间的空白。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[String 不可变] --> B[final 修饰类]
+    A --> C[private final char / byte 数组]
+    B --> D[不可继承]
+    C --> E[值不可修改]
+    F[不可变好处] --> G[线程安全]
+    F --> H[可缓存 hashCode]
+    F --> I[字符串常量池复用]
+    F --> J[安全性 防篡改]
+    K["JDK 9 改进"] --> L["char 2字节 → byte 1字节<br/>+ coder 编码标识<br/>节省内存"]
+    M[拼接] --> N["+ 编译期优化 StringBuilder"]
+    M --> O["concat/StringUtils"]
+    P["intern"] --> Q[入常量池 复用]
+```
 ## 记忆要点
 
 - 不可变本质：因为底层value数组被private final修饰且类被final修饰

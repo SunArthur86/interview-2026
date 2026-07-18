@@ -98,6 +98,20 @@ s1.removeAll(s2);  // 差集 → [A]
 │       hash冲突？ → equals()比较？          │
               └───────────┬───────────────────────┘
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Set 接口] --> B[无序 不可重复]
+    A --> C[核心约束 hashCode+equals]
+    A --> D[主要实现]
+    D --> E[HashSet<br/>HashMap 键 O 1]
+    D --> F[LinkedHashSet<br/>保留插入顺序]
+    D --> G[TreeSet<br/>TreeMap 红黑树 有序]
+    D --> H[CopyOnWriteArraySet<br/>线程安全]
+    A --> I[典型场景<br/>去重 集合运算]
+```
 ## 记忆要点
 
 - 核心特性：继承 Collection，元素不可重复（靠 equals 判断），无索引，最多允许一个 null

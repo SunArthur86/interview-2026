@@ -183,6 +183,25 @@ Canal 同步的可靠性靠"失败重试 + 对账补偿"。权衡方案：
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 交易核心链路
+        A[订单服务创建/支付订单] --> B[(MySQL: 写入订单表)]
+        B --> C[生产者: 发送事务消息]
+        C --> D[(RocketMQ: 订单事件 Topic)]
+        D --> E[消费者: 库存冻结/积分发放]
+    end
+    subgraph 异步数据同步链路
+        F[(MySQL: Binlog变动)] --> G[Canal 监听解析]
+        G --> H[(Kafka: 数据同步 Topic)]
+        H --> I[Flink 计算或消费者处理]
+        I --> J[(Elasticsearch: 搜索引擎更新)]
+        I --> K[(数据仓库/离线数仓)]
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

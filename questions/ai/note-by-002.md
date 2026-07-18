@@ -183,6 +183,22 @@ GRPO 的 token 级 IS 和 PPO 一致，区别在于：
 - **GSPO 对 token 级 IS 的优化**：结合 MoE 的稀疏激活特性调整权重
 - **ReMax / RLOO**：其他无需重要性采样的 RL 方法（on-policy，但样本效率低）
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A1["旧策略采样轨迹"] --> B["计算Token旧概率"]
+    B --> C["新策略前向计算"]
+    C --> D["计算Token新概率"]
+    D --> E["Log域计算独立比值"]
+    E --> F{"PPO Clip 裁剪"}
+    F -->|"限制在 1±ε 内"| G["生成Token级 Ratio 权重"]
+    F -->|"裁剪极端偏离值"| G
+    G --> H["修正Off-policy偏差"]
+    H --> I["计算精细Token级优势"]
+    I --> J["更新新策略参数"]
+```
+
 ## 记忆要点
 
 - 核心对比：序列级是连乘易爆炸下溢，token级是独立计算比值，数值更稳定

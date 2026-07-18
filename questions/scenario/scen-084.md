@@ -131,6 +131,23 @@ else → 放行
 - 规则更新实时生效
 - 99.99%可用性（风控挂了交易也要能放行）
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    TX[交易请求] --> FL[Flink 实时特征]
+    FL --> RD[(Redis 特征)]
+    RD --> RULE[规则引擎 硬规则]
+    RULE -->|命中| BLOCK[拦截]
+    RULE -->|未命中| ML[ML模型评分]
+    ML -->|高风险| BLOCK
+    ML -->|低风险| PASS[放行]
+    DOWN[风控挂掉] --> DEG[自动降级放行]
+    style BLOCK fill:#ffcccc
+    style PASS fill:#d4edda
+```
+
 ## 记忆要点
 
 - 双核驱动：规则引擎微秒级处理强逻辑（黑名单/频率），ML模型毫秒级识别黑盒异常模式。

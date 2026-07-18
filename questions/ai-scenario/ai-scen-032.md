@@ -113,6 +113,36 @@ def evaluate_golden_set(model_outputs, golden_data):
 3. **主观题的评分一致性**：对于开放性问题，如何保证LLM-as-Judge或人工评分的稳定性？
    *答案要点*：细化评分Rubric（细则），将抽象标准转化为具体的检查项；使用CoT（Chain of Thought）让Judge先分析再打分；计算Cohen's Kappa系数监控一致性，低一致性样本需重新对齐标准。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["数据来源池"] --> B["标注与规范设计"]
+    subgraph A ["多源数据采集"]
+        A1["线上真实日志"]
+        A2["Bad Case回流"]
+        A3["红队对抗样本"]
+    end
+    subgraph B ["精细化标注"]
+        B1["参考答案标注"]
+        B2["1-5分评分细则"]
+        B3["关键检查点定义"]
+    end
+    B --> C{"Golden Set分层路由"}
+    C -->|"核心场景"| D1["Core Set (50条)<br/>Pre-merge必跑"]
+    C -->|"全量覆盖"| D2["Full Set (500条)<br/>Pre-release全量跑"]
+    D1 --> E["自动评测引擎"]
+    D2 --> E
+    subgraph E ["自动化评测"]
+        E1["规则校验<br/>(格式/关键词)"] --> E4["综合评分汇总"]
+        E2["LLM-as-Judge<br/>(GPT-4o-mini语义)"] --> E4
+        E3["语义相似度<br/>(BERTScore)"] --> E4
+    end
+    E4 --> F{"通过率检查"}
+    F -- "下降>5%" --> G["阻断CI/CD发布"]
+    F -- "Pre-merge>95%" --> H["允许代码合并"]
+```
+
 ## 记忆要点
 
 - 构建流程：来源（线上日志/人工构造/对抗样本）→ 标注（评分细则）→ 分层。

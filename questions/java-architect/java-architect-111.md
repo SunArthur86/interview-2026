@@ -382,6 +382,33 @@ wrk -t8 -c100 -d60s http://order-service-boot3/api/orders
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——为什么不改成 javax 保留兼容？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["Spring Boot 2.7<br/>javax.* 命名空间"] --> B{"升级路径规划"}
+    B --> C["升级 JDK 17+"]
+    B --> D["使用自动化重构工具"]
+    B --> E["排查间接依赖残留"]
+
+    D --> F["Spring Boot Migrator"]
+    D --> G["OpenRewrite"]
+    E --> H["mvn dependency:tree"]
+
+    F --> I["全局替换 javax 为 jakarta<br/>(如 Servlet / JPA)"]
+    G --> I
+    H --> J{"发现第三方库<br/>依赖 javax?"}
+
+    J -- 是 --> K["升级该库版本或排除依赖"]
+    J -- 否 --> L["编译期检查通过"]
+    K --> L
+
+    L --> M["Spring Boot 3.x<br/>jakarta.* 命名空间"]
+    M --> N["回归测试与契约验证<br/>(保证 API 行为不变)"]
+
+    style A fill:#f9d0c4,stroke:#e06666
+    style M fill:#d9ead3,stroke:#93c47d
+```
 
 ## 视频脚本
 

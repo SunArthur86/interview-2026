@@ -207,6 +207,27 @@ Java 并发的本质是**"对抗 CPU 缓存/重排，保证共享状态正确"**
 
 **收尾：** 您想继续往深里聊吗——比如「synchronized 和 Lock 区别？」
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1[并发核心机制]
+        A1[JVM内存模型] -->|happens-before| A2[共享状态正确性]
+    end
+    subgraph S2[同步原语演进]
+        B1[volatile状态标志] --> B2[无锁CAS操作]
+        B2 --> B3[并发容器]
+        B3 --> B4[AQS显式锁]
+    end
+    subgraph S3[模型路由表实战]
+        C1[本地ConcurrentHashMap] -->|读无锁| C2[纳秒级路由查询]
+        C3[Nacos配置中心] -->|最终一致延迟| C4[各Pod路由表快照]
+        C5[MLflow元数据中心] -->|版本就绪| C1
+    end
+    S1 --> S2
+    S2 --> S3
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

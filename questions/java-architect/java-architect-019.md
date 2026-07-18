@@ -350,6 +350,28 @@ public boolean deductStock(Long skuId, int quantity) {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：CAP 中的 C 和 ACID 中的 C 是一回事吗？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph CAP定理 [CAP 定理 P必选]
+        direction LR
+        A[CP 强一致性] --> B[分区时拒绝写牺牲可用]
+        B --> C[Zookeeper / etcd<br/>配置中心 / 分布式锁]
+        D[AP 高可用性] --> E[分区时各自读写牺牲一致]
+        E --> F[Nacos / Eureka<br/>注册中心 / 社交缓存]
+    end
+
+    subgraph BASE理论 [BASE 理论 AP的工程妥协]
+        direction LR
+        G[基本可用] --> H[允许响应降级]
+        H --> I[软状态] --> J[允许中间状态不一致]
+        J --> K[最终一致] --> L[恢复后收敛如读修复]
+    end
+
+    F -.->|互联网业务首选| BASE理论
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

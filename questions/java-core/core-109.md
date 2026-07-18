@@ -104,6 +104,23 @@ public static void addNumbers(List<? super Integer> list) {
 2.  **PECS 原则**：“Producer Extends, Consumer Super”。当需要从集合中读取数据（生产）时，使用 `extends`；当需要向集合写入数据（消费）时，使用 `super`。
 3.  **桥接方法**：编译器为了保持泛型类型擦除后的多态性，会自动生成合成方法（桥接方法），在字节码层面连接子类重写的方法和父类泛型方法。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java 泛型] --> B[类型参数化<br/>E T K V]
+    A --> C[编译期类型检查]
+    A --> D[类型擦除 Type Erasure]
+    D --> E["编译后擦除为 Object<br/>或上界 bound"]
+    D --> F[运行时无泛型信息]
+    D --> G[不能用 new T<br/>不能用泛型数组]
+    H[通配符] --> I["? extends T 上界<br/>只读 协变"]
+    H --> J["? super T 下界<br/>只写 逆变"]
+    K[PECS 原则] --> L[Provider extends<br/>Consumer super]
+    M[场景] --> N[集合类型安全]
+    M --> O[框架 API 抽象]
+```
 ## 记忆要点
 
 - 核心：因为提供编译期检查，所以能消除强转隐患并保障类型安全

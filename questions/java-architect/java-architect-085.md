@@ -419,6 +419,28 @@ buf breaking --against '.git#branch=main'
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——什么时候该出 v2 而不是在 v1 演进？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant App as 调用方 App/Web
+    participant Broker as Pact Broker
+    participant CI as 提供方订单服务 CI
+    participant Order as 订单服务 v1/v2
+
+    App->>App: 定义期望契约 (只用id+amount)
+    App->>Broker: 推送 Pact 契约文件
+    CI->>Broker: 拉取所有消费方契约
+    CI->>CI: 运行 Pact CDC 验证测试
+    alt 破坏性变更 (如删amount)
+        CI-->>CI: Pact 失败 卡住构建
+    else 非破坏性变更 (加字段)
+        CI-->>CI: Pact 通过 允许发布
+    end
+    CI->>Order: 部署多版本并存 (/v1 /v2)
+    App->>Order: URL版本路由调用
+    Order-->>App: 返回兼容响应 (忽略未知字段)
+```
 
 ## 视频脚本
 

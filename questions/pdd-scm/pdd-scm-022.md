@@ -191,6 +191,28 @@ ES 不适合高频更新：
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 商品中心服务
+        A1[商品管理后台] --> A2[MySQL分库分表]
+        A1 -- 写入 --> A3[Canal解析Binlog]
+    end
+    subgraph 存储层
+        A2 --- A2a[SPU分16库]
+        A2 --- A2b[SKU分32库]
+    end
+    A3 -- 清缓存/发事件 --> B1[Redis多级缓存]
+    A3 -- 异步构建 --> B2[ElasticSearch索引]
+    subgraph 读服务与下游
+        C1[商品详情页] --> B1
+        C1 --> B2
+        C2[实时库存查询] --> C3[Redis库存引擎]
+        A3 -- MQ广播 --> C4[下游交易/搜索系统]
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

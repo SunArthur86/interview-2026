@@ -198,6 +198,26 @@ temperature: 0.1-0.3（降低随机性，减少编造）
 - **CRAG（Corrective RAG）**：检索后先评估质量，质量差就触发 web 搜索补充
 - **Self-RAG**：训练模型自己判断"要不要检索""检索结果相不相关""答案有没有依据"
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["用户提问Query"] --> B["向量检索Top-K"]
+    B --> C["相似度阈值过滤<br/>剔除低分无关Chunk"]
+    C --> D["Rerank重排模型<br/>Cross-Encoder精排"]
+    D --> E["LLM生成答案<br/>Prompt限制+溯源引用"]
+    E --> F["事实校验子Agent<br/>逐句比对Context"]
+    F --> G{"答案有依据?"}
+    G -- "有" --> H["返回最终结果"]
+    G -- "无" --> I["拦截并返回拒答"]
+    subgraph "幻觉缓解多层防御"
+      C
+      D
+      E
+      F
+    end
+```
+
 ## 记忆要点
 
 - 幻觉根源：检索不到硬编、检索到噪声误用、LLM自身胡编，需多层防御

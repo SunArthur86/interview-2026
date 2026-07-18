@@ -305,6 +305,35 @@ TiDB 确实支持任意二级索引查询、无需人工分片。但前面提过
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：分片键怎么选？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant App as 风控应用服务
+    participant Proxy as ShardingSphere代理
+    participant Master as MySQL主库
+    participant Slave as MySQL从库1
+    participant ES as ES异构索引库
+
+    App->>Proxy: 提交事件写入(INSERT)
+    Proxy->>Master: 按时间+Hash(uid)精确路由
+    Master-->>Proxy: 写入成功
+    Note over App,Proxy: 高频写入链路
+
+    App->>Proxy: 查询某用户最近7天事件(uid+time)
+    Proxy->>Slave: 路由到特定分片读
+    Slave-->>Proxy: 返回结果集
+    Proxy-->>App: 快速返回数据
+
+    App->>Proxy: 按商户(merchant_id)复杂查询
+    Note over Proxy: 未携带分片键,触发全分片扫描!
+    App->>ES: 直接查询ES异构索引
+    ES->>Slave: 异步订阅Binlog构建索引
+    ES-->>App: 返回聚合结果数据
+
+    Note over App,ES: 历史明细表冷热分离归档
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

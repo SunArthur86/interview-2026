@@ -105,6 +105,23 @@ public class ModShardingDBAlgorithm implements PreciseShardingAlgorithm<Long> {
 | **扩容难度** | N/A | 简单 | 难 (需数据迁移) | 中 (通常需倍数扩容) |
 | **典型场景** | < 2000万行 | 复杂业务拆分 | 日志、历史数据 | 订单、用户数据 |
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    BIG[亿级单表] --> KEY[分片键选择]
+    KEY --> HS[Hash 分片 均匀]
+    KEY --> RG[Range 分片 范围查询]
+    HS --> DB1[(库1)]
+    HS --> DB2[(库2)]
+    HS --> DBN[(库N)]
+    JOIN[跨库Join] --> ES[Elasticsearch 冗余]
+    MIG[迁移扩容] --> DW[双写+binlog同步]
+    style HS fill:#d4edda
+    style JOIN fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 分片策略：范围分片易产生新数据热点，而Hash分片能保证数据分布绝对均匀。

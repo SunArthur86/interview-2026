@@ -412,6 +412,29 @@ public class DataQualityScoreCalculator {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——规则引擎选 Drools 还是自研？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[上游业务数据<br/>SKU/订单/价格] --> B[业务网关入口]
+    subgraph S1 [事前同步拦截层]
+        B --> C[Hibernate Validator<br/>字段级校验]
+        C --> D[Drools规则引擎<br/>跨表业务级校验]
+    end
+    D -- 校验拒绝 --> E[直接阻断写入]
+    D -- 命中可疑 --> F[Quarantine隔离区表]
+    D -- 校验通过 --> G[主数据库MySQL]
+    subgraph S2 [事中实时监测层]
+        G --> H[Flink流式计算<br/>异常模式监测]
+    end
+    H -- 发现暴增等异常 --> F
+    subgraph S3 [事后对账兜底层]
+        G --> I[T+1离线对账任务]
+        J[下游ES/数仓] --> I
+        I -- diff_rate大于0.1% --> K[自动补偿/人工介入]
+    end
+    F --> L[低风险自动修复<br/>高风险人工审核]
+```
 
 ## 视频脚本
 

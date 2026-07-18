@@ -244,6 +244,43 @@ ES 深分页的根本矛盾——from+size 在 `from=10000` 后性能骤降（ES
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 数据源
+        A[(MySQL 商品表)]
+    end
+
+    subgraph 数据同步层
+        B[Canal 监听 Binlog]
+    end
+
+    subgraph Elasticsearch 集群
+        C[IK 分词器 ik_smart/ik_max_word]
+        D[倒排索引 Term Dictionary]
+        E[Posting List 文档ID/词频/位置]
+        F[BM25 相关性打分模块]
+    end
+
+    subgraph 查询与排查
+        G[客户端搜索请求]
+        H[倒排索引匹配查询]
+        I[explain 分析排序]
+        J[search_after 游标深分页]
+    end
+
+    A -->|Binlog 行变更| B
+    B -->|秒级延迟 最终一致| C
+    C --> D
+    D --> E
+    E --> F
+    G --> H
+    H --> F
+    F --> I
+    F --> J
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

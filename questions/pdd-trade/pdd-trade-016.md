@@ -156,6 +156,34 @@ synchronized 没有"死锁检测"，它一样会死锁（两个 synchronized 块
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant T1 as 线程A
+    participant CLH as AQS同步队列
+    participant T2 as 持锁线程B
+    participant T3 as 新来的线程C
+
+    T2->>CLH: 持有Lock(state=1)
+    T1->>CLH: tryAcquire()竞争失败
+    CLH->>T1: 入队尾并阻塞 park()
+    Note over T1,CLH: CLH双向链表节点排队等待
+
+    T3->>CLH: tryAcquire() CAS竞争
+    alt 非公平锁
+        CLH-->>T3: CAS成功,直接抢到锁
+        Note over T3: 减少唤醒开销,吞吐高
+    else 公平锁
+        CLH->>T3: hasQueuedPredecessors()==true
+        CLH-->>T3: 拒绝抢锁,乖乖入队
+    end
+
+    T2->>CLH: unlock()释放锁(state=0)
+    CLH->>T1: unpark()唤醒后继节点
+    T1->>CLH: 被唤醒,尝试自旋获取锁成功
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -241,6 +241,27 @@ search_after 的正确性验证：
 
 **收尾：** ES 和 MySQL 区别？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1[写入与同步链路]
+        A[MySQL评价库] -->|Canal同步| B[ES集群]
+    end
+    subgraph S2[ElasticSearch核心]
+        C[分词器 ik_max_word] -->|构建| D[倒排索引 Postings]
+        E[查询DSL解析] -->|匹配| D
+        D -->|相关性算分| F[BM25模型计算]
+    end
+    subgraph S3[查询性能优化]
+        G[filter条件<br/>不算分且自动缓存]
+        H[search_after<br/>替代深度分页]
+    end
+    B --> C
+    B --> E
+    F -->|结合| G
+    F -->|结合| H
+```
 
 ## 视频脚本
 

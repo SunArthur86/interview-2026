@@ -300,6 +300,22 @@ Tracing：
 
 **收尾：** 三支柱怎么关联？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[业务请求] --> B[traceId生成透传]
+    B --> C[应用服务]
+    subgraph 可观测性三支柱
+        C -->|离散事件| D[Logging ELK]
+        C -->|聚合数据| E[Metrics Prometheus]
+        C -->|跨服务耗时| F[Tracing SkyWalking]
+    end
+    D -.->|traceId关联| G[告警分级收敛]
+    E -.->|症状触发| G
+    F -.->|慢链路定位| G
+    G --> H[On-call响应与联合复盘]
+```
 
 ## 视频脚本
 

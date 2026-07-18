@@ -110,6 +110,25 @@ TCP 首部通常为 20 字节（不含选项），最长可达 60 字节。
     -   占 4 位。
     -   **作用**：指出 TCP 首部的长度，单位是 4 字节。最大值为 15 (0b1111)，即 60 字节。
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - 核心定义：TCP 是一种面向连接的、可靠的、基于字节流的传输层通信协议

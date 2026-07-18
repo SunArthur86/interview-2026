@@ -99,6 +99,25 @@ try (BufferedReader reader = new BufferedReader(
 2. **字符流与字节流的转换**：为什么需要 `InputStreamReader`？因为文件本质是字节流，如果是文本文件，需要指定编码（如 UTF-8）解码为字符，否则可能乱码。
 3. **NIO 的 Buffer 读写原理**：Buffer 写模式：limit=capacity, position 随写入增加。Flip 操作：读模式，limit 设为当前 position，position 设为 0。Clear/Compact：重置 Buffer 为写模式。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java IO 四大基类] --> B[InputStream 字节输入]
+    A --> C[OutputStream 字节输出]
+    A --> D[Reader 字符输入]
+    A --> E[Writer 字符输出]
+    B --> B1[FileInputStream]
+    B --> B2[BufferedInputStream 装饰]
+    C --> C1[FileOutputStream]
+    D --> D1[InputStreamReader 桥梁]
+    D --> D2[BufferedReader]
+    E --> E1[OutputStreamWriter]
+    B & C --> F[字节流 二进制 音视频]
+    D & E --> G[字符流 文本 防乱码]
+    H[设计模式] --> I[装饰器模式<br/>节点流+处理流]
+```
 ## 记忆要点
 
 - 四大基类：InputStream/OutputStream操作字节，Reader/Writer操作字符

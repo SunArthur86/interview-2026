@@ -85,6 +85,28 @@ fetch('/api/search', {
 2. **POST 能不能缓存？**：POST 请求默认不缓存，但可以通过设置 Header（如 `Cache-Control`）来允许缓存（如计算结果不变的 POST 请求）。
 3. **如何实现文件上传？**：通常使用 POST 请求，设置 `Content-Type: multipart/form-data`。
 
+
+## 核心架构图
+
+```mermaid
+flowchart LR
+    subgraph GET
+        G1[语义 安全 幂等]
+        G2[参数在 URL 查询串]
+        G3[长度受 URL 限制<br/>约 2KB]
+        G4[可被缓存/收藏]
+        G5[明文 不应敏感]
+    end
+    subgraph POST
+        P1[语义 创建 非幂等]
+        P2[参数在 body]
+        P3[大小受服务器限制<br/>可上传文件]
+        P4[默认不缓存]
+        P5[body 也明文<br/>需 HTTPS]
+    end
+    GET -.本质都是 TCP.-> POST
+    Note["本质: 都是 TCP 请求<br/>差异由语义/约定/浏览器实现"]
+```
 ## 记忆要点
 
 - 语义本质：GET 是只读幂等操作，POST 是提交修改操作通常非幂等

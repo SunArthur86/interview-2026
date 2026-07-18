@@ -88,6 +88,15 @@ def gqa_forward(q, k, v, n_rep):
 2. **GQA 对训练和推理速度的影响是否相同？**（主要收益在推理显存，训练速度收益相对较小，主要受限于 Memory Bound）
 3. **除了减少显存，GQA 对 Attention Kernel 计算还有哪些优化点？**（减少了 HBM 读取 K/V 的次数）
 
+```mermaid
+flowchart TD
+    MHA[MHA<br/>h个Q/K/V头] --> MQA[MQA<br/>h个Q头 1个KV]
+    MHA --> GQA[GQA<br/>h个Q头 h/g个KV]
+    GQA --> Repeat[Repeat扩展KV匹配Q]
+    Repeat --> Match[计算Attention]
+    Match --> Save[显存带宽节省g倍]
+```
+
 ## 记忆要点
 
 - GQA优势：KV头数减少g倍(如8倍)，显存和带宽压力骤降，质量接近MHA远超MQA。

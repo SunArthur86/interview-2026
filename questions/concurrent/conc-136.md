@@ -109,6 +109,36 @@ CompletableFuture.allOf(userFuture, orderFuture)
 1. **线程池选择**：如果不指定线程池，`supplyAsync` 默认使用哪个线程池？（ForkJoinPool.commonPool()，业务代码强烈建议自定义线程池以避免阻塞公共池）
 2. **thenApply vs thenApplyAsync**：有什么区别？（不带 Async 的由当前线程或上一个任务的线程执行，带 Async 的提交给线程池）
 
+### Future vs CompletableFuture 编排能力对比
+
+```mermaid
+flowchart TB
+    Task["异步任务"] --> Future["Future<br/>(JDK5)"]
+    Task --> CF["CompletableFuture<br/>(JDK8)"]
+
+    Future --> F1["get() 阻塞获取"]
+    Future --> F2["isDone 轮询"]
+    Future --> F3["无法回调"]
+    Future --> F4["无法链式组合"]
+
+    F1 --> FPain["痛点: 主线程被迫阻塞<br/>编排困难"]
+
+    CF --> C1["supplyAsync 异步执行"]
+    CF --> C2["thenApply 转换结果"]
+    CF --> C3["thenCompose 串联(扁平化)"]
+    CF --> C4["thenCombine 合并两个"]
+    CF --> C5["allOf / anyOf 汇聚"]
+    CF --> C6["exceptionally / handle 异常处理"]
+
+    C1 --> Chain["回调链式编排<br/>无需阻塞"]
+    Chain --> Pool["默认 ForkJoinPool<br/>可指定自定义线程池"]
+
+    classDef future fill:#fff3e0,stroke:#ef6c00
+    classDef cf fill:#e8f5e9,stroke:#2e7d32
+    class F1,F2,F3,F4,FPain future
+    class C1,C2,C3,C4,C5,C6,Chain,Pool cf
+```
+
 ## 记忆要点
 
 - Future痛点：get()阻塞、不支持链式回调、组合处理极其困难

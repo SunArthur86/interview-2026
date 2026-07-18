@@ -372,6 +372,24 @@ public class PersistedQueryCache {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——DataLoader 缓存命中规则？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant App as App客户端
+    participant BFF as GraphQL BFF
+    participant Loader as DataLoader
+    participant RPC as UserClient
+    App->>BFF: 1. 发起 query 查询订单列表
+    BFF->>BFF: 2. 解析获取 100 个订单的 user 字段
+    BFF->>Loader: 3. 触发 100 次 load(userId)
+    Loader->>Loader: 4. 攒批窗口 tick (16ms)
+    Loader->>RPC: 5. 合并为 1 次 batch load(Set<id>)
+    RPC-->>Loader: 6. 返回 Map<id, User> 批量结果
+    Loader-->>BFF: 7. 分发对应 User 对象给各字段
+    BFF-->>App: 8. 聚合 JSON 返回
+    Note over App,BFF: @auth directive 校验<br/>拦截非 ADMIN 请求手机号字段
+```
 
 ## 视频脚本
 

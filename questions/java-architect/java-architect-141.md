@@ -286,6 +286,26 @@ JD 中台三套库，搜索风控和数仓，
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——Debezium 部署在哪？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 数据源
+        A[("MySQL 主库<br/>binlog_format=ROW")] -->|低延迟无侵入| B["Debezium Connector"]
+    end
+    subgraph 事件总线
+        B -->|解析变更<br/>c/u/d/r| C[("Kafka Topic<br/>分片存储事件流")]
+        C -.->|Schema 校验| D["Schema Registry"]
+    end
+    subgraph 下游异构消费
+        C --> E["Java 消费者<br/>at-least-once"]
+        E -->|event_id 幂等| F[("Elasticsearch<br/>搜索平台")]
+        E -->|event_id 幂等| G[("Redis
+实时画像")]
+        E -->|event_id 幂等| H[("数据中台
+数仓")]
+    end
+```
 
 ## 视频脚本
 

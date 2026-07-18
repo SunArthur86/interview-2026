@@ -100,6 +100,27 @@ public class InvalidParameterException extends RuntimeException {
 2. **常见受检与非受检异常的区别**：为什么 Java 设计受检异常？（为了强制开发者处理可恢复的错误，如文件不存在）。
 3. **try-with-resources**：JDK 7 引入的语法糖，用于自动关闭实现了 `AutoCloseable` 接口的资源，替代繁琐的 `finally` 关闭流操作。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Throwable] --> B[Error 错误]
+    A --> C[Exception 异常]
+    B --> B1[OutOfMemoryError]
+    B --> B2[StackOverflowError]
+    B --> B3[VirtualMachineError]
+    C --> D[受检异常 CheckedException]
+    C --> E[非受检 RuntimeException]
+    D --> D1[IOException]
+    D --> D2[SQLException]
+    D --> D3[ClassNotFoundException]
+    E --> E1[NullPointerException]
+    E --> E2[IndexOutOfBoundsException]
+    E --> E3[ClassCastException]
+    D -.必须 try-catch/throws.-> F[编译期检查]
+    E -.可try-catch.-> G[运行期抛出]
+```
 ## 记忆要点
 
 - 异常分受检异常（编译时强制try-catch，如IO异常）和非受检异常（运行时异常如空指针，不强制处理）

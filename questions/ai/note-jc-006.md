@@ -163,6 +163,32 @@ RLHF 训练要同时驻留多个模型：
 - **Megatron-LM**：NVIDIA 的张量并行库，和 DeepSpeed 配合做 3D 并行
 - **ZeRO 的通信复杂度**：Z1 额外 all-reduce（梯度），Z3 额外 all-gather（参数），Z3 通信最重
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["单卡显存不足<br/>无法训练大模型"] --> B["DeepSpeed<br/>显存优化库"]
+    B --> C["ZeRO<br/>消除数据并行冗余"]
+    B --> D["Offload<br/>卸载至CPU/NVMe"]
+    B --> E["激活检查点<br/>重算降低显存"]
+
+    subgraph S1 ["ZeRO 显存优化三阶段"]
+        direction LR
+        F["ZeRO-1<br/>切分优化器状态"] --> G["ZeRO-2<br/>追加切分梯度"]
+        G --> H["ZeRO-3<br/>全切分含模型参数"]
+    end
+
+    C --> S1
+
+    H --> I{"显存足够?"}
+    I -- "否(跨机宽带受限)" --> J["通信开销大<br/>前向反向需All-gather"]
+    I -- "是(单机NVLink)" --> K["通信重叠计算<br/>开销可控"]
+
+    J --> L["结合CPU卸载<br/>或降级使用ZeRO-2"]
+    K --> M["3D并行结合TP/PP<br/>高效训练百亿参数"]
+    L --> M
+```
+
 ## 记忆要点
 
 - DeepSpeed核心：基于数据并行，通过ZeRO分片解决大模型显存冗余

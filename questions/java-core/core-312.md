@@ -94,6 +94,23 @@ public class MyService extends BaseService {
 2. **访问权限与继承**：父类中 private 的方法，子类能否继承？（不能继承，也就无法重写Override，虽然可以定义同名方法，但这不算多态的重写）。
 3. **局部变量的访问权限**：局部变量（方法内定义）能否用 public/protected 修饰？（不能，局部变量只能用 final，访问权限默认仅限于方法内）。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[静态内部类 Static Nested] --> B[static 修饰]
+    B --> C[不依赖外部实例]
+    B --> D[可直接 new Outer.Inner]
+    E[对比成员内部类] --> F[成员类持有 Outer this]
+    E --> G[静态类不持有<br/>节省内存]
+    H[典型场景] --> I[HashMap.Node<br/>不需要访问外部数据]
+    H --> J[单例模式<br/>静态内部类懒加载]
+    H --> K[Builder 模式]
+    L[优势] --> M[封装相关逻辑]
+    L --> N[避免对外暴露]
+    L --> O[与外部解耦]
+```
 ## 记忆要点
 
 - 口诀：私(default)同包保子公，范围从小到大层层递进

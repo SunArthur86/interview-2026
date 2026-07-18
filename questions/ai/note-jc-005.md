@@ -188,6 +188,32 @@ GSPO 用 token 级重要性权重修正：
 - **DAPO**（字节）：另一款 GRPO 变体，针对 RLHF 优化（动态采样 + 长度归一化）
 - **Mixtral / Qwen-MoE**：开源 MoE 模型，训练细节公开可参考
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph GRPO["传统 GRPO 应用于 MoE"]
+        direction TB
+        A1["Token级优势 A_t"] --> B1["梯度方向正负冲突"]
+        B1 --> C1["Router 路由震荡<br/>加剧专家负载不均"]
+        C1 --> D1["Expert Collapse<br/>(专家坍缩/死亡)"]
+    end
+
+    subgraph GSPO["GSPO 针对 MoE 优化方案"]
+        direction TB
+        A2["1. 序列级优势 A_i"] --> B2["同序列梯度符号一致<br/>平滑路由更新"]
+        A3["2. 显式负载均衡损失"] --> B3["防止路由集中与专家死亡"]
+        A4["3. Token级重要性采样"] --> B4["适配稀疏激活特性"]
+    end
+
+    GRPO -- "梯度扰动离散路由" --> GSPO
+
+    style C1 fill:#f96,stroke:#333,stroke-width:2px
+    style D1 fill:#f66,stroke:#333,stroke-width:2px
+    style B2 fill:#9f9,stroke:#333,stroke-width:2px
+    style B3 fill:#9f9,stroke:#333,stroke-width:2px
+```
+
 ## 记忆要点
 
 - RL训MoE痛点：RL梯度扰动离散路由，加剧负载不均和路由震荡

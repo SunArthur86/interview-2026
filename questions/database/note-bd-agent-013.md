@@ -128,6 +128,22 @@ B+树：无论查什么key，都要走到叶子节点
 3. **MongoDB选B树的原因**：MongoDB单文档查询为主，不需要频繁范围扫描
 4. **聚簇索引**：InnoDB的主键索引就是聚簇索引——叶子节点存完整行数据
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ROOT[根节点] --> IN_B[B树:存key+data]
+    ROOT --> IN_BP[B+树:仅存key]
+    IN_B --> LEAF_B[叶子/非叶子都有data]
+    IN_BP --> LEAF_BP[叶子存全部data]
+    LEAF_BP --> LINK[双向链表]
+    LINK --> RANGE[范围扫描高效]
+    IN_B --> RAN_B[范围查询需回溯]
+    style LEAF_BP fill:#d4edda
+    style LEAF_B fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 数据分布：B树所有节点存数据，而B+树数据全在叶子节点，非叶子只存索引

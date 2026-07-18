@@ -424,6 +424,36 @@ public class HLCClock {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——NTP 同步会回拨吗？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 分布式时间方案
+        A[物理时钟方案
+NTP/Chronyd] --> B[时间同步中心
+标准时间源]
+        B --> C[应用服务器节点A]
+        B --> D[应用服务器节点B]
+        C --> E{时钟监控
+slew逐步调整}
+        D --> E
+        E -->|发现偏差| F[漂移补偿/告警]
+    end
+
+    subgraph 存储与展示规范
+        G[(数据库统一存储
+UTC时间)] --> H[Java Instant时间戳
+传递无时区歧义]
+        H --> I[前端/网关解析
+按用户Local时区展示]
+    end
+
+    subgraph 分布式协调方案
+        J[HLC混合逻辑时钟
+物理时间+逻辑序号] --> K[保证事件因果偏序
+happened-before]
+    end
+```
 
 ## 视频脚本
 

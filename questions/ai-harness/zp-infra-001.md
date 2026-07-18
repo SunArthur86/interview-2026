@@ -87,6 +87,14 @@ def smooth_quant_transform(activation, weight, alpha=0.5):
 2. **追问**：SmoothQuant 中的 alpha 参数通常取多少？（答：通常取 0.5，表示激活值和权重各承担一半的量化难度，不同模型可能需要微调）。
 3. **追问**：Per-channel 和 Per-token 量化的区别是什么？（答：Per-channel 是对权重矩阵的每一列/行单独定 Scale；Per-token 是对每一个 Token 的激活值单独定 Scale。Per-channel 训练前/后均可，Per-tensor 仅能训练后；Per-token 推理计算开销大但精度高）。
 
+```mermaid
+flowchart TD
+    Model[FP模型] --> Choice{量化粒度}
+    Choice -->|Per-channel/tensor| Smooth[SmoothQuant<br/>W8A8]
+    Choice -->|Per-group| AWQ[AWQ<br/>1%显著权重FP16]
+    Choice -->|Per-column| GPTQ[GPTQ<br/>Hessian二阶补偿]
+```
+
 ## 记忆要点
 
 - SmoothQuant：Per-channel/tensor。数学等价变换，将激活难度迁移至权重，适合W8A8。

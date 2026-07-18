@@ -78,6 +78,34 @@ message = {
 2. 在多 Agent 协作中，如果下游 Agent 依据上游 Agent 的错误中间态继续工作，会产生“错误级联”，如何设计机制切断这种级联？
 3. 如何通过自动化测试（如基于 LLM 的 Evaluator）来监控线上 Agent 系统的注意力漂移情况？
 
+
+## 核心流程图
+
+```mermaid
+flowchart TB
+    subgraph Problem["注意力漂移问题"]
+        Long["长对话/多 Agent"] --> Drift["注意力分散到无关信息"]
+        Drift --> Forget["关键指令被稀释/遗忘"]
+    end
+    subgraph Mitigation["缓解策略"]
+        Pin["System Prompt 固化<br/>关键约束置顶"]
+        Sum["定期摘要压缩<br/>减少噪声 Token"]
+        Role["角色边界明确<br/>防越权跨域"]
+        Win["滑动窗口<br/>+ 长期记忆检索"]
+        Annot["结构化标注<br/>高亮关键实体"]
+    end
+    Forget --> Pin
+    Forget --> Sum
+    Forget --> Role
+    Forget --> Win
+    Forget --> Annot
+    Pin --> Focus["注意力聚焦<br/>关键任务稳定"]
+    Sum --> Focus["注意力聚焦<br/>关键任务稳定"]
+    Role --> Focus["注意力聚焦<br/>关键任务稳定"]
+    Win --> Focus["注意力聚焦<br/>关键任务稳定"]
+    Annot --> Focus["注意力聚焦<br/>关键任务稳定"]
+```
+
 ## 记忆要点
 
 - 定义：长上下文或多目标导致关键约束关注度下降，产生“中间迷失”现象。

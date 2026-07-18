@@ -77,6 +77,22 @@ Map<String, User> userMap = users.stream()
 3. **构造器引用如何处理带参构造？**：如 `User::new`，若函数式接口接受 `String`，则自动匹配 `User(String name)` 构造器。
 4. **为什么重载方法可能导致方法引用模糊？**：编译器有时无法推断出具体调用哪个重载方法，此时需要显式使用 Lambda。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[方法引用] --> B["Lambda 的简写<br/>当 body 只是调用某方法"]
+    C[四种形式] --> D["类名::静态方法<br/>Math::abs"]
+    C --> E["对象::实例方法<br/>System.out::println"]
+    C --> F["类名::实例方法<br/>String::length<br/>第一个参数作为接收者"]
+    C --> G["类名::new<br/>构造引用 ArrayList::new"]
+    H[示例] --> I["list.forEachs -> System.out.printlns<br/>list.forEachSystem.out::println"]
+    J[本质] --> K[仍是函数式接口实例]
+    J --> L[与 Lambda 等价]
+    M[场景] --> N[Stream 链式调用]
+    M --> O[集合元素收集]
+```
 ## 记忆要点
 
 - 一句话定义：Lambda表达式只调一个方法时的简写，用::符号分隔。

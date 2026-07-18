@@ -146,6 +146,22 @@ B+树非叶子每页：
 3. **范围查询是关键**：B+树叶子链表让范围扫描变顺序IO，这是数据库选B+树的核心原因
 4. **MongoDB对比**：B树适合KV查询，B+树适合范围查询
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q[查询key] --> BT[B树:逐层找]
+    Q --> BP[B+树:必到叶子]
+    BT --> RES1[可能在非叶子命中]
+    BP --> RES2[稳定到叶子]
+    BP --> NEXT[叶子链表遍历]
+    NEXT --> RG[范围查询极快]
+    BT --> NOCHAIN[无链表 需中序回溯]
+    style RG fill:#d4edda
+    style NOCHAIN fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 数据分布：B树所有节点均存Key+Data，而B+树仅叶子节点存Data，非叶子只存索引Key

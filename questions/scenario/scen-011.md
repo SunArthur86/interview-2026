@@ -100,6 +100,21 @@ local rank = redis.call('zrank', queue_key, user_id)
 return {rank, timestamp}
 ```
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    U[用户进入] --> ZS[Redis ZSet 入队]
+    ZS -->|score=时间戳| RANK[排队排名]
+    RANK --> TB[令牌桶放行]
+    TB -->|获取令牌| PROC[处理业务]
+    PROC --> ACK[通知用户]
+    POLL[客户端轮询] --> RANK
+    TIMEOUT[超时未处理] --> REL[自动释放]
+    style TB fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 数据结构：选Redis ZSet而非List，因为ZSet能以O(log N)极速返回排队名次。

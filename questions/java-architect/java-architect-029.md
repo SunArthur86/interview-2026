@@ -469,6 +469,35 @@ redis-cli -c -p 7000 cluster countkeysinslot <slot>
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：哨兵和 Cluster 什么区别，怎么选？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[Redis 客户端] -->|读写命令| B[Cluster 路由节点]
+    B -->|CRC16 计算| C[16384 槽位映射]
+    C --> D{目标节点}
+
+    D --> E[主节点 Master A]
+    D --> F[主节点 Master B]
+    D --> G[主节点 Master C]
+
+    subgraph Gossip 通信网
+        E <--> F
+        F <--> G
+        E <--> G
+    end
+
+    E -->|异步复制| H[从节点 Replica A]
+    F -->|异步复制| I[从节点 Replica B]
+    G -->|异步复制| J[从节点 Replica C]
+
+    subgraph 故障转移机制
+        K[哨兵/集群检测] -->|主观/客观下线| L[Raft 选举 Leader]
+        L --> M[提升最优从库为主库]
+        M --> N[通知客户端切换路由]
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

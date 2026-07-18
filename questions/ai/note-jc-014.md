@@ -180,6 +180,28 @@ DAG 最短路用逆推 DP（拓扑序处理）更简单；
 - **空间优化**：背包问题 dp[i][j] 只依赖 dp[i-1][...]，可压缩成一维 dp[j]
 - **区间 DP / 树形 DP / 状压 DP**：按状态结构分类的高级 DP 技巧
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Graph[有向带权图 DAG]
+        direction LR
+        S((起点 S)) -->|"w=2"| A((节点 A))
+        S -->|"w=5"| B((节点 B))
+        A -->|"w=3"| T((终点 T))
+        B -->|"w=1"| T
+    end
+    subgraph DP[逆推动态规划求解]
+        direction TB
+        C1["初始化 dp[T]=0"] --> C2["计算 dp[A]<br/>min(w_A_T + dp[T])"]
+        C2 --> C3["计算 dp[B]<br/>min(w_B_T + dp[T])"]
+        C3 --> C4["计算 dp[S]<br/>min(w_S_A+dp[A], w_S_B+dp[B])"]
+    end
+    Graph -.->|"逆拓扑序"| DP
+    D1["结果: 起点 S 到终点 T 最短路径"]
+    C4 --> D1
+```
+
 ## 记忆要点
 
 - 核心思想：大问题拆子问题并存储解，空间换时间避免重复计算

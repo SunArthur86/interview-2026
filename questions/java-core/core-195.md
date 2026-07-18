@@ -117,6 +117,24 @@ location ~ \.html$ {
 2.  **为什么 ETag 优先级更高**：Last-Modified 只能精确到秒，且文件内容修改时间变了但内容没变时会导致无效传输，ETag 基于内容指纹更准确。
 3.  **刷新缓存的操作**：强制刷新（Ctrl+F5）会跳过所有缓存并请求新数据（请求头带 `Pragma: no-cache` 和 `Cache-Control: no-cache`）；普通刷新（F5）会跳过强缓存但允许协商缓存。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[HTTP 缓存决策] --> B{本地有无缓存?}
+    B -->|否| C[向服务器请求<br/>200 from network]
+    B -->|是| D{Cache-Control/Expires<br/>是否过期?}
+    D -->|未过期| E[强缓存 200 from cache<br/>不发请求]
+    D -->|已过期| F{协商缓存命中?}
+    F -->|ETag 一致<br/>If-None-Match| G[304 Not Modified<br/>不返回 body]
+    F -->|Last-Modified 一致<br/>If-Modified-Since| G
+    F -->|均不一致| H[200 返回新资源<br/>更新缓存标识]
+    I[强缓存字段] --> J[Cache-Control max-age]
+    I --> K[Expires 老版本]
+    L[协商缓存字段] --> M[ETag/If-None-Match 精确]
+    L --> N[Last-Modified/If-Modified-Since 秒级]
+```
 ## 记忆要点
 
 - 两大缓存分级：强制缓存直接读取（返回200），协商缓存校验服务端（返回304）。

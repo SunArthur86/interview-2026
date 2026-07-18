@@ -135,6 +135,27 @@ public void handleVipOrder(OrderDto order) { }
 1.  **按业务层级订阅**：如 `logs.error.#` 订阅所有错误日志，`logs.*` 订阅所有一级日志。
 2.  **多租户/分区分发**：`user.{userId}.command` 针对特定用户投递指令。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[消息中间件 AMQP 模型] --> B[Producer 生产者]
+    B --> C[Exchange 交换器]
+    C --> D[Queue 队列]
+    D --> E[Consumer 消费者]
+    F[Exchange 类型] --> G[Direct 路由键精确匹配]
+    F --> H[Topic 模式匹配<br/>user.* 匹配 user.create]
+    F --> I[Fanout 广播 全部队列]
+    F --> J[Headers 头部匹配]
+    K[Topic 规则] --> L["* 一个单词"]
+    K --> M["# 零个或多个单词"]
+    N[Binding 绑定] --> O[Exchange ↔ Queue 关系]
+    P[可靠性] --> Q[生产者确认 confirm]
+    P --> R[消费者手动 ack]
+    P --> S[持久化+durable 队列]
+    T[典型 MQ] --> U[RabbitMQ/Kafka/RocketMQ]
+```
 ## 记忆要点
 
 - Topic交换器基于模式匹配，解决了Direct只能精确匹配的问题。

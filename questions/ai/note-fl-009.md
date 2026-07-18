@@ -98,6 +98,27 @@ memory_points:
 - **hook 配置**：pre-commit hook 自动跑 lint+test，AI 改完自动验证
 - **AI 编程的边界**：架构决策、安全敏感（鉴权/加密）、业务核心逻辑，这些 AI 可以辅助但人来拍板
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["开发者需求"] --> B["编写 CLAUDE.md<br/>定义架构与禁忌"]
+    B --> C["AI 生成 Plan<br/>设计方案"]
+    C --> D{"人工 Review Plan"}
+    D -- "方向不对" --> C
+    D -- "方向对齐" --> E["AI 编写代码<br/>小步实施"]
+    E --> F["AI 编写/执行测试<br/>TDD 驱动"]
+    F --> G{"三层质量兜底"}
+    subgraph G ["三层质量兜底"]
+      G1["Lint规则验证"]
+      G2["单测防回归"]
+      G3["人工Review抓设计"]
+    end
+    G --> H{"检查通过?"}
+    H -- "否: 过度抽象/吞异常" --> E
+    H -- "是" --> I["合并代码 Merge"]
+```
+
 ## 记忆要点
 
 - 标准流程：先写CLAUDE.md定规矩，复杂改动先出plan，小步实施每步跑测试

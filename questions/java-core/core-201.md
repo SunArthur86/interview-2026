@@ -75,6 +75,27 @@ System.out.println(stack.poll()); // 输出 1 (因为是链表，先来后到，
 | **内存开销** | 较小 (仅数据) | 较大 (含前后指针) | 较小 |
 | **CPU 缓存** | 高 (连续内存) | 低 (离散内存) | 高 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart LR
+    subgraph link["标签"]
+        L1[HTML 标签]
+        L2[并行下载 不阻塞]
+        L3[可预加载 preload]
+        L4[可切换样式表]
+        L5[支持 rel=icon/module]
+    end
+    subgraph at_import["@import 指令"]
+        I1[CSS 内语法]
+        I2[串行 必须先下载 CSS]
+        I3[只在 CSS 解析时才触发]
+        I4[影响性能 延迟加载]
+        I5[只能在 CSS 文件顶部]
+    end
+    Note["推荐: 用 link 加载 CSS<br/>避免 @import 影响首屏速度"]
+```
 ## 记忆要点
 
 - 底层结构：双向链表，首尾指针相连，首尾增删极快O(1)，但指定索引查询极慢O(n)。

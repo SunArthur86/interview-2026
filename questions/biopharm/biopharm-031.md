@@ -202,6 +202,44 @@ FP32 → INT8（每维单独量化）
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：HNSW 原理？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A1["待检索的高维向量"]
+
+    subgraph HNSW[图导航方案]
+        B1["分层小世界图构建<br/>参数M/efConstruction"]
+        B2["图导航检索<br/>查询参数efSearch"]
+    end
+
+    subgraph IVF[倒排分桶方案]
+        C1["KMeans聚类分桶<br/>参数nlist"]
+        C2["桶内精排搜索<br/>探查参数nprobe"]
+    end
+
+    subgraph Quantization[量化压缩方案]
+        D1["乘积量化PQ<br/>切段压缩内存"]
+        D2["标量量化SQ<br/>INT8近似无损"]
+    end
+
+    subgraph TradeOff[三角权衡目标]
+        E1["高召回率"]
+        E2["低延迟查询"]
+        E3["低内存占用"]
+    end
+
+    A1 --> HNSW
+    A1 --> IVF
+    HNSW --> D1
+    IVF --> D1
+    IVF --> D2
+    HNSW --> E1
+    HNSW -.->|内存消耗大| E3
+    IVF --> E3
+    D1 --> E3
+```
+
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深

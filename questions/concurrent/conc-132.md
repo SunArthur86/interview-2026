@@ -80,6 +80,31 @@ public class VolatileFlag {
 2. **时间顺序 vs 先行发生**：happens-before 不代表时间上的先后，只代表语义上的保证。
 3. **实际应用**：请结合单例模式的双重检查锁（DCL）解释 volatile 的作用。
 
+### happens-before 八大规则关系图
+
+```mermaid
+flowchart TD
+    HB["happens-before<br/>前操作结果对后操作可见"] --> R1["1. 单线程规则<br/>代码顺序"]
+    HB --> R2["2. 锁规则<br/>unlock hb 后续 lock"]
+    HB --> R3["3. volatile 规则<br/>写 hb 后续读"]
+    HB --> R4["4. 线程启动<br/>start() hb 线程内动作"]
+    HB --> R5["5. 线程终止<br/>线程动作 hb join()返回"]
+    HB --> R6["6. 线程中断<br/>interrupt() hb 检测中断"]
+    HB --> R7["7. 对象终结<br/>构造 hb finalize"]
+    HB --> R8["8. 传递性<br/>A hb B 且 B hb C 则 A hb C"]
+
+    Example["示例"] --> E1["volatile 写<br/>happens-before<br/>后续 volatile 读"]
+    E1 --> E2["前序普通变量<br/>对读线程可见"]
+
+    Without["无 hb 关系"] --> Reorder["编译器/CPU 可重排<br/>结果不可预测"]
+    With["有 hb 关系"] --> Ordered["内存屏障禁止重排<br/>保证可见性与有序性"]
+
+    classDef rule fill:#e3f2fd,stroke:#1565c0
+    class R1,R2,R3,R4,R5,R6,R7,R8 rule
+    classDef bad fill:#ffebee,stroke:#c62828
+    class Without,Reorder bad
+```
+
 ## 记忆要点
 
 - 核心作用：JMM中保证多线程间操作的可见性与有序性

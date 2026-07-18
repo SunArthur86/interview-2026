@@ -342,6 +342,23 @@ public class AliasMethod {
 
 **核心结论**：对于抽奖这种**读多写少**（每次请求都读，概率配置极少变更）的场景，空间换时间是绝对正确的方向。展开表用 40KB 的内存，把每次抽奖的 CPU 开销从 K 次比较降到 1 次取模，在高 QPS 场景下收益巨大。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Setup [构建阶段]
+        C[概率配置<br/>一等奖10%, 二等奖30%] --> B[按概率展开填充数组槽位]
+        B --> T[生成大小为N的<br/>静态只读查找表 int table N]
+    end
+
+    subgraph Runtime [高频抽奖阶段]
+        T --> R[ThreadLocalRandom.current<br/>生成 0 到 N 的随机数]
+        R --> M[对数组长度 N 执行取模运算]
+        M --> I[一步定位到数组下标<br/>获取奖品 ID]
+        I --> O[返回抽奖结果]
+    end
+```
+
 ## 记忆要点
 
 - 核心对比：原算法需O(K)累加遍历前缀和，优化后变O(1)一步定位取模查表

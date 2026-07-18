@@ -465,6 +465,30 @@ public class OrderController {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：为什么解锁要 Lua 脚本？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[客户端业务线程] -->|1. SET key uuid NX PX 30000| B[Redis Server]
+    B -->|2. 加锁成功| A
+    A -->|3. 业务执行中| C{Redisson 看门狗}
+    C -->|4. 每1/3 TTL检查| A
+    C -->|5. 异步续期| B
+    A -->|6. 业务完成| D[Lua 脚本解锁]
+    D -->|7. 判断 uuid 匹配并删除| B
+
+    subgraph CP 容错方案
+        E[RedLock 算法] --> F[5个独立Redis节点]
+        E --> G[获取多数派锁>半数]
+        E --> H[补偿 GC Pause 时钟问题]
+    end
+
+    subgraph CP 强一致场景
+        I[Zookeeper / etcd] --> J[临时有序节点]
+        J --> K[Watch 监听机制]
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

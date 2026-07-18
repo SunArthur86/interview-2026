@@ -136,6 +136,37 @@ interface AgentState {
 - 真正生产级的多 Agent 系统会用 message bus（如 NATS/Kafka）做异步通信，而非同步共享内存
 - 反思阶段如果用 LLM，反思结果要**摘要后再写回**，不留原始错误文本，否则会污染上下文
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["用户请求输入"] --> B{"规则前置拦截<br/>(if-else)"}
+    B -- "高频确定意图" --> C["Workflow工作流执行"]
+    B -- "长尾复杂意图" --> D["LLM意图推断"]
+    D --> E["Agent调度器"]
+    E <--> F[("Redis 热状态库<br/>当前步/缓存")]
+    E <--> G[("Postgres 冷账本<br/>全量日志/审计")]
+    subgraph H["多Agent共享State协作"]
+        I["Planner<br/>拆解任务生成计划"]
+        J["Executor<br/>调用外部API工具"]
+        K["Critic<br/>摘要反思评估结果"]
+    end
+    E -- "读写共享State" --> I
+    I -- "派发单步任务" --> J
+    J -- "返回执行结果" --> K
+    K -- "反思通过/失败指令" --> E
+    subgraph M["熔断与防死循环限制"]
+        N["硬步数上限<br/>最多10-15步"]
+        O["软上限<br/>Critic连续2次确认"]
+        P["异常上限<br/>连续3次工具失败"]
+    end
+    H -.-> M
+    M -- "触发限制" --> Q["强制返回当前最优结果"]
+    C --> Q
+    K -- "任务完成" --> Q
+    Q --> R["输出最终响应"]
+```
+
 ## 记忆要点
 
 - 五段式拆分原则：因为能if-else的确定性逻辑不该花Token，所以意图判断交LLM，执行全走Workflow

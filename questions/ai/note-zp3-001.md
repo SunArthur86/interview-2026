@@ -166,6 +166,25 @@ Attention[i,j] = softmax(Q_i·K_j / √d - m·|i-j|)
 缺点: 线性衰减假设太强，远距离token信息丢失严重
 ```
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["Self-Attention本身<br/>位置无关"] --> B["需要对Q和K注入位置信息"]
+    B --> C["方案选择: 位置编码对比"]
+    C --> D1["绝对位置编码<br/>直接相加"]
+    C --> D2["RoPE旋转位置编码<br/>对Q/K做绝对旋转"]
+    C --> D3["ALiBi线性偏置<br/>直接在Attention Score加惩罚"]
+    D2 --> E["Q·K点积后,旋转角度相减<br/>天然得到相对位置m-n"]
+    E --> F["无额外参数且计算高效"]
+    F --> G{"推理时遇到超出<br/>训练长度的长文本?"}
+    G -- "直接外推表现下降" --> H["NTK-aware Scaling<br/>调大Base Frequency"]
+    H --> I["短距离不损失分辨率<br/>长距离外推至32K/128K"]
+    I --> J["最终输出: 支持长序列<br/>上下文的Attention Score"]
+    style D2 fill:#e6ffe6,stroke:#009900
+    style H fill:#fff2e6,stroke:#cc6600
+```
+
 ## 记忆要点
 
 - 必要性：Self-Attention本身位置无关，需注入位置信息防顺序混乱

@@ -449,6 +449,37 @@ public void auditAndRevokeStaleScopes() {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——mTLS 证书怎么签发和轮转？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Client[客户端]
+        A[外部请求发起]
+    end
+    subgraph Edge[边缘接入层]
+        B[API Gateway 验证 JWT]
+    end
+    subgraph Mesh[服务网格Istio]
+        C[Envoy Proxy 自动 mTLS]
+        D[目标微服务携带 SPIFFE ID]
+    end
+    subgraph Policy[策略层]
+        E[Java 应用提取用户与操作上下文]
+        F[OPA 策略引擎 ABAC 决策]
+    end
+    subgraph Infra[基础设施]
+        G[Istiod 控制面签发与轮转证书]
+        H[审计日志系统]
+    end
+    A --> B
+    B --> C
+    C -- 双向TLS证书验证 --> D
+    D --> E
+    E -- 查询授权 --> F
+    F -- 默认拒绝或允许 --> D
+    D --> H
+    G -.-> C
+```
 
 ## 视频脚本
 

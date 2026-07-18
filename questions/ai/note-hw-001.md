@@ -266,6 +266,31 @@ list(flatten([1, [2, [3, 4]], 5]))  # [1, 2, 3, 4, 5]
 - **itertools标准库**：`chain`、`islice`、`groupby`、`tee` 等是生成器组合的核心工具
 - **PyTorch DataLoader**：本质就是迭代器模式——`iter(dataloader)` 逐batch产出数据，内部用多进程+生成器实现预加载
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 数据源
+        A["open()<br/>文件迭代器"]
+    end
+
+    subgraph 流式处理Pipeline
+        B["read_jsonl<br/>逐行解析"] --> C["filter_quality<br/>过滤低质数据"]
+        C --> D["tokenize<br/>文本切词"]
+        D --> E["batch<br/>按需打包Batch"]
+    end
+
+    subgraph 消费端
+        F["for/next()<br/>模型训练消费"]
+    end
+
+    A --> B
+    E --> F
+
+    G["yield 挂起恢复<br/>内存常驻 O(1)"] -.-> B
+    G -.-> D
+```
+
 ## 记忆要点
 
 - 包含关系：生成器是特殊的迭代器（Generator ⊂ Iterator），yield 关键字自动实现协议。

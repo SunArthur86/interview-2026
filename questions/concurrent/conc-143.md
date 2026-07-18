@@ -119,6 +119,34 @@ public class Cache {
 3. **读写互斥可见性**：写锁释放后，需要手动释放并确保 volatile 写语义，StampedLock 内部已经处理了内存语义。
 4. **无 Condition**：不支持 `newCondition`，无法进行精细的线程间等待/通知。
 
+### ReadWriteLock vs StampedLock 原理对比
+
+```mermaid
+flowchart TB
+    Lock["读写锁体系"] --> RW["ReadWriteLock<br/>(JDK8-)"]
+    Lock --> ST["StampedLock<br/>(JDK8+)"]
+
+    RW --> RWRead["读锁: 共享<br/>多线程并发读"]
+    RW --> RWWrite["写锁: 独占<br/>互斥写"]
+    RW --> RWHunger["痛点: 读多写少时<br/>写线程饥饿"]
+
+    ST --> STOpt["乐观读 tryOptimisticRead<br/>无 CAS 直接读"]
+    ST --> STValidate["读后 validate 校验戳"]
+    ST --> STUpgrade{"校验失败?"}
+    STUpgrade -->|"是"| STRead["升级为悲观读锁"]
+    STUpgrade -->|"否"| STSuccess["直接使用<br/>零开销"]
+
+    STRead -. 写锁未释放 .-> STWait["等待或重试"]
+    STValidate --> STWrite["写锁: 独占<br/>改变 stamp"]
+
+    classDef rw fill:#e3f2fd,stroke:#1565c0
+    classDef st fill:#e8f5e9,stroke:#2e7d32
+    classDef pain fill:#ffebee,stroke:#c62828
+    class RW,RWRead,RWWrite rw
+    class ST,STOpt,STValidate,STUpgrade,STRead,STSuccess st
+    class RWHunger pain
+```
+
 ## 记忆要点
 
 - 对比 AtomicLong：高并发下 AtomicLong 单点 CAS 竞争大，而 LongAdder 将热点数据分散到 Cell[]。

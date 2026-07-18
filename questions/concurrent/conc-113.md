@@ -118,6 +118,38 @@ WHERE id = 100 AND version = 5; -- 假设当前版本为5
 2. **死锁排查**：如何通过 `SHOW ENGINE INNODB STATUS` 分析死锁日志，定位锁冲突的事务。
 3. **MDL 锁阻塞**：
 
+### Java 锁的多维划分图
+
+```mermaid
+flowchart TB
+    Lock["Java 锁的划分"] --> D1["按粒度"]
+    Lock --> D2["按特性"]
+    Lock --> D3["按实现"]
+
+    D1 --> D11["偏向锁"]
+    D1 --> D12["轻量级锁"]
+    D1 --> D13["重量级锁"]
+
+    D2 --> D21["公平 / 非公平"]
+    D2 --> D22["独占 / 共享"]
+    D2 --> D23["可重入 / 不可重入"]
+    D2 --> D24["乐观 / 悲观"]
+    D2 --> D25["自旋 / 阻塞"]
+
+    D3 --> D31["synchronized<br/>JVM 内置"]
+    D3 --> D32["ReentrantLock<br/>基于 AQS"]
+    D3 --> D33["ReadWriteLock<br/>读写分离"]
+    D3 --> D34["StampedLock<br/>乐观读"]
+
+    D11 -. 升级 .-> D12
+    D12 -. 升级 .-> D13
+
+    classDef dim fill:#ede7f6,stroke:#5e35b1
+    classDef item fill:#e3f2fd,stroke:#1565c0
+    class D1,D2,D3 dim
+    class D11,D12,D13,D21,D22,D23,D24,D25,D31,D32,D33,D34 item
+```
+
 ## 记忆要点
 
 - 两大划分维度：数据库角度（全局/表/行）对比程序员角度（乐观/悲观）

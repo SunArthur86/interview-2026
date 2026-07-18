@@ -99,6 +99,23 @@ server {
 | **性能开销** | 极低 | 存在 TCP/TLS 握手延迟及加解密 CPU 开销 |
 | **安全性** | 易被监听、篡改、劫持 | 防窃听、防篡改、防冒充 |
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 浏览器 Client
+    participant S as 服务器 Server
+    participant CA as CA 证书机构
+    C->>S: 1. ClientHello + 随机数1 + 支持的密码套件
+    S->>C: 2. ServerHello + 随机数2 + 选定套件 + 证书
+    C->>CA: 3. 校验证书<br/>CA 公钥验签
+    CA-->>C: 证书合法
+    C->>S: 4. 生成 PreMasterSecret<br/>用服务器公钥加密发送
+    C->>S: 5. 双方用 3 个随机数<br/>生成对称密钥
+    C->>S: 6. 后续用对称密钥加密通信
+    Note over C,S: 非对称加密协商密钥<br/>对称加密传输数据
+```
 ## 记忆要点
 
 - 本质安全：HTTP+SSL/TLS，通过混合加密、摘要算法、数字证书保证安全。

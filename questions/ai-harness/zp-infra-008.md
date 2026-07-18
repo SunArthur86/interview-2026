@@ -115,6 +115,16 @@ __global__ void good_add(float4* x, float4* y, float4* out, int n) {
 2. **如何通过 Nsight Compute 的 `dram__throughput` 和 `dram__bytes_sum` 快速判断是否 Memory Bound？**（如果吞吐接近峰值或 Stall 主要在 Memory，即为 Memory Bound）
 3. **Warp Divergence 对性能的影响有多大？如何检测？**（查看 `smsp__thread_branch_executed` 指标）
 
+```mermaid
+flowchart TD
+    Kernel[CUDA Kernel] --> AI[算术强度AI<br/>FLOPs/Bytes]
+    AI --> Compare{对比转折点}
+    Compare -->|低于| Memory[Memory Bound<br/>合并访问/分块]
+    Compare -->|高于| Compute[Compute Bound<br/>Tensor Core/流水线]
+    Memory --> Tool[Nsight Compute]
+    Compute --> Tool
+```
+
 ## 记忆要点
 
 - 计算公式：算术强度AI = FLOPs / Bytes，对比转折点判断Bound类型

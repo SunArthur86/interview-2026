@@ -228,6 +228,23 @@ Feed 时间线：
 
 **收尾：** 为什么是删缓存不是更新缓存？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant App as 业务应用
+    participant DB as MySQL主库
+    participant Binlog as Binlog日志
+    participant Canal as Canal组件
+    participant MQ as Kafka队列
+    participant Redis as Redis缓存
+    App->>DB: 1. 写入/更新评价数据
+    DB-->>Binlog: 2. 记录数据变更事件
+    Binlog->>Canal: 3. 伪装Slave监听并拉取
+    Canal->>MQ: 4. 解析变更推送消息
+    MQ->>Redis: 5. 消费消息删除旧缓存
+    Redis-->>App: 6. 下次读触发惰性重建加载
+```
 
 ## 视频脚本
 

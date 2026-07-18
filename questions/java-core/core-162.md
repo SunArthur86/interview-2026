@@ -88,6 +88,23 @@ ObjectInputStream ois = new ObjectInputStream(in) {
 | **跨语言** | 否 | 是 | 有限 (需配置) | 是 (完美支持) |
 | **安全性** | 差 (已知漏洞多) | 较好 | 一般 | 较好 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java 序列化] --> B[对象 → 字节流]
+    B --> C[存储到磁盘]
+    B --> D[网络传输 RPC]
+    B --> E[深拷贝]
+    F[实现方式] --> G["实现 Serializable<br/>空标记接口<br/>默认序列化"]
+    F --> H["实现 Externalizable<br/>自定义 writeExternal/readExternal"]
+    I[关键字段] --> J["serialVersionUID<br/>版本一致性校验"]
+    I --> K[transient 不参与序列化]
+    I --> L[static 不参与序列化]
+    M[替代方案] --> N[JSON Jackson/Fastjson]
+    M --> O[Protobuf/Thrift<br/>跨语言 高效]
+```
 ## 记忆要点
 
 - 核心定义：序列化是将对象转为字节流，反序列化反之，用于跨网络传输或持久化。

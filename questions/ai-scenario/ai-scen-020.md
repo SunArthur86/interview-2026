@@ -170,6 +170,36 @@ handoff_rules:
 - **衡量 AI 贡献要设计 A/B 实验**：不能只看 AI 处理的线索转化率，因为 AI 接的多是低质量线索。必须做随机分流 A/B 测试，对比"有 AI 介入"vs"无 AI"的最终成交率，才能真实归因。
 - **GDPR/个保法合规**：客户画像涉及个人信息，对话录音和画像存储要明确告知用户、提供退出机制，敏感字段（身份证、手机号）要脱敏后入库。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 数据输入层
+        CRM[CRM历史与行为数据]
+        Conv[实时对话信息]
+    end
+
+    subgraph 知识与画像层
+        CRM --> Profile[客户实时画像增量更新]
+        Conv --> Profile
+        Profile --> Budget[预算探询强制校验]
+        KB[(销售知识库与话术)]
+    end
+
+    subgraph 对话策略引擎 FSM
+        Budget -->|预算达标| Stage[销售漏斗阶段识别]
+        Budget -->|预算锁死| Filter[无效线索过滤]
+        Stage --> Strategy[SPIN提问与策略匹配]
+        KB --> Strategy
+    end
+
+    subgraph 推荐与执行层
+        Strategy --> Engine[个性化产品组合推荐]
+        Engine --> Chat[LLM生成回复]
+        Chat --> Output[引导成单/转人工兜底]
+    end
+```
+
 ## 记忆要点
 
 - 核心能力：SPIN提问挖掘需求，销售漏斗阶段识别，异议处理促单。

@@ -237,8 +237,30 @@ Feed 流的正确性验证：
 
 **收尾：** 大 V 发 Feed 怎么处理？
 
+## 流程图
 
-
+```mermaid
+flowchart TD
+    subgraph 混合模式分流
+    A["博主发布新Feed"] --> B{"粉丝数阈值判断"}
+    end
+    subgraph 普通用户推模式
+    B -->|"粉丝 < 10万"| C1["写扩散"]
+    C1 --> C2["遍历活跃粉丝BitMap"] --> C3[("粉丝Redis ZSet<br/>收件箱")]
+    end
+    subgraph 大V拉模式
+    B -->|"粉丝 > 10万"| D1["读扩散"]
+    D1 --> D2[("大V Redis ZSet<br/>发件箱")]
+    end
+    subgraph 粉丝读取Feed
+    E1["粉丝刷新Feed流"] --> E2["拉取收件箱 ZSet"]
+    E2 --> E3["大V发件箱热点检测"]
+    E3 -->|"命中热点"| E4["Caffeine本地缓存"]
+    E3 -->|"正常拉取"| D2
+    E4 --> E5["多级混合排序展示"]
+    E2 --> E5
+    end
+```
 
 ## 视频脚本
 

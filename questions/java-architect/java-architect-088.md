@@ -343,6 +343,32 @@ public class RagAnswerService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——向量库怎么选？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1 [索引构建层]
+        A1[知识库文档] --> A2[文档切片 256 Token]
+        A2 --> A3[Embedding 向量化]
+        A4[Debezium监听Binlog<br/>增量索引] --> A5[(Milvus 向量库)]
+        A3 --> A5
+    end
+    subgraph S2 [检索与过滤层]
+        B1[用户Query] --> B2[Query Embedding]
+        B2 --> B3[权限 Pre-Filter<br/>tenant_id硬约束]
+        B3 --> B4[混合检索 向量+BM25]
+        B4 --> C1[RRF融合]
+        C1 --> C2[Cross-Encoder 重排]
+        C2 --> C3[Top-K 召回切片]
+    end
+    subgraph S3 [生成与校验层]
+        C3 --> D1[组装Prompt带切片]
+        D1 --> D2[LLM 生成回答]
+        D2 --> D3[Citation引用校验]
+        D3 -->|无引用/越权| D4[拒答兜底]
+        D3 -->|校验通过| D5[输出可信回答]
+    end
+```
 
 ## 视频脚本
 

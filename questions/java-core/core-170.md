@@ -87,6 +87,22 @@ System.out.println(maxHeap.poll()); // 20
 | LinkedList | 双向链表 | 插入顺序 (FIFO) | O(1) | 普通队列、缓冲区 |
 | TreeSet | 红黑树 | 全排序 (自然/定制) | O(log N) | 需要唯一且排序的集合 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[PriorityQueue] --> B[底层 Object 数组]
+    B --> C[以二叉小顶堆组织]
+    C --> D[父节点 ≤ 子节点]
+    D --> E[根节点为最小值]
+    F[offer 入队] --> G[元素加到末尾]
+    G --> H[上浮 siftUp<br/>与父比较交换]
+    I[poll 出队] --> J[取堆顶元素]
+    J --> K[末尾移到堆顶]
+    K --> L[下沉 siftDown<br/>与较小子比较交换]
+    H & L --> M[查询 O 1<br/>入出队 O log n]
+```
 ## 记忆要点
 
 - PriorityQueue底层基于二叉小顶堆实现，默认每次poll/peek取出最小值。

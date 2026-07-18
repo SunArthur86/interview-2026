@@ -393,6 +393,41 @@ def graphrag_risk_decide(event):
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：GraphRAG 和普通 RAG 区别？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Request[实时风控请求]
+        A1[文本/行为序列输入]
+    end
+
+    subgraph Graph[GraphRAG知识图谱检索]
+        B1[实体识别 UID/IP/设备]
+        B2[多跳关系路径遍历]
+        B3[高风险关联案卷提取]
+        B1 --> B2 --> B3
+    end
+
+    subgraph LLM[大模型推理层]
+        C1[防幻觉Prompt约束]
+        C2[图谱证据交叉验证]
+        C3[结构化JSON风险报告]
+        C1 --> C2 --> C3
+    end
+
+    subgraph Feedback[持续学习闭环]
+        D1[人工审核确认]
+        D2[SFT样本微调]
+        D3[DPO偏好对齐]
+        D1 --> D2 --> D3
+    end
+
+    A1 --> B1
+    B3 --> C1
+    C3 -- "命中拦截" --> D1
+    D3 -.-> C1
+```
+
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深

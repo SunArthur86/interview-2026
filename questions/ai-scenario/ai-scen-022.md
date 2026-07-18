@@ -107,6 +107,34 @@ class OpenAIAdapter(ProviderAdapter):
 | **性能开销** | 低 (<20ms) | 低 (<30ms) | 中 (>50ms) | **最低 (<10ms)** |
 | **适用场景** | 快速M验证 | 中小企业统一管理 | 多模型私有化部署 | 大型企业核心业务 |
 
+## 流程图
+
+```mermaid
+flowchart TD
+    App[AI应用请求] --> Gateway[统一API网关入口]
+    Gateway --> Limit[限流控制 RPM/TPM]
+    Limit --> Router[智能路由决策中心]
+
+    subgraph 治理与管控
+        Router --> Trace[全链路Trace记录]
+        Router --> Cost[Token计量与预算归因]
+    end
+
+    Router --> Dispatch{路由策略选择}
+    Dispatch -->|基于能力| P1[DeepSeek处理代码]
+    Dispatch -->|基于成本| P2[Claude处理创意]
+    Dispatch -->|基于延迟| P3[GPT-4处理通用]
+
+    P1 --> Fuse[熔断与重试指数退避]
+    P2 --> Fuse
+    P3 --> Fuse
+
+    Fuse -->|失败| Fallback[自动故障降级切换]
+    Fuse -->|成功| Resp[统一流式协议适配响应]
+    Fallback --> Resp
+    Resp --> App
+```
+
 ## 记忆要点
 
 - 核心职责：统一接口适配、智能路由（成本/能力/延迟）、流量治理、成本归因。

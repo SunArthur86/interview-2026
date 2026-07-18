@@ -118,6 +118,38 @@ class GetUserInfoParams(BaseModel):
 - 高并发场景下 tool_call 要做令牌桶限流，防止 LLM 短时间内并发调用把下游 DB 打穿
 - Structured Output（OpenAI 的 `response_format: json_schema`）比纯 function calling 更严格，能强制模型输出合法 JSON
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["LLM生成工具意图"] --> B["服务端统一分发器<br/>鉴权/限流/路由"]
+    B --> C{"工具安全等级判定"}
+    C -- "只读查询类" --> D["自动审批执行"]
+    C -- "高危不可逆类<br/>(删库/清表)" --> E["物理隔离不可见"]
+    C -- "常规写入类" --> F["参数双校验"]
+    subgraph F["参数双层校验防幻觉"]
+        direction LR
+        G["JSON Schema引导<br/>LLM理解Description"]
+        H["Pydantic强校验<br/>服务端验证类型/必填"]
+    end
+    F -- "校验失败" --> I{"重试次数 <= 2 ?"}
+    I -- "是" --> J["塞回Prompt让模型重写"]
+    J --> B
+    I -- "否" --> K["降级: 转人工兜底"]
+    F -- "业务规则拒绝" --> L["直接透传报错终止"]
+    F -- "校验通过" --> M["调用下游API执行"]
+    M -- "网络/超时失败" --> N["指数退避重试"]
+    M -- "执行成功" --> O[("全链路Trace落库<br/>trace_id串联")]
+    D --> O
+    N --> O
+    subgraph P["高危工具确认流"]
+        E --> Q["触发飞书卡片"]
+        Q --> R{"人工二次确认?"}
+        R -- "拒绝" --> K
+        R -- "同意" --> M
+    end
+```
+
 ## 记忆要点
 
 - 双层校验防幻觉：模型侧用JSON Schema写清Description，服务端用Pydantic强制解析参数类型

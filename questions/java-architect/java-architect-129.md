@@ -397,6 +397,32 @@ ReactorRiskEventServiceGrpc.ReactorRiskEventServiceStub stub =
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——HTTP/2 flow control 怎么工作？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Service ["服务端 (模型推理)"]
+        A["Reactor Publisher<br/>发送事件流"]
+    end
+    subgraph Network ["网络传输 (HTTP/2)"]
+        B["Flow Control<br/>发送窗口 65535B"]
+    end
+    subgraph Client ["客户端 (实时风控)"]
+        C["limitRate(100)<br/>控制拉取节奏"]
+        D{"onBackpressure<br/>背压策略选择"}
+        E["实时风控: LATEST"]
+        F["行为审计: BUFFER/DROP"]
+        G["交易事件: ERROR"]
+        H["慢消费/停止 request(n)"]
+    end
+    A --> B --> C --> D
+    D --> E
+    D --> F
+    D --> G
+    H -- 下游消费慢 --> C
+    H -.->|TCP buffer 满| B
+    B -.->|窗口耗尽暂停发送| A
+```
 
 ## 视频脚本
 

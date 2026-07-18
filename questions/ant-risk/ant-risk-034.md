@@ -395,6 +395,42 @@ KV cache 是 LLM 推理的显存大头——每生成一个 token，要把之前
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：KV cache 占多少显存？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Input[推理请求入口]
+        A1[系统Prompt前缀]
+        A2[动态Few-shot指令]
+    end
+
+    subgraph Sched[动态批处理调度]
+        B1[Continuous Batching]
+        B2[投机解码小模型验证]
+        A1 & A2 --> B1
+    end
+
+    subgraph GPU[GPU显存与计算]
+        C1[PagedAttention块表映射]
+        C2[Prefix KV Cache命中]
+        C3[Flash Attention计算]
+        C4[INT8/INT4权重量化]
+        B1 --> C2
+        C2 -- "未命中" --> C1
+        C1 --> C3
+        C3 --> C4
+    end
+
+    subgraph Output[输出与监控]
+        D1[流式Token输出]
+        D2[GPU利用率指标]
+        D3[P99推理延迟告警]
+    end
+
+    C4 --> D1
+    D1 --> D2 & D3
+```
+
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深

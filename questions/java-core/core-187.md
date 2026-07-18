@@ -98,6 +98,25 @@ socket.setKeepAlive(true);
 | **典型设备** | 七层负载均衡（应用层）、四层交换机（传输层） | 路由器（网际层）、普通交换机（接口层） |
 | **实战意义** | 解释新技术原理（如 SSL/TLS 在表示层） | 解释互联网实际运行机制（如 IP 路由） |
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - 层级对比：OSI分7层偏理论，TCP/IP分4层是工业实用标准。

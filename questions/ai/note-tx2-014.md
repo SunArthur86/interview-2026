@@ -203,6 +203,28 @@ def call_with_validation(prompt, allowed_tools, max_retries=2):
 - **模糊匹配**：枚举字段用 fuzzy match（"中国"→"China"），ratidio 库
 - **Schema 热更新**：工具 schema 存配置中心，校验器动态加载，不改代码加新工具
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["模型输出原始JSON字符串"] --> B{"json.loads解析<br/>格式是否合法?"}
+    B -- "否: 非法格式" --> C1["捕获JSONDecodeError<br/>提示重新生成"]
+    B -- "是: 转为字典" --> D["Pydantic严格模型校验"]
+    D --> E{"extra=forbid<br/>Literal等校验"}
+    E -- "否: 缺失/类型/越界/多余" --> C2["捕获ValidationError<br/>提取错误详情"]
+    E -- "是: 结构合法" --> F["自定义validator业务校验"]
+    F --> G{"业务逻辑合法?<br/>如金额>0"}
+    G -- "否: 业务报错" --> C3["拦截并返回错误详情"]
+    G -- "是: 校验通过" --> H["调用下游API执行"]
+    C1 --> I{"重试次数 <= 2 ?"}
+    C2 --> I
+    C3 --> I
+    I -- "是: 塞回Prompt" --> A
+    I -- "否: 超过限制" --> J["抛出最终异常终止"]
+    style J fill:#ffcccc,stroke:#ff0000
+    style H fill:#ccffcc,stroke:#008000
+```
+
 ## 记忆要点
 
 - 校验三层：先json.loads查格式，再查工具名是否越界，最后用Pydantic查参数

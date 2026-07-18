@@ -66,6 +66,22 @@ System.out.println(list); // 输出 [A, B-Modified, B-Plus, C]
 | **索引访问** | 不支持 | **支持** | 不支持 |
 | **ListIterator** | 不支持 | **支持** | 不支持 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[List 接口] --> B[有序 可重复]
+    A --> C[核心方法]
+    C --> D[add/get/set/remove]
+    C --> E[indexOf/lastIndexOf]
+    C --> F[ListIterator 双向遍历]
+    A --> G[主要实现]
+    G --> H[ArrayList<br/>数组 随机访问快]
+    G --> I[LinkedList<br/>双向链表 增删快]
+    G --> J[Vector<br/>线程安全 已过时]
+    G --> K[CopyOnWriteArrayList<br/>读多写少并发]
+```
 ## 记忆要点
 
 - 核心特征：元素有序、允许重复、支持基于索引的随机访问。

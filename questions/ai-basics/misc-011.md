@@ -72,6 +72,28 @@ def compute_sft_loss(logits, labels, user_mask):
     return loss
 ```
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["原始SFT指令数据"] --> B["数据构建最佳实践"]
+    B --> C["质量严格过滤<br/>(1K精品 > 10万低质)"]
+    B --> D["格式统一<br/>(ChatML/Alpaca)"]
+    B --> E["指令表达多样性<br/>包含CoT推理数据"]
+
+    E --> F["SFT 微调训练阶段"]
+    F --> G["多轮对话历史<br/>Mask Loss"]
+    G --> H["仅计算当前回复<br/>(Assistant)梯度"]
+
+    F --> I["防止灾难性遗忘策略"]
+    I --> J["混入10-20%<br/>预训练语料"]
+    I --> K["使用低学习率<br/>(预训练的1/10)"]
+    I --> L["采用LoRA微调<br/>冻结原始权重"]
+
+    H --> M["获得指令跟随能力<br/>且保留基座通用能力"]
+    L --> M
+```
+
 ## 记忆要点
 
 - SFT构建：质量>数量，格式统一，包含CoT，指令表达需多样性

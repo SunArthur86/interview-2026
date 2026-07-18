@@ -327,6 +327,36 @@ LinkedHashSet<Integer> reversed = set.reversed();   // 类型不变
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——SequencedCollection 和 Iterable 区别？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["SequencedCollection 接口"] --> B["统一有序集合操作"]
+    A --> C["SequencedSet 接口"]
+    A --> D["SequencedMap 接口"]
+
+    B --> E["List / Deque"]
+    C --> F["LinkedHashSet"]
+    D --> G["LinkedHashMap"]
+
+    B --> H["addFirst / addLast"]
+    B --> I["getFirst / getLast"]
+    B --> J["removeFirst / removeLast"]
+    B --> K["reversed() 反向视图"]
+
+    subgraph Old ["JDK 21 之前的痛点"]
+        L["List 取尾元素<br/>get(size - 1)"] --> M["O(n) 或索引越界风险"]
+        N["LinkedHashSet 取尾元素<br/>遍历迭代器到底"] --> O["O(n) 性能差"]
+    end
+
+    I -.->|"优化性能与可读性"| M
+    I -.->|"O(1) 优化"| O
+
+    style H fill:#d9ead3,stroke:#93c47d
+    style I fill:#d9ead3,stroke:#93c47d
+    style J fill:#d9ead3,stroke:#93c47d
+    style K fill:#d9ead3,stroke:#93c47d
+```
 
 ## 视频脚本
 

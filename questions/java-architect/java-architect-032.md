@@ -408,6 +408,29 @@ public void onMessage(OrderEvent event) {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：全局有序怎么办？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[Producer 生产者] -->|按 Order_ID 做 Key| B[Kafka Cluster]
+    B -->|murmur2 hash| C[同 Key 路由至同分区]
+    C --> D[单分区单消费者串行处理]
+    D --> E{消费端幂等落库判断}
+
+    E -->|高频前置判断| F[Redis 令牌校验]
+    F -->|未拦截| G[数据库唯一索引约束]
+    G -->|更新状态机| H[UPDATE WHERE status='INIT']
+
+    subgraph 异常情况处理
+        I[Offset 未提交宕机] --> J[At-Least-Once 必然重复]
+        K[Rebalance 重分配] --> J
+        L[消息 Seq 版本落后] --> M[拒绝消费转入死信队列]
+    end
+
+    F -->|通过| N[正常处理业务逻辑]
+    G -->|触发唯一索引冲突| O[捕获异常并幂等返回]
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

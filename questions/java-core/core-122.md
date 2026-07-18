@@ -133,6 +133,25 @@ if (n == 0) {
 2.  **如果已经建立了连接，但是客户端突然故障了怎么办？**
     -   TCP 设有保活计时器。如果客户端故障，服务端不会一直傻等，超过 2 小时后，服务端会主动发送探测报文，连续 10 次无响应则关闭连接。
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - 核心：因为 TCP 是全双工通信，所以两端需各自独立关闭发送通道

@@ -145,6 +145,22 @@ memory_points:
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：增量更新怎么做？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Upload[上传文件] --> Meta[填写元数据/证据等级]
+    Meta --> Review[人工/自动审核]
+    Review -->|通过| Version[版本管理 v1.0]
+    Review -->|拒绝| Reject[打回修改]
+    Version --> Chunk[文档分块并计算Hash]
+    Chunk --> Compare{对比新旧Hash}
+    Compare -->|有变化| Embed[变化块生成新向量]
+    Compare -->|无变化| Skip[跳过]
+    Embed --> VectorDB[(向量数据库)]
+    VectorDB --> Filter[权限元数据预过滤]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

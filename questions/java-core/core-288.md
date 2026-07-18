@@ -94,6 +94,28 @@ memory_points:
 *   **考点 3**：长连接场景下应该使用哪种负载均衡算法？（考察最少连接算法的适用性）
 *   **考点 4**：LVS 和 Nginx 的区别是什么？（考察四层和七层负载均衡的底层实现区别）
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[负载均衡算法] --> B[静态算法]
+    A --> C[动态算法]
+    B --> D[轮询 Round Robin<br/>依次分配]
+    B --> E[加权轮询 WRR<br/>按性能分配]
+    B --> F[IP Hash<br/>同 IP 固定到某节点]
+    B --> G[随机 Random]
+    C --> H[最少连接 Least Connections]
+    C --> I[加权最少连接 WLCP]
+    C --> J[最快响应 Fastest Response]
+    C --> K[一致性 Hash<br/>数据缓存场景]
+    L[层次] --> M[DNS/CDN 全局负载]
+    L --> N["LVS/F5 网络层 4 层"]
+    L --> O["Nginx/Haproxy 应用层 7 层"]
+    P[场景] --> Q[Web 集群入口]
+    P --> R[RPC 服务发现]
+    P --> S[数据库中间件]
+```
 ## 记忆要点
 
 - 简单基础：轮询（均等）、加权（按性能分配比例）、随机（大数定律近似轮询）

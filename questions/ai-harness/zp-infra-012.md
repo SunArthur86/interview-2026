@@ -97,6 +97,18 @@ memory_points:
 1. **FlashAttention v1 和 v2 的主要区别？**（v2 主要优化了 workload partitioning，减少非矩阵计算，更适合 H100）
 2. **为什么 MoE 训练容易导致负载不均？**（某些 Expert 收到的 Token 过多，导致计算倾斜，通常使用 Load Balance Loss = \alpha * n \times (aux_loss) 解决）
 
+```mermaid
+flowchart TD
+    Prep[Infra岗位准备] --> Inference[推理优化]
+    Prep --> Train[训练优化]
+    Prep --> CUDA[CUDA基础]
+    Inference --> KV[KV Cache/PagedAttention]
+    Inference --> Quant[量化W4A16/W8A8]
+    Train --> Parallel[3D并行]
+    Train --> ZeRO[ZeRO-3切分]
+    CUDA --> Base[SM/Warp/Memory Coalescing]
+```
+
 ## 记忆要点
 
 - 推理优化：KV Cache计算显存，PagedAttention解决碎片，量化(W4A16/W8A8)提速

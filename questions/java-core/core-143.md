@@ -95,6 +95,23 @@ private void grow(int minCapacity) {
 2. `add` 和 `addAll` 扩容的区别？（`addAll` 批量插入时，会优先计算所需最小容量，可能一次性扩容到位，避免多次扩容）
 3. ArrayList 为什么线程不安全？如何替代？（Vector, Collections.synchronizedList, CopyOnWriteArrayList）
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[ArrayList 扩容] --> B["add 时检查 size+1 > capacity"]
+    B --> C{需要扩容?}
+    C -->|否| D[直接 elementData size = e]
+    C -->|是| E["计算新容量<br/>oldCap + oldCap >> 1<br/>即 1.5 倍"]
+    E --> F{新容量是否足够?}
+    F -->|是| G[Arrays.copyOf 复制]
+    F -->|否| H[取 minCapacity 与 MAX_ARRAY_SIZE]
+    H --> G
+    G --> I[elementData 指向新数组]
+    I --> D
+    D --> J[size++]
+```
 ## 记忆要点
 
 - 触发时机：因为添加元素时size达到容量上限，所以触发扩容

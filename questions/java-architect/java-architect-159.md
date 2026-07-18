@@ -299,6 +299,28 @@ public class GrayscaleRouter {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——重建亿级索引要多快？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[亿级商品文档源数据] --> B[Spring Batch分片读取]
+    subgraph S1 [后台并行重建中心]
+        B --> C[GPU集群批量向量化<br/>bge-large-v1.5模型]
+        C --> D[新版本v2 Collection]
+    end
+    subgraph S2 [增量同步保障区]
+        E[CDC数据变更捕获] --> F[双写老版本v1索引]
+        E --> G[同步写入新版本v2索引]
+    end
+    subgraph S3 [无感切换控制面]
+        D --> H[一致性校验与抽样评测]
+        G --> H
+        H -- 指标无退化 --> I[5%流量灰度切流]
+        I -- 灰度验证通过 --> J[别名原子切换到v2]
+        J --> K[线上服务读取别名]
+        K -- 发现指标退化 --> L[别名秒级切回v1老索引]
+    end
+```
 
 ## 视频脚本
 

@@ -94,6 +94,15 @@ out = acc / l_curr
 | **适用硬件** | 全部 | Ampere+ (A100) | Ampere+ (A100) | Hopper (H100) |
 | **反向传播** | 需存N²矩阵 | 重计算 (省显存) | 更高效的并行重计算 | 异步重计算 |
 
+```mermaid
+flowchart TD
+    QKV[Q/K/V矩阵] --> Tile[Tiling分块<br/>IO-aware]
+    Tile --> SRAM[(SRAM<br/>快速缓存)]
+    SRAM --> Online[Online Softmax<br/>不存N^2矩阵]
+    Online --> HBM[(HBM<br/>O(N)访问)]
+    HBM --> Output[输出]
+```
+
 ## 记忆要点
 
 - 核心优化：IO-aware Tiling 分块计算，将 HBM 访问从 O(N²) 降至 O(N)。

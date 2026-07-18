@@ -124,6 +124,31 @@ def compute_dpo_loss(policy_model, ref_model, batch, beta=0.1):
 logits = beta * torch.clamp(pi_ratio - ref_ratio, min=-5, max=5)
 ```
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["RLHF 优化目标<br/>最大化奖励并约束KL散度"] --> B["求解KL约束最优策略<br/>得到闭式解"]
+    B --> C["反解出奖励函数表达式<br/>r = β·log(π/π_ref) + 常数"]
+    C --> D["隐式包含了奖励模型 RM"]
+    D --> E["代入Bradley-Terry偏好模型"]
+    E --> F["消去常数项<br/>推导出DPO损失函数"]
+
+    F --> G["直接利用偏好对训练"]
+    G --> H["拉大对 Chosen 好回答的概率"]
+    G --> I["压低对 Rejected 差回答的概率"]
+
+    subgraph J ["DPO 核心优势"]
+        K["无需单独训练奖励模型 RM"]
+        L["无需 Critic 估计优势函数"]
+        M["大幅降低显存占用"]
+        N["避免 Reward Hacking 问题"]
+    end
+
+    H --> J
+    I --> J
+```
+
 ## 记忆要点
 
 - DPO核心：利用RLHF最优策略闭式解，将Reward模型隐式消去

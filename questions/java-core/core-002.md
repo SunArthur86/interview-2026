@@ -114,6 +114,24 @@ HashSet 内部
 1.  **HashSet 如何判断元素重复？**
     - 先判断 `hashCode` 是否相同，不同则肯定不是重复对象；若相同，再调用 `equals` 判断。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[调用 HashSet.add e] --> B[底层调用 HashMap.put e, PRESENT]
+    B --> C[计算 e 的 hashCode]
+    C --> D["定位桶 (n-1) & hash"]
+    D --> E{桶为空?}
+    E -->|是| F[新增节点 Key=e]
+    E -->|否| G{hashCode 相同?}
+    G -->|否| H[视为不同元素<br/>追加到链表/树]
+    G -->|是| I{equals 相同?}
+    I -->|否| H
+    I -->|是| J[判定重复<br/>拒绝加入 返回 false]
+    F --> K[加入成功 返回 true]
+    H --> K
+```
 ## 记忆要点
 
 - 底层本质：HashSet底层本质就是HashMap，存入的元素作为Key，Value固定占位

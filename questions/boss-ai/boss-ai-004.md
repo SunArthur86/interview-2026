@@ -156,6 +156,52 @@ IM 的本质是**"用应用层协议补足网络的不可靠，把'尽量送达'
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：WebSocket 怎么做心跳？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Client [客户端]
+        A1[用户/角色交互]
+        A2[本地消息队列<br/>seq排序与去重]
+    end
+
+    subgraph Gateway [网关层]
+        B1[WebSocket长连接<br/>HTTP/SSE降级]
+        B2[心跳保活与断线重连]
+    end
+
+    subgraph Logic [业务逻辑层]
+        C1[消息接收与校验]
+        C2[生成全局msg_id<br/>与会话内seq]
+        C3{消息类型路由}
+        C4[私聊: 写收件箱]
+        C5[群聊: 写扩散<br/>同步至多端]
+    end
+
+    subgraph Async [异步处理层]
+        D1[LLM流式生成<br/>按reply_id合并chunk]
+        D2[事件驱动主动触发]
+    end
+
+    subgraph Storage [存储层]
+        E1[(MySQL/Redis<br/>持久化热消息)]
+        E2[(OSS/ClickHouse<br/>冷数据归档)]
+    end
+
+    A1 --> B1
+    B1 --> C1
+    C1 --> C2
+    C2 --> C3
+    C3 --> C4
+    C3 --> C5
+    C4 & C5 --> E1
+    E1 --> B1
+    B1 --> A2
+    C1 --> D1
+    D1 --> B1
+    D2 --> C4
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -126,6 +126,25 @@ while (true) {
 - **NAT 穿透的差异**：UDP 的 NAT 映射会超时（30s~5min 无流量就失效），需 keepalive。TCP 的连接保持更稳定。P2P（如 WebRTC）用 UDP + STUN/TURN 穿透。
 - **TCP 的拥塞控制算法选择**：Linux 默认 cubic，BBR（Google）在高延迟/丢包链路上性能更好（如跨地域）。`net.ipv4.tcp_congestion_control=bbr` 开启，但需内核 4.9+。生产环境 A/B 测试再切换。
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - 连接与可靠性：TCP面向连接且可靠（三次握手），UDP无连接且不可靠。

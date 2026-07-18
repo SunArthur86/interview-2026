@@ -84,6 +84,35 @@ public class VolatileExample {
 2. **JMM 八大原子操作中，volatile 主要影响哪些？**（Lock/Unlock 主内存操作，Read/Load/Use/Assign/Store/Write 交互）。
 3. **除了单例，还有哪些适用场景？**（读写锁的读状态标识、广播通知机制）。
 
+### volatile 内存屏障与可见性原理
+
+```mermaid
+flowchart LR
+    subgraph Write["写 volatile 变量流程"]
+        W1["线程A 写 volatile"] --> W2["JVM 插入 StoreStore 屏障"]
+        W2 --> W3["lock 前缀指令"]
+        W3 --> W4["触发 MESI 协议<br/>刷主存 + 失效其他核缓存"]
+    end
+
+    subgraph Read["读 volatile 变量流程"]
+        R1["线程B 读 volatile"] --> R2["从主内存重新加载"]
+        R2 --> R3["JVM 插入 LoadLoad 屏障"]
+        R3 --> R4["禁止后续指令重排"]
+    end
+
+    W4 -. 缓存失效通知 .-> R2
+
+    DCL["DCL 单例 instance = new Singleton()"] --> DCLSplit["1.分配内存 2.初始化 3.赋引用"]
+    DCLSplit --> Reorder{"无 volatile<br/>可能重排 1->3->2"}
+    Reorder --> NPE["B 线程拿到未初始化对象 NPE"]
+    DCL -. 加 volatile .-> Safe["禁止重排<br/>安全发布"]
+
+    classDef barrier fill:#fff8e1,stroke:#f9a825
+    class W2,W3,W4,R2,R3 barrier
+    classDef danger fill:#ffebee,stroke:#c62828
+    class NPE danger
+```
+
 ## 记忆要点
 
 - 三大核心作用：保证可见性、禁止指令重排序，但不保证原子性。

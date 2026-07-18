@@ -155,6 +155,20 @@ WHERE login_date >= DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY)
 - **允许中断1天**：用 LEAD 看下一个日期差 ≤2 的归为同组（更复杂的业务规则）
 - **滑动窗口版**：用 SUM(1) OVER(ORDER BY date RANGE BETWEEN 6 PRECEDING AND CURRENT ROW) 判断窗口内是否满 7 天
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["司机原始登录记录表"] --> B["按司机与日期DISTINCT去重"]
+    B --> C["ROW_NUMBER分组排序<br/>PARTITION BY driver_id"]
+    C --> D["计算差值恒定分组键<br/>日期序号 - 行序号 = Grp"]
+    D --> E{"连续日期判定"}
+    E -- "日期未中断<br/>Grp保持不变" --> F["GROUP BY driver_id, Grp"]
+    E -- "日期断线跳跃<br/>Grp发生变化" --> F
+    F --> G["HAVING COUNT >= 7"]
+    G --> H["输出连续7天登录司机ID"]
+```
+
 ## 记忆要点
 
 - 核心口诀：日期减去行号等于相同分组键（DATE - ROW_NUMBER = Grp）

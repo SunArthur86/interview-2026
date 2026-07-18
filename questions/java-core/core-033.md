@@ -98,6 +98,24 @@ public class OrderController {
 2. **循环依赖**：构造器注入无法解决循环依赖，而 Setter 注入（字段注入）可以，为什么？（因为实例化阶段和属性赋值阶段的区别）
 3. **注解选择**：在 Spring 项目中，推荐使用哪个？（通常推荐 `@Autowired`，因为它更强大且支持构造器注入；若要解耦 Spring 依赖可选 `@Resource` 或 `@Inject`）
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A["依赖注入 @Autowired vs @Resource"] --> B["@Autowired Spring 自带"]
+    A --> C["@Resource JSR-250 标准"]
+    B --> D[默认 byType]
+    B --> E["类型多个时 配合 @Qualifier"]
+    B --> F[可加在字段/构造/setter]
+    B --> G["required=false 可选"]
+    C --> H[默认 byName]
+    C --> I["找不到名 再 byType"]
+    C --> J["name 属性指定名"]
+    C --> K["type 属性指定类型"]
+    L[推荐] --> M[构造器注入<br/>不可变 易测试]
+    L --> N["@Resource 字段注入<br/>指定名更明确"]
+```
 ## 记忆要点
 
 - 来源不同：@Autowired 是 Spring 提供，而 @Resource 是 JDK（JSR-250）标准注解

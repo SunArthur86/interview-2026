@@ -307,6 +307,27 @@ def eval_all_domains(model):
 - **LoRAHub**：多LoRA组合，按需加载不同领域能力
 - **MoE路由分析**：DeepSeek-MoE论文中分析了专家如何自然分工到不同领域
 
+## 流程图
+
+```mermaid
+flowchart TD
+    M[基座预训练模型] --> T[多领域数据混训]
+
+    subgraph 防遗忘数据层
+    T --> P[动态配比策略<br/>基础>60% 增强<20%]
+    T --> ER[经验回放 Replay<br/>混入20%旧数据]
+    end
+
+    P --> G{梯度冲突检测 cos<0?}
+    ER --> G
+    
+    G -->|是: 领域互相挤占| C[架构层解法隔离<br/>MoE多专家或LoRA多适配器]
+    G -->|严重冲突 cos<-0.3| PC[梯度操作层解法<br/>PCGrad投影消除冲突]
+
+    C --> E[多领域评估矩阵<br/>MMLU/GSM8K等对照]
+    PC --> E
+```
+
 ## 记忆要点
 
 - 核心问题：多领域混训因梯度方向冲突(cos<0)导致灾难性遗忘，一方提升另一方下降

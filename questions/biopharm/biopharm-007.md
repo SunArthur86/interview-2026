@@ -142,6 +142,23 @@ async def ask(req):
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：Python asyncio 和 Go goroutine 区别？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Client[前端客户端] -->|HTTP请求| API[asyncio事件循环 API入口]
+    API -->|长耗时任务| MQ[(Celery任务队列)]
+    API -->|实时查询/响应| Client
+    MQ --> Worker1[Worker进程1]
+    MQ --> Worker2[Worker进程2]
+    Worker1 --> GPUPool[GPU推理池 vLLM批处理]
+    Worker2 --> GPUPool
+    GPUPool -->|结果回调| MQ
+    Worker1 -.-> DBPool[(数据库/Redis连接池)]
+    Worker2 -.-> DBPool
+    MQ -.->|背压/限流 429| API
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

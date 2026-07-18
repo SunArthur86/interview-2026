@@ -87,6 +87,24 @@ map.forEach((k, v) -> System.out.println(k + ":" + v));
 3. **LinkedHashMap 如何实现 LRU 缓存？**
    - 通过设置 `accessOrder=true`，将访问顺序改为最近最少使用（LRU）顺序，每次访问（get/put）都会将节点移至链表尾部。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Map 接口] --> B[key-value 映射]
+    A --> C[key 唯一 可 null]
+    A --> D[核心方法]
+    D --> E[put/get/remove]
+    D --> F[containsKey/containsValue]
+    D --> G[keySet/values/entrySet]
+    A --> H[主要实现]
+    H --> I[HashMap 非线程安全]
+    H --> J[LinkedHashMap 顺序]
+    H --> K[TreeMap 排序]
+    H --> L[ConcurrentHashMap 并发]
+    H --> M[Hashtable 已过时]
+```
 ## 记忆要点
 
 - 核心特征：独立于Collection体系，存储键值对映射，Key绝不允许重复。

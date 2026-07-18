@@ -190,6 +190,38 @@ Prompt 工程本质是**"用上下文工程化引导 LLM 的概率分布"**。Co
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：CoT 为什么有效？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1 [Prompt 输入层]
+        A1[角色设定与指令] --> A2[分隔符隔离数据]
+        A3[Few-shot 示例对齐]
+    end
+    subgraph S2 [推理与执行层]
+        B1{复杂推理判断}
+        B1 -- 是 --> B2[CoT: 分步生成 token]
+        B1 -- 需查资料 --> B3[ReAct: 思考-行动-观察]
+        B3 --> B4[Function Calling 调用工具]
+        B2 --> B5[生成中间结果]
+        B4 --> B5
+    end
+    subgraph S3 [结构化输出与校验]
+        C1[JSON Mode 约束]
+        B5 --> C1
+        C1 --> C2{Schema 校验}
+        C2 -- 失败 --> C3[失败重试与兜底解析]
+        C3 --> C1
+        C2 -- 成功 --> C4[稳定结构化响应]
+    end
+    subgraph S4 [工程化管理]
+        D1[Prompt 版本存储] --> D2[离线评测集回归]
+        D2 --> D3[线上灰度 A/B 测试]
+        D3 --> D1
+    end
+    C4 -.-> D2
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -101,6 +101,22 @@ public synchronized long nextId() {
 | Leaf Segment | 极高 (内存) | 趋势递增 | 64bit | 中 | 需要持久化保证 |
 | Redis Incr | 中 (网络IO) | 严格递增 | 64bit | 低 | 简单分布式计数 |
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ[请求ID] --> SF[Snowflake 雪花]
+    SF --> BIT[41位时间+10位机器+12位序列]
+    BIT --> INC[趋势递增]
+    REQ --> SEG[号段模式]
+    SEG --> DB[(DB 批量取号)]
+    DB --> BUF[双 Buffer 缓冲]
+    CLK[时钟回拨] --> WT[等待/报错]
+    style SF fill:#d4edda
+    style CLK fill:#ffcccc
+```
+
 ## 记忆要点
 
 - 方案对比：UUID本地生成但无序致索引差，数据库自增受限单点瓶颈。

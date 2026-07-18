@@ -305,6 +305,37 @@ Agent AB 的特殊性：
 
 **收尾：** 您想继续往深里聊吗——比如「怎么评测 Agent？」
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Agent编排层
+        I[业务请求输入] --> N[Workflow节点编排<br/>LangGraph/Dify]
+        N --> M[大语言模型组件]
+        N --> T[外部工具调用]
+        M & T --> O[聚合输出]
+    end
+
+    subgraph 护栏与安全控制
+        I --> IG[输入护栏<br/>越狱检测/敏感词过滤]
+        O --> OG[输出护栏<br/>格式校验/事实核查]
+        OG -- 高风险操作 --> HU[人审兜底确认]
+        OG -- 低风险正常 --> RS[返回响应结果]
+        HU --> RS
+    end
+
+    subgraph 评测与监控闭环
+        RS --> EV[在线监控大盘<br/>延迟/幻觉率/成本/负反馈]
+        EV --> AB[A/B实验与灰度发布<br/>多维指标检验]
+        AB --> BM[离线评测基准回归<br/>LLM-as-Judge/人工抽检]
+        BM -.->|版本化效果比对| N
+    end
+
+    subgraph 版本与变更管理
+        VG[模型/Prompt/RAG版本 Git管理] --> N
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -223,6 +223,23 @@ public class DualWriteConsumer implements RocketMQListener<ShortLink> {
 3. **连接池隔离回答 follow-up**："并发查 64 表会不会耗尽连接池？会。所以更推荐索引表方案，将并发表数从 64 降到 1\~3，连接压力骤降。"
 4. **异步并行校验**：如果某些校验规则之间无依赖关系，可以进一步用 `CompletableFuture.anyOf` 做并行而非串行链。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[查询用户短链列表] --> B{是否使用索引表}
+    B -->|未使用 并发查询| C[CompletableFuture并发扫描64张表]
+    B -->|使用索引表| D[查询user_id分片索引表]
+    C --> E[申请64个HikariCP连接]
+    C --> F[合并各表Top N结果]
+    F --> G[内存全局排序与分页]
+    D --> H[获取目标short_code集合]
+    H --> I[精准路由1~3张物理表]
+    I --> J[直接取出完整记录]
+    G --> K[返回分页结果]
+    J --> K
+```
+
 ## 记忆要点
 
 - 核心思路：把64表串行扫描变并发查询，因为串行是64倍延迟，所以并行降至Max(单表)延迟

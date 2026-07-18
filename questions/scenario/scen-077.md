@@ -122,6 +122,22 @@ func GeneratePrefixKeys(keyword string) []string {
 4. **内存不够存所有前缀怎么办？**
    - 只存储高频前缀（如前90%流量覆盖的词根）；低频前缀回源到ElasticSearch查询。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    IN[用户输入前缀] --> DEB[防抖请求]
+    DEB --> TRIE[Trie树/前缀索引]
+    TRIE --> MATCH[匹配候选词]
+    MATCH --> WT[热度+历史+个性化权重]
+    WT --> SORT[排序]
+    SORT --> CACHE[结果缓存]
+    CACHE --> RTN[返回建议]
+    ERR[拼写错误] --> FUZ[模糊匹配/拼音容错]
+    style TRIE fill:#d4edda
+```
+
 ## 记忆要点
 
 - 核心存储：Redis ZSet方案。因为需高频前缀查询与权重排序，所以Key设计为前缀，Value存完整词及热度分数。

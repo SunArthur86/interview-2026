@@ -68,6 +68,23 @@ public static <T> void copyElements(List<? extends T> src,
 | **性能** | 无额外开销（引用类型相同） | 代码膨胀风险，但内联优化后可能性能更高 |
 | **基本类型** | 不支持（必须用 `Integer`） | 直接支持（`List<int>`） |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java 泛型] --> B[类型参数化<br/>E T K V]
+    A --> C[编译期类型检查]
+    A --> D[类型擦除 Type Erasure]
+    D --> E["编译后擦除为 Object<br/>或上界 bound"]
+    D --> F[运行时无泛型信息]
+    D --> G[不能用 new T<br/>不能用泛型数组]
+    H[通配符] --> I["? extends T 上界<br/>只读 协变"]
+    H --> J["? super T 下界<br/>只写 逆变"]
+    K[PECS 原则] --> L[Provider extends<br/>Consumer super]
+    M[场景] --> N[集合类型安全]
+    M --> O[框架 API 抽象]
+```
 ## 记忆要点
 
 - 因为Java泛型存在类型擦除，所以仅在编译期检查类型，运行时被替换成Object。

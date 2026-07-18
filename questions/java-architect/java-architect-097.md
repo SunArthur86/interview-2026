@@ -312,6 +312,24 @@ MySQL 单机容量参考：
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——峰值系数怎么定？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    B[业务目标:峰值订单量] --> QPS[峰值QPS推导]
+    QPS --> F[DAU×人均请求×峰值系数÷时长]
+    F --> LL[Little's Law公式推导并发数]
+    LL -->|L = λ × W| CE[评估各层资源容量清单]
+    CE --> APP[应用层:实例数=峰值QPS÷单机QPS×冗余]
+    CE --> DB[数据库层:按QPS与数据量分库分表]
+    CE --> CACHE[缓存层:内存水位与分片带宽]
+    CE --> GPU[AI层:GPU并发数与Token成本预算]
+    APP --> HW[设定扩容触发水位线:CPU70%/RT200ms]
+    DB --> HW
+    CACHE --> HW
+    GPU --> HW
+    HW --> HPA[自动弹性扩容吸收估算偏差]
+```
 
 ## 视频脚本
 

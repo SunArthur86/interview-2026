@@ -115,6 +115,36 @@ window.addEventListener('beforeunload', (e) => {
 5. **本地索引的 CPU/IO 压力** — 本地建索引是 CPU/IO 密集型，放在 Worker 或子进程执行，避免阻塞主线程导致 UI 卡顿
 6. **失败隔离与降级** — 单段失败不应拖垮整条链路，可设计降级（如云端推理失败回退本地小模型，导出失败保留中间产物供用户手动下载）
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 前端调度层 统一状态机
+        direction LR
+        S1[pending] --> S2[indexing]
+        S2 --> S3[inferring]
+        S3 --> S4[exporting]
+        S4 --> S5[done]
+    end
+    subgraph Stage1 本地索引
+        direction LR
+        L_Files[OS文件系统] --> L_Index[本地特征向量]
+    end
+    subgraph Stage2 云端推理
+        direction LR
+        C_API[云端模型API] --> C_SSE[流式Token响应]
+    end
+    subgraph Stage3 产物导出
+        direction LR
+        E_Data[推理结果落盘] --> E_File[最终导出文件]
+    end
+    S2 -.->|触发| L_Files
+    L_Index -.->|契约传递| S3
+    S3 -.->|触发| C_API
+    C_SSE -.->|流式接收| S4
+    S4 -.->|触发| E_Data
+```
+
 ## 记忆要点
 
 - 分层解耦架构：前端通过统一任务调度层串联三段链路，不相互阻塞

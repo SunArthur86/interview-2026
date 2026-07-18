@@ -110,6 +110,22 @@ public class RateLimiterFilter implements GlobalFilter, Ordered {
 }
 ```
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    CL[客户端] --> GW[API 网关]
+    GW --> F1[Filter: 鉴权]
+    F1 --> F2[Filter: 限流]
+    F2 --> F3[Filter: 日志]
+    F3 --> ROUTE[动态路由]
+    ROUTE --> SV1[服务A]
+    ROUTE --> SV2[服务B]
+    ROUTE --> GRAY[灰度版本]
+    style GW fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 核心职责：统一入口处理非业务横切关注点（鉴权、限流、路由、协议转换、监控）。

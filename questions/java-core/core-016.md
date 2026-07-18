@@ -121,6 +121,24 @@ public static byte[] writeVarInt(int value) {
 2. **Varint 的缺点**：对于负数和大整数（最高位为 1 的符号位问题），Varint 反而可能占用 10 字节（ZigZag 编码如何解决此问题？）。
 3. **Huffman 编码解码条件**：为何需要传输 Huffman 树或频率表？接收方如何重建字典？
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[字符编码流程] --> B[字符 Char Unicode]
+    B --> C[编码 Encode]
+    C --> D[字节 Byte<br/>UTF-8/GBK]
+    D --> E[存储/传输]
+    E --> F[解码 Decode]
+    F --> G[字符]
+    H[常见编码] --> I[ASCII 1字节 英文]
+    H --> J[GBK 中文2字节]
+    H --> K[UTF-8 变长1-4字节]
+    H --> L[UTF-16 固定2字节]
+    M[乱码根源] --> N[编码与解码字符集不一致]
+    M --> O[字节流读字符截断]
+```
 ## 记忆要点
 
 - 核心策略是高频字符用短码，低频字符用长码，节省空间

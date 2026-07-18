@@ -225,6 +225,34 @@ def delete_doubly(node):
 | LRU-K | 最近K次访问 | 平衡 | 实现复杂 |
 | ARC | 自适应LRU+LFU | 自动调优 | 实现最复杂 |
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Client[客户端请求]
+        A["发起 Get / Put 请求"]
+    end
+
+    subgraph CacheStructure[LRU 缓存内部结构]
+        B{"Key 是否存在?"}
+        C["HashMap 定位节点"]
+        D["双向链表 (虚拟头尾)"]
+        E["移至虚拟头节点"]
+        F["淘汰虚拟尾节点"]
+    end
+
+    A --> B
+    B -- "存在 / 命中" --> C
+    B -- "不存在 / Put新值" --> G{"容量是否已满?"}
+    C --> E
+    G -- "未满" --> H["创建新节点"]
+    G -- "已满" --> F
+    F --> I["Map移除Key"]
+    I --> H
+    H --> E
+    E --> D
+```
+
 ## 记忆要点
 
 - 核心结构：HashMap + 双向链表。因为要O(1)读写，所以用Map查位置，用链表保顺序。

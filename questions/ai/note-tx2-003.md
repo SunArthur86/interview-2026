@@ -165,6 +165,32 @@ OpenAI/Anthropic/混元 的 function calling 接口：
 - **Parallel Function Calling**：一次生成多个 tool_call 并行执行（GPT-4 Turbo 支持）
 - **Multi-turn Function Calling**：工具返回结果后，模型继续调下一个工具（ReAct 的基础）
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1 ["数据准备"]
+        A1["自然语言<br/>用户意图"] --> A2["工具描述<br/>Schema规范"]
+        A1 & A2 --> B["构建问答对<br/>指令微调数据集"]
+    end
+
+    subgraph S2 ["模型训练"]
+        B --> C1["SFT阶段<br/>学会JSON格式与参数映射"]
+        C1 --> C2["RLHF/DPO阶段<br/>优化参数质量与工具决策"]
+        C2 --> D["具备Function<br/>Calling能力的模型"]
+    end
+
+    subgraph S3 ["推理与约束"]
+        D --> E1["用户请求+"]
+        E1 --> E2["约束解码 FSM<br/>限制Token生成空间"]
+        E2 --> F["合法结构化<br/>JSON参数输出"]
+    end
+
+    F --> G["并行工具调用<br/>或嵌套调用执行"]
+    G --> H["工具返回结果"]
+    H --> D
+```
+
 ## 记忆要点
 
 - 本质澄清：FC并非理解语义，而是学会了将自然语言按schema映射为结构化JSON

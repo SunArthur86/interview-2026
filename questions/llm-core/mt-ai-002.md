@@ -90,6 +90,21 @@ def apply_rotary_pos_emb(q, k, cos, sin):
 | **ALiBi** | 在 Attention Score 加线性距离惩罚 | **极强** (无需插值) | 低 (加法) | 长序列建模，非自回归场景 |
 | **RoPE** | 向量在复数域旋转，内积体现相对位置 | 中等 (需 NTK/YaRN 缩放) | 低 (逐元素乘) | LLaMA, PaLM 等绝大多数 LLM |
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[位置 m] --> B[构造旋转矩阵 R_m]
+    B --> C[对 Query 旋转]
+    B --> D[对 Key 旋转]
+    C --> E[Q_m · K_n]
+    D --> E
+    E --> F[结果仅依赖相对位置 m-n]
+    F --> G[相对位置编码]
+    G --> H[天然支持长度外推]
+    G --> I[计算高效 可并行]
+```
+
 ## 记忆要点
 
 - 核心原理：通过旋转矩阵将绝对位置作用于 Q/K，相乘后内积自然包含相对位置信息。

@@ -217,8 +217,23 @@ EXPLAIN SELECT * FROM review WHERE product_id = 100;
 
 **收尾：** 为什么用 B+ 树不用 B 树/红黑树？
 
+## 流程图
 
-
+```mermaid
+flowchart TD
+    A1["商品评价页翻页请求"] --> B1{"查询优化策略选择"}
+    B1 -->|"LIMIT offset > 10000"| C1["ES 分布式检索"]
+    B1 -->|"常规分页 WHERE product_id=?"| C2["MySQL联合索引检索"]
+    
+    subgraph MySQL联合索引优化
+        C2 --> D1["(product_id, status, create_time)"]
+        D1 --> D2["B+树定位等值前缀"]
+        D2 --> D3["叶子链表按时间倒序扫描"]
+        D3 --> D4["拿到主键ID列表"]
+        D4 --> D5["覆盖索引直接返回<br/>或按主键ID批量回表"]
+        D5 --> E1["返回Top 10评价数据"]
+    end
+```
 
 ## 视频脚本
 

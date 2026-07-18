@@ -117,6 +117,15 @@ def pack_fp4_blocks(weight_matrix):
 2. **为什么选择 per-block (32) 而不是 per-channel 或 per-tensor？**（精度与显存开销的平衡）
 3. **FP8 缩放因子本身是否需要反量化？**（通常在计算单元内部直接使用 FP8 计算，无需转为 FP32）
 
+```mermaid
+flowchart TD
+    FP[FP权重] --> Block[Per-block分块<br/>每32元素]
+    Block --> Scale[FP8 Scale缩放<br/>最后一维]
+    Scale --> Store[存储:FP4权重+Scale表]
+    Store --> Format[[M, N/32]FP8表]
+    Format --> Dequant[反量化相乘还原]
+```
+
 ## 记忆要点
 
 - NVFP4原理：1符号+2指数+1尾数，动态范围±448，比INT4更优。

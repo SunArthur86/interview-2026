@@ -382,6 +382,31 @@ public class OrderQueryService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——归档时怎么不锁表？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1 [大表治理在线库]
+        A1[在线业务 MySQL<br/>10亿行 500G] --> A2[pt-archiver<br/>小批量迁移 1000行/次]
+    end
+    subgraph S2 [归档处理流]
+        B1[归档任务调度<br/>Java XXL-Job] --> A2
+        A2 --> B2[校验冷库数据完整性]
+        B2 --> B3[DELETE 源表<br/>不锁表限速]
+    end
+    subgraph S3 [冷库存储层]
+        C1[TiDB 冷库<br/>支持分析查询]
+    end
+    B3 --> C1
+    subgraph S4 [在线表分区治理]
+        D1[RANGE 按月分区表] --> D2[DROP PARTITION<br/>秒级删历史分区]
+        D1 --> D3[分区裁剪<br/>Pruning 查询加速]
+    end
+    subgraph S5 [应用冷热路由]
+        E1[冷热透明路由代理] -->|优先| D1
+        E1 -->|Miss查冷库| C1
+    end
+```
 
 ## 视频脚本
 

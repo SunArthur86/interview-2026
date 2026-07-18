@@ -156,6 +156,43 @@ ZGC 没有 Full GC，但问题依然在——内存泄漏会导致 ZGC 的并发
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph App [交易应用]
+        A["业务对象/本地缓存"]
+        B["无界集合/大对象分配"]
+    end
+
+    subgraph JVM [JVM 内存与 G1 GC]
+        C["Eden区"]
+        D["Survivor区"]
+        E["Old老年代<br/>(Region块组合)"]
+        F{"GC触发条件<br/>(Allocation Failure等)"}
+        G["并发标记<br/>(IHOP阈值)"]
+        H["Mixed GC<br/>(优先回收垃圾多Region)"]
+    end
+
+    subgraph Opt [调优与监控]
+        I["MAT Dump<br/>分析大对象"]
+        J["设置上限<br/>maximumSize+TTL"]
+        K["监控告警<br/>FGC/停顿P99"]
+    end
+
+    A --> C
+    B --> C
+    C -- "YGC/晋升" --> D
+    D -- "年龄达标" --> E
+    E -- "缓存堆积" --> F
+    F -- "触发" --> G
+    G -- "选定CSet" --> H
+    H -- "产生STW停顿" --> K
+    K -- "抓取Heap快照" --> I
+    I -- "定位根因" --> J
+    J -- "控制对象无界增长" --> A
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

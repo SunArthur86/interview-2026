@@ -99,6 +99,26 @@ server {
 3. **自签名证书**：什么情况下使用？为什么浏览器会报不安全？（因为没有受信任的 CA 签名，需手动导入信任）。
 4. **SAN 与 CN**：现代浏览器强制要求使用 SAN（Subject Alternative Name）来匹配域名，仅依靠 CN 已被废弃。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[数字证书体系 PKI] --> B[CA 证书颁发机构]
+    B --> C[生成密钥对<br/>公钥+私钥]
+    C --> D[CSR 证书签名请求]
+    D --> E[CA 用私钥签名]
+    E --> F[颁发 X.509 证书<br/>含公钥+持有者+有效期+CA 签名]
+    G[校验链] --> H[浏览器收到证书]
+    H --> I[用 CA 公钥验签<br/>验证真伪]
+    I --> J[检查有效期/域名/吊销列表]
+    J --> K[校验通过 信任公钥]
+    L[信任根] --> M[操作系统/浏览器<br/>预装 Root CA]
+    M --> N[Root CA 签发 Intermediate]
+    N --> O[Intermediate 签发 End-Entity]
+    P[HTTPS/TLS] --> Q[服务端证书<br/>证明公钥归属]
+    R[证书吊销] --> S[CRL/OCSP]
+```
 ## 记忆要点
 
 - 核心作用：由权威CA背书，防中间人攻击，证明“公钥确实属于该实体”

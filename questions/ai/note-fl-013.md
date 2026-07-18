@@ -108,6 +108,24 @@ consumer 从 Stream 读消息（XREADGROUP）→ 消息进入该 consumer 的 Pe
 - **Kafka 的 partition**：并行消费的关键，一个 partition 只能被一个 consumer 消费（同组内）
 - **Pulsar**：介于两者之间，计算存储分离，云原生友好
 
+## 流程图
+
+```mermaid
+flowchart TD
+    Prod["Agent事件生产者"] --> MQ{消息队列选型}
+    MQ -->|中小规模/已有Redis| Stream["Redis Stream<br/>亚毫秒延迟"]
+    MQ -->|百万级QPS/严格不丢| Kafka["Kafka<br/>磁盘顺序写与多副本"]
+
+    subgraph Stream [消费组与Pending机制]
+        S1["XADD 写入流"] --> S2["XREAD 消费组拉取"]
+        S2 --> Consumer1[Consumer A]
+        S2 --> Consumer2[Consumer B]
+        Consumer1 -.->|"崩溃/未确认"| P[Pending List]
+        Monitor["后台监控任务"] -->|"XPENDING 查空闲时间"| P
+        Monitor -->|"XCLAIM 超时认领"| Consumer2
+    end
+```
+
 ## 记忆要点
 
 - Stream vs Kafka：Redis Stream亚毫秒延迟且部署轻量，Kafka磁盘顺序写吞吐百万级且不丢

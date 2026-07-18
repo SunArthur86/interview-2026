@@ -359,6 +359,37 @@ public class RolloutService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——Feature Flag 怎么实现？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Client [客户端]
+        A1[租户发起请求]
+    end
+
+    subgraph Gateway [网关层]
+        B1[提取 TenantId]
+        B2{灰度路由判断<br/>白名单 / Hash%100}
+        B3[加 X-Gray-Version Header]
+    end
+
+    subgraph ConfigCenter [配置中心 Apollo]
+        C1[Feature Flag<br/> rolloutPercent]
+        C2[配置隔离<br/> config.tenantId / config.default]
+    end
+
+    subgraph Application [应用服务层]
+        D1[命中灰度<br/> NewReportService]
+        D2[未命中灰度<br/> OldReportService]
+    end
+
+    A1 --> B1 --> B2
+    C1 -.推送配置.-> B2
+    B2 -- 命中 --> B3 --> D1
+    B2 -- 未命中 --> D2
+    C2 -.读取配置.-> D1
+    C2 -.读取配置.-> D2
+```
 
 ## 视频脚本
 

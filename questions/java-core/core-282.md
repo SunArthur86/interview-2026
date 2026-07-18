@@ -122,6 +122,24 @@ public class Originator {
 }
 ```
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[备忘录模式 Memento] --> B[Originator 发起人]
+    B --> C[创建快照 save]
+    B --> D[恢复快照 restore]
+    C --> E[Memento 备忘录]
+    E --> F[保存内部状态<br/>只读对外]
+    G[Caretaker 管理者] --> H[持有 Memento 列表]
+    H --> I[不可修改内容]
+    D --> H
+    J[场景] --> K[撤销 Undo]
+    J --> L[事务回滚]
+    J --> M[游戏存档]
+    N[优势] --> O[封装不破坏<br/>状态外置保存]
+```
 ## 记忆要点
 
 - 一句话定义：不破坏封装的前提下，捕获并外部保存对象内部状态以供恢复

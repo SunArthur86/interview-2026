@@ -87,6 +87,16 @@ state = phone_extraction.run("Call me at 13812345678.")
 2. **vLLM 的 PagedAttention 在实现计算时是如何处理非连续物理 Block 的？**（通过 paged_kernel 索引映射）
 3. **结构化输出的正则约束通常如何集成到 Decoding 过程中？**（通常构建一个 Finite State Machine (FSM) 动态屏蔽无效 Token）
 
+```mermaid
+flowchart TD
+    Scene[应用场景] --> Choice{引擎选型}
+    Choice -->|通用单轮| vLLM[vLLM<br/>PagedAttention]
+    Choice -->|多轮/长前缀| SGLang[SGLang<br/>RadixAttention]
+    Choice -->|结构化输出| SGLang2[SGLang<br/>Regex/JSON约束]
+    vLLM --> Mature[生态成熟]
+    SGLang --> Prefix[自动共享前缀]
+```
+
 ## 记忆要点
 
 - vLLM核心：PagedAttention分页管理KV，解决显存碎片，生态成熟适合通用推理

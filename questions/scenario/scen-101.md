@@ -129,6 +129,22 @@ function getDisabledSpecs(selectedSpecs, allSKUs) {
 3. **价格计算**：购物车中不同SKU（不同SPU）的优惠叠加计算逻辑，是在网关层还是服务层计算？
 4. **商品变更历史**：SPU属性变更（如修改描述）与SKU上下架的审计日志设计。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SPU[SPU 商品类] --> SP[公共信息 品牌/标题]
+    SPU --> SPEC[规格表 Spec]
+    SPEC --> SV[规格值 SpecValue]
+    SV --> SKU[SKU 售卖单品]
+    SKU --> PRICE[价格/库存]
+    SEL[前端选规格] --> MAP[规格组合映射]
+    MAP --> SKU
+    style SPU fill:#e6f2ff
+    style SKU fill:#fff4e6
+```
+
 ## 记忆要点
 
 - SPU是产品集(如iPhone 15)，SKU是最小库存单元(如银色256G)，一个SPU含多SKU

@@ -140,6 +140,23 @@ public boolean mergeFile(String fileId, String fileHash, int totalChunks) {
 - 访问控制：ACL + Token
 - 防盗链：Referer检查 + 签名URL
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    UP[大文件上传] --> MD5[计算文件Hash]
+    MD5 --> DUP{Hash已存在?}
+    DUP -->|是| INSTANT[秒传 建引用]
+    DUP -->|否| CHUNK[分片上传]
+    CHUNK --> PARA[并行上传+断点续传]
+    PARA --> STORE[分片落盘]
+    STORE --> CHK[分片+整体MD5校验]
+    CHK --> MERGE[合并为完整文件]
+    SHARE[分享] --> TOK[Token鉴权+时效]
+    style INSTANT fill:#d4edda
+```
+
 ## 记忆要点
 
 - 秒传原理：上传前先算文件MD5比对服务端，存在则直接加引用关系，零流量传输

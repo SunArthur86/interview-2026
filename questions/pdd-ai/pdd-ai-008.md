@@ -202,6 +202,27 @@ SRM 的常见根因有四个。第一，分流哈希本身的偏差——MurmurH
 
 **收尾：** 您想继续往深里聊吗——比如「怎么保证分流均匀？」
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant U as 用户请求
+    participant R as 实验平台分流网关
+    participant E1 as 推荐模型层
+    participant E2 as 搜索策略层
+    participant M as 指标计算引擎
+    U->>R: 请求推荐/搜索
+    R->>R: MurmurHash计算分流
+    par 正交分层实验
+        R->>E1: 命中推荐模型B桶
+        R->>E2: 命中搜索策略A桶
+    end
+    E1-->>U: 返回实验组推荐结果
+    E2-->>U: 返回实验组搜索结果
+    U->>M: 上报埋点行为
+    M->>M: CUPED方差缩减与显著性检验
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

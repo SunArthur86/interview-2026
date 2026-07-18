@@ -98,6 +98,27 @@ Client      Local DNS      Root Server    .com Server    google.com NS
   │            │  (Result IP)                 │               │
   │<───────────│              │              │               │
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[浏览器输入域名] --> B[查本地 hosts]
+    B --> C[查本地 DNS 缓存]
+    C --> D[问本地域名服务器 LDNS]
+    D --> E{LDNS 缓存命中?}
+    E -->|是| F[返回 IP]
+    E -->|否| G[递归查询]
+    G --> H[根域名服务器]
+    H --> I[迭代返回 TLD 地址]
+    I --> J[顶级域 .com 服务器]
+    J --> K[迭代返回权威地址]
+    K --> L[权威域名服务器]
+    L --> M[返回最终 IP]
+    M --> N[LDNS 缓存 + 返回客户端]
+    O[递归] --> P[客户端↔LDNS<br/>替你查到底]
+    Q[迭代] --> R[LDNS↔各级<br/>逐级指路]
+```
 ## 记忆要点
 
 - 递归查询：你问我我必答到底，客户端负担轻而服务器负担重（多用于客户端查Local DNS）

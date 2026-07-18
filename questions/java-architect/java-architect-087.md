@@ -406,6 +406,30 @@ public OrderSuggestion recommend(UserQuery q) {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——Spring AI 和 LangChain4j 怎么选？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1 [业务接入与隔离层]
+        A1[Java 业务主链路<br/>Tomcat 线程池] -->|异步解耦| A2[LLM 独立线程池<br/>Resilience4j隔离]
+    end
+    subgraph S2 [四大护栏机制]
+        B1[安全护栏<br/>PII脱敏与Prompt注入检测]
+        B2[成本护栏<br/>Token预算与模型路由]
+        B3[输出护栏<br/>JSON Schema严格校验]
+        B4[降级护栏<br/>Feature Flag切规则引擎]
+    end
+    A2 --> B1
+    B1 --> B2
+    B2 --> C1
+    subgraph S3 [外部大模型依赖]
+        C1[GPT-4 / 通义千问 API<br/>慢/贵/非确定性]
+    end
+    C1 --> B3
+    B3 -->|校验失败/超时| B4
+    B3 -->|输出可信DTO建议| A1
+    B4 --> A1
+```
 
 ## 视频脚本
 

@@ -357,6 +357,29 @@ while (running) {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——Redis Stream 消息怎么持久化？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 业务场景层
+        A["轻量异步任务<br/>App push/IM"]
+        B["核心业务流<br/>订单/支付/埋点"]
+    end
+    subgraph Redis Stream
+        C["内存模型<br/>AOF everysec"]
+        D["单机/分片<br/>< 10万 QPS"]
+        E["亚毫秒级延迟"]
+    end
+    subgraph Kafka
+        F["磁盘模型<br/>顺序追加写"]
+        G["分布式分区<br/>百万 QPS"]
+        H["多副本零丢失"]
+    end
+    A --> C
+    B --> F
+    C --> D --> E
+    F --> G --> H
+```
 
 ## 视频脚本
 

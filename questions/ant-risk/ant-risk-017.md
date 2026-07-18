@@ -331,6 +331,24 @@ Redis 确实容量大，但延迟高。风控决策查缓存的 RT 预算是 5ms
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：内存泄漏和内存溢出区别？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[风控服务触发 OOM] --> B[开启 HeapDumpOnOutOfMemoryError]
+    B --> C{是否生成 hprof dump文件?}
+    C -- 是 --> D[MAT分析支配树与GC Root引用链]
+    C -- 否 --> E[根据异常日志区分OOM类型]
+    E -- 堆内存溢出 --> F[jstat/Arthas 查内存增长趋势]
+    E -- Metaspace溢出 --> G[jcmd 查看 ClassLoader 统计]
+    E -- 线程数溢出 --> H[jstack 分析线程爆炸根因]
+    D --> I[定位泄漏代码引用]
+    F --> I
+    G --> I
+    H --> I
+    I --> J[修复: 修复内存泄漏/加限流降级/扩容]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -130,6 +130,24 @@ def calculate_score(order, rider):
 - 支持单城市百万订单/日
 - 万级骑手实时位置追踪
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    ORD[新订单] --> GRID[区域网格化]
+    GRID --> CAND[候选骑手集合]
+    CAND --> M1[贪心指派]
+    CAND --> M2[二分图匹配]
+    CAND --> M3[智能寻优]
+    M1 --> ASG[最优分配]
+    M2 --> ASG
+    M3 --> ASG
+    ASG --> DYN[实时动态调整]
+    DYN -->|超单/路况| REA[重新调度]
+    style ASG fill:#d4edda
+```
+
 ## 记忆要点
 
 - 本质模型：多约束条件下的最优分配，属于NP-Hard问题，需平衡响应时间与全局最优

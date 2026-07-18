@@ -475,6 +475,40 @@ public String getHotKey(String key) {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：布隆过滤器为什么能防穿透？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 客户端请求
+        R1[高并发查询请求]
+    end
+
+    subgraph 防护前置拦截
+        P1[布隆过滤器 Bloom Filter]
+        P2{Key是否存在?}
+    end
+
+    subgraph 本地与分布式缓存
+        L1[本地缓存 Caffeine<br/>防热点击穿]
+        C1{Redis缓存命中?}
+    end
+
+    subgraph 数据库回源防护
+        L2[分布式锁<br/>互斥重建]
+        DB1[(数据库 MySQL)]
+    end
+
+    R1 --> P1
+    P1 --> P2
+    P2 -- 不存在直接拦截 --> R1
+    P2 -- 存在/穿透缓存空值 --> L1
+    L1 -- 本地未命中 --> C1
+    C1 -- 命中 --> R1
+    C1 -- 未命中/缓存雪崩 --> L2
+    L2 -- 抢到锁的单线程 --> DB1
+    DB1 -- 写入带随机TTL防雪崩 --> C1
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

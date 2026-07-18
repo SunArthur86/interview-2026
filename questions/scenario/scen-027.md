@@ -107,6 +107,23 @@ memory_points:
 3. **查询上下文 vs 过滤上下文**：`must`和`filter`在评分和缓存上的区别是什么？
 4. **Geo Search**：如何实现“附近的人”？（`geo_distance`，GeoHash原理）
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    Q[用户搜索词] --> QL[查询层 纠错/改写/意图]
+    QL --> RC[召回层 多路]
+    RC --> KW[关键词倒排]
+    RC --> VEC[向量召回]
+    KW --> MERG[合并去重]
+    VEC --> MERG
+    MERG --> RK[粗排]
+    RK --> FR[精排+业务加权]
+    FR --> AGG[聚合统计筛选面]
+    style RC fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 架构四层：查询理解（意图/改写）、召回（倒排+向量）、排序（粗排BM25+精排预估CTR/CVR）、展示

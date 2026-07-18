@@ -435,6 +435,24 @@ spec:
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——KEDA 和 HPA 区别？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph K8s Cluster
+        direction LR
+        A["Kafka Topic<br/>30 Partitions"] -- "消费 lag 指标" --> B("KEDA Operator")
+        B -- "查询 lag" --> A
+        B -- "动态伸缩 replicas" --> C["ScaledObject"]
+        C --> D["Java Consumer Pod 1"]
+        C --> E["Java Consumer Pod 2"]
+        C --> F["Java Consumer Pod N<br/>最多扩容至 30"]
+    end
+    G["HPA<br/>基于 CPU"] -.->|IO密集型CPU低不扩容| D
+    D --> A
+    E --> A
+    F --> A
+```
 
 ## 视频脚本
 

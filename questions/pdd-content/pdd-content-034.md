@@ -294,6 +294,34 @@ vLLM 的创新不在"有没有 KV Cache"（这是 Transformer 自带的），而
 
 **收尾：** vLLM 为什么快？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 客户端请求接入
+        R1[请求A Prompt] & R2[请求B Prompt] & R3[请求C Prompt] --> CB[Continuous Batching<br/>动态连续批处理]
+    end
+
+    subgraph 显存管理与优化
+        CB --> PA[PagedAttention<br/>OS虚拟内存分页按需分配]
+        PA --> KC[管理 KV Cache 显存块]
+        KC --> MEM[(GPU显存利用率 95%+)]
+    end
+
+    subgraph 模型计算层
+        KC --> PR[Prefill阶段<br/>计算密集首Token生成]
+        PR --> DC[Decode阶段<br/>显存密集后续Token生成]
+        DC --> Q[INT8/AWQ 模型量化<br/>保精度降显存]
+    end
+
+    subgraph 分布式并行加速
+        Q --> TP[张量并行 TP<br/>多层卡同算一层]
+        Q --> PP[Pipeline并行 PP<br/>多卡流水线层间分配]
+        TP & PP --> SD[投机解码/Prefix Caching<br/>小模型预测加速]
+    end
+
+    SD --> OUT[流式聚合输出响应]
+```
 
 ## 视频脚本
 

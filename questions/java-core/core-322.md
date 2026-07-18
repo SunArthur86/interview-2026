@@ -118,6 +118,29 @@ CompletableFuture.allOf(userF, ordersF)        // 等两个任务都完成
 - 异步与时间：CompletableFuture 实现多任务编排，java.time 包提供更安全的全新日期 API。
 - parallelStream 共用公共 ForkJoinPool，长时间阻塞任务会拖垮其他并行流，建议自定义线程池。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Java 关键新特性] --> B["Java 8"]
+    B --> B1[Lambda + 方法引用]
+    B --> B2[Stream 流式 API]
+    B --> B3[Optional 防 NPE]
+    B --> B4[接口默认/静态方法]
+    B --> B5[新日期 API java.time]
+    A --> C["Java 9-17"]
+    C --> C1[模块化 JPMS]
+    C --> C2[var 局部类型推断]
+    C --> C3[Records 记录类]
+    C --> C4[密封类 Sealed]
+    C --> C5[模式匹配 instanceof]
+    A --> D["Java 21 LTS"]
+    D --> D1[虚拟线程]
+    D --> D2[结构化并发]
+    D --> D3[Generational ZGC]
+    D --> D4[Pattern Matching switch]
+```
 ## 记忆要点
 
 - 两大基石：Lambda表达式（简化代码）与Stream API（函数式处理集合）。

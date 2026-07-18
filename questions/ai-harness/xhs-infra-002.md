@@ -92,6 +92,17 @@ def speculative_decode(prompt, draft_model, target_model, max_spec_steps=5):
 | **Lookahead Decoding** | n-gram 匹配 | 高（简单文本） | 无需额外模型，推理级训练 | 复杂语义场景效果差 |
 | **EAGLE (based Logits)** | 浅层网络特征 | 高 (80%+) | 极高的接受率和速度 | 依赖特定特征的提取，实现复杂 |
 
+```mermaid
+flowchart TD
+    Prompt[Prompt] --> Draft[小模型Draft<br/>快速生成候选]
+    Draft --> Verify[大模型Target<br/>并行验证]
+    Verify --> Accept{接受正确前缀}
+    Accept -->|猜对| Free[免费获得Token]
+    Accept -->|拒绝| Resample[拒绝处重采样]
+    Free --> Output[输出]
+    Resample --> Output
+```
+
 ## 记忆要点
 
 - 核心流程：小模型快速生成候选，大模型并行验证，接受正确前缀，拒绝处重采样。

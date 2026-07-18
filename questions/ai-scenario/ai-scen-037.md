@@ -114,6 +114,28 @@ def process_stream(stream_url, model, frame_buffer):
 1. **时间戳对齐错误**：抽帧处理后，检测结果的时间戳必须严格映射回原视频流，否则会导致告警定位错误。
 2. **内存泄漏**：在长时间运行的流处理任务中，未正确释放帧缓冲区或显存（CUDA cache）会导致服务随时间推移越来越慢直至崩溃。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["实时视频流(RTSP/WebRTC)"] --> B[FFmpeg解码与抽帧]
+    B --> C["帧队列缓冲区"]
+    C --> D{"运动检测/关键帧"}
+    D -->|有变化| E["分析层"]
+    D -->|无变化| F[跳帧处理]
+    subgraph E["分析层"]
+        E1[YOLOv8目标检测]
+        E2[SlowFast动作识别]
+        E3[Video-LLaVA语义理解]
+    end
+    E --> G[事件检测规则引擎]
+    G --> H["实时告警(WebSocket)"]
+    G --> I[生成结构化数据JSON]
+    G --> J["自动生成关键事件时间线"]
+
+    style F stroke-dasharray: 5 5
+```
+
 ## 记忆要点
 
 - 架构流程：接入层(抽帧) → 分析层(检测/识别) → 事件层(规则/异常)。

@@ -370,6 +370,34 @@ Java 21 终于追上 Kotlin/Scala 的 ADT 能力，且因为 sealed 接口的存
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——Record Pattern 和访问者模式（Visitor）什么关系？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["sealed interface OrderEvent<br/>permits Payment, Refund, Coupon"] --> B
+    A --> C
+    A --> D
+    B["record Payment<br/>(orderId, amount)"]
+    C["record Refund<br/>(orderId, reason)"]
+    D["record Coupon<br/>(userId, discount)"]
+
+    B --> E{"switch pattern<br/>穷尽性校验"}
+    C --> E
+    D --> E
+
+    E -->|"case Payment"| F["处理支付逻辑<br/>解构获取 amount"]
+    E -->|"case Refund"| G["处理退款逻辑<br/>解构获取 reason"]
+    E -->|"case Coupon"| H["处理优惠券逻辑<br/>解构获取 discount"]
+    E -->|"未覆盖新类型"| I["编译期报错<br/>强制补全分支"]
+
+    subgraph Old ["老式 instanceof 方案"]
+        J["if instanceof Payment"] --> K["强转并调用<br/>(ClassCastException 风险)"]
+        K --> L["新增类型无提醒<br/>(运行时 NPE 风险)"]
+    end
+
+    style I fill:#f9d0c4,stroke:#e06666
+    style L fill:#f9d0c4,stroke:#e06666
+```
 
 ## 视频脚本
 

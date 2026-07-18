@@ -83,6 +83,19 @@ producer.send(new ProducerRecord<>("topic", "key", "value"));
 - Broker：多副本同步复制 + 防止脏选举
 - 消费者：手动Ack + 业务幂等
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    P[生产端] -->|按业务Key分区| KEY[如订单ID hash]
+    KEY --> PART[Partition N]
+    PART -->|分区内天然有序| ORD[单分区有序]
+    ORD --> CON[消费端单线程绑定]
+    CON --> SEQ[顺序处理]
+    style PART fill:#d4edda
+```
+
 ## 记忆要点
 
 - 生产端防丢：同步发送+acks=all（等所有副本确认）+开启幂等防重试重复

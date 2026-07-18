@@ -104,6 +104,28 @@ def log_tool_call(tool_name, inputs, outputs, cost_tokens):
 3. **日志防篡改机制**：如何证明审计日志没有被内部人员修改？
    *答案要点*：引入WORM（Write Once Read Many）存储介质；或者使用区块链技术/哈希链。定期计算日志块的Hash并锚定到不可变账本中，任何修改都会导致Hash校验失败。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["用户查询输入"] --> B["TraceID生成器"]
+    B --> C["RAG检索召回"]
+    B --> D["LLM推理过程"]
+    C -.-> E["审计追踪中心"]
+    D -.-> E
+    subgraph E ["审计数据模型"]
+        E1["请求审计<br/>(Prompt/模型版本)"] --> E4["OpenTelemetry标准化日志"]
+        E2["推理审计<br/>(工具链/Token消耗)"] --> E4
+        E3["决策审计<br/>(RAG Chunk引用)"] --> E4
+    end
+    E4 --> F{"热温冷分层路由"}
+    F -->|"热数据(近3个月)"| G["Elasticsearch集群<br/>(支撑快速检索)"]
+    F -->|"冷数据(3个月后)"| H["S3 Glacier归档<br/>(Parquet列式压缩)"]
+    G --> I["Trace回放系统<br/>(事故调查/合规举证)"]
+    H --> I
+    I -.-> J["WORM存储介质<br/>(日志防篡改)"]
+```
+
 ## 记忆要点
 
 - 审计数据：记录完整Prompt、工具调用链、Token消耗、引用来源。

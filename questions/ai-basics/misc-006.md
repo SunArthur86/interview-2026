@@ -112,6 +112,36 @@ def get_stats(vocab):
 3. **Unigram vs BPE**：T5 使用 Unigram 的原因是什么？(Unigram 基于概率模型剪枝，理论上能找到更优的子词切分组合)。
 4. **多字节字符**：对于 Emoji 或中文，BPE 的合并策略是怎样的？(通常是先在 Byte 层面合并，然后再在字符层面合并)。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["原始文本语料"] --> B["预处理拆分字符"] 
+    B --> C{选择分词算法}
+    C --> D["BPE<br/>按频率合并高频字节对"]
+    C --> E["WordPiece<br/>按似然最大化合并"]
+    C --> F["SentencePiece<br/>空格视为普通字符"]
+
+    subgraph GPT_LLaMA ["GPT/LLaMA 采用 BPE"]
+        D --> H["高频词完整编码"]
+        H --> I["低频词拆为子词"]
+        I --> J["Byte级别兜底<br/>保证无UNK且可逆"]
+    end
+
+    subgraph BERT ["BERT 采用 WordPiece"]
+        E --> K["最大化语言模型似然"]
+        K --> L["处理语义完整的词"]
+    end
+
+    subgraph T5 ["T5/多语言 采用 SentencePiece"]
+        F --> M["支持BPE/Unigram"]
+        M --> N["空格统一编码为▁<br/>解决多语言一致性"]
+    end
+
+    J --> O["大模型倾向BPE<br/>子词覆盖好且编码效率高"]
+    N --> O
+```
+
 ## 记忆要点
 
 - BPE按频率自底向上合并，WordPiece按似然合并，SentencePiece把空格当字符处理

@@ -79,6 +79,25 @@ socket.setTcpNoDelay(true);
 2. **Wireshark 过滤语法**：`tcp.flags.syn == 1 and tcp.flags.ack == 1` 等。
 3. **SYN Flood 攻击原理**：如何利用半连接队列耗尽资源，`SYN Cookies` 如何防御。
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - 核心工具：tcpdump常用于服务端命令行抓取底层包，而Wireshark偏向图形化过滤分析.pcap文件

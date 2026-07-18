@@ -100,6 +100,28 @@ TCP/IP Stack (校验/路由)
 2. **NAPI 优势**：为什么在高流量下 NAPI 比纯中断效率高？（答案：高流量下纯中断会导致 CPU 陷入中断上下文无法自拔（中断风暴），NAPI 改为轮询，批量处理，降低上下文切换开销）。
 3. **Ring Buffer**：如果 Ring Buffer 满了会发生什么？（答案：丢包。接收丢包会增加 `rx_dropped` 计数器；发送丢包通常在 QDisc 层统计）。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Linux 系统核心] --> B[用户空间 User Space]
+    A --> C[内核空间 Kernel Space]
+    B --> D[应用程序 ring 3]
+    B --> E[glibc/系统调用封装]
+    C --> F[进程/内存/文件子系统]
+    C --> G[设备驱动/网络栈]
+    H[系统调用] --> I[read/write/open]
+    H --> J[fork/exec/wait]
+    H --> K[mmap/brk]
+    L[进程间通信] --> M[管道/信号/消息队列]
+    L --> N[共享内存/信号量/Socket]
+    O[文件系统] --> P[VFS 抽象层]
+    O --> Q[ext4/XFS/Btrfs]
+    R[性能工具] --> S[strace/ltrace]
+    R --> T[perf/eBPF]
+    R --> U[vmstat/iostat/netstat]
+```
 ## 记忆要点
 
 - 核心载体：收发数据在内核中均被封装为sk_buff结构进行传递

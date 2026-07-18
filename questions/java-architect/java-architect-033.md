@@ -398,6 +398,33 @@ public class OrderTimeoutConsumer implements RocketMQListener<TimeoutEvent> {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：事务消息和本地消息表怎么选？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant Producer as 订单服务<br/>(Producer)
+    participant Broker as RocketMQ<br/>Broker
+    participant Half as 半消息Topic<br/>(HALF_TOPIC)
+    participant DB as 本地订单DB
+    participant Checker as 事务回查服务
+    participant Consumer as 下游消费者
+
+    Producer->>Broker: 1. 发送半消息
+    Broker->>Half: 暂存(对消费者不可见)
+    Broker-->>Producer: 半消息发送成功
+    Producer->>DB: 2. 执行本地事务(扣库存/创单)
+    DB-->>Producer: 事务执行成功
+    alt 正常流程
+        Producer->>Broker: 3. 提交Commit
+        Broker->>Consumer: 4. 投递真实业务消息
+    else 异常崩溃
+        Broker->>Checker: 默认60s后触发回查
+        Checker->>DB: 查询本地事务状态(幂等)
+        DB-->>Checker: 返回Commit/Rollback/Unknown
+        Checker->>Broker: 反馈事务状态
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

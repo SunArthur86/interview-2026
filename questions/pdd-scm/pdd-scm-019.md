@@ -220,6 +220,41 @@ MongoDB 适合"属性 schema 频繁变 + 文档查询"场景，但供应链用 M
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 商品模型
+        A[("类目树<br/>Category")] --> B["属性模板"]
+        B --> C["商品SPU<br/>iPhone 15"]
+        C --> D["关键属性<br/>品牌:苹果"]
+        C --> E["销售属性<br/>颜色:黑/内存:256G"]
+    end
+
+    subgraph SKU数据存储
+        F["单品SKU<br/>黑色256G"]
+        F --> G[("MySQL<br/>attributes JSON字段")]
+        F --> H[("ES<br/>结构化属性字段")]
+        F --> I[("Redis<br/>热点SKU缓存")]
+    end
+
+    E -- "笛卡尔积生成" --> F
+    G -- "Canal监听变更" --> H
+    G -- "缓存刷新" --> I
+
+    subgraph 业务场景查询
+        J["商品详情页"]
+        K["属性筛选搜索"]
+        J -. 按sku_id查详情 .-> G
+        K -. 按属性倒排索引 .-> H
+    end
+
+    subgraph SKU状态流转
+        L["ACTIVE上架"] --> M["INACTIVE下架"]
+        M --> N["DELETED逻辑删除"]
+    end
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

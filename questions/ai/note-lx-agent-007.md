@@ -196,6 +196,28 @@ def _plan_execution(self, subtasks: list) -> dict:
 3. **容错设计**：某个子任务失败不应阻塞其他任务，失败任务的输出标记为null由主Agent降级处理
 4. **用户感知**：多任务并行时应有进度反馈（"正在查询天气...✅ 正在搜索机票..."），不能让用户干等
 
+## 流程图
+
+```mermaid
+flowchart TD
+    U["用户复合需求"] --> M["主 Agent 任务分解<br/>LLM 组件"]
+    M --> D1["拆分规则与依赖校验"]
+    D1 --> P["并行执行无依赖子任务"]
+    subgraph Sub-tasks[独立隔离的子任务上下文]
+        direction LR
+        T1["子任务1: 查询天气"]
+        T2["子任务2: 搜索机票"]
+        T3["子任务3: 总结纪要"]
+    end
+    P --> Sub-tasks
+    subgraph Format[结构化输出契约]
+        F1["输出 Schema 传递"]
+    end
+    Sub-tasks --> F1
+    F1 --> M2["主 Agent 结果整合"]
+    M2 --> O["输出最终回复"]
+```
+
 ## 记忆要点
 
 - 污染根源：多任务挤在同一上下文，历史信息干扰导致参数误传或质量降级

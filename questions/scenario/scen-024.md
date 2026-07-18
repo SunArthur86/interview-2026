@@ -113,6 +113,21 @@ consumer.registerMessageListener(new MessageListenerOrderly() {
 - 状态机：消费者维护状态机，乱序消息通过状态判断是否处理
 - 版本号：消息带版本号，消费时检查版本连续性
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    P[生产端] -->|同步发送+ACK| BR[Broker]
+    BR -->|多副本同步复制+刷盘| ST[持久化存储]
+    ST --> C[消费端]
+    C -->|业务成功后手动提交| OFF[Offset]
+    FAIL[发送失败] -->|幂等重试| BR
+    DUP[重复消费] --> IDEM[业务幂等去重]
+    style ST fill:#d4edda
+    style IDEM fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 顺序消费前提：摒弃全局有序（极差），只用分区有序（同业务Key进同队列）

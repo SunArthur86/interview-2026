@@ -220,6 +220,23 @@ class HierarchicalWindow:
 - **prompt cache 配合**：摘要部分（固定）走 cache，近期消息（变化）不走，省成本
 - **检索式替代摘要**：不摘要，而是把历史存向量库，每轮按 query 召回相关片段（避免摘要信息损失）
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["接收用户新消息"] --> B["tokenizer计算当前<br/>总Token数"]
+    B --> C{"总Token数是否<br/>超过安全阈值"}
+    C -- "否: 未超限" --> D["新消息加入双端队列尾部"]
+    D --> E["直接组装请求给LLM"]
+    C -- "是: 超限" --> F["提取队列头部最旧的<br/>N条历史消息"]
+    F --> G["LLM摘要压缩为<br/>结构化摘要JSON"]
+    G --> H["将摘要插回队首<br/>压缩存储"]
+    H --> I["保留近期Keep_recent<br/>条原文消息"]
+    I --> E
+    style E fill:#e6f2ff,stroke:#0066cc
+    style G fill:#fff2e6,stroke:#cc6600
+```
+
 ## 记忆要点
 
 - 核心机制：保留近期Keep_recent条原文，一旦总Token超限，立即触发滑动窗口摘要最旧消息

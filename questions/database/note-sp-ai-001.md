@@ -150,6 +150,25 @@ SELECT id FROM users WHERE id = 1;
 3. **PgSQL优势**：JSONB可索引、pgvector、PostGIS等扩展生态丰富
 4. **MySQL优势**：聚簇索引主键查询极快，适合KV式访问模式
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    subgraph MySQL[MySQL InnoDB]
+        MP[主键查询] --> MC[聚簇索引叶子]
+        MC --> MD[data整行]
+    end
+    subgraph PgSQL[PostgreSQL]
+        PP[索引查询] --> PC[叶子存CTID]
+        PC --> PR[回表读物理地址]
+    end
+    MD -.一次IO.-> OK1[极快]
+    PR -.两次IO.-> OK2[灵活]
+    style MC fill:#d4edda
+    style PC fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 底层结构相同：MySQL和PgSQL均用B+树，核心区别在表组织方式不同

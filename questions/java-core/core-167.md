@@ -94,6 +94,20 @@ System.out.println(viewHistory);
 | **允许 Null** | 允许 | 允许 | 不允许 |
 | **适用场景** | 仅需去重 | 需去重+保持顺序（如历史记录） | 需去重+排序（如排行榜） |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A["LinkedHashMap<br/>HashMap + 双向链表"] --> B[数组桶 table]
+    B --> C[桶内节点 Entry]
+    C --> D{维护顺序类型?}
+    D -->|accessOrder=false| E[插入顺序<br/>head ↔ tail]
+    D -->|accessOrder=true| F[访问顺序 LRU<br/>访问后移到尾]
+    E --> G[遍历时按链表顺序输出]
+    F --> G
+    F --> H[可结合 removeEldestEntry<br/>实现 LRU 缓存]
+```
 ## 记忆要点
 
 - 核心特性：HashSet子类，基于LinkedHashMap，既保证元素唯一又保持插入顺序。

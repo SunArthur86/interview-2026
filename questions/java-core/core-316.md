@@ -110,6 +110,24 @@ public class IntegerCacheTest {
 | **适用场景** | 一般业务逻辑、数值计算、IO 解析 | 极其特殊的场景 (如需要强制独立对象) |
 | **推荐程度** | **强烈推荐** (编译器自动装箱亦采用此法) | **不推荐** (Java 9+ 已标记为 Deprecated) |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Integer 缓存池] --> B["IntegerCache 内部类"]
+    B --> C["范围 -128 ~ 127"]
+    B --> D[类加载时预创建<br/>static 数组]
+    E["Integer.valueOf i"] --> F{i 在缓存范围?}
+    F -->|是| G[返回缓存对象<br/>== true]
+    F -->|否| H[new Integer 新对象<br/>== false]
+    I[面试坑] --> J["Integer a = 127<br/>Integer b = 127<br/>a == b 为 true"]
+    I --> K["a = 200 b = 200<br/>a == b 为 false"]
+    L[其他包装类] --> M[Boolean.TRUE/FALSE]
+    L --> N[Long Cache -128~127]
+    L --> O[Character Cache 0~127]
+    P[规范] --> Q[必须用 equals 比较]
+```
 ## 记忆要点
 
 - 核心范围：Integer静态加载缓存数组，默认复用-128到127的对象

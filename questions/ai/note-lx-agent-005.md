@@ -157,6 +157,34 @@ def multi_intent_detection(user_input: str) -> list:
 3. **冷启动方案**：新意图类型出现时，先用LLM few-shot处理，积累数据后再训分类器
 4. **意图冲突**：用户同时表达矛盾意图（"想买又觉得贵"），需要识别情绪+给出折中建议
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph Client[用户交互]
+        U["多轮对话输入"]
+    end
+    subgraph Server[意图识别服务]
+        direction TB
+        R["7B 轻量分类器<br/>初筛路由"]
+        S1["对话状态追踪 DST<br/>维护槽位与实体状态"]
+        L1["LLM 历史窗口拼接"]
+        L2["32B LLM 精判<br/>处理隐式与省略句"]
+        S1 -- 提供结构化状态 --> R
+        R -- "高置信度 (>0.8)" --> O1["直接输出明确意图"]
+        R -- "低置信度 (<0.8)" --> L2
+        L1 -- 上下文补充 --> L2
+    end
+    subgraph Action[Agent 执行]
+        P["意图链推理预测<br/>预加载相关资源"]
+        E["执行对应业务动作"]
+    end
+    U --> R
+    O1 --> P
+    L2 --> O1
+    P --> E
+```
+
 ## 记忆要点
 
 - 三大盲区：单轮分类器搞不定省略句、指代消解与隐式意图

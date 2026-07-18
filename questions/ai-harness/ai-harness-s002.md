@@ -95,6 +95,17 @@ def profile_phase(stage, input_ids, past_kv=None):
 2. **误区**：Batch Size 越大，推理吞吐量一定线性增加。
    **纠正**：在 Decode 阶段，过大的 Batch Size 可能导致 KV Cache 占用过多显存，触发 OOM 或者频繁的内存碎片整理；同时，如果 Batch 内各序列长度差异巨大，计算会受限于最长的序列，导致 Padding 浪费。
 
+```mermaid
+flowchart LR
+    Prompt[输入Prompt] --> Prefill[Prefill阶段<br/>并行算KV]
+    Prefill --> TTFT[决定TTFT]
+    Prefill --> Decode[Decode阶段<br/>串行读KV]
+    Decode --> TPOT[决定TPOT]
+    Decode --> Output[输出Token]
+    Prefill -.->|O(N^2)矩阵乘| Compute[吃算力]
+    Decode -.->|大Cache读取| Memory[吃显存带宽]
+```
+
 ## 记忆要点
 
 - 两阶段对比：Prefill并行算KV密集（决定TTFT），Decode串行读KV受限（决定TPOT）。

@@ -102,6 +102,29 @@ final void treeifyBin(Node<K,V>[] tab, int hash) {
 - 避坑指南：已知数据量时务必预设容量（expectedSize / 0.75 + 1）防止频繁扩容抖动。
 - 作为 HashMap 的 key 必须正确重写 hashCode 和 equals，且 key 对象最好是不可变类，否则 put 后修改字段会导致 get 失败。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[HashMap 键值对存取] --> B[计算 key 的 hashCode]
+    B --> C[扰动函数 hash]
+    C --> D["定位桶索引 (n-1) & hash"]
+    D --> E{桶位置是否为空?}
+    E -->|是| F[直接放入新 Node]
+    E -->|否| G{key 是否相等?<br/>hashCode+equals}
+    G -->|相等| H[覆盖旧 Value]
+    G -->|不相等| I[尾插法插入链表]
+    I --> J{链表长度 > 8<br/>且容量 ≥ 64?}
+    J -->|是| K["链表转红黑树<br/>O(log n)"]
+    J -->|否| L["保持链表<br/>O(n)"]
+    M{"元素数 > 容量×0.75?"} -->|是| N[扩容2倍 Rehash]
+    N --> O[元素重分布<br/>原位或原位+oldCap]
+    F --> M
+    H --> M
+    K --> M
+    L --> M
+```
 ## 记忆要点
 
 - 底层结构演进：JDK1.8为数组+链表+红黑树（解决哈希冲突退化）。

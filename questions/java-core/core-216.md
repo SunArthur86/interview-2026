@@ -93,6 +93,25 @@ net.ipv4.tcp_max_tw_buckets = 5000
 3. **服务端开启 `tcp_tw_reuse` 有意义吗？**
    - 意义不大。因为作为连接的被动接收方，本地端口会复用，但连接的四元组（源IP、源端口、目的IP、目的端口）不同，通常不会受 TIME_WAIT 限制。该参数主要针对高并发短连接的客户端。
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - TIME_WAIT 意义：持续 2MSL 保证可靠终止，防止旧报文干扰新连接，但也易导致端口耗尽

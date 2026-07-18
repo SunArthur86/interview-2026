@@ -141,6 +141,35 @@ TD(λ) / GAE：用 (γλ)^k 衰减权重融合所有 n 步 → 最优折中
 - **SARSA**：on-policy 的 TD 控制，用实际 Q(s',a') 做 bootstrap
 - **为什么 RLHF 用 GAE 而非纯 MC**：MC 方差大导致 PPO 训练不稳，GAE 平衡
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph MC["蒙特卡洛 MC"]
+        direction TB
+        E["等待整条轨迹结束"]
+        F["计算实际总回报"]
+        U["更新状态价值<br/>(无偏估计, 高方差)"]
+        E --> F --> U
+    end
+
+    subgraph TD["时序差分 TD"]
+        direction TB
+        S1["走单步获得<br/>状态 s, 奖励 r, 新状态 s'"]
+        S2["TD 目标 = r + γV(s')"]
+        S3["更新状态价值<br/>(有偏自举, 低方差)"]
+        S1 --> S2 --> S3
+    end
+
+    O["状态价值估计与策略更新"]
+
+    MC -- "样本效率低<br/>不适用连续任务" --> O
+    TD -- "Bootstrapping<br/>样本效率高" --> O
+
+    V["真实奖励 r 提供锚点"]
+    V -.-> S2
+```
+
 ## 记忆要点
 
 - 对比核心：MC无偏但方差大，TD有偏（bootstrap）但方差小

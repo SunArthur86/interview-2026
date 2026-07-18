@@ -119,6 +119,24 @@ if (currentMillis < lastMillis) {
 3. **如何保证生成的 ID 不被恶意猜测/遍历？**
    - Snowflake ID 规律性太强，容易被推测出单日订单量。可在序列号或机器 ID 部分加入随机因子，或者使用「雪花算法 + 雪漂移」算法，使得 ID 在表面上失去连续性，但仍保持全局唯一和趋势递增（利于数据库索引）。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    REQ[生成订单号] --> SF[Snowflake]
+    SF --> B1[1位符号]
+    SF --> B2[41位时间戳]
+    SF --> B3[10位机器ID]
+    SF --> B4[12位序列号]
+    B2 --> INC[趋势递增 利于索引]
+    CLK[时钟回拨] --> CH{回拨大小?}
+    CH -->|小| WAIT[等待]
+    CH -->|大| ABT[报错/弃用]
+    style INC fill:#d4edda
+    style CLK fill:#ffcccc
+```
+
 ## 记忆要点
 
 - Snowflake核心结构：1符+41毫秒+5机房+5机器+12序列，单机每秒约400万。

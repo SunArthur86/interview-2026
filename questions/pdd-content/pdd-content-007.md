@@ -206,6 +206,25 @@ Gap Lock 是 RR 隔离下"当前读"（`SELECT ... FOR UPDATE / LOCK IN SHARE MO
 
 **收尾：** RC 和 RR 的快照差异？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 读取链路
+        A1["用户查询评价列表<br/>MVCC 快照读"] --> A2["读取记录隐藏字段 trx_id"]
+        A2 --> A3{"比对 ReadView 活跃事务列表"}
+        A3 -->|"可见"| A4["直接返回当前行数据"]
+        A3 -->|"不可见"| A5["顺 roll_pointer 找上一版本"]
+        A5 --> A3
+    end
+
+    subgraph 写入与审核链路
+        B1["审核员更新评价状态<br/>SELECT FOR UPDATE"] --> B2["当前读: 加行锁与间隙锁"]
+        B2 --> B3["修改数据并生成 Undo Log 版本"]
+    end
+
+    B3 -.->|"读写不冲突"| A2
+```
 
 ## 视频脚本
 

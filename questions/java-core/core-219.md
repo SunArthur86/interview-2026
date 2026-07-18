@@ -124,6 +124,25 @@ void process(byte[] data) {
 3. **什么是 Nagle 算法？它会导致什么问题？**
    - Nagle 算法要求发送方缓冲数据，只有收集到足够多的数据（或收到上一个包的 ACK）才发送。这会导致小数据包延迟发送，造成高延迟。在实时性要求高的场景（如游戏、即时通讯）通常需要禁用（`TCP_NODELAY`）。
 
+
+## 核心架构图
+
+```mermaid
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务端
+    Note over C,S: 三次握手 建立连接
+    C->>S: SYN seq=x
+    S->>C: SYN+ACK seq=y ack=x+1
+    C->>S: ACK seq=x+1 ack=y+1
+    Note over C,S: 数据传输 ESTABLISHED
+    Note over C,S: 四次挥手 断开连接
+    C->>S: FIN seq=u 主动关闭
+    S->>C: ACK seq=v ack=u+1 半关闭
+    S->>C: FIN seq=w 数据发完
+    C->>S: ACK seq=u+1 ack=w+1
+    Note over C: TIME_WAIT 2MSL 后关闭
+```
 ## 记忆要点
 
 - 本质成因：TCP 是面向字节流的协议，底层无消息边界保护，而 UDP 面向报文不粘包

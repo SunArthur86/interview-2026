@@ -119,6 +119,16 @@ Please rank the candidates by relevance to the query. Return only the sorted IDs
 | **部署难度** | 低 (Python 为主) | 中 (容器化) | 高 (需编译 TensorRT 引擎) |
 | **成本效益** | 高 (显存利用率高) | 中 | 极高 (吞吐量大，但开发维护成本高) |
 
+```mermaid
+flowchart TD
+    Request[百万QPS请求] --> LB[L7负载均衡<br/>用户画像路由]
+    LB --> Affinity[会话亲和<br/>命中KV Cache]
+    Affinity --> Schedule[Continuous Batching<br/>剔除Padding]
+    Schedule --> PD[Prefill/Decode分离调度]
+    PD --> Hetero[异构GPU池<br/>A100算力/L40S带宽]
+    Hetero --> Cost[前缀缓存+投机采样]
+```
+
 ## 记忆要点
 
 - 负载均衡：L7按内容/用户画像路由，长文本去高显存节点。会话亲和命中KV Cache。

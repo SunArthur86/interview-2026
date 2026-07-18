@@ -355,6 +355,20 @@ public class CartCheckoutValidator {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——未登录购物车怎么处理？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[多端客户端<br/>App/PC/小程序] -->|写入 deviceId| B[未登录临时车<br/>Redis Hash]
+    A -->|写入 userId| C[已登录主车<br/>Redis Hash]
+    B -->|Login Merge<br/>取较大数量| C
+    C -->|异步落盘| D[MySQL 购物车表<br/>持久化兜底]
+    C -->|读取| E[查询聚合层]
+    E -->|按 seller_id 分组| F[商家分组视图<br/>自营/第三方]
+    F --> G[实时批量查询<br/>SKU状态/价格/库存]
+    G --> H[失效商品拦截<br/>不允许结算]
+    G --> I[有效商品结算<br/>下单强校验锁库存]
+```
 
 ## 视频脚本
 

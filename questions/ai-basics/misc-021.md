@@ -125,6 +125,26 @@ def sample_with_strategy(logits, temperature=0.7, top_k=40, top_p=0.9):
   2. Min-P采样是近年来提出的新策略，它与Top-p有何本质区别，为何在处理某些模型的“白板”问题时效果更好？
   3. 在Speculative Decoding（投机采样）场景下，Draft Model和Target Model的采样策略参数（如Temperature）是否必须保持一致，为什么？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[复杂推理问题] --> B{是否提供范例?}
+
+    B -- 否 --> C[Zero-shot CoT]
+    C --> D[Prompt追加 Let's think step by step]
+
+    B -- 是 --> E[Few-shot CoT]
+    E --> F[提供 问题 -> 推理步骤 -> 答案 范例]
+
+    D --> G[激活大模型预训练推理模式]
+    F --> G
+
+    G --> H[强制模型分步输出中间过程]
+    H --> I[利用更多Token扩展计算量]
+    I --> J[减少跳步错误 输出最终答案]
+```
+
 ## 记忆要点
 
 - Temperature：控制随机性，低T确定（代码），高T创意（写作）

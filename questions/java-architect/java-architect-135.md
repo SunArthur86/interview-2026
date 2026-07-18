@@ -421,6 +421,32 @@ public void weeklyIntegrityCheck() {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——hash chain 怎么实现？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph App[业务应用]
+        A[Java AOP拦截 @Auditable]
+        B[组装六要素与操作前后状态]
+        C[计算上一条日志的 SHA256 Hash]
+        C --> D[使用 HSM 私钥签名]
+    end
+    subgraph MQ[可靠投递层]
+        E[同步发送 Kafka acks=all]
+    end
+    subgraph Audit[独立审计中心]
+        F[落盘 WORM S3 Object Lock]
+        G[Hash Chain 验证与防篡改告警]
+    end
+    subgraph Access[安全访问隔离层]
+        H[合规与安全团队专属账号]
+        I[业务团队无权访问 ACL隔离]
+    end
+    A --> B --> C
+    D --> E --> F --> G
+    F --> H
+    F -.-> I
+```
 
 ## 视频脚本
 

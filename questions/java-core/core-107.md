@@ -84,6 +84,24 @@ xfs_io -c 'resbsp 1048576' /path/to/large_file
 3. **日志文件系统的优势**：简述 JFS/XFS/Ext4 如何通过日志保证数据一致性并加快开机速度。
 4. **RAID 对文件系统的影响**：RAID 0/1/5/10 如何在不同层面（性能、冗余）影响文件系统的表现。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[文件系统] --> B[Boot Block 引导块]
+    A --> C[Super Block 超级块<br/>全局元信息]
+    A --> D[Inode 区 索引节点]
+    A --> E[Data Block 数据块]
+    F[文件 = Inode + 数据块]
+    F --> G[Inode 存元信息<br/>权限/大小/时间]
+    F --> H[Inode 含 12 直接+1 间接+1 双间接+1 三间接指针]
+    H --> I[小文件直接指针<br/>大文件多级间接]
+    J[优化] --> K[空间局部性<br/>预读]
+    J --> L[日志 journaling<br/>防崩溃数据损坏]
+    J --> M[碎片整理<br/>连续分配]
+    N[典型] --> O[ext4/XFS<br/>HDFS 块大 128MB]
+```
 ## 记忆要点
 
 - 空间管理：块大提升大文件性能但增内部碎片，空闲块多用位图法管理

@@ -197,6 +197,34 @@ MySQL 扛不住对账的数据量：
 
 **收尾：** 您看这块要不要再展开聊聊？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph S1[业务系统数据源]
+        A[订单系统记录]
+        B[仓储系统记录]
+        C[财务系统记录]
+    end
+    subgraph S2[实时监控层]
+        D[Flink实时比对] --> E[异常告警/拦截]
+    end
+    subgraph S3[T+1离线对账层]
+        F[Canal同步] --> G[Iceberg/Hive数仓]
+        G --> H[Spark FULL OUTER JOIN]
+    end
+    A --> D
+    B --> D
+    C --> D
+    A --> F
+    B --> F
+    C --> F
+    H --> I{金额一致性校验}
+    I -- 差异数据 --> J[差异分类定界]
+    J --> K[精度Bug/同步丢失修复]
+    I -- 平账 --> L[输出对账报告]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

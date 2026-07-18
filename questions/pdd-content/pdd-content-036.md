@@ -326,6 +326,26 @@ Cross-Encoder 重排解决不了召回率低（它只重排已召回的，不增
 
 **收尾：** 您想继续往深里聊吗——比如「怎么提升召回？」
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["用户输入Query<br/>(待审UGC/评价)"] --> B["LLM查询改写<br/>(多语义变体扩展)"]
+    B --> C["多路混合检索"]
+    B --> D["关键词检索<br/>(BM25精确匹配)"]
+    subgraph Vector Recall ["向量语义检索"]
+        C1["BGE Embedding"] --> C2[("Milvus向量库<br/>HNSW索引")]
+    end
+    C --> E["合并召回Top_20"]
+    D --> E
+    E --> F["Cross-Encoder重排<br/>(bge-reranker-base)"]
+    F --> G["取Top_5作为上下文"]
+    G --> H["LLM带引用生成<br/>(防幻觉输出)"]
+    H --> I{"是否存在引用?"}
+    I -- 是 --> J["输出违规判定与案例依据"]
+    I -- 否 --> K["提示暂无相似案例"]
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

@@ -389,6 +389,44 @@ public class ProductService {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：为什么写操作删缓存而不是更新缓存？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph 业务读写请求
+        R1[读请求 Read]
+        W1[写请求 Write]
+    end
+
+    subgraph 缓存层 Redis
+        C1{缓存命中?}
+        C2[缓存空值/旧值]
+    end
+
+    subgraph 数据库层 MySQL
+        DB1[(更新数据库)]
+        DB2[(查询数据库)]
+    end
+
+    subgraph 最终一致兜底机制
+        M1[订阅 Binlog<br/>Canal监听]
+        M2[消息队列 MQ]
+        M3[延迟双删/异步失效]
+    end
+
+    R1 --> C1
+    C1 -- Miss --> DB2
+    DB2 -- 回填带TTL --> C2
+    C1 -- Hit --> R1
+
+    W1 --> DB1
+    DB1 -- 1.先更DB --> M1
+    W1 -- 2.同步删除缓存 --> C2
+    M1 -- 发送变更事件 --> M2
+    M2 --> M3
+    M3 -- 异步重试删除 --> C2
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

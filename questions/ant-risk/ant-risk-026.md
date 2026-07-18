@@ -378,6 +378,44 @@ public Feature getFeatureSafe(String uid) {
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：缓存三大问题？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    subgraph Client[客户端请求]
+        A1[风控决策请求]
+    end
+
+    subgraph Async[异步与队列层]
+        B1[有界线程池处理]
+        B2[消息队列 Kafka 削峰]
+        B3[异步统计回流]
+        B1 <--> B2
+    end
+
+    subgraph Cache[多级缓存层]
+        C1[本地特征缓存]
+        C2[Redis集群缓存]
+        C3[布隆过滤器防穿透]
+        C1 --> C2
+        C2 --> C3
+    end
+
+    subgraph Backend[后端存储与计算]
+        D1[HikariCP连接池]
+        D2[MySQL分库分表]
+        D3[无状态弹性扩容节点]
+        D1 --> D2
+    end
+
+    A1 --> B1
+    B1 --> C1
+    C2 -- "缓存未命中" --> D1
+    D3 --> B1
+    B1 -- "旁路" --> B2
+    B2 --> B3
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

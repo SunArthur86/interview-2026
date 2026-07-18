@@ -99,6 +99,26 @@ public Object cacheInterceptor(ProceedingJoinPoint pjp, MyCache myCache) throws 
 | **CLASS** | 是 | 是 | 否 | 字节码操作工具 |
 | **RUNTIME** | 是 | 是 | 是 | Spring, JUnit (反射) |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[注解 Annotation] --> B[元注解 标注注解]
+    B --> C[Target 目标位置]
+    B --> D[Retention 保留期]
+    B --> E[Inherited 可继承]
+    B --> F[Documented 文档]
+    D --> G[Source 源码如 Override]
+    D --> H[Class 字节码默认]
+    D --> I[Runtime 运行时 反射可读]
+    J[处理机制] --> K[APT 编译期<br/>生成代码 Lombok]
+    J --> L[字节码增强<br/>ASM/CGLIB]
+    J --> M["运行时反射扫描<br/>Spring @Component"]
+    N[典型应用] --> O[Spring/SpringBoot 配置]
+    N --> P[JUnit 测试]
+    N --> Q[ButterKnife View 绑定]
+```
 ## 记忆要点
 
 - 工作三步曲：用@interface定义，打标签使用，最后配合解析器发挥作用。

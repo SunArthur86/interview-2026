@@ -122,6 +122,39 @@ try {
 - **非公平锁吞吐更高是默认选择**：非公平锁允许新线程插队，减少了线程切换开销，吞吐通常比公平锁高。除非业务严格要求 FIFO（如限流公平排队），否则用默认的非公平锁。
 - **state 是 volatile + CAS，不是 synchronized**：AQS 用乐观并发（CAS）而非悲观锁（synchronized）修改 state，这是它高性能的基础。但要注意 CAS 自旋在高竞争下会浪费 CPU。
 
+### AQS 核心结构图
+
+```mermaid
+flowchart TB
+    subgraph Framework["AQS 框架(AbstractQueuedSynchronizer)"]
+        State["volatile int state<br/>同步状态(CAS 修改)"]
+        CLH["CLH 变种双向链表<br/>等待队列"]
+        Template["模板方法<br/>acquire / release"]
+    end
+
+    Template -->|"调用子类"| Subclass["子类重写<br/>tryAcquire / tryRelease"]
+    Subclass -->|"定义 state 语义"| State
+
+    Thread1["线程获取资源"] --> CAS{"CAS 修改 state"}
+    CAS -->|"成功"| Run["继续执行临界区"]
+    CAS -->|"失败"| Enqueue["封装为 Node 入队尾"]
+    Enqueue --> CLH
+    CLH --> Park["LockSupport.park 阻塞"]
+
+    Release["持有者 release"] --> Wake["唤醒后继节点"]
+    Wake --> Unpark["LockSupport.unpark"]
+    Unpark --> Retry["后继线程重试 CAS"]
+
+    State -. ReentrantLock .-> S1["state=0 未锁 / 1 已锁 / n 重入"]
+    State -. Semaphore .-> S2["state=剩余许可数"]
+    State -. CountDownLatch .-> S3["state=剩余计数"]
+
+    classDef core fill:#e3f2fd,stroke:#1565c0
+    classDef sem fill:#fff3e0,stroke:#ef6c00
+    class State,CLH,Template core
+    class S1,S2,S3 sem
+```
+
 ## 记忆要点
 
 - 一句话定义：Java并发包中实现锁与同步器的核心基础框架。

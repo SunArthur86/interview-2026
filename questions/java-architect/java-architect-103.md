@@ -360,6 +360,28 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——StructuredTaskScope 和 ExecutorService 区别？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["下单请求<br/>虚拟线程接收"] --> B["StructuredTaskScope<br/>开启作用域"]
+    B --> C
+    subgraph C ["并行 Fork 下游服务"]
+        C1["用户服务"]
+        C2["库存服务"]
+        C3["营销服务"]
+        C4["风控服务"]
+    end
+    C1 --> D{"处理策略"}
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    D --> E["ShutdownOnFailure<br/>任一失败全部取消"]
+    D --> F["ShutdownOnSuccess<br/>最快成功则取消其他"]
+    E --> G["scope.joinUntil<br/>超时兜底"]
+    F --> G
+    G --> H["关闭作用域<br/>无游离任务"]
+```
 
 ## 视频脚本
 

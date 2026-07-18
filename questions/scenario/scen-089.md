@@ -124,6 +124,21 @@ CEP.pattern(loginStream, pattern)
    - Memory State Backend 将状态存在 JVM 堆内存，存取极快但受限于 GC 和内存大小，状态过大容易 OOM。
    - RocksDB 将状态序列化后存于本地磁盘，支持海量状态（TB级），不受 JVM 限制，但涉及序列化/反序列化和磁盘 IO，性能较低，适合大状态场景。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SRC[数据源 Kafka] --> FL[Flink 流处理]
+    FL --> WM[Watermark 处理乱序]
+    WM --> WIN[窗口 Window]
+    WIN --> STATE[Keyed State 状态]
+    STATE --> ROCK[(RocksDB 持久化)]
+    CKP[Checkpoint 快照] --> EOS[Exactly-Once]
+    FL --> SINK[输出 Sink]
+    style EOS fill:#d4edda
+```
+
 ## 记忆要点
 
 - Watermark防乱序：水位线=最大事件时间-延迟阈值，触发窗口计算且防阻塞。

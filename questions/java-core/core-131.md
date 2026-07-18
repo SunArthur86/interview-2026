@@ -121,6 +121,28 @@ void set_socket_buffer(int sockfd) {
          └─────────────┘      └─────────────┘
 ```
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Linux 网络包接收流程] --> B[网卡 NIC 收到帧]
+    B --> C[DMA 写入 Ring Buffer]
+    C --> D[网卡硬件中断 IRQ]
+    D --> E[NAPI 轮询拉取<br/>软中断 NET_RX]
+    E --> F[内核 skb 分配+协议栈解析]
+    F --> G[IP 层路由判断]
+    G --> H[TCP 层处理]
+    H --> I[放入 socket 接收队列]
+    I --> J[应用 recv/read 拷贝]
+    K[发送方向] --> L[应用 send/write]
+    L --> M[TCP 分段+IP 路由]
+    M --> N[qdisc 队列调度]
+    N --> O[网卡驱动发包]
+    P[优化] --> Q[零拷贝 sendfile]
+    P --> R[多队列 RSS/RPS]
+    P --> S[SO_REUSEPORT 多进程负载]
+```
 ## 记忆要点
 
 - 发送流：应用调用 send 触发拷贝到内核发送缓冲，经协议栈层层封装，由网卡 DMA 发出。

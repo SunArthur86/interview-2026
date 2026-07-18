@@ -101,6 +101,24 @@ System.out.println(f.getByte(s2)); // 1 (UTF16)
 - 设计原因：大部分堆内字符串数据为纯拉丁字母，改 byte[] 节省近半内存。
 - 第三方库若通过反射直接访问 String 内部 `value` 字段，在 JDK 9+ 会因类型变更（char[]→byte[]）而报错，需升级库版本。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[String 不可变] --> B[final 修饰类]
+    A --> C[private final char / byte 数组]
+    B --> D[不可继承]
+    C --> E[值不可修改]
+    F[不可变好处] --> G[线程安全]
+    F --> H[可缓存 hashCode]
+    F --> I[字符串常量池复用]
+    F --> J[安全性 防篡改]
+    K["JDK 9 改进"] --> L["char 2字节 → byte 1字节<br/>+ coder 编码标识<br/>节省内存"]
+    M[拼接] --> N["+ 编译期优化 StringBuilder"]
+    M --> O["concat/StringUtils"]
+    P["intern"] --> Q[入常量池 复用]
+```
 ## 记忆要点
 
 - 核心结论：String类被final修饰，故为最终类，无法被继承。

@@ -69,6 +69,32 @@ WHERE id=1 AND version = ${oldVersion};
 2. **ABA 问题的解决**：除了版本号，还有什么方式？可以通过标记位（如 AtomicStampedReference）或者将变量类型定义为不可变对象来解决。
 3. **MVCC 与乐观锁的关系**：MVCC（多版本并发控制）是一种并发控制机制，既利用了类似乐观锁的版本思想，又结合了悲观锁的锁机制（如 Next-Key Lock 解决幻读），是数据库层面的综合解决方案。
 
+### 乐观锁 CAS 实现流程
+
+```mermaid
+flowchart TD
+    Start(["线程修改变量"]) --> Read["读取当前值 V"]
+    Read --> Calc["计算新值 N"]
+    Calc --> CAS{"CAS(V, E, N)<br/>V==E?"}
+    CAS -->|"是, 未被改"| Update["更新 V=N<br/>返回成功"]
+    CAS -->|"否, 已被改"| Retry["自旋重试"]
+    Retry --> Read
+
+    Update --> ABA{"ABA 隐患"}
+    ABA -->|"值 A->B->A"| Undetected["CAS 无法感知"]
+    Undetected --> Stamp["引入版本号<br/>AtomicStampedReference"]
+
+    SpinRisk["高并发自旋风险"] --> CPUBusy["CAS 失败多<br/>CPU 空转"]
+    CPUBusy --> LongAdder["改用 LongAdder<br/>分散热点 Cell[]"]
+
+    classDef ok fill:#e8f5e9,stroke:#2e7d32
+    classDef risk fill:#ffebee,stroke:#c62828
+    classDef sol fill:#e3f2fd,stroke:#1565c0
+    class Update ok
+    class ABA,Undetected,SpinRisk,CPUBusy risk
+    class Stamp,LongAdder sol
+```
+
 ## 记忆要点
 
 - 核心思想：假设无冲突先操作，提交更新时通过版本号校验是否被修改过。

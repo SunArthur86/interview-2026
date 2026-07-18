@@ -295,6 +295,27 @@ TGI 简单但性能和功能都落后于 vLLM。第一，**性能差距**——T
 
 **收尾：** 您想继续往深里聊吗——比如「为什么 TRT-LLM 比 vLLM 快？」
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph S1["TRT-LLM"]
+        A1["NVIDIA 官方Kernel"] --> A2["吞吐极高"]
+        A3["闭源引擎编译"] --> A4["部署灵活度低"]
+    end
+    subgraph S2["vLLM"]
+        B1["PagedAttention"] --> B2["吞吐较高"]
+        B3["HF模型直加载"] --> B4["部署极易"]
+    end
+    subgraph S3["TGI"]
+        C1["HF生态集成"] --> C2["吞吐中等"]
+        C3["Docker一键启动"] --> C4["定制化弱"]
+    end
+    D["业务选型网关"] -->|极致延迟/成本| A1
+    D -->|快速迭代/通用| B1
+    D -->|快速上线/监控| C1
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

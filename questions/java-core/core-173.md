@@ -112,6 +112,27 @@ while (true) {
 3.  **ZipList 转换条件**：List/Hash/Zset 在什么情况下会从 ZipList 转换为 Skiplist/Hashtable？（元素个数和元素大小的配置阈值）。
 4.  **BitMap/HyperLogLog**：这些虽然是特殊类型，但通常基于 String 实现，面试中可能会问它
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[Redis 数据类型] --> B[String 字符串]
+    A --> C[Hash 哈希表]
+    A --> D[List 列表]
+    A --> E[Set 集合]
+    A --> F[ZSet 有序集合]
+    A --> G[Stream/Bitmap/HLL 等]
+    B --> B1[缓存/计数器/分布式锁]
+    C --> C1[对象存储<br/>用户属性]
+    D --> D1[消息队列/最新列表]
+    E --> E1[去重/标签/共同好友]
+    F --> F1[排行榜/延时队列]
+    H[底层结构] --> I[SDS/ziplist/listpack]
+    H --> J[dict/quicklist/skiplist]
+    K[选择原则] --> L[数据特征匹配]
+    K --> M[内存与性能平衡]
+```
 ## 记忆要点
 
 - 口诀：S-H-L-S-Z 对应 缓存/对象、购物车、消息队列、去重、排行榜。

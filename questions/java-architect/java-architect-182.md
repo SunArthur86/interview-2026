@@ -362,6 +362,23 @@ public class ClientNotifyService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——客户端怎么直传？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[商家客户端] -->|1.请求临时凭证| B(业务服务端)
+    B -->|2.返回STS签名URL| A
+    A -->|3.直传视频/图片| C[(对象存储OSS)]
+    C -->|4.POST上传回调| B
+    A -->|4.客户端兜底通知| B
+    B -->|5.更新元数据UPLOADED| D[(MySQL)]
+    B -->|6.发转码任务| E[消息队列MQ]
+    E --> F[FFmpeg异步转码Worker]
+    F -->|7.多清晰度产物| C
+    F -->|8.状态更新为READY| D
+    G[定时T+1对账系统] --> H{比对OSS与DB}
+    H -->|发现差异| B
+```
 
 ## 视频脚本
 

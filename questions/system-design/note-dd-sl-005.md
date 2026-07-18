@@ -220,6 +220,24 @@ Step 3: 端到端压测（全链路）
 
 > 压测定位瓶颈的核心方法是**分层 Profiling**：用 `redis-benchmark` 验证 Redis、用火焰图定位应用热点、用 `jstat` 排查 GC、用 `SHOW PROCESSLIST` 查看 DB 连接。短链系统最常见的第一个瓶颈是 **Redis 单线程 CPU 打满**，其次是 **DB 连接池耗尽**（缓存命中率下降导致穿透）。定位到瓶颈后，针对性优化——Pipeline、多级缓存、连接池扩容、GC 调优——而不是盲目加机器。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[压测请求涌入] --> B[网络层: TCP连接与带宽]
+    B --> C[应用层: 线程池与GC停顿]
+    C --> D[缓存层: Redis单线程瓶颈]
+    D --> E[数据库层: HikariCP连接池耗尽]
+    D --> F[磁盘IO: AOF与Redo刷盘]
+    G[排查监控指标] --> B
+    G --> C
+    G --> D
+    G --> E
+    G --> F
+    C -.->|火焰图定位CPU热点| H[JSON序列化/同步日志]
+    E -.->|缓存穿透导致排队| I[慢查询与连接等待]
+```
+
 ## 记忆要点
 
 - 排查顺序：从网络、应用CPU到Redis和DB，依链路逐层定位

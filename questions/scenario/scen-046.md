@@ -160,6 +160,23 @@ memory_points:
 3.  **如何区分网络带宽问题与网络延迟问题？**
     *   *提示*：带宽打满通常表现为所有请求都变慢（RT增加且吞吐上不去）；网络延迟通常表现为特定下游服务超时或波动，需结合 `ping`/`traceroute` 及链路追踪判断。
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SLOW[接口变慢] --> SCOPE[确认影响范围]
+    SCOPE --> APP[应用监控/日志]
+    APP --> JV[JVM: CPU/GC/线程]
+    JV --> JST[jstack/jmap 分析]
+    APP --> DB[数据库 慢SQL/锁等待]
+    APP --> CACHE[缓存命中率]
+    APP --> NET[网络/下游依赖]
+    JV --> FIX[止血+根因修复]
+    DB --> FIX
+    style SCOPE fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 排查六步法：确认现象 → 看监控 → 查常见原因 → 快速止血 → 根因分析 → 长期优化

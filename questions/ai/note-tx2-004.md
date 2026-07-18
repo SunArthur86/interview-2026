@@ -228,6 +228,21 @@ def parse_model_output(raw: str) -> OrderInfo:
 - **OpenAI 的 Structured Output**：`response_format: {type: "json_schema", strict: true}` 是 2024 年新功能，比 function calling 更严格
 - **多 Schema 选择**：让模型先选 schema 类型再填充（如"这是订单还是退款"→选对应 schema）
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["用户请求与目标JSON Schema"] --> B["Prompt层<br/>明确要求+Few-shot"]
+    B --> C["API限制层<br/>strict=true"]
+    C --> D["Schema设计层<br/>精简字段+枚举"]
+    D --> E["约束解码层<br/>FSM状态机"]
+    E --> F["LLM生成结果"]
+    F --> G{"格式校验<br/>是否合法?"}
+    G -- "是" --> H["成功输出JSON"]
+    G -- "否" --> I["后处理兜底<br/>正则提取与修复"]
+    I --> G
+```
+
 ## 记忆要点
 
 - 五层防御体系：Prompt提示→Schema设计→API限制→约束解码→后处理兜底

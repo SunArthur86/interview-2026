@@ -90,6 +90,20 @@ model = AutoModelForCausalLM.from_pretrained(
 | **资源消耗** | 低 (推理时配置) | 低 | 高 (需更多显存和算力) |
 | **适用场景** | 快速验证、资源受限 | 生产环境外推首选 (Qwen2/GPT-4) | 追求极致长文效果 (Qwen2.5) |
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A[训练长度 8K] --> B[扩展到 32K/128K]
+    B --> C{Qwen 长度外推}
+    C --> C1[YaRN: NTK 插值]
+    C --> C2[动态 NTK 分段]
+    C --> C3[ABF 调整基频]
+    C1 & C2 & C3 --> D[缩放 RoPE 频率]
+    D --> E[适配更长序列]
+    E --> F[少量微调恢复性能]
+```
+
 ## 记忆要点
 
 - 演进口诀：初代非线插、二代上YaRN、2.5暴力练全长

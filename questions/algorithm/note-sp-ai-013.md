@@ -205,6 +205,22 @@ if not node.left and not node.right and remaining == 0:
 3. **叶子判断**：`not node.left and not node.right`，不能只判断node不为None
 4. **复杂度分析**：能分析不同树形下的时间复杂度差异
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["Root 节点"] --> B["做选择: path 加入节点<br/>remaining 扣减节点值"]
+    B --> C{"判断是否为叶子节点"}
+    C -- "否" --> D["递归左/右子树"]
+    C -- "是" --> E{"判断 remaining == 0"}
+    E -- "否" --> F["撤销选择: 弹出当前节点"]
+    E -- "是" --> G["合法路径处理"]
+    G --> H["result.append path 切片拷贝"]
+    H --> F
+    D --> F
+    F --> I["返回上层递归"]
+```
+
 ## 记忆要点
 
 - 核心算法：DFS回溯。因为要找所有解，所以递归遍历所有从根到叶子的路径。

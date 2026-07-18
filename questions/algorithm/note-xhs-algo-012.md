@@ -239,6 +239,30 @@ public int[] mergeKSortedArrays(int[][] arrays) {
 
 **收尾：** 为什么要从后往前？
 
+## 流程图
+
+```mermaid
+flowchart LR
+    subgraph 数组一 nums1
+        direction LR
+        N1A[2]
+        N1B[5]
+        N1C[6]
+        N1D[0]
+        N1E[0]
+        N1F[0]
+    end
+    subgraph 数组二 nums2
+        direction LR
+        N2A[1]
+        N2B[2]
+        N2C[3]
+    end
+    P1((指针p1)) -.- N1C
+    P2((指针p2)) -.- N2C
+    P((指针p指向末尾)) -.- N1F
+    P2 -- "每次取较大值" --> P
+```
 
 ## 视频脚本
 

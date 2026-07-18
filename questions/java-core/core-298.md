@@ -96,6 +96,24 @@ memory_points:
 4. **ArrayList 扩容机制细节**：
    - 默认容量、扩容倍数、`Arrays.copyOf` 的性能损耗。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[集合线程安全] --> B[早期同步]
+    A --> C[并发包 java.util.concurrent]
+    B --> D[Vector 元素同步]
+    B --> E[Hashtable 同步]
+    B --> F[Collections.synchronizedXxx<br/>装饰器]
+    C --> G[CopyOnWriteArrayList<br/>读多写少]
+    C --> H[ConcurrentHashMap<br/>分段锁/CAS]
+    C --> I[ConcurrentLinkedQueue<br/>CAS 无锁]
+    C --> J[BlockingQueue<br/>阻塞队列]
+    K[不安全集合] --> L[HashMap 并发死链/数据覆盖]
+    K --> M[ArrayList 迭代 ConcurrentModificationException]
+    K --> N[非线程安全原因<br/>非原子/指令重排/可见性]
+```
 ## 记忆要点
 
 - 老牌安全：Vector/Hashtable方法全锁（性能差淘汰），Collections包装类迭代需手动加锁

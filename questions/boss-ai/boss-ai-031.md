@@ -284,6 +284,27 @@ TTS/ASR 工程化的本质是**"把语音转换做成实时、自然、规模化
 
 **收尾：** 这块我在项目里也踩过坑——想深入的话，可以接着聊：首字延迟怎么压到 300ms？您更想看哪个方向？
 
+## 流程图
+
+```mermaid
+sequenceDiagram
+    participant U as 用户
+    participant C as 客户端
+    participant ASR as 流式ASR
+    participant LLM as AI大模型
+    participant TTS as 流式TTS
+    
+    U->>C: 开始说话(语音流)
+    C->>ASR: 音频分片传输
+    ASR-->>LLM: 实时转写文本
+    ASR-->>C: 返回中间结果(<300ms)
+    LLM->>LLM: 情绪分析与意图识别
+    LLM-->>TTS: 流式返回回答文本
+    TTS-->>TTS: 提取情感特征与声纹克隆
+    TTS-->>C: 流式合成音频分片
+    C-->>U: 实时播放语音(边合成边播)
+```
+
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深

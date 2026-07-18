@@ -114,6 +114,23 @@ IM系统核心需求：实时消息收发、消息有序可靠、在线状态管
 - 消息延迟：<200ms（同城）
 - 消息吞吐：10万条/秒
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    CL[客户端] --> CONN[接入层 TCP长连接]
+    CONN --> HB[心跳保活]
+    MSG[发送消息] --> ROUTE[路由分发]
+    ROUTE -->|小群| WD[写扩散 写各自收件箱]
+    ROUTE -->|大群| RD[读扩散 拉取群信箱]
+    WD --> SYNC[syncKey 增量同步]
+    RD --> SYNC
+    OFFLINE[离线用户] --> STORE[离线消息存储]
+    style WD fill:#ffe4b5
+    style RD fill:#d4edda
+```
+
 ## 记忆要点
 
 - 整体分层：接入层长连接保活+路由表（Redis），逻辑层消息处理转发，存储层保证可靠不丢

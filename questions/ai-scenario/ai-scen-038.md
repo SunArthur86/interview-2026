@@ -116,6 +116,28 @@ def generate_controllable_image(prompt, pose_image):
 1. **随机种子管理**：在微服务架构下，若不同Worker的随机数生成器初始化方式不同，相同的Prompt和Seed可能生成完全不同的图，导致缓存失效或体验不一致。
 2. **显存碎片化**：频繁加载卸载不同的LoRA模型会导致GPU显存严重碎片化，需要定期重启进程或使用统一的Model Pool管理。
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["用户简短描述"] --> B["Prompt工程层"]
+    B -->|LLM扩展| C[详细生成指令]
+    C --> D["可控生成层"]
+    subgraph D["可控生成层"]
+        D1[ControlNet姿态控制]
+        D2[IP-Adapter风格迁移]
+        D3[LoRA角色微调]
+    end
+    D --> E["扩散模型生成"]
+    E --> F["后处理层"]
+    subgraph F["后处理层"]
+        F1[Real-ESRGAN超分]
+        F2[CodeFormer面部修复]
+        F3[NSFW双重安全过滤]
+    end
+    F --> G[返回生成结果]
+```
+
 ## 记忆要点
 
 - 架构：扩散模型生成 → Prompt增强 → 可控生成 → 后处理(超分/安检)。

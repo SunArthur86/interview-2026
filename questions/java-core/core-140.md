@@ -82,6 +82,24 @@ int main() {
 2. 孤儿进程会被谁收养？有什么危害？（通常无害，由 init 托管）
 3. 守护进程与孤儿进程的区别？
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[进程特殊状态] --> B[孤儿进程 Orphan]
+    A --> C[僵尸进程 Zombie]
+    B --> D[父进程先退出]
+    D --> E[子进程被 init 收养<br/>正常无害]
+    C --> F[子进程已退出]
+    F --> G[父进程未 wait]
+    G --> H[PCB 仍占用<br/>PID 不释放]
+    I[僵尸危害] --> J[占用 PID<br/>耗尽则无法创建新进程]
+    K[避免] --> L[父进程 wait/waitpid]
+    K --> M["注册 SIGCHLD 信号处理"]
+    K --> N[父进程忽略 SIGCHLD<br/>SIG_IGN]
+    K --> O[两次 fork 父立即退出<br/>孙子变孤儿]
+```
 ## 记忆要点
 
 - 孤儿进程：父进程先退出，子进程被init（PID为1）收养，通常无害。

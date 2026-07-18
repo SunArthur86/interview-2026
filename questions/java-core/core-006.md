@@ -114,6 +114,24 @@ http {
 3. **既然有了 HTTP/2，为什么还要保持 Keep-Alive？**
    - HTTP/2 也是基于 TCP 的，建立连接（TCP + TLS）依然昂贵（2-3 RTT），多路复用是建立在同一个 TCP 连接之上的。
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[HTTP 缓存决策] --> B{本地有无缓存?}
+    B -->|否| C[向服务器请求<br/>200 from network]
+    B -->|是| D{Cache-Control/Expires<br/>是否过期?}
+    D -->|未过期| E[强缓存 200 from cache<br/>不发请求]
+    D -->|已过期| F{协商缓存命中?}
+    F -->|ETag 一致<br/>If-None-Match| G[304 Not Modified<br/>不返回 body]
+    F -->|Last-Modified 一致<br/>If-Modified-Since| G
+    F -->|均不一致| H[200 返回新资源<br/>更新缓存标识]
+    I[强缓存字段] --> J[Cache-Control max-age]
+    I --> K[Expires 老版本]
+    L[协商缓存字段] --> M[ETag/If-None-Match 精确]
+    L --> N[Last-Modified/If-Modified-Since 秒级]
+```
 ## 记忆要点
 
 - 传输层优化：HTTP/2解决HTTP队头阻塞，而HTTP/3基于UDP解决TCP队头阻塞。

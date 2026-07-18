@@ -428,6 +428,31 @@ traceId: "abc123def456789abc123def456789ab"
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——traceId 怎么生成？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A["业务服务生成日志"] --> B["Logback 组装结构化 JSON<br/>注入 MDC 上下文"]
+    B --> C["异步采集 AsyncAppender<br/>队列满 neverBlock 丢弃"]
+    C --> D["日志采集器 Filebeat"]
+    D --> E["日志存储 ELK / Loki"]
+
+    subgraph Context ["traceId 透传机制"]
+        F["HTTP 请求<br/>W3C traceparent Header"] --> I["MDC 注入 traceId"]
+        G["MQ 消息<br/>消息属性透传"] --> I
+        H["线程池异步任务<br/>TransmittableThreadLocal"] --> I
+    end
+
+    I -.-> B
+
+    E --> J{"日志查询与诊断"}
+    J --> K["按 traceId 搜索<br/>秒级拉出跨服务全链路"]
+    J --> L["按 level / service 聚合统计"]
+
+    K --> M["快速定位下单失败根因"]
+    style C fill:#ffe599,stroke:#f1c232
+    style I fill:#d9ead3,stroke:#93c47d
+```
 
 ## 视频脚本
 

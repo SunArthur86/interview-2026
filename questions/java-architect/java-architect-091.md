@@ -370,6 +370,21 @@ public class PromptCanaryService {
 
 **收尾：** 以上是我的整体思路。您想继续深入聊——prompt 模板和代码怎么解耦？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    D[开发者编写Prompt] --> DB[(Prompt版本数据库)]
+    DB -->|生成版本号| EV[Prompt评测集CI自动评估]
+    EV -->|评估通过| RV[Reviewer代码审批审查]
+    RV -->|审批通过/双人复核| GS[5%流量灰度发布]
+    GS -->|质量监控| MT{质量下降超阈值?}
+    MT -->|是| RB[自动回滚上一稳定版本]
+    MT -->|否| FQ[全量发布线上环境]
+    FQ --> RT[业务系统运行时渲染]
+    RT --> SI[变量注入安全防护Sanitize]
+    SI --> LLM[调用LLM大模型]
+```
 
 ## 视频脚本
 

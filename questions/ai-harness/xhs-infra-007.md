@@ -109,6 +109,16 @@ train_loader = DataLoader(
 | **Nsight Systems (nsys)** | 系统级时间线可视化 | Kernel Stream, CUDA memcpy, NCCL Call gap |
 | **Nsight Compute (ncu)** | Kernel 级别深度分析 | Tensor Core Utilization, Memory Throughput |
 
+```mermaid
+flowchart TD
+    Training[训练任务] --> Issue{问题诊断}
+    Issue -->|OOM| ZeRO[ZeRO-3切片<br/>Checkpointing换显存]
+    Issue -->|低MFU| Profile[Profiler查Kernel]
+    Issue -->|Hang| NCCL[NCCL_DEBUG查通信]
+    Profile --> Fix[算子融合/通信Overlap]
+    NCCL --> Stack[py-spy抓堆栈]
+```
+
 ## 记忆要点
 
 - OOM诊断：显存=模型+优化器(2x)+梯度+激活+KV。解法用ZeRO-3切片、Checkpoint换显存、SP切分序列。

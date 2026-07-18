@@ -234,6 +234,19 @@ public ListNode reverseBetween(ListNode head, int left, int right) {
 
 **收尾：** 这块我踩过坑——要不要深入聊：递归反转的空间复杂度为什么是O(n)？
 
+## 流程图
+
+```mermaid
+flowchart TD
+    A("初始化<br/>prev = None, curr = head") --> B{"curr != None ?"}
+    B -- "是" --> C["暂存 next = curr.next"]
+    C --> D["反转指针<br/>curr.next = prev"]
+    D --> E["prev 前进<br/>prev = curr"]
+    E --> F["curr 前进<br/>curr = next"]
+    F --> B
+    B -- "否: 遍历完毕" --> G["返回 prev 新头节点"]
+```
+
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深

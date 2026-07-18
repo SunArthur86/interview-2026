@@ -89,6 +89,23 @@ server {
 | **重定向** | Location | 指引客户端跳转到新的 URL |
 | **协商与信息** | Server, Date, Accept-Ranges | 服务器信息、时间戳、是否支持断点续传 |
 
+
+## 核心架构图
+
+```mermaid
+flowchart TD
+    A[会话保持] --> B[Cookie 客户端]
+    A --> C[Session 服务端]
+    D[首次登录] --> E[服务器创建 Session<br/>存内存/Redis]
+    E --> F[生成 sessionId]
+    F --> G[通过 Set-Cookie 下发]
+    G --> H[浏览器存储 Cookie]
+    I[后续请求] --> J[Cookie 自动携带 sessionId]
+    J --> K[服务器根据 id 找 Session]
+    B --> L[容量 4KB<br/>有过期时间]
+    C --> M[容量无限制<br/>默认 30 分钟过期]
+    N[分布式] --> O[Session 共享<br/>Redis/粘性路由/JWT]
+```
 ## 记忆要点
 
 - 实体三剑客：Content-Type定类型、Length定长度、Encoding定压缩

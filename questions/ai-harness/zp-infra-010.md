@@ -105,6 +105,15 @@ model.layer[-1].register_forward_hook(check_nan)
 2. **如何区分是通信 Bound 还是计算 Bound？**（查看 Nsight Systems 的 gap，如果计算Kernel之间有长空闲等待 NCCL，则是通信未重叠）
 3. **Gradient Checkpointing 为什么能节省显存？原理是什么？**（以计算换空间，前向不存所有中间激活，反向时重算）
 
+```mermaid
+flowchart TD
+    Train[训练任务] --> Issue{问题}
+    Issue -->|低MFU| Nsight[Nsight看通信重叠]
+    Issue -->|OOM| ZeRO[ZeRO-3/Checkpointing/Offload]
+    Issue -->|Hang| NCCL[NCCL_DEBUG/py-spy]
+    Nsight --> Fix[算子融合/通信Overlap]
+```
+
 ## 记忆要点
 
 - 低MFU诊断：用Profiler看Kernel耗时，Nsight看通信重叠，常见瓶颈是通信未Overlap或数据加载慢

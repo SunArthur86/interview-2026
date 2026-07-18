@@ -79,6 +79,23 @@ public class TraceFilter implements Filter {
 | **成本** | 高 (磁盘/内存要求高) | 低 (约 ELK 的 10%-20%) |
 | **适用场景** | 需要复杂全文检索、日志分析 | 追求低成本、以 Metrics 为主的可观测性 |
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    APP[微服务应用] --> M[Metrics 指标]
+    APP --> L[Logging 日志]
+    APP --> T[Tracing 链路]
+    T --> TID[TraceID 注入]
+    TID -.贯穿.-> M
+    TID -.贯穿.-> L
+    M --> FIN[发现问题]
+    L --> CAUSE[查明原因]
+    T --> LOC[定位链路段]
+    style TID fill:#ffe4b5
+```
+
 ## 记忆要点
 
 - 支柱分工：Metrics看系统问题、Logging查具体原因、Tracing定问题层级
