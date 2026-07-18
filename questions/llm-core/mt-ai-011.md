@@ -137,6 +137,27 @@ ensemble_retriever = EnsembleRetriever(
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["S-T 要明确背景和量化目标"]
+    N1["A 要突出技术难点和解决方案"]
+    N2["R 必须有数据支撑的量化结果"]
+    N3["强调 Trade-off 和反思过程"]
+    N4["体现数据驱动的迭代思维"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+    style N4 fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - STAR框架：S背景讲清痛点，T目标量化指标，A方案突出难点解决，R结果带数据复盘

@@ -136,6 +136,24 @@ class RateLimiter:
 4. **限流算法选择**：令牌桶 vs 漏桶，在应对突发流量（如Agent瞬间发起大量子任务）时有什么区别？
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["混合路由按难度分配模型，平衡成本与质量"]
+    N1["KV Cache避免重复计算，量化提升吞"]
+    N2["限流器保护系统，优先保障关键任务"]
+    N3["批处理提升GPU利用率"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 降本四策：混合路由(大小模型分流)、KV Cache(缓存注意力)、量化(INT4/8)、Continuous Batching(动态批处理)

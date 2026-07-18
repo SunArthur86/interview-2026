@@ -121,6 +121,24 @@ async def handle_get_status() -> list[TextContent]:
     │ (Client)  │
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["Tools是函数定义，是基础"]
+    N1["Skills是工具+流程的封装，解决业务"]
+    N2["MCP是通信协议，解耦Agent与Ser"]
+    N3["自建服务推荐MCP以兼容生态"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - Tools：原子函数，JSON Schema定义，抽象层级最低，粒度细管理开销大。

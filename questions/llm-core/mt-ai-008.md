@@ -117,6 +117,24 @@ outputs = llm.generate(["你好，请介绍一下北京的景点。"], sampling_
 | **Qwen-2.5** | GQA | 128K | 微调 (FP8/量化支持更好) | 数学/代码全能，18T 数据训练 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["Qwen-1 奠定双语基础架构"]
+    N1["Qwen-1.5 引入 GQA 推理加速"]
+    N2["Qwen-2 实现长文本与多语言突破"]
+    N3["Qwen-2.5 数据堆至 18T 达到"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - Qwen1筑基(双语强)，1.5换代GQA(省显存)，2代破壁128K(多语言)，2.5全能成SOTA

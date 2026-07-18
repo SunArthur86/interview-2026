@@ -87,6 +87,25 @@ class ProductAnswer(BaseModel):
 3. **知识边界**：如何判断问题是应该由模型通用知识回答，还是应该拒绝回答？
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    TASK["用户任务<br/>'翻译这段话'"] --> PROMPT["Prompt 构造"]
+    PROMPT --> ZERO["Zero-shot<br/>直接提问"]
+    PROMPT --> FEW["Few-shot<br/>附带示例"]
+    PROMPT --> COT["Chain-of-Thought<br/>'让我们一步步思考'"]
+    ZERO --> LLM["LLM 推理"]
+    FEW --> LLM
+    COT --> LLM
+    LLM --> OUTPUT["输出结果"]
+    GUARD["Guardrails<br/>注入检测/越狱防护"] --> PROMPT
+    style FEW fill:#2196F3,color:#fff
+    style COT fill:#4CAF50,color:#fff
+    style GUARD fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - 幻觉成因：模型预测概率而非检索事实，记忆偏差+生成噪声导致编造

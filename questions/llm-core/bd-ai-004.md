@@ -124,6 +124,24 @@ def build_context(query: str, session_id: str):
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["Claude Code：自动压缩上下文，"]
+    N1["Hermes：结构化记忆与Skill能力"]
+    N2["OpenClaw：事件溯源，Plugin"]
+    N3["编程选Claude，复杂业务流程选Her"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 记忆：Claude Code自动摘要压缩，Hermes结构化JSON记忆，OpenClaw事件溯源。

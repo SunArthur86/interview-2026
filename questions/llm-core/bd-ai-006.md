@@ -133,6 +133,27 @@ def react_loop(query, tools, max_iterations=10):
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["核心是ReAct循环推理执行"]
+    N1["规划层分解复杂任务"]
+    N2["RAG提供外部知识增强"]
+    N3["工具需原子化且鲁棒"]
+    N4["上下文需动态组装管理"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+    style N4 fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - 核心闭环：感知(组装上下文)→规划(任务分解)→行动(工具调用)→观察(结果解析)→决策

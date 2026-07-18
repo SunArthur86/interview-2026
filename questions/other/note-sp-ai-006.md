@@ -173,6 +173,24 @@ asyncio.run(main())
 4. **选型公式**：CPU密集→进程，IO密集→协程，简单IO→线程
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["GIL是CPython特有的，同一时刻只"]
+    N1["进程是资源分配最小单位，独立内存可利用多"]
+    N2["线程共享内存但受GIL限制不能并行CPU"]
+    N3["协程是用户态轻量线程，适合高并发IO"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - GIL本质是全局锁：因为保护引用计数，所以同一时刻仅单线程执行Python字节码。

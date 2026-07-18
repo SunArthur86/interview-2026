@@ -101,6 +101,24 @@ def safe_tool_call(tool_name, arguments):
 3. **错误反馈机制**：工具执行失败后的Error Message如何设计才能让模型最快理解并纠错？（结构化错误码 + 自然语言解释）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["每轮注入原始目标，提醒初心"]
+    N1["阶段总结与压缩上下文，减少噪音"]
+    N2["工具白名单+参数校验，拦截非法调用"]
+    N3["Few-shot示范标准用法"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 防漂移：每轮Prompt注入原始目标，N步后压缩总结，长任务拆短，外部监督Agent

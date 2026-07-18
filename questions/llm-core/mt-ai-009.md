@@ -126,6 +126,27 @@ response = client.chat.completions.create(
 | **中文能力** | 优秀 | **Qwen/GLM 具有本土优势** |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["综合能力首选 GPT-4o 或 Clau"]
+    N1["中文场景首选 Qwen 系列"]
+    N2["高性价比推理首选 DeepSeek"]
+    N3["私有化部署选 Llama 或 Qwen"]
+    N4["关注合规与数据安全"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+    style N4 fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - 选型决策看四维：能力(模态/推理) vs 成本(API/算力) vs 合规 vs 生态

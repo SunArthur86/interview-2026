@@ -120,6 +120,25 @@ User Query                       User Query
 3. **时效性差异**：RAG适合解决时效性问题吗？（不适合，除非向量库更新频率极高，否则实时数据还是得靠Function Calling）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart LR
+    TASK["用户任务<br/>'翻译这段话'"] --> PROMPT["Prompt 构造"]
+    PROMPT --> ZERO["Zero-shot<br/>直接提问"]
+    PROMPT --> FEW["Few-shot<br/>附带示例"]
+    PROMPT --> COT["Chain-of-Thought<br/>'让我们一步步思考'"]
+    ZERO --> LLM["LLM 推理"]
+    FEW --> LLM
+    COT --> LLM
+    LLM --> OUTPUT["输出结果"]
+    GUARD["Guardrails<br/>注入检测/越狱防护"] --> PROMPT
+    style FEW fill:#2196F3,color:#fff
+    style COT fill:#4CAF50,color:#fff
+    style GUARD fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - 核心区别：FC调API获实时/结构化数据，RAG检索文档获离线/非结构化知识

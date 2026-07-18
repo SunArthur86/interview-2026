@@ -104,6 +104,27 @@ def apply_rotary_emb(xq, xk, freqs_cis):
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["Transformer 是大模型的基石"]
+    N1["LoRA 是高效微调的必修课"]
+    N2["DPO 是当前对齐的主流方案"]
+    N3["不仅要读，还要复现和批判思考"]
+    N4["能将论文原理应用到实际工程中"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+    style N4 fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - 必读Top3：Attention奠定QKV架构，RoPE奠定位置编码，DPO奠定对齐新范式

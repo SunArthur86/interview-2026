@@ -105,6 +105,27 @@ memory_points:
 ```
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["Cursor 适合全流程项目级开发"]
+    N1["Windsurf 擅长多文件协同编辑"]
+    N2["Agent 模式能自动处理跨文件修改"]
+    N3["核心在于提供清晰的上下文和意图"]
+    N4["仍需人工审查业务逻辑"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+    style N4 fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - Cursor核心是Agent闭环(Composer模式)：主导0到1搭脚手架与多文件重构

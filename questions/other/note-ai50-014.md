@@ -257,6 +257,24 @@ async def cpu_heavy_correct():
 | LLM流式输出 | 等完整响应 | 逐token返回 | 感知延迟↓90% |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["asyncio是Python异步编程的标"]
+    N1["Agent中必须用异步的场景: 并行工具"]
+    N2["关键: await是"让出控制权"，不是"]
+    N3["注意: CPU密集型任务不适合async"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 因为Agent常遇网络I/O，所以用异步避免串行阻塞，大幅降低总耗时。

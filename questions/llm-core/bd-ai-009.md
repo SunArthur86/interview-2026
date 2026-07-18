@@ -120,6 +120,24 @@ class SendEmailSkill(BaseSkill):
 3. **冷启动问题**：新开发的Skill没有使用数据，如何优化其Prompt或初始参数？
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["定义标准四要素（功能、输入、输出、依赖）"]
+    N1["注册表实现自动发现与调用"]
+    N2["版本控制保证向后兼容"]
+    N3["权限隔离与热插拔提升稳定性"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 核心思路：能力标准化封装，像App一样即插即用，解耦技能与主流程

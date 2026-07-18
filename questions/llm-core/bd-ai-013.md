@@ -101,6 +101,24 @@ Query + [Docs]                 Query
 3. **幻觉率对比**：RAG和微调谁的幻觉率更低？（RAG在事实准确性上通常优于微调，因为微调本质上还是在“背诵”，可能记错细节）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["RAG低成本更新知识，微调改变模型行为模"]
+    N1["新知识优先RAG，新风格/新逻辑必须微调"]
+    N2["微调成本高且周期长"]
+    N3["追求低延迟可考虑微调内化知识"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 一句话：学新知识用RAG(外挂)，学新能力/风格用微调(内化)

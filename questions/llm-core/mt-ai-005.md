@@ -93,6 +93,24 @@ def dpo_loss(policy_chosen_logps, policy_rejected_logps, ref_chosen_logps, ref_r
 | **效果** | SOTA天花板（OpenAI 路线） | 接近 RLHF，性价比首选 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["SFT：学会遵循指令和格式"]
+    N1["RM：训练打分员判断回答好坏"]
+    N2["RLHF/DPO：基于人类偏好优化对齐"]
+    N3["趋势：DPO因无需显式RM逐渐普及"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 核心链路：SFT（指令微调）建立格式，接着训练奖励模型，最后用 RLHF 做人类对齐。

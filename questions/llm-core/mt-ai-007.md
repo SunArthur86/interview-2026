@@ -128,6 +128,24 @@ def top_k_top_p_filtering(logits, top_k=0, top_p=0.0, filter_value=-float('Inf')
 | **Contrastive Search** | 长文本生成 | 实现稍复杂，需调节 deg_penalty | penalty=0.5~1.0 |
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["Greedy：最稳但死板，适合做题"]
+    N1["Sampling：引入随机性，适合创作"]
+    N2["Top-K/Top-P：过滤掉低概率的胡"]
+    N3["Temperature：控制随机程度的旋"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+```
+
 ## 记忆要点
 
 - 两大流派：Greedy/Beam重确定易重复，Top-K/Top-P重多样防尾巴

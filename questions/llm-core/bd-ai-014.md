@@ -104,6 +104,26 @@ SFT Pipeline:                    RLHF/DPO Pipeline:
 3. **数据规模效应**：在SFT中，为什么有时候增加数据反而效果变差？（数据质量分布不均，低质量数据污染了模型原有的通用能力，需严格数据清洗和课程学习Curriculum Learning）
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    SFT["Step 1: SFT<br/>监督微调"] --> RM["Step 2: Reward Model<br/>训练奖励模型"]
+    RM --> PPO["Step 3: PPO/RLHF<br/>强化学习优化"]
+    RM --> DPO["Alternative: DPO<br/>直接偏好优化<br/>无需显式RM"]
+    PPO --> EVAL["评估: 有用性/无害性/诚实性"]
+    DPO --> EVAL
+    DATA1["人类偏好数据<br/>(prompt, chosen, rejected)"] --> RM
+    DATA1 --> DPO
+    EVAL --> DEPLOY["部署上线"]
+    style SFT fill:#2196F3,color:#fff
+    style RM fill:#FF9800,color:#fff
+    style PPO fill:#4CAF50,color:#fff
+    style DPO fill:#9C27B0,color:#fff
+    style EVAL fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - 迭代速度：SFT(单步闭环)快于RLHF(需训RM+PPO)，SFT适合快速试错

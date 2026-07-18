@@ -126,6 +126,27 @@ def execute_with_retry(agent_func, max_retries=2, timeout=5):
 4. **并发控制**：当任务分解为几十个子任务时，如何进行并发限流和资源调度（Semaphore/RateLimiter）？
 
 
+
+## 核心流程图
+
+```mermaid
+flowchart TD
+    N0["推荐Hub-Spoke星型架构"]
+    N1["消息结构化确保可追踪"]
+    N2["超时重试降级校验四层防错"]
+    N3["状态持久化支持断点续传"]
+    N4["关键操作保留人工介入口"]
+    N0 --> N1
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    style N0 fill:#2196F3,color:#fff
+    style N1 fill:#FF9800,color:#fff
+    style N2 fill:#4CAF50,color:#fff
+    style N3 fill:#9C27B0,color:#fff
+    style N4 fill:#f44336,color:#fff
+```
+
 ## 记忆要点
 
 - 架构选型：星型(主控协调)优于链式(易断全断)和网状(复杂难控)，解耦清晰
