@@ -146,3 +146,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "程序从磁盘加载到内存，CPU逐条执行指令处理数据——就像厨师按菜谱做菜，菜谱（代码）从书架（磁盘）拿到厨房（内存），厨师（CPU）按步骤处理食材（数据），最后装盘（输出）" | 核心定义 |
 | 1:20 | 宏观流程示意 | "源代码经编译链接为可执行文件，Shell 加载至内存，CPU 读取指令并输出。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["程序执行流程是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["宏观流程：源代码经编译链接为可执行文件，Shell …"]:::core
+        C["IO 优化：磁盘到内存的加载由 DMA 技术完成，无…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

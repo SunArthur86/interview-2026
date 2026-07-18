@@ -208,13 +208,11 @@ graph TD
     E --> E1["NTILE / CUME_DIST<br/>分桶与累计分布"]
 ```
 
-
 ## 记忆要点
 
 - 语法记忆：函数() OVER (PARTITION BY 分组 ORDER BY 排序 ROWS BETWEEN 范围)
 - 四大分类：聚合类（算日均）、排序类（取TopN）、偏移类（环比Lag/Lead）、分布类（NTile分桶)
 - 函数对比：ROW_NUMBER唯一不重复，RANK重复且跳号，DENSE_RANK重复不跳号
-
 
 ## 苏格拉底式面试追问
 
@@ -269,11 +267,9 @@ ROWS 是"按物理行"定义窗口，RANGE 是"按逻辑值"定义窗口。ROWS 
 
 **收尾：** 您想深入聊：ROW_NUMBER/RANK/DENSE_RANK 怎么选？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -281,3 +277,35 @@ ROWS 是"按物理行"定义窗口，RANGE 是"按逻辑值"定义窗口。ROWS 
 | 0:20 | 核心概念图 | "窗口函数能在不聚合行的情况下对"一组相关行"做计算，保留明细同时算聚合/排名/偏移。四类：①聚合类(SUM/AVG/…" | 核心定义 |
 | 0:55 | 聚合类示意图 | "聚合类——SUM/AVG/COUNT OVER(PARTITION BY) 保留明细算聚合" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["开窗函数用过哪些？举个实际场景<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["聚合类示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

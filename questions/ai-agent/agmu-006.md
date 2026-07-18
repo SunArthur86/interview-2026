@@ -98,7 +98,6 @@ Blackboard Mode:           Message Queue:
 1. **误区：认为黑板模式就是共享数据库**。黑板模式强调的是“知识源对中心状态变化的被动响应”，而不仅仅是存储数据，缺少控制逻辑的共享数据库不是黑板模式。
 2. **误区：忽视读写分离的复杂性**。黑板模式中，专家既要读状态又要写状态，容易产生竞态条件，不同于 MQ 的单向流动，工程上处理难度更大。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -166,7 +165,6 @@ flowchart TD
 - MQ 模式：适合任务分发、削峰填谷，强调顺序和可靠投递。
 - 避坑指南：黑板需处理并发写冲突，MQ 顺序消费可能导致积压。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 黑板是共享状态协作求解（读写最新快照），队列是异步消息传输（追加消费强调顺序）。黑板像会议室白板大家看同一张图谁感兴趣谁响应，队列像工单系统前台接单后台按序处理。黑板适合多 Agent 协作同一对象，MQ 适合任务分发削峰填谷。坑是黑板要处理并发写冲突，MQ 顺序消费可能积压。两者常结合：MQ 触发 Agent 更新黑板状态。
@@ -190,3 +188,37 @@ flowchart TD
 | 1:10 | 并发写冲突警示 | "坑：黑板要处理并发写冲突，MQ 顺序消费可能积压。" | 边界情况 |
 | 1:35 | 金融风控案例 | "实战：MQ 卡顿全延迟，改黑板并行检测降 80% 延迟。" | 实战收益 |
 | 1:50 | 总结卡 | "记住：黑板共享状态，MQ 异步传输，常结合用。下期讲动态分配。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["黑板 vs 消息队列<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心区别对比表<br/>0:15"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["适用场景<br/>0:45"]:::practice
+        N3["并发写冲突警示<br/>1:10"]:::practice
+        N4["金融风控案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -140,14 +140,12 @@ flowchart TD
     end
 ```
 
-
 ## 记忆要点
 
 - 低MFU诊断：用Profiler看Kernel耗时，Nsight看通信重叠，常见瓶颈是通信未Overlap或数据加载慢
 - OOM解决：ZeRO-3分片参数、Checkpointing换激活显存、CPU Offload卸载冷数据
 - Hang诊断：开启NCCL_DEBUG看通信死锁，CUDA_LAUNCH_BLOCKING同步定位错误，py-spy查堆栈
 - 显存公式：总显存=权重+梯度+优化器+激活+KV，优化器状态占比最大
-
 
 ## 结构化回答
 
@@ -171,3 +169,36 @@ flowchart TD
 | 1:12 | 低MFU诊断图解 | "用Profiler看Kernel耗时，Nsight看通信重叠，常见瓶颈是通信未Overlap或数据加载慢" | 低MFU诊断 |
 | 1:48 | OOM解决图解 | "ZeRO-3分片参数、Checkpointing换激活显存、CPU Offload卸载冷数据" | OOM解决 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】大模型训练低…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["定位MFU低效、OOM根源和死锁点以恢复训练<br/>0:36"]:::core
+        N2["低MFU诊断图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["OOM解决图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -280,3 +280,35 @@ SynchronousQueue 的语义是"无缓冲，每个 put 必须等一个 take"——
 | 1:06 | IO 模型对比图分步演示 | "队列选型：因为无界队列会OOM，所以线上必须强制使用有界队列" | 队列选型 |
 | 1:57 | 关键代码/伪代码片段 | "拒绝策略：核心链路用Abort防积压，可降级异步用CallerRuns主线程背压" | 拒绝策略 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如何动态调整线程池参数。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["线程池怎么配置？线上拒绝策略怎么选？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["公式口诀：CPU密集型配置核数+1，而IO密集型配置…"]:::core
+        C["队列选型：因为无界队列会OOM，所以线上必须强制使用…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

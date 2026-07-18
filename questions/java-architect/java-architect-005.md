@@ -399,6 +399,32 @@ flowchart TD
 | 0:50 | 概念结构示意图 | happens-before 8 条规则（程序顺序、锁、volatile、线程启动、线程终止、中断、对象初始化、传递性）。 | happens-before 8 条 |
 | 1:20 | volatile 内存语义图 | 可见性（强制主存）+ 禁止指令重排序（内存屏障）。 | volatile 的两个语义 |
 | 1:50 | 流程图 | 构造完成即对其他线程可见（DCL 单例为什么 final 安全）。 | final 域的特殊保证 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>JVM 内存"]:::concept
+    N3["0:50<br/>happens-before"]:::concept
+    N4["1:20<br/>volatile 的两个语义"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["1:50<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
 | 3:30 | 总结卡 | 一句话记忆：happens-before 不是时间顺序，是"可见性 + 有序性"的偏序关系。 下期可以接着聊：volatile 和 synchronized 区别。 | 收尾总结 |
 
 

@@ -464,4 +464,30 @@ sequenceDiagram
 | 1:05 | 消息队列架构图 | 延迟消息 18 个级别（1s/5s/10s/30s/1m/2m/3m/4m/5m/6m/7m/8m/9m/10m/20m/30m/1h/2h）。 | 延迟消息 18 个级别（1s/5s/ |
 | 2:30 | 总结卡 | 一句话记忆：事务消息四步：半消息 → 本地事务 → commit/rollback → 回查兜底。 下期可以接着聊：事务消息和本地消息表怎么选。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>事务隔离级别"]:::concept
+    N3["0:40<br/>半消息存内部"]:::deep
+    N4["1:05<br/>个级别（1s/5s/"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["2:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

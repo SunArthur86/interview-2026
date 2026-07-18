@@ -126,8 +126,6 @@ response = client.chat.completions.create(
 | **维护难度** | 无 (直接调 API) | 高 (需运维 KV Cache、显存等) |
 | **中文能力** | 优秀 | **Qwen/GLM 具有本土优势** |
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -161,7 +159,6 @@ flowchart TD
 - 闭源天花板：Claude 3.5主导代码/长文，GPT-4o主导多模态与复杂Agent
 - 低成本硬核推理：选DeepSeek系列(MoE架构)，同等性能成本仅闭源十分之一
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 根据场景需求在闭源巨头和开源SOTA之间做Trade-off。——打个比方，选工具像选车，跑车（GPT-4）快但贵，卡车（开源）能拉货但需自己开，根据路况（场景）决定。
@@ -184,3 +181,36 @@ flowchart TD
 | 1:12 | 选型决策看四维图解 | "能力(模态/推理) vs 成本(API/算力) vs 合规 vs 生态" | 选型决策看四维 |
 | 1:48 | 私有部署首选开源图解 | "Qwen/Llama，其中Qwen称霸中文场景，Llama深耕英文定制" | 私有部署首选开源 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】使用过的 AI 基座模…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["根据场景需求在闭源巨头和开源SOTA之间做Tra<br/>0:36"]:::core
+        N2["选型决策看四维图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["私有部署首选开源图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

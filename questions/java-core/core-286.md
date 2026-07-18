@@ -191,3 +191,35 @@ flowchart TD
 | 1:30 | 核心思想示意 | "定义创建对象接口，将实例化推迟到具体工厂子类实现" | 要点1 |
 | 2:15 | 对比简单工厂示意 | "新增产品无需改原代码，符合开闭原则，避免工厂类过于臃肿" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["工厂方法模式的设计思想和应用场景是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心思想：定义创建对象接口，将实例化推迟到具体工厂子…"]:::core
+        C["对比简单工厂：新增产品无需改原代码，符合开闭原则，避…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

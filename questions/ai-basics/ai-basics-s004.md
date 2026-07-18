@@ -102,7 +102,6 @@ output_ln = ln(x)
 1. **RMSNorm和LayerNorm的区别？**（答：RMSNorm去掉了均值中心化，计算更快，性能相当，LLM常用）
 2. **BatchNorm在推理时怎么处理？**（答：使用训练时累积的全局running_mean和running_var，冻结更新）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -182,4 +181,37 @@ flowchart TD
 | 1:10 | BN vs LN 对比表 | "BN 适合 CNN 但训练推理不一致，LN 适合 Transformer 训练推理一致。" | 核心对比 |
 | 1:35 | Transformer 为啥用 LN | "NLP 句子变长 + LLM Micro-Batch，BN 失效，LN 对每 token 独立归一化。" | 选型原因 |
 | 1:55 | RMSNorm 简化版示意 | "衍生：RMSNorm 去掉减均值只除 RMS，计算更快，LLaMA 常用。" | 衍生技术 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["BN vs LN<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["全班成绩 vs 各科成绩类比<br/>0:15"]:::core
+        N2["两种归一化维度示意图<br/>0:40"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["BN vs LN 对比表<br/>1:10"]:::practice
+        N4["Transformer 为啥用 LN<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["RMSNorm 简化版示意<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

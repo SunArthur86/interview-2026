@@ -503,3 +503,31 @@ flowchart TD
 | 1:50 | 流程图 | 99.99% = 月停 4.3 分钟，靠多重冗余 + 快速切换实现。 | 99.99% = 月停 4.3 分钟 |
 | 3:30 | 总结卡 | 一句话记忆：高可用三要素：冗余 + 隔离 + 自愈。 下期可以接着聊：同城双活和异地多活区别。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>高可用"]:::concept
+    N3["0:50<br/>多机房"]:::deep
+    N4["1:20<br/>容量冗余"]:::concept
+    N5["1:50<br/>99.99%"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

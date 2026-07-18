@@ -203,6 +203,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个防重提交/幂等方案？适用于下单、支付等核心业务"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质定义：相同请求执行多次，产生的副作用与执行一次完…"]:::core
+        C["方案对比：Token防表单重复提交，唯一索引防并发创…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：如何设计一个通用的接口幂等方案？适用于下单、支付、回调等核心业务。
 
 > 合并自 `scen-113`（相似度 73%）
@@ -297,3 +329,35 @@ Flow:
 | 1:22 | 生活类比动画 | "打个比方——像外卖订单：重复下单时，系统根据单号识别，只送一份饭。" | 核心类比 |
 | 2:03 | 唯一ID或 图解 | "通过唯一ID或Token标识请求。" | 唯一ID或 |
 | 2:50 | Redis 图解 | "Redis SETNX实现分布式互斥。" | Redis |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个防重提交/幂等方案？适用于下单、支付等核心业务"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质定义：相同请求执行多次，产生的副作用与执行一次完…"]:::core
+        C["方案对比：Token防表单重复提交，唯一索引防并发创…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

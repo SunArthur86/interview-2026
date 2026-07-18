@@ -225,14 +225,12 @@ flowchart TD
     G -->|"是"| H["返回最长无重复子串长度"]
 ```
 
-
 ## 记忆要点
 
 - 算法框架：滑动窗口+哈希表，因为right遍历一次且left可跳变，所以时间复杂度为O(n)
 - 核心优化：遇重复字符，left直接跳到该字符上次出现的下标+1（跳变收缩）
 - 边界判断：跳变前必须检查 char_index[ch] >= left，否则会误跳到窗口外
 - 核心动作：每次移动right更新哈希表，并计算 max_len = max(max_len, right-left+1)
-
 
 ## 苏格拉底式面试追问
 
@@ -291,11 +289,9 @@ DP 能解但不是最优。dp[i] 的转移：dp[i] = min(dp[i-1]+1, i - pos[s[i]
 
 **收尾：** 您想深入聊：如果允许最多 K 个重复怎么做？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -303,3 +299,35 @@ DP 能解但不是最优。dp[i] 的转移：dp[i] = min(dp[i-1]+1, i - pos[s[i]
 | 0:20 | 核心概念图 | "求字符串最长无重复字符子串的长度，最优解是滑动窗口+哈希表 O(n)。维护窗口 [left, right]，right…" | 核心定义 |
 | 0:55 | 滑动窗口[l示意图 | "滑动窗口[l——滑动窗口[left,right]+哈希表存字符最新下标" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["手撕：求字符串最长无重复字符子串的…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["滑动窗口[l示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

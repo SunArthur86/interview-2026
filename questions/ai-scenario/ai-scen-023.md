@@ -124,7 +124,6 @@ async def get_semantic_cache(query: str, threshold=0.95):
 4. **流式输出与缓存的冲突？**
    - 命中缓存时，若原始结果已完整生成，服务端需模拟流式发送（将缓存结果切片发送），保持客户端接口一致性。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -182,7 +181,6 @@ flowchart TD
 - 风险控制：Hash Key包含Temperature参数，模型更新自动失效旧缓存。
 - 实战效果：语义缓存命中率达30%，延迟从800ms降至15ms，大幅降本。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过复用计算结果或中间状态，减少重复推理以降低延迟和Token消耗。——打个比方，像考试时的记忆库，完全一样直接抄答案，意思相似稍作修改，开头一样直接接续写。
@@ -204,3 +202,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：通过复用计算结果或中间状态，减少重复推理以降低延迟和Token消耗。" | 核心定义 |
 | 1:00 | 三级缓存图解 | "精确匹配（Redis）→ 语义匹配（向量）→ Prefix匹配（KV Cache）。" | 三级缓存 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计LLM推理的缓存策略<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过复用计算结果或中间状态，减少重复推理以降低延<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["三级缓存图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

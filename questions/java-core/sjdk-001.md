@@ -147,6 +147,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Virtual Threads（虚拟线程）？它与传统线…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质：JDK 21轻量级线程，由JVM调度，打破Ja…"]:::core
+        C["对比：传统线程内存~MB级且数量受限，虚拟线程~KB…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是Java 21的虚拟线程（Virtual Threads）？它与平台线程（Platform Threads）有什么本质区别？
 
 > 合并自 `jnf-001`（相似度 72%）
@@ -219,3 +251,35 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 | 0:40 | 概念动画/示意图 | "由JVM管理的轻量级线程，在OS线程上多路复用——像轻量级角色扮演，少量CPU（演员）轮流扮演百万角色" | 核心定义 |
 | 1:20 | 要点1图解示意 | "因为由JVM管理且按需挂载载体线程，所以虚拟线程能以极低内存支撑百万级高并发。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Virtual Threads（虚拟线程）？它与传统线…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质：JDK 21轻量级线程，由JVM调度，打破Ja…"]:::core
+        C["对比：传统线程内存~MB级且数量受限，虚拟线程~KB…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

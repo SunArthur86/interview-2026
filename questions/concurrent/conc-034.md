@@ -147,3 +147,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 排队上厕所，满了要么硬挤（异常），要么回头（特殊值），要么一直等（阻塞），要么等会再看（超时）。 | 核心概念 |
 | 0:40 | 抛出异常组示意图 | 抛出异常组：add, remove, element，失败即报错 | 抛出异常组 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是阻塞队列的主要方法？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["口诀「抛异返值阻超时」：四大类策略对应不同失败处理场…"]:::core
+        C["抛异常 vs 返特殊值：add/remove 遇满空…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

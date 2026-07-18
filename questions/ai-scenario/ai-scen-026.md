@@ -163,7 +163,6 @@ flowchart TD
     I -.-> A
 ```
 
-
 ## 记忆要点
 
 - 模型路由（核心）：简单任务用7B，复杂用GPT-4，整体成本可降50-70%。
@@ -172,9 +171,7 @@ flowchart TD
 - 预算管理：租户/用户/功能三级配额，超额限流，实时告警。
 - 成本估算：日均10万次请求，全GPT-4约$300/天，路由优化混合约$80/天。
 
-
 ## 结构化回答
-
 
 **30 秒电梯演讲：** 出租车分级：近距离骑单车（小模型），远距离打专车（大模型），省钱又高效。
 
@@ -184,7 +181,6 @@ flowchart TD
 3. **设置租户和用户级** — 设置租户和用户级Token预算配额
 
 **收尾：** 模型路由的难度分类器如何训练？
-
 
 ## 视频脚本
 
@@ -196,3 +192,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：按任务难度分级路由模型，配合缓存与精简控制成本。" | 核心定义 |
 | 1:00 | 模型路由（核心）图解 | "简单任务用7B，复杂用GPT-4，整体成本可降50-70%。" | 模型路由（核心） |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计LLM的Token成本控制系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["按任务难度分级路由模型，配合缓存与精简控制成本。<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["模型路由（核心）图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -94,7 +94,6 @@ for q in queries.split("\n"):
 2.  GraphRAG 需要预先构建图谱，对于每天更新的海量新闻类数据，如何设计增量更新的图谱构建流程以保证实时性？
 3.  Self-RAG 需要训练带有 Reflection Token 的模型，如果只有现有黑盒 API（如 GPT-4），如何模拟实现类似 Self-RAG 的“检索-评估-生成”循环？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -137,7 +136,6 @@ flowchart TB
     Graph --> Benefit3["复杂关系推理"]
 ```
 
-
 ## 记忆要点
 
 - 查询优化：重写补全实体、HyDE 生成假设答案、多路查询覆盖语义。
@@ -170,4 +168,38 @@ flowchart TB
 | 1:55 | Self-RAG 反思 Token 流程 | "Self-RAG 训练时引入反思 Token，模型自判要不要检索、文档相不相关。" | 生成优化 |
 | 2:30 | Long Context 迷失中间现象 | "长上下文塞全量文档？小心 Lost-in-the-Middle，中间位置信息容易丢。" | 边界警示 |
 | 2:50 | 多轮对话改写案例 | "实战：追问'那个多少钱'，Query Rewriting 结合历史重写，准确率提 40%。" | 实战案例 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["RAG 进阶技术<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三大优化方向总览图<br/>0:20"]:::core
+        N2["HyDE + Multi-Query 示意图<br/>0:50"]:::core
+        N3["GraphRAG 图谱遍历图<br/>1:20"]:::deep
+        N4["Self-RAG 反思 Token 流程<br/>1:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N5["Long Context 迷失中间现象<br/>2:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N6["多轮对话改写案例<br/>2:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5 --> N6
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

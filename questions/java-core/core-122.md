@@ -207,6 +207,38 @@ sequenceDiagram
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["四次挥手的过程，以及为什么是四次？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心：因为 TCP 是全双工通信，所以两端需各自独立…"]:::core
+        C["流程：FIN（主动方） -》 ACK（被动方） -》…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是四次挥手的过程？
 
 > 合并自 `core-017`（相似度 76%）
@@ -306,3 +338,35 @@ sysctl -w net.ipv4.tcp_tw_reuse=1
 | 0:40 | 概念动画/示意图 | "双向全双工断开，双方分别停止发送并确认——挂电话：A说“挂了”，B说“好的（再讲两句）”，B说“我挂了”，A说“拜拜”" | 核心定义 |
 | 1:20 | 全双工关闭需四步示意 | "主动方FIN，被动方ACK与FIN分开发" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["四次挥手的过程，以及为什么是四次？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心：因为 TCP 是全双工通信，所以两端需各自独立…"]:::core
+        C["流程：FIN（主动方） -》 ACK（被动方） -》…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

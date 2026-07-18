@@ -110,7 +110,6 @@ def hybrid_search(query_text, image_path):
 │      [Chunk Text] + [Image Base64] + [Metadata]                     │
            └───────────────────────────────┬─────────────────────────────────────┘
 
-
 ## 核心流程图
 
 ```mermaid
@@ -170,7 +169,6 @@ flowchart TD
 - 检索流程：图文联合查询，多路召回后融合排序，支持文搜图、图搜文
 - 生成阶段：多模态LLM(如GPT-4o)接收文本+图片上下文，生成带引用的回答
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 统一图文语义空间，实现跨模态内容的精准召回与生成。——打个比方，把文字和图片翻译成同一种“外语”，让它们能互相理解并关联。
@@ -193,3 +191,36 @@ flowchart TD
 | 1:12 | 统一空间图解 | "使用CLIP等多模态模型将图文映射到同一向量空间，支持跨模态检索" | 统一空间 |
 | 1:48 | 索引策略图解 | "向量库存储多向量字段，图片提取OCR文本辅助索引" | 索引策略 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个多模态 RAG 系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["统一图文语义空间，实现跨模态内容的精准召回与生成<br/>0:36"]:::core
+        N3["索引策略图解<br/>1:48"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["统一空间图解<br/>1:12"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

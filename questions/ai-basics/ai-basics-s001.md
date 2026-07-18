@@ -152,7 +152,6 @@ flowchart TD
     E -.-> G
 ```
 
-
 ## 记忆要点
 
 - 本质原因：链式法则连乘，梯度<1导致消失，>1导致爆炸。
@@ -183,4 +182,37 @@ flowchart TD
 | 1:10 | ReLU + 残差连接示意图 | "解决消失：ReLU 导数恒 1，残差连接 y=F(x)+x 提供梯度旁路。" | 解决消失 |
 | 1:35 | 梯度裁剪代码示例 | "解决爆炸：clip_grad_norm 强制限制范数阈值，RNN/LSTM 常用。" | 解决爆炸 |
 | 1:55 | LSTM Loss 变 NaN 案例 | "实战：10 层 LSTM 初始化权重过大 Loss 变 NaN，加梯度裁剪恢复。" | 实战案例 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["梯度消失与爆炸<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["传声筒游戏类比<br/>0:15"]:::core
+        N2["链式法则连乘示意图<br/>0:40"]:::deep
+        N3["ReLU + 残差连接示意图<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["梯度裁剪代码示例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["LSTM Loss 变 NaN 案例<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

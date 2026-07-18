@@ -165,3 +165,35 @@ flowchart TD
 | 0:40 | 无锁算法示意图 | 无锁算法，依赖CPU原子指令 | 无锁算法 |
 | 1:10 | 比较并更新示意图 | 通过比较并更新保证并发一致性 | 比较并更新 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是CAS（比较并交换-乐观锁机制-锁自旋）？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心原理：无锁乐观机制，当内存值V等于预期值E时，才…"]:::core
+        C["三大缺陷：存在ABA问题、高并发下自旋开销大、仅能保…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

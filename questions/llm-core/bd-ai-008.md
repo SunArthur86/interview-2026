@@ -101,8 +101,6 @@ def safe_tool_call(tool_name, arguments):
 2. **ReAct循环稳定性**：如果模型一直输出Thought但不调用Action，如何强制终止？（设定最大Thought迭代次数）
 3. **错误反馈机制**：工具执行失败后的Error Message如何设计才能让模型最快理解并纠错？（结构化错误码 + 自然语言解释）
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -134,7 +132,6 @@ flowchart TD
 - 实战技巧：参数强制类型(如int)可减少90%解析崩溃，错误信息需结构化反馈
 - 防御：Prompt注入用分隔符和指令层级隔离，ReAct循环设最大步数防死循环
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过记忆锚点和校验约束，确保Agent长期运行不跑偏且调用真实工具。——打个比方，像考试时反复看题目（防跑偏），且只能用考场发的文具（防幻觉工具）。
@@ -157,3 +154,36 @@ flowchart TD
 | 1:12 | 防漂移图解 | "每轮Prompt注入原始目标，N步后压缩总结，长任务拆短，外部监督Agent" | 防漂移 |
 | 1:48 | 防幻觉图解 | "严格定义Schema，工具白名单拦截，Pydantic校验参数，执行前验证" | 防幻觉 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】如何解决Agent的上…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过记忆锚点和校验约束，确保Agent长期运行不<br/>0:36"]:::core
+        N2["防漂移图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["防幻觉图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

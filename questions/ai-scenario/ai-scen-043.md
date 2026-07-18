@@ -132,7 +132,6 @@ completion = llm.generate(build_fim_prompt(prefix, suffix))
 3. **长文本处理**：除了RAG，还有哪些Context压缩技术（如Summary、RoPE scaling）。
 4. **安全过滤**
 
-
 ## 核心流程图
 
 ```mermaid
@@ -190,7 +189,6 @@ flowchart TD
 - 挑战：大项目用RAG检索代码片段，多文件修改用Plan→Execute模式。
 - 隐私：敏感信息过滤，端侧模型处理补全防代码泄露。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 基于上下文感知的代码补全与生成，RAG解决长尾依赖。——打个比方，像坐在旁边的资深程序员，看着你写并实时提供建议。
@@ -213,3 +211,36 @@ flowchart TD
 | 1:12 | 架构图解 | "上下文构建(跨文件/RAG) → 代码生成(FIM/Chat) → 质量检查。" | 架构 |
 | 1:48 | 上下文图解 | "光标前后代码 + AST依赖检索 + 项目规范注入。" | 上下文 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI代码助手（类似GitH…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["基于上下文感知的代码补全与生成，RAG解决长尾依<br/>0:36"]:::core
+        N2["架构图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["上下文图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

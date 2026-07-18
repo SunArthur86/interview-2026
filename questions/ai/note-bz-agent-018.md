@@ -253,7 +253,6 @@ def break_symmetry(stuck_state):
 2. **多层防护**：预防→检测→恢复→兜底，体系化而非单点
 3. **强调"LLM 特有"手段**：除了传统方法，还能用 LLM 判断冲突合理性、反思循环原因
 
-
 ## 核心流程图
 
 ```mermaid
@@ -298,7 +297,6 @@ flowchart TD
 - 两大顽疾：资源与结论冲突，以及互相推诿或重试导致的死循环
 - 防冲突四板斧：划定角色边界、共享资源加锁、引入投票/LLM仲裁机制、设定优先级抢占
 - 防死循环三招：全局步数硬上限兜底、状态指纹做环检测、失败次数熔断不再重试
-
 
 ## 苏格拉底式面试追问
 
@@ -357,11 +355,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：冲突怎么自动检测？——共享资源加版本号/CAS，冲突时触发仲裁？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -370,3 +366,36 @@ flowchart TD
 | 0:50 | 防冲突示意图 | "防冲突——角色边界+仲裁机制+优先级" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：冲突怎么自动检测？——共享资源加版本号/CAS，冲突时触发仲？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent 怎么避免冲突和无限…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["防冲突示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

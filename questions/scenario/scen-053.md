@@ -196,3 +196,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——就像系统的控制台，改一个开关，所有机器自动生效。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：集中管理微服务配置，支持变更热更新和灰度控制。" | 核心定义 |
 | 1:50 | 配置集中存储与版 图解 | "配置集中存储与版本管理。" | 配置集中存储与版 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计配置中心？支持动态配置、灰度发布、多环境管理"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心功能：支持多环境隔离、灰度发布（按IP/标签推送…"]:::core
+        C["高可用容灾：配置中心不可用时，客户端使用本地快照缓存…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -340,3 +340,35 @@ GIL 保证"同一时刻只有一个线程执行字节码"，但一条 Python 语
 | 0:15 | IO 模型对比图 | "核心用法：threading.Thread传target与args，调start()启动，join()阻塞等待" | 核心用法 |
 | 1:02 | IO 模型对比图分步演示 | "避坑指南：因start只能调一次，所以严禁直接调run()（那仅是普通函数执行）" | 避坑指南 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：GIL底层原理。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【美团面经】Python怎么实现多线程？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心用法：threading.Thread传targ…"]:::core
+        C["避坑指南：因start只能调一次，所以严禁直接调ru…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

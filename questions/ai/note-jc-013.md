@@ -218,7 +218,6 @@ flowchart TD
     Bad -.-> H["退化保护<br/>自动切换堆排保证 O"]
 ```
 
-
 ## 记忆要点
 
 - 口诀记忆：选插冒 O(n²)，归排 O(n logn)；快排均 O(nlogn) 坏 O(n²)
@@ -274,7 +273,6 @@ IntroSort 的切换逻辑基于递归深度监控。一是深度阈值：IntroSo
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 快排像整理书架——随便抽一本书当标准（pivot），比它矮的放左边高的放右边，然后左右两边各再抽一本当标准继续分。最坏情况是书已经按高矮排好了你每次抽第一本（永远是当前最矮），就只能一本本挪 O(n²)。随机抽就不容易遇到这种情况。
 
 **展开框架：**
@@ -284,11 +282,9 @@ IntroSort 的切换逻辑基于递归深度监控。一是深度阈值：IntroSo
 
 **收尾：** 快排为什么平均 O(n log n)？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -296,3 +292,35 @@ IntroSort 的切换逻辑基于递归深度监控。一是深度阈值：IntroSo
 | 0:20 | 核心概念图 | "常见排序复杂度——冒泡/选择/插入 O(n²)（简单但慢），归并/快排/堆排 O(nlogn)（高效），桶排/计数 O(…" | 核心定义 |
 | 0:55 | 冒泡/选择/示意图 | "冒泡/选择/——冒泡/选择/插入 O(n²)；归并/快排/堆排 O(nlogn)；桶排/计数 O(n+k)" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["排序算法时间复杂度 + 快排原理与…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["冒泡/选择/示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

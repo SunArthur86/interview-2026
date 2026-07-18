@@ -215,7 +215,6 @@ COMPLIANCE = {
 2. **领域知识三注入**：RAG(灵活)+微调(深度)+Prompt(轻量)，按需选择
 3. **数字人全链路**：ASR→LLM→TTS→Avatar，延迟优化是关键——体现实战
 
-
 ## 核心流程图
 
 ```mermaid
@@ -300,7 +299,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像培养专业人才——通识教育(通用LLM)+专业培训(领域知识)+工具技能(领域工具)+职业操守(合规)。
 
 **展开框架：**
@@ -310,11 +308,9 @@ flowchart TD
 
 **收尾：** AI名师和通用辅导什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -323,3 +319,36 @@ flowchart TD
 | 0:50 | 领域知识示意图 | "领域知识——RAG+微调" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：AI名师和通用辅导什么区别？——懂课纲/教学方法/学生心理？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["实战：垂直领域智能体（AI 名师机…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["领域知识示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -166,3 +166,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "标记存活后移动对象紧凑排列，消除内存碎片——书架整理后，把所有留下的书挤到一端，腾出整块空地" | 核心定义 |
 | 1:20 | 核心三步曲示意 | "标记存活对象、向内存一端移动整理、直接清理边界外的垃圾" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["标记整理（Mark-Compact）算法的原理是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心三步曲：标记存活对象、向内存一端移动整理、直接清…"]:::core
+        C["对比优势：解决了标记-清除的内存碎片问题，且不像复制…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

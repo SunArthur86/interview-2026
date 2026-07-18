@@ -133,3 +133,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "内存不足时，决定淘汰哪页数据的策略——像书桌只能放4本书，新书来了必须移走一本。LRU是移走最久没看的那本；FIFO是移走最早放上去的那本" | 核心定义 |
 | 1:20 | LRU淘汰最久未访问示意 | "基于局部性原理；FIFO淘汰最先进入，只看先后顺序。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["解释一下页面置换算法，例如LRU（最近最少使用）、FIFO（…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["LRU淘汰最久未访问，基于局部性原理；FIFO淘汰最…"]:::core
+        C["LRU用哈希表+双向链表实现O（1）复杂度；FIFO…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -185,3 +185,35 @@ flowchart TD
 | 1:10 | 拒绝 Executors示意图 | 拒绝 Executors，使用有界队列防止 OOM | 拒绝 Executors |
 | 1:40 | 监控指标进行动态参数调整示意图 | 通过监控指标进行动态参数调整 | 监控指标进行动态参数调整 |
 | 2:10 | 总结卡 + 下期预告 | 记住三个词就能答好这道题。下期追问：线程池的队列为什么不用无界？newFixedThreadPool 的坑是什么？ | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["线程池如何调优？核心线程数、最大线程数、队列大小应该怎么设置…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["任务提交流程：核心满 -》 入队列 -》 队列满 -…"]:::core
+        C["因为 CPU 密集型需减少切换，所以线程数设为 N+…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

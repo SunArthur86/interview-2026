@@ -243,7 +243,6 @@ class KnowledgeUpdatePipeline:
 
 **面试加分点**：提到Post5原文中的RAG优化技巧——结构化语义切分+上下文桥接、Query扩写+语义相似度阈值、混合检索用LambdaMART做分数归一化；提到Contextual Retrieval(Anthropic 2024)在切分时给每个chunk加上文档级摘要作为上下文；提到评估chunk质量可以用RAGAS的Context Precision和Context Recall指标；提到Late Chunking（先对整文档做embedding再切分）是2024年新方向。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -333,7 +332,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像切蛋糕——切太大一坨吃不下（检索噪声多），切太小碎渣到处是（语义不完整）。要沿着蛋糕的"自然纹理"（段落边界）切，每块大小正好一口吃
 
 **展开框架：**
@@ -343,11 +341,9 @@ flowchart TD
 
 **收尾：** 如何处理表格和图片的切分？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -356,3 +352,36 @@ flowchart TD
 | 0:50 | 固定切分示意图 | "固定切分——简单但可能切断语义" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：如何处理表格和图片的切分？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["如何确定Chunk的大小和切分策略…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["固定切分示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

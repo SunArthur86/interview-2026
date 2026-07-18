@@ -1415,3 +1415,35 @@ Markdown 文本框（textarea）性能好（纯文本，浏览器原生优化）
 | 1:06 | 架构示意图分步演示 | "三步闭环：编辑(改草案) -> 确认(看Diff) -> 发布(真落地)" | 三步闭环 |
 | 1:57 | 关键代码/伪代码片段 | "状态机设计：draft -> editing -> review -> published，每一步均可回退" | 状态机设计 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：三步流程会不会太繁琐？如何平衡效率和安全性。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【月之暗面面经】桌面端为什么要把结果编辑、确认和发布拆成三步…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心原因：AI产出不可控，为防止不可逆操作，必须引入…"]:::core
+        C["三步闭环：编辑（改草案） -》 确认（看Diff） …"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

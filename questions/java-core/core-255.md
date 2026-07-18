@@ -188,3 +188,35 @@ flowchart TD
 | 1:30 | 连续分配示意 | "顺序快但碎片多，链表分配：零碎无外片但随机访问慢。" | 要点1 |
 | 2:15 | FAT表示意 | "内存中存链表关系，查表快但表大会吃内存（如Windows）。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是文件系统的实现？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["连续分配：顺序快但碎片多，链表分配：零碎无外片但随机…"]:::core
+        C["FAT表：内存中存链表关系，查表快但表大会吃内存（如…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -220,7 +220,6 @@ Var(Q·K) = d_k  →  Var(Q·K/√d_k) = 1
 3. **多头直觉**：不同头学习不同子空间的模式（语法/语义/指代等）
 4. **复杂度**：O(n²·d)，n是序列长度——这是FlashAttention等优化的动机
 
-
 ## 核心流程图
 
 ```mermaid
@@ -254,7 +253,6 @@ flowchart TD
 - 计算四步口诀：算内积（Q乘K转置）→缩放（除以根号d）→归一化→加权聚合（乘V）。
 - 缩放原因：因为内积过大会导致Softmax进入饱和区引起梯度消失，所以需除以根号d。
 - 多头机制：因为多组并行计算能捕捉不同子空间特征，所以融合后表达力更强。
-
 
 ## 苏格拉底式面试追问
 
@@ -309,11 +307,9 @@ Single-Head 只能学一种注意力模式，表达能力受限。Multi-Head 让
 
 **收尾：** 您想深入聊：为什么除以根号d？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -321,3 +317,35 @@ Single-Head 只能学一种注意力模式，表达能力受限。Multi-Head 让
 | 0:20 | 核心概念图 | "每个词跟所有词做相关性打分，按分数加权聚合——每个词都能看到全句" | 核心定义 |
 | 0:55 | Q示意图 | "Q——Q=查询向量(我要找什么)，K=键向量(我有什么标签)，V=值向量(我的内容)" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["自注意力机制的计算过程是怎样的？Q…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Q示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

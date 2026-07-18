@@ -187,6 +187,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是HTTP/2？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三大核心：二进制分帧、多路复用、HPACK头部压缩，…"]:::core
+        C["多路复用：单TCP连接并发多个请求，通过Stream…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：HTTP/2 的多路复用是如何解决 HTTP/1.x 的队头阻塞问题的？
 
 > 合并自 `tr4-013`（相似度 73%）
@@ -249,3 +281,35 @@ server.on('stream', (stream, headers) => {
 | 0:40 | 概念动画/示意图 | "基于二进制分帧与 Stream ID，在单 TCP 连接上混合并行传输数据——像在高速公路上，以前（HTTP/1.1）车队必须一辆接一辆过收费站，前车卡住后车全等；现在（HTTP/2）所有车被拆散成零件，在不同的车道（Stream）上穿插混行，互不干扰，到了终点再按编号组装回原车" | 核心定义 |
 | 1:20 | 前提示意 | "因为引入二进制分帧层，所以能将数据打散混合传输。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是HTTP/2？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三大核心：二进制分帧、多路复用、HPACK头部压缩，…"]:::core
+        C["多路复用：单TCP连接并发多个请求，通过Stream…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

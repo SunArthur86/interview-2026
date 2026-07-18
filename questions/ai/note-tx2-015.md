@@ -241,13 +241,11 @@ flowchart TD
 
 ```
 
-
 ## 记忆要点
 
 - 核心机制：保留近期Keep_recent条原文，一旦总Token超限，立即触发滑动窗口摘要最旧消息
 - 摘要策略：每次从队首批量取N条旧消息，LLM压缩成一条系统摘要插回队首
 - 数据结构：双端队列管理动态上下文，滑动更新实现历史信息的有损压缩
-
 
 ## 苏格拉底式面试追问
 
@@ -302,11 +300,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：摘要本身也占 token，怎么避免"摘要越积越多"？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -314,3 +310,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "滑动窗口实现长对话自动摘要截断，控制总 token 上限——维护一个窗口，新消息进来如果总 token 超限，就把最旧的…" | 核心定义 |
 | 0:55 | 维护消息示意图 | "维护消息——维护消息deque，tokenizer算每条token数" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["算法题：滑动窗口实现长对话自动摘要…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["维护消息示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

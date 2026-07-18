@@ -150,14 +150,12 @@ flowchart TD
     J --> K[入库测试用例]
 ```
 
-
 ## 记忆要点
 
 - 架构四层：代码理解(AST/控制流)、测试策略(边界/异常)、生成层(LLM+Mock)、验证层(覆盖率/去重)。
 - 单元测重Mock：自动识别依赖生成Stub；API测重文档：基于Swagger生成用例；集成测重环境。
 - 核心流程：静态分析提取特征→LLM生成代码→执行验证→覆盖率反馈→迭代修复。
 - 质量保障：生成测试必须能运行，配合Mutation Testing检测有效性，人工Review兜底。
-
 
 ## 结构化回答
 
@@ -180,3 +178,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：静态分析理解逻辑，LLM生成测试用例，自动验证覆盖率。" | 核心定义 |
 | 1:00 | 架构四层图解 | "代码理解(AST/控制流)、测试策略(边界/异常)、生成层(LLM+Mock)、验证层(覆盖率/去重)。" | 架构四层 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI测试生成系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["静态分析理解逻辑，LLM生成测试用例，自动验证覆<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["架构四层图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

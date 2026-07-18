@@ -124,14 +124,12 @@ flowchart TD
     HBM --> Output[输出]
 ```
 
-
 ## 记忆要点
 
 - 核心优化：IO-aware Tiling 分块计算，将 HBM 访问从 O(N²) 降至 O(N)。
 - v1：引入分块和在线 Softmax，Kernel 融合减少读写。
 - v2：优化工作分区和 Warp-level 并行，减少非矩阵运算，A100 加速明显。
 - v3：利用 H100 FP8 Tensor Core 和 TMA 异步加载，速度接近理论峰值。
-
 
 ## 结构化回答
 
@@ -156,3 +154,37 @@ flowchart TD
 | 2:00 | v1图解 | "引入分块和在线 Softmax，Kernel 融合减少读写。" | v1 |
 | 2:40 | v2图解 | "优化工作分区和 Warp-level 并行，减少非矩阵运算，A100 加速明显。" | v2 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["FlashAttention v1…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过Tiling分块利用高速SRAM，减少对慢速<br/>0:40"]:::core
+        N2["核心优化图解<br/>1:20"]:::core
+        N3["v1图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["v2图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

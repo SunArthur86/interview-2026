@@ -157,3 +157,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——时光倒流了，必须等人等到时间恢复正常，或者用备好的号段顶着。" | 核心类比 |
 | 2:03 | 短时间回拨等待 图解 | "短时间回拨等待。" | 短时间回拨等待 |
 | 2:50 | 长时间回拨报错 图解 | "长时间回拨报错。" | 长时间回拨报错 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["雪花算法的时钟回拨问题如何解决？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["时钟回拨原因：NTP同步或手动修改导致时间倒退，引发…"]:::core
+        C["微小回拨（如《5ms）：因为时间极短，所以线程睡眠等…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

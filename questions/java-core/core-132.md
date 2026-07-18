@@ -189,3 +189,35 @@ flowchart LR
 | 0:40 | 概念动画/示意图 | "重载是同名不同参，编译区分；重写是子类重写父类方法，运行时多态——重载像是同一款手机的不同型号（参数不同），重写像是儿子继承了父亲的技能并改进（方法名相同但实现不同）" | 核心定义 |
 | 1:20 | 核心区别示意 | "重载是同类同名不同参数（编译期多态），重写是子类改写父类方法（运行期多态）。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["方法的重载和重写有什么区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心区别：重载是同类同名不同参数（编译期多态），重写…"]:::core
+        C["重载规则：与返回值、修饰符、异常无关，只看参数列表（…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

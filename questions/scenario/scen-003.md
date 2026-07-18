@@ -176,3 +176,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——发牌员提前洗好牌(预生成金额)，大家依次抢一张，发完即止。" | 核心类比 |
 | 2:03 | 二倍均值法 图解 | "二倍均值法保证公平随机。" | 二倍均值法 |
 | 2:50 | Lua脚本 图解 | "Lua脚本保证原子并发扣减。" | Lua脚本 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计微信抢红包系统？红包金额如何拆分？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["金额拆分：必记微信二倍均值法，公式=随机（0.01,…"]:::core
+        C["存储设计：总信息用Redis Hash，拆分后明细金…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

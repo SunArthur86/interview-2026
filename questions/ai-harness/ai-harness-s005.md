@@ -115,7 +115,6 @@ class KVCache:
 3. **FlashAttention 对 KV Cache 有影响吗？**
    - FlashAttention 优化的是计算过程（减少 HBM 访问），不改变 KV Cache 的存储机制，但通常与其配套使用。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -172,7 +171,6 @@ flowchart TD
 - 系统级调度：vLLM的PagedAttention按页分配消灭碎片，Prefix Sharing复用系统提示词。
 - 架构级拓展：Sliding Window限长丢弃旧Token，Offloading时间换空间卸载至CPU内存。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过分块、量化、共享和裁剪手段压缩KV Cache显存占用。——打个比方，做笔记：只记重点(GQA)、用缩写(量化)、撕掉旧页、共用开头。
@@ -195,3 +193,36 @@ flowchart TD
 | 1:12 | 核心认知图解 | "KV Cache是LLM推理显存大头（占比超80%），优化的本质是省显存提并发。" | 核心认知 |
 | 1:48 | 显存降维打击图解 | "GQA/MQA减KV头数，INT8/INT4量化直接减半或削减75%存储。" | 显存降维打击 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["LLM中的KV Cache如何优化<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过分块、量化、共享和裁剪手段压缩KV Cach<br/>0:36"]:::core
+        N2["核心认知图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["显存降维打击图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

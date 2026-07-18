@@ -149,3 +149,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "确保全局唯一实例的设计模式——就像公司只有一位CEO，不管哪位员工要找老板，找到的都是同一个人" | 核心定义 |
 | 1:20 | 核心场景示意 | "资源共享(配置/缓存)、资源控制(数据库/线程池)、全局统一(日志)" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是单例模式的应用场景？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心场景：资源共享（配置/缓存）、资源控制（数据库/…"]:::core
+        C["实现要点：私有构造防外部new，静态实例提供全局访问…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

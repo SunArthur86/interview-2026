@@ -90,7 +90,6 @@ print(results["results"])
 └───────────────┘       └───────────────┘       └───────────────┘
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -175,4 +174,36 @@ flowchart TD
 | 0:55 | 能力基准：GSM8K / HumanEval / TruthfulQA | 逻辑能力看 GSM8K 数学推理、HumanEval 代码生成、TruthfulQA 反幻觉，针对实际推理。 | 能力基准 |
 | 1:25 | 对话基准：MT-Bench / Arena-Hard | 对话体验看 MT-Bench 多轮对话用 GPT-4 打分，Arena-Hard 难度高、区分度强。 | 对话基准 |
 | 1:50 | 局限 + 最佳实践组合图 | 局限是数据污染、过拟合、多选题偏差，所以最佳实践是静态基准加模型裁判加真实 A/B 测试。 | 局限与实践 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《评估基准》+ 高考漫画<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["知识基准：MMLU / C-Eval<br/>0:25"]:::core
+        N2["能力基准：GSM8K / HumanEval / Tr…<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对话基准：MT-Bench / Arena-Hard<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["局限 + 最佳实践组合图<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

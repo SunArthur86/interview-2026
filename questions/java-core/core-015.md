@@ -184,3 +184,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "运行时动态获取类信息并操作对象的方法和属性——像照镜子，平时只看外表，反射能看到内部构造并动手改造" | 核心定义 |
 | 1:20 | 要点1图解示意 | "因为框架需解耦，所以利用反射运行时动态创建和注入对象。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是反射的应用场合？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["因为框架需解耦，所以利用反射运行时动态创建和注入对象"]:::core
+        C["核心应用：Spring框架的DI依赖注入与ORM结果…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

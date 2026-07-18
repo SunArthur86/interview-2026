@@ -199,3 +199,35 @@ flowchart TD
 | 1:30 | 两大分类示意 | "运行时靠反射解析，编译时靠Pluggable API生成代码。" | 要点1 |
 | 2:15 | 运行时示意 | "保留策略为RUNTIME，依赖反射API读取（如JUnit/Spring）。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是注解处理器？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["两大分类：运行时靠反射解析，编译时靠Pluggabl…"]:::core
+        C["运行时：保留策略为RUNTIME，依赖反射API读取…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

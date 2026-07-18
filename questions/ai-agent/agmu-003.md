@@ -103,7 +103,6 @@ class CircuitBreaker:
 2. 在多 Agent 协作中，如果中间某个 Agent 挂了，是让整个流程 Fail-Fast（快速失败），还是记录状态等待人工介入？决策依据是什么？
 3. 如何设计一套机制来自动检测 Agent 的输出是“幻觉”而非“有效但略有偏差”的结果？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -163,7 +162,6 @@ flowchart TD
 - 逻辑容错：需检测部分成功（格式对内容错），引入 Schema 校验层。
 - 避坑指南：逻辑错误无限重试只会浪费 Token，需配合修改提示词策略。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 多 Agent 容错核心是失败隔离加可替换性——审查 Agent 打回代码不污染主上下文，沙箱执行崩溃只影响该任务。工程配套是指数退避重试、断路器防雪崩、降级模板兜底。逻辑容错要检测部分成功（格式对内容错）引入 Schema 校验层。关键误区是逻辑错误无限重试只浪费 Token，要配合修改提示词。
@@ -187,3 +185,37 @@ flowchart TD
 | 1:10 | 逻辑容错警示 | "坑：格式对内容错的幻觉要 Schema 校验层兜底。" | 逻辑容错 |
 | 1:35 | API 解析熔断案例 | "实战：没熔断单小时烧数千美元，加失败计数器解决。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：失败隔离 + 重试 + 断路器 + 降级。下期讲架构模式。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent 容错怎么体现<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["失败隔离示意图<br/>0:15"]:::core
+        N2["工程配套三件套<br/>0:45"]:::core
+        N3["逻辑容错警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["API 解析熔断案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

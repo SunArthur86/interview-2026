@@ -218,3 +218,35 @@ OT/CRDT 是协同编辑的终极方案（自动合并多人同时编辑的冲突
 | 2:01 | 关键代码/伪代码片段 | "冲突解决机制：操作入队列串行处理，底座用乐观锁（版本号）防数据打架" | 冲突解决机制 |
 | 2:54 | 对比表格 | "全局Store管理共享状态(任务/产物/权限)" | 全局Store管理共享状 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Electron多窗口怎么共享状态。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【月之暗面面经】如果桌面端支持多窗口协作，前端怎么避免不同窗…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["主从架构隔离：主窗口管状态，子窗口只负责 UI 视图…"]:::core
+        C["本地跨窗口通信：通过主进程 IPC 或 Broadc…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

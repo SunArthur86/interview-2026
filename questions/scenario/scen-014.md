@@ -155,3 +155,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——就像把一本厚字典拆成128本小册子，按拼音或部首(分片键)分发到不同书架上。" | 核心类比 |
 | 2:03 | 分片键选错 图解 | "分片键选错是大忌，需兼顾查询高频和数据分布均匀。" | 分片键选错 |
 | 2:50 | Hash分片 图解 | "Hash分片解决均匀性，Range分片解决范围查询。" | Hash分片 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个百亿级数据的分库分表方案？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["分片策略：范围分片易产生新数据热点，而Hash分片能…"]:::core
+        C["分片键铁律：必须选择高基数且查询高频的条件，避免带来…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

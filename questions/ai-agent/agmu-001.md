@@ -102,7 +102,6 @@ def research_team(topic):
 1. **过度设计**：并不是所有复杂的任务都需要多 Agent。很多时候，一个强大的单 Agent + 高质量的 System Prompt + Few-shot Examples 就能解决，且维护成本更低、响应更快。多 Agent 引入的通信开销和调试复杂度往往被低估。
 2. **通信噪音**：Agent 之间传递的自然语言对话如果不做结构化约束，很容易包含大量“废话”或无效信息，不仅浪费 Token，还可能导致下游 Agent 误解。应强制使用结构化数据（如 JSON Schema）进行 Agent 间的主要信息传递。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -170,7 +169,6 @@ flowchart TD
 - 架构优势：多 Agent 易调试（白盒）、可并行、容错性高，但 Token 成本增加。
 - 避坑指南：简单任务勿过度设计，通信需用结构化约束减少噪音。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 本质区别不在调几次模型，而在是否显式建模角色、通信和治理。单 Agent 是全能打杂工靠涌现思维，多 Agent 是有分工的项目组靠结构化治理。该上多 Agent 的三个信号：需要多种专业视角、需要严格审批权限、可拆分子任务并行提速。优势是白盒易调试、可并行、容错高，但 Token 成本增加。
@@ -194,3 +192,37 @@ flowchart TD
 | 1:10 | 架构优势 | "白盒易调试、可并行、容错高，但 Token 成本增加。" | 优劣势 |
 | 1:35 | 周报系统案例 | "实战：拆成 DataAnalyst 和 Writer，调试时间降 60%。" | 实战收益 |
 | 1:50 | 总结卡 | "记住：简单任务别过度设计，通信要结构化。下期讲注意力漂移。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["单 Agent vs 多 Agent<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["本质区别对比表<br/>0:15"]:::core
+        N2["决策三信号图<br/>0:45"]:::deep
+        N3["架构优势<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["周报系统案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

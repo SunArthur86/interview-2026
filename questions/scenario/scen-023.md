@@ -155,3 +155,35 @@ flowchart LR
 | 0:35 | 生活类比动画 | "打个比方——像水库蓄洪，洪水来时先存进库里，再按可控速度慢慢放水灌溉。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：用消息队列做缓冲池，平滑瞬时高并发流量。" | 核心定义 |
 | 1:50 | 生产端快速写入 图解 | "生产端快速写入，不阻塞用户。" | 生产端快速写入 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个基于消息队列的削峰填谷方案？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["削峰本质：接入层令牌桶限流，MQ持久化缓冲，消费端按…"]:::core
+        C["消费端调优：限制单次拉取量（如max.poll.re…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

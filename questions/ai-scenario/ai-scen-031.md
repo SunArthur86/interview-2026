@@ -151,7 +151,6 @@ flowchart TD
     I -.-> J["WORM存储介质<br/>(日志防篡改)"]
 ```
 
-
 ## 记忆要点
 
 - 审计数据：记录完整Prompt、工具调用链、Token消耗、引用来源。
@@ -159,7 +158,6 @@ flowchart TD
 - 合规对接：满足欧盟AI Act/金融SEC要求，日志保留3-7年。
 - 存储优化：冷热分离，热数据存ES，冷数据存S3，PII脱敏存储。
 - 防篡改：采用WORM介质或区块链哈希链，确保日志不可变。
-
 
 ## 结构化回答
 
@@ -183,3 +181,36 @@ flowchart TD
 | 1:12 | 审计数据图解 | "记录完整Prompt、工具调用链、Token消耗、引用来源。" | 审计数据 |
 | 1:48 | Trace回放图解 | "基于TraceID复现推理过程，用于事故调查和合规举证。" | Trace回放 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI审计与合规系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["记录从输入到输出的全链路黑盒过程，实现可追溯与可<br/>0:36"]:::core
+        N2["审计数据图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Trace回放图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

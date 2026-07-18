@@ -530,3 +530,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "分层裁决：安全>风控>营销分层执行，上层结果覆盖下层" | 分层裁决 |
 | 2:54 | 对比表格 | "绝对优先级（短路）" | 绝对优先级（短路） |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：一票否决和权重投票各适合什么场景。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】如果规则之间存在优先级冲突怎么办？比如黑名单和V…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["业务场景：黑名单拦截与VIP加权同时命中，属于动作冲…"]:::core
+        C["一票否决：安全风控类规则拥有绝对优先权，命中直接拦截"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -452,4 +452,28 @@ flowchart TD
 | 0:30 | 锁状态转换图 | 对象头里记录锁状态、线程 ID、HashCode。 | Mark Word |
 | 1:30 | 总结卡 | 一句话记忆：synchronized 锁升级：无锁→偏向→轻量（自旋）→重量（monitor），不可降级。 下期可以接着聊：偏向锁为什么 JDK 15 默认弃用。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>AQS 队列"]:::concept
+    N3["0:30<br/>Mark Word"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

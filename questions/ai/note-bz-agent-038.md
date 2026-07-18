@@ -185,7 +185,6 @@ Skill通过MCP的标准化接口调用这些工具
 2. **互补关系**：Skill 通过 MCP 调用工具，两者结合才是完整方案
 3. **用 USB 类比**：Skill=USB 设备（U 盘/摄像头），MCP=USB 接口标准——设备通过标准接口连接
 
-
 ## 核心流程图
 
 ```mermaid
@@ -229,7 +228,6 @@ flowchart TD
 - 定位不同：Skill聚焦应用层管“做什么与怎么做”，MCP聚焦协议层管“怎么连接”。
 - 包含内容：Skill是包含Prompt+Tools+Flow的能力包；MCP是Server+Client的标准化接口。
 - 互补关系：Skill定义业务执行流程，MCP负责将底层工具标准化暴露供Skill调用。
-
 
 ## 苏格拉底式面试追问
 
@@ -288,11 +286,9 @@ MCP 不保证质量，质量由 Server 实现者负责，MCP 只保证"连接标
 
 **收尾：** 您想深入聊：MCP是谁提出的？——Anthropic，2024年开源？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -301,3 +297,36 @@ MCP 不保证质量，质量由 Server 实现者负责，MCP 只保证"连接标
 | 0:50 | Skill示意图 | "Skill——能力封装(prompt+tools+flow)，面向任务" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：MCP是谁提出的？——Anthropic，2024年开源？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Agent Skill 与 MCP…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Skill示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

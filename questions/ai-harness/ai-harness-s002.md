@@ -124,14 +124,12 @@ flowchart LR
     Decode -.->|大Cache读取| Memory[吃显存带宽]
 ```
 
-
 ## 记忆要点
 
 - 两阶段对比：Prefill并行算KV密集（决定TTFT），Decode串行读KV受限（决定TPOT）。
 - 计算瓶颈对比：Prefill吃算力做O(N^2)矩阵乘，Decode吃显存带宽做大Cache读取。
 - 优化策略口诀：Pre用FlashAttn分块算，Dec靠量化投机采样，混批调靠vLLM连续批处理。
 - 长上下文避坑：Prompt极长时Prefill耗时O(N^2)激增，TTFT可能远超Decode时间。
-
 
 ## 结构化回答
 
@@ -155,3 +153,36 @@ flowchart LR
 | 1:12 | 两阶段对比图解 | "Prefill并行算KV密集（决定TTFT），Decode串行读KV受限（决定TPOT）。" | 两阶段对比 |
 | 1:48 | 计算瓶颈对比图解 | "Prefill吃算力做O(N^2)矩阵乘，Decode吃显存带宽做大Cache读取。" | 计算瓶颈对比 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["LLM推理的Prefill和Dec…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["Prefill并行读题，Decode逐字答题，两<br/>0:36"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["两阶段对比图解<br/>1:12"]:::practice
+        N3["计算瓶颈对比图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -137,7 +137,6 @@ sequenceDiagram
     LLM->>T: 动态调整检索向量
 ```
 
-
 ## 记忆要点
 
 - 架构：用户画像 → 多路召回(传统/LLM/向量) → 排序 → 解释生成。
@@ -145,7 +144,6 @@ sequenceDiagram
 - LLM重排：Top-50候选输入LLM，Logit Bias限制输出范围防幻觉。
 - 边界处理：新品冷启动用文案生成Embedding，ID白名单校验防幻觉。
 - 易错点：ID Token化需防词表挤占，LLM负责逻辑而非全量检索。
-
 
 ## 结构化回答
 
@@ -169,3 +167,36 @@ sequenceDiagram
 | 1:12 | 架构图解 | "用户画像 → 多路召回(传统/LLM/向量) → 排序 → 解释生成。" | 架构 |
 | 1:48 | LLM召回图解 | "Prompt生成Item ID，利用参数记忆零样本召回。" | LLM召回 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个LLM驱动的个性化推荐系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["LLM理解意图与重排，传统模型保障效率。<br/>0:36"]:::core
+        N2["架构图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["LLM召回图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

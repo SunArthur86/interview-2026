@@ -137,7 +137,6 @@ action = llm.decide(context, tools)  # → book_ticket(flight=CA123)
 2. **区分 Agentic 程度**：Workflow（固定流程）→ Agent（动态决策）→ Autonomous Agent（完全自主），不是二元的
 3. **提 Anthropic 的定义**：Augmented LLM + Tools + Loop，简洁权威
 
-
 ## 核心流程图
 
 ```mermaid
@@ -173,7 +172,6 @@ flowchart TD
 - 主动性对比：LLM是被动单步应答，而Agent是主动达成多步目标
 - 状态与行动：LLM无状态且只输出文本，而Agent有跨轮记忆且能调用工具产生真实效果
 - 依赖关系：因为LLM是Agent的决策大脑，所以LLM是Agent的必要组件，但LLM≠Agent
-
 
 ## 苏格拉底式面试追问
 
@@ -223,7 +221,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** LLM像一本百科全书（你问它答），Agent像一个员工（你给目标，它自己查资料、定计划、用工具、交付结果）。
 
 **展开框架：**
@@ -233,11 +230,9 @@ flowchart TD
 
 **收尾：** Agent和Workflow/工作流有什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -245,3 +240,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "LLM是被动的"知识引擎"，Agent是主动的"行动派"——给LLM装上规划、记忆、工具三大外挂，让它从"只会说"变成"…" | 核心定义 |
 | 0:55 | LLM示意图 | "LLM——LLM被动应答，Agent主动达成目标" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["什么是 AI Agent？它和单纯…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["LLM示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

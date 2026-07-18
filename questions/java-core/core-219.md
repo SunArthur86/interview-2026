@@ -196,3 +196,35 @@ sequenceDiagram
 | 1:30 | 本质成因示意 | "TCP 是面向字节流的协议，底层无消息边界保护，而 UDP 面向报文不粘包" | 要点1 |
 | 2:15 | 机制影响示意 | "发送端合并小包的 Nagle 算法，以及接收端读取不及时导致缓冲区数据堆积" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是TCP粘包问题？如何解决TCP粘包问题？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质成因：TCP 是面向字节流的协议，底层无消息边界…"]:::core
+        C["机制影响：发送端合并小包的 Nagle 算法，以及接…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

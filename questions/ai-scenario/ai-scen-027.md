@@ -115,7 +115,6 @@ flowchart TD
     L["红队测试与样本库"] -.-> E
 ```
 
-
 ## 记忆要点
 
 - 攻击模式：直接注入（指令覆盖）、间接注入（RAG/网页内容）、多轮注入。
@@ -123,7 +122,6 @@ flowchart TD
 - 架构层防御：用户输入用特殊标记包裹（如<user>），工具调用权限分离。
 - 输出层防御：检测Prompt泄露、行为校验、全量审计日志。
 - 持续对抗：定期红队测试，更新攻击样本库，使用安全对齐模型。
-
 
 ## 结构化回答
 
@@ -147,3 +145,36 @@ flowchart TD
 | 1:12 | 攻击模式图解 | "直接注入（指令覆盖）、间接注入（RAG/网页内容）、多轮注入。" | 攻击模式 |
 | 1:48 | 输入层防御图解 | "注入分类器检测、特殊字符过滤、长度限制防淹没。" | 输入层防御 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计Prompt注入防御系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["【场景分析】 Prompt注入是LLM应用最严重<br/>0:36"]:::core
+        N2["攻击模式图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["输入层防御图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

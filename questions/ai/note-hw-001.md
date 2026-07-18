@@ -315,7 +315,6 @@ flowchart TD
     G -.-> D
 ```
 
-
 ## 记忆要点
 
 - 包含关系：生成器是特殊的迭代器（Generator ⊂ Iterator），yield 关键字自动实现协议。
@@ -371,7 +370,6 @@ yield 的底层依赖生成器的"帧对象（frame object）"持久化。Python
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 迭代器像已经印好的整本书放在桌上，生成器像一个说书人——你听到哪一段他就讲到哪一段，不需要提前把全书印出来。
 
 **展开框架：**
@@ -381,11 +379,9 @@ yield 的底层依赖生成器的"帧对象（frame object）"持久化。Python
 
 **收尾：** 生成器协程（async generator）和普通生成器有什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -393,3 +389,35 @@ yield 的底层依赖生成器的"帧对象（frame object）"持久化。Python
 | 0:20 | 核心概念图 | "生成器是一种"懒求值"的迭代器，用yield逐个产出值而不是一次性全部加载到内存。" | 核心定义 |
 | 0:55 | 迭代器(It示意图 | "迭代器(It——迭代器(Iterator)是实现__next__和__iter__协议的对象" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Python 生成器与迭代器的区别…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["迭代器(It示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

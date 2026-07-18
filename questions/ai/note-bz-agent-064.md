@@ -264,7 +264,6 @@ react_agent = graph.compile()
 2. **强调"图结构"优势**：可视化/可调试/支持循环分支——比代码 if-else 更清晰
 3. **人工节点是亮点**：interrupt 机制支持 Human-in-the-loop，这是生产刚需
 
-
 ## 核心流程图
 
 ```mermaid
@@ -306,7 +305,6 @@ flowchart TD
 - 核心三要素：State(状态：流转数据)、Node(节点：执行动作)、Edge(边：流转控制)
 - 搭建四步法：1.定义State结构体 → 2.编写节点动作函数 → 3.连线(含条件分支) → 4.编译运行
 - 条件边是灵魂：根据State中的变量(如是否需人工)动态决定下一跳节点，实现智能路由
-
 
 ## 苏格拉底式面试追问
 
@@ -365,11 +363,9 @@ State 要"结构化+必要+可累积"。1）结构化——State 用 TypedDict/d
 
 **收尾：** 您想深入聊：LangGraph和普通代码写Agent什么区别？——图结构更清晰可调试？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -378,3 +374,36 @@ State 要"结构化+必要+可累积"。1）结构化——State 用 TypedDict/d
 | 0:50 | 四步示意图 | "四步——定义State→建节点→连边→编译" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：LangGraph和普通代码写Agent什么区别？——图结构？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["如何基于 LangGraph 搭建…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["四步示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

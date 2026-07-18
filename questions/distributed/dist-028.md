@@ -196,3 +196,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——跨行转账：A银行扣款和B银行加款必须同时成功，否则两边都退回。" | 核心类比 |
 | 2:03 | 涉及多个独立 图解 | "涉及多个独立的资源节点(如不同数据库)。" | 涉及多个独立 |
 | 2:50 | 需要一个协调者统一 图解 | "需要一个协调者统一指挥。" | 需要一个协调者统一 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是分布式事务？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：跨多个网络节点的事务，需协调多方资源保证…"]:::core
+        C["强一致方案：2PC/XA（数据库原生，靠全局锁，性能…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

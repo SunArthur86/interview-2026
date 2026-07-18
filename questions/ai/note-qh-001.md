@@ -164,7 +164,6 @@ Draft模型不直接生成token，而是预测target模型的隐藏状态
 | **KV Cache** | 缓存历史Key/Value | 2-5x | ✅ |
 | **Continuous Batching** | 动态拼batch | 5-10x | ✅ |
 
-
 ## 核心流程图
 
 ```mermaid
@@ -206,7 +205,6 @@ flowchart TD
 - 无损加速机制：基于拒绝采样（接受率=min(1, 目标概率/草稿概率)），绝不损失大模型生成质量。
 - 因为大模型解码是计算密集的串行访存，所以投机解码能把多次串行转化为一次并行验证。
 - 速度关键：草稿模型必须极小且与目标模型分布相近，猜对率越高，加速比越大。
-
 
 ## 苏格拉底式面试追问
 
@@ -261,11 +259,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：Draft模型怎么选？一定要小模型吗？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -275,3 +271,37 @@ flowchart TD
 | 1:30 | Target模型示意图 | "Target模型——大模型，并行验证k个token" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：Draft模型怎么选？一定要小模型吗？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["什么是投机解码(Speculati…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Draft模型示意图<br/>0:50"]:::deep
+        N3["Target模型示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

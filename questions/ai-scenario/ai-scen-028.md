@@ -175,7 +175,6 @@ flowchart TD
     I --> M["转入后审核抽检"]
 ```
 
-
 ## 记忆要点
 
 - 多级架构：规则层（<1ms黑名单）→ 模型层（BERT分类）→ LLM层（意图理解）→ 人工。
@@ -183,7 +182,6 @@ flowchart TD
 - 性能权衡：实时性要求<100ms，需平衡误杀（体验）与漏放（合规）。
 - 多模态：文本用BERT，图片用CLIP，视频抽帧+音频转文本。
 - 持续优化：分析FP/FN样本，A/B测试策略，防御对抗试探。
-
 
 ## 结构化回答
 
@@ -207,3 +205,36 @@ flowchart TD
 | 1:12 | 多级架构图解 | "规则层（<1ms黑名单）→ 模型层（BERT分类）→ LLM层（意图理解）→ 人工。" | 多级架构 |
 | 1:48 | 审核时机图解 | "预审核（发布前拦截）保安全，后审核（抽检）保体验。" | 审核时机 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI内容审核系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["基于漏斗模型的多层分级过滤架构。<br/>0:36"]:::core
+        N2["多级架构图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["审核时机图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

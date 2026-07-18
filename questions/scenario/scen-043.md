@@ -168,3 +168,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像彩排游行一样，在真实街道上用替身演练堵点。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：真实环境模拟流量，通过数据隔离验证系统极限容量。" | 核心定义 |
 | 1:50 | 全链路标记透传 图解 | "全链路标记透传实现数据隔离。" | 全链路标记透传 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计全链路压测方案？模拟真实大促流量验证系统容量"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心数据隔离：流量打Header标记，请求路由到专属…"]:::core
+        C["链路透传机制：压测标记通过ThreadLocal结合…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

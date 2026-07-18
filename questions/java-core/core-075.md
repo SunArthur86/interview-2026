@@ -155,3 +155,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "网络通信分层标准，每层解决特定传输问题——寄快递流程：打包（应用）、填单（表示）、排队（会话）、发货（传输）、中转（网络）、装车（链路）、上路（物理）" | 核心定义 |
 | 1:20 | 七层口诀示意 | "物数网传会表应（物理、数据链路、网络、传输、会话、表示、应用）" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是OSI 七层参考模型？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["七层口诀：物数网传会表应（物理、数据链路、网络、传输…"]:::core
+        C["单元递进：物理传比特，链路组帧，网络发包，传输提供端…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

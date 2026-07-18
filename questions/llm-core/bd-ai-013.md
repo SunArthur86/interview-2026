@@ -101,8 +101,6 @@ Query + [Docs]                 Query
 2. **数据配比**：做领域微调时，通用指令数据和领域数据的比例应该是多少？（通常 1:1 到 1:5，视任务难度而定，防止过拟合领域数据导致通用能力崩塌）
 3. **幻觉率对比**：RAG和微调谁的幻觉率更低？（RAG在事实准确性上通常优于微调，因为微调本质上还是在“背诵”，可能记错细节）
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -134,7 +132,6 @@ flowchart TD
 - 必须微调场景：特定输出格式、特定推理逻辑、特定领域风格(如法律文书)
 - 决策：知识更新快/低成本优先RAG；特定风格/推理模式/降延迟优先微调
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** RAG外挂知识库解决“不知道”，微调内化技能解决“不会做”。——打个比方，RAG是开卷考试带参考资料，微调是考前特训掌握新技能。
@@ -157,3 +154,36 @@ flowchart TD
 | 1:12 | 一句话图解 | "学新知识用RAG(外挂)，学新能力/风格用微调(内化)" | 一句话 |
 | 1:48 | RAG优势图解 | "成本低、实时生效、准确实时；劣势：Context长限制、延迟高" | RAG优势 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】微调（Fine-tun…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["RAG外挂知识库解决“不知道”，微调内化技能解决<br/>0:36"]:::core
+        N3["RAG优势图解<br/>1:48"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["一句话图解<br/>1:12"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

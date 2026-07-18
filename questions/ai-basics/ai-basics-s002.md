@@ -131,7 +131,6 @@ flowchart LR
     A2 --> C
 ```
 
-
 ## 记忆要点
 
 - MSE：用于回归，假设误差高斯分布，梯度随误差减小而变慢。
@@ -161,4 +160,36 @@ flowchart LR
 | 0:40 | 两种损失梯度对比图 | "MSE 梯度随误差减小变慢，交叉熵梯度与误差成正比收敛快。" | 梯度特性 |
 | 1:05 | 分类不用 MSE 原理图 | "关键：MSE+Sigmoid 梯度含导数会消失，交叉熵抵消衰减因子。" | 核心区别 |
 | 1:25 | LLM 训练是多分类 | "实战：LLM 训练本质是词汇表 5 万+ 的超大规模多分类，必用交叉熵。" | 应用扩展 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["MSE vs 交叉熵<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["打靶偏离 vs 概率差类比<br/>0:15"]:::core
+        N3["分类不用 MSE 原理图<br/>1:05"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["两种损失梯度对比图<br/>0:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["LLM 训练是多分类<br/>1:25"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

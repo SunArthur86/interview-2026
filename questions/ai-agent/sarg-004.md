@@ -103,7 +103,6 @@ sorted_docs = [doc for _, doc in sorted(zip(scores, candidates), reverse=True)]
 2.  在高并发场景下，Reranker 模型是 CPU 计算密集型，你会如何做推理加速或架构优化？（提示：量化 int8、批处理、独立 GPU 服务部署）
 3.  除了精度，Reranker 在处理“否定意图”时有什么天然优势？能否举例说明？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -175,4 +174,37 @@ flowchart TD
 | 1:10 | 锦上添花非雪中送炭图 | "关键认知：召回里没有的，Rerank 也排不出来——它只挑最好的。" | 核心边界 |
 | 1:35 | 客服退款意图误排案例 | "实战：检索把不支持退款排在退款流程前面，Reranker 按意图重排纠正。" | 实战案例 |
 | 1:55 | 总结卡 | "口诀：先召回后精排，只排 Top-100，是锦上添花。下期讲进阶 RAG。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Rerank 重排<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["两阶段架构流程图<br/>0:15"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Bi vs Cross-Encoder 对比表<br/>0:45"]:::practice
+        N3["锦上添花非雪中送炭图<br/>1:10"]:::practice
+        N4["客服退款意图误排案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：先召回后精排，只排 Top-100，是锦上<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

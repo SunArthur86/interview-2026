@@ -79,7 +79,6 @@ message = {
 2. 在多 Agent 协作中，如果下游 Agent 依据上游 Agent 的错误中间态继续工作，会产生“错误级联”，如何设计机制切断这种级联？
 3. 如何通过自动化测试（如基于 LLM 的 Evaluator）来监控线上 Agent 系统的注意力漂移情况？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -129,14 +128,12 @@ flowchart TB
     Annot --> Focus["注意力聚焦<br/>关键任务稳定"]
 ```
 
-
 ## 记忆要点
 
 - 定义：长上下文或多目标导致关键约束关注度下降，产生“中间迷失”现象。
 - 缓解核心：拆解子目标缩短上下文，单 Agent 单责，使用结构化中间态传递。
 - 对比：单 Agent 易迷失首尾，多 Agent 聚焦局部，注意力更集中。
 - 避坑指南：单纯增加 Token 不能解决漂移，需配合 RAG 或分层摘要。
-
 
 ## 结构化回答
 
@@ -161,3 +158,37 @@ flowchart TB
 | 1:10 | 加 Token 误区警示 | "坑：单纯加 Token 解决不了漂移，反而召回率下降。" | 关键误区 |
 | 1:35 | SQL 安全约束案例 | "实战：单 Agent 忘只读约束，Safety Agent 审权限后误删归零。" | 实战收益 |
 | 1:50 | 总结卡 | "记住：拆短上下文 + 单责 + 结构化传递。下期讲容错。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["什么是注意力漂移<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["漂移现象图<br/>0:15"]:::core
+        N2["多 Agent 三招缓解<br/>0:45"]:::core
+        N3["加 Token 误区警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["SQL 安全约束案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

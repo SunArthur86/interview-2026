@@ -87,8 +87,6 @@ class ProductAnswer(BaseModel):
 2. **模型自信度**：模型输出非常自信但内容错误，如何处理？（不要仅依赖文本语气，引入LogProbs评估概率分布熵值，熵值过高表示不确定）
 3. **知识边界**：如何判断问题是应该由模型通用知识回答，还是应该拒绝回答？
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -116,7 +114,6 @@ flowchart LR
 - 实战组合：RAG(背景)+FC(实时)+结构化输出+引用溯源(防投诉)
 - 检测：不要信自信语气，用LogProbs看熵值，熵高表示不确定
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 利用外部事实约束和格式限制，降低模型概率生成的随机性。——打个比方，开卷考试（RAG）+只能填空（Structured Output），逼着它只写有依据的内容。
@@ -139,3 +136,36 @@ flowchart LR
 | 1:12 | 幻觉成因图解 | "模型预测概率而非检索事实，记忆偏差+生成噪声导致编造" | 幻觉成因 |
 | 1:48 | 核心思路图解 | "减少自由发挥空间，外挂真实数据源" | 核心思路 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】幻觉是怎么产生的<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用外部事实约束和格式限制，降低模型概率生成的随<br/>0:36"]:::core
+        N3["核心思路图解<br/>1:48"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["幻觉成因图解<br/>1:12"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

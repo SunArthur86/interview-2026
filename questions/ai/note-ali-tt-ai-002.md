@@ -349,7 +349,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 层级式就像公司部门——CEO(父Agent)把任务分给各部门经理(子Agent)，各部门独立干活，互不通信，最后汇报。协作式就像项目组——产品经理和开发坐在一起(通信)，互相讨论(共享上下文)，因为任务有依赖。子Agent不会拿到CE...
 
 **展开框架：**
@@ -359,11 +358,9 @@ flowchart TD
 
 **收尾：** 层级式和协作式如何选择？各自的优缺点是什么？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -373,4 +370,37 @@ flowchart TD
 | 1:30 | 协作式(示意图 | "协作式(——Planner-Executor模型，多个Agent之间相互通信协作" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：层级式和协作式如何选择？各自的优缺点是什么？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Multi-Agent是如何共享上…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["层级式(示意图<br/>0:50"]:::deep
+        N3["协作式(示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

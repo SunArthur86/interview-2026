@@ -167,3 +167,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像家里电路保险丝：电流过大(异常)自动跳闸(熔断)，保护家电，试合闸(半开)确认没问题了再恢复供电。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：故障检测、快速失败、自动探测恢复。" | 核心定义 |
 | 1:50 | 异常比例或慢调用 图解 | "基于异常比例或慢调用触发熔断。" | 异常比例或慢调用 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计熔断降级方案？保证系统在故障时仍能提供基本服务"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["熔断三态流转：Closed正常放行，失败率达阈值转O…"]:::core
+        C["熔断与降级对比：熔断是自我保护快速失败，降级是提供兜…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

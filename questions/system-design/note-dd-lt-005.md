@@ -639,3 +639,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "并发优势：读操作完全无锁零开销，而引用的原子替换（纳秒级）对读线程毫无感知。" | 并发优势 |
 | 2:54 | 对比表格 | "Copy-On-Write替换引用" | Copy-On |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：COW的内存开销大吗。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】如果奖品概率配置临时变了，概率查找表怎么更新？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心矛盾：读写频率极度不对称（读多写少），直接修改数…"]:::core
+        C["解决方案：写时复制（COW），先构建完整新表，再通过…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

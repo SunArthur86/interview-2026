@@ -105,7 +105,6 @@ class TransferRequest(BaseModel):
 1. **过度依赖LLM自我约束**：仅在System Prompt中要求“不要执行危险操作”，而没有在代码层面设置强制拦截，这是极高风险的做法。
 2. **权限粒度过粗**：仅区分“用户”和“管理员”，未将工具权限细化到具体的资源ID或数据范围，容易导致水平越权。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -167,9 +166,7 @@ flowchart TD
 - 高危操作（删除/转账）必须Human-in-the-Loop二次确认
 - 参数层需注入检测，扫描“ignore previous”等恶意指令
 
-
 ## 结构化回答
-
 
 **30 秒电梯演讲：** 像操作系统的权限控制，普通用户不能删库，高危操作必须输入管理员密码确认。
 
@@ -179,7 +176,6 @@ flowchart TD
 3. **高风险操作必须经** — 高风险操作必须经过人工确认。
 
 **收尾：** 如何在不影响用户体验的前提下实现安全审批？
-
 
 ## 视频脚本
 
@@ -192,3 +188,36 @@ flowchart TD
 | 1:12 | 要点图解 | "工具注册白名单，参数必须通过JSON Schema校验（类型/范围）" | 要点 |
 | 1:48 | 要点图解 | "执行前做RBAC权限校验和资源归属检查，防越权" | 要点 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI Agent的工具调用（T…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["构建多层防御网，在工具注册、参数校验、执行检查和<br/>0:36"]:::core
+        N2["工具注册白名单，参数必须通过JSON Schem<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["执行前做RBAC权限校验和资源归属检查，防越权<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

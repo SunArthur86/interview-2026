@@ -93,7 +93,6 @@ frontend_data = UserSchema(**mock_api_resp).model_dump(by_alias=False) # Standar
 2. 在极端情况下，两个 Agent 各执一词（前端认为 A 对，后端认为 B 对），仲裁机制如何设计？是引入“架构师 Agent”还是基于规则？
 3. 对于复杂的嵌套对象，JSON Schema 可能会非常长，如何优化 Token 消耗？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -154,7 +153,6 @@ flowchart TD
 - 引入 OpenAPI/Schema 作为唯一真理，QA Agent 强校验。
 - 采用 Schema First 或 Reflexion 模式自我修正。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 多 Agent 会降低一致性，因为不同 Agent 独立上下文和 Prompt 容易产生接口对不上、字段命名不一致。解法是单一契约源——引入 OpenAPI 或 JSON Schema 作为唯一 Truth Source，所有 Agent 必须引用而非臆造。配合契约测试 Agent（QA Agent 比对前后端实现）和 Schema First 或 Reflexion 模式自我修正。坑是 Schema 漂移需架构师 Agent 维护生命周期，巨大 OpenAPI 塞 Prompt 要用 RAG 只注入相关接口。
@@ -178,3 +176,37 @@ flowchart TD
 | 1:10 | Schema 漂移警示 | "坑：Schema 生成一次不永久有效，要架构师 Agent 维护。" | 关键坑 |
 | 1:35 | userId 命名冲突案例 | "实战：后端蛇形前端驼峰，Schema 强校验拦截联调失败。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：单一契约源 + QA Agent + Reflexion。下期讲评估。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent 会降低一致性吗<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["问题根源图<br/>0:15"]:::core
+        N2["单一契约源<br/>0:45"]:::core
+        N3["Schema 漂移警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["userId 命名冲突案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

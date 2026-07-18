@@ -132,3 +132,35 @@ flowchart TD
 | 0:40 | ConcurrentHash示意图 | ConcurrentHashMap使用分段锁或CAS+Sync | ConcurrentHash |
 | 1:10 | CopyOnWriteArr示意图 | CopyOnWriteArrayList适合读多写少，写时复制 | CopyOnWriteArr |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是并发容器？Java 有哪些并发容器？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["并发容器对比同步容器：细粒度锁或CAS替代整表锁，迭…"]:::core
+        C["ConcurrentHashMap：JDK 8抛弃S…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

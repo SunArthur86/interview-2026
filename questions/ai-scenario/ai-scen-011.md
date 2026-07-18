@@ -112,7 +112,6 @@ def retrieve_context(query: str, user_id: str):
 1. **混淆RAG与长期记忆**：RAG通常针对通用的静态知识库，而Agent长期记忆是针对特定用户的动态个性化数据，设计时需区分权限和隔离性。
 2. **忽视记忆的反射机制**：认为记忆只是“存”和“取”，而忽略了Agent需要具备“反思”能力（即在任务结束后主动提炼重要信息写入长期记忆）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -169,7 +168,6 @@ flowchart TD
 - 长期记忆分三类：用户画像、知识记忆、事件记忆
 - 需支持时间衰减和“选择性遗忘”，防止过时信息干扰
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 建立分层存储机制，像人脑一样处理短期记忆、工作状态和长期知识的存取。——打个比方，短期记忆像电脑内存（断电丢），长期记忆像硬盘（永久存），检索时只调取相关文件。
@@ -192,3 +190,36 @@ flowchart TD
 | 1:12 | 三层架构图解 | "短期（滑动窗口）、工作（任务轨迹）、长期（向量+KV）" | 三层架构 |
 | 1:48 | 要点图解 | "短期记忆用摘要压缩替代原文，长期记忆用向量检索Top-K" | 要点 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI Agent的记忆系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["建立分层存储机制，像人脑一样处理短期记忆、工作状<br/>0:36"]:::core
+        N2["三层架构图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["短期记忆用摘要压缩替代原文，长期记忆用向量检索T<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

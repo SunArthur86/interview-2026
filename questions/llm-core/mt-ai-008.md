@@ -117,8 +117,6 @@ outputs = llm.generate(["你好，请介绍一下北京的景点。"], sampling_
 | **Qwen-2** | GQA | 128K | 持平 (但在长文本下更优) | 多语言，YaRN 外推算法 |
 | **Qwen-2.5** | GQA | 128K | 微调 (FP8/量化支持更好) | 数学/代码全能，18T 数据训练 |
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -149,7 +147,6 @@ flowchart TD
 - 长度演进：32K外推 -> YaRN+DCA算法外推128K -> 原生全长训练128K
 - Qwen2.5质变核心：喂入18T海量Token，并衍生Coder/Math专精垂直版本
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 阿里通义千问系列的开源演进史，核心是架构标准化与数据规模扩展。——打个比方，像汽车迭代，从普通轿车（Qwen-1）升级到超跑（Qwen-2.5），引擎架构优化且燃料更多。
@@ -172,3 +169,36 @@ flowchart TD
 | 1:12 | 要点图解 | "Qwen1筑基(双语强)，1.5换代GQA(省显存)，2代破壁128K(多语言)，2.5全能成SOTA" | 要点 |
 | 1:48 | 架构演进图解 | "MHA转GQA减少KV Cache，通信效率提升30%" | 架构演进 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】串一下 Qwen 系列…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["阿里通义千问系列的开源演进史，核心是架构标准化与<br/>0:36"]:::core
+        N3["架构演进图解<br/>1:48"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Qwen1筑基(双语强)，1.5换代GQA(省显<br/>1:12"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

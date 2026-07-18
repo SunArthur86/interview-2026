@@ -454,3 +454,35 @@ flowchart TD
 | 1:06 | 链表节点指针图分步演示 | "找中点：快慢指针法，因为快指针走两步慢指针走一步，所以慢指针刚好停在中点。" | 找中点 |
 | 1:57 | 关键代码/伪代码片段 | "转后半：断开前后半段，将后半段链表进行局部反转。" | 转后半 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：链表有环怎么处理。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【美团面经】手撕：重排链表（LeetCode 143）"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三步走口诀：找中点、转后半、交错合并"]:::core
+        C["找中点：快慢指针法，因为快指针走两步慢指针走一步，所…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

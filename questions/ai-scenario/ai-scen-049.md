@@ -163,14 +163,12 @@ flowchart TD
     G -.->|闭环更新| A
 ```
 
-
 ## 记忆要点
 
 - 核心价值：因材施教、即时反馈；关键设计：知识图谱依赖、苏格拉底式引导(不直接给答案)。
 - 架构四层：学情诊断(定位薄弱点)、个性化推荐(路径规划/难度适配)、智能辅导(答疑/错题分析)、评估反馈。
 - 推荐策略：协同过滤找相似题，知识图谱规划路径，DKT预测掌握度；需平衡探索与利用。
 - 边界处理：冷启动用入门测，知识盲区诚实说不知道，情绪崩溃触发安抚机制。
-
 
 ## 结构化回答
 
@@ -193,3 +191,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：基于知识图谱和LLM的因材施教闭环系统" | 核心定义 |
 | 1:00 | 核心价值图解 | "因材施教、即时反馈；关键设计：知识图谱依赖、苏格拉底式引导(不直接给答案)。" | 核心价值 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI教育辅导系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["基于知识图谱和LLM的因材施教闭环系统<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["核心价值图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

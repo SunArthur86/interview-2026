@@ -160,7 +160,6 @@ flowchart TD
     F --> G[返回生成结果]
 ```
 
-
 ## 记忆要点
 
 - 架构：扩散模型生成 → Prompt增强 → 可控生成 → 后处理(超分/安检)。
@@ -168,7 +167,6 @@ flowchart TD
 - 服务优化：异步队列管理，TensorRT/xFormers加速，Prompt结果缓存。
 - 边界处理：NSFW双重拦截，Prompt注入用System Prompt过滤。
 - 易错点：随机种子需全局一致，频繁加载LoRA致显存碎片化。
-
 
 ## 结构化回答
 
@@ -191,3 +189,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：利用扩散模型与Prompt工程，实现从文本到可控图像的生成。" | 核心定义 |
 | 1:00 | 架构图解 | "扩散模型生成 → Prompt增强 → 可控生成 → 后处理(超分/安检)。" | 架构 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI文生图系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用扩散模型与Prompt工程，实现从文本到可控<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["架构图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

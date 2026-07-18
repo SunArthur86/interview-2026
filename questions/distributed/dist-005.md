@@ -157,3 +157,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——公司前台(LB)代收所有信件，转发给各部门，回信也由前台代发。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：通过修改IP地址实现转发，所有流量都经过负载均衡器。" | 核心定义 |
 | 1:50 | 请求和响应都必须 图解 | "请求和响应都必须经过LB。" | 请求和响应都必须 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["LVS NAT模式的工作原理是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心原理：LB 作为 RS 网关，通过内核 Netf…"]:::core
+        C["关键配置：因为响应必须原路返回，所以 RS 的默认网…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

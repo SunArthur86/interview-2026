@@ -237,7 +237,6 @@ def calculate_roi(agent_system):
 2. **场景要具体**：不要泛泛说"能用于各行各业"，要能举出具体的角色分工和流程
 3. **承认挑战**：成本（Token 贵）和稳定性（概率系统）是企业落地的两大障碍，要有对策
 
-
 ## 核心流程图
 
 ```mermaid
@@ -282,7 +281,6 @@ flowchart TD
 - 渐进式三步走：先单Agent验证ROI，再多Agent专业化提效，最后沉淀平台化
 - 升级多Agent触发信号：上下文超限、角色指令混淆、需并行提速、对抗校验
 - 四大典型场景：多角色智能客服、流水线软件开发、并行数据分析、内容生产
-
 
 ## 苏格拉底式面试追问
 
@@ -332,7 +330,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像开公司——先单干证明业务可行→再招人分工扩大→最后建制度平台化运营。
 
 **展开框架：**
@@ -342,11 +339,9 @@ flowchart TD
 
 **收尾：** 怎么判断该用多Agent了？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -355,3 +350,36 @@ flowchart TD
 | 0:50 | 构建思路示意图 | "构建思路——单Agent闭环→多Agent分工→平台化" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：怎么判断该用多Agent了？——单Agent上下文塞不下/角？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["企业级 Agent 构建思路是什么…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["构建思路示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

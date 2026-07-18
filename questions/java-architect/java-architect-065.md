@@ -521,6 +521,34 @@ flowchart TD
 | 1:30 | 在线特征服务示意/对比图 | "低延迟查询（Redis/特征存储），模型预测时实时取特征" | 在线特征服务要点 |
 | 1:55 | 总结卡 | "记住：特征一致性。下期见。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>像培训销售"]:::concept
+    N3["0:40<br/>特征一致性陷阱要点"]:::deep
+    N4["1:05<br/>统一特征平台要点"]:::deep
+    N5["1:30<br/>在线特征服务要点"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["1:55<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 ---
 
 ## 延伸：【Java 后端架构师】推荐特征实时更新与训练服务偏差
@@ -846,5 +874,29 @@ public class TrainingServingSkewMonitor {
 | 0:15 | 训练服务偏差示意/对比图 | "训练特征和服务特征定义/计算/窗口不一致" | 训练服务偏差要点 |
 | 0:40 | 实时特征示意/对比图 | "用户实时行为（点击/购买/停留）秒级更新到特征 store" | 实时特征要点 |
 | 1:25 | 总结卡 | "记住：训练服务偏差。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>训练服务偏差要点"]:::deep
+    N3["0:40<br/>实时特征要点"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:25<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
 
 

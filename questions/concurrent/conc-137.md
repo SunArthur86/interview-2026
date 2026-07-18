@@ -202,3 +202,35 @@ flowchart TD
 | 0:40 | 轻量级示意图 | 轻量级，内存KB级，可百万级并发 | 轻量级 |
 | 1:10 | IO阻塞时自动卸载示意图 | IO阻塞时自动卸载，不占用OS线程 | IO阻塞时自动卸载 |
 | 1:40 | 总结卡 + 下期预告 | 记住三个词就能答好这道题。下期追问：虚拟线程在 synchronized 块中会发生什么？为什么要避免在虚拟线程中用 synchronized？ | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["JDK 21 虚拟线程（Virtual Thread）的原理…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质区别：平台1:1映射OS且创建成本高，虚拟N:M…"]:::core
+        C["核心原理：利用Continuation实现挂起与恢复…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

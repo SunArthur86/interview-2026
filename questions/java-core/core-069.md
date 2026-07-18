@@ -189,3 +189,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "按流向、单位、角色三维分类的抽象数据传输管道——就像快递运输，分寄出/收到（流向），散装/箱装（单位），快递员/中转站（角色）" | 核心定义 |
 | 1:20 | 四大基类示意 | "InputStream和OutputStream(字节)，Reader和Writer(字符)" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是IO流的分类？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["四大基类：InputStream和OutputStr…"]:::core
+        C["应用对比：字节流专攻二进制（图片等），字符流专攻文本…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

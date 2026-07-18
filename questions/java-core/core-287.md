@@ -181,3 +181,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "分组预排序的插入排序，宏观调序微观微调——像玩扑克，先大体分组理顺（大步长），最后再细节整理（步长1）" | 核心定义 |
 | 1:20 | 本质是插入排序升级版示意 | "通过大gap预排序让元素跨越交换，最后gap=1微调" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["希尔排序的原理是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质是插入排序升级版，通过大gap预排序让元素跨越交…"]:::core
+        C["过程口诀：选序列、分多组、组内插入排序、逐次缩gap…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

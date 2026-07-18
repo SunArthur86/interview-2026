@@ -156,14 +156,12 @@ flowchart TD
     H --> I
 ```
 
-
 ## 记忆要点
 
 - 核心需求：高质量(信达雅)、低延迟、领域适配；架构：引擎层、上下文层、质量层、人机协作。
 - 路由策略：简单句用NMT(快)，复杂/专业内容用LLM(准)；结合术语库和记忆库保证一致性。
 - 上下文管理：文档级翻译保持术语一致，风格指南控制语气，文化适配避免歧义。
 - 评估指标：BLEU/COMET评估质量，人工评分体验；低资源语种用Pivot Language或零样本翻译。
-
 
 ## 结构化回答
 
@@ -186,3 +184,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：结合NMT与LLM的上下文感知多语言转译引擎" | 核心定义 |
 | 1:00 | 核心需求图解 | "高质量(信达雅)、低延迟、领域适配；架构：引擎层、上下文层、质量层、人机协作。" | 核心需求 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI多语言翻译系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["结合NMT与LLM的上下文感知多语言转译引擎<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["核心需求图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

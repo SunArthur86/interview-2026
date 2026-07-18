@@ -170,14 +170,12 @@ ensemble_retriever = EnsembleRetriever(
 2.  **向量数据库索引如何选择？**（数据量<100万用 IVF_FLAT，数据量大且内存足够用 HNSW，需要精确查全用 Flat）
 3.  **RAG 中如何处理数据更新？**（Upsert 机制：向量库支持 Insert+Update，或采用“软删除+重新插入”策略保证一致性）
 
-
 ## 记忆要点
 
 - 数据摄取：异步Pipeline解析，混合分块(语义/结构化)，GPU批量向量化
 - 检索策略：混合检索(Dense向量+Sparse关键词) + CrossEncoder重排序提升准确率
 - 架构核心：向量库(Milvus)存索引，元数据做权限过滤，LLM生成带引用回答
 - 性能指标：百万文档需分片索引，秒级检索依赖HNSW算法与缓存预热
-
 
 ## 结构化回答
 
@@ -201,3 +199,36 @@ ensemble_retriever = EnsembleRetriever(
 | 1:12 | 数据摄取图解 | "异步Pipeline解析，混合分块(语义/结构化)，GPU批量向量化" | 数据摄取 |
 | 1:48 | 检索策略图解 | "混合检索(Dense向量+Sparse关键词) + CrossEncoder重排序提升准确率" | 检索策略 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个企业级 RAG 知识库系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["混合检索+重排序精准召回，结合权限控制生成可信答<br/>0:36"]:::core
+        N3["检索策略图解<br/>1:48"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["数据摄取图解<br/>1:12"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

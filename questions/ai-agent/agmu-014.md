@@ -100,7 +100,6 @@ class LoopGuard:
 1. **状态哈希**：如何实现高效的状态去重？（答：使用布隆过滤器或 Redis Set 存储 Hash，注意设置过期时间）。
 2. **无进展定义**：如何量化「进展」？（答：基于特定 Token 的出现（如 [DONE]）、任务状态位的变化，或者使用 Critic Agent 评分）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -156,7 +155,6 @@ flowchart TD
 - 哈希粒度选关键参数，避免微小差异导致失效。
 - 预算熔断是保护成本的最后一道防线。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 检测多 Agent 死循环要组合策略，单一方法有漏网之鱼。四招：全局步数上限（最粗暴的硬熔断）、状态哈希去重（连续重复同一计划或工具入参判定死循环）、无进展检测（tokens_spent 增但 task_completion_score 不变）、预算熔断（Token/费用/时间阈值）。关键是哈希粒度选关键参数（Action Plan 或 Tool Call Arguments）不做整个 Context 哈希，避免微小差异失效。
@@ -180,3 +178,37 @@ flowchart TD
 | 1:10 | 滑动窗口示意 | "周期性循环 A→B→C→A 要滑动窗口比对最近 N 步。" | 周期检测 |
 | 1:35 | 代码纠错案例 | "实战：修复/回滚拉锯，JSON 参数 MD5 哈希检测省费用。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：组合四招 + 关键参数哈希 + 滑动窗口。下期讲错误隔离。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["怎么检测多 Agent 死循环<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["四招组合策略<br/>0:15"]:::core
+        N2["哈希粒度警示<br/>0:45"]:::deep
+        N3["滑动窗口示意<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["代码纠错案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

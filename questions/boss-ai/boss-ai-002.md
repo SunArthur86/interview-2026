@@ -205,3 +205,29 @@ flowchart TD
 | 1:05 | 代码示例截图 | 滚动摘要（旧轮次压缩成一段）/ 关键信息抽取（人名/偏好/事件）。 | 压缩策略 |
 | 2:30 | 总结卡 | 一句话记忆：窗口三层：近期原文 + 中期摘要 + 远期向量召回。 下期可以接着聊：滑动窗口 N 取多少。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>概念结构"]:::concept
+    N3["0:40<br/>滑动窗口"]:::deep
+    N4["1:05<br/>压缩策略"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["2:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

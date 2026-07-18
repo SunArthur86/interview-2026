@@ -144,3 +144,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像快递分拣员，根据包裹上的具体地址(URL)把货送到对应的货架(服务器)。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：基于应用层内容(如URL)智能分发流量到不同后端。" | 核心定义 |
 | 1:50 | 工作在OSI七层(应 图解 | "工作在OSI七层(应用层)。" | 工作在OSI七层(应 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是七层负载均衡（内容交换）？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：工作在应用层，通过解析 HTTP 报文内…"]:::core
+        C["四层Vs七层：四层基于 IP+端口极速转发，而七层基…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

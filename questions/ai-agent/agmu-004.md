@@ -95,7 +95,6 @@ nclass BossAgent:
 2. 如果 Boss 需要根据 Worker 的实时反馈动态调整后续策略（如 DAG 的动态剪枝），在设计上如何避免状态管理的混乱？
 3. 观察到 Boss Agent 变得非常“聪明”（调度逻辑极其复杂），这是否是一种反模式？如何通过架构演进来解决 Boss 过于沉重的问题？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -155,7 +154,6 @@ flowchart TD
 - 并行度：Pipeline 受限于最慢阶段（短板），Boss-Worker 易于水平扩展。
 - 避坑指南：简单线性任务用 Pipeline 更快，Boss-Worker 有调度开销。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** Pipeline 是固定阶段顺序执行，像工厂流水线强依赖（Stage A→B→C）；Boss-Worker 是动态任务分发，像项目经理排期弱依赖（Boss 派活 Workers 干完汇总）。并行度差异：Pipeline 受限于最慢阶段短板，Boss-Worker 易水平扩展。简单线性任务用 Pipeline 更快，Boss-Worker 有调度开销；两者常混合用，Boss 定阶段内部跑 Pipeline。
@@ -179,3 +177,37 @@ flowchart TD
 | 1:10 | 混合模式 | "常见混合：Boss 定阶段，阶段内部跑 Pipeline。" | 混合实践 |
 | 1:35 | 文档生成案例 | "实战：Pipeline 提取失败全挂，改 Boss 按类型分发提升可用性。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：线性任务用 Pipeline，弹性任务用 Boss。下期讲背压。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Boss-Worker vs Pi…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["本质差异对比图<br/>0:15"]:::core
+        N2["并行度对比<br/>0:45"]:::deep
+        N3["混合模式<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["文档生成案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

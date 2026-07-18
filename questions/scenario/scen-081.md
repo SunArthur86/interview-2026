@@ -173,3 +173,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像春运火车票，先锁票再给15分钟付钱，不付就退回票池。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：缓存前置扣减与异步事务回滚，防止超卖并保证库存最终一致。" | 核心定义 |
 | 1:50 | 库存预热 图解 | "秒杀前将DB库存同步至Redis。" | 库存预热 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个秒杀系统的库存预热和回滚机制？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心思想：秒杀前DB数据双写校验预热进Redis，防…"]:::core
+        C["防超卖与防重：利用Lua脚本保证原子性，校验Set防…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

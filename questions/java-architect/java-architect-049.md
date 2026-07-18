@@ -475,4 +475,28 @@ flowchart TD
 | 0:40 | ABAC示意/对比图 | "Subject（主体属性）+ Resource（资源属性）+ Environment（环境属性）+ Policy（策略）" | ABAC要点 |
 | 1:25 | 总结卡 | "记住：RBAC = 功能权限。下期见。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>RBAC0要点"]:::deep
+    N3["0:40<br/>ABAC要点"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:25<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

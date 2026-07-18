@@ -150,3 +150,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "TCP 控制发送速率从指数增长转为线性增长，以避免网络拥堵——像在高速上起步时先踩油门加速（慢启动），达到限速后改为匀速巡航（拥塞避免）" | 核心定义 |
 | 1:20 | 触发标志示意 | "当cwnd达到慢启动门限(ssthresh)时切入本阶段" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是拥塞避免？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["触发标志：当cwnd达到慢启动门限（ssthresh…"]:::core
+        C["增长机制：由慢启动的指数增长转为线性（每经过1个RT…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

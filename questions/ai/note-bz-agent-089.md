@@ -150,7 +150,6 @@ R: 自动解决率70%，年节省人力成本200万，
 2. **量化一切**：数字是最有力的证据——延迟、准确率、成本、规模
 3. **双价值**：技术深度（怎么做的）+ 业务价值（影响了什么）——两个都要有
 
-
 ## 核心流程图
 
 ```mermaid
@@ -236,7 +235,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像写战绩——不是"打了仗"，而是"以少胜多歼敌X，用了Y战术"。
 
 **展开框架：**
@@ -246,11 +244,9 @@ flowchart TD
 
 **收尾：** 没有数据怎么办？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -258,3 +254,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "企业级Agent经验融入简历=把日常工作提炼成"量化成就"。用STAR结构(情境/任务/行动/结果)，突出技术深度和业务…" | 核心定义 |
 | 0:55 | 成就导向示意图 | "成就导向——不是"负责"而是"实现/提升"" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["如何将企业级 Agent 开发经验…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["成就导向示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

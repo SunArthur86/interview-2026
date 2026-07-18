@@ -203,3 +203,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像城堡安保，门口查证件(认证)，墙头防翻越(防注入)，窗户装栅栏(防XSS)。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：构建多层防御体系，拦截常见的Web恶意攻击。" | 核心定义 |
 | 1:50 | 防SQL注入 图解 | "参数化查询，不用字符串拼接。" | 防SQL注入 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何防范常见的Web安全攻击？SQL注入/XSS/CSRF/…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["SQL注入：因拼接SQL有风险，故强用参数化查询与O…"]:::core
+        C["XSS防御：输出做HTML实体编码，配HttpOnl…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

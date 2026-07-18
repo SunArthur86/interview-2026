@@ -98,14 +98,12 @@ from dataclasses import dataclass, field
 from typing import Optional
 import hashlib
 
-
 class InterventionType(Enum):
     NONE = "none"              # 正常，不干预
     FORCE_SUMMARIZE = "summarize"  # 强制总结当前进度
     FORCE_TERMINATE = "terminate"  # 强制终止
     ROLLBACK = "rollback"      # 回退到检查点
     REASSIGN = "reassign"      # 重新分配任务
-
 
 @dataclass
 class AgentMessage:
@@ -119,7 +117,6 @@ class AgentMessage:
         self.content_hash = hashlib.md5(
             self.content.encode()
         ).hexdigest()[:16]
-
 
 class LoopDetector:
     """
@@ -206,7 +203,6 @@ class LoopDetector:
             return 0.0
         return len(set_a & set_b) / len(set_a | set_b)
 
-
 # ============ 监督Agent主循环 ============
 class SupervisorAgent:
     """监督Agent——在每次Agent交互后执行检测"""
@@ -271,7 +267,6 @@ from datetime import datetime
 from typing import Any
 import hashlib
 
-
 @dataclass
 class SharedFact:
     """共享工作记忆中的一条事实"""
@@ -281,7 +276,6 @@ class SharedFact:
     value: Any                        # 事实值
     confidence: float = 1.0
     timestamp: datetime = field(default_factory=datetime.now)
-
 
 class SharedWorkspace:
     """
@@ -333,7 +327,6 @@ class SharedWorkspace:
 ```python
 from dataclasses import dataclass
 
-
 @dataclass
 class CompressedMessage:
     """压缩后的Agent间消息"""
@@ -342,7 +335,6 @@ class CompressedMessage:
     new_facts: dict              # 新增事实
     analysis: str                # Agent的分析结论（精简，限200字）
     token_budget: int            # Token预算
-
 
 class MessageCompressor:
     """
@@ -405,7 +397,6 @@ class MessageCompressor:
             return content
         return content[: self.MAX_ANALYSIS_CHARS - 3] + "..."
 
-
 # ============ 压缩效果对比 ============
 def demo_compression_savings():
     """演示压缩前后的Token节省"""
@@ -437,7 +428,6 @@ def demo_compression_savings():
 5. **最大合理Agent数量（follow-up）**：经验值 3~5 个。超过 5 个通信复杂度 O(n²) 会急剧上升，边际收益递减。参考：AutoGen 建议不超过 5 个 Agent，MetaGPT 模拟软件公司用 5 个角色（PM/架构师/工程师/QA/Reviewer）。
 
 6. **真实工程数据**：在美团外卖调度场景中，多Agent协商机票/酒店预订时，未加循环检测前平均执行 47 步才收敛；加上监督Agent+步数限制后，平均 8 步收敛，准确率提升 15%。
-
 
 ## 核心流程图
 
@@ -485,7 +475,6 @@ flowchart TD
 - 破局冗余：采用黑板模式共享记忆单写多读，配合结构化摘要做差异增量传输。
 - 路由去重：计算内容指纹与语义Embedding相似度，拦截重复与互相踢皮球的无效消息。
 
-
 ## 苏格拉底式面试追问
 
 > 这组追问模拟面试官层层逼问，每一问先回答"为什么"，再回答"怎么做"，最后回答"如何证明"。
@@ -530,7 +519,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 无限循环就像两个人互相说你说需要一个裁判来打破僵局。信息冗余就像群里10人转发同一条消息需要公告板。
 
 **展开框架：**
@@ -540,11 +528,9 @@ flowchart TD
 
 **收尾：** 监督Agent本身会不会成为瓶颈？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -554,3 +540,37 @@ flowchart TD
 | 1:30 | 中断信号强制示意图 | "中断信号强制——中断信号强制总结or回退" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：监督Agent本身会不会成为瓶颈？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多智能体如何解决无限循环或者信息冗…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["监督示意图<br/>0:50"]:::deep
+        N3["中断信号强制示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

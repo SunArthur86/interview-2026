@@ -199,3 +199,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "自动装箱时复用常用数值范围的Integer对象——像工具箱里的常用螺丝钉（-128到127），大家都拿公用这批，不常用的才重新造" | 核心定义 |
 | 1:20 | 核心范围示意 | "Integer静态加载缓存数组，默认复用-128到127的对象" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Integer缓存池的原理是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心范围：Integer静态加载缓存数组，默认复用-…"]:::core
+        C["必会考点：valueOf走缓存，new Intege…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -102,7 +102,6 @@ if is_hallucination == "No":
 3. **如何量化评估幻觉？** 
    可以使用 FactScore（原子事实分解验证）、TrueTeacher（基于GPT-4的评估）或 RAGAS (Context Faithfulness) 等框架，将生成结果分解为原子事实并与知识库比对。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -180,4 +179,36 @@ flowchart TD
 | 0:55 | 事实性幻觉缓解：RAG + RLHF + 引用校验 | 事实性幻觉靠 RAG 给证据底座，RLHF 对齐诚实偏好，生成后用 NLI 或 LLM-as-Judge 做引用校验。 | 事实性缓解 |
 | 1:25 | 推理类幻觉缓解：CoT + 自一致性投票 | 推理类幻觉靠 CoT 思维链或自一致性，多次采样投票来缓解逻辑错误。 | 推理性缓解 |
 | 1:50 | 警告：RAG 不能完全解决幻觉 | 注意 RAG 也不能完全消灭幻觉，检索错误或模型忽略上下文时还是会出错。 | 边界提醒 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《LLM 幻觉》+ 学生没复习…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三大成因图：数据偏差 / 解码随机 / 概率目标<br/>0:25"]:::core
+        N2["事实性幻觉缓解：RAG + RLHF + 引用校验<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["推理类幻觉缓解：CoT + 自一致性投票<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["警告：RAG 不能完全解决幻觉<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

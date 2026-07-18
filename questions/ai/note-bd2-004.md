@@ -250,7 +250,6 @@ class AgentMemory:
 4. **性能**: 长期记忆检索延迟应 < 100ms，用缓存优化
 5. **可观测性**: 记忆读写日志可追踪，便于调试
 
-
 ## 记忆要点
 
 - 分层架构：短期记忆放上下文窗口，长期记忆靠向量库持久化。
@@ -315,11 +314,9 @@ LLM 自管理不可靠且贵。让 LLM 判断"这条信息要不要记住"需要
 
 **收尾：** 您想深入聊：Memory和RAG有什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -328,3 +325,36 @@ LLM 自管理不可靠且贵。让 LLM 判断"这条信息要不要记住"需要
 | 0:50 | 短期记忆示意图 | "短期记忆——对话历史，存在上下文窗口中，生命周期=单次会话" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：Memory和RAG有什么区别？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Agent的Memory如何进行管…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["短期记忆示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -151,7 +151,6 @@ flowchart TD
     G --> H
 ```
 
-
 ## 记忆要点
 
 - 脱敏Pipeline：规则（正则）+ NER（模型）+ LLM（隐式PII），替换为占位符。
@@ -159,7 +158,6 @@ flowchart TD
 - 数据安全：私有化部署不出域，外部API需零留存（Zero Retention）。
 - 权限控制：RBAC角色访问，数据分级（公开/机密），审计日志追溯。
 - 合规设计：用户知情同意，支持数据删除/携带权，隐私影响评估（PIA）。
-
 
 ## 结构化回答
 
@@ -182,3 +180,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：全链路识别、替换与控制敏感信息，确保数据合规。" | 核心定义 |
 | 1:00 | 脱敏Pipeline图解 | "规则（正则）+ NER（模型）+ LLM（隐式PII），替换为占位符。" | 脱敏Pipeline |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI系统的PII脱敏与数据安全…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["全链路识别、替换与控制敏感信息，确保数据合规。<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["脱敏Pipeline图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

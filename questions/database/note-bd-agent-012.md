@@ -271,3 +271,35 @@ MVCC 靠 Read View（读视图）实现。Read View 记录"当前活跃事务 ID
 | 0:15 | MySQL EXPLAIN 执行计划截图 | "一句话区分：脏读读到未提交修改（UPDATE），幻读读到新插入行（INSERT）" | 一句话区分 |
 | 1:02 | MySQL EXPLAIN 执行计划截图分步演示 | "隔离级别递进：读未提交<读已提交(RC)<可重复读(RR)<串行化。InnoDB默认RR级别" | 隔离级别递进 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：MVCC的Read View是怎么工作的。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["MySQL里脏读和幻读分别是什么？数据库怎么避免？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话区分：脏读读到未提交修改（UPDATE），幻读…"]:::core
+        C["隔离级别递进：读未提交《读已提交（RC）《可重复读（…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

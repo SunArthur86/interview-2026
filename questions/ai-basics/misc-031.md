@@ -122,7 +122,6 @@ print(result.to_pandas())
 2. 如果RAG系统的上下文窗口有限，导致Context被截断，会主要影响哪个指标？（主要影响Context Recall，因为相关文档可能被截断；同时也可能影响Faithfulness，因为依据缺失导致模型被迫幻觉）
 3. 除了Ragas，如何进行端到端的用户满意度评估？（引入人工反馈RLHF，或根据用户点击率、点赞率等隐性指标构建Human Preference Metrics）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -204,4 +203,36 @@ flowchart TD
 | 0:55 | 生成侧两指标：Faithfulness / Relevancy | 生成侧看两个：Faithfulness 看答案陈述是否被上下文支持，防幻觉；Answer Relevancy 看答案是否切题。 | 生成指标 |
 | 1:25 | 评估流程图：RAG 输出 → LLM-as-a-Judge → 打分 | 流程是 RAG 输出交给 LLM-as-a-Judge 自动打分，不需要人工标注标准答案。 | 评估流程 |
 | 1:50 | 注意点提示：评估模型偏见 | 注意评估模型自身也有偏见，关键场景还是要抽样人工校准一下。 | 注意事项 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Ragas 评估》+ 老师批…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["检索侧两指标：Precision / Recall<br/>0:25"]:::core
+        N3["评估流程图：RAG 输出 → LLM-as-a-Jud…<br/>1:25"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["生成侧两指标：Faithfulness / Relev…<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["注意点提示：评估模型偏见<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

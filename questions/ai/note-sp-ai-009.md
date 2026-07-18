@@ -200,7 +200,6 @@ HHH 框架：
 3. **KL约束**：无论RLHF还是DPO都需要KL散度防止模型偏离太远
 4. **对齐税**：对齐后模型能力可能下降(为了安全牺牲部分能力)
 
-
 ## 核心流程图
 
 ```mermaid
@@ -250,7 +249,6 @@ flowchart TD
 - 对齐双雄：RLHF是两阶段经典法，DPO是无强化学习的直推法。
 - RLHF核心：先训练奖励模型打分，再用PPO最大化奖励，同时用KL散度约束防偏离。
 - DPO对比RLHF：DPO省去奖励模型和强化学习，直接用偏好对数据优化策略，更简单稳定。
-
 
 ## 苏格拉底式面试追问
 
@@ -305,11 +303,9 @@ DPO 和 RLHF 各有优劣。DPO 直接用偏好对优化策略，简单稳定，
 
 **收尾：** 您想深入聊：PPO算法的核心思想是什么？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -317,3 +313,35 @@ DPO 和 RLHF 各有优劣。DPO 直接用偏好对优化策略，简单稳定，
 | 0:20 | 核心概念图 | "对齐让模型说人想要的、安全的、有用的，核心方法是RLHF和DPO" | 核心定义 |
 | 0:55 | RLHF示意图 | "RLHF——偏好排序→训奖励模型→PPO微调" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["简单讲一下大模型训练的对齐操作？<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["RLHF示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

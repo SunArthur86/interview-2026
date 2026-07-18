@@ -444,3 +444,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "多级缓存抗量：因为单Redis有瓶颈，所以用Caffeine(L1)挡80%流量，Redis降一个数量级压力" | 多级缓存抗量 |
 | 2:54 | 对比表格 | "连接池调优：消除隐性瓶颈，按核心数调整HikariCP最大连接数，防止高并发排队" | 连接池调优 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Local Cache 和 Redis 缓存怎么做一致性。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】你这个架构比较简单，理论上做到 5 万 QPS …"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["全链路分层压榨：沿CDN→网关→应用→缓存→DB逐层…"]:::core
+        C["CDN预缓存拦截：因为短链302响应极小，所以推边缘…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

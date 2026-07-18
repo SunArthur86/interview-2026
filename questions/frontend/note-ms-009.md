@@ -228,3 +228,35 @@ Checkpoint 的开销 vs 从头跑的开销权衡。Checkpoint 开销：序列化
 | 2:01 | 关键代码/伪代码片段 | "Checkpoint保运行快照，Log记操作痕迹，二者保障可追溯与断点续传" | Checkpoint保运 |
 | 2:54 | 对比表格 | "Task: id/状态/优先级/类型" | Task |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：任务状态机怎么设计。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【月之暗面面经】如果让你设计桌面 Agent 的任务中心，会…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心对象五大件：Task（任务） + Artifac…"]:::core
+        C["Task是调度核心，记录状态机与执行依赖关系"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

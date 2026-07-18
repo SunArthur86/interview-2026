@@ -222,3 +222,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "可解释性与掌控感：通过执行回放、产物 Diff 削弱黑盒感，建立用户信任" | 可解释性与掌控感 |
 | 2:54 | 对比表格 | "Agent任务编排(多步/多Agent/断点续传)" | Agent任务编排 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：端侧推理的前端怎么配合。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【月之暗面面经】你怎么看桌面 AI 产品前端未来一年的主战场…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["全链路体验闭环：主战场从单一对话框转向多 Agent…"]:::core
+        C["深度系统级集成：依托原生能力打破浏览器沙箱，实现全局…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

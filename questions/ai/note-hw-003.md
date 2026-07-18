@@ -268,7 +268,6 @@ experiment_2026_06 = {
 - **大模型数据质量评估工具**：CCNet（Meta，网页质量打分）、datasketch（去重）、FairLLM（毒性检测）
 - **华为AI DC全栈**：昇腾NPU（算力）+ MindSpore（框架）+ 盘古大模型（模型）+ 数据湖（数据），面试可结合全栈视角谈
 
-
 ## 核心流程图
 
 ```mermaid
@@ -376,11 +375,9 @@ Lakehouse 对大模型数据的价值不是"SQL 查询文本内容"，而是"元
 
 **收尾：** 您想深入聊：数据湖和数据仓库、Lakehouse有什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -389,3 +386,36 @@ Lakehouse 对大模型数据的价值不是"SQL 查询文本内容"，而是"元
 | 0:50 | 数据湖存储原示意图 | "数据湖存储原——数据湖存储原始格式数据（schema-on-read），区别于数据仓库（schema-on-write）" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：数据湖和数据仓库、Lakehouse有什么区别？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["AI DC 数据基础设施/数据湖在…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["数据湖存储原示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

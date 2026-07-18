@@ -188,3 +188,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "内存满时淘汰旧页面的策略——书架满了，挑一本旧书扔掉再放新书" | 核心定义 |
 | 1:20 | 示意 | "置换未来最久不访问的页面，因无法预知未来仅作理论基准" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是页面置换算法？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["OPT：置换未来最久不访问的页面，因无法预知未来仅作…"]:::core
+        C["FIFO：简单先进先出，但可能淘汰热点，且存在缺页率…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

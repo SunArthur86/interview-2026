@@ -162,3 +162,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "通过重排磁盘I/O请求顺序来减少磁头移动距离——像送快递，FCFS是按单顺序送，SCAN是电梯式逐层送，SSTF是送最近的" | 核心定义 |
 | 1:20 | 目标示意 | "优化磁头移动轨迹，核心是减少寻道时间" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是常见磁盘调度算法？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["目标：优化磁头移动轨迹，核心是减少寻道时间"]:::core
+        C["FCFS按序服务公平但寻道长；SSTF找最近导致远处…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

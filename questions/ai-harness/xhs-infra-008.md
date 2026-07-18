@@ -148,13 +148,11 @@ flowchart TD
     Hetero --> Cost[前缀缓存+投机采样]
 ```
 
-
 ## 记忆要点
 
 - 负载均衡：L7按内容/用户画像路由，长文本去高显存节点。会话亲和命中KV Cache。
 - 调度优化：Continuous Batching动态剔除Padding。Prefill(算力)与Decode(带宽)分离调度。
 - 成本优化：异构GPU池(A100算力/L40S带宽)。投机采样用小模型加速。前缀缓存共享Prompt。
-
 
 ## 结构化回答
 
@@ -179,3 +177,37 @@ flowchart TD
 | 2:00 | 调度优化图解 | "Continuous Batching动态剔除Padding。Prefill(算力)与Decode(带宽)分离调度。" | 调度优化 |
 | 2:40 | 成本优化图解 | "异构GPU池(A100算力/L40S带宽)。投机采样用小模型加速。前缀缓存共享Prompt。" | 成本优化 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个支持百万QPS的大模型Se…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["分级调度与弹性异构资源组合，平衡高并发与成本。<br/>0:40"]:::core
+        N2["负载均衡图解<br/>1:20"]:::deep
+        N3["调度优化图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["成本优化图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

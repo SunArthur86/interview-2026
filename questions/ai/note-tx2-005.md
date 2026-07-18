@@ -238,7 +238,6 @@ flowchart TD
     G --> H["向量化入向量库"]
 ```
 
-
 ## 记忆要点
 
 - 四大方案对比：固定窗口最糙、递归分割最通用、语义分割最高质、结构感知最准
@@ -246,7 +245,6 @@ flowchart TD
 - 优缺对比：结构感知能保全文层级最准，但极度依赖输入文档的结构化解析质量
 - 参数铁律：chunk建议200-500 tokens，overlap保持10-20%防语义硬截断
 - 混合策略：生产中常先按文档结构感知切大块，超长再降级用递归兜底切小块
-
 
 ## 苏格拉底式面试追问
 
@@ -301,11 +299,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：chunk overlap 多少合适？为什么要 overlap？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -314,3 +310,36 @@ flowchart TD
 | 0:50 | 固定窗口示意图 | "固定窗口——按固定token数切，简单但可能切断语义" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：chunk overlap 多少合适？为什么要 overla？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["文档分块四种方案优缺点：固定窗口、…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["固定窗口示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -96,7 +96,6 @@ output = model.generate(
 2. **Contrastive Search 中 $\alpha$ 参数的作用**？($\alpha$ 过大导致不连贯，过小导致重复)
 3. **Temperature 参数的影响**？（Temperature > 1 平滑概率分布增加随机性，< 1 尖锐分布使其更确定，接近0即变为Greedy）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -166,4 +165,36 @@ flowchart TD
 | 0:55 | Contrastive Search：概率 + 退化惩罚 | Contrastive Search 结合概率和退化惩罚，惩罚和已生成内容相似的 token，专治重复，适合长文本和 RAG，alpha 通常 0.5 到 0.7。 | Contrastive |
 | 1:25 | Nucleus Sampling 随机采样动画 | Nucleus Sampling 即 Top-p 随机采样，多样性高，适合创意写作，但可能产生幻觉。 | Nucleus |
 | 1:50 | 决策口诀三栏表：事实/创意/翻译 | 决策口诀：事实问答用 Contrastive，创意对话用 Nucleus，机器翻译用 Beam。 | 决策口诀 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["通顺又不重复<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["Greedy vs Beam Search 路径图<br/>0:25"]:::core
+        N2["Contrastive Search：概率 + 退化惩罚<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Nucleus Sampling 随机采样动画<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["决策口诀三栏表：事实/创意/翻译<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

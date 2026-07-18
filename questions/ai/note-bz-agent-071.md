@@ -229,7 +229,6 @@ async def get_response(user, message):
 2. **动态组装**：不同场景不同 Prompt，而非一个打天下——体现工程化
 3. **A/B 测试**：Prompt 优化要数据驱动，不能拍脑袋——体现实证思维
 
-
 ## 核心流程图
 
 ```mermaid
@@ -323,7 +322,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像管理法律条文——有版本(修订)、有模块(总则/分则)、按场景组合(民事用民法，刑事用刑法)。
 
 **展开框架：**
@@ -333,11 +331,9 @@ flowchart TD
 
 **收尾：** Prompt存哪里？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -346,3 +342,36 @@ flowchart TD
 | 0:50 | 版本控制示意图 | "版本控制——git管理/语义版本/变更日志" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：Prompt存哪里？——独立文件/数据库/Prompt管理平？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["如何对 Prompt 做版本控制与…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["版本控制示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

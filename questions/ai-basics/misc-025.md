@@ -131,7 +131,6 @@ compression_retriever = ContextualCompressionRetriever(
 1. **RAG 与 Fine-tuning 如何选择**？(RAG 适合事实性、动态知识；Fine-tuning 适合语言风格、指令遵循、领域内隐知识)
 2. **混合检索 (Hybrid Search)**：关键词检索 (BM25) 与 向量检索 如何加权？(Reciprocal Rank Fusion, RRF 算法)
 
-
 ## 记忆要点
 
 - RAG流程：Query改写 -> 向量检索 -> Rerank重排 -> Prompt构造 -> LLM生成。
@@ -161,4 +160,36 @@ compression_retriever = ContextualCompressionRetriever(
 | 0:55 | 优势四栏：实时/少幻觉/可溯源/低成本 | 优势很明确：知识实时更新、减少幻觉、答案可溯源、不用微调成本低。 | 核心优势 |
 | 1:25 | 挑战图：混合检索/父子分块/多跳/中间丢失 | 挑战在检索质量、分块策略、多跳推理，还有 Lost in the Middle 现象——中间位置文档容易被忽略。 | 关键挑战 |
 | 1:50 | 解法：CoT 提示 + Reranker 精排 | 解法是引入 CoT 提示让模型分析相关文档，或者用 Reranker 精排 Top-K 提升准确率。 | 解法 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《RAG 检索增强生成》+ 开…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["五步流程图：改写→检索→重排→构造→生成<br/>0:25"]:::core
+        N2["优势四栏：实时/少幻觉/可溯源/低成本<br/>0:55"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["挑战图：混合检索/父子分块/多跳/中间丢失<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["解法：CoT 提示 + Reranker 精排<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

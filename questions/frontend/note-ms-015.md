@@ -865,3 +865,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "L1查类型大小、L2查可读结构、L3用轻量模型比对任务相关性" | L1查类型大小 |
 | 2:54 | 对比表格 | "校验管道化：各层规则独立，支持异步串联执行并聚合反馈结果" | 校验管道化 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：语义校验怎么实现？用小模型预判吗。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【月之暗面面经】如果用户给了错误的文件上下文，前端怎样尽早发…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心策略快速失败：在前端尽早拦截错误，避免浪费后端算…"]:::core
+        C["三层校验架构：L1格式（硬拒绝）、L2内容（强提示）…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

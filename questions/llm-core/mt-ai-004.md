@@ -152,14 +152,12 @@ flowchart TD
     E --> G[DeepSeek 采用]
 ```
 
-
 ## 记忆要点
 
 - MLA 核心：对全量 KV 进行数学低秩分解，推理时将矩阵吸收进 Q，大幅省显存。
 - 压缩机制：只缓存低维潜向量，恢复投影在 Attention 计算中实时合并，显存换计算。
 - 方案对比：MQA/GQA 是物理硬共享易损精度，而 MLA 是动态压缩，压缩率极高。
 - 阶段差异：Prefill 阶段多算投影略慢，但因 Decode 阶段显存骤降，整体吞吐大幅提升。
-
 
 ## 结构化回答
 
@@ -184,3 +182,37 @@ flowchart TD
 | 2:00 | 压缩机制图解 | "只缓存低维潜向量，恢复投影在 Attention 计算中实时合并，显存换计算。" | 压缩机制 |
 | 2:40 | 方案对比图解 | "MQA/GQA 是物理硬共享易损精度，而 MLA 是动态压缩，压缩率极高。" | 方案对比 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】MLA 是怎么对 KV…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["MLA通过低秩分解压缩KV，比单纯共享头更高效。<br/>0:40"]:::core
+        N2["MLA 核心图解<br/>1:20"]:::core
+        N3["压缩机制图解<br/>2:00"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["方案对比图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

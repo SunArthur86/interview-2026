@@ -106,7 +106,6 @@ docs = [doc for _, doc in sorted(zip(scores, docs), key=lambda x: x[0], reverse=
 3. **如何处理Reranker的长文本限制？**
    - 切片处理或只截取关键部分（如标题和首段）。部分模型（如BGE-large）支持更长的上下文窗口。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -185,4 +184,36 @@ flowchart TD
 | 0:55 | Cross-Encoder 示意：拼接 + 深层交互 | Cross-Encoder 把 query 和 doc 拼一起做深层 Attention 交互，精度高，但每个 pair 都要算，无法缓存。 | Cross-Encoder |
 | 1:25 | 经典流程图：召回 Top-50 → 精排 Top-5 | 经典流程：Bi-Encoder 召回 Top-50，Cross-Encoder 精排到 Top-5，兼顾速度和精度。 | 经典流程 |
 | 1:50 | 代价提示：计算开销大，仅处理少量候选 | 代价是 Cross-Encoder 计算开销大，只能处理少量候选，所以放在流程最后一步。 | 代价与边界 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Reranker 精排》+ …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["Bi-Encoder 示意：query/doc 独立编…<br/>0:25"]:::core
+        N3["经典流程图：召回 Top-50 → 精排 Top-5<br/>1:25"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Cross-Encoder 示意：拼接 + 深层交互<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["代价提示：计算开销大，仅处理少量候选<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

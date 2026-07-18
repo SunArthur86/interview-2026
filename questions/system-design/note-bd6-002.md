@@ -291,6 +291,38 @@ flowchart TD
 | 2:54 | 对比表格 | "断点续传：记录消费到的Binlog position/GTID，CDC工具重启后从断点继续" | 断点续传 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：CDC和定时全量同步有什么区别？（实时vs批量，增量vs全量）。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【字节一面】基于 CDC 思想设计一个数据同步系统：单一数据…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["CDC架构"]:::core
+        C["vs 定时轮询"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 苏格拉底式面试追问
 
 | 追问层级 | 面试官可能这样问 | 高分回答方向 |

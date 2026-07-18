@@ -372,3 +372,31 @@ flowchart LR
 | 1:50 | 代码示例截图 | 隐私/依赖/真实性/未成年保护。 | 伦理边界 |
 | 3:30 | 总结卡 | 一句话记忆：演进：多模态→具身→Agent 自主。 下期可以接着聊：现在入局 AI 陪伴还有机会吗。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>Agent 感知-思考-行动闭环"]:::concept
+    N3["0:50<br/>具身智能"]:::concept
+    N4["1:20<br/>Agent 自主"]:::deep
+    N5["1:50<br/>伦理边界"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

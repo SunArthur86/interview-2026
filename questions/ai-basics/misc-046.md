@@ -110,7 +110,6 @@ loss.backward()
                         └───────────────────────────────────────┘
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -189,4 +188,36 @@ flowchart TD
 | 0:55 | GRPO 算法 + R1-Zero/R1 对比 | 训练用 GRPO，组内相对优势、无需 Critic；R1-Zero 纯 RL 涌现推理，R1 加 SFT 冷启动优化。 | 训练方法 |
 | 1:25 | Test-Time Compute Scaling 曲线 | 这开启了新范式：Test-Time Compute Scaling，用推理时的算力换智力，不再只靠做大参数。 | 新范式 |
 | 1:50 | 能力涌现：自我反思 + 错误验证 | 模型能自发学会自我反思和错误验证，这是单纯监督学习学不到的能力。 | 能力涌现 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《推理模型 o1/R1》+ 草…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["长思维链示意：反思 → 验证 → 纠错<br/>0:25"]:::core
+        N2["GRPO 算法 + R1-Zero/R1 对比<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Test-Time Compute Scaling 曲线<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["能力涌现：自我反思 + 错误验证<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

@@ -54,7 +54,6 @@ frequency: medium
   
   类比：两个候选人各自填表打分——快但不够细致
 
-
 【Cross-Encoder 交叉编码器】
 
   [CLS] Query [SEP] Doc [SEP] ──→ [Transformer] ──→ 相关性分数
@@ -186,7 +185,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 召回阶段像海选——双塔模型快速从万人中挑出20个候选人（各打各的分，快但粗）。精排阶段像决赛——Cross-Encoder把query和doc放在一起仔细对比（交叉互动，慢但准）。两阶段架构=海选+决赛
 
 **展开框架：**
@@ -196,11 +194,9 @@ flowchart TD
 
 **收尾：** Cross-Encoder为什么不能预计算doc向量？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -208,6 +204,37 @@ flowchart TD
 | 0:20 | 核心概念图 | "Reranker是检索结果的精排环节——用Cross-Encoder把query和doc拼在一起送入模型，通过深度交叉交…" | 核心定义 |
 | 0:55 | Bi-Encoder（双塔）示意图 | "Bi-Encoder（双塔）——query和doc分别编码再算相似度，速度快但无交叉交互" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Reranker是什么？为什么需要…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Bi-Encoder（双塔）示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 
 ## 苏格拉底式面试追问
 

@@ -221,3 +221,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像春运售票，提前预测客流并加开临时列车。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：结合历史与压测数据预测负载，通过弹性伸缩保障供给。" | 核心定义 |
 | 1:50 | 历史数据增长率和压测 图解 | "通过历史数据增长率和压测确定容量基线。" | 历史数据增长率和压测 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计容量评估和扩容方案？应对大促/活动流量"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["容量公式：所需实例数 = 目标峰值QPS / （单机…"]:::core
+        C["扩容策略：提前预扩容+定时扩容应对规律，HPA自动扩…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

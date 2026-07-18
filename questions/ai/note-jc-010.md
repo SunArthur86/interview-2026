@@ -170,7 +170,6 @@ flowchart TD
     D2 --> F["工程认知误差<br/>1TB硬盘显931GB"]
 ```
 
-
 ## 记忆要点
 
 - 核心换算：1 byte（字节） = 8 bit（位），bit是最小单位
@@ -235,11 +234,9 @@ int 大小是"性能 + 兼容 + 标准"的权衡，64 位系统保持 int=32 是
 
 **收尾：** 您想深入聊：为什么是 1024 进制不是 1000？
 
-
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -247,3 +244,35 @@ int 大小是"性能 + 兼容 + 标准"的权衡，64 位系统保持 int=32 是
 | 0:20 | 核心概念图 | "bit（位）是计算机最小单位（0或1），byte（字节）是基本存储单位，1 byte = 8 bit。衍生：1KB=…" | 核心定义 |
 | 0:55 | bit示意图 | "bit——bit=位(0或1)，byte=字节，1 byte=8 bit" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["bit 和 byte 之间的对应关系<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["bit示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

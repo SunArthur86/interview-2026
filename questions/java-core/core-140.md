@@ -162,3 +162,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "孤儿进程无父收养，僵尸进程死后未清理——孤儿进程像父母去世后孩子被福利院收养，僵尸进程像人死后无人处理遗体" | 核心定义 |
 | 1:20 | 孤儿进程示意 | "父进程先退出，子进程被init（PID为1）收养，通常无害。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["说一说僵尸进程和孤儿进程？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["孤儿进程：父进程先退出，子进程被init（PID为1…"]:::core
+        C["僵尸进程：子进程已退出，但父进程未调用wait（）回…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

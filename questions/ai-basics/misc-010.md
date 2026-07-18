@@ -113,7 +113,6 @@ class LoRALinear(nn.Module):
         return self.linear(x) + self.lora_up(self.lora_down(x)) * self.scaling
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -184,4 +183,37 @@ flowchart TD
 | 1:10 | 初始化 A 随机 B 为 0 | "初始化：A 随机高斯，B 初始化为 0，保证训练初始 BA=0 行为不变。" | 关键细节 |
 | 1:35 | QLoRA 4-bit NF4 量化 | "QLoRA：基座 4-bit NF4 量化加双重量化加分页优化器，单卡微调 70B。" | QLoRA 改进 |
 | 1:55 | 总结卡 | "口诀：冻结加低秩，r 取 4-64，QLoRA 单卡 70B。下期讲 KV Cache。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["LoRA 与 QLoRA<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["大衣打补丁类比<br/>0:15"]:::core
+        N2["LoRA 低秩旁路示意图<br/>0:40"]:::core
+        N3["初始化 A 随机 B 为 0<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["QLoRA 4-bit NF4 量化<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：冻结加低秩，r 取 4-64，QLoRA<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

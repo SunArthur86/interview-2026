@@ -159,3 +159,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像公司前台，统一接待、验证身份并引导到具体部门。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：作为系统统一入口，集中处理路由、鉴权等通用逻辑。" | 核心定义 |
 | 1:50 | 拦截非业务逻辑如鉴权 图解 | "拦截非业务逻辑如鉴权、限流、日志。" | 拦截非业务逻辑如鉴权 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计API网关？统一鉴权、限流、路由、监控"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心职责：统一入口处理非业务横切关注点（鉴权、限流、…"]:::core
+        C["高可用设计：网关自身必须无状态以支持横向扩容，配合多…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

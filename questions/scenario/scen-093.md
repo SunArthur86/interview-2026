@@ -171,3 +171,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像多层滤网过滤泥水，大石头在最上层被挡住，细沙在下层过滤，最后只有清水流进水缸。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：多层过滤漏斗，将无效请求尽早拦截，让少量真实请求进入系统。" | 核心定义 |
 | 1:50 | 客户端与CDN拦截静 图解 | "客户端与CDN拦截静态及非合法请求。" | 客户端与CDN拦截静 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个秒杀系统的流量削峰方案？保护后端不被压垮"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心原则：层层拦截，读多写少，绝不让流量触碰核心DB"]:::core
+        C["前置削峰：CDN静态隔离+验证码拉长请求+按钮防抖，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

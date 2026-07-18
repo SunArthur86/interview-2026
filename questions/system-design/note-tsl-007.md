@@ -395,3 +395,35 @@ public class QualityAssuranceService {
 | 2:01 | 关键代码/伪代码片段 | "质量校验：3人交叉标注算IoU，结合专家金标准抽检，保95%准确率" | 质量校验 |
 | 2:54 | 对比表格 | "S3/HDFS对象存储管理PB级原始数据" | S3/HDFS对象存储管 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：自动标注准确率不够怎么办。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["PB级路测数据需人工+自动标注，如何设计后端架构，支持标注任…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["存算降本：S3分层存PB级数据，AI预标注提效减负，…"]:::core
+        C["任务调度：按难度和标注员技能动态分配，可视化看板实时…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

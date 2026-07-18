@@ -228,7 +228,6 @@ flowchart TD
     L["LLM Warmup<br/>防初期发散"] --> A
 ```
 
-
 ## 记忆要点
 
 - 核心本质：Adam = Momentum(一阶动量) + RMSProp(二阶矩)
@@ -294,11 +293,9 @@ bug 在 CV 不明显是因为 CV 模型的参数特性与 LLM 不同。CV 模型
 
 **收尾：** 您想深入聊：为什么需要偏差修正？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -307,3 +304,36 @@ bug 在 CV 不明显是因为 CV 模型的参数特性与 LLM 不同。CV 模型
 | 0:50 | 一阶矩示意图 | "一阶矩——一阶矩 m_t = β1·m_{t-1}+(1-β1)·g_t（动量，梯度方向的EMA）" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：为什么需要偏差修正？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Adam 优化器的公式：一阶矩、二…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["一阶矩示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

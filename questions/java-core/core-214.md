@@ -243,6 +243,38 @@ sequenceDiagram
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是TCP三次握手/四次挥手？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三次握手：C发SYN，S回SYN+ACK，C发ACK…"]:::core
+        C["四次挥手原因：TCP 是全双工，被动方收到 FIN …"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是三次握手的过程？
 
 > 合并自 `core-084`（相似度 71%）
@@ -332,6 +364,38 @@ ln, _ := lc.Listen(context.Background(), "tcp", ":8080")
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是TCP三次握手/四次挥手？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三次握手：C发SYN，S回SYN+ACK，C发ACK…"]:::core
+        C["四次挥手原因：TCP 是全双工，被动方收到 FIN …"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是TCP连接与断开优化？如何减少TCP握手/挥手延迟？
 
 > 合并自 `core-010`（相似度 70%）
@@ -412,3 +476,35 @@ net.ipv4.tcp_fin_timeout = 30
 | 1:30 | 传输优化示意 | "开启TCP_NODELAY关闭Nagle算法，避免其与延迟ACK引发的200ms延迟。" | 要点1 |
 | 2:15 | 建连优化示意 | "开启tcp_fastopen(TFO)携带数据，减少1个RTT建连延迟。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是TCP三次握手/四次挥手？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三次握手：C发SYN，S回SYN+ACK，C发ACK…"]:::core
+        C["四次挥手原因：TCP 是全双工，被动方收到 FIN …"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

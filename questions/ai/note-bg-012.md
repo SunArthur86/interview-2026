@@ -410,7 +410,6 @@ class CodeReviewExecution:
 - **Cursor/Cline的MCP集成**：实际IDE Agent如何使用MCP接入工具
 - **OpenAI的Function Calling演进**：从tools到parallel_function_calling到computer_use
 
-
 ## 核心流程图
 
 ```mermaid
@@ -455,7 +454,6 @@ flowchart TD
 - Function Call：LLM原生能力，直接输出结构化JSON指令替代文本解析
 - MCP协议：Client与Server解耦，把M×N适配降维成M+N的标准化工具生态
 - Skill侧重：Agent内化的业务流，MCP侧重跨模型跨平台的外部工具通信规范
-
 
 ## 苏格拉底式面试追问
 
@@ -514,11 +512,9 @@ Skill 是应用层的"能力包"，内部可以调用 MCP Server 提供的工具
 
 **收尾：** 您想深入聊：MCP和传统的Plugin/API有什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -527,3 +523,36 @@ Skill 是应用层的"能力包"，内部可以调用 MCP Server 提供的工具
 | 0:50 | Function Call示意图 | "Function Call——LLM输出结构化{tool_name, arguments}的能力（底层）" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：MCP和传统的Plugin/API有什么区别？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["MCP、Skill、Functio…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Function Call示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

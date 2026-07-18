@@ -141,7 +141,6 @@ flowchart TD
     J --> K[注意: 仅对大模型>100B有效]
 ```
 
-
 ## 记忆要点
 
 - CoT原理：让模型输出推理步骤再给答案，分解问题并利用更多计算。
@@ -171,4 +170,36 @@ flowchart TD
 | 0:55 | Zero-shot：加 "Let's think step by step" | Zero-shot CoT 最简单，加一句"Let's think step by step"就能启动，无需任何示例。 | Zero-shot |
 | 1:20 | Few-shot：带推理过程的范例 | Few-shot CoT 提供带推理链的范例，效果更稳定，但消耗更多 token。 | Few-shot |
 | 1:50 | 边界提示：仅大模型有效，适用逻辑推理 | 注意 CoT 只对大模型，大约 100B 以上才有效，适用逻辑推理，对常识问答没用。 | 有效边界 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《CoT 思维链》+ 解数学题…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["原理图：问题 → 推理步骤 → 答案<br/>0:25"]:::core
+        N2["Zero-shot：加 'Let's think st…<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Few-shot：带推理过程的范例<br/>1:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["边界提示：仅大模型有效，适用逻辑推理<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

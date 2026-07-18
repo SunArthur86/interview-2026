@@ -141,7 +141,6 @@ def is_qualified(resume_json, jd_requirements):
     └──────────────────┘
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -199,7 +198,6 @@ flowchart TD
 - 实体对齐：构建技能图谱，解决AWS与Amazon Web Services归一。
 - 易错点：关键词匹配需防Java包含JavaScript误判。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 结构化解析简历，语义匹配JD，规则+AI综合评分。——打个比方，像HR助理先筛选硬条件，再由资深HR评估软实力。
@@ -221,3 +219,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：结构化解析简历，语义匹配JD，规则+AI综合评分。" | 核心定义 |
 | 1:00 | 流程图解 | "简历解析(LayoutLM/LLM) → JD建模 → 规则过滤 → 语义匹配。" | 流程 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI简历筛选系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["结构化解析简历，语义匹配JD，规则+AI综合评分<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["流程图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

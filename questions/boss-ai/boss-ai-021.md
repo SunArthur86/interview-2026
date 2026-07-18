@@ -269,3 +269,29 @@ flowchart TD
 | 1:50 | 代码示例截图 | Agent 角色有内在状态（情绪/关系），会随时间成长。 | 演进 |
 | 3:30 | 总结卡 | 一句话记忆：范式：规则 → Agent 自主演绎。 下期可以接着聊：Agent 改造和直接 prompt 一个角色有什么区别。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>Agent 感知-思考-行动闭环"]:::concept
+    N3["0:50<br/>Agent 三要素"]:::concept
+    N4["1:20<br/>自主演绎"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

@@ -167,3 +167,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "根据丢包严重程度（超时或ACK丢失）调整发送速率——堵车了，如果彻底堵死就清空重开（超时），如果是慢行就减速慢行（快速恢复）" | 核心定义 |
 | 1:20 | 拥塞信号分两种示意 | "超时代表严重拥堵，3次重复ACK代表轻微丢包" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是拥塞发生？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["拥塞信号分两种：超时代表严重拥堵，3次重复ACK代表…"]:::core
+        C["严重拥塞（超时）：ssthresh减半，cwnd直接…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

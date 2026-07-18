@@ -297,3 +297,35 @@ flowchart TD
 | 1:06 | 缓存读写策略流程图分步演示 | "核心 I/O：bind() / connect() / read() / write()" | 核心 I/O |
 | 1:57 | 关键代码/伪代码片段 | "writeAndFlush()：写数据并冲刷到远程节点" | writeAndFlush |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Channel 和 EventLoop 如何绑定。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Channel 的作用是什么？为什么是线程安全的？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["Channel定义"]:::core
+        C["核心 I/O"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

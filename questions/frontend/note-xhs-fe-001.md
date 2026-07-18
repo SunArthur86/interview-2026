@@ -331,6 +331,38 @@ flowchart TD
 | 1:57 | 关键代码/伪代码片段 | "每个token触发一次setState是性能杀手 到 改为Buffer累积+RAF按帧刷新" | 每个token触发一次 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Web Worker能否直接操作DOM？（不能，需要postMessage通信）。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【前端面试】AI 对话产品中 SSE 流式渲染如何优化？前端…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心矛盾"]:::core
+        C["三招优化"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 苏格拉底式面试追问
 
 | 追问层级 | 面试官可能这样问 | 高分回答方向 |

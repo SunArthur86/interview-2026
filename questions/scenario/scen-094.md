@@ -169,3 +169,35 @@ flowchart TD
 | 0:25 | 生活类比动画 | "打个比方——比赛热身先把身体活动开，比赛过程中根据情况及时补水调整状态。" | 核心类比 |
 | 0:50 | 概念定义动画 | "一句话：在流量到来前主动加载热点数据，运行时根据变更策略保持数据一致。" | 核心定义 |
 | 1:20 | 启动时 图解 | "启动时利用钩子加载热点数据。" | 启动时 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个缓存预热和缓存刷新机制？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["预热时机：系统启动、低峰定时、大促前针对Top热点数…"]:::core
+        C["更新策略：先更新DB再删缓存，彻底解耦且防并发更新的…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -167,3 +167,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "不依赖外部类实例的内部类，可定义静态成员——像钱包里的卡片，卡片属于钱包（类），但不依赖于钱包当前被拿着（实例）" | 核心定义 |
 | 1:20 | 独立性示意 | "不依赖外部类实例，可直接 new Outer.Inner() 创建" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是静态内部类（Static Inner Class）？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["独立性：不依赖外部类实例，可直接 new Outer…"]:::core
+        C["限制：因为不持有外部类实例引用，所以只能访问外部类的…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

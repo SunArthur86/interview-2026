@@ -86,7 +86,6 @@ splitter = SemanticSplitterNodeParser(
 2. **Small-to-Big 策略**：除了 Parent-Child，还有检索 Sentence 索引但返回 Window 的做法，这和 Parent-Child 的区别是什么？(Parent-Child 粒度更大，Sentence 2 Window 更灵活)
 3. **RAG 中表格数据的处理**：上述文本分块策略对表格效果极差，如何处理？(需要将表格转为 Markdown 或 HTML 文本描述，或者使用多模态/专门的 Table Parsing)
 
-
 ## 核心流程图
 
 ```mermaid
@@ -168,4 +167,36 @@ flowchart TD
 | 0:55 | 父子分块示意：小块索引 + 大块返回 | 最推荐父子分块：小块做索引保证检索精准，命中后返回它所属的大块给 LLM，上下文更完整。 | 父子分块 |
 | 1:25 | 参数图：chunk_size 512-800 / overlap 10-20% | 关键参数：chunk_size 一般取 512 到 800，overlap 设 10% 到 20% 防止语义被切断。 | 关键参数 |
 | 1:50 | 表格/代码块特殊处理示意图 | 实战注意：表格和代码块要特殊处理，不能从中间截断，优先用 Markdown 结构来切。 | 实战要点 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《RAG 分块策略》+ 百科全…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三种策略对比图：固定/语义/结构化<br/>0:25"]:::core
+        N2["父子分块示意：小块索引 + 大块返回<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["参数图：chunk_size 512-800 / ov…<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["表格/代码块特殊处理示意图<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

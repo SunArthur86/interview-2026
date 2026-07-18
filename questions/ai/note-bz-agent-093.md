@@ -203,7 +203,6 @@ Week 8: 模拟面试+查漏
 3. **知道 tradeoff**：不只说"用了什么"，还说"为什么/有什么代价"
 4. **保持学习**：Agent 领域变化快，面试官会问最近的新东西——体现持续学习
 
-
 ## 核心流程图
 
 ```mermaid
@@ -288,7 +287,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像备考大学——课本知识(基础)+模拟题(项目)+综合素质(设计)+志愿填报(行业认知)。
 
 **展开框架：**
@@ -298,11 +296,9 @@ flowchart TD
 
 **收尾：** 准备多久合适？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -310,3 +306,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "2026年Agent面试准备=基础理论(Agent/RAG/LLM原理)+项目实战(能深挖)+系统设计(架构能力)+行业…" | 核心定义 |
 | 0:55 | 基础理论示意图 | "基础理论——Agent/RAG/Prompt/LLM原理" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["2026 年 Agent 智能体面…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["基础理论示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

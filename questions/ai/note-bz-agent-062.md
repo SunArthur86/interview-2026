@@ -189,13 +189,11 @@ engine = SubQuestionQueryEngine.from_defaults(query_engine_tools=[
 2. **索引多样性**：LlamaIndex 不只是向量索引，还有图/树/摘要——这是深度优势
 3. **数据连接器**：LlamaHub 200+数据源，企业数据接入更方便
 
-
 ## 记忆要点
 
 - 核心定位：专注“数据连接”的RAG专精框架（LangChain偏通用综合）
 - 三层核心架构：数据层(200+数据连接器) → 索引层(多结构索引) → 查询层(检索合成)
 - 五大索引结构：向量、摘要、知识图谱(多跳)、树状、关键词，满足不同检索推理需求
-
 
 ## 苏格拉底式面试追问
 
@@ -254,11 +252,9 @@ AB 对比。1）开发效率——同 RAG 需求，用 LlamaIndex vs LangChain v
 
 **收尾：** 您想深入聊：LlamaIndex能做Agent吗？——能，但不如LangChain/LangGraph？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -267,3 +263,36 @@ AB 对比。1）开发效率——同 RAG 需求，用 LlamaIndex vs LangChain v
 | 0:50 | 定位示意图 | "定位——专注数据框架/RAG" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：LlamaIndex能做Agent吗？——能，但不如Lang？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["LlamaIndex 在 RAG …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["定位示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

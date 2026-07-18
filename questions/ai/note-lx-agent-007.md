@@ -242,7 +242,6 @@ flowchart TD
     M2 --> O["输出最终回复"]
 ```
 
-
 ## 记忆要点
 
 - 污染根源：多任务挤在同一上下文，历史信息干扰导致参数误传或质量降级
@@ -308,11 +307,9 @@ LLM 拆分的质量需校验和兜底。一是拆分规范（prompt 约束）：
 
 **收尾：** 您想深入聊：任务间有依赖时（如"查完天气再决定带什么行李"）怎么处理？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -321,3 +318,36 @@ LLM 拆分的质量需校验和兜底。一是拆分规范（prompt 约束）：
 | 0:50 | 任务拆分示意图 | "任务拆分——将多需求拆成独立子任务，明确边界" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：任务间有依赖时（如"查完天气再决定带什么行李"）怎么处理？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["用户一次提多个需求时，Agent的…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["任务拆分示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

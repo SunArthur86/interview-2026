@@ -196,6 +196,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个高性能的多级缓存架构？本地缓存、分布式缓存、CD…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["多级缓存：请求走向为CDN→Nginx→本地→Red…"]:::core
+        C["本地算法：Caffeine用W-TinyLFU，因为…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：如何设计一个多级缓存架构？包含本地缓存、分布式缓存、CDN。
 
 > 合并自 `scen-018`（相似度 69%）
@@ -305,3 +337,35 @@ Client Request
 | 0:35 | 生活类比动画 | "打个比方——像多层安检，村口挡一批、小区门口挡一批、楼门口再挡一批，最后才进屋查户口。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：在不同层级设置缓存防线，逐级拦截请求，最大限度减少穿透到数据库的流量。" | 核心定义 |
 | 1:50 | 本地缓存极快但容量小 图解 | "本地缓存极快但容量小且易不一致，适合读多写少的配置或热点数据。" | 本地缓存极快但容量小 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个高性能的多级缓存架构？本地缓存、分布式缓存、CD…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["多级缓存：请求走向为CDN→Nginx→本地→Red…"]:::core
+        C["本地算法：Caffeine用W-TinyLFU，因为…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

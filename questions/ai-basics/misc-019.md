@@ -104,7 +104,6 @@ outputs = llm.generate(["你好，请介绍一下量子物理。"], sampling_par
   2. 在极端低比特（如INT2或INT1）量化下，AWQ的Scaling机制是否会失效，为什么？
   3. 如果模型权重分布本身非常平滑（如经过深度平滑SmoothQuant），AWQ基于激活幅度的策略还能否准确找到重要权重？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -183,4 +182,36 @@ flowchart TD
 | 0:55 | AWQ 流程图：1% 显著权重保留 | AWQ 走激活感知路线，保留 1% 的显著权重不量化，其余压成 INT4，运行时无需反量化，速度快。 | AWQ 原理 |
 | 1:25 | 对比表：精度/速度/算子依赖 | 对比下来，AWQ 在 INT4 下精度损失极小且推理更快，GPTQ 需要特殊算子支持。 | 横向对比 |
 | 1:50 | 70B 部署性能柱状图：吞吐/显存 | 实战里，70B 模型部署 AWQ 比 GPTQ 吞吐量更高、显存占用更低，所以推理首选 AWQ。 | 实战结论 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["AWQ vs GPTQ》+ 高清图…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["GPTQ 流程图：Hessian 矩阵 + 校准数据<br/>0:25"]:::core
+        N2["AWQ 流程图：1% 显著权重保留<br/>0:55"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比表：精度/速度/算子依赖<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["70B 部署性能柱状图：吞吐/显存<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

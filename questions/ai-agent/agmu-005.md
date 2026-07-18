@@ -98,7 +98,6 @@ Start Discussion
 1. **误区：认为只要多轮讨论结果就会变好**。实际上，若基础模型能力不足或 Prompt 有偏差，讨论只会放大错误。
 2. **误区：依赖 Embedding 相似度作为唯一收敛指标**。在某些场景下，两个完全相反的观点向量相似度也可能很高，需结合语义一致性校验。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -155,7 +154,6 @@ flowchart TD
 - 防死锁：引入 Moderator 仲裁，或设置外部真值校验打破集体幻觉。
 - 避坑指南：讨论适合创意类，高风险决策需配合确定性规则引擎。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 民主讨论模式容易死循环或废话堆砌，必须有议程表和超时闹钟。硬终止四招：最大轮数限制、Token 预算、收敛阈值（观点相似度 >0.95）、Moderator 仲裁。软优化是强制结构化发言（观点+证据+反对意见）允许 PASS。防死锁要引入外部真值校验打破集体幻觉，讨论适合创意类不适合高风险决策。
@@ -179,3 +177,37 @@ flowchart TD
 | 1:10 | 集体幻觉警示 | "坑：全票通过但答案错，要外部真值校验打破。" | 边界情况 |
 | 1:35 | 代码风格争论案例 | "实战：两 Agent 无限争论，投票+Token 熔断调高级 LLM。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：硬终止 + 结构化发言 + 真值校验。下期讲黑板模式。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["民主讨论怎么不开长会<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["硬终止四招<br/>0:15"]:::core
+        N2["结构化发言示例<br/>0:45"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["集体幻觉警示<br/>1:10"]:::practice
+        N4["代码风格争论案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -190,3 +190,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——保安查证件，看脸、看动作，可疑的拦下来盘问。" | 核心类比 |
 | 2:03 | 多层防御从网络到业务 图解 | "多层防御从网络到业务。" | 多层防御从网络到业务 |
 | 2:50 | 设备 图解 | "设备指纹识别机器身份。" | 设备 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个防刷系统？防止黄牛/机器人/恶意攻击"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["四层防御：网络层（WAF/IP限频）、设备层（指纹）…"]:::core
+        C["风控引擎：请求进规则引擎评估，按风险评分决定放行、验…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

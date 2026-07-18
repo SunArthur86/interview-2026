@@ -161,3 +161,35 @@ flowchart TD
 | 1:30 | 一句话定义示意 | "Java单列集合的根接口，继承Iterable接口，存储不唯一的对象。" | 要点1 |
 | 2:15 | 三大子接口示意 | "List(有序可重复)、Set(无序不重复)、Queue(FIFO队列)。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Collection接口？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：Java单列集合的根接口，继承Itera…"]:::core
+        C["三大子接口：List（有序可重复）、Set（无序不重…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

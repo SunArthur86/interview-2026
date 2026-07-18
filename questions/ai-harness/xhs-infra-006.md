@@ -165,14 +165,12 @@ flowchart TD
     Pipe --> Roofline[Roofline分析]
 ```
 
-
 ## 记忆要点
 
 - 内存优化：Coalescing 合并访问，Shared Memory Tiling 分块复用，Padding 消除 Bank Conflict。
 - Tensor Core：使用 WMMA API，要求 FP16/BF16 输入和 FP32 累加，数据布局需对齐。
 - 流水线：Double Buffering 异步加载，隐藏内存延迟，掩盖数据传输时间。
 - 性能分析：用 Roofline 模型判断是 Memory Bound 还是 Compute Bound，对症下药。
-
 
 ## 结构化回答
 
@@ -197,3 +195,37 @@ flowchart TD
 | 2:00 | Tensor Core图解 | "使用 WMMA API，要求 FP16/BF16 输入和 FP32 累加，数据布局需对齐。" | Tensor Core |
 | 2:40 | 流水线图解 | "Double Buffering 异步加载，隐藏内存延迟，掩盖数据传输时间。" | 流水线 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["CUDA Kernel优化：如何写…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用Shared Memory分块和Tensor<br/>0:40"]:::core
+        N2["内存优化图解<br/>1:20"]:::deep
+        N3["Tensor Core图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["流水线图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

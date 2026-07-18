@@ -200,6 +200,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["HashMap JDK 8 的底层原理？为什么引入红黑树？扩…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["结构：数组+链表+红黑树。链表长度≥8且数组≥64才…"]:::core
+        C["定位：hash&（n-1）当n为2的幂时等效取模；h…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：HashMap（数组+链表+红黑树）是什么？
 
 > 合并自 `core-154`（相似度 75%）
@@ -299,3 +331,35 @@ static final int hash(Object key) {
 | 1:30 | 结构骨架示意 | "主体数组+链表解决哈希冲突，JDK1.8引入红黑树解决长链表O(N)查询慢问题" | 要点1 |
 | 2:15 | 核心参数示意 | "初始容量16，负载因子0.75，扩容阈值=两者乘积" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["HashMap JDK 8 的底层原理？为什么引入红黑树？扩…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["结构：数组+链表+红黑树。链表长度≥8且数组≥64才…"]:::core
+        C["定位：hash&（n-1）当n为2的幂时等效取模；h…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

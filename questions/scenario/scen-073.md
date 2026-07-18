@@ -181,3 +181,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像滴滴打车调度员，瞬间决定哪辆车接哪单最快最顺路。" | 核心类比 |
 | 2:03 | 多目标优化 图解 | "时间最短、效率最高、成本最低。" | 多目标优化 |
 | 2:50 | 分阶段调度 图解 | "贪心指派、二分图匹配、智能寻优。" | 分阶段调度 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计外卖配送调度系统？类似美团/饿了么"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质模型：多约束条件下的最优分配，属于NP-Hard…"]:::core
+        C["调度模式对比：实时调度快但视野短，批次调度（积压N秒…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

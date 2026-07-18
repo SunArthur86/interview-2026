@@ -171,3 +171,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——消费者自己手里有份餐厅名单，根据喜好(距离、评分)自己选一家吃。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：客户端侧的负载均衡，通过多种算法选择最优服务实例。" | 核心定义 |
 | 1:50 | 轮询 图解 | "按顺序轮流。" | 轮询 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Ribbon内置的负载均衡策略是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["基础策略：轮询是默认策略，而随机策略适合海量请求下的…"]:::core
+        C["性能导向：响应时间权重会让快机器分到更多请求，最低并…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

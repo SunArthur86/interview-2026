@@ -104,8 +104,6 @@ def apply_rotary_emb(xq, xk, freqs_cis):
     return xq_out.type_as(xq), xk_out.type_as(xk)
 ```
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -139,7 +137,6 @@ flowchart TD
 - 回答策略：读论文+实战结合(如通过调RoPE的base值实现长文外推解决信息截断)
 - 方法论：读论文不仅懂QKV公式，更要带入工程解决如长文本特征衰减等实际Bug
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过精读经典论文掌握技术本质，并具备工程化落地的转化能力。——打个比方，像练武功要练马步一样，Transformer、LoRA 是基础内功，练好了才能学新招式。
@@ -163,3 +160,37 @@ flowchart TD
 | 2:00 | 要点图解 | "DeepSeek技术报告必看：拆解MLA与MoE如何实现极端的显存压缩与低成本推理" | 要点 |
 | 2:40 | 回答策略图解 | "读论文+实战结合(如通过调RoPE的base值实现长文外推解决信息截断)" | 回答策略 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】近一年读过什么 AI …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过精读经典论文掌握技术本质，并具备工程化落地的<br/>0:40"]:::core
+        N2["必读Top3图解<br/>1:20"]:::deep
+        N4["回答策略图解<br/>2:40"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["DeepSeek技术报告必看：拆解MLA与MoE<br/>2:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

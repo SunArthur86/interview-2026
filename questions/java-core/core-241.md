@@ -153,3 +153,35 @@ flowchart TD
 | 1:30 | 核心示意 | "加密和解密使用同一个密钥，速度快，适合大数据量加解密" | 要点1 |
 | 2:15 | 典型算法示意 | "AES最常用，DES已淘汰，严禁使用不安全的ECB模式" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是对称加密？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心：加密和解密使用同一个密钥，速度快，适合大数据量…"]:::core
+        C["典型算法：AES最常用，DES已淘汰，严禁使用不安全…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

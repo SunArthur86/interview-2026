@@ -146,3 +146,35 @@ flowchart TD
 | 0:40 | 同一个线程多次获取同一把锁示意图 | 允许同一个线程多次获取同一把锁 | 同一个线程多次获取同一把锁 |
 | 1:10 | 避免线程因自己持有的锁而死锁示意图 | 避免线程因自己持有的锁而死锁 | 避免线程因自己持有的锁而死锁 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是可重入锁？它的实现原理是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["定义：同一线程外层获锁后，内层仍能获取，不会阻塞自己"]:::core
+        C["核心机制：锁内部维护计数器与持有线程标识，重入则加1…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

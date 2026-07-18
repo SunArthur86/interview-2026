@@ -198,3 +198,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——CAP是宪法，BASE是AP派的行动指南：先凑合用，慢慢修。" | 核心类比 |
 | 2:03 | CAP理论 图解 | "CAP理论指导架构选型。" | CAP理论 |
 | 2:50 | BASE 图解 | "BASE是实现最终一致的方法。" | BASE |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["CAP 定理和 BASE 理论的关系是什么？互联网架构为什么…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["BASE是CAP中AP架构的工程延伸：基本可用、软状…"]:::core
+        C["互联网选AP+BASE：因为CP阻塞会引发雪崩，所以…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

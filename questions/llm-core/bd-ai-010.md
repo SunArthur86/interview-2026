@@ -112,7 +112,6 @@ flowchart TD
     G --> H[效果差十倍]
 ```
 
-
 ## 记忆要点
 
 - 核心目标：翻译意图为模型易理解形式，压缩概率分布，提高输出确定性
@@ -120,7 +119,6 @@ flowchart TD
 - 效果差异：好Prompt概率分布集中(尖峰)，差Prompt分布平坦(随机)
 - 实用技巧：明确角色、任务、约束，给示例，要求推理过程，禁止Markdown
 - 注意：简单任务CoT可能引入噪声，Few-shot示例顺序有影响(后置权重高)
-
 
 ## 结构化回答
 
@@ -143,3 +141,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：通过精准指令引导概率分布，将模糊意图转化为确定输出。" | 核心定义 |
 | 1:00 | 核心目标图解 | "翻译意图为模型易理解形式，压缩概率分布，提高输出确定性" | 核心目标 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】Prompt Engi…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过精准指令引导概率分布，将模糊意图转化为确定输<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["核心目标图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

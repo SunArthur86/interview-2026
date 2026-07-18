@@ -125,7 +125,6 @@ optimized_qa = teleprompter.compile(QA(), trainset=train_data)
 2. **追问**：DSPy 的 `BootstrapFewShot` 和 `KNN` 优化器分别适用于什么场景？它们在选择示例时的核心差异是什么？
 3. **追问**：如果目标是优化一个多步骤的 Agent 流程（包含 RAG + 工具调用），DSPy 如何保证整体链路的端到端优化？
 
-
 ## 记忆要点
 
 - 核心思想：声明式编程替代手写Prompt，将Prompt Engineering转为参数优化
@@ -156,4 +155,36 @@ optimized_qa = teleprompter.compile(QA(), trainset=train_data)
 | 0:55 | 优化流程：Signature → 优化器搜索 → 编译 | 流程是定义 Signature，让优化器自动搜索最佳 Prompt 和示例，然后编译运行。 | 优化流程 |
 | 1:25 | 对比：人工调参 vs Teacher LLM + Metric 自动调优 | 传统靠人工调参，DSPy 靠 Teacher LLM 生成示例、用 Metric 反馈自动调优。 | 对比传统 |
 | 1:50 | 局限提示：Metric 难设计 / 依赖 Teacher / 易过拟合 | 局限是 Metric 设计主观且难，依赖 Teacher 模型能力上限，容易过拟合训练集。 | 局限性 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《DSPy 程序化 Promp…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["四大组件图：Signature/Module/Tele…<br/>0:25"]:::core
+        N2["优化流程：Signature → 优化器搜索 → 编译<br/>0:55"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比：人工调参 vs Teacher LLM + Me…<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["局限提示：Metric 难设计 / 依赖 Teache…<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

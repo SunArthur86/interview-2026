@@ -148,7 +148,6 @@ class SwiGLU(nn.Module):
         return self.down_proj(F.silu(self.gate_proj(x)) * self.up_proj(x))
 ```
 
-
 ## 记忆要点
 
 - SwiGLU引入门控机制，公式为Swish(xW_g)⊙(xW_in))W_out
@@ -179,4 +178,37 @@ class SwiGLU(nn.Module):
 | 1:10 | 对比 ReLU/GELU | "ReLU 负区间梯度为 0 会死亡，SwiGLU 的 Swish 梯度平滑性能更好。" | 对比优势 |
 | 1:35 | 参数量加 50% 警示 | "代价：多一个门控矩阵参数加 50%，把隐藏层维度调小平衡总参。" | 代价平衡 |
 | 1:55 | 总结卡 | "口诀：门控乘 Swish，梯度平滑，调维度平衡参数。下期讲涌现。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["SwiGLU 激活函数<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["智能阀门类比<br/>0:15"]:::core
+        N2["SwiGLU 公式拆解图<br/>0:40"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比 ReLU/GELU<br/>1:10"]:::practice
+        N4["参数量加 50% 警示<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：门控乘 Swish，梯度平滑，调维度平衡参<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

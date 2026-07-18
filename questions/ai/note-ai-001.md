@@ -126,7 +126,6 @@ def scaled_dot_product_attention(Q, K, V, mask=None):
     
     return output, attn_weights
 
-
 # === 实验验证：缩放前后方差对比 ===
 import numpy as np
 
@@ -232,7 +231,6 @@ for d_k in d_k_values:
 
 5. **从第一性原理理解：** 面试官追问深层问题时，可以从信息论角度补充——Softmax 温度参数和 $\sqrt{d_k}$ 缩放在数学上等价，都是调节输出分布的"锐度"。注意力分布的熵应在适当范围内：太尖锐（退化为 hard attention）则梯度差，太平坦（退化为 mean pooling）则表达力弱。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -310,7 +308,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 就像考试分数标准化——100道题的总分（方差大）除以根号100=10，变成标准分（方差1）。
 
 **展开框架：**
@@ -320,11 +317,9 @@ flowchart TD
 
 **收尾：** 为什么是根号d_k不是d_k？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -333,3 +328,36 @@ flowchart TD
 | 0:50 | 点积方差示意图 | "点积方差——点积方差=d_k" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：为什么是根号d_k不是d_k？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Self-Attention 为什…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["点积方差示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

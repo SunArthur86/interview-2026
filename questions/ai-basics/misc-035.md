@@ -107,7 +107,6 @@ def build_safe_prompt(user_input: str, system_instruction: str):
 2. **追问**：如何设计一个“意图预检”模型来判断输入是否包含恶意指令，它与主模型之间存在哪些平衡点（如误杀率 vs 延迟）？
 3. **追问**：面对 Prompt Injection，为什么 LLM 也很容易中招，这与传统的 SQL 注入防御原理有何异同？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -178,4 +177,36 @@ flowchart TD
 | 0:55 | 防御分层：输入过滤 + XML 隔离 + 输出校验 | 防御要分层：输入做过滤，Prompt 用 XML 标签隔离系统指令和用户内容，输出做格式校验。 | 防御分层 |
 | 1:25 | 架构层：最小权限 + 人工审核 | 架构层坚持最小权限，禁止 LLM 直接执行高危操作，删库转账这种必须人工审核。 | 架构防御 |
 | 1:50 | RAG 防御：清洗检索内容 + 意图预检 | RAG 场景特别危险，要清洗检索内容，对文档做摘要或意图预检再喂给模型。 | RAG 防御 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Prompt 注入防御》+ …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三类攻击：直接/间接（RAG）/越狱<br/>0:25"]:::core
+        N3["架构层：最小权限 + 人工审核<br/>1:25"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["防御分层：输入过滤 + XML 隔离 + 输出校验<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["RAG 防御：清洗检索内容 + 意图预检<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

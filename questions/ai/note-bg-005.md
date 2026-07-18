@@ -327,7 +327,6 @@ class EnhancedDAPO:
 - **PRM（Let's Verify Step by Step）**：OpenAI 2023，过程奖励的奠基工作
 - **Self-Play / SPIN**：模型自我对弈，从自身错误中学习，也能缓解困难样本问题
 
-
 ## 核心流程图
 
 ```mermaid
@@ -377,7 +376,6 @@ flowchart TD
 - 解决策略：DAPO通过动态采样过滤掉无梯度信号的无效样本，凑满有效batch
 - 代价体现：当前模型完全答不出的超难全错样本被丢弃，丧失学习机会
 - 能力限制：因困难样本被剔除，故模型的能力天花板会被永久锁死
-
 
 ## 苏格拉底式面试追问
 
@@ -436,11 +434,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：如何判断一个prompt对当前模型是"太难了"？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -450,3 +446,37 @@ flowchart TD
 | 1:30 | 零奖励样本剔除的代价示意图 | "零奖励样本剔除的代价——困难样本（全错）学不到" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：如何判断一个prompt对当前模型是"太难了"？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["DAPO 动态采样提升效率 & 零…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["动态采样示意图<br/>0:50"]:::deep
+        N3["零奖励样本剔除的代价示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -499,6 +499,28 @@ flowchart TD
 | 0:00 | 标题卡 | "服务间调用的超时、重试与幂等控制——这道题面试官到底想考什么？我用 30 秒给你讲透。" | 开场钩子 |
 | 0:15 | 微服务架构图 | 先说核心：超时、重试、幂等是分布式调用的"稳定性三件套"——超时防止无限等待拖垮调用方，重试容忍瞬时故障提升成功率，幂等保证重试不产生副作用。三者配合的数学本质是：超时切断长尾、重试把 。 | 核心定义 |
 | 0:30 | RPC 调用流程图 | 固定间隔、指数退避（Exponential Backoff）、抖动（Jitter），避免惊群。 | 重试策略 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>微服务"]:::concept
+  end
+  subgraph Outro["🎯 收尾"]
+    N3["0:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
 | 1:30 | 总结卡 | 一句话记忆：超时三层：连接超时（短）、读超时（P99×3-5）、全局超时（兜底）。 下期可以接着聊：超时时间设多少合适。 | 收尾总结 |
 
 

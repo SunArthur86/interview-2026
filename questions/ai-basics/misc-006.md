@@ -173,7 +173,6 @@ flowchart TD
     N --> O
 ```
 
-
 ## 记忆要点
 
 - BPE按频率自底向上合并，WordPiece按似然合并，SentencePiece把空格当字符处理
@@ -204,4 +203,37 @@ flowchart TD
 | 1:10 | 大模型选 BPE 原因 | "子词覆盖好、多语言友好、无 UNK 可逆，Byte 级保证能编码任何文本。" | 选型理由 |
 | 1:35 | 中文 token 效率低警示 | "痛点：中文在未优化词表里效率低，需扩词表或用 SentencePiece。" | 中文痛点 |
 | 1:55 | 总结卡 | "口诀：BPE 按频率，SentencePiece 处理空格，大模型标配。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["分词算法<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["积木拼词类比<br/>0:15"]:::core
+        N2["三种算法对比表<br/>0:40"]:::deep
+        N3["大模型选 BPE 原因<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["中文 token 效率低警示<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：BPE 按频率，SentencePiece<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

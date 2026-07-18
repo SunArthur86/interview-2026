@@ -398,3 +398,35 @@ flowchart TD
 | 1:06 | 架构示意图分步演示 | "硬编码痛点：新增规则必改核心代码，导致类膨胀、测试难、发版回归风险极高。" | 硬编码痛点 |
 | 1:57 | 关键代码/伪代码片段 | "重构方案：用责任链+组合模式构建规则引擎，将每条规则封装为独立Handler实现解耦。" | 重构方案 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：什么是开闭原则。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】你会把付费用户加权这种规则直接写死在抽奖流程里吗…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["结论：绝不能硬编码，因为规则与流程强耦合严重违反开闭…"]:::core
+        C["硬编码痛点：新增规则必改核心代码，导致类膨胀、测试难…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

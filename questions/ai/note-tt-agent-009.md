@@ -136,7 +136,6 @@ Agent路径（灵活、高成本）：
 3. **监控指标**：Workflow看成功率/延迟，Agent看完成率/平均轮数/成本/用户满意度
 4. **Anthropic的建议**："能用Workflow就别用Agent"——Workflow可控性远高于Agent
 
-
 ## 核心流程图
 
 ```mermaid
@@ -172,7 +171,6 @@ flowchart TD
 - 因果句：因为高频标准场景要求低延迟且高合规，所以选固定工作流Workflow
 - 因果句：因为客诉等非标场景输入多变且需多步反思，所以必须用自研Agent
 - 口诀法：混合架构是趋势，标准查流程走捷径，长尾复杂推理交Agent
-
 
 ## 苏格拉底式面试追问
 
@@ -227,11 +225,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：Workflow和Agent混合架构怎么做？什么节点该固定什么该灵活？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -240,3 +236,36 @@ flowchart TD
 | 0:50 | Workflow示意图 | "Workflow——预定义DAG，节点固定，流程可预测" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：Workflow和Agent混合架构怎么做？什么节点该固定什？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Workflow固定工作流和自主决…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Workflow示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

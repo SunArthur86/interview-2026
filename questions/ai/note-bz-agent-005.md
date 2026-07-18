@@ -203,7 +203,6 @@ metrics = {
 2. **提"LLM Gateway"**：模型路由层是多模型/降级/成本控制的关键组件
 3. **可观测是上线前提**：没有 Trace 和监控的 Agent 不敢上生产，因为概率性故障无法定位
 
-
 ## 核心流程图
 
 ```mermaid
@@ -239,7 +238,6 @@ flowchart TD
 - 六大必备组件：编排引擎、记忆模块、工具层、知识库、安全层、可观测监控
 - 记忆工程：需用户隔离、重排序（Rerank）、以及基于TTL的遗忘机制
 - 企业级工具规范：必须包含参数Schema、权限矩阵、限流和降级策略
-
 
 ## 苏格拉底式面试追问
 
@@ -298,11 +296,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：企业级Agent和开源框架什么关系？——框架提供组件骨架，企业需定制化？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -311,3 +307,36 @@ flowchart TD
 | 0:50 | 六大组件示意图 | "六大组件——编排/记忆/工具/知识/安全/可观测" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：企业级Agent和开源框架什么关系？——框架提供组件骨架，企？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["企业级 Agent 如何搭建？必备…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["六大组件示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

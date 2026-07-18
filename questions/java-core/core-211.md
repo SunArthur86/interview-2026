@@ -183,3 +183,35 @@ flowchart TD
 | 1:30 | SDS 动态字符串示意 | "O(1)获取长度且二进制安全，预分配与惰性释放机制，String底层" | 要点1 |
 | 2:15 | SkipList 跳表示意 | "ZSet底层之一，空间换时间实现 O(logN) 查找，比红黑树更易实现且支持高效范围查询" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Redis底层数据结构？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["SDS 动态字符串：O（1）获取长度且二进制安全，预…"]:::core
+        C["SkipList 跳表：ZSet底层之一，空间换时间…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

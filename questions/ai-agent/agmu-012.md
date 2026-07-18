@@ -89,7 +89,6 @@ asyncio.run(main())
 1. **SOP 作用**：MetaGPT 中的 SOP 是如何实现的？（答：通过定义固定的 Prompt 模板和 Agent 执行顺序，强制每个角色只能输入/输出特定格式文档）。
 2. **成本问题**：如何控制 MetaGPT 的成本？（答：通常通过限制生成内容的长度，或者替换更小的模型给非核心角色）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -156,7 +155,6 @@ flowchart TD
 - 结构化程度高但链路长，成本高、耗时长，不适合直接上生产。
 - 适合 Demo 演示与原型验证，CrewAI 更适合垂直业务流。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** MetaGPT 不适合直接上生产。它的卖点是引入 SOP 和多角色模拟公司（PM、架构师、工程师、QA），擅长生成标准 Markdown 文档和代码用于 Demo 和原型验证。但链路长、成本高、耗时长（跑一次 15 分钟 $5+），且缺乏细粒度 Token 预算熔断。适合技术预研文档草拟，垂直业务流用 CrewAI 更合适。
@@ -180,3 +178,37 @@ flowchart TD
 | 1:10 | 生产痛点警示 | "坑：链路长成本高耗时长，缺乏 Token 预算熔断。" | 生产短板 |
 | 1:35 | 原型生成案例 | "实战：跑一次 15 分钟 $5+，引用不存在包名 Debug 更长。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：适合 Demo 和预研，生产用 CrewAI 或 LangGraph。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["MetaGPT 适合上生产吗<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心卖点<br/>0:15"]:::core
+        N2["工作流图<br/>0:45"]:::core
+        N3["生产痛点警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["原型生成案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

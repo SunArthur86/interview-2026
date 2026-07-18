@@ -296,3 +296,35 @@ flowchart LR
 | 0:15 | 架构示意图 | "从后往前三指针：p1就是m-1, p2就是n-1, p就是m+n-1" | 从后往前三指针 |
 | 0:47 | 架构示意图分步演示 | "每次取较大的放p位置，对应指针左移" | 每次取较大的放p位置 |
 | 1:20 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：为什么要从后往前？从前往前不行吗。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【拼多多二面】手撕算法：合并两个有序数组"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["从后往前三指针"]:::core
+        C["每次取较大的放p位置"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

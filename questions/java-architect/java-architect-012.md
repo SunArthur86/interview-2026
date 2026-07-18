@@ -427,4 +427,30 @@ flowchart TD
 | 1:05 | AOP 动态代理原理图 | self-invocation（this 调用）、非 public、异常被吞、异常类型不匹配、多线程、未托管 Bean。 | 失效场景 |
 | 2:30 | 总结卡 | 一句话记忆：事务 = AOP 代理拦截 + ThreadLocal 绑定 Connection。 下期可以接着聊：同类内部调用为什么事务失效。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>事务隔离级别"]:::concept
+    N3["0:40<br/>4 种隔离级别"]:::deep
+    N4["1:05<br/>失效场景"]:::practice
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["2:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

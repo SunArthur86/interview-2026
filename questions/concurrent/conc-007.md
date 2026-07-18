@@ -177,3 +177,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 去干洗店洗衣服：填单子（Callable），拿小票，凭小票取衣服。 | 核心概念 |
 | 0:40 | Runnable 无返回值示意图 | Runnable 无返回值，Callable 有返回值。 | Runnable 无返回值 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["ExecutorService、Callable《Class…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["接口对比：Runnable无返回不抛异常，而Call…"]:::core
+        C["异步获取：Future代表异步结果，因为get（）会…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

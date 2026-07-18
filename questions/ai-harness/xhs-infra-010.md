@@ -120,7 +120,6 @@ def check_expert_balance(local_expert_counts):
 - **StepFun万亿MoE**：384专家，8+1共享架构，大规模并行下对通信库优化极深。
 - **MiniMax**：32专家，结合 ETP (Expert Tensor Parallelism) 降低通信量。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -176,7 +175,6 @@ flowchart TD
 - 负载均衡：Auxiliary Loss让fi接近1/N，Noisy Top-K增加探索，共享专家兜底。
 - 实战调优：Loss尖峰查通信耗时方差，调大Aux权重，避免专家负载倾斜。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 优化通信拓扑与负载均衡策略，解决MoE的All-to-All瓶颈。——打个比方，像安排专家会诊，既要避免病人都挤向名医，也要避免转院路途太远。
@@ -200,3 +198,37 @@ flowchart TD
 | 2:00 | 负载均衡图解 | "Auxiliary Loss让fi接近1/N，Noisy Top-K增加探索，共享专家兜底。" | 负载均衡 |
 | 2:40 | 实战调优图解 | "Loss尖峰查通信耗时方差，调大Aux权重，避免专家负载倾斜。" | 实战调优 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["MoE（Mixture of Ex…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["优化通信拓扑与负载均衡策略，解决MoE的All-<br/>0:40"]:::core
+        N2["通信瓶颈图解<br/>1:20"]:::deep
+        N3["负载均衡图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["实战调优图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

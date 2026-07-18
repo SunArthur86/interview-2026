@@ -101,7 +101,6 @@ for payload in attack_payloads:
   3. **Garak 和 PyRIT 的区别？**：Garak更侧重于漏洞扫描模块化，PyRIT则侧重于交互式评估流程。
   4. **如何处理“成员推断”攻击？**：即判断某条数据是否属于模型的训练集，通常通过分析模型对该数据的置信度差异来防御，如差分隐私技术。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -172,4 +171,36 @@ flowchart TD
 | 0:55 | 防御四件套：输入隔离 / 输出过滤 / 最小权限 / 速率限制 | 防御重点：输入用 XML 标签隔离、输出做过滤、架构坚持最小权限、API 做速率限制。 | 防御重点 |
 | 1:25 | 工具图标：Garak / PyRIT / PAIR | 工具上 Garak 做漏洞扫描，微软的 PyRIT 和 PAIR 做自动化越狱测试。 | 自动化工具 |
 | 1:50 | RAG 风险：间接注入 + 清洗示意 | RAG 最大风险是间接注入，文档里藏恶意指令，所以要清洗检索内容、做权限隔离。 | RAG 风险 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《红队测试》+ 黑客偷家修门锁…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["攻击面图：越狱 / 注入 / 投毒 / 窃取<br/>0:25"]:::core
+        N2["防御四件套：输入隔离 / 输出过滤 / 最小权限 / …<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["工具图标：Garak / PyRIT / PAIR<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["RAG 风险：间接注入 + 清洗示意<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

@@ -168,3 +168,35 @@ flowchart LR
 | 0:40 | 概念动画/示意图 | "数组是连续空间读写快增删慢，链表是分散节点增删快读写慢——数组像排好座的影院，找座快但加座难；链表像寻宝游戏，下一个在哪看线索，插入删除方便" | 核心定义 |
 | 1:20 | 要点1图解示意 | "但增删需移动元素较慢；链表靠指针非连续，增删快O(1)" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["链表和数组的区别是什么？链表的常见操作？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["数组内存连续支持随机访问O（1），但增删需移动元素较…"]:::core
+        C["因为内存连续，数组对CPU缓存友好而链表较差；链表无…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

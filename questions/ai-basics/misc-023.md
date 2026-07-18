@@ -87,7 +87,6 @@ llm = LLM(
 2. **PagedAttention 的计算复杂度**：在连续生成时，PagedAttention 相比传统显存管理在算子层面有哪些额外开销？(Block table 读取)
 3. **FlashAttention 的地位**：在长上下文优化中，FlashAttention (IO 意识) 是基础，其他策略主要解决的是显存容量和多卡扩展问题。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -166,4 +165,36 @@ flowchart TD
 | 0:55 | Ring Attention 多机环形通信图 | 第二条线是 Attention 架构：Ring Attention 跨机环形传递 KV，能支持 1M 以上的超长上下文。 | Ring Attention |
 | 1:25 | StreamingLLM 示意：滑动窗口 + Attention Sink | StreamingLLM 用滑动窗口加 Attention Sink，支持无限流式输入，适合对话场景。 | StreamingLLM |
 | 1:50 | vLLM block_size 调参示意 | 实战小技巧：长文本下调大 vLLM 的 block_size 到 256，可以减少元数据开销。 | 实战调参 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《长上下文优化》+ 厚书变薄笔…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["KV Cache 优化三件套：量化/分块/共享<br/>0:25"]:::core
+        N2["Ring Attention 多机环形通信图<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["StreamingLLM 示意：滑动窗口 + Atte…<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["vLLM block_size 调参示意<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

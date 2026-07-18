@@ -128,8 +128,6 @@ def top_k_top_p_filtering(logits, top_k=0, top_p=0.0, filter_value=-float('Inf')
 | **Top-P (Nucleus)** | 通用对话 (推荐) | 概率分布极平时可能截断过多 | P=0.9, T=0.7 |
 | **Contrastive Search** | 长文本生成 | 实现稍复杂，需调节 deg_penalty | penalty=0.5~1.0 |
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -160,7 +158,6 @@ flowchart TD
 - Top-P核基选：动态截断累积概率(常设0.9)，比Top-K固定截断更自然
 - 进阶加速：投机采样用小模型草拟+大模型验证，实现2-3倍无损加速
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 从概率分布中选择token的策略，平衡确定性与多样性。——打个比方，像写作文，是每次只选最顺口的词（Greedy），还是在候选词里随机抽（Sampling），取决于你想要标准答案还是创意。
@@ -182,3 +179,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：从概率分布中选择token的策略，平衡确定性与多样性。" | 核心定义 |
 | 1:00 | 两大流派图解 | "Greedy/Beam重确定易重复，Top-K/Top-P重多样防尾巴" | 两大流派 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】了解大模型的解码策略吗<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["从概率分布中选择token的策略，平衡确定性与多<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["两大流派图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

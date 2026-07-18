@@ -126,8 +126,6 @@ def execute_with_retry(agent_func, max_retries=2, timeout=5):
 3. **上下文传递**：子Agent是否需要全部历史上下文？如何设计"参考上下文"窗口以节省Token？
 4. **并发控制**：当任务分解为几十个子任务时，如何进行并发限流和资源调度（Semaphore/RateLimiter）？
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -162,7 +160,6 @@ flowchart TD
 - 工程关键：状态持久化存DB/Redis防丢，Checkpoint机制支持回滚，消息需幂等
 - 并发控制：多子任务时用Semaphore限流，防止资源打满
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 星型架构解耦通信，四层防线（超时、重试、降级、校验）保障鲁棒性。——打个比方，像公司架构：老板（主）给员工（子）派活，不干就换人，干完要质检。
@@ -186,3 +183,37 @@ flowchart TD
 | 2:00 | 通信机制图解 | "子Agent互不通信，全由主Agent中转、分发任务并聚合结果" | 通信机制 |
 | 2:40 | 异常四层防线图解 | "超时机制、重试策略、降级方案(挂了用简单方法)、结果校验" | 异常四层防线 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】多Agent架构下，主…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["星型架构解耦通信，四层防线（超时、重试、降级、校<br/>0:40"]:::core
+        N2["架构选型图解<br/>1:20"]:::core
+        N3["通信机制图解<br/>2:00"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["异常四层防线图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

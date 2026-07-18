@@ -155,14 +155,12 @@ flowchart TD
     H --> I[输出Top-5结果送给LLM]
 ```
 
-
 ## 记忆要点
 
 - BM25负责精确匹配（ID/错误码），Dense负责语义理解（同义词/改写）
 - 融合策略常用RRF（倒数排名融合）或加权线性插值（需归一化）
 - RRF公式：Σ 1/(k+rank)，参数k通常取60，鲁棒性强
 - 混合检索后接Reranker精排，可提升MRR 20%-40%
-
 
 ## 结构化回答
 
@@ -185,3 +183,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：结合关键词精确匹配与向量语义理解，通过Rerank提升召回质量。" | 核心定义 |
 | 1:00 | 要点图解 | "BM25负责精确匹配（ID/错误码），Dense负责语义理解（同义词/改写）" | 要点 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计RAG系统的混合检索方案<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["结合关键词精确匹配与向量语义理解，通过Reran<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["BM25负责精确匹配（ID/错误码），Dense<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -156,3 +156,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 作业状态：写好了（就绪）、正在写（运行）、等老师签字（阻塞）、写完了（终止）。 | 核心概念 |
 | 0:40 | 三态模型示意图 | 三态模型：就绪、运行、阻塞 | 三态模型 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是进程的状态有哪些？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三大基本状态：就绪（等CPU）、运行（用CPU）、阻…"]:::core
+        C["流转铁律：阻塞状态恢复后不能直接回运行，必须先重回就…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

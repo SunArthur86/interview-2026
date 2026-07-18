@@ -214,3 +214,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "引入函数式编程、流式处理和新日期时间API，大幅提升开发效率——像从手动挡换到自动挡跑车（Stream/Lambda），修好了老旧的仪表盘（Date API），加装了防撞系统" | 核心定义 |
 | 1:20 | 两大基石示意 | "Lambda表达式（简化代码）与Stream API（函数式处理集合）。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Java 8有哪些新特性？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["两大基石：Lambda表达式（简化代码）与Strea…"]:::core
+        C["防NPE利器：Optional容器，优雅链式处理多层…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

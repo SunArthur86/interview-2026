@@ -194,6 +194,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["字节流和字符流的区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["基本单元：字节流操作 8 位字节，字符流操作 16 …"]:::core
+        C["基类区别：字节流是 InputStream/Outp…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是字符流？
 
 > 合并自 `core-237`（相似度 68%）
@@ -292,6 +324,38 @@ try (BufferedReader reader = new BufferedReader(
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["字节流和字符流的区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["基本单元：字节流操作 8 位字节，字符流操作 16 …"]:::core
+        C["基类区别：字节流是 InputStream/Outp…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是IO流基本认识？
 
 > 合并自 `core-068`（相似度 66%）
@@ -370,3 +434,35 @@ Files.copy(Paths.get("source.txt"), Paths.get("dest.txt"), StandardCopyOption.RE
 | 0:40 | 概念动画/示意图 | "数据传输的管道，分字节（8位）和字符（16位）流——水管运送水，I/O流运送字节或字符数据" | 核心定义 |
 | 1:20 | 核心概念示意 | "Java以字节(byte)为基本单位处理数据流向的机制" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["字节流和字符流的区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["基本单元：字节流操作 8 位字节，字符流操作 16 …"]:::core
+        C["基类区别：字节流是 InputStream/Outp…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

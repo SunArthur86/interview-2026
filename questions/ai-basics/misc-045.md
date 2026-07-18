@@ -94,7 +94,6 @@ class RMSNorm(nn.Module):
                                             └───────────────────────────────┘
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -184,4 +183,36 @@ flowchart TD
 | 0:55 | Pre-Norm vs Post-Norm 结构对比图 | Pre-Norm 把归一化放在残差之前，主干梯度有直连通路，传得稳、支持深模型；Post-Norm 深层易梯度消失。 | Pre/Post-Norm |
 | 1:25 | 梯度传播示意：Pre-Norm 直连 vs Post-Norm 阻塞 | 关键区别在梯度：Pre-Norm 有直连通路，梯度顺畅；Post-Norm 深层容易梯度消失，训练难。 | 梯度传播 |
 | 1:50 | LLaMA 标签 + 组合优势 | 实战上，LLaMA 用 RMSNorm 加 Pre-Norm 的组合，既快又稳，解决了深层训练的 Loss 震荡。 | 实战组合 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《RMSNorm 与 Pre-…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["RMSNorm vs LayerNorm 公式对比<br/>0:25"]:::core
+        N2["Pre-Norm vs Post-Norm 结构对比图<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["梯度传播示意：Pre-Norm 直连 vs Post-…<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["LLaMA 标签 + 组合优势<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

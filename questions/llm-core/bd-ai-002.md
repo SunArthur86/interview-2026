@@ -138,7 +138,6 @@ flowchart TD
     G --> H[端到端完成任务]
 ```
 
-
 ## 记忆要点
 
 - 核心区别：网页AI是对话式，Claude Code是Agent式（给目标自主执行）。
@@ -146,7 +145,6 @@ flowchart TD
 - 交互：无需手动复制粘贴，直接在终端环境形成闭环，遇到错误自动修复。
 - 最佳实践：任务粒度适中，给约束比给步骤好，利用Git checkpoint控制风险。
 - 踩坑：防止死循环和过度工程化，长任务需定期重复关键约束或使用pause。
-
 
 ## 结构化回答
 
@@ -170,3 +168,36 @@ flowchart TD
 | 1:12 | 核心区别图解 | "网页AI是对话式，Claude Code是Agent式（给目标自主执行）。" | 核心区别 |
 | 1:48 | 能力图解 | "拥有文件系统感知和命令执行权，可自动读写文件、跑测试、多轮迭代。" | 能力 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】Claude Code…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["从“对话生成”升级为“自主代理”，具备读写执行闭<br/>0:36"]:::core
+        N2["核心区别图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["能力图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

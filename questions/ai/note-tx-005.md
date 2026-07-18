@@ -282,7 +282,6 @@ def safe_forget(memory_id: str):
 4. **延伸到合规**：提到 GDPR 的 right-to-be-forgotten，体现对法规的认知。
 5. **成本意识**：遗忘不只是功能，更是成本控制手段——向量DB 按存储量计费。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -325,7 +324,6 @@ flowchart TD
 - 行级隔离：共享存储配合metadata过滤，需在代码层强加隔离护栏防漏查。
 - 最佳架构：公共知识全局共享+私有记忆按user_id严格隔离。
 - 遗忘机制：更新合并冗余，按时间衰减或重要性递减淘汰防膨胀。
-
 
 ## 苏格拉底式面试追问
 
@@ -371,7 +369,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 记忆系统像酒店——每个客人有独立房间（用户隔离），房间有不同清洁频率：常住客人的房间保留物品（高频访问），退房客人的物品清理（TTL过期），VIP客人的偏好永久记录（永不遗忘）。
 
 **展开框架：**
@@ -381,11 +378,9 @@ flowchart TD
 
 **收尾：** 共享记忆和私有记忆怎么区分？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -395,3 +390,37 @@ flowchart TD
 | 1:30 | 公共知识共享示意图 | "公共知识共享——公共知识共享+私有记忆隔离" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：共享记忆和私有记忆怎么区分？——按来源打标签（system=？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["你的 Memory 是多用户的吗？…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["命名空间示意图<br/>0:50"]:::deep
+        N3["公共知识共享示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

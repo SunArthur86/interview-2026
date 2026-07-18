@@ -103,7 +103,6 @@ GQA (分组共享 - G=2):
 2. **性能瓶颈**：为什么减少 KV Cache 能提速？(解释 Compute-bound vs Memory-bound，大模型推理通常是 Memory-bound，减少访存量比减少计算量更关键)。
 3. **分组策略选择**：GQA 的分组数量 G 如何选取？(通常根据模型大小和 KV Cache 压缩率需求折中，如 40B 模型常用 G=8)。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -183,4 +182,37 @@ flowchart TD
 | 1:10 | 质量 vs 速度权衡图 | "权衡：K/V 头越少推理越快但质量降，大模型推理 Memory-bound 减访存最关键。" | 权衡逻辑 |
 | 1:35 | GQA 为啥是甜点 | "GQA 兼顾 MHA 质量和 MQA 速度，KV Cache 压到 1/G，是大模型标配。" | 选型结论 |
 | 1:55 | 总结卡 | "口诀：MHA 质好，MQA 极快，GQA 兼顾。下期讲分词。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["MHA/MQA/GQA<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["多人共用参考书类比<br/>0:15"]:::core
+        N2["三种策略 K/V 头数对比图<br/>0:40"]:::core
+        N3["质量 vs 速度权衡图<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["GQA 为啥是甜点<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：MHA 质好，MQA 极快，GQA 兼顾。<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

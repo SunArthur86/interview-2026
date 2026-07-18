@@ -273,3 +273,35 @@ Cython 释放 GIL（`with nogil:` 块）是绕 GIL 的优雅方案——在 nogi
 | 0:15 | IO 模型对比图 | "GIL本质是全局锁：因为保护引用计数，所以同一时刻仅单线程执行Python字节码。" | GIL本质是全局锁 |
 | 1:02 | IO 模型对比图分步演示 | "场景对比：CPU密集多进程绕GIL，而IO密集多线程/协程遇阻塞会自动释放GIL。" | 场景对比 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：GIL能被移除吗？PEP 703是什么。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Python的GIL是什么？什么是进程？什么是协程？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["GIL本质是全局锁：因为保护引用计数，所以同一时刻仅…"]:::core
+        C["场景对比：CPU密集多进程绕GIL，而IO密集多线程…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

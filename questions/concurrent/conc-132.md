@@ -139,3 +139,35 @@ flowchart TD
 | 0:40 | 程序顺序内前序后示意图 | 程序顺序内前序后 | 程序顺序内前序后 |
 | 1:10 | 解锁后加锁示意图 | 解锁后加锁可见 | 解锁后加锁 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是happens-before规则？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心作用：JMM中保证多线程间操作的可见性与有序性"]:::core
+        C["口诀记忆八大规则：程序次序、锁、volatile、传…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -111,7 +111,6 @@ def build_plan(llm_response):
 1. **过度依赖一次性规划**：认为LLM能一次性生成完美的DAG，实际上长链条任务的中间步骤极易出错，必须支持“边执行边修正”的增量规划。
 2. **忽略计划的Cost预估**：规划时仅考虑逻辑可行性，未评估Token消耗、时间成本或API调用费用，导致任务执行到一半因资源耗尽而中断。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -159,7 +158,6 @@ flowchart TD
 - 设置Max Steps硬限制，防止LLM陷入无限拆分
 - 执行节点引入“状态校验”，失败时触发局部重规划
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 将复杂任务拆解为可执行的步骤链，并在执行过程中根据反馈动态调整。——打个比方，像写代码前先画流程图，遇到报错时回溯修改逻辑，而不是盲目执行。
@@ -182,3 +180,36 @@ flowchart TD
 | 1:12 | 规划模式图解 | "ReAct（循环推理）、Plan-and-Solve（先规划后执行）、ToT（树探索）" | 规划模式 |
 | 1:48 | 要点图解 | "任务分解为DAG图，执行前做拓扑排序检测循环依赖" | 要点 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI Agent的规划（Pla…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["将复杂任务拆解为可执行的步骤链，并在执行过程中根<br/>0:36"]:::core
+        N2["规划模式图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["任务分解为DAG图，执行前做拓扑排序检测循环依赖<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

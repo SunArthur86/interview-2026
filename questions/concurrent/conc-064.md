@@ -147,3 +147,35 @@ flowchart LR
 | 0:40 | 强制刷新主内存示意图 | 强制刷新主内存保证可见性 | 强制刷新主内存 |
 | 1:10 | 插入内存屏障禁止指令重排示意图 | 插入内存屏障禁止指令重排 | 插入内存屏障禁止指令重排 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["volatile关键字的作用和原理是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三大核心作用：保证可见性、禁止指令重排序，但不保证原…"]:::core
+        C["底层原理：依赖内存屏障与CPU的lock指令触发ME…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

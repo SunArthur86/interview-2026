@@ -141,3 +141,35 @@ flowchart TD
 | 1:30 | 核心定义示意 | "网络设备的逻辑地址，用于寻址和路由，由网络位与主机位构成。" | 要点1 |
 | 2:15 | 私网IP段口诀示意 | "A(10.)、B(172.16.-31.)、C(192.168.)，公网唯一但私网可复用（靠NAT）。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是IP地址？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心定义：网络设备的逻辑地址，用于寻址和路由，由网络…"]:::core
+        C["私网IP段口诀：A（10.）、B（172.16.-3…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

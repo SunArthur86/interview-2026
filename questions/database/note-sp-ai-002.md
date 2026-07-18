@@ -241,3 +241,35 @@ EXPLAIN ANALYZE 看执行计划。`SELECT * FROM t WHERE id BETWEEN 1000 AND 200
 | 0:15 | MySQL EXPLAIN 执行计划截图 | "数据分布：B树所有节点均存Key+Data，而B+树仅叶子节点存Data，非叶子只存索引Key" | 数据分布 |
 | 1:02 | MySQL EXPLAIN 执行计划截图分步演示 | "查询稳定性：B树查询可能在非叶子提前命中故不稳定，而B+树必须查到叶子节点故极其稳定" | 查询稳定性 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：B+树的叶子链表是双向还是单向。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["B树和B+树的区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["数据分布：B树所有节点均存Key+Data，而B+树…"]:::core
+        C["查询稳定性：B树查询可能在非叶子提前命中故不稳定，而…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -105,8 +105,6 @@ frequency: medium
 4. Do not use 'any'; use 'unknown' if type is uncertain.
 ```
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -140,7 +138,6 @@ flowchart TD
 - Cursor胜在@Codebase语义检索与生态，Windsurf胜在IDE原生集成与无感交互
 - 实战避坑：大型Monorepo防索引过慢，大模型重构防Token消耗与幻觉修改
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 利用AI Agent通过IDE深度集成实现编程效率革命。——打个比方，就像带了个极聪明且懂全项目代码的实习生，你写意图，他写代码。
@@ -163,3 +160,36 @@ flowchart TD
 | 1:12 | 要点图解 | "Cursor核心是Agent闭环(Composer模式)：主导0到1搭脚手架与多文件重构" | 要点 |
 | 1:48 | 要点图解 | "Windsurf核心是流式推导(Cascade模式)：类似CoT，擅长复杂逻辑梳理与代码审查" | 要点 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】使用 Cursor、W…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用AI Agent通过IDE深度集成实现编程效<br/>0:36"]:::core
+        N2["Cursor核心是Agent闭环(Compose<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Windsurf核心是流式推导(Cascade模<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -198,7 +198,6 @@ vllm serve model \
 3. **用户感知**：流式输出让用户在1s内看到反馈，比绝对延迟优化更重要（心理学）
 4. **成本权衡**：Speculative Decoding增加小模型推理成本，但大模型推理次数减少，总成本可能降低
 
-
 ## 核心流程图
 
 ```mermaid
@@ -239,7 +238,6 @@ flowchart TD
 - 对比句：模型层靠小模型路由与KV缓存，工程层靠无依赖步骤异步并行化处理
 - 因果句：因为工具定义等前缀固定，所以开启Prefix Caching可大幅减少Token计算
 - 因果句：因为Rerank模型极耗时，所以检索层采用粗排召回Top50再精排提速
-
 
 ## 苏格拉底式面试追问
 
@@ -294,11 +292,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：Speculative Decoding在Agent场景的效果如何？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -308,3 +304,37 @@ flowchart TD
 | 1:30 | 检索层示意图 | "检索层——Query缓存、异步预检索、Embedding本地化" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：Speculative Decoding在Agent场景的效？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["自研Agent多步推理带来高延迟，…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["模型层示意图<br/>0:50"]:::deep
+        N3["检索层示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

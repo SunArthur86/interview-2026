@@ -208,3 +208,35 @@ flowchart TB
 | 1:22 | 生活类比动画 | "打个比方——将大公司拆成独立事业部，独立核算，通过合同协作。" | 核心类比 |
 | 2:03 | DDD限界上下文 图解 | "DDD限界上下文是拆分的理论依据。" | DDD限界上下文 |
 | 2:50 | 数据独享数据库 图解 | "数据独享数据库避免耦合。" | 数据独享数据库 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何从单体架构演进到微服务架构？微服务拆分的原则和方法"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["拆分原则：基于DDD领域驱动设计，保证单一职责与数据…"]:::core
+        C["演进模式：采用绞杀者模式，通过API网关路由，新功能…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

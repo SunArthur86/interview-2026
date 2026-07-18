@@ -177,3 +177,35 @@ flowchart TD
 | 0:40 | Key示意图 | Key是弱引用，回收后变null导致无法通过Key访问Value | Key |
 | 1:10 | Value示意图 | Value是强引用，Entry存在则Value无法被GC回收 | Value |
 | 1:40 | 总结卡 + 下期预告 | 记住三个词就能答好这道题。下期追问：ThreadLocalMap 的 key 为什么用弱引用？用强引用不就没泄漏了吗？ | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["ThreadLocal 的内存泄漏原理是什么？为什么在线程池…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["结构：每个 Thread 持有 ThreadLoca…"]:::core
+        C["内存泄漏根因：Key 被 GC 回收变 null，但…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -126,14 +126,12 @@ flowchart TD
     V3 --> Peak[接近理论峰值]
 ```
 
-
 ## 记忆要点
 
 - 核心原理：Tiling分块计算+Online Softmax，避免读写HBM，将显存从O(N²)降至O(N)
 - v1重计算：前向不存Attention矩阵，反向重算以换空间，解决显存瓶颈
 - v2优化：调整线程块与并行策略，减少非Matmul计算，提升算力利用率
 - v3特性：利用H100的TMA异步搬运与FP8 Tensor Core，实现计算与传输重叠
-
 
 ## 结构化回答
 
@@ -157,3 +155,36 @@ flowchart TD
 | 1:12 | 核心原理图解 | "Tiling分块计算+Online Softmax，避免读写HBM，将显存从O(N²)降至O(N)" | 核心原理 |
 | 1:48 | v1重计算图解 | "前向不存Attention矩阵，反向重算以换空间，解决显存瓶颈" | v1重计算 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】FlashA…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用分块计算避免HBM读写瓶颈，提升IO效率<br/>0:36"]:::core
+        N2["核心原理图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["v1重计算图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -154,6 +154,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["进程的调度算法有哪些？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["口诀：先来先服务、短作业优先、时间片轮转、优先级、多…"]:::core
+        C["对比：FCFS简单易护航，SJF最优但易饿死，RR公…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：进程调度算法你了解多少？
 
 > 合并自 `core-142`（相似度 76%）
@@ -189,3 +221,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "按规则分配CPU时间，平衡效率与公平——像老师安排学生回答问题，可以按举手顺序（先来先服务）、优先叫回答快的（短作业优先）、轮流叫（时间片轮转）或按成绩优先级叫" | 核心定义 |
 | 1:20 | 核心五剑客示意 | "FCFS、SJF、RR、优先级、多级反馈队列(MLFQ)" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["进程的调度算法有哪些？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["口诀：先来先服务、短作业优先、时间片轮转、优先级、多…"]:::core
+        C["对比：FCFS简单易护航，SJF最优但易饿死，RR公…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -114,7 +114,6 @@ def build_graph_index(entities_relations):
 2. GraphRAG的“Global Search”在生成社区摘要时，如果社区过大（如几千个节点），摘要的质量如何保证？（Microsoft采用了分层摘要，先对小区间摘要，再对大区间摘要，防止信息丢失）
 3. 在资源受限的情况下，能否只用图结构而不用LLM生成摘要？（可以使用基于图算法（如PageRank）提取关键实体和路径，但失去了自然语言描述的语义连贯性，适合结构化查询而非阅读理解）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -196,4 +195,36 @@ flowchart TD
 | 0:55 | Local vs Global 查询示意 | 两种查询：Local Search 查具体实体和邻居，回答局部事实；Global Search 查社区摘要，回答全局综述。 | 两种模式 |
 | 1:25 | 对比图：向量 RAG 局部 vs GraphRAG 全局 | 优势是支持多跳推理和全局理解，解决了传统 RAG 无法回答"整体数据讲了什么"的问题。 | 核心优势 |
 | 1:50 | 成本警告：大量 LLM 调用 + 维护难 | 代价是构建成本高，需要大量 LLM 调用抽取实体，增量更新维护也比向量库难。 | 代价与边界 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《GraphRAG》+ 碎纸片…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["构建流程图：文档 → 实体关系 → 图谱 → 社区<br/>0:25"]:::core
+        N3["对比图：向量 RAG 局部 vs GraphRAG 全局<br/>1:25"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Local vs Global 查询示意<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["成本警告：大量 LLM 调用 + 维护难<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

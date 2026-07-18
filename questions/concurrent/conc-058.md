@@ -194,3 +194,35 @@ flowchart TD
 | 0:40 | 无竞争用偏向锁（记录线程ID示意图 | 无竞争用偏向锁（记录线程ID）。 | 无竞争用偏向锁（记录线程ID |
 | 1:10 | 轻度竞争用轻量级锁（CAS示意图 | 轻度竞争用轻量级锁（CAS自旋）。 | 轻度竞争用轻量级锁（CAS |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Synchronized 反向理解是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["反向推导：早期重量级锁依赖OS阻塞开销大，故需按竞争…"]:::core
+        C["升级口诀：无锁 -》 偏向（单线程记ID） -》 轻…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

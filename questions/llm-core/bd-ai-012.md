@@ -120,8 +120,6 @@ User Query                       User Query
 2. **多跳查询**：RAG中遇到复杂问题需要多次检索才能回答，如何设计？（Agent推理链路：Answer A -> Question B -> Retrieve B -> Synthesize）
 3. **时效性差异**：RAG适合解决时效性问题吗？（不适合，除非向量库更新频率极高，否则实时数据还是得靠Function Calling）
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -149,7 +147,6 @@ flowchart LR
 - RAG关键：Embedding转向量，向量库做语义检索，非关键词匹配
 - 实战：静态知识(公积金)用RAG，个性化鉴权数据(年假)必须用FC
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** Function Calling获取实时结构化数据，RAG检索离线非结构化知识。——打个比方，Function Calling是打电话问实时信息，RAG是去图书馆翻阅历史档案。
@@ -172,3 +169,36 @@ flowchart LR
 | 1:12 | 核心区别图解 | "FC调API获实时/结构化数据，RAG检索文档获离线/非结构化知识" | 核心区别 |
 | 1:48 | 选型标准图解 | "需实时数据/执行操作(查库发邮件)用FC；需领域知识/私有文档用RAG" | 选型标准 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】Function Ca…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["Function Calling获取实时结构化数<br/>0:36"]:::core
+        N2["核心区别图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["选型标准图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -120,7 +120,6 @@ def decide_transaction(user_features):
 | **Flink** | 毫秒级 (低) | 极高 | 原生支持 StateBackend | 实时反欺诈，复杂CEP |
 | **Kafka Streams** | 毫秒级 | 中 | 轻量级，依赖 Kafka | 简单流式ETL，日志清洗 |
 
-
 ## 核心流程图
 
 ```mermaid
@@ -177,7 +176,6 @@ flowchart TD
 - 模型融合：规则引擎兜底黑名单，ML模型评分，GNN检测团伙，LLM辅助解释。
 - 关键指标：欺诈检出率>95%，误拦率<0.1%，KS值>0.4；冷启动用通用画像或强规则。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 实时特征计算，多模型融合决策，毫秒级响应拦截。——打个比方，像银行门口的安检门，快速扫描所有人，异常则报警。
@@ -200,3 +198,36 @@ flowchart TD
 | 1:12 | 核心要求图解 | "低延迟(<50ms)、高准确率、可解释；实时特征计算是关键(Flink/预聚合)。" | 核心要求 |
 | 1:48 | 架构四层图解 | "实时特征(画像/图特征)、模型层(规则+XGBoost+GNN)、决策层(放行/验证/拦截)、反馈闭环。" | 架构四层 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI金融风控系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["实时特征计算，多模型融合决策，毫秒级响应拦截。<br/>0:36"]:::core
+        N2["核心要求图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["架构四层图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

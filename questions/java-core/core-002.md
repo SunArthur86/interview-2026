@@ -193,3 +193,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "利用HashMap的Key唯一性来实现元素去重——像一个不贴标签的篮子，相同的球（内容）只能放进去一个，不管你扔几次" | 核心定义 |
 | 1:20 | 底层本质示意 | "HashSet底层本质就是HashMap，存入的元素作为Key，Value固定占位" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["HashSet（Hash表）是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["底层本质：HashSet底层本质就是HashMap，…"]:::core
+        C["去重铁律：只有当对象的hashCode相同且equa…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

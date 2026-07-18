@@ -79,7 +79,6 @@ def weighted_vote(agent_votes, agent_weights):
 1. **误区：增加 Agent 数量一定能提高准确率**。根据“一致性悖论”，如果 Agent 的准确率低于 50%，增加数量反而会降低整体正确性。
 2. **误区：投票机制只看最终选项**。实际上，LLM 的推理过程更为重要，如果推理过程错误但选项碰巧正确，这种“蒙对”的情况应该被降权处理。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -123,14 +122,12 @@ flowchart TB
     Add3 --> Robust["鲁棒聚合"]
 ```
 
-
 ## 记忆要点
 
 - 核心缺陷：Agent 意见不独立，易产生同质化幻觉，投票只是数人头非看证据。
 - 改进方案：设证据门槛（引用来源）、红蓝对抗（主动挑错）、专家一票否决。
 - 权重陷阱：高权重 Agent 幻觉会带偏系统，需结合信心分动态调整。
 - 避坑指南：Agent 准确率低于 50% 时，增加数量反而降低整体正确性。
-
 
 ## 结构化回答
 
@@ -155,3 +152,37 @@ flowchart TB
 | 1:10 | 权重陷阱警示 | "坑：高权重 Agent 幻觉带偏系统，准确率低于 50% 加数量反降。" | 关键陷阱 |
 | 1:35 | 金融研报案例 | "实战：3 Agent 同源虚构数据通过，校验 Agent 一票否决。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：投票+证据+红蓝对抗+一票否决。下期讲状态机。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["为什么光投票不够<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心缺陷图<br/>0:15"]:::core
+        N2["改进方案四招<br/>0:45"]:::deep
+        N3["权重陷阱警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["金融研报案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

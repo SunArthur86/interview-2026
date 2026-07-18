@@ -120,7 +120,6 @@ def robust_json_parse(text: str):
 2. **追问**：在流式输出场景下，如何实时校验和解析不完整的 JSON 片段而不阻塞响应？
 3. **追问**：对比 `json5` 和 `lark` 解析器，在处理 LLM 输出时的容错能力有何区别？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -191,4 +190,36 @@ flowchart TD
 | 0:55 | Prompt 三要素：XML 分隔 + Schema + 明确声明 | Prompt 三要素：用 XML 标签分隔、提供清晰 Schema、明确声明只输出 JSON。 | Prompt 三要素 |
 | 1:25 | 参数设置：温度=0 + max_tokens 留够 | 参数上温度设为 0 降低随机性，max_tokens 一定要留够，防止 JSON 结构被截断。 | 参数设置 |
 | 1:50 | 后处理链路：正则 → json5 → Pydantic | 后处理用正则提取 JSON 块、json5 容错解析、Pydantic 校验字段，复杂结构再配 Few-shot 示例。 | 后处理兜底 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《让 LLM 输出 JSON》…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["方法优先级：Function Calling / JS…<br/>0:25"]:::core
+        N2["Prompt 三要素：XML 分隔 + Schema …<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["参数设置：温度=0 + max_tokens 留够<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["后处理链路：正则 → json5 → Pydantic<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

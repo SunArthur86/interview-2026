@@ -401,3 +401,35 @@ public class PointsRecordConsumer implements RocketMQListener<PointRecordMessage
 | 2:01 | 关键代码/伪代码片段 | "最终一致：异步落库必有延迟风险，所以必须定时对账核对Redis与MySQL数据" | 最终一致 |
 | 2:54 | 对比表格 | "过期管理：积分精准过期，通过延迟队列触发到期时间点，主动扣减并通知" | 过期管理 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：积分被恶意刷取怎么办。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["亿级车主积分获取、兑换、过期管理，如何设计后端架构，保证积分…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["模型分离：汇总表存总余额，流水表（按月分表）记明细，…"]:::core
+        C["高并发兑换：因为积分等于钱不能错，所以用Redis+…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

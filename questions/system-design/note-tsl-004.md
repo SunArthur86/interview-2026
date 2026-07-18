@@ -412,3 +412,35 @@ public void calculateUtilization() {
 | 2:01 | 关键代码/伪代码片段 | "调度策略：不仅看距离，还需结合桩实时负载与电价，综合计算推荐最优解" | 调度策略 |
 | 2:54 | 对比表格 | "防超分配：分配瞬间通过分布式锁/状态校验占位，防止多车抢夺同一空闲桩" | 防超分配 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：多个用户同时抢占同一个充电桩怎么办。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["全球数万座充电桩实时调度，如何设计后端架构，实现用户就近分配…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["空间索引：Redis GEO存储坐标，用GEORAD…"]:::core
+        C["实时状态：充电桩心跳上报到MQ，消费后更新Redis…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -104,7 +104,6 @@ with torch.no_grad():
 3. **Temperature参数 $\tau$ 的作用？** 
    控制 softmax 分布的平滑程度。较小的 $\tau$ 使分布更尖锐，更关注难分样本；较大的 $\tau$ 使分布更平滑，有助于优化。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -175,4 +174,36 @@ flowchart TD
 | 0:55 | InfoNCE 损失示意：正样本拉近，负样本推远 | 训练用 InfoNCE 对比损失，正样本对拉近、负样本对推远，同时优化以图找文和以文找图。 | 训练目标 |
 | 1:25 | 零样本分类流程：Prompt + 相似度比较 | 零样本分类把类别构造成 Prompt，比如"A photo of a dog"，算图像和各类别文本相似度取最大。 | 零样本分类 |
 | 1:50 | 局限提示：细粒度弱 / 抽象概念差 / 依赖 Prompt | 局限是细粒度分类弱，抽象概念理解差，比较依赖 Prompt Engineering。 | 局限性 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《CLIP 跨模态对齐》+ 翻…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["双编码器架构图：Image Encoder + Tex…<br/>0:25"]:::core
+        N2["InfoNCE 损失示意：正样本拉近，负样本推远<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["零样本分类流程：Prompt + 相似度比较<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["局限提示：细粒度弱 / 抽象概念差 / 依赖 Prom…<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

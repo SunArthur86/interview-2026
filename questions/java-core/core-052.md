@@ -272,3 +272,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "throws声明风险，throw制造事故——throws是“小心地滑”的警示牌，throw是真扔了一个香蕉皮" | 核心定义 |
 | 1:20 | 位置差异示意 | "throws在方法签名上，throw在方法体内部。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Throw和throws的区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["位置差异：throws在方法签名上，throw在方法…"]:::core
+        C["跟随内容：throws后跟异常类名（可多个），thr…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

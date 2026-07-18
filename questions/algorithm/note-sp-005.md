@@ -290,3 +290,35 @@ flowchart TD
 | 0:15 | 架构示意图 | "最优解: 递归传递(min, max)值域，O(n)时间O(h)空间" | 最优解 |
 | 1:02 | 架构示意图分步演示 | "等价判断: 中序遍历结果严格递增" | 等价判断 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：BST和二叉树的区别是什么。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["验证二叉搜索树（LeetCode 98）"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["最优解"]:::core
+        C["等价判断"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

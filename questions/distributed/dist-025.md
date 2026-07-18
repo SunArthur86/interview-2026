@@ -158,3 +158,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像报社总编(Leader)发稿，记者(Follower)确认后刊登，总编换人时先同步之前的稿件。" | 核心类比 |
 | 2:03 | 正常时走消息广播流程 图解 | "正常时走消息广播流程(两阶段提交)。" | 正常时走消息广播流程 |
 | 2:50 | 异常时走崩溃恢复流程 图解 | "异常时走崩溃恢复流程(选主+同步)。" | 异常时走崩溃恢复流程 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["ZooKeeper的ZAB协议的工作流程是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["两大模式：正常运行的消息广播（半数 ACK 提交），…"]:::core
+        C["消息广播：类似 2PC 优化，Leader 收到过半…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -132,7 +132,6 @@ User Query
 1. **忽略网页解析的Robots协议**：在批量抓取网页内容进行索引时，容易忽视版权和爬虫规范，可能导致IP被封禁。必须严格遵守目标网站的Robots.txt，并设置合理的抓取频率和User-Agent。
 2. **过度依赖SerpAPI等第三方服务**：第三方搜索API可能会有单日调用次数限制或突然的API变更。系统设计中必须考虑Multi-Provider策略（如同时接入Bing和Google），当一个Provider不可用时能自动切换。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -193,7 +192,6 @@ flowchart TD
 - 边界处理：实时事件强制调用新闻API，无答案直接拒答。
 - 核心价值：直接给答案而非链接，解决信息过载。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 检索增强生成（RAG）+引用溯源，直接生成答案。——打个比方，像助理帮你读完资料并标注出处，直接给你结论。
@@ -216,3 +214,36 @@ flowchart TD
 | 1:12 | 架构图解 | "Query理解(拆解) → 混合检索(BM25+向量) → 答案生成(引用溯源)。" | 架构 |
 | 1:48 | 检索策略图解 | "HyDE生成假设文档检索，RRF融合多路结果。" | 检索策略 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI搜索引擎（类似Perp…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["检索增强生成（RAG）+引用溯源，直接生成答案。<br/>0:36"]:::core
+        N2["架构图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["检索策略图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

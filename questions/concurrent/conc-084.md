@@ -157,3 +157,35 @@ flowchart TD
 | 0:40 | 对象头含运行时数据（锁示意图 | 对象头含运行时数据（锁、GC年龄）和类型指针。 | 对象头含运行时数据（锁 |
 | 1:10 | 实例数据按特定规则排列节省空示意图 | 实例数据按特定规则排列节省空间。 | 实例数据按特定规则排列节省空 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是内存中对象？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["对象三大布局：对象头、实例数据、对齐填充（总大小必须…"]:::core
+        C["对象头双核心：Mark Word存锁状态与哈希，Cl…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

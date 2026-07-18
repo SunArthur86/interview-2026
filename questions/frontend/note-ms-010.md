@@ -249,3 +249,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "产物导出需防丢失，前端应拦截退出并做断点续传机制" | 产物导出需防丢失 |
 | 2:54 | 对比表格 | "本地索引: 文件扫描/向量化/缓存" | 本地索引 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：云端推理超时怎么处理。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【月之暗面面经】本地索引、云端推理和产物导出是三段链路，前端…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["分层解耦架构：前端通过统一任务调度层串联三段链路，不…"]:::core
+        C["因为异步链路耗时久，所以必须有全生命周期的状态机（执…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

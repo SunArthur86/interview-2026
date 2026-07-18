@@ -135,14 +135,12 @@ flowchart TD
     D --> F[BM25倒排索引构建]
 ```
 
-
 ## 记忆要点
 
 - 固定大小适合通用，语义分块适合代码，递归字符分块兼顾结构与语义
 - 固定大小通常512-1024 Token，需保留10%-15%重叠以维持上下文连贯
 - 代码文档用AST或函数级分块，QA对用Question-Answer独立分块
 - 避免在句子中间截断，优先按段落或标点符号切分
-
 
 ## 结构化回答
 
@@ -165,3 +163,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：平衡语义完整性与检索粒度，针对内容类型选择最佳切分策略。" | 核心定义 |
 | 1:00 | 要点图解 | "固定大小适合通用，语义分块适合代码，递归字符分块兼顾结构与语义" | 要点 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["在RAG系统中如何设计有效的Chu…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["平衡语义完整性与检索粒度，针对内容类型选择最佳切<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["固定大小适合通用，语义分块适合代码，递归字符分块<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

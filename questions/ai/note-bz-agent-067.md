@@ -204,7 +204,6 @@ selection_dimensions = {
 3. **结合实践**：说自己用过什么、为什么选——有真实经验最加分
 4. **务实态度**：承认多 Agent 框架不够成熟，生产建议 LangGraph——不自嗨
 
-
 ## 核心流程图
 
 ```mermaid
@@ -240,7 +239,6 @@ flowchart TD
 - 选型看场景：重RAG选LlamaIndex，生产级单体选LangGraph，多Agent协作用CrewAI/AutoGen
 - 选型看团队：非技术团队用Dify拖拽，资深研发或特殊需求建议自研框架
 - 主流框架痛点：抽象过度、API迭代快、多Agent调试复杂且成本高
-
 
 ## 苏格拉底式面试追问
 
@@ -290,7 +288,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像选车——代步选Toyota(LangChain通用)、越野选LandRover(LangGraph可控)、赛车选F1(自研)、新手选自动挡(Dify低代码)。
 
 **展开框架：**
@@ -300,11 +297,9 @@ flowchart TD
 
 **收尾：** 字节内部用什么？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -313,3 +308,36 @@ flowchart TD
 | 0:50 | LangChain示意图 | "LangChain——通用，生态好" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：字节内部用什么？——自研为主（有特殊需求和能力）？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["字节 AI 二面：对主流 Agen…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["LangChain示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

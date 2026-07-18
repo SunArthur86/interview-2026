@@ -210,3 +210,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——记账员写账本，统计员实时读账本做报表，各干各的。" | 核心类比 |
 | 2:03 | 命令端负责业务强 图解 | "命令端负责业务强一致写。" | 命令端负责业务强 |
 | 2:50 | 查询端依赖独立读模型 图解 | "查询端依赖独立读模型。" | 查询端依赖独立读模型 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计微服务的数据一致性方案？CQRS和事件驱动架构"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["CQRS架构：核心思想是读写分离，写库保证强一致，读…"]:::core
+        C["数据同步：写操作发出领域事件，读模型异步订阅事件，达…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

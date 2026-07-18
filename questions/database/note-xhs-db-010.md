@@ -258,3 +258,35 @@ flowchart TD
 | 1:57 | 关键代码/伪代码片段 | "String就是缓存/计数/锁；Hash就是对象；List就是队列；Set就是去重/集合运算；ZSet就是排行榜/延…" | String=缓存/计数 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：ZSet 为什么用跳表而不是红黑树。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Redis 数据类型有哪些？各自的应用场景？（华为od Ja…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["单值缓存 验证码/商品库存"]:::core
+        C["计数器 incr 点赞数/阅读量"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+

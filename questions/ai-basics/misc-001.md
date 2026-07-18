@@ -126,7 +126,6 @@ flowchart LR
     B --> C["复杂度代价<br/>O(N²·d)"]
 ```
 
-
 ## 记忆要点
 
 - 定义：序列中每个位置直接关注所有其他位置，计算加权求和。
@@ -157,4 +156,37 @@ flowchart LR
 | 1:10 | Self-Attention vs RNN 对比表 | "长依赖 O(1) vs O(N)，能并行 vs 必须串行，两大核心优势。" | 对比优势 |
 | 1:35 | O(N²) 复杂度警示 | "代价：复杂度 O(N²·d)，序列长了要用 FlashAttention 优化。" | 复杂度代价 |
 | 1:55 | 总结卡 | "口诀：QKV 加权，O(1) 长依赖能并行。下期讲位置编码。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Self-Attention<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["全场看一眼 vs 传声筒类比<br/>0:15"]:::core
+        N2["QKV 计算流程图<br/>0:40"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Self-Attention vs RNN 对比表<br/>1:10"]:::practice
+        N4["O(N²) 复杂度警示<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

@@ -108,7 +108,6 @@ def scaled_dot_product_attention(query, key, value, mask=None):
 2. **Self-Attention的时间复杂度是多少？**（答：O(N²·d)，主要来自QKᵀ矩阵乘法；N是序列长度）
 3. **如何降低Attention的计算复杂度？**（答：Sparse Attention, FlashAttention, Linear Attention等优化手段）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -185,4 +184,36 @@ flowchart TD
 | 0:40 | QKV 计算流程图 | "Q 查意图，K 被匹配，V 是内容；QKᵀ 算分，softmax 归一化，加权聚合 V。" | 核心公式 |
 | 1:05 | 除 √d_k 防饱和示意 | "关键细节：除以 √d_k 防止点积过大让 Softmax 梯度饱和，拉回方差 1。" | 缩放因子 |
 | 1:25 | 总结卡 | "口诀：QKV 交互，除根号 d，O(1) 长依赖能并行。下期讲梯度问题。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["注意力机制<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["读文章找上下文类比<br/>0:15"]:::core
+        N2["QKV 计算流程图<br/>0:40"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["除 √d_k 防饱和示意<br/>1:05"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["口诀：QKV 交互，除根号 d，O(1) 长依赖<br/>1:25"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

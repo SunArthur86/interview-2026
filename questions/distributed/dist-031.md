@@ -163,3 +163,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——网购时自己查快递网点信息，然后自己选最近的一个去寄。" | 核心类比 |
 | 2:03 | 客户端负责向注册中心 图解 | "客户端负责向注册中心查询服务地址列表。" | 客户端负责向注册中心 |
 | 2:50 | 客户端负责负载均衡逻 图解 | "客户端负责负载均衡逻辑(如轮询)。" | 客户端负责负载均衡逻 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["微服务中客户端发现模式的工作原理是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["流程核心：客户端直连注册中心拉取IP列表，自己在内部…"]:::core
+        C["优缺点对比：因为少一层代理所以性能好、架构简单，但多…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

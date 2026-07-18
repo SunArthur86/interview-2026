@@ -308,3 +308,35 @@ Flink 的"端到端 Exactly-Once 写 Kafka 下游"实际用的就是 2PC（TwoPh
 | 1:06 | Kafka 分区与消费者组架构图分步演示 | "聚簇差异：MySQL主键叶子存完整行（极快），而PgSQL所有索引叶子只存CTID物理指针（均需回表）" | 聚簇差异 |
 | 1:57 | 关键代码/伪代码片段 | "二级索引差异：MySQL二级索引存主键值（需二次回表），而PgSQL均存物理CTID" | 二级索引差异 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Flink Checkpoint的Barrier对齐有什么问题。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何保证 Kafka 到 Flink 的数据不丢失、不重复（…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话区分：两者底层同用B+树，但MySQL主键是聚…"]:::core
+        C["聚簇差异：MySQL主键叶子存完整行（极快），而Pg…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

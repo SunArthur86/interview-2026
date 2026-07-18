@@ -185,6 +185,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Java中的阻塞队列？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心特性：队列空时取阻塞，队列满时存阻塞，天然解耦生…"]:::core
+        C["四组API：抛异常（add）、返特殊值（offer）…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：JAVA阻塞队列原理是什么？
 
 > 合并自 `core-155`（相似度 74%）
@@ -280,3 +312,35 @@ private void enqueue(E x) {
 | 1:30 | 一句话定义示意 | "支持阻塞的队列，空时取等待，满时存等待" | 要点1 |
 | 2:15 | 底层机制示意 | "依赖Reentrant锁，配合notEmpty和notFull两个Condition实现挂起与唤醒" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Java中的阻塞队列？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心特性：队列空时取阻塞，队列满时存阻塞，天然解耦生…"]:::core
+        C["四组API：抛异常（add）、返特殊值（offer）…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

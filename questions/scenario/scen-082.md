@@ -198,3 +198,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像老师点名册上的格子，打钩代表已读，一页能管全班。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：利用位图或计数器海量压缩存储，高效计算消息的已读状态。" | 核心定义 |
 | 1:50 | Bitmap方案 图解 | "一个比特位代表一个用户的已读状态。" | Bitmap方案 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个亿级用户的消息已读未读系统？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["方案选型：万人大群用Bitmap极省内存，而获取具体…"]:::core
+        C["Bitmap机制：因为位图极度压缩，所以1万人只需1…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

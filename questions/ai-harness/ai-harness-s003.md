@@ -109,7 +109,6 @@ class ColumnParallelLinear(torch.nn.Module):
 2. **误区**：流水线并行（PP）的阶段划分越多越好。
    **纠正**：PP 阶段划分越多，虽然每张卡的显存压力越小，但产生的通信边界和 Bubble 也会越多，导致 GPU 利用率下降和 latency 增加。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -166,7 +165,6 @@ flowchart TD
 - 选型口诀：单机多卡用TP，跨机超长模型用PP，数据规模大用DP（含ZeRO分片）。
 - 推理避坑：流式推理Batch=1时PP会有严重流水线气泡，推理应首选TP避免高延迟。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过拆分模型层、权重矩阵或数据序列，突破单卡显存限制。——打个比方，大象装冰箱：把象切开分装(层并行)，或几个人一起抬(张量并行)，或多冰箱放不同象(数据并行)。
@@ -189,3 +187,36 @@ flowchart TD
 | 1:12 | 切分维度对比图解 | "TP切层内权重（需高频通信），PP切层（跨机低频通信），DP切数据。" | 切分维度对比 |
 | 1:48 | 通信依赖对比图解 | "TP极依赖单机NVLink带宽做All-Reduce，PP靠跨机IB网络做点对点激活通信。" | 通信依赖对比 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["模型并行有哪些方案<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过拆分模型层、权重矩阵或数据序列，突破单卡显存<br/>0:36"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["切分维度对比图解<br/>1:12"]:::practice
+        N3["通信依赖对比图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

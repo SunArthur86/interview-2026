@@ -151,3 +151,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "编译时类型安全检查，避免运行时转换错误——就像给箱子贴上标签，规定只能放苹果，别人就不会误放香蕉，取出来时也不用担心拿到错的水果" | 核心定义 |
 | 1:20 | 仅在编译期检查类型示意 | "因为Java泛型存在类型擦除，所以仅在编译期检查类型，运行时被替换成Object。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["说一说你对泛型的理解？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["因为Java泛型存在类型擦除，所以仅在编译期检查类型…"]:::core
+        C["因为类型擦除，泛型参数必须是引用类型而不能是基本类型…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

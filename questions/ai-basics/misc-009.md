@@ -139,7 +139,6 @@ def dpo_loss(policy_chosen_logps, policy_rejected_logps,
     return loss, acc
 ```
 
-
 ## 记忆要点
 
 - RLHF三阶段：SFT学会对话格式 -> RM训练打分模型 -> PPO强化学习对齐
@@ -170,4 +169,37 @@ def dpo_loss(policy_chosen_logps, policy_rejected_logps,
 | 1:10 | PPO 4 模型显存大警示 | "PPO 痛点：要 4 个模型显存大、难调参、易 Reward Hacking 钻空子。" | PPO 痛点 |
 | 1:35 | DPO 闭式解示意图 | "DPO 直接优化偏好数据隐去 RM，只需 2 个模型，显存减半训练稳。" | DPO 优势 |
 | 1:55 | 总结卡 | "口诀：SFT+RM+PPO 三步，DPO 简化成主流。下期讲 LoRA。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["RLHF 与对齐<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["训狗类比<br/>0:15"]:::core
+        N2["RLHF 三阶段流程图<br/>0:40"]:::deep
+        N4["DPO 闭式解示意图<br/>1:35"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["PPO 4 模型显存大警示<br/>1:10"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：SFT+RM+PPO 三步，DPO 简化成<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

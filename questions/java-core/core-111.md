@@ -145,3 +145,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "将调用信息转换为网络可传输的数据格式——像写信，中文（对象）先翻译成摩尔斯电码（编码），接收方再翻译回中文（解码）" | 核心定义 |
 | 1:20 | 结构示意 | "RPC消息含头部(含长度/魔数)与消息体(接口/方法/参数/请求ID)" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是消息编解码？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["结构：RPC消息含头部（含长度/魔数）与消息体（接口…"]:::core
+        C["痛点：因为TCP是流式传输，所以解码端必须处理半包和…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

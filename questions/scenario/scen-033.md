@@ -198,6 +198,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个库存扣减系统？防超卖、支持高并发、最终一致"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["时机选择：下单减（防超卖但易占库存）、付款减（防占库…"]:::core
+        C["防超卖核心：Redis+Lua脚本原子性检查并扣减，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：如何设计一个秒杀系统？如何防止超卖？
 
 > 合并自 `ssd-002`（相似度 65%）
@@ -313,3 +345,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像商场限时抢购，设多道安检且只给进店的人发票。" | 核心类比 |
 | 2:03 | 前端静态化加限流 图解 | "前端静态化加限流，按钮防抖。" | 前端静态化加限流 |
 | 2:50 | 网关层限流黑名单拦截 图解 | "网关层限流黑名单拦截。" | 网关层限流黑名单拦截 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个库存扣减系统？防超卖、支持高并发、最终一致"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["时机选择：下单减（防超卖但易占库存）、付款减（防占库…"]:::core
+        C["防超卖核心：Redis+Lua脚本原子性检查并扣减，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

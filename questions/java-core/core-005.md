@@ -162,3 +162,35 @@ sequenceDiagram
 | 0:40 | 概念动画/示意图 | "HTTP加SSL/TLS加密层，保障数据安全传输——像寄信从透明信封换成了带防伪锁的保险箱，只有收件人能打开" | 核心定义 |
 | 1:20 | 要点1图解示意 | "默认端口从80变为443。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是HTTPS协议？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质是HTTP加上SSL/TLS安全层，默认端口从8…"]:::core
+        C["非对称加密（如RSA）用于协商密钥，而对称加密（如A…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

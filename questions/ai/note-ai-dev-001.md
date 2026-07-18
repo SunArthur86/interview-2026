@@ -254,7 +254,6 @@ class RobustFunctionCaller:
 
 **面试加分点**：提到OpenAI的Structured Outputs（2024）通过约束解码保证JSON格式100%合法；提到Pydantic做Python原生的参数校验比JSON Schema更简洁；提到在生产环境中应该监控Function Calling的P99延迟和成功率，设置告警阈值（如成功率<95%触发告警）；提到Prompt中加入few-shot示例可以提高首次调用成功率10-20%。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -350,11 +349,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：除了Function Calling还有哪些结构化输出方法？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -363,3 +360,36 @@ flowchart TD
 | 0:50 | 输入层示意图 | "输入层——JSON Schema校验 + 参数类型检查" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：除了Function Calling还有哪些结构化输出方法？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Function Calling工…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["输入层示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

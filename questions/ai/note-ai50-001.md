@@ -159,7 +159,6 @@ def table_to_markdown(table):
 3. **超大表格拆分**: 超过模型窗口的表格按行拆分，每段保留表头
 4. **版本管理**: PDF更新时增量处理，只重新解析变更页面
 
-
 ## 核心流程图
 
 ```mermaid
@@ -257,11 +256,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：如果表格嵌套在PDF的复杂版式中（多栏布局），怎么处理？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -270,3 +267,36 @@ flowchart TD
 | 0:50 | 基于规则的前置检测示意图 | "基于规则的前置检测——检测表格边框线和跨页标记" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：如果表格嵌套在PDF的复杂版式中（多栏布局），怎么处理？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["工业PDF跨页大表格的切片处理策略<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["基于规则的前置检测示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

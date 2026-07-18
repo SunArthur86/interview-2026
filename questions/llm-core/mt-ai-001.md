@@ -242,14 +242,12 @@ flowchart TD
     I --> J[推动开源生态]
 ```
 
-
 ## 记忆要点
 
 - 结构改进一：用 Pre-RMSNorm 替代后置 LayerNorm，因为梯度更稳定且计算更省时。
 - 结构改进二：采用无偏置设计叠加 RoPE 旋转位置编码，减少参数且支持长度外推。
 - 核心激活：FFN 层换用 SwiGLU，平滑且收敛快。
 - 训练贡献：验证 Scaling Law，以小参数+海量公开数据实现极高性价比并繁荣开源生态。
-
 
 ## 结构化回答
 
@@ -273,3 +271,36 @@ flowchart TD
 | 1:12 | 结构改进一图解 | "用 Pre-RMSNorm 替代后置 LayerNorm，因为梯度更稳定且计算更省时。" | 结构改进一 |
 | 1:48 | 结构改进二图解 | "采用无偏置设计叠加 RoPE 旋转位置编码，减少参数且支持长度外推。" | 结构改进二 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】说一下 LLaMA 的…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["移除冗余设计，用更优架构和更多数据提升小模型性能<br/>0:36"]:::core
+        N2["结构改进一图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["结构改进二图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

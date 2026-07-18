@@ -146,14 +146,12 @@ flowchart TD
     Compute --> Tool
 ```
 
-
 ## 记忆要点
 
 - 计算公式：算术强度AI = FLOPs / Bytes，对比转折点判断Bound类型
 - Memory Bound：带宽瓶颈，优化方向是合并访问、Shared Memory分块、向量化读写
 - Compute Bound：算力瓶颈，优化方向是Tensor Core利用、指令流水线、减少逻辑判断
 - 工具定位：Nsight Compute看Stall原因，Nsight Systems看计算与通信重叠情况
-
 
 ## 结构化回答
 
@@ -178,3 +176,37 @@ flowchart TD
 | 2:00 | Memory Bound图解 | "带宽瓶颈，优化方向是合并访问、Shared Memory分块、向量化读写" | Memory Bound |
 | 2:40 | 要点图解 | "Compute Bound：算力瓶颈，优化方向是Tensor Core利用、指令流水线、减少逻辑判断" | 要点 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】如何评估一个…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用Roofline模型和Nsight工具定位K<br/>0:40"]:::core
+        N2["计算公式图解<br/>1:20"]:::deep
+        N3["Memory Bound图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["Compute Bound：算力瓶颈，优化方向是<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

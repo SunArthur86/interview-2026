@@ -138,7 +138,6 @@ flowchart TD
 
 ```
 
-
 ## 记忆要点
 
 - 架构流程：接入层(抽帧) → 分析层(检测/识别) → 事件层(规则/异常)。
@@ -146,7 +145,6 @@ flowchart TD
 - 实战策略：关键帧+运动检测，降低帧率提升并发路数。
 - 边界处理：断流需心跳重连，遮挡用Re-ID关联轨迹。
 - 易错点：时间戳严格对齐，防止显存泄漏导致服务崩溃。
-
 
 ## 结构化回答
 
@@ -170,3 +168,36 @@ flowchart TD
 | 1:12 | 架构流程图解 | "接入层(抽帧) → 分析层(检测/识别) → 事件层(规则/异常)。" | 架构流程 |
 | 1:48 | 性能优化图解 | "边缘端推理、模型量化INT8、运动检测跳帧、GPU批处理。" | 性能优化 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI视频分析系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["抽帧+目标检测+时序分析，从视频中提取结构化事件<br/>0:36"]:::core
+        N2["架构流程图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["性能优化图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

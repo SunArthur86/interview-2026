@@ -153,7 +153,6 @@ flowchart TD
     J -- "指标正常" --> O["扩大灰度: 10%->50%->全量"]
 ```
 
-
 ## 记忆要点
 
 - 发布流程：Golden Set回归 → 影子测试 → 灰度放量（5%→100%）→ 全量。
@@ -161,7 +160,6 @@ flowchart TD
 - 监控指标：质量（满意度/重试率）、性能（延迟）、安全（有害率）。
 - 回滚机制：关键指标恶化自动回滚，配置版本化管理（模型/Prompt/参数）。
 - 实战教训：未灰度直接全量导致术语翻译幻觉，需监控“用户修改率”。
-
 
 ## 结构化回答
 
@@ -185,3 +183,36 @@ flowchart TD
 | 1:12 | 发布流程图解 | "Golden Set回归 → 影子测试 → 灰度放量（5%→100%）→ 全量。" | 发布流程 |
 | 1:48 | 灰度策略图解 | "按用户ID Hash分桶，保证同一用户体验一致，支持场景灰度。" | 灰度策略 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计LLM模型的灰度发布系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过流量小步快跑验证模型效果，确保发布安全可回滚<br/>0:36"]:::core
+        N2["发布流程图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["灰度策略图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

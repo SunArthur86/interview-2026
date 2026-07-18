@@ -355,4 +355,28 @@ flowchart TD
 | 0:30 | 性能优化对比图 | 方法调用计数器 + 回边计数器，默认 10000/17000 触发。 | 热点探测 |
 | 1:30 | 总结卡 | 一句话记忆：JIT 三层：解释 → C1 → C2，分层编译（Tiered Compilation）JDK 8 默认开启。 下期可以接着聊：为什么 JIT 不一开始就编译。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>JVM 内存分代"]:::concept
+    N3["0:30<br/>热点探测"]:::practice
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

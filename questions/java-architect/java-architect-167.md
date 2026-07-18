@@ -413,6 +413,30 @@ flowchart TD
 | 0:40 | 合并逻辑示意/对比图 | "同 userId+skuId 合并数量，不同 sku 规格独立存储" | 合并逻辑要点 |
 | 1:25 | 总结卡 | "记住：存储。下期见。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>存储选型要点"]:::deep
+    N3["0:40<br/>合并逻辑要点"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:25<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 ## 苏格拉底式面试追问
 
 这组追问训练你在面试现场一层层逼近本质。每一问先回答"为什么"，再回答"怎么做"，最后回答"如何证明"。

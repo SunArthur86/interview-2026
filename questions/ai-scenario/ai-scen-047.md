@@ -160,14 +160,12 @@ flowchart TD
     I -.->|反馈优化| D1
 ```
 
-
 ## 记忆要点
 
 - 核心约束：极高准确性、可解释性、合规认证(NMPA/FDA)；AI仅辅助，医生做决策。
 - 架构四层：数据接入(DICOM/EMR)、AI诊断(影像/文本/多模态融合)、知识层(指南/图谱)、解释层。
 - 技术选型：影像分割用U-Net/MedSAM，分类用ResNet/ViT，多模态需特征对齐融合。
 - 隐私安全：数据脱敏、本地化部署不出院、访问审计、患者知情同意。
-
 
 ## 结构化回答
 
@@ -191,3 +189,36 @@ flowchart TD
 | 1:12 | 核心约束图解 | "极高准确性、可解释性、合规认证(NMPA/FDA)；AI仅辅助，医生做决策。" | 核心约束 |
 | 1:48 | 架构四层图解 | "数据接入(DICOM/EMR)、AI诊断(影像/文本/多模态融合)、知识层(指南/图谱)、解释层。" | 架构四层 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI医疗辅助诊断系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["多模态数据融合，专业模型辅助诊断，医生最终决策。<br/>0:36"]:::core
+        N2["核心约束图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["架构四层图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

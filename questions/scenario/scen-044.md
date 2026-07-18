@@ -146,3 +146,35 @@ flowchart LR
 | 0:35 | 生活类比动画 | "打个比方——试吃新菜，先给几个人尝尝没问题再端上全席。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：小范围试错，逐步放量，将发布风险控制在最小范围。" | 核心定义 |
 | 1:50 | 网关或Feature 图解 | "通过网关或Feature Flag控制流量路由。" | 网关或Feature |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计灰度发布方案？安全可控地发布新版本"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["灰度策略：按流量比例或用户特征灰度，配合金丝雀（单实…"]:::core
+        C["技术实现对比：网关层基于Cookie/Header路…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

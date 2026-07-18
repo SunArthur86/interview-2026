@@ -102,7 +102,6 @@ def execute_tool(agent_output: dict):
 2. 对于不可信代码（如用户上传的 Python 脚本），Docker 的隔离性可能不够（如内核漏洞），你会如何进一步增强安全性？
 3. 如何处理 Agent 产生的“隐性错误”？即函数返回了 HTTP 200 但内容是错误的，如何感知并隔离？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -163,7 +162,6 @@ flowchart TD
 - 输出需经 Pydantic 校验，禁止直接执行自然语言指令。
 - 检查点机制确保失败后从安全节点重试而非从头开始。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 错误隔离层层设防防止一个 Agent 的错误或恶意攻击导致系统崩溃。四道防线：沙箱执行与最小权限（容器内只读文件系统）、Validator 门禁（Pydantic 校验输出禁止直接执行）、检查点机制（失败从安全节点重试而非从头）、参数清洗（自然语言强制转结构化数据）。坑是仅校验 JSON 格式不够，要配合语义层校验防 SQL 注入绕过。
@@ -187,3 +185,37 @@ flowchart TD
 | 1:10 | 格式校验警示 | "坑：仅校验 JSON 格式不够，要语义层校验防 SQL 注入绕过。" | 关键细节 |
 | 1:35 | DELETE 恶意指令案例 | "实战：Agent 生成 DELETE，只读文件系统+Pydantic 拦截解决。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：沙箱+门禁+检查点+参数清洗。下期讲一致性。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent 错误隔离怎么做<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["四道防线图<br/>0:15"]:::core
+        N2["沙箱技术对比<br/>0:45"]:::deep
+        N3["格式校验警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["DELETE 恶意指令案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

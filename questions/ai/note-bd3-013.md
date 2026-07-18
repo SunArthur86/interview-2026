@@ -244,7 +244,6 @@ metrics = {
 
 **面试加分点**：提到混合检索（向量+BM25+重排序）可以缓解单一检索方式的退化；提到HNSW索引的`ef_construction`和`ef_search`参数会影响索引质量和查询性能；提到使用Canary查询集（100条标注好的query-doc pair）定期自动评估召回质量；提到双写策略（新旧索引并行运行一段时间）可以安全地进行embedding模型升级。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -347,11 +346,9 @@ embedding 模型不同则向量空间不同，混用导致召回错乱。text-ad
 
 **收尾：** 您想深入聊：如何设置召回质量的告警阈值？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -360,3 +357,36 @@ embedding 模型不同则向量空间不同，混用导致召回错乱。text-ad
 | 0:50 | 数据层示意图 | "数据层——新文档未索引、旧文档已删除但向量残留" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：如何设置召回质量的告警阈值？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["RAG系统运行一段时间后召回效果变…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["数据层示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

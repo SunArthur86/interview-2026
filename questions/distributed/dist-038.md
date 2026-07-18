@@ -169,3 +169,35 @@ flowchart TB
 | 1:22 | 生活类比动画 | "打个比方——团购，必须所有人都付钱才成交，有一人退单全员退款。" | 核心类比 |
 | 2:03 | 2PC/3PC强 图解 | "2PC/3PC强一致但性能差。" | 2PC/3PC强 |
 | 2:50 | TCC/Saga灵活 图解 | "TCC/Saga灵活但业务侵入大。" | TCC/Saga灵活 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["分布式事务有哪些解决方案？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["方案演进：2PC强一致但阻塞，TCC高性能但业务侵入…"]:::core
+        C["TCC核心：Try预留、Confirm确认、Canc…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

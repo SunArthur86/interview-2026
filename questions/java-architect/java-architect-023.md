@@ -528,4 +528,26 @@ flowchart TD
 | 0:30 | 概念结构示意图 | 用户维度（user_id 哈希）、时间维度（按月分表）、地理维度。 | 路由维度 |
 | 1:30 | 总结卡 | 一句话记忆：分库（连接/TPS）vs 分表（数据量/磁盘），通常分库分表一起做。 下期可以接着聊：分库分表后主键怎么生成。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>分库分表"]:::concept
+  end
+  subgraph Outro["🎯 收尾"]
+    N3["1:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

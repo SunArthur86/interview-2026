@@ -88,7 +88,6 @@ app = workflow.compile(checkpointer=memory)
 2. **循环控制**：AutoGen 如何防止无限对话？（答：通常通过设置 `max_consecutive_auto_reply` 参数）。
 3. **人机协作**：两者如何介入人工审核？（答：AutoGen 通过中断机制，LangGraph 通过特定的 interrupt 节点或边）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -144,7 +143,6 @@ flowchart TD
 - AutoGen 状态隐式难恢复，LangGraph 显式 Checkpoint 支持断点续传。
 - AutoGen 适合脑暴探索，LangGraph 适合长链路生产任务。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** AutoGen 像聊天群组重对话社交，LangGraph 像工作流引擎重状态机确定性。AutoGen 状态隐式在对话历史中难恢复，适合脑暴探索；LangGraph 显式 Checkpoint 支持断点续传和时间旅行，适合长链路生产任务。选型看场景：探索用 AutoGen，生产用 LangGraph。两者可混用——LangGraph 节点内嵌 AutoGen 会话处理角色对话，统一 trace id 和成本核算。
@@ -168,3 +166,37 @@ flowchart TD
 | 1:10 | 选型决策表 | "探索用 AutoGen，生产用 LangGraph，看场景选。" | 选型建议 |
 | 1:35 | SQL 超时案例 | "实战：LangGraph 断点恢复免重跑，AutoGen 中断全丢。" | 实战对比 |
 | 1:50 | 总结卡 | "记住：AutoGen 重对话，LangGraph 重状态。下期讲混用。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["AutoGen vs LangGr…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心气质差异<br/>0:15"]:::core
+        N2["状态管理对比<br/>0:45"]:::deep
+        N3["选型决策表<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["SQL 超时案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

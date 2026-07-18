@@ -429,4 +429,30 @@ flowchart TD
 | 1:05 | 滑动窗口 vs 令牌桶示意/对比图 | "滑动窗口 vs 令牌桶 —— 前者匀速后者突发" | 滑动窗口 vs 令牌桶要点 |
 | 1:55 | 总结卡 | "记住：四种限流算法对比。下期见。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>四种限流算法对比要点"]:::deep
+    N3["0:40<br/>分布式限流要点"]:::deep
+    N4["1:05<br/>滑动窗口 vs 令牌桶要点"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["1:55<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

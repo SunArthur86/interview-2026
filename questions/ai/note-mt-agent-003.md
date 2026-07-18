@@ -182,7 +182,6 @@ def llm_chain_pipeline(question: str):
     # ❌ 如果搜索结果为空怎么办？如果需要多次搜索怎么办？
     # ❌ Chain无法自主决定——只能开发者预先写好所有分支
 
-
 # ---- Agent方式：LLM自主决定下一步 ----
 def agent_loop(question: str, max_steps: int = 10):
     """LLM在循环中自主决策：要不要搜索？搜什么？搜够了没有？"""
@@ -233,14 +232,12 @@ def agent_loop(question: str, max_steps: int = 10):
 
 > **一句话总结**：Agent = 感知+规划+记忆+行动的自主决策闭环；LLM Chain = 预定义管道中嵌入LLM计算单元。分水岭是——**谁拥有"下一步做什么"的决策权**。
 
-
 ## 记忆要点
 
 - 四大架构模块：感知、规划、记忆、行动共同组成Agent闭环决策循环
 - 与传统对比：传统LLM Chain是无状态单次流水线，而Agent是有记忆的动态自循环
 - 记忆机制：依赖短期上下文窗口与长期向量检索库，实现多轮状态感知
 - 行动机制：Agent能自主调用外部API与代码执行环境，而非仅生成文本
-
 
 ## 苏格拉底式面试追问
 
@@ -286,7 +283,6 @@ def agent_loop(question: str, max_steps: int = 10):
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** LLM Chain就像火车轨道铺好的AI是引擎但方向人定，Agent就像自动驾驶汽车AI自己决定走哪条路。
 
 **展开框架：**
@@ -296,11 +292,9 @@ def agent_loop(question: str, max_steps: int = 10):
 
 **收尾：** ReAct模式和Agent有什么关系？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -309,3 +303,36 @@ def agent_loop(question: str, max_steps: int = 10):
 | 0:50 | 感知模块解示意图 | "感知模块解——感知模块解析输入" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：ReAct模式和Agent有什么关系？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["简述Agent的基本架构组成，并解…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["感知模块解示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

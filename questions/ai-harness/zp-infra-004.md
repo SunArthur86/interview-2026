@@ -129,13 +129,11 @@ flowchart TD
     end
 ```
 
-
 ## 记忆要点
 
 - 诊断：显存碎片、预分配浪费(短请求占长空间)、前缀无法共享。
 - 修复：PagedAttention分页管理(利用率40%→96%)，Continuous Batching动态调度。
 - 其他：Radix Tree复用前缀，KV量化(FP8/INT8)，GQA减少头数。
-
 
 ## 结构化回答
 
@@ -160,3 +158,37 @@ flowchart TD
 | 2:00 | 修复图解 | "PagedAttention分页管理(利用率40%→96%)，Continuous Batching动态调度。" | 修复 |
 | 2:40 | 其他图解 | "Radix Tree复用前缀，KV量化(FP8/INT8)，GQA减少头数。" | 其他 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】KV Cac…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过分页管理、动态批处理和前缀复用优化显存<br/>0:40"]:::core
+        N2["诊断图解<br/>1:20"]:::deep
+        N3["修复图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["其他图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -120,7 +120,6 @@ class PDSeparationScheduler:
 2. **追问**：如何解决 Prefill 和 Decode 节点之间的 KV Cache 传输延迟问题？（答：使用 RDMA/InfiniBand，或者计算-传输流水线重叠）。
 3. **追问**：除了分离 GPU，调度层面有什么优化？（答：Continuous Batching、Iteration Level Scheduling）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -187,7 +186,6 @@ flowchart TD
 - 架构流程：Prefill生成KV，通过RDMA传输给Decode节点，实现硬件异构利用。
 - 边界条件：Prompt极短时网络开销大于收益，耦合架构更优。需解决KV传输延迟。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 将Prefill（计算密集）和Decode（内存密集）拆分到不同资源。——打个比方，像流水线一样，有人专门负责备料（Prefill），有人专门负责打包。
@@ -211,3 +209,37 @@ flowchart TD
 | 2:00 | 架构流程图解 | "Prefill生成KV，通过RDMA传输给Decode节点，实现硬件异构利用。" | 架构流程 |
 | 2:40 | 边界条件图解 | "Prompt极短时网络开销大于收益，耦合架构更优。需解决KV传输延迟。" | 边界条件 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Prefill-Decode分离（…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["将Prefill（计算密集）和Decode（内存<br/>0:40"]:::core
+        N2["核心区别图解<br/>1:20"]:::core
+        N3["架构流程图解<br/>2:00"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["边界条件图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

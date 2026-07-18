@@ -200,6 +200,38 @@ sequenceDiagram
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["TCP与UDP的概念，特点，区别和对应的使用场景？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["连接与可靠性：TCP面向连接且可靠（三次握手），UD…"]:::core
+        C["传输方式：TCP面向字节流（无边界），UDP面向报文…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：TCP和UDP的概念和特点是什么？
 
 > 合并自 `core-051`（相似度 71%）
@@ -255,3 +287,35 @@ TCP 和 UDP 是传输层最主要的两种协议。
 | 0:40 | 概念动画/示意图 | "TCP是可靠连接服务，UDP是不可靠数据报服务——TCP像打电话（专线），UDP像大喇叭喊话（不管谁听到、听没听到）" | 核心定义 |
 | 1:20 | TCP核心示意 | "面向连接，通过序列号、ACK和重传保证可靠有序。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["TCP与UDP的概念，特点，区别和对应的使用场景？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["连接与可靠性：TCP面向连接且可靠（三次握手），UD…"]:::core
+        C["传输方式：TCP面向字节流（无边界），UDP面向报文…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

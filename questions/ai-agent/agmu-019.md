@@ -102,7 +102,6 @@ def dispatch_task(task_type: str) -> str:
 2. 在多 Agent 系统中，如何处理“慢速 Agent”拖垮整体响应速度的问题？（提示：设置超时机制、异步并行或热备份 Agent）。
 3. 你提到了“角色隔离”，如何防止不同 Agent 的 Prompt 之间产生冲突或指令泄露？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -163,7 +162,6 @@ flowchart TD
 - 多 Agent 适合需角色隔离、并行处理或对抗评审的复杂任务。
 - 避免过度设计，简单任务勿增实体。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 单 Agent 是瑞士军刀（统一策略按序调用 API），多 Agent 是专家组（角色隔离、并行处理、对抗评审）。任务只需统一策略按序调用不同 API 用单 Agent + 工具调度即可，架构简单上下文连贯成本低。需要角色隔离（程序员、PM、测试员）、并行处理、对抗评审或复杂组织流程才上多 Agent。遵循奥卡姆剃刀——如无必要勿增实体，简单任务别过度设计。
@@ -187,3 +185,37 @@ flowchart TD
 | 1:10 | 过度设计警示 | "坑：简单任务引入多 Agent 延迟成倍增加，遵循奥卡姆剃刀。" | 关键坑 |
 | 1:35 | 文档生成案例 | "实战：单 Agent 忘术语，多 Agent 并行耗时缩短 30%。" | 实战收益 |
 | 1:50 | 总结卡 | "记住：简单用单 Agent，复杂角色隔离才上多 Agent。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent vs 单 Agen…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N2["选型维度表<br/>0:45"]:::deep
+        N3["过度设计警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N1["架构对比图<br/>0:15"]:::practice
+        N4["文档生成案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

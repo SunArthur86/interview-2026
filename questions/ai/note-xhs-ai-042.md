@@ -94,7 +94,6 @@ def decompose_and_order(user_request, llm, available_tools):
     
     return json.loads(plan)
 
-
 def execute_plan(plan, tool_registry):
     """按DAG拓扑序执行，最大化并行"""
     tasks = {t['id']: t for t in plan['tasks']}
@@ -267,7 +266,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 做一顿年夜饭：红烧肉要炖2小时（先开始），蔬菜5分钟搞定（晚点做），汤要趁热喝（最后做）。你需要根据依赖关系和耗时排出最优顺序——Agent也一样，要分析哪些任务有先后依赖，哪些可以同时做
 
 **展开框架：**
@@ -277,11 +275,9 @@ flowchart TD
 
 **收尾：** 子任务拆分错误怎么修正？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -289,6 +285,37 @@ flowchart TD
 | 0:20 | 核心概念图 | "复合需求的任务排序本质是构建DAG（有向无环图）——LLM分析任务间的依赖关系，生成拓扑排序，可并行的并行，必须串行的按…" | 核心定义 |
 | 0:55 | 复合需求示意图 | "复合需求——复合需求=多个子任务 → 需要任务分解+排序" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["复合需求怎么判断任务执行先后顺序？<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["复合需求示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 
 ## 苏格拉底式面试追问
 

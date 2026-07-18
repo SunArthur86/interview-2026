@@ -121,8 +121,6 @@ async def handle_get_status() -> list[TextContent]:
     │ MCP Host  │                               │ MCP Host  │
     │ (Client)  │
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -154,7 +152,6 @@ flowchart TD
 - 关系：Skills编排Tools，MCP传输Tools/数据，实现真正的插件化。
 - 选型：简单调用用Tools，复用能力用Skills，通用服务接入选MCP。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 三层抽象：Tools是原子函数，MCP是连接协议，Skills是业务封装。——打个比方，像玩乐高：Tools是积木块，MCP是积木接口标准，Skills是拼好的模型。
@@ -178,3 +175,37 @@ flowchart TD
 | 2:00 | Skills图解 | "高阶能力包，封装Prompt+工具链+流程，可复用可分享，抽象层级最高。" | Skills |
 | 2:40 | MCP图解 | "标准化传输协议，解耦Agent和工具，一次开发多端接入，抽象层级居中。" | MCP |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】Skills、Tool…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三层抽象：Tools是原子函数，MCP是连接协议<br/>0:40"]:::core
+        N2["Tools图解<br/>1:20"]:::deep
+        N3["Skills图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["MCP图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

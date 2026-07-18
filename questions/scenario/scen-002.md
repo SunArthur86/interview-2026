@@ -168,3 +168,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像商场限量发售，门外排队(限流)，进门凭票(Redis)，发货(MQ)。" | 核心类比 |
 | 2:03 | 前端静态化与按钮置灰 图解 | "前端静态化与按钮置灰拦截无效请求。" | 前端静态化与按钮置灰 |
 | 2:50 | Redis原子扣减库 图解 | "Redis原子扣减库存作为第一道防线。" | Redis原子扣减库 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个秒杀系统？假设某商品1000件，瞬时并发100万"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["防超卖三道防线：网关限流、Redis预扣（Lua原子…"]:::core
+        C["核心链路：因为同步写库慢，所以Redis扣减成功后必…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

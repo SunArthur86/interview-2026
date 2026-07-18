@@ -217,7 +217,6 @@ def check_quota(user_id, max_daily_tokens=100000):
 - **会话亲和性（Sticky Session）**：负载均衡把同一用户路由到同一实例（减少 Redis 读取，但有单点风险）
 - **多租户架构**：DB 隔离（每租户独立DB）vs Schema 隔离 vs Row 隔离，按租户规模选
 
-
 ## 核心流程图
 
 ```mermaid
@@ -266,7 +265,6 @@ flowchart TD
 - 会话隔离：每请求用ThreadLocal/ContextVars存用户ID，绝不共享全局上下文
 - 并发控制：令牌桶限制单用户QPS防滥用，信号量限制LLM总并发槽位防雪崩
 - 数据隔离：DB用行级安全(RLS)，向量库检索强制带user_id过滤表达式防越权
-
 
 ## 苏格拉底式面试追问
 
@@ -321,11 +319,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：怎么防止用户A的请求拿到用户B的会话？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -334,3 +330,36 @@ flowchart TD
 | 0:50 | 会话隔离示意图 | "会话隔离——session_id维度Redis key + 每请求独立LLM上下文" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：怎么防止用户A的请求拿到用户B的会话？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["高并发多用户会话隔离设计<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["会话隔离示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

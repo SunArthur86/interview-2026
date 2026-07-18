@@ -75,12 +75,10 @@ Markdown 标题感知切片
 import re
 from dataclasses import dataclass
 
-
 @dataclass
 class Chunk:
     text: str
     metadata: dict  # 来源、标题路径、类型等
-
 
 def markdown_header_chunking(
     text: str,
@@ -126,7 +124,6 @@ def markdown_header_chunking(
 
     return chunks
 
-
 def _add_chunk(chunks, text, headers, max_size, min_size):
     """如果section太长，再按段落递归切"""
     header_path = " > ".join(headers.get(i, "") for i in sorted(headers))
@@ -163,7 +160,6 @@ def _add_chunk(chunks, text, headers, max_size, min_size):
 """
 from sentence_transformers import SentenceTransformer
 import numpy as np
-
 
 def semantic_chunking(
     text: str,
@@ -233,7 +229,6 @@ def semantic_chunking(
 from dataclasses import dataclass
 from typing import Optional
 
-
 @dataclass
 class TableChunk:
     text: str              # Markdown/JSON 格式的表格文本
@@ -241,7 +236,6 @@ class TableChunk:
     row_range: tuple       # (起始行, 结束行)
     has_header: bool       # 是否包含表头
     summary: Optional[str] # 表格摘要（可选）
-
 
 def chunk_table(
     headers: list[str],
@@ -292,7 +286,6 @@ def chunk_table(
         ))
 
     return chunks
-
 
 # ============================================================
 # 完整示例: 从文档中分离正文和表格
@@ -374,12 +367,10 @@ def mixed_document_chunking(
 
     return chunks
 
-
 def _is_table_line(line: str) -> bool:
     """判断是否为 Markdown 表格行"""
     stripped = line.strip()
     return stripped.startswith("|") and stripped.endswith("|") and "|" in stripped[1:-1]
-
 
 # ============================================================
 # 运行示例
@@ -520,7 +511,6 @@ def process_figure(image_path: str, vlm_client) -> dict:
 5. **生产环境工具链推荐**：文档解析用 `unstructured` 或 `marker`（表格识别好）；切片用 LlamaIndex的`SentenceSplitter` + 自定义Table解析；PDF表格提取推荐 `camelot` 或 `pdfplumber`。
 6. **Late Chunking**（2024年新技术）：先对整个文档做Embedding（保留全局上下文），再做切片——通过延迟切片时机来保留文档级的上下文信息，在长文档检索中有显著优势。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -620,11 +610,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：表格数据怎么向量化效果最好？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -634,3 +622,37 @@ flowchart TD
 | 1:30 | 表格示意图 | "表格——结构化保留(Markdown/HTML格式)" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：表格数据怎么向量化效果最好？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["如果用户的文档同时包含大段正文和密…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["正文示意图<br/>0:50"]:::deep
+        N3["表格示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

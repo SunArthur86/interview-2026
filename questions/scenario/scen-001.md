@@ -175,3 +175,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像个巨大的电信局，分配短号码(发号)，接通长号(跳转)。" | 核心类比 |
 | 2:03 | 发号器 图解 | "发号器保证短链全局唯一性。" | 发号器 |
 | 2:50 | 读写分离 图解 | "读写分离，写MySQL，读Redis。" | 读写分离 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个短链系统？数据量约百亿级别，日均访问量十亿次"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["发号器三方案：自增Base62、号段模式Leaf、雪…"]:::core
+        C["因为百亿数据需扩展，所以MySQL按短码Hash分1…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

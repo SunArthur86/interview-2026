@@ -164,3 +164,35 @@ flowchart TD
 | 1:30 | 本质示意 | "通过虚拟线程实现同步代码风格高并发，替代复杂的Reactive异步链" | 要点1 |
 | 2:15 | 核心原理示意 | "基于Continuation续体，遇阻塞IO则从载体线程Unmount卸载" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Project Loom？虚拟线程如何改变Java并发…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质：通过虚拟线程实现同步代码风格高并发，替代复杂的…"]:::core
+        C["核心原理：基于Continuation续体，遇阻塞I…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

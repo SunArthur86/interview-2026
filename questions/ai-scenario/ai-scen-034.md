@@ -159,7 +159,6 @@ flowchart TD
     M --> N[质量看板与分级告警系统]
 ```
 
-
 ## 记忆要点
 
 - 三层监控：基础设施（GPU/延迟）→ 模型行为（Token/幻觉/工具调用）→ 业务质量（满意度/留存）。
@@ -167,7 +166,6 @@ flowchart TD
 - Trace追踪：OpenTelemetry全链路追踪，记录每步耗时与Prompt上下文。
 - 告警体系：P0服务不可用（电话），P1延迟恶化（飞书），P2质量下降（邮件）。
 - 对比：传统监控看SLA，AI可观测性看幻觉率、逻辑正确性及成本归因。
-
 
 ## 结构化回答
 
@@ -191,3 +189,36 @@ flowchart TD
 | 1:12 | 三层监控图解 | "基础设施（GPU/延迟）→ 模型行为（Token/幻觉/工具调用）→ 业务质量（满意度/留存）。" | 三层监控 |
 | 1:48 | 核心指标图解 | "Token消耗趋势、工具调用成功率、拒答率、差评率。" | 核心指标 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI系统的可观测性方案<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["监控基建、模型行为和业务质量，全链路洞察系统健康<br/>0:36"]:::core
+        N3["核心指标图解<br/>1:48"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["三层监控图解<br/>1:12"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -162,3 +162,35 @@ while (true) {
 | 0:40 | 概念动画/示意图 | "基于通道和缓冲区的IO模型，利用选择器实现单线程多路复用——餐厅服务员（Selector）同时照看多桌客人（Channel），客人有招手（事件）才去处理，不用一直傻站着" | 核心定义 |
 | 1:20 | 三大组件示意 | "Buffer（缓冲区）、Channel（双向通道）、Selector（多路复用器）。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["NIO的三大核心组件是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三大组件：Buffer（缓冲区）、Channel（双…"]:::core
+        C["Buffer核心：靠flip（）切换读写模式，靠三个…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

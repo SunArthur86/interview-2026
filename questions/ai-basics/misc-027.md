@@ -120,7 +120,6 @@ final_scores = alpha * bm25_norm + (1 - alpha) * vector_norm
 3. **混合检索在哪些场景下效果提升最明显？**
    - 专业术语多（如医疗、法律）、用户查询包含缩写、或需要同时处理语义和拼写错误的场景。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -202,4 +201,36 @@ flowchart TD
 | 0:55 | RRF 公式：sum(1/(k+rank))，k=60 | 融合方法主流是 RRF，倒数排名融合，公式是对 1 除以 k 加 rank 求和，k 通常取 60，好处是无需归一化分数。 | RRF 融合 |
 | 1:25 | RRF vs 加权平均 对比 | 相比加权平均需要归一化、调参麻烦，RRF 按排名融合对分数尺度不敏感，所以最常用。 | 方法对比 |
 | 1:50 | 适用场景图标：医疗/法律/缩写/拼写错误 | 适合专业术语多、有缩写、或要同时处理语义和拼写错误的场景，比如医疗、法律。 | 适用场景 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["目录索引 + 内容理解<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["BM25 vs 向量检索 对比图<br/>0:25"]:::core
+        N2["RRF 公式：sum(1/(k+rank))，k=60<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["RRF vs 加权平均 对比<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["适用场景图标：医疗/法律/缩写/拼写错误<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

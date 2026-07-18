@@ -84,7 +84,6 @@ result = crew.kickoff()
 2. **内存共享**：不同 Agent 之间如何共享上下文？（答：主要通过 Task 的输出作为下一个 Task 的输入，或者共享短期记忆）。
 3. **执行机制**：CrewAI 是并行的吗？（答：默认 Sequential 是串行的，Hierarchical 中 Manager 可以并发派发，但需注意 LLM API 调用的并发限制）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -145,7 +144,6 @@ flowchart TD
 - 支持 Sequential 顺序流和 Hierarchical 层级管理。
 - Task 输出自动作为下个 Task 输入，实现上下文传递。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** Crew 抽象把"角色分工+任务依赖+执行顺序"从散乱 Prompt 工程中抽离成一等公民，像把口头分工变成可视化组织架构图。降低写一大坨 system prompt 的心智负担，让协作结构可见可复用。支持 Sequential 顺序流和 Hierarchical 层级管理，Task 输出自动作为下个 Task 输入。缺点是权限边界需自己把控，复杂分支编排能力弱于 LangGraph。
@@ -169,3 +167,37 @@ flowchart TD
 | 1:10 | 上下文自动传递 | "Task 输出自动作为下个 Task 输入，Context 机制传递。" | 上下文机制 |
 | 1:35 | 格式偏差卡死案例 | "实战：任务链长中间 JSON 缺字段卡死，加校验钩子解决。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：角色+任务+Crew 三件套，注意权限边界。下期讲 MetaGPT。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["CrewAI 的 Crew 抽象<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三件套抽象图<br/>0:15"]:::core
+        N2["两种 Process 对比<br/>0:45"]:::core
+        N3["上下文自动传递<br/>1:10"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["格式偏差卡死案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

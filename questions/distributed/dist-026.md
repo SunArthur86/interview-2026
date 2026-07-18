@@ -158,3 +158,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——圆桌会议，每个人(节点)占一个位置，问题(数据)交给右手边最近的人处理。来人新人只需负责一小段。" | 核心类比 |
 | 2:03 | 构建首尾相接 图解 | "构建首尾相接的Hash环。" | 构建首尾相接 |
 | 2:50 | 顺时针查找最近 图解 | "顺时针查找最近的服务节点。" | 顺时针查找最近 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["一致性Hash的原理和特性是什么？它在分布式系统中的应用？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["因为解决取模算法扩缩容导致全量缓存失效，所以引入一致…"]:::core
+        C["路由规则：顺时针方向寻找最近的节点，Java常用Tr…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

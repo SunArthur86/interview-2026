@@ -162,3 +162,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——智能交通指挥员，既懂按车牌(IP)分流，也懂按目的地(URL)指路，还能发现坏车(故障节点)。" | 核心类比 |
 | 2:03 | 四层(TCP)和七层 图解 | "支持四层(TCP)和七层(HTTP)代理。" | 四层(TCP)和七层 |
 | 2:50 | 单进程事件驱动 图解 | "单进程事件驱动，性能极高。" | 单进程事件驱动 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["HAProxy负载均衡器的特点和使用场景是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心定位：提供高可用与负载均衡的代理软件，同时支持 …"]:::core
+        C["四大特性：事件驱动高性能、丰富算法、会话保持与多层级…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

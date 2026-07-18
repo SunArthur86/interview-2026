@@ -341,6 +341,30 @@ flowchart TD
 | 0:15 | 线程池工作流程图 | 先说核心：线程池参数设计的本质是"按业务模型对资源做预算"——CPU 密集型把线程数压到核数（多则上下文切换浪费），IO 密集型放大线程数（多则等 IO 时让出 CPU）。拒绝策略和队列。 | 核心定义 |
 | 0:40 | 概念结构示意图 | 核心线程→队列→非核心线程→拒绝策略。 | 提交流程 |
 | 1:05 | 流程图 | N+1；IO 密集型：2N 或 N×(1+等待/计算)。 | CPU 密集型 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>线程池工作"]:::concept
+    N3["0:40<br/>提交流程"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:05<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
 | 2:30 | 总结卡 | 一句话记忆：七参数：核心、最大、存活时间、队列、线程工厂、拒绝策略、单位。 下期可以接着聊：为什么核心线程满了先进队列而不是先开非核心线程。 | 收尾总结 |
 
 

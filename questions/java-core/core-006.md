@@ -201,3 +201,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "通过复用连接、压缩数据、缓存资源减少传输开销——像送快递，把零散包裹打包（压缩）、用专车直送（复用连接）、在楼下设自提柜（缓存）" | 核心定义 |
 | 1:20 | 传输层优化示意 | "HTTP/2解决HTTP队头阻塞，而HTTP/3基于UDP解决TCP队头阻塞。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是HTTP优化方案？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["传输层优化：HTTP/2解决HTTP队头阻塞，而HT…"]:::core
+        C["缓存策略：强缓存直接读本地，协商缓存（304）询问服…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

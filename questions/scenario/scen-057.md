@@ -197,3 +197,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——给每个服务员配一个助手，专门负责传话、记菜单、招呼客人。" | 核心类比 |
 | 2:03 | Sidecar拦截进 图解 | "Sidecar拦截进出流量。" | Sidecar拦截进 |
 | 2:50 | 控制面统一下发治 图解 | "控制面统一下发治理规则。" | 控制面统一下发治 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计 Service Mesh（服务网格）架构？Isti…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心机制：业务无感知，治理逻辑全下沉至Sidecar…"]:::core
+        C["控制与数据面：控制面Pilot通过xDS协议下发配置…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

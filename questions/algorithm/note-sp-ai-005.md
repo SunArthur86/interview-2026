@@ -265,3 +265,35 @@ Timsort 解决了两个工程问题：一、稳定性——对象排序要求稳
 | 0:15 | 排序算法柱状图动画 | "时间复杂度记口诀：最好O(n)，最坏平均皆O(n²)。因为未优化全遍历为n²，优化后一轮无交换提前终止为n。" | 时间复杂度记口诀 |
 | 0:47 | 排序算法柱状图动画分步演示 | "空间复杂度O(1)，因为是原地交换只用常数级额外空间。" | 空间复杂度O(1) |
 | 1:20 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：冒泡排序怎么优化。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["冒泡排序的时间复杂度？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["时间复杂度记口诀：最好O（n），最坏平均皆O（n²）…"]:::core
+        C["空间复杂度O（1），因为是原地交换只用常数级额外空间"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

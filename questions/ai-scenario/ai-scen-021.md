@@ -148,7 +148,6 @@ flowchart TD
     Stream --> Client
 ```
 
-
 ## 记忆要点
 
 - 核心引擎：vLLM（PagedAttention+Continuous Batching）或TensorRT-LLM。
@@ -156,7 +155,6 @@ flowchart TD
 - 缓存策略：Prefix Cache复用系统Prompt，KV Cache共享，减少重复计算。
 - 容量规划：70B模型需4卡A100，支持50-100并发，吞吐约2000 tokens/s。
 - 高可用：API网关统一鉴权，GPU感知调度，动态扩缩容防OOM。
-
 
 ## 结构化回答
 
@@ -180,3 +178,36 @@ flowchart TD
 | 1:12 | 核心引擎图解 | "vLLM（PagedAttention+Continuous Batching）或TensorRT-LLM。" | 核心引擎 |
 | 1:48 | 性能优化图解 | "量化（FP16→INT4）提速30%，Speculative Decoding加速2-3倍。" | 性能优化 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个高并发的LLM模型推理服务<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用高性能推理引擎和GPU调度优化，实现大模型的<br/>0:36"]:::core
+        N2["核心引擎图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["性能优化图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

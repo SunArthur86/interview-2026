@@ -195,11 +195,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：向量检索和BM25的召回结果重叠率通常是多少？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -207,6 +205,37 @@ flowchart TD
 | 0:20 | 核心概念图 | "向量检索擅长语义匹配但精确匹配差，BM25擅长关键词匹配但语义理解差——单用任何一种都有盲区，混合检索取两者之长" | 核心定义 |
 | 0:55 | 向量检索示意图 | "向量检索——语义匹配强，精确匹配差（搜编号/人名/专有名词漏召回）" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["为什么不能只用向量检索？<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["向量检索示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 
 ## 苏格拉底式面试追问
 

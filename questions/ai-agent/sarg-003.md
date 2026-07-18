@@ -89,7 +89,6 @@ ensemble_retriever = EnsembleRetriever(
 3.  **如何评估 Embedding 是否适合我的数据？**
     构造一个包含“Query-正文档-负文档”的小规模测试集，计算 Recall@k 或 MRR 指标进行实测。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -135,7 +134,6 @@ flowchart TB
     Choose --> Benchmark["基准: MTEB 排行榜"]
 ```
 
-
 ## 记忆要点
 
 - 选型维度：语言支持（中文选BGE）、维度权衡（精度vs速度）、上下文长度
@@ -166,4 +164,37 @@ flowchart TB
 | 1:10 | Dense + Sparse 混合检索图 | "最佳实践：Dense 向量抓语义 + BM25 抓关键词，混合互补，效果最好。" | 混合检索 |
 | 1:35 | 医疗术语召回案例 | "实战：通用模型搜心梗匹配不到心肌梗死，微调 BGE 注入同义词对，召回提 30%。" | 实战案例 |
 | 1:55 | 总结卡 | "口诀：看 MTEB Retrieval 榜，中文 BGE，混合检索最稳。下期讲 Rerank。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Embedding 怎么选<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三大选型维度图<br/>0:15"]:::core
+        N3["Dense + Sparse 混合检索图<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["主流模型对比表<br/>0:45"]:::practice
+        N4["医疗术语召回案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：看 MTEB Retrieval 榜，中文<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

@@ -179,3 +179,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像体育馆的大屏幕广播，有人喊话就马上广播出去，没听清就算了。" | 核心类比 |
 | 2:03 | 长连接管理维持在 图解 | "长连接管理维持在线状态。" | 长连接管理维持在 |
 | 2:50 | 消息队列削峰填谷 图解 | "消息队列削峰填谷。" | 消息队列削峰填谷 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计直播弹幕系统？百万级用户同时在线，每秒十万条弹幕"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["架构链路：长连接接入→按房间隔离的Topic→消费推…"]:::core
+        C["热点隔离：因为大主播易引发弹幕雪崩，所以必须对热点直…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

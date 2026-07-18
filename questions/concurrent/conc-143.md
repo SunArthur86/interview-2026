@@ -179,3 +179,35 @@ flowchart TB
 | 0:40 | ReadWriteLock示意图 | ReadWriteLock读写互斥，高并发读存在写饥饿 | ReadWriteLock |
 | 1:10 | StampedLock乐观读示意图 | StampedLock乐观读通过版本号校验实现无锁读取 | StampedLock乐观读 |
 | 1:40 | 总结卡 + 下期预告 | 记住三个词就能答好这道题。下期追问：StampedLock 为什么不可重入？如果同一线程重复获取会怎样？ | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["读写锁（ReadWriteLock）和 StampedLoc…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["对比 AtomicLong：高并发下 AtomicL…"]:::core
+        C["因为 LongAdder 分段加锁减少了冲突，所以高…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

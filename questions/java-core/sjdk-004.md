@@ -145,3 +145,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "限制继承范围，介于final和普通类之间——像私人俱乐部，只有名单上的人才能进去" | 核心定义 |
 | 1:20 | 本质示意 | "在全开放与final全封闭间提供第三选项，精确控制继承树范围" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Sealed Classes（密封类）是什么？它和final…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质：在全开放与final全封闭间提供第三选项，精确…"]:::core
+        C["语法：父类用permits指定子类，子类必须声明为f…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

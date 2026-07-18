@@ -256,7 +256,6 @@ class SkillLifecycle:
 2. **不是所有 Prompt 都要升级**：只升级高频复用的，体现"投资回报"思维
 3. **强调"资产管理"**：Skill 是组织的资产（可版本/分享/迭代），Prompt 是消耗品
 
-
 ## 核心流程图
 
 ```mermaid
@@ -301,7 +300,6 @@ flowchart TD
 - 对比差异：Prompt是低复用文本，Skill是高复用、可管理、带Schema的结构化模块。
 - 核心五步：加元数据(可发现)→加工具依赖(声明式)→加流程(可复现)→加Schema(可测试)→加示例(提质量)。
 - 总结口诀：从裸文本进化为带身份、依赖、流程、接口和例子的标准化组件。
-
 
 ## 苏格拉底式面试追问
 
@@ -360,11 +358,9 @@ AB 对比。固定测试集，对比：1）裸 Prompt（手动复制粘贴执行
 
 **收尾：** 您想深入聊：所有Prompt都该升级成Skill吗？——不，高频复用的才值得？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -373,3 +369,36 @@ AB 对比。固定测试集，对比：1）裸 Prompt（手动复制粘贴执行
 | 0:50 | Prompt→Skill五步示意图 | "Prompt→Skill五步——加元数据/加工具/加流程/加Schema/加示例" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：所有Prompt都该升级成Skill吗？——不，高频复用的才？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Prompt 不等于 Skill，…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Prompt→Skill五步示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

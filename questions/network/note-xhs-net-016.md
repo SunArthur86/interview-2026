@@ -325,3 +325,35 @@ sequenceDiagram
 | 2:01 | 关键代码/伪代码片段 | "数据帧格式：FIN+opcode+mask+payload" | 数据帧格式 |
 | 2:54 | 对比表格 | "Java实现：@ServerEndpoint(简单)或Netty(高性能)" | Java实现 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：WebSocket 和 SSE（Server-Sent Events）的区别？AI流式响应用哪个。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["WebSocket 主要是用来做什么的？如何设计实现一个 W…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["WebSocket=全双"]:::core
+        C["解决HTTP轮询的低效问"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

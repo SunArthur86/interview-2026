@@ -115,13 +115,11 @@ flowchart TD
     Choice -->|Per-column| GPTQ[GPTQ<br/>Hessian二阶补偿]
 ```
 
-
 ## 记忆要点
 
 - SmoothQuant：Per-channel/tensor。数学等价变换，将激活难度迁移至权重，适合W8A8。
 - AWQ：Per-group。保留1%显著权重为FP16，其余INT4量化，激活感知，推理快。
 - GPTQ：Per-column。基于Hessian二阶信息补偿权重误差，纯INT4，精度高。
-
 
 ## 结构化回答
 
@@ -146,3 +144,37 @@ flowchart TD
 | 2:00 | AWQ图解 | "Per-group。保留1%显著权重为FP16，其余INT4量化，激活感知，推理快。" | AWQ |
 | 2:40 | GPTQ图解 | "Per-column。基于Hessian二阶信息补偿权重误差，纯INT4，精度高。" | GPTQ |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】按照量化粒度…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过数学变换或优化算法减少权重量化误差<br/>0:40"]:::core
+        N2["SmoothQuant图解<br/>1:20"]:::deep
+        N3["AWQ图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["GPTQ图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

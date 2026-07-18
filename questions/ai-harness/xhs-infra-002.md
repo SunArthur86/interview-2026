@@ -118,14 +118,12 @@ flowchart TD
     Resample --> Output
 ```
 
-
 ## 记忆要点
 
 - 核心流程：小模型快速生成候选，大模型并行验证，接受正确前缀，拒绝处重采样。
 - 加速原理：利用小模型速度快，大模型并行验证只花一次 Forward，期望加速 1.5-2.5x。
 - 高 Batch 优势：验证阶段计算密集，GPU 利用率高，常与 PagedAttention 组合。
 - 关键指标：接受率决定加速比，需确保 Draft Model 与 Target Model 分布对齐。
-
 
 ## 结构化回答
 
@@ -150,3 +148,37 @@ flowchart TD
 | 2:00 | 加速原理图解 | "利用小模型速度快，大模型并行验证只花一次 Forward，期望加速 1.5-2.5x。" | 加速原理 |
 | 2:40 | 高 Batch 优势图解 | "验证阶段计算密集，GPU 利用率高，常与 PagedAttention 组合。" | 高 Batch 优势 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Speculative Decod…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["小模型快速草拟，大模型并行验证，以小博大的推理加<br/>0:40"]:::core
+        N2["核心流程图解<br/>1:20"]:::core
+        N3["加速原理图解<br/>2:00"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["高 Batch 优势图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

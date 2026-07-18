@@ -104,8 +104,6 @@ SFT Pipeline:                    RLHF/DPO Pipeline:
 2. **Reward Hacking**：在RLHF训练中，模型学会欺骗Reward Model得分高但输出质量差，怎么破？（使用混合Reward：模型评分 + 规则约束 + 人工抽检）
 3. **数据规模效应**：在SFT中，为什么有时候增加数据反而效果变差？（数据质量分布不均，低质量数据污染了模型原有的通用能力，需严格数据清洗和课程学习Curriculum Learning）
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -134,7 +132,6 @@ flowchart TD
 - DPO优势：无需显式Reward Model，直接在偏好对上优化，工程落地简单
 - 基模变强：SFT靠数据蒸馏，RLHF靠规则验证(Verifiable Reward)
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** SFT靠优质数据快速成型，RLHF靠反馈奖励对齐偏好，正向自动化发展。——打个比方，SFT像照着模范书练习（有样学样），RLHF像老师根据表现打分（纠正偏差）。
@@ -158,3 +155,37 @@ flowchart TD
 | 2:00 | SFT破局点图解 | "重质量轻数量，几百条高质量数据优于万条普通数据" | SFT破局点 |
 | 2:40 | RLHF破局点图解 | "从人工标注转向自动反馈(如代码能否跑通)，用DPO简化流程" | RLHF破局点 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】SFT和RLHF哪个更…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["SFT靠优质数据快速成型，RLHF靠反馈奖励对齐<br/>0:40"]:::core
+        N2["迭代速度图解<br/>1:20"]:::deep
+        N3["SFT破局点图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["RLHF破局点图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

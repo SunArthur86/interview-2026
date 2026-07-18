@@ -207,3 +207,31 @@ flowchart TD
 | 1:50 | 概念结构示意图 | 可靠性靠'生成-校验-重试'闭环，而非盲目信任模型输出。 | 可靠性靠'生成-校验-重试'闭环 |
 | 3:30 | 总结卡 | 一句话记忆：Agent = Plan + Tool + Memory + Verify + Orchestrate。 下期可以接着聊：Agent 用什么编排框架。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>Agent 感知-思考-行动闭环"]:::concept
+    N3["0:50<br/>Agent = 规划"]:::practice
+    N4["1:20<br/>编排引擎"]:::deep
+    N5["1:50<br/>可靠性靠'生成-校验-重试'闭环"]:::concept
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

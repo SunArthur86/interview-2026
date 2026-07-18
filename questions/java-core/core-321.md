@@ -181,3 +181,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "hashCode定桶位，equals定具体对象，必须保持逻辑一致——找人先看他在哪个楼（hashCode），进楼再看具体房间（equals）。如果认定是一个人，那他必须在同一个楼里" | 核心定义 |
 | 1:20 | 契约铁律示意 | "equals相等，hashCode必相等；hashCode相等，equals不一定相等。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["equals（）和hashCode（）的关系是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["契约铁律：equals相等，hashCode必相等；…"]:::core
+        C["致命后果：只重写equals会导致相同对象在Hash…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

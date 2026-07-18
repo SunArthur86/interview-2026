@@ -202,3 +202,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像给赛车装几十个传感器，仪表盘实时显示转速、油温，异常立刻报警。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：全链路数据埋点与实时告警，确保秒杀过程可观测。" | 核心定义 |
 | 1:50 | 四维监控 图解 | "业务指标、系统资源、链路追踪、日志。" | 四维监控 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个秒杀系统的全链路追踪和监控？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["工具铁三角：Prometheus看指标数值，SkyW…"]:::core
+        C["精细化埋点：核心接口需打上业务Tag（如UserId…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

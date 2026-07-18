@@ -580,3 +580,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "扩容优势：哈希取模扩容需迁移近全量数据，而路由表扩容只改部分记录指向，无需全量重算" | 扩容优势 |
 | 2:54 | 对比表格 | "适用场景：哈希定死规划，一致性Hash平滑扩容，路由表极致灵活细粒度可控，范围分片利于区间查询" | 适用场景 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：路由表本身会不会成为瓶颈。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】短链接数据分片之后，你又加了路由表，这个路由表具…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：路由表就是“短码→分片节点”的显式映射中…"]:::core
+        C["核心对比：哈希路由是“计算得出”而路由表是“查询得出…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

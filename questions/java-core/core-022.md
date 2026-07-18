@@ -159,3 +159,35 @@ flowchart LR
 | 0:40 | 概念动画/示意图 | "接收方通告缓冲区剩余空间，控制发送方发送速率，实现流量控制——像水管龙头，如果你（接收方）接水太慢，水箱满了就关掉龙头（发送方），防止溢出" | 核心定义 |
 | 1:20 | 核心目的示意 | "接收方通告剩余缓冲区大小，防止被发送方淹没(点对点)" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是接收方滑动窗口？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心目的：接收方通告剩余缓冲区大小，防止被发送方淹没…"]:::core
+        C["窗口为0（Zero Window）：缓冲满发送方停发…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -151,7 +151,6 @@ def review_pr(diff_context, file_path):
 2. **长Diff处理**：当PR包含1000+行变更时，如何分块审查。
 3. **降低误报**：如何利用代码库的Git历史和开发者反馈来校准LLM的输出。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -209,7 +208,6 @@ flowchart TD
 - 效果优化：Few-shot注入历史Review，路径白名单过滤误报。
 - 集成：Pre-commit快速查，PR自动Review，Critical阻断合并。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 静态工具扫漏洞，LLM审逻辑，自动化Review流程。——打个比方，像带了多种扫描仪的资深专家，机器扫规则，人审逻辑。
@@ -232,3 +230,36 @@ flowchart TD
 | 1:12 | 流程图解 | "Diff解析 → 静态分析 → LLM深度审查 → 报告生成。" | 流程 |
 | 1:48 | 审查维度图解 | "静态工具查漏洞，LLM查逻辑Bug/边界条件/性能问题。" | 审查维度 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI代码审查系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["静态工具扫漏洞，LLM审逻辑，自动化Review<br/>0:36"]:::core
+        N2["流程图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["审查维度图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

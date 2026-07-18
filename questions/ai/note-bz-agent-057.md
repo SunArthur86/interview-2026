@@ -220,7 +220,6 @@ class GraphRAGQuery:
 2. **承认成本高**：GraphRAG 构建贵更新难，不是银弹——只在需要时用
 3. **混合架构**：向量+图谱混合（简单走向量，复杂走图谱）是生产实践
 
-
 ## 核心流程图
 
 ```mermaid
@@ -260,7 +259,6 @@ flowchart TD
 - 必用场景：多跳推理（如A收购B，B的创始人是谁）、复杂依赖与因果分析。
 - 图库构建：LLM抽取实体和关系构建图，并跑Leiden算法做社区检测。
 - 全局查询：GraphRAG先汇总各社区生成的摘要，再回答全局总结类问题。
-
 
 ## 苏格拉底式面试追问
 
@@ -319,11 +317,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：GraphRAG怎么构建？——LLM抽实体+关系→建图→社区聚类？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -333,3 +329,37 @@ flowchart TD
 | 1:30 | 构建示意图 | "构建——LLM抽实体关系→建图→社区检测" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：GraphRAG怎么构建？——LLM抽实体+关系→建图→社区？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["什么场景必须用 GraphRAG？…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["核心示意图<br/>0:50"]:::deep
+        N3["构建示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

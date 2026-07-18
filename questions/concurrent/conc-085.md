@@ -222,3 +222,35 @@ flowchart TD
 | 0:40 | 私有构造函数防止外部new示意图 | 私有构造函数防止外部new | 私有构造函数防止外部new |
 | 1:10 | 私有静态变量示意图 | 私有静态变量存储唯一实例 | 私有静态变量 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是单例模式的6种实现？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心三要素：私有构造、私有静态变量、公有静态访问方法"]:::core
+        C["口诀记忆6种：饿汉、懒汉（不安全/安全）、DCL、静…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

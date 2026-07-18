@@ -185,3 +185,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——报纸订阅，大报纸(大V)不挨家送(拉)，社区小报(普通人)直接塞信箱(推)。" | 核心类比 |
 | 2:03 | 推模式读快写慢 图解 | "推模式读快写慢，拉模式反之。" | 推模式读快写慢 |
 | 2:50 | 混合模式 图解 | "混合模式根据粉丝数切换策略。" | 混合模式 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个 Feed 流（信息流）系统？类似微博/Twit…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心方案对比：推模式读快写放大，拉模式写快读慢，最终…"]:::core
+        C["混合策略：普通用户发帖用推模式写扩散，大V发帖用拉模…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

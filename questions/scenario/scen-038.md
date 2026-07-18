@@ -161,3 +161,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像学生打卡：我在教室(服务器)举手(心跳)，老师在点名册(Redis)记“在”，同学(好友)能看到我举手。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：心跳续期、集中存储、事件广播。" | 核心定义 |
 | 1:50 | 客户端定时心跳续期 图解 | "客户端定时心跳续期Redis TTL。" | 客户端定时心跳续期 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个实时在线状态系统？显示好友在线/离线状态"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["状态存储：Redis Hash存在线状态，设置60秒…"]:::core
+        C["心跳优化：因为高频写Redis压力大，所以网关本地缓…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

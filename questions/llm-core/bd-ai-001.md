@@ -138,7 +138,6 @@ flowchart LR
     D1 --> G[适合端到端任务]
 ```
 
-
 ## 记忆要点
 
 - Copilot：行级/函数级补全，IDE深度集成，适合写样板代码和API调用。
@@ -146,7 +145,6 @@ flowchart LR
 - Claude Code：CLI Agent，自主执行命令和测试，适合环境搭建和批量修复。
 - Web Chat：适合架构设计、技术选型和Debug思路探讨，思考型任务。
 - 选型：补全用Copilot，重构用Cursor，自主任务用Claude Code，设计用Web。
-
 
 ## 结构化回答
 
@@ -169,3 +167,35 @@ flowchart LR
 | 0:30 | 概念定义动画 | "一句话：Copilot 补全行，Cursor 改全库，Claude Code 自主执行任务。" | 核心定义 |
 | 1:00 | Copilot图解 | "行级/函数级补全，IDE深度集成，适合写样板代码和API调用。" | Copilot |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】平常用什么AI编程工具<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["Copilot 补全行，Cursor 改全库，C<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Copilot图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

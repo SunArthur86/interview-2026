@@ -144,3 +144,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "结合哈希摘要与非对称加密，确保数据完整且来源可信——把信件内容算出指纹，再用私钥封在信封里，别人用公钥开箱对比指纹防伪" | 核心定义 |
 | 1:20 | 要点1图解示意 | "保证数据完整性防篡改" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是摘要算法+数字签名？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["摘要（如SHA-256）提取内容唯一指纹，保证数据完…"]:::core
+        C["数字签名解决身份防抵赖：发送方用私钥对摘要加密生成签…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

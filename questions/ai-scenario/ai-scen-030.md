@@ -147,7 +147,6 @@ flowchart TD
     D7 -.-> F
 ```
 
-
 ## 记忆要点
 
 - 三层模型：用户身份（OAuth）→ 资源权限（RBAC/ABAC）→ AI行为（工具/输出过滤）。
@@ -155,7 +154,6 @@ flowchart TD
 - 数据隔离：RAG检索时行级过滤，向量库按租户Namespace隔离。
 - 防泄露：系统Prompt不包含敏感信息，输出PII检测。
 - 审计：全链路记录（请求→推理→工具），日志WORM存储防篡改。
-
 
 ## 结构化回答
 
@@ -179,3 +177,36 @@ flowchart TD
 | 1:12 | 三层模型图解 | "用户身份（OAuth）→ 资源权限（RBAC/ABAC）→ AI行为（工具/输出过滤）。" | 三层模型 |
 | 1:48 | 核心防御图解 | "工具调用必须经代码层校验，绝不信任LLM生成的参数。" | 核心防御 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI系统的权限控制方案<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["在身份、资源、AI行为三层建立边界，防止诱导和越<br/>0:36"]:::core
+        N3["核心防御图解<br/>1:48"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["三层模型图解<br/>1:12"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

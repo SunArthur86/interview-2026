@@ -143,14 +143,12 @@ flowchart TD
     I --> J[Attention 计算]
 ```
 
-
 ## 记忆要点
 
 - 核心机制：通过低秩压缩仅缓存极小的潜在向量，推理时上投影动态恢复，显存换计算。
 - RoPE 冲突：因为 RoPE 旋转会阻碍投影矩阵被 Q 吸收，所以不能直接用标准 RoPE。
 - 解法优化：采用解耦 RoPE，拆分为无位置的内容压缩通道与带位置的极小维度通道。
 - 性能对比：GQA 是物理共享，而 MLA 是数学低秩分解，压缩率更高且质量近乎无损。
-
 
 ## 结构化回答
 
@@ -175,3 +173,37 @@ flowchart TD
 | 2:00 | RoPE 冲突图解 | "因为 RoPE 旋转会阻碍投影矩阵被 Q 吸收，所以不能直接用标准 RoPE。" | RoPE 冲突 |
 | 2:40 | 解法优化图解 | "采用解耦 RoPE，拆分为无位置的内容压缩通道与带位置的极小维度通道。" | 解法优化 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】DeepSeek 的 …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["用低秩压缩KV Cache并解耦RoPE，极致节<br/>0:40"]:::core
+        N2["核心机制图解<br/>1:20"]:::core
+        N3["RoPE 冲突图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["解法优化图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

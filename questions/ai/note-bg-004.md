@@ -371,7 +371,6 @@ def choose_method(task_type, resources, data):
 - **DPO论文**：Stanford 2023，RLHF的偏好直接优化理论
 - **其他变体**：KTO（Kahneman-Tversky，只需好/坏标签无需成对）、IPO、ORPO
 
-
 ## 核心流程图
 
 ```mermaid
@@ -422,7 +421,6 @@ flowchart TD
 - GRPO原理：同prompt采样G个回答，组内分数标准化作为优势值，免去价值网络
 - DAPO优化：因全对全错样本梯度为0，故动态剔除以提升有效梯度密度
 - DPO本质：直接偏好优化，通过构造闭式解跳过RL和RM，全离线训练
-
 
 ## 苏格拉底式面试追问
 
@@ -481,11 +479,9 @@ DPO 有三个硬伤：1）离线——它用静态偏好对训练，无法在线
 
 **收尾：** 您想深入聊：GRPO去掉Critic后，优势估计的方差会变大吗？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -495,3 +491,37 @@ DPO 有三个硬伤：1）离线——它用静态偏好对训练，无法在线
 | 1:30 | GRPO示意图 | "GRPO——无Critic，组内G个样本相对排名做优势" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：GRPO去掉Critic后，优势估计的方差会变大吗？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["PPO、GRPO、DPO、DAPO…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["PPO示意图<br/>0:50"]:::deep
+        N3["GRPO示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

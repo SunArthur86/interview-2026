@@ -190,3 +190,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像开连锁店：每个城市(机房)都有店，本地人只去本地店(单元化)，着火了马上把客人转到隔壁城市店。" | 核心类比 |
 | 2:03 | 按用户ID分片路由 图解 | "按用户ID分片路由，归属地就近访问。" | 按用户ID分片路由 |
 | 2:50 | 单元化 图解 | "单元化保证数据主要在本地写。" | 单元化 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计异地多活架构？保证地域级故障时业务不中断"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["同城与异地对比：同城双活延迟低可强同步，异地多活因延…"]:::core
+        C["单元化核心：按用户ID哈希路由，同用户固定在单机房写…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

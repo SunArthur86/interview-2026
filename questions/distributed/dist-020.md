@@ -178,3 +178,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像电话总机，负责接听电话(VIP)并转接给具体的客服(RS)，根据模式不同，转接方式可能不同。" | 核心类比 |
 | 2:03 | 工作在OSI四层 图解 | "工作在OSI四层，基于IPVS内核模块。" | 工作在OSI四层 |
 | 2:50 | NAT模式改IP 图解 | "NAT模式改IP，性能差；DR模式改MAC，性能最好。" | NAT模式改IP |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["LVS负载均衡的原理和工作模式有哪些？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心定位：LVS 是基于 Linux 内核 IPVS…"]:::core
+        C["DR 模式：仅改 MAC 地址，性能最高但限同一物理…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -144,3 +144,35 @@ flowchart LR
 | 1:30 | 核心对比示意 | "static控制归属（类级别共享），final控制变更（不可变/不可重写）。" | 要点1 |
 | 2:15 | st示意 | "随类加载，存于方法区。修饰方法不可被重写，静态块仅执行一次。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["static和final有什么区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心对比：static控制归属（类级别共享），fin…"]:::core
+        C["static：随类加载，存于方法区。修饰方法不可被重…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

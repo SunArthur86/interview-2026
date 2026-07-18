@@ -480,3 +480,29 @@ flowchart TD
 | 1:05 | 代码示例截图 | 发现→通知→定位→止损→恢复→复盘。 | 应急响应 |
 | 2:30 | 总结卡 | 一句话记忆：预案分级（P0电话/P1短信/P2 IM）+ 回滚策略（代码/配置/数据/流量）。 下期可以接着聊：代码回滚和数据回滚冲突怎么办。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>概念结构"]:::concept
+    N3["0:40<br/>回滚类型"]:::deep
+    N4["1:05<br/>应急响应"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["2:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

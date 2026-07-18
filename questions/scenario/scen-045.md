@@ -183,3 +183,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像免疫系统识别病毒并自动吞噬一样。" | 核心类比 |
 | 2:03 | 检测、诊断、决策、执 图解 | "检测、诊断、决策、执行四层架构。" | 检测、诊断、决策、执 |
 | 2:50 | 预设常见故障 图解 | "预设常见故障的恢复脚本或规则。" | 预设常见故障 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个故障自愈系统？自动检测、诊断和恢复服务"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["自愈闭环：监控采集 → 异常检测 → 根因定位 → …"]:::core
+        C["防误杀机制：因为自动化可能误判，所以需多次采样确认、…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

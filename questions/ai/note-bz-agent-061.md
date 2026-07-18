@@ -214,7 +214,6 @@ class ProductionRAGAgent:
 2. **LangGraph 是重点**：支持循环/分支/人工节点——这是生产级 Agent 的刚需
 3. **强调可观测**：没有 LangSmith 级别的 Trace，生产 Agent 无法调试
 
-
 ## 核心流程图
 
 ```mermaid
@@ -257,7 +256,6 @@ flowchart TD
 - LCEL优势：管道符`|`串联组件，替代黑盒Chain，原生支持流式、异步与批处理
 - LangGraph解决复杂流：引入图结构，原生支持循环(ReAct)、条件分支、人工干预(HITL)与状态检查点
 - LangSmith做全链路追踪：提供Trace调试、评估测试与线上监控闭环
-
 
 ## 苏格拉底式面试追问
 
@@ -307,7 +305,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 从毛坯房(LangChain早期)到精装房(1.2)——加了监控系统(LangSmith)、复杂管线(LangGraph)、标准化接口(LCEL)。
 
 **展开框架：**
@@ -317,11 +314,9 @@ flowchart TD
 
 **收尾：** LCEL和旧Chain什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -330,3 +325,36 @@ flowchart TD
 | 0:50 | LCEL示意图 | "LCEL——声明式链编排（替代旧Chain）" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：LCEL和旧Chain什么区别？——LCEL声明式+流式+异？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["LangChain 1.2 生产级…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["LCEL示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -509,3 +509,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "原子防超卖：Redis执行Lua脚本扣减库存，因为需保证“判断+扣减”串行原子性" | 原子防超卖 |
 | 2:54 | 对比表格 | "异步落库：因为DB无法承受并发写入，所以Redis扣减成功后发MQ异步落DB下单" | 异步落库 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Redis挂了怎么办。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["设计一个秒杀系统，核心要点是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心思想：层层削峰，10万请求最终仅有极少量打到DB…"]:::core
+        C["漏斗模型：前端→网关限流→应用过滤，层层递减退掉无效…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -306,7 +306,6 @@ result = await app.execute({"messages": [{"role": "user", "content": "..."}]})
 2. **讲清难点**：并行调度/状态一致性/中断恢复——这些是真做了才会遇到的
 3. **务实建议**：除非特殊需求，否则用 LangGraph 更划算——不自嗨
 
-
 ## 核心流程图
 
 ```mermaid
@@ -349,7 +348,6 @@ flowchart TD
 - 执行引擎核心：基于拓扑排序调度节点，控制并行与防死循环，是框架心脏
 - 实现复杂流的关键：支持条件路由分发、状态合并与异步并发调度
 - 企业级特性壁垒：长任务中断恢复(检查点机制)与全链路Trace监控是自研难点
-
 
 ## 苏格拉底式面试追问
 
@@ -408,11 +406,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：为什么自研而不直接用LangGraph？——特殊需求/性能/学习/无依赖？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -422,3 +418,37 @@ flowchart TD
 | 1:30 | 难点示意图 | "难点——循环检测/并行调度/中断恢复" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：为什么自研而不直接用LangGraph？——特殊需求/性能/？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["如何实现一个对标 LangGrap…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["核心模块示意图<br/>0:50"]:::deep
+        N3["难点示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

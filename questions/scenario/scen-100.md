@@ -162,3 +162,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——去餐厅点餐，给你个叫号器，你可以自己看屏(轮询)，也可以等响了(推送)再取餐。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：以轮询为兜底，WebSocket为主推，结合Redis中间状态存储，实现异步结果同步。" | 核心定义 |
 | 1:50 | 客户端返回排队凭证 图解 | "客户端返回排队凭证，而非直接结果。" | 客户端返回排队凭证 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个秒杀后的异步通知系统？告知用户抢购结果"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["秒杀通知两方案：前端指数退避轮询（查Redis），W…"]:::core
+        C["WebSocket断线易丢消息，必须配合前端轮询兜底…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

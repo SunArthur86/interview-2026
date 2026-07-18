@@ -213,6 +213,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何排查线上接口突然变慢的问题？给出系统化的排查思路"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["排查六步法：确认现象 → 看监控 → 查常见原因 →…"]:::core
+        C["止血三板斧：回滚最新变更，隔离异常节点，触发限流降级…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：线上接口突然变慢如何系统化排查？给出从应用到基础设施的完整排查路径。
 
 > 合并自 `scen-114`（相似度 69%）
@@ -312,3 +344,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像水管查漏水，从水龙头一路查到总阀门。" | 核心类比 |
 | 2:03 | 先看应用监控和日志 图解 | "先看应用监控和日志，定位CPU/GC/线程问题。" | 先看应用监控和日志 |
 | 2:50 | 查数据库慢SQL、索 图解 | "查数据库慢SQL、索引和锁等待。" | 查数据库慢SQL、索 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何排查线上接口突然变慢的问题？给出系统化的排查思路"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["排查六步法：确认现象 → 看监控 → 查常见原因 →…"]:::core
+        C["止血三板斧：回滚最新变更，隔离异常节点，触发限流降级…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

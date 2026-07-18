@@ -136,3 +136,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 多人改同一文档，要么加锁独占，要么每人存副本改完合并，要么先改再检查版本。 | 核心概念 |
 | 0:40 | 悲观锁示意图 | 悲观锁：读写互斥，适合写多场景 | 悲观锁 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["数据库并发控制策略有哪些？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心对比：悲观锁防冲突先加锁，而乐观锁假设无冲突提交…"]:::core
+        C["MVCC机制：快照读不加锁，靠 undo log +…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

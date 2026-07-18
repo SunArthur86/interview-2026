@@ -153,3 +153,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——Redis锁像抢凳子快但有误判，ZK锁像排队叫号准但慢。" | 核心类比 |
 | 2:03 | Redis依赖时间 图解 | "Redis依赖时间，主从切换不安全。" | Redis依赖时间 |
 | 2:50 | Redlock 图解 | "Redlock解决单点但引入时钟依赖。" | Redlock |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Redlock 算法为什么有争议？Redis 分布式锁和 Z…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["单机Redis锁指令：SET key NX PX，且…"]:::core
+        C["Redlock争议：因为依赖各节点时钟且怕GC停顿，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

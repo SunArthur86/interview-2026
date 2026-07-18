@@ -178,3 +178,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——景区限流，漏桶是匀速放人进，令牌桶是攒了券就能快速进。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：限制请求速率，保护系统不被突发流量冲垮。" | 核心定义 |
 | 1:50 | 令牌桶允许突发流量 图解 | "令牌桶允许突发流量。" | 令牌桶允许突发流量 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["常见的限流算法有哪些？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["四大算法：固定窗口、滑动窗口、漏桶、令牌桶"]:::core
+        C["因为固定窗口有临界突刺，所以滑动窗口划细格子平滑流量"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

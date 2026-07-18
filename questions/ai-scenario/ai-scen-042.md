@@ -142,7 +142,6 @@ def search_pipeline(query, user_profile):
 - **向量索引优化**：使用 HNSW 算法平衡召回率与延迟。
 - **LLM 延迟优化**：重排环节仅对精排后的 Top-N（如 20 个）进行 LLM 打分，而非全量。
 
-
 ## 记忆要点
 
 - 流程：Query理解(意图/改写) → 多路召回 → 多阶段排序 → LLM增强。
@@ -150,7 +149,6 @@ def search_pipeline(query, user_profile):
 - 排序层：粗排(双塔) → 精排(多目标) → 重排(ListWise) → LLM解释。
 - LLM增强：生成推荐理由，支持对话式交互和动态调整。
 - 核心升级：从关键词匹配升级为语义理解和个性化排序。
-
 
 ## 结构化回答
 
@@ -174,3 +172,36 @@ def search_pipeline(query, user_profile):
 | 1:12 | 流程图解 | "Query理解(意图/改写) → 多路召回 → 多阶段排序 → LLM增强。" | 流程 |
 | 1:48 | 召回策略图解 | "向量召回语义，文本召回关键词，图谱召回关联，RRF融合。" | 召回策略 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI驱动的产品搜索与排序系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["语义理解意图，多路召回候选，多阶段排序优化。<br/>0:36"]:::core
+        N2["流程图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["召回策略图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

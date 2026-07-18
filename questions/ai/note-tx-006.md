@@ -268,7 +268,6 @@ def agent_step(state):
 4. **提到评估闭环**：从 A/B 测试到 Bad Case 收集再到迭代，体现"上线只是开始"的认知。
 5. **反问面试官**：贵团队在 Agent 落地中遇到的最大挑战是成本还是稳定性？——体现参与感。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -304,7 +303,6 @@ flowchart TD
 - 数据差异：科研跑干净静态Benchmark，工业处理脏数据与长尾分布。
 - 成本延迟：科研不计成本，工业必须分层模型路由降本并严控SLA延迟。
 - 容错评估：科研报平均分，工业需完整降级兜底并依赖线上A/B测试。
-
 
 ## 苏格拉底式面试追问
 
@@ -359,11 +357,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：论文中的方法怎么落地？——先验证核心假设，再解决成本/延迟/稳定性？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -372,3 +368,36 @@ flowchart TD
 | 0:50 | 科研示意图 | "科研——验证新方法/Benchmark驱动" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：论文中的方法怎么落地？——先验证核心假设，再解决成本/延迟/？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["科研场景和工业场景的 Agent …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["科研示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

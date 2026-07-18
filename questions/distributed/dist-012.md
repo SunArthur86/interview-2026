@@ -193,3 +193,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像查黄页，商家开店先登记(注册)，顾客想吃饭查黄页找到电话打过去(发现)。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：服务在动态注册表中登记，消费者按需查找并调用。" | 核心定义 |
 | 1:50 | 服务动态IP寻址问题 图解 | "解决服务动态IP寻址问题。" | 服务动态IP寻址问题 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是服务注册发现？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心价值：解决微服务实例 IP 频繁变动问题，实现服…"]:::core
+        C["注册对比：客户端自注册需集成 SDK 耦合高，而第三…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -202,7 +202,6 @@ def global_consistency_check():
 3. **可扩展性**：这种方法不仅适用于写书，也适用于长周期项目（如代码重构、技术文档撰写）
 4. **成本意识**：按需检索比全量塞入更省Token，每章约2600字 vs 全书20万字
 
-
 ## 核心流程图
 
 ```mermaid
@@ -253,7 +252,6 @@ flowchart TD
 - 建立项目圣经bible.md：精炼核心设定、大纲与规则，每次完整带入
 - 按需加载(RAG)：每次开新会话只带入(圣经+近3章摘要+涉及角色卡)
 - 全局一致性检查：交给无状态的Subagent分章节异步扫描
-
 
 ## 苏格拉底式面试追问
 
@@ -308,11 +306,9 @@ RAG 适合"局部检索"（找相关片段），但写书需要"全局一致性"
 
 **收尾：** 您想深入聊：人物设定在后续章节出现矛盾怎么办？如何自动检测？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -322,3 +318,37 @@ RAG 适合"局部检索"（找相关片段），但写书需要"全局一致性"
 | 1:30 | CLAUDE.md自动加载示意图 | "CLAUDE.md自动加载——每次新会话自动读取项目配置" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：人物设定在后续章节出现矛盾怎么办？如何自动检测？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["用AI辅助写一本书，内容很长容易超…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["项目圣经（bible.md）示意图<br/>0:50"]:::deep
+        N3["CLAUDE.md自动加载示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

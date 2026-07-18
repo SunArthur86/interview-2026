@@ -161,14 +161,12 @@ else:
 2. **如何处理 1M 长度下的 Attention 计算延迟？**（使用 Ring Attention 或 Block Sparse Attention，如 Longformer 架构）
 3. **多模态特征占用的显存通常比文本大多少？如何优化？**（图片特征通常维度高且序列长，可使用 Feature Linear Projection 或 VQ-VAE 进行压缩量化）
 
-
 ## 记忆要点
 
 - 调度策略：Prefill/Decode分离，长上下文用专用Prefill节点，避免阻塞Decode
 - KV管理：Radix Tree共享System Prompt前缀，分层存储（GPU热数据+CPU冷数据）
 - 多模态处理：图片通过VLM编码，特征存入KV Cache或独立索引
 - 负载均衡：基于请求长度和计算量动态调度，优先保证高并发短请求的SLA
-
 
 ## 结构化回答
 
@@ -193,3 +191,37 @@ else:
 | 2:00 | KV管理图解 | "Radix Tree共享System Prompt前缀，分层存储（GPU热数据+CPU冷数据）" | KV管理 |
 | 2:40 | 多模态处理图解 | "图片通过VLM编码，特征存入KV Cache或独立索引" | 多模态处理 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】设计一个支持…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过KV分层管理和前缀复用最大化算力利用率。<br/>0:40"]:::core
+        N2["调度策略图解<br/>1:20"]:::core
+        N3["KV管理图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["多模态处理图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -137,8 +137,6 @@ ensemble_retriever = EnsembleRetriever(
 )
 ```
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -172,7 +170,6 @@ flowchart TD
 - 量化结果模板：准确率/延迟(TP99) + 业务价值(降本增效DAU提升)
 - 万能架构：Query改写 -> 意图路由 -> 混合检索 -> Rerank精排 -> LLM带溯源生成
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 用结构化叙事展示发现问题、解决问题并创造价值的过程。——打个比方，像讲一个精彩的英雄故事：遇到大反派（痛点），练绝世武功（技术方案），最终拯救世界（结果）。
@@ -195,3 +192,36 @@ flowchart TD
 | 1:12 | STAR框架图解 | "S背景讲清痛点，T目标量化指标，A方案突出难点解决，R结果带数据复盘" | STAR框架 |
 | 1:48 | 行动环节三层讲图解 | "方案选型(为何选Qwen) -> 架构设计(含降级兜底) -> 迭代调优(Bad Case驱动)" | 行动环节三层讲 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】请说说开发过的 AI …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["用结构化叙事展示发现问题、解决问题并创造价值的过<br/>0:36"]:::core
+        N2["STAR框架图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["行动环节三层讲图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

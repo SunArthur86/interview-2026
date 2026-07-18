@@ -414,3 +414,35 @@ flowchart TD
 | 0:15 | TCP/IP 协议栈分层图 | "基准量级：单机Redis读写QPS约8万至10万" | 基准量级 |
 | 1:02 | TCP/IP 协议栈分层图分步演示 | "高性能因：纯内存操作加epoll多路复用，单线程免锁无切换" | 高性能因 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Redis 6.0 的多线程IO模型了解吗。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】单 Redis 的 QPS 大概是什么量级？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["基准量级：单机Redis读写QPS约8万至10万"]:::core
+        C["高性能因：纯内存操作加epoll多路复用，单线程免锁…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

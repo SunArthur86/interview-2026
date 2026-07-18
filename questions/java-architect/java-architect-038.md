@@ -452,4 +452,28 @@ flowchart TD
 | 0:30 | 流程图 | 可用性 99.9%（年宕机 8.76h）、成功率 99.95%、P99 < 500ms。 | SLO 典型 |
 | 1:30 | 总结卡 | 一句话记忆：SLI（指标）→ SLO（目标）→ 错误预算（额度）→ SLA（合同）。 下期可以接着聊：SLI 怎么选。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>概念结构"]:::concept
+    N3["0:30<br/>SLO 典型"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

@@ -184,3 +184,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像无限续摊的自助餐厅，服务员根据你口味不断端上新菜。" | 核心类比 |
 | 2:03 | 多路召回 图解 | "协同过滤、向量检索、热门兜底。" | 多路召回 |
 | 2:50 | 多目标排序 图解 | "平衡点击率、完播率、互动率。" | 多目标排序 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个短视频推荐系统？类似抖音/TikTok"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["滑块防破解：绝对不能仅校验坐标，核心是比对前端提交滑…"]:::core
+        C["随机数安全：生成验证码或概率计算必须用SecureR…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

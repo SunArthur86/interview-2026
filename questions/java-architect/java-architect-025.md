@@ -452,6 +452,32 @@ flowchart TD
 | 0:50 | 概念结构示意图 | 主备（Active-Standby）、主从（一主多从）、MGR（多主）、异地容灾。 | 高可用架构 |
 | 1:20 | 流程图 | 全量（mysqldump/XtraBackup）+ 增量（binlog）+ 定期校验。 | 备份三件套 |
 | 1:50 | 代码示例截图 | 停应用 → 恢复全量 → 重放 binlog 到故障点 → 校验 → 恢复应用。 | 恢复流程 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>容灾切换"]:::concept
+    N3["0:50<br/>高可用架构"]:::concept
+    N4["1:20<br/>备份三件套"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["1:50<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
 | 3:30 | 总结卡 | 一句话记忆：RPO（数据丢失量）+ RTO（恢复时间）是高可用核心指标。 下期可以接着聊：RPO 和 RTO 怎么定。 | 收尾总结 |
 
 

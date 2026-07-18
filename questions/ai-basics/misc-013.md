@@ -94,7 +94,6 @@ def compute_group_advantage(rewards):
 2. 对于确定性输出（如数学题），组内方差较小时，GRPO的梯度更新是否有效？
 3. GRPO相比其他不依赖Critic的算法（如REINFORCE）的核心改进点在哪里？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -164,4 +163,36 @@ flowchart TD
 | 0:55 | 公式：A_i = (r_i - mean(r)) / std(r) | 优势值就是组内归一化：r_i 减均值再除标准差，这样不管奖励绝对值多大，都统一到同一尺度。 | 优势计算 |
 | 1:25 | 显存对比柱状图：PPO vs GRPO | 相比 PPO，GRPO 只需要 Policy 和 Reward 模型，省掉了 Value 网络，显存更低，训练更快，稳定性也更好。 | 相比 PPO 的优势 |
 | 1:50 | G 值权衡图：方差 vs 成本曲线 | 实战里组大小 G 要拿捏好，过大增加方差和采样成本，过小则均值基准不准。这也是它能涌现长链推理的关键。 | G 值选择与涌现 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《GRPO 组相对策略优化》+…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["同一题采样 G 个回答的示意图<br/>0:25"]:::core
+        N2["公式：A_i = (r_i - mean(r)) / …<br/>0:55"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["显存对比柱状图：PPO vs GRPO<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["G 值权衡图：方差 vs 成本曲线<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

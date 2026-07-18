@@ -211,7 +211,6 @@ class CustomBenchmark:
 3. **局限**: Benchmark可能被针对性优化(刷分)，真实场景分布可能偏离测试集
 4. **实践**: 自建领域评估集 > 通用Benchmark，持续更新测试用例"
 
-
 ## 核心流程图
 
 ```mermaid
@@ -314,11 +313,9 @@ GAIA 通用但有参考价值。GAIA 是学术界公认的多步推理 benchmark
 
 **收尾：** 您想深入聊：UTBench和AgentBench有什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -327,3 +324,36 @@ GAIA 通用但有参考价值。GAIA 是学术界公认的多步推理 benchmark
 | 0:50 | UTBench示意图 | "UTBench——针对工具使用能力的Benchmark，测试Agent调用工具的准确性和效率" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：UTBench和AgentBench有什么区别？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["UTBench等Benchmark…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["UTBench示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

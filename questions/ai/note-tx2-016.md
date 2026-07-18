@@ -203,7 +203,6 @@ def classify_intent(query):
 - **客服知识库自动更新**：质检 Agent 发现的知识缺口自动补充到 RAG
 - **多模态客服**：图片（截图报错）+ 语音（电话）+ 文字，统一接入
 
-
 ## 核心流程图
 
 ```mermaid
@@ -249,7 +248,6 @@ flowchart TD
 - 子Agent无状态化：会话上下文存Redis，数据存PG，保障水平扩展
 - 成本和延迟控制：简单问题用单Agent，小模型分类大模型生成
 - 辅以SSE流式输出和异步质检Agent，优化体验与质量
-
 
 ## 苏格拉底式面试追问
 
@@ -304,11 +302,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：怎么衡量多智能体相比单Agent的提升？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -318,3 +314,37 @@ flowchart TD
 | 1:30 | 意图分类示意图 | "意图分类——规则(关键词)兜底 + LLM(语义)主路由" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：怎么衡量多智能体相比单Agent的提升？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["业务场景：某讯客服中心多智能体落地…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Orchestrator示意图<br/>0:50"]:::deep
+        N3["意图分类示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

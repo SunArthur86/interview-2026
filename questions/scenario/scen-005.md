@@ -170,3 +170,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——就像现场投票，大屏幕(Redis)实时更新数字，后台(DB)慢慢统计选票。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：高频写操作下的实时计数与关系存储，追求最终一致性。" | 核心定义 |
 | 1:50 | Redis Set/ 图解 | "Redis Set/Hash存储点赞关系防重。" | Redis Set/ |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计微博/朋友圈点赞系统？日活数亿，每秒点赞数十万"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["双链路设计：写路径用Set防重并异步批量刷DB，读路…"]:::core
+        C["抗热点明星：引入本地缓存做一级计数，牺牲毫秒级实时性…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

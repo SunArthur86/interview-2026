@@ -172,3 +172,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——就像皇帝(Leader)发圣旨(广播)，换朝代时大家认新皇帝并统一史书(同步)。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：通过原子广播和选举机制，保证分布式数据在崩溃前后的一致性。" | 核心定义 |
 | 1:50 | Zxid 图解 | "Zxid包含epoch和计数器，保证全局有序。" | Zxid |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是ZAB协议？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心定义：ZAB 是专为 ZooKeeper 设计的…"]:::core
+        C["唯一标识：Zxid 由高 32 位 epoch（防旧…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

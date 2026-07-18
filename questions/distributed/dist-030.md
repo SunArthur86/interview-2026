@@ -175,3 +175,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——3PC多了个预备动作；柔性事务就像“先记账再对账”，允许暂时不平，但最后一定要平。" | 核心类比 |
 | 2:03 | 3PC引入超时机制减 图解 | "3PC引入超时机制减少阻塞。" | 3PC引入超时机制减 |
 | 2:50 | 柔性事务 图解 | "柔性事务基于BASE理论。" | 柔性事务 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是柔性事务？最大努力通知型事务是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["柔性事务基于BASE理论，牺牲强一致性（ACID），…"]:::core
+        C["最大努力通知：主动方配合本地消息表+定时任务阶梯重试…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

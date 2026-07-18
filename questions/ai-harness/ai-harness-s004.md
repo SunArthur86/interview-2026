@@ -120,7 +120,6 @@ class KVCache:
 2. **误区**：开启了 Prefix Caching 就一定能节省显存。
    **纠正**：Prefix Caching 共享的是物理 Block。如果请求的并发度不够高，或者 System Prompt 之间的差异导致无法完全匹配，共享率会很低，此时缓存本身占用的显存反而可能成为负担。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -178,7 +177,6 @@ flowchart TD
 - 量化收益：FP16→INT8省50%，→INT4省75%(需配SmoothQuant)。
 - 易错点：KV越大≠效果越好；Prefix Caching共享率低反成负担。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 根据吞吐、延迟和硬件资源匹配最优推理框架。——打个比方，跑车拉货选卡车(TensorRT)，买菜选代步车，不想买车就打车。
@@ -200,3 +198,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：根据吞吐、延迟和硬件资源匹配最优推理框架。" | 核心定义 |
 | 1:00 | 要点图解 | "KV Cache是显存大头，可达总显存80%以上。" | 要点 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["大模型部署有哪些方案<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["根据吞吐、延迟和硬件资源匹配最优推理框架。<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["KV Cache是显存大头，可达总显存80%以上<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

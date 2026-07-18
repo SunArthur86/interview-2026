@@ -423,3 +423,35 @@ flowchart TD
 | 1:06 | Redis Lua 脚本执行截图分步演示 | "数据安全：敏感信息AES-256加密传输与脱敏存储，状态存Redis供快查" | 数据安全 |
 | 1:57 | 关键代码/伪代码片段 | "全球合规：数据本地化，按国家/认证类型分Topic路由至多区域数据中心" | 全球合规 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：身份信息泄露怎么办。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["亿级车主完成实名认证（身份、车辆信息核验），如何设计后端架构…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["异步解耦：API秒级收件入队，第三方慢调API用MQ…"]:::core
+        C["数据安全：敏感信息AES-256加密传输与脱敏存储，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

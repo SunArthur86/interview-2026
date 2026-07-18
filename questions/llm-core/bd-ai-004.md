@@ -124,8 +124,6 @@ def build_context(query: str, session_id: str):
     }
 ```
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -157,7 +155,6 @@ flowchart TD
 - 差异：Claude Code无缝但细节丢失，Hermes精确检索适合回溯，OpenClaw适合审计。
 - 策略：长任务需注意上下文窗口限制，利用Resume或Profile隔离管理会话。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** Claude Code重集成易用，Hermes重技能封装，OpenClaw重可定制审计。——打个比方，像办公软件：Claude是Mac（生态好开箱用），Hermes是瑞士军刀（功能全），OpenClaw是工作站（可折腾）。
@@ -181,3 +178,37 @@ flowchart TD
 | 2:00 | 工具图解 | "Claude Code MCP集成最深，Hermes Skill编排最强，OpenClaw Plugin最灵活。" | 工具 |
 | 2:40 | 上下文图解 | "Claude Code自动去重压缩，Hermes检索注入，OpenClaw全量日志。" | 上下文 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】对比OpenClaw/…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["Claude Code重集成易用，Hermes重<br/>0:40"]:::core
+        N2["记忆图解<br/>1:20"]:::deep
+        N3["工具图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["上下文图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

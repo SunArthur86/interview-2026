@@ -179,3 +179,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像冰箱，常用的放冷藏室(伸手即得)，不常用的放冷冻室(省电)。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：根据数据访问频率将数据分级存储，热数据放昂贵高速存储，冷数据放廉价慢速存储。" | 核心定义 |
 | 1:50 | 按时间或频率划分 图解 | "按时间或频率划分冷热标准。" | 按时间或频率划分 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个海量数据的冷热分离方案？热数据百亿，冷数据千亿"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["分层记忆：热配MySQL+Redis（《10ms），…"]:::core
+        C["冷热判定双标准：时间维度（30/180天）或访问频率…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

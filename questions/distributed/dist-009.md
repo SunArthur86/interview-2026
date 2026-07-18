@@ -147,3 +147,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——同一本书(URL)的借阅请求，都由同一个图书管理员(Server)处理。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：根据URL计算哈希值，将相同请求定向到同一台服务器。" | 核心定义 |
 | 1:50 | 计算URL 图解 | "计算URL的Hash值分配服务器。" | 计算URL |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是URL散列？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：对请求的 URL 进行 Hash 计算并…"]:::core
+        C["核心优势：因为相同资源请求总落同节点，所以能极致提升…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

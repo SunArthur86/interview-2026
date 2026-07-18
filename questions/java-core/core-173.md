@@ -204,3 +204,35 @@ flowchart TD
 | 1:30 | 口诀示意 | "S-H-L-S-Z 对应 缓存/对象、购物车、消息队列、去重、排行榜。" | 要点1 |
 | 2:15 | 要点2图解示意 | "专做计数器与分布式锁；Hash：专做对象字段更新。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Redis五种数据结构和应用场景是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["口诀：S-H-L-S-Z 对应 缓存/对象、购物车、…"]:::core
+        C["String原子递增（INCR）：专做计数器与分布式…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

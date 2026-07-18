@@ -447,4 +447,28 @@ flowchart TD
 | 0:30 | 高可用架构图 | Leader 读写，Follower 从 Leader 拉取同步，ISR 集合决定谁能当选。 | 副本是可用性单元 |
 | 1:30 | 总结卡 | 一句话记忆：分区=并发单元（吞吐），副本=可用单元（RPO），ISR=all+min.insync.replicas=2 是生产标配。 下期可以接着聊：分区数怎么定。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>Kafka"]:::concept
+    N3["0:30<br/>副本是可用性单元"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

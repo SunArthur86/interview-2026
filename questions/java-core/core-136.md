@@ -197,3 +197,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "运行时获取类的唯一身份证的三种途径——就像想知道一个人的档案，可以看他出示的身份证（getClass()），直接看户口本上的类别名，或者通过名字去系统里查（forName）" | 核心定义 |
 | 1:20 | 口诀示意 | "对象getClass、类名.class、Class.forName" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["获取Class对象的3种方法是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["口诀：对象getClass、类名.class、Cla…"]:::core
+        C["因为.forNme动态加载无编译期检查，所以常用于框…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

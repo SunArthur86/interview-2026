@@ -223,7 +223,6 @@ class PriorityScheduler:
 2. **强调"事件驱动"**：现代 Agent（如 LangGraph）本质是事件驱动的状态机，这是理解框架底层的关键
 3. **LLM 是转换函数**：LLM 在调度中的角色是"决定状态转换"，而非执行——执行交给工具和事件循环
 
-
 ## 核心流程图
 
 ```mermaid
@@ -259,7 +258,6 @@ flowchart TD
 - 核心状态机：IDLE → PLANNING → EXECUTING → OBSERVING → REPLANNING/RESPONDING
 - 驱动机制：由事件队列驱动，根据当前状态和接收到的事件查表决定状态转换
 - 调度闭环：OBSERVING后若未完成或报错，触发循环回到PLANNING进行重规划
-
 
 ## 苏格拉底式面试追问
 
@@ -318,11 +316,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：多Agent怎么调度？——消息队列+事件总线，每个Agent订阅感兴趣的事件？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -332,3 +328,37 @@ flowchart TD
 | 1:30 | LLM示意图 | "LLM——LLM在状态转换点做决策" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：多Agent怎么调度？——消息队列+事件总线，每个Agent？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Agent 的底层调度逻辑是什么？<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["调度核心示意图<br/>0:50"]:::deep
+        N3["LLM示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

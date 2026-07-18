@@ -342,6 +342,34 @@ flowchart TD
 | 1:50 | 流程图 | TTS/渲染带情感标签，匹配 LLM 输出情绪。 | 情感 |
 | 3:30 | 总结卡 | 一句话记忆：五阶段：ASR→LLM→TTS→渲染→合成。 下期可以接着聊：流式怎么做。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>Agent 编排链路"]:::concept
+    N3["0:50<br/>编排"]:::concept
+    N4["1:20<br/>低延迟"]:::practice
+    N5["1:50<br/>情感"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 ---
 
 ## 延伸：【巨剧核 AI 陪伴】音视频异步任务系统怎么设计？
@@ -499,4 +527,32 @@ idempotency_key = hash(input + params + user_id)
 | 1:20 | 流程图 | DAG（如 ASR→LLM→TTS→渲染）有依赖有并行。 | 算子编排 |
 | 1:50 | 代码示例截图 | GPU 池化、优先级队列、抢占/预留。 | 资源调度 |
 | 3:30 | 总结卡 | 一句话记忆：异步任务三件套：task_id + 状态机 + 队列。 下期可以接着聊：任务超时怎么判定。 | 收尾总结 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>Agent 编排链路"]:::concept
+    N3["0:50<br/>状态机"]:::concept
+    N4["1:20<br/>算子编排"]:::deep
+    N5["1:50<br/>资源调度"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
 

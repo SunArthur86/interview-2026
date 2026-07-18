@@ -302,7 +302,6 @@ tool_registry.register(BatchTool(
 
 > **总结**：在企业级场景下（数据安全权重高、需要深度定制），自研 Agent 综合得分更高；但在个人开发者/开源社区场景下，Claude Code 凭借产品体验和生态优势更优。**这不是谁替代谁的问题，而是不同约束条件下的不同最优解**——就像 Kubernetes 和 Serverless 的关系。
 
-
 ## 记忆要点
 
 - 设计假设：CC是单模型云端SaaS，自研是模型可插拔加私有化部署。
@@ -310,7 +309,6 @@ tool_registry.register(BatchTool(
 - 工具差异：CC工具固定不可变，自研具插件化工具注册中心接企业内部API。
 - 优势：可控性极强（数据与模型），能深度定制企业内部专属工作流。
 - 不足：开源模型能力不及闭源SOTA，且生态完善度与工程成熟度有待积累。
-
 
 ## 苏格拉底式面试追问
 
@@ -356,7 +354,6 @@ tool_registry.register(BatchTool(
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 就像对比自研 RPC 框架 vs gRPC——功能可能重叠，但设计取舍完全不同。
 
 **展开框架：**
@@ -366,11 +363,9 @@ tool_registry.register(BatchTool(
 
 **收尾：** Claude Code 的哪些设计你觉得特别巧妙，值得借鉴？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -380,3 +375,37 @@ tool_registry.register(BatchTool(
 | 1:30 | 工具调用机制示意图 | "工具调用机制——工具调用机制" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：Claude Code 的哪些设计你觉得特别巧妙，值得借鉴？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["该项目与 Claude Code …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["上下文窗口示意图<br/>0:50"]:::deep
+        N3["工具调用机制示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

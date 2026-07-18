@@ -159,3 +159,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像闹钟：把任务记在日历上，钟表指针转到时刻就响铃。" | 核心类比 |
 | 2:03 | DB轮询性 图解 | "DB轮询性能差，适合小规模。" | DB轮询性 |
 | 2:50 | Redis ZSet 图解 | "Redis ZSet利用分数存时间，扫描高效。" | Redis ZSet |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个支持百万级任务的延迟队列？要求精确触发、高可用"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["方案对比：DB轮询（量小）、Redis ZSet（中…"]:::core
+        C["生产推荐组合：Redis ZSet做持久化待办表，扫…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

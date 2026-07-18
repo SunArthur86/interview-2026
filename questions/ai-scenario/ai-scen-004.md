@@ -124,7 +124,6 @@ text_splitter = RecursiveCharacterTextSplitter(
 2. **滑动窗口的作用**：Overlap 是为了解决什么问题？（答：解决语义边界切断问题，确保关键信息（如实体名词）不被截断在两个chunk之间）。
 3. **父子索引的优缺点**：什么情况下必须用父子索引？（答：需要高精度检索（小chunk）但给LLM提供完整上下文（大chunk）时，或者为了减少向量化成本时）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -192,7 +191,6 @@ flowchart TD
 - 元数据设计：必须包含Source、Page、Title、Time，支持权限过滤
 - Pipeline优化：异步流式处理，批量Embedding，实时更新索引
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 异步解耦流水线结合批处理，实现高吞吐低延迟索引。——打个比方，像流水线工厂，分工明确，各环节独立扩容，瓶颈在哪加哪里。
@@ -215,3 +213,36 @@ flowchart TD
 | 1:12 | 分块策略图解 | "语义分块优于固定窗口，父子索引兼顾精准召回与上下文完整性" | 分块策略 |
 | 1:48 | 结构化处理图解 | "Markdown按标题层级切分，表格整表存+摘要，代码按函数切分" | 结构化处理 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计大规模文档处理的RAG Pip…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["异步解耦流水线结合批处理，实现高吞吐低延迟索引。<br/>0:36"]:::core
+        N2["分块策略图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["结构化处理图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -154,3 +154,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 挂电话：A说“我说完了”（1），B说“知道了”（2），B说“我也说完了”（3），A说“知道了”（4）。 | 核心概念 |
 | 0:40 | 建立连接示意图 | 建立连接是三次握手，断开连接是四次挥手。 | 建立连接 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是四次挥手？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["因果逻辑：因为是全双工，所以各发各的FIN需四次挥手"]:::core
+        C["关键状态：主动方最终必经TIME_WAIT且等待2M…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

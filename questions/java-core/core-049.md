@@ -135,3 +135,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "TCP可靠有序但慢，UDP快速不可靠，二者互为补充——TCP像打电话（需接通、确认），UDP像寄明信片（扔进邮筒就走）" | 核心定义 |
 | 1:20 | 连接对比示意 | "TCP面向连接需握手，而UDP无连接即发即走" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["TCP与UDP的区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["连接对比：TCP面向连接需握手，而UDP无连接即发即…"]:::core
+        C["可靠性对比：TCP保证可靠无差错有序到达，UDP尽最…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -179,3 +179,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像公司的总机，把消息按紧急程度转到电话、短信或邮件。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：统一消息分发平台，根据策略和偏好多通道触达用户。" | 核心定义 |
 | 1:50 | 统一接入 图解 | "业务方只发消息，不关心具体通道。" | 统一接入 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个消息通知中心？统一管理APP/短信/邮件/站内信…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心架构：业务系统→API→消息队列→处理引擎→多渠…"]:::core
+        C["路由与降级：验证码保达优先（短信转语音），而营销类成…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

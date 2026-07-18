@@ -122,14 +122,12 @@ import random
 import httpx
 from typing import Optional
 
-
 class RetryConfig:
     """重试配置"""
     max_retries: int = 3
     base_delay: float = 1.0      # 基础延迟（秒）
     max_delay: float = 30.0      # 最大延迟上限
     retryable_status: set = {429, 500, 502, 503, 504}
-
 
 async def call_llm_with_retry(
     prompt: str,
@@ -230,7 +228,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
 @dataclass
 class ModelConfig:
     """单个模型配置"""
@@ -241,7 +238,6 @@ class ModelConfig:
     timeout: int = 30
     max_tokens: int = 2048
 
-
 # 降级链配置（按优先级排列）
 MODEL_CHAIN = [
     ModelConfig("gpt-4o", "openai", API_KEY_1, "https://api.openai.com/v1"),
@@ -249,7 +245,6 @@ MODEL_CHAIN = [
     ModelConfig("gpt-35-turbo", "azure", AZURE_KEY, AZURE_ENDPOINT),
     ModelConfig("qwen-7b", "local", "", "http://localhost:11434/v1"),  # Ollama 本地
 ]
-
 
 async def call_with_fallback(prompt: str) -> tuple[str, str]:
     """
@@ -326,12 +321,10 @@ redis_client = redis.from_url("redis://localhost:6379", decode_responses=True)
 
 CACHE_TTL = 1800  # 30 分钟
 
-
 def get_cache_key(query: str, model: str = "") -> str:
     """生成精确匹配缓存键"""
     content = f"{query}:{model}"
     return f"llm:cache:{hashlib.sha256(content.encode()).hexdigest()}"
-
 
 async def llm_call_with_cache(prompt: str) -> str:
     """带缓存的 LLM 调用"""
@@ -372,7 +365,6 @@ async def llm_call_with_cache(prompt: str) -> str:
             print(f"⚠️ Serving stale cache due to LLM failure")
             return json.loads(stale)["response"]
         raise
-
 
 async def semantic_cache_search(query: str, threshold: float = 0.95):
     """
@@ -421,7 +413,6 @@ async def rule_based_fallback(query: str) -> str:
         "3. 访问帮助中心：help.example.com"
     )
 
-
 async def cache_or_rule_fallback(prompt: str) -> tuple[str, str]:
     """缓存降级 → 规则兜底"""
     # 先试缓存降级
@@ -463,12 +454,10 @@ import time
 from enum import Enum
 from dataclasses import dataclass, field
 
-
 class CircuitState(Enum):
     CLOSED = "closed"      # 正常，允许调用
     OPEN = "open"          # 熔断，拒绝调用
     HALF_OPEN = "half_open"  # 半开，探测中
-
 
 @dataclass
 class CircuitBreaker:
@@ -525,7 +514,6 @@ class CircuitBreaker:
             self._state = CircuitState.OPEN
             logger.warning(f"Circuit breaker → OPEN "
                          f"(failures={self._failure_count})")
-
 
 # 使用示例
 breaker = CircuitBreaker(failure_threshold=5, recovery_timeout=60)
@@ -624,7 +612,6 @@ llm_latency = Histogram("llm_latency_seconds", "LLM call latency",
 6. **可观测性**：降级不是终点，必须监控降级触发频率并告警
 7. **追问准备**：退避间隔如何设置（base_delay 和 max_delay）、半开状态如何设计（探测请求数）、如何监控降级频率（Prometheus 指标）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -715,7 +702,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 就像飞机出行——航班取消(超时)时先改签(重试)，改签不了换高铁(模型降级)，高铁也没有就住酒店等明天(缓存/规则降级)。
 
 **展开框架：**
@@ -725,11 +711,9 @@ flowchart TD
 
 **收尾：** 如何设置重试的退避间隔？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -739,3 +723,37 @@ flowchart TD
 | 1:30 | 模型降级(G示意图 | "模型降级(G——模型降级(GPT-4→GPT-3.5→本地模型)" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：如何设置重试的退避间隔？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["你在项目里遇到过大模型接口调用超时…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["指数退避示意图<br/>0:50"]:::deep
+        N3["模型降级(G示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

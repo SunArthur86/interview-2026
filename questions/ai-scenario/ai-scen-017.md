@@ -122,7 +122,6 @@ def escalate_to_human(session_id: str, reason: str):
             │ (防幻觉兜底)  │
             └─────────
 
-
 ## 核心流程图
 
 ```mermaid
@@ -191,7 +190,6 @@ flowchart TD
 - 技术选型：首选RAG+LLM，维护成本低；传统FAQ仅用于极简单业务。
 - 实战优化：接入结构化数据库，通过Function Calling直接判断退货规则。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 结合意图识别、知识库检索和情绪检测，自动解答常见问题并智能转接人工。——打个比方，像初级客服处理简单问题，遇到搞不定或客户生气时，立刻把电话转给主管。
@@ -214,3 +212,36 @@ flowchart TD
 | 1:12 | 核心流程图解 | "意图识别（BERT/LLM）→ RAG检索 → 置信度判断 → 低分转人工。" | 核心流程 |
 | 1:48 | 知识检索图解 | "混合检索（向量+关键词+Rerank），对接CRM实时查订单。" | 知识检索 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI智能客服系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["结合意图识别、知识库检索和情绪检测，自动解答常见<br/>0:36"]:::core
+        N2["核心流程图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["知识检索图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

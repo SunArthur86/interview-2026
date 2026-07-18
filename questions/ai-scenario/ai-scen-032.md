@@ -182,7 +182,6 @@ flowchart TD
     F -- "Pre-merge>95%" --> H["允许代码合并"]
 ```
 
-
 ## 记忆要点
 
 - 构建流程：来源（线上日志/人工构造/对抗样本）→ 标注（评分细则）→ 分层。
@@ -190,7 +189,6 @@ flowchart TD
 - 评测执行：规则校验（必过）+ LLM-as-Judge（语义评分）+ 语义相似度。
 - CI集成：Pre-merge通过率>95%，Pre-release>90%，下降>5%阻断发布。
 - 对比：Golden Set离线快且无风险，A/B测试在线慢但看真实业务指标。
-
 
 ## 结构化回答
 
@@ -213,3 +211,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：构建分层标准测试集，通过自动化评测守护模型质量。" | 核心定义 |
 | 1:00 | 构建流程图解 | "来源（线上日志/人工构造/对抗样本）→ 标注（评分细则）→ 分层。" | 构建流程 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI应用的Golden Set…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["构建分层标准测试集，通过自动化评测守护模型质量。<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["构建流程图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

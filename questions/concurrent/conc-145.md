@@ -165,3 +165,35 @@ flowchart TD
 | 0:40 | 竞争机制示意图 | 竞争机制：AtomicLong基于CAS单点竞争，LongAdder基于Cell[]分散热点。 | 竞争机制 |
 | 1:10 | 精度代价示意图 | 精度代价：LongAdder的sum()方法是遍历求和，非原子快照，允许微小误差。 | 精度代价 |
 | 1:40 | 总结卡 + 下期预告 | 记住三个词就能答好这道题。下期追问：LongAdder 的 Cell 数量是如何确定的？为什么通常是 CPU 核数？ | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["AtomicLong 和 LongAdder 有什么区别？高…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["对比 ReadWriteLock：StampedLo…"]:::core
+        C["乐观读流程：tryOptimisticRead 获取…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

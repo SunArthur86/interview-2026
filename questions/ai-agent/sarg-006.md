@@ -100,7 +100,6 @@ LIMIT 5;
 2.  对于实时性要求极高的 RAG 系统（如毫秒级响应），你会如何设计向量库的缓存策略来避免重复的向量计算和 I/O 开销？
 3.  既然 pgvector 功能基础，为什么很多大厂仍然选择在 PostgreSQL 上通过插件扩展而非引入 Milvus？请从数据一致性、架构复杂度等角度分析。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -143,7 +142,6 @@ flowchart TB
     Chroma --> Use3["用: 原型/小项目"]
 ```
 
-
 ## 记忆要点
 
 - Milvus 适合亿级大规模分布式，Pinecone 适合快速 MVP 免运维。
@@ -175,4 +173,37 @@ flowchart TB
 | 1:15 | 度量一致性警示图 | "最易踩坑：Embedding 用余弦，库却配了 L2，Reranker 输入质量直接受损。" | 关键避坑 |
 | 1:40 | HNSW OOM 切 DiskANN 案例 | "实战：Milvus HNSW 写大批量 OOM，切 DiskANN 内存降 60%，延迟只增 20ms。" | 实战案例 |
 | 1:55 | 总结卡 | "口诀：按规模选库，HNSW 精度高，度量要一致。下期讲 Agent 工具设计。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["向量数据库选型<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N2["三种索引算法示意图<br/>0:45"]:::core
+        N3["度量一致性警示图<br/>1:15"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N1["五大向量库对比表<br/>0:15"]:::practice
+        N4["HNSW OOM 切 DiskANN 案例<br/>1:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：按规模选库，HNSW 精度高，度量要一致。<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

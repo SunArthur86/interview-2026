@@ -187,3 +187,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——小区大门保安，查证件(认证)、限流进入人数(限流)、发现坏人不让进(熔断)。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：在流量入口统一实施限流、熔断、降级，构建微服务的防洪大坝。" | 核心定义 |
 | 1:50 | 多维限流 图解 | "全局、接口、用户、IP分级控制。" | 多维限流 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个微服务的网关限流降级一体化方案？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["限流算法选型：全局/用户用固定或滑动窗口，网络突发流…"]:::core
+        C["熔断三态（关闭-打开-半开），触发看慢调用/异常比例…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

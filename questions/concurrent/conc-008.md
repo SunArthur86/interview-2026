@@ -179,6 +179,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Interrupt方法结束线程是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质定义：interrupt是协作式终止，仅设置标志…"]:::core
+        C["两态响应：运行中仅设标志位需主动检查，阻塞中则抛异常…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：线程中断（interrupt）是什么？
 
 > 合并自 `conc-036`（相似度 67%）
@@ -289,3 +321,35 @@ try {
 | 0:20 | 核心概念动画/示意图 | 你在睡觉（阻塞），别人把你叫醒（中断）；你在干活（运行），别人喊你停一下，具体停不停你自己决定。 | 核心概念 |
 | 0:40 | interrupt()示意图 | interrupt() 仅设置中断标志位 | interrupt() |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Interrupt方法结束线程是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["本质定义：interrupt是协作式终止，仅设置标志…"]:::core
+        C["两态响应：运行中仅设标志位需主动检查，阻塞中则抛异常…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

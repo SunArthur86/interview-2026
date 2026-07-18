@@ -193,13 +193,11 @@ flowchart TD
     G --> H["输出连续7天登录司机ID"]
 ```
 
-
 ## 记忆要点
 
 - 核心口诀：日期减去行号等于相同分组键（DATE - ROW_NUMBER = Grp）
 - 因连续日期递增与行号递增相减得常数，断线则常数变，借此巧妙分组
 - 通用解题框架：先DISTINCT去重，再用窗口打行号，最后GroupBy并Having判定大于等于N天
-
 
 ## 苏格拉底式面试追问
 
@@ -254,11 +252,9 @@ ROW_NUMBER 差值法适合"连续 N 天"这种"长度判断"场景——一次 G
 
 **收尾：** 您想深入聊：如果要找"连续登录至少N天且期间不能有一天中断"，怎么改？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -267,3 +263,36 @@ ROW_NUMBER 差值法适合"连续 N 天"这种"长度判断"场景——一次 G
 | 0:50 | 核心示意图 | "核心——连续日期的"日期序号 - 行号 = 恒定分组键"" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：如果要找"连续登录至少N天且期间不能有一天中断"，怎么改？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["手写 SQL：找出连续7天都有登录…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["核心示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

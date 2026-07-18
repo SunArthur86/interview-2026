@@ -155,7 +155,6 @@ flowchart TD
     K1 -.->|通过session_id关联| K2
 ```
 
-
 ## 记忆要点
 
 - Agent状态首选Hash：支持字段级update省带宽，整体设TTL，优于String频繁全量读写
@@ -220,11 +219,9 @@ ZSet 方案适合轻量场景——延时任务少、精度要求不高（秒级
 
 **收尾：** 您想深入聊：Hash 字段太多（>1000）会不会有问题？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -232,3 +229,35 @@ ZSet 方案适合轻量场景——延时任务少、精度要求不高（秒级
 | 0:20 | 核心概念图 | "Redis 五大数据结构各有场景——String 做计数/缓存对象/分布式锁，Hash 做对象字段级读写（最适合…" | 核心定义 |
 | 0:55 | String示意图 | "String——计数器(INCR)/缓存对象JSON/分布式锁" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Redis 数据结构：String…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["String示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

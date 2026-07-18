@@ -177,3 +177,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "写在代码里的特殊注释，可自动生成API文档——像带有说明书草图的零件图纸，工具能自动把草图排版成精美手册" | 核心定义 |
 | 1:20 | 工具示意 | "因为配合javadoc工具，所以能生成HTML格式的API文档" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是文档注释？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["工具：因为配合javadoc工具，所以能生成HTML…"]:::core
+        C["语法：以 /** 开始，*/ 结尾，通常置于类或方法…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -162,3 +162,35 @@ flowchart TD
 | 0:40 | 乐观锁示意图 | 乐观锁通过CAS无锁实现，适合读多写少 | 乐观锁 |
 | 1:10 | 悲观锁示意图 | 悲观锁通过互斥同步实现，适合写多 | 悲观锁 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["介绍一下几种典型的锁？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话总览：Java锁是按设计思想、实现机制、特性等…"]:::core
+        C["核心四维度对比：乐观/悲观、公平/非公平、可重入/不…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

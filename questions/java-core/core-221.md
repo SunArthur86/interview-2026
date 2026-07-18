@@ -171,3 +171,35 @@ flowchart TD
 | 1:30 | 底层结构示意 | "基于红黑树（自平衡二叉查找树）实现，Key 强制有序（自然排序或 Comparator）" | 要点1 |
 | 2:15 | 性能与限制示意 | "增删改查的时间复杂度为 O(logN)，非线程安全，自然排序下 Key 不能为 null" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是treemap？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["底层结构：基于红黑树（自平衡二叉查找树）实现，Key…"]:::core
+        C["性能与限制：增删改查的时间复杂度为 O（logN），…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

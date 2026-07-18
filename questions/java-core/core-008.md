@@ -144,3 +144,35 @@ public class JavaEnvInfo {
 | 0:40 | 概念动画/示意图 | "跨平台的面向对象语言，依靠JVM实现一次编写到处运行——像万能翻译官，你只管说“Java语”（字节码），它能翻译给不同的人（操作系统）听" | 核心定义 |
 | 1:20 | 要点1图解示意 | "到处运行」的跨平台能力。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Java概述？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["Java核心特性是面向对象与「一次编写，到处运行」的…"]:::core
+        C["包含关系：JDK包含JRE和开发工具，而JRE包含J…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -441,3 +441,35 @@ flowchart TD
 | 0:15 | Redis Lua 脚本执行截图 | "业务痛点：长链致短信成本增加，且无法精准统计点击转化" | 业务痛点 |
 | 1:02 | Redis Lua 脚本执行截图分步演示 | "发号器选型：选号段模式实现全局唯一，避免UUID无序影响索引" | 发号器选型 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：项目最大的技术挑战是什么。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】做短链项目的出发点是什么？用了哪些技术？最后达到…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["业务痛点：长链致短信成本增加，且无法精准统计点击转化"]:::core
+        C["发号器选型：选号段模式实现全局唯一，避免UUID无序…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

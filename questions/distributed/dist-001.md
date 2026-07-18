@@ -149,3 +149,35 @@ flowchart TD
 | 0:25 | 生活类比动画 | "打个比方——像服务员菜单一样管理菜品(API)，电路保险丝防止过载。" | 核心类比 |
 | 0:50 | 概念定义动画 | "一句话：管理微服务接口文档与测试，并提供熔断机制保护系统。" | 核心定义 |
 | 1:20 | Hystrix 图解 | "失败率达阈值熔断，半开状态探测恢复。" | Hystrix |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["微服务中API管理的作用和方案是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["Hystrix断路器三态：Closed正常-》失败率…"]:::core
+        C["Half-Open半开状态仅放行单请求，成功则恢复C…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

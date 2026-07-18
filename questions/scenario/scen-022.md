@@ -171,3 +171,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——改户口本(DB)和家门口的告示牌(缓存)，改完户口本记得把告示牌擦了重写，别让邻居看错。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：在数据库和缓存无法原子更新的约束下，通过特定顺序和异步机制保证数据最终收敛。" | 核心定义 |
 | 1:50 | 标准策略 图解 | "标准策略是先更新DB，再删除缓存(Cache-Aside)。" | 标准策略 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何保证缓存与数据库的数据一致性？最终一致和强一致分别怎么做…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心准则：因为并发引发脏读脏写，故坚决“先更DB后删…"]:::core
+        C["延迟双删：先删缓存 -》 更新DB -》 延迟500…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

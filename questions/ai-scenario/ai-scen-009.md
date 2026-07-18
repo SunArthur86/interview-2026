@@ -106,7 +106,6 @@ def orchestrator_loop(task, max_steps=10):
 1. **过度依赖Agent自主性**：试图让LLM完全自主决定所有流程，导致输出不可控。实际上核心流程应由代码/DAG强约束，LLM仅负责处理具体逻辑。
 2. **忽视“人机协同”**：设计完全全自动的闭环，忽略了在关键决策点（如资金划转、发布报告）必须加入人工确认环节，否则风险极大。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -174,7 +173,6 @@ flowchart TD
 - 通信模式选共享黑板（解耦）或消息传递（明确流程）
 - 必须设置超时熔断与死锁检测，防止单点故障挂起系统
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过角色分工和协作机制，让多个AI Agent像团队一样协同完成复杂任务。——打个比方，像公司项目组，有PM分配任务，有程序员写代码，有测试找Bug，最后大家一起交付。
@@ -197,3 +195,36 @@ flowchart TD
 | 1:12 | 核心组件图解 | "Orchestrator（编排）、Worker（执行）、Shared State（通信）" | 核心组件 |
 | 1:48 | 要点图解 | "任务编排用DAG图建模，支持并行执行与依赖管理" | 要点 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个多Agent协作系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过角色分工和协作机制，让多个AI Agent像<br/>0:36"]:::core
+        N2["核心组件图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["任务编排用DAG图建模，支持并行执行与依赖管理<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

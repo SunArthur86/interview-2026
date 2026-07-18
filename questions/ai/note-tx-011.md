@@ -380,7 +380,6 @@ class Agent:
         await asyncio.sleep(0.1)  # 模拟推理延迟
         return {"agent": self.name, "result": f"<{self.role}处理结果>", "confidence": 0.85}
 
-
 class MultiAgentOrchestrator:
     """多 Agent 编排器"""
 
@@ -423,7 +422,6 @@ class MultiAgentOrchestrator:
         final = f"最终结果: (综合 {len(exec_results)} 个 Agent 的输出)"
         print(f"[Orchestrator] 完成: {final}")
         return final
-
 
 # ── 启动 ──
 async def main():
@@ -508,7 +506,6 @@ async def safe_run(agent: Agent, task: str, max_retries: int = 3):
 
 面试关键加分点：能说清楚**为什么**这样设计（第一性原理：模块化+标准化接口 > 单体复杂度），并能给出**工程权衡**（Agent 数量、延迟、成本的三角约束）。
 
-
 ## 记忆要点
 
 - 单体Agent有三大瓶颈：错误易累积、角色易混淆、扩展性极差
@@ -516,7 +513,6 @@ async def safe_run(agent: Agent, task: str, max_retries: int = 3):
 - 架构三要素：编排器路由聚合、专职Agent（规划/执行/审查）、共享内存通信
 - 两大协同模式：流水线（串行）与扇出汇聚（并行）
 - 加分点：类比传统微服务架构，强调标准通信协议与容错机制设计
-
 
 ## 苏格拉底式面试追问
 
@@ -562,7 +558,6 @@ async def safe_run(agent: Agent, task: str, max_retries: int = 3):
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 就像一个开发团队——有 PM 拆需求、架构师设计、开发写代码、QA 测试，每个角色有明确职责和协作协议。
 
 **展开框架：**
@@ -572,11 +567,9 @@ async def safe_run(agent: Agent, task: str, max_retries: int = 3):
 
 **收尾：** 多 Agent 之间如果产生冲突的输出怎么处理？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -586,3 +579,37 @@ async def safe_run(agent: Agent, task: str, max_retries: int = 3):
 | 1:30 | 通信协议示意图 | "通信协议——通信协议" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：多 Agent 之间如果产生冲突的输出怎么处理？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent 协同机制怎么设计的？<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["角色定义示意图<br/>0:50"]:::deep
+        N3["通信协议示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

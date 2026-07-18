@@ -479,3 +479,29 @@ flowchart TD
 | 1:05 | 流程图 | 线程池/信号量/集群/容器/物理。 | 隔离 |
 | 2:30 | 总结卡 | 一句话记忆：负载均衡：DNS/网关/服务端/RPC 层。 下期可以接着聊：一致性哈希解决什么问题。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>压测报告截"]:::concept
+    N3["0:40<br/>算法"]:::deep
+    N4["1:05<br/>隔离"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["2:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

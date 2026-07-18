@@ -255,7 +255,6 @@ class ForgettingManager:
 2. **遗忘是 feature 不是 bug**：主动设计遗忘机制，避免记忆膨胀和噪声
 3. **提"软删除+保留期"**：误删可恢复，体现工程严谨
 
-
 ## 核心流程图
 
 ```mermaid
@@ -296,7 +295,6 @@ flowchart TD
 - 四大记忆类型：短期（会话上下文）、长期（跨会话向量库）、工作（暂存区）、情景（轨迹复盘）
 - 写入四步策略：重要性打分、向量相似度去重合并、LLM提取压缩、打标签附TTL
 - 检索策略：采用多路召回（向量语义+关键词等）结合重排序，精准提取Top-K
-
 
 ## 苏格拉底式面试追问
 
@@ -355,11 +353,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：记忆怎么避免存垃圾？——重要性评分+去重+LLM筛选？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -369,3 +365,37 @@ flowchart TD
 | 1:30 | 写入示意图 | "写入——重要性判断+去重+压缩" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：记忆怎么避免存垃圾？——重要性评分+去重+LLM筛选？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Agent Memory 怎么设计？<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["四类记忆示意图<br/>0:50"]:::deep
+        N3["写入示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

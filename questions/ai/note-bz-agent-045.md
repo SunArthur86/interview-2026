@@ -207,7 +207,6 @@ Agentic RAG: Agent自主决策检索策略（何时/查什么/查几次）
 2. **强调知识与能力解耦**：RAG 的本质是把知识外部化，这是区别于微调的核心
 3. **提可溯源**：RAG 能给出来处，这是比纯 LLM 重要的优势（尤其企业场景）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -251,7 +250,6 @@ flowchart TD
 - 一句话定义：检索增强生成，相当于让大模型从闭卷变开卷考试。
 - 离线阶段(数据准备)：文档加载→分块→向量化→存入向量库。
 - 在线阶段(查询回答)：问题向量化→检索Top-K文档→组装增强Prompt→LLM生成带引用的答案。
-
 
 ## 苏格拉底式面试追问
 
@@ -310,11 +308,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：RAG和微调怎么选？——事实知识用RAG，能力风格用微调？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -322,3 +318,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "RAG=检索增强生成。先从知识库检索相关文档，再让LLM基于检索结果生成答案。解决LLM知识过时和幻觉问题，像"开卷考试…" | 核心定义 |
 | 0:55 | 核心示意图 | "核心——检索(Retrieval)+增强(Augmented)+生成(Generation)" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["什么是 RAG？整体流程是怎样的？<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["核心示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

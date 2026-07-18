@@ -91,7 +91,6 @@ frequency: high
 2. **追问**：如果要设计一个“通用型”Agent 的 System Prompt，如何平衡“通用性”和“特定任务的表现力”？
 3. **追问**：你提到“Let's think step by step”，在什么场景下这种 CoT（思维链）提示反而会降低模型性能？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -176,4 +175,36 @@ flowchart TD
 | 0:55 | 原则对比：具体 vs 模糊 / 正面 vs 负面 | 原则上具体优于模糊，正面指令优于负面指令，用 Markdown 结构化组织。 | 关键原则 |
 | 1:25 | 技巧：step by step + 专家角色 | 技巧上用"Let's think step by step"激发思维链，用专家角色激活领域知识。 | 指令技巧 |
 | 1:50 | 易错点：指令过载 + 长 Prompt 处理 | 易错点是指令过载，核心不超过 3 到 5 条；长 Prompt 核心 Identity 保留，规则可检索提取，每轮重注。 | 易错点 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《System Prompt …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["CREATE 框架四要素图<br/>0:25"]:::core
+        N2["原则对比：具体 vs 模糊 / 正面 vs 负面<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["技巧：step by step + 专家角色<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["易错点：指令过载 + 长 Prompt 处理<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

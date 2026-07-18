@@ -111,7 +111,6 @@ def estimate_loss(params, tokens, a=1.8, b=0.6):
 print(f"Estimated Loss: {estimate_loss(7e9, 2e12):.4f}")
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -182,4 +181,37 @@ flowchart TD
 | 1:10 | Scaling Law 幂律图 | "性能与算力、参数、数据呈幂律关系，越大越好但有最优解。" | Scaling Law |
 | 1:35 | Chinchilla 20 倍定律 | "Chinchilla：最优训练 token 数约为参数量 20 倍，数据量要匹配。" | 数据配比 |
 | 1:55 | 总结卡 | "口诀：规模出涌现，20 倍数据最优，端侧用 Long Chinchilla。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["涌现能力与 Scaling Law<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["水沸腾类比<br/>0:15"]:::core
+        N2["涌现能力出现曲线<br/>0:40"]:::deep
+        N3["Scaling Law 幂律图<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["Chinchilla 20 倍定律<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：规模出涌现，20 倍数据最优，端侧用 Lo<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

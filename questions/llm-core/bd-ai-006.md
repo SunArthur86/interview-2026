@@ -133,8 +133,6 @@ def react_loop(query, tools, max_iterations=10):
     return "Maximum iterations reached."
 ```
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -169,7 +167,6 @@ flowchart TD
 - 行动层：ReAct循环，LLM选工具→执行→捕获异常→将错误反馈给LLM自我纠正
 - 关键参数：设置最大迭代次数(如10次)防止死循环，异常信息需转化为自然语言
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过感知-规划-行动-观察的闭环，结合RAG和工具调用实现自主决策。——打个比方，像人做任务：先看资料（感知），定计划（规划），动手做（行动），检查结果（观察）。
@@ -192,3 +189,36 @@ flowchart TD
 | 1:12 | 核心闭环图解 | "感知(组装上下文)→规划(任务分解)→行动(工具调用)→观察(结果解析)→决策" | 核心闭环 |
 | 1:48 | 感知层图解 | "注入Prompt、对话历史、RAG检索知识及工具Schema，构建完整上下文" | 感知层 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】Agent如何结合工具…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过感知-规划-行动-观察的闭环，结合RAG和工<br/>0:36"]:::core
+        N2["核心闭环图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["感知层图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

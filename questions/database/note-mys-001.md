@@ -255,6 +255,38 @@ flowchart TD
 | 1:02 | MySQL EXPLAIN 执行计划截图分步演示 | "反范式 就是 用冗余字段减少JOIN，本质是空间换时间" | 反范式 = 用冗余字段减 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：什么场景必须用反范式？（分层查询、树形结构、报表聚合）。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【美云智数终面】复杂业务下如何做数据库表设计？三范式和反范式…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["解析器Parser 词法/语法/语义分析"]:::core
+        C["1NF=列不可分"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 苏格拉底式面试追问
 
 | 追问层级 | 面试官可能这样问 | 高分回答方向 |

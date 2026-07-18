@@ -115,14 +115,12 @@ flowchart TD
     SGLang --> Prefix[自动共享前缀]
 ```
 
-
 ## 记忆要点
 
 - vLLM核心：PagedAttention分页管理KV，解决显存碎片，生态成熟适合通用推理
 - SGLang核心：RadixAttention树状结构，自动共享前缀，适合多轮对话与Agent
 - 结构化输出：SGLang原生支持Regex/JSON约束解码，vLLM通常需后处理
 - 场景选择：通用单轮选vLLM，多轮/长前缀/结构化输出选SGLang
-
 
 ## 结构化回答
 
@@ -146,3 +144,36 @@ flowchart TD
 | 1:12 | vLLM核心图解 | "PagedAttention分页管理KV，解决显存碎片，生态成熟适合通用推理" | vLLM核心 |
 | 1:48 | SGLang核心图解 | "RadixAttention树状结构，自动共享前缀，适合多轮对话与Agent" | SGLang核心 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】vLLM 和…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["PagedAttention解决显存碎片，Rad<br/>0:36"]:::core
+        N2["vLLM核心图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["SGLang核心图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

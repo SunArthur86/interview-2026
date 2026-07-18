@@ -152,7 +152,6 @@ flowchart TD
     end
 ```
 
-
 ## 记忆要点
 
 - 定义：训练集表现好，测试集表现差，本质是学到了噪声而非规律。
@@ -183,4 +182,37 @@ flowchart TD
 | 1:10 | Dropout 原理示意图 | "Dropout 训练时随机失活模拟集成，推理时全连接；L2 限制权重幅度。" | 模型层 |
 | 1:35 | YOLO 背景单一案例 | "实战：YOLO 背景太单一过拟合亮度，加 Mosaic 增强强制学形状。" | 实战案例 |
 | 1:55 | 总结卡 | "口诀：数据增强、Dropout 正则、Early Stopping，拒绝死记硬背。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["过拟合与防止<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["背例题换题不会类比<br/>0:15"]:::core
+        N2["三层防线示意图<br/>0:40"]:::deep
+        N3["Dropout 原理示意图<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["YOLO 背景单一案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：数据增强、Dropout 正则、Early<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

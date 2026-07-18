@@ -150,3 +150,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "存储原始数据的八种内置类型，非对象，栈内存分配——像乐高基础块，形状固定，直接拼插；不像高级组件（对象）还要包装" | 核心定义 |
 | 1:20 | 四大分类示意 | "整型(默认int)、浮点型(默认double)、字符型(2字节)、布尔型" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Java基础数据类型？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["四大分类：整型（默认int）、浮点型（默认doubl…"]:::core
+        C["类型转换：因为小转大安全所以自动隐式，而大转小需强制…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -105,7 +105,6 @@ def hybrid_score(dense_score, bm25_score, alpha=0.7):
 **评估指标：**
 *   **MTEB (Massive Text Embedding Benchmark)**: 目前最权威的测评基准，涵盖检索、重排序、聚类等任务。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -187,4 +186,36 @@ flowchart TD
 | 0:55 | BGE 系列：large-zh vs M3 | 中文首选 BGE 系列：BGE-large-zh 重精度，BGE-M3 支持长文本和多语言，功能更全。 | BGE 选型 |
 | 1:25 | Cohere v3 / E5 / GTE 对比 | 商业可用选 Cohere v3 多语言极强，E5 和 GTE 中英均衡，适合混合场景。 | 其他选型 |
 | 1:50 | 实战：BGE-M3 + 混合检索 | RAG 实战推荐 BGE-M3，配合向量加 BM25 的混合检索，效果比单一向量更好。 | 实战建议 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Embedding 模型选型…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["文本 → 高维向量 → 余弦相似度<br/>0:25"]:::core
+        N2["BGE 系列：large-zh vs M3<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Cohere v3 / E5 / GTE 对比<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["实战：BGE-M3 + 混合检索<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

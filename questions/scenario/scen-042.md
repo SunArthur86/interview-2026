@@ -144,3 +144,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像开车仪表盘：速度表(Metrics)告诉你快慢，行车记录仪(Logging)记录发生了什么，导航轨迹(Tracing)告诉你走哪条路最堵。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：Metrics看趋势、Logging查细节、Tracing找瓶颈。" | 核心定义 |
 | 1:50 | Metrics 图解 | "Prometheus监控数值指标。" | Metrics |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个全链路监控系统？覆盖日志、指标、链路追踪"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["监控三支柱：Metrics指标准实时的系统状态，Lo…"]:::core
+        C["Metrics方案：Prometheus主动Pull…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

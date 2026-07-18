@@ -119,7 +119,6 @@ flowchart TD
     GPU --> Speed[比HF快14-24倍]
 ```
 
-
 ## 记忆要点
 
 - PagedAttention：KV Cache 分块管理，消除显存碎片，利用率从 60% 提至 96%。
@@ -127,7 +126,6 @@ flowchart TD
 - 核心优势：结合两者，比 HuggingFace 快 14-24 倍，显存利用率接近极致。
 - 关键配置：Block Size 通常设 16，Prefix Caching 可复用 System Prompt KV。
 - 适用场景：高并发在线服务首选，单任务微调场景优势不明显。
-
 
 ## 结构化回答
 
@@ -151,3 +149,36 @@ flowchart TD
 | 1:12 | 要点图解 | "PagedAttention：KV Cache 分块管理，消除显存碎片，利用率从 60% 提至 96%。" | 要点 |
 | 1:48 | 要点图解 | "Continuous Batching：请求动态进出 Batch，无需等最长请求结束，吞吐大幅提升。" | 要点 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["vLLM的核心优化技术有哪些<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["PagedAttention管理显存碎片，Con<br/>0:36"]:::core
+        N2["PagedAttention：KV Cache<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Continuous Batching：请求动态<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -168,3 +168,35 @@ flowchart TD
 | 1:30 | 核心思想示意 | "屏蔽物理内存离散，为进程提供连续且独立的逻辑地址空间。" | 要点1 |
 | 2:15 | 加速机制示意 | "依赖MMU翻译，靠TLB(快表)缓存近期映射极速转换地址。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是虚拟内存？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心思想：屏蔽物理内存离散，为进程提供连续且独立的逻…"]:::core
+        C["加速机制：依赖MMU翻译，靠TLB（快表）缓存近期映…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

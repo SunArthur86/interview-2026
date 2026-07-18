@@ -171,7 +171,6 @@ flowchart TD
     I --> J[减少跳步错误 输出最终答案]
 ```
 
-
 ## 记忆要点
 
 - Temperature：控制随机性，低T确定（代码），高T创意（写作）
@@ -201,4 +200,36 @@ flowchart TD
 | 0:55 | Top-k 示意：固定 k=40 个候选 | Top-k 是固定候选集大小，比如 k 等于 40，简单粗暴截掉低概率噪声。 | Top-k |
 | 1:20 | Top-p 示意：动态累积概率到 p=0.9 | Top-p 是动态截断长尾，保留累积概率达到 0.9 的候选集，自适应不同分布形状。 | Top-p |
 | 1:50 | 组合表：代码 T=0.1 / 创意 T=0.7 | 实战最常用 T 加 Top-p 组合，代码用 T=0.1，创意写作用 T=0.7。 | 组合建议 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《采样三件套》+ 水龙头调温漫画<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["Temperature 曲线：低 T 尖锐 vs 高 …<br/>0:25"]:::core
+        N2["Top-k 示意：固定 k=40 个候选<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Top-p 示意：动态累积概率到 p=0.9<br/>1:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["组合表：代码 T=0.1 / 创意 T=0.7<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

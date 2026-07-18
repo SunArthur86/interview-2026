@@ -254,7 +254,6 @@ class SkillRegistry:
 2. **核心是"标准化"**：统一接口让 N×M 变 N+M，这是软件工程经典思想
 3. **提生态价值**：标准化催生 Skill 市场（类比 App Store），这是 Agent 生态的基础
 
-
 ## 核心流程图
 
 ```mermaid
@@ -303,7 +302,6 @@ flowchart TD
 - 万物指代：API、脚本、文档、SOP、外部服务等皆可封装为统一Skill。
 - 统一规范六要素：元数据(身份)、触发器(何时用)、工具依赖、输入输出Schema、执行流程、示例。
 - 核心价值：通过统一规范，让异构能力(AI/人工/数据)标准化，供Agent按需动态调度。
-
 
 ## 苏格拉底式面试追问
 
@@ -362,11 +360,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：万物具体指什么？——API/脚本/知识库/人工流程/RPA？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -375,3 +371,36 @@ flowchart TD
 | 0:50 | 统一规范示意图 | "统一规范——元数据+工具+流程+Schema" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：万物具体指什么？——API/脚本/知识库/人工流程/RPA？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["如何基于统一规范实现'万物皆可 S…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["统一规范示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

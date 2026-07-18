@@ -165,3 +165,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 像抢厕所上厕所，人多时得排队睡大觉（阻塞），由管理员（OS）叫号，虽然慢但不会乱挤。 | 核心概念 |
 | 0:40 | 操作系统Mutex示意图 | 基于操作系统Mutex实现。 | 操作系统Mutex |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是重量级锁（Heavyweight Lock）？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["底层依赖：基于 OS 互斥量与 ObjectMoni…"]:::core
+        C["触发时机：轻量级锁自旋失败或竞争激烈时，膨胀为重量级…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -174,7 +174,6 @@ def handle_conflict(new_memory: dict, conflict_memory: dict) -> str:
 3. **冲突日志**：记录所有冲突及解决方式，用于后续优化冲突检测阈值
 4. **优雅降级**：如果主动澄清过于频繁会打扰用户，设置澄清频率上限（如每5轮最多1次）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -265,7 +264,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 就像微信备注更新——朋友改名了你会更新备注（时间戳优先），如果不确定就问一句"你现在叫什么？"（主动澄清）
 
 **展开框架：**
@@ -275,11 +273,9 @@ flowchart TD
 
 **收尾：** 如何自动检测记忆冲突？用什么算法或模型？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -288,3 +284,36 @@ flowchart TD
 | 0:50 | 时间戳优先示意图 | "时间戳优先——最新信息覆盖旧信息" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：如何自动检测记忆冲突？用什么算法或模型？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多轮对话中，如果不同轮次的记忆发生…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["时间戳优先示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

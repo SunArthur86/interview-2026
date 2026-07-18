@@ -181,7 +181,6 @@ flowchart TD
     I --> J
 ```
 
-
 ## 记忆要点
 
 - DPO核心：利用RLHF最优策略闭式解，将Reward模型隐式消去
@@ -211,4 +210,36 @@ flowchart TD
 | 0:55 | 损失函数图：Chosen ↑ + Rejected ↓ | 损失函数就是拿偏好对算 Log-ratio 差值，让好答案概率往上走，差答案概率往下压。 | 损失函数 |
 | 1:20 | 双网络示意：Policy + Reference | 整个训练只需要策略模型和参考模型两个网络，不用 Critic，不用 RM，显存占用大幅降低。 | 双网络架构 |
 | 1:45 | KL 约束示意 + "避免 Reward Hacking"标签 | 参考模型的作用是算 KL 散度，防止策略跑偏，同时也避免了 PPO 里常见的 Reward Hacking 问题。 | KL 约束与优势 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《DPO 直接偏好优化》+ P…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["公式：r = β·log(π/π_ref) + con…<br/>0:25"]:::core
+        N3["双网络示意：Policy + Reference<br/>1:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["损失函数图：Chosen ↑ + Rejected ↓<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["KL 约束示意 + '避免 Reward Hackin…<br/>1:45"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

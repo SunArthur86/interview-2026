@@ -175,7 +175,6 @@ def react_agent(goal, memory, tools):
 2. **提"记忆最难"**：规划和工具相对成熟（靠强模型 + API 规范），记忆是最难工程化的（检索召回/用户隔离/遗忘策略）
 3. **能力分级**：弱 Agent（固定流程+少量工具）→ 强 Agent（动态规划+长期记忆+多工具）→ 自主 Agent（自主设目标）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -217,7 +216,6 @@ flowchart TD
 - 规划范式：线性CoT、分支ToT、以及交替进行的ReAct（推理+行动）
 - 记忆分层：短期为上下文窗口，长期为向量库检索，任务记忆记录执行轨迹
 - 工具分类：分为感知类（读取环境如搜索）和行动类（改变环境如发邮件）
-
 
 ## 苏格拉底式面试追问
 
@@ -276,11 +274,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：这三大能力哪个最难做？——记忆（稀疏奖励、检索召回、用户隔离）？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -288,3 +284,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "Agent三大核心能力=规划（怎么干）+记忆（记住什么）+工具（能干什么）。三者缺一不可，构成Agent的行动闭环。" | 核心定义 |
 | 0:55 | 规划Planning示意图 | "规划Planning——任务分解+步骤编排+失败重规划" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["AI Agent 的核心能力有哪些…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["规划Planning示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

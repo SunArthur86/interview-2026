@@ -103,7 +103,6 @@ out = flash_attn_func(
 2. Flash Attention 支持Attention Mask吗？如何实现的？
 3. Flash Attention-3 在H100上使用了什么新的硬件特性（如Tensor Cores或TMA）？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -182,4 +181,36 @@ flowchart TD
 | 0:55 | 在线 Softmax 流程图 | 配合在线 Softmax，边算边归一化，不用等整个矩阵出来，进一步减少中间结果落盘。 | 在线 Softmax |
 | 1:25 | 效果对比柱状图：速度 2-4x / 显存 O(n²)→O(n) | 效果很显著：速度快 2 到 4 倍，显存从 O(n²) 降到 O(n)，直接支持更长的上下文。 | 效果数据 |
 | 1:50 | "数学精确等价"标签 + 短序列警告图标 | 重点强调，它是数学精确等价的，不是近似算法。但序列极短，比如小于 512，Kernel 开销反而可能让它变慢。 | 性质与边界 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Flash Attentio…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["Tiling 分块示意图：Q/K/V 切块进 SRAM<br/>0:25"]:::core
+        N2["在线 Softmax 流程图<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["效果对比柱状图：速度 2-4x / 显存 O(n²)→…<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["数学精确等价'标签 + 短序列警告图标<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

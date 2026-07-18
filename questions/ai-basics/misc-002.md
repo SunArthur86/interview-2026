@@ -92,7 +92,6 @@ def precompute_freqs_cis(dim: int, end: int, theta: float = 10000.0):
 3. **多维处理**：RoPE 如何应用到高维向量？(两两分组旋转，即 head_dim/2 次旋转)。
 4. **对比 ALiBi**：RoPE (加法在复数域/旋转) vs ALiBi (直接在 Attention Score 减去偏置) 的优劣。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -175,4 +174,37 @@ flowchart TD
 | 1:10 | RoPE 旋转矩阵原理图 | "RoPE 旋转矩阵注入 Q 和 K，内积自然包含相对位置信息。" | RoPE 原理 |
 | 1:35 | 长度外推 4K→32K 示意 | "优势：长度外推强，训练 4K 推理 32K+，长文本用 NTK-aware Scaling。" | 外推能力 |
 | 1:55 | 总结卡 | "口诀：RoPE 旋转注相对位置，外推强。下期讲 MoE。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["位置编码与 RoPE<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["时针旋转角度类比<br/>0:15"]:::core
+        N3["RoPE 旋转矩阵原理图<br/>1:10"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["三种位置编码对比表<br/>0:40"]:::practice
+        N4["长度外推 4K→32K 示意<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

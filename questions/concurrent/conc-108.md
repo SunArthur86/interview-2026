@@ -180,6 +180,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是进程线程基础？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["创建方式：继承Thread、实现Runnable、实…"]:::core
+        C["状态流转：NEW -》 RUNNABLE -》 （B…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：进程和线程的区别
 
 > 合并自 `dsl-022`（相似度 69%）
@@ -282,3 +314,35 @@ class SharedData {
 | 0:20 | 核心概念动画/示意图 | 进程像工厂，线程像工厂里的工人。多个工人共享工厂资源（线程共享内存），但不同工厂资源独立（进程隔离）。 | 核心概念 |
 | 0:40 | 资源分配与调度单位示意图 | 资源分配与调度单位 | 资源分配与调度单位 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是进程线程基础？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["创建方式：继承Thread、实现Runnable、实…"]:::core
+        C["状态流转：NEW -》 RUNNABLE -》 （B…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

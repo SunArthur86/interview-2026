@@ -137,13 +137,11 @@ flowchart TD
     NCCL --> Stack[py-spy抓堆栈]
 ```
 
-
 ## 记忆要点
 
 - OOM诊断：显存=模型+优化器(2x)+梯度+激活+KV。解法用ZeRO-3切片、Checkpoint换显存、SP切分序列。
 - 低MFU诊断：算力Bound查Kernel利用率，内存Bound查HBM带宽。解法通信Overlap、算子融合、IO加速。
 - Hang诊断：设NCCL_DEBUG=INFO查通信，用py-spy抓堆栈。常见死锁或IB网卡MTU不一致。
-
 
 ## 结构化回答
 
@@ -168,3 +166,37 @@ flowchart TD
 | 2:00 | 低MFU诊断图解 | "算力Bound查Kernel利用率，内存Bound查HBM带宽。解法通信Overlap、算子融合、IO加速。" | 低MFU诊断 |
 | 2:40 | Hang诊断图解 | "设NCCL_DEBUG=INFO查通信，用py-spy抓堆栈。常见死锁或IB网卡MTU不一致。" | Hang诊断 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["大模型训练中如何诊断OOM、低MF…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用Profiler工具分析算力、显存和通信瓶颈<br/>0:40"]:::core
+        N2["OOM诊断图解<br/>1:20"]:::deep
+        N3["低MFU诊断图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["Hang诊断图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

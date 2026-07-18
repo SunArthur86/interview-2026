@@ -187,3 +187,35 @@ sequenceDiagram
 | 1:22 | 生活类比动画 | "打个比方——全班投票，先问大家都同意吗(准备)，全同意就通过(提交)，有一人反对就作废(回滚)。" | 核心类比 |
 | 2:03 | 准备和提交两个阶段 图解 | "包含准备和提交两个阶段。" | 准备和提交两个阶段 |
 | 2:50 | 原子性(要么全做要么 图解 | "保证原子性(要么全做要么全不做)。" | 原子性(要么全做要么 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是两阶段提交（2PC）协议？有什么缺点？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["两阶段指：一阶段准备（写日志锁资源不提交），二阶段提…"]:::core
+        C["缺点一：因为所有参与者等待协调者指令，所以导致严重同…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

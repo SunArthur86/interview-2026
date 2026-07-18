@@ -256,12 +256,10 @@ from dataclasses import dataclass, field
 from enum import Enum
 from collections import defaultdict
 
-
 class EventType(Enum):
     INSERT = "INSERT"
     UPDATE = "UPDATE"
     DELETE = "DELETE"
-
 
 @dataclass
 class DocumentEvent:
@@ -273,7 +271,6 @@ class DocumentEvent:
     content: Optional[str] = None        # INSERT/UPDATE 时有值
     timestamp: float = field(default_factory=time.time)
     content_hash: Optional[str] = None    # 内容哈希
-
 
 class IncrementalIndexManager:
     """
@@ -510,7 +507,6 @@ class IncrementalIndexManager:
             start += chunk_size - overlap
         return chunks if chunks else [text]
 
-
 # ============ 使用示例 ============
 
 class MockVectorDB:
@@ -528,11 +524,9 @@ class MockVectorDB:
     def list_doc_ids(self, collection):
         return {r["metadata"]["doc_id"] for r in self.data[collection]}
 
-
 def mock_embed(texts: List[str]) -> List[List[float]]:
     """模拟 Embedding 函数"""
     return [[hash(t) % 100 / 100.0] * 8 for t in texts]  # 伪向量
-
 
 if __name__ == "__main__":
     manager = IncrementalIndexManager(
@@ -653,7 +647,6 @@ class GradualIndexSwitcher:
 
 **一句话总结：** 实时增量更新的核心是 **CDC 监听变更 → 仅对变更文档做增量 Embedding → 双写版本化索引 → 灰度切换 + 多层一致性保障**。通过版本号丢弃过期事件、内容哈希实现幂等、TTL 自动清理旧版本、定期对账兜底修复，实现秒级延迟的有界最终一致性。
 
-
 ## 记忆要点
 
 - 痛点：全量重建慢且耗资源，核心是实时性、一致性与吞吐量的三角权衡。
@@ -718,11 +711,9 @@ Milvus/Qdrant 等确实支持流式写入（实时 insert/update），但"实时
 
 **收尾：** 您想深入聊：如何处理文档删除的索引清理？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -732,3 +723,37 @@ Milvus/Qdrant 等确实支持流式写入（实时 insert/update），但"实时
 | 1:30 | 增量示意图 | "增量——增量Embedding(只处理变更文档)" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：如何处理文档删除的索引清理？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["业务知识库每天有大量文档新增和修改…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["CDC示意图<br/>0:50"]:::deep
+        N3["增量示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

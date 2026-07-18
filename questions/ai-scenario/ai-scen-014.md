@@ -120,7 +120,6 @@ def retry_with_backoff(max_retries=3, base_delay=1):
 1. **混淆重试与幂等**：认为所有失败都可以重试。实际上，非幂等操作（如转账、发送邮件）的重试会导致严重后果，必须在重试前检查操作的幂等性。
 2. **过度依赖自我修正**：LLM面对某些逻辑死结时无法通过Self-Reflection解决，反而会消耗大量Token。必须设置“修正失败”后的兜底策略（如转人工）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -180,7 +179,6 @@ flowchart TD
 - 长任务失败需设计补偿动作（Compensation）回滚已执行步骤
 - 记录历史错误路径，防止Agent在相同状态间死循环
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 构建分类分级容错机制，自动检测异常并执行重试、回滚或降级操作。——打个比方，像程序的try-catch块，遇到bug不是直接崩，而是记录日志、尝试重连或提示用户。
@@ -203,3 +201,36 @@ flowchart TD
 | 1:12 | 错误分类图解 | "瞬态（重试）、语义（自修正）、逻辑（询问/降级）" | 错误分类 |
 | 1:48 | 要点图解 | "瞬态错误用指数退避重试，超过次数转降级策略" | 要点 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计AI Agent的错误恢复机制<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["构建分类分级容错机制，自动检测异常并执行重试、回<br/>0:36"]:::core
+        N2["错误分类图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["瞬态错误用指数退避重试，超过次数转降级策略<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

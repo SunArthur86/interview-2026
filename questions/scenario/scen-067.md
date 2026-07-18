@@ -160,3 +160,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像运动会记分牌，一有新成绩立刻更新位置，随时能看前几名。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：利用有序结构高效存储分数，实现实时排名更新与查询。" | 核心定义 |
 | 1:50 | Redis 图解 | "Redis ZSet天然支持排序，O(logN)更新。" | Redis |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个排行榜系统？支持亿级用户、实时更新、多种维度排序"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心结构：Redis ZSet天然排序，亿级数据因单…"]:::core
+        C["核心命令：ZINCRBY更新分数，ZREVRANK拿…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

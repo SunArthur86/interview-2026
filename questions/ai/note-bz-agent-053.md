@@ -171,7 +171,6 @@ Rerank对RAG效果提升（经验值）：
 2. **解释 Bi vs Cross**：Bi-Encoder 无交互快但不准，Cross-Encoder 有交互准但慢
 3. **效果显著**：Rerank 通常能提升 10%+ 准确率，是 RAG 优化性价比最高的手段
 
-
 ## 核心流程图
 
 ```mermaid
@@ -216,7 +215,6 @@ flowchart TD
 - 性能对比：向量召回快但粗，Rerank极准但慢（无法预计算）。
 - 标准流程：两阶段Pipeline（先Bi召回Top20，再Cross精排选Top5）。
 - 模型推荐：开源首选bge-reranker，商业可用Cohere。
-
 
 ## 苏格拉底式面试追问
 
@@ -275,11 +273,9 @@ AB 对比。1）排序质量——对比向量检索 top-K vs Rerank top-K 的 M
 
 **收尾：** 您想深入聊：Rerank用什么模型？——Cross-Encoder(如bge-reranker)？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -288,3 +284,36 @@ AB 对比。1）排序质量——对比向量检索 top-K vs Rerank top-K 的 M
 | 0:50 | 两阶段示意图 | "两阶段——召回(Bi-Encoder快)→重排(Cross-Encoder准)" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：Rerank用什么模型？——Cross-Encoder(如b？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["重排算法（Rerank）如何提升检…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["两阶段示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

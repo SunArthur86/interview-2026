@@ -186,3 +186,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "计算机与外部世界交互的硬件接口及其控制机制——计算机的感官（眼耳）和手脚（嘴手），以及控制它们的神经反射" | 核心定义 |
 | 1:20 | 要点1图解示意 | "分为纯输入、纯输出、双向设备（如网卡/磁盘）" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是输入/输出设备？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["I/O设备是计算机与外部交换信息的硬件，分为纯输入、…"]:::core
+        C["CPU参与度越来越少：轮询最耗时，中断驱动介入中等"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

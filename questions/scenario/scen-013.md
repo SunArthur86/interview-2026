@@ -149,3 +149,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——就像每台机器发号器都有一本不同编号的发票簿，大家一起按顺序撕发票。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：在分布式环境下高效生成唯一且有序的数字ID。" | 核心定义 |
 | 1:50 | UUID无序性 图解 | "UUID无序性能差，不推荐做主键。" | UUID无序性 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个分布式 UUID / ID 生成器？要求全局唯一…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["方案对比：UUID本地生成但无序致索引差，数据库自增…"]:::core
+        C["双强方案：发号高性能选Snowflake（64位时间…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

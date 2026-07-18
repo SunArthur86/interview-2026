@@ -121,7 +121,6 @@ flowchart TD
     L --> M
 ```
 
-
 ## 记忆要点
 
 - SFT构建：质量>数量，格式统一，包含CoT，指令表达需多样性
@@ -151,4 +150,36 @@ flowchart TD
 | 0:55 | 示意图：预训练语料 + 低学习率 + LoRA 旁路 | 防止灾难性遗忘，关键是掺回 10 到 20% 的预训练语料，学习率调低，能用 LoRA 冻结权重就别全量微调。 | 防遗忘三板斧 |
 | 1:25 | 多轮对话示意图，高亮当前回复 | 多轮对话有个坑：训练时只对当前回复算 Loss，历史部分要 Mask 掉，否则模型会学着去"生成历史"。 | Loss Mask 技巧 |
 | 1:50 | 红色警告图标 + "数据飞轮"循环图 | 最后一条铁律：低质量 SFT 数据是毒药，会造成不可逆的能力退化。线上数据回收必须先过质检这一关。 | 数据飞轮风控 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《SFT 数据集构建与防遗忘》…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三栏对比图：格式统一/指令多样/CoT 混入<br/>0:25"]:::core
+        N2["示意图：预训练语料 + 低学习率 + LoRA 旁路<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["多轮对话示意图，高亮当前回复<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["红色警告图标 + '数据飞轮'循环图<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

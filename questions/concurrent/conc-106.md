@@ -150,3 +150,35 @@ flowchart TD
 | 0:40 | 进程间隔离示意图 | 进程间隔离，线程间共享 | 进程间隔离 |
 | 1:10 | 线程切换开销小示意图 | 线程切换开销小 | 线程切换开销小 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是进程和线程？它们的区别是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["基本定义：进程是资源分配的基本单位，线程是CPU调度…"]:::core
+        C["资源分配：进程拥有独立地址空间，而同进程内的线程共享…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

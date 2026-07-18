@@ -185,3 +185,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像直播转播，主播(源库)说话，转播车(CDC)实时把信号发给不同平台(目标库)。" | 核心类比 |
 | 2:03 | CDC工具 图解 | "监听Binlog/WAL日志捕获变更。" | CDC工具 |
 | 2:50 | 消息队列 图解 | "解耦源库与目标存储，削峰填谷。" | 消息队列 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个分布式系统的数据同步方案？多数据中心数据一致"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["方案选型：异构存储同步首选CDC（Canal/Deb…"]:::core
+        C["顺序性保障：因Binlog需顺序消费，Kafka需用…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -169,3 +169,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "通过final修饰和私有数组确保对象创建后状态不可修改——像刻好的石碑，一旦写好就不能改，谁都可以拿去读，不用担心被涂改" | 核心定义 |
 | 1:20 | 底层实现示意 | "类用final修饰防继承，核心数组(byte[]/char[])用private final修饰防修改。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["String为什么设计为不可变？有什么好处？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["底层实现：类用final修饰防继承，核心数组（byt…"]:::core
+        C["核心好处：因为不可变，所以天然线程安全、绝对适合做H…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -327,3 +327,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "大V特判：大V(粉丝>10万)用拉模式，因为写扩散会瞬间撑爆Redis，改为粉丝活跃时再拉取" | 大V特判 |
 | 2:54 | 对比表格 | "数据结构：收发件箱(in/outbox)均用Redis ZSET，因为Score存时间戳天然支持按时间倒序排" | 数据结构 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：推拉结合的切换阈值怎么定。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["微博千万网红 Feed 流量如何扛住不崩？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心架构：千万网红Feed采用推拉结合模式，兼顾性能…"]:::core
+        C["推拉分界：普通用户（粉丝《10万）用推模式，因为发博…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

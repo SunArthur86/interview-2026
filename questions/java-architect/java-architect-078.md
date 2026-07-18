@@ -524,6 +524,32 @@ groups:
 | 1:05 | 秒传示意/对比图 | "上传前算文件 MD5，查对象存储是否已存在，命中则直接返回 URL（不实际传输）" | 秒传要点 |
 | 1:55 | 总结卡 | "记住：分片。下期见。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>像搬家运一本书类比"]:::concept
+    N3["0:40<br/>分片上传要点"]:::deep
+    N4["1:05<br/>秒传要点"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["1:55<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 ---
 
 ## 延伸：【Java 后端架构师】文件秒传、分片上传与病毒扫描
@@ -852,5 +878,29 @@ public class FileAccessService {
 | 0:15 | 秒传示意/对比图 | "上传前算 MD5，查 file 表命中则复用 fileId 不重复传" | 秒传要点 |
 | 0:40 | 分片上传示意/对比图 | "大文件切 5MB 片，并行上传，支持断点续传" | 分片上传要点 |
 | 1:25 | 总结卡 | "记住：秒传。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>秒传要点"]:::deep
+    N3["0:40<br/>分片上传要点"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:25<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
 
 

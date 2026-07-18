@@ -150,3 +150,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "无论异常与否都会执行的代码块——就像出门上班（try）无论顺不顺，回家关门（finally）是必须做的动作" | 核心定义 |
 | 1:20 | 执行机制示意 | "编译器会将finally代码块逻辑复制到try/catch的所有正常与异常出口路径" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是finally？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["执行机制：编译器会将finally代码块逻辑复制到t…"]:::core
+        C["唯二不执行：只有虚拟机退出（System.exit）…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

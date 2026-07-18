@@ -92,7 +92,6 @@ def audit_risk():
 1. **集成方式**：BPM 如何调用 Agent？（答：通常通过 HTTP/REST 调用 Agent 服务，解析其结构化输出作为流程变量）。
 2. **数据一致性**：Agent 产生的数据如何同步？（答：Agent 不直接写核心业务库，而是返回数据对象，由 BPM 服务层校验后写入）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -151,7 +150,6 @@ flowchart TD
 - 两者互补，BPM 常作为主控制器调用 Agent 子服务。
 - 涉及资金与权限的落账操作必须在 BPM 侧完成。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 企业里多 Agent 和 BPM 是互补而非替代。BPM（Camunda、Activiti）管确定性流程和强一致性事务，适合规则固定需审计的审批流；多 Agent 管不确定性流程，适合意图识别、文档生成、非结构化数据处理。混合编排是 BPM 作为主控制器调用 Agent 子服务，Agent 返回结构化 JSON 决策后 BPM 继续。涉及资金权限的落账操作必须在 BPM 侧完成。
@@ -175,3 +173,37 @@ flowchart TD
 | 1:10 | 合规底线警示 | "资金权限落账必须在 BPM 侧，不能仅靠 Agent 工具调用。" | 合规要求 |
 | 1:35 | 信贷幻觉案例 | "实战：Agent 误标工资为洗钱，BPM 高风险网关拦截。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：BPM 主控，Agent 辅助，落账走 BPM。下期讲死循环检测。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent 与 BPM 的关系<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["职责分工表<br/>0:15"]:::core
+        N2["混合编排架构<br/>0:45"]:::deep
+        N3["合规底线警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["信贷幻觉案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

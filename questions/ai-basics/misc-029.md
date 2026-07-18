@@ -109,7 +109,6 @@ def hyde_retrieval(query, llm, vector_store):
 2. Multi-Query生成多个查询后，如何合并检索结果？是简单的取并集，还是需要根据与原问题的相关性进行重排？（通常需要Reranker，如Cross-Encoder进行精排）
 3. HyDE生成的假设文档如果与事实相反（负向问题），如何防止检索到错误内容？（可以在Prompt中约束“即使假设，也请基于正向知识生成”或使用对比检索技术）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -188,4 +187,36 @@ flowchart TD
 | 0:55 | Step-Back 示意：具体问题 → 抽象背景 | 第二招 Step-Back：把具体问题抽象化，先检索背景知识，再回答细节，适合复杂推理。 | Step-Back |
 | 1:25 | Multi-Query 示意：多路变体召回 + 融合 | 第三招 Multi-Query：生成多个问题变体，多路召回再融合，防止单一表述遗漏相关文档。 | Multi-Query |
 | 1:50 | 警告图标：HyDE 对精确事实查询慎用 | 注意 HyDE 对精确事实查询，比如 ID 号，可能因为幻觉误导检索，这类场景要慎用。 | 使用边界 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Query 改写三招》+ 点…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["HyDE 流程：问题 → 假设答案 → embeddi…<br/>0:25"]:::core
+        N2["Step-Back 示意：具体问题 → 抽象背景<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Multi-Query 示意：多路变体召回 + 融合<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["警告图标：HyDE 对精确事实查询慎用<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

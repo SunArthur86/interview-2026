@@ -146,3 +146,35 @@ flowchart LR
 | 1:30 | 数据结构对比示意 | "List是单列集合允许重复且有序，Map是双列双列Key不可重复。" | 要点1 |
 | 2:15 | 访问方式差异示意 | "List支持索引下标O(1)访问，Map通过Key映射快速获取Value。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["List和Map有什么区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["数据结构对比：List是单列集合允许重复且有序，Ma…"]:::core
+        C["访问方式差异：List支持索引下标O（1）访问，Ma…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

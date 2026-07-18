@@ -249,3 +249,35 @@ flowchart TD
 | 0:15 | dp 数组填表过程动画 | "状态转移方程：dp[i] 就是 max(dp[i-1], dp[i-2] + nums[i])" | 状态转移方程 |
 | 1:02 | dp 数组填表过程动画分步演示 | "空间优化：用 prev2 和 prev1 两个变量代替整个dp数组" | 空间优化 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如果房屋排成环形呢？（力扣213）。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【拼多多 Java服务端】力扣198：打家劫舍"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["状态转移方程"]:::core
+        C["空间优化"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

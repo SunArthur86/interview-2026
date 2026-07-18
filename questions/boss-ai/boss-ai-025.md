@@ -308,3 +308,31 @@ flowchart TD
 | 1:50 | 概念结构示意图 | 贵模型小流量、便宜模型大流量、缓存复用。 | 成本优化 |
 | 3:30 | 总结卡 | 一句话记忆：MoE：路由+专家+融合。 下期可以接着聊：路由判错怎么办。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>Agent 编排链路"]:::concept
+    N3["0:50<br/>场景路由"]:::practice
+    N4["1:20<br/>协作模式"]:::practice
+    N5["1:50<br/>成本优化"]:::practice
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

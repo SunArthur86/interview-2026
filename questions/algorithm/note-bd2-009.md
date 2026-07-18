@@ -292,3 +292,35 @@ flowchart TD
 | 0:15 | 排序算法柱状图动画 | "第一步必须排序：因为区间乱序无法直接比较，所以先按起点进行排序。" | 第一步必须排序 |
 | 1:02 | 排序算法柱状图动画分步演示 | "遍历条件判断：因为当前区间start <就是 上一区间end意味着重叠，所以合并并取较大的end。" | 遍历条件判断 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如果要返回哪些区间有重叠(而不是合并)，怎么做。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["手撕：力扣56.合并区间"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["第一步必须排序：因为区间乱序无法直接比较，所以先按起…"]:::core
+        C["遍历条件判断：因为当前区间start 《= 上一区间…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -305,3 +305,35 @@ flowchart TD
 | 1:57 | 关键代码/伪代码片段 | "三大保障：MQ可靠投递 + 幂等消费 + 定时补偿任务" | 三大保障 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如果消息队列在扣款成功后宕机了，库存没扣，怎么补偿。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【拼多多一面】什么是最终一致性？在电商下单流程中如何体现？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["最终一致性"]:::core
+        C["电商下单链路"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+

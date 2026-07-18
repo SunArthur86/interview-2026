@@ -142,7 +142,6 @@ def adaptive_top_k(query: str, query_type: str) -> int:
 3. **动态K**：不要写死K值，根据Query难度动态调整（简单问题小K，复杂问题大K）
 4. **监控指标**：设置召回率监控、Rerank延迟监控，当分布漂移时自动调整K
 
-
 ## 核心流程图
 
 ```mermaid
@@ -250,11 +249,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：如何自动化确定最优Top-K？有没有自适应K的方法？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -262,3 +259,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "Top-K控制向量检索的召回数量。太小→漏召回，太大→噪声多+延迟高+Rerank成本飙升。工业经验：向量检索K=100…" | 核心定义 |
 | 0:55 | K过小示意图 | "K过小——召回不足、容错率低、Rerank无候选可排" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["向量检索中Top-K设置过大或过小…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["K过小示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

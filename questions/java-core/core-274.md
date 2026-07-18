@@ -218,6 +218,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是面向对象程序设计概述？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["OOP核心：先定数据结构（类），再写算法（方法），适…"]:::core
+        C["三大特征口诀：封装（藏细节）、继承（is-a复用）、…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是面向对象？
 
 > 合并自 `core-275`（相似度 72%）
@@ -294,3 +326,35 @@ OOP 核心概念关系图
 | 1:30 | OOP核心示意 | "程序是对象集合，包含数据与代码，以对象交互完成任务" | 要点1 |
 | 2:15 | 要点2图解示意 | "降低系统复杂度保障数据安全" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是面向对象程序设计概述？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["OOP核心：先定数据结构（类），再写算法（方法），适…"]:::core
+        C["三大特征口诀：封装（藏细节）、继承（is-a复用）、…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -128,14 +128,12 @@ flowchart TD
     G --> I[计算高效 可并行]
 ```
 
-
 ## 记忆要点
 
 - 核心原理：通过旋转矩阵将绝对位置作用于 Q/K，相乘后内积自然包含相对位置信息。
 - 机制优势：因为不增加额外矩阵乘法，且具备远程衰减特性，所以计算极其高效。
 - 外推能力：依赖相对距离，对长文本具备一定泛化能力。
 - 对比方案：绝对正弦编码外推差，而 ALiBi 直接加偏置天然外推极强，但 RoPE 仍是绝对主流。
-
 
 ## 结构化回答
 
@@ -160,3 +158,37 @@ flowchart TD
 | 2:00 | 机制优势图解 | "因为不增加额外矩阵乘法，且具备远程衰减特性，所以计算极其高效。" | 机制优势 |
 | 2:40 | 外推能力图解 | "依赖相对距离，对长文本具备一定泛化能力。" | 外推能力 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】说一说 RoPE 的原…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过旋转向量将绝对位置转化为相对位置信息。<br/>0:40"]:::core
+        N2["核心原理图解<br/>1:20"]:::core
+        N3["机制优势图解<br/>2:00"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["外推能力图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

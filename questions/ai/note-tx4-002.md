@@ -213,7 +213,6 @@ AUDIT_EVENTS = [
 # 例：发现用户投诉"我的偏好被改了"→ 查审计日志 → 定位到哪次会话改的
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -255,7 +254,6 @@ flowchart TD
 - 高置信度旧记忆遇冲突时：新记忆高优写入，并异步主动询问用户确认真相
 - 多租户防泄露：检索时强制双层过滤(tenant_id + user_id)
 - 防越权读取：必须经过权限网关，校验当前会话用户与记忆所有者严格一致
-
 
 ## 苏格拉底式面试追问
 
@@ -310,11 +308,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：记忆存在哪？向量库还是关系数据库？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -324,3 +320,37 @@ flowchart TD
 | 1:30 | 多租户隔离示意图 | "多租户隔离——tenant_id+user_id双层过滤，物理分库+权限网关" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：记忆存在哪？向量库还是关系数据库？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计多用户在线 Agent 长期记…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["冲突处理示意图<br/>0:50"]:::deep
+        N3["多租户隔离示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -120,8 +120,6 @@ class SendEmailSkill(BaseSkill):
 2. **Skill路由策略**：当多个Skill都能满足同一个用户意图时，如何选择最优的？（基于向量相似度匹配Description或专门的路由模型）
 3. **冷启动问题**：新开发的Skill没有使用数据，如何优化其Prompt或初始参数？
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -153,7 +151,6 @@ flowchart TD
 - 实现：定义BaseSkill基类统一接口，用装饰器自动注册到中心目录
 - 对比：传统Plugin靠配置扫描，Agent Skill靠语义理解路由，适配难度更低
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 标准化封装能力并集中管理，实现模块化组合与动态扩展。——打个比方，像手机应用商店，统一标准、动态下载、即插即用，互不干扰。
@@ -177,3 +174,37 @@ flowchart TD
 | 2:00 | Skill四要素图解 | "功能描述、输入Schema、输出Schema、依赖工具列表" | Skill四要素 |
 | 2:40 | 可扩展性图解 | "注册表自动发现、版本管理(向后兼容)、组合编排、权限隔离、热插拔" | 可扩展性 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】Agent系统如何设计…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["标准化封装能力并集中管理，实现模块化组合与动态扩<br/>0:40"]:::core
+        N2["核心思路图解<br/>1:20"]:::core
+        N3["Skill四要素图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["可扩展性图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

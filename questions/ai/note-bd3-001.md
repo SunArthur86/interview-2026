@@ -132,7 +132,6 @@ def causal_self_attention(Q, K, V):
 
 **面试加分点**：提到GPT-4技术报告确认使用Decoder-only；提到LLaMA、Qwen、DeepSeek等主流开源模型全部采用Decoder-only；提到Prefix-LM（如GLM）作为Decoder-only的变体，在理解+生成混合任务上的折中方案。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -239,11 +238,9 @@ Encoder-Decoder 的"参数效率"优势在小规模显著，大规模被 Decoder
 
 **收尾：** 您想深入聊：Encoder-only架构（如BERT）在哪些场景仍然有优势？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -253,3 +250,37 @@ Encoder-Decoder 的"参数效率"优势在小规模显著，大规模被 Decoder
 | 1:30 | 生成能力示意图 | "生成能力——自回归解码天然适配文本生成任务" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：Encoder-only架构（如BERT）在哪些场景仍然有优？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["为什么当前主流生成式大模型几乎都采…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["训练效率示意图<br/>0:50"]:::deep
+        N3["生成能力示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -158,6 +158,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是信号量？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["四个必要条件：互斥、请求保持、不剥夺、循环等待（口诀…"]:::core
+        C["排查工具：使用 jstack 命令或 JConsol…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：Semaphore（信号量-控制同时访问的线程个数）是什么？
 
 > 合并自 `conc-056`（相似度 70%）
@@ -224,3 +256,35 @@ try {
 | 0:40 | 核心示意图 | 核心是许可计数器acquire减，release加。 | 核心 |
 | 1:10 | 用于限流和资源池示意图 | 用于限流和资源池，允许多线程并发。 | 用于限流和资源池 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是信号量？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["四个必要条件：互斥、请求保持、不剥夺、循环等待（口诀…"]:::core
+        C["排查工具：使用 jstack 命令或 JConsol…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -122,7 +122,6 @@ def position_aware_chunking(regions: List[DocumentRegion], max_tokens: int = 512
 
     return chunks
 
-
 def _build_chunk(text_parts, images, captions, page, seq_start, idx):
     text = "\n".join(text_parts)
     # 在文本中注入图片占位符，保持阅读顺序关联
@@ -138,7 +137,6 @@ def _build_chunk(text_parts, images, captions, page, seq_start, idx):
         position_context=f"page_{page}",
         seq_order=seq_start,
     )
-
 
 def _estimate_tokens(text_parts: List[str]) -> int:
     return sum(len(t) // 2 for t in text_parts)  # 粗略估算
@@ -178,7 +176,6 @@ async def enrich_image_with_context(image_path: str, vlm_client, ocr_engine):
 [/图片内容描述]
 """
     return injected_block.strip()
-
 
 async def build_multimodal_chunk(page_text: str, images: List[dict], vlm_client, ocr_engine):
     """将OCR+Caption注入到正文，形成多模态文本块"""
@@ -362,7 +359,6 @@ class MultimodalIndexer:
 
 > "我的方案是四层关联保持策略。**第一层做位置感知切片**，用版面分析识别出图文区域后，把图注和图片绑定为一个原子单元，切chunk时不跨图文边界。**第二层做OCR+Caption注入**，对每张图用OCR提取文字、用VLM生成语义描述，以结构化标记注入到正文对应位置，这样图片信息变成文本流的一部分。**第三层做位置编码**，在每个chunk的文本前加上页码、坐标、阅读序列号前缀，让Embedding感知位置上下文。**第四层做多模态Embedding**，用CLIP把图片和文本映射到同一向量空间，实现跨模态检索。核心原则是：图文关联的断裂发生在切片阶段，所以必须在切片时就把位置信息和图片内容注入到文本流中，而不是事后补救。"
 
-
 ## 核心流程图
 
 ```mermaid
@@ -460,7 +456,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 就像看连环画——每幅画旁边的文字和画本身是一个整体，拆开就丢失了'图配文'的语义关联。
 
 **展开框架：**
@@ -470,11 +465,9 @@ flowchart TD
 
 **收尾：** 如何处理跨页的图文关联？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -484,3 +477,37 @@ flowchart TD
 | 1:30 | 图片示意图 | "图片——图片OCR+caption注入正文" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：如何处理跨页的图文关联？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["你提到做过多模态文档解析，当图片里…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["图文同切片(示意图<br/>0:50"]:::deep
+        N3["图片示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -115,7 +115,6 @@ print(processor.decode(output[0], skip_special_tokens=True))
 3. **视觉特征如何注入LLM？** 
    通常将视觉Token序列拼接到文本Token序列之前（或替换掉文本中的占位符<image>），让LLM将其作为上下文进行处理。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -194,4 +193,36 @@ flowchart TD
 | 0:55 | 两阶段训练流程图 | 训练分两阶段：先冻结 ViT 和 LLM 只训投影层做特征对齐，再指令微调训投影加 LLM。 | 两阶段训练 |
 | 1:25 | 为何有效：CLIP 高质量特征 + LLM 强推理 | 之所以简单 MLP 就够用，是因为 CLIP 给的特征质量高，LLM 推理能力强，中间桥接很轻量。 | 为何有效 |
 | 1:50 | 实战优势：表格结构理解鲁棒 | 实战上，LLaVA 对表格结构这类多模态理解，比传统 CV 方案更鲁棒，而且代码量少。 | 实战优势 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《LLaVA 视觉接入》+ 文…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["架构三件套图：ViT + 投影层 + LLM<br/>0:25"]:::core
+        N2["两阶段训练流程图<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["为何有效：CLIP 高质量特征 + LLM 强推理<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["实战优势：表格结构理解鲁棒<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

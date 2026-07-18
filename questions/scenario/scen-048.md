@@ -218,3 +218,35 @@ flowchart TD
 | 0:25 | 生活类比动画 | "打个比方——蓝绿是直接换路跑，金丝雀是先换一辆车试试。" | 核心类比 |
 | 0:50 | 概念定义动画 | "一句话：蓝绿是整体切换，金丝雀是渐进引流，实现平滑发布。" | 核心定义 |
 | 1:20 | 蓝绿部署资源成本高但 图解 | "蓝绿部署资源成本高但切换回滚快。" | 蓝绿部署资源成本高但 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计蓝绿部署和金丝雀发布方案？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["蓝绿部署：维护双倍资源的完整环境，通过路由秒级切换实…"]:::core
+        C["金丝雀发布：按流量比例（如10%到100%）渐进式引…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -219,13 +219,11 @@ flowchart TD
     Ext --> O["支持超长上下文推理"]
 ```
 
-
 ## 记忆要点
 
 - 因注意力机制具排列不变性，模型无法区分词序，故需位置编码注入位置信息
 - 正弦编码无需训练且可外推；可学习编码需训练但长度固定且属绝对位置
 - 主流RoPE通过旋转矩阵作用于Q和K，因点积自带相对位置信息故天然支持外推
-
 
 ## 苏格拉底式面试追问
 
@@ -271,7 +269,6 @@ RoPE 的 base frequency 调大后，短距离的位置分辨率会下降。base 
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 注意力像失忆的读者——能认出每个字但不记得字的顺序。位置编码像给每个字贴上页码标签
 
 **展开框架：**
@@ -281,11 +278,9 @@ RoPE 的 base frequency 调大后，短距离的位置分辨率会下降。base 
 
 **收尾：** RoPE为什么能表示相对位置？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -293,3 +288,35 @@ RoPE 的 base frequency 调大后，短距离的位置分辨率会下降。base 
 | 0:20 | 核心概念图 | "自注意力不关心顺序，不加位置编码"我爱你"和"你爱我"一模一样" | 核心定义 |
 | 0:55 | 正弦位置编码示意图 | "正弦位置编码——正余弦函数生成固定向量" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["为什么需要位置编码？Transfo…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["正弦位置编码示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

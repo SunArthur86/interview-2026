@@ -136,8 +136,6 @@ class RateLimiter:
 3. **路由策略的冷启动**：如果缺乏历史数据，如何准确判断任务复杂度从而进行路由？
 4. **限流算法选择**：令牌桶 vs 漏桶，在应对突发流量（如Agent瞬间发起大量子任务）时有什么区别？
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -169,7 +167,6 @@ flowchart TD
 - 限流器：令牌桶算法防429，主控请求优先级高于子Agent，关键路径优先
 - 权衡：多Agent中子任务用小模型，核心规划用大模型，平衡效率与准确性
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过混合路由、缓存、量化和并发控制，最大化算力性价比。——打个比方，像物流调度，易碎品走专车（大模型），日用品走拼车（小模型），并用缓存避免重复打包。
@@ -192,3 +189,36 @@ flowchart TD
 | 1:12 | 降本四策图解 | "混合路由(大小模型分流)、KV Cache(缓存注意力)、量化(INT4/8)、Continuous Batching(" | 降本四策 |
 | 1:48 | 混合路由图解 | "简单任务走小模型省成本，复杂任务走大模型保质量，意图识别分流" | 混合路由 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】如何降低推理成本<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过混合路由、缓存、量化和并发控制，最大化算力性<br/>0:36"]:::core
+        N2["降本四策图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["混合路由图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

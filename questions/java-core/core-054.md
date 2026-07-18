@@ -184,6 +184,38 @@ sequenceDiagram
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["三次握手的过程，以及为什么是三次，而不是四次，两次？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["握手流程：C发SYN（x） -》 S回SYN+ACK…"]:::core
+        C["防历史连接：两次握手会让滞留的旧SYN致使服务端建立…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：为什么需要三次握手？
 
 > 合并自 `core-056`（相似度 78%）
@@ -256,6 +288,38 @@ sequenceDiagram
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["三次握手的过程，以及为什么是三次，而不是四次，两次？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["握手流程：C发SYN（x） -》 S回SYN+ACK…"]:::core
+        C["防历史连接：两次握手会让滞留的旧SYN致使服务端建立…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是三次握手？
 
 > 合并自 `core-085`（相似度 76%）
@@ -313,3 +377,35 @@ sequenceDiagram
 | 0:40 | 概念动画/示意图 | "确认双方收发能力的三次交互——就像打电话，A喊“喂”，B回“听到，请讲”，A说“好的”，正式对话开始" | 核心定义 |
 | 1:20 | 一问(SYN)示意 | "客户端发连接请求，进入SYN_SENT状态" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["三次握手的过程，以及为什么是三次，而不是四次，两次？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["握手流程：C发SYN（x） -》 S回SYN+ACK…"]:::core
+        C["防历史连接：两次握手会让滞留的旧SYN致使服务端建立…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

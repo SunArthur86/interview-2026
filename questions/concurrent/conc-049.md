@@ -144,3 +144,35 @@ flowchart TD
 | 0:40 | wait释放锁并等待示意图 | wait释放锁并等待，需notify唤醒；sleep休眠不释放锁。 | wait释放锁并等待 |
 | 1:10 | interrupt示意图 | interrupt仅设置标志位，结合异常机制优雅终止线程。 | interrupt |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Java线程有哪些基本方法？各自的作用？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["锁释放对比：wait（）必在同步块且释放锁，而sle…"]:::core
+        C["中断机制：interrupt（）仅设标志位，遇阻塞（…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

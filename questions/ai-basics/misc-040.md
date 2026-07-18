@@ -112,7 +112,6 @@ image = pipe(
 image.save("cyberpunk.png")
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -197,4 +196,36 @@ flowchart TD
 | 0:55 | 反向过程 + U-Net 预测噪声 | 反向过程训练 U-Net 预测每一步的噪声，从纯噪声逐步去噪恢复图像。 | 反向过程 |
 | 1:25 | U-Net 结构图：跳跃连接 + Cross-Attention + AdaLN | U-Net 靠跳跃连接补高频细节，Cross-Attention 注入文本条件，AdaLN 注入时间步告知噪声水平。 | U-Net 核心 |
 | 1:50 | Stable Diffusion 改进：潜空间扩散 | Stable Diffusion 的关键改进是在 VAE 压缩的潜空间做扩散，大幅降低计算量，消费级显卡也能跑。 | SD 改进 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《扩散模型》+ 清水搅浑再倒流…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["前向过程动画：图像逐步加噪到纯噪声<br/>0:25"]:::core
+        N3["U-Net 结构图：跳跃连接 + Cross-Atte…<br/>1:25"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["反向过程 + U-Net 预测噪声<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["Stable Diffusion 改进：潜空间扩散<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

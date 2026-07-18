@@ -148,3 +148,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——电路保险丝与水坝的综合体，既防电流过载(熔断)，又控水流洪峰(限流)。" | 核心类比 |
 | 2:03 | Sentinel 图解 | "Sentinel活跃维护，支持热点限流和系统自适应保护；Hystrix已停更。" | Sentinel |
 | 2:50 | 状态流转 图解 | "关闭(Closed)→熔断(Open)→半开探测(Half-Open)。" | 状态流转 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Sentinel 和 Hystrix 的区别？熔断降级的核心…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["隔离对比：Hystrix靠线程池隔离开销大，Sent…"]:::core
+        C["三态流转：Closed正常统计 -》 Open直接拒…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

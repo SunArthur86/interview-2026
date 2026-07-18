@@ -184,3 +184,35 @@ flowchart TB
 | 0:40 | 全局锁锁整库示意图 | 全局锁锁整库，常用于全库备份 | 全局锁锁整库 |
 | 1:10 | 表锁锁整张表示意图 | 表锁锁整张表，开销小并发低 | 表锁锁整张表 |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是锁的划分？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["两大划分维度：数据库角度（全局/表/行）对比程序员角…"]:::core
+        C["行锁退化为口诀：唯一等值退Record，普通等值退G…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

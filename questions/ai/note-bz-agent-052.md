@@ -234,7 +234,6 @@ def evaluate_embedding(test_cases, embedder, vector_db):
 2. **父子分块**：检索小块精准，返回大块上下文全——这是 RAG 进阶技巧
 3. **Embedding 可微调**：通用模型在专业领域效果差，微调是终极优化手段
 
-
 ## 核心流程图
 
 ```mermaid
@@ -282,7 +281,6 @@ flowchart TD
 - 模型选型：中文首选BGE/Qwen，英文OpenAI，专业领域必须用对比学习微调。
 - 分块策略：固定大小易切断语义，最推荐递归分块保边界，语义分块最精准。
 - 进阶索引：多建多粒度索引，父子分块用小块精准命中，用大块返回完整上下文。
-
 
 ## 苏格拉底式面试追问
 
@@ -332,7 +330,6 @@ AB 对比全链路指标。1）embedding 质量——用评估集（query-文档
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像给每本书编条码——编得好（同类书条码相近），找书时扫一下就能找到相似的。
 
 **展开框架：**
@@ -342,11 +339,9 @@ AB 对比全链路指标。1）embedding 质量——用评估集（query-文档
 
 **收尾：** Embedding维度越高越好吗？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -355,3 +350,36 @@ AB 对比全链路指标。1）embedding 质量——用评估集（query-文档
 | 0:50 | 选模型示意图 | "选模型——中文BGE/英文OpenAI/领域微调" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：Embedding维度越高越好吗？——不一定，768/102？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Embedding 策略怎么定？如…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["选模型示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

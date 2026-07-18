@@ -125,7 +125,6 @@ def best_of_n_sampling(model, tokenizer, prompt, n_samples=5):
     return valid_candidates[0] if valid_candidates else candidates[0]
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -195,4 +194,36 @@ flowchart TD
 | 0:55 | 三大手段：Long CoT / Best-of-N / 思维树 | 三大手段：更长的思维链让模型多步推理，Best-of-N 采样取最优，思维树做搜索验证。 | 核心手段 |
 | 1:25 | OpenAI o1 + DeepSeek-R1 代表案例 | 代表是 OpenAI o1 和 DeepSeek-R1，用 RL 训练模型学会在推理时思考更久。 | 代表案例 |
 | 1:50 | 复杂推理任务提升柱状图 | 在数学、代码这些复杂推理任务上，Test-Time Compute 带来了显著提升，是新的 scaling 维度。 | 效果与潜力 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Test-Time Comp…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["范式转变曲线：参数 Scaling → 推理 Scal…<br/>0:25"]:::core
+        N2["三大手段：Long CoT / Best-of-N /…<br/>0:55"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["OpenAI o1 + DeepSeek-R1 代表案例<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["复杂推理任务提升柱状图<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

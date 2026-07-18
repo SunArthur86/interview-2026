@@ -163,3 +163,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "高效分配存储空间并保证数据一致性的机制——像图书馆管理员管理书架，记录空位、修补损坏的目录并防止一人占满书架" | 核心定义 |
 | 1:20 | 空间管理示意 | "块大提升大文件性能但增内部碎片，空闲块多用位图法管理" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是文件系统的管理和优化？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["空间管理：块大提升大文件性能但增内部碎片，空闲块多用…"]:::core
+        C["一致性：日志文件系统（如Ext4）先写日志再改数据，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

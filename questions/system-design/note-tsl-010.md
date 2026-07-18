@@ -444,3 +444,35 @@ flowchart TD
 | 1:06 | 架构示意图分步演示 | "AI智能引擎：NLP做意图/情感分析，聚类合并相同Bug，P0紧急度评估定级" | AI智能引擎 |
 | 1:57 | 关键代码/伪代码片段 | "动态路由分发：基于SLA和紧急度，P0走快速通道，工单按队列分配团队处理" | 动态路由分发 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：AI分类错误率10%，怎么减少误分。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["亿级车主提交APP、车载系统反馈，如何设计后端架构，实现反馈…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["处理流水线：快接入 → AI分类去重 → 工单状态机…"]:::core
+        C["AI智能引擎：NLP做意图/情感分析，聚类合并相同B…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

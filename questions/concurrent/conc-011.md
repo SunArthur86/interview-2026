@@ -172,3 +172,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 想让同事停下来，是发个消息通知他（interrupt），而不是直接拔掉他电脑的电源（stop）。 | 核心概念 |
 | 0:40 | 正常结束示意图 | 正常结束：run方法执行完毕。 | 正常结束 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Java终止线程有哪几种方式？为什么stop（）被废弃？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["终止线程推荐 interrupt 和 volatil…"]:::core
+        C["因为 stop（） 会瞬间释放所有锁并破坏原子性，导…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

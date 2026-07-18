@@ -178,7 +178,6 @@ def constrained_generate(prompt: str, grammar: str, max_tokens: int = 256):
     )
     return response["choices"][0]["text"]
 
-
 # === Outlines (Python库) 约束解码示例 ===
 import outlines
 
@@ -464,7 +463,6 @@ class AntiHallucinationPipeline:
 4. 了解logprob阈值设置的经验值和trade-off（精度vs召回）
 5. 知道约束解码对格式幻觉有效但对内容幻觉效果有限，需要配合RAG
 
-
 ## 记忆要点
 
 - 本质：Prompt是软引导，防幻觉需多层工程上的纵深防御。
@@ -529,11 +527,9 @@ class AntiHallucinationPipeline:
 
 **收尾：** 您想深入聊：NLI校验的具体实现？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -543,3 +539,37 @@ class AntiHallucinationPipeline:
 | 1:30 | 约束解码示意图 | "约束解码——限制token候选(上下文约束)" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：NLI校验的具体实现？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["除了在 Prompt 中加约束，还…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["RAG示意图<br/>0:50"]:::deep
+        N3["约束解码示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

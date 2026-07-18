@@ -226,7 +226,6 @@ context = short_term + long_term_profile + relevant
 - **Memory 的时效性**：不同记忆有不同 TTL（会话=30min，偏好=永久，价格=1个月）
 - **跨用户 Memory**：知识库类记忆可跨用户共享（如"退款政策"），个人记忆严格隔离
 
-
 ## 核心流程图
 
 ```mermaid
@@ -268,7 +267,6 @@ flowchart TD
 - 组装逻辑：按相关性召回长期和向量记忆，结合短期上下文，受Token预算严格控制
 - 防污染手段1：原始错误信息须先摘要成规则再写回，严禁直接塞入主Context
 - 防污染手段2：反思与中间推理过程存独立scratchpad，只把最终结论合并进主Context
-
 
 ## 苏格拉底式面试追问
 
@@ -323,11 +321,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：怎么衡量 Memory 的有效性？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -337,3 +333,37 @@ flowchart TD
 | 1:30 | 避免污染示意图 | "避免污染——摘要后写回/独立scratchpad/相关性召回/遗忘机制" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：怎么衡量 Memory 的有效性？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计 Agent 的 Memory…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["三层示意图<br/>0:50"]:::deep
+        N3["避免污染示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

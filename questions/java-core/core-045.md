@@ -205,3 +205,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "数据从用户应用经内核协议栈到网卡驱动的传输过程——发快递：用户填单（socket），经分拣中心（协议栈），装车（网卡），收货反向操作" | 核心定义 |
 | 1:20 | 核心载体示意 | "收发数据在内核中均被封装为sk_buff结构进行传递" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Linux是如何收发网络包的？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心载体：收发数据在内核中均被封装为sk_buff结…"]:::core
+        C["接收机制：网卡DMA到RingBuffer触发硬中断…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

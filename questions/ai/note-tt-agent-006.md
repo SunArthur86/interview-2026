@@ -142,7 +142,6 @@ def measure_stiffness(response: str, rag_context: str) -> float:
 3. **A/B测试**：对比"纯RAG模式"vs"RAG+个性化Prompt"的回复满意度差异
 4. **安全兜底**：当用户当前会话信息明显异常（如预算=0）时，不盲目遵循而是确认
 
-
 ## 核心流程图
 
 ```mermaid
@@ -187,7 +186,6 @@ flowchart TD
 - 口诀法：检测冲突不是全盘否定，而是触发异步画像更新（滑动窗口多次命中才改）
 - 因果句：因为RAG提供知识库素材而非话术，所以要用提示词强制模型重组语言
 - 因果句：为了防止回复僵硬照抄，可以通过N-gram重叠率等指标量化评估僵硬度
-
 
 ## 苏格拉底式面试追问
 
@@ -242,11 +240,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：画像更新频率怎么定？实时更新还是T+1批量更新？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -255,3 +251,36 @@ flowchart TD
 | 0:50 | 当前会话信示意图 | "当前会话信——当前会话信息优先于长期画像（时间就近原则）" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：画像更新频率怎么定？实时更新还是T+1批量更新？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["用户长期画像和当前会话信息冲突时，…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["当前会话信示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

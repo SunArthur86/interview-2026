@@ -110,7 +110,6 @@ def run_with_timeout_and_loop_check(step_func: Callable, max_steps: int = 20) ->
 2. 如何构建高质量的 Golden Set？除了人工标注，有没有自动化生成并清洗测试数据的方法？
 3. 在资源受限的情况下（如只有 GPT-3.5 可用做裁判），如何保证评估的客观性？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -167,7 +166,6 @@ flowchart TD
 - 配合 LLM-as-a-judge 和 Golden Set，防偏见。
 - Tracing 可视化全链路，定位 Token 消耗与中间状态。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 多 Agent 评估必须分层进行，单看最终结果难定位问题。三层：单元测单 Agent 输入输出（Function Call 正确率）、集成测两两交互（消息解析成功率）、E2E 测任务成功率（整体 Goal 完成率）。辅助手段是 LLM-as-Judge（GPT-4 当裁判）但要防偏见配黄金集与人审。必须用 Tracing（LangSmith、Arize）可视化全链路定位 Token 消耗和中间状态。
@@ -191,3 +189,37 @@ flowchart TD
 | 1:10 | Tracing 可视化 | "LangSmith、Arize 可视化全链路，定位 Token 消耗。" | 工具支持 |
 | 1:35 | 意图误判案例 | "实战：准确率 95% 但意图误判导致多轮，Trace 定位优化。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：分层评估 + LLM 裁判 + Tracing。下期讲人机在环。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent 评估怎么做<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三层评估图<br/>0:15"]:::core
+        N2["LLM-as-Judge 警示<br/>0:45"]:::deep
+        N3["Tracing 可视化<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["意图误判案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

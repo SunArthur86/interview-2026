@@ -219,7 +219,6 @@ flowchart TD
     end
 ```
 
-
 ## 记忆要点
 
 - 核心能力：SPIN提问挖掘需求，销售漏斗阶段识别，异议处理促单。
@@ -227,7 +226,6 @@ flowchart TD
 - 策略路由：根据意图和对话历史判断阶段（开场/挖掘/谈判/促单）。
 - 实战优化：Prompt增加“预算探询强制节点”，过滤无效线索提升转化。
 - 推荐引擎：需求匹配产品矩阵，基于画像做个性化组合推荐。
-
 
 ## 结构化回答
 
@@ -250,3 +248,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：基于销售漏斗和客户画像，利用策略引擎引导对话并自动转化销售线索。" | 核心定义 |
 | 1:00 | 核心能力图解 | "SPIN提问挖掘需求，销售漏斗阶段识别，异议处理促单。" | 核心能力 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI销售助手<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["基于销售漏斗和客户画像，利用策略引擎引导对话并自<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["核心能力图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

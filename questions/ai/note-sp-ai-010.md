@@ -174,7 +174,6 @@ class DecoderLayer(nn.Module):
 3. **为什么Decoder-only成为主流**：统一架构、scaling简单、零样本能力强
 4. **训练vs推理**：训练时teacher forcing可并行，推理时逐词自回归
 
-
 ## 核心流程图
 
 ```mermaid
@@ -219,7 +218,6 @@ flowchart TD
 - Encoder结构：核心是全局Self-Attention（Q=K=V），不设掩码。
 - Decoder特有Mask：因为有Masked Self-Attn遮挡未来词，所以只能按序自回归生成。
 - Decoder特征融合：通过Cross-Attention（Q来自Decoder，K与V来自Encoder）获取源句信息。
-
 
 ## 苏格拉底式面试追问
 
@@ -274,11 +272,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：为什么Encoder可以并行而Decoder不能？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -286,3 +282,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "Transformer是纯注意力机制的编码器-解码器架构，抛弃了RNN" | 核心定义 |
 | 0:55 | Encoder示意图 | "Encoder——Encoder读完整输入，每个词融合全句上下文" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Transformer的整体结构是…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Encoder示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

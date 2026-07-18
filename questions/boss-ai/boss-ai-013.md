@@ -291,3 +291,31 @@ flowchart TD
 | 1:50 | 流程图 | 软更新+版本+衰减+重要性加权。 | 演进 |
 | 3:30 | 总结卡 | 一句话记忆：多存储：Redis/MySQL/向量库/对象存储。 下期可以接着聊：向量库怎么选。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>向量检索"]:::concept
+    N3["0:50<br/>召回引擎"]:::deep
+    N4["1:20<br/>写入管线"]:::concept
+    N5["1:50<br/>演进"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

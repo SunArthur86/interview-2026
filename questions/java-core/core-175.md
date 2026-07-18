@@ -174,3 +174,35 @@ flowchart TD
 | 1:30 | 核心结论示意 | "6.0前纯单线程；6.0后网络IO多线程，命令执行仍单线程。" | 要点1 |
 | 2:15 | 单线程原因示意 | "避免上下文切换与锁竞争，瓶颈在内存与网络而非CPU。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Redis数据类型的应用场景是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心结论：6.0前纯单线程；6.0后网络IO多线程，…"]:::core
+        C["单线程原因：避免上下文切换与锁竞争，瓶颈在内存与网络…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

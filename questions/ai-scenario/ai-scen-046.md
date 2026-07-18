@@ -159,14 +159,12 @@ flowchart TD
     end
 ```
 
-
 ## 记忆要点
 
 - 核心约束：法律准确性、合规性、可审计性；LLM是助手而非律师，决策需人确认。
 - 架构四层：知识库(法规/模板)、生成层(模板填充+严格约束)、审查层(风险检测)、审计层(追溯)。
 - 生成vs审查：生成重逻辑自洽与模板填充；审查重OCR纠错与风险评级。
 - 安全合规：数据加密存储、权限控制、电子签名集成，严格遵循地域法律差异。
-
 
 ## 结构化回答
 
@@ -190,3 +188,36 @@ flowchart TD
 | 1:12 | 核心约束图解 | "法律准确性、合规性、可审计性；LLM是助手而非律师，决策需人确认。" | 核心约束 |
 | 1:48 | 架构四层图解 | "知识库(法规/模板)、生成层(模板填充+严格约束)、审查层(风险检测)、审计层(追溯)。" | 架构四层 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个AI法律合同生成与审查系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["基于模板库和条款库的生成，LLM辅助但受限，全程<br/>0:36"]:::core
+        N2["核心约束图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["架构四层图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

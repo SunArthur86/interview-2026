@@ -467,4 +467,28 @@ flowchart TD
 | 0:30 | SQL EXPLAIN 截图 | 每次修改生成 undo log，通过 roll_pointer 链接成历史版本链。 | 版本链 |
 | 1:30 | 总结卡 | 一句话记忆：MVCC = 多版本（undo log 版本链）+ ReadView（可见性判断）。 下期可以接着聊：MVCC 解决了幻读吗。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>锁状态转换"]:::concept
+    N3["0:30<br/>版本链"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

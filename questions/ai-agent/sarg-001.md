@@ -99,7 +99,6 @@ answer = llm.predict(prompt)
 3.  **如果检索到的文档是错误的，RAG 会如何表现？**
     模型会产生“误导性幻觉”，即基于错误的事实生成逻辑自洽但内容错误的答案。因此检索质量和 Rerank 至关重要。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -181,4 +180,36 @@ flowchart TD
 | 0:40 | 四大核心痛点图 | "解决四个问题：知识过时、私有数据、幻觉、不可溯源。" | 核心价值 |
 | 1:05 | 金融研报时间过滤案例 | "实战：研报 RAG 混淆年份，Prompt 强制按时间标签答 + Metadata 过滤，提 40%。" | 实战案例 |
 | 1:25 | 总结卡 | "一句话：检索加生成，外挂知识降幻觉。下期讲怎么切文档。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["什么是 RAG<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["RAG 离线+在线流程图<br/>0:15"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["四大核心痛点图<br/>0:40"]:::practice
+        N3["金融研报时间过滤案例<br/>1:05"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>1:25"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

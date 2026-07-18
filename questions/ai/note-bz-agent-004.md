@@ -221,7 +221,6 @@ metrics = {
 2. **分层选模型**：体现成本意识——简单任务用小模型，复杂任务才上大模型
 3. **稳定性是最大挑战**：Agent 是概率系统，要靠工程（重试/降级/兜底/监控）保证可用性
 
-
 ## 核心流程图
 
 ```mermaid
@@ -257,7 +256,6 @@ flowchart TD
 - 搭建四步曲：选大脑（分层模型省钱）、定工具（初期<10个且定义清晰）、写Prompt、做记忆
 - 分层模型策略：简单路由用小模型，主推理用强模型，以平衡成本与效果
 - 工具治理：工具过多时用RAG按需检索工具描述，而非全塞给LLM
-
 
 ## 苏格拉底式面试追问
 
@@ -316,11 +314,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：没有GPU怎么搭Agent？——直接调API（OpenAI/Claude/国产），无需自部署？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -329,3 +325,36 @@ flowchart TD
 | 0:50 | 七步示意图 | "七步——选LLM→定工具→写Prompt→做记忆→加循环→上安全→测迭代" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：没有GPU怎么搭Agent？——直接调API（OpenAI/？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["如何从 0 搭建一个 AI Age…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["七步示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

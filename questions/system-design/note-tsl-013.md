@@ -460,3 +460,35 @@ flowchart TD
 | 1:06 | 架构示意图分步演示 | "统一状态机：拆解多式联运复杂节点(生产到海运到清关到交付)，驱动状态流转" | 统一状态机 |
 | 1:57 | 关键代码/伪代码片段 | "全链监控：ETA引擎预测到货，WebSocket推前端，规则引擎抓延误触发客服告警" | 全链监控 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：承运商API不稳定/延迟大怎么办。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["全球数万笔车辆订单物流实时跟踪，如何设计后端架构，支持物流节…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["多源适配：适配器屏蔽数十家承运商差异，统一清洗去重排…"]:::core
+        C["统一状态机：拆解多式联运复杂节点（生产→海运→清关→…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

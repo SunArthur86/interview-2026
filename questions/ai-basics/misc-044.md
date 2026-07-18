@@ -115,7 +115,6 @@ def generate_cai_response(prompt, model, constitution):
                           └───────────────────┘
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -192,4 +191,36 @@ flowchart TD
 | 0:55 | 两阶段流程图：SL-CAI + RL-CAI | 分两阶段：SL-CAI 自我批评修正生成监督数据，RL-CAI 由 AI 当判别器生成偏好数据做强化学习。 | 两阶段流程 |
 | 1:25 | 对比表：CAI vs RLHF | 相比 RLHF 人工标注成本高、不一致，CAI 用 AI 评估，低成本、高一致、价值观显式可审计。 | 对比 RLHF |
 | 1:50 | Claude 标签 + 可扩展性优势 | 核心优势是价值观显式、可扩展性强，Claude 系列就是采用这套对齐方法。 | 核心优势 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Constitutional…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["宪法原则清单示意<br/>0:25"]:::core
+        N2["两阶段流程图：SL-CAI + RL-CAI<br/>0:55"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比表：CAI vs RLHF<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["Claude 标签 + 可扩展性优势<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

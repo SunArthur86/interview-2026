@@ -277,3 +277,35 @@ flowchart TD
 | 0:15 | 链表节点指针图 | "迭代法：prev/curr/next三指针，O(n)时间O(1)空间" | 迭代法 |
 | 1:02 | 链表节点指针图分步演示 | "递归法：递归到末尾再逐层翻转指针，O(n)空间" | 递归法 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：递归反转的空间复杂度为什么是O(n)。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["反转单链表（O（n）时间 O（1）空间）（华为od Java…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["暂存 next = curr.next"]:::core
+        C["反转指针 curr.next = prev"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

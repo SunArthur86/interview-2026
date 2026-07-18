@@ -170,3 +170,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像银行转账：记账要双人复核(幂等)，每天晚上必须核对账目(对账)，一分钱不能差。" | 核心类比 |
 | 2:03 | 流程 图解 | "创建→支付→回调→状态更新。" | 流程 |
 | 2:50 | 幂等设计 图解 | "唯一ID防重复扣款。" | 幂等设计 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个支付系统？支持千万级日订单，金额零误差"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心设计：网关层统一适配渠道并路由，核心账务采用复式…"]:::core
+        C["防重保障：接口用Redis Token防抖，数据层对…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

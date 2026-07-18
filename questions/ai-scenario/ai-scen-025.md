@@ -148,7 +148,6 @@ def decide_route(prompt: str, context: dict):
 | **MediaPipe** | Google官方，集成度高 | Android/iOS/Web | GPU/NPU | TFLite (有限) |
 | **Core ML** | Apple生态原生性能 | iOS/macOS | ANE (NPU) | Core ML模型 |
 
-
 ## 核心流程图
 
 ```mermaid
@@ -206,7 +205,6 @@ flowchart TD
 - 性能优化：滑动窗口分段摘要、Speculative Decoding加速、内存映射按需加载。
 - 关键指标：iPhone 15 Pro跑1.5B INT4，内存约1GB，速度15-20 tokens/s。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 通过量化压缩和框架优化，在资源受限的设备上运行模型。——打个比方，把大胖子（模型）压缩成精瘦特种兵，塞进手机里干活。
@@ -229,3 +227,36 @@ flowchart TD
 | 1:12 | 核心约束图解 | "内存受限（4-8GB），需INT4量化（1.5B模型约800MB）+KV Cache清理防OOM。" | 核心约束 |
 | 1:48 | 推理框架图解 | "iOS首选Core ML（ANE加速），Android选MediaPipe/MLC-LLM，跨平台选llama.cpp。" | 推理框架 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计端侧LLM部署方案<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["通过量化压缩和框架优化，在资源受限的设备上运行模<br/>0:36"]:::core
+        N2["核心约束图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["推理框架图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

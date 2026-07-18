@@ -144,7 +144,6 @@ flowchart TD
     L --> M[实战: 可开启 CPU Offload 或 通信 overlap]
 ```
 
-
 ## 记忆要点
 
 - ZeRO三级切分：Stage1切状态，Stage2切梯度，Stage3切参数
@@ -174,4 +173,36 @@ flowchart TD
 | 0:55 | 显存节省柱状图：4x/8x/Nx | 显存上，Stage 1 省约 4 倍，Stage 2 省 8 倍，Stage 3 能省到 N 倍，N 是卡数。 | 显存节省 |
 | 1:25 | All-Gather 通信示意图 | 但天下没免费午餐，Stage 3 要频繁做 All-Gather 重建参数，通信量大概是 Stage 2 的 1.5 倍。 | 通信代价 |
 | 1:50 | 选型决策树：<7B / 7-70B / >70B | 选型按规模来：小于 7B 用 Stage 1，7 到 70B 用 Stage 2，大于 70B 才上 Stage 3。 | 选择策略 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《ZeRO 显存优化》+ 多人…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["三级递进图：Stage1/2/3 切分对象<br/>0:25"]:::core
+        N2["显存节省柱状图：4x/8x/Nx<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["All-Gather 通信示意图<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["选型决策树：<7B / 7-70B / >70B<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

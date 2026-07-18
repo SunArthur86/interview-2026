@@ -140,14 +140,12 @@ flowchart TD
     Choice -->|硬件原生| FP8[FP8<br/>H100支持]
 ```
 
-
 ## 记忆要点
 
 - GPTQ：基于二阶信息的 PTQ，INT4 精度好，通用性强，但推理有解码开销。
 - AWQ：激活感知量化，保留 1% 关键通道为 FP16，推理速度优于 GPTQ。
 - SmoothQuant：将激活难度迁移至权重，解决异常值问题，适合 INT8。
 - FP8：H100 原生支持，无需软件模拟，量化误差最小，依赖硬件。
-
 
 ## 结构化回答
 
@@ -172,3 +170,37 @@ flowchart TD
 | 2:00 | AWQ图解 | "激活感知量化，保留 1% 关键通道为 FP16，推理速度优于 GPTQ。" | AWQ |
 | 2:40 | SmoothQuant图解 | "将激活难度迁移至权重，解决异常值问题，适合 INT8。" | SmoothQuant |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["模型量化方法对比：GPTQ vs …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["将模型参数从高精度压缩到低精度，减少显存和计算开<br/>0:40"]:::core
+        N2["GPTQ图解<br/>1:20"]:::deep
+        N3["AWQ图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["SmoothQuant图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

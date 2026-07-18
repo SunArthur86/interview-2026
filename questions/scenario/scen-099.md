@@ -161,3 +161,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像工匠干活，锯木头用电锯，拧螺丝用起子，没有万能工具，只有最合适的工具。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：根据数据结构、一致性要求及查询模式，匹配最擅长的存储引擎。" | 核心定义 |
 | 1:50 | MySQL强事务适合 图解 | "MySQL强事务适合核心业务。" | MySQL强事务适合 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个海量数据的存储选型方案？MySQL/MongoD…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["选型决策：强事务选MySQL，模糊搜索选ES，百亿级…"]:::core
+        C["DB严禁存大文件/图片，只需存URL，避免Buffe…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

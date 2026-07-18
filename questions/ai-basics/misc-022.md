@@ -89,7 +89,6 @@ def get_tree_mask(batch_size, seq_len, k):
 2. **Tree Attention 的具体实现**：如何在 CUDA Kernel 层面高效实现 Tree Mask 以避免显存碎片？
 3. **非自回归模型的区别**：Speculative Decoding 本质上还是自回归的，只是利用了并行验证，这与完全非自回归（如 Non-Autoregressive Transformer）有何本质不同？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -164,4 +163,35 @@ flowchart TD
 | 0:20 | 双模型图：Draft Model 快速猜 token | 小模型快速猜几个 token 作为草稿，成本很低，速度很快。 | Draft 草稿 |
 | 0:45 | Target Model 并行验证 + Tree Masking | 大模型一次性并行验证这批 token，用 Tree Masking 一次前向搞定，命中就接受，不命中从断点重算。 | 并行验证 |
 | 1:10 | 加速比曲线：理论 5-6x / 实际 2-3x | 理论能加速 5 到 6 倍，实际 2 到 3 倍，瓶颈是猜测接受率。实战里开 Temperature 会降低命中率，验证阶段建议用 Greedy。 | 加速比与实战 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《投机采样》+ 实习生写稿/主…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["双模型图：Draft Model 快速猜 token<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["Target Model 并行验证 + Tree Ma…<br/>0:45"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["加速比曲线：理论 5-6x / 实际 2-3x<br/>1:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

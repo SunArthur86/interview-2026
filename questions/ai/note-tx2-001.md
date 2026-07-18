@@ -171,7 +171,6 @@ Planning 拆解：
 - **Multi-Agent**：多个 Agent 分工协作（Planner/Executor/Critic），处理更复杂任务
 - **Computer Use**：Anthropic 的能力，Agent 直接操作电脑（点击/输入/截屏），Tool 扩展到 GUI
 
-
 ## 核心流程图
 
 ```mermaid
@@ -214,7 +213,6 @@ flowchart TD
 - 概念辨析：Tool是静态的能力清单，而Action是动态的具体执行行为
 - 核心区分：Agent是LLM动态决策（灵活），而Workflow是固定流程（确定）
 - 隐性加分项：Reflection（反思机制）是Agent自我纠错与进化的关键
-
 
 ## 苏格拉底式面试追问
 
@@ -269,11 +267,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：Planning 的四种范式（CoT/ReAct/ToT/Plan&Execute）怎么选？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -282,3 +278,36 @@ flowchart TD
 | 0:50 | Planning示意图 | "Planning——把复杂任务拆解成步骤（CoT/ReAct/ToT/Plan&Execute）" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：Planning 的四种范式（CoT/ReAct/ToT/P？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["什么是 Agent？核心组件（Pl…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Planning示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

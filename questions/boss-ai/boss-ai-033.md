@@ -338,3 +338,29 @@ flowchart TD
 | 1:05 | 流程图 | 关键词+分类模型+LLM-Judge+人工分级。 | 管线 |
 | 2:30 | 总结卡 | 一句话记忆：双向：UGC 入审 + AIGC 出审。 下期可以接着聊：图像审核怎么做。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>jstat / GC 日志截"]:::concept
+    N3["0:40<br/>多模态"]:::concept
+    N4["1:05<br/>管线"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["2:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

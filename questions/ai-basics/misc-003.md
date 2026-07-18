@@ -109,7 +109,6 @@ def topk_routing(hidden_state, gate, top_k):
 2. **训练稳定性**：Router 坍塌问题，即总是倾向于选择同一个专家。如何解决？（增加负载均衡 Loss，引入噪声）。
 3. **DeepSeek-MoE 细节**：共享专家是否参与路由选择？（通常不参与，直接作为输出的一部分，保证基础能力不失）。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -189,4 +188,37 @@ flowchart TD
 | 1:10 | Mixtral vs DeepSeek-MoE 对比 | "Mixtral 8 选 2 粗粒度，DeepSeek 细粒度小专家加共享专家。" | 两种方案 |
 | 1:35 | Router 坍塌警示 | "坑：Router 总选同一专家会坍塌，得加负载均衡 Loss 和噪声。" | 训练难点 |
 | 1:55 | 总结卡 | "口诀：多专家 Router 选 Top-K，共享专家隔离通用知识。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["MoE 架构<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["医院分科室类比<br/>0:15"]:::core
+        N2["MoE Router 选 Top-K 示意图<br/>0:40"]:::core
+        N3["Mixtral vs DeepSeek-MoE 对比<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["Router 坍塌警示<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：多专家 Router 选 Top-K，共享<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

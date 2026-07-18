@@ -144,3 +144,35 @@ flowchart TD
 | 0:40 | put/take示意图 | put/take 支持阻塞 | put/take |
 | 1:10 | offer/poll示意图 | offer/poll 支持超时 | offer/poll |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["说一说你对BlockingQueue的了解？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：满则阻塞写，空则阻塞读，专用于多线程安全…"]:::core
+        C["核心四方法对比：抛异常（add/remove）、返特…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

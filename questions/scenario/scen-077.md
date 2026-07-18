@@ -169,3 +169,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像输入法的联想功能，敲几个字就猜出你想输啥。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：基于前缀树或索引结构，毫秒级返回匹配的搜索建议词。" | 核心定义 |
 | 1:50 | 数据结构 图解 | "Trie树或Redis前缀索引。" | 数据结构 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计搜索自动补全（Suggest）系统？输入即时推荐"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心存储：Redis ZSet方案。因为需高频前缀查…"]:::core
+        C["性能优化：防内存爆炸需前缀截断（最多前6位）与容量控…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

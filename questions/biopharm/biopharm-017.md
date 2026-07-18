@@ -217,3 +217,29 @@ flowchart LR
 | 1:05 | 概念结构示意图 | 连接/读取/全链路超时，避免无限等待。 | 超时 |
 | 2:30 | 总结卡 | 一句话记忆：四件套+熔断：限流/降级/超时/重试。 下期可以接着聊：令牌桶和漏桶区别。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>限流算法"]:::concept
+    N3["0:40<br/>降级"]:::deep
+    N4["1:05<br/>超时"]:::concept
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["2:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

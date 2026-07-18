@@ -262,7 +262,6 @@ async def hybrid_workflow(feature_request):
 2. **强调"实际混合"**：生产中很少单用一种，常是"并行调研→串行执行→仲裁审核"
 3. **提成本意识**：仲裁模式最贵，不能滥用；简单任务串行即可
 
-
 ## 核心流程图
 
 ```mermaid
@@ -307,7 +306,6 @@ flowchart TD
 - 串行：前一个输出是后一个输入，顺序明确但无法并行易阻塞
 - 并行：主管分发独立子任务并发执行，速度快，最后聚合结果
 - 仲裁：多方独立提方案，由仲裁者综合择优或融合，提升可靠性
-
 
 ## 苏格拉底式面试追问
 
@@ -366,11 +364,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：三种模式能混用吗？——能，先并行调研再串行写作最后仲裁审核？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -379,3 +375,36 @@ flowchart TD
 | 0:50 | 串行示意图 | "串行——流水线，前输出后输入，适合有依赖" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：三种模式能混用吗？——能，先并行调研再串行写作最后仲裁审核？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多 Agent 协作有哪些模式？（…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["串行示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

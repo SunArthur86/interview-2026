@@ -218,7 +218,6 @@ flowchart TD
     H --> D
 ```
 
-
 ## 记忆要点
 
 - 本质澄清：FC并非理解语义，而是学会了将自然语言按schema映射为结构化JSON
@@ -226,7 +225,6 @@ flowchart TD
 - RLHF的作用：在SFT基础上，用偏好排序优化参数质量（如绝对日期优于相对词）
 - 双保险机制：模型侧靠SFT学格式，推理侧靠约束解码(Constrained Decoding)兜底
 - 底层实现：约束解码常将JSON结构转化为有限状态机(FSM)限制token生成空间
-
 
 ## 苏格拉底式面试追问
 
@@ -281,11 +279,9 @@ SFT 是"教会格式"，RLHF/DPO 是"优化决策"。两者解决不同问题：
 
 **收尾：** 您想深入聊：Structured Output（response_format json_schema）和 Function Calling 区别？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -295,3 +291,37 @@ SFT 是"教会格式"，RLHF/DPO 是"优化决策"。两者解决不同问题：
 | 1:30 | RLHF 辅助示意图 | "RLHF 辅助——偏好数据(正确调用>错误调用)优化选最优" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：Structured Output（response_for？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Function Calling …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["SFT 阶段示意图<br/>0:50"]:::deep
+        N3["RLHF 辅助示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

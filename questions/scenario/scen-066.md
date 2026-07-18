@@ -174,3 +174,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像给信件签名盖章防篡改，加日期戳防旧信重投，设门禁防陌生人骚扰。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：通过签名验签保证数据完整，通过时空维度防重放与爬虫。" | 核心定义 |
 | 1:50 | 接口签名 图解 | "HMAC摘要算法，密钥协商。" | 接口签名 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计接口安全方案？防篡改、防重放、防爬虫"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["签名机制：拼方法URL时间戳随机数Body，用HMA…"]:::core
+        C["防重放：因截获包可重发，故校验时间戳（5分钟）配合R…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

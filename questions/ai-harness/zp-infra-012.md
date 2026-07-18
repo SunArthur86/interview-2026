@@ -132,14 +132,12 @@ flowchart TD
     CUDA --> Base[SM/Warp/Memory Coalescing]
 ```
 
-
 ## 记忆要点
 
 - 推理优化：KV Cache计算显存，PagedAttention解决碎片，量化(W4A16/W8A8)提速
 - 训练优化：3D并行(数据/张量/流水线)，ZeRO-3切分参数，混合精度防溢出
 - CUDA基础：SM/Warp架构，Memory Coalescing合并访问，Shared Memory减少HBM读取
 - 面试重点：项目深挖原理(如vLLM Block机制)，系统设计(高并发推理)，算法推导(FlashAttention)
-
 
 ## 结构化回答
 
@@ -163,3 +161,36 @@ flowchart TD
 | 1:12 | 推理优化图解 | "KV Cache计算显存，PagedAttention解决碎片，量化(W4A16/W8A8)提速" | 推理优化 |
 | 1:48 | 训练优化图解 | "3D并行(数据/张量/流水线)，ZeRO-3切分参数，混合精度防溢出" | 训练优化 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱面经】大模型 Infra 岗…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["掌握从Transformer架构到分布式训练落地<br/>0:36"]:::core
+        N2["推理优化图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["训练优化图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

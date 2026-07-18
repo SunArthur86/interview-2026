@@ -181,3 +181,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 像独卫厕所，一个人进去把门锁上（加锁），其他人只能在门外等着（阻塞），他出来后（解锁），下一个人才能进。 | 核心概念 |
 | 0:40 | 核心目的示意图 | 核心目的：保护共享资源，防止竞态条件。 | 核心目的 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是互斥锁Mutex？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心机制：Mutex保护临界区，因加锁失败会线程阻塞…"]:::core
+        C["适用场景：因互斥锁有上下文切换开销，所以适合临界区长…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

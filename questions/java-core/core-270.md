@@ -145,3 +145,35 @@ flowchart TD
 | 1:30 | 三级结构示意 | "根CA(内置) -> 中间CA(中继签发) -> 服务器证书(底层)。" | 要点1 |
 | 2:15 | 验证流向示意 | "客户端从下往上，依次用上级公钥验证下级证书的签名。" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是证书信任链？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三级结构：根CA（内置） -》 中间CA（中继签发）…"]:::core
+        C["验证流向：客户端从下往上，依次用上级公钥验证下级证书…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

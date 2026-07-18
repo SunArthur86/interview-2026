@@ -122,13 +122,11 @@ flowchart TD
     Branch -->|并行| Parallel[并行投机<br/>高吞吐]
 ```
 
-
 ## 记忆要点
 
 - 基础投机：小模型Draft生成候选，大模型Target并行验证，猜对免费，保证分布一致。
 - Medusa：Target多头并行预测，无需额外模型。EAGLE：特征级投机，接受率高。
 - 并行vs树状：树状单次验证延迟低，并行节点分离吞吐高。低延迟选树状，高吞吐选并行。
-
 
 ## 结构化回答
 
@@ -153,3 +151,37 @@ flowchart TD
 | 2:00 | Medusa图解 | "Target多头并行预测，无需额外模型。EAGLE：特征级投机，接受率高。" | Medusa |
 | 2:40 | 并行vs树状图解 | "树状单次验证延迟低，并行节点分离吞吐高。低延迟选树状，高吞吐选并行。" | 并行vs树状 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】Specul…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["用低成本草稿预测并用高质量模型验证，变串行为并行<br/>0:40"]:::core
+        N2["基础投机图解<br/>1:20"]:::deep
+        N3["Medusa图解<br/>2:00"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["并行vs树状图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -163,7 +163,6 @@ flowchart TD
     F --> F1[敏感信息脱敏]
 ```
 
-
 ## 记忆要点
 
 - 坑1：过度信任AI代码，必须写测试验证，关键路径人工审查。
@@ -171,7 +170,6 @@ flowchart TD
 - 坑3：代码风格不一致，用.cursorrules定义规范，统一格式。
 - 坑4：长对话失忆，关键约束写进配置文件，定期重复或拆分任务。
 - 黄金法则：AI是副驾驶，测试是信任基础，约束显式化，保持人类审查闭环。
-
 
 ## 结构化回答
 
@@ -195,3 +193,36 @@ flowchart TD
 | 1:12 | 坑1图解 | "过度信任AI代码，必须写测试验证，关键路径人工审查。" | 坑1 |
 | 1:48 | 坑2图解 | "上下文不足致幻觉API，用@docs引用文档，注明版本号。" | 坑2 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【字节面经】AI编程中有哪些踩坑经验<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["不盲信，强约束，重测试，防幻觉，守安全。<br/>0:36"]:::core
+        N2["坑1图解<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["坑2图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -153,7 +153,6 @@ flowchart TD
     Arch -->|Scaling Law友好| Modern["现代大模型统一架构<br/>支持Zero-shot与通用生成"]
 ```
 
-
 ## 记忆要点
 
 - 公式核心：Attention = softmax(Q·K^T / √d_k) · V，除以√d_k是为防点积过大导致梯度消失。
@@ -218,11 +217,9 @@ h 的选择是"子空间表达力"和"每头维度足够"的权衡。每个 head
 
 **收尾：** 您想深入聊：为什么除√d_k 不除d_k？方差推导？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -231,3 +228,36 @@ h 的选择是"子空间表达力"和"每头维度足够"的权衡。每个 head
 | 0:50 | Self-Attention示意图 | "Self-Attention——softmax(Q·K^T/√d_k)·V，除√d_k 防梯度消失" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：为什么除√d_k 不除d_k？方差推导？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["Transformer 基础：Se…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Self-Attention示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

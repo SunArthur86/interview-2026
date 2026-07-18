@@ -222,3 +222,31 @@ flowchart TD
 | 1:50 | 模型训练流程图 | 安全/合规/人设一致性三层校验。 | 输出审核 |
 | 3:30 | 总结卡 | 一句话记忆：编排链路：人设+上下文+记忆+输入 → prompt → 路由 → 工具 → 审核 → 返回。 下期可以接着聊：Agent 编排用什么框架。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>Agent 感知-思考-行动闭环"]:::concept
+    N3["0:50<br/>模型路由"]:::deep
+    N4["1:20<br/>工具调用"]:::deep
+    N5["1:50<br/>输出审核"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

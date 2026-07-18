@@ -174,3 +174,35 @@ flowchart TD
 | 1:30 | 升级单向不可逆示意 | "无锁 → 偏向锁(记线程ID) → 轻量级锁(CAS+自旋) → 重量级锁(OS互斥量阻塞)" | 要点1 |
 | 2:15 | 偏向锁假设只有单线程执行示意 | "轻量级锁假设多线程交替执行且无激烈竞争" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["synchronized 的锁升级过程是怎样的？偏向锁为什么…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["升级单向不可逆：无锁 → 偏向锁（记线程ID） → …"]:::core
+        C["偏向锁假设只有单线程执行，轻量级锁假设多线程交替执行…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -94,7 +94,6 @@ def human_in_the_loop_agent(agent_result, confidence_threshold=0.8):
 2. 如何量化“人机在环”带来的收益？即如何证明增加人工步骤比纯自动化更好？
 3. 在用户端体验上，如何优雅地处理“转人工”的过渡，不让用户感到系统正在“卡顿”或“由于错误而中断”？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -148,7 +147,6 @@ flowchart TD
 - 低置信度或高风险触发人工审核，修正数据用于微调。
 - 需校准置信度，防止模型对错误回答过度自信。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 人机在环是高风险决策的安全防线，也是 RLHF 数据来源。触发场景：高风险决策（医疗、金融）、未知法规限制、模型置信度低。人类作为最终审核者防止幻觉或逻辑错误导致严重后果，同时产生的真实反馈数据用于微调迭代。需校准置信度（温度缩放或 Platt Scaling）防模型对错误回答过度自信，人工审核超时要有安全降级策略而非无限挂起。
@@ -172,3 +170,37 @@ flowchart TD
 | 1:10 | 置信度幻觉警示 | "坑：模型对错误回答过度自信，要温度缩放校准。" | 关键坑 |
 | 1:35 | 财报幻觉案例 | "实战：编造财报数据，置信度门槛+数据积累幻觉降 40%。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：高风险触发 + 数据闭环 + 置信度校准。下期讲架构取舍。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["为什么需要人机在环<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["触发场景<br/>0:15"]:::core
+        N2["数据闭环图<br/>0:45"]:::deep
+        N3["置信度幻觉警示<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["财报幻觉案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -127,7 +127,6 @@ flowchart TD
     L --> M[输出高质量训练集]
 ```
 
-
 ## 记忆要点
 
 - 使用场景：领域数据不足、SFT指令生成、偏好对构造
@@ -157,4 +156,36 @@ flowchart TD
 | 0:55 | 三大风险图：模型坍缩/偏见放大/幻觉传播 | 但有三大风险：模型坍缩导致多样性下降，偏见被循环放大，幻觉被当成事实传播。 | 三大风险 |
 | 1:25 | 缓解措施三件套：30%真实数据 + 质量过滤 + 多样性去重 | 缓解办法很明确：必须掺 30% 以上的真实数据保底，再做严格的质量过滤和多样性去重。 | 缓解措施 |
 | 1:50 | 红色警告：低质量合成 = 灾难性遗忘 | 最后一条铁律：低质量合成数据是毒药，会导致灾难性遗忘，宁缺毋滥。 | 风控红线 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["飞轮还是毒药》+ 学生抄作业漫画<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N2["三大风险图：模型坍缩/偏见放大/幻觉传播<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N1["三大场景图标：领域不足/SFT指令/偏好对<br/>0:25"]:::practice
+        N3["缓解措施三件套：30%真实数据 + 质量过滤 + 多样…<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["红色警告：低质量合成 = 灾难性遗忘<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

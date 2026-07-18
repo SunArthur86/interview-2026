@@ -157,3 +157,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 像传话游戏，说完话的人主动把话筒传给下一个人；如果一个人拿着话筒不撒手（死循环），游戏就卡住了。 | 核心概念 |
 | 0:40 | 线程示意图 | 线程必须主动让出CPU控制权。 | 线程 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是协同式调度？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：控制并发访问特定资源个数的同步器，本质是…"]:::core
+        C["核心操作：acquire 获取许可（减1），rele…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -245,14 +245,12 @@ trace = {
 2. **混合架构**：纯 Agent 不稳定，纯工作流不灵活，生产推荐"工作流骨架 + Agent 节点"
 3. **提"中断恢复"**：长任务（如人工审核）要支持 checkpoint，这是 LangGraph 的核心能力
 
-
 ## 记忆要点
 
 - 四层架构：交互层、编排层（智能核心）、能力层（可插拔）、基础设施层
 - 记忆系统读取路径：向量检索 → 多取重排（Rerank） → 时效性/重要性加权过滤
 - 生产级重点：记忆需用户隔离防越权，工具用RAG按需召回防Token超限
 - 基础设施：必须包含权限、限流、全链路Trace和监控告警体系
-
 
 ## 苏格拉底式面试追问
 
@@ -311,11 +309,9 @@ trace = {
 
 **收尾：** 您想深入聊：微服务化怎么拆？——按能力拆（Memory服务/Tool服务/RAG服务独立部署）？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -325,3 +321,37 @@ trace = {
 | 1:30 | 编排层是智能示意图 | "编排层是智能——编排层是智能核心（LLM+控制循环）" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：微服务化怎么拆？——按能力拆（Memory服务/Tool服务？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["生产级 Agent 的架构怎么划分…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["四层架构示意图<br/>0:50"]:::deep
+        N3["编排层是智能示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -154,7 +154,6 @@ flowchart TD
     H --> J[计算Cohen Kappa一致性]
 ```
 
-
 ## 记忆要点
 
 - 评测模式：Pointwise（绝对评分）vs Pairwise（A/B对比，更稳定）。
@@ -162,7 +161,6 @@ flowchart TD
 - 模型选择：Judge能力需高于被测模型，常用GPT-4o/Claude-3.5。
 - 成本优化：日常CI用Mini模型，正式评测用旗舰模型。
 - 一致性：人工抽检5%样本，计算Cohen's Kappa > 0.6为合格。
-
 
 ## 结构化回答
 
@@ -185,3 +183,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：用强模型评估弱模型，通过校准偏差实现高效自动化评测。" | 核心定义 |
 | 1:00 | 评测模式图解 | "Pointwise（绝对评分）vs Pairwise（A/B对比，更稳定）。" | 评测模式 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计LLM-as-Judge评测管道<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["用强模型评估弱模型，通过校准偏差实现高效自动化评<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["评测模式图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

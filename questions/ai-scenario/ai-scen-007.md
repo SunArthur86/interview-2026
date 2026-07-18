@@ -169,14 +169,12 @@ flowchart TD
     F1 --> G
 ```
 
-
 ## 记忆要点
 
 - 评测分三层：检索层（Recall/MRR）、生成层（Faithfulness/Relevancy）、端到端
 - Faithfulness衡量忠实度（反幻觉），Context Recall衡量检索是否漏掉关键信息
 - 构建Golden Set（200-500条）包含常见、边缘及对抗样本，用于回归测试
 - 集成CI/CD：设定阈值（如Recall@5>0.8），不达标阻断发布
-
 
 ## 结构化回答
 
@@ -199,3 +197,35 @@ flowchart TD
 | 0:30 | 概念定义动画 | "一句话：构建检索、生成、端到端三层指标体系，驱动系统持续迭代。" | 核心定义 |
 | 1:00 | 评测分三层图解 | "检索层（Recall/MRR）、生成层（Faithfulness/Relevancy）、端到端" | 评测分三层 |
 | 1:30 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["为RAG系统设计完整的评测体系<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["构建检索、生成、端到端三层指标体系，驱动系统持续<br/>0:30"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["评测分三层图解<br/>1:00"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["总结回顾 & 下期预告<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

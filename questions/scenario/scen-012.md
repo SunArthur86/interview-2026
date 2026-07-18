@@ -143,3 +143,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像挂历，每天打个勾，用0和1标记有无签到，超级省纸。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：利用位图的极简存储与位运算高效处理连续状态。" | 核心定义 |
 | 1:50 | Bitmap位运算极 图解 | "Bitmap位运算极大节省空间。" | Bitmap位运算极 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个签到打卡系统？支持亿级用户每日签到 + 签到统计"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心结构：因为签到是状态布尔值，所以完美适配Redi…"]:::core
+        C["极致压缩：Key设计按月聚合，单用户一月仅占31位约…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

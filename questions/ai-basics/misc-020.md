@@ -106,7 +106,6 @@ def init_llm_engine():
   2. 在极高并发下，vLLM的Scheduler调度开销是否会成为新的瓶颈？如果是，有哪些优化思路（如分离CUDA Graph）？
   3. 相比于TGI（Text Generation Inference），vLLM的迭代级调度在处理长尾延迟请求时有何不同？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -185,4 +184,36 @@ flowchart TD
 | 0:55 | Continuous Batching 动画：请求动态进出 | 第二件是 Continuous Batching，动态调度请求，谁完成或等待就移出，新请求立刻插进来，不浪费算力。 | 连续批处理 |
 | 1:25 | Prefix Caching 示意：System Prompt 复用 | 第三件是 Prefix Caching，复用 System Prompt 等公共前缀的计算结果，降低首字延迟。 | 前缀缓存 |
 | 1:50 | 吞吐对比柱状图：50 vs 5 tok/s | 三件套合起来，相比 HuggingFace 吞吐量提升约 10 倍，从 5 涨到 50 个 token 每秒。 | 效果数据 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《vLLM 为何这么快》+ 餐…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["PagedAttention 分块图：KV Cache…<br/>0:25"]:::core
+        N2["Continuous Batching 动画：请求动态…<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Prefix Caching 示意：System Pr…<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["吞吐对比柱状图：50 vs 5 tok/s<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

@@ -173,6 +173,38 @@ flowchart TD
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["BASE理论是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["理论定位：是对CAP中AP的延伸，解决互联网高并发下…"]:::core
+        C["核心口诀：基本可用、软状态、最终一致性"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：BASE理论的特点
 
 > 合并自 `dst-014`（相似度 79%）
@@ -266,6 +298,38 @@ public OrderDetail handleFallback(Long orderId, Throwable ex) {
 | 1:50 | 基本可用和最终一致性 图解 | "核心是基本可用和最终一致性。" | 基本可用和最终一致性 |
 
 ---
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["BASE理论是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["理论定位：是对CAP中AP的延伸，解决互联网高并发下…"]:::core
+        C["核心口诀：基本可用、软状态、最终一致性"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
 
 ## 延伸：BASE定理
 
@@ -367,6 +431,38 @@ public void handleOrder(Order order) {
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["BASE理论是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["理论定位：是对CAP中AP的延伸，解决互联网高并发下…"]:::core
+        C["核心口诀：基本可用、软状态、最终一致性"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：BASE理论与CAP的关系
 
 > 合并自 `dst-015`（相似度 74%）
@@ -459,3 +555,35 @@ public void processOrder(Order order) {
 | 0:35 | 生活类比动画 | "打个比方——CAP是宪法，BASE是执行细则，专门针对AP场景如何落地“最终一致”。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：BASE是对CAP中AP方案的延伸，通过最终一致性弥补强一致性的缺失。" | 核心定义 |
 | 1:50 | BASE源于对C 图解 | "BASE源于对CAP理论的权衡与演化。" | BASE源于对C |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["BASE理论是什么？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["理论定位：是对CAP中AP的延伸，解决互联网高并发下…"]:::core
+        C["核心口诀：基本可用、软状态、最终一致性"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

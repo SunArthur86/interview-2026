@@ -191,3 +191,35 @@ flowchart TD
 | 1:10 | 空桶示意图 | 空桶使用 CAS 无锁插入，冲突才用 synchronized | 空桶 |
 | 1:40 | 数组结构与 HashMap示意图 | 数组结构与 HashMap 8 对齐，支持红黑树与多线程扩容 | 数组结构与 HashMap |
 | 2:10 | 总结卡 + 下期预告 | 记住三个词就能答好这道题。下期追问：ConcurrentHashMap 的扩容是如何多线程协助的？ | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["ConcurrentHashMap 在 JDK 8 中的实现…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["对比 JDK7：JDK8 移除 Segment 分段…"]:::core
+        C["写操作锁粒度细化：数组桶为空则用 CAS 插入，非空…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

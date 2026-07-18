@@ -160,3 +160,35 @@ flowchart TD
 | 2:15 | 强Leader模型简 图解 | "强Leader模型简化逻辑。" | 强Leader模型简 |
 | 3:00 | 少数服从多数原则 图解 | "少数服从多数原则。" | 少数服从多数原则 |
 | 3:50 | 选举安全性 图解 | "选举安全性保证日志不丢。" | 选举安全性 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Raft 协议的 Leader 选举和日志复制流程是什么？为…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三大核心：Leader选举、日志复制、安全性"]:::core
+        C["Leader选举：随机超时机制触发，获半数以上（N/…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

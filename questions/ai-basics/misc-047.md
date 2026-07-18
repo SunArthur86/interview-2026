@@ -110,7 +110,6 @@ def distillation_loss(student_logits, teacher_logits, labels, temperature=5.0, a
     return alpha * soft_loss + (1.0 - alpha) * hard_loss
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -188,4 +187,36 @@ flowchart TD
 | 0:55 | 温度 T 平滑 + KL 散度示意 | 软标签需要用温度 T 平滑放大，让学生用 KL 散度去学习教师的概率分布。 | 蒸馏核心 |
 | 1:25 | CoT 蒸馏：学习思维链步骤 | CoT 蒸馏直接让学生学习教师的思维链步骤，习得推理能力，不只是学最终答案。 | CoT 蒸馏 |
 | 1:50 | 实战：混合硬软标签防幻觉 | 实战上大模型蒸馏要防幻觉，常把硬标签和软标签混合训练，兼顾准确性和暗知识。 | 实战要点 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《知识蒸馏》+ 老师讲错题漫画<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["硬标签 vs 软标签对比图<br/>0:25"]:::core
+        N2["温度 T 平滑 + KL 散度示意<br/>0:55"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["CoT 蒸馏：学习思维链步骤<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["实战：混合硬软标签防幻觉<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

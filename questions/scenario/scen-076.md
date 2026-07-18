@@ -165,3 +165,35 @@ flowchart TD
 | 0:25 | 生活类比动画 | "打个比方——像小区门口的保安，问个问题确认你是真人不是机器。" | 核心类比 |
 | 0:50 | 概念定义动画 | "一句话：通过安全挑战区分人机，防御恶意自动化攻击。" | 核心定义 |
 | 1:20 | 多种形态 图解 | "图文识别、短信校验、行为轨迹。" | 多种形态 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个验证码系统？支持图形/短信/滑块多种形式"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心存储：验证码全凭Redis，过期时间定5min，…"]:::core
+        C["多维防刷：手机号限60s、IP限1h；接口防刷必前置…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

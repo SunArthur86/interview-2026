@@ -549,4 +549,28 @@ flowchart TD
 | 0:30 | 概念结构示意图 | 离散事件（结构化 JSON），高保真但高成本，适合排查。 | Logs |
 | 1:30 | 总结卡 | 一句话记忆：Metrics 看有没有问题（聚合数字、告警）。 下期可以接着聊：三件套采样率怎么定。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>分布式链路追踪"]:::concept
+    N3["0:30<br/>Logs"]:::concept
+  end
+  subgraph Outro["🎯 收尾"]
+    N4["1:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 

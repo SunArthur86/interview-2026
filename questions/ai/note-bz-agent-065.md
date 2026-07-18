@@ -277,7 +277,6 @@ def compensate(state):
 2. **子图模块化**：复杂流程拆成子图，可复用可维护——体现工程思维
 3. **补偿事务**：失败后的补偿是分布式系统的经典问题，能讲到说明有深度
 
-
 ## 核心流程图
 
 ```mermaid
@@ -320,7 +319,6 @@ flowchart TD
 - 状态(State)要分离：业务数据、流程状态与执行记录字段需独立隔离维护
 - 条件路由控制流：如支付后按金额分大额审核与正常发货，按错误次数走重试或降级
 - 进阶能力：Fan-out/Fan-in实现任务并发，子图实现模块化封装，检查点保障长任务恢复
-
 
 ## 苏格拉底式面试追问
 
@@ -370,7 +368,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像设计企业SOP——不是简单的线性流程，而是有审批/并行/回退/子流程的复杂网络，LangGraph就是画这张网的工具。
 
 **展开框架：**
@@ -380,11 +377,9 @@ flowchart TD
 
 **收尾：** 子图怎么用？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -394,3 +389,37 @@ flowchart TD
 | 1:30 | 状态管理示意图 | "状态管理——显式State对象" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：子图怎么用？——把常用流程封装为子图，主图调用？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["LangGraph 的核心 Gra…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["复杂图示意图<br/>0:50"]:::deep
+        N3["状态管理示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

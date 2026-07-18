@@ -183,3 +183,35 @@ flowchart TD
 | 1:30 | 独有顽疾示意 | "JDK1.7多线程扩容并发执行transfer方法引发环形链表，导致CPU飙升100%" | 要点1 |
 | 2:15 | 罪魁祸首示意 | "因为1.7采用头插法，并发迁移时链表被反转，极易形成A.next=B且B.next=A" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["HashMap中的循环链表是如何产生的？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["独有顽疾：JDK1.7多线程扩容并发执行transf…"]:::core
+        C["罪魁祸首：因为1.7采用头插法，并发迁移时链表被反转…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

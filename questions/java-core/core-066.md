@@ -193,6 +193,38 @@ fetch('/api/login', {
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是HTTP请求报文？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["报文三段：请求行（方法+URI+版本）、请求头（Ke…"]:::core
+        C["请求行方法：GET获取资源、POST提交数据、PUT…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：什么是HTTP响应报文？
 
 > 合并自 `core-061`（相似度 76%）
@@ -296,3 +328,35 @@ public ResponseEntity<Resource> downloadFile() throws IOException {
 | 0:40 | 概念动画/示意图 | "服务器返回给客户端的标准数据格式——回信：先写结论（状态码），再写细节（头部），最后是正文（内容）" | 核心定义 |
 | 1:20 | 四大结构示意 | "状态行、响应头部、空行、响应体" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是HTTP请求报文？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["报文三段：请求行（方法+URI+版本）、请求头（Ke…"]:::core
+        C["请求行方法：GET获取资源、POST提交数据、PUT…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

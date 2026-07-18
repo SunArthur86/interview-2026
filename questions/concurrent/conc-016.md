@@ -158,3 +158,35 @@ flowchart TD
 | 0:20 | 核心概念动画/示意图 | 就像切屏玩游戏，PCB是游戏图标，切换帧是记下你玩到哪一步、装备是什么，方便下次接着玩。 | 核心概念 |
 | 0:40 | PCB记录进程元数据示意图 | PCB记录进程元数据，是进程存在的唯一标识。 | PCB记录进程元数据 |
 | 1:10 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是PCB-“切换桢”？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：PCB 是进程控制块，保存切换时的执行现…"]:::core
+        C["切换开销：进程切换需刷新 TLB 及 L1/L2 缓…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

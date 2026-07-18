@@ -437,3 +437,35 @@ flowchart TD
 | 1:06 | Redis Lua 脚本执行截图分步演示 | "状态码选型：用302而非301，因每次回源可精准统计点击量" | 状态码选型 |
 | 1:57 | 关键代码/伪代码片段 | "缓存结合：请求先查Redis防穿透，未命中再查DB返回长URL" | 缓存结合 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：301 和 302 对 SEO 有什么影响。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】短链跳转的原理是什么？用的是什么 HTTP 状态…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["底层原理：一次KV查询提取长链，通过3xx状态码重定…"]:::core
+        C["状态码选型：用302而非301，因每次回源可精准统计…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

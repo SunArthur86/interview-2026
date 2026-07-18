@@ -145,6 +145,38 @@ java -XX:+PrintCompilation -XX:+PrintGCDetails com.example.MyApp
 
 ---
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Java代码执行与编译？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心流程：源码经javac编译为字节码，JVM类加载…"]:::core
+        C["执行引擎对比：解释器逐行执行启动快，JIT编译热点代…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+
 ## 延伸：Java 编译过程
 
 > 合并自 `dsl-010`（相似度 73%）
@@ -257,3 +289,35 @@ java -XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation co
 | 2:24 | 解释与JIT共存示意 | "解释器负责启动快慢预热，JIT负责探测热点代码并编译为本地机器码保障峰值性能" | 要点2 |
 | 3:12 | 编译模式对比示意 | "混合模式为默认平衡策略，AOT编译牺牲跨平台性与运行时优化换取极致启动速度" | 要点3 |
 | 4:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是Java代码执行与编译？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心流程：源码经javac编译为字节码，JVM类加载…"]:::core
+        C["执行引擎对比：解释器逐行执行启动快，JIT编译热点代…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

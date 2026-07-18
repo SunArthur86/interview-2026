@@ -149,7 +149,6 @@ class MessageBus:
     async def recv(self, name: str) -> Message:
         return await self._queues[name].get()
 
-
 # ============================================================
 # Agent基类
 # ============================================================
@@ -167,7 +166,6 @@ class BaseAgent:
 
     async def run(self):
         raise NotImplementedError
-
 
 # ============================================================
 # Master Agent：任务拆解 + 调度 + 聚合
@@ -218,7 +216,6 @@ class MasterAgent(BaseAgent):
     def _aggregate(self, results: dict) -> str:
         return str(results)
 
-
 # ============================================================
 # Search Agent（子Agent，可与Analyst P2P通信）
 # ============================================================
@@ -246,7 +243,6 @@ class SearchAgent(BaseAgent):
                 # 任务级结果回传给Master
                 await self._send("master", "result",
                                  {"task_id": task["id"], "data": search_result})
-
 
 # ============================================================
 # Analyst Agent（子Agent，接收P2P数据 + P2P转发给Writer）
@@ -280,7 +276,6 @@ class AnalystAgent(BaseAgent):
                 await self._send("master", "result",
                                  {"task_id": task["id"], "data": analysis})
 
-
 # ============================================================
 # Writer Agent
 # ============================================================
@@ -299,7 +294,6 @@ class WriterAgent(BaseAgent):
                 report = f"基于{p2p_cache}生成报告..."
                 await self._send("master", "result",
                                  {"task_id": msg.payload["id"], "data": report})
-
 
 # ============================================================
 # 启动
@@ -340,14 +334,12 @@ asyncio.run(main())
 
 > **一句话总结**：混合架构 = 任务级master+sub保证控制力 + 信息级P2P保证效率。既不是纯workflow的死板，也不是纯master-slave的瓶颈，而是根据通信层级选择最合适的拓扑。
 
-
 ## 记忆要点
 
 - 选型定调：因为单一模式有瓶颈，所以选用Workflow加Master的混合架构
 - Workflow优势：应对流程固定的场景，因为步骤无需动态决策所以编排极稳定
 - Master+Sub优势：应对任务开放场景，因为主控能动态拆解调度所以灵活度高
 - 通信机制优化：子Agent间采用P2P直连通信，因为免去主控中转所以极大降低延迟
-
 
 ## 苏格拉底式面试追问
 
@@ -393,7 +385,6 @@ P2P 直连确实比"全部经过 Master 中转"延迟低，但单点故障会扩
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 就像项目组——PM负责任务拆解，前端后端QA各负责专项，但前后端可以直接沟通不用事事绕回PM。
 
 **展开框架：**
@@ -403,11 +394,9 @@ P2P 直连确实比"全部经过 Master 中转"延迟低，但单点故障会扩
 
 **收尾：** 子Agent之间直接通信的协议是什么？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -417,3 +406,37 @@ P2P 直连确实比"全部经过 Master 中转"延迟低，但单点故障会扩
 | 1:30 | 子Agent示意图 | "子Agent——子Agent负责信息级同步" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：子Agent之间直接通信的协议是什么？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["你的Agent项目用的是什么架构？…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["主控负责任示意图<br/>0:50"]:::deep
+        N3["子Agent示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

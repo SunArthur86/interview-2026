@@ -183,3 +183,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "IO库按流（输入/输出）和数据类型（字节/字符）分类——水管系统：源头是水龙头，中间有过滤器（处理流），接通不同容器" | 核心定义 |
 | 1:20 | 四大基类示意 | "InputStream/OutputStream操作字节，Reader/Writer操作字符" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Java IO包的核心类有哪些？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["四大基类：InputStream/OutputStr…"]:::core
+        C["分类体系：按方向分输入输出，按功能分节点流（操作源）…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

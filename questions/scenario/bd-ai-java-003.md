@@ -176,3 +176,35 @@ flowchart TD
 | 2:15 | Web应用逻辑确定 图解 | "Web应用逻辑确定，Agent决策概率性。" | Web应用逻辑确定 |
 | 3:00 | Agent 图解 | "Agent通过循环调用工具逐步达成目标。" | Agent |
 | 3:50 | 需关注Token成本 图解 | "需关注Token成本、Trace追踪和非确定性测试。" | 需关注Token成本 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【字节面经】传统 Web 应用和 AI Agent 应用有什…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心对比：传统Web是确定性请求响应，AI Agen…"]:::core
+        C["因为Token按次消费，所以Agent需通过限流+缓…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

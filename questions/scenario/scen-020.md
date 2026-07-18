@@ -162,3 +162,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像明星过安检，人多就多开几个通道，或者先把照片发到广场大屏幕让大家看，别都挤在门口。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：通过探测和加副本机制，将极高频的单点访问分散到多个存储节点。" | 核心定义 |
 | 1:50 | 热点探测依赖 图解 | "热点探测依赖Flink或客户端统计。" | 热点探测依赖 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计热点数据的缓存方案？比如某明星出轨新闻瞬间访问量暴增"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["热点探测三招：客户端聚合上报、网关滑动窗口拦截、Re…"]:::core
+        C["单点瓶颈破局：因为单Key集中压垮Redis，故打散…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

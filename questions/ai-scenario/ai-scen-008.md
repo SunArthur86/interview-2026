@@ -101,7 +101,6 @@ def upsert_document(collection, doc_id, new_chunks):
 2. 在CDC捕获binlog时，如何处理海量历史数据的冷启动和全量+增量的同步切换问题？
 3. Embedding服务的高并发调用是实时链路的瓶颈，有什么优化手段（如批处理、量化模型）？
 
-
 ## 核心流程图
 
 ```mermaid
@@ -169,7 +168,6 @@ flowchart TD
 - 高频更新场景需批处理合并，防止锁表或性能瓶颈
 - 注意“标记删除”导致的幽灵数据，业务层需用版本号过滤
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 基于CDC监听和增量Upsert机制，实现文档变更的秒级同步。——打个比方，像即时通讯，发消息立刻推送，而不是等收信人手动刷新。
@@ -192,3 +190,36 @@ flowchart TD
 | 1:12 | 要点图解 | "核心是CDC监听变更+消息队列异步处理+向量库Upsert" | 要点 |
 | 1:48 | 要点图解 | "Upsert逻辑为“删除旧ID+插入新向量”，保证原子性" | 要点 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个支持实时更新和增量索引的R…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["基于CDC监听和增量Upsert机制，实现文档变<br/>0:36"]:::core
+        N2["核心是CDC监听变更+消息队列异步处理+向量库U<br/>1:12"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Upsert逻辑为“删除旧ID+插入新向量”，保<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -234,3 +234,35 @@ flowchart TD
 | 1:30 | 一句话定义示意 | "主题状态一变，自动通知多个依赖的观察者，实现一对多联动" | 要点1 |
 | 2:15 | 核心角色示意 | "Subject管状态发通知，Observer听更新做响应" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["说一说你了解的观察者模式？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：主题状态一变，自动通知多个依赖的观察者，…"]:::core
+        C["核心角色：Subject管状态发通知，Observe…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

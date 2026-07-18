@@ -154,3 +154,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——断网了，要么不让写(保准)，要么各写各的(保在线)。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：分区发生时，只能在数据一致性和服务可用性中二选一。" | 核心定义 |
 | 1:50 | 客观存在 图解 | "P是客观存在的。" | 客观存在 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["CAP理论中如何选择CP还是AP？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["因为网络分区P必然发生，所以系统只能在C（一致性）和…"]:::core
+        C["选CP：宁可拒绝服务也要数据强一致（如金融、ZK、e…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

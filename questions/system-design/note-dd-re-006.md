@@ -899,3 +899,35 @@ public class RuleController {
 | 2:01 | 关键代码/伪代码片段 | "路由机制：以活动ID为Key，动态路由并装载对应规则组合" | 路由机制 |
 | 2:54 | 对比表格 | "规则集模板" | 规则集模板 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：规则集模板的粒度怎么定。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】如果不同活动下规则组合不一样，系统要怎么支持？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心方案：规则集模板化，各活动绑定独立规则集实现解耦"]:::core
+        C["灵活扩展：私有规则可覆盖模板，结合SPI加载定制化逻…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

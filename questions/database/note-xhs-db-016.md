@@ -291,3 +291,35 @@ flowchart TD
 | 1:57 | 关键代码/伪代码片段 | "聚簇索引就是数据行本身按主键B+树组织；二级索引就是键值到主键值到回表" | 聚簇索引=数据行本身按主 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：为什么B+树比B树更适合做数据库索引。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【拼多多 Java服务端】MySQL索引底层用的什么数据结构…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["解析器Parser 词法/语法/语义分析"]:::core
+        C["B+树非叶节点只存键+指"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+

@@ -428,3 +428,35 @@ PyTorch 的底层计算（矩阵乘法、卷积）是 C++ 实现（用 OpenMP/MK
 | 1:06 | IO 模型对比图分步演示 | "释放时机：遇IO阻塞主动释放，或被定时抢占（默认约5ms），CPU密集型难以释放" | 释放时机 |
 | 1:57 | 关键代码/伪代码片段 | "IO密集（如API调用）：因多在等待网络，故多线程有效，可大幅提升并发效率" | IO密集（如API调用） |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：GIL会被移除吗？PEP 703。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【字节面经】讲一下 Python 的 GIL 机制，在 I/…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["一句话定义：GIL是CPython的互斥锁，因保护引…"]:::core
+        C["释放时机：遇IO阻塞主动释放，或被定时抢占（默认约5…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

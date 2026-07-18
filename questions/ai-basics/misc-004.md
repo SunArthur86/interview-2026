@@ -96,7 +96,6 @@ Step 3: Input "!" (Need attention on "Hello World")
   K3, V3 (计算) ───────┼──► [ Concat: K1+K2+K3, ... ]
                       │       │
 
-
 ## 核心流程图
 
 ```mermaid
@@ -176,4 +175,37 @@ flowchart TD
 | 1:10 | 复杂度 O(n²)→O(n) 图 | "加速原理：显存换时间，复杂度从 O(n²) 降到 O(n)。" | 加速原理 |
 | 1:35 | 显存占用公式警示 | "代价：显存随长度线性增长，长文本时比模型权重还占，batch 受限。" | 代价瓶颈 |
 | 1:55 | 总结卡 | "口诀：缓存历史 KV，O(n) 生成，长文本要优化显存。下期讲 GQA。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["KV Cache<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["算术题抄步骤类比<br/>0:15"]:::core
+        N2["KV Cache 增长示意图<br/>0:40"]:::core
+        N3["复杂度 O(n²)→O(n) 图<br/>1:10"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["显存占用公式警示<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["口诀：缓存历史 KV，O(n) 生成，长文本要优<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

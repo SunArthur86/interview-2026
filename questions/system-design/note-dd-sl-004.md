@@ -293,3 +293,35 @@ flowchart TD
 | 1:06 | 缓存读写策略流程图分步演示 | "命中年人：命中率跌破95%性能明显下降，跌破90%直接断崖" | 命中年人 |
 | 1:57 | 关键代码/伪代码片段 | "应对策略：引入本地多级缓存顶住热点，配合预热防穿透DB" | 应对策略 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：缓存命中率低于多少时QPS会明显下降。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】压测时最多能存多少数据？不同数据量下，短链系统的…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["容量制约：数据量激增致缓存命中率降，是QPS断崖式下…"]:::core
+        C["命中年人：命中率跌破95%性能明显下降，跌破90%直…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -166,3 +166,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像分账本：按人头记流水，太厚了就换新本子，旧账打包封存。" | 核心类比 |
 | 2:03 | 单表千万或单库百 图解 | "单表千万或单库百GB即考虑分片。" | 单表千万或单库百 |
 | 2:50 | 分片键选user 图解 | "分片键选user_id，避免跨片查询。" | 分片键选user |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["电商订单系统日增千万级数据，如何设计存储方案？什么时候该分库…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["拆分阈值：因为单表超1000万或文件超100G引发深…"]:::core
+        C["分片键选择：推荐user_id，因买家维度查询最多，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

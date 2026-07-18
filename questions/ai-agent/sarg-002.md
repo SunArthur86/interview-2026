@@ -91,7 +91,6 @@ docs = text_splitter.create_documents([long_legal_text])
 3.  **针对表格数据应该怎么切分？**
     表格不建议随机切分，应将表格作为一个整体提取（如转为 Markdown 或 HTML），或者提取表头+每一行作为一个单独的语义块，以便精确检索特定数据。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -128,7 +127,6 @@ flowchart TB
     Trade --> Large["大: 上下文完整<br/>检索噪声多"]
 ```
 
-
 ## 记忆要点
 
 - 固定长度：简单但易切断语义，需设置Overlap（10-20%）防止信息丢失
@@ -159,4 +157,37 @@ flowchart TB
 | 1:10 | Overlap 作用示意图 | "Overlap 重叠 10-20%，防止关键信息正好被切在边界上。" | 关键参数 |
 | 1:35 | API 文档切分踩坑案例 | "实战：参数说明和示例被切到两个 Chunk，LLM 编错示例，改语义切分后解决。" | 实战案例 |
 | 1:55 | 总结卡 | "口诀：顺语义切、设重叠、父子兼顾。下期讲 Embedding 怎么选。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["RAG 怎么切文档<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["块大小权衡示意图<br/>0:15"]:::core
+        N3["Overlap 作用示意图<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["四种切分策略对比表<br/>0:40"]:::practice
+        N4["API 文档切分踩坑案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:55"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

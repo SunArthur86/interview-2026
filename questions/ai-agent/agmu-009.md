@@ -94,7 +94,6 @@ class AgentStateMachine:
 1. **误区：状态机限制了 LLM 的灵活性**。实际上，状态机只是约束了“流程走向”，在具体的 Action 执行上，LLM 依然有巨大的发挥空间。
 2. **误区：将状态机等同于 LLM 的 System Prompt**。System Prompt 是软指令，LLM 可能不遵守；状态机是硬逻辑，强制流转。两者结合效果最佳。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -151,7 +150,6 @@ flowchart TD
 - 工程实践：自然语言作为状态机附件，流转由 LLM 输出特定指令触发。
 - 避坑指南：状态机限制流程走向而非 LLM 发挥空间，两者结合最佳。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 状态机提供可测试性、可观测性和防跑偏护栏，纯自然语言隐式发散难追踪。状态机能明确指示"卡在 WAITING_FOR_APPROVAL 多久了"，自然语言要人工读日志分析。工程实践是自然语言作为状态机附件——流转由 LLM 输出特定指令触发，内容存上下文。状态存在 Redis（高性能）或数据库（持久化可审计），配合乐观锁解决并发修改。
@@ -175,3 +173,37 @@ flowchart TD
 | 1:10 | 状态爆炸警示 | "坑：业务复杂状态组合指数增长，用层次化状态机管理。" | 边界情况 |
 | 1:35 | 客服死循环案例 | "实战：纯 LLM 判断转人工死循环，状态机严格流转解决。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：状态机是骨架，自然语言是附件。下期讲框架对比。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["为什么用状态机不用纯自然语言<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["四大优势<br/>0:15"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["对比自然语言<br/>0:45"]:::practice
+        N3["状态爆炸警示<br/>1:10"]:::practice
+        N4["客服死循环案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -171,3 +171,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像自来水管，数据像水流一样源源不断流进来，经过过滤(算子)实时流出清水。" | 核心类比 |
 | 2:03 | 流批一体 图解 | "Flink处理无界流，支持事件时间和窗口。" | 流批一体 |
 | 2:50 | 状态管理 图解 | "Keyed State记录中间结果，RocksDB持久化。" | 状态管理 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个系统来处理海量数据的实时计算？Flink/Spa…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["Watermark防乱序：水位线=最大事件时间-延迟…"]:::core
+        C["Exactly-Once端到端：依赖Checkpoi…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

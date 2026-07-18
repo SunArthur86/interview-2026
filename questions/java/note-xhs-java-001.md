@@ -209,3 +209,35 @@ graph TD
 | 1:02 | 缓存读写策略流程图分步演示 | "LinkedList就是双向链表，头尾插入O(1)" | LinkedList=双 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：ArrayList 扩容 1.5 倍的原因是什么？为什么不是 2 倍。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["ArrayList 和 LinkedList 的区别与使用场…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["ArrayList=数组"]:::core
+        C["LinkedList=双"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+

@@ -161,3 +161,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——电影票上有时间、座位号和防伪码，这张票只能看这一场的这个位置，不能复制使用。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：通过时间戳限时效、随机数防唯一、签名防篡改，确保请求“一票有效”。" | 核心定义 |
 | 1:50 | 时间戳 图解 | "时间戳防止过期的旧请求重放。" | 时间戳 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个防接口重放攻击的方案？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["三要素防重放：时间戳（Timestamp）保时效、随…"]:::core
+        C["时间戳窗口通常5分钟，Nonce用Redis SET…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

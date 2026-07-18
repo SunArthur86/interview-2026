@@ -93,7 +93,6 @@ frequency: medium
 def r
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -163,4 +162,36 @@ flowchart TD
 | 0:55 | RAG 栏：快/新/准 + 向量检索动画 | RAG 外挂向量库，知识实时更新、答案可溯源，适合高频更新、事实性强的场景。 | RAG 特点 |
 | 1:20 | Prompt 栏：浅/廉 + 格式控制示意 | Prompt 最便宜，只控制格式和逻辑，适合简单任务，但知识深度浅。 | Prompt 定位 |
 | 1:50 | 组合拳流程图：CPT → SFT → RAG | 最佳实践是组合拳：CPT 内化术语，SFT 调格式，RAG 补实时信息，三者各司其职。 | 最佳实践 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《领域适配三范式》+ CPT/…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["CPT 栏：深/慢/贵 + 知识内化曲线<br/>0:25"]:::core
+        N2["RAG 栏：快/新/准 + 向量检索动画<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["Prompt 栏：浅/廉 + 格式控制示意<br/>1:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["组合拳流程图：CPT → SFT → RAG<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

@@ -151,3 +151,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像查电话簿，不知道号码时，先查总机(根)，再查分机号(TLD)，最后找到具体的人(权威)。" | 核心类比 |
 | 2:03 | 分布式层级结构避免单 图解 | "采用分布式层级结构避免单点故障和传输延迟。" | 分布式层级结构避免单 |
 | 2:50 | 解析流程依次为 图解 | "浏览器缓存 -> 本地Hosts -> 本地DNS -> 根/TLD/权威DNS。" | 解析流程依次为 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["DNS的工作原理和查询过程是怎样的？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心定义：将难记的域名转换成机器通信 IP 地址的分…"]:::core
+        C["层级结构：自右向左依次降低，依次为根域、顶级域、二级…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -167,3 +167,35 @@ flowchart LR
 | 0:35 | 生活类比动画 | "打个比方——像超市排队结账，人多了多开几个收银台(扩容)，或把人分流到新开的临时通道。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：通过横向扩容消费者、临时迁移Topic及优化消费逻辑来清理积压。" | 核心定义 |
 | 1:50 | 紧急扩容 图解 | "增加消费者实例(需对应增加分区)。" | 紧急扩容 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计消息积压的处理方案？百万级消息积压如何快速消费？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["扩容限制：消费者实例数绝不能超过Topic分区数，否…"]:::core
+        C["临时Topic大法：原Topic分区不够时，新建N倍…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

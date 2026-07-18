@@ -168,3 +168,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——都是投票选班长(Leader)，Raft规则简单通用，ZAB针对特定学校(ZK)优化。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：Raft易懂通用，ZAB专为ZooKeeper设计，都基于多数派原则。" | 核心定义 |
 | 1:50 | 都依赖过半节点确认 图解 | "都依赖过半节点确认。" | 都依赖过半节点确认 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Raft协议和ZAB协议有什么区别？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["共同基础：两者皆依赖 Quorum（过半机制）、Le…"]:::core
+        C["设计目标：Raft 追求「通俗易懂与通用」，而 ZA…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

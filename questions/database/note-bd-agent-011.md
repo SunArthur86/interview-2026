@@ -257,3 +257,35 @@ Redis作者Antirez选择SkipList的理由：**实现简单 + 范围查询高效 
 | 0:15 | Redis Lua 脚本执行截图 | "一句话总结：ZSet底层是Hash表加跳表的组合，小数据量下退化用Listpack紧凑存储" | 一句话总结 |
 | 1:02 | Redis Lua 脚本执行截图分步演示 | "双核职责：Hash表负责O(1)快速查分数，跳表负责O(logN)范围排名查询" | 双核职责 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：SkipList为什么用多级链表而不是平衡树。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Redis的ZSet底层是怎么实现的？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["双核职责：Hash表负责O（1）快速查分数，跳表负责…"]:::core
+        C["关键阈值：元素数》128或单元素》64字节时触发底层…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

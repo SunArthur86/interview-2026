@@ -180,3 +180,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像机场安检，先看证件(规则)，再过扫描仪(模型)，有问题立马扣人。" | 核心类比 |
 | 2:03 | 实时计算 图解 | "Flink计算滑动窗口特征存入Redis。" | 实时计算 |
 | 2:50 | 规则+模型 图解 | "硬规则快速拦截，机器学习模型评分。" | 规则+模型 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个实时风控系统？毫秒级识别欺诈交易"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["双核驱动：规则引擎微秒级处理强逻辑（黑名单/频率），…"]:::core
+        C["决策与反馈：综合风险分=规则分*W1+模型分*W2，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

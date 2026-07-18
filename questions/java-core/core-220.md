@@ -182,3 +182,35 @@ sequenceDiagram
 | 1:30 | 核心定义示意 | "TCP 是一种面向连接的、可靠的、基于字节流的传输层通信协议" | 要点1 |
 | 2:15 | 可靠性保障示意 | "通过序列号、确认应答（ACK）、重传机制和校验和保证数据无差错按序到达" | 要点2 |
 | 3:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是TCP？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心定义：TCP 是一种面向连接的、可靠的、基于字节…"]:::core
+        C["可靠性保障：通过序列号、确认应答（ACK）、重传机制…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

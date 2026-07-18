@@ -201,7 +201,6 @@ H5 [ 0.28 0.30 0.29 0.80 1.0  0.82 ]  ← 可合并为同一组
 
 **面试加分点**：提到LLaMA-2 70B使用GQA(num_kv_heads=8)而7B/13B仍用MHA；提到vLLM和TensorRT-LLM对GQA做了专门优化；提到GQA是当前开源大模型的事实标准（LLaMA-3、Qwen-2、Mistral、DeepSeek-V2等全部采用）。
 
-
 ## 记忆要点
 
 - KV头数渐变缩：MHA全独立，MQA全共享，GQA分组共享折中两者。
@@ -265,11 +264,9 @@ MHA + PagedAttention 是"不改架构，优化显存管理"。PagedAttention 消
 
 **收尾：** 您想深入聊：GQA中分组数G应该怎么选？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -278,3 +275,36 @@ MHA + PagedAttention 是"不改架构，优化显存管理"。PagedAttention 消
 | 0:50 | MHA示意图 | "MHA——N个Q头 + N个K/V头 → 效果最好但KV Cache最大" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：GQA中分组数G应该怎么选？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["请对比MHA、MQA、GQA三种注…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["MHA示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -347,7 +347,6 @@ flowchart TD
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 刚进一个新城市——(1)链路追踪就像打开GPS导航，输入一个目的地(功能)，看完整的路线规划(调用链)：先到A站→转B线→到C站，每段多长(耗时)；(2)注册中心就像看地铁线路图，一目了然有哪些线路(服务)和站点(实例)。
 
 **展开框架：**
@@ -357,11 +356,9 @@ flowchart TD
 
 **收尾：** 如何快速理解一个复杂微服务系统的数据流向？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -369,4 +366,35 @@ flowchart TD
 | 0:20 | 核心概念图 | "快速上手新部门的两个核心抓手：(1)代码链路追踪——通过SkyWalking等APM工具追踪请求完整调用链，理解微服务间…" | 核心定义 |
 | 0:55 | 链路追踪工具(示意图 | "链路追踪工具(——追踪一个请求在多个微服务间的完整调用路径" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["实习新到部门，如何在两周内快速上手…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["链路追踪工具(示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

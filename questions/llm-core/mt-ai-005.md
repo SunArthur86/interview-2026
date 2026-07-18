@@ -93,8 +93,6 @@ def dpo_loss(policy_chosen_logps, policy_rejected_logps, ref_chosen_logps, ref_r
 | **训练稳定性** | 较差（超参数敏感，易 KL 散度发散） | 较好（本质是分类优化） |
 | **效果** | SOTA天花板（OpenAI 路线） | 接近 RLHF，性价比首选 |
 
-
-
 ## 核心流程图
 
 ```mermaid
@@ -125,7 +123,6 @@ flowchart TD
 - RLHF vs DPO：因为 RLHF 训练极度复杂且不稳，所以 DPO 免去 RM 直接偏好优化成高性价比首选。
 - 进阶演进：DeepSeek-R1 跳过 SFT 直接进行强化学习，验证了纯 RL 激发深度推理的潜力。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 从“读书”到“做题”再到“讲规矩”的过程。——打个比方，SFT是教学生做题格式，RLHF是给回答打分纠偏，最后变成懂礼貌的优等生。
@@ -148,3 +145,36 @@ flowchart TD
 | 1:12 | 核心链路图解 | "SFT（指令微调）建立格式，接着训练奖励模型，最后用 RLHF 做人类对齐。" | 核心链路 |
 | 1:48 | SFT 细节图解 | "数据质量重于数量，核心是让模型听懂指令并严格遵循输出格式。" | SFT 细节 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【美团面经】说一说大模型后训练（P…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["从“读书”到“做题”再到“讲规矩”的过程。<br/>0:36"]:::core
+        N2["核心链路图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["SFT 细节图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

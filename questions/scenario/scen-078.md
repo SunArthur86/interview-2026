@@ -162,3 +162,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像把钱包从身上(本地)换成存银行(Redis)，哪里都能取。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：解决微服务多实例间用户登录状态共享与身份认证问题。" | 核心定义 |
 | 1:50 | 集中存储 图解 | "Session存Redis，所有实例共享。" | 集中存储 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个分布式Session方案？微服务下Session…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["方案选型：集中式存储高可用易扩展，适合主流微服务；而…"]:::core
+        C["致命坑点：因为极易忘记设置过期时间，所以Redis …"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

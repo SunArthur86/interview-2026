@@ -245,7 +245,6 @@ Function Calling（技术实现）：
 2. **原生 vs Prompt**：优先用原生 FC（更准更稳），不支持才用 prompt 工程
 3. **错误回传**：工具失败时把错误信息回传给 LLM，让它自主决定重试/换方案——这是"智能"的体现
 
-
 ## 核心流程图
 
 ```mermaid
@@ -284,7 +283,6 @@ flowchart TD
 - 推荐原生Function Calling：大模型原生输出结构化JSON，参数提取稳定可靠
 - 对比Prompt硬解：对于不支持FC的旧模型，只能通过提示词约束并正则强行解析输出
 - 面试一句话：Tool Use本质是赋予了LLM调用外部API与动态获取实时数据的能力
-
 
 ## 苏格拉底式面试追问
 
@@ -343,11 +341,9 @@ LLM 是 next-token 生成，理论上可能生成语法错的 JSON（尤其长 J
 
 **收尾：** 您想深入聊：Function Calling和ReAct什么关系？——Function Calling是ReAct的"Action"的工程实现？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -356,3 +352,36 @@ LLM 是 next-token 生成，理论上可能生成语法错的 JSON（尤其长 J
 | 0:50 | 流程示意图 | "流程——LLM生成tool_call → 程序执行 → 结果回传 → LLM继续" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：Function Calling和ReAct什么关系？——F？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["LLM 工具调用（Tool Use…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["流程示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -262,11 +262,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：HyDE具体怎么实现？有什么风险？
 
-
 ## 视频脚本
 
 > 预计时长：3 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -274,6 +272,37 @@ flowchart TD
 | 0:20 | 核心概念图 | "RAG效果不好时从五个方向排查：chunk大小、query改写、多路召回、rerank精排、上下文压缩——逐个诊断才能对…" | 核心定义 |
 | 0:55 | chunk大小示意图 | "chunk大小——太大稀释精度，太小丢上下文，通常300-800字符" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["RAG效果不好怎么优化？<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["chunk大小示意图<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N3["对比/实战案例图<br/>1:30"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 
 ## 苏格拉底式面试追问
 

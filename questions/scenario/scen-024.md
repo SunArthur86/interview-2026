@@ -160,3 +160,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——寄重要挂号信：发件要回执(ACK)，运输要保价(副本)，收件要签字(手动提交)。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：确保消息在发送、存储、消费三个环节全链路落地。" | 核心定义 |
 | 1:50 | 发 图解 | "同步发送 + ACK确认 + 幂等重试。" | 发 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何保证消息队列的消息不丢失？从生产到消费全链路分析"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["顺序消费前提：摒弃全局有序（极差），只用分区有序（同…"]:::core
+        C["生产路由：按业务主键（如Order ID）Hash定…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

@@ -99,7 +99,6 @@ def select_few_shot_examples(query, corpus_embeddings, k=3):
 2. ICL中的“Recitation”现象是什么？模型是否会死记硬背示例？（如果示例列表很长，模型可能会通过注意力机制直接从Context中“复制”答案而不是进行泛化推理，这被称为Recitation，削弱了泛化能力）
 3. 如何利用反向思维进行ICL？（提供输入和错误输出，让模型解释原因并修正，这在纠错类任务中往往比正向示例更有效。）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -181,4 +180,36 @@ flowchart TD
 | 0:55 | 示例选择策略：随机/相似度/多样性 | 示例选择有随机、相似度、多样性等策略，相似度检索最常用，选和当前问题最像的示例。 | 选择策略 |
 | 1:25 | 关键点图：顺序敏感 / 3-5 个 / 格式一致 | 关键三点：示例顺序影响巨大，3 到 5 个效果最好，格式必须严格一致。 | 关键要点 |
 | 1:50 | Self-Consistency：多路径 + 多数投票 | Self-Consistency 多路径生成再多数投票，能再提升 5 到 15% 准确率，常配合 CoT 用。 | 增强技巧 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《上下文学习 ICL》+ 书法…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["原理图：Prompt 示例 → 模式匹配（类似 KNN）<br/>0:25"]:::core
+        N2["示例选择策略：随机/相似度/多样性<br/>0:55"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["关键点图：顺序敏感 / 3-5 个 / 格式一致<br/>1:25"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["Self-Consistency：多路径 + 多数投票<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

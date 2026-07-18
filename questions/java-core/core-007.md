@@ -129,3 +129,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "三位数字代码，告诉客户端请求处理结果——像快递单上的状态：已揽收（2xx）、查无此地（4xx）、站点爆仓（5xx）" | 核心定义 |
 | 1:20 | 状态码分5类示意 | "1信息、2成功、3重定向、4客户端错误、5服务器错误。" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是HTTP状态码？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["状态码分5类：1信息、2成功、3重定向、4客户端错误…"]:::core
+        C["常考301与302对比：301代表永久重定向，而30…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

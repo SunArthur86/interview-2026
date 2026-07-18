@@ -367,6 +367,32 @@ flowchart TD
 | 1:05 | 代码示例截图 | 分阶段加权 + 细粒度上报。 | 进度 |
 | 2:30 | 总结卡 | 一句话记忆：任务化：submit→task_id→排队→执行。 下期可以接着聊：进度怎么精确。 | 收尾总结 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>概念结构"]:::concept
+    N3["0:40<br/>算子"]:::deep
+    N4["1:05<br/>进度"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["2:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 ---
 
 ## 延伸：【巨剧核 AI 陪伴】音视频 AI 生成任务平台架构怎么设计？
@@ -547,4 +573,32 @@ DAG 描述：
 | 1:20 | 流程图 | 池化/优先级/抢占/弹性扩缩容。 | GPU 调度 |
 | 1:50 | 代码示例截图 | 全生命周期持久化，断点可恢复。 | 状态机 |
 | 3:30 | 总结卡 | 一句话记忆：任务平台 = 接入+调度+监控。 下期可以接着聊：GPU 怎么池化。 | 收尾总结 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>GPU 显存分配"]:::concept
+    N3["0:50<br/>算子 DAG"]:::concept
+    N4["1:20<br/>GPU 调度"]:::deep
+    N5["1:50<br/>状态机"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["3:30<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
 

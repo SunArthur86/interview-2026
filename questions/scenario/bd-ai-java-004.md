@@ -127,3 +127,35 @@ flowchart TD
 | 2:15 | 每轮Prompt重申 图解 | "每轮Prompt重申原始目标锚定方向。" | 每轮Prompt重申 |
 | 3:00 | 短期记忆用摘要替代历 图解 | "短期记忆用摘要替代历史对话。" | 短期记忆用摘要替代历 |
 | 3:50 | 长期记忆存向量数据库 图解 | "长期记忆存向量数据库，按需检索。" | 长期记忆存向量数据库 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【字节面经】如何解决 Agent 的上下文漂移问题？如何在有…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["治漂移根因：每轮Prompt强制注入原始目标，并附“…"]:::core
+        C["压缩策略对比：滑动窗口省Token但丢信息，对话摘要…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

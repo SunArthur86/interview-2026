@@ -165,3 +165,35 @@ flowchart TD
 | 0:40 | Fixed示意图 | Fixed：固定线程数，队列无限，防OOM需自定义 | Fixed |
 | 1:10 | Cached示意图 | Cached：线程数无限，队列空，适合短任务 | Cached |
 | 1:40 | 总结卡 + 下期预告 | 记住今天这几个关键词，面试一定用得上。下期见。 | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["Java 提供了哪几种线程池？各自的特点和适用场景？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["四大线程池：Fixed（固定）、Cached（缓存无…"]:::core
+        C["生产禁忌：禁用 Executors 工厂，因为无界队…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

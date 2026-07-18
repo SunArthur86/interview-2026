@@ -430,6 +430,34 @@ flowchart TD
 | 1:30 | 热点扩散示意/对比图 | "热度阈值触发缓存预热 + CDN + 限流" | 热点扩散要点 |
 | 1:55 | 总结卡 | "记住：推拉结合。下期见。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:15<br/>像快递分拣普通包裹走标准流程（拉"]:::concept
+    N3["0:40<br/>推拉结合要点"]:::deep
+    N4["1:05<br/>冷启动要点"]:::deep
+    N5["1:30<br/>热点扩散要点"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N6["1:55<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  N5 --> N6
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+
 ## 苏格拉底式面试追问
 
 这组追问训练你在面试现场一层层逼近本质。每一问先回答"为什么"，再回答"怎么做"，最后回答"如何证明"。

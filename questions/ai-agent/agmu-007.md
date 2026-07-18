@@ -88,7 +88,6 @@ Step1 -> Step2 -> Step3       Boss
 1. **误区：动态分配就是多线程**。动态分配的核心在于「任务内容的生成是运行时决定的」，而多线程只是执行手段。即便单线程也能实现动态任务分配的逻辑。
 2. **误区：过度依赖动态**。对于 90% 的常规case，动态分配由于增加了思考和规划步骤，延迟远高于固定 Pipeline，应只在必要时使用。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -150,7 +149,6 @@ flowchart TD
 - 混合模式：主干用 Pipeline 保证流程，关键节点插动态分配处理复杂分支。
 - 避坑指南：动态分配有不可控风险，需设预算上限和最大递归深度。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 固定 Pipeline 适合 SOP 稳定、契约清晰的标准化流程（ETL、审核），吞吐高可预测；动态分配适合探索性任务（故障排查、科研分析），前步输出决定后步动作可分叉。常混合用——主干是 Pipeline 保证流程，关键节点插动态分配处理复杂分支。坑是动态分配有不可控风险（循环生成任务、成本失控），必须设预算上限、最大递归深度、工具白名单。
@@ -174,3 +172,37 @@ flowchart TD
 | 1:10 | 混合模式架构 | "主干 Pipeline 保证流程，关键节点插动态分配处理分支。" | 混合实践 |
 | 1:35 | 运维死循环案例 | "实战：固定 Pipeline 卡重启死循环，动态分配解 0-day 排查。" | 实战教训 |
 | 1:50 | 总结卡 | "记住：稳定走 Pipeline，探索走动态，常混合。下期讲投票。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["动态分配 vs 固定 Pipeli…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N3["混合模式架构<br/>1:10"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N1["Pipeline 适用场景<br/>0:15"]:::practice
+        N2["动态分配适用场景<br/>0:45"]:::practice
+        N4["运维死循环案例<br/>1:35"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

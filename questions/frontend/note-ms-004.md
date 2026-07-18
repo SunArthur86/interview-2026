@@ -655,3 +655,35 @@ OCR vs 多模态模型各有利弊：OCR 优势是便宜（每次调用几分钱
 | 2:01 | 关键代码/伪代码片段 | "异步处理：大文件先存引用，后台异步提取，避免阻塞UI交互" | 异步处理 |
 | 2:54 | 对比表格 | "来源对象/提取结果/任务引用三层拆开" | 来源对象/提取结果/任务 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：上下文满了怎么提示用户。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【月之暗面面经】多模态输入同时有网页、文档和本地截图时，桌面…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心原则：上下文不是大数据池，而是分层引用系统"]:::core
+        C["三层架构：来源对象层（存引用）、提取结果层（存文本/…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

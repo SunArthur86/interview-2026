@@ -116,7 +116,6 @@ def query_internal_crm(customer_id: str) -> str:
 1. **忽视运维监控**：认为部署完就结束了，实际上私有化模型很容易出现显存泄漏或CUDA OOM。必须监控GPU显存使用率和KV Cache碎片率。
 2. **安全边界模糊**：虽然模型在本地，但Agent通过工具访问内网系统时，如果不做严格的权限管控（如RBAC），Agent可能成为攻击内网的跳板。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -185,7 +184,6 @@ flowchart TD
 - 异构适配：支持量化适配低显存卡，RAG增量更新保证知识时效。
 - 实战痛点：用RocksDB存KV Cache确保中间态数据不落盘，满足审计合规。
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 基于开源模型和本地推理引擎，在受限硬件资源下构建安全可控的私有AI系统。——打个比方，像自建机房，不租阿里云，用自己的服务器和开源软件搭建内部系统，数据绝对安全。
@@ -208,3 +206,36 @@ flowchart TD
 | 1:12 | 核心约束图解 | "数据不出域，选Qwen/Llama等开源模型，用vLLM/TGI本地推理。" | 核心约束 |
 | 1:48 | 架构选型图解 | "LangGraph优于LangChain，状态机可控，避免过度抽象。" | 架构选型 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个Self-hosted的A…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["基于开源模型和本地推理引擎，在受限硬件资源下构建<br/>0:36"]:::core
+        N2["核心约束图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["架构选型图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -144,13 +144,11 @@ flowchart TD
     Format --> Dequant[反量化相乘还原]
 ```
 
-
 ## 记忆要点
 
 - NVFP4原理：1符号+2指数+1尾数，动态范围±448，比INT4更优。
 - 缩放机制：Per-block缩放，每32个元素共享一个FP8 Scale，在最后一维缩放。
 - 保存格式：权重存FP4，额外存FP8 Scale表 [M, N/32]，反量化相乘还原。
-
 
 ## 结构化回答
 
@@ -175,3 +173,37 @@ flowchart TD
 | 2:00 | 缩放机制图解 | "Per-block缩放，每32个元素共享一个FP8 Scale，在最后一维缩放。" | 缩放机制 |
 | 2:40 | 保存格式图解 | "权重存FP4，额外存FP8 Scale表 [M, N/32]，反量化相乘还原。" | 保存格式 |
 | 3:20 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["【智谱Infra面经】NVFP4 …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["利用浮点格式指数特性在4比特内表达更大动态范围<br/>0:40"]:::core
+        N2["NVFP4原理图解<br/>1:20"]:::core
+        N3["缩放机制图解<br/>2:00"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["保存格式图解<br/>2:40"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

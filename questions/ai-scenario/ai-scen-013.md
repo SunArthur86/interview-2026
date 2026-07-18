@@ -118,7 +118,6 @@ def handle_approval(review_id, approved):
 1. **混淆人机交互与人工审核**：认为简单的“用户确认弹窗”就是HitL，真正的HitL通常涉及独立的风控系统、角色分离和审计追溯。
 2. **缺乏回退通道**：设计了人工拒绝的逻辑，但拒绝后没有引导Agent进行自我修正或提供备选方案，导致流程直接死结束。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -176,7 +175,6 @@ flowchart TD
 - 人工审核需独立系统与角色分离，确保审计追溯
 - 设计超时降级策略，防止审核员离线导致任务无限挂起
 
-
 ## 结构化回答
 
 **30 秒电梯演讲：** 在关键决策节点引入人工审核，建立安全网，确保Agent行为可控且准确。——打个比方，像自动驾驶的L2/L3级，机器负责大部分驾驶，但复杂路口或突发情况必须人接管。
@@ -199,3 +197,36 @@ flowchart TD
 | 1:12 | 协作模式图解 | "先审后行（高风险）、先行后审（低风险）、影子模式（验证期）" | 协作模式 |
 | 1:48 | 核心流程图解 | "Agent执行 → 风险引擎打分 → 超阈值转人工审核" | 核心流程 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个Human-in-the-…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["在关键决策节点引入人工审核，建立安全网，确保Ag<br/>0:36"]:::core
+        N2["协作模式图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["核心流程图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

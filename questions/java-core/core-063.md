@@ -166,3 +166,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "简单灵活的文本协议，无状态但易于扩展——通用万能插座，虽然不记忆状态（健忘），但能适配各种电器" | 核心定义 |
 | 1:20 | 协议简述示意 | "HTTP是Web基石，默认无状态且明文传输，简单灵活易扩展" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是HTTP特性与简述？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["协议简述：HTTP是Web基石，默认无状态且明文传输…"]:::core
+        C["Web三剑客：HTML编内容、HTTP传报文、URL…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

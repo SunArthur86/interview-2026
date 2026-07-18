@@ -171,7 +171,6 @@ class CrossModalRetriever:
 3. **实际工程**：双塔模型适合大规模检索（可预先建索引），Cross-Encoder适合精排但延迟高
 4. **与RAG结合**：对齐后图文可在同一向量库中检索，实现"以图搜文"和"以文搜图"
 
-
 ## 核心流程图
 
 ```mermaid
@@ -279,11 +278,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：CLIP的训练数据规模要多大才能有效？小数据场景怎么办？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -293,3 +290,37 @@ flowchart TD
 | 1:30 | 投影层映射示意图 | "投影层映射——在预训练模型上加投影头，无需重训整个模型" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：CLIP的训练数据规模要多大才能有效？小数据场景怎么办？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["多模态检索中，图像和文本向量不在同…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["CLIP范式示意图<br/>0:50"]:::deep
+        N3["投影层映射示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

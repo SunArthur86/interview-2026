@@ -745,3 +745,35 @@ Canvas 渲染性能确实更好（无 DOM 节点，纯绘制），但失去 DOM 
 | 2:01 | 关键代码/伪代码片段 | "核心交互：支持针对特定产物的局部重生成，而非全量重跑" | 核心交互 |
 | 2:54 | 对比表格 | "按任务分组再按产物类型展示" | 按任务分组再按产物类型展 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：不同类型产物的预览方案。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【月之暗面面经】如果一个 Agent 会生成站点、表格和 P…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心定位：AI产物不是消息，而是结构化、可预览、有版…"]:::core
+        C["架构三件套：任务分组侧栏、类型感知预览层、版本时间线…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

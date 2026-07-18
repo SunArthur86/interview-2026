@@ -167,7 +167,6 @@ flowchart TD
     H --> I["大模型生成回答"]
 ```
 
-
 ## 记忆要点
 
 - RAG四件套：Query Rewrite改写、混合检索(BM25+向量)、Rerank精排、动态Top-K
@@ -232,11 +231,9 @@ RRF 公式 `1/(k+rank)` 里的 k 控制头部和尾部排名的权重差异。k 
 
 **收尾：** 您想深入聊：Late Interaction（ColBERT v2）相比 bi-encoder 和 cross-encoder 优势在哪？
 
-
 ## 视频脚本
 
 > 预计时长：5 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -246,3 +243,37 @@ RRF 公式 `1/(k+rank)` 里的 k 控制头部和尾部排名的权重差异。k 
 | 1:30 | 召回用示意图 | "召回用——召回用 bi-encoder（query/doc 分别编码算余弦），精排用 cross-encoder（拼一起进模型）" | 要点拆解2 |
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：Late Interaction（ColBERT v2）相比？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["RAG 做过哪些优化？为什么加 R…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["查询改写示意图<br/>0:50"]:::deep
+        N3["召回用示意图<br/>1:30"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N4["对比/实战案例图<br/>2:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N5["总结回顾 & 下期预告<br/>3:10"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4 --> N5
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

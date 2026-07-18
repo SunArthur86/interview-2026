@@ -263,3 +263,29 @@ flowchart TD
 | 1:56 | 流程图：输入→处理→输出 | 要点是：AQS：CLH 队列 + state + 独占/共享模式 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——synchronized 和 Lock 区别？。 | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+  subgraph Intro["🎬 引入"]
+    N1["0:00<br/>开场钩子"]:::open
+  end
+  subgraph Body["📚 讲解"]
+    N2["0:12<br/>三性"]:::concept
+    N3["1:04<br/>能力/参数"]:::deep
+    N4["1:56<br/>AQS"]:::deep
+  end
+  subgraph Outro["🎯 收尾"]
+    N5["3:00<br/>收尾总结"]:::summary
+  end
+  N1 --> N2
+  N2 --> N3
+  N3 --> N4
+  N4 --> N5
+  classDef open fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+  classDef concept fill:#3b82f6,stroke:#1e3a8a,color:#fff;
+  classDef deep fill:#10b981,stroke:#047857,color:#fff;
+  classDef practice fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+  classDef summary fill:#6b7280,stroke:#374151,color:#fff,stroke-width:2px;
+```
+

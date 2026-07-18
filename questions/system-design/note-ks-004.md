@@ -406,3 +406,35 @@ flowchart TD
 | 1:57 | 关键代码/伪代码片段 | "时钟回拨解法：记录lastTimestamp到回拨<5ms则等待到>5ms则抛异常/借用未来时间" | 时钟回拨解法 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：雪花算法为什么用64位？128位有什么问题。" | 收尾 |
 
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【快手Java一面】分库分表后，雪花算法生成的ID出现冲突，…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["直接返回缓存数据 O（1） 低延迟"]:::core
+        C["Snowflake结构"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+
+

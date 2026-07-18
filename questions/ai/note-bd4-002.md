@@ -164,7 +164,6 @@ result = json.loads(response)  # 直接拿到结构化结果
 4. **Schema验证**：输出后用Pydantic/jsonschema校验，失败则重试
 5. **降级策略**：JSON解析失败→正则提取→规则兜底→人工客服
 
-
 ## 核心流程图
 
 ```mermaid
@@ -268,11 +267,9 @@ NER 精度高但"槽位定义变化时需重训"且"复杂槽位难抽取"。NER
 
 **收尾：** 您想深入聊：用LLM做意图识别时，怎么保证输出稳定JSON？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -281,3 +278,36 @@ NER 精度高但"槽位定义变化时需重训"且"复杂槽位难抽取"。NER
 | 0:50 | 意图识别示意图 | "意图识别——文本分类任务，输出intent label" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：用LLM做意图识别时，怎么保证输出稳定JSON？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["本地生活场景下怎么做意图识别与槽位…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["意图识别示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

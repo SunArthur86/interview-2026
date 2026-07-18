@@ -299,3 +299,35 @@ HashSet 方案直观——遍历 A 存入 Set，遍历 B 查 Set，时间 O(n+m)
 | 0:15 | 链表节点指针图 | "核心双指针：pA走A链表后跨到B头，pB走B链表后跨到A头。" | 核心双指针 |
 | 1:02 | 链表节点指针图分步演示 | "数学等式：因为路径长度 a+c+b 就是 b+c+a，所以双指针必然在交点相遇。" | 数学等式 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如果链表有环怎么办。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["怎么判断链表相交？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心双指针：pA走A链表后跨到B头，pB走B链表后跨…"]:::core
+        C["数学等式：因为路径长度 a+c+b = b+c+a，…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

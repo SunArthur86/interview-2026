@@ -211,7 +211,6 @@ Claude Code 的 Skill 机制：
 2. **强调"复用"**：Skill 的价值是"一次开发多次使用"，像软件库一样
 3. **提生态价值**：Skill 可分享可组合，是 Agent 生态的基础（类比 App 之于手机）
 
-
 ## 核心流程图
 
 ```mermaid
@@ -247,7 +246,6 @@ flowchart TD
 - 对比Tool与Skill：Tool是底层原子操作(如search)，Skill是多步组合的复杂业务能力(如调研)
 - Skill五大核心组件：触发条件、提示词、依赖工具、执行流程、输入输出Schema
 - 本质是高内聚低耦合：将常用复杂Agent处理逻辑固化为能力包，实现跨场景复用
-
 
 ## 苏格拉底式面试追问
 
@@ -297,7 +295,6 @@ Skill 的本质是"可复用、可管理的能力模块"，区别于一次性 Pr
 
 ## 结构化回答
 
-
 **30 秒电梯演讲：** 像游戏的技能系统——"火球术"封装了(施法动作+伤害计算+特效)，玩家一键释放，而非每次手动组合。Skill=Agent的"技能"。
 
 **展开框架：**
@@ -307,11 +304,9 @@ Skill 的本质是"可复用、可管理的能力模块"，区别于一次性 Pr
 
 **收尾：** Skill和Tool什么区别？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -320,3 +315,36 @@ Skill 的本质是"可复用、可管理的能力模块"，区别于一次性 Pr
 | 0:50 | Skill示意图 | "Skill——Skill = Prompt + Tools + Flow 的封装" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：Skill和Tool什么区别？——Tool是单步操作，Ski？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["什么是 Skill？Agent 架…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["Skill示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

@@ -179,3 +179,35 @@ flowchart TD
 | 0:40 | 概念动画/示意图 | "DNS解析中服务器代劳查询（递归）与指引下级地址（迭代）的两种方式——递归像秘书帮你跑腿直到拿到文件；迭代像问路，路人只告诉你下个地点在哪，你自己走" | 核心定义 |
 | 1:20 | 递归查询示意 | "你问我我必答到底，客户端负担轻而服务器负担重（多用于客户端查Local DNS）" | 要点1 |
 | 2:00 | 总结卡 | "记住这几条，面试不慌。下期讲进阶追问。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["什么是递归查询和迭代查询？"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["递归查询：你问我我必答到底，客户端负担轻而服务器负担…"]:::core
+        C["迭代查询：你问我我给线索，只返回下级地址让请求方自己…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

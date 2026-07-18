@@ -166,7 +166,6 @@ class Relation:
     type: str          # CEO / FOUNDED / LOCATED_IN
     weight: float = 1.0
 
-
 class GraphRAG:
     def __init__(self):
         self.graph = nx.DiGraph()
@@ -331,7 +330,6 @@ class GraphRAG:
 
 4. **面试加分点：** 提到 GraphRAG 的 **Map-Reduce 全局搜索** 和 **Leiden 社区检测** 这两个技术细节，能展示你对原始论文的深入理解。再提一下 LightRAG 等替代方案，说明你关注最新进展。
 
-
 ## 核心流程图
 
 ```mermaid
@@ -372,7 +370,6 @@ flowchart TD
 - GraphRAG核心：离线抽取实体关系建图谱+社区检测生成摘要。
 - 双模检索：Local针对单实体图遍历，Global针对全局Map-Reduce摘要。
 - 场景互补：简单事实用向量，复杂多跳与全局总结用图谱，常建混合架构。
-
 
 ## 苏格拉底式面试追问
 
@@ -427,11 +424,9 @@ flowchart TD
 
 **收尾：** 您想深入聊：GraphRAG怎么评估效果？——对比向量RAG在多跳问答上的准确率？
 
-
 ## 视频脚本
 
 > 预计时长：4 分钟 | 由浅入深
-
 
 | 时间 | 画面/字幕 | 口播台词 | 讲解要点 |
 |------|----------|----------|----------|
@@ -440,3 +435,36 @@ flowchart TD
 | 0:50 | 普通RAG示意图 | "普通RAG——向量相似度+局部片段" | 要点拆解1 |
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：GraphRAG怎么评估效果？——对比向量RAG在多跳问答上？" | 收尾与钩子 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["GraphRAG 跟普通 RAG …<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["核心概念图<br/>0:20"]:::core
+        N2["普通RAG示意图<br/>0:50"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["对比/实战案例图<br/>1:30"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:20"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+

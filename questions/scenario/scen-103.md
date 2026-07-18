@@ -162,3 +162,35 @@ flowchart TD
 | 1:22 | 生活类比动画 | "打个比方——像游园验票：门口保安粗筛，入口闸机细查，场馆内区控。" | 核心类比 |
 | 2:03 | 本地限流抗高频 图解 | "本地限流抗高频，无网延迟。" | 本地限流抗高频 |
 | 2:50 | 分布式限流用Lua 图解 | "分布式限流用Lua，保原子性。" | 分布式限流用Lua |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个支撑千万级并发的网关限流系统？对比单机限流与分布…"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["千万并发需分层限流：CDN/Nginx层（L3）拦截…"]:::core
+        C["单机用滑动窗口更精准，分布式用Redis+Lua（保…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

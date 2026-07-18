@@ -106,7 +106,6 @@ Answer:"""
     return prompt
 ```
 
-
 ## 核心流程图
 
 ```mermaid
@@ -188,4 +187,36 @@ flowchart TD
 | 0:55 | 首因/近因效应类比 | 根因在 Transformer 的注意力机制，偏向首尾，类似人类记忆的首因和近因效应。 | 根因 |
 | 1:25 | 缓解三招：重排 / 压缩 / 结构化 | 缓解办法：把关键文档重排到首尾、对文档做摘要压缩、用结构化 Prompt 帮模型定位。 | 缓解策略 |
 | 1:50 | 实战：XML 标签分隔 + 显式提示 | 实战里检索的 Top-K 文档用 XML 标签分隔，并在 Prompt 里显式提示关注中间部分。 | 实战技巧 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["标题《Lost in the Mi…<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["U 型注意力曲线图<br/>0:25"]:::core
+        N3["缓解三招：重排 / 压缩 / 结构化<br/>1:25"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N2["首因/近因效应类比<br/>0:55"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["实战：XML 标签分隔 + 显式提示<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

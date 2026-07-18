@@ -524,3 +524,35 @@ flowchart TD
 | 2:01 | 关键代码/伪代码片段 | "Redisson特性：支持可重入，且自带看门狗自动续期，防止业务超时引发死锁。" | Redisson特性 |
 | 2:54 | 对比表格 | "互补关系：incr作高性能前置过滤，而Redisson锁兜底复杂业务逻辑一致性。" | 互补关系 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Redisson的看门狗机制了解吗。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["【滴滴面经】Redis 的 incr 和 Redisson …"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["场景对比：incr解决单步原子计数（极快），而Red…"]:::core
+        C["incr局限：单命令虽原子，但无法保护扣减后的多步逻…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

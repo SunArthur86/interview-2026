@@ -126,7 +126,6 @@ flowchart TD
     M --> N
 ```
 
-
 ## 记忆要点
 
 - 配比口诀：英中代码四三二，数科多语各占一
@@ -156,4 +155,36 @@ flowchart TD
 | 0:55 | 数学/科学/多语言数据图标 | 除了英中代码，还得配数学、科学和多语言数据，各占一份左右，保证通用知识覆盖。 | 辅助数据 |
 | 1:20 | 小模型陷阱示意图：参数 <1B 曲线 | 小模型有个坑：参数小于 1B 的时候，代码比例必须压到 5% 以下，否则会挤占语言容量，基础能力反而下降。 | 小模型陷阱 |
 | 1:50 | 对比柱状图：代码 -5% 后数学/JSON 表现 | 实战影响很直接，代码比例降 5%，数学成绩显著下降，JSON 格式输出也明显变差。 | 实战影响 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["英4/中3/代码2<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N2["数学/科学/多语言数据图标<br/>0:55"]:::deep
+    end
+
+    subgraph Practice["🔧 实战"]
+        N1["代码片段动画 + '逻辑推理'标签<br/>0:25"]:::practice
+        N3["小模型陷阱示意图：参数 <1B 曲线<br/>1:20"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["对比柱状图：代码 -5% 后数学/JSON 表现<br/>1:50"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
 

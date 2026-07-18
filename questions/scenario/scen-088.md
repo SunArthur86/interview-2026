@@ -164,3 +164,35 @@ flowchart TD
 | 0:35 | 生活类比动画 | "打个比方——像红绿灯指挥交通，只有绿灯才能通行，不能随意变道，防止交通瘫痪。" | 核心类比 |
 | 1:10 | 概念定义动画 | "一句话：定义合法的状态流转规则，利用状态机模式管理订单生命周期。" | 核心定义 |
 | 1:50 | 状态定义 图解 | "明确待付、待发、完成等核心状态。" | 状态定义 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["引入"]
+        A["如何设计一个电商订单状态机？管理订单生命周期"]:::intro
+    end
+
+    subgraph Core["讲解"]
+        B["核心定义法：用「状态+事件=下一状态」的合法转移Ma…"]:::core
+        C["并发安全：数据库更新采用乐观锁（update whe…"]:::deep
+    end
+
+    subgraph Practice["实战"]
+        D["代码实战"]:::practice
+    end
+
+    subgraph Wrap["收尾"]
+        E["总结回顾"]:::wrap
+    end
+
+    A --> B --> C --> D --> E
+
+    classDef intro fill:#FF9800,color:#fff,stroke:#F57C00,stroke-width:2px
+    classDef core fill:#2196F3,color:#fff,stroke:#1976D2,stroke-width:2px
+    classDef deep fill:#4CAF50,color:#fff,stroke:#388E3C,stroke-width:2px
+    classDef practice fill:#9C27B0,color:#fff,stroke:#7B1FA2,stroke-width:2px
+    classDef wrap fill:#607D8B,color:#fff,stroke:#455A64,stroke-width:2px
+```
+

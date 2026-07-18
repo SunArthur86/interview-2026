@@ -156,7 +156,6 @@ flowchart TD
     D --> E[输出结构化JSON/CSV数据]
 ```
 
-
 ## 记忆要点
 
 - 架构分层：图像处理(OCR/表格) → 多模态理解(MLLM) → 知识增强(RAG)。
@@ -164,7 +163,6 @@ flowchart TD
 - 图表提取：识别类型 → 读取坐标轴 → 输出CSV/JSON数据。
 - 技术选型：固定表单用传统CV，复杂语义用MLLM，成本精度平衡。
 - 边界处理：低分辨率图先超分，复杂表格用MLLM修正版面。
-
 
 ## 结构化回答
 
@@ -188,3 +186,36 @@ flowchart TD
 | 1:12 | 架构分层图解 | "图像处理(OCR/表格) → 多模态理解(MLLM) → 知识增强(RAG)。" | 架构分层 |
 | 1:48 | 文档解析图解 | "OCR提取 → 版面分析 → 结构化JSON输出，防错位。" | 文档解析 |
 | 2:24 | 总结卡 | "记好这几条，面试不慌。下期见。" | 收尾 |
+
+### 视频流程图
+
+```mermaid
+flowchart LR
+
+    subgraph Intro["🎥 引入"]
+        N0["设计一个图文理解系统<br/>0:00"]:::intro
+    end
+
+    subgraph Core["📖 核心讲解"]
+        N1["融合OCR、多模态大模型与检索技术，解析视觉信息<br/>0:36"]:::core
+        N2["架构分层图解<br/>1:12"]:::core
+    end
+
+    subgraph Practice["🔧 实战"]
+        N3["文档解析图解<br/>1:48"]:::practice
+    end
+
+    subgraph Wrap["🎬 收尾"]
+        N4["总结回顾 & 下期预告<br/>2:24"]:::wrap
+    end
+
+    N0 --> N1 --> N2 --> N3 --> N4
+
+    classDef intro fill:#FF9800,color:#fff
+    classDef core fill:#2196F3,color:#fff
+    classDef deep fill:#4CAF50,color:#fff
+    classDef practice fill:#9C27B0,color:#fff
+    classDef wrap fill:#607D8B,color:#fff
+```
+
+
