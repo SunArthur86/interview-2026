@@ -360,3 +360,31 @@ MySQL→ES 同步本质是跨系统数据复制，受 CAP 约束：
 | 0:40 | 三种同步模式示意/对比图 | "同步双写（事务）、异步 MQ（最终一致）、CDC binlog（解耦最终一致）" | 三种同步模式要点 |
 | 1:05 | 延迟来源示意/对比图 | "MQ 投递 + ES 刷新（refresh interval，默认 1 秒）" | 延迟来源要点 |
 | 1:55 | 总结卡 | "记住：三模式。下期见。" | 收尾 |
+
+## 苏格拉底式面试追问
+
+这组追问训练你在面试现场一层层逼近本质。每一问先回答"为什么"，再回答"怎么做"，最后回答"如何证明"。
+
+| 追问层级 | 面试官可能这样问 | 高分回答方向 |
+|----------|------------------|--------------|
+| 目标追问 | 搜索场景为什么选 CDC 异步而不是同步双写？强一致不更好吗？ | 搜索容忍秒级延迟（用户不感知"刚上架 1 秒搜不到"），但 ES 不支持分布式事务（同步双写性能差且一致性代价高）。CDC 解耦——MySQL 主库不受 ES 故障拖累。判断依据：搜索是辅助查询不是交易，AP（最终一致）够用 |
+| 证据追问 | 你怎么证明 MySQL→ES 同步没丢数据？ | 监控 index_to_search_latency（写入到可搜索延迟，应 < 2s）、reconcile_diff_rate（T+1 MySQL count vs ES count 差异，应趋近 0）、binlog_lag（Debezium 消费 binlog 的滞后秒数）。每条记录有 updated_at 版本，可追溯同步状态 |
+| 边界追问 | 哪些场景必须用同步双写（Outbox）不能用 CDC？ | 核心交易数据（价格/库存）——用户下单时价格必须和搜索一致，否则下单价格和展示价格不符。这类用 Outbox 同事务保证。判断依据：数据"被交易依赖"还是"仅展示"——交易用同步，展示用 CDC |
+| 反例追问 | 给一个 CDC 同步丢数据的真实反例？ | Debezium 消费 binlog 时 MySQL 主从切换，从库 binlog position 和主库不一致，部分变更丢失（ES 搜不到）。根因：主从切换时 position 没保留。修复：Debezium 用 GTID（全局事务 ID）而非 position，主从切换后能从 GTID 续上。监控 binlog_gap_on_failover |
+| 风险追问 | ES refresh_interval 默认 1 秒，但商家上架商品后立刻去搜搜不到，投诉怎么办？ | 极少数关键场景（秒杀商品上架）用手动 refresh（写入后强制 refresh，性能差但实时）。通用场景接受 1 秒延迟——前端提示"商品上架后 1 秒内可搜到"。或用 GET by id（不受 refresh 影响，实时读）。监控 refresh_force_count（手动 refresh 次数，过高说明滥用）|
+| 验证追问 | 双写一个成功一个失败（MySQL 成功 ES 失败）怎么恢复？ | CDC 方案靠 binlog 重放——MySQL 成功后 binlog 有记录，消费失败 Kafka 不 ack 会重试。如果 ES 持续失败（如 ES 集群挂），消息堆积，等 ES 恢复后继续消费。极端（消息丢失）靠 T+1 对账补偿。监控 es_write_failure_retry_count 和 dead_letter_count |
+| 沉淀换乘 | 多业务（商品/店铺/评论）都要 MySQL→ES 同步，你怎么避免每业务各搞一套？ | 沉淀通用 SyncPipeline——Debezium 配置 + Kafka 消费 + ES bulk 写入 + 重试/死信/对账通用。业务只声明"源表→ES 索引 mapping + 字段转换"。提供 sync_lag_dashboard 按 table 拆延迟。监控按业务拆 reconcile_diff_rate 定位弱同步链 |
+
+### 现场对话示例
+
+**面试官**：ES refresh_interval 调到 200ms 实时性好了，但写入性能降 30%，这个 trade-off 怎么决策？
+
+**候选人**：看业务对实时性的真实需求。"刚上架立即搜到"在大多数电商场景不是硬需求（用户不会盯着搜），1 秒延迟可接受。200ms 只给秒杀/限时购等强实时场景。决策框架：先按 1s 默认跑，监控用户投诉"搜不到"的比例；如果投诉集中在"刚上架"，再针对性调小（且只调相关索引）。全局调 200ms 是过度优化。监控 search_freshness_complaint_rate。
+
+**面试官**：你说 T+1 对账扫 MySQL 和 ES，但亿级数据全扫一遍要几小时，影响生产库怎么办？
+
+**候选人**：对账不能全量扫生产 MySQL（慢查询风险）。分两步：(1) 数量校验（快）—— `SELECT COUNT(*)` vs ES count，秒级完成，只校验总数差异；(2) 抽样校验（慢）—— 只对"数量不一致"或"updated_at 在最近 1 天"的数据做明细比对，分批 limit 10000 查。明细对账走只读从库不影响主库。监控 reconcile_duration（对账耗时，超阈值告警）。
+
+**面试官**：CDC 方案 Debezium 监听 binlog，但如果 DBA 做了 DDL 变更（加字段），消费端解析旧 schema 会不会挂？
+
+**候选人**：会挂——Debezium schema 变更时消费端用旧 schema 解析新格式失败。对策：Debezium 有 schema history topic（记录 DDL 变更），消费端启动时先加载 schema history。但保险起见，DDL 变更要走流程——先停消费端，DDL，再启消费端（消费端代码已更新支持新 schema）。监控 schema_mismatch_count（schema 不匹配的解析失败数）。

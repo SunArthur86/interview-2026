@@ -62,6 +62,124 @@ public class Out {
 2. 局部内部类可以定义静态成员吗？（不可以，因为非静态内部类依赖于外部实例，而静态成员属于类级别，定义在局部中语义不明；JDK 16+ 允许定义 static final 的常量）
 3. 局部内部类与匿名内部类的区别？（局部内部类有类名，可复用；匿名内部类无类名，通常用于一次性实现接口或继承类）
 
+## 技术原理
+
+局部内部类是 Java 编译器层面的语法糖，本质是**把"只在某个方法里用的辅助类"封装在该方法的作用域内，避免污染外部类的命名空间**。它的核心难点是跨作用域的变量访问——为什么必须 final。
+
+- **编译产物的存在形式**：局部内部类编译后生成独立的 `.class` 文件，命名格式为 `Outer$1LocalInner.class`（`$数字` 前缀区分同一外部类里的多个局部内部类）。它不是外部类的成员，所以不能用 `public/private/static` 等成员修饰符。运行时仍由普通 ClassLoader 加载，只是它对外部的可见性被限制在源码作用域。
+- **Effectively Final 的本质——变量拷贝 + 一致性保证**：局部变量存在于方法栈帧中，方法返回时栈帧销毁。但局部内部类的实例可能逃逸（被 return、赋值给成员变量），生命周期长于方法栈帧。为了让内部类在方法返回后仍能访问这些变量，编译器**把用到的局部变量拷贝一份作为内部类的实例字段**（构造时传入）。如果允许变量修改，内部类持有的是拷贝，外部修改后两者不一致——这正是"闭包变量必须 final"的根因。Java 8 引入 Effectively Final（不显式写 final 但事实不变），编译器自动判定，减少样板代码。
+- **成员限制的语义原因**：局部内部类是"实例上下文"的（依赖外部实例），如果允许定义 `static` 成员会产生语义歧义——静态成员属于类级别，但这个类连独立的类加载时机都不明确。JDK 16+ 放宽到允许 `static final` 常量（编译期常量无歧义），但仍不允许普通 static 字段或方法。
+- **与 Lambda 的等价性**：Lambda 本质上就是"匿名局部内部类的语法糖"，访问外部变量也要 Effectively Final。理解局部内部类的原理就理解了 Lambda 闭包捕获的本质——`invokedynamic` + `LambdaMetafactory` 只是把内部类的实例化优化成了更轻量的形式。
+
+## 代码示例
+
+```java
+// 1. 局部内部类的基本用法：方法内的辅助数据封装
+public class Calculator {
+
+    public Result compute(int[] data) {
+        // 局部内部类：封装中间计算结果，只在本方法用
+        class Intermediate {
+            int sum = 0;
+            int max = Integer.MIN_VALUE;
+            int count = 0;
+
+            void add(int v) {
+                sum += v;
+                if (v > max) max = v;
+                count++;
+            }
+        }
+
+        Intermediate im = new Intermediate();
+        for (int v : data) im.add(v);
+        return new Result(im.sum, im.max, (double) im.sum / im.count);
+    }
+}
+```
+
+```java
+// 2. Effectively Final 演示：闭包变量捕获
+public class HandlerFactory {
+
+    // 错误写法：变量被修改，不能在局部内部类中访问
+    public Runnable buildBad() {
+        int x = 0;
+        // x++;  // 一旦修改，下面局部类访问 x 会编译失败
+        class Task implements Runnable {
+            public void run() {
+                // System.out.println(x);  // 编译错误：x 不是 effectively final
+            }
+        }
+        return new Task();
+    }
+
+    // 正确写法：变量初始化后不再修改
+    public Runnable buildGood(int input) {
+        int multiplier = input * 2;   // effectively final，后续不修改
+        class Task implements Runnable {
+            public void run() {
+                System.out.println(multiplier);   // 编译通过
+            }
+        }
+        return new Task();   // 实例逃逸，但 multiplier 作为字段拷贝保留
+    }
+}
+```
+
+```java
+// 3. 编译产物验证：查看 Outer$1LocalInner.class
+// 反编译可见编译器自动添加了接收外部变量拷贝的构造器
+public class Outer$1LocalInner {
+    // 编译器自动注入的字段（拷贝自方法局部变量）
+    private final int val$paramVar;
+    private final int val$localVar;
+    private final Outer this$0;   // 外部类实例引用
+
+    Outer$1LocalInner(Outer outer, int paramVar, int localVar) {
+        this.this$0 = outer;
+        this.val$paramVar = paramVar;
+        this.val$localVar = localVar;
+    }
+}
+```
+
+```java
+// 4. JDK16+ 允许 static final 常量
+public class Service {
+    public void process() {
+        class LocalWorker {
+            static final int MAX_RETRY = 3;   // JDK16+ 允许
+            // static int count = 0;          // 仍编译错误
+
+            void doWork() {
+                for (int i = 0; i < MAX_RETRY; i++) { /* ... */ }
+            }
+        }
+    }
+}
+```
+
+## 对比选型
+
+| 维度 | 局部内部类 | 匿名内部类 | Lambda | 成员内部类 |
+| :--- | :--- | :--- | :--- | :--- |
+| **定义位置** | 方法/块内 | 方法内（表达式） | 方法内（表达式） | 外部类内部 |
+| **类名** | 有，可复用 | 无，一次性 | 无，函数式 | 有 |
+| **作用域** | 仅定义块内 | 仅定义处 | 仅定义处 | 整个外部类 |
+| **访问修饰符** | 不能用 | 不能用 | N/A | 可用 |
+| **外部变量** | Effectively Final | Effectively Final | Effectively Final | 无限制 |
+| **适用场景** | 方法内辅助逻辑复用 | 一次性接口实现 | 函数式接口 | 与外部类强绑定 |
+
+## 常见坑
+
+- **局部变量修改后访问失败**：在内部类定义前修改了变量，后续局部内部类访问会编译失败。把变量声明拆成两个（一个不变给内部类用，一个可变给外部用）可绕过。
+- **不要用局部内部类做控制流**：早期 Java 没有 Lambda，开发者习惯用局部内部类做策略模式。现在应优先用 Lambda/方法引用，可读性更好。
+- **static 成员限制**：JDK 16 前完全不允许，16+ 只允许 `static final` 常量。误用会编译失败，IDE 通常会提示。
+- **序列化陷阱**：局部内部类实例如果实现了 `Serializable`，会连带捕获外部类实例（`this$0`），可能导致意外持有外部类引用，阻碍 GC。生产代码避免让局部内部类可序列化。
+- **反编译可看到捕获字段**：局部内部类实例的字段比代码里写的多（编译器注入的 `val$xxx`），调试时注意区分业务字段和编译器生成字段。
+- **作用域不能跨方法**：局部内部类只在定义它的方法内可见，无法被其他方法引用。需要跨方法共享时升级为成员内部类或顶级类。
+
 ## 记忆要点
 
 - 作用域：定义在方法或作用域块内，仅在当前块内可见，不能加访问修饰符。

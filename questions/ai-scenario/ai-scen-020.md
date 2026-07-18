@@ -71,6 +71,105 @@ def determine_conversation_stage(chat_history, user_intent):
         return "discovery" # SPIN需求挖掘
 ```
 
+## 技术原理
+
+AI 销售助手的核心是**把非结构化的自然语言对话映射到结构化的销售漏斗状态机**，每一轮对话既要推进阶段，又要产出可落库的结构化数据。这本质是一个"对话状态跟踪 + 策略路由"的工程问题：
+
+- **销售漏斗作为有限状态机（FSM）**：阶段定义为 认知→兴趣→评估→决策→成交，每个阶段有明确的进入条件和退出动作。LLM 本身不擅长维持长程状态，所以必须由外层的状态机记录"当前处于哪个阶段""已经收集了哪些槽位（slot）"。LLM 每轮只负责：意图识别（用户处于漏斗哪一阶）、槽位抽取（预算/决策人/痛点）、下一步策略生成。
+- **SPIN 提问法的工程化拆解**：SPIN（Situation/Problem/Implication/Need-Payoff）不是让 LLM 自由发挥，而是拆成可校验的子任务——Situation 阶段必填槽位（公司规模、行业），Problem 阶段必填槽位（当前痛点），Implication 阶段做影响放大（量化损失），Need-Payoff 阶段引导客户自己说出价值。每个子任务配独立的 Prompt 和校验规则，避免 LLM 跑偏。
+- **客户画像的实时增量更新**：画像不是静态的 CRM 快照，而是对话过程中持续抽取的增量。每轮对话用一个小模型（或函数调用）抽取"预算""决策角色""时间节点"等槽位，写入画像库。下一轮策略生成时把最新画像注入 Prompt，实现"边聊边记"。
+- **人机协作的降级机制**：AI 识别到"超出能力边界"（技术深水区、强情绪、大客户战略谈判）时主动转人工，而不是硬聊。关键信号包括：用户连续 2 次表达不满、问题命中"转人工"意图分类器、预算超过阈值进入"高价值线索"队列。这是 AI 销售落地时转化率不崩盘的兜底。
+
+## 代码示例
+
+```python
+# 1. 销售漏斗状态机 + 策略路由
+from enum import Enum
+from dataclasses import dataclass, field
+
+class FunnelStage(Enum):
+    OPENING = "opening"        # 开场建立信任
+    DISCOVERY = "discovery"    # SPIN 需求挖掘
+    PROPOSAL = "proposal"      # 产品推荐
+    NEGOTIATION = "negotiation"  # 异议处理/谈判
+    CLOSING = "closing"        # 促单
+
+@dataclass
+class CustomerProfile:
+    industry: str = ""
+    budget: str = ""           # 关键槽位：预算
+    pain_points: list = field(default_factory=list)
+    decision_role: str = ""    # 决策人/影响者/使用者
+    timeline: str = ""
+
+class SalesStrategyRouter:
+    """根据意图 + 槽位填充度决定下一阶段和策略"""
+    def route(self, intent: str, profile: CustomerProfile,
+              history: list) -> tuple[FunnelStage, str]:
+        # 强制节点：预算未探询不允许进入促单（实战踩坑总结）
+        if intent == "closing_intent" and not profile.budget:
+            return FunnelStage.DISCOVERY, "spin_budget_probe"
+        if intent == "objection":
+            return FunnelStage.NEGOTIATION, "objection_handler"
+        if profile.pain_points and profile.budget:
+            return FunnelStage.PROPOSAL, "product_recommend"
+        return FunnelStage.DISCOVERY, "spin_problem_question"
+
+# 2. 槽位抽取 + 画像增量更新（每轮调用）
+def extract_slots(user_msg: str, profile: CustomerProfile) -> CustomerProfile:
+    """用小模型/正则从用户消息抽取槽位，增量更新画像"""
+    prompt = f"""从用户消息抽取销售关键信息，输出 JSON：
+    {{'budget': '', 'pain_points': [], 'decision_role': '', 'timeline': ''}}
+    用户消息：{user_msg}
+    当前画像：{profile.__dict__}"""
+    slots = llm_extract(prompt)   # 函数调用，输出结构化 JSON
+    for k, v in slots.items():
+        if v:
+            setattr(profile, k, v)   # 只更新非空字段
+    return profile
+
+# 3. 异议处理：结构化知识库检索 + 话术模板
+def handle_objection(objection: str, kb: vectorstore) -> str:
+    """异议 → 检索知识库 → 填充话术模板"""
+    docs = kb.similarity_search(objection, k=3)   # 竞品对比/案例/FAB
+    return llm_generate(
+        template="用户提出异议：{obj}\n参考话术：{ctx}\n生成自然回应",
+        ctx="\n".join(d.content for d in docs), obj=objection)
+```
+
+```yaml
+# 4. 人机协作降级规则（配置化，避免硬编码）
+handoff_rules:
+  - trigger: "intent == complain && sentiment_score < -0.5"
+    action: transfer_to_human
+    reason: "用户情绪负向，AI 继续会激化矛盾"
+  - trigger: "turn_count > 15 && stage == discovery"
+    action: transfer_to_human
+    reason: "需求挖掘超 15 轮仍未收敛，可能高价值复杂客户"
+  - trigger: "budget > 100000"
+    action: transfer_to_human
+    reason: "大额线索必须人工介入"
+```
+
+## 对比选型
+
+| 维度 | 纯规则型销售机器人 | LLM 驱动销售助手（本方案） | 人工销售 |
+| :--- | :--- | :--- | :--- |
+| **对话自然度** | 低（关键词匹配，僵硬） | 高（上下文理解，拟人化） | 最高 |
+| **覆盖咨询量** | 高（成本极低） | 中高（40%-70% 初级咨询） | 低（人力受限） |
+| **复杂谈判** | 不支持 | 有限（需人机协作降级） | 强 |
+| **画像积累** | 无（不沉淀数据） | 实时增量结构化 | 依赖销售手动录入 |
+| **转化率** | 极低 | 中（过滤无效线索后提升 15%+） | 高 |
+| **适用阶段** | 顶部漏斗筛选 | 中部漏斗培育 + 意向识别 | 底部漏斗成交 |
+
+## 常见坑
+
+- **不要让 LLM 自由发挥对话**：无状态机的自由对话会跑题、跳过预算探询、过早报价。必须用 FSM 强制阶段流转 + 槽位校验，把 LM 限制在"单轮策略生成"的边界内。
+- **预算探询是必填节点**：实战踩坑——未探询预算就推高价产品，人工介入后发现预算锁死，转化率低。在 Prompt 增加强制节点后无效线索过滤率提升 15%。
+- **异议处理不能靠 LLM 即兴**：竞品对比、价格异议这类问题必须检索结构化知识库（竞品分析表、FAB 话术），不能让模型瞎编，否则会出现幻觉性贬低竞品（合规风险）。
+- **衡量 AI 贡献要设计 A/B 实验**：不能只看 AI 处理的线索转化率，因为 AI 接的多是低质量线索。必须做随机分流 A/B 测试，对比"有 AI 介入"vs"无 AI"的最终成交率，才能真实归因。
+- **GDPR/个保法合规**：客户画像涉及个人信息，对话录音和画像存储要明确告知用户、提供退出机制，敏感字段（身份证、手机号）要脱敏后入库。
+
 ## 记忆要点
 
 - 核心能力：SPIN提问挖掘需求，销售漏斗阶段识别，异议处理促单。
