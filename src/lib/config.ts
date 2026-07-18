@@ -44,6 +44,11 @@ export const APP_CONFIG = {
     'java-architect': { label: 'Java 后端架构师', icon: '🏗️', color: '#5856d6' },
     'boss-ai':        { label: '巨剧核 AI 陪伴', icon: '🎭', color: '#ff2d55' },
     'biopharm':       { label: '生物医药 AI 全栈', icon: '🧬', color: '#00c7be' },
+    // === 面试笔记 ===
+    'algorithm':      { label: '算法', icon: '🔢', color: '#e74c3c' },
+    'frontend':       { label: '前端', icon: '🎨', color: '#9b59b6' },
+    'network':        { label: '网络', icon: '🌐', color: '#3498db' },
+    'other':          { label: '其他', icon: '📦', color: '#95a5a6' },
   } as Record<string, CategoryConfig>,
   subcatGroups: {
     // === Java 子分类 ===
