@@ -139,9 +139,6 @@ flowchart TB
     class C1,C2,C3,C4,C5,C6,Chain,Pool cf
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-136.svg" alt="Future和CompletableFuture有什么区别？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -153,8 +150,6 @@ flowchart TB
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** Future就像电话订票只能一直等回复；CompletableFuture像短信订票，票好了自动通知你，还能顺便订酒店。
 
 **展开框架：**
@@ -163,8 +158,6 @@ flowchart TB
 3. **支持异常处理** — 支持异常处理（核心概念）
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

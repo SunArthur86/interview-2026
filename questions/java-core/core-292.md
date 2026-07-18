@@ -128,9 +128,6 @@ public class MergeSort {
 *   **考点 2**：为什么归并排序比快速排序更稳定？（考察快排 O(n²) 的最坏情况和归并排序恒定 O(n log n) 的特性）
 *   **考点 3**：如何在单链表上实现归并排序？（考察链表归并无需额外空间，只需修改指针的特性）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-292.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -142,7 +139,6 @@ public class MergeSort {
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 把一副牌分成两堆，每堆理顺，最后像接龙一样合并成一副有序牌。
 
 **展开框架：**
@@ -151,7 +147,6 @@ public class MergeSort {
 3. **时间复杂度恒** — 时间复杂度恒为O(n log n)
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

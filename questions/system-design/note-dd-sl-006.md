@@ -275,9 +275,6 @@ slot = CRC16(key) % 16384
 
 > 单实例 Redis QPS 基准是 **8~12万**，瓶颈不在 CPU 计算而在**网络 IO**（单线程处理 Socket 读写）。Pipeline 批量执行可提升 3~10 倍；Redis 6.0 引入多线程 IO 可提升约 1 倍；如果仍不够，使用 Redis Cluster 水平扩展，每增加一个分片，整体 QPS 近似线性增长。短链系统这种 `短码→URL` 的纯 KV 查询场景，单 Redis 10万 QPS 完全够用，亿级数据再用集群。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-sl-006.svg" alt="【滴滴面经】单 Redis 的 QPS 大概是什么量级？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

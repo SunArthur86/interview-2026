@@ -243,7 +243,3 @@ flowchart LR
 | 1:05 | B+ 树索引结构图 | HNSW（推荐）/ IVFFlat，百万级千万级可用。 | 索引 |
 | 2:30 | 总结卡 | 一句话记忆：PGVector：向量作 PG 列，SQL 检索。 下期可以接着聊：HNSW 索引怎么建。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-035.svg" alt="【生物医药 AI】PostgreSQL + PGVector 实战怎么做（OLTP+向量一体化）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

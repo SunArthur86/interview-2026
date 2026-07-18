@@ -613,9 +613,6 @@ class GradualIndexSwitcher:
 
 **一句话总结：** 实时增量更新的核心是 **CDC 监听变更 → 仅对变更文档做增量 Embedding → 双写版本化索引 → 灰度切换 + 多层一致性保障**。通过版本号丢弃过期事件、内容哈希实现幂等、TTL 自动清理旧版本、定期对账兜底修复，实现秒级延迟的有界最终一致性。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-llm-014.svg" alt="【字节面经】业务知识库每天有大量文档新增和修改，如何设计一套实时增量更新方案，使检索结果保持低延迟且一致性可控？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

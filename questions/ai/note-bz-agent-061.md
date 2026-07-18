@@ -213,9 +213,6 @@ class ProductionRAGAgent:
 2. **LangGraph 是重点**：支持循环/分支/人工节点——这是生产级 Agent 的刚需
 3. **强调可观测**：没有 LangSmith 级别的 Trace，生产 Agent 无法调试
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-061.svg" alt="LangChain 1.2 生产级架构是什么样？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -274,8 +271,6 @@ class ProductionRAGAgent:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 从毛坯房(LangChain早期)到精装房(1.2)——加了监控系统(LangSmith)、复杂管线(LangGraph)、标准化接口(LCEL)。
 
 **展开框架：**
@@ -284,9 +279,6 @@ class ProductionRAGAgent:
 3. **LangSmith** — 全链路监控调试
 
 **收尾：** LCEL和旧Chain什么区别？
-
-
-
 
 
 ## 视频脚本

@@ -286,9 +286,6 @@ class PromptInjectionDefense:
 2. **安全三层面**：输入(防注入)+输出(防泄露)+行为(权限控制)——立体防护
 3. **Prompt 注入是重点**：这是 LLM 特有的安全风险，要专门讲防护方案
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-079.svg" alt="大模型监控指标如何设计？安全防护方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -345,8 +342,6 @@ class PromptInjectionDefense:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像给银行装安保——监控摄像头(指标监控)、门禁系统(权限控制)、金库保险柜(数据保护)、报警系统(异常告警)。
 
 **展开框架：**
@@ -355,9 +350,6 @@ class PromptInjectionDefense:
 3. **核心** — 可观测+可告警+可干预
 
 **收尾：** 幻觉率怎么监控？
-
-
-
 
 
 ## 视频脚本

@@ -103,9 +103,6 @@ client := &http.Client{
 2. **服务端配置**：Nginx/Apache 中如何配置 Keep-Alive 超时？过短或过长有什么影响？（答案：`keepalive_timeout`；太短导致频繁握手，太长占用连接）。
 3. **与 TCP Keep-Alive 的区别**：HTTP Keep-Alive 和 TCP 层的 SO_KEEPALIVE 有什么不同？（答案：HTTP Keep-Alive 是应用层复用连接，TCP Keep-Alive 是传输层心跳检测，用于死连接排查）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-043.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

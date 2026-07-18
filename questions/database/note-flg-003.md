@@ -285,6 +285,3 @@ POST /orders/_search?scroll=1m
 | 1:57 | 关键代码/伪代码片段 | "一致性: 秒级最终一致(非强一致) + 对账机制" | 一致性 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Canal同步有延迟，用户搜索到的数据不是最新的怎么办。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-flg-003.svg" alt="Elasticsearch查询场景与MySQL数据同步 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

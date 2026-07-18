@@ -106,9 +106,6 @@ ensemble_retriever = EnsembleRetriever(
 2.  **向量数据库索引如何选择？**（数据量<100万用 IVF_FLAT，数据量大且内存足够用 HNSW，需要精确查全用 Flat）
 3.  **RAG 中如何处理数据更新？**（Upsert 机制：向量库支持 Insert+Update，或采用“软删除+重新插入”策略保证一致性）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-001.svg" alt="如何设计一个企业级 RAG 知识库系统？要求支持百万级文档、秒级检索、高准确率回答。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

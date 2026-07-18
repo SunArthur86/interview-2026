@@ -108,9 +108,6 @@ def topk_routing(hidden_state, gate, top_k):
 2. **训练稳定性**：Router 坍塌问题，即总是倾向于选择同一个专家。如何解决？（增加负载均衡 Loss，引入噪声）。
 3. **DeepSeek-MoE 细节**：共享专家是否参与路由选择？（通常不参与，直接作为输出的一部分，保证基础能力不失）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-003.svg" alt="MoE(Mixture of Experts)架构是什么?DeepSeek-MoE和Mixtral有什么区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

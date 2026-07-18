@@ -104,9 +104,6 @@ flowchart TD
     style BIT fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-012.svg" alt="如何设计一个签到打卡系统？支持亿级用户每日签到 + 签到统计。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -119,8 +116,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像挂历，每天打个勾，用0和1标记有无签到，超级省纸。
 
 **展开框架：**
@@ -129,8 +124,6 @@ flowchart TD
 3. **Key** — Key按年月分片方便管理
 
 **收尾：** Bitmap如何统计连续签到天数？
-
-
 
 
 ## 视频脚本

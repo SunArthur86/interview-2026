@@ -274,7 +274,3 @@ new Object()
 | 1:57 | 关键代码/伪代码片段 | "JDK8: 永久代到元空间(本地内存，不在堆中)" | JDK8 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：JDK8为什么要用元空间替代永久代。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-016.svg" alt="【拼多多 Java服务端】JVM内存区域如何划分的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -472,14 +472,4 @@ flowchart LR
 | 1:05 | Cedar示意/对比图 | "AWS 推出、语法简洁、形式化验证、支持 partial evaluation" | Cedar要点 |
 | 1:55 | 总结卡 | "记住：OPA。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-133.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-133.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-133.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

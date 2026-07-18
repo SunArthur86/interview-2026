@@ -1291,9 +1291,7 @@ function determineFlowDepth(productType: ProductType): 'fast' | 'standard' | 'st
 **Q3: 发布后的回滚机制怎么设计？**
 发布前创建 `RollbackSnapshot`（备份所有将被覆盖/删除的文件内容），发布失败或用户主动回滚时：① 恢复备份文件到原始内容 ② 删除新创建的文件。回滚快照与变更单元一一对应，保证操作可逆。已回滚状态 (`rolled_back`) 是终态，不可再次回滚。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_frontend_note-ms-008.svg" alt="【月之暗面面经】桌面端为什么要把结果编辑、确认和发布拆成三步？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心原因：AI产出不可控，为防止不可逆操作，必须引入Human-in-the-loop

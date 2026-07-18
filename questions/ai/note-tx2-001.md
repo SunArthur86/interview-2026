@@ -168,9 +168,6 @@ Planning 拆解：
 - **Multi-Agent**：多个 Agent 分工协作（Planner/Executor/Critic），处理更复杂任务
 - **Computer Use**：Anthropic 的能力，Agent 直接操作电脑（点击/输入/截屏），Tool 扩展到 GUI
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx2-001.svg" alt="【某讯面经】什么是 Agent？核心组件（Planning、Memory、Tool、Action）作用分别是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

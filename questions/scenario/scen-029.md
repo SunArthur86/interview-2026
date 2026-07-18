@@ -104,9 +104,6 @@ memory_points:
 3. **对账细节**：如果渠道一直在扣款中（Pending），何时算超时？（通常设置30min或24h，超时后主动查询渠道接口确认）
 4. **金额计算**：为什么不能用Double/Float计算金额？（精度丢失，如0.1+0.2!=0.3，必须用BigDecimal或Long存分）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-029.svg" alt="如何设计一个支付系统？支持千万级日订单，金额零误差。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -118,7 +115,6 @@ memory_points:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像银行转账：记账要双人复核（幂等），每天晚上必须核对账目（对账），一分钱不能差。
 
 **展开框架：**
@@ -127,7 +123,6 @@ memory_points:
 3. **事务控制** — TCC或本地消息表保一致
 
 **收尾：** 支付系统如何保证幂等？
-
 
 
 ## 视频脚本

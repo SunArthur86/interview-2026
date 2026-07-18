@@ -98,9 +98,6 @@ answer = llm.predict(prompt)
 3.  **如果检索到的文档是错误的，RAG 会如何表现？**
     模型会产生“误导性幻觉”，即基于错误的事实生成逻辑自洽但内容错误的答案。因此检索质量和 Rerank 至关重要。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_sarg-001.svg" alt="RAG的基本架构是什么？为什么需要RAG？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

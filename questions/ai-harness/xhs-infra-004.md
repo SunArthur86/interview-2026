@@ -103,9 +103,6 @@ flowchart TD
     HBM --> Output[输出]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_xhs-infra-004.svg" alt="FlashAttention v1/v2/v3的核心改进分别是什么？为什么能减少内存访问？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

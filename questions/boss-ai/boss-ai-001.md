@@ -196,7 +196,3 @@ flowchart TD
 | 1:50 | 模型训练流程图 | 安全/合规/人设一致性三层校验。 | 输出审核 |
 | 3:30 | 总结卡 | 一句话记忆：编排链路：人设+上下文+记忆+输入 → prompt → 路由 → 工具 → 审核 → 返回。 下期可以接着聊：Agent 编排用什么框架。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-001.svg" alt="【巨剧核 AI 陪伴】Agent 编排全链路怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -208,9 +208,6 @@ def hybrid_agent(goal):
 2. **强调组合**：生产中几乎都是混合架构（Plan 骨架 + ReAct 节点 + Reflexion 兜底）
 3. **从任务结构出发**：可分解？需工具？可验证？——这三个问题决定框架选择
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-014.svg" alt="主流认知框架（CoT/ReAct/Plan-Execute/Reflexion）各自适用什么场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

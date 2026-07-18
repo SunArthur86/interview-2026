@@ -107,9 +107,6 @@ void onCongestionEvent(TCPState& state, bool isTimeout) {
 2. **RTO 是如何计算的？**：通常基于 RTT（往返时间）测量，使用加权移动平均或 Karn 算法计算，并包含一定的方差补偿，以适应网络波动。
 3. **拥塞控制和流量控制的区别**：拥塞控制是全局性的，防止网络过载；流量控制是点对点的，防止发送方淹没接收方（滑动窗口机制）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-020.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

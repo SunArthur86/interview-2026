@@ -92,9 +92,6 @@ flowchart TD
     style SUM fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_bd-ai-java-004.svg" alt="【字节面经】如何解决 Agent 的上下文漂移问题？如何在有限上下文窗口内做短期和长期记忆压缩？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

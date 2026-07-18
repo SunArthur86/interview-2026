@@ -155,9 +155,6 @@ flowchart TD
     K --> L["返回 dummy.next<br/>(真正的合并头节点)"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-016.svg" alt="【字节飞连面经】算法：合并两个有序链表（LeetCode 21） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

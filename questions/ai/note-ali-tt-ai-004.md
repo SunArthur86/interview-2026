@@ -326,6 +326,3 @@ class AgentResponse(BaseModel):
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：RAG检索不到相关信息时，如何防止模型"硬编"答案？" | 收尾与钩子 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ali-tt-ai-004.svg" alt="【阿里淘天AI二面】如何避免Agent场景下模型的幻觉问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -201,7 +201,3 @@ AT 模式确实省事，但它在高并发扣库存场景有致命问题——AT
 | 1:56 | 流程图：输入→处理→输出 | 要点是：Seata：AT 模式（自动生成回滚 SQL）/ TCC / Saga | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-004.svg" alt="【拼多多交易】分布式事务怎么解决？下单跨服务怎么一致？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

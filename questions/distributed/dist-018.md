@@ -87,11 +87,6 @@ backend www_back
 4. **性能调优**：`maxconn`、`nbproc` 以及系统层面的 `ulimit` 设置对并发能力的影响。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-018.svg" alt="HAProxy负载均衡器的特点和使用场景是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心定位：提供高可用与负载均衡的代理软件，同时支持 TCP(4层)和 HTTP(7层)。
@@ -103,8 +98,6 @@ backend www_back
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 智能交通指挥员，既懂按车牌（IP）分流，也懂按目的地（URL）指路，还能发现坏车（故障节点）。
 
 **展开框架：**
@@ -113,8 +106,6 @@ backend www_back
 3. **支持多种负载** — 支持多种负载均衡算法和健康检查
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -164,9 +164,6 @@ RISKS = """
 3. **关联岗位**：将Vibe Coding与Agent开发岗位关联——"用AI构建AI"是核心能力
 4. **实操Demo**：如果能现场展示用Claude Code快速实现一个小功能，加分极大
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-lx-agent-014.svg" alt="Vibe Coding工具为什么最近会被拿来问，面试里应该怎么答？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -180,7 +180,3 @@ graph TD
 | 1:02 | 缓存读写策略流程图分步演示 | "LinkedList就是双向链表，头尾插入O(1)" | LinkedList=双 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：ArrayList 扩容 1.5 倍的原因是什么？为什么不是 2 倍。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-001.svg" alt="ArrayList 和 LinkedList 的区别与使用场景？（华为od Java一面） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

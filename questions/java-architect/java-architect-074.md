@@ -433,14 +433,4 @@ sum(rate(container_cpu_cfs_throttled_seconds_total[5m])) by (pod)
 | 0:40 | 容器 memory li示意/对比图 | "容器 memory limit 必须 > JVM 总内存 + 安全余量（通常留 25%）" | 容器 memory li要点 |
 | 1:25 | 总结卡 | "记住：JVM 总内存 = 堆 +。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-074.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-074.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-074.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

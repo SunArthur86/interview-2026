@@ -84,9 +84,6 @@ Java IO 流主要分为字节流和字符流。
 1. **混淆 NIO 与非阻塞 I/O**：Java 中的 NIO（New IO/Non-blocking IO）包虽然支持非阻塞 I/O，但其核心组件是 Channel 和 Buffer。真正的 I/O 多路复用依赖于 `Selector`。单纯的非阻塞 I/O（不使用 Selector）会由于忙轮询导致 CPU 100%，并不是高性能方案。
 2. **多路复用是同步还是异步**：I/O 多路复用本质上是**同步 I/O**模型。因为虽然“等待数据准备好”这一步由 epoll 监听被阻塞了，但第二步“将数据从内核复制到用户空间”仍然需要进程在调用 `recvfrom` 时同步阻塞等待（或立即返回后拷贝）。真正的异步 I/O（AIO）是“两个阶段都不需要阻塞”。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-069.svg" alt="什么是I/O模型？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

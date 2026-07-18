@@ -203,9 +203,6 @@ selection_dimensions = {
 3. **结合实践**：说自己用过什么、为什么选——有真实经验最加分
 4. **务实态度**：承认多 Agent 框架不够成熟，生产建议 LangGraph——不自嗨
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-067.svg" alt="字节 AI 二面：对主流 Agent 框架有什么看法？怎么选型？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -272,7 +269,6 @@ selection_dimensions = {
 3. **LlamaIndex** — LlamaIndex：RAG专精
 
 **收尾：** 字节内部用什么？
-
 
 
 ## 视频脚本

@@ -107,9 +107,6 @@ t.interrupt(); // 设置标志位，让 while 循环退出
 2. **LockSupport.park() 的响应**：处于 `park` 状态的线程被 `interrupt` 后，会立即返回（不抛异常），可以通过 `Thread.interrupted()` 判断。
 3. **不可中断的阻塞**：Java NIO 中的 `ServerSocketChannel.accept()` 或某些 IO 阻塞可能无法响应中断，需要关闭 Channel 来跳出阻塞。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-008.svg" alt="Interrupt方法结束线程是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -121,7 +118,6 @@ t.interrupt(); // 设置标志位，让 while 循环退出
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 不是拔电源，而是按暂停键让任务自己收拾东西走人。
 
 **展开框架：**
@@ -130,7 +126,6 @@ t.interrupt(); // 设置标志位，让 while 循环退出
 3. **通过检查标志** — 通过检查标志位或捕获异常来处理中断逻辑。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本
@@ -236,7 +231,6 @@ try {
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 你在睡觉（阻塞），别人把你叫醒（中断）；你在干活（运行），别人喊你停一下，具体停不停你自己决定。
 
 **展开框架：**
@@ -245,7 +239,6 @@ try {
 3. **Interrupted** — 运行线程需检查 isInterrupted() 自行处理
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

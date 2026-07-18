@@ -116,9 +116,6 @@ flowchart TD
     L --> M[实战: 可开启 CPU Offload 或 通信 overlap]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-015.svg" alt="ZeRO (Zero Redundancy Optimizer)的三级优化分别是什么?如何选择 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

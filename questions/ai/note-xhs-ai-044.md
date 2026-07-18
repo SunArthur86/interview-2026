@@ -263,6 +263,3 @@ class SourceTracker:
 **面试官**：RAG过度约束有什么副作用？
 **候选人**：过度依赖检索失去创造性、检索失败时无法回答、回答生硬满意度下降，需要平衡约束和灵活性。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-044.svg" alt="【快手AI大模型】RAG缓解幻觉的边界在哪里？三层管控怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

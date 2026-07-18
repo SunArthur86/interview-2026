@@ -166,9 +166,6 @@ def check_rate_limit(user_id, api):
 3. **异步落库**：Redis做过程态，MySQL做最终态，体现架构思维
 4. **TTL管理**：不同数据设置不同过期时间，平衡一致性和性能
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-bd-agent-007.svg" alt="Redis在业务项目中主要解决了哪些问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

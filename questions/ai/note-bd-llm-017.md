@@ -481,9 +481,6 @@ class ProductionJSONGenerator:
 4. 提到后处理修复的具体策略：尾部逗号、单引号→双引号、`json-repair` 库
 5. 强调生产环境要**组合使用**：约束解码为主 + schema验证为辅 + 后处理为兜底
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-llm-017.svg" alt="【字节面经】让模型稳定输出符合 Schema 的 JSON 数据，除了 Function Calling，你还用过哪些方法？各有什么适用边界？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -476,7 +476,6 @@ public class SettlementRetryService {
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像餐厅结账。一桌客人消费 500 元（用优惠券 -50，实付 450）。餐厅要算：厨房成本 200（食材）、服务员提成 45（10%）、平台抽佣 22.5（5%）、餐厅利润 182.5。这个"500 元怎么分"就是清分。如果餐厅每天打...
 
 **展开框架：**
@@ -485,8 +484,6 @@ public class SettlementRetryService {
 3. **批处理** — 大数据量跑批（Spark/Flink 批），日终全量清分
 
 **收尾：** 清分规则怎么配置化？
-
-
 
 
 ## 视频脚本
@@ -500,14 +497,4 @@ public class SettlementRetryService {
 | 0:40 | 结算（付钱）示意/对比图 | "资金划转，T+1 批量打款给商家" | 结算（付钱）要点 |
 | 1:25 | 总结卡 | "记住：清分算钱。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-061.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-061.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-061.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

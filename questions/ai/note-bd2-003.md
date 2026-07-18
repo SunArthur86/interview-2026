@@ -247,9 +247,6 @@ index = faiss.IndexIVFPQ(quantizer, 1536, nlist=100, m=8, nbits=8)
 | HNSW | ~98% | 很快 | 中大 | 100万-1亿 |
 | IVFPQ | ~90% | 最快 | 最小 | >1亿 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd2-003.svg" alt="Embedding原理和RAG向量检索过程 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

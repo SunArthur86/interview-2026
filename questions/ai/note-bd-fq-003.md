@@ -173,9 +173,6 @@ def handle_conflict(new_memory: dict, conflict_memory: dict) -> str:
 3. **冲突日志**：记录所有冲突及解决方式，用于后续优化冲突检测阈值
 4. **优雅降级**：如果主动澄清过于频繁会打扰用户，设置澄清频率上限（如每5轮最多1次）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-fq-003.svg" alt="多轮对话中，如果不同轮次的记忆发生冲突，你如何处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -233,7 +230,6 @@ def handle_conflict(new_memory: dict, conflict_memory: dict) -> str:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 就像微信备注更新——朋友改名了你会更新备注（时间戳优先），如果不确定就问一句"你现在叫什么？"（主动澄清）
 
 **展开框架：**
@@ -242,8 +238,6 @@ def handle_conflict(new_memory: dict, conflict_memory: dict) -> str:
 3. **版本化管理** — 记录记忆变更历史，支持回溯
 
 **收尾：** 如何自动检测记忆冲突？用什么算法或模型？
-
-
 
 
 ## 视频脚本

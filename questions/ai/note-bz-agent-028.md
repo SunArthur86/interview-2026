@@ -252,9 +252,6 @@ def route_model(query, history_length):
 2. **组合拳最有效**：单一方法效果有限，分层+拆解+缓存组合最优
 3. **提"Prompt Caching"**：厂商原生支持的缓存，零质量损失省钱，必提
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-028.svg" alt="多轮对话越聊越贵，如何优化 Token 成本？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

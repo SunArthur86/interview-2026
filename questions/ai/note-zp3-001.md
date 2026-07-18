@@ -185,9 +185,6 @@ flowchart TD
     style H fill:#fff2e6,stroke:#cc6600
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-zp3-001.svg" alt="详细讲讲 RoPE 旋转位置编码？还有哪些位置编码？为什么用 RoPE？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

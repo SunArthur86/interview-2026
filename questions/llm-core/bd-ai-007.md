@@ -125,9 +125,6 @@ def execute_with_retry(agent_func, max_retries=2, timeout=5):
 3. **上下文传递**：子Agent是否需要全部历史上下文？如何设计"参考上下文"窗口以节省Token？
 4. **并发控制**：当任务分解为几十个子任务时，如何进行并发限流和资源调度（Semaphore/RateLimiter）？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_bd-ai-007.svg" alt="【字节面经】多Agent架构下，主Agent和子Agent的通信链路怎么设计？异常如何处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

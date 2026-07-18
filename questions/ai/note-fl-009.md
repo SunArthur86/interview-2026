@@ -119,9 +119,6 @@ flowchart TD
     H -- "是" --> I["合并代码 Merge"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-009.svg" alt="【字节飞连面经】AI 编程工具的使用流程？怎么保证 AI 生成代码质量？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

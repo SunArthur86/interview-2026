@@ -124,9 +124,6 @@ flowchart TD
     class Block,Park wait
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-022.svg" alt="什么是信号量？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -204,8 +201,6 @@ try {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像景区限流，一次只放行固定数量的人。
 
 **展开框架：**
@@ -214,8 +209,6 @@ try {
 3. **计数为1时可** — 计数为1时可做互斥锁。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

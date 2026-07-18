@@ -398,7 +398,3 @@ Agent 修 bug 要"多层防护"。第一，**沙箱执行**——Agent 生成的
 | 2:09 | 代码片段 + 注释高亮 | 要点是：Agent：自动建 PR/跑测试 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——怎么保证代码安全？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-035.svg" alt="【拼多多 AI 中台】AI 代码助手怎么落地？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

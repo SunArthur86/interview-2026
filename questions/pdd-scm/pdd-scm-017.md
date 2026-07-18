@@ -243,7 +243,3 @@ flowchart TD
 | 1:00 | 能力/参数拆解表 | 要点是：提交顺序：核心 → 队列 → 非核心 → 拒绝（先队列后扩容！） | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-017.svg" alt="【拼多多供应链】线程池原理？怎么配置？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

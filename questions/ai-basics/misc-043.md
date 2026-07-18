@@ -100,9 +100,6 @@ for payload in attack_payloads:
   3. **Garak 和 PyRIT 的区别？**：Garak更侧重于漏洞扫描模块化，PyRIT则侧重于交互式评估流程。
   4. **如何处理“成员推断”攻击？**：即判断某条数据是否属于模型的训练集，通常通过分析模型对该数据的置信度差异来防御，如差分隐私技术。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-043.svg" alt="什么是AI红队测试(Red Teaming)?常见的攻击面有哪些 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

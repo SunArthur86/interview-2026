@@ -192,7 +192,3 @@ flowchart TD
 | 1:05 | 流程图 | 耗时任务入队削峰，解耦生产消费。 | 队列 |
 | 2:30 | 总结卡 | 一句话记忆：五板斧：池化/缓存/队列/异步/扩容。 下期可以接着聊：语义缓存怎么设计。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-016.svg" alt="【生物医药 AI】AI 产品的并发优化怎么做（池化/缓存/扩容/异步/队列）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -252,9 +252,6 @@ class ToolStrategyLearner:
 
 **结论**: 先用自进化快速迭代到瓶颈，再考虑微调实现能力跃迁。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai50-012.svg" alt="不微调模型如何实现Agent自进化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

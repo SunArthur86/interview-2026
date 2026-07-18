@@ -200,7 +200,3 @@ ConcurrentHashMap 禁 null 是因为"二义性问题"。HashMap 单线程下，`
 | 2:54 | 对比表格 | "扩容翻倍，元素位置就是原位置或原位置+oldCap" | 扩容翻倍 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：HashMap 的 key 可以为 null 吗？value 呢。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-002.svg" alt="HashMap 底层原理及扩容机制？（华为od Java一面） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

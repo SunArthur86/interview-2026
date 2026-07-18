@@ -84,9 +84,6 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 2. **载体线程是固定的吗？**
    - 不固定。虚拟线程在生命周期中会被 JVM 调度到不同的载体线程上运行。因此，在虚拟线程中调用 `Thread.currentThread()` 返回的永远是该虚拟线程本身，而非底层的载体线程。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_sjdk-001.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

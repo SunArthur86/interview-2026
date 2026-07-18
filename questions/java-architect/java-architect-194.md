@@ -417,14 +417,4 @@ P2 预案（分钟级生效）：切流 —— 需主管批准（影响大）
 | 0:40 | 全链路压测示意/对比图 | "生产环境压测（影子库/影子流量），验证容量" | 全链路压测要点 |
 | 1:25 | 总结卡 | "记住：容量公式。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-194.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-194.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-194.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

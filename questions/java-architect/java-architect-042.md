@@ -494,14 +494,4 @@ kubectl rollout status deployment/order-service
 | 1:05 | 金丝雀示意/对比图 | "1% → 10% → 100% 阶段放量，看监控指标决策" | 金丝雀要点 |
 | 1:55 | 总结卡 | "记住：蓝绿。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-042.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-042.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-042.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

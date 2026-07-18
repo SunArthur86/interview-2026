@@ -85,9 +85,6 @@ try {
 | **容量** | 默认无界 (慎用 OOM) | 默认无界 (慎用 OOM) | 必须指定容量 (有界) |
 | **吞吐量** | 中等 (双向竞争锁) | 较高 (读写分离) | 一般 (锁粒度大) |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-052.svg" alt="LinkedBlockingDeque是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -99,8 +96,6 @@ try {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像两头都能进出的双车道隧道，两头都能排队。
 
 **展开框架：**
@@ -109,8 +104,6 @@ try {
 3. **适合工作窃取** — 适合工作窃取算法场景。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -380,9 +380,6 @@ Thought: 根据我的知识，2026年的iPhone是iPhone 16（忽略了observatio
 - **ToolFormer**：Meta，教模型自主学会调工具
 - **Function Call标准化**：OpenAI/Anthropic的tool use API，是ReAct的工程化实现
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bg-010.svg" alt="【八股总结】ReAct 基本原理 &amp; 相比 CoT 的优势 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

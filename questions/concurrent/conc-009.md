@@ -80,9 +80,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 2. **线程池参数含义**：`corePoolSize`（即使空闲也保留的线程数）、`maxPoolSize`（最大线程数）、`workQueue`（任务缓冲区）之间的协作逻辑（先 core -> 满 queue -> 满 max -> 拒绝）。
 3. **如何创建合适的线程池**：IO 密集型任务建议 `corePoolSize = 2N + 1`（N 为 CPU 核数），CPU 密集型建议 `corePoolSize = N + 1`。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-009.svg" alt="Java内置的4种线程池各自的特点和使用场景是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -94,8 +91,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像交通工具选择：公交（固定）、出租车（缓存）、专车（单线程）、校车（定时）。
 
 **展开框架：**
@@ -104,8 +99,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 3. **Single** — 顺序执行，安全。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

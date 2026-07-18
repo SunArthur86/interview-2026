@@ -145,9 +145,6 @@ scores, ids = index.search(query, k=10)
 3. **FAISS优化**：归一化+IP比直接L2快约30%（省去开方运算），且效果等价
 4. **HNSW选择**：HNSW索引默认支持余弦（内积），比暴力搜索快1000倍
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-fq-005.svg" alt="余弦相似度和欧氏距离在高维空间中的差异是什么？实际怎么选？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -249,9 +249,6 @@ class ParentChildRetriever:
 2. **强调混合检索+Rerank**：这两个是性价比最高的，必提
 3. **多路召回思想**：召回阶段宁多勿少（先召回再精排），体现"召回率优先"原则
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-048.svg" alt="RAG 有哪些优化技巧？（十种） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -311,8 +308,6 @@ class ParentChildRetriever:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像钓鱼——选对鱼饵(查询改写)、多撒几竿(多路召回)、挑大鱼(重排)、选好钓点(分块)。
 
 **展开框架：**
@@ -321,9 +316,6 @@ class ParentChildRetriever:
 3. **核心思想** — 多路召回+精排
 
 **收尾：** 召回率怎么衡量？
-
-
-
 
 
 ## 视频脚本

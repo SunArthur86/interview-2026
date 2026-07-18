@@ -207,9 +207,6 @@ OpenClaw 支持可配置的遗忘策略：
 3. **举真实例子**：如 CC 在长任务中压缩后仍能继续，对比 GPT-4 直接用长上下文但成本爆炸。
 4. **延伸到成本**：CC 的 Auto-Compact 本质是省钱——压缩后后续每轮都少付 token 费；OpenClaw 的检索增加延迟和向量DB成本。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx-004.svg" alt="【腾讯面经】Claude Code 的 memory 是怎么做的？OpenClaw 的 memory 是怎么做的？两者的记忆机制有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

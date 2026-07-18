@@ -83,9 +83,6 @@ public class LockUpgradeDemo {
 3. **自旋锁的优缺点**：为什么要有自旋？（避免挂起线程的开销，但自旋会消耗 CPU，适用于锁持有时间短的场景）。
 4. **对象头结构**：Mark Word 在不同锁状态下的位布局变化（如 64 位 JVM 中，无锁、偏向、轻量级、重量级分别存储了什么信息）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-062.svg" alt="synchronized关键字的底层原理是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

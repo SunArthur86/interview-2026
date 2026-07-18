@@ -88,9 +88,6 @@ class TreeNode {
 2. **与堆的区别**：二叉搜索树（BST）满足左<根<右，用于查找；堆（通常大顶堆/小顶堆）满足父>子或父<子，用于优先级队列排序，不一定是完全二叉搜索树。
 3. **平衡二叉树**：请简述 AVL 树或红黑树是如何通过旋转来维持平衡的？（LL, RR, LR, RL 旋转）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-104.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -115,9 +115,6 @@ public void updateHotScore(String keyword, int viewCount) {
 2. **热点 Key 处理**：某个热搜词（如突发新闻）访问量极大，如何防止 Redis 节点被打挂？（答：使用 Local Cache 缓存 Top 数据，或对 Key 进行拆分分片）。
 3. **时间衰减因子**：λ 参数如何动态调整？（答：通过配置中心动态下发，根据全站流量峰谷调整衰减速度）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-006.svg" alt="如何设计微博热搜榜单系统？实时统计热搜词并排序。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -129,8 +126,6 @@ public void updateHotScore(String keyword, int viewCount) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像股市大盘，实时把所有买卖单（搜索行为）汇总计算最新股价（热度）。
 
 **展开框架：**
@@ -139,8 +134,6 @@ public void updateHotScore(String keyword, int viewCount) {
 3. **Redis** — Redis ZSet实现实时排序
 
 **收尾：** 滑动窗口大小的选择依据是什么？
-
-
 
 
 ## 视频脚本

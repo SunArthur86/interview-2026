@@ -85,9 +85,6 @@ System.out.println(a.add(b)); // 输出 0.3
 2. **为什么 float 赋值要加 f？**：Java 中小数字面量默认是 `double` 类型。将 `double` 赋值给 `float` 属于大容量转小容量，必须强制转型 `float f = 3.14f;`，否则编译报错（可能损失精度）。
 3. **switch 支持哪些类型？**：Java 5 起支持 enum；Java 7 起支持 String；仅支持 byte, short, char, int 及其包装类（会自动拆箱），不支持 long, float, double。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-072.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

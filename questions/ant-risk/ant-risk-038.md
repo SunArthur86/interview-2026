@@ -409,7 +409,3 @@ RiskResult result = flow.execute(event);
 | 1:50 | 对比表格 | 可解释、可审计、可追溯。 | 监管 |
 | 3:30 | 总结卡 | 一句话记忆：智能风控 = 决策编排 + 规则 + 模型 + 特征 + 关系 + AI Agent。 下期可以接着聊：智能风控和传统风控区别。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-038.svg" alt="【蚂蚁风控】设计一个智能风控平台 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

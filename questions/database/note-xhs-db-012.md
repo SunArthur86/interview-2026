@@ -269,6 +269,3 @@ B+树三层确实能存千万级（约 2000 万行），但"能存"和"性能好
 | 2:54 | 对比表格 | "带来的问题：跨库JOIN失效、分布式事务、全局ID、分页" | 带来的问题 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：ShardingSphere-JDBC 和 Proxy 模式怎么选。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-xhs-db-012.svg" alt="分库分表设计、分片键如何选择？（华为od Java二面） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

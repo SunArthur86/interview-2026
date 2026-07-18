@@ -87,9 +87,6 @@ Reactor 模式是一种事件驱动模式，用于处理多个客户端的并发
 3. **无锁化设计是如何实现的？**（考察每个 EventLoop 独占一个线程，Channel 绑定到 EventLoop 后处理全程串行）
 4. **什么是 TCP 粘包/拆包，Netty 如何解决？**
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-127.svg" alt="高效的Reactor线程模型是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

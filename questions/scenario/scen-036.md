@@ -125,9 +125,6 @@ function integrate(op, docArray) {
 【性能优化】
 - **本地优先**
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-036.svg" alt="如何设计一个在线协同编辑系统？类似Google Docs / 腾讯文档。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -139,8 +136,6 @@ function integrate(op, docArray) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像多人同时改一张草稿纸：OT是改的时候告诉别人“我在第三行加了字”，CRDT是每行字都有编号自动排队。
 
 **展开框架：**
@@ -149,8 +144,6 @@ function integrate(op, docArray) {
 3. **定期快照+增** — 定期快照+增量日志恢复文档
 
 **收尾：** OT和CRDT有什么区别？
-
-
 
 
 ## 视频脚本

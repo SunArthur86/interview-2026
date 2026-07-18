@@ -130,9 +130,6 @@ flowchart TD
     H --> I["大模型生成回答"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-005.svg" alt="【字节飞连面经】RAG 做过哪些优化？为什么加 Rerank？BM25 够好向量还有必要吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

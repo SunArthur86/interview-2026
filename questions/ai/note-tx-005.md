@@ -281,9 +281,6 @@ def safe_forget(memory_id: str):
 4. **延伸到合规**：提到 GDPR 的 right-to-be-forgotten，体现对法规的认知。
 5. **成本意识**：遗忘不只是功能，更是成本控制手段——向量DB 按存储量计费。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx-005.svg" alt="【腾讯面经】你的 Memory 是多用户的吗？有没有做用户隔离？遗忘机制怎么实现？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -347,7 +344,6 @@ def safe_forget(memory_id: str):
 3. **遗忘=TTL+L** — RU+时间衰减+主动删除
 
 **收尾：** 共享记忆和私有记忆怎么区分？
-
 
 
 ## 视频脚本

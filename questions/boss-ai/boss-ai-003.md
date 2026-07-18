@@ -172,7 +172,3 @@ user_input embedding┤
 | 1:50 | 流程图 | 矛盾处理（新覆盖旧）/ 衰减（久未访问降权）。 | 更新 |
 | 3:30 | 总结卡 | 一句话记忆：记忆三层：短期原文 + 长期事实 + 向量片段。 下期可以接着聊：记忆存什么不存什么。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-003.svg" alt="【巨剧核 AI 陪伴】记忆系统怎么设计（短期/长期/摘要/向量检索）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

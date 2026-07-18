@@ -291,9 +291,6 @@ flowchart TD
     G -.-> D
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-hw-001.svg" alt="【华为面经】Python 生成器与迭代器的区别？流式处理有什么优势？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -351,7 +348,6 @@ yield 的底层依赖生成器的"帧对象（frame object）"持久化。Python
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 迭代器像已经印好的整本书放在桌上，生成器像一个说书人——你听到哪一段他就讲到哪一段，不需要提前把全书印出来。
 
 **展开框架：**
@@ -360,8 +356,6 @@ yield 的底层依赖生成器的"帧对象（frame object）"持久化。Python
 3. **生成器是惰性求值** — 生成器是惰性求值(lazy evaluation)，不预分配内存
 
 **收尾：** 生成器协程（async generator）和普通生成器有什么区别？
-
-
 
 
 ## 视频脚本

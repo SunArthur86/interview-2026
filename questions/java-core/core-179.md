@@ -92,9 +92,6 @@ Ethernet Header + IP Packet + FCS (以太网帧)
     // 传输层 + 网络层：OS 自动封装 TCP 头和 IP 头发送
     ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-179.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

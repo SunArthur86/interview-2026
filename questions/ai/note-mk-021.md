@@ -230,9 +230,6 @@ artifactRegistry.register({
 - **渲染器耦合业务逻辑**：渲染器应该纯展示，不包含Agent业务逻辑
 - **没有注册表机制**：新增类型需要改多处代码，而非只注册一次
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mk-021.svg" alt="【月之暗面面经】如果产品要扩到更多桌面能力，哪层前端架构最该先做成平台？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

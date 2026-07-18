@@ -107,9 +107,6 @@ flowchart LR
     class WaitW,WaitR wait
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-105.svg" alt="什么是读写锁？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -122,8 +119,6 @@ flowchart LR
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 阅览室：可以多人同时看书(读)，但有人整理书架(写)时其他人不能进出。
 
 **展开框架：**
@@ -132,8 +127,6 @@ flowchart LR
 3. **适合读多写少** — 适合读多写少场景提高并发
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

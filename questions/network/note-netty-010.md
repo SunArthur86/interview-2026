@@ -264,9 +264,6 @@ CPU×2 是"IO 等待 + CPU 计算"的平衡。EventLoop 既要处理 IO（含等
 五条经验：一、EventLoop 不阻塞——handler 内只做轻量处理，耗时任务丢业务线程池；二、Channel 绑定 EventLoop——理解绑定关系，同一 Channel 的操作在同一线程（无锁）；三、ioRatio 默认 50——除非明确知道负载特征（IO 重调高、业务重应丢业务线程池而非调低 ioRatio），否则不动；四、EventLoop 数量 = CPU×2——默认值适合大多数场景，按负载调；五、监控 EventLoop——pendingTasks、Channel 数、IO 吞吐，异常时排查阻塞 handler。核心："EventLoop 是单线程串行的 IO 引擎，保持其不被阻塞是 Netty 高性能的关键，所有耗时操作必须异步化或丢业务线程池。"
 
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_network_note-netty-010.svg" alt="EventLoop 的核心原理与线程模型？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** EventLoop 是 Netty 处理连接生命周期内所有事件的核心抽象——它本质上是一个"绑定单一线程、死循环处理任务"的执行器。

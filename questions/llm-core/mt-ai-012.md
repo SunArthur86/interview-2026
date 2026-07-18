@@ -103,9 +103,6 @@ def apply_rotary_emb(xq, xk, freqs_cis):
     return xq_out.type_as(xq), xk_out.type_as(xk)
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_mt-ai-012.svg" alt="【美团面经】近一年读过什么 AI 论文/技术报告两次以上？对你有什么帮助？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

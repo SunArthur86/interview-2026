@@ -308,9 +308,6 @@ class BadCaseCollector:
 
 **面试加分点**：提到LangGraph的`recursion_limit`参数可以硬性限制Agent循环次数；提到ReAct论文建议在Observation中注入"We've tried X times"的提示信息；提到CrewAI的多Agent系统通过"Router Agent"检测单个Agent的异常并重新分配任务；提到AutoGen的"Stop"消息类型可以让任何参与者终止对话；提到实际生产环境中应该实现"断路器模式"(Circuit Breaker)——当某个工具连续失败超过阈值时暂时禁用该工具。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd3-016.svg" alt="Agent经常出现循环调用工具无法停止的问题，你会采取哪些解决方案？连续失败三次应如何处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

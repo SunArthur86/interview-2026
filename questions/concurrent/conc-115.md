@@ -89,9 +89,6 @@ public void put(T x) throws InterruptedException {
 - **ReentrantLock 忘记 unlock**：必须在 `finally` 中释放，否则异常时死锁；这是相比 synchronized 自动释放的主要风险点。
 - **公平锁吞吐低**：公平锁要维护队列顺序，线程切换多，除饥饿敏感场景外默认用非公平。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-115.svg" alt="介绍一下几种典型的锁？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

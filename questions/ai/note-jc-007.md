@@ -190,9 +190,6 @@ flowchart TD
     L["LLM Warmup<br/>防初期发散"] --> A
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-jc-007.svg" alt="【阶跃星辰面经】Adam 优化器的公式：一阶矩、二阶矩、梯度更新 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

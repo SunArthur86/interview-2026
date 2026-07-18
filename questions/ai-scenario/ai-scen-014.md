@@ -119,9 +119,6 @@ def retry_with_backoff(max_retries=3, base_delay=1):
 1. **混淆重试与幂等**：认为所有失败都可以重试。实际上，非幂等操作（如转账、发送邮件）的重试会导致严重后果，必须在重试前检查操作的幂等性。
 2. **过度依赖自我修正**：LLM面对某些逻辑死结时无法通过Self-Reflection解决，反而会消耗大量Token。必须设置“修正失败”后的兜底策略（如转人工）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-014.svg" alt="如何设计AI Agent的错误恢复机制？当Agent执行任务中途失败时，如何优雅地处理和恢复。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

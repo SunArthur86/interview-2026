@@ -213,9 +213,6 @@ Orchestrator 汇总 → 通知用户"已退款"
 - **层级 Agent**：Manager Agent → Worker Agents，类似组织架构
 - **竞标式分工**：多个 Agent 竞标任务，Orchestrator 选最优（适合能力重叠场景）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx2-009.svg" alt="【某讯面经】设计一个多 Agent 协作系统（如客服中心）：分工、通信、状态管理、容错 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -188,9 +188,6 @@ class DynamicToolManager:
 2. **强调"选择困难症"**：LLM 和人一样，选择越多准确率越低
 3. **工具 RAG**：这是解决多工具的核心方案，把工具检索当 RAG 做
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-033.svg" alt="能不能直接给 Agent 30 个以上的工具？有什么风险？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

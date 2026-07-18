@@ -342,9 +342,6 @@ flowchart LR
     end
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-hw-005.svg" alt="【华为面经】优化器 Adam 与 SGD 的本质区别？大模型为什么用 AdamW？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

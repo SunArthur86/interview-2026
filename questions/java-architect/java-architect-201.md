@@ -512,14 +512,4 @@ public class TransferService {
 | 3:20 | 修复优先级表：统一加锁顺序 / 缩短事务 / 补索引 / 死锁重试 | 修复方向：统一加锁顺序（小 ID 先锁，能消除顺序相反类死锁）、缩短事务、补索引避免范围锁扩大、业务侧死锁幂等重试。死锁是 InnoDB 正常保护，但频繁死锁必须修根因，不能靠调大锁超时掩盖。 | 修复方案 |
 | 3:50 | 总结卡 + 下期预告 | 记住五个词：第一现场、锁等待图、SQL 还原、全量收集、统一加锁顺序。下期我们聊——业务语义天然相反时（下单 vs 退款）怎么避免死锁。 | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-201.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-201.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-201.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

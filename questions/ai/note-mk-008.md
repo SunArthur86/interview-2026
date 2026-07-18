@@ -283,9 +283,6 @@ async function publish(draft: DraftArtifact, reviewedContent: string) {
 - **发布后没有版本历史**：出了问题无法回退到之前的版本
 - **没有审计日志**：无法追踪谁在什么时候改了什么
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mk-008.svg" alt="【月之暗面面经】桌面端为什么要把结果编辑、确认和发布拆成三步？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

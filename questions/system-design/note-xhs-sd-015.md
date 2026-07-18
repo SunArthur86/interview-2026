@@ -243,6 +243,3 @@ public void compensateInventory() {
 | 1:57 | 关键代码/伪代码片段 | "三大保障：MQ可靠投递 + 幂等消费 + 定时补偿任务" | 三大保障 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如果消息队列在扣款成功后宕机了，库存没扣，怎么补偿。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-015.svg" alt="【拼多多一面】什么是最终一致性？在电商下单流程中如何体现？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

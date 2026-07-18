@@ -326,6 +326,3 @@ public class SeckillConsumer implements RocketMQListener<SeckillMsg> {
 **面试官**：缓存扣减成功DB失败怎么办？
 **候选人**：补偿回滚缓存，或缓存预扣+DB最终扣减+对账兜底，不能只信缓存，DB是最终一致依据。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-mys-003.svg" alt="【美云智数终面】高并发下商品库存扣减，如何防止超卖？从数据库、缓存、消息队列三层设计方案 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

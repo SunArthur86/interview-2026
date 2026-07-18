@@ -410,14 +410,4 @@ setUp(
 | 1:50 | 对比表格 | 核心业务排队（保 RT 不保吞吐），非核心拒绝（保吞吐不保 RT）。 | 排队 vs 拒绝 |
 | 3:30 | 总结卡 | 一句话记忆：Little's Law：L = λW，容量计算的数学根基。 下期可以接着聊：Little's Law 怎么用。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-035.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-035.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-035.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

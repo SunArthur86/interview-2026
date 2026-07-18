@@ -76,9 +76,6 @@ while (!Thread.currentThread().isInterrupted()) {
 3.  **join 的底层实现**：join() 底层是如何实现的？（实际上也是利用 wait() 方法）
 4.  **yield 的实际效果**：在 Linux/Windows 下 yield 的行为差异（可能导致线程切换到其他 CPU 核）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-049.svg" alt="Java线程有哪些基本方法？各自的作用？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

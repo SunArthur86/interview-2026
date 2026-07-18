@@ -204,6 +204,3 @@ Hermes 扩展:
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：如果让Hermes支持编码场景，需要做哪些改造？" | 收尾与钩子 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ddag-001.svg" alt="对比Claude Code和Hermes在设计模式上的区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

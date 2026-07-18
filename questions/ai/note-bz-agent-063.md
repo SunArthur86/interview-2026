@@ -168,9 +168,6 @@ os.environ["LANGCHAIN_TRACING_V2"] = "true"
 2. **LangGraph 是趋势**：复杂 Agent 生产部署的首选，比旧 Chain 更可控
 3. **LangSmith 是必需品**：没有监控的 LLM 应用不敢上生产——这是工程常识
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-063.svg" alt="LangChain / LangGraph / LangSmith 家族各自定位与区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

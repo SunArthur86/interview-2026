@@ -123,9 +123,6 @@ public void handleOrderChange(String message) {
 3. **如何处理回环数据（A同步到B，B又同步回A）？**
    - 在消息头或扩展字段中增加 `source_id`（源头ID）。消费者在处理前检查该字段，如果发现 `source_id` 等于自身 ID，则直接丢弃，不做写入。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-086.svg" alt="如何设计一个分布式系统的数据同步方案？多数据中心数据一致。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

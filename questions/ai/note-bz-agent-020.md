@@ -236,9 +236,6 @@ def calculate_roi(agent_system):
 2. **场景要具体**：不要泛泛说"能用于各行各业"，要能举出具体的角色分工和流程
 3. **承认挑战**：成本（Token 贵）和稳定性（概率系统）是企业落地的两大障碍，要有对策
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-020.svg" alt="企业级 Agent 构建思路是什么？多 Agent 有哪些应用场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -296,7 +293,6 @@ def calculate_roi(agent_system):
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像开公司——先单干证明业务可行→再招人分工扩大→最后建制度平台化运营。
 
 **展开框架：**
@@ -305,8 +301,6 @@ def calculate_roi(agent_system):
 3. **应用场景** — 客服/编程/数据分析/RPA/运维
 
 **收尾：** 怎么判断该用多Agent了？
-
-
 
 
 ## 视频脚本

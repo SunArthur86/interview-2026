@@ -189,9 +189,6 @@ memory_points:
      - 粉丝 > 500万: 拉模式 + 缓存预聚合
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-feed-001.svg" alt="微博千万网红 Feed 流量如何扛住不崩？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

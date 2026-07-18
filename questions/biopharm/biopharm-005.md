@@ -130,7 +130,6 @@ def route(query, context):
 3. **怎么平衡质量和成本？**——A/B 实验测各场景不同模型的质量-成本曲线，找拐点；动态调整路由策略。
 
 
-
 ## 补充记忆点
 - 质量-延迟-成本三角，路由找帕累托最优
 - 场景路由：意图分类 → 模型档位
@@ -182,8 +181,4 @@ flowchart TD
 | 0:40 | 成本优化对比表 | 意图分类 → 简单/复杂/工具任务 → 选模型。 | 场景路由 |
 | 1:05 | 概念结构示意图 | 主模型挂/超时 → 备供应商 → 兜底小模型/规则。 | fallback 链 |
 | 2:30 | 总结卡 | 一句话记忆：质量-延迟-成本三角，路由找帕累托最优。 下期可以接着聊：路由用什么判定。 | 收尾总结 |
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-005.svg" alt="【生物医药 AI】多模型路由怎么做（场景/成本/fallback）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 

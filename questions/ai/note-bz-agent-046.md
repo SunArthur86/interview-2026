@@ -210,9 +210,6 @@ class RAGPipeline:
 2. **强调检索是核心**：60%的效果由检索决定，生成只是锦上添花
 3. **模块化可替换**：每个组件可独立优化/升级，体现工程架构思维
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-046.svg" alt="RAG 系统的核心组件及工作逻辑？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -270,7 +267,6 @@ class RAGPipeline:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像图书馆——编目员(索引器)把书分类，检索员(检索器)帮你找书，咨询员(生成器)基于书给你解答。
 
 **展开框架：**
@@ -279,8 +275,6 @@ class RAGPipeline:
 3. **每个组件** — 每个组件可独立优化
 
 **收尾：** 哪个组件最关键？
-
-
 
 
 ## 视频脚本

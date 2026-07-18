@@ -106,9 +106,6 @@ flowchart TD
     C --> M[容量无限制<br/>默认 30 分钟过期]
     N[分布式] --> O[Session 共享<br/>Redis/粘性路由/JWT]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-062.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

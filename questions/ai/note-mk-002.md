@@ -213,9 +213,6 @@ interface PermissionSpec {
 - **没有撤销路径**：授权后无法收回，用户只能卸载应用
 - **忽略 .gitignore**：AI 索引目录时不跳过 node_modules/.env 等敏感文件
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mk-002.svg" alt="【月之暗面面经】桌面 AI 产品接入本地文件和目录时，前端如何设计权限提示？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

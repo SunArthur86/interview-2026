@@ -168,9 +168,6 @@ def slot_filling(text, intent):
 2. **混合方案最实用**：规则(快)+LLM(准)结合，兼顾延迟和覆盖
 3. **意图+槽位配合**：识别意图后还要提取参数，是完整的 NLU
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-082.svg" alt="大模型意图识别是怎么做的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -228,7 +225,6 @@ def slot_filling(text, intent):
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像前台接待——听客人说一句话，判断他要找哪个部门(意图分类)。
 
 **展开框架：**
@@ -237,8 +233,6 @@ def slot_filling(text, intent):
 3. **挑战** — 意图模糊/多意图/长尾
 
 **收尾：** 意图识别准确率怎么提升？
-
-
 
 
 ## 视频脚本

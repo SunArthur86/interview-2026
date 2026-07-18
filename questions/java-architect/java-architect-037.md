@@ -482,14 +482,4 @@ groups:
 | 0:30 | 概念结构示意图 | 离散事件（结构化 JSON），高保真但高成本，适合排查。 | Logs |
 | 1:30 | 总结卡 | 一句话记忆：Metrics 看有没有问题（聚合数字、告警）。 下期可以接着聊：三件套采样率怎么定。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-037.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-037.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-037.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

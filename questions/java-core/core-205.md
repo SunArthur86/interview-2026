@@ -139,9 +139,6 @@ void putVal(int hash, K key, V value) {
 | **哈希扰动** | 4次位运算 + 5次异或 | **1次位运算 + 1次异或** (高16位异或) |
 | **扩容后位置** | 重新计算 Hash | **原位置 或 原位置 + oldCap** |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-205.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

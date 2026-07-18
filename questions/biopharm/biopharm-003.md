@@ -196,7 +196,3 @@ flowchart TD
 | 1:50 | 安全防御架构图 | 参数校验 + 权限 + 白名单 + 审计 + 人工确认（高危工具）。 | 安全 |
 | 3:30 | 总结卡 | 一句话记忆：Function Calling = 模型输出结构化调用意图。 下期可以接着聊：Function Calling 和 ReAct 的关系。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-003.svg" alt="【生物医药 AI】Tool Calling / Function Calling / MCP 协议怎么落地？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

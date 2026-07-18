@@ -107,9 +107,6 @@ class DeadlockExample {
 4.  **synchronized 是公平锁吗？**
     *   回答要点：不是，synchronized 是非公平锁，它不保证先等待的线程先获取锁。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-096.svg" alt="什么是线程同步和锁？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -121,7 +118,6 @@ class DeadlockExample {
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 就像十字路口的红绿灯（同步）和单行道（锁），指挥车辆有序通过，防止撞车。
 
 **展开框架：**
@@ -130,7 +126,6 @@ class DeadlockExample {
 3. **死锁** — 多个线程互相持有对方所需资源
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

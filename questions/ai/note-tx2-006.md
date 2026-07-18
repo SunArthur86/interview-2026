@@ -159,9 +159,6 @@ Rerank（cross-encoder）→ top-5（精排）
 - **Multi-vector**：ColBERT 风格，每个 token 一个向量，做 late interaction，精度更高
 - **混合检索的工程实现**：Milvus/Qdrant/Weaviate 都原生支持混合检索（一个 API 同时查 BM25 + 向量）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx2-006.svg" alt="【某讯面经】BM25 关键词检索 + 向量检索混合检索优势，只单向量会有什么问题 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

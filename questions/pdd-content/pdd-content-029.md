@@ -285,8 +285,6 @@ if (danmakuDegrade) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 预案回滚像开车系安全带+备胎——灰度是慢慢上路、回滚是掉头返回、演练是定期练习。
 
 **展开框架：**
@@ -321,8 +319,4 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：回滚：版本/数据/配置 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：预案：故障剧本 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——灰度怎么设计？。 | 收尾 |
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-content_pdd-content-029.svg" alt="【拼多多内容】预案回滚与钱学森工程理论？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 

@@ -223,7 +223,3 @@ sequenceDiagram
 | 1:00 | 能力/参数拆解表 | 要点是：集成 Sentinel（熔断）/ Retryer（重试） | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-011.svg" alt="【拼多多交易】Feign 怎么用？服务间调用怎么治理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

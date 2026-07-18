@@ -182,9 +182,6 @@ func refreshLeaderboard() {
 }
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-xl-001.svg" alt="从零设计微博热搜实时计算服务 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

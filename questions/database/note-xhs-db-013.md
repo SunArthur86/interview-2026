@@ -202,6 +202,3 @@ memory_points:
 **面试官**：redo log写满了会怎样？
 **候选人**：触发强制checkpoint推进刷脏页，期间所有写请求被阻塞，所以线上要监控redo使用率并合理设置大小。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-xhs-db-013.svg" alt="【拼多多 Java服务端】binlog、redo log、undo log的作用和区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

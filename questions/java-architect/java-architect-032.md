@@ -442,14 +442,4 @@ flowchart TD
 | 0:30 | 消息队列架构图 | producer 重试、consumer offset 提交前宕机、rebalance 重分配。 | 重复消费根因 |
 | 1:30 | 总结卡 | 一句话记忆：顺序 = 同 key 同分区，全局有序是反模式。 下期可以接着聊：全局有序怎么办。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-032.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-032.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-032.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -206,9 +206,6 @@ Agentic RAG: Agent自主决策检索策略（何时/查什么/查几次）
 2. **强调知识与能力解耦**：RAG 的本质是把知识外部化，这是区别于微调的核心
 3. **提可溯源**：RAG 能给出来处，这是比纯 LLM 重要的优势（尤其企业场景）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-045.svg" alt="什么是 RAG？整体流程是怎样的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

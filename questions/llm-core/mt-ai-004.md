@@ -128,9 +128,6 @@ flowchart TD
     E --> G[DeepSeek 采用]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_mt-ai-004.svg" alt="【美团面经】MLA 是怎么对 KV Cache 做优化的？和 MQA/GQA 相比有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

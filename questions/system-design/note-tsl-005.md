@@ -253,9 +253,6 @@ public class FirmwareVerifier {
 2. **断点续传**：固件下载支持断点续传，重新联网后从断点继续
 3. **写入校验**：重启后验证B分区完整性，不完整则重新下载
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-tsl-005.svg" alt="车载固件多版本迭代，如何设计后端校验架构，验证固件完整性、兼容性，避免异常固件导致车辆故障？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

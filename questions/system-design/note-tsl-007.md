@@ -280,9 +280,6 @@ public class QualityAssuranceService {
 3. **DLP 数据防泄露**：监控异常行为（如截屏/拍照频率过高）
 4. **权限分级**：不同标注员只能看到分配给自己的数据
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-tsl-007.svg" alt="PB级路测数据需人工+自动标注，如何设计后端架构，支持标注任务分配、进度跟踪与标注结果校验？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

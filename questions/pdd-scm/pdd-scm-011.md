@@ -219,7 +219,3 @@ public interface InventoryClient {
 | 1:00 | 能力/参数拆解表 | 要点是：Gateway：路由 + 过滤 + 限流 | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-011.svg" alt="【拼多多供应链】Spring Cloud 微服务怎么落地？供应链怎么拆？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

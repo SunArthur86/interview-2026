@@ -88,11 +88,6 @@ server.3=192.168.1.3:2888:3888:observer
 3. **Observer 如何连接集群？**：在配置 Observer 时，通常可以指定其跟随的 Follower 列表（`server.x=...:observer` 配置中隐含），Observer 会连接到这些节点进行数据同步。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-024.svg" alt="ZooKeeper中Observer角色的作用是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心作用：只处理读请求以扩展集群性能，跨机房部署降低异地访问延迟。
@@ -104,7 +99,6 @@ server.3=192.168.1.3:2888:3888:observer
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 股东大会的列席观众：能看（读）能发表意见，但表决（写）不计入票数。
 
 **展开框架：**
@@ -113,7 +107,6 @@ server.3=192.168.1.3:2888:3888:observer
 3. **部署在异地机房可** — 部署在异地机房可优化跨机房读延迟
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

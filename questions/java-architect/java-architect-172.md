@@ -349,14 +349,4 @@ flowchart TD
 
 **候选人**：MVT 样本量 = 单因素实验 × 组数，8 组就是 8 倍样本。破法：(1) 拆成多个独立 A/B（每个因素单独实验，正交分层保证互不干扰）；(2) 部分析因（Fractional Factorial）——只跑部分组合（如 8 组里跑 4 组代表性组合）降低样本；(3) 如果真要交互效应分析，用 ML 模型（如 XGBoost）拟合各因素贡献。监控 mvt_experiment_count（MVT 实验占比，高说明样本压力大）。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-172.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-172.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-172.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

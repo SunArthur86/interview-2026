@@ -228,9 +228,6 @@ async def get_response(user, message):
 2. **动态组装**：不同场景不同 Prompt，而非一个打天下——体现工程化
 3. **A/B 测试**：Prompt 优化要数据驱动，不能拍脑袋——体现实证思维
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-071.svg" alt="如何对 Prompt 做版本控制与动态组装？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -287,7 +284,6 @@ async def get_response(user, message):
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像管理法律条文——有版本(修订)、有模块(总则/分则)、按场景组合(民事用民法，刑事用刑法)。
 
 **展开框架：**
@@ -296,8 +292,6 @@ async def get_response(user, message):
 3. **动态组装** — 按上下文拼接
 
 **收尾：** Prompt存哪里？
-
-
 
 
 ## 视频脚本

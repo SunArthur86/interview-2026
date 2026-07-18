@@ -103,9 +103,6 @@ with torch.no_grad():
 3. **Temperature参数 $\tau$ 的作用？** 
    控制 softmax 分布的平滑程度。较小的 $\tau$ 使分布更尖锐，更关注难分样本；较大的 $\tau$ 使分布更平滑，有助于优化。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-038.svg" alt="CLIP的原理是什么?为什么它能实现零样本图像分类 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

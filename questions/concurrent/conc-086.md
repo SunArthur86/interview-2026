@@ -112,9 +112,6 @@ flowchart TD
     class Got,Free ok
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-086.svg" alt="什么是可重入锁？它的实现原理是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -126,8 +123,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 这就好比拿着家门钥匙进屋，进卧室时不需要再换一把钥匙，同一把钥匙能开所有锁。
 
 **展开框架：**
@@ -136,8 +131,6 @@ flowchart TD
 3. **实现机制** — 实现机制通常基于计数器
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

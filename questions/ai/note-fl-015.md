@@ -149,9 +149,6 @@ flowchart TD
     DPO主流方案 -.替代原因: 省显存/稳定.-> RLHF传统方案
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-015.svg" alt="【字节飞连面经】SFT vs RLHF vs DPO：做什么 / 数据形态 / 难点 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

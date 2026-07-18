@@ -97,9 +97,6 @@ else {
 1. **在 ConcurrentHashMap 中使用复合操作**：例如 `if (!map.containsKey(key)) map.put(key, value);` 这种“先检查后执行”的操作在并发下不是原子的，仍需加锁或使用 `putIfAbsent` 等原子方法。
 2. **CopyOnWriteArrayList 用于频繁写入场景**：每次写入都会复制整个数组，若写入频繁，会导致内存占用飙升和频繁 GC，性能远不如 `Vector` 或 `Collections.synchronizedList`。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-091.svg" alt="什么是并发容器分类？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

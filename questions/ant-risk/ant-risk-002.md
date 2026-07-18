@@ -325,7 +325,3 @@ flowchart TD
 | 1:05 | CAS 原理图 | 先 check 队列是否有前驱，有则入队。 | 公平锁 |
 | 2:30 | 总结卡 | 一句话记忆：AQS = volatile state + CLH 变种双向队列 + CAS。 下期可以接着聊：AQS 的公平锁和非公平锁性能差多少。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-002.svg" alt="【蚂蚁风控】AQS 原理？ReentrantLock 的公平锁和非公平锁是怎么实现的？风控系统里怎么用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -83,11 +83,6 @@ func (r *Raft) handleRPC(term uint64) {
 3.  **Term 和 Index 共同决定了什么？**（答：决定了日志的完整性，Index 相同 Term 更大的日志更新）
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-007.svg" alt="Raft算法中Term（任期）的作用是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 角色定义：Term 是连续递增的整数，充当 Raft 集群的「逻辑时钟」
@@ -98,8 +93,6 @@ func (r *Raft) handleRPC(term uint64) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** Term就像“届数”，新任的领导（大届数）命令优先于旧领导（小届数）。
 
 **展开框架：**
@@ -108,8 +101,6 @@ func (r *Raft) handleRPC(term uint64) {
 3. **Leader** — 保证每个任期最多有一个Leader。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

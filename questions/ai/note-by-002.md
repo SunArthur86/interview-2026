@@ -199,9 +199,6 @@ flowchart TD
     I --> J["更新新策略参数"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-by-002.svg" alt="【字节面经】GRPO 中 Token 级别重要性采样的实现逻辑与作用 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

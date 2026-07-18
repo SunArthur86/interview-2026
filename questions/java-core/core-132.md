@@ -138,9 +138,6 @@ flowchart LR
     end
     Note["重载是横向扩展同名方法<br/>重写是纵向改造父类行为"]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-132.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

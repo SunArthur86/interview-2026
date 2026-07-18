@@ -190,9 +190,6 @@ class ReplayEngine:
 3. **对标工具**：提到LangSmith、Langfuse等开源Trace工具
 4. **生产思维**：Trace数据量很大→需要采样+异步写入
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-agent-005.svg" alt="从工程化角度看，Agent Harness主要解决哪些问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

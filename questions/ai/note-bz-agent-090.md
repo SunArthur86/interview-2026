@@ -176,9 +176,6 @@ projects_to_build = [
 2. **补 AI 不难**：API 调用+框架使用即可入门，不需要 PhD——门槛比想象的低
 3. **建立差异化**：纯 Agent 工程师会饱和，行业+AI 复合人才更稀缺——长远看
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-090.svg" alt="程序员如何抢占 Agent 开发红利？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -236,8 +233,6 @@ projects_to_build = [
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像移动互联网早期——先学iOS开发的都吃到了红利。Agent是下一个平台机会，早期入场者优势大。
 
 **展开框架：**
@@ -246,9 +241,6 @@ projects_to_build = [
 3. **建差异化** — 行业+AI的复合能力
 
 **收尾：** 没AI基础怎么入门？
-
-
-
 
 
 ## 视频脚本

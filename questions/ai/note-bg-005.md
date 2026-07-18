@@ -326,9 +326,6 @@ class EnhancedDAPO:
 - **PRM（Let's Verify Step by Step）**：OpenAI 2023，过程奖励的奠基工作
 - **Self-Play / SPIN**：模型自我对弈，从自身错误中学习，也能缓解困难样本问题
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bg-005.svg" alt="【八股总结】DAPO 动态采样提升效率 &amp; 零奖励样本剔除的代价 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

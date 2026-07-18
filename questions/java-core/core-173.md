@@ -133,9 +133,6 @@ flowchart TD
     K[选择原则] --> L[数据特征匹配]
     K --> M[内存与性能平衡]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-173.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

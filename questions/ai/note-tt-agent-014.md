@@ -192,9 +192,6 @@ flowchart TD
     G --> I{"第四层: 降级兜底<br/>备选工具/默认话术"}
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tt-agent-014.svg" alt="频繁出现模型反复调用错误工具怎么处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -131,9 +131,6 @@ flowchart TD
     K --> N[MapStruct Bean 映射]
     O[优势] --> P[编译期检查<br/>零运行时开销]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-260.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

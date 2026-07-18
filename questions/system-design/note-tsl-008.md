@@ -259,9 +259,6 @@ public void generateMonthlyBills() {
 - **汇率转换**：账单按用户主货币展示，实时汇率换算
 - **税费合规**：不同国家税率不同，计费引擎按地区加载税率规则
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-tsl-008.svg" alt="会员享受充电折扣、优先预约等权益，如何设计后端架构，支持会员等级管理、权益实时生效与账单统计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

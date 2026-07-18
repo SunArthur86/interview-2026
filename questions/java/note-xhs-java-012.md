@@ -169,7 +169,3 @@ done
 **面试官**：怎么避免再次发生这种情况？
 **候选人**：JVM启动基线必配自动dump+GC日志+OOM告警，定期jmap主动dump保留趋势，纳入发布检查清单。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-012.svg" alt="【拼多多 Java服务端】OOM时JVM没自动生成Dump文件怎么办？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

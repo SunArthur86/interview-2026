@@ -408,14 +408,4 @@ flowchart TD
 
 **候选人**：ROI = 替代的人工成本 - AI 成本。AI 客服月成本 50 万（token 费 + 运维），替代了 20 个初级客服（月薪 1.5 万 × 20 = 30 万）——这看是亏的。但还要算"AI 7×24 在线提升的转化"和"复杂问题升级到人工的节省"。完整 ROI 要和业务方一起算，不能只看 token 账单。我会给 CFO 两个数：直接替代成本 + 业务增量收益，让他自己判断。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-164.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-164.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-164.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

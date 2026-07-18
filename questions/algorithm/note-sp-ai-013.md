@@ -221,9 +221,7 @@ flowchart TD
     F --> I["返回上层递归"]
 ```
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_algorithm_note-sp-ai-013.svg" alt="手撕二叉树目标和（LeetCode 113. 路径总和 II）" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心算法：DFS回溯。因为要找所有解，所以递归遍历所有从根到叶子的路径。

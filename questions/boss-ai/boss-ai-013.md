@@ -239,7 +239,3 @@ PII 保护：
 | 1:50 | 流程图 | 软更新+版本+衰减+重要性加权。 | 演进 |
 | 3:30 | 总结卡 | 一句话记忆：多存储：Redis/MySQL/向量库/对象存储。 下期可以接着聊：向量库怎么选。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-013.svg" alt="【巨剧核 AI 陪伴】记忆与上下文系统架构怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

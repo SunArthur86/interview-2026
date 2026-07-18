@@ -187,9 +187,6 @@ selection_criteria = {
 2. **给选型建议**：按规模分级推荐，体现实战经验（别只说"看需求"）
 3. **提混合检索**：现代向量库不只做向量，还支持关键词+向量混合——这是趋势
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-051.svg" alt="为什么选向量数据库而不是传统数据库？向量数据库如何选型对比？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -248,7 +245,6 @@ selection_criteria = {
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 传统DB像查字典(精确匹配词)，向量库像"以图搜图"(找相似的)，本质是不同的查询范式。
 
 **展开框架：**
@@ -257,8 +253,6 @@ selection_criteria = {
 3. **选型维度** — 规模/性能/功能/成本/运维
 
 **收尾：** 向量库能存传统数据吗？
-
-
 
 
 ## 视频脚本

@@ -99,11 +99,6 @@ public String invokeService() {
 3. **CAP 理论在服务注册中心选型中的体现？**（提示：Eureka 保证 AP（可用性），Consul/Zookeeper 保证 CP（一致性））。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-031.svg" alt="微服务中客户端发现模式的工作原理是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 流程核心：客户端直连注册中心拉取IP列表，自己在内部完成负载均衡并直连。
@@ -114,8 +109,6 @@ public String invokeService() {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 网购时自己查快递网点信息，然后自己选最近的一个去寄。
 
 **展开框架：**
@@ -124,8 +117,6 @@ public String invokeService() {
 3. **客户端自行处** — 客户端自行处理服务故障重试
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

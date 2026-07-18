@@ -288,9 +288,6 @@ class ProductionMCPServer:
 2. **强调"一次实现处处可用"**：MCP 的核心价值是解耦，工具不绑定框架
 3. **提生产要点**：权限/限流/审计/错误处理，体现工程化思维
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-039.svg" alt="如何从 0 搭建一个专属 MCP 服务？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

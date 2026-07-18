@@ -132,9 +132,6 @@ flowchart TD
     style AGG fill:#ffe4b5
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-110.svg" alt="电商订单系统日增千万级数据，如何设计存储方案？什么时候该分库分表？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

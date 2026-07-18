@@ -93,9 +93,6 @@ def compute_group_advantage(rewards):
 2. 对于确定性输出（如数学题），组内方差较小时，GRPO的梯度更新是否有效？
 3. GRPO相比其他不依赖Critic的算法（如REINFORCE）的核心改进点在哪里？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-013.svg" alt="DeepSeek提出的GRPO算法是什么?相比PPO有什么优势 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

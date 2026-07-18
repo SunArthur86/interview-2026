@@ -125,9 +125,6 @@ flowchart TD
     Choice -->|数值误差| MSE[MSE最小化]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_zp-infra-002.svg" alt="【智谱Infra面经】简述 MinMax 和 Percentile 校准算法有什么不同？还知道什么其他校准算法？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

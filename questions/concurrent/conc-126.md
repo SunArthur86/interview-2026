@@ -70,9 +70,6 @@ Producer Thread          Consumer Thread
 3. **BlockingQueue 为什么不需要显式加锁即可保证线程安全？**（考察内部已封装的锁机制）
 4. **生产环境中如何选择合适的阻塞队列？**
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-126.svg" alt="说一说你对BlockingQueue的了解？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -84,8 +81,6 @@ Producer Thread          Consumer Thread
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像肯德基的点餐窗口，厨师做好放进窗口（队列），没菜了顾客就等，满了厨师就等。
 
 **展开框架：**
@@ -94,8 +89,6 @@ Producer Thread          Consumer Thread
 3. **常用于生产者** — 常用于生产者消费者模式
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

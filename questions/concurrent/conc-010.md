@@ -107,9 +107,6 @@ heavyTask.start();
 1. **RUNNABLE 包含 Ready 和 Running**：Java 将“就绪”和“运行中”统一视为 `RUNNABLE` 状态，调用 `yield()` 或时间片用完都会回到就绪队列。
 2. **线程优先级问题**：在 Windows 上效果较明显，但在 Linux 上由于 `nice` 值映射机制，不同 Java 优先级可能表现为同一 OS 优先级，导致优先级设置失效。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-010.svg" alt="Java线程调度的机制是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

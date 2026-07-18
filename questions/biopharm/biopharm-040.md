@@ -223,7 +223,3 @@ flowchart TD
 | 1:05 | 流程图 | 自动化科研流程（文献/实验/临床）。 | Agent 时代 |
 | 2:30 | 总结卡 | 一句话记忆：三大趋势：AI4Science/精准医疗/Agent 时代。 下期可以接着聊：AI4Science 有哪些突破。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-040.svg" alt="【生物医药 AI】的未来与就业（AI4Science/精准医疗/Agent 时代） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

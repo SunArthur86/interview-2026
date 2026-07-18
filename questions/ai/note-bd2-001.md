@@ -244,9 +244,6 @@ def robust_tool_execution(tool_call, max_retries=2):
     # 失败后LLM可以决定: 换工具/换参数/告诉用户失败
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd2-001.svg" alt="Agent工具调用的完整机制和判断逻辑 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

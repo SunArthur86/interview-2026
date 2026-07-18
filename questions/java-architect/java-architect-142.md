@@ -310,14 +310,4 @@ Canal/Debezium，订阅 ROW 日志；删而非更新，并发最安全。
 | 0:40 | 延迟双删的缺陷示意/对比图 | "sleep 不可控、吞吐骤降、二次删失败仍不一致 —— 高频考点" | 延迟双删的缺陷要点 |
 | 1:25 | 总结卡 | "记住：先 DB 后删 vs 先删后。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-142.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-142.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-142.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -104,9 +104,6 @@ flowchart TD
     N[演进] --> O["Java 8 Lambda<br/>函数式接口简化"]
     N --> P[方法引用 进一步简化]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-278.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

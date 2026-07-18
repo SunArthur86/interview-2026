@@ -346,7 +346,3 @@ sequenceDiagram
 | 1:05 | 延迟优化对比表 | 异步复制（默认）/ 半同步 / 组复制。 | 主从延迟 |
 | 2:30 | 总结卡 | 一句话记忆：垂直分（业务/字段）+ 水平分（hash/range/时间）+ 主从分离。 下期可以接着聊：分片键怎么选。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-010.svg" alt="【蚂蚁风控】亿级数据的 MySQL 怎么扩展？分库分表方案？主从延迟怎么解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

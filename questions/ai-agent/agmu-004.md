@@ -94,9 +94,6 @@ nclass BossAgent:
 2. 如果 Boss 需要根据 Worker 的实时反馈动态调整后续策略（如 DAG 的动态剪枝），在设计上如何避免状态管理的混乱？
 3. 观察到 Boss Agent 变得非常“聪明”（调度逻辑极其复杂），这是否是一种反模式？如何通过架构演进来解决 Boss 过于沉重的问题？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_agmu-004.svg" alt="Boss-Worker 和 Pipeline 有什么本质差异 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

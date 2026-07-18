@@ -441,7 +441,3 @@ flowchart TD
 | 1:50 | 流程图 | LLM 推理慢，用 RAG 检索 + 简短 prompt 加速。 | 实时性 |
 | 3:30 | 总结卡 | 一句话记忆：LLM 风控核心：语义理解（文本/行为/意图）。 下期可以接着聊：GraphRAG 和普通 RAG 区别。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-032.svg" alt="【蚂蚁风控】LLM 风控怎么用？GraphRAG 怎么应用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -71,9 +71,6 @@ ThreadPoolExecutor.execute()的执行流程：
 3. **配置了 `SynchronousQueue` 作为队列，流程会有什么不同？**（因为没有容量，直接进入步骤3创建非核心线程或拒绝）
 4. **线程池抛出 RejectedExecutionException 的常见原因及排查思路？**
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-130.svg" alt="线程池的执行流程是怎样的？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -85,8 +82,6 @@ ThreadPoolExecutor.execute()的执行流程：
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 先找正式工干，没人的话先记在小本本上排队，本子满了就招临时工，实在没人也记不下了就拒单。
 
 **展开框架：**
@@ -95,8 +90,6 @@ ThreadPoolExecutor.execute()的执行流程：
 3. **队列满了创建** — 队列满了创建非核心线程
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -119,9 +119,6 @@ flowchart TD
     Stream --> Client
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-021.svg" alt="如何设计一个高并发的LLM模型推理服务？支持1000+QPS、流式输出、多模型管理。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

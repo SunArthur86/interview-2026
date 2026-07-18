@@ -206,7 +206,3 @@ flowchart TD
 | 1:50 | 流程图 | 支持并行、分支、循环、子流程、断点恢复。 | 支持并行 |
 | 3:30 | 总结卡 | 一句话记忆：Workflow 控骨架，Agent 填局部。 下期可以接着聊：自研 vs LangGraph/Temporal。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-013.svg" alt="【生物医药 AI】Workflow + Agent 编排引擎架构怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -103,9 +103,6 @@ public void downloadFile(String url) {
 | **CyclicBarrier** | 同步屏障 | 等待线程数 | 可循环 (reset) | 多线程数据汇总 |
 | **ReentrantLock** | 独占模式 | 锁重入次数 (0/1+) | 可释放/重入 | 临界区保护 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-055.svg" alt="Semaphore信号量的原理和使用场景是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -117,8 +114,6 @@ public void downloadFile(String url) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像车库只有5个车位，车来了拿通行证，走时归还。
 
 **展开框架：**
@@ -127,8 +122,6 @@ public void downloadFile(String url) {
 3. **常用于流量控** — 常用于流量控制或资源池管理。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

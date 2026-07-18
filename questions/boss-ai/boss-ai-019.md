@@ -261,7 +261,3 @@ flowchart TD
 | 1:05 | 代码示例截图 | 灰度发布 + feature flag + 可观测。 | 变更管理 |
 | 2:30 | 总结卡 | 一句话记忆：预案三件套：SOP + 值班 + 演练。 下期可以接着聊：回滚数据怎么处理。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-019.svg" alt="【巨剧核 AI 陪伴】预案、回滚与变更管理怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

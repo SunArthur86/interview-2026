@@ -283,9 +283,6 @@ class CounselingMemory:
         return context
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai50-013.svg" alt="心理咨询Agent如何用LangGraph控制对话走向？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

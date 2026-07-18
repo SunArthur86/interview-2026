@@ -101,9 +101,6 @@ public void addBlacklist(String ip) {
 1. **误以为读操作完全不需要 volatile**：读操作虽然不需要锁，但必须通过 `volatile` 读取引用才能保证可见性，否则可能读到旧引用。
 2. **误以为适用于写多读少**：恰恰相反，任何写操作都会复制整个底层数组，写多会导致 CPU 和内存消耗巨大，应严格限制在读多写少场景。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-040.svg" alt="CopyOnWriteArrayList是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -115,8 +112,6 @@ public void addBlacklist(String ip) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 写黑板报时，为了不影响别人看，先把内容抄到另一块黑板上改完了再换上去，大家看的还是旧的那块。
 
 **展开框架：**
@@ -125,8 +120,6 @@ public void addBlacklist(String ip) {
 3. **保证最终一致** — 保证最终一致性而非实时一致性
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

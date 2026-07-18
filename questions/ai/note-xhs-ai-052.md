@@ -245,6 +245,3 @@ def rewrite_query(user_query, chat_history, user_context):
 | 1:30 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 2:20 | 总结卡 | "记住核心要点。下期我们追问：企业级RAG的权限管控在哪个环节实现？向量检索前还是检索后？" | 收尾与钩子 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-052.svg" alt="【高德AI面试】企业级RAG和普通RAG的核心区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -122,9 +122,6 @@ flowchart TD
     E2 -->|"采样maxmemory-samples<br/>默认取5选最久未用"| Clear[腾出空间]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-011.svg" alt="【字节飞连面经】Redis 过期删除策略 + 内存淘汰策略：Key 过期会立刻删吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

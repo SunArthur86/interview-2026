@@ -200,9 +200,7 @@ flowchart TD
     K -.->|"距离相等必然同步"| E
 ```
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_algorithm_note-sp-ai-004.svg" alt="怎么判断链表相交？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心双指针：pA走A链表后跨到B头，pB走B链表后跨到A头。

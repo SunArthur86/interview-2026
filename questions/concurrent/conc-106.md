@@ -79,9 +79,6 @@ memory_points:
 3. 协程与线程的区别？
    - 协程是用户态轻量级线程，由程序自身调度，切换完全在用户态完成，不涉及内核态切换，开销远小于线程。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-106.svg" alt="什么是进程和线程？它们的区别是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -94,8 +91,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 进程是工厂，线程是工人。工厂独立，工人共享工厂设备。
 
 **展开框架：**
@@ -104,8 +99,6 @@ memory_points:
 3. **多线程** — 多线程需同步防冲突
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

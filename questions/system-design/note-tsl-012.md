@@ -315,9 +315,6 @@ public class AlertValidator {
 - **远程锁车**：车主授权后远程限制车辆速度/锁定
 - **哨兵视频**：提供车辆周围环境录像作为证据
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-tsl-012.svg" alt="车辆出现异常启动、移动时触发预警，如何设计后端架构，支持预警信息实时推送、异常轨迹追踪？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

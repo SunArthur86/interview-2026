@@ -311,6 +311,3 @@ MAT中如何确认ThreadLocal泄漏：
 | 1:57 | 关键代码/伪代码片段 | "铁律：ThreadLocal用完必须remove()，标准写法try{...}finally{tl.remove();}" | 铁律 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：ThreadLocal和Synchronized有什么区别？各自的适用场景。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-ks-003.svg" alt="【快手Java一面】MAT显示10万个ThreadLocalEntry未回收，如何解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

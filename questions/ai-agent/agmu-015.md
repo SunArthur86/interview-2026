@@ -101,9 +101,6 @@ def execute_tool(agent_output: dict):
 2. 对于不可信代码（如用户上传的 Python 脚本），Docker 的隔离性可能不够（如内核漏洞），你会如何进一步增强安全性？
 3. 如何处理 Agent 产生的“隐性错误”？即函数返回了 HTTP 200 但内容是错误的，如何感知并隔离？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_agmu-015.svg" alt="错误隔离在多 Agent 里如何实现 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

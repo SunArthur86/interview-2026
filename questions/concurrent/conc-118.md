@@ -75,9 +75,6 @@ synchronized(lock) {
 2. **线程间通信方式**：除了 wait/notify，还有 Lock/Condition（支持多条件队列）、管道输入输出流（PipedInputStream/PipedOutputStream）。
 3. **ThreadLocal 的内存泄漏问题**：ThreadLocalMap 中的 Key 是弱引用，Value 是强引用，如果线程不结束，Value 无法回收，导致内存泄漏，需手动 remove。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-118.svg" alt="如何在两个线程之间共享数据？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -89,7 +86,6 @@ synchronized(lock) {
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 两人共看一块黑板（共享变量）vs 传纸条（消息队列）。
 
 **展开框架：**
@@ -98,7 +94,6 @@ synchronized(lock) {
 3. **BlockingQueue** — 阻塞队列（BlockingQueue）实现生产消费模型
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

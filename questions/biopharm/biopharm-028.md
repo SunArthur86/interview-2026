@@ -228,7 +228,3 @@ flowchart TD
 | 1:50 | 流程图 | 组合多工具成复合任务（Workflow/Agent）。 | 编排 |
 | 3:30 | 总结卡 | 一句话记忆：MCP = 工具的 USB 标准。 下期可以接着聊：MCP server 怎么写。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-028.svg" alt="【生物医药 AI】MCP 协议工程实践怎么做（注册/发现/安全/编排）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

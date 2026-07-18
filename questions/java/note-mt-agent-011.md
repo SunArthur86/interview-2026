@@ -244,10 +244,6 @@ flowchart LR
     end
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-mt-agent-011.svg" alt="【美团面经】Python如何读取大文件？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 
 ## 记忆要点
 

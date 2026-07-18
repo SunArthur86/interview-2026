@@ -166,10 +166,6 @@ final void treeifyBin(Node<K,V>[] tab, int hash) {
 | 扩容计算 | 重新hash定位 | hash & oldCap位运算 |
 | 最坏查找 | O(n) | O(logn) |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-mi-001.svg" alt="HashMap JDK8 底层原理是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 
 ## 记忆要点
 

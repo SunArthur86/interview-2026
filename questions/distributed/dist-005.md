@@ -84,11 +84,6 @@ service ipvsadm save
 ```
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-005.svg" alt="LVS NAT模式的工作原理是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心原理：LB 作为 RS 网关，通过内核 Netfilter 实现 DNAT（请求）和 SNAT（响应）
@@ -99,8 +94,6 @@ service ipvsadm save
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 公司前台（LB）代收所有信件，转发给各部门，回信也由前台代发。
 
 **展开框架：**
@@ -109,8 +102,6 @@ service ipvsadm save
 3. **支持端口映射** — 支持端口映射。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

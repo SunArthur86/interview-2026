@@ -127,9 +127,6 @@ CDN(HTML静态页) → Nginx缓存(动态数据) → Redis(价格/库存) → My
 - 价格变更 → 实时更新Redis → 前端轮询
 - 库存变更 → Redis原子操作 → 实时展示
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-083.svg" alt="如何设计一个商品详情页系统？支持高并发、多数据源聚合。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

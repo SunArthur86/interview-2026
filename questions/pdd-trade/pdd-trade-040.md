@@ -282,7 +282,3 @@ flowchart TD
 | 1:56 | 代码片段 + 关键行高亮 | 要点是：路径：API→RAG→Agent→LLMOps | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——要不要学数学/算法？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-040.svg" alt="【拼多多交易】Java 工程师怎么转 AI？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

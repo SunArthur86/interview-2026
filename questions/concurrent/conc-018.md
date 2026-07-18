@@ -90,9 +90,6 @@ void ObjectMonitor::Enter(TRAPS) {
 3.  **JDK 1.6 对 synchronized 做了哪些优化？**
     - 偏向锁、轻量级锁、锁消除、锁粗化、自适应自旋。这些优化的目的都是为了避免直接膨胀到重量级锁。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-018.svg" alt="什么是重量级锁（Heavyweight Lock）？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

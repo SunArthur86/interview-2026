@@ -129,9 +129,6 @@ flowchart TD
     H --> H1[硬件搬运 CPU 几乎不参与]
     J[驱动模型] --> K[VFS → 通用块层 → 设备驱动]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-026.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

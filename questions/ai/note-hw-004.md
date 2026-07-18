@@ -360,9 +360,6 @@ def active_learning_loop(model, unlabeled_pool, budget=10000):
 - **大模型辅助标注**：SAM（Segment Anything）做分割预标、GPT-4V做场景理解预标，可节省80%人工
 - **数据飞轮**：字节、华为等大厂的数据闭环系统——产品上线→数据回流→自动标注→模型迭代
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-hw-004.svg" alt="【华为面经】华为手机拍照场景训练数据采集与标注方案 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

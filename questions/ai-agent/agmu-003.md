@@ -102,9 +102,6 @@ class CircuitBreaker:
 2. 在多 Agent 协作中，如果中间某个 Agent 挂了，是让整个流程 Fail-Fast（快速失败），还是记录状态等待人工介入？决策依据是什么？
 3. 如何设计一套机制来自动检测 Agent 的输出是“幻觉”而非“有效但略有偏差”的结果？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_agmu-003.svg" alt="多 Agent 的「容错」具体怎么体现 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

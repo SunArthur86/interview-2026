@@ -78,9 +78,6 @@ Thread A: | [执行 A] | <------> | [执行 B] | [执行 A] |
 2.  **监控上下文切换**：如何通过 `vmstat` 或 `pidstat` 命令查看系统或特定进程的上下文切换次数（`cs` 列或 `cswch/s`）。
 3.  **零拷贝技术**：虽然不是直接减少上下文切换，但减少了数据在内核态和用户态之间的拷贝次数，间接提升了系统性能。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-028.svg" alt="什么是线程上下文切换？如何减少上下文切换？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

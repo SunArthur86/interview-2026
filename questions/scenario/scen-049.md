@@ -156,9 +156,6 @@ memory_points:
 3.  **Kafka 扩容时为何要增加 Partition？**
     *   *提示*：Kafka 的消费并发度由 Partition 数量和 Consumer Group 内的线程数决定（Min(分区数, 线程数)）。如果只扩 Broker 不扩 Partition，吞吐量无法线性提升。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-049.svg" alt="如何设计容量评估和扩容方案？应对大促/活动流量。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -170,8 +167,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像春运售票，提前预测客流并加开临时列车。
 
 **展开框架：**
@@ -180,8 +175,6 @@ memory_points:
 3. **分级降级策略保障核心业务** — 分级降级策略保障核心业务可用
 
 **收尾：** 如何确定单机最大QPS？
-
-
 
 
 ## 视频脚本

@@ -120,9 +120,6 @@ public class RateLimitFilter implements GlobalFilter {
 3. **熔断粒度**：是基于服务粒度熔断还是接口粒度？（推荐接口粒度，避免因一个非核心接口异常导致整个服务不可用）。
 4. **配置一致性**：多网关实例下，如何保证限流配置同步更新？（依赖配置中心的高可用推送机制，网关本地缓存规则作为兜底）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-102.svg" alt="如何设计一个微服务的网关限流降级一体化方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -134,8 +131,6 @@ public class RateLimitFilter implements GlobalFilter {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 小区大门保安，查证件（认证）、限流进入人数（限流）、发现坏人不让进（熔断）。
 
 **展开框架：**
@@ -144,8 +139,6 @@ public class RateLimitFilter implements GlobalFilter {
 3. **服务降级返回** — 服务降级返回默认值或缓存保核心体验
 
 **收尾：** 网关如何实现动态规则？
-
-
 
 
 ## 视频脚本

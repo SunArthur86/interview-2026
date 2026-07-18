@@ -268,9 +268,6 @@ class ResponseCache:
 2. **核心是保护 LLM**：LLM 是最脆弱最贵的，所有防护围绕它
 3. **降级而非报错**：熔断/降级保证"返回点什么"而非崩溃——用户体验优先
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-076.svg" alt="Agent 高并发如何做防护？（网关限流+会话限流+模型熔断+工具降级） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

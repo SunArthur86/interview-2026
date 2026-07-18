@@ -108,9 +108,6 @@ public Mono<ResponseEntity<TaskId>> runAgent(@RequestBody AgentRequest req) {
 ## 常见考点
 1. **非确定性处理**：如何保证 Agent 输出的稳定性？答案：通过设定严格的 System Prompt、使用温度参数低的模型、以及引入“人工确认”机制来减少随机性。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_bd-ai-java-003.svg" alt="【字节面经】传统 Web 应用和 AI Agent 应用有什么不同？结合你的开发经历谈谈。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

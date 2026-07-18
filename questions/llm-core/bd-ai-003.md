@@ -120,9 +120,6 @@ async def handle_get_status() -> list[TextContent]:
     │ MCP Host  │                               │ MCP Host  │
     │ (Client)  │
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_bd-ai-003.svg" alt="【字节面经】Skills、Tools、MCP三者的区别是什么？如果自己实现工具服务，选哪种方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

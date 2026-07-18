@@ -315,9 +315,6 @@ def llm_as_judge(question, answer, context, judge_llm):
 
 > RAG 评估的本质是**分解**：用 Recall@K / MRR 评估检索器，用 Faithfulness / Answer Relevancy 评估生成器，用 RAGAS 框架实现无标注自动化评分，再配合 LLM-as-Judge 和人工抽检形成闭环。不分解就无法定位瓶颈，这是 RAG 系统优化的第一原则。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-llm-007.svg" alt="【字节面经】如何评估 RAG 系统的回答质量？你用过 RAGAS 或类似的评测框架吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

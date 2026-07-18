@@ -106,9 +106,6 @@ flowchart LR
     style REL fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-047.svg" alt="如何设计一个 SLA/SLO 保障体系？量化系统可靠性目标。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

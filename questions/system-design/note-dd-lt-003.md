@@ -359,9 +359,6 @@ flowchart TD
     end
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-lt-003.svg" alt="【滴滴面经】你说用了空间换时间，把抽奖算法优化到了 O(1)，具体是怎么做的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

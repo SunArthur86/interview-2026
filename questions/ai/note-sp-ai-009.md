@@ -199,9 +199,6 @@ HHH 框架：
 3. **KL约束**：无论RLHF还是DPO都需要KL散度防止模型偏离太远
 4. **对齐税**：对齐后模型能力可能下降(为了安全牺牲部分能力)
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-sp-ai-009.svg" alt="简单讲一下大模型训练的对齐操作？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

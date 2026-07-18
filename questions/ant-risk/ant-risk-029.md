@@ -454,7 +454,3 @@ flowchart TD
 | 1:05 | 代码示例截图 | 发现→通知→定位→止损→恢复→复盘。 | 应急响应 |
 | 2:30 | 总结卡 | 一句话记忆：预案分级（P0电话/P1短信/P2 IM）+ 回滚策略（代码/配置/数据/流量）。 下期可以接着聊：代码回滚和数据回滚冲突怎么办。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-029.svg" alt="【蚂蚁风控】高可用——预案、回滚、应急响应怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

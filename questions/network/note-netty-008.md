@@ -218,9 +218,6 @@ ChannelHandlerContext  ChannelHandlerContext  ChannelHandlerContext
 五条经验：一、单一职责——每个 Handler 做一件事（解码、业务、编码分开），不写"上帝 Handler"；二、无状态优先——能用 @Sharable 共享的尽量无状态，有状态用非共享（默认）；三、异常处理——最后加 ExceptionHandler 统一捕获，中间 Handler 的异常要么处理要么 fireExceptionCaught 向后传；四、编解码用 FrameDecoder——处理半包粘包（LengthFieldBasedFrameDecoder 等），不要假设一次 read 是完整消息；五、资源释放——SimpleChannelInboundHandler 自动释放入站 ByteBuf，自定义传递要 retain/release 配对。核心："责任链 + 单一职责 + 无状态 + 异常处理 + 资源管理"是 Netty Handler 设计的五要素，遵守了代码清晰且不易出 bug。
 
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_network_note-netty-008.svg" alt="ChannelHandler 和 ChannelPipeline 的关系？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** ChannelHandler 是"处理一个事件的业务逻辑单元"，ChannelPipeline 是"把多个 Handler 串成处理链的容器"。

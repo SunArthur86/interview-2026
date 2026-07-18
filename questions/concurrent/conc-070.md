@@ -117,9 +117,6 @@ tags: []
 1. **I/O 复用的归属**：虽然 I/O 复用可以处理多个连接，但它在分类上属于**同步 I/O**，而非异步 I/O。因为第二步“数据拷贝”依然是同步阻塞进行的（应用进程参与拷贝）。
 2. **select 的 1024 限制**：很多人误以为 select 限制是操作系统层面的硬限制。实际上这个限制通常是编译时常量 `FD_SETSIZE`（默认 1024）。修改并重新编译内核可以改变这个值，但性能会因线性遍历进一步下降。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-070.svg" alt="什么是IO复用？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

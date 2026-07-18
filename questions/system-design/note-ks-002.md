@@ -304,6 +304,3 @@ public Product getProductWithLogicalExpire(String key) {
 | 1:57 | 关键代码/伪代码片段 | "逻辑过期核心：缓存值中存expireTime字段，逻辑判断过期后返回旧值+异步刷新(用户无感)" | 逻辑过期核心 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：缓存击穿、缓存穿透、缓存雪崩三者的区别和各自防御方案。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-ks-002.svg" alt="【快手Java一面】热点Key突然失效，数据库被打到限流，除了互斥锁还有什么方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

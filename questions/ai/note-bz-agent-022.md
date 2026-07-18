@@ -254,9 +254,6 @@ class ForgettingManager:
 2. **遗忘是 feature 不是 bug**：主动设计遗忘机制，避免记忆膨胀和噪声
 3. **提"软删除+保留期"**：误删可恢复，体现工程严谨
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-022.svg" alt="Agent Memory 怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

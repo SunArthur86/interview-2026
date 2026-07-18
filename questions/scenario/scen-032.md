@@ -135,9 +135,6 @@ flowchart TD
     style DIFF fill:#ffcccc
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-032.svg" alt="如何设计一个对账系统？保证支付/订单/资金数据分毫不差。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -149,8 +146,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像记账员每晚核对微信账单和自己的记账本，发现对不上的账目立刻查明原因。
 
 **展开框架：**
@@ -159,8 +154,6 @@ flowchart TD
 3. **自动匹配** — 按流水号逐笔比对
 
 **收尾：** 对账发现差异如何自动修复？
-
-
 
 
 ## 视频脚本

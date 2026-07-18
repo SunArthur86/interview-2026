@@ -199,9 +199,6 @@ ProducerRecord<String, Event> record = new ProducerRecord<>(
        → 拒绝操作 (安全失败)
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-mt2-001.svg" alt="分布式流程引擎如何保证状态一致性？Redis 锁故障怎么兜底？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -353,9 +353,7 @@ flowchart TD
     Result --> End([重排完成])
 ```
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_algorithm_note-mt-agent-012.svg" alt="【美团面经】手撕：重排链表（LeetCode 143）" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 三步走口诀：找中点、转后半、交错合并。

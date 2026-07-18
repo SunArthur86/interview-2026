@@ -318,14 +318,4 @@ flowchart TD
 | 1:05 | 流程图 | N+1；IO 密集型：2N 或 N×(1+等待/计算)。 | CPU 密集型 |
 | 2:30 | 总结卡 | 一句话记忆：七参数：核心、最大、存活时间、队列、线程工厂、拒绝策略、单位。 下期可以接着聊：为什么核心线程满了先进队列而不是先开非核心线程。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-006.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-006.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-006.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

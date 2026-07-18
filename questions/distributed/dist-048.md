@@ -82,11 +82,6 @@ if (currentTime < lastTimestamp) {
 4. **时间戳位耗尽**：41位时间戳大约能用69年，如何解决架构级的长久性？（可以在位数未耗尽前修改业务逻辑，如增加Epoch位）。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-048.svg" alt="雪花算法的时钟回拨问题如何解决？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 时钟回拨原因：NTP同步或手动修改导致时间倒退，引发ID重复
@@ -98,9 +93,6 @@ if (currentTime < lastTimestamp) {
 ## 结构化回答
 
 
-
-
-
 **30 秒电梯演讲：** 时光倒流了，必须等人等到时间恢复正常，或者用备好的号段顶着。
 
 **展开框架：**
@@ -109,9 +101,6 @@ if (currentTime < lastTimestamp) {
 3. **ZK/RingBuffer兜底** — 可用ZK或RingBuffer兜底
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
-
 
 
 ## 视频脚本

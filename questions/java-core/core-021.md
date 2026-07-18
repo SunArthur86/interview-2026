@@ -92,9 +92,6 @@ for _ in range(10): # 模拟收到 10 个 ACK
 2. **慢启动和拥塞避免的切换点**：当 cwnd >= ssthresh 时切换。如果在慢启动期间发生丢包，ssthresh 会更新为 cwnd 的一半，下一次进入拥塞避免时起点会更低。
 3. **为什么不是收到 ACK 就加 1 MSS？**：如果在拥塞避免阶段仍然指数增长，一旦达到接近带宽上限，网络流量会瞬间溢出，导致剧烈丢包。线性增长能提供足够的反馈时间让发送方感知到拥塞信号（如 ACK 延迟增加或丢弃）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-021.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

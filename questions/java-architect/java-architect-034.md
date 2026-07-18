@@ -412,14 +412,4 @@ public class OrderPlacedEvent {
 | 0:30 | 流程图 | 事件通知（轻量）、事件携带状态转移（携带数据）、事件溯源（事件即状态）。 | 事件类型 |
 | 1:30 | 总结卡 | 一句话记忆：EDA：事件是 fact（已发生），不是 command（祈使）。 下期可以接着聊：事件和命令（command）区别。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-034.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-034.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-034.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

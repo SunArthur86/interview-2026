@@ -184,9 +184,6 @@ flowchart TD
     K --> A
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-jc-009.svg" alt="【阶跃星辰面经】BF16 和 FP16 两种精度有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -282,6 +282,3 @@ public void sendMessages() {
 **面试官**：分布式事务有什么风险？
 **候选人**：性能开销、死锁、补偿失败、消息丢失、长锁定资源、一致性窗口，需要对账兜底+补偿幂等+监控保障。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-mys-002.svg" alt="【美云智数终面】分布式事务场景你遇到过几种？2PC、TCC、本地消息表分别适用什么业务场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

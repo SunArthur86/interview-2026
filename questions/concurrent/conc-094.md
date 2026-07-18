@@ -80,9 +80,6 @@ memory_points:
 3.  **如何预防死锁中的“循环等待”？**
     *   回答要点：实施有序资源分配策略，强制所有进程按照固定的顺序（如按地址升序或编号）申请资源。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-094.svg" alt="什么是死锁（DeadLock）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -94,8 +91,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像十字路口四辆车互不相让，谁也动不了，彻底堵死。
 
 **展开框架：**
@@ -104,8 +99,6 @@ memory_points:
 3. **不可抢占** — 资源不能被强行夺走
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

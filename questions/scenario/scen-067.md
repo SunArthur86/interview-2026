@@ -126,9 +126,6 @@ flowchart TD
     style ZS fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-067.svg" alt="如何设计一个排行榜系统？支持亿级用户、实时更新、多种维度排序。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -141,8 +138,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像运动会记分牌，一有新成绩立刻更新位置，随时能看前几名。
 
 **展开框架：**
@@ -151,8 +146,6 @@ flowchart TD
 3. **大数据量分桶** — 大数据量分桶处理或冷热分离
 
 **收尾：** 亿级用户的排名如何快速查询？
-
-
 
 
 ## 视频脚本

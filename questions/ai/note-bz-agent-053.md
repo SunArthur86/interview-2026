@@ -170,9 +170,6 @@ Rerank对RAG效果提升（经验值）：
 2. **解释 Bi vs Cross**：Bi-Encoder 无交互快但不准，Cross-Encoder 有交互准但慢
 3. **效果显著**：Rerank 通常能提升 10%+ 准确率，是 RAG 优化性价比最高的手段
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-053.svg" alt="重排算法（Rerank）如何提升检索匹配精度？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

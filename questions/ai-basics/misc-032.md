@@ -114,9 +114,6 @@ flowchart TD
     J --> K[注意: 仅对大模型>100B有效]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-032.svg" alt="Chain-of-Thought (CoT) 提示的原理是什么?Zero-shot CoT vs Few-shot CoT有什么区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

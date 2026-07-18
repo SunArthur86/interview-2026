@@ -112,9 +112,6 @@ Mark Word (32位 JVM) 布局随锁状态变化：
    - **撤销成本不可控**：偏向锁撤销需要到达 Safepoint，如果程序中出现了大量并发竞争（例如使用了线程池、并发容器等），偏向锁的撤销会导致长时间的 STW（Stop The World），反而降低性能。
    - **收益下降**：现代 Java 程序普遍使用并发库，锁的竞争模式比早期更复杂，偏向锁“锁通常由一个线程持有”的假设在复杂系统中往往不成立。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-324.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

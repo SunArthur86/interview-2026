@@ -216,9 +216,6 @@ def validate_result(result, schema):
 2. **错误回传 LLM**：这是 Agent 区别于传统程序的关键——失败后 LLM 自主决策而非硬编码
 3. **预防+治理**：既要有事后治理（重试/降级），也要有事前预防（超时/熔断/限流）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-035.svg" alt="工具调用失败如何治理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

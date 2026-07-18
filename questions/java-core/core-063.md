@@ -108,9 +108,6 @@ def get_data():
 | **明文传输** | 报文为纯文本 | 调试方便，利于学习 | 易被窃听、篡改 | 升级为 HTTPS (TLS 加密) |
 | **请求/响应模型** | 一问一答 | 逻辑简单 | 无法由服务器主动推送 | WebSocket, HTTP/2 Server Push, SSE |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-063.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

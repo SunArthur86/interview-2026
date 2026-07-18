@@ -223,9 +223,6 @@ public ListNode reverseBetween(ListNode head, int left, int right) {
 三条可复用：一、"暂存 next 再修改指针"——所有链表指针操作（反转、删除、插入、合并）都要先暂存会被覆盖的指针，再修改；二、"循环不变式思维"——写循环前想清楚"每轮结束后各指针指向什么"，结束时据此确定返回值（反转链表返回 prev 不是 curr，源于不变式）；三、"原子操作识别"——反转链表是链表的"原子操作"，K 个一组翻转、反转区间、回文判断、重排链表都用到它。我把"反转链表迭代版"和"反转区间版"都存进模板库，遇到链表题先看能否分解成已知原子操作的组合，能分解就拼模板。
 
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_algorithm_note-xhs-algo-006.svg" alt="反转单链表（O(n)时间 O(1)空间）（华为od Java一面）" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** 反转链表就是把每个节点的next指针从「指向后一个」改成「指向前一个」。

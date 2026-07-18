@@ -124,9 +124,6 @@ sequenceDiagram
     LLM->>T: 动态调整检索向量
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-039.svg" alt="如何设计一个LLM驱动的个性化推荐系统？理解用户深层需求，支持对话式推荐。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

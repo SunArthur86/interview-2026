@@ -408,9 +408,6 @@ class CodeReviewExecution:
 - **Cursor/Cline的MCP集成**：实际IDE Agent如何使用MCP接入工具
 - **OpenAI的Function Calling演进**：从tools到parallel_function_calling到computer_use
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bg-012.svg" alt="【八股总结】MCP、Skill、Function Call 的关系与区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

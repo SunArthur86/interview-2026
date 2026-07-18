@@ -110,9 +110,6 @@ CompletableFuture<String> result = futureA.thenCombine(futureB, (a, b) -> a + ",
 1. **Future 的局限性**：`get()` 阻塞主线程，多个串行 `get` 会降低效率。如何解决？（使用 `CompletableFuture` 进行回调编排或 `ExecutorService.invokeAll` 批量执行）。
 2. **任务异常处理**：如果 `call()` 抛出异常，`get()` 会将其包装在 `ExecutionException` 中抛出，通过 `e.getCause()` 获取原始异常。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-007.svg" alt="ExecutorService、Callable<Class>、Future有返回值线程是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

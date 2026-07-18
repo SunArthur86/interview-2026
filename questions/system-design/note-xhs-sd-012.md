@@ -241,6 +241,3 @@ kubectl autoscale deployment order-service --min=5 --max=50 --cpu-percent=70
 **面试官**：扩容一定有效吗？
 **候选人**：不一定，依赖下游（DB/第三方）扩容无效、启动慢的服务来不及，要先限流止血再分析瓶颈。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-012.svg" alt="【JAVA大厂面试】业务QPS突然提升100倍，你会怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

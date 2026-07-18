@@ -409,14 +409,4 @@ flowchart TD
 
 **候选人**：合并策略要更细——同 skuId 合并时不是简单取较大值，而是"取较大值但提示用户"。合并后前端弹窗"已为您合并未登录时的购物车，共 X 件商品新增/更新"。让用户知情可调整。或者更保守：合并时取和（user 2 + device 5 = 7），但提示"检测到重复加购"。实际业务取舍——JD 早期取较大值是怕重复加，现在多提示用户。监控 cart_merge_user_complaint。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-167.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-167.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-167.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

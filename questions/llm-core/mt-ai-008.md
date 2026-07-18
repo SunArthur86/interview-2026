@@ -116,9 +116,6 @@ outputs = llm.generate(["你好，请介绍一下北京的景点。"], sampling_
 | **Qwen-2** | GQA | 128K | 持平 (但在长文本下更优) | 多语言，YaRN 外推算法 |
 | **Qwen-2.5** | GQA | 128K | 微调 (FP8/量化支持更好) | 数学/代码全能，18T 数据训练 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_mt-ai-008.svg" alt="【美团面经】串一下 Qwen 系列，几版模型都做了哪些贡献？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

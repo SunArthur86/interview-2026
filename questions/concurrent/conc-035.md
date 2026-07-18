@@ -69,9 +69,6 @@ WHERE id = 100 AND version = 10;
 4. **乐观锁如何实现？**
    - 通常使用 version 字段（`update table set ver=ver+1, ... where id=1 and ver=old_ver`）或 CAS 机制，失败则重试。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-035.svg" alt="数据库并发控制策略有哪些？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

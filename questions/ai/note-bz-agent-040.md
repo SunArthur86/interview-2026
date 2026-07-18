@@ -255,9 +255,6 @@ class SkillLifecycle:
 2. **不是所有 Prompt 都要升级**：只升级高频复用的，体现"投资回报"思维
 3. **强调"资产管理"**：Skill 是组织的资产（可版本/分享/迭代），Prompt 是消耗品
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-040.svg" alt="Prompt 不等于 Skill，怎么把 Prompt 升级为 Skill？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -173,9 +173,6 @@ flowchart TD
     style A fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-jc-004.svg" alt="【阶跃星辰/字节面经】GRPO 里的优势值是什么？怎么计算？baseline 起什么作用 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

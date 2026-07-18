@@ -98,9 +98,6 @@ def call_llm_with_fallback(prompt):
 - **数据隐私**：敏感数据（PII）在进入 LLM 前需通过脱敏模块处理。
 - **Prompt 注入防御**：在 Gateway 层增加输入清洗策略。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_eng-practice_eng-practice-s005.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -91,9 +91,6 @@ def audit_risk():
 1. **集成方式**：BPM 如何调用 Agent？（答：通常通过 HTTP/REST 调用 Agent 服务，解析其结构化输出作为流程变量）。
 2. **数据一致性**：Agent 产生的数据如何同步？（答：Agent 不直接写核心业务库，而是返回数据对象，由 BPM 服务层校验后写入）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_agmu-013.svg" alt="企业里多 Agent 与「传统工作流引擎(BPM)」关系是什么 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

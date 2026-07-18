@@ -96,9 +96,6 @@ memory_points:
    - `shutdown()`：不再接受新任务，等待已提交任务（包括队列中的）执行完。
    - `shutdownNow()`：不再接受新任务，尝试停止正在执行的任务（通过 `Thread.interrupt()`），并返回队列中未执行的任务列表。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-101.svg" alt="什么是线程池？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -111,8 +108,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 出租车队：不用每次造车，直接派空车接客(任务)。
 
 **展开框架：**
@@ -121,8 +116,6 @@ memory_points:
 3. **Scheduled** — Scheduled支持定时任务
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

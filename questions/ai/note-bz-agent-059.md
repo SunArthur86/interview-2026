@@ -215,9 +215,6 @@ memory_points:
 2. **全链路 + 数据**：讲清每环节 + 给出具体数字（recall从X到Y），显得真实
 3. **展现权衡思维**：不只说"用了什么"，还说"为什么这么选/有什么 tradeoff"
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-059.svg" alt="美团 Agent 二面：知识库检索会怎么问到底？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -277,8 +274,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 面试官问"怎么做菜"，你不能只说"把菜放进锅里"，要说选材/刀工/火候/调味/摆盘/试味全流程。
 
 **展开框架：**
@@ -287,9 +282,6 @@ memory_points:
 3. **结合实际项目** — 结合实际项目经验
 
 **收尾：** 检索延迟怎么优化？
-
-
-
 
 
 ## 视频脚本

@@ -135,9 +135,6 @@ public void markReadBatch(Long userId, Long groupId, List<Long> msgIds) {
 - 异步更新：先返回成功，异步更新计数
 - 缓存未读总数：Redis计数器 + 定时校正
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-082.svg" alt="如何设计一个亿级用户的消息已读未读系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

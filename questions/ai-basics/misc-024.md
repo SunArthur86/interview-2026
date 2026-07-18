@@ -95,9 +95,6 @@ output = model.generate(
 2. **Contrastive Search 中 $\alpha$ 参数的作用**？($\alpha$ 过大导致不连贯，过小导致重复)
 3. **Temperature 参数的影响**？（Temperature > 1 平滑概率分布增加随机性，< 1 尖锐分布使其更确定，接近0即变为Greedy）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-024.svg" alt="对比常见解码策略:Greedy/Beam Search/Contrastive Search各自的优缺点 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

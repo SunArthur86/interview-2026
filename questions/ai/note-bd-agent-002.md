@@ -138,9 +138,6 @@ Tool ←─── LLM推理决策 ───→ 更新Memory
 3. **Tool Calling安全**：提到权限校验和超时控制
 4. **协同关系**：能画出四大能力的交互流程图
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-agent-002.svg" alt="AI Agent项目实际用到了哪些Agent技术能力？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -198,8 +195,6 @@ Tool ←─── LLM推理决策 ───→ 更新Memory
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像一个有经验的助理——有工作流程(Workflow)、有记事本(Memory)、能查资料(RAG)、会用工具(Tool Calling)
 
 **展开框架：**
@@ -208,9 +203,6 @@ Tool ←─── LLM推理决策 ───→ 更新Memory
 3. **RAG** — RAG检索提供外部知识
 
 **收尾：** 四种能力的优先级和依赖关系是什么？
-
-
-
 
 
 ## 视频脚本

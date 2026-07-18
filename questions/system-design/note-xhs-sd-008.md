@@ -338,6 +338,3 @@ public class AIRouter {
 | 2:54 | 对比表格 | "工程化：计费/缓存/限流/审计/灰度" | 工程化 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：AI网关如何做成本优化？Token预算管理怎么做。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-008.svg" alt="如何设计多 AI 厂商接口统一适配方案？（入职Java复盘） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

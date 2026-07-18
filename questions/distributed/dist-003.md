@@ -149,11 +149,6 @@ sysctl -p
 - **session 保持要小心**：DR 模式默认无连接跟踪优化，长连接会话保持建议用源 IP 哈希（`-s sh`）而非持久化模板，避免 LB 连接表爆满。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-003.svg" alt="LVS DR模式的工作原理是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心原理：仅改写二层数据包的 MAC 地址，IP 报文头保持原样（CIP 与 VIP 不变）
@@ -164,8 +159,6 @@ sysctl -p
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 老板（LB）只把任务转给对应员工（RS），员工干完直接汇报客户。
 
 **展开框架：**
@@ -174,8 +167,6 @@ sysctl -p
 3. **RS** — RS必须配置VIP并抑制ARP。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

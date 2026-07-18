@@ -248,9 +248,6 @@ Agent多且动态 → 消息总线
 2. **没有最优解**：每种方式有 tradeoff，选型看规模和需求
 3. **提"黑板模式"**：经典 AI 架构（源自 Hearsay-II 语音识别），多 Agent 协作的基础范式
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-017.svg" alt="Multi-Agent 之间的连接（通信）方式有哪几种？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -308,8 +305,6 @@ Supervisor 单点是经典"单点故障"问题。解决：1）主备冗余——
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像同事沟通——直接喊话(直接调用)、用共享文档(黑板)、用即时通讯群(消息总线)、通过项目经理协调(中心化)。
 
 **展开框架：**
@@ -318,9 +313,6 @@ Supervisor 单点是经典"单点故障"问题。解决：1）主备冗余——
 3. **消息总线** — 发布订阅，事件驱动
 
 **收尾：** 哪种最常用？
-
-
-
 
 
 ## 视频脚本

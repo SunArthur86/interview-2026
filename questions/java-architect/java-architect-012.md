@@ -374,14 +374,4 @@ WHERE TIME_TO_SEC(TIMEDIFF(NOW(), trx_started)) > 5;   -- 超过 5 秒的事务
 | 1:05 | AOP 动态代理原理图 | self-invocation（this 调用）、非 public、异常被吞、异常类型不匹配、多线程、未托管 Bean。 | 失效场景 |
 | 2:30 | 总结卡 | 一句话记忆：事务 = AOP 代理拦截 + ThreadLocal 绑定 Connection。 下期可以接着聊：同类内部调用为什么事务失效。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-012.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-012.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-012.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

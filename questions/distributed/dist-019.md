@@ -87,11 +87,6 @@ echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
 3. **RS 的配置细节**：如何处理 RS 上的路由表和 ARP 问题。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-019.svg" alt="LVS TUN模式的工作原理是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心原理：通过 IP-in-IP 隧道技术再封装外层 IP 头，实现跨网段调度。
@@ -103,8 +98,6 @@ echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 信封上套一个大信封寄给收件人，收件人拆开大信封处理原信，直接回信不用经过寄信人。
 
 **展开框架：**
@@ -113,8 +106,6 @@ echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
 3. **RealServer** — RealServer响应直接返回给客户端
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

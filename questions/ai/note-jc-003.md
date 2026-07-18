@@ -166,9 +166,6 @@ GAE 的 λ 就是控制这个权衡——λ 小偏向 TD（高偏差低方差）
 - **交叉验证选复杂度**：用验证集找偏差方差平衡点
 - **GAE 的 λ 即偏差方差旋钮**：调 λ 就是在调价值估计的偏差方差权衡
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-jc-003.svg" alt="【阶跃星辰面经】解释一下偏差和方差分别是什么概念 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -81,9 +81,6 @@ cat /proc/$pid/maps | grep stack
 2. **内存泄漏**：堆内存的泄漏如何发生？如何检测？
 3. **栈溢出**：什么会导致 StackOverflowError（如无限递归）？如何调整栈大小？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-002.svg" alt="什么是Linux 内存管理？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

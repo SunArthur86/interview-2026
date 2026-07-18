@@ -161,9 +161,7 @@ flowchart TD
     H -- "true: 发生过交换" --> B
 ```
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_algorithm_note-sp-ai-005.svg" alt="冒泡排序的时间复杂度？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 时间复杂度记口诀：最好O(n)，最坏平均皆O(n²)。因为未优化全遍历为n²，优化后一轮无交换提前终止为n。
@@ -223,7 +221,6 @@ Timsort 解决了两个工程问题：一、稳定性——对象排序要求稳
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像排队时两个人比身高，矮的往前挪——每一轮都有一个最高的"冒泡"到最后
 
 **展开框架：**
@@ -232,7 +229,6 @@ Timsort 解决了两个工程问题：一、稳定性——对象排序要求稳
 3. **空间O(1)** — 空间O(1)，原地排序
 
 **收尾：** 冒泡排序怎么优化？
-
 
 
 ## 视频脚本

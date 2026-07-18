@@ -375,14 +375,4 @@ public class InventoryEventListener {
 | 0:30 | 概念结构示意图 | 上游/下游、防腐层（ACL）、共享内核、客户/供应商。 | 上下文映射（Context Map） |
 | 1:30 | 总结卡 | 一句话记忆：限界上下文 = 微服务拆分的逻辑单元（术语一致 + 规则一致）。 下期可以接着聊：一个限界上下文一定对应一个微服务吗。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-016.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-016.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-016.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

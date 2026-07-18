@@ -145,9 +145,6 @@ Redis作者Antirez选择SkipList的理由：**实现简单 + 范围查询高效 
 3. **SkipList vs B+Tree**：SkipList偏内存(指针跳转)，B+Tree偏磁盘(页组织)
 4. **ListPack进化**：Redis 7.0用ListPack替代了ziplist，解决了级联更新问题
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-bd-agent-011.svg" alt="Redis的ZSet底层是怎么实现的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

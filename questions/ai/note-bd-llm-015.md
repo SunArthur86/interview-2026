@@ -444,9 +444,6 @@ class AntiHallucinationPipeline:
 4. 了解logprob阈值设置的经验值和trade-off（精度vs召回）
 5. 知道约束解码对格式幻觉有效但对内容幻觉效果有限，需要配合RAG
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-llm-015.svg" alt="【字节面经】除了在 Prompt 中加约束，还有哪些工程手段可以在生成阶段降低模型幻觉？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

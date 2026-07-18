@@ -531,9 +531,7 @@ ipcMain.on('task-state-broadcast', (event, data) => {
 
 4. **持久化是任务层的隐性要求**。桌面端用户可能直接关窗口甚至关应用。任务层状态必须持久化到磁盘（SQLite/IndexedDB），重启后恢复。这不是可选功能，是桌面产品的基本要求。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_frontend_note-ms-005.svg" alt="【月之暗面面经】Vue 做桌面 AI 产品时，哪些状态应该在页面层，哪些要上升到任务层？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心判据：状态在用户切走页面后还需看到，就属于任务层

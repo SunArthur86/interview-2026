@@ -127,9 +127,7 @@ flowchart TD
     end
 ```
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_frontend_note-ms-018.svg" alt="【月之暗面面经】你怎么看桌面 AI 产品前端未来一年的主战场？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 全链路体验闭环：主战场从单一对话框转向多 Agent 协同与产物自动落盘

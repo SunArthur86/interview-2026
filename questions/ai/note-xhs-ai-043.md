@@ -264,6 +264,3 @@ lora_config = LoraConfig(
 **面试官**：全参数微调一定比LoRA好吗？
 **候选人**：不一定，全参数更易灾难性遗忘、成本高、易过拟合；LoRA的低秩约束反而是正则化，某些场景更稳更优。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-043.svg" alt="【快手AI大模型】LoRA/QLoRA微调如何保证人设不崩坏、风格统一？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

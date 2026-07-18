@@ -111,9 +111,6 @@ memory_points:
    - 前端防抖（Debounce）：用户停止输入 200ms 后再发起请求。
    - 服务端合并请求：对于同一用户极短时间内的相同前缀请求，可以共享计算结果。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-098.svg" alt="如何设计一个商品搜索的搜索建议和热词推荐系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -125,8 +122,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像百度搜索框，你敲几个字，它就根据大家都搜什么和你以前搜过什么，猜你想搜啥。
 
 **展开框架：**
@@ -135,8 +130,6 @@ memory_points:
 3. **结合** — 结合用户历史实现个性化联想
 
 **收尾：** 拼音搜索如何实现？
-
-
 
 
 ## 视频脚本

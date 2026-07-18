@@ -133,9 +133,6 @@ POST /_reindex
 4. **重建索引导致磁盘空间不足怎么办？**
    - 分批次 Reindex（按时间或 ID 范围）；或者临时挂载新盘；或者将副本数设为 0 减少占用，重建完再加副本。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-095.svg" alt="如何设计一个搜索系统的索引重建方案？不停机完成百亿数据索引重建。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -147,8 +144,6 @@ POST /_reindex
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 给飞机换引擎，先在旁边装个新的备用引擎，调试好了再切换油路。
 
 **展开框架：**
@@ -157,8 +152,6 @@ POST /_reindex
 3. **写入时关闭副** — 写入时关闭副本和刷新提升速度
 
 **收尾：** 如何验证新索引数据正确？
-
-
 
 
 ## 视频脚本

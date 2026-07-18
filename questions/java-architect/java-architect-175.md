@@ -420,14 +420,4 @@ flowchart TD
 
 **候选人**：种子用户选择要精准——按内容标签（如"美妆"）匹配兴趣用户，且选"高互动倾向"的用户（历史点赞率高）。不是随机 100 人。如果种子选错了（如把美妆内容推给科技爱好者），互动率低被淘汰是真冤枉。所以冷启动的内容理解和标签提取很关键——用 LLM 离线生成内容标签。监控 cold_start_mislabel_rate（内容标签错误率）。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-175.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-175.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-175.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

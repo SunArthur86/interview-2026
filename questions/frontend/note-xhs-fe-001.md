@@ -252,9 +252,6 @@ class SSEManager {
 5. **不只是SSE**：能延伸到ReadableStream、WebGPU端侧推理等前沿方案
 
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_frontend_note-xhs-fe-001.svg" alt="【前端面试】AI 对话产品中 SSE 流式渲染如何优化？前端主线程被堵塞怎么解决？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** AI对话产品的SSE流式渲染如果在前端主线程处理，每个token到达都触发DOM更新，会导致Long Task和FPS骤降。

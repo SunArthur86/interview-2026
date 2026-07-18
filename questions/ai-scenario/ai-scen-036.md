@@ -137,9 +137,6 @@ flowchart TD
     D --> E[输出结构化JSON/CSV数据]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-036.svg" alt="如何设计一个图文理解系统？支持文档图片OCR、图表数据提取、视觉问答（VQA）。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

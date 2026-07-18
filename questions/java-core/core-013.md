@@ -109,9 +109,6 @@ int main() {
 2. **多级页表**：为何 64 位系统需要多级页表？（为了压缩页表大小，避免页表占用连续且巨大的内存空间）。
 3. **缺页中断**：缺页中断属于“内中断”还是“外中断”？处理流程是怎样的？（页表项为无效 -> 触发中断 -> OS 调度磁盘 IO -> 更新页表 -> 恢复指令执行）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-013.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

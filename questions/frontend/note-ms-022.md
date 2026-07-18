@@ -161,9 +161,7 @@ flowchart TD
     D1 -- "打分过低" --> D2
 ```
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_frontend_note-ms-022.svg" alt="【月之暗面面经】如果桌面产物质量忽高忽低，前端能做哪些护栏？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 输入端护栏：因AI输出不可控，所以必须前端强校验产物结构并具备重试机制

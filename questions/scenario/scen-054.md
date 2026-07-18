@@ -142,9 +142,6 @@ flowchart TD
     style REG fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-054.svg" alt="如何设计服务注册与发现机制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -156,8 +153,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像电话黄页，商家入驻，用户按名字查号码打电话。
 
 **展开框架：**
@@ -166,8 +161,6 @@ flowchart TD
 3. **客户端缓存服** — 客户端缓存服务列表
 
 **收尾：** AP和CP模式如何选择？
-
-
 
 
 ## 视频脚本

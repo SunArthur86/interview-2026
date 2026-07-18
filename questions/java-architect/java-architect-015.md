@@ -491,14 +491,4 @@ spring:
 | 1:50 | 流程图 | 按 Header/Cookie/IP/UID 路由到灰度实例，金丝雀比例可动态调整。 | 灰度发布 |
 | 3:30 | 总结卡 | 一句话记忆：SCG = Route（路由）+ Predicate（断言）+ Filter（过滤器）三要素。 下期可以接着聊：Spring Cloud Gateway 和 Zuul 区别。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-015.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-015.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-015.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

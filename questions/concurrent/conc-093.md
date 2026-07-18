@@ -87,9 +87,6 @@ memory_points:
 3.  **signal 和 broadcast 的区别？**
     *   回答要点：signal 只唤醒一个，效率高；broadcast 唤醒所有，容易造成“惊群效应”（大量线程竞争锁），但在特定场景下（如状态改变对所有线程可见）是必须的。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-093.svg" alt="什么是条件变量？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -101,8 +98,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像快递到了柜子（条件变量），你在家睡觉（阻塞），柜子通知你（唤醒）才去拿。
 
 **展开框架：**
@@ -111,8 +106,6 @@ memory_points:
 3. **条件满足时被** — 条件满足时被唤醒并重新竞争锁
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

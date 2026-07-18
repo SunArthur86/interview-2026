@@ -483,7 +483,3 @@ flowchart TD
 | 1:05 | 代码示例截图 | LLM 原理、AI 工程化、Agent 架构、AI 工具。 | 学习重点 |
 | 2:30 | 总结卡 | 一句话记忆：转型四阶段：用 AI → 集成 AI → 工程化 AI → 设计 AI 方案。 下期可以接着聊：Java 工程师转 AI 最大的坎。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-040.svg" alt="【蚂蚁风控】Java 后端工程师怎么转 AI？转型路径和就业建议 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

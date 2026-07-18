@@ -136,9 +136,6 @@ async def agent_with_memory_and_rag(user_input, user_id, session_id):
 └─────────────────────────────────────────┘
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd5-001.svg" alt="讲讲 RAG 和持久化记忆的区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

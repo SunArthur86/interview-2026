@@ -121,9 +121,6 @@ def escalate_to_human(session_id: str, reason: str):
             │ (防幻觉兜底)  │
             └─────────
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-017.svg" alt="如何设计一个AI智能客服系统？要求能处理80%的常见问题，复杂问题转人工。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

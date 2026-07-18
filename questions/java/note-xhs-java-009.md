@@ -239,7 +239,3 @@ public class LockUpgradeDemo {
 **面试官**：偏向锁一定比轻量级锁好吗？
 **候选人**：不一定。多线程交替访问场景偏向锁撤销重偏向开销更大，所以JDK15默认禁用偏向锁，权衡维护成本和收益。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-009.svg" alt="【拼多多 Java服务端】synchronized锁升级过程，每个状态的标志位在对象头哪里？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

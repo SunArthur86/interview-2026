@@ -134,9 +134,6 @@ public void createOrder(OrderRequest req) {
 3. **MQ消费幂等**：如果消费失败导致消息重回队列，如何保证不重复扣款？（先查去重表，或利用数据库唯一索引做Insert Select Where Not Exists）。
 4. **并发边界**：如果两个请求同时通过Redis Token校验怎么办？（Redis单线程模型保证了原子性，delete是串行的；但若后端处理慢，需配合DB唯一索引兜底）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-030.svg" alt="如何设计一个防重提交/幂等方案？适用于下单、支付等核心业务。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -242,8 +239,6 @@ Flow:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像外卖订单：重复下单时，系统根据单号识别，只送一份饭。
 
 **展开框架：**
@@ -252,8 +247,6 @@ Flow:
 3. **业务操作与幂等校验** — 业务操作与幂等校验需原子
 
 **收尾：** Token机制的Token存在哪里？如何保证一次性？
-
-
 
 
 ## 视频脚本

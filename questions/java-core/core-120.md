@@ -130,9 +130,6 @@ flowchart TD
     E --> E2[旧数据频率失真]
     F --> F1[循环队列+访问位<br/>近似 LRU]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-120.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

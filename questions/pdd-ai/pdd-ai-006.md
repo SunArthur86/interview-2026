@@ -247,7 +247,3 @@ KieScanner 依赖 Kjar Maven 仓库（规则打包成 kjar 发到 Nexus），每
 | 1:56 | 流程图：输入→处理→输出 | 要点是：规则存 DB + 热加载 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——Drools 为什么慢？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-006.svg" alt="【拼多多 AI 中台】业务规则中台怎么设计？规则引擎选型？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -397,14 +397,4 @@ mysql -P 3307 -e "SELECT COUNT(*) FROM trade.orders;"   # 验证可读
 | 1:50 | 代码示例截图 | 停应用 → 恢复全量 → 重放 binlog 到故障点 → 校验 → 恢复应用。 | 恢复流程 |
 | 3:30 | 总结卡 | 一句话记忆：RPO（数据丢失量）+ RTO（恢复时间）是高可用核心指标。 下期可以接着聊：RPO 和 RTO 怎么定。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-025.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-025.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-025.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

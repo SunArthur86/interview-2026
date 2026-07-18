@@ -126,9 +126,6 @@ MySQL (Binlog)      Canal Server      Kafka           Consumer (ES)
 └───────────┘       └───────────┘      └───────┘      └───────────┘
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-026.svg" alt="如何设计一个全文搜索引擎？支持亿级文档的实时搜索。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -141,8 +138,6 @@ MySQL (Binlog)      Canal Server      Kafka           Consumer (ES)
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像书籍末尾的关键词索引页，想找“苹果”直接翻到对应的页码，而不用翻遍整本书。
 
 **展开框架：**
@@ -151,8 +146,6 @@ MySQL (Binlog)      Canal Server      Kafka           Consumer (ES)
 3. **写入优化** — 批量写入+异步刷新
 
 **收尾：** ES的倒排索引结构是什么？
-
-
 
 
 ## 视频脚本

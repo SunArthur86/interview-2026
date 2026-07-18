@@ -98,9 +98,6 @@ compression_retriever = ContextualCompressionRetriever(
 1. **RAG 与 Fine-tuning 如何选择**？(RAG 适合事实性、动态知识；Fine-tuning 适合语言风格、指令遵循、领域内隐知识)
 2. **混合检索 (Hybrid Search)**：关键词检索 (BM25) 与 向量检索 如何加权？(Reciprocal Rank Fusion, RRF 算法)
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-025.svg" alt="RAG的基本流程是什么?相比纯LLM有什么优势?核心挑战有哪些 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -119,9 +119,6 @@ class SendEmailSkill(BaseSkill):
 2. **Skill路由策略**：当多个Skill都能满足同一个用户意图时，如何选择最优的？（基于向量相似度匹配Description或专门的路由模型）
 3. **冷启动问题**：新开发的Skill没有使用数据，如何优化其Prompt或初始参数？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_bd-ai-009.svg" alt="【字节面经】Agent系统如何设计能力复用和Skill管理，保证可扩展性？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

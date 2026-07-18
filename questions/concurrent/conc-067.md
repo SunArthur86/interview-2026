@@ -155,9 +155,6 @@ flowchart TB
     class S1,S2,S3 sem
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-067.svg" alt="什么是AQS？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -169,8 +166,6 @@ flowchart TB
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像红绿灯控制系统(state)，控制车辆(线程)通行，没通行的就在队列排队。
 
 **展开框架：**
@@ -179,8 +174,6 @@ flowchart TB
 3. **模板方法模式** — 模板方法模式，由子类定义获取释放逻辑
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

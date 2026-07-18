@@ -290,9 +290,6 @@ Application Layer ──┤
 >
 > 综合下来，系统的瓶颈会不断后移，最终理论极限取决于 Redis 集群规模和分库分表数量，做到 **几十万 QPS** 是完全可行的。"
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-sl-007.svg" alt="【滴滴面经】你这个架构比较简单，理论上做到 5 万 QPS 应该不难，你觉得还有哪些优化空间？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

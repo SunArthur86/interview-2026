@@ -82,9 +82,6 @@ public class MD5Util {
 | **SHA-256** | 256 bit | 高 | 中等 | 数字签名、区块链、安全校验 |
 | **BCrypt** | 192 bit | 高 | **慢（设计初衷）** | **密码存储**（加盐，抗彩虹表） |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-169.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

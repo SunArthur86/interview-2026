@@ -105,9 +105,6 @@ flowchart TD
     class Without,Reorder bad
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-132.svg" alt="什么是happens-before规则？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -119,8 +116,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像先盖好楼才能装修，装修完才能入住，有先后顺序，前面的结果后面一定能看到。
 
 **展开框架：**
@@ -129,8 +124,6 @@ flowchart TD
 3. **volatile写后读** — volatile写后读可见
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

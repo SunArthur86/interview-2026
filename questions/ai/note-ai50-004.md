@@ -152,9 +152,6 @@ pairs = [(query, doc['content'][:512]) for doc in candidates]
 
 **结论**: Reranker通常能提升15-20个百分点的Recall@5，是RAG系统从60分到80分的关键组件。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai50-004.svg" alt="为什么要加Reranker重排？直接拿向量检索结果给模型会有什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

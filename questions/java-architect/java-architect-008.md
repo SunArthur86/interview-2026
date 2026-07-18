@@ -395,14 +395,4 @@ AQS 的第一性：**所有同步器（锁、信号量、闭锁）本质都是"s
 | 0:30 | 锁状态转换图 | 对象头里记录锁状态、线程 ID、HashCode。 | Mark Word |
 | 1:30 | 总结卡 | 一句话记忆：synchronized 锁升级：无锁→偏向→轻量（自旋）→重量（monitor），不可降级。 下期可以接着聊：偏向锁为什么 JDK 15 默认弃用。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-008.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-008.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-008.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

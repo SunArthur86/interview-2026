@@ -201,9 +201,6 @@ def global_consistency_check():
 3. **可扩展性**：这种方法不仅适用于写书，也适用于长周期项目（如代码重构、技术文档撰写）
 4. **成本意识**：按需检索比全量塞入更省Token，每章约2600字 vs 全书20万字
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx3-001.svg" alt="用AI辅助写一本书，内容很长容易超过上下文长度，你怎么处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -292,7 +292,3 @@ NeRF / Gaussian Splatting：
 | 1:50 | 延迟优化对比表 | 全链路流式 + 并行 + 边缘部署 + 预渲染。 | 低延迟 |
 | 3:30 | 总结卡 | 一句话记忆：三轨：嘴型/表情/动作。 下期可以接着聊：1 万人并发怎么扛。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-030.svg" alt="【巨剧核 AI 陪伴】数字人服务端架构怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

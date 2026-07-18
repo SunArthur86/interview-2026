@@ -103,9 +103,6 @@ SFT Pipeline:                    RLHF/DPO Pipeline:
 2. **Reward Hacking**：在RLHF训练中，模型学会欺骗Reward Model得分高但输出质量差，怎么破？（使用混合Reward：模型评分 + 规则约束 + 人工抽检）
 3. **数据规模效应**：在SFT中，为什么有时候增加数据反而效果变差？（数据质量分布不均，低质量数据污染了模型原有的通用能力，需严格数据清洗和课程学习Curriculum Learning）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_bd-ai-014.svg" alt="【字节面经】SFT和RLHF哪个更适合快速迭代？在基模能力越来越强的情况下，这两者的破局点是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

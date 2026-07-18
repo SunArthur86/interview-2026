@@ -91,9 +91,6 @@ flowchart TD
     L["红队测试与样本库"] -.-> E
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-027.svg" alt="如何设计Prompt注入防御系统？防止恶意用户通过输入操纵AI系统的行为。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

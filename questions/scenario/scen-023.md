@@ -121,9 +121,6 @@ flowchart LR
     style MQ fill:#ffe4b5
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-023.svg" alt="如何设计一个基于消息队列的削峰填谷方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

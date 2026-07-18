@@ -170,9 +170,6 @@ memory_points:
 - **不追问失败场景**：正常流程谁都能讲，失败处理才是真功夫
 - **不验证本地/云端边界**：这是桌面AI和Web前端最本质的区别
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mk-017.svg" alt="【月之暗面面经】你如何判断候选人真的做过 AI-Native 桌面产品，而不是普通 Web 前端？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -131,9 +131,6 @@ flowchart TD
     H --> I
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-sz-001.svg" alt="【神州专车面经】介绍做过最复杂的数据项目，从需求到落地怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

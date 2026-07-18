@@ -263,9 +263,7 @@ flowchart TD
     Greedy -.->|若局部最优无法<br/>推出全局最优| Check
 ```
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_algorithm_note-algo-001.svg" alt="动态规划解题框架？怎么判断一道题该用DP？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 识别口诀：求最值+能拆分子问题+子问题重复算=90%该用动态规划

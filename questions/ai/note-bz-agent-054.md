@@ -177,9 +177,6 @@ relevant = [doc for doc in results if doc.similarity > 0.7]
 2. **归一化技巧**：归一化后点积=余弦但更快——体现工程优化
 3. **给阈值参考**：0.7 以上算相关，体现实战经验
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-054.svg" alt="向量间相似度如何计算？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -238,8 +235,6 @@ AB 对比。固定评估集（query-文档对），对比不同度量的 Recall@
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像比较两个人的兴趣——余弦相似度看"方向是否一致"(都爱运动)，点积还看"强度"(多爱)，欧氏距离看"差距有多大"。
 
 **展开框架：**
@@ -248,9 +243,6 @@ AB 对比。固定评估集（query-文档对），对比不同度量的 Recall@
 3. **欧氏距离：绝** — 欧氏距离：绝对距离
 
 **收尾：** Embedding为什么要归一化？
-
-
-
 
 
 ## 视频脚本

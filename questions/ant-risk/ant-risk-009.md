@@ -307,7 +307,3 @@ flowchart TD
 | 1:05 | MVCC 版本链图 | 能看到最新已提交。 | RC 每次 select 都新建 rea |
 | 2:30 | 总结卡 | 一句话记忆：RR 默认隔离级别，read view 在事务首次读时建立后复用。 下期可以接着聊：为什么 InnoDB 默认 RR 而不是 RC。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-009.svg" alt="【蚂蚁风控】MySQL 事务隔离级别？MVCC 原理？InnoDB 怎么解决幻读？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

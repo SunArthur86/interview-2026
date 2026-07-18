@@ -279,7 +279,3 @@ map.compute(uid, (k, old) -> merge(old, delta));
 | 1:05 | HashMap 数组+链表图 | 桶链表长度 ≥8 且数组 ≥64 时转红黑树（查找 O(n)→O(logn)）。 | 桶链表长度 ≥8 且数组 ≥64 时 |
 | 2:30 | 总结卡 | 一句话记忆：JDK7 Segment 分段锁，JDK8 CAS+synchronized 桶锁。 下期可以接着聊：为什么 JDK8 放弃分段锁。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-004.svg" alt="【蚂蚁风控】ConcurrentHashMap 在 JDK7 和 JDK8 的实现差异？put 流程是怎样的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

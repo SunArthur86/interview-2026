@@ -91,9 +91,6 @@ return ring.get(ring.tailMap(hashKey).firstKey());
 4. **什么是 Gossip 协议？**
    - Cassandra 节点间通过 Gossip 协议交换状态（如节点存活、Schema 变化），这是维护 Token Ring 状态一致性的基础。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-037.svg" alt="Cassandra一致Hash和虚拟节点是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -105,8 +102,6 @@ return ring.get(ring.tailMap(hashKey).firstKey());
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 圆桌会议室，人（节点）坐一圈，文件（数据）交给右手边的人。为防某个人太累，让他多坐几个虚拟位置分摊任务。
 
 **展开框架：**
@@ -115,8 +110,6 @@ return ring.get(ring.tailMap(hashKey).firstKey());
 3. **增删节点只影** — 增删节点只影响相邻节点数据
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

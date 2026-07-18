@@ -124,9 +124,6 @@ flowchart TD
     Choice -->|硬件原生| FP8[FP8<br/>H100支持]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_xhs-infra-005.svg" alt="模型量化方法对比：GPTQ vs AWQ vs FP8 vs SmoothQuant，各有什么优缺点？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

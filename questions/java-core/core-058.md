@@ -74,9 +74,6 @@ DNS解析是将域名转换为IP地址的过程。整个流程涉及浏览器、
 3. **递归查询和迭代查询的区别**：分别在什么阶段发生？
 4. **DNS解析为什么使用UDP**：虽然也支持TCP（主要用在区域传送），但普通查询主要用UDP是因为包小、速度快。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-058.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

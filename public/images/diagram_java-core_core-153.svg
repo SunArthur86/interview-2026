@@ -46,7 +46,7 @@
 <text x="651" y="268" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">[4]</text>
 <rect x="680" y="250" width="42" height="36" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
 <text x="701" y="268" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">[5]</text>
-<text x="580" y="310" font-size="11" fill="#4CAF50" text-anchor="middle">链表>8 & 数组≥64 → 红黑树 (TreeBin)</text>
+<text x="580" y="310" font-size="11" fill="#4CAF50" text-anchor="middle">链表>8 &amp; 数组≥64 → 红黑树 (TreeBin)</text>
 <text x="580" y="332" font-size="11" fill="#4CAF50" text-anchor="middle">sizeCtl 控制；transfer 多线程辅助扩容</text>
 <text x="60" y="390" font-size="13" fill="#9C27B0" font-weight="700">核心 API：putIfAbsent / computeIfAbsent / sizeCtl / ForwardingNode</text>
 <text x="60" y="414" font-size="12" fill="#607D8B">读操作无锁(volatile Node) / 写 CAS+sync / 扩容并发迁移 / size 弱一致</text>

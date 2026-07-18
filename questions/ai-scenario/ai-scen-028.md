@@ -151,9 +151,6 @@ flowchart TD
     I --> M["转入后审核抽检"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-028.svg" alt="如何设计一个AI内容审核系统？实时检测文本、图片、视频中的有害内容。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

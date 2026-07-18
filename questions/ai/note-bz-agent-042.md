@@ -217,9 +217,6 @@ class IterationConfig:
 2. **评估是核心**：没有评估闭环的 Agent 无法持续改进——强调"可度量"
 3. **"精装"比喻好**：Demo 是毛坯，生产要精装，每步都不可省
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-042.svg" alt="Hermes Agent 七步精装，让智能体真正会干活？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -277,7 +274,6 @@ class IterationConfig:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像毛坯房精装——地基(架构)有了，但要水电(工具/记忆)、装修(安全/体验)、验收(评估)才能入住(上线)。
 
 **展开框架：**
@@ -286,8 +282,6 @@ class IterationConfig:
 3. **关键** — 稳定性和体验
 
 **收尾：** 哪步最重要？
-
-
 
 
 ## 视频脚本

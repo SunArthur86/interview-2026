@@ -272,9 +272,6 @@ class LLMonitor:
 2. **三态熔断器**：closed→open→half_open，自动恢复而非人工干预
 3. **降级链**：主→备→缓存→规则→兜底，保证总返回结果——用户体验优先
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-077.svg" alt="大模型 API 的限流熔断如何设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -135,9 +135,6 @@ memory_points:
 4. **Binlog 增量同步延迟过大怎么处理？**
    答：如果同步速度跟不上写入速度，会造成“数据倒挂”（永远追不上）。处理方式：优化同步通道的并发度，对大事务进行拆分，或者在业务低峰期暂停写入进行追赶。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-058.svg" alt="如何设计一个大规模数据迁移方案？不停机迁移百亿数据。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -150,8 +147,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 换高速公路时，先修好新路，让车慢慢导流过去，再封旧路。
 
 **展开框架：**
@@ -160,8 +155,6 @@ memory_points:
 3. **灰度读流量校** — 灰度读流量校验数据
 
 **收尾：** 双写方案如何保证一致性？
-
-
 
 
 ## 视频脚本

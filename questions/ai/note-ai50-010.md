@@ -271,9 +271,6 @@ flowchart TD
     G -.->|断点续传重发事件| F
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai50-010.svg" alt="Agent多步任务的流式传输怎么实现？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

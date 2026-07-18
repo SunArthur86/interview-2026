@@ -206,7 +206,3 @@ flowchart TD
 | 1:00 | 能力/参数拆解表 | 要点是：Hash：对象存储（用户信息） | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-009.svg" alt="【拼多多交易】Redis 数据结构在交易系统的应用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

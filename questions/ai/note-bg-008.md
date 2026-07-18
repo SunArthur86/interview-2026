@@ -362,9 +362,6 @@ ZeRO-3: 切分优化器状态 + 梯度 + 参数（省Nx，即FSDP）
 - **Sequence Parallel**：TP的变体，把序列维度也切分，进一步减通信
 - **Ring Attention**：长序列场景的特殊并行，跨GPU分布式attention
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bg-008.svg" alt="【八股总结】TP/PP/DP 分布式策略 &amp; TP 开大为什么变慢 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

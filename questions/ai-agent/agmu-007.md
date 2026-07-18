@@ -87,9 +87,6 @@ Step1 -> Step2 -> Step3       Boss
 1. **误区：动态分配就是多线程**。动态分配的核心在于「任务内容的生成是运行时决定的」，而多线程只是执行手段。即便单线程也能实现动态任务分配的逻辑。
 2. **误区：过度依赖动态**。对于 90% 的常规case，动态分配由于增加了思考和规划步骤，延迟远高于固定 Pipeline，应只在必要时使用。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_agmu-007.svg" alt="动态任务分配和固定 Pipeline 各适合什么场景 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

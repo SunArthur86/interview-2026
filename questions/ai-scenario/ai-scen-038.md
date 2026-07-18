@@ -138,9 +138,6 @@ flowchart TD
     F --> G[返回生成结果]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-038.svg" alt="如何设计一个AI文生图系统？支持文字描述生成高质量图片、可控生成、批量生产。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

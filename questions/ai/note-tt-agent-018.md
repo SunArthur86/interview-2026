@@ -197,9 +197,6 @@ vllm serve model \
 3. **用户感知**：流式输出让用户在1s内看到反馈，比绝对延迟优化更重要（心理学）
 4. **成本权衡**：Speculative Decoding增加小模型推理成本，但大模型推理次数减少，总成本可能降低
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tt-agent-018.svg" alt="自研Agent多步推理带来高延迟，从模型、检索、工程三层给出优化方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -142,9 +142,6 @@ flowchart TB
 4. **领域模型如何映射到数据库表？**
    - 追问点：聚合根是否对应一张表？值对象如何持久化？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-051.svg" alt="如何从单体架构演进到微服务架构？微服务拆分的原则和方法。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -156,8 +153,6 @@ flowchart TB
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 将大公司拆成独立事业部，独立核算，通过合同协作。
 
 **展开框架：**
@@ -166,8 +161,6 @@ flowchart TB
 3. **利用双写和同** — 利用双写和同步工具平滑迁移数据
 
 **收尾：** 如何确定微服务的拆分粒度？
-
-
 
 
 ## 视频脚本

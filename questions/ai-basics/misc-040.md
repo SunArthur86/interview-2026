@@ -111,9 +111,6 @@ image = pipe(
 image.save("cyberpunk.png")
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-040.svg" alt="扩散模型(Diffusion)的前向和反向过程是什么?为什么U-Net是核心架构 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

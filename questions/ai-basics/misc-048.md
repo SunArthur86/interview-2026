@@ -104,9 +104,6 @@ def hybrid_score(dense_score, bm25_score, alpha=0.7):
 **评估指标：**
 *   **MTEB (Massive Text Embedding Benchmark)**: 目前最权威的测评基准，涵盖检索、重排序、聚类等任务。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-048.svg" alt="如何选择Embedding模型?BGE、E5、Cohere各有什么特点?中文场景推荐什么 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

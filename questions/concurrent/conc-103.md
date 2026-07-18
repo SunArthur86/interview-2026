@@ -81,9 +81,6 @@ try (Entry entry = SphU.entry("resourceName")) {
 3. 如何实现自动恢复？
    - 当服务检测到下游健康（探针成功）或流量恢复正常后，熔断器会进入“半开”状态尝试放行少量请求，成功则全开，失败则继续关闭。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-103.svg" alt="什么是缓存降级？什么场景下需要降级？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -96,8 +93,6 @@ try (Entry entry = SphU.entry("resourceName")) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 停电时，只保留电梯和照明，关掉装饰灯和空调。
 
 **展开框架：**
@@ -106,8 +101,6 @@ try (Entry entry = SphU.entry("resourceName")) {
 3. **应对高并发或** — 应对高并发或下游故障
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

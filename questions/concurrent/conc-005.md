@@ -87,9 +87,6 @@ pidof java | xargs -I {} cat /proc/{}/stat | awk '{print "Major Faults:"$10 " Mi
 2. **TLB 命中率**：什么是 TLB？多进程切换时为什么会导致 TLB 失效？
 3. **页面抖动**：什么是 Thrashing（颠簸）？发生时系统表现如何？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-005.svg" alt="什么是虚拟内存？为什么需要虚拟内存？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

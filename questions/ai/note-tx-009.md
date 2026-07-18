@@ -261,9 +261,6 @@ tool_registry.register(BatchTool(
 
 > **总结**：在企业级场景下（数据安全权重高、需要深度定制），自研 Agent 综合得分更高；但在个人开发者/开源社区场景下，Claude Code 凭借产品体验和生态优势更优。**这不是谁替代谁的问题，而是不同约束条件下的不同最优解**——就像 Kubernetes 和 Serverless 的关系。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx-009.svg" alt="【腾讯面经】该项目与 Claude Code 的核心差异在哪？有哪些优势及不足？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -319,8 +316,6 @@ tool_registry.register(BatchTool(
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像对比自研 RPC 框架 vs gRPC——功能可能重叠，但设计取舍完全不同。
 
 **展开框架：**
@@ -329,9 +324,6 @@ tool_registry.register(BatchTool(
 3. **多语言支持** — 多语言支持（核心概念）
 
 **收尾：** Claude Code 的哪些设计你觉得特别巧妙，值得借鉴？
-
-
-
 
 
 ## 视频脚本

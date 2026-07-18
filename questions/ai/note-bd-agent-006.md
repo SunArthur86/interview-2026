@@ -204,9 +204,6 @@ Agent执行 → 成功 → 更新DAG → 继续下游
 3. **分层设计**：同步用LangGraph，异步用MQ，体现技术选型能力
 4. **安全第一**：强调"防失控"是Agent工程化的核心命题
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-agent-006.svg" alt="如果一个Agent需要调用另一个Agent，怎么做编排和防失控？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

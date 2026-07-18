@@ -186,9 +186,6 @@ ADS (应用层):   直接服务业务
                 → 推荐特征, 定价因子, 客服FAQ
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-gz-002.svg" alt="如何利用大模型挖掘瓜子二手车的数据价值？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

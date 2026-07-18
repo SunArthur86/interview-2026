@@ -104,9 +104,6 @@ flowchart TD
     G --> G1[扫到最远请求即反向<br/>不空跑]
     H[目标] --> I[减少寻道时间<br/>提升吞吐]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-018.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -119,7 +116,6 @@ flowchart TD
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像送快递，FCFS是按单顺序送，SCAN是电梯式逐层送，SSTF是送最近的。
 
 **展开框架：**
@@ -128,7 +124,6 @@ flowchart TD
 3. **SCAN（电梯）** — 单向到底，解决饥饿
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

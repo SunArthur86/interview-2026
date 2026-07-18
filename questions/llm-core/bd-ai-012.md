@@ -119,9 +119,6 @@ User Query                       User Query
 2. **多跳查询**：RAG中遇到复杂问题需要多次检索才能回答，如何设计？（Agent推理链路：Answer A -> Question B -> Retrieve B -> Synthesize）
 3. **时效性差异**：RAG适合解决时效性问题吗？（不适合，除非向量库更新频率极高，否则实时数据还是得靠Function Calling）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_bd-ai-012.svg" alt="【字节面经】Function Calling与RAG的区别和联系是什么？什么时候用Function Calling，什么时候用RAG？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

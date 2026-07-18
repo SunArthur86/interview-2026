@@ -121,9 +121,6 @@ executorService.submit(() -> {
 | **位移管理** | 自动/简单，处理完提交 | 复杂，需防止 Rebalance 丢数据 |
 | **适用场景** | 顺序敏感业务 (金融、库存) | 吞吐敏感业务 (日志处理、推荐) |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-111.svg" alt="线上 Kafka 消息积压百万条如何快速处理？给出系统化的排查和恢复方案。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -135,8 +132,6 @@ executorService.submit(() -> {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像流水线堵料：先招临时工（扩容）突击处理，再优化流程（逻辑）提效。
 
 **展开框架：**
@@ -145,8 +140,6 @@ executorService.submit(() -> {
 3. **消费逻辑降级** — 消费逻辑降级，只做核心落库
 
 **收尾：** 为什么消费者数超过 Partition 数就无效？如何增加并发？
-
-
 
 
 ## 视频脚本

@@ -193,7 +193,3 @@ flowchart TD
 | 1:05 | 概念结构示意图 | 语义缓存命中复用（降次数）。 | 缓存 |
 | 2:30 | 总结卡 | 一句话记忆：成本 = token × 单价 × 次数。 下期可以接着聊：语义缓存怎么实现。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-010.svg" alt="【生物医药 AI】AI 系统的性能与成本怎么控制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

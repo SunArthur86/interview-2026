@@ -162,9 +162,6 @@ flowchart TD
     style NOCHAIN fill:#ffe4b5
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-sp-ai-002.svg" alt="B树和B+树的区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

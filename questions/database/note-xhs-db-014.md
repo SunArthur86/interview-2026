@@ -248,6 +248,3 @@ sync_binlog = 1  -- 每次提交都fsync binlog (推荐)
 **面试官**：2PC的性能代价你怎么应对？
 **候选人**：用binlog组提交把多个事务的fsync合并成一次，配合SSD降低fsync开销，实测高并发下吞吐能提升数倍。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-xhs-db-014.svg" alt="【拼多多 Java服务端】两阶段提交（2PC）讲一下。崩溃恢复时怎么处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

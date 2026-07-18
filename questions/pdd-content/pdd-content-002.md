@@ -165,8 +165,6 @@ AtomicInteger 在低并发（<1000 QPS）完全够用，但直播弹幕高峰能
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** volatile 像公告板——你改了立刻所有人看见（可见性），且顺序不会乱（禁止重排），但抢着改还是会冲突（不保证原子）。
 
 **展开框架：**
@@ -208,8 +206,4 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：禁止重排：内存屏障 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：不保证原子：i++ 要 Atomic | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——volatile 和 synchronized 区别？。 | 收尾 |
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-content_pdd-content-002.svg" alt="【拼多多内容】volatile 关键字原理与直播计数场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 

@@ -229,7 +229,3 @@ private int timeout;
 **面试官**：临时实例心跳机制具体是怎样的？
 **候选人**：客户端默认5s发一次心跳，15s未收到标记不健康，30s未收到剔除实例，通过Distro协议在集群间异步最终一致同步。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-005.svg" alt="【Java微服务】Nacos临时实例vs持久实例的区别？各自的一致性协议？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

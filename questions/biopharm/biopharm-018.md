@@ -206,7 +206,3 @@ flowchart TD
 | 1:50 | 流程图 | 模拟真实负载（含 LLM 耗时），找瓶颈和底线。 | 全链路压测 |
 | 3:30 | 总结卡 | 一句话记忆：均衡：网关层+推理层多级。 下期可以接着聊：GPU 怎么隔离。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-018.svg" alt="【生物医药 AI】负载均衡/隔离/压测怎么做（GPU/多租户/全链路）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

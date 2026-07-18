@@ -192,9 +192,6 @@ flowchart TD
     G --> M[BI报表与聚合分析]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-sz-006.svg" alt="【神州专车面经】事实表和维度表怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

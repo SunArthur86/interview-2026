@@ -116,9 +116,6 @@ public boolean verifyTrack(List<Point> track, int targetX) {
 - **传输安全**：全程HTTPS，验证码在服务端哈希存储（如SHA256），明文不落库/不落日志。
 - **短信成本控制**：验证码在发送前先校验手机号格式、归属地（拦截高风险区号），对于同IP连续请求不同手机号的行为直接封禁，防止短信接口被恶意刷单消耗。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-075.svg" alt="如何设计一个短视频推荐系统？类似抖音/TikTok。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -93,9 +93,6 @@ memory_points:
 3. **Sentinel 的 QPS 限流是基于滑动窗口吗？** 回答：Sentinel 默认使用滑动窗口（LeapArray），将 1s 分为若干样本，统计精度高。
 4. **预热限流？** 回答：系统刚启动时阈值较低（冷启动），随着时间逐渐增加到最大阈值（Guava RateLimiter 支持 `setWarmupPeriod`），防止瞬时流量压垮冷系统。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-039.svg" alt="如何设计一个高可用的限流方案？对比令牌桶、漏桶、滑动窗口算法。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -107,8 +104,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像地铁安检：固定速率放人（漏桶），或者凭券入场（令牌桶），没券了就在门口排队（限流）。
 
 **展开框架：**
@@ -117,8 +112,6 @@ memory_points:
 3. **Redis** — Redis+Lua实现分布式全局限流
 
 **收尾：** 令牌桶和漏桶的区别？
-
-
 
 
 ## 视频脚本

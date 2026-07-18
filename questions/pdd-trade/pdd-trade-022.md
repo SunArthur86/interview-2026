@@ -235,7 +235,3 @@ flowchart TD
 | 2:09 | 代码片段 + 注释高亮 | 要点是：对账：T+1 差错处理 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——怎么知道通道成功率？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-022.svg" alt="【拼多多交易】支付路由怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

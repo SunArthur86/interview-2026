@@ -139,9 +139,6 @@ return 1
 3. **一人多领问题**：如何支持“每人限领 2 张”的数据结构？（Redis 使用 Hash 结构 `HSET user:{userId} {templateId} count`，配合 Lua 脚本检查）
 4. **优惠券分布式事务**：下单扣券和扣库存涉及多个微服务，如何保证一致性？（TCC 或 Seata 框架，最终一致性；先锁券，支付成功后再核销）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-068.svg" alt="如何设计优惠券系统？支持海量发放、领取、核销。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

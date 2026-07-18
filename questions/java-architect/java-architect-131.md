@@ -457,14 +457,4 @@ public class BackChannelLogoutController {
 | 0:40 | OIDC 三种 flow示意/对比图 | "Authorization Code（最常用）、Implicit（废弃）、Hybrid（特殊场景）" | OIDC 三种 flow要点 |
 | 1:25 | 总结卡 | "记住：OAuth2.1。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-131.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-131.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-131.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

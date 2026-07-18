@@ -373,14 +373,4 @@ try {
 | 0:30 | 高可用架构图 | Leader 读写，Follower 从 Leader 拉取同步，ISR 集合决定谁能当选。 | 副本是可用性单元 |
 | 1:30 | 总结卡 | 一句话记忆：分区=并发单元（吞吐），副本=可用单元（RPO），ISR=all+min.insync.replicas=2 是生产标配。 下期可以接着聊：分区数怎么定。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-031.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-031.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-031.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

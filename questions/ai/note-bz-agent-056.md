@@ -204,9 +204,6 @@ Naive RAG
 2. **多跳问答最能体现价值**：这是 Naive RAG 做不到的，用例子说明
 3. **承认成本**：Agentic 更慢更贵，简单任务不该用——体现实用主义
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-056.svg" alt="什么是 Agentic RAG？和传统 RAG 的区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

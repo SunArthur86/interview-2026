@@ -131,9 +131,6 @@ flowchart TD
     style RD fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-034.svg" alt="如何设计即时通讯（IM）系统？类似微信/QQ，支持亿级在线。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -145,8 +142,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像邮政系统：接入局是邮局（长连接），信件按地址路由（消息投递），没人的信存局里（离线消息）。
 
 **展开框架：**
@@ -155,8 +150,6 @@ flowchart TD
 3. **小群写扩散** — 小群写扩散，大群读扩散
 
 **收尾：** 如何保证消息的顺序性？
-
-
 
 
 ## 视频脚本

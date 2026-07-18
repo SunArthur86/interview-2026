@@ -101,9 +101,6 @@ output_ln = ln(x)
 1. **RMSNorm和LayerNorm的区别？**（答：RMSNorm去掉了均值中心化，计算更快，性能相当，LLM常用）
 2. **BatchNorm在推理时怎么处理？**（答：使用训练时累积的全局running_mean和running_var，冻结更新）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_ai-basics-s004.svg" alt="Batch Normalization和Layer Normalization有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

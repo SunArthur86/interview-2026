@@ -89,9 +89,6 @@ pidstat -w -p <pid> 1
 1. **如何减少上下文切换？**：使用无锁编程（CAS）、协程、减少线程数量（利用线程池）、让同一线程处理亲和性任务。
 2. **Java 中如何监控上下文切换次数？**：在 Linux 下可以使用 `vmstat 1`
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-016.svg" alt="什么是PCB-“切换桢”？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

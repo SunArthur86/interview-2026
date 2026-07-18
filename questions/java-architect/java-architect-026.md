@@ -438,14 +438,4 @@ flowchart TD
 | 0:30 | Redis 数据结构图 | 先更 DB 后删缓存（推荐）、延迟双删、订阅 binlog 主动失效。 | 一致性策略 |
 | 1:30 | 总结卡 | 一句话记忆：Cache-Aside（最常用）：读 miss 查 DB 回填；写先更 DB 后删缓存。 下期可以接着聊：为什么写操作删缓存而不是更新缓存。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-026.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-026.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-026.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

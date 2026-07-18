@@ -157,7 +157,3 @@ def assemble_context(persona, memory_summary, recent, user_input, budget):
 | 1:05 | 代码示例截图 | 滚动摘要（旧轮次压缩成一段）/ 关键信息抽取（人名/偏好/事件）。 | 压缩策略 |
 | 2:30 | 总结卡 | 一句话记忆：窗口三层：近期原文 + 中期摘要 + 远期向量召回。 下期可以接着聊：滑动窗口 N 取多少。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-002.svg" alt="【巨剧核 AI 陪伴】长上下文与会话管理怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

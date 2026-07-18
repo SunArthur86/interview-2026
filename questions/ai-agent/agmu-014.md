@@ -99,9 +99,6 @@ class LoopGuard:
 1. **状态哈希**：如何实现高效的状态去重？（答：使用布隆过滤器或 Redis Set 存储 Hash，注意设置过期时间）。
 2. **无进展定义**：如何量化「进展」？（答：基于特定 Token 的出现（如 [DONE]）、任务状态位的变化，或者使用 Critic Agent 评分）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_agmu-014.svg" alt="如何检测多 Agent 系统的「死循环」 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -92,9 +92,6 @@ void pure_user_calc() {
 2. **哪些操作需要内核态**：IO 操作、进程管理、内存管理、网络通信等。
 3. **零拷贝与上下文切换**：为什么 mmap 和 sendfile 能减少上下文切换次数？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-308.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

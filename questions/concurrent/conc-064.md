@@ -113,9 +113,6 @@ flowchart LR
     class NPE danger
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-064.svg" alt="volatile关键字的作用和原理是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -127,8 +124,6 @@ flowchart LR
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像写在白板上的通知，大家立刻看到，且不能乱涂乱改顺序。
 
 **展开框架：**
@@ -137,8 +132,6 @@ flowchart LR
 3. **不保证原子性** — 不保证原子性（如i++需加锁）
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -99,9 +99,6 @@ memory_points:
 3. **如何避免热点 Key 突然消失导致的缓存击穿？**
    - 永不过期 + 异步刷新，或者构建本地缓存作为二级保险。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-020.svg" alt="如何设计热点数据的缓存方案？比如某明星出轨新闻瞬间访问量暴增。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -114,7 +111,6 @@ memory_points:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像明星过安检，人多就多开几个通道，或者先把照片发到广场大屏幕让大家看，别都挤在门口。
 
 **展开框架：**
@@ -123,7 +119,6 @@ memory_points:
 3. **能推CDN的静态** — 能推CDN的静态内容尽量推CDN
 
 **收尾：** 如何实时检测热点Key？
-
 
 
 ## 视频脚本

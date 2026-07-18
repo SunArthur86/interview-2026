@@ -287,9 +287,6 @@ crew = Crew(
 
 **面试加分点**：提到MetaGPT的SOP(Standard Operating Procedure)理念——用人类团队的协作规范约束Agent行为；提到AutoGen的GroupChat模式支持灵活的多Agent对话；提到Agent数量最优值通常是3-5个，超过10个通信开销急剧上升；提到ChatDev模拟完整软件公司的多Agent协作（CEO→CTO→程序员→测试员）；提到多Agent系统最大的挑战是"评估"——如何判断协作效果是来自协同还是单个Agent的能力。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd3-017.svg" alt="多智能体系统中如何设计协同机制？策略冲突时如何解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

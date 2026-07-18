@@ -258,9 +258,6 @@ class HumanEvaluation:
 2. **强调闭环**：评估不是一次性，而是"测→改→再测"的持续过程
 3. **Bad Case 驱动**：评估的核心价值是发现问题——Bad Case 是最宝贵的优化素材
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-043.svg" alt="Agent 性能如何量化评估？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

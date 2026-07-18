@@ -123,9 +123,6 @@ async def get_semantic_cache(query: str, threshold=0.95):
 4. **流式输出与缓存的冲突？**
    - 命中缓存时，若原始结果已完整生成，服务端需模拟流式发送（将缓存结果切片发送），保持客户端接口一致性。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-023.svg" alt="如何设计LLM推理的缓存策略？通过精确缓存、语义缓存和Prefix缓存降低成本和延迟。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

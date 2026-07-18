@@ -71,9 +71,6 @@ System.out.println(msg.getContent());
 2. **为什么选 Protobuf 而不是 JSON？** JSON 是文本格式，字段名重复占用带宽，解析需正则或 split，速度比二进制慢 5-10 倍。
 3. **粘包/拆包问题**：二进制序列化通常需要在传输层（如 Netty）配合 LengthFieldBasedFrameDecoder 处理粘包。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-006.svg" alt="什么是高性能的序列化框架？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -85,8 +82,6 @@ System.out.println(msg.getContent());
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 把行李（对象）压缩成真空袋（二进制流），省空间好搬运。
 
 **展开框架：**
@@ -95,8 +90,6 @@ System.out.println(msg.getContent());
 3. **RPC** — 多用于 RPC 调用和数据持久化。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

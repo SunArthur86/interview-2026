@@ -118,9 +118,6 @@ class LockUpgradeDemo {
 | **轻量级锁** | 00 | 线程交替/短暂竞争 | 避免内核切换 (自旋) | 竞争激烈时 CPU 浪费 (自旋空转) |
 | **重量级锁** | 10 | 高并发激烈竞争 | 不浪费 CPU (线程挂起) | 用户态/内核态切换开销大 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-058.svg" alt="Synchronized 反向理解是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -132,7 +129,6 @@ class LockUpgradeDemo {
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像买票，没排队直接进（无锁/偏向），人少跑两步（轻量自旋），人多老实排队（重量级）。
 
 **展开框架：**
@@ -141,7 +137,6 @@ class LockUpgradeDemo {
 3. **重度竞争升级重量** — 重度竞争升级重量级锁（OS阻塞）。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

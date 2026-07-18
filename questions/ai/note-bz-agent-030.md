@@ -255,9 +255,6 @@ class DialogueDPO:
 2. **奖励是核心**：强调奖励设计的难度（稀疏/延迟/主观），这是对话 RL 区别于其他 RL 的关键
 3. **DPO vs RLHF**：知道 DPO 更简单实用，RLHF 适合需要在线学习的场景——体现前沿认知
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-030.svg" alt="基于强化学习的对话策略如何优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

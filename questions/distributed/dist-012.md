@@ -125,11 +125,6 @@ public class ConsumerController {
 3. **雪崩效应与缓存**：如果注册中心宕机，客户端还能调用吗？（答：可以，客户端通常会缓存服务列表，但无法感知新服务下线）。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-012.svg" alt="什么是服务注册发现？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心价值：解决微服务实例 IP 频繁变动问题，实现服务调用的动态解耦
@@ -140,8 +135,6 @@ public class ConsumerController {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像查黄页，商家开店先登记（注册），顾客想吃饭查黄页找到电话打过去（发现）。
 
 **展开框架：**
@@ -150,8 +143,6 @@ public class ConsumerController {
 3. **ZooKeeper** — 注册中心如ZooKeeper、Consul、Eureka
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

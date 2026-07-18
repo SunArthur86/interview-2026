@@ -86,9 +86,6 @@ class ProductAnswer(BaseModel):
 2. **模型自信度**：模型输出非常自信但内容错误，如何处理？（不要仅依赖文本语气，引入LogProbs评估概率分布熵值，熵值过高表示不确定）
 3. **知识边界**：如何判断问题是应该由模型通用知识回答，还是应该拒绝回答？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_bd-ai-011.svg" alt="【字节面经】幻觉是怎么产生的？你有哪些方法可以减轻模型幻觉？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

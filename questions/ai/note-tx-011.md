@@ -480,9 +480,6 @@ async def safe_run(agent: Agent, task: str, max_retries: int = 3):
 
 面试关键加分点：能说清楚**为什么**这样设计（第一性原理：模块化+标准化接口 > 单体复杂度），并能给出**工程权衡**（Agent 数量、延迟、成本的三角约束）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx-011.svg" alt="【腾讯面经】多 Agent 协同机制怎么设计的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -538,8 +535,6 @@ async def safe_run(agent: Agent, task: str, max_retries: int = 3):
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像一个开发团队——有 PM 拆需求、架构师设计、开发写代码、QA 测试，每个角色有明确职责和协作协议。
 
 **展开框架：**
@@ -548,9 +543,6 @@ async def safe_run(agent: Agent, task: str, max_retries: int = 3):
 3. **冲突解决机制** — 冲突解决机制（核心概念）
 
 **收尾：** 多 Agent 之间如果产生冲突的输出怎么处理？
-
-
-
 
 
 ## 视频脚本

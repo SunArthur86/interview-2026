@@ -113,9 +113,6 @@ def build_graph_index(entities_relations):
 2. GraphRAG的“Global Search”在生成社区摘要时，如果社区过大（如几千个节点），摘要的质量如何保证？（Microsoft采用了分层摘要，先对小区间摘要，再对大区间摘要，防止信息丢失）
 3. 在资源受限的情况下，能否只用图结构而不用LLM生成摘要？（可以使用基于图算法（如PageRank）提取关键实体和路径，但失去了自然语言描述的语义连贯性，适合结构化查询而非阅读理解）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-030.svg" alt="GraphRAG(微软提出)是什么?相比传统向量RAG有什么优势 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

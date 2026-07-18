@@ -241,9 +241,6 @@ llm_app_version = {
 2. **灰度+自动回滚**：灰度发布+指标监控自动回滚——保证线上稳定
 3. **A/B 测试数据驱动**：版本决策基于数据而非感觉
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-087.svg" alt="模型版本管理系统实现要点？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -300,7 +297,6 @@ llm_app_version = {
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像药品管理——批次号(版本)、临床数据(评估)、召回机制(回滚)、上市监控(线上监控)、更新换代(迭代)。
 
 **展开框架：**
@@ -309,8 +305,6 @@ llm_app_version = {
 3. **A/B测试** — 新旧版本灰度对比
 
 **收尾：** LLM也需要版本管理吗？
-
-
 
 
 ## 视频脚本

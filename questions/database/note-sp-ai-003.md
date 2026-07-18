@@ -175,9 +175,6 @@ while True:
 3. **局限性认知**：知道Redis MQ不适合大规模流处理场景
 4. **选型建议**：根据场景推荐Redis/Kafka/RabbitMQ
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-sp-ai-003.svg" alt="Redis的主要功能？为什么用Redis实现消息队列？跟Python内置的比有什么优点？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

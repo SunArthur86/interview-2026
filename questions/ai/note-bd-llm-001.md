@@ -376,9 +376,6 @@ if __name__ == "__main__":
 5. **可观测性**：生产RAG系统必须监控检索命中率、上下文利用率、答案引用准确率等指标，建议接入LangSmith / Phoenix等RAG可观测平台。
 6. **成本控制**：Rerank阶段是计算瓶颈，可通过先向量粗筛→轻量Reranker精排→重量Reranker终排的级联策略平衡延迟与精度。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-llm-001.svg" alt="【字节面经】RAG 系统的整体流程是什么？索引阶段和检索阶段分别承担哪些职责？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

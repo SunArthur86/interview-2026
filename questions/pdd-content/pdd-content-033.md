@@ -349,7 +349,3 @@ flowchart TD
 | 2:09 | 代码片段 + 注释高亮 | 要点是：版本：prompt/模型/数据 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——怎么评测 Agent？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-content_pdd-content-033.svg" alt="【拼多多内容】AI Harness 工程化怎么落地？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

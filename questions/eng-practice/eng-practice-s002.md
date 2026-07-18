@@ -105,9 +105,6 @@ data_samples = {
 2. **RAG 评估中的 Faithfulness 和 Context Recall 的具体计算方式？**：通常是将答案切分成陈述句，然后分别验证其是否被上下文支持。
 3. **如何构建高质量的黄金测试集？**：讨论生成式构建（用LLM生成Q&A）与人工校验的结合。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_eng-practice_eng-practice-s002.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

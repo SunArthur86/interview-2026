@@ -385,9 +385,6 @@ public class ConflictResolutionManager {
 
 **工程最佳实践**：用分层裁决做框架，用一票否决做安全兜底，用互斥组做同域排他，用权重投票做营销柔性决策。四者组合，覆盖绝大多数冲突场景。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-re-004.svg" alt="【滴滴面经】如果规则之间存在优先级冲突怎么办？比如黑名单和VIP概率提升同时命中。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

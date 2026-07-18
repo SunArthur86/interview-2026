@@ -437,14 +437,4 @@ sequenceDiagram
 | 1:05 | 消息队列架构图 | 延迟消息 18 个级别（1s/5s/10s/30s/1m/2m/3m/4m/5m/6m/7m/8m/9m/10m/20m/30m/1h/2h）。 | 延迟消息 18 个级别（1s/5s/ |
 | 2:30 | 总结卡 | 一句话记忆：事务消息四步：半消息 → 本地事务 → commit/rollback → 回查兜底。 下期可以接着聊：事务消息和本地消息表怎么选。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-033.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-033.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-033.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -250,9 +250,6 @@ def evaluate_recall(test_cases):
 2. **混合检索+Rerank 是黄金组合**：先广召回(混合)再精选(Rerank)
 3. **父子分块**：解决"精准检索"和"上下文完整"的矛盾——进阶技巧
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-085.svg" alt="文档问答系统的检索召回率如何提升？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -310,8 +307,6 @@ def evaluate_recall(test_cases):
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像图书馆找书——好的检索词(查询优化)、多种索引方式(混合检索)、让馆员帮你挑(Rerank)、合理分类摆放(分块)。
 
 **展开框架：**
@@ -320,9 +315,6 @@ def evaluate_recall(test_cases):
 3. **排序** — Rerank精选
 
 **收尾：** 召回率多少算好？
-
-
-
 
 
 ## 视频脚本

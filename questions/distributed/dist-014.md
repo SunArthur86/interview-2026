@@ -85,11 +85,6 @@ public class GatewayConfig {
 3. **如何保证高可用**：网关挂了整个系统瘫痪，如何解决？（答：网关本身无状态，前面挂 LVS/Nginx 做四层负载均衡，实现热备）。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-014.svg" alt="微服务中API网关的作用是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心定义：微服务统一流量入口，类似 Facade 模式，处理所有非业务横向关注点。
@@ -101,8 +96,6 @@ public class GatewayConfig {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像公司前台，外来人员（请求）先来前台登记，前台指引去哪个部门（服务），不合规的直接拦下。
 
 **展开框架：**
@@ -111,8 +104,6 @@ public class GatewayConfig {
 3. **集中处理认证** — 集中处理认证、限流、监控
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -116,9 +116,6 @@ flowchart TD
     L[推荐] --> M[构造器注入<br/>不可变 易测试]
     L --> N["@Resource 字段注入<br/>指定名更明确"]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-033.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

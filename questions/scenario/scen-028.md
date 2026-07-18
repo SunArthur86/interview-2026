@@ -102,9 +102,6 @@ memory_points:
 3. **评估指标**：AUC和GAUC的区别？AUC衡量排序能力，GAUC衡量用户维度的平均排序能力（更符合业务）。
 4. **实时性**：如何实现实时推荐？（Flink实时计算用户短期兴趣画像，更新Embedding）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-028.svg" alt="如何设计一个推荐系统？类似抖音/淘宝的个性化推荐。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -116,7 +113,6 @@ memory_points:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像选秀比赛：海选刷掉大部分人，晋级赛筛选，决赛精细评分，最后调节节目单。
 
 **展开框架：**
@@ -125,7 +121,6 @@ memory_points:
 3. **重排** — 去重、打散、广告插播
 
 **收尾：** 如何解决推荐系统的冷启动问题？
-
 
 
 ## 视频脚本

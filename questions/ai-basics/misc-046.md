@@ -109,9 +109,6 @@ loss.backward()
                         └───────────────────────────────────────┘
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-046.svg" alt="OpenAI o1模型的推理能力和传统模型有什么本质区别?DeepSeek-R1是如何复现的 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

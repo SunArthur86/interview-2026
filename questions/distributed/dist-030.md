@@ -103,11 +103,6 @@ public void retryNotify() {
 3. **3PC 相比 2PC 到底解决了什么问题？**（提示：主要解决了协调者故障后参与者的阻塞问题，但引入了网络分区导致数据不一致的风险）。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-030.svg" alt="什么是柔性事务？最大努力通知型事务是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 柔性事务基于BASE理论，牺牲强一致性（ACID），换取高可用和最终一致性
@@ -115,8 +110,6 @@ public void retryNotify() {
 - 对比：本地消息表重在内部数据同步一致性，最大努力通知重在跨平台外部结果通知（如支付回调）
 
 ## 结构化回答
-
-
 
 
 **30 秒电梯演讲：** 3PC多了个预备动作；柔性事务就像“先记账再对账”，允许暂时不平，但最后一定要平。
@@ -127,8 +120,6 @@ public void retryNotify() {
 3. **TCC** — TCC通过业务补偿保证最终一致
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

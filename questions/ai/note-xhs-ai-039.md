@@ -245,6 +245,3 @@ class MemoryManager:
 **面试官**：长期记忆有什么风险？
 **候选人**：记忆污染、隐私合规、召回噪音、记忆过期、跨用户串扰，需要脱敏、定期清理、污染监控保障。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-039.svg" alt="【AI Agent工程】短期长期记忆怎么在向量库联动检索？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

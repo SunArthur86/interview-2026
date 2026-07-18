@@ -106,9 +106,6 @@ memory_points:
 4. **秒杀系统中如何解决少卖（卖不完）的问题？**
    - Redis 扣减成功后入 MQ 必须高可靠（事务消息/本地消息表）；消费端消费失败必须重试。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-093.svg" alt="如何设计一个秒杀系统的流量削峰方案？保护后端不被压垮。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -120,7 +117,6 @@ memory_points:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像多层滤网过滤泥水，大石头在最上层被挡住，细沙在下层过滤，最后只有清水流进水缸。
 
 **展开框架：**
@@ -129,7 +125,6 @@ memory_points:
 3. **Redis利用原** — Redis利用原子操作做库存预扣
 
 **收尾：** 如何设计多层限流策略？
-
 
 
 ## 视频脚本

@@ -123,9 +123,6 @@ text_splitter = RecursiveCharacterTextSplitter(
 2. **滑动窗口的作用**：Overlap 是为了解决什么问题？（答：解决语义边界切断问题，确保关键信息（如实体名词）不被截断在两个chunk之间）。
 3. **父子索引的优缺点**：什么情况下必须用父子索引？（答：需要高精度检索（小chunk）但给LLM提供完整上下文（大chunk）时，或者为了减少向量化成本时）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-004.svg" alt="如何设计大规模文档处理的RAG Pipeline？日均新增10万+文档，需要实时索引和低延迟查询。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

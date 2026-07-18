@@ -71,11 +71,6 @@ server {
 - **Apache**：模块丰富，历史悠久的七层代理。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-011.svg" alt="什么是七层负载均衡（内容交换）？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 一句话定义：工作在应用层，通过解析 HTTP 报文内容（如 URL/Header）进行流量分发
@@ -86,8 +81,6 @@ server {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像快递分拣员，根据包裹上的具体地址（URL）把货送到对应的货架（服务器）。
 
 **展开框架：**
@@ -96,8 +89,6 @@ server {
 3. **通常作为反向代理使** — 通常作为反向代理使用
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

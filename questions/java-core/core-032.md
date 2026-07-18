@@ -113,9 +113,6 @@ flowchart LR
     end
     Note["数组适合读多写少 查询场景<br/>链表适合频繁增删"]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-032.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -126,7 +123,6 @@ flowchart LR
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 数组像排好座的影院，找座快但加座难；链表像寻宝游戏，下一个在哪看线索，插入删除方便。
 
 **展开框架：**
@@ -135,7 +131,6 @@ flowchart LR
 3. **数组内存连续** — 数组内存连续，链表内存分散
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

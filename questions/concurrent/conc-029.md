@@ -105,9 +105,6 @@ flowchart TB
     class M1,M2,M3,M4,M5 means
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-029.svg" alt="什么是线程安全？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -119,8 +116,6 @@ flowchart TB
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 多个人同时改同一个文档，加锁后不会出现内容覆盖或错乱。
 
 **展开框架：**
@@ -129,8 +124,6 @@ flowchart TB
 3. **不可变对象天** — 不可变对象天生线程安全
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

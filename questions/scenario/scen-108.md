@@ -96,9 +96,6 @@ flowchart TD
     style TID fill:#ffe4b5
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-108.svg" alt="如何从零搭建微服务的全链路可观测性体系？覆盖 Metrics、Logging、Tracing 三大支柱。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

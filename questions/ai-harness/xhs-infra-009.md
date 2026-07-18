@@ -119,9 +119,6 @@ class PDSeparationScheduler:
 2. **追问**：如何解决 Prefill 和 Decode 节点之间的 KV Cache 传输延迟问题？（答：使用 RDMA/InfiniBand，或者计算-传输流水线重叠）。
 3. **追问**：除了分离 GPU，调度层面有什么优化？（答：Continuous Batching、Iteration Level Scheduling）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_xhs-infra-009.svg" alt="Prefill-Decode分离（PD分离）是什么？为什么能提升推理效率？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

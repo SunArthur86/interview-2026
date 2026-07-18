@@ -111,9 +111,6 @@ flowchart LR
     style ES fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-050.svg" alt="如何设计一个完整的日志收集分析系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -125,8 +122,6 @@ flowchart LR
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像城市的快递系统，收集员收件，分拣中心转运，仓库按索引存放。
 
 **展开框架：**
@@ -135,8 +130,6 @@ flowchart LR
 3. **TraceID** — 日志需结构化输出包含TraceID
 
 **收尾：** Filebeat如何处理多行日志？
-
-
 
 
 ## 视频脚本

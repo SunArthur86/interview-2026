@@ -159,9 +159,6 @@ def semantic_chunk(text, max_chunk_size=512):
 | Markdown | 按标题层级 | 0 |
 | 对话记录 | 按对话轮次 | 5-10% |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai50-005.svg" alt="文档切片为什么要有Overlap？它主要解决什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -218,7 +215,6 @@ parent-child（又叫 small-to-big）是个好方案，检索用小 chunk 保精
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 就像装修贴瓷砖留重叠缝——每块瓷砖边缘和下一块重叠一小段，这样即使某块有瑕疵，整体也不会出现明显的缝隙
 
 **展开框架：**
@@ -227,8 +223,6 @@ parent-child（又叫 small-to-big）是个好方案，检索用小 chunk 保精
 3. **Overlap** — Overlap解决的是"硬切分"问题，更好的方案是语义切分
 
 **收尾：** 语义切分(Semantic Chunking)怎么实现？
-
-
 
 
 ## 视频脚本

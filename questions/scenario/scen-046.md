@@ -177,9 +177,6 @@ flowchart TD
     style SCOPE fill:#ffe4b5
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-046.svg" alt="如何排查线上接口突然变慢的问题？给出系统化的排查思路。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -191,8 +188,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像医生看病，先量体温问症状，再做CT查病灶。
 
 **展开框架：**
@@ -201,8 +196,6 @@ flowchart TD
 3. **利用jstack** — 利用jstack、jmap等工具分析线程与内存
 
 **收尾：** 如何分析Heap Dump？
-
-
 
 
 ## 视频脚本
@@ -296,8 +289,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像水管查漏水，从水龙头一路查到总阀门。
 
 **展开框架：**
@@ -306,8 +297,6 @@ flowchart TD
 3. **查缓存命中率** — 查缓存命中率及网络延迟。
 
 **收尾：** 如何快速定位是DB还是应用的问题？
-
-
 
 
 ## 视频脚本

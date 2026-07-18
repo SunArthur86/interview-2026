@@ -325,7 +325,3 @@ flowchart TD
 | 1:05 | 代码示例截图 | AI 应用工程师（非算法研究），工程+AI 复合。 | 定位 |
 | 2:30 | 总结卡 | 一句话记忆：复用：架构/分布式/高并发。 下期可以接着聊：要学 Python 吗。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-039.svg" alt="【巨剧核 AI 陪伴】Java/后端架构师转 AI 工程路径？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

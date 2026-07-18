@@ -206,8 +206,6 @@ EXPLAIN SELECT * FROM review WHERE product_id = 100;
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 索引像字典目录——B+ 树是目录的目录（多叉树），叶子串成链表方便翻页。
 
 **展开框架：**
@@ -246,8 +244,4 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：联合索引最左前缀 | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：覆盖索引不回表 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——为什么用 B+ 树不用 B 树/红黑树？。 | 收尾 |
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-content_pdd-content-006.svg" alt="【拼多多内容】MySQL 索引与评价查询优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 

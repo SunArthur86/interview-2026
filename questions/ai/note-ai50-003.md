@@ -166,9 +166,6 @@ def rrf_fusion(*result_lists, k=60, top_k=10):
 3. **分词器选择**: 中文用IK分词器，代码用标准分词器
 4. **召回量**: 一般取top_k的3-5倍做初始召回，给RRF足够的候选池
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai50-003.svg" alt="向量检索和关键词检索各适合什么场景？为什么做混合检索？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

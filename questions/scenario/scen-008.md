@@ -118,9 +118,6 @@ else
 end
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-008.svg" alt="如何设计一个春运红包雨系统？春晚期间瞬时并发千万级。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -133,8 +130,6 @@ end
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像发传单，提前把传单分发给许多工作人员，用户就近拿，瞬间发完。
 
 **展开框架：**
@@ -143,8 +138,6 @@ end
 3. **多级限流保护** — 多级限流保护系统
 
 **收尾：** 红包金额如何在多台服务器间分配？
-
-
 
 
 ## 视频脚本

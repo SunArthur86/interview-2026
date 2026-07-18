@@ -107,9 +107,6 @@ memory_points:
 4. **布隆过滤器在缓存预热中的作用？**
    - 预热时构建布隆过滤器，查询时先判断 Key 是否存在。若不存在，直接拦截，防止缓存穿透（大量请求查询不存在的数据）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-094.svg" alt="如何设计一个缓存预热和缓存刷新机制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

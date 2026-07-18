@@ -136,11 +136,6 @@ flowchart TB
 ```
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-038.svg" alt="分布式事务有哪些解决方案？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 方案演进：2PC强一致但阻塞，TCC高性能但业务侵入，MQ/本地消息表保最终一致。
@@ -151,8 +146,6 @@ flowchart TB
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 团购，必须所有人都付钱才成交，有一人退单全员退款。
 
 **展开框架：**
@@ -161,8 +154,6 @@ flowchart TB
 3. **最终一致性** — 最终一致性是主流妥协方案
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -85,11 +85,6 @@ ZAB 并非完全照搬 Paxos，而是针对 ZooKeeper 的**主备架构**（Prim
 2. **为什么 ZooKeeper 集群节点数通常是奇数？**：
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-025.svg" alt="ZooKeeper的ZAB协议的工作流程是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 两大模式：正常运行的消息广播（半数 ACK 提交），异常时的崩溃恢复。
@@ -101,8 +96,6 @@ ZAB 并非完全照搬 Paxos，而是针对 ZooKeeper 的**主备架构**（Prim
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像报社总编（Leader）发稿，记者（Follower）确认后刊登，总编换人时先同步之前的稿件。
 
 **展开框架：**
@@ -111,8 +104,6 @@ ZAB 并非完全照搬 Paxos，而是针对 ZooKeeper 的**主备架构**（Prim
 3. **Zxid** — 利用Zxid保证全局有序
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -98,9 +98,6 @@ Client (Browser/App)
 3. **消息队列的作用**：解耦、削峰、异步。如果 MQ 挂了怎么办？答：MQ 集群高可用，或者本地缓存降级（直接记录落盘，后续人工/脚本处理）。
 4. **分布式锁的使用**：如果库存初始化在 Redis，Redis 自身的 `decr` 是原子的，不需要额外分布式锁。但在处理“一人一单”逻辑（Redis Set + Lua）或后续订单创建时可能需要分布式锁防止重复创建。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-119.svg" alt="如何设计一个秒杀系统？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -451,9 +451,7 @@ public int get(int key) {
 
 > LRU Cache = **HashMap（O(1) 查找）+ 双向链表（O(1) 删除/插入）**，head 端是最近访问，tail 端是最久未访问。get 和 put 的核心操作都是 HashMap 查找 + 链表节点移动，每步都是 O(1)。面试中先说 OrderedDict/LinkedHashMap 方案展示知识广度，再手写完整实现展示底层功底，同时准备好线程安全和 LFU 的追问。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_algorithm_note-bd-llm-009.svg" alt="【字节面经】实现一个 LRU Cache，要求 get/put 均为 O(1)。" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心设计：HashMap负责O(1)查找，双向链表负责O(1)维护时序

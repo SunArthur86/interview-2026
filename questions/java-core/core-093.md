@@ -84,9 +84,6 @@ echo 1 > /proc/sys/net/ipv4/tcp_syncookies
    - `net.ipv4.tcp_max_syn_backlog`：指定半连接队列的最大长度。
    - `net.ipv4.tcp_abort_on_overflow`：全连接满时，是直接丢弃 (0) 还是发送 RST (1)。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-093.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

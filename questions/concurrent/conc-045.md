@@ -93,9 +93,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 1. **混淆 IO 密集型和 CPU 密集型线程数设置**：IO 密集型通常设置为 2N 或 2N+1（N为CPU核数），CPU 密集型设置为 N+1，而不是越大越好。
 2. **使用无界队列**：误以为 `LinkedBlockingQueue` 不传参数是“有界”的，其实默认容量是 `Integer.MAX_VALUE`，极易造成内存溢出。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-045.svg" alt="Java 提供了哪几种线程池？各自的特点和适用场景？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

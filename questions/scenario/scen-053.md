@@ -129,9 +129,6 @@ public class ConfigChangeListener {
 }
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-053.svg" alt="如何设计配置中心？支持动态配置、灰度发布、多环境管理。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -143,8 +140,6 @@ public class ConfigChangeListener {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像系统的控制台，改一个开关，所有机器自动生效。
 
 **展开框架：**
@@ -153,8 +148,6 @@ public class ConfigChangeListener {
 3. **灰度发布控制** — 灰度发布控制生效范围
 
 **收尾：** Apollo的长轮询如何实现？
-
-
 
 
 ## 视频脚本

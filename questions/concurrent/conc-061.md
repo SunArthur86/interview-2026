@@ -75,9 +75,6 @@ redis-cli --latency
 3. **纯缓存场景 vs 持久化场景**：如果开启了 RDB/AOF，fork 子进程时会阻塞吗？（会，fork 操作在瞬时是阻塞的，大内存实例需注意）。
 4. **Pipeline 是什么**：如何减少 RTT（往返时间）？（Pipeline 可以一次发送多条命令，减少网络往返开销，但这不是并发，是批处理）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-061.svg" alt="redis是单线程的吗？那如何支持高并发是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

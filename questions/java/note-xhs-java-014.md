@@ -239,7 +239,3 @@ ThreadPoolExecutor inferencePool = new ThreadPoolExecutor(
 | 1:57 | 关键代码/伪代码片段 | "CPU密集型：线程数 ≈ CPU核数+1；IO密集型：线程数 ≈ CPU核数×2或更多" | CPU密集型 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：线程池是如何区分核心线程和非核心线程的。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-014.svg" alt="【拼多多 Java服务端】Java线程池有哪些参数？提交任务时的处理流程是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

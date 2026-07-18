@@ -106,9 +106,6 @@ flowchart TB
     Annot --> Focus["注意力聚焦<br/>关键任务稳定"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_agmu-002.svg" alt="什么是「注意力漂移」?多 Agent 如何缓解 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

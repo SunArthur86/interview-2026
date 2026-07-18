@@ -119,9 +119,6 @@ try {
 3.  **什么是 AQS (AbstractQueuedSynchronizer)？**
     *   回答要点：它是 Java 并发包中构建锁和同步器的基础框架（如 ReentrantLock, CountDownLatch 都是基于它实现的），核心是一个 volatile int state 变量和一个 CLH 队列。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-095.svg" alt="什么是种线程锁？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

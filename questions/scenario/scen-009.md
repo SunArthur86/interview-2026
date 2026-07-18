@@ -119,9 +119,6 @@ public List<Comment> getComments(Long postId, Long lastCommentId, int limit) {
 2. **实时性**：刚发的评论没刷出来怎么办？（答：写后即读，写入时直接将评论 ID 追加到用户的 Redis 缓存列表末尾）。
 3. **排序切换**：从“按时间”切换到“按热度”，数据源完全不同，如何保证一致性？（答：使用 ES 进行多维度排序，或者 Redis 维护两套 ZSet）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-009.svg" alt="如何设计一个评论系统？支持千万级帖子，每篇帖子上万评论。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -134,8 +131,6 @@ public List<Comment> getComments(Long postId, Long lastCommentId, int limit) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像论坛帖子，主楼层是一楼二楼，回复楼层是盖楼，还要按热度把最好的楼顶上去。
 
 **展开框架：**
@@ -144,8 +139,6 @@ public List<Comment> getComments(Long postId, Long lastCommentId, int limit) {
 3. **Redis** — Redis缓存热门评论加速读
 
 **收尾：** 如何实现无限滚动加载？
-
-
 
 
 ## 视频脚本

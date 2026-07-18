@@ -218,9 +218,6 @@ class DiffRenderer {
 - **大产物用文本diff**：站点/PPT这种结构化产物用文本diff，信息量太大
 - **没有diff层级切换**：不能根据需要切换详细程度，要么太简略要么太详细
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mk-013.svg" alt="【月之暗面面经】如何设计 AI 桌面端的产物 diff，既能给新手看，也能给高手看？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -278,8 +275,6 @@ class DiffRenderer {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像装修方案——给业主看的是效果图（摘要层："客厅墙改成蓝色"），给设计师看的是施工图（细节层："墙面漆色号#4A90D9，面积12㎡，需2遍涂刷"）。同一份变更，不同人看不同层次。
 
 **展开框架：**
@@ -288,9 +283,6 @@ class DiffRenderer {
 3. **支持局部接受** — 支持局部接受、局部拒绝和整单重跑
 
 **收尾：** 如果桌面端要接文件、网页和本地目录，你先画哪套权限边界？
-
-
-
 
 
 ## 视频脚本

@@ -253,9 +253,6 @@ class RobustFunctionCaller:
 
 **面试加分点**：提到OpenAI的Structured Outputs（2024）通过约束解码保证JSON格式100%合法；提到Pydantic做Python原生的参数校验比JSON Schema更简洁；提到在生产环境中应该监控Function Calling的P99延迟和成功率，设置告警阈值（如成功率<95%触发告警）；提到Prompt中加入few-shot示例可以提高首次调用成功率10-20%。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai-dev-001.svg" alt="Function Calling工程实现：如何设计容错机制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

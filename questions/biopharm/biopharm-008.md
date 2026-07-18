@@ -173,7 +173,3 @@ flowchart TD
 | 1:05 | 代码示例截图 | 按租户/部门/角色控制可见性和检索范围。 | 权限 |
 | 2:30 | 总结卡 | 一句话记忆：文档生命周期：录入→审核→发布→下线。 下期可以接着聊：增量更新怎么做。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-008.svg" alt="【生物医药 AI】企业知识库怎么建设（文档/版本/权限/更新）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

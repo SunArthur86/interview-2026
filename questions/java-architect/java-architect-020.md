@@ -443,14 +443,4 @@ flowchart TD
 | 1:50 | 流程图 | 故障场景 → 触发条件 → 执行动作 → 验证指标 → 回滚步骤。 | 应急预案剧本化 |
 | 3:30 | 总结卡 | 一句话记忆：配置三要素：dataId + group + namespace。 下期可以接着聊：配置热更新的延迟多少。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-020.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-020.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-020.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

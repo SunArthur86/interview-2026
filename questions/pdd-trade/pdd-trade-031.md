@@ -211,7 +211,3 @@ Agent 的测试要专门设计：
 | 2:09 | 代码片段 + 注释高亮 | 要点是：落地优先：客服/退款/异常处置 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——Agent 怎么调交易系统？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-031.svg" alt="【拼多多交易】用 AI Agent 怎么改造交易系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -104,9 +104,6 @@ memory_points:
 4. **Redis宕机怎么办？**
    - 验证码服务降级（直接拒绝或进入宽松模式），依赖Redis持久化（RDB/AOF）重启后恢复，但验证码通常短期丢失可接受。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-076.svg" alt="如何设计一个验证码系统？支持图形/短信/滑块多种形式。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

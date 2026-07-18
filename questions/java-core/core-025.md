@@ -116,9 +116,6 @@ encryptedData += cipher.final('hex');
 2. **为什么不全用对称加密？**：密钥分发困难，在不安全网络上无法安全传输密钥。
 3. **中间人攻击**：在非对称加密阶段，如何防止黑客拦截并发送自己的公钥？（引出数字证书的概念）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-025.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -129,7 +126,6 @@ encryptedData += cipher.final('hex');
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 见面时用保险箱（非对称）互换家门钥匙，之后聊天直接用家门钥匙（对称）开门。
 
 **展开框架：**
@@ -138,7 +134,6 @@ encryptedData += cipher.final('hex');
 3. **结合两者优势** — 结合两者优势，解决密钥分发和性能瓶颈
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

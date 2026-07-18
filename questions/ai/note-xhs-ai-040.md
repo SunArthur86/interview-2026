@@ -293,6 +293,3 @@ SYSTEM_PROMPT = """
 **面试官**：拦截太严会怎样？
 **候选人**：误杀合法调用导致Agent卡死、体验差，要设计降级和重试策略，监控误杀率和漏杀率持续调优。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-040.svg" alt="【AI Agent工程】模型幻觉调用不存在API如何拦截？工具调用降级方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

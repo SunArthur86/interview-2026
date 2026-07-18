@@ -208,9 +208,6 @@ ANALYSIS_PROMPT = """
 2. **客服重边界**：客服 Prompt 最重要的是"不能做什么"和"兜底"
 3. **编程重验证**：编程 Prompt 要要求可运行代码+测试，体现严谨
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-069.svg" alt="不同场景下提示词怎么写？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -269,8 +266,6 @@ AB 对比。固定场景测试集，对比"场景化 Prompt"vs"通用 Prompt"：
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像不同场合说话——正式会议(严谨)、朋友聊天(随意)、技术讨论(精确)、创意brainstorm(发散)。
 
 **展开框架：**
@@ -279,9 +274,6 @@ AB 对比。固定场景测试集，对比"场景化 Prompt"vs"通用 Prompt"：
 3. **创作** — 风格+示例+灵感
 
 **收尾：** 怎么知道Prompt好不好？
-
-
-
 
 
 ## 视频脚本

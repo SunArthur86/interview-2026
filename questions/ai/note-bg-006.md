@@ -386,9 +386,6 @@ def agentic_rl_training(model, tools, tasks, reward_model):
 - **ToolFormer**：Meta的工作，教模型自主学会调用工具
 - **Reinforcement Fine-tuning (RFT)**：OpenAI o1/R1的训练范式，Agentic RL的具体实现
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bg-006.svg" alt="【八股总结】Agentic RL 的 Agent loop 如何运行？哪些 token 参与 loss？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

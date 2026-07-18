@@ -104,9 +104,6 @@ class TransferRequest(BaseModel):
 1. **过度依赖LLM自我约束**：仅在System Prompt中要求“不要执行危险操作”，而没有在代码层面设置强制拦截，这是极高风险的做法。
 2. **权限粒度过粗**：仅区分“用户”和“管理员”，未将工具权限细化到具体的资源ID或数据范围，容易导致水平越权。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-010.svg" alt="如何设计AI Agent的工具调用（Tool Calling）安全边界？防止Agent执行危险操作。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -119,7 +116,6 @@ class TransferRequest(BaseModel):
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像操作系统的权限控制，普通用户不能删库，高危操作必须输入管理员密码确认。
 
 **展开框架：**
@@ -128,7 +124,6 @@ class TransferRequest(BaseModel):
 3. **高风险操作必须经** — 高风险操作必须经过人工确认。
 
 **收尾：** 如何在不影响用户体验的前提下实现安全审批？
-
 
 
 ## 视频脚本

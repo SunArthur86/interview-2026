@@ -374,6 +374,3 @@ Nacos 架构中两套协议并行：
 | 2:54 | 对比表格 | "CAP选择：注册中心选AP(可用性>一致性)，因为拿到过期数据到重试，拿不到数据到雪崩" | CAP选择 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Distro协议和Gossip协议有什么区别。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-ks-008.svg" alt="【面试题】Nacos AP 和 CP 实现原理 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

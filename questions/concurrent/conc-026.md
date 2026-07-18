@@ -86,9 +86,6 @@ public String determineTable(Long userId, int tableCount) {
 2.  **分表后的分页查询**：如 `limit 100000, 10` 在分表场景下性能极差，如何优化（如搜索撮合、二次排序）。
 3.  **主键 ID 生成策略**：分表后如何保证 ID 全局唯一（如雪花算法 Snowflake、UUID、数据库步长）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-026.svg" alt="什么是水平分表？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -100,8 +97,6 @@ public String determineTable(Long userId, int tableCount) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像一本太厚的书拆分成上、中、下三册，目录一样，内容不同。
 
 **展开框架：**
@@ -110,8 +105,6 @@ public String determineTable(Long userId, int tableCount) {
 3. **解决单表数据量过大的性** — 解决单表数据量过大的性能瓶颈
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

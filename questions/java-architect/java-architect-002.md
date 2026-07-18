@@ -263,14 +263,4 @@ ZGC 的本质突破是用**染色指针把引用修正摊到并发阶段**：
 | 0:30 | jstat / GC 日志截图 | 染色指针 + 读屏障，停顿 < 1ms 且与堆无关，JDK 21 Generational GA。 | ZGC |
 | 1:30 | 总结卡 | 一句话记忆：停顿来源：根扫描（短 STW）+ 对象移动（传统 STW，ZGC/Shenandoah 并发化）。 下期可以接着聊：ZGC 为什么 JDK 21 才分代。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-002.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-002.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-002.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

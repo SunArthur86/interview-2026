@@ -129,9 +129,6 @@ JWT缺点：
 3. **SSO 与 OAuth2 区别**：SSO 是一种登录解决方案，OAuth2 是一种授权框架。（答：SSO 侧重于多个应用系统间一次登录，处处通行；OAuth2 侧重于让第三方应用获得用户在某平台的操作权限，而无需告知密码）
 4. **网关统一认证 vs 服务自认证**：微服务架构下 JWT 验证放在哪里？（答：通常放在 API 网关做统一鉴权和黑名单拦截，内部服务间调用若走内网信任区可使用透传的 userId 或更轻量的 mTLS 证书认证，避免每个服务重复解析 JWT）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-063.svg" alt="如何设计统一认证授权系统（SSO/OAuth2/JWT）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

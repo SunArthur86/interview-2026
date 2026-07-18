@@ -409,14 +409,4 @@ GameDay 月月做，故障档案不放过，真故障来了才不慌。
 | 1:05 | 爆炸半径控制示意/对比图 | "爆炸半径控制 —— 分级、abort 条件、回滚预案" | 爆炸半径控制要点 |
 | 1:55 | 总结卡 | "记住：混沌工程四大原则。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-147.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-147.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-147.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

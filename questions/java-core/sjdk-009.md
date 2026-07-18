@@ -103,9 +103,6 @@ public void correctProcess() {
 🔥 实战案例：
 在某电商大促活动中，我们将原有的 Tomcat 线程池（200线程）升级为支持虚拟线程的 Web 容器。原本在并发 2000 QPS 时出现的“RejectExecutionException”彻底消失，在 8C16G 机器上轻松支撑 10,000+ QPS，且延迟 P99 从 500ms 降低到 50ms。但上线初期曾因遗留代码中大量使用 `synchronized` 导致 Carrier Thread 被耗尽，监控发现 CPU 利用率极低但吞吐上不去，排查后定位到是 Pinning 问题，替换为 ReentrantLock 后恢复。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_sjdk-009.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

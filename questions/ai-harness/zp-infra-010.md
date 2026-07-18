@@ -114,9 +114,6 @@ flowchart TD
     Nsight --> Fix[算子融合/通信Overlap]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_zp-infra-010.svg" alt="【智谱Infra面经】大模型训练低 MFU / OOM / hang 如何诊断？用哪些工具和指标？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -290,6 +290,3 @@ public void processOrder(String message) {
 | 1:57 | 关键代码/伪代码片段 | "Exactly-Once 就是 幂等生产者 + 事务（Kafka 0.11+）" | Exactly-Once |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Kafka的ISR机制是什么？如果ISR只剩一个副本怎么办。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-017.svg" alt="【拼多多二面 + XHS视频帖】Kafka 如何保证消息不丢失、不重复消费？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -147,9 +147,6 @@ engine = SubQuestionQueryEngine.from_defaults(query_engine_tools=[
 2. **索引多样性**：LlamaIndex 不只是向量索引，还有图/树/摘要——这是深度优势
 3. **数据连接器**：LlamaHub 200+数据源，企业数据接入更方便
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-062.svg" alt="LlamaIndex 在 RAG 系统中的架构？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

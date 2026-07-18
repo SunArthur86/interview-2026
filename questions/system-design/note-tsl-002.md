@@ -291,9 +291,6 @@ public class TranscodingService {
 3. **仅音频模式**：视频内容可切为纯音频，节省 80%+ 流量
 4. **数据用量提醒**：超套餐时自动降为低码率
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-tsl-002.svg" alt="千万辆车辆同步使用车载娱乐功能（音乐、视频），如何设计后端架构，保证流媒体播放流畅，无卡顿且节省车载流量？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

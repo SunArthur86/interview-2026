@@ -258,7 +258,3 @@ flowchart TD
 | 2:09 | 代码片段 + 注释高亮 | 要点是：自动化：检测→匹配→执行 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——回滚和预案区别？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-029.svg" alt="【拼多多交易】预案/回滚怎么做？钱学森工程思维？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

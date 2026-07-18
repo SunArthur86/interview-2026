@@ -105,9 +105,6 @@ Low Addresses (0x0)
 3. **堆和栈的区别**：栈由系统自动分配释放，堆由程序员分配释放（Java 中由 GC 回收）；栈空间小速度快，堆空间大速度慢。
 4. **虚拟内存的优势**：隔离性（进程互不干扰）、物理内存利用率高（只加载需要的页）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-074.svg" alt="什么是Linux？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

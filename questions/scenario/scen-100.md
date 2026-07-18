@@ -99,9 +99,6 @@ User (Client)       Server (Backend)          Message Queue    DB/Cache
 3. **如果 Redis 挂了，轮询接口怎么处理？**
    - 降级：直接查询 MySQL 订单表。虽然 MySQL 压力大，但秒杀结束后流量峰值已过，可以承受。或者返回 "系统繁忙"，让用户稍后再试。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-100.svg" alt="如何设计一个秒杀后的异步通知系统？告知用户抢购结果。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

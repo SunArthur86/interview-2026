@@ -228,8 +228,6 @@ Kafka 的 exactly-once 是"事务（transactional producer）+ 幂等生产（id
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** Kafka 像快递分拣中心——按地址（分区）分到不同传送带，多个快递员（消费者）各取一类，互不抢活。
 
 **展开框架：**
@@ -269,8 +267,4 @@ flowchart TD
 | 1:04 | 能力/参数拆解表 | 要点是：副本：Leader+Follower | 能力拆解 |
 | 1:56 | 流程图：输入→处理→输出 | 要点是：消费者组：组内分区分担 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——怎么保证不丢？。 | 收尾 |
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-content_pdd-content-012.svg" alt="【拼多多内容】Kafka 在评价/直播事件流的应用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 

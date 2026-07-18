@@ -282,6 +282,3 @@ def semantic_chunk(text, threshold=0.5):
 **面试官**：Chunking不当有什么问题？
 **候选人**：chunk过大召回噪音、过小语义不完整、切分位置截断关键信息、重叠不够上下文丢失，需要badcase分析和参数调优。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-yz-002.svg" alt="【宇树科技二面】RAG 的 Chunking 策略如何设计？遇到过哪些问题，如何调整？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

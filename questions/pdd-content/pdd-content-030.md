@@ -330,7 +330,3 @@ flowchart TD
 | 2:09 | 代码片段 + 注释高亮 | 要点是：协同：on-call+复盘 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——三支柱怎么关联？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-content_pdd-content-030.svg" alt="【拼多多内容】可观测性与跨团队治理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

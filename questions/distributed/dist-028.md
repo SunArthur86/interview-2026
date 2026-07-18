@@ -123,11 +123,6 @@ public interface StockTccAction {
 - **空回滚和悬挂问题（TCC）**：Try 请求因网络丢失但 Cancel 先到达时，要能识别"空回滚"（没 Try 就 Cancel）；Try 延迟到达 Cancel 之后时形成"悬挂"（业务已结束又 Try），要靠事务记录表防止。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-028.svg" alt="什么是分布式事务？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 一句话定义：跨多个网络节点的事务，需协调多方资源保证全局要么全成功要么全失败
@@ -138,8 +133,6 @@ public interface StockTccAction {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 跨行转账：A银行扣款和B银行加款必须同时成功，否则两边都退回。
 
 **展开框架：**
@@ -148,8 +141,6 @@ public interface StockTccAction {
 3. **遵循原子性原则** — 遵循原子性原则，杜绝部分成功
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

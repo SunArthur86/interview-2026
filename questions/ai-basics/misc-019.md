@@ -103,9 +103,6 @@ outputs = llm.generate(["你好，请介绍一下量子物理。"], sampling_par
   2. 在极端低比特（如INT2或INT1）量化下，AWQ的Scaling机制是否会失效，为什么？
   3. 如果模型权重分布本身非常平滑（如经过深度平滑SmoothQuant），AWQ基于激活幅度的策略还能否准确找到重要权重？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-019.svg" alt="模型量化的主要方法有哪些?GPTQ和AWQ的区别是什么 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

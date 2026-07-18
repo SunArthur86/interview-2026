@@ -132,9 +132,6 @@ flowchart TD
     end
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-046.svg" alt="如何设计一个AI法律合同生成与审查系统？确保法律准确性和合规性。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -342,9 +342,6 @@ public class VipWeightRule extends AbstractRule {
 3. **并行优化**：对于无依赖关系的校验规则（如黑名单校验和频率限制互不影响），可以用 `CompletableFuture` 并行执行以降低链路延迟。但要注意 `LotteryContext` 的线程安全问题。
 4. **回答 follow-up "责任链中途能不能终止"**：能。当前实现中任一规则返回 `false` 即终止。也可以设计更灵活的终止策略：`ABORT`（终止）、`CONTINUE`（继续）、`SKIP\_REMAINING`（跳过剩余规则但视为通过）三态返回值。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-re-002.svg" alt="【滴滴面经】你前面提到用责任链和组合模式做规则引擎，那新增的付费用户加权规则怎么接入原来的规则链？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

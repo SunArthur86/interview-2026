@@ -149,7 +149,6 @@ class Reranker:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 召回阶段像海选——双塔模型快速从万人中挑出20个候选人（各打各的分，快但粗）。精排阶段像决赛——Cross-Encoder把query和doc放在一起仔细对比（交叉互动，慢但准）。两阶段架构=海选+决赛
 
 **展开框架：**
@@ -158,8 +157,6 @@ class Reranker:
 3. **两阶段架构** — 先用Bi-Encoder召回Top20（快），再用Cross-Encoder精排取Top5（准）
 
 **收尾：** Cross-Encoder为什么不能预计算doc向量？
-
-
 
 
 ## 视频脚本
@@ -194,6 +191,3 @@ class Reranker:
 **面试官**：Reranker有什么风险？
 **候选人**：延迟增加（cross-encoder慢）、成本上升、模型选型不当反降效果、与召回不一致排序错乱，需要评测集和延迟监控保障。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-035.svg" alt="【RAG混合检索】Reranker是什么？为什么需要精排？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -148,9 +148,6 @@ class AdaptiveModelAgent:
 3. **监控指标**：每个子Agent独立监控成功率、延迟、成本，发现退化及时调整模型
 4. **A/B测试**：换模型必须做A/B测试，确保质量不下降再全量切换
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-lx-agent-006.svg" alt="主Agent和子Agent的模型该怎么分配，为什么不一定都用同一个大模型？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

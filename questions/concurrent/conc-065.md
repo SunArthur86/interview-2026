@@ -113,9 +113,6 @@ SELECT * FROM information_schema.optimizer_trace;
 1. **缓存机制混淆**：误以为 MySQL 8.0 依然包含查询缓存，实际已被移除（现在更多指 Redis 等外部缓存）。
 2. **功能边界**：认为“分析器”会检查表和字段是否存在，实际上这是“预处理器”的工作；分析器主要负责语法和词法。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-065.svg" alt="一条SQL查询语句是如何执行的？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -127,8 +124,6 @@ SELECT * FROM information_schema.optimizer_trace;
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像去餐厅点菜：排队进门(连接)、看菜单(解析)、厨师规划做菜顺序(优化)、厨师做菜(执行)。
 
 **展开框架：**
@@ -137,8 +132,6 @@ SELECT * FROM information_schema.optimizer_trace;
 3. **优化器生成最** — 优化器生成最优执行计划
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

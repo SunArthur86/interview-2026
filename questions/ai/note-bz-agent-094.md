@@ -194,9 +194,6 @@ DON'T（减分）：
 2. **先问后答**：澄清需求展示成熟——别急于表现
 3. **tradeoff 是核心**：面试官最想听"为什么这么选"——这区分资深和初级
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-094.svg" alt="agent 模拟面试（结合项目场景题）怎么答？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

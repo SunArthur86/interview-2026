@@ -111,9 +111,6 @@ class BoundedBuffer {
 3. **管程的优势**：为什么 Java 选择管程（synchronized）而不是信号量？（因为管程将同步逻辑封装，降低了编程出错概率，自动处理互斥进入）。
 4. **乐观锁与悲观锁**：在数据库或并发包中的应用场景。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-309.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

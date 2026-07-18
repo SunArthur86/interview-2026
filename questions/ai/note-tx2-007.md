@@ -218,9 +218,6 @@ flowchart TD
     end
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx2-007.svg" alt="【某讯面经】缓解 RAG 幻觉手段：溯源引用、相似度阈值过滤、事实校验子Agent、重排模型 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -96,9 +96,6 @@ public void increment() {
 1. **ABA 问题忽略**：在链表节点删除等场景，ABA 可能导致严重的数据错误，需使用 `AtomicStampedReference` 处理。
 2. **误解原子性范围**：`atomicRef.getAndUpdate()` 只能保证引用赋值的原子性，不能保证对象内部属性修改的原子性，对象本身仍需是线程安全的。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-044.svg" alt="Java atomic包中的原子类是如何实现的？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

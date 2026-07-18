@@ -218,9 +218,6 @@ trace = {
 2. **混合架构**：纯 Agent 不稳定，纯工作流不灵活，生产推荐"工作流骨架 + Agent 节点"
 3. **提"中断恢复"**：长任务（如人工审核）要支持 checkpoint，这是 LangGraph 的核心能力
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-006.svg" alt="生产级 Agent 的架构怎么划分？（记忆、权限、工作流） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -70,9 +70,6 @@ ZGC 利用 64 位指针的闲置位存储颜色信息，实现并发整理。
 3. **分代 ZGC 为什么能提升吞吐量？**
    因为大部分对象朝生夕死，年轻代 GC 频繁且只需扫描少量区域，避免了全堆扫描的高昂 Barrier 成本。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_sjdk-005.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

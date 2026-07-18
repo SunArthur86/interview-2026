@@ -98,9 +98,6 @@ def select_few_shot_examples(query, corpus_embeddings, k=3):
 2. ICL中的“Recitation”现象是什么？模型是否会死记硬背示例？（如果示例列表很长，模型可能会通过注意力机制直接从Context中“复制”答案而不是进行泛化推理，这被称为Recitation，削弱了泛化能力）
 3. 如何利用反向思维进行ICL？（提供输入和错误输出，让模型解释原因并修正，这在纠错类任务中往往比正向示例更有效。）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-033.svg" alt="In-Context Learning (ICL) 的原理是什么?Few-shot示例如何选择 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

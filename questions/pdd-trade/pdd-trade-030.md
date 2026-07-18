@@ -216,7 +216,6 @@ groups:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 可观测性像医院的"监护系统"——Metrics 是心率血压（数字）、Logs 是病历（事件明细）、Traces 是会诊记录（跨科室因果链）。
 
 **展开框架：**
@@ -225,7 +224,6 @@ groups:
 3. **SLO** — 错误预算驱动优先级
 
 **收尾：** traceId 怎么跨进程透传？
-
 
 
 ## 视频脚本
@@ -240,8 +238,4 @@ groups:
 | 1:30 | 红色警示框 + 反例代码 | 要点是：错误预算驱动优先级 | 关键机制 |
 | 2:09 | 代码片段 + 注释高亮 | 要点是：治理：标准化接入 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——traceId 怎么跨进程透传？。 | 收尾 |
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-030.svg" alt="【拼多多交易】可观测性怎么治理跨团队？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 

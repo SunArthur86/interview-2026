@@ -113,9 +113,6 @@ API安全三要素：身份认证、数据完整性、防重放。
 3. **密钥轮换机制**：AppKey泄露或定期更换时，如何保证服务不中断？（使用双密钥共存期，或密钥版本控制）
 4. **HTTPS 加密与签名的关系**：有了 HTTPS 为什么还需要应用层签名？（HTTPS 只防传输窃听/篡改，不防客户端作恶/重放；签名用于业务层身份确认和防篡改）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-066.svg" alt="如何设计接口安全方案？防篡改、防重放、防爬虫。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

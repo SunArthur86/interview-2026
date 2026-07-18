@@ -96,9 +96,6 @@ flowchart TD
     style PART fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-025.svg" alt="如何保证消息的顺序消费？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -111,8 +108,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像单车道排队过收费站，只有前一辆车通过，后一辆车才能进，保证先进先出。
 
 **展开框架：**
@@ -121,8 +116,6 @@ flowchart TD
 3. **消费端单线程** — 消费端单线程绑定队列
 
 **收尾：** 顺序消费如何处理积压？
-
-
 
 
 ## 视频脚本

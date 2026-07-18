@@ -119,9 +119,6 @@ public boolean equals(Object obj) {
 | HashSet 去重 | 失败（出现重复） | 失败（误判为相同） | 成功 |
 | 约定合规性 | 违反（hashCode 不一致） | 违反（equals 不一致） | 符合规范 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-321.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -90,9 +90,6 @@ java -XX:+PrintCompilation -XX:+PrintGCDetails com.example.MyApp
 2. **解释器与 JIT 的共存？**：JVM 采用混合模式，启动时解释器快速响应，热点代码触发 JIT 编译后替换执行，达到性能平衡。
 3. **C1 与 C2 编译器的区别？**：C1 关注编译速度（Client编译器），C2 关注极致性能（Server编译器），分层编译利用两者优势。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-071.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

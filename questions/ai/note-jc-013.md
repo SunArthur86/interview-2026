@@ -195,9 +195,6 @@ flowchart TD
     Bad -.-> H["退化保护<br/>自动切换堆排保证 O"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-jc-013.svg" alt="【阶跃星辰面经】排序算法时间复杂度 + 快排原理与最坏情况 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -255,7 +252,6 @@ IntroSort 的切换逻辑基于递归深度监控。一是深度阈值：IntroSo
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 快排像整理书架——随便抽一本书当标准（pivot），比它矮的放左边高的放右边，然后左右两边各再抽一本当标准继续分。最坏情况是书已经按高矮排好了你每次抽第一本（永远是当前最矮），就只能一本本挪 O(n²)。随机抽就不容易遇到这种情况。
 
 **展开框架：**
@@ -264,8 +260,6 @@ IntroSort 的切换逻辑基于递归深度监控。一是深度阈值：IntroSo
 3. **最坏 O(n²)** — 每次pivot选到极值（已序+选首尾）
 
 **收尾：** 快排为什么平均 O(n log n)？
-
-
 
 
 ## 视频脚本

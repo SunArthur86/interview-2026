@@ -334,8 +334,6 @@ JD 订单改 RC，死锁减八成，并发升三成。
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 长事务是数据库稳定性的万恶之源——一个长事务能同时引爆 Undo 版本链膨胀、MDL 长期持有阻塞 DDL、binlog 巨大拖垮从库、锁持有久导致锁等待雪崩四颗雷。JD 结算治理就三招：大事务拆小批、长事务勤提交、锁等待秒回滚。
 
 **展开框架：**
@@ -376,14 +374,4 @@ flowchart TD
 | 1:30 | 要点 4 详解 | "这部分看正文对比表和代码示例。" | 要点 4 |
 | 1:55 | 总结卡 | "记住：大事务/长事务/锁等待的定义。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-150.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-150.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-150.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -226,9 +226,6 @@ flowchart TD
     S2 --> P
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-jc-012.svg" alt="【阶跃星辰面经】GPU 死锁是什么情况 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

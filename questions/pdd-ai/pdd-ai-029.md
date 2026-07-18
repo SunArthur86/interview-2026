@@ -405,7 +405,3 @@ flowchart TD
 | 2:09 | 监控大盘截图 + 指标曲线 | 要点是：自动化：监控→触发 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——预案怎么自动化？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-029.svg" alt="【拼多多 AI 中台】预案和回滚怎么做？钱学森工程理论怎么应用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

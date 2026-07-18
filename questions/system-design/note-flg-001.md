@@ -226,6 +226,3 @@ TransactionMQProducer producer = new TransactionMQProducer("order_group");
 | 1:57 | 关键代码/伪代码片段 | "ActiveMQ: JMS全功能 + 性能最弱 + 遗留系统维护" | ActiveMQ |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Kafka和这三个MQ有什么区别？什么时候用Kafka。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-flg-001.svg" alt="RabbitMQ、RocketMQ和ActiveMQ的主要差异及选型 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -264,7 +264,3 @@ public void safeMethodWithTimeout() {
 **面试官**：线程RUNNABLE但CPU不高是什么情况？
 **候选人**：多半在等IO，Java层面RUNNABLE但native层阻塞在socketRead0，要看栈是否卡在IO的native方法上。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-010.svg" alt="【拼多多 Java服务端】手写死锁代码，如何排查？CPU飙高怎么排查？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

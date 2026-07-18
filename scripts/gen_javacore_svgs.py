@@ -541,7 +541,7 @@ def tpl_hashmap(title, essence, body_top=110):
             parts.append(arrow(x - 10, chain_y, x, chain_y))
     # 红黑树（第 5 个桶）
     tree_y = body_top + 40 + 4 * 56 + 22
-    parts.append(box(220, tree_y - 22, 110, 44, '链表>8\n& 总数≥64', fill=ORANGE + '22', stroke=ORANGE, font_size=12))
+    parts.append(box(220, tree_y - 22, 110, 44, '链表>8\n&amp; 总数≥64', fill=ORANGE + '22', stroke=ORANGE, font_size=12))
     parts.append(arrow(330, tree_y, 360, tree_y, label='树化'))
     parts.append(box(360, tree_y - 22, 130, 44, '红黑树\nO(logN)', fill=RED + '22', stroke=RED, font_size=12))
     # 右侧要点
@@ -1050,7 +1050,7 @@ def tpl_concurrence_map(title, essence, body_top=110):
         x = 430 + i * 50
         parts.append(box(x, body_top + 140, 42, 36, f'[{i}]', fill=GREEN + '22', stroke=GREEN, font_size=9))
     parts.append(f'<text x="580" y="{body_top + 200}" font-size="11" fill="{GREEN}" text-anchor="middle">'
-                 f'链表>8 & 数组≥64 → 红黑树 (TreeBin)</text>')
+                 f'链表>8 &amp; 数组≥64 → 红黑树 (TreeBin)</text>')
     parts.append(f'<text x="580" y="{body_top + 222}" font-size="11" fill="{GREEN}" text-anchor="middle">'
                  f'sizeCtl 控制；transfer 多线程辅助扩容</text>')
     # 底部要点
@@ -1215,7 +1215,7 @@ def tpl_reflection(title, essence, body_top=110):
     parts.append(f'<text x="80" y="{body_top + 422}" font-size="11" fill="#37474F">运行期扩展（插件机制）</text>')
     parts.append(f'<rect x="420" y="{body_top + 360}" width="320" height="80" rx="8" '
                  f'fill="{RED}11" stroke="{RED}" stroke-width="1.5"/>')
-    parts.append(f'<text x="440" y="{body_top + 384}" font-size="13" fill="{RED}" font-weight="700">劣势</font>')
+    parts.append(f'<text x="440" y="{body_top + 384}" font-size="13" fill="{RED}" font-weight="700">劣势</text>')
     parts.append(f'<text x="440" y="{body_top + 404}" font-size="11" fill="#37474F">性能差（JIT 后仍 1.5x）</text>')
     parts.append(f'<text x="440" y="{body_top + 422}" font-size="11" fill="#37474F">破坏封装 / 安全风险</text>')
     parts.append(svg_footer())
@@ -1540,7 +1540,7 @@ def tpl_tomcat(title, essence, body_top=110):
     # 左：线程模型
     parts.append(f'<rect x="60" y="{body_top + 240}" width="380" height="190" rx="8" '
                  f'fill="#FFFFFF" stroke="{GRAY}" stroke-width="1.5"/>')
-    parts.append(f'<text x="80" y="{body_top + 264}" font-size="13" fill="{GRAY}" font-weight="700">线程模型 & 类加载</text>')
+    parts.append(f'<text x="80" y="{body_top + 264}" font-size="13" fill="{GRAY}" font-weight="700">线程模型 &amp; 类加载</text>')
     notes = ['Connector → Executor (线程池)', '每个请求一个 Worker 线程',
              'WebAppClassLoader 打破双亲委派', '每个 Context 独立 ClassLoader',
              '热部署原理：替换 ClassLoader']

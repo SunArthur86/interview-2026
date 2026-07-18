@@ -239,7 +239,3 @@ AI 陪伴的特殊性在于**角色是第一公民**——既是 IM 的发送方
 | 1:50 | 对比表格 | 内容审核/版本/下架/数据统计。 | 发布系统 |
 | 3:30 | 总结卡 | 一句话记忆：IM：实时长连接 + 可靠投递。 下期可以接着聊：Feed 排序怎么做的。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-015.svg" alt="【巨剧核 AI 陪伴】消息与社区系统架构怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

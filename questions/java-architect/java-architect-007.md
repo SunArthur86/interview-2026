@@ -352,14 +352,4 @@ flowchart TD
 | 0:30 | Future 任务编排图 | thenApply（同步）、thenApplyAsync（异步切线程）。 | 转换 |
 | 1:30 | 总结卡 | 一句话记忆：CompletableFuture 是异步 DAG 构造器，不是 Future 升级版。 下期可以接着聊：为什么默认 ForkJoinPool.commonPool 不能用。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-007.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-007.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-007.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

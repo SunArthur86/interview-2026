@@ -243,9 +243,6 @@ LLM推理:
 
 **面试加分点**：提到LangChain/LangGraph的Agent框架设计；提到AutoGPT/BabyAGI展示了Agent的自主任务分解能力；提到Agent评估框架如AgentBench、τ-bench；提到多Agent系统（如CrewAI、AutoGen）的协作模式——Router/Worker/Critic架构；提到MCP(Model Context Protocol)正在标准化Agent的工具接入层。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd3-015.svg" alt="一个完整的LLM Agent系统通常由哪些核心模块组成？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

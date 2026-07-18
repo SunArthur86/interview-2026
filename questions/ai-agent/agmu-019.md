@@ -101,9 +101,6 @@ def dispatch_task(task_type: str) -> str:
 2. 在多 Agent 系统中，如何处理“慢速 Agent”拖垮整体响应速度的问题？（提示：设置超时机制、异步并行或热备份 Agent）。
 3. 你提到了“角色隔离”，如何防止不同 Agent 的 Prompt 之间产生冲突或指令泄露？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_agmu-019.svg" alt="多 Agent 与「单 Agent + 多个工具」取舍 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

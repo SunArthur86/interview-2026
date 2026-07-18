@@ -104,9 +104,6 @@ flowchart TD
     E --> F[少量微调恢复性能]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_mt-ai-006.svg" alt="【美团面经】Qwen 是怎么做长度外推的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

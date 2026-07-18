@@ -361,7 +361,3 @@ public void checkFeatureQuality(String featName) {
 | 1:50 | 流程图 | Hive（特征仓库）+ Iceberg（版本）。 | 离线存储 |
 | 3:30 | 总结卡 | 一句话记忆：特征平台 = 定义 + 计算 + 存储 + 服务 + 治理 五位一体。 下期可以接着聊：离线在线一致性怎么保证。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-022.svg" alt="【蚂蚁风控】设计一个特征平台，支持亿级用户、千万特征、毫秒级查询 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

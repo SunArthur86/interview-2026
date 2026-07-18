@@ -88,9 +88,6 @@ flowchart LR
     style ID fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_bd-ai-java-001.svg" alt="【字节面经】你平常使用什么 AI 工具？AI 编程工具和传统网页问答 AI 有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

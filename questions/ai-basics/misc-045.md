@@ -93,9 +93,6 @@ class RMSNorm(nn.Module):
                                             └───────────────────────────────┘
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-045.svg" alt="为什么LLaMA用RMSNorm而不是LayerNorm?Pre-Norm和Post-Norm有什么区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

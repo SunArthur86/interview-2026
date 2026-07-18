@@ -83,9 +83,6 @@ try (OutputStream out = socket.getOutputStream();
 1. **为什么需要 TIME_WAIT**？如果过多会有什么危害（端口耗尽）？如何解决？
 2. **CLOSE_WAIT 状态过多**：通常是什么原因导致的（通常是代码问题，如未关闭流或 Socket
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-003.svg" alt="什么是四次挥手？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

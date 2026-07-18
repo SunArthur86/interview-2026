@@ -84,11 +84,6 @@ CircuitBreaker cb = registry.circuitBreaker("paymentService");
 3. **熔断与重试的关系**：熔断打开期间，请求通常直接返回失败，一般不建议在熔断器拦截阶段进行自动重试（除非配置了特定的Fallback策略），以免加重恢复期的负载。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-044.svg" alt="熔断器的三种状态是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 三态流转：Closed（正常） -> Open（熔断） -> Half_Open（探测）
@@ -100,8 +95,6 @@ CircuitBreaker cb = registry.circuitBreaker("paymentService");
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 家里的保险丝，检测到电流过载自动断路，修好试电后再合上。
 
 **展开框架：**
@@ -110,8 +103,6 @@ CircuitBreaker cb = registry.circuitBreaker("paymentService");
 3. **结合降级使** — 结合降级使用保核心
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

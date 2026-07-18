@@ -142,9 +142,6 @@ flowchart TD
     F --> F1[敏感信息脱敏]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_bd-ai-005.svg" alt="【字节面经】AI编程中有哪些踩坑经验？分享你的最佳实践。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -108,9 +108,6 @@ class ColumnParallelLinear(torch.nn.Module):
 2. **误区**：流水线并行（PP）的阶段划分越多越好。
    **纠正**：PP 阶段划分越多，虽然每张卡的显存压力越小，但产生的通信边界和 Bubble 也会越多，导致 GPU 利用率下降和 latency 增加。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_ai-harness-s003.svg" alt="模型并行有哪些方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

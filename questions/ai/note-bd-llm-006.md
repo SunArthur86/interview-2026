@@ -623,9 +623,6 @@ llm_latency = Histogram("llm_latency_seconds", "LLM call latency",
 6. **可观测性**：降级不是终点，必须监控降级触发频率并告警
 7. **追问准备**：退避间隔如何设置（base_delay 和 max_delay）、半开状态如何设计（探测请求数）、如何监控降级频率（Prometheus 指标）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-llm-006.svg" alt="【字节面经】你在项目里遇到过大模型接口调用超时或限流的问题吗？怎么设计重试与降级机制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -684,8 +681,6 @@ llm_latency = Histogram("llm_latency_seconds", "LLM call latency",
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像飞机出行——航班取消(超时)时先改签(重试)，改签不了换高铁(模型降级)，高铁也没有就住酒店等明天(缓存/规则降级)。
 
 **展开框架：**
@@ -694,9 +689,6 @@ llm_latency = Histogram("llm_latency_seconds", "LLM call latency",
 3. **Query** — 缓存降级(相似Query命中缓存)
 
 **收尾：** 如何设置重试的退避间隔？
-
-
-
 
 
 ## 视频脚本

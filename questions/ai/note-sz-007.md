@@ -185,9 +185,6 @@ flowchart LR
     C1 -.元数据统一被生态复用.-> T
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-sz-007.svg" alt="【神州专车面经】Spark 和 Hive 在项目中分别承担什么角色？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

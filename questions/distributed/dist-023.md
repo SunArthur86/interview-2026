@@ -89,11 +89,6 @@ public Executor asyncExecutor() {
 ```
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-023.svg" alt="Spring Cloud Sleuth如何实现分布式链路追踪？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心模型：一次完整调用由全局唯一 TraceId 和具体工作单元 SpanId 组成。
@@ -105,8 +100,6 @@ public Executor asyncExecutor() {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 快递包裹上的运单号（TraceID），每到一站盖个章（SpanID），全程可追踪。
 
 **展开框架：**
@@ -115,8 +108,6 @@ public Executor asyncExecutor() {
 3. **HTTP** — 通过HTTP Header透传追踪信息
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

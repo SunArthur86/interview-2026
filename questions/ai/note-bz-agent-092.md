@@ -214,9 +214,6 @@ COMPLIANCE = {
 2. **领域知识三注入**：RAG(灵活)+微调(深度)+Prompt(轻量)，按需选择
 3. **数字人全链路**：ASR→LLM→TTS→Avatar，延迟优化是关键——体现实战
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-092.svg" alt="实战：垂直领域智能体（AI 名师机器人/数字人）怎么落地？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -274,8 +271,6 @@ COMPLIANCE = {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像培养专业人才——通识教育(通用LLM)+专业培训(领域知识)+工具技能(领域工具)+职业操守(合规)。
 
 **展开框架：**
@@ -284,9 +279,6 @@ COMPLIANCE = {
 3. **人设** — 角色塑造/语气/形象
 
 **收尾：** AI名师和通用辅导什么区别？
-
-
-
 
 
 ## 视频脚本

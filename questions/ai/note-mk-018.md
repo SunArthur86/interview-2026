@@ -173,9 +173,6 @@ AI产物从"只读预览"进化为"可编辑工作台"
 - **不做平台化**：Agent越来越多，不做平台化就会被技术债压垮
 - **忽略人机节奏**：快慢不分、反馈不当，用户体验割裂
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mk-018.svg" alt="【月之暗面面经】你怎么看桌面 AI 产品前端未来一年的主战场？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

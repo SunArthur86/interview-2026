@@ -129,9 +129,6 @@ flowchart TD
     style WS fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-071.svg" alt="如何设计一个实时数据大屏系统？类似双11大屏。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -144,8 +141,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像交通指挥中心，摄像头实时采集（CDC），大屏即时处理（Flink），红绿灯秒级响应。
 
 **展开框架：**
@@ -154,8 +149,6 @@ flowchart TD
 3. **WebSocket** — 前端WebSocket订阅，实时推送指标
 
 **收尾：** 如何保证大屏数据的实时性？
-
-
 
 
 ## 视频脚本

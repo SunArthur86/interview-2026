@@ -122,9 +122,6 @@ memory_points:
 3. **冲突解决**：如果出现极端情况导致双写，如何解决数据冲突？（时间戳版本号、业务逻辑合并、人工介入）
 4. **边缘触发**：接入层如何快速感知机房故障并切断流量？（健康检查失败阈值、自动熔断机制）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-041.svg" alt="如何设计异地多活架构？保证地域级故障时业务不中断。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

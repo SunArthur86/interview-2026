@@ -173,9 +173,6 @@ class DecoderLayer(nn.Module):
 3. **为什么Decoder-only成为主流**：统一架构、scaling简单、零样本能力强
 4. **训练vs推理**：训练时teacher forcing可并行，推理时逐词自回归
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-sp-ai-010.svg" alt="Transformer的整体结构是怎样的？Encoder和Decoder分别做什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

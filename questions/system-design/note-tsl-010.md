@@ -291,9 +291,6 @@ public class FeedbackClosureService {
 - **批量处理**：同一cluster的反馈批量回复统一解决方案
 - **FAQ拦截**：高频问题在提交时自动推荐已有答案
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-tsl-010.svg" alt="亿级车主提交APP、车载系统反馈，如何设计后端架构，实现反馈分类、流转、处理闭环且实时响应？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

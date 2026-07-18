@@ -97,9 +97,6 @@ memory_points:
 3. **为什么不建议使用 Executors 创建线程池？**
    因为 `FixedThreadPool` 和 `SingleThreadExecutor` 默认允许的队列长度为 `Integer.MAX_VALUE`，可能导致 OOM；`CachedThreadPool` 允许创建最大 `Integer.MAX_VALUE` 个线程，可能导致耗尽 CPU 或内存资源。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-100.svg" alt="什么是线程池的组成？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -230,7 +230,3 @@ flowchart TD
 | 2:09 | 代码片段 + 注释高亮 | 要点是：结合实战案例展开 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-039.svg" alt="【拼多多供应链】FDE 怎么落地一个供应链 AI 项目？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

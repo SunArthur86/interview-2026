@@ -212,7 +212,3 @@ def infer(idempotency_key, ...):
 | 1:05 | 概念结构示意图 | 消息中间件，可靠投递/路由/持久化。 | RabbitMQ |
 | 2:30 | 总结卡 | 一句话记忆：三角色：生产者+Broker(RabbitMQ)+Worker。 下期可以接着聊：Celery 和 RQ/Kafka 区别。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-036.svg" alt="【生物医药 AI】异步任务系统怎么做（Celery/RabbitMQ/长任务编排）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

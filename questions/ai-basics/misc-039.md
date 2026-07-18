@@ -114,9 +114,6 @@ print(processor.decode(output[0], skip_special_tokens=True))
 3. **视觉特征如何注入LLM？** 
    通常将视觉Token序列拼接到文本Token序列之前（或替换掉文本中的占位符<image>），让LLM将其作为上下文进行处理。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-039.svg" alt="LLaVA的架构是什么?它是如何将视觉信息接入LLM的 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

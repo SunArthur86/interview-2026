@@ -83,11 +83,6 @@ ZooKeeper 锁流程:
 4. **数据库乐观锁 vs 分布式锁**：扣减库存场景下，利用数据库的 `update stock set num=num-1 where id=1 and num>0` 是一种基于乐观锁的无锁方案，但容易导致行锁竞争激烈，连接池耗尽。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-050.svg" alt="Redlock 算法为什么有争议？Redis 分布式锁和 ZooKeeper 分布式锁的本质区别？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 单机Redis锁指令：SET key NX PX，且释放必须用Lua保证原子性
@@ -99,8 +94,6 @@ ZooKeeper 锁流程:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** Redis锁像抢凳子快但有误判，ZK锁像排队叫号准但慢。
 
 **展开框架：**
@@ -109,8 +102,6 @@ ZooKeeper 锁流程:
 3. **ZK** — ZK依赖ZAB协议，强一致
 
 **收尾：** Redis 分布式锁的「续期」问题如何解决？Redisson 的看门狗原理？
-
-
 
 
 ## 视频脚本

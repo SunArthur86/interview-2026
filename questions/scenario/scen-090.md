@@ -114,9 +114,6 @@ Nacos集群（3-7节点）
 3. **CAP 理论下，注册中心为什么通常选择 AP 而不是 CP？**
    - 注册中心的核心价值是「服务发现」。如果选 CP（强一致），在发生网络分区时，为了保证一致性，部分节点不可用，导致此时无法注册新服务或发现新服务，整个集群可能停止扩容或流量调度，这对业务是灾难性的。AP 模式下，即使分区，各节点仍可用，虽然数据可能有短暂延迟，但保证了业务的持续可用性（可用性 > 一致性）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-090.svg" alt="如何设计一个高可用的注册中心集群？Nacos/Eureka对比。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

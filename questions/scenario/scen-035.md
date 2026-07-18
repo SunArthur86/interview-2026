@@ -138,9 +138,6 @@ flowchart TD
     style APP fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-035.svg" alt="如何设计消息推送系统？支持APP Push、短信、邮件多通道。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -152,8 +149,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像快递公司送货：有顺丰（APP）、EMS（短信），上门没人就放快递柜（站内信），必须送到。
 
 **展开框架：**
@@ -162,8 +157,6 @@ flowchart TD
 3. **用户画像与标** — 用户画像与标签圈人
 
 **收尾：** 如何提高APP推送到达率？
-
-
 
 
 ## 视频脚本

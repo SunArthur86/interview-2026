@@ -232,7 +232,3 @@ JMM定义了4种内存屏障：
 | 1:57 | 关键代码/伪代码片段 | "DCL单例必须用volatile——防止new对象时的指令重排序（分配内存到赋值引用到初始化，重排为分配到赋值到其他…" | DCL单例必须用 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：volatile能替代synchronized吗？为什么。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-xhs-java-018.svg" alt="【拼多多一面】volatile 关键字的作用和底层实现 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -252,9 +252,6 @@ def break_symmetry(stuck_state):
 2. **多层防护**：预防→检测→恢复→兜底，体系化而非单点
 3. **强调"LLM 特有"手段**：除了传统方法，还能用 LLM 判断冲突合理性、反思循环原因
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-018.svg" alt="多 Agent 怎么避免冲突和无限循环？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

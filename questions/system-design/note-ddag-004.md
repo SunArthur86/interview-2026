@@ -244,6 +244,3 @@ def reduce_false_positives(candidates):
 | 2:54 | 对比表格 | "vs Agentic RAG: 一个是'找相似信息辅助生成'一个是'找相似风险辅助决策'" | vs Agentic |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：行为模式向量怎么构建？用什么模型。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-ddag-004.svg" alt="设计信贷风控场景的检索系统 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

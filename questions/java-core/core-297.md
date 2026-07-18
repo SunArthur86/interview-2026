@@ -150,9 +150,6 @@ flowchart TD
     N --> O[并查集判环]
     P[适合稀疏图 O E log E]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-297.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -164,7 +161,6 @@ flowchart TD
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 用最短的光纤把所有城市连起来，且不能有环路。
 
 **展开框架：**
@@ -173,7 +169,6 @@ flowchart TD
 3. **Prim** — Prim适合稠密图，Kruskal适合稀疏图
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
 
 
 ## 视频脚本

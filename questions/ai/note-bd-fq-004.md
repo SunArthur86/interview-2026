@@ -140,9 +140,6 @@ def adaptive_top_k(query: str, query_type: str) -> int:
 3. **动态K**：不要写死K值，根据Query难度动态调整（简单问题小K，复杂问题大K）
 4. **监控指标**：设置召回率监控、Rerank延迟监控，当分布漂移时自动调整K
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-fq-004.svg" alt="向量检索中Top-K设置过大或过小分别会带来什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

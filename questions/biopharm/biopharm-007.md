@@ -171,7 +171,3 @@ flowchart TD
 | 1:05 | 代码示例截图 | 连接池/模型推理池/GPU 池，复用昂贵资源。 | 资源池 |
 | 2:30 | 总结卡 | 一句话记忆：异步核心：等待时不占线程。 下期可以接着聊：Python asyncio 和 Go goroutine 区别。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-007.svg" alt="【生物医药 AI】AI 产品的高并发后端怎么做（异步/调度/资源池）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

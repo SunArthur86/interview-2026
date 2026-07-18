@@ -404,14 +404,4 @@ public void applyPromotion(Long orderId, Long promotionId) {
 | 0:40 | 仓储的契约示意/对比图 | "save(aggregate) 持久化整个聚合、findById 返回完整聚合、不暴露 DAO" | 仓储的契约要点 |
 | 1:25 | 总结卡 | "记住：聚合根三原则。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-046.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-046.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-046.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

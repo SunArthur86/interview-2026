@@ -193,9 +193,6 @@ PROMPT = """
 2. **四大类问题**：输出控制/能力激发/行为约束/质量提升，体系化
 3. **知道何时升级**：Prompt 解决不了时用 RAG/微调/换模型——体现全局视野
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-070.svg" alt="提示词工程能解决什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

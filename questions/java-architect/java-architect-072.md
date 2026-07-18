@@ -427,14 +427,4 @@ gRPC (HTTP/2 + Protobuf):
 | 0:40 | gRPC示意/对比图 | "HTTP/2 + Protobuf，强类型 IDL 契约，双向流，适合内部服务间高性能调用" | gRPC要点 |
 | 1:25 | 总结卡 | "记住：对外 REST/GraphQ。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-072.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-072.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-072.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

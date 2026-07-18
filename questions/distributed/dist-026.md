@@ -93,11 +93,6 @@ String getNode(String key) {
 3. **Hash 环的“倾斜”问题是什么？**：即使有虚拟节点，如果某个真实节点的性能较差或者 Hash 算法分布不均，仍可能导致该节点承担过多流量。解决方法是动态调整虚拟节点权重（高性能节点分配更多虚拟节点）。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-026.svg" alt="一致性Hash的原理和特性是什么？它在分布式系统中的应用？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 因为解决取模算法扩缩容导致全量缓存失效，所以引入一致性Hash环
@@ -108,8 +103,6 @@ String getNode(String key) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 圆桌会议，每个人（节点）占一个位置，问题（数据）交给右手边最近的人处理。来人新人只需负责一小段。
 
 **展开框架：**
@@ -118,8 +111,6 @@ String getNode(String key) {
 3. **引入虚拟节点** — 引入虚拟节点解决数据倾斜
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

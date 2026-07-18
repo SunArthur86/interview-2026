@@ -104,9 +104,6 @@ memory_points:
 4. Do not use 'any'; use 'unknown' if type is uncertain.
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_mt-ai-010.svg" alt="【美团面经】使用 Cursor、Windsurf 的使用场景和使用情况如何？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

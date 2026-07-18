@@ -113,9 +113,6 @@ app.get('/api/data', (req, res) => {
 | **优先级** | 高 (先检查强缓存) | 低 (强缓存失效后才检查) |
 | **适用场景** | 静态资源 (JS/CSS/图片) | HTML 文档或频繁变化的动态数据 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-030.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

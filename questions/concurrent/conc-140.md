@@ -117,9 +117,6 @@ synchronized 基于实现
 
 【注意】`ReentrantLock` 必须在 `finally` 块中调用 `unlock()`，且加锁解锁次数必须对应，否则会导致死锁或逻辑错误。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-140.svg" alt="ReentrantLock 相比 synchronized 多了哪些高级功能？什么场景该用 ReentrantLock？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

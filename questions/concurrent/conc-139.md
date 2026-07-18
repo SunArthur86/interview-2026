@@ -116,9 +116,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 3. **队列设置**：推荐有界队列。大小设置需结合任务执行耗时与系统容忍的最大延迟。
 4. **拒绝策略**：核心业务推荐 `CallerRunsPolicy` 实现平滑降级，非核心业务可用 Discard 或记录日志持久化。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-139.svg" alt="线程池如何调优？核心线程数、最大线程数、队列大小应该怎么设置？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

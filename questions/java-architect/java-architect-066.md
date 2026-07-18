@@ -429,7 +429,6 @@ public void archiveColdData() {
 **收尾：** 收件箱数据怎么清理（无限增长）？
 
 
-
 ## 视频脚本
 
 > 预计时长：2 分钟 | 由浅入深
@@ -442,14 +441,4 @@ public void archiveColdData() {
 | 1:05 | 读扩散（拉模式/Fanout示意/对比图 | "on-read）：发帖只写发件箱，读时拉关注人合并，写快读慢" | 读扩散（拉模式/Fanout要点 |
 | 1:55 | 总结卡 | "记住：写扩散。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-066.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-066.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-066.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

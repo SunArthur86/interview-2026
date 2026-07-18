@@ -216,9 +216,6 @@ JDK Future（如 FutureTask）设计为"轮询模型"——`future.isDone()` 检
 五条经验：一、用 addListener 不用 await——await 阻塞线程且可能死锁，addListener 异步回调；二、检查 isSuccess 和 cause——listener 内先判断成功失败，分别处理；三、EventLoop 内绝不 await——会死锁，Netty 会抛异常但代码要避免写这种逻辑；四、Future 链式——addListener 内调下一个异步操作，避免"回调地狱"用 Promise 协调多个 Future；五、Promise 不可滥用——开发者通常只读 ChannelFuture，Promise 是 Netty 内部用的，除非自定义异步操作（如把外部回调包装成 Netty Future）才用 Promise。核心："异步回调 + isSuccess 检查 + EventLoop 不阻塞 + 链式组合"是 Netty 异步编程的四要素。
 
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_network_note-netty-007.svg" alt="ChannelFuture 与 JDK Future 的区别？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 

@@ -100,9 +100,6 @@ for (Integer key : map.keySet()) {
 - 它不会抛出 `ConcurrentModificationException`。
 - 它可能反映迭代器创建时的状态，也可能反映迭代过程中的部分修改，甚至可能反映创建后才插入的元素，但不保证一定反映所有修改。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-146.svg" alt="为什么 ConcurrentHashMap 的 size() 不精确？如何获取精确的元素数量？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

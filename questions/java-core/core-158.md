@@ -93,9 +93,6 @@ String response = stub.sayHello("World");
 | **性能** | 中等 (标准序列化效率低) | 高 (优化的二进制协议) |
 | **适用场景** | Java 间纯远程调用，简单内部系统 | 复杂的微服务架构，异构系统通信 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-158.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

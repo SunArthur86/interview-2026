@@ -279,7 +279,3 @@ Service Mesh 确实把服务发现下沉到 sidecar（Envoy），一致性由 Pi
 | 1:05 | 概念结构示意图 | 临时实例（客户端心跳）vs 持久实例（服务端主动探测）。 | 临时实例（客户端心跳） |
 | 2:30 | 总结卡 | 一句话记忆：AP vs CP：AP（Eureka/Nacos临时实例，可用优先）、CP（ZK/Consul/Nacos持久实例，一致优先）。 下期可以接着聊：Eureka 和 Nacos 区别。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-006.svg" alt="【蚂蚁风控】Spring Cloud 服务注册与发现原理？Nacos 为什么比 Eureka 更适合风控？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

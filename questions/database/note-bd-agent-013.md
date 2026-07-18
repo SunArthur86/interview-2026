@@ -144,9 +144,6 @@ flowchart TD
     style LEAF_B fill:#ffe4b5
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_database_note-bd-agent-013.svg" alt="B树和B+树在数据库索引里的核心区别是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

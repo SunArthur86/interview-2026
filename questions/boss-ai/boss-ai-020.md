@@ -254,7 +254,3 @@ AI 特色：
 | 1:50 | 对比表格 | 基于 SLO 的 release 放行、错误预算、慢着但稳。 | 治理 |
 | 3:30 | 总结卡 | 一句话记忆：三支柱：日志/指标/链路。 下期可以接着聊：链路追踪怎么做。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-020.svg" alt="【巨剧核 AI 陪伴】可观测性、治理、跨团队推进怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

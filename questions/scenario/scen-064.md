@@ -128,9 +128,6 @@ private String phone;  // 序列化时自动脱敏
 3. **检索问题**：手机号加密后（如 AES），如何根据手机号查询用户？（答：方案一：确定性加密（如 AES-SIV），相同明文对应相同密文，可建索引但泄露频率信息；方案二：保存哈希值用于检索，密文用于解密）
 4. **前端加密意义**：前端 HTTPS 已经加密了，为什么还要做业务层加密？（答：防御内部威胁，防止 DBA 或运维人员直接查库看到明文；满足合规审计要求；即使数据备份泄露也无法还原）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-064.svg" alt="如何设计敏感数据加密和脱敏方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

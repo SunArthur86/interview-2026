@@ -126,9 +126,6 @@ flowchart TD
     J -- "指标正常" --> O["扩大灰度: 10%->50%->全量"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-024.svg" alt="如何设计LLM模型的灰度发布系统？安全地上线新模型或更新Prompt，支持快速回滚。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

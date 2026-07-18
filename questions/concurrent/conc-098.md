@@ -78,9 +78,6 @@ memory_points:
 3. **线程栈溢出怎么办？**
    修改 `pthread_attr_setstacksize` 增大栈，或者优化递归深度/局部变量大小。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-098.svg" alt="什么是线程属性？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -93,8 +90,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像给新员工配置入职包：要不要工牌回收(分离)、工位多大(栈)。
 
 **展开框架：**
@@ -103,8 +98,6 @@ memory_points:
 3. **主线程退出** — 主线程退出会带崩整个进程
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -83,9 +83,6 @@ memory_points:
 3. **多线程与多进程的适用场景？**
    需要频繁通信、数据共享、低延迟切换选多线程；需要高隔离性、高容错性、利用多核并行计算选多进程。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-097.svg" alt="什么是线程基础？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -98,8 +95,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 进程是火车（车厢资源），线程是列车员（共享车厢干活）。
 
 **展开框架：**
@@ -108,8 +103,6 @@ memory_points:
 3. **线程切换开销** — 线程切换开销远小于进程
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

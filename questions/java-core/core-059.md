@@ -92,9 +92,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 2. **Keep-Alive 的优缺点**：长连接一直占用资源，如何管理？（通过 timeout 和 max 参数控制）。
 3. **为什么 HTTP/1.1 实际上并不能实现真正的多路复用**？（这是 HTTP/2 的特性）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-059.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -452,7 +452,3 @@ public class HealthController {
 | 1:50 | 流程图 | 99.99% = 月停 4.3 分钟，靠多重冗余 + 快速切换实现。 | 99.99% = 月停 4.3 分钟 |
 | 3:30 | 总结卡 | 一句话记忆：高可用三要素：冗余 + 隔离 + 自愈。 下期可以接着聊：同城双活和异地多活区别。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-030.svg" alt="【蚂蚁风控】怎么设计一个 99.99% 可用性的亿级 QPS 风控架构？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

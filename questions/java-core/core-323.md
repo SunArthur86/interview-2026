@@ -130,9 +130,6 @@ HashMap JDK 8 内部结构示意：
    | **哈希扰动** | 4次位运算 + 5次异或（复杂） | 1次位运算 + 1次异或（高效） |
    | **节点类型** | Entry 类 | Node 类（TreeNode 继承 Node） |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-323.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

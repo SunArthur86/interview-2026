@@ -119,9 +119,6 @@ flowchart TD
     NCCL --> Stack[py-spy抓堆栈]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_xhs-infra-007.svg" alt="大模型训练中如何诊断OOM、低MFU和hang？常用的Profiler工具有哪些？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

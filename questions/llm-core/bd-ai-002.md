@@ -116,9 +116,6 @@ flowchart TD
     G --> H[端到端完成任务]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_llm-core_bd-ai-002.svg" alt="【字节面经】Claude Code的使用经验？与传统网页问答AI有什么核心区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

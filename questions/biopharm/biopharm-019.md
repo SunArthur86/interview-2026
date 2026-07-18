@@ -201,7 +201,3 @@ flowchart TD
 | 1:05 | 代码示例截图 | 小流量验证，逐步放量，可观测可逆。 | 灰度发布 |
 | 2:30 | 总结卡 | 一句话记忆：预案：分级+SOP+演练。 下期可以接着聊：数据回滚怎么做。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-019.svg" alt="【生物医药 AI】预案/回滚怎么做（含钱学森工程理论）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

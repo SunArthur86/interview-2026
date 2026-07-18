@@ -147,9 +147,6 @@ app = workflow.compile()
 3. **失败处理**：提及repair_count上限、降级策略，体现生产环境思维
 4. **成本意识**：Repair只改有问题的段落而非全文重写，节省Token
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-agent-001.svg" alt="如何搭建Agent工作流并提升生成准确性？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

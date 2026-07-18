@@ -135,9 +135,6 @@ Agent路径（灵活、高成本）：
 3. **监控指标**：Workflow看成功率/延迟，Agent看完成率/平均轮数/成本/用户满意度
 4. **Anthropic的建议**："能用Workflow就别用Agent"——Workflow可控性远高于Agent
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tt-agent-009.svg" alt="Workflow固定工作流和自主决策Agent怎么区分？什么场景选Workflow、什么必须自研Agent？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

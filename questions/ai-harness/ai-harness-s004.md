@@ -119,9 +119,6 @@ class KVCache:
 2. **误区**：开启了 Prefix Caching 就一定能节省显存。
    **纠正**：Prefix Caching 共享的是物理 Block。如果请求的并发度不够高，或者 System Prompt 之间的差异导致无法完全匹配，共享率会很低，此时缓存本身占用的显存反而可能成为负担。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_ai-harness-s004.svg" alt="大模型部署有哪些方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

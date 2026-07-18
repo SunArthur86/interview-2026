@@ -136,9 +136,6 @@ action = llm.decide(context, tools)  # → book_ticket(flight=CA123)
 2. **区分 Agentic 程度**：Workflow（固定流程）→ Agent（动态决策）→ Autonomous Agent（完全自主），不是二元的
 3. **提 Anthropic 的定义**：Augmented LLM + Tools + Loop，简洁权威
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-001.svg" alt="什么是 AI Agent？它和单纯的大模型（LLM）有什么区别和关系？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -197,7 +194,6 @@ action = llm.decide(context, tools)  # → book_ticket(flight=CA123)
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** LLM像一本百科全书（你问它答），Agent像一个员工（你给目标，它自己查资料、定计划、用工具、交付结果）。
 
 **展开框架：**
@@ -206,8 +202,6 @@ action = llm.decide(context, tools)  # → book_ticket(flight=CA123)
 3. **Agent** — Agent是循环系统，LLM是其中一环
 
 **收尾：** Agent和Workflow/工作流有什么区别？
-
-
 
 
 ## 视频脚本

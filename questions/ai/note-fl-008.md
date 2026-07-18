@@ -93,9 +93,6 @@ memory_points:
 - **低代码平台的本质矛盾**：可视化表达的复杂度上限 < 代码表达。任何低代码平台到一定复杂度都会退化成"用 JSON 写代码"
 - **未来趋势**：低代码平台 + AI 辅助生成（自然语言→workflow），可能突破可视化复杂度上限
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-008.svg" alt="【字节飞连面经】怎么看扣子（Coze）这类产品？低代码 Agent 平台优势和局限？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

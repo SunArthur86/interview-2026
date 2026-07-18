@@ -99,9 +99,6 @@ flowchart TD
     style LK2 fill:#ffcccc
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-021.svg" alt="如何设计一个分布式锁？从单机到RedLock到ZK，分别适用什么场景？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

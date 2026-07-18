@@ -110,9 +110,6 @@ def estimate_loss(params, tokens, a=1.8, b=0.6):
 print(f"Estimated Loss: {estimate_loss(7e9, 2e12):.4f}")
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-008.svg" alt="大模型的涌现能力(Emergent Abilities)是什么?Scaling Law如何指导模型训练 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

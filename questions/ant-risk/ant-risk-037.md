@@ -511,7 +511,3 @@ flowchart TD
 | 1:50 | 监控大盘截图 | 评估、漂移、迭代。 | 监控层 |
 | 3:30 | 总结卡 | 一句话记忆：AI Infra = 数据 + 训练 + 推理 + 监控 四层。 下期可以接着聊：训练和推理 GPU 怎么调度。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ant-risk_ant-risk-037.svg" alt="【蚂蚁风控】AI Infra 怎么设计？支撑大模型全生命周期 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

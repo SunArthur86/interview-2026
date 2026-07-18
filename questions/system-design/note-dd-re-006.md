@@ -786,9 +786,6 @@ public class RuleController {
 4. **隔离**：不同活动的规则执行结果需做上下文隔离，避免规则间意外影响
 5. **测试**：提供规则集试跑（Dry Run）能力，在线上数据副本上验证规则配置正确性
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-re-006.svg" alt="【滴滴面经】如果不同活动下规则组合不一样，系统要怎么支持？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

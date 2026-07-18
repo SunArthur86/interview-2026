@@ -295,7 +295,3 @@ flowchart TD
 | 1:50 | 流程图 | cross-encoder 精排 bi-encoder 召回结果。 | 重排序 |
 | 3:30 | 总结卡 | 一句话记忆：嵌入：文本→向量。 下期可以接着聊：HNSW 为什么快。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-034.svg" alt="【巨剧核 AI 陪伴】向量检索与召回怎么做（选型/ANN/重排）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -160,9 +160,7 @@ flowchart TD
     A2 -. "销毁通知" .-> B3
 ```
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_frontend_note-ms-021.svg" alt="【月之暗面面经】如果产品要扩到更多桌面能力，哪层前端架构最该先做成平台？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心抽离：能力扩展本质是跨进程通信（IPC），所以最该先把 RPC/IPC 通信层平台化

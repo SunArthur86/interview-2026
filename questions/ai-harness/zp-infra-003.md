@@ -126,9 +126,6 @@ flowchart TD
     Format --> Dequant[反量化相乘还原]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-harness_zp-infra-003.svg" alt="【智谱Infra面经】NVFP4 的原理是什么？怎么做缩放的？在哪个维度缩放？保存的格式是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -185,9 +185,6 @@ flowchart TD
     H -.->|穿透请求增加10倍| E
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-sl-004.svg" alt="【滴滴面经】压测时最多能存多少数据？不同数据量下，短链系统的 QPS 表现怎么样？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

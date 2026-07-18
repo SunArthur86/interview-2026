@@ -183,7 +183,3 @@ L3 强化学习路由（进阶）：
 | 1:05 | 成本优化对比表 | 主→备→兜底小模型，按 SLA 和成本排序。 | fallback 链 |
 | 2:30 | 总结卡 | 一句话记忆：路由维度：场景/复杂度/成本/延迟/可用性。 下期可以接着聊：复杂度怎么判。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-008.svg" alt="【巨剧核 AI 陪伴】多模型路由怎么设计（路由/fallback/成本）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

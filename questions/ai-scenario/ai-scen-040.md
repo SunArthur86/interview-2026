@@ -131,9 +131,6 @@ User Query
 1. **忽略网页解析的Robots协议**：在批量抓取网页内容进行索引时，容易忽视版权和爬虫规范，可能导致IP被封禁。必须严格遵守目标网站的Robots.txt，并设置合理的抓取频率和User-Agent。
 2. **过度依赖SerpAPI等第三方服务**：第三方搜索API可能会有单日调用次数限制或突然的API变更。系统设计中必须考虑Multi-Provider策略（如同时接入Bing和Google），当一个Provider不可用时能自动切换。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-040.svg" alt="如何设计一个AI搜索引擎（类似Perplexity）？直接给出答案而非链接列表，支持引用溯源。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

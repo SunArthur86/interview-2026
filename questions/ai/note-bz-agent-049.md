@@ -208,9 +208,6 @@ def evaluate_recall(test_cases):
 2. **混合检索是关键**：向量+BM25 互补，能覆盖单一方法的盲区
 3. **量化评估**：用 recall@k 指标衡量，而非凭感觉
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-049.svg" alt="如何提升 RAG 的检索召回率？（全链路优化） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -269,7 +266,6 @@ AB 对比。固定评估集（query+golden 文档），对比：1）基线（单
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像大海捞针——用更好的探测器(查询改写)、多艘船一起捞(多路)、大网眼捞全(高召回)、再挑出真货(重排)。
 
 **展开框架：**
@@ -278,8 +274,6 @@ AB 对比。固定评估集（query+golden 文档），对比：1）基线（单
 3. **参数** — 增大top_k、降低阈值
 
 **收尾：** 召回率多少算好？
-
-
 
 
 ## 视频脚本

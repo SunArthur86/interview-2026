@@ -288,7 +288,3 @@ flowchart LR
 | 2:09 | 代码片段 + 注释高亮 | 要点是：INT4 几乎无损，INT8 通用 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——INT4 量化会掉多少点？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-017.svg" alt="【拼多多 AI 中台】LLM 量化（INT8/INT4/AWQ/GPTQ）怎么选？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

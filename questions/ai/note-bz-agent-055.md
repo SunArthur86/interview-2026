@@ -229,9 +229,6 @@ flowchart TD
     L -.-> H
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-055.svg" alt="文档的加载和分割（Chunking）怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

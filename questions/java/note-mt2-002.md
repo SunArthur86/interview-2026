@@ -176,10 +176,6 @@ CompletableFuture.supplyAsync(() -> {
 └──────────────────────────────────────────────────┘
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java_note-mt2-002.svg" alt="用 Future/线程池做并发，怎么监控线程池状态？怎么防止血崩？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 
 ## 记忆要点
 

@@ -130,9 +130,6 @@ public void asyncProcess() {
 }
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-055.svg" alt="如何设计微服务的链路追踪系统？快速定位跨服务调用问题。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -144,8 +141,6 @@ public void asyncProcess() {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像快递面单，记录包裹经过的每一个中转站和时间。
 
 **展开框架：**
@@ -154,8 +149,6 @@ public void asyncProcess() {
 3. **字节码增强无** — 字节码增强无侵入埋点
 
 **收尾：** TraceId如何在线程池中传播？
-
-
 
 
 ## 视频脚本

@@ -191,7 +191,3 @@ LLM 流式输出 token 序列
 | 1:50 | 一致性协议对比表 | 拦截 / 重生成 / 降级模板 / 人工复核。 | 处置 |
 | 3:30 | 总结卡 | 一句话记忆：三层审核：安全 + 合规 + 人设。 下期可以接着聊：审核挡不住的新型违规怎么办。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-007.svg" alt="【巨剧核 AI 陪伴】模型输出审核怎么做（安全/合规/人设）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

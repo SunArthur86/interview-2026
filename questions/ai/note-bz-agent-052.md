@@ -233,9 +233,6 @@ def evaluate_embedding(test_cases, embedder, vector_db):
 2. **父子分块**：检索小块精准，返回大块上下文全——这是 RAG 进阶技巧
 3. **Embedding 可微调**：通用模型在专业领域效果差，微调是终极优化手段
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-052.svg" alt="Embedding 策略怎么定？如何构建高精度向量检索体系？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -294,8 +291,6 @@ AB 对比全链路指标。1）embedding 质量——用评估集（query-文档
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像给每本书编条码——编得好（同类书条码相近），找书时扫一下就能找到相似的。
 
 **展开框架：**
@@ -304,9 +299,6 @@ AB 对比全链路指标。1）embedding 质量——用评估集（query-文档
 3. **索引** — 多粒度/父子分块
 
 **收尾：** Embedding维度越高越好吗？
-
-
-
 
 
 ## 视频脚本

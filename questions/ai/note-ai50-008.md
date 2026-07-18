@@ -225,9 +225,6 @@ response = client.chat.completions.create(
 # 模型直接返回结构化的tool_calls，不需要文本解析
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai50-008.svg" alt="ReAct的原理和与单轮问答的本质区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

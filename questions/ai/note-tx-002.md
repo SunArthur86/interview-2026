@@ -330,9 +330,6 @@ class GraphRAG:
 
 4. **面试加分点：** 提到 GraphRAG 的 **Map-Reduce 全局搜索** 和 **Leiden 社区检测** 这两个技术细节，能展示你对原始论文的深入理解。再提一下 LightRAG 等替代方案，说明你关注最新进展。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx-002.svg" alt="【腾讯面经】GraphRAG 跟普通 RAG 的区别是什么？什么场景适合用 GraphRAG？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

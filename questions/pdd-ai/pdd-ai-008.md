@@ -235,7 +235,3 @@ sequenceDiagram
 | 1:56 | 监控大盘截图 + 指标曲线 | 要点是：核心指标 + 显著性（p<0.05） | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——怎么保证分流均匀？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-008.svg" alt="【拼多多 AI 中台】实验平台（A/B Test）怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

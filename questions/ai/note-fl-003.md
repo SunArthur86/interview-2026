@@ -149,9 +149,6 @@ flowchart TD
     N -.->|"下次推理注入精简规则"| O
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-003.svg" alt="【字节飞连面经】项目中模型不听指令怎么办？怎么定位？反思会污染上下文吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

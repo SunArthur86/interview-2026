@@ -451,14 +451,4 @@ public void accessResource(String token, String res) {
 | 1:30 | 失败模式示意/对比图 | "过度抽象（通用但难用）、伪中台（搬代码非真复用）、大而全（什么都有什么都差）" | 失败模式要点 |
 | 1:55 | 总结卡 | "记住：平台化触发点。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-100.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-100.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-100.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

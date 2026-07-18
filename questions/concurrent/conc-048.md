@@ -92,9 +92,6 @@ executor.execute(() -> doTask());
 | **Callable** | 实现 Callable | 有 (Future) | 能抛出受检异常 | 无限制，灵活 | 需要异步计算结果的场景 |
 | **ThreadPool** | 实现 Runnable/Callable | 取决于任务 | 取决于任务 | 无限制，灵活 | 生产环境标准做法，资源管控 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-048.svg" alt="Java创建线程有哪几种方式？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

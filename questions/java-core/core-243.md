@@ -118,9 +118,6 @@ Logger logger = factory.createLogger();
 | **工厂方法** | 多个 (一一对应) | 多个 | 新增工厂类 (好) | 产品种类多，需灵活扩展 |
 | **抽象工厂** | 多个 (对应产品族) | 多个 (多个等级) | 新增工厂类，但新增等级难 | 产品有家族概念（如跨平台UI） |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-243.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

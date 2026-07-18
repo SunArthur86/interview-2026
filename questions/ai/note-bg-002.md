@@ -311,9 +311,6 @@ SFT数据量推荐：
 - **Constitutional AI**：Anthropic的方案，用AI反馈代替部分人类标注，但SFT冷启动仍然必需
 - **KTO/ORPO**：新的偏好优化方法，尝试减少对SFT的依赖，但目前仍需冷启动
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bg-002.svg" alt="【八股总结】SFT 冷启动和后续 RL 的关系是什么？为什么 RL 前需要 SFT？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

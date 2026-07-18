@@ -286,7 +286,3 @@ flowchart TD
 | 2:09 | 代码片段 + 注释高亮 | 要点是：减优：MQA/GQA/量化/滑窗 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——KV Cache 为什么这么大？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-ai_pdd-ai-015.svg" alt="【拼多多 AI 中台】KV Cache 原理是什么？怎么估算大小？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

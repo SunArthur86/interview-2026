@@ -87,9 +87,6 @@ Object Memory Layout (HotSpot 64-bit)
 2. **为什么需要内存对齐**：CPU 访问内存时不是按字节逐个读取，而是按块（如 Cache Line, 通常 64 字节）读取。不对齐可能导致跨 Cache Line 读取，增加 CPU 消耗；同时也为了原子性保证（如 64 位 long 读写）。
 3. **引用类型存储**：栈帧中的 LocalVariableTable 存储的是引用的句柄或直接指针，引用本身指向堆内存。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-084.svg" alt="什么是内存中对象？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

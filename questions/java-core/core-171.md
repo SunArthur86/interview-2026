@@ -101,9 +101,6 @@ byte[] bytes = user.toByteArray();
 | **自描述性** | 强（包含结构） | 强 | **弱（依赖 .proto）**
 | **适用场景** | 浏览器接口、配置文件 | 遗留系统、文档 | 高性能内部通信、存储 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-171.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

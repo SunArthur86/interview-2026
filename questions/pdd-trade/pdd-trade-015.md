@@ -182,7 +182,3 @@ flowchart TD
 | 1:00 | 能力/参数拆解表 | 要点是：扰动：(h^(h>>>16)) 让高位参与低位 | 能力拆解 |
 | 2:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-015.svg" alt="【拼多多交易】HashMap 原理？扩容机制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

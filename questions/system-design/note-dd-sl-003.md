@@ -388,9 +388,6 @@ public void checkConsistency() {
 
 > **面试核心论点：** "短链场景读多写少，数据变更极少，不一致窗口通过 TTL 自动收敛。**Cache Aside + TTL 兜底 + Canal 异步补偿**是性价比最高的方案，追求强一致是过度设计，会牺牲 90% 的 QPS 性能。能讲清楚这个 trade-off，就是架构师思维。"
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-sl-003.svg" alt="【滴滴面经】怎么保证 Redis 里的短链数据和 DB 一致？这个场景下是否一定要强一致？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

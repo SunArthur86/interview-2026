@@ -273,9 +273,6 @@ public class USPolicy implements CompliancePolicy {
 - **增量认证**：已认证车主添加新车时，复用身份认证，只核验车辆信息
 - **家庭账户**：支持多人共享车辆，每人独立认证
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-tsl-006.svg" alt="亿级车主完成实名认证（身份、车辆信息核验），如何设计后端架构，保证核验高效、数据安全且符合全球合规要求？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

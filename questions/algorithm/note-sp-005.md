@@ -227,9 +227,6 @@ class Solution:
    → 改用迭代中序遍历(Morris遍历可以做到O(1)空间)
 
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_algorithm_note-sp-005.svg" alt="验证二叉搜索树（LeetCode 98）" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** 验证BST 就是 检查每个节点是否满足"左子树所有节点 < 当前节点 < 右子树所有节点"。打个比方，就像查字典的页码——左边所有页码必须比当前页小，右边所有页码必须比当前页大。不能只看相邻页，因为中间穿插的页也可能乱序。

@@ -88,9 +88,6 @@ public enum EnumSingleton {
 2. **反射破坏单例**：如何通过反射调用私有构造器破坏单例？如何在构造函数中添加防御代码（如判断实例是否已存在，若存在则抛出异常）？
 3. **ClassLoader**：不同的类加载器可能会加载同一个类多次，导致单例失效，如何处理？（通常由同一个类加载器加载或指定上下文类加载器）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-094.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

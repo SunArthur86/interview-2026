@@ -139,9 +139,6 @@ flowchart TD
     E -.-> K
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-007.svg" alt="【字节飞连面经】用过哪些 Agent 框架？LangGraph vs LangChain？为什么选 LangGraph？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

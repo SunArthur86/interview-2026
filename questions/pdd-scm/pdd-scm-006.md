@@ -252,7 +252,3 @@ flowchart TD
 | 1:56 | 流程图：输入→处理→输出 | 要点是：三大问题：穿透（布隆过滤）、击穿（互斥锁）、雪崩（TTL 抖动） | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-006.svg" alt="【拼多多供应链】Redis 缓存怎么保证和 DB 一致？三大缓存问题怎么解？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

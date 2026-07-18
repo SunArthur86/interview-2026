@@ -240,9 +240,6 @@ class Observability:
 2. **六大能力成体系**：生命周期/注册发现/通信/调度/SDK/监控，体现平台思维
 3. **知道主流方案**：AutoGen/CrewAI/LangGraph 各有侧重，选型体现工程判断
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-019.svg" alt="如何理解和打造一个多 Agent 平台？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

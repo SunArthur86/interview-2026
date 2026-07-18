@@ -180,9 +180,6 @@ class CostMonitor:
 3. **持续监控**：上线后持续收集bad case，定期回归测试防止退化
 4. **A/B测试**：新版本Agent和旧版本同时服务，对比真实用户满意度指标
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-lx-agent-010.svg" alt="设计一个Agent，怎么判断它是真的&quot;好&quot;，而不是只是会演示？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

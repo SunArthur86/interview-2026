@@ -202,9 +202,6 @@ flowchart TD
     F --> G["线上A/B测试<br/>业务指标验证"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-sz-011.svg" alt="【神州专车面经】模型离线 AUC 高但线上效果差，查哪些问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -100,9 +100,6 @@ def upsert_document(collection, doc_id, new_chunks):
 2. 在CDC捕获binlog时，如何处理海量历史数据的冷启动和全量+增量的同步切换问题？
 3. Embedding服务的高并发调用是实时链路的瓶颈，有什么优化手段（如批处理、量化模型）？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-008.svg" alt="设计一个支持实时更新和增量索引的RAG系统。当知识库文档频繁变更时，如何保证检索结果的时效性？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

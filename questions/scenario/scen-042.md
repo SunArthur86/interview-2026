@@ -111,9 +111,6 @@ flowchart TD
     style TID fill:#ffe4b5
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-042.svg" alt="如何设计一个全链路监控系统？覆盖日志、指标、链路追踪。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -125,7 +122,6 @@ flowchart TD
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像开车仪表盘：速度表（Metrics）告诉你快慢，行车记录仪（Logging）记录发生了什么，导航轨迹（Tracing）告诉你走哪条路最堵。
 
 **展开框架：**
@@ -134,7 +130,6 @@ flowchart TD
 3. **Tracing** — SkyWalking追踪分布式调用链
 
 **收尾：** TraceId如何在微服务间传递？
-
 
 
 ## 视频脚本

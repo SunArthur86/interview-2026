@@ -194,9 +194,6 @@ flowchart TD
     Ext --> O["支持超长上下文推理"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-sp-ai-012.svg" alt="为什么需要位置编码？Transformer的位置编码是怎么做的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -250,7 +247,6 @@ RoPE 的 base frequency 调大后，短距离的位置分辨率会下降。base 
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 注意力像失忆的读者——能认出每个字但不记得字的顺序。位置编码像给每个字贴上页码标签
 
 **展开框架：**
@@ -259,8 +255,6 @@ RoPE 的 base frequency 调大后，短距离的位置分辨率会下降。base 
 3. **RoPE旋转编码** — 旋转矩阵注入Q/K点积，主流方案
 
 **收尾：** RoPE为什么能表示相对位置？
-
-
 
 
 ## 视频脚本

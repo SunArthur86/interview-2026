@@ -182,7 +182,3 @@ flowchart TD
 | 1:50 | 代码示例截图 | Agent 加速+初筛，专家决策，关键点人工确认（合规）。 | 人机协作 |
 | 3:30 | 总结卡 | 一句话记忆：三环节：药物发现/文献分析/临床试验。 下期可以接着聊：AI 药物发现靠谱吗。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-021.svg" alt="【生物医药 AI】用 AI Agent 怎么改造医药研发流程？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

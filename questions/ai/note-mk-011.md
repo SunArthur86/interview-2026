@@ -249,9 +249,6 @@ class TaskResultBroadcaster {
 - **锁不过期**：窗口崩溃后锁不释放，其他窗口永远无法编辑
 - **长任务结果只通知发起窗口**：其他窗口的任务中心看不到最新状态
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mk-011.svg" alt="【月之暗面面经】如果桌面端支持多窗口协作，前端怎么避免不同窗口状态打架？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -309,8 +306,6 @@ class TaskResultBroadcaster {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像团队协作写文档——核心内容（任务和产物）存在共享服务器上（全局同步），但每个人自己的编辑器界面（字号/主题/滚动位置）各自独立，不互相干扰。
 
 **展开框架：**
@@ -319,9 +314,6 @@ class TaskResultBroadcaster {
 3. **冲突时先提示哪个窗口持** — 冲突时先提示哪个窗口持有编辑权
 
 **收尾：** 如果桌面端要接文件、网页和本地目录，你先画哪套权限边界？
-
-
-
 
 
 ## 视频脚本

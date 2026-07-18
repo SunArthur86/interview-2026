@@ -88,11 +88,6 @@ paths:
 | **主要受众** | 运维、架构师 | 开发者、产品经理、第三方合作伙伴 |
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-001.svg" alt="微服务中API管理的作用和方案是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - Hystrix断路器三态：Closed正常->失败率超50%切Open->5秒后Half-Open试探

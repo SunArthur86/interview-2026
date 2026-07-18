@@ -93,9 +93,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
                              └──────────────┘  └───────────────┘
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-015.svg" alt="什么是Java线程池工作过程？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -107,8 +104,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 公司招人：正式员工（核心）干不完就排队（队列），排队太长就招临时工（非核心），临时工也干不完就只能拒单。
 
 **展开框架：**
@@ -117,8 +112,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 3. **队列已满** — 创建非核心线程（最大数内）。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

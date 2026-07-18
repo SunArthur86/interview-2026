@@ -223,7 +223,3 @@ flowchart TD
 | 1:05 | 概念结构示意图 | 非开发也能搭、快速原型、可视化调试。 | 低代码优势 |
 | 2:30 | 总结卡 | 一句话记忆：Dify 低代码快搭，LangGraph 精细可控。 下期可以接着聊：Dify 能上生产吗。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-038.svg" alt="【生物医药 AI】Dify/LangGraph 可视化 Agent 编排怎么做（低代码+工程化）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

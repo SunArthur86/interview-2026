@@ -79,9 +79,6 @@ thread.start();
 3. 为什么不推荐使用 `Thread.stop()`？
 4. `run()` 方法抛出异常后，线程处于什么状态？主线程能捕获到吗？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-030.svg" alt="什么是线程死亡（DEAD）？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -93,8 +90,6 @@ thread.start();
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 员工下班离职，工牌注销，不能再回来工作。
 
 **展开框架：**
@@ -103,8 +98,6 @@ thread.start();
 3. **死亡的线程不** — 死亡的线程不能被再次 start
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

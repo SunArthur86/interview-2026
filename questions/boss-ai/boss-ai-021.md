@@ -216,7 +216,3 @@ LLM 推理（隐式）：
 | 1:50 | 代码示例截图 | Agent 角色有内在状态（情绪/关系），会随时间成长。 | 演进 |
 | 3:30 | 总结卡 | 一句话记忆：范式：规则 → Agent 自主演绎。 下期可以接着聊：Agent 改造和直接 prompt 一个角色有什么区别。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-021.svg" alt="【巨剧核 AI 陪伴】用 AI Agent 改造陪伴产品（从规则到自主演绎） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

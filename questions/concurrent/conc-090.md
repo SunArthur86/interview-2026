@@ -88,9 +88,6 @@ memory_points:
 1. **认为对象的初始化顺序总是类加载在前**：对于父类与子类的初始化，父类静态 -> 子类静态 -> 父类非静态/构造 -> 子类非静态/构造，但对于同一个对象，`new` 指令触发的检查是确保类已加载，未加载才会触发加载。
 2. **混淆指针碰撞和空闲列表的触发条件**：取决于垃圾收集器是否带有压缩整理功能。Serial、ParNew 等收集器使用指针碰撞；CMS 这种基于 Mark-Sweep 的收集器使用空闲列表。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-090.svg" alt="什么是对象的创建？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -102,8 +99,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像盖房子，先找地（分配内存），再清理场地（清零），最后按图纸砌墙（执行构造函数）。
 
 **展开框架：**
@@ -112,8 +107,6 @@ memory_points:
 3. **并发安全** — CAS+重试或TLAB本地分配
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

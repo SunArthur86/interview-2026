@@ -788,9 +788,7 @@ function openTask(taskId: string) {
 
 4. **"离开—通知—回来—继续"是桌面 AI 的核心体验差异**。Web 端 AI 产品受限于浏览器标签页，用户切走就失联。桌面端通过系统通知 + 任务中心 + 检查点续传，让用户可以自由切换上下文而不丢失工作进度——这是桌面端 AI 产品的护城河。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_frontend_note-ms-006.svg" alt="【月之暗面面经】桌面端长任务执行时，前端怎样做通知、回看和继续执行？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 核心目标：长任务执行时，必须让用户能放心离开再无缝回来

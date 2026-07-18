@@ -351,7 +351,3 @@ flowchart LR
 | 1:50 | 代码示例截图 | 隐私/依赖/真实性/未成年保护。 | 伦理边界 |
 | 3:30 | 总结卡 | 一句话记忆：演进：多模态→具身→Agent 自主。 下期可以接着聊：现在入局 AI 陪伴还有机会吗。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-040.svg" alt="【巨剧核 AI 陪伴】AI 陪伴产品的未来与工程师价值？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

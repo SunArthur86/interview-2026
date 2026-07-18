@@ -297,9 +297,6 @@ RAGAS拆解评估:
 
 **面试加分点**：提到HyDE（Hypothetical Document Embedding）——先让LLM生成一个假设答案，用假设答案做向量检索，因为"答案"和"文档"的语义空间比"问题"和"文档"更近；提到RRF（Reciprocal Rank Fusion）是更简单但效果略逊的归一化方法；提到Anthropic的Contextual Retrieval在切分时用LLM给每个chunk生成上下文摘要，进一步解决chunk断裂问题；提到最先进的RAG系统还会加入知识图谱增强（GraphRAG），通过实体关系提升复杂推理能力。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-ai-dev-002.svg" alt="大厂P7：RAG准确率从60%提升到85%的4个关键优化 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

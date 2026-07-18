@@ -326,6 +326,3 @@ flowchart TD
 | 1:57 | 关键代码/伪代码片段 | "状态机方案: 状态流转(PENDING到PROCESSING到SUCCESS)天然幂等" | 状态机方案 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如果Redis宕机导致分布式锁失效怎么办。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-flg-002.svg" alt="设计MQ幂等消费函数 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

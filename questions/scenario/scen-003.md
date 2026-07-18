@@ -110,9 +110,6 @@ return {1, amount}
 2. **二倍均值法细节**：为什么要 `× 2`？（保证均值稳定，避免后续抢到的金额忽大忽小，确保每人抢到的金额期望值相同）。
 3. **幂等性**：用户疯狂点击按钮，如何防止抢到多个？（Lua 脚本中先用 Set/Bitmap 记录 `hset red_packet_id user_id 1`，若已存在则直接返回错误）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-003.svg" alt="如何设计微信抢红包系统？红包金额如何拆分？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -124,8 +121,6 @@ return {1, amount}
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 发牌员提前洗好牌（预生成金额），大家依次抢一张，发完即止。
 
 **展开框架：**
@@ -134,8 +129,6 @@ return {1, amount}
 3. **Redis** — Redis存储红包详情，MySQL持久化
 
 **收尾：** 二倍均值法的数学原理是什么？
-
-
 
 
 ## 视频脚本

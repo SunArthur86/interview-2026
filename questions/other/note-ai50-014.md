@@ -256,9 +256,7 @@ async def cpu_heavy_correct():
 | 100并发用户 | 排队 | 同时处理 | 100× |
 | LLM流式输出 | 等完整响应 | 逐token返回 | 感知延迟↓90% |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_other_note-ai50-014.svg" alt="Python异步编程在Agent开发中的应用" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 记忆要点
 
 - 因为Agent常遇网络I/O，所以用异步避免串行阻塞，大幅降低总耗时。

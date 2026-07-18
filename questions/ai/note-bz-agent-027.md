@@ -231,9 +231,6 @@ def handle_reference_to_old(reference, topic_history):
 2. **强调"主动确认"**：不确定时追问比猜测更好——宁可慢一点也要连贯
 3. **提"话题追踪"**：很多人忽略这点，但它是长对话连贯的关键
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-027.svg" alt="多轮对话的连贯性如何保持？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

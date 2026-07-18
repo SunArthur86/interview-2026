@@ -256,9 +256,6 @@ def test_behavior_control():
 2. **Few-shot 最有效**：示例比描述更有力——这是实战经验
 3. **不能 100%**：行为控制需配合后处理校验——体现实事求是
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-073.svg" alt="基于 Prompt 的模型行为控制技术？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -316,8 +313,6 @@ def test_behavior_control():
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像驯兽——给角色(狮子的身份)、训练指令(规则)、示范(示例)、奖励格式(结构)、安全红线(不可攻击)。
 
 **展开框架：**
@@ -326,9 +321,6 @@ def test_behavior_control():
 3. **Few** — Few-shot是最有效的行为塑形
 
 **收尾：** 行为控制能100%可靠吗？
-
-
-
 
 
 ## 视频脚本

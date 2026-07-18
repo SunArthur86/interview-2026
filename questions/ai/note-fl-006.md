@@ -127,9 +127,6 @@ flowchart TD
     F --> J["输出最终回答"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-006.svg" alt="【字节飞连面经】Agentic RAG 和传统 RAG 区别？Query Rewrite 算 Agentic 吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

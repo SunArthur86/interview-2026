@@ -335,7 +335,3 @@ flowchart TD
 | 1:50 | 对比表格 | MVP → 验证 → 迭代 → 规模化。 | 落地路径 |
 | 3:30 | 总结卡 | 一句话记忆：FDE：业务→技术→工程→运营。 下期可以接着聊：FDE 和架构师啥区别。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-038.svg" alt="【巨剧核 AI 陪伴】FDE 视角：AI 陪伴项目从需求到落地怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

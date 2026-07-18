@@ -83,9 +83,6 @@ System.out.println(s3 == s4);
 2. **`intern()` 的内存变化**：JDK 6 将字符串复制永久代 vs JDK 7+ 将堆引用复制到常量池。
 3. **String 为什么不可变？**：安全性（如网络参数、文件路径）、线程安全、Hash 缓存、常量池实现基础。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-176.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

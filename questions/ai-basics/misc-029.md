@@ -108,9 +108,6 @@ def hyde_retrieval(query, llm, vector_store):
 2. Multi-Query生成多个查询后，如何合并检索结果？是简单的取并集，还是需要根据与原问题的相关性进行重排？（通常需要Reranker，如Cross-Encoder进行精排）
 3. HyDE生成的假设文档如果与事实相反（负向问题），如何防止检索到错误内容？（可以在Prompt中约束“即使假设，也请基于正向知识生成”或使用对比检索技术）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-029.svg" alt="RAG中的查询改写技术有哪些?HyDE和Step-Back Prompting分别解决什么问题 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -106,9 +106,6 @@ Future<String> future = executor.submit(() -> {
 3. 线程池中线程复用原理？
    - 线程池中的 Worker 线程在执行完一个任务后，不会退出，而是通过 `while (task != null || (task = getTask()) != null)` 循环不断从阻塞队列中获取新任务执行，从而实现复用。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-108.svg" alt="什么是进程线程基础？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -227,9 +224,6 @@ class SharedData {
 ## 结构化回答
 
 
-
-
-
 **30 秒电梯演讲：** 进程像工厂，线程像工厂里的工人。多个工人共享工厂资源（线程共享内存），但不同工厂资源独立（进程隔离）。
 
 **展开框架：**
@@ -238,9 +232,6 @@ class SharedData {
 3. **开销与通信差异** — 开销与通信差异
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
-
 
 
 ## 视频脚本

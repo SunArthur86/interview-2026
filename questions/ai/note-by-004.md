@@ -223,9 +223,6 @@ flowchart TD
     D --> K
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-by-004.svg" alt="【字节面经】手撕：不大于 n 的最大值 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -284,7 +281,6 @@ flowchart TD
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像用限定的积木（数字集合）搭一个不超过规定高度（n）的塔，且尽量高——从底层（高位）开始挑最大的能放的积木，放不下就回退重选。
 
 **展开框架：**
@@ -293,8 +289,6 @@ flowchart TD
 3. **解读2(找性质)** — 从n往下遍历 or 二分
 
 **收尾：** 如果数字可重复使用呢？
-
-
 
 
 ## 视频脚本

@@ -184,9 +184,6 @@ Skill通过MCP的标准化接口调用这些工具
 2. **互补关系**：Skill 通过 MCP 调用工具，两者结合才是完整方案
 3. **用 USB 类比**：Skill=USB 设备（U 盘/摄像头），MCP=USB 接口标准——设备通过标准接口连接
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-038.svg" alt="Agent Skill 与 MCP 的区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

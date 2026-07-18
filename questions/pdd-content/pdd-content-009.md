@@ -259,7 +259,3 @@ sequenceDiagram
 | 2:09 | 代码片段 + 注释高亮 | 要点是：强一致代价大，慎用 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——为什么是删缓存不是更新缓存？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-content_pdd-content-009.svg" alt="【拼多多内容】Redis 缓存一致性方案（评价/Feed）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

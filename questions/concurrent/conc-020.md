@@ -107,9 +107,6 @@ try {
     - **公平锁**：严格按照请求锁的顺序来获取锁（FIFO），吞吐量较低但避免饥饿。
     - **非公平锁**：允许插队，线程尝试获取锁时直接竞争，失败再加入队列。通常吞吐量更高（`synchronized` 是非公平的，`ReentrantLock` 默认也是非公平的）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-020.svg" alt="什么是互斥锁Mutex？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

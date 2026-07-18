@@ -250,7 +250,3 @@ flowchart TD
 | 1:56 | 流程图：输入→处理→输出 | 要点是：BlockingQueue：阻塞 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住这些核心点就够了。下期我们接着聊——ConcurrentHashMap 为什么不允许 null？。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-content_pdd-content-014.svg" alt="【拼多多内容】高并发集合在内容场景的应用？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

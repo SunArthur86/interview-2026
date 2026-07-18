@@ -317,6 +317,3 @@ public void reconcile() {
 | 2:54 | 对比表格 | "幂等保证：订单号/requestId去重，防止重复扣减" | 幂等保证 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Lua脚本扣减失败了怎么办？用户等了半天发现没货。" | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-016.svg" alt="【拼多多一面】大促时如何用 Redis+消息队列做库存扣减与订单异步创建？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

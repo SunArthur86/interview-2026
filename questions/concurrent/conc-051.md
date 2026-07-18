@@ -98,9 +98,6 @@ try {
 3.  **Condition 的优势**：相比 Synchronized 的 wait/notify，Condition 有什么优势？（支持多路通知，选择性唤醒）
 4.  **ReadWriteLock**：读写锁适用于什么场景？（读多写少）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-051.svg" alt="Java线程锁的特点/性能和使用场景是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -90,11 +90,6 @@ public synchronized long nextId() {
 3. **为什么Kafka的ID是有序的**？Kafka早期使用ZK生成，性能差；后期使用Snowflake算法，保证了Partition内的有序性和单调性。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-036.svg" alt="分布式ID有哪些生成方案？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 方案对比：UUID无序致页分裂，雪花算法趋势递增，号段模式严格递增。
@@ -105,8 +100,6 @@ public synchronized long nextId() {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 每家公司发工牌，号段连号且不重复，一看就知道大概年份。
 
 **展开框架：**
@@ -115,8 +108,6 @@ public synchronized long nextId() {
 3. **DB** — 号段模式降低了DB压力
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

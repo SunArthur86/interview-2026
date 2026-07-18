@@ -107,9 +107,6 @@ memory_points:
 2. **如何检测模型幻觉？**：除了后处理，还有如 LogProbs 分析（模型对生成内容的置信度是否很低）、Self-Check（模型自问自答验证）等方法。
 3. **Temperature 设置为 0 是否能完全消除幻觉？**：不能，它只是消除了随机性，模型依然可能基于错误的先验知识生成确定性的错误内容。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_eng-practice_eng-practice-s003.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

@@ -294,9 +294,6 @@ class SafetyController:
 | 状态传递 | 每步结果作为下步输入 | 清晰可控 | 串联延迟 | 线性流水线 |
 | 数据库 | 共享数据库表 | 持久化 | 查询延迟 | 需要持久状态 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd2-005.svg" alt="多Agent协作、上下文管理和任务状态传递 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

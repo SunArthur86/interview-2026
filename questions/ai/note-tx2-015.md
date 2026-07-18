@@ -237,9 +237,6 @@ flowchart TD
     style G fill:#fff2e6,stroke:#cc6600
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx2-015.svg" alt="【某讯面经】算法题：滑动窗口实现长对话自动摘要截断，控制总 token 上限 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

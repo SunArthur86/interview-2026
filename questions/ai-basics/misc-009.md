@@ -96,9 +96,6 @@ def dpo_loss(policy_chosen_logps, policy_rejected_logps,
     return loss, acc
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-009.svg" alt="RLHF的完整流程是什么?为什么需要它?PPO和DPO有什么区别 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

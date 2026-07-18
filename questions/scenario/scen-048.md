@@ -152,9 +152,6 @@ K8s默认策略：
 3.  **K8s 滚动更新中的 `maxSurge` 和 `maxUnavailable` 的含义？**
     *   *提示*：`maxSurge` (最大激增) 允许超过副本数的 Pod 数量；`maxUnavailable` (最大不可用) 允许不可用的 Pod 数量。快速发布通常调大 `maxSurge`；保守发布则调小 `maxUnavailable`。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-048.svg" alt="如何设计蓝绿部署和金丝雀发布方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -166,8 +163,6 @@ K8s默认策略：
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 蓝绿是直接换路跑，金丝雀是先换一辆车试试。
 
 **展开框架：**
@@ -176,8 +171,6 @@ K8s默认策略：
 3. **滚动更新** — 滚动更新是K8s默认策略
 
 **收尾：** 蓝绿部署的数据库如何处理？
-
-
 
 
 ## 视频脚本

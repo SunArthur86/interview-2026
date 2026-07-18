@@ -276,9 +276,6 @@ def compensate(state):
 2. **子图模块化**：复杂流程拆成子图，可复用可维护——体现工程思维
 3. **补偿事务**：失败后的补偿是分布式系统的经典问题，能讲到说明有深度
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-065.svg" alt="LangGraph 的核心 Graph 如何设计？如何打造企业级复杂工作流？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -337,8 +334,6 @@ def compensate(state):
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像设计企业SOP——不是简单的线性流程，而是有审批/并行/回退/子流程的复杂网络，LangGraph就是画这张网的工具。
 
 **展开框架：**
@@ -347,9 +342,6 @@ def compensate(state):
 3. **人工节点** — 审批/确认
 
 **收尾：** 子图怎么用？
-
-
-
 
 
 ## 视频脚本

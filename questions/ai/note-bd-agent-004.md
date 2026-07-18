@@ -222,9 +222,6 @@ async def agent_execute(task: str):
 3. **动态注册**：Agent不需要预先知道所有Tool，运行时通过MCP发现
 4. **与Function Calling对比**：MCP是协议层标准，Function Calling是调用机制
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd-agent-004.svg" alt="如何给Agent生成Skill并通过MCP接入外部能力？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

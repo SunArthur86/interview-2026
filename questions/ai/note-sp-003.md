@@ -238,7 +238,6 @@ class ParentChildChunker:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 想象你在图书馆找书。用书名/章节标题(小块)精确定位到你要的内容，但借阅时拿走整本书(父块)而不是单页，因为单页内容可能因为缺少前后文而难以理解。
 
 **展开框架：**
@@ -247,8 +246,6 @@ class ParentChildChunker:
 3. **ID** — 父子通过文档ID/章节ID关联，父块包含子块
 
 **收尾：** 父块太大导致context超限怎么办？
-
-
 
 
 ## 视频脚本
@@ -265,6 +262,3 @@ class ParentChildChunker:
 | 2:20 | 对比/实战案例图 | "对比一下常见误区和工程实践，看真实场景里怎么取舍。" | 实战与对比 |
 | 3:10 | 总结卡 | "记住核心要点。下期我们追问：父块太大导致context超限怎么办？" | 收尾与钩子 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-sp-003.svg" alt="父子文档混合分块解决什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

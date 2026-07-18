@@ -113,9 +113,6 @@ flowchart LR
     style ALL fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-044.svg" alt="如何设计灰度发布方案？安全可控地发布新版本。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -127,8 +124,6 @@ flowchart LR
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 试吃新菜，先给几个人尝尝没问题再端上全席。
 
 **展开框架：**
@@ -137,8 +132,6 @@ flowchart LR
 3. **数据库变更** — 数据库变更需遵循向前向后兼容原则
 
 **收尾：** 灰度发布和蓝绿部署有什么区别？
-
-
 
 
 ## 视频脚本

@@ -101,9 +101,6 @@ Start: 存储需求
 3. **HBase 为什么不适合做随机读？**
    - HBase 是 LSM-Tree 架构，写入是追加顺序写，性能极高；但读取可能需要合并 MemStore 和磁盘上的 HFile，且不支持多列索引，只能通过 RowKey 查询，随机范围查询性能不如 B+ 树结构的 MySQL。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-099.svg" alt="如何设计一个海量数据的存储选型方案？MySQL/MongoDB/HBase/ES如何选择？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

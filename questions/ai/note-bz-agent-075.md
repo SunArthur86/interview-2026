@@ -222,9 +222,6 @@ def map_reduce_long_doc(docs, question):
 2. **中间遗忘**：长上下文不是万能的，重要信息放首尾——体现实战经验
 3. **RAG 仍是主流**：即使有 1M 窗口，RAG 在成本和精度上仍更优——务实判断
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-075.svg" alt="上下文窗口是什么？突破长上下文有哪些技术？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

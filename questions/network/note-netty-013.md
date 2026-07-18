@@ -278,9 +278,6 @@ TCP 层面，channelInactive 触发时 TCP 可能还没完全关闭（处于 FIN
 五条经验：一、在 channelActive 做上线处理（记录、发握手）、channelInactive 做下线清理（释放资源、通知）；二、channelReadComplete 合并 flush——避免每条消息 flush 一次，批量 flush 提升吞吐；三、IdleStateHandler 做心跳超时——配置读空闲时间，userEventTriggered 里 close 无心跳的连接；四、exceptionCaught 兜底——Pipeline 末尾加 ExceptionHandler 统一处理异常，避免连接泄漏；五、自定义事件传控制信号——鉴权、限流等用 userEventTriggered，与业务数据分离。核心："理解生命周期事件序列，在正确的事件做正确的处理，是 Netty Handler 设计的基础，错误的事件处理会导致资源泄漏或业务异常。"
 
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_network_note-netty-013.svg" alt="Channel 和 ChannelHandler 的生命周期？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 ## 结构化回答
 
 **30 秒电梯演讲：** Netty 的两个生命周期——Channel 生命周期描述"一个连接从注册到注销"的状态变迁（registered→active→inactive→unregistered）。

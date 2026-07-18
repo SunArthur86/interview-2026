@@ -427,7 +427,6 @@ spec:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 像连锁餐厅的"多店运营"——单店（单集群）出事（火灾/停电）影响一家，多店（多集群）互备，一家关了客人去另一家。总部（控制面）统一管理，各店就近服务客人（地域路由），数据总部同步（异地复制）。
 
 **展开框架：**
@@ -436,8 +435,6 @@ spec:
 3. **Istio Multi-Cluster** — 统一治理跨集群流量
 
 **收尾：** 同城双活和异地多活区别？
-
-
 
 
 ## 视频脚本
@@ -451,14 +448,4 @@ spec:
 | 0:40 | 容灾等级示意/对比图 | "同城双活 / 两地三中心 / 异地灾备" | 容灾等级要点 |
 | 1:25 | 总结卡 | "记住：多集群 K8s。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-124.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-124.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-124.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

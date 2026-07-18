@@ -88,9 +88,6 @@ def get_tree_mask(batch_size, seq_len, k):
 2. **Tree Attention 的具体实现**：如何在 CUDA Kernel 层面高效实现 Tree Mask 以避免显存碎片？
 3. **非自回归模型的区别**：Speculative Decoding 本质上还是自回归的，只是利用了并行验证，这与完全非自回归（如 Non-Autoregressive Transformer）有何本质不同？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-basics_misc-022.svg" alt="Speculative Decoding的原理是什么?为什么能加速2-3倍 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

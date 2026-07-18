@@ -202,9 +202,6 @@ prompts = [
 
 **面试加分点**：提到vLLM从v0.5开始支持Multi-LoRA高效服务；提到SGLang的LoRA路由在多LoRA场景下比vLLM更快；提到合并后的模型可以通过重新加载LoRA权重来"反合并"（但需要保存原始LoRA文件）；提到rank较大的LoRA(r≥64)额外延迟可能达到5%以上，此时合并更有意义。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd3-010.svg" alt="为了减少LoRA带来的延迟，你会不会做权重合并？有什么利弊？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

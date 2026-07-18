@@ -95,11 +95,6 @@ try {
 3. **ZooKeeper的羊群效应**：如果不监听前一个节点，而是监听锁节点本身，所有等待的节点都会被唤醒，造成风暴。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-034.svg" alt="分布式锁有哪些实现方案？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 三大方案：Redis(AP重性能)、ZooKeeper(CP重强一致)、数据库(简单易实现)。
@@ -110,8 +105,6 @@ try {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 厕所只有一个坑位，谁拿到钥匙谁进，其他人排队。
 
 **展开框架：**
@@ -120,8 +113,6 @@ try {
 3. **DB** — DB最简单但性能瓶颈大
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

@@ -126,9 +126,6 @@ flowchart TD
     style GW fill:#ffe4b5
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-052.svg" alt="如何设计API网关？统一鉴权、限流、路由、监控。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -140,8 +137,6 @@ flowchart TD
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 像公司前台，统一接待、验证身份并引导到具体部门。
 
 **展开框架：**
@@ -150,8 +145,6 @@ flowchart TD
 3. **支持动态配置** — 支持动态配置和灰度发布
 
 **收尾：** 网关如何实现动态路由？
-
-
 
 
 ## 视频脚本

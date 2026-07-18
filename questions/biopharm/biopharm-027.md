@@ -200,7 +200,3 @@ flowchart TD
 | 1:05 | 代码示例截图 | AI 生成代码必须人工 review（不能盲信）。 | 代码审查 |
 | 2:30 | 总结卡 | 一句话记忆：统一工具 + 规则文件注入规范。 下期可以接着聊：.cursorrules/CLAUDE.md 写什么。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-027.svg" alt="【生物医药 AI】AI Coding 团队规范怎么落地（Cursor/Claude Code）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

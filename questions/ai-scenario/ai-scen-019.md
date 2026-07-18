@@ -141,9 +141,6 @@ flowchart TD
     Topic -.->|意图切换| Update
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-019.svg" alt="如何设计一个多轮对话管理系统？支持上下文继承、话题切换、信息补全追问。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

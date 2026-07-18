@@ -403,14 +403,4 @@ flowchart TD
 
 **候选人**：会挂——Debezium schema 变更时消费端用旧 schema 解析新格式失败。对策：Debezium 有 schema history topic（记录 DDL 变更），消费端启动时先加载 schema history。但保险起见，DDL 变更要走流程——先停消费端，DDL，再启消费端（消费端代码已更新支持新 schema）。监控 schema_mismatch_count（schema 不匹配的解析失败数）。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-174.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-174.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-174.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

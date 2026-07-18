@@ -111,9 +111,6 @@ flowchart TD
     P[跳表特性] --> Q[多层链表 O log N]
     P --> R[实现简单 范围查询友好]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-211.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

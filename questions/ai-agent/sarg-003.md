@@ -107,9 +107,6 @@ flowchart TB
     Choose --> Benchmark["基准: MTEB 排行榜"]
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-agent_sarg-003.svg" alt="如何选择Embedding模型？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

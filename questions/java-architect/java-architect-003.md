@@ -327,14 +327,4 @@ flowchart TD
 | 1:05 | 流程图 | SPI（JDBC）、OSGi、Tomcat WebApp 隔离。 | 打破委派的三个经典场景 |
 | 2:30 | 总结卡 | 一句话记忆：类唯一性 = ClassLoader + 全限定名，这是插件化/热部署的基石。 下期可以接着聊：为什么 JDBC 用 SPI 而不是直接 new。 | 收尾总结 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-003.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-003.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-003.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

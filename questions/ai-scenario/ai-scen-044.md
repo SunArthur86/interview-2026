@@ -150,9 +150,6 @@ def review_pr(diff_context, file_path):
 2. **长Diff处理**：当PR包含1000+行变更时，如何分块审查。
 3. **降低误报**：如何利用代码库的Git历史和开发者反馈来校准LLM的输出。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-044.svg" alt="如何设计一个AI代码审查系统？自动检测PR中的Bug、安全漏洞和性能问题。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

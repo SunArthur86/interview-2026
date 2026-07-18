@@ -224,7 +224,3 @@ Kafka 事务和本地消息表解决不同问题：
 | 1:56 | 流程图：输入→处理→输出 | 要点是：消费端：手动提交 offset（enable.auto.commit=false）+ 幂等消费 | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-008.svg" alt="【拼多多供应链】Kafka 怎么保证消息不丢不重？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

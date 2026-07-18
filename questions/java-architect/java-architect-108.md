@@ -361,14 +361,4 @@ jstat -gcutil <pid> 1000                 # 看 GC 频率和耗时（仅参考，
 | 1:05 | P99 GC pause示意/对比图 | "P99 GC pause < 1ms（堆 16GB 内）、< 10ms（堆 16TB 内）" | P99 GC pause要点 |
 | 1:55 | 总结卡 | "记住：Generational Z。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-108.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-108.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-108.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

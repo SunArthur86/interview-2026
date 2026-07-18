@@ -103,11 +103,6 @@ echo "2" > /proc/sys/net/ipv4/conf/all/arp_announce
 ```
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-020.svg" alt="LVS负载均衡的原理和工作模式有哪些？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 核心定位：LVS 是基于 Linux 内核 IPVS 模块的四层负载均衡技术。

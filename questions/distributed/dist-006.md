@@ -97,11 +97,6 @@ public void processProposal(Proposal p) {
 3.  **Raft 和 ZAB 在处理日志不一致时的策略有何不同？**（答：Raft 是 Leader 强制覆盖 Follower 的冲突日志；ZAB 是 Leader 根据差异发送 DIFF 或 SNAP，Follower 主动同步。）
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-006.svg" alt="Raft协议和ZAB协议有什么区别？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 共同基础：两者皆依赖 Quorum（过半机制）、Leader 驱动及心跳检测
@@ -112,8 +107,6 @@ public void processProposal(Proposal p) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 都是投票选班长（Leader），Raft规则简单通用，ZAB针对特定学校（ZK）优化。
 
 **展开框架：**
@@ -122,8 +115,6 @@ public void processProposal(Proposal p) {
 3. **ZAB** — ZAB核心是原子广播和崩溃恢复。
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

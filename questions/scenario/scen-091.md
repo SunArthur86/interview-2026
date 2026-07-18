@@ -111,9 +111,6 @@ memory_points:
 4. **消费端处理成功但 ACK 失败（如网络断开）会导致重复消费吗？**
    - 会。下次重连时会从上次确认的 offset 重新拉取，必须设计幂等性。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-091.svg" alt="如何设计一个消息的可靠投递方案？从生产到消费的端到端保证。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

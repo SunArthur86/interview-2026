@@ -150,9 +150,6 @@ flowchart TD
     end
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-fl-002.svg" alt="【字节飞连面经】怎么设计 Tool Calling？Schema 怎么定义？防危险工具？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -210,7 +207,6 @@ flowchart TD
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 就像餐厅点单——客人（LLM）按菜单（Schema）写"宫保鸡丁、不要花生"（结构化意图），服务员（服务端）核对菜单（Pydantic 校验），有毒食材（危险工具）不上菜单，必须经理（二次确认）签字才下单。
 
 **展开框架：**
@@ -219,8 +215,6 @@ flowchart TD
 3. **LLM** — 危险工具（deleterive）绝不进 LLM 可见 tool list，走服务端二次确认
 
 **收尾：** MCP（Model Context Protocol）对工具调用标准化带来什么改变？
-
-
 
 
 ## 视频脚本

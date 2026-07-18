@@ -147,9 +147,6 @@ public void sendPendingMessages() {
 }
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-056.svg" alt="如何设计微服务的数据一致性方案？CQRS和事件驱动架构。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -161,8 +158,6 @@ public void sendPendingMessages() {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 记账员写账本，统计员实时读账本做报表，各干各的。
 
 **展开框架：**
@@ -171,8 +166,6 @@ public void sendPendingMessages() {
 3. **事件总线同步** — 事件总线同步数据变更
 
 **收尾：** CQRS的数据同步延迟如何处理？
-
-
 
 
 ## 视频脚本

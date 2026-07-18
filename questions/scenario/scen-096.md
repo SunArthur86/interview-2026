@@ -122,9 +122,6 @@ flowchart TD
     style FAST fill:#d4edda
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-096.svg" alt="如何设计一个通用的分页方案？深度分页问题如何解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

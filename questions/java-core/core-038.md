@@ -107,9 +107,6 @@ flowchart LR
     GET -.本质都是 TCP.-> POST
     Note["本质: 都是 TCP 请求<br/>差异由语义/约定/浏览器实现"]
 ```
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-038.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

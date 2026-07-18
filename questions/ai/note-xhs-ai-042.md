@@ -238,7 +238,6 @@ class TaskTransaction:
 ## 结构化回答
 
 
-
 **30 秒电梯演讲：** 做一顿年夜饭：红烧肉要炖2小时（先开始），蔬菜5分钟搞定（晚点做），汤要趁热喝（最后做）。你需要根据依赖关系和耗时排出最优顺序——Agent也一样，要分析哪些任务有先后依赖，哪些可以同时做
 
 **展开框架：**
@@ -247,8 +246,6 @@ class TaskTransaction:
 3. **DAG拓扑排序** — 找出可并行的子任务
 
 **收尾：** 子任务拆分错误怎么修正？
-
-
 
 
 ## 视频脚本
@@ -283,6 +280,3 @@ class TaskTransaction:
 **面试官**：LLM分解可靠吗？
 **候选人**：不一定，复杂任务可能分解出错或依赖识别不准，需要校验DAG无环、必要时人工确认或分步分解，配合失败回滚。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-042.svg" alt="【AI Agent工程】复合需求怎么判断任务执行先后顺序？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

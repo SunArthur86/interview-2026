@@ -393,14 +393,4 @@ flowchart TD
 
 **候选人**：审计日志入库前做 PII 脱敏——手机号/身份证/银行卡正则替换。但保留 LLM 输出的"决策结构"（intent + parameters 的 JSON）不脱敏，只脱敏自由文本字段。审计日志加密存储，访问走权限审批，保留期 90 天（合规要求）。这是"可追溯"和"隐私保护"的平衡。
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-163.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-163.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-163.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -358,9 +358,6 @@ DB 兜底做持久（最终一致+定时对账）
 
 > **面试核心一句话**：秒杀系统的本质是**层层削峰**——前端限流 → 网关限流 → Redis 原子扣减 → MQ 异步削峰 → DB 最终持久化，让到达数据库的写入量始终在其承受范围内，同时用 Lua 脚本保证扣减原子性、MQ 幂等消费保证不重复下单。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-sd-001.svg" alt="设计一个秒杀系统，核心要点是什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

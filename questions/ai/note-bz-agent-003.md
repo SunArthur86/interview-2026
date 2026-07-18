@@ -172,9 +172,6 @@ def execute_with_recovery(action):
 2. **强调"循环"是本质**：单次 LLM 调用不是 Agent，必须有反馈循环
 3. **提"目标驱动"**：Agent 与聊天机器人的根本区别是目标导向（goal-directed），而非话轮导向
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-003.svg" alt="AI Agent 的工作原理是什么？三大核心能力分别指什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

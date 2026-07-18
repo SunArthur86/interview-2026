@@ -105,9 +105,6 @@ def orchestrator_loop(task, max_steps=10):
 1. **过度依赖Agent自主性**：试图让LLM完全自主决定所有流程，导致输出不可控。实际上核心流程应由代码/DAG强约束，LLM仅负责处理具体逻辑。
 2. **忽视“人机协同”**：设计完全全自动的闭环，忽略了在关键决策点（如资金划转、发布报告）必须加入人工确认环节，否则风险极大。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-009.svg" alt="如何设计一个多Agent协作系统？例如多个AI Agent协同完成一个复杂的数据分析报告。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

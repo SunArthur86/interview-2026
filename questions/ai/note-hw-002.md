@@ -309,9 +309,6 @@ SELECT * FROM final WHERE rn = 1;
 - **Hive的SkewJoin优化**：`set hive.optimize.skewjoin=true`，自动把倾斜key单独走MapJoin
 - **大模型数据去重工具**：datasketch（MinHash LSH）、Deduplicating Massive Datasets（CCNet的精确去重）
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-hw-002.svg" alt="【华为面经】SQL 窗口函数与数据倾斜问题如何处理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

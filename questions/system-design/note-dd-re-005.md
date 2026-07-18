@@ -750,9 +750,6 @@ public void rollback(String ruleSetId, String targetVersion) {
 | 版本管理 | 语义化版本 + DB 持久化 | 全量历史可追溯、一键回滚 |
 | 灰度发布 | 多维度灰度路由 | 降低规则变更风险 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-dd-re-005.svg" alt="【滴滴面经】如果规则引擎要做成动态可配置的，你觉得应该怎么设计？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

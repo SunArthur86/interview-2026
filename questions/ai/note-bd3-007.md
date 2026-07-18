@@ -171,9 +171,6 @@ flowchart TD
 
 **面试加分点**：提到ZeRO论文(Rajbhandari et al., 2020)证明ZeRO-3在64卡上训练170B模型时通信开销仅增加约30%；提到ZeRO-Offload将优化器状态卸载到CPU内存；提到FSDP（PyTorch原生）本质是ZeRO-3的实现；提到在实际工程中，ZeRO-2是使用频率最高的配置（性能与显存的最佳平衡）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd3-007.svg" alt="DeepSpeed ZeRO-1、ZeRO-2和ZeRO-3分别做了哪些优化？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

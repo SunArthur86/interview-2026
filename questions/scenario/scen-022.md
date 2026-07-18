@@ -110,9 +110,6 @@ public void updateData(Data data) {
 - 延迟双删 + Canal binlog监听 = 双保险
 - 关键数据（余额）不用缓存或用强一致方案
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_scenario_scen-022.svg" alt="如何保证缓存与数据库的数据一致性？最终一致和强一致分别怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

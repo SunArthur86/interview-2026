@@ -221,9 +221,6 @@ exportLogger.info({ traceId, msg: '开始导出', path: exportPath });
 - **整单重试**：索引已经完成了，失败在推理，却要重新索引
 - **没有traceId**：出问题后无法关联本地日志和云端日志进行排查
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mk-010.svg" alt="【月之暗面面经】本地索引、云端推理和产物导出是三段链路，前端怎样串起来？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

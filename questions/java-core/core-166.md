@@ -129,9 +129,6 @@ while (it.hasNext()) {
 | **线程安全** | 不安全 | 不安全 |
 | **实战场景** | **绝大多数场景**，如查询列表、数据传输 | 很少使用，除非频繁在头尾操作（如队列/栈） |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-166.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

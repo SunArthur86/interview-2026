@@ -91,9 +91,6 @@ executor.submit(() -> {
 3. **异步线程要手动传递上下文**：MDC 在异步场景下 TraceId 会丢失，需用 TaskDecorator 或手动包装 Runnable 传递。
 4. **避免存大对象**：每个线程一份副本，大对象会导致内存膨胀，尤其是线程数多的场景。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-060.svg" alt="java 并发 中的 ThreadLocal是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

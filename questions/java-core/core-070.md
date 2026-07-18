@@ -112,9 +112,6 @@ new Thread(() -> {
 | **性能特点** | 存取性能一般，内存占用小 | 高并发下吞吐量较高，但节点对象多内存开销大 | 极高吞吐量（直接传递） |
 | **适用场景** | 内存敏感、需要严格限流的场景 | 高并发吞吐、任务量不可预估的场景 | 异步任务快速交接（如 CachedThreadPool） |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-070.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

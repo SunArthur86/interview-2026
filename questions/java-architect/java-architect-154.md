@@ -389,14 +389,4 @@ CDC 单向流，回流走 Kafka，T+1 对账保一致。
 | 0:40 | 三大格式对比示意/对比图 | "三大格式对比 —— Iceberg/Hudi/Delta 各有强项" | 三大格式对比要点 |
 | 1:25 | 总结卡 | "记住：湖仓一体定义。下期见。" | 收尾 |
 
-## 核心知识点图
 
-<img src="/interview-2026/images/diagram_java-architect_java-architect-154.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-154.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-architect_java-architect-154.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

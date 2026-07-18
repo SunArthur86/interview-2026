@@ -275,9 +275,6 @@ class ComplianceLayer:
 2. **多层防幻觉**：RAG+结构化+交叉验证+安全审核+人工兜底，体现对医疗严肃性的理解
 3. **会诊隐喻**：多 Agent = 多学科会诊，这个类比既贴切又能解释架构合理性
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-021.svg" alt="医疗辅助诊断多智能体怎么落地？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

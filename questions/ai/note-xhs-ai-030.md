@@ -213,6 +213,3 @@ Layer 40 (深层): ███                  保留 10%
 **面试官**：怎么评估质量损失？
 **候选人**：用LongBench/RULER长文档benchmark、needle-in-haystack测试、业务badcase分析，对比全注意力基线判断可接受度。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-030.svg" alt="【AI Infra推理优化】稀疏注意力方案怎么选？StreamingLLM vs H2O vs PyramidKV - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

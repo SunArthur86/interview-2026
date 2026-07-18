@@ -245,7 +245,3 @@ flowchart TD
 | 1:05 | 概念结构示意图 | 单机→集群→全链路，找瓶颈、定容量、验证降级。 | 压测 |
 | 2:30 | 总结卡 | 一句话记忆：负载均衡：均匀分流 + 健康检查。 下期可以接着聊：一致性哈希解决什么。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_boss-ai_boss-ai-018.svg" alt="【巨剧核 AI 陪伴】负载均衡、隔离、压测怎么做？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

@@ -164,9 +164,6 @@ flowchart LR
     P --> AC
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-jc-001.svg" alt="【阶跃星辰面经】说说你对 GAE 的理解 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

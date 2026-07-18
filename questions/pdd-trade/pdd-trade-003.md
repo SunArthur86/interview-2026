@@ -192,7 +192,3 @@ memory_points:
 | 2:09 | 代码片段 + 注释高亮 | 要点是：流量切换：DNS/SLB 秒级切流 | 实战要点 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-trade_pdd-trade-003.svg" alt="【拼多多交易】多活容灾怎么设计？核心交易怎么保证不挂？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

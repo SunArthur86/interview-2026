@@ -103,9 +103,6 @@ def search_pipeline(query, user_profile):
 - **向量索引优化**：使用 HNSW 算法平衡召回率与延迟。
 - **LLM 延迟优化**：重排环节仅对精排后的 Top-N（如 20 个）进行 LLM 打分，而非全量。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-042.svg" alt="如何设计一个AI驱动的产品搜索与排序系统？结合语义搜索、个性化排序和LLM增强。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

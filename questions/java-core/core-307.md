@@ -118,9 +118,6 @@ class MessageServer implements Subject {
 2. **线程安全**：当多个线程同时注册和通知时，需要使用 `CopyOnWriteArrayList` 或 `synchronized` 块来保证 `observers` 集合的线程安全。
 3. **执行顺序**：如果观察者的执行顺序有依赖（如 A 必须在 B 之前执行），简单的 List 顺序遍历是可控的，但在异步场景（如 Reactor/MQ）中顺序无法保证，设计时需避免观察者间的逻辑依赖。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_java-core_core-307.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

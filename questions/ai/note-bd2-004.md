@@ -226,9 +226,6 @@ class AgentMemory:
 4. **性能**: 长期记忆检索延迟应 < 100ms，用缓存优化
 5. **可观测性**: 记忆读写日志可追踪，便于调试
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bd2-004.svg" alt="Agent的Memory如何进行管理？存在哪些地方？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

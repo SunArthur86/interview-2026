@@ -293,7 +293,3 @@ flowchart TD
 | 1:56 | 流程图：输入→处理→输出 | 要点是：分词器：中文用 IK（pdd_keyword / pdd_smart） | 关键机制 |
 | 3:00 | 总结卡 + 下期预告 | 记住核心要点就够了。下期见。 | 收尾 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_pdd-scm_pdd-scm-010.svg" alt="【拼多多供应链】ES 怎么做商品搜索？倒排索引原理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

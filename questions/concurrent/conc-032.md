@@ -87,9 +87,6 @@ memory_points:
 3. 单核 CPU 系统中，能否有多个进程处于运行状态？
 4. 引入进程是为了解决什么问题？它与线程的主要区别在调度层面的体现？
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-032.svg" alt="什么是进程的状态有哪些？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -101,8 +98,6 @@ memory_points:
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 作业状态：写好了（就绪）、正在写（运行）、等老师签字（阻塞）、写完了（终止）。
 
 **展开框架：**
@@ -111,8 +106,6 @@ memory_points:
 3. **运行到阻塞由** — 运行到阻塞由资源请求触发
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本

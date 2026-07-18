@@ -80,11 +80,6 @@ memory_points:
 4. **服务熔断和服务降级的区别**：熔断是自我保护（断开后停止调用），降级是兜底方案（服务不可用时返回默认值）。
 
 
-
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_distributed_dist-052.svg" alt="Sentinel 和 Hystrix 的区别？熔断降级的核心策略是什么？" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-
 ## 记忆要点
 
 - 隔离对比：Hystrix靠线程池隔离开销大，Sentinel靠滑动窗口轻量

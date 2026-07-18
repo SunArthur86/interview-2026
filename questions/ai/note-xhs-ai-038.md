@@ -212,6 +212,3 @@ result = model.encode(
 **面试官**：中文场景要注意什么？
 **候选人**：选中文优化模型（bge-zh、m3e）、注意max_seq_len覆盖业务文本长度、分词器对中文支持，配合业务评测集验证。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-xhs-ai-038.svg" alt="【RAG基础】Embedding模型怎么选？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -140,9 +140,6 @@ flowchart TD
     CTX -->|SSE持续推送| Client
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai-scenario_ai-scen-016.svg" alt="如何设计一个类似ChatGPT的对话系统？支持流式输出、多轮对话、插件调用。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

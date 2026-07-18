@@ -316,9 +316,6 @@ asyncio.run(main())
 
 > **一句话总结**：混合架构 = 任务级master+sub保证控制力 + 信息级P2P保证效率。既不是纯workflow的死板，也不是纯master-slave的瓶颈，而是根据通信层级选择最合适的拓扑。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-mt-agent-002.svg" alt="【美团面经】你的Agent项目用的是什么架构？master加sub Agent还是workflow？为什么这么选型？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -373,8 +370,6 @@ P2P 直连确实比"全部经过 Master 中转"延迟低，但单点故障会扩
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 就像项目组——PM负责任务拆解，前端后端QA各负责专项，但前后端可以直接沟通不用事事绕回PM。
 
 **展开框架：**
@@ -383,9 +378,6 @@ P2P 直连确实比"全部经过 Master 中转"延迟低，但单点故障会扩
 3. **非纯mast** — 非纯master-slave
 
 **收尾：** 子Agent之间直接通信的协议是什么？
-
-
-
 
 
 ## 视频脚本

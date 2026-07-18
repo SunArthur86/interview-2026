@@ -201,9 +201,6 @@ def find_optimal_params(test_cases, param_grid):
 2. **Top-P 优于 Top-K**：核采样更智能自适应——体现前沿认知
 3. **A/B 测试**：参数调优不能拍脑袋，要数据驱动
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-bz-agent-074.svg" alt="生成参数 Temperature、Top-P、Top-K 在业务中如何调优？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

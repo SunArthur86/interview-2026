@@ -196,9 +196,6 @@ DPO偏好对: 1K-10K对好/坏调用对比
   - 冗余调用率: 不必要的重复调用比例
 ```
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_ai_note-tx4-001.svg" alt="大模型工具调用(Function Calling)能力是如何训练出来的？SFT和DPO分别解决什么问题？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

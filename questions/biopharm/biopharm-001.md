@@ -157,7 +157,3 @@ def reliable_agent_answer(query, max_retry=3):
 | 1:50 | 概念结构示意图 | 可靠性靠'生成-校验-重试'闭环，而非盲目信任模型输出。 | 可靠性靠'生成-校验-重试'闭环 |
 | 3:30 | 总结卡 | 一句话记忆：Agent = Plan + Tool + Memory + Verify + Orchestrate。 下期可以接着聊：Agent 用什么编排框架。 | 收尾总结 |
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_biopharm_biopharm-001.svg" alt="【生物医药 AI】企业级 AI Agent 架构怎么做到高性能/高可用/高可靠？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
-

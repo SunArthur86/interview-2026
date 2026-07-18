@@ -516,9 +516,6 @@ LLM推理:
 
 架构上采用 **Gateway → 意图路由 → RAG流水线 → LLM推理 → 质量监控** 的分层设计，每一层水平可扩展，通过Kafka解耦同步与异步链路，既保证<3s的响应延迟，又实现了全面的质量可观测。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_system-design_note-bd-llm-018.svg" alt="【字节面经】设计一个企业内部的智能客服系统，支持多产品线知识库隔离、多租户权限控制，以及回答质量可观测性监控，请描述整体架构。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 

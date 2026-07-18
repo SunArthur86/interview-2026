@@ -110,9 +110,6 @@ public void setData(Object newData) {
 2. **读写锁的“写饥饿”**：如果读操作非常频繁，写锁可能一直获取不到，如何解决（使用“公平锁”策略）？
 3. **锁状态存储**：一个 int 变量如何同时保存读锁和写锁的重入次数？（高 16 位写，低 16 位读）。
 
-## 核心知识点图
-
-<img src="/interview-2026/images/diagram_concurrent_conc-117.svg" alt="共享锁和独占锁的区别是什么？ 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
 
 ## 记忆要点
 
@@ -124,8 +121,6 @@ public void setData(Object newData) {
 ## 结构化回答
 
 
-
-
 **30 秒电梯演讲：** 单人占座（独占）vs 多人共读（共享）。
 
 **展开框架：**
@@ -134,8 +129,6 @@ public void setData(Object newData) {
 3. **读写锁中读读共享** — 读写锁中读读共享，读写互斥
 
 **收尾：** 这是我实战中的理解，您想深入哪一段？
-
-
 
 
 ## 视频脚本
