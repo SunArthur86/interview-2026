@@ -31,6 +31,7 @@ memory_points:
 - FunctionCall：厂商原生的单次函数调用，灵活性最高但绑定特定格式无状态
 - MCP：基于JSON-RPC的开放标准协议，实现跨平台工具发现与生态接入
 - Skills：封装多Tool加Prompt加流程逻辑，抽象层级最高直接复用完整业务
+frequency: high
 ---
 
 # 【美团面经】Function Call到MCP到Skills的区别与优缺点？
@@ -343,6 +344,7 @@ flowchart TD
     style FC fill:#FF9800,color:#fff
     style SKILL fill:#9C27B0,color:#fff
     style MCP fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

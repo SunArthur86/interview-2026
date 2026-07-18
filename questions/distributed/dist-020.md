@@ -17,6 +17,7 @@ memory_points:
 - NAT 模式：双向修改目标与源 IP，流量必过调度器致其易成性能瓶颈。
 - TUN 模式：通过 IP 隧道封装转发，支持跨网段部署且响应直达客户端。
 - Full-NAT：双向修改源与目的 IP，解决跨 VLAN 部署但调度器双向承压。
+frequency: medium
 ---
 
 # LVS负载均衡的原理和工作模式有哪些？
@@ -142,6 +143,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

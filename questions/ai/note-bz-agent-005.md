@@ -31,6 +31,7 @@ memory_points:
 - 六大必备组件：编排引擎、记忆模块、工具层、知识库、安全层、可观测监控
 - 记忆工程：需用户隔离、重排序（Rerank）、以及基于TTL的遗忘机制
 - 企业级工具规范：必须包含参数Schema、权限矩阵、限流和降级策略
+frequency: medium
 ---
 
 # 企业级 Agent 如何搭建？必备组件有哪些？
@@ -229,6 +230,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

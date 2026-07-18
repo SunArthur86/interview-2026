@@ -11,7 +11,7 @@ tags:
 - 数据存储
 feynman:
   essence: 笔记类型数据有关联关系、需要复杂查询和事务保证，所以主存储用MySQL。Redis只做缓存和计数。当需要范围查询、多表JOIN、事务一致性时必须用MySQL。
-  analogy: "MySQL像图书馆（有分类目录、能按条件搜书、借还书有记录），Redis像你桌上的书架（放常看的书拿取快但容量有限、不适合做正式档案）。需要查「某月所有视频笔记按点赞排序」这种复杂操作，只能去图书馆。"
+  analogy: MySQL像图书馆（有分类目录、能按条件搜书、借还书有记录），Redis像你桌上的书架（放常看的书拿取快但容量有限、不适合做正式档案）。需要查「某月所有视频笔记按点赞排序」这种复杂操作，只能去图书馆。
   key_points:
   - 关联数据+复杂查询→MySQL主存储
   - Redis做缓存/计数/排行榜，不做主存储
@@ -19,18 +19,19 @@ feynman:
   - 正确架构：MySQL主存+Redis缓存，保证最终一致性
   - Redis内存成本是磁盘的100倍以上
 first_principle:
-  problem: "不同数据存储引擎有根本性的能力差异。如何根据数据特征（关联性、查询复杂度、一致性要求、读写比例）选择正确的存储方案？"
+  problem: 不同数据存储引擎有根本性的能力差异。如何根据数据特征（关联性、查询复杂度、一致性要求、读写比例）选择正确的存储方案？
   axioms:
   - 关系数据库的核心价值是关系（关联查询）+ ACID（事务一致性）
   - 内存数据库的核心价值是速度（O(1)读写）但牺牲了复杂查询能力
   - CAP理论：分布式环境下一致性(C)和可用性(A)不可兼得
   - 缓存模式是空间换时间：用内存存储热数据加速访问
-  rebuild: "从数据存储需求出发：数据有关联关系和复杂查询→必须用MySQL；有高速读写需求→加Redis缓存层；有事务要求→MySQL事务保证。两者不是替代关系而是互补关系，通过Cache-Aside模式协作"
+  rebuild: 从数据存储需求出发：数据有关联关系和复杂查询→必须用MySQL；有高速读写需求→加Redis缓存层；有事务要求→MySQL事务保证。两者不是替代关系而是互补关系，通过Cache-Aside模式协作
 follow_up:
 - 如何保证 MySQL 和 Redis 的数据一致性？
 - 缓存击穿、缓存穿透、缓存雪崩怎么解决？
 - MySQL 的复合索引和 Redis 的 ZSet 各自适合什么查询？
 - 什么场景下 Redis 也可以做主存储？（如纯计数场景）
+frequency: high
 ---
 
 # 场景题：笔记类型数据（直播/图文/视频，有类型关联关系）应该用 MySQL 还是 Redis 存？什么场景必须用 MySQL？（小红书Java一面）
@@ -236,6 +237,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 结构化回答
 

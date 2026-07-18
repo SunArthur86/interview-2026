@@ -10,9 +10,12 @@ tags:
 - 长连接
 - 心跳
 feynman:
-  essence: WebSocket 网关的核心是"Netty 长连接管理 + 心跳保活 + 连接限流"。百万长连接靠 Netty 的 NIO（单机 10 万+ 连接）。心跳检测（idle handler）剔除死连接。连接限流（IP/用户级）防恶意连接耗尽资源。
-  analogy: 像电话总机——每个通话是一条长连接（Netty channel），总机（网关）管理所有通话。客服定期问"还在吗"（心跳），没回应就挂断（idle 剔除）。防止有人恶意占线（限流）。
-  first_principle: 长连接的难点是"连接保活"和"资源治理"。TCP 连接可能假死（对端宕机但 FIN 没发），靠心跳检测剔除。恶意客户端疯狂建连耗尽 FD，靠限流防护。百万连接靠 Netty NIO（epoll 多路复用，单线程管万连接）。
+  essence: WebSocket 网关的核心是"Netty 长连接管理 + 心跳保活 + 连接限流"。百万长连接靠 Netty 的 NIO（单机 10 万+
+    连接）。心跳检测（idle handler）剔除死连接。连接限流（IP/用户级）防恶意连接耗尽资源。
+  analogy: 像电话总机——每个通话是一条长连接（Netty channel），总机（网关）管理所有通话。客服定期问"还在吗"（心跳），没回应就挂断（idle
+    剔除）。防止有人恶意占线（限流）。
+  first_principle: 长连接的难点是"连接保活"和"资源治理"。TCP 连接可能假死（对端宕机但 FIN 没发），靠心跳检测剔除。恶意客户端疯狂建连耗尽
+    FD，靠限流防护。百万连接靠 Netty NIO（epoll 多路复用，单线程管万连接）。
   key_points:
   - 长连接管理：Netty NioServerSocketChannel + ChannelGroup
   - 心跳保活：IdleStateHandler（读空闲 90s 触发心跳，3 次失败断开）
@@ -26,19 +29,23 @@ first_principle:
   - 恶意客户端可疯狂建连耗尽 FD（每连接占一个 FD）
   - 单机连接数有上限（内存/FD 限制），必须水平扩展
   - 网关扩缩容时已有连接要平滑迁移
-  rebuild: Netty NIO（epoll 多路复用，单机 10 万+ 连接）。IdleStateHandler 检测空闲——90 秒无读触发心跳探测，3 次失败断开。令牌桶限流（单 IP 100 连接，单用户 5 连接）。Channel.isWritable() 背压检查写缓冲水位。网关水平扩展，用户连任意节点，路由表（Redis）记录 userId → 节点。
+  rebuild: Netty NIO（epoll 多路复用，单机 10 万+ 连接）。IdleStateHandler 检测空闲——90 秒无读触发心跳探测，3
+    次失败断开。令牌桶限流（单 IP 100 连接，单用户 5 连接）。Channel.isWritable() 背压检查写缓冲水位。网关水平扩展，用户连任意节点，路由表（Redis）记录
+    userId → 节点。
 follow_up:
-  - 单机支撑多少连接？——约 10-50 万（取决于内存和 FD）。每连接约 4KB（ByteBuf），10 万连接 ≈ 400MB。调优：调大 FD 上限（ulimit -n 1000000）、堆外内存、ByteBuf 池化。
-  - 心跳间隔多久？——90 秒读空闲触发探测，客户端 30 秒发一次心跳。3 次探测失败（270 秒）断开。太短浪费带宽，太长不能及时剔除死连接。
-  - 怎么防恶意连接？——IP 级限流（单 IP 最多 100 连接）+ 用户级（单用户最多 5 连接）+ 建连频率限流（单 IP 每秒最多 10 次建连）。
-  - 网关扩容怎么办？——新节点加入，DNS/LB 分流新连接到新节点。老连接不断（直到客户端主动断或心跳失败）。路由表记录 userId → 节点，发送时查路由。
-  - 消息怎么路由到用户所在节点？——发送方查路由表（userId → nodeId），发 MQ 到目标节点，目标节点推给本地 session。
+- 单机支撑多少连接？——约 10-50 万（取决于内存和 FD）。每连接约 4KB（ByteBuf），10 万连接 ≈ 400MB。调优：调大 FD 上限（ulimit
+  -n 1000000）、堆外内存、ByteBuf 池化。
+- 心跳间隔多久？——90 秒读空闲触发探测，客户端 30 秒发一次心跳。3 次探测失败（270 秒）断开。太短浪费带宽，太长不能及时剔除死连接。
+- 怎么防恶意连接？——IP 级限流（单 IP 最多 100 连接）+ 用户级（单用户最多 5 连接）+ 建连频率限流（单 IP 每秒最多 10 次建连）。
+- 网关扩容怎么办？——新节点加入，DNS/LB 分流新连接到新节点。老连接不断（直到客户端主动断或心跳失败）。路由表记录 userId → 节点，发送时查路由。
+- 消息怎么路由到用户所在节点？——发送方查路由表（userId → nodeId），发 MQ 到目标节点，目标节点推给本地 session。
 memory_points:
-  - 长连接：Netty NioServerSocketChannel，单机 10-50 万连接
-  - 心跳：IdleStateHandler，90s 读空闲探测，3 次失败断开
-  - 限流：IP 级（100 连接）+ 用户级（5 连接）+ 建连频率（10/秒）
-  - 背压：Channel.isWritable()，写缓冲高水位防 OOM
-  - 路由：userId → 节点（Redis 路由表），跨节点走 MQ
+- 长连接：Netty NioServerSocketChannel，单机 10-50 万连接
+- 心跳：IdleStateHandler，90s 读空闲探测，3 次失败断开
+- 限流：IP 级（100 连接）+ 用户级（5 连接）+ 建连频率（10/秒）
+- 背压：Channel.isWritable()，写缓冲高水位防 OOM
+- 路由：userId → 节点（Redis 路由表），跨节点走 MQ
+frequency: high
 ---
 
 # 【Java 后端架构师】WebSocket 网关与长连接治理
@@ -386,6 +393,35 @@ public void onRouteMessage(String data) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B1 process
+    class BossGroup decision
+    class C1 special
+    class C2 error
+    class D1 info
+    class E1 start
+    class F1 process
+    class G1 decision
+    class G2 special
+    class H1 error
+    class I1 info
+    class J1 start
+    class J2 process
+    class K1 decision
+    class K2 special
+    class Netty error
+    class Redis info
+    class WorkerGroup start
+    class br process
+    class false decision
+    class isWritable special
+    class userId error
     A1["百万客户端"] -- "TCP握手" --> B1["Netty BossGroup<br/>接收连接"]
     B1 --> C1{"连接限流校验"}
     C1 -- "IP级(100) / 用户级(5)" --> D1["Netty WorkerGroup<br/>epoll多路复用"]

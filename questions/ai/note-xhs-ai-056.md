@@ -29,16 +29,17 @@ first_principle:
   - 用户更在意"有文案"而非"等5秒拿完美文案"
   rebuild: 将LLM调用从同步阻塞改为流式异步 → 短文案先用模板/缓存秒级返回 → LLM在后台生成补充流式推送 → 超时降级到静态文案。三层保障确保用户始终在1秒内看到内容。
 follow_up:
-  - 流式返回用SSE还是WebSocket？各自优缺点？
-  - 缓存的key怎么设计？相似商品怎么命中同一个缓存？
-  - 降级文案太千篇一律用户会反感，怎么优化？
-  - 大促期间LLM API也可能超时，怎么保证可用性？
-  - 文案质量怎么评估？A/B测试怎么做？
+- 流式返回用SSE还是WebSocket？各自优缺点？
+- 缓存的key怎么设计？相似商品怎么命中同一个缓存？
+- 降级文案太千篇一律用户会反感，怎么优化？
+- 大促期间LLM API也可能超时，怎么保证可用性？
+- 文案质量怎么评估？A/B测试怎么做？
 memory_points:
-  - 三层保障：缓存秒级返回 → 流式LLM补充 → 超时模板兜底
-  - 流式返回：SSE（Server-Sent Events）实现，首token延迟<200ms
-  - 缓存key：商品品类+价格区间+目标人群特征 → 哈希
-  - 降级策略：300ms→动态模板, 500ms→静态文案, 1s→隐藏AI入口
+- 三层保障：缓存秒级返回 → 流式LLM补充 → 超时模板兜底
+- 流式返回：SSE（Server-Sent Events）实现，首token延迟<200ms
+- 缓存key：商品品类+价格区间+目标人群特征 → 哈希
+- 降级策略：300ms→动态模板, 500ms→静态文案, 1s→隐藏AI入口
+frequency: high
 ---
 
 # 【拼多多一面】商品详情页接入"智能推荐文案"AI接口，如何设计调用链路保证延迟可控？
@@ -326,6 +327,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 结构化回答

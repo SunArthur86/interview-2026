@@ -16,6 +16,7 @@ memory_points:
 - 临界资源唯一，临界区是代码段，二者是“资源”与“访问路径”的关系
 - 互斥靠锁，同步靠信号量PV操作，管程则将锁与变量自动封装
 - 防虚假唤醒必考点：条件判断必须用while而非if，否则会越权执行
+frequency: low
 ---
 
 # 解释一下进程同步和互斥，以及解决这些问题的方法？
@@ -142,6 +143,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

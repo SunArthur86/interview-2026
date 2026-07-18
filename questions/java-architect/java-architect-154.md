@@ -4,8 +4,17 @@ difficulty: L2
 category: java-architect
 subcategory: 中台架构
 title: 湖仓一体与 Java 在线业务的数据边界
-tags: [湖仓一体, 数据湖, Iceberg, Hudi, 数据边界]
-related: [java-architect-153, java-architect-155, java-architect-141]
+tags:
+- 湖仓一体
+- 数据湖
+- Iceberg
+- Hudi
+- 数据边界
+related:
+- java-architect-153
+- java-architect-155
+- java-architect-141
+frequency: low
 ---
 
 # 湖仓一体与 Java 在线业务的数据边界
@@ -415,6 +424,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

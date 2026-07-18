@@ -9,8 +9,11 @@ tags:
 - 事件传播
 - Netty
 feynman:
-  essence: ChannelHandlerContext 是"ChannelHandler 与 ChannelPipeline 之间的桥梁"，它代表了 Handler 在 Pipeline 中的位置。通过 Channel 或 ChannelPipeline 触发的事件会从整个链头/尾传播；而通过 ChannelHandlerContext 触发的事件，只会从"当前 Handler 的下一个 Handler"开始传播——这让你能精准控制事件的传播范围。
-  analogy: ChannelHandlerContext 像是流水线上某个工位的"传菜按钮"。如果你从车间广播喊话（用 Channel/Pipeline），所有人（整条链）都会听到；如果你只按自己工位的传菜按钮（用 ChannelHandlerContext），菜只会传给下一个工位，不会惊动整条线。
+  essence: ChannelHandlerContext 是"ChannelHandler 与 ChannelPipeline 之间的桥梁"，它代表了 Handler
+    在 Pipeline 中的位置。通过 Channel 或 ChannelPipeline 触发的事件会从整个链头/尾传播；而通过 ChannelHandlerContext
+    触发的事件，只会从"当前 Handler 的下一个 Handler"开始传播——这让你能精准控制事件的传播范围。
+  analogy: ChannelHandlerContext 像是流水线上某个工位的"传菜按钮"。如果你从车间广播喊话（用 Channel/Pipeline），所有人（整条链）都会听到；如果你只按自己工位的传菜按钮（用
+    ChannelHandlerContext），菜只会传给下一个工位，不会惊动整条线。
   key_points:
   - ChannelHandlerContext=Handler与Pipeline之间的关联
   - Channel/Pipeline方法:事件沿整个Pipeline传播
@@ -24,14 +27,15 @@ first_principle:
   - Handler需要知道自己在这个链条中的位置才能决定传给谁
   rebuild: 从"控制事件流向"出发→设计ChannelHandlerContext表示Handler在Pipeline中的位置(持有前后引用)→提供两种传播方式:①从Channel/Pipeline出发=全链传播②从Context出发=从下一个Handler开始→Handler通过Context的fireChannelRead/write等方法把事件交给后继→实现精准的事件流控制。
 follow_up:
-  - 如何实现一个 Handler 只处理一次然后移除自己？
-  - ctx.write() 和 channel.write() 的区别？传播方向有何不同？
-  - ChannelHandlerContext 的生命周期？
+- 如何实现一个 Handler 只处理一次然后移除自己？
+- ctx.write() 和 channel.write() 的区别？传播方向有何不同？
+- ChannelHandlerContext 的生命周期？
 memory_points:
-  - ChannelHandlerContext 定义：代表 ChannelHandler 和 ChannelPipeline 之间的关联
-  - 传播范围差异：Channel/Pipeline 的方法沿整个 Pipeline 传播；Context 的方法从当前 Handler 的下一个开始传播
-  - 关系链：Channel ↔ ChannelPipeline ↔ ChannelHandler ↔ ChannelHandlerContext
-  - 工程价值：精准控制事件流向，避免全链广播
+- ChannelHandlerContext 定义：代表 ChannelHandler 和 ChannelPipeline 之间的关联
+- 传播范围差异：Channel/Pipeline 的方法沿整个 Pipeline 传播；Context 的方法从当前 Handler 的下一个开始传播
+- 关系链：Channel ↔ ChannelPipeline ↔ ChannelHandler ↔ ChannelHandlerContext
+- 工程价值：精准控制事件流向，避免全链广播
+frequency: high
 ---
 
 # ChannelHandlerContext 的作用是什么？
@@ -258,6 +262,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

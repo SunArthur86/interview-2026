@@ -33,6 +33,7 @@ memory_points:
 - 坑3：代码风格不一致，用.cursorrules定义规范，统一格式。
 - 坑4：长对话失忆，关键约束写进配置文件，定期重复或拆分任务。
 - 黄金法则：AI是副驾驶，测试是信任基础，约束显式化，保持人类审查闭环。
+frequency: low
 ---
 
 # 【字节面经】AI编程中有哪些踩坑经验？分享你的最佳实践。
@@ -130,6 +131,26 @@ Code Review (Human重点检查逻辑/安全)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AI process
+    class B decision
+    class B1 special
+    class C error
+    class C1 info
+    class D start
+    class D1 process
+    class E decision
+    class E1 special
+    class F error
+    class F1 info
+    class Prompt start
+    class Review process
     A[AI 编程最佳实践] --> B[不盲信]
     A --> C[强约束]
     A --> D[重测试]

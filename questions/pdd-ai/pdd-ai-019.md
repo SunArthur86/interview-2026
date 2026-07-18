@@ -12,7 +12,8 @@ tags:
 - FP8
 - 梯度累加
 feynman:
-  essence: 混合精度训练是"前向反向用 FP16/BF16 算（快），权重/梯度/优化器状态用 FP32 存（准）"，省显存提速 2-3 倍，配合 Loss Scaling 防小梯度下溢。
+  essence: 混合精度训练是"前向反向用 FP16/BF16 算（快），权重/梯度/优化器状态用 FP32 存（准）"，省显存提速 2-3 倍，配合 Loss
+    Scaling 防小梯度下溢。
   analogy: 像精密加工——粗加工用快速工具（FP16 计算快），关键尺寸用卡尺精修（FP32 主权重），快慢结合又不失精度。
   first_principle: FP16 算得快但精度低易溢出，FP32 精确但慢且占显存，混合用两者优势。
   key_points:
@@ -29,14 +30,15 @@ first_principle:
   - 主权重需要高精度保证长期收敛
   rebuild: 混合精度（计算 FP16 + 主权重 FP32 + Loss Scaling 或用 BF16）。
 follow_up:
-  - FP16 和 BF16 区别？——FP16 数位多范围小（易溢出），BF16 范围同 FP32 但精度低
-  - 为什么要 Loss Scaling？——FP16 小梯度下溢（小于 6e-8 变 0），放大 loss 同步放大梯度
-  - 梯度累加等于大 batch 吗？——数学近似等价，但 BN 统计/正则项可能不同
+- FP16 和 BF16 区别？——FP16 数位多范围小（易溢出），BF16 范围同 FP32 但精度低
+- 为什么要 Loss Scaling？——FP16 小梯度下溢（小于 6e-8 变 0），放大 loss 同步放大梯度
+- 梯度累加等于大 batch 吗？——数学近似等价，但 BN 统计/正则项可能不同
 memory_points:
-  - 主权重 FP32 + 计算 FP16/BF16
-  - Loss Scaling 防 FP16 下溢
-  - BF16（A100+）范围同 FP32 无需 scaling
-  - 梯度累加：多 micro-batch 累加后更新
+- 主权重 FP32 + 计算 FP16/BF16
+- Loss Scaling 防 FP16 下溢
+- BF16（A100+）范围同 FP32 无需 scaling
+- 梯度累加：多 micro-batch 累加后更新
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】混合精度训练怎么实现？FP16/BF16/FP8 怎么选？
@@ -295,6 +297,30 @@ INT8 训练比推理难得多，目前不成熟。第一，**训练 vs 推理的
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BF16 decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class FP16 process
+    class FP32 decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class K process
+    class L decision
+    class Micro special
+    class batch error
+    class br info
     A["输入数据 Micro-batch"] --> B["FP32 Master权重"]
     B -->|"Cast降精度"| C["FP16/BF16计算权重"]
     

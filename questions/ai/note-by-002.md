@@ -11,9 +11,13 @@ tags:
 - Token级别
 - RLHF
 feynman:
-  essence: GRPO 的 token 级重要性采样是在 PPO 的序列级重要性采样基础上，进一步对序列内每个 token 计算重要性权重 ratio=π_new(token)/π_old(token)。作用是修正"off-policy 偏差"——采样用的旧策略和当前策略分布不同，直接用旧样本估梯度会有偏，重要性采样用权重修正这个偏差。token 级（而非序列级）让每个 token 的贡献被独立校正，提升梯度估计精度，尤其对长序列（序列级会平均化 token 差异）。
-  analogy: 像用旧地图（旧策略）采样的路况数据规划新路线（新策略）——新路线和旧路线偏离的地方（分布差异），数据要按"新旧路况匹配度"加权（重要性权重）。token 级就是每个路口单独算匹配度，比整条路一起算更精确。
-  first_principle: RL 训练时策略在变，采样用的是旧策略 π_old，估梯度用的是新策略 π_new。两者分布不同导致估计有偏。重要性采样用 w=π_new/π_old 修正权重，无偏估计 E_old[w·f]=E_new[f]。token 级是逐 token 算 w，比序列级（整条 w）更精细。
+  essence: GRPO 的 token 级重要性采样是在 PPO 的序列级重要性采样基础上，进一步对序列内每个 token 计算重要性权重 ratio=π_new(token)/π_old(token)。作用是修正"off-policy
+    偏差"——采样用的旧策略和当前策略分布不同，直接用旧样本估梯度会有偏，重要性采样用权重修正这个偏差。token 级（而非序列级）让每个 token 的贡献被独立校正，提升梯度估计精度，尤其对长序列（序列级会平均化
+    token 差异）。
+  analogy: 像用旧地图（旧策略）采样的路况数据规划新路线（新策略）——新路线和旧路线偏离的地方（分布差异），数据要按"新旧路况匹配度"加权（重要性权重）。token
+    级就是每个路口单独算匹配度，比整条路一起算更精确。
+  first_principle: RL 训练时策略在变，采样用的是旧策略 π_old，估梯度用的是新策略 π_new。两者分布不同导致估计有偏。重要性采样用 w=π_new/π_old
+    修正权重，无偏估计 E_old[w·f]=E_new[f]。token 级是逐 token 算 w，比序列级（整条 w）更精细。
   key_points:
   - token级ratio = π_new(token|context) / π_old(token|context)
   - '作用: 修正off-policy偏差（采样用π_old，训练用π_new）'
@@ -33,6 +37,7 @@ memory_points:
 - 计算公式：用log域算避免下溢，即 ratio = exp(logp_new - logp_old)
 - 核心作用：修正off-policy偏差，因为采样用旧策略而训练更新新策略
 - 安全机制：配合PPO clip，限制ratio在[1-ε, 1+ε]防极端权重
+frequency: high
 ---
 
 # 【字节面经】GRPO 中 Token 级别重要性采样的实现逻辑与作用
@@ -187,6 +192,25 @@ GRPO 的 token 级 IS 和 PPO 一致，区别在于：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B process
+    class C decision
+    class Clip special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class PPO info
+    class Ratio start
     A1["旧策略采样轨迹"] --> B["计算Token旧概率"]
     B --> C["新策略前向计算"]
     C --> D["计算Token新概率"]

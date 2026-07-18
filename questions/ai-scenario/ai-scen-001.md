@@ -28,6 +28,7 @@ memory_points:
 - 检索策略：混合检索(Dense向量+Sparse关键词) + CrossEncoder重排序提升准确率
 - 架构核心：向量库(Milvus)存索引，元数据做权限过滤，LLM生成带引用回答
 - 性能指标：百万文档需分片索引，秒级检索依赖HNSW算法与缓存预热
+frequency: medium
 ---
 
 # 如何设计一个企业级 RAG 知识库系统？要求支持百万级文档、秒级检索、高准确率回答。
@@ -41,6 +42,69 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACL start
+    class Async process
+    class Augmentation decision
+    class BGE special
+    class BM25 error
+    class Batch info
+    class CH start
+    class Chunking process
+    class Citations decision
+    class Context special
+    class CrossEncoder error
+    class DB info
+    class DS start
+    class Data process
+    class Database decision
+    class Dense special
+    class EM error
+    class Embedding info
+    class Filter start
+    class GL process
+    class GPU decision
+    class Generation special
+    class HNSW error
+    class Hybrid info
+    class IDX start
+    class IPL process
+    class IVF_FLAT decision
+    class Index special
+    class Ingestion error
+    class LLM info
+    class Layer start
+    class MD process
+    class Metadata decision
+    class Milvus special
+    class Model error
+    class P info
+    class Parser start
+    class Pipeline process
+    class Processing decision
+    class Qdrant special
+    class RAL error
+    class Recursive info
+    class Reference start
+    class Rerank process
+    class Retrieval decision
+    class S3 special
+    class Search error
+    class Semantic info
+    class Source start
+    class Sparse process
+    class Tenant decision
+    class Time special
+    class Unstructured error
+    class VDB info
+    class Vector start
+    class Window process
+    class br decision
     DS[Data Source S3/DB] -->|Ingestion Pipeline Async| IPL[Ingestion & Processing Layer]
     IPL --> P[Parser Unstructured]
     P --> CH[Chunking Semantic/Recursive]

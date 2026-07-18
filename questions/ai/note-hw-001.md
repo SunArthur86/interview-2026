@@ -31,6 +31,7 @@ memory_points:
 - 状态管理：迭代器需手写 class 维护状态，生成器用 yield 自动冻结并恢复执行上下文。
 - 空间优势：流式处理按需 yield 逐行产出，内存恒定在 O(1)，完美解决大文件 OOM 问题。
 - 流水线模式：多个生成器可级联 chaining，数据像流水线一样穿过多个处理阶段。
+frequency: medium
 ---
 
 # 【华为面经】Python 生成器与迭代器的区别？流式处理有什么优势？
@@ -270,6 +271,29 @@ list(flatten([1, [2, [3, 4]], 5]))  # [1, 2, 3, 4, 5]
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class O process
+    class batch decision
+    class br special
+    class filter_quality error
+    class for info
+    class next start
+    class open process
+    class read_jsonl decision
+    class tokenize special
+    class yield error
     subgraph 数据源
         A["open()<br/>文件迭代器"]
     end

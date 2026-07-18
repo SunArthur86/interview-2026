@@ -33,6 +33,7 @@ memory_points:
 - 供应链 FDE：智能补货/库存优化/异常检测方案落地
 - AI 项目失败 70% 因业务-技术脱节
 - 价值：把"技术能做"变成"客户能用"
+frequency: low
 ---
 
 # 【拼多多供应链】FDE 怎么落地一个供应链 AI 项目？
@@ -188,6 +189,29 @@ FDE 方法论沉淀：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class Phase1 process
+    class Phase2 decision
+    class Phase3 special
+    class Retrain error
     subgraph Phase1[阶段一: 数据与基线验证]
         A[供应链业务痛点] --> B[XGBoost基线预测]
         B --> C{是否优于规则?}

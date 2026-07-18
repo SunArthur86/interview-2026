@@ -32,6 +32,7 @@ memory_points:
 - 核心：分数不可比，但排名可比。不能直接相加分数。
 - 公式：RRF_score = Σ 1/(k + rank)，k为常数通常取60。
 - 特性：k=60使头部排名平滑，避免Winner-Take-All，两系统均靠前得分最高。
+frequency: high
 ---
 
 # 【字节面经】稀疏检索和稠密检索的结果如何做融合排序？你了解 RRF 吗？
@@ -357,6 +358,24 @@ if __name__ == "__main__":
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BM25 decision
+    class F special
+    class M error
+    class Q info
+    class R1 start
+    class R2 process
+    class V decision
+    class br special
+    class k error
+    class rank info
     Q[用户Query] --> A[双路并行检索]
     
     subgraph 异构召回

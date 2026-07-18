@@ -10,9 +10,13 @@ tags:
 - LangGraph
 - Agent框架
 feynman:
-  essence: LangChain 是早期"链式调用"抽象（封装 prompt/LLM/output_parser），LangGraph 是后来出的有状态图框架，把工作流显式建模成状态机。State 解决"上下文怎么传"，Node 解决"每一步做什么"，Edge 解决"下一步去哪"（conditional edge 让流程按状态走分支）。选 LangGraph 是因为它最贴近"显式有限状态机"心智模型，调试/回放/断点都比 AutoGen"Agent 互聊"好治理。
-  analogy: LangChain 像流水线传送带（A→B→C 线性），LangGraph 像地铁线路图（有分叉、有环线、有换乘站）。前者简单场景快，后者复杂场景才理得清。AutoGen 像开会议——几个人各说各的，会议记录又长又乱。
-  first_principle: 复杂 Agent 逻辑本质是状态机。把状态（State）、动作（Node）、转移（Edge）显式化，才能调试、回放、断点、并行、人工介入。隐式的"Agent 互聊"无法做到这些工程能力。
+  essence: LangChain 是早期"链式调用"抽象（封装 prompt/LLM/output_parser），LangGraph 是后来出的有状态图框架，把工作流显式建模成状态机。State
+    解决"上下文怎么传"，Node 解决"每一步做什么"，Edge 解决"下一步去哪"（conditional edge 让流程按状态走分支）。选 LangGraph
+    是因为它最贴近"显式有限状态机"心智模型，调试/回放/断点都比 AutoGen"Agent 互聊"好治理。
+  analogy: LangChain 像流水线传送带（A→B→C 线性），LangGraph 像地铁线路图（有分叉、有环线、有换乘站）。前者简单场景快，后者复杂场景才理得清。AutoGen
+    像开会议——几个人各说各的，会议记录又长又乱。
+  first_principle: 复杂 Agent 逻辑本质是状态机。把状态（State）、动作（Node）、转移（Edge）显式化，才能调试、回放、断点、并行、人工介入。隐式的"Agent
+    互聊"无法做到这些工程能力。
   key_points:
   - LangChain 链式（LCEL）适合线性流；LangGraph 图式支持循环/分支/并行/人工介入
   - State：TypedDict 定义共享上下文，每个 Node 读+改它
@@ -21,7 +25,8 @@ feynman:
   - 选 LangGraph：显式状态+路由+复用通用能力，比 AutoGen/CrewAI/手写更可控
 first_principle:
   essence: Agent = 显式状态机
-  derivation: 复杂逻辑本质是状态机 → 状态/动作/转移必须显式 → 才能调试回放断点并行 → LangGraph 把这三者抽象成 State/Node/Edge → 隐式互聊（AutoGen）无法工程化
+  derivation: 复杂逻辑本质是状态机 → 状态/动作/转移必须显式 → 才能调试回放断点并行 → LangGraph 把这三者抽象成 State/Node/Edge
+    → 隐式互聊（AutoGen）无法工程化
   conclusion: 选框架不是选"哪个流行"，而是选"哪个抽象匹配你的复杂度"——简单用 LangChain，复杂用 LangGraph，互聊用 AutoGen
 follow_up:
 - LangGraph 的 interrupt() 怎么实现 human-in-the-loop？
@@ -32,6 +37,7 @@ memory_points:
 - 核心三要素：State(共享上下文)、Node(执行动作)、Conditional Edge(条件路由分支)
 - 对比优势：AutoGen难调试，手写缺通用基建。LangGraph自带持久化与流处理
 - 加分项：interrupt机制结合Checkpoint，原生支持human-in-the-loop人工介入审批
+frequency: high
 ---
 
 # 【字节飞连面经】用过哪些 Agent 框架？LangGraph vs LangChain？为什么选 LangGraph？
@@ -120,6 +126,35 @@ Edge（边）：下一步去哪
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CheckpointSaver special
+    class Conditional error
+    class D info
+    class E start
+    class Edge process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class K process
+    class Node_A decision
+    class Node_B special
+    class Node_C error
+    class Postgres info
+    class Redis start
+    class S process
+    class State decision
+    class br special
+    class interrupt error
     A(["开始"]) --> B["Node_A: 意图分类"]
     B --> C{"Conditional Edge<br/>条件路由"}
     C -- "知识查询" --> D["Node_B: 检索知识库"]

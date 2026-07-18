@@ -32,6 +32,7 @@ memory_points:
 - 高并发兑换：因为积分等于钱不能错，所以用Redis+Lua原子扣减防超卖，MQ异步落库
 - 最终一致：异步落库必有延迟风险，所以必须定时对账核对Redis与MySQL数据
 - 过期管理：积分精准过期，通过延迟队列触发到期时间点，主动扣减并通知
+frequency: high
 ---
 
 # 亿级车主积分获取、兑换、过期管理，如何设计后端架构，保证积分计算准确，支持高并发兑换且实时同步状态？
@@ -62,6 +63,25 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class GW process
+    class IN decision
+    class MQ special
+    class MYSQL error
+    class MySQL info
+    class REDIS start
+    class RocketMQ process
+    class SVC decision
+    class br special
+    class point_expire error
+    class point_records info
+    class user_points start
     IN["用户请求层<br/>获取积分 / 兑换积分 / 查询余额"]
     GW["API 网关层<br/>鉴权 / 限流 / 防刷"]
     SVC["积分服务层 (无状态)<br/>获取积分 → MQ异步处理<br/>兑换积分 → Redis原子扣减<br/>查询余额 → Redis直读"]

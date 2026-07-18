@@ -16,6 +16,7 @@ memory_points:
 - 互斥规则：读读共享不互斥，只要遇写（读写、写写）均需互斥等待
 - AQS原理：整型state变量按位切割，高16位记录写锁低16位记录读锁
 - 锁降级单向：支持写锁降级为读锁保证可见性，而读锁不可升级为写防死锁
+frequency: high
 ---
 
 # 共享锁和独占锁的区别是什么？
@@ -151,6 +152,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

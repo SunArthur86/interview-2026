@@ -25,6 +25,7 @@ memory_points:
 - 为什么不精确：因为遍历求和期间没有加锁，其他线程可能正在并发修改数据，所以只是近似快照。
 - 注意区别：JDK8 的 mappingCount() 返回 long，仅为防溢出，内部实现与 size() 一致，依然不精确。
 - 如果强依赖精确值：建议在业务层使用 AtomicLong 等外部计数器维护。
+frequency: high
 ---
 
 # 为什么 ConcurrentHashMap 的 size() 不精确？如何获取精确的元素数量？
@@ -139,6 +140,7 @@ flowchart TD
     style LIST fill:#FF9800,color:#fff
     style TREEIFY fill:#9C27B0,color:#fff
     style TRANSFER fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

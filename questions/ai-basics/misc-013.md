@@ -21,6 +21,7 @@ memory_points:
 - 优势计算：A_i = (r_i - mean(r)) / std(r)，通过组内归一化消除尺度差异
 - 相比PPO：显存更低（只需Policy和RM），训练更快，稳定性更好
 - 实战：组大小G需适中，过大会增加方差和成本，过小则基准不准
+frequency: high
 ---
 
 # DeepSeek提出的GRPO算法是什么?相比PPO有什么优势
@@ -131,6 +132,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

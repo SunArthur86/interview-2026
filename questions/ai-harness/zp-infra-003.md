@@ -27,6 +27,7 @@ memory_points:
 - NVFP4原理：1符号+2指数+1尾数，动态范围±448，比INT4更优。
 - 缩放机制：Per-block缩放，每32个元素共享一个FP8 Scale，在最后一维缩放。
 - 保存格式：权重存FP4，额外存FP8 Scale表 [M, N/32]，反量化相乘还原。
+frequency: medium
 ---
 
 # 【智谱Infra面经】NVFP4 的原理是什么？怎么做缩放的？在哪个维度缩放？保存的格式是什么？
@@ -119,6 +120,23 @@ def pack_fp4_blocks(weight_matrix):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Block start
+    class Dequant process
+    class FP decision
+    class FP8 special
+    class Format error
+    class M info
+    class N start
+    class Per process
+    class Scale decision
+    class Store special
+    class br error
     FP[FP权重] --> Block[Per-block分块<br/>每32元素]
     Block --> Scale[FP8 Scale缩放<br/>最后一维]
     Scale --> Store[存储:FP4权重+Scale表]

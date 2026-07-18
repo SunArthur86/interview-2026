@@ -31,6 +31,7 @@ memory_points:
 - 高并发双通道：MQTT百万级长连接接入，Kafka做海量诊断数据流缓冲
 - 极速可视化：时序DB(TDengine)存高频传感器数据，工作台WebSocket实时回放
 - 行车绝对安全：IoT网关鉴权隔离，诊断通道只读，控制指令需极严安全校验
+frequency: high
 ---
 
 # 工程师远程诊断车辆故障，如何设计后端架构，支持实时获取车载故障数据、远程调试且不影响车辆行驶？
@@ -61,6 +62,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AGENT start
+    class ALARM process
+    class CAR decision
+    class CMD special
+    class ECU error
+    class EMQX info
+    class GW start
+    class InfluxDB process
+    class IoT decision
+    class KAFKA special
+    class Kafka error
+    class MQTT info
+    class MQTT_C start
+    class TDengine process
+    class TLS decision
+    class TSDB special
+    class WS error
+    class br info
+    class cmd start
+    class diag process
+    class vin decision
     subgraph CAR["车辆端"]
         ECU["ECU集群<br/>传感器数据<br/>故障码"]
         AGENT["诊断代理<br/>数据采集<br/>故障过滤"]

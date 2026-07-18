@@ -11,11 +11,13 @@ tags:
 - 内存泄漏
 - 排查
 feynman:
-  essence: OOM 排查的核心是"分类型 + 看堆 + 找支配对象"——先判断是哪种 OOM（heap/metaspace/direct/thread），dump 堆，用 MAT 找支配树最大对象。
+  essence: OOM 排查的核心是"分类型 + 看堆 + 找支配对象"——先判断是哪种 OOM（heap/metaspace/direct/thread），dump
+    堆，用 MAT 找支配树最大对象。
   analogy: OOM 像房间挤爆——先看是哪个房间爆（堆/元空间/直接内存），再看是谁占了最大空间（支配对象），最后找出"只进不出"的占用者（泄漏点）。
   first_principle: 内存是有限资源，OOM 是"申请超过可用"。根因分两类——瞬时流量大（申请多）或内存泄漏（不释放）。
   key_points:
-  - OOM 类型：Java heap space（堆）/ Metaspace / GC overhead / Direct buffer / Unable to create thread
+  - OOM 类型：Java heap space（堆）/ Metaspace / GC overhead / Direct buffer / Unable to
+    create thread
   - 自动 dump：-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=
   - MAT 三件套：Dominator Tree（支配树）、Histogram（按类聚合）、Leak Suspects（嫌疑报告）
   - 在线诊断：jmap、arthas、jstack
@@ -35,6 +37,7 @@ memory_points:
 - -XX:+HeapDumpOnOutOfMemoryError 自动 dump 现场
 - MAT Dominator Tree 找最大支配对象，Leak Suspects 自动分析
 - 在线诊断：arthas（首选）/ jmap / jstack
+frequency: high
 ---
 
 # 【蚂蚁风控】线上服务 OOM 怎么排查？讲一次完整的排查过程
@@ -335,6 +338,30 @@ Redis 确实容量大，但延迟高。风控决策查缓存的 RT 预算是 5ms
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Arthas process
+    class B decision
+    class C special
+    class ClassLoader error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class HeapDumpOnOutOfMemoryError error
+    class I info
+    class J start
+    class OOM process
+    class hprof decision
+    class jcmd special
+    class jstack error
+    class jstat info
     A[风控服务触发 OOM] --> B[开启 HeapDumpOnOutOfMemoryError]
     B --> C{是否生成 hprof dump文件?}
     C -- 是 --> D[MAT分析支配树与GC Root引用链]

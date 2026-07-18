@@ -29,6 +29,7 @@ memory_points:
 - 分片广播：海量数据按 hash(userId) % 总分片数 路由，多机并行极大提升处理速度
 - 失败重试陷阱：重试极易产生脏数据，因为网络抖动，所以业务代码必须实现幂等
 - 路由选型：FIRST适合单点长耗时任务，ROUND适合大量短任务，FAILOVER自动剔除宕机节点
+frequency: medium
 ---
 
 # 如何设计一个分布式定时任务系统？
@@ -150,6 +151,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

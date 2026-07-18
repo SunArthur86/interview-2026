@@ -34,6 +34,7 @@ memory_points:
 - 规划层：采用ReWOO先分解任务再执行，避免无效调用，复杂任务分步处理
 - 行动层：ReAct循环，LLM选工具→执行→捕获异常→将错误反馈给LLM自我纠正
 - 关键参数：设置最大迭代次数(如10次)防止死循环，异常信息需转化为自然语言
+frequency: medium
 ---
 
 # 【字节面经】Agent如何结合工具、知识、规划实现自主运行？请设计一个完整的执行链路。
@@ -152,6 +153,12 @@ flowchart TD
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
     style N4 fill:#f44336,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

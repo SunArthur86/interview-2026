@@ -26,19 +26,21 @@ first_principle:
   - 如果从后往前填充，不会覆盖任何有用数据
   - 每次比较两个指针指向的元素，大的放最后
   - nums1剩余元素天然有序，无需移动
-  rebuild: 三指针 p1=m-1, p2=n-1, p=m+n-1 → 比较 nums1[p1] 和 nums2[p2]，大的放nums1[p]，p和对应指针左移 → nums2有剩余则拷贝，nums1有剩余无需处理。
+  rebuild: 三指针 p1=m-1, p2=n-1, p=m+n-1 → 比较 nums1[p1] 和 nums2[p2]，大的放nums1[p]，p和对应指针左移
+    → nums2有剩余则拷贝，nums1有剩余无需处理。
 follow_up:
-  - 为什么要从后往前？从前往前不行吗？
-  - 如果nums1没有预留空间（长度正好是m），怎么合并？
-  - 合并K个有序数组怎么做？用什么数据结构？
-  - 合并两个有序链表和合并两个有序数组有什么区别？
-  - 如果两个数组非常大（内存放不下），怎么合并？（外部排序）
+- 为什么要从后往前？从前往前不行吗？
+- 如果nums1没有预留空间（长度正好是m），怎么合并？
+- 合并K个有序数组怎么做？用什么数据结构？
+- 合并两个有序链表和合并两个有序数组有什么区别？
+- 如果两个数组非常大（内存放不下），怎么合并？（外部排序）
 memory_points:
-  - 从后往前三指针：p1=m-1, p2=n-1, p=m+n-1
-  - 每次取较大的放p位置，对应指针左移
-  - nums2剩余需拷贝，nums1剩余不动
-  - 时空复杂度：O(m+n) / O(1)
-  - 前提：nums1长度≥m+n
+- 从后往前三指针：p1=m-1, p2=n-1, p=m+n-1
+- 每次取较大的放p位置，对应指针左移
+- nums2剩余需拷贝，nums1剩余不动
+- 时空复杂度：O(m+n) / O(1)
+- 前提：nums1长度≥m+n
+frequency: low
 ---
 
 # 【拼多多二面】手撕算法：合并两个有序数组
@@ -243,6 +245,26 @@ public int[] mergeKSortedArrays(int[][] arrays) {
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class N1A start
+    class N1B process
+    class N1C decision
+    class N1D special
+    class N1E error
+    class N1F info
+    class N2A start
+    class N2B process
+    class N2C decision
+    class P special
+    class P1 error
+    class P2 info
+    class nums1 start
+    class nums2 process
     subgraph 数组一 nums1
         direction LR
         N1A[2]

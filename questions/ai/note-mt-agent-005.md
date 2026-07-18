@@ -30,6 +30,7 @@ memory_points:
 - 解耦思想：用Jinja2变量化模板，将静态系统指令与动态用户数据分离复用
 - 输出约束：强制使用JSON Schema等格式约束，确保下游解析的绝对稳定
 - 工程化管理：把Prompt当API对待，结合Git版本控制与A/B测试持续迭代
+frequency: medium
 ---
 
 # 【美团面经】提示词模板是怎么构建的？
@@ -44,6 +45,39 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AB process
+    class B decision
+    class Few special
+    class Input error
+    class JSON info
+    class Jinja2 start
+    class Markdown process
+    class Output decision
+    class P1 special
+    class P2 error
+    class P3 info
+    class P4 start
+    class P5 process
+    class PT decision
+    class Prompt special
+    class RAG error
+    class Schema info
+    class System start
+    class Template process
+    class Test decision
+    class VER special
+    class br error
+    class retrieved_docs info
+    class shot start
+    class user_msg process
+    class v1 decision
     subgraph PT["Prompt Template"]
         P1["① System Prompt (角色设定)<br/>你是一个专业的美团客服助手,负责处理用户投诉"]
         P2["② 任务指令 + 变量化模板 (Jinja2)<br/>根据以下信息生成回复: 用户: {{user_msg}}..."]

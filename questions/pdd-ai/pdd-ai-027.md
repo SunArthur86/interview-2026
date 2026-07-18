@@ -29,14 +29,15 @@ first_principle:
   - 雪崩会扩散
   rebuild: 限流 + 降级 + 超时 + 重试（四板斧组合）。
 follow_up:
-  - LLM 怎么按 token 限流？——预估输出 token，按累计 token 限（防超长输出爆资源）
-  - 重试为什么会放大故障？——大量重试 → 雪崩，要退避 + 熔断
-  - 怎么判断该降级？——错误率/RT/资源水位超阈值自动触发
+- LLM 怎么按 token 限流？——预估输出 token，按累计 token 限（防超长输出爆资源）
+- 重试为什么会放大故障？——大量重试 → 雪崩，要退避 + 熔断
+- 怎么判断该降级？——错误率/RT/资源水位超阈值自动触发
 memory_points:
-  - 算法：令牌桶/漏桶/滑窗/计数
-  - 维度：QPS/并发/token/成本
-  - 降级：兜底/小模型/关非核心
-  - 重试：退避 + 上限 + 幂等
+- 算法：令牌桶/漏桶/滑窗/计数
+- 维度：QPS/并发/token/成本
+- 降级：兜底/小模型/关非核心
+- 重试：退避 + 上限 + 幂等
+frequency: high
 ---
 
 # 【拼多多 AI 中台】限流降级超时重试怎么做？LLM 网关怎么限流？
@@ -369,6 +370,22 @@ QPS 限流对 LLM 不够，因为"一个请求的资源消耗差异巨大"。第
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
     A["LLM网关入口"] --> B["Sentinel令牌桶限流"]
     B --> C{"令牌/Token充足?"}
     C -->|否| D["快速失败拒绝"]

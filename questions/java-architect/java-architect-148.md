@@ -4,8 +4,17 @@ difficulty: L2
 category: java-architect
 subcategory: 稳定性治理
 title: 故障注入如何验证超时、重试与熔断
-tags: [故障注入, 超时, 重试, 熔断, Resilience4j]
-related: [java-architect-147, java-architect-146, java-architect-145]
+tags:
+- 故障注入
+- 超时
+- 重试
+- 熔断
+- Resilience4j
+related:
+- java-architect-147
+- java-architect-146
+- java-architect-145
+frequency: high
 ---
 
 # 故障注入如何验证超时、重试与熔断
@@ -425,6 +434,31 @@ JD 流量染色法，生产验证不影响真用户。
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CLOSED special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HALF_OPEN special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class OPEN special
+    class connect error
+    class read info
+    class test start
     A[测试请求发起] --> B{流量染色判断}
     B -->|携带 test 标记| C[故障注入拦截器]
     B -->|无标记| D[正常业务流程]

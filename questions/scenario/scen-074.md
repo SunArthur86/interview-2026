@@ -29,6 +29,7 @@ memory_points:
 - 权限粒度：功能权限控菜单按钮，数据权限控行级(部门)/列级(脱敏)可见度
 - 校验机制：登录将权限列表注入Redis，请求时拦截器利用AntPathMatcher做URL匹配
 - 数据权限实现：底层依赖MyBatis拦截器动态拼装SQL条件(如 WHERE dept_id = ?)
+frequency: medium
 ---
 
 # 如何设计一个权限管理系统（RBAC/ABAC）？
@@ -171,6 +172,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

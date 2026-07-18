@@ -26,6 +26,7 @@ memory_points:
 - 最佳实践：catch 异常后必须再次调用 interrupt() 恢复中断状态以防丢失
 follow_up: []
 tags: []
+frequency: medium
 ---
 
 # Interrupt方法结束线程是什么？
@@ -142,6 +143,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

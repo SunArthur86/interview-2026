@@ -15,6 +15,7 @@ memory_points:
 - 接收机制：网卡DMA到RingBuffer触发硬中断，NAPI轮询机制防止中断风暴
 - 发送流程：系统调用将数据拷贝至Socket缓冲区，逐层加TCP/IP头交由网卡发送
 - 零拷贝优化：sendfile或mmap可避免用户态与内核态之间的数据拷贝
+frequency: low
 ---
 
 # Linux是如何收发网络包的？
@@ -105,6 +106,59 @@ TCP/IP Stack (校验/路由)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Btrfs decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class Kernel start
+    class L process
+    class Linux decision
+    class M special
+    class N error
+    class O info
+    class P start
+    class Q process
+    class R decision
+    class S special
+    class Socket error
+    class Space info
+    class T start
+    class U process
+    class User decision
+    class VFS special
+    class XFS error
+    class brk info
+    class eBPF start
+    class exec process
+    class ext4 decision
+    class fork special
+    class glibc error
+    class iostat info
+    class ltrace start
+    class mmap process
+    class netstat decision
+    class open special
+    class perf error
+    class read info
+    class ring start
+    class strace process
+    class vmstat decision
+    class wait special
+    class write error
     A[Linux 系统核心] --> B[用户空间 User Space]
     A --> C[内核空间 Kernel Space]
     B --> D[应用程序 ring 3]

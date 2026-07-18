@@ -17,6 +17,7 @@ memory_points:
 - 四大池对比：Fixed定长且无界队列，Cached无限线程且同步队列，Single单线程串行
 - 方法对比：execute()无返回值且无法捕获异常，submit()返回Future且可获取执行异常
 - 避坑指南：禁止用Executors创建，因为默认无界队列或无限线程极易导致OOM
+frequency: high
 ---
 
 # 什么是线程池？
@@ -135,6 +136,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

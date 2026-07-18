@@ -30,6 +30,7 @@ memory_points:
 - RoPE 冲突：因为 RoPE 旋转会阻碍投影矩阵被 Q 吸收，所以不能直接用标准 RoPE。
 - 解法优化：采用解耦 RoPE，拆分为无位置的内容压缩通道与带位置的极小维度通道。
 - 性能对比：GQA 是物理共享，而 MLA 是数学低秩分解，压缩率更高且质量近乎无损。
+frequency: high
 ---
 
 # 【美团面经】DeepSeek 的 MLA 注意力是怎么做的？它可以直接用 RoPE 吗？为什么不能，做了哪些优化？
@@ -110,6 +111,27 @@ def mla_attention(q, kv_cache):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Attention process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class KV info
+    class RoPE start
+    class c process
+    class x decision
     A[输入 x] --> B[下投影压缩]
     B --> C[低维潜在向量 c]
     C --> D[推理仅缓存 c]

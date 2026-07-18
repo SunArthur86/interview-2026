@@ -32,6 +32,7 @@ memory_points:
 - 大规模生产首选Milvus：因为支持多副本高可用、水平扩展、实时更新与标量混合检索
 - FAISS缺陷：无服务化API无高可用，数据更新难，仅适合离线实验或嵌入式单机
 - 索引选择：HNSW是综合平衡首选，超大规模且内存不足时选DiskANN
+frequency: high
 ---
 
 # 【某讯面经】Milvus/FAISS/Chroma 线上选型差异，大规模生产用哪个？
@@ -194,6 +195,26 @@ results = collection.search(
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Chroma special
+    class D error
+    class E info
+    class F start
+    class FAISS process
+    class G decision
+    class H special
+    class I error
+    class IVF info
+    class Milvus start
+    class br process
     subgraph "向量库方案对比与选型"
       direction TD
       A["业务场景判断"] --> B{"核心需求评估"}

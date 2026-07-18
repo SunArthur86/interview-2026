@@ -17,6 +17,7 @@ memory_points:
 - 动作拆解：wait时原子性释放锁并阻塞，被唤醒时自动重新获取锁。
 - 避坑必记：防止虚假唤醒，wait必须在while循环中调用而非if语句。
 - 函数对比：signal唤醒单个效率高，broadcast唤醒全部易引发惊群效应。
+frequency: medium
 ---
 
 # 什么是条件变量？
@@ -122,6 +123,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

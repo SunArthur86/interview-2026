@@ -21,7 +21,8 @@ feynman:
   - 需通过AB测试在具体场景确定最优K
 first_principle:
   essence: Top-K是在召回率和计算成本之间寻找最优点
-  derivation: 设Top-K=i的召回率R(i)，精确率P(i)。R(i)随i递增但边际递减，P(i)随i递减。Rerank成本C(i)=i×cost_per_doc。最优K满足：dR/dK × value_of_recall = dC/dK
+  derivation: 设Top-K=i的召回率R(i)，精确率P(i)。R(i)随i递增但边际递减，P(i)随i递减。Rerank成本C(i)=i×cost_per_doc。最优K满足：dR/dK
+    × value_of_recall = dC/dK
   conclusion: 最优K值 = 召回率曲线拐点 + Rerank成本约束，需在具体数据上AB测试确定
 follow_up:
 - 如何自动化确定最优Top-K？有没有自适应K的方法？
@@ -32,6 +33,7 @@ memory_points:
 - 过大危害：不仅P99延迟和Rerank成本飙升，更会引入噪声导致准确率反降
 - 工程最优解：采用三阶段架构，第一阶段Top-K设置在100-200之间粗排
 - 动态自适应：需根据Query区分度调整，模糊问题放大K，明确事实缩小K
+frequency: medium
 ---
 
 # 向量检索中Top-K设置过大或过小分别会带来什么问题？
@@ -181,6 +183,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

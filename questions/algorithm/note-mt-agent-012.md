@@ -31,6 +31,7 @@ memory_points:
 - 找中点：快慢指针法，因为快指针走两步慢指针走一步，所以慢指针刚好停在中点。
 - 转后半：断开前后半段，将后半段链表进行局部反转。
 - 合并：双指针交替连接，时间 O(n) 且空间 O(1)。
+frequency: low
 ---
 
 # 【美团面经】手撕：重排链表（LeetCode 143）
@@ -331,6 +332,28 @@ def reorderList_recursive(head):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class End start
+    class FindMid process
+    class L0 decision
+    class L1 special
+    class Ln error
+    class Result info
+    class Reversed start
+    class Split process
+    class Start decision
+    class Step special
+    class Step1 error
+    class Step1Group info
+    class Step2 start
+    class Step2Group process
+    class Step3 decision
+    class Step3Group special
     Start([原始单链表]) --> Step1
 
     subgraph Step1Group[Step 1: 快慢指针找中点]

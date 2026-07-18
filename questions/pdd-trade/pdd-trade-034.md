@@ -28,15 +28,16 @@ first_principle:
   - GPU 贵
   rebuild: KV Cache 复用 + 动态 Batching + 量化 + 投机解码 + 并行。
 follow_up:
-  - vLLM 为什么快？——PagedAttention 管理 KV Cache 分页，无碎片
-  - 量化损失精度吗？——INT8 几乎无损，INT4 轻微降，关键用 AWQ/GPTQ
-  - 投机解码原理？——小模型先出 N 个 token，大模型并行校验，正确则省 N-1 步
+- vLLM 为什么快？——PagedAttention 管理 KV Cache 分页，无碎片
+- 量化损失精度吗？——INT8 几乎无损，INT4 轻微降，关键用 AWQ/GPTQ
+- 投机解码原理？——小模型先出 N 个 token，大模型并行校验，正确则省 N-1 步
 memory_points:
-  - KV Cache 复用历史
-  - Continuous Batching 动态拼 batch
-  - 量化 INT8/FP8 省显存
-  - 投机解码：小草稿+大校验
-  - 并行：TP/PP
+- KV Cache 复用历史
+- Continuous Batching 动态拼 batch
+- 量化 INT8/FP8 省显存
+- 投机解码：小草稿+大校验
+- 并行：TP/PP
+frequency: high
 ---
 
 # 【拼多多交易】LLM 推理怎么优化？
@@ -215,6 +216,32 @@ FP8 的限制是硬件绑定。FP8 只有 H100/H200 原生支持，A100 是 FP16
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Batching start
+    class CB process
+    class Cache decision
+    class Calc special
+    class Continuous error
+    class Direct info
+    class Draft start
+    class INT8 process
+    class Out decision
+    class PA special
+    class PagedAttention error
+    class Quan info
+    class Req start
+    class Reuse process
+    class Spec decision
+    class TP_TP special
+    class Tensor error
+    class Verify info
+    class br start
+    class vLLM process
     Req([并发推理请求]) --> CB[Continuous Batching<br/>动态拼组请求]
     CB --> Cache{命中前缀缓存?}
 

@@ -27,14 +27,15 @@ first_principle:
   - 故障会传染（级联）
   rebuild: 限流（入口闸）+ 降级（非核心弃）+ 超时（不等死）+ 重试（临时故障）。
 follow_up:
-  - 令牌桶和漏桶区别？——令牌桶允许突发（攒令牌），漏桶匀速
-  - 重试为什么必须幂等？——否则重复扣款/下单
-  - 超时怎么配层级？——下游超时 < 上游超时（DB<服务<网关）
+- 令牌桶和漏桶区别？——令牌桶允许突发（攒令牌），漏桶匀速
+- 重试为什么必须幂等？——否则重复扣款/下单
+- 超时怎么配层级？——下游超时 < 上游超时（DB<服务<网关）
 memory_points:
-  - 限流：令牌桶/漏桶/Sentinel
-  - 降级：核心保交易，非核心弃
-  - 超时：分级（DB<服务<网关）
-  - 重试：指数退避+幂等+有限次
+- 限流：令牌桶/漏桶/Sentinel
+- 降级：核心保交易，非核心弃
+- 超时：分级（DB<服务<网关）
+- 重试：指数退避+幂等+有限次
+frequency: high
 ---
 
 # 【拼多多交易】稳定性四板斧：限流/降级/超时/重试？
@@ -222,6 +223,25 @@ public Order pay(Long orderId) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
     A[入口流量] --> B[网关层单UID/全局QPS限流]
     B --> C[业务应用服务]
     C --> D{调用下游资源}

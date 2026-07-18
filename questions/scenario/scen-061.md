@@ -28,6 +28,7 @@ memory_points:
 - 选型铁律：核心业务用保守熟悉技术，边缘非核心业务可尝试新技术。
 - 避坑指南：不盲目追新，优先选团队熟悉且开源成熟方案以降低风险。
 - 技术债处理：遗留系统重构采用绞杀者模式逐步替换，忌大爆炸重写。
+frequency: low
 ---
 
 # 如何做技术选型？评估和选择适合团队的技术方案。
@@ -169,6 +170,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

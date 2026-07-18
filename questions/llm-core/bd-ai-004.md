@@ -34,6 +34,7 @@ memory_points:
 - 上下文：Claude Code自动去重压缩，Hermes检索注入，OpenClaw全量日志。
 - 差异：Claude Code无缝但细节丢失，Hermes精确检索适合回溯，OpenClaw适合审计。
 - 策略：长任务需注意上下文窗口限制，利用Resume或Profile隔离管理会话。
+frequency: medium
 ---
 
 # 【字节面经】对比OpenClaw/Hermes/Claude Code等Agent框架，从记忆机制、工具调用、上下文管理三个维度分析。
@@ -140,6 +141,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

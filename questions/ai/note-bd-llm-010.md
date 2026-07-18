@@ -32,6 +32,7 @@ memory_points:
 - Lost in Middle：模型对超长上下文的注意力呈U型曲线，因为中部信息极易被忽略，所以全塞入精度反而下降
 - 业务硬需求：RAG支持增量索引秒级更新与精确文档溯源，这是静态长上下文绝对无法做到的
 - 成本劣势：长上下文单次Token消耗与首字延迟极高，相比RAG每次几K的消耗不具备规模化商业可行性
+frequency: medium
 ---
 
 # 【字节面经】你提到做过多模态文档解析，当图片里的文字与周边正文语义强相关时，你是怎么把两者的上下文关联保留下来的？
@@ -400,6 +401,7 @@ flowchart TD
     style VEC fill:#FF9800,color:#fff
     style STORE fill:#9C27B0,color:#fff
     style COS fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

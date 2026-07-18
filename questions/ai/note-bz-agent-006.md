@@ -33,6 +33,7 @@ memory_points:
 - 记忆系统读取路径：向量检索 → 多取重排（Rerank） → 时效性/重要性加权过滤
 - 生产级重点：记忆需用户隔离防越权，工具用RAG按需召回防Token超限
 - 基础设施：必须包含权限、限流、全链路Trace和监控告警体系
+frequency: medium
 ---
 
 # 生产级 Agent 的架构怎么划分？（记忆、权限、工作流）
@@ -41,6 +42,32 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class App start
+    class Capabilities process
+    class IM decision
+    class Infrastructure special
+    class Interaction error
+    class L1 info
+    class L2 start
+    class L3 process
+    class L4 decision
+    class Layer special
+    class Memory error
+    class OpenAPI info
+    class Orchestration start
+    class RAG process
+    class Skill decision
+    class Tools special
+    class Trace error
+    class UI info
+    class Web start
+    class br process
     L1["Layer 1: 交互层 (Interaction)<br/>Web UI | App | OpenAPI | IM(钉钉/飞书) | 语音"]
     L2["Layer 2: 编排层 (Orchestration) — 智能核心<br/>意图理解 → 工作流引擎 → 循环控制器<br/>+ 规划器 + 反思器 + 人工协作节点"]
     L3["Layer 3: 能力层 (Capabilities) — 可插拔<br/>Memory 记忆服务 | Tools 工具服务 | RAG 知识库 | Skill 技能库"]

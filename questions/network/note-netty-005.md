@@ -11,8 +11,11 @@ tags:
 - ChannelPipeline
 - ByteBuf
 feynman:
-  essence: Netty 用两组组件构建一切：①网络抽象组（Channel 管连接、EventLoop 管控制流、ChannelFuture 管异步通知）负责"如何通信"；②数据处理组（ChannelHandler 管业务逻辑、ChannelPipeline 管处理链、ByteBuf 管数据）负责"处理什么"。理解这 6 个组件的关系，就理解了 Netty 的全貌。
-  analogy: 把 Netty 想象成一家餐厅。Channel 是"传送带"（连接通道，运数据），EventLoop 是"服务员"（一个服务员固定服务几张桌子的控制流），ChannelFuture 是"取餐号"（异步通知你菜好了）。ChannelHandler 是"厨师"（具体处理每道菜的业务），ChannelPipeline 是"后厨流水线"（多个厨师按顺序协作），ByteBuf 是"食材筐"（装数据的容器）。
+  essence: Netty 用两组组件构建一切：①网络抽象组（Channel 管连接、EventLoop 管控制流、ChannelFuture 管异步通知）负责"如何通信"；②数据处理组（ChannelHandler
+    管业务逻辑、ChannelPipeline 管处理链、ByteBuf 管数据）负责"处理什么"。理解这 6 个组件的关系，就理解了 Netty 的全貌。
+  analogy: 把 Netty 想象成一家餐厅。Channel 是"传送带"（连接通道，运数据），EventLoop 是"服务员"（一个服务员固定服务几张桌子的控制流），ChannelFuture
+    是"取餐号"（异步通知你菜好了）。ChannelHandler 是"厨师"（具体处理每道菜的业务），ChannelPipeline 是"后厨流水线"（多个厨师按顺序协作），ByteBuf
+    是"食材筐"（装数据的容器）。
   key_points:
   - 网络抽象三件套=Channel(连接)+EventLoop(控制流/并发)+ChannelFuture(异步通知)
   - 数据处理三件套=ChannelHandler(业务)+ChannelPipeline(处理链)+ByteBuf(数据)
@@ -26,14 +29,15 @@ first_principle:
   - 高性能要求并发无锁化(单线程串行)
   rebuild: 从"通信"拆出三要素→Channel表示连接、EventLoop表示控制流和多线程、ChannelFuture表示异步通知→从"数据处理"拆出三要素→ChannelHandler装业务逻辑、ChannelPipeline编排Handler顺序、ByteBuf承载数据→两组共6个组件，构成Netty全部抽象。
 follow_up:
-  - Channel 和 EventLoop 是什么关系？
-  - ChannelPipeline 如何决定 Handler 的执行顺序？
-  - ByteBuf 为什么比 ByteBuffer 好？
+- Channel 和 EventLoop 是什么关系？
+- ChannelPipeline 如何决定 Handler 的执行顺序？
+- ByteBuf 为什么比 ByteBuffer 好？
 memory_points:
-  - 网络抽象组：Channel=Socket；EventLoop=控制流/多线程/并发；ChannelFuture=异步通知
-  - 数据处理组：ChannelHandler + ChannelPipeline + ByteBuf
-  - 设计哲学：异步事件驱动 + 应用逻辑与网络层解耦
-  - 技术基础：基于Java NIO + 一组设计模式
+- 网络抽象组：Channel=Socket；EventLoop=控制流/多线程/并发；ChannelFuture=异步通知
+- 数据处理组：ChannelHandler + ChannelPipeline + ByteBuf
+- 设计哲学：异步事件驱动 + 应用逻辑与网络层解耦
+- 技术基础：基于Java NIO + 一组设计模式
+frequency: high
 ---
 
 # Netty 的核心组件有哪些？
@@ -242,6 +246,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

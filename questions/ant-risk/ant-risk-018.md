@@ -29,12 +29,14 @@ first_principle:
 follow_up:
 - 主从延迟怎么解决？——关键路径强制读主、半同步、业务容忍
 - Canal 怎么用？——伪装成从库订阅 binlog，解析后投递 Kafka，用于缓存刷新、ES 同步、对账
-- ROW 格式为什么生产推荐？——记录每行变更，主从一致最稳；STATEMENT 在不确定函数（now/uuid）下可能不一致。注意 STATEMENT 是官方原版默认，但云数据库（阿里云 RDS）通常默认改 ROW
+- ROW 格式为什么生产推荐？——记录每行变更，主从一致最稳；STATEMENT 在不确定函数（now/uuid）下可能不一致。注意 STATEMENT 是官方原版默认，但云数据库（阿里云
+  RDS）通常默认改 ROW
 memory_points:
 - 主从复制三线程：主库 Dump + 从库 IO + 从库 SQL
 - binlog 三格式：STATEMENT（语句，官方默认）/ROW（行变更，生产推荐）/MIXED
 - 同步方式：异步（默认秒级延迟）/半同步（毫秒级）/组复制（强一致）
 - binlog 三用途：主从同步、数据恢复、CDC（Canal）
+frequency: high
 ---
 
 # 【蚂蚁风控】MySQL 主从同步原理？binlog 是什么？Canal 怎么用？
@@ -389,6 +391,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

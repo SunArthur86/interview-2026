@@ -9,9 +9,11 @@ tags:
 - 确定性
 - 业务流程
 feynman:
-  essence: LLM 输出进入业务流程的本质是"把非确定的生成结果约束成确定的结构化决策"——LLM 只负责"理解意图 + 提取参数 + 推荐方案"，真正改变业务状态的动作（扣款、改库存、发券）由确定性代码执行。核心模式是"LLM 输出 JSON → schema 校验 → 业务规则校验 → 确定性执行"，绝不让 LLM 直接操作数据库。
+  essence: LLM 输出进入业务流程的本质是"把非确定的生成结果约束成确定的结构化决策"——LLM 只负责"理解意图 + 提取参数 + 推荐方案"，真正改变业务状态的动作（扣款、改库存、发券）由确定性代码执行。核心模式是"LLM
+    输出 JSON → schema 校验 → 业务规则校验 → 确定性执行"，绝不让 LLM 直接操作数据库。
   analogy: 像医院的 AI 分诊——AI 负责听病人描述、理解症状、推荐科室（非确定），但开药、做手术由医生和确定性医疗流程执行（确定）。AI 的建议要经过医生确认才执行。
-  first_principle: LLM 是概率模型，同样的输入可能输出不同的结果，可能幻觉（编造不存在的订单号）、可能格式错（该输出 JSON 输出了散文）。业务流程要求确定性（扣款必须精确到分、库存必须精确到件）。两者之间必须有"schema 校验 + 规则校验 + 幂等执行"的转换层。
+  first_principle: LLM 是概率模型，同样的输入可能输出不同的结果，可能幻觉（编造不存在的订单号）、可能格式错（该输出 JSON 输出了散文）。业务流程要求确定性（扣款必须精确到分、库存必须精确到件）。两者之间必须有"schema
+    校验 + 规则校验 + 幂等执行"的转换层。
   key_points:
   - 转换层模式：LLM 输出 → JSON schema 校验 → 业务规则校验 → 确定性执行
   - 结构化输出：function calling / JSON mode / structured output（OpenAI 的 response_format）
@@ -25,19 +27,23 @@ first_principle:
   - 业务流程要求精确（金额精确到分、状态机不可乱跳）
   - 不可逆操作（转账、删数据）一旦执行无法撤回
   - LLM 不应该直接持有数据库连接或业务权限
-  rebuild: 建转换层——LLM 用 function calling 输出结构化决策（intent + parameters），代码层做三道校验（JSON schema 校验格式、业务规则校验合理性、权限校验合法性），全部通过后由确定性 Service 执行。LLM 的输出视为"建议"而非"指令"，执行权在代码。
+  rebuild: 建转换层——LLM 用 function calling 输出结构化决策（intent + parameters），代码层做三道校验（JSON
+    schema 校验格式、业务规则校验合理性、权限校验合法性），全部通过后由确定性 Service 执行。LLM 的输出视为"建议"而非"指令"，执行权在代码。
 follow_up:
-  - 怎么保证 LLM 输出 JSON 格式对？——用 function calling（OpenAI tool_use）或 response_format=json_object，模型层面约束输出。再加 jsonschema 校验兜底（ajv/java-jsonschema）。格式错重试 2 次，仍失败降级人工。
-  - LLM 幻觉出不存在的订单号怎么办？——业务规则校验层查数据库验证 orderId 真实存在且属于当前用户，不存在直接拒绝。不信任 LLM 的任何参数。
-  - 数值类输出（金额、数量）怎么保证精确？——LLM 输出字符串而非数字（避免浮点），业务层解析为 BigDecimal 精确计算。关键数值二次校验（"退款金额 1200 元，请确认"）。
-  - LLM 决策和规则引擎冲突怎么办？——规则引擎优先（确定性）。LLM 推荐"给用户退款"，但规则校验"超退货时效"，拒绝。LLM 的输出始终是建议，规则是硬约束。
-  - 怎么回退 LLM 的错误决策？——所有 LLM 驱动的操作用 soft delete（标记而非物理删除）+ 审计日志（记录 LLM 原始输出 + 执行结果）。发现错误可回溯撤销。
+- 怎么保证 LLM 输出 JSON 格式对？——用 function calling（OpenAI tool_use）或 response_format=json_object，模型层面约束输出。再加
+  jsonschema 校验兜底（ajv/java-jsonschema）。格式错重试 2 次，仍失败降级人工。
+- LLM 幻觉出不存在的订单号怎么办？——业务规则校验层查数据库验证 orderId 真实存在且属于当前用户，不存在直接拒绝。不信任 LLM 的任何参数。
+- 数值类输出（金额、数量）怎么保证精确？——LLM 输出字符串而非数字（避免浮点），业务层解析为 BigDecimal 精确计算。关键数值二次校验（"退款金额 1200
+  元，请确认"）。
+- LLM 决策和规则引擎冲突怎么办？——规则引擎优先（确定性）。LLM 推荐"给用户退款"，但规则校验"超退货时效"，拒绝。LLM 的输出始终是建议，规则是硬约束。
+- 怎么回退 LLM 的错误决策？——所有 LLM 驱动的操作用 soft delete（标记而非物理删除）+ 审计日志（记录 LLM 原始输出 + 执行结果）。发现错误可回溯撤销。
 memory_points:
-  - 转换层：LLM 输出 → JSON schema → 业务规则 → 确定性执行
-  - 结构化输出：function calling / response_format=json_object
-  - 双轨校验：LLM 自校验 + 代码硬校验（schema + 规则 + 权限）
-  - 幂等：idempotency_key 兜底重复输出
-  - 可回退：soft delete + 审计日志，LLM 输出视为建议非指令
+- 转换层：LLM 输出 → JSON schema → 业务规则 → 确定性执行
+- 结构化输出：function calling / response_format=json_object
+- 双轨校验：LLM 自校验 + 代码硬校验（schema + 规则 + 权限）
+- 幂等：idempotency_key 兜底重复输出
+- 可回退：soft delete + 审计日志，LLM 输出视为建议非指令
+frequency: medium
 ---
 
 # 【Java 后端架构师】LLM 输出如何进入确定性业务流程
@@ -340,6 +346,30 @@ LLM 是概率模型（生成下一个 token 的概率分布），业务系统是
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Calling special
+    class D error
+    class Delete info
+    class E start
+    class F process
+    class Function decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class JSON process
+    class K decision
+    class LLM special
+    class Schema error
+    class Soft info
     A([用户输入自然语言]) --> B[LLM 概率模型]
     B --> C[Function Calling 输出 JSON]
     C --> D{Schema 格式校验}

@@ -19,6 +19,7 @@ memory_points:
 - 通信依赖对比：TP极依赖单机NVLink带宽做All-Reduce，PP靠跨机IB网络做点对点激活通信。
 - 选型口诀：单机多卡用TP，跨机超长模型用PP，数据规模大用DP（含ZeRO分片）。
 - 推理避坑：流式推理Batch=1时PP会有严重流水线气泡，推理应首选TP避免高延迟。
+frequency: low
 ---
 
 # 模型并行有哪些方案？
@@ -155,6 +156,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

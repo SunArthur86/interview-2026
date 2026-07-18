@@ -36,6 +36,7 @@ memory_points:
 - 流程：Embedding → 检索 → 拼 prompt → LLM
 - 高级 RAG：重排序、查询改写、HyDE
 - 风控应用：相似案件、规则问答、运营助手
+frequency: medium
 ---
 
 # 【蚂蚁风控】RAG 怎么用？风控系统的 RAG 应用
@@ -459,6 +460,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

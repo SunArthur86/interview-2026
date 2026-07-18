@@ -31,6 +31,7 @@ memory_points:
 - 模型首选：中英双语首选bge-m3，因开源可私有部署且支持多语言与多模式检索
 - 维度权衡：维度越高精度越好，但因为存储和检索成本呈线性甚至指数增加，所以需按需取舍
 - 降维技术：bge-m3和text-embedding-3支持截断降维，因为保留前N维仍含大部分语义，所以兼顾了精度与成本
+frequency: medium
 ---
 
 # 【字节面经】不同的 Embedding 模型对检索质量影响很大，你是如何选型的？有没有做过对比评测？
@@ -434,6 +435,7 @@ flowchart TD
     style VEC fill:#FF9800,color:#fff
     style STORE fill:#9C27B0,color:#fff
     style COS fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -13,15 +13,17 @@ tags:
 feynman:
   essence: 传统RAG是"一次检索→一次生成"的单轮管道，当问题需要多步推理、多源检索、或判断"何时停止检索"时就力不从心。Agentic RAG让LLM成为"检索的决策者"——自主决定查什么、查几次、何时停止、如何综合，从而处理复杂的多跳问题和动态检索场景。
   analogy: 传统RAG像一个只会按菜谱做菜的厨师——给你什么食材就做什么菜。Agentic RAG像一个有判断力的厨师——发现食材不够会自己去买、尝味道不对会调整调料、一道菜需要多个步骤会按顺序完成。
-  first_principle: 复杂问题的信息需求是动态的——你无法在提问时就知道需要检索几次、查哪些源。传统RAG的"一次检索"假设信息需求是静态的，而Agentic RAG承认信息需求是逐步揭示的。
+  first_principle: 复杂问题的信息需求是动态的——你无法在提问时就知道需要检索几次、查哪些源。传统RAG的"一次检索"假设信息需求是静态的，而Agentic
+    RAG承认信息需求是逐步揭示的。
   key_points:
   - '传统RAG: query→检索→生成(单轮管道)'
   - 'Agentic RAG: query→规划→迭代检索→判断→综合(多轮闭环)'
   - '核心能力: 自主决定检索策略 + 多跳推理 + 动态终止判断'
-  - '预处理摘要解决静态问题，Agentic RAG解决动态问题'
+  - 预处理摘要解决静态问题，Agentic RAG解决动态问题
 first_principle:
   essence: 信息检索的本质需求是"找到回答问题所需的充分信息"。但充分性的判断依赖于已检索到的内容——这是一个动态的、迭代的过程。
-  derivation: 用户提问 → 检索一次 → 评估是否信息充分 → 不够则改写query再检索 → 直到信息充分才生成 → 这个迭代判断过程需要LLM的推理能力 → 所以需要Agent
+  derivation: 用户提问 → 检索一次 → 评估是否信息充分 → 不够则改写query再检索 → 直到信息充分才生成 → 这个迭代判断过程需要LLM的推理能力
+    → 所以需要Agent
   conclusion: Agentic RAG的本质是"把检索从固定管道变为LLM自主决策的迭代过程"
 follow_up:
 - Agentic RAG的延迟比传统RAG高很多，怎么平衡？
@@ -29,10 +31,11 @@ follow_up:
 - Agentic RAG怎么评估效果？
 - 多跳推理的"跳数"怎么控制？
 memory_points:
-- '传统RAG单轮(检索到生成) vs Agentic RAG多轮(检索到评估到再检索到生成)'
+- 传统RAG单轮(检索到生成) vs Agentic RAG多轮(检索到评估到再检索到生成)
 - '核心差异: 检索策略是预设的 vs 检索策略由LLM动态决定'
 - 'Agentic RAG适用: 多跳问题/多源融合/需要推理判断的复杂查询'
 - '传统RAG适用: 直接事实问答/简单FAQ/延迟敏感场景'
+frequency: medium
 ---
 
 # 为什么需要Agentic RAG？传统RAG加摘要召回不行吗？
@@ -226,6 +229,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

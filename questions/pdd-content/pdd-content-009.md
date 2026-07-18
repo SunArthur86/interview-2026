@@ -27,14 +27,15 @@ first_principle:
   - 强一致代价大
   rebuild: Cache Aside + 延时双删 + 异步补偿。
 follow_up:
-  - 为什么是删缓存不是更新缓存？——更新可能并发覆盖；删是惰性下次读再建
-  - 延时双删多久合适？——读业务耗时（一次 DB 查询+业务），通常 1s
-  - canal 同步怎么保证不丢？——binlog ACK + 幂等消费
+- 为什么是删缓存不是更新缓存？——更新可能并发覆盖；删是惰性下次读再建
+- 延时双删多久合适？——读业务耗时（一次 DB 查询+业务），通常 1s
+- canal 同步怎么保证不丢？——binlog ACK + 幂等消费
 memory_points:
-  - Cache Aside：写库→删缓存
-  - 延时双删：写库→删→延时再删
-  - 最终一致：canal binlog + 消息
-  - 强一致代价大，慎用
+- Cache Aside：写库→删缓存
+- 延时双删：写库→删→延时再删
+- 最终一致：canal binlog + 消息
+- 强一致代价大，慎用
+frequency: high
 ---
 
 # 【拼多多内容】Redis 缓存一致性方案（评价/Feed）？
@@ -232,6 +233,19 @@ Feed 时间线：
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class App start
+    class Binlog process
+    class Canal decision
+    class DB special
+    class MQ error
+    class Redis info
+    class as start
     participant App as 业务应用
     participant DB as MySQL主库
     participant Binlog as Binlog日志

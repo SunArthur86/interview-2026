@@ -16,6 +16,7 @@ memory_points:
 - 核心原因：普通CAS只比较值本身，缺乏对修改过程的感知
 - 解决方案1：版本号机制，每次更新比对预期版本号，底层类AtomicStampedReference
 - 解决方案2：标记位机制，仅判断是否被修改过，底层类AtomicMarkableReference
+frequency: medium
 ---
 
 # CAS的ABA问题是什么？如何解决？
@@ -118,6 +119,7 @@ flowchart TD
     style FAIL fill:#F44336,color:#fff
     style NOTE fill:#FF9800,color:#fff
     style LONGADDER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

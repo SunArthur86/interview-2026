@@ -29,15 +29,16 @@ first_principle:
   - 效果需量化
   rebuild: AI Infra 平台（训练+推理+数据+评测+部署）。
 follow_up:
-  - GPU 怎么调度？——K8s+设备插件+抢占式+共享
-  - 模型怎么部署？——TF Serving/vLLM/Triton + K8s
-  - AB 实验怎么做？——流量分桶+指标对比+显著性
+- GPU 怎么调度？——K8s+设备插件+抢占式+共享
+- 模型怎么部署？——TF Serving/vLLM/Triton + K8s
+- AB 实验怎么做？——流量分桶+指标对比+显著性
 memory_points:
-  - 训练：GPU 调度+分布式
-  - 推理：vLLM/Triton+K8s
-  - 数据：标注+特征+版本
-  - 评测：benchmark+AB
-  - 部署：灰度+回滚
+- 训练：GPU 调度+分布式
+- 推理：vLLM/Triton+K8s
+- 数据：标注+特征+版本
+- 评测：benchmark+AB
+- 部署：灰度+回滚
+frequency: medium
 ---
 
 # 【拼多多内容】AI Infra 平台怎么建设？
@@ -371,6 +372,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

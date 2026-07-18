@@ -31,6 +31,7 @@ memory_points:
 - Windsurf核心是流式推导(Cascade模式)：类似CoT，擅长复杂逻辑梳理与代码审查
 - Cursor胜在@Codebase语义检索与生态，Windsurf胜在IDE原生集成与无感交互
 - 实战避坑：大型Monorepo防索引过慢，大模型重构防Token消耗与幻觉修改
+frequency: medium
 ---
 
 # 【美团面经】使用 Cursor、Windsurf 的使用场景和使用情况如何？
@@ -124,6 +125,12 @@ flowchart TD
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
     style N4 fill:#f44336,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

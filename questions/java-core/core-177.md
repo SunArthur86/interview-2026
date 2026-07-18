@@ -16,6 +16,7 @@ memory_points:
 - JDK8及之前：底层固定使用char[]数组，每个字符占2字节，存英文浪费。
 - JDK9及之后：底层改为byte[]数组，搭配coder标识动态选择压缩编码。
 - 设计原因：大部分堆内字符串数据为纯拉丁字母，改byte[]节省近半内存。
+frequency: high
 ---
 
 # String底层使用的什么类型是什么？
@@ -106,6 +107,42 @@ System.out.println(f.getByte(s2)); // 1 (UTF16)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class JDK error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class Q info
+    class String start
+    class StringBuilder process
+    class StringUtils decision
+    class br special
+    class byte error
+    class char info
+    class coder start
+    class concat process
+    class final decision
+    class hashCode special
+    class intern error
+    class private info
     A[String 不可变] --> B[final 修饰类]
     A --> C[private final char / byte 数组]
     B --> D[不可继承]

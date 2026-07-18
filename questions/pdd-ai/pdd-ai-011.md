@@ -10,7 +10,8 @@ tags:
 - 缓存
 - 特征
 feynman:
-  essence: Redis 是"内存级 KV 存储"，模型推理结果/特征/限流计数都靠它低延迟；中台要懂 5 种数据结构、持久化、集群、热点 key/大 key 治理。
+  essence: Redis 是"内存级 KV 存储"，模型推理结果/特征/限流计数都靠它低延迟；中台要懂 5 种数据结构、持久化、集群、热点 key/大 key
+    治理。
   analogy: 像办公桌抽屉——常用文件（热点数据）放手边（Redis 内存），秒拿；不常用的归档（DB），慢但便宜。
   first_principle: 内存比磁盘快 100 倍，热数据放内存能极大降延迟、减 DB 压力。
   key_points:
@@ -27,14 +28,15 @@ first_principle:
   - 缓存会有一致性问题
   rebuild: Redis（内存 KV + 持久化 + 集群 + 缓存策略 + 治理）。
 follow_up:
-  - Redis 为什么快？——单线程避免锁 + 内存 + epoll 多路复用 + 高效数据结构
-  - 缓存和 DB 一致性怎么保证？——Cache Aside（先 DB 后删缓存）+ 双删 + 订阅 binlog
-  - 大 key 怎么治理？——拆分（Hash 分桶）+ 监控（memory usage）+ 异步删除（UNLINK）
+- Redis 为什么快？——单线程避免锁 + 内存 + epoll 多路复用 + 高效数据结构
+- 缓存和 DB 一致性怎么保证？——Cache Aside（先 DB 后删缓存）+ 双删 + 订阅 binlog
+- 大 key 怎么治理？——拆分（Hash 分桶）+ 监控（memory usage）+ 异步删除（UNLINK）
 memory_points:
-  - 5 结构：String/Hash/List/Set/ZSet
-  - 持久化：RDB 快照/AOF 日志
-  - 集群：主从/哨兵/Cluster
-  - 三大问题：穿透/击穿/雪崩
+- 5 结构：String/Hash/List/Set/ZSet
+- 持久化：RDB 快照/AOF 日志
+- 集群：主从/哨兵/Cluster
+- 三大问题：穿透/击穿/雪崩
+frequency: high
 ---
 
 # 【拼多多 AI 中台】Redis 高级用法与中台缓存怎么设计？
@@ -238,6 +240,29 @@ Redis Cluster 的分片是"按 key 分"，不是"按 key 内部字段分"。`mod
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B1 process
+    class B2 decision
+    class B3 special
+    class B4 error
+    class C1 info
+    class C2 start
+    class Client process
+    class Cluster decision
+    class D1 special
+    class Hash error
+    class Redis info
+    class RedisCluster start
+    class Slot process
+    class Storage decision
+    class ZSet special
+    class hot_sku error
     subgraph Client[应用服务]
         A1[特征提取请求]
     end

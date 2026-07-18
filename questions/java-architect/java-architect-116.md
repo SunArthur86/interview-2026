@@ -9,9 +9,12 @@ tags:
 - 可观测性
 - 内核观测
 feynman:
-  essence: eBPF（Extended Berkeley Packet Filter）是 Linux 内核的可编程沙箱——在内核态运行沙箱程序，无需改内核源码或加载内核模块。在 Java 可观测性场景，eBPF 提供内核级观测：网络（TCP 连接/重传/延迟）、文件 IO、系统调用、CPU 调度，无需改 Java 代码、无需 Agent、几乎零开销。代表项目：Pixie（K8s 网络观测）、Parca（持续 profiling）、Cilium（网络+可观测性）。
+  essence: eBPF（Extended Berkeley Packet Filter）是 Linux 内核的可编程沙箱——在内核态运行沙箱程序，无需改内核源码或加载内核模块。在
+    Java 可观测性场景，eBPF 提供内核级观测：网络（TCP 连接/重传/延迟）、文件 IO、系统调用、CPU 调度，无需改 Java 代码、无需 Agent、几乎零开销。代表项目：Pixie（K8s
+    网络观测）、Parca（持续 profiling）、Cilium（网络+可观测性）。
   analogy: 像"超级仪表盘的探针"——传统监控是"在车上装 GPS"（应用层埋点），eBPF 是"在路面装传感器"（内核层观测）。不用改车（应用），传感器看所有经过的车。
-  first_principle: 传统可观测性的盲区是内核态——Java Agent 看不到 TCP 重传、syscall 延迟、CPU 调度。eBPF 把观测点放到内核：① 无侵入（不改应用代码）；② 全量观测（所有进程的网络/IO/syscall）；③ 低开销（JIT 编译，纳秒级钩子）。补齐应用层监控的盲区。
+  first_principle: 传统可观测性的盲区是内核态——Java Agent 看不到 TCP 重传、syscall 延迟、CPU 调度。eBPF 把观测点放到内核：①
+    无侵入（不改应用代码）；② 全量观测（所有进程的网络/IO/syscall）；③ 低开销（JIT 编译，纳秒级钩子）。补齐应用层监控的盲区。
   key_points:
   - eBPF = Linux 内核可编程沙箱（不改内核源码）
   - 钩子点：kprobe/uprobe/tracepoint/XDP/TC
@@ -25,21 +28,26 @@ first_principle:
   - 应用层只能看到应用调用栈（HTTP/JDBC），看不到内核
   - 内核问题是高阶故障源（网络抖动、IO 阻塞、调度饥饿）
   - 改内核源码或加模块不现实（生产环境不允许）
-  rebuild: eBPF 在内核态运行沙箱程序，钩子点（kprobe/uprobe/tracepoint）拦截内核函数。程序经验证器（安全检查）+ JIT 编译后执行。观测 Java：① 网络层（TCP 重传、连接延迟、RTT）；② IO 层（文件读写延迟）；③ syscall（open/read/write 频率和耗时）；④ CPU 调度（调度延迟、上下文切换）。应用零改动、Agent 不用部署、开销 < 1%。
+  rebuild: eBPF 在内核态运行沙箱程序，钩子点（kprobe/uprobe/tracepoint）拦截内核函数。程序经验证器（安全检查）+ JIT 编译后执行。观测
+    Java：① 网络层（TCP 重传、连接延迟、RTT）；② IO 层（文件读写延迟）；③ syscall（open/read/write 频率和耗时）；④
+    CPU 调度（调度延迟、上下文切换）。应用零改动、Agent 不用部署、开销 < 1%。
 follow_up:
-  - eBPF 和 Java Agent 区别？——Agent 在应用层（JVM 内）观测 HTTP/JDBC；eBPF 在内核层观测网络/IO/syscall。互补，不替代
-  - eBPF 安全吗？——验证器（verifier）保证程序安全（无死循环、不越界访问内存）。eBPF 程序要 root 权限加载（CAP_BPF）
-  - eBPF 看什么 Java 指标？——TCP 重传率、连接延迟（三次握手耗时）、syscall 频率、CPU 调度延迟、GC 引起的 STW 对 syscall 的影响
-  - eBPF 能看 JVM 内部吗？——能通过 uprobe 钩 JVM 函数（如 JVM_GC_Pause），但不如 JFR 详细。eBPF 优势在内核观测，JVM 内部用 JFR
-  - eBPF 怎么用？——bpftrace（命令行脚本）/Pixie（K8s 一键观测）/Parca（持续 profiling）/Cilium（网络+可观测）
+- eBPF 和 Java Agent 区别？——Agent 在应用层（JVM 内）观测 HTTP/JDBC；eBPF 在内核层观测网络/IO/syscall。互补，不替代
+- eBPF 安全吗？——验证器（verifier）保证程序安全（无死循环、不越界访问内存）。eBPF 程序要 root 权限加载（CAP_BPF）
+- eBPF 看什么 Java 指标？——TCP 重传率、连接延迟（三次握手耗时）、syscall 频率、CPU 调度延迟、GC 引起的 STW 对 syscall
+  的影响
+- eBPF 能看 JVM 内部吗？——能通过 uprobe 钩 JVM 函数（如 JVM_GC_Pause），但不如 JFR 详细。eBPF 优势在内核观测，JVM
+  内部用 JFR
+- eBPF 怎么用？——bpftrace（命令行脚本）/Pixie（K8s 一键观测）/Parca（持续 profiling）/Cilium（网络+可观测）
 memory_points:
-  - eBPF = Linux 内核可编程沙箱（不改内核源码）
-  - 钩子点：kprobe（内核函数）/uprobe（用户函数）/tracepoint/XDP（网络包）
-  - 验证器 + JIT 编译 → 安全 + 高性能
-  - 补应用层监控的内核盲区（TCP/syscall/调度）
-  - 代表项目：Pixie/Parca/Cilium/bpftrace
-  - 应用零改动、Agent 不用部署、开销 < 1%
-  - Java 场景：网络抖动/IO 阻塞/GC 对 syscall 影响
+- eBPF = Linux 内核可编程沙箱（不改内核源码）
+- 钩子点：kprobe（内核函数）/uprobe（用户函数）/tracepoint/XDP（网络包）
+- 验证器 + JIT 编译 → 安全 + 高性能
+- 补应用层监控的内核盲区（TCP/syscall/调度）
+- 代表项目：Pixie/Parca/Cilium/bpftrace
+- 应用零改动、Agent 不用部署、开销 < 1%
+- Java 场景：网络抖动/IO 阻塞/GC 对 syscall 影响
+frequency: high
 ---
 
 # 【Java 后端架构师】eBPF 与 Java 服务可观测性如何结合
@@ -411,6 +419,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

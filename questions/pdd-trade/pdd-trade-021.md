@@ -26,14 +26,15 @@ first_principle:
   - 历史订单冷数据占大头
   rebuild: 分库分表（写）+ ES/HBase（多维读）+ 冷热分离归档。
 follow_up:
-  - 按 UID 查和按商户查怎么都支持？——基因法分片（UID 路由信息嵌入 order_id）+ 二级索引
-  - 订单数据怎么归档？——3 月前转 HBase/OSS，热表只留近期
-  - 订单号怎么生成？——雪花算法+基因（UID 后几位嵌入），保证按 UID 反查
+- 按 UID 查和按商户查怎么都支持？——基因法分片（UID 路由信息嵌入 order_id）+ 二级索引
+- 订单数据怎么归档？——3 月前转 HBase/OSS，热表只留近期
+- 订单号怎么生成？——雪花算法+基因（UID 后几位嵌入），保证按 UID 反查
 memory_points:
-  - 分库分表：order_id 路由（基因法）
-  - CQRS：MySQL 写、ES/HBase 读
-  - 状态机+领域事件驱动下游
-  - 冷热分离：热 MySQL + 冷 HBase
+- 分库分表：order_id 路由（基因法）
+- CQRS：MySQL 写、ES/HBase 读
+- 状态机+领域事件驱动下游
+- 冷热分离：热 MySQL + 冷 HBase
+frequency: medium
 ---
 
 # 【拼多多交易】订单中心怎么设计？
@@ -235,6 +236,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

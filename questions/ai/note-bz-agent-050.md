@@ -29,6 +29,7 @@ memory_points:
 - 核心方案：查询改写对齐风格，HyDE用假设答案对齐文档语义。
 - 词表鸿沟：缩写或中英混用，靠同义词扩展或多语言Embedding解决。
 - 进阶方案：用领域同义对微调Embedding模型，从根上拉近向量空间。
+frequency: medium
 ---
 
 # 如何解决 RAG 中的语义鸿沟问题？
@@ -224,6 +225,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

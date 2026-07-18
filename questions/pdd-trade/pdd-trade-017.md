@@ -29,6 +29,7 @@ memory_points:
 - 策略消除 if-else、状态状态机、观察者解耦、责任链串行
 - OCP：对扩展开放对修改封闭
 - Rule of Three
+frequency: high
 ---
 
 # 【拼多多交易】交易系统怎么用设计模式？
@@ -159,6 +160,30 @@ abstract class OrderTemplate {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class Map process
+    class N decision
+    class Outbox special
+    class PromoStrategy error
+    class String info
     A["发起交易下单请求"] --> B["模板方法: 验参 -> 锁定库存 -> 创建订单"]
     B --> C["责任链: 风控过滤校验"]
     C --> D["策略模式: 匹配并计算促销金额"]

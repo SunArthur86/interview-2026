@@ -29,6 +29,7 @@ memory_points:
 - 理论三大件：Agent三大能力（规划/记忆/工具）、RAG全链路优化、LLM推理与训练原理必考
 - 项目灵魂四问：因为面试官最爱深挖细节，所以要提前备好选型理由、评估方法、最大踩坑与扩展方案
 - 系统设计万能回答框架：需求澄清→分层架构→技术选型Trade-off→限流兜底→评估指标闭环
+frequency: medium
 ---
 
 # 2026 年 Agent 智能体面试整体怎么准备？
@@ -229,6 +230,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

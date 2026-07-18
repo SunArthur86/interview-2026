@@ -11,7 +11,8 @@ tags:
 - Claude Code
 - 研发提效
 feynman:
-  essence: AI 代码助手（Cursor/Claude Code）把"写代码"变成"对话"——补全、多文件重构、调试、测试，供应链研发效率提升 30-50%，是工程师 AI 转型的最佳切入点。
+  essence: AI 代码助手（Cursor/Claude Code）把"写代码"变成"对话"——补全、多文件重构、调试、测试，供应链研发效率提升 30-50%，是工程师
+    AI 转型的最佳切入点。
   analogy: 传统编程像用纸笔写稿，AI 代码助手像有秘书——你说意图，它写代码，你 review。
   first_principle: 写代码 70% 时间花在模式化工作（CRUD/查文档/调试），AI 擅长这些，让人聚焦设计。
   key_points:
@@ -35,6 +36,7 @@ memory_points:
 - 场景：补全/重构/调试/测试/文档
 - 提效 30-50%，但必须 review
 - 敏感代码用企业版/私有部署
+frequency: medium
 ---
 
 # 【拼多多供应链】怎么用 AI 代码助手改造研发流程？
@@ -210,6 +212,32 @@ AI 写测试要"快 + 人工补强"：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class CRUD start
+    class Claude process
+    class Core decision
+    class Cursor special
+    class D1 error
+    class D2 info
+    class D3 start
+    class Dev process
+    class E decision
+    class F special
+    class G error
+    class H info
+    class I start
+    class Review process
     subgraph Dev ["AI辅助研发流程"]
         A["开发者需求意图"] --> B["AI代码助手 (Cursor/Claude)"]
         B --> C1["生成模板代码 (CRUD)"]

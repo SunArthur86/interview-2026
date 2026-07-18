@@ -16,6 +16,7 @@ memory_points:
 - 防超卖公式：Redis利用Lua脚本原子检查并扣减，DB层兜底乐观锁防超
 - 核心数据流：网关拦截限流 -> Redis预减库存 -> MQ异步削峰 -> DB落盘
 - 前端优化：静态化结合CDN抗峰值，配合答题验证码拉长请求平削瞬时峰
+frequency: high
 ---
 
 # 如何设计一个秒杀系统？
@@ -133,6 +134,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

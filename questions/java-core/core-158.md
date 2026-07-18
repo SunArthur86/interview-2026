@@ -16,6 +16,7 @@ memory_points:
 - 核心三件套：服务端注册Registry，客户端获取Stub桩，网络传输TCP序列化数据
 - 调用流程：客户端调Stub -> 序列化参数TCP发送 -> 服务端反射调用真实方法 -> 返回序列化结果
 - 实战避坑：服务端重启会导致客户端连接失效报错，需配套自定义Socket及心跳重连机制
+frequency: medium
 ---
 
 # Java RMI的实现方式和工作原理是什么？
@@ -120,6 +121,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

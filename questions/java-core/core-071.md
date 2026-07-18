@@ -26,6 +26,7 @@ memory_points:
 - 编译模式对比：混合模式为默认平衡策略，AOT编译牺牲跨平台性与运行时优化换取极致启动速度
 follow_up: []
 tags: []
+frequency: medium
 ---
 
 # 什么是Java代码执行与编译？
@@ -54,6 +55,27 @@ tags: []
 #### JVM 整体架构与执行流
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class BC start
+    class CPU process
+    class Heap decision
+    class Interp special
+    class JIT error
+    class Java info
+    class Method start
+    class OS process
+    class PC decision
+    class RDA special
+    class Src error
+    class Stack info
+    class br start
+    class class process
+    class javac decision
     Src[Java 源代码] -->|"javac 编译"| BC["字节码 (.class 文件)"]
     BC -->|"类加载子系统"| RDA["运行时数据区"]
     RDA --> Heap[堆]

@@ -33,6 +33,7 @@ memory_points:
 - G1：Region + 可预测停顿 + Mixed GC
 - JDK 9+ 默认 G1
 - 调优目标：减少 Full GC
+frequency: high
 ---
 
 # 【拼多多交易】JVM GC 怎么调优？
@@ -160,6 +161,37 @@ ZGC 没有 Full GC，但问题依然在——内存泄漏会导致 ZGC 的并发
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Allocation process
+    class App decision
+    class B special
+    class C error
+    class D info
+    class Dump start
+    class E process
+    class F decision
+    class FGC special
+    class G error
+    class G1 info
+    class GC start
+    class H process
+    class I decision
+    class J special
+    class JVM error
+    class K info
+    class MAT start
+    class Mixed process
+    class Opt decision
+    class TTL special
+    class YGC error
+    class br info
+    class maximumSize start
     subgraph App [交易应用]
         A["业务对象/本地缓存"]
         B["无界集合/大对象分配"]

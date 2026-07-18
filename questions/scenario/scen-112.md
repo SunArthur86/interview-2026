@@ -25,6 +25,7 @@ memory_points:
 - DB兜底层：UPDATE stock SET count=count-1 WHERE id=? AND count>0 利用了行锁
 - 极致性能：用Redis Lua脚本做GET与DECR的原子扣减，承压10万+QPS
 - 全链路架构：前置限流削峰，Redis Lua扣减，MQ异步落库，DB乐观锁兜底
+frequency: high
 ---
 
 # 秒杀系统如何做到「绝不超卖」？从缓存到数据库的全链路库存扣减方案。
@@ -128,6 +129,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

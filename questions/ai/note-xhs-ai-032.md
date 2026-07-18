@@ -11,8 +11,8 @@ tags:
 - 故障处置
 - 面经
 feynman:
-  essence: "OOM紧急处置是推理服务线上事故的标准止血流程——从最小影响的参数调整开始，逐步加码，每步验证后再进下一步"
-  analogy: "像急诊分诊：先量体温吃退烧药（降利用率参数），不行再打点滴（降并发），再不行上呼吸机（开量化），最后才考虑手术（权重量化）。不能一上来就全部手段同时上，否则分不清哪个起了作用"
+  essence: OOM紧急处置是推理服务线上事故的标准止血流程——从最小影响的参数调整开始，逐步加码，每步验证后再进下一步
+  analogy: 像急诊分诊：先量体温吃退烧药（降利用率参数），不行再打点滴（降并发），再不行上呼吸机（开量化），最后才考虑手术（权重量化）。不能一上来就全部手段同时上，否则分不清哪个起了作用
   key_points:
   - 五步止血法：降utilization→降并发→开量化→开prefix cache→权重量化
   - 每步验证后再进下一步，避免叠加变更导致问题难定位
@@ -20,9 +20,10 @@ feynman:
   - FP8→INT8→FP16回退是量化降级的优先顺序
   - AWQ/GPTQ是最后的核武器——影响模型质量
 first_principle:
-  essence: "GPU OOM的本质是 物理显存 < (模型权重 + KV Cache + 激活值 + 临时buffer)。止血就是压缩这四个分量"
-  derivation: "vLLM启动时预留 gpu_memory_utilization × 总显存 给KV Cache，其余给模型权重和activation。当实际运行时KV Cache超出预留空间，触发OOM。止血策略按影响范围从小到大：调参数(影响最小)→降并发(影响吞吐)→量化KV(影响精度)→量化权重(影响最大)"
-  conclusion: "线上事故处置的第一原则是可追溯性——每次只改一个变量，确认效果后再改下一个"
+  essence: GPU OOM的本质是 物理显存 < (模型权重 + KV Cache + 激活值 + 临时buffer)。止血就是压缩这四个分量
+  derivation: vLLM启动时预留 gpu_memory_utilization × 总显存 给KV Cache，其余给模型权重和activation。当实际运行时KV
+    Cache超出预留空间，触发OOM。止血策略按影响范围从小到大：调参数(影响最小)→降并发(影响吞吐)→量化KV(影响精度)→量化权重(影响最大)
+  conclusion: 线上事故处置的第一原则是可追溯性——每次只改一个变量，确认效果后再改下一个
 follow_up:
 - gpu_memory_utilization设多少最安全？默认0.9合适吗？
 - max_num_seqs降到多少合适？有没有动态调整的方案？
@@ -33,6 +34,7 @@ memory_points:
 - 每步验证后再进下一步，不叠加变更
 - gpu_memory_utilization 0.95→0.85
 - 量化降级顺序：FP8→INT8→FP16
+frequency: high
 ---
 
 # 【AI Infra推理优化】OOM紧急处置优先级是什么？
@@ -198,6 +200,7 @@ flowchart TD
     style W_FIX fill:#009688,color:#fff
     style KV_FIX fill:#FF9800,color:#fff
     style OFFL fill:#9C27B0,color:#fff
+
 ```
 
 ## 结构化回答

@@ -4,8 +4,17 @@ difficulty: L3
 category: java-architect
 subcategory: 稳定性治理
 title: 混沌工程在 Java 核心链路中的落地
-tags: [混沌工程, Chaos Mesh, 故障注入, 稳定性, Java]
-related: [java-architect-148, java-architect-146, java-architect-145]
+tags:
+- 混沌工程
+- Chaos Mesh
+- 故障注入
+- 稳定性
+- Java
+related:
+- java-architect-148
+- java-architect-146
+- java-architect-145
+frequency: medium
 ---
 
 # 混沌工程在 Java 核心链路中的落地
@@ -431,6 +440,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

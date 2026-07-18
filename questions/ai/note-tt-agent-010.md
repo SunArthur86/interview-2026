@@ -21,7 +21,8 @@ feynman:
   - 定期抽检：随机抽样审核Agent输出质量
 first_principle:
   essence: 人工介入的边际成本应低于错误操作的边际损失
-  derivation: 设人工审核成本C_human=2元/次，错误操作损失C_error=500元/次。当模型置信度<阈值τ时，预期损失=P(error)×C_error。当P(error)×500 > 2，即P(error)>0.4%时就值得人工审核
+  derivation: 设人工审核成本C_human=2元/次，错误操作损失C_error=500元/次。当模型置信度<阈值τ时，预期损失=P(error)×C_error。当P(error)×500
+    > 2，即P(error)>0.4%时就值得人工审核
   conclusion: HITL不是每个节点都加，而是在"错误损失大×出错概率非零"的节点加
 follow_up:
 - 人工审核的SLA怎么定？用户等太久怎么办？
@@ -32,6 +33,7 @@ memory_points:
 - 因果句：因为退款转账等操作具有不可逆性，所以必须设计强阻断的人工二次确认
 - 因果句：因为模型存在认知边界，所以当输出置信度低于阈值时必须转人工接管
 - 对比句：连续失败或触发安全红线时直接转交人工，周期性抽检则用于持续优化
+frequency: medium
 ---
 
 # Human-in-the-loop人工断点怎么设计？哪些环节需要人工介入审批？
@@ -187,6 +189,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

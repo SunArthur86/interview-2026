@@ -27,14 +27,15 @@ first_principle:
   - 消息不能丢
   rebuild: Kafka（分区并行 + 副本 + 消费组 + 顺序写高性能）。
 follow_up:
-  - 怎么保证消息不丢？——Producer acks=all + 副本 + Consumer 手动提交 offset
-  - 怎么保证消息有序？——同 key 进同分区（分区有序），全局有序单分区（牺牲并行）
-  - 怎么处理重复消息？——幂等消费（业务唯一键去重）
+- 怎么保证消息不丢？——Producer acks=all + 副本 + Consumer 手动提交 offset
+- 怎么保证消息有序？——同 key 进同分区（分区有序），全局有序单分区（牺牲并行）
+- 怎么处理重复消息？——幂等消费（业务唯一键去重）
 memory_points:
-  - 三角色：Producer/Broker/Consumer
-  - 高吞吐：顺序写+零拷贝+批量
-  - 消费组分区分担
-  - 可靠：acks=all + 副本 + 幂等
+- 三角色：Producer/Broker/Consumer
+- 高吞吐：顺序写+零拷贝+批量
+- 消费组分区分担
+- 可靠：acks=all + 副本 + 幂等
+frequency: high
 ---
 
 # 【拼多多 AI 中台】Kafka 怎么用？消息队列怎么保证可靠性？
@@ -292,6 +293,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

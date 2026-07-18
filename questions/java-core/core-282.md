@@ -21,6 +21,7 @@ memory_points:
 - 核心三角色：发起人(创建/恢复)、备忘录(存状态)、管理者(仅持有不可改)
 - 封装性体现：管理者只负责存取快照，完全不知道内部状态的具体细节
 - 典型应用场景：文本编辑器的撤销(Ctrl+Z)、游戏存档与回档功能
+frequency: medium
 ---
 
 # 备忘录模式的原理是什么？
@@ -127,6 +128,34 @@ public class Originator {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Caretaker special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class Memento decision
+    class N special
+    class O error
+    class Originator info
+    class Undo start
+    class br process
+    class restore decision
+    class save special
     A[备忘录模式 Memento] --> B[Originator 发起人]
     B --> C[创建快照 save]
     B --> D[恢复快照 restore]

@@ -33,6 +33,7 @@ memory_points:
 - 结构骨架：主体数组+链表解决哈希冲突，JDK1.8引入红黑树解决长链表O(N)查询慢问题
 - 核心参数：初始容量16，负载因子0.75，扩容阈值=两者乘积
 - 树化门槛：链表长度>8 且 数组长度>=64 才转红黑树，长度降至6则退化为链表
+frequency: high
 ---
 
 # HashMap JDK 8 的底层原理？为什么引入红黑树？扩容机制是怎样的？
@@ -164,6 +165,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

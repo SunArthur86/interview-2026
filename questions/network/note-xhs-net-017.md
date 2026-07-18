@@ -13,8 +13,8 @@ tags:
 - 协议选型
 - 面经
 feynman:
-  essence: "gRPC基于HTTP/2+Protobuf，适合微服务间高性能通信；HTTP/REST基于HTTP/1.1+JSON，适合对外API和前后端通信"
-  analogy: "gRPC就像军队的加密对讲机——专用频段、压缩编码、双向通话，高效但需要双方都配设备；HTTP就像普通电话——通用、人话可读，但传输效率低"
+  essence: gRPC基于HTTP/2+Protobuf，适合微服务间高性能通信；HTTP/REST基于HTTP/1.1+JSON，适合对外API和前后端通信
+  analogy: gRPC就像军队的加密对讲机——专用频段、压缩编码、双向通话，高效但需要双方都配设备；HTTP就像普通电话——通用、人话可读，但传输效率低
   key_points:
   - gRPC = HTTP/2 + Protobuf序列化 + IDL（.proto文件）
   - Protobuf二进制序列化比JSON小3-10倍，解析快20-100倍
@@ -22,9 +22,10 @@ feynman:
   - gRPC支持四种调用模式：Unary、Server Stream、Client Stream、Bidirectional
   - 选型：内部微服务用gRPC，对外API/前后端用HTTP/REST
 first_principle:
-  essence: "微服务间通信的核心需求是'高性能+强类型+跨语言'，HTTP/1.1+JSON在每个维度都有瓶颈"
-  derivation: "JSON人类可读但机器解析慢(文本序列化) → Protobuf二进制编码 → 更小更快; HTTP/1.1每次请求新建连接+队头阻塞 → HTTP/2多路复用 → 更高效; REST接口无强类型约束 → IDL定义接口契约 → 编译期检查"
-  conclusion: "gRPC在序列化效率、传输效率、接口契约三个维度全面优于HTTP/REST，但牺牲了可读性和浏览器直接访问能力"
+  essence: 微服务间通信的核心需求是'高性能+强类型+跨语言'，HTTP/1.1+JSON在每个维度都有瓶颈
+  derivation: JSON人类可读但机器解析慢(文本序列化) → Protobuf二进制编码 → 更小更快; HTTP/1.1每次请求新建连接+队头阻塞
+    → HTTP/2多路复用 → 更高效; REST接口无强类型约束 → IDL定义接口契约 → 编译期检查
+  conclusion: gRPC在序列化效率、传输效率、接口契约三个维度全面优于HTTP/REST，但牺牲了可读性和浏览器直接访问能力
 follow_up:
 - gRPC的健康检查机制是什么？
 - Protobuf的向后兼容性如何保证？
@@ -36,6 +37,7 @@ memory_points:
 - Protobuf vs JSON：体积小3-10x，解析快20-100x
 - HTTP/2三大特性：多路复用、头部压缩(HPACK)、Server Push
 - 四种调用模式：Unary(一元)、Server Streaming、Client Streaming、Bidirectional Streaming
+frequency: medium
 ---
 
 # 【拼多多 Java服务端】AI助手项目接入层协议选型：HTTP vs gRPC
@@ -247,6 +249,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

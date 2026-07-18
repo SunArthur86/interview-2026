@@ -17,6 +17,7 @@ memory_points:
 - 实战优化：大文件传输（如 Kafka/Nginx）用 sendfile 实现零拷贝，减少 CPU 拷贝。
 - 丢包排查：RX dropped 多因软中断处理慢或应用读取慢导致缓冲区满。
 - 对比：零拷贝将数据拷贝次数从 4 次减至 2 次且全为 DMA。
+frequency: low
 ---
 
 # 收发流程是什么？
@@ -126,6 +127,53 @@ void set_socket_buffer(int sockfd) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Buffer decision
+    class C special
+    class D error
+    class DMA info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class IP info
+    class IRQ start
+    class J process
+    class K decision
+    class L special
+    class Linux error
+    class M info
+    class N start
+    class NAPI process
+    class NET_RX decision
+    class NIC special
+    class O error
+    class P info
+    class Q start
+    class R process
+    class RPS decision
+    class RSS special
+    class Ring error
+    class S info
+    class SO_REUSEPORT start
+    class TCP process
+    class br decision
+    class qdisc special
+    class read error
+    class recv info
+    class send start
+    class sendfile process
+    class skb decision
+    class socket special
+    class write error
     A[Linux 网络包接收流程] --> B[网卡 NIC 收到帧]
     B --> C[DMA 写入 Ring Buffer]
     C --> D[网卡硬件中断 IRQ]

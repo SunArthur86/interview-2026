@@ -16,6 +16,7 @@ memory_points:
 - 强一致方案：2PC/XA（数据库原生，靠全局锁，性能极差，适合传统场景）
 - 最终一致方案：TCC（高侵入高性能）、Saga（长流程）、Seata AT（无侵入主流）
 - 对比记忆：因为高并发下强一致锁引发雪崩，所以互联网业务普遍采用柔性事务（最终一致）
+frequency: high
 ---
 
 # 什么是分布式事务？
@@ -161,6 +162,7 @@ flowchart TD
     style SAGA fill:#9C27B0,color:#fff
     style EVENT fill:#009688,color:#fff
     style COMP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

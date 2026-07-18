@@ -27,6 +27,7 @@ memory_points:
 - 索引策略：向量库存储多向量字段，图片提取OCR文本辅助索引
 - 检索流程：图文联合查询，多路召回后融合排序，支持文搜图、图搜文
 - 生成阶段：多模态LLM(如GPT-4o)接收文本+图片上下文，生成带引用的回答
+frequency: medium
 ---
 
 # 如何设计一个多模态 RAG 系统？支持图文混合检索，用户可以用文字搜索图片、用图片搜索相关文档。
@@ -159,6 +160,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

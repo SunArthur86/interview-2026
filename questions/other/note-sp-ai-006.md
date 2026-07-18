@@ -30,6 +30,7 @@ memory_points:
 - GIL本质是全局锁：因为保护引用计数，所以同一时刻仅单线程执行Python字节码。
 - 场景对比：CPU密集多进程绕GIL，而IO密集多线程/协程遇阻塞会自动释放GIL。
 - 概念对比：进程资源独立开销大，线程共享内存受GIL限，协程极轻量单线程内并发。
+frequency: high
 ---
 
 # Python的GIL是什么？什么是进程？什么是协程？
@@ -189,6 +190,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

@@ -34,6 +34,7 @@ memory_points:
 - 核心矛盾：块大=上下文完整但检索不准，块小=检索准但上下文断裂
 - 按文档类型选：FAQ用每条一个chunk，论文用按section切，代码用按函数切
 - 加分项：提到markdown-aware分块(按标题层级)和代码感知分块(按函数/类)
+frequency: medium
 ---
 
 # 【宇树科技二面】RAG 的 Chunking 策略如何设计？遇到过哪些问题，如何调整？
@@ -272,6 +273,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

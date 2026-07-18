@@ -17,6 +17,7 @@ memory_points:
 - 底层机制：网状类加载模型，打破双亲委派。每个 Bundle 独立 ClassLoader 解决 Jar 包冲突
 - 服务机制：提供注册中心，Bundle 动态注册和发现服务，实现面向服务的编程模型
 - 高频对比：OSGi 是运行时动态模块化（支持热部署），而 Java 9 JPMS 是静态编译时模块化
+frequency: low
 ---
 
 # 什么是OSGI（动态模型系统）？
@@ -118,6 +119,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -9,7 +9,8 @@ tags:
 - 数据项目
 - STAR法则
 feynman:
-  essence: 介绍复杂数据项目用 STAR-B（Situation背景/Task任务/Action方案/Result结果/Building反思）结构，重点突出"难点"和"量化结果"。背景30秒（业务/上下游），难点30秒（列2个真正卡过的点），方案90秒（A vs B 对比为什么选A），结果30秒（上线了什么+量化指标），反思30秒（回头看哪里可以更好）。指标没数字="提升很多"=没提升。
+  essence: 介绍复杂数据项目用 STAR-B（Situation背景/Task任务/Action方案/Result结果/Building反思）结构，重点突出"难点"和"量化结果"。背景30秒（业务/上下游），难点30秒（列2个真正卡过的点），方案90秒（A
+    vs B 对比为什么选A），结果30秒（上线了什么+量化指标），反思30秒（回头看哪里可以更好）。指标没数字="提升很多"=没提升。
   analogy: 像讲故事——先交代背景（什么朝代什么事），再讲冲突（遇到什么难题），高潮是解决方案（怎么破局），结局是战果（斩敌多少），彩蛋是反思（下次怎么打更好）。没有冲突和高潮的故事没人爱听。
   first_principle: 面试官追问的本质是验证"你真的做过吗 + 你理解多深"。结构化叙述让面试官能抓重点，量化数据证明真实性，反思证明成长性。
   key_points:
@@ -30,6 +31,7 @@ memory_points:
 - 用STAR-B结构叙事：背景、任务、方案行动、量化结果、复盘反思
 - 方案对比（A vs B）：必须给出技术选型理由以证明权衡过，拒绝盲目选型
 - 难点和结果必须量化：讲具体技术卡点（如数据倾斜），结果给具体数字（如降90%）
+frequency: high
 ---
 
 # 【神州专车面经】介绍做过最复杂的数据项目，从需求到落地怎么做？
@@ -119,6 +121,28 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Action process
+    class B decision
+    class Building special
+    class C error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class Off info
+    class Result start
+    class Situation process
+    class Task decision
+    class br special
     A["背景(Situation)<br/>业务价值与痛点"] --> B["任务(Task)<br/>职责与技术卡点"]
     B --> C["方案(Action)<br/>A/B选型对比"]
     C --> D["结果(Result)<br/>基线对比与量化指标"]

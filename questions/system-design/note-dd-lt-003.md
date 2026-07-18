@@ -33,6 +33,7 @@ memory_points:
 - 口诀记流程：建表展开铺满，抽奖随机取模，一步直达结果
 - 关键数字：表大小通常设10000，保证精度到万分位
 - 极易踩坑：概率极小但非0的奖品，必须强制分配至少1个槽位防死局
+frequency: low
 ---
 
 # 【滴滴面经】你说用了空间换时间，把抽奖算法优化到了 O(1)，具体是怎么做的？
@@ -346,6 +347,28 @@ public class AliasMethod {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class B start
+    class C process
+    class I decision
+    class ID special
+    class M error
+    class N info
+    class O start
+    class R process
+    class Runtime decision
+    class Setup special
+    class T error
+    class ThreadLocalRandom info
+    class br start
+    class current process
+    class int decision
+    class table special
     subgraph Setup [构建阶段]
         C[概率配置<br/>一等奖10%, 二等奖30%] --> B[按概率展开填充数组槽位]
         B --> T[生成大小为N的<br/>静态只读查找表 int table N]

@@ -35,6 +35,7 @@ memory_points:
 - 流式写入：EasyExcel/SXSSF(窗口大小100行)，避免百万行全加载内存
 - 幂等：任务ID+分片号唯一标识，重试跳过已完成的分片
 - 续传：Redis记录分片状态(PENDING/RUNNING/DONE/FAILED)，重启后从断点继续
+frequency: high
 ---
 
 # 【字节一面】使用普通数据库和Java原生手段，设计一个千万级数据量导出报表到OSS的流程
@@ -313,6 +314,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

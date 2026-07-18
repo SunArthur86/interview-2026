@@ -16,6 +16,7 @@ memory_points:
 - 拆分对比：水平拆行（解决表太长），垂直拆列（解决表太宽）。
 - Range 路由扩容易但易产生热点，Hash 路由分布均但扩容迁移量大。
 - 痛点：分表后会产生跨表 Join、分页查询以及全局唯一 ID 生成等复杂问题。
+frequency: low
 ---
 
 # 什么是水平分表？
@@ -121,6 +122,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

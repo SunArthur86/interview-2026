@@ -29,6 +29,7 @@ memory_points:
 - 数据隔离：RAG检索时行级过滤，向量库按租户Namespace隔离。
 - 防泄露：系统Prompt不包含敏感信息，输出PII检测。
 - 审计：全链路记录（请求→推理→工具），日志WORM存储防篡改。
+frequency: low
 ---
 
 # 如何设计AI系统的权限控制方案？防止LLM被利用进行越权操作或信息泄露。
@@ -103,6 +104,32 @@ def execute_tool(user_id, tool_name, args):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ABAC process
+    class B decision
+    class C special
+    class D error
+    class D1 info
+    class D2 start
+    class D3 process
+    class D4 decision
+    class D5 special
+    class D6 error
+    class D7 info
+    class E start
+    class F process
+    class JWT decision
+    class OAuth special
+    class RBAC error
+    class S1 info
+    class SQL start
+    class br process
     A["用户对话请求"] --> B["第一层 身份认证<br/>OAuth 2.0 / JWT"]
     B --> C["第二层 资源权限<br/>RBAC / ABAC"]
     C --> D["第三层 AI行为过滤"]

@@ -9,9 +9,12 @@ tags:
 - 领域边界
 - 治理
 feynman:
-  essence: 单体系统的死法不是"太大"，而是"边界混乱"——所有模块互相依赖、共享数据库、改一处动全身。模块化的核心是"用强制的物理边界（Java Module System / Maven 多模块 / Spring Modulith）替代自觉的逻辑边界"，让"领域边界"从约定变成编译期约束。能编译通过 ≠ 边界清晰，能防止跨领域乱调用的边界才是真模块化。
-  analogy: 像合租房子——大家共用客厅厨房（共享 DB）迟早因为"谁洗碗"吵架。模块化是"改成独立公寓"（各自有完整厨房卫生间），虽然总平米数大了，但边界清晰、互不干扰。Spring Modulith 是"软隔断"（屏风），JPMS 是"硬隔断"（承重墙）。
-  first_principle: 模块化的第一性是"用强制边界降低耦合"。自觉遵守的边界（包名规范、注释）会被业务压力冲垮——"这个紧急需求跨领域调一下"。强制边界（编译期检查、ArchUnit 测试、模块隔离）让"违规调用"变成编译失败或测试失败，把"边界"从道德约束升为工程约束。
+  essence: 单体系统的死法不是"太大"，而是"边界混乱"——所有模块互相依赖、共享数据库、改一处动全身。模块化的核心是"用强制的物理边界（Java Module
+    System / Maven 多模块 / Spring Modulith）替代自觉的逻辑边界"，让"领域边界"从约定变成编译期约束。能编译通过 ≠ 边界清晰，能防止跨领域乱调用的边界才是真模块化。
+  analogy: 像合租房子——大家共用客厅厨房（共享 DB）迟早因为"谁洗碗"吵架。模块化是"改成独立公寓"（各自有完整厨房卫生间），虽然总平米数大了，但边界清晰、互不干扰。Spring
+    Modulith 是"软隔断"（屏风），JPMS 是"硬隔断"（承重墙）。
+  first_principle: 模块化的第一性是"用强制边界降低耦合"。自觉遵守的边界（包名规范、注释）会被业务压力冲垮——"这个紧急需求跨领域调一下"。强制边界（编译期检查、ArchUnit
+    测试、模块隔离）让"违规调用"变成编译失败或测试失败，把"边界"从道德约束升为工程约束。
   key_points:
   - 三种实现：Maven 多模块（构建隔离）、Spring Modulith（逻辑模块+验证）、JPMS（JDK 9+ 强制模块）
   - 领域边界用 DDD 限界上下文划分，一个模块 = 一个限界上下文
@@ -25,19 +28,23 @@ first_principle:
   - 共享 DB 是最大的耦合源——跨领域 JOIN 让表结构无法独立演进
   - 模块化要"强制"才有效——编译期/测试期约束 > 运行期约定
   - 模块化是微服务的前置条件——单体内部都划不清边界，拆成微服务只会更乱
-  rebuild: 用 DDD 限界上下文划分领域（订单/库存/支付/营销），每个领域是一个模块。模块间通过公开 API（interface）交互，内部实现（implementation）对外不可见。物理隔离用 Maven 多模块（构建隔离）+ Spring Modulith（逻辑模块 + 自动文档）+ JPMS（JDK 9+ 编译期强制）。数据库按模块拆表归属，禁止跨模块 JOIN，跨模块查询走 API。ArchUnit 做架构守护测试，CI 阻断边界违规。
+  rebuild: 用 DDD 限界上下文划分领域（订单/库存/支付/营销），每个领域是一个模块。模块间通过公开 API（interface）交互，内部实现（implementation）对外不可见。物理隔离用
+    Maven 多模块（构建隔离）+ Spring Modulith（逻辑模块 + 自动文档）+ JPMS（JDK 9+ 编译期强制）。数据库按模块拆表归属，禁止跨模块
+    JOIN，跨模块查询走 API。ArchUnit 做架构守护测试，CI 阻断边界违规。
 follow_up:
-  - Maven 多模块和 JPMS 区别？——Maven 是构建期隔离（依赖管理），JPMS 是编译期+运行期强制（module-info.java）。JPMS 更强但侵入性高
-  - Spring Modulith 是什么？——Spring 官方的模块化框架，用 package 约定划分模块，提供边界验证、模块文档自动生成、事件发布机制
-  - 为什么禁止跨模块 JOIN？——跨模块 JOIN 让表结构耦合（改 A 表影响 B 模块查询）。跨模块查询走 API（B 模块提供查询接口）或 CQRS（物化视图）
-  - 模块化一定要拆微服务吗？——不。模块化单体（Modular Monolith）是优于微服务的中间态——保留单体的部署/事务简单性，又有模块的边界清晰性。适合 50 人以下的团队
-  - 怎么防止模块化退化为"大泥球"？——ArchUnit 架构测试 + CI 阻断 + 评审 checklist。边界违规一次都不能放过，否则破窗效应
+- Maven 多模块和 JPMS 区别？——Maven 是构建期隔离（依赖管理），JPMS 是编译期+运行期强制（module-info.java）。JPMS 更强但侵入性高
+- Spring Modulith 是什么？——Spring 官方的模块化框架，用 package 约定划分模块，提供边界验证、模块文档自动生成、事件发布机制
+- 为什么禁止跨模块 JOIN？——跨模块 JOIN 让表结构耦合（改 A 表影响 B 模块查询）。跨模块查询走 API（B 模块提供查询接口）或 CQRS（物化视图）
+- 模块化一定要拆微服务吗？——不。模块化单体（Modular Monolith）是优于微服务的中间态——保留单体的部署/事务简单性，又有模块的边界清晰性。适合 50
+  人以下的团队
+- 怎么防止模块化退化为"大泥球"？——ArchUnit 架构测试 + CI 阻断 + 评审 checklist。边界违规一次都不能放过，否则破窗效应
 memory_points:
-  - 三种实现：Maven 多模块（构建隔离）/Spring Modulith（逻辑+验证）/JPMS（编译期强制）
-  - 领域边界用 DDD 限界上下文，一个模块 = 一个限界上下文
-  - 模块间只通过公开 API 交互，禁止跨模块访问内部类/表
-  - ArchUnit 做架构守护测试，CI 阻断边界违规
-  - 数据库按模块拆表，禁止跨模块 JOIN（走 API 或物化视图）
+- 三种实现：Maven 多模块（构建隔离）/Spring Modulith（逻辑+验证）/JPMS（编译期强制）
+- 领域边界用 DDD 限界上下文，一个模块 = 一个限界上下文
+- 模块间只通过公开 API 交互，禁止跨模块访问内部类/表
+- ArchUnit 做架构守护测试，CI 阻断边界违规
+- 数据库按模块拆表，禁止跨模块 JOIN（走 API 或物化视图）
+frequency: medium
 ---
 
 # 【Java 后端架构师】单体系统模块化与领域边界治理
@@ -413,6 +420,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

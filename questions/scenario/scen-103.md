@@ -25,6 +25,7 @@ memory_points:
 - 单机用滑动窗口更精准，分布式用Redis+Lua(保证原子性)或令牌桶
 - 高并发绝不全走Redis：先过本地限流，仅秒杀等核心资源才申请分布式Token
 - Redis挂掉要优雅降级为单机限流，宁可局部超载，绝不能阻断全局服务
+frequency: high
 ---
 
 # 如何设计一个支撑千万级并发的网关限流系统？对比单机限流与分布式限流的方案。
@@ -128,6 +129,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

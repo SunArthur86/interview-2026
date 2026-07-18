@@ -28,6 +28,7 @@ memory_points:
 - 设计原则：单一职责（只做一件事）与明确边界（严格的输入输出Schema）。
 - 不用Creator原因：自动生成缺乏对边界case处理与异常降级的工程级可控性。
 - 手设流程：需求分析→Schema定义→Prompt工程→工具依赖→异常测试。
+frequency: medium
 ---
 
 # 【腾讯面经】Skill 怎么设计的？为什么不用 Skill Creator（自动生成工具）？
@@ -459,6 +460,7 @@ flowchart TD
     style FC fill:#FF9800,color:#fff
     style SKILL fill:#9C27B0,color:#fff
     style MCP fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

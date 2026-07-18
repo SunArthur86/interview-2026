@@ -27,14 +27,15 @@ first_principle:
   - 回收时要停业务线程（STW）才能保证一致
   rebuild: 分代回收（新生代频繁小回收 + 老年代偶尔大回收）+ 并发收集（减少 STW）。
 follow_up:
-  - G1 和 CMS 区别？——G1 基于Region可预测暂停，CMS 标记清除有碎片，JDK 9 后 G1 默认
-  - 怎么排查 Full GC 频繁？——jstat/jmap dump → 找大对象/内存泄漏 → 调新生代比
-  - ZGC 为什么这么快？——染色指针 + 读屏障 + 并发整理，STW < 10ms
+- G1 和 CMS 区别？——G1 基于Region可预测暂停，CMS 标记清除有碎片，JDK 9 后 G1 默认
+- 怎么排查 Full GC 频繁？——jstat/jmap dump → 找大对象/内存泄漏 → 调新生代比
+- ZGC 为什么这么快？——染色指针 + 读屏障 + 并发整理，STW < 10ms
 memory_points:
-  - GC Root：栈/静态/JNI/活动线程
-  - 新生代复制算法，老年代标记整理
-  - G1 默认（9+），ZGC 低延迟（<10ms STW）
-  - 调优：堆/新生代比/暂停目标
+- GC Root：栈/静态/JNI/活动线程
+- 新生代复制算法，老年代标记整理
+- G1 默认（9+），ZGC 低延迟（<10ms STW）
+- 调优：堆/新生代比/暂停目标
+frequency: high
 ---
 
 # 【拼多多 AI 中台】JVM GC 原理与模型服务调优怎么做？
@@ -238,6 +239,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

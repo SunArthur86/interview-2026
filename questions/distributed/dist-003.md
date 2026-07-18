@@ -16,6 +16,7 @@ memory_points:
 - 流量路径：因为响应包由 RS 直接通过网关发给客户端，所以 LB 不会成为性能瓶颈
 - 网络要求：因为依赖二层 MAC 转发，所以 LB 与 RS 必须处于同一个物理局域网内
 - 关键配置：RS 需在 lo 接口绑定 VIP（32位掩码），且必须配置 ARP 抑制防冲突
+frequency: low
 ---
 
 # LVS DR模式的工作原理是什么？
@@ -188,6 +189,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -15,6 +15,7 @@ memory_points:
 - 核心区分：Runnable无返回不抛异常，而Callable有返回值且能抛受检异常
 - 避坑指南：生产环境禁用Executors直接创建，推荐ThreadPoolExecutor防OOM
 - 必考点：调start()启动而非run()，前者开启新线程，后者只是普通方法调用
+frequency: medium
 ---
 
 # Java创建线程有哪几种方式？
@@ -127,6 +128,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

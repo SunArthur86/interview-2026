@@ -29,6 +29,7 @@ memory_points:
 - 消费端防丢：关闭自动提交Offset，业务逻辑处理完毕后再手动Ack
 - 重试兜底：多次消费失败必须转入死信队列（DLQ）进行人工干预，切忌直接丢弃
 - 全链路铁律：Producer重试落库表，Broker同步刷盘防断电，Consumer手动提交加幂等
+frequency: high
 ---
 
 # 如何保证消息的顺序消费？
@@ -94,6 +95,12 @@ flowchart TD
     ORD --> CON[消费端单线程绑定]
     CON --> SEQ[顺序处理]
     style PART fill:#d4edda
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 

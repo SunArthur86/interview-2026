@@ -8,9 +8,13 @@ tags:
 - 并发
 - 可见性
 feynman:
-  essence: JMM 的本质是定义"多线程下共享变量的可见性、有序性"契约。它不是硬件内存模型的翻译，而是一层抽象——程序员按 happens-before 写代码就能保证正确性，编译器/CPU 在不破坏 happens-before 的前提下可自由重排序优化。
-  analogy: 像办公室协作的白板规则：每个员工（线程）有自己的草稿纸（工作内存/CPU 缓存），白板（主内存）是唯一真实数据源。JMM 规定什么时候必须把草稿誊到白板（写回主存），什么时候必须重新看白板（刷新工作内存）——这些时机就是 happens-before 关系。
-  first_principle: 为什么需要 JMM？因为 CPU 有多级缓存 + 乱序执行 + 编译器优化，三者都会重排序。如果不加约束，单线程正确的代码在多线程下会崩。JMM 的 happens-before 是"可推理的可见性边界"——只要 A happens-before B，A 的写对 B 一定可见，且 A 不会被重排到 B 后。
+  essence: JMM 的本质是定义"多线程下共享变量的可见性、有序性"契约。它不是硬件内存模型的翻译，而是一层抽象——程序员按 happens-before
+    写代码就能保证正确性，编译器/CPU 在不破坏 happens-before 的前提下可自由重排序优化。
+  analogy: 像办公室协作的白板规则：每个员工（线程）有自己的草稿纸（工作内存/CPU 缓存），白板（主内存）是唯一真实数据源。JMM 规定什么时候必须把草稿誊到白板（写回主存），什么时候必须重新看白板（刷新工作内存）——这些时机就是
+    happens-before 关系。
+  first_principle: 为什么需要 JMM？因为 CPU 有多级缓存 + 乱序执行 + 编译器优化，三者都会重排序。如果不加约束，单线程正确的代码在多线程下会崩。JMM
+    的 happens-before 是"可推理的可见性边界"——只要 A happens-before B，A 的写对 B 一定可见，且 A 不会被重排到 B
+    后。
   key_points:
   - JMM 三大特性：原子性、可见性、有序性
   - happens-before 8 条规则（程序顺序、锁、volatile、线程启动、线程终止、中断、对象初始化、传递性）
@@ -23,19 +27,24 @@ first_principle:
   - 程序员要的是"可推理"，不是要每次都考虑硬件细节
   - 性能不能崩——不能要求所有变量都强一致（那样等于串行）
   - 重排序只要不改变单线程语义就是合法的（as-if-serial）
-  rebuild: JMM 引入主内存/工作内存抽象，规定 8 种原子操作（lock/read/load/use/assign/store/write/unlock）；定义 happens-before 关系作为可推理的可见性边界——程序员只要保证写操作 happens-before 读操作，可见性就有保证；volatile/synchronized/final 是建立 happens-before 的工具。编译器和 CPU 在不破坏 happens-before 的前提下自由优化，兼顾正确性和性能。
+  rebuild: JMM 引入主内存/工作内存抽象，规定 8 种原子操作（lock/read/load/use/assign/store/write/unlock）；定义
+    happens-before 关系作为可推理的可见性边界——程序员只要保证写操作 happens-before 读操作，可见性就有保证；volatile/synchronized/final
+    是建立 happens-before 的工具。编译器和 CPU 在不破坏 happens-before 的前提下自由优化，兼顾正确性和性能。
 follow_up:
-  - volatile 和 synchronized 区别？——volatile 保证可见性+禁止重排序，不保证原子性（i++ 仍不安全）；synchronized 三者都保证但开销大
-  - i++ 为什么不是原子的？——它是 read-i、i+1、write-i 三步，多线程交错会丢更新；要原子用 AtomicInteger 或 synchronized
-  - 指令重排序怎么破坏 DCL 单例？——构造函数内的赋值可能被重排到对象引用赋值之后，其他线程拿到未构造完的对象
-  - final 域为什么安全？——JMM 规定 final 域的写入禁止重排到构造函数之外，且构造完成保证对其他线程可见
-  - happens-before 和 as-if-serial 区别？——as-if-serial 是单线程语义（单线程内重排序不影响结果）；happens-before 是跨线程的可见性契约
+- volatile 和 synchronized 区别？——volatile 保证可见性+禁止重排序，不保证原子性（i++ 仍不安全）；synchronized
+  三者都保证但开销大
+- i++ 为什么不是原子的？——它是 read-i、i+1、write-i 三步，多线程交错会丢更新；要原子用 AtomicInteger 或 synchronized
+- 指令重排序怎么破坏 DCL 单例？——构造函数内的赋值可能被重排到对象引用赋值之后，其他线程拿到未构造完的对象
+- final 域为什么安全？——JMM 规定 final 域的写入禁止重排到构造函数之外，且构造完成保证对其他线程可见
+- happens-before 和 as-if-serial 区别？——as-if-serial 是单线程语义（单线程内重排序不影响结果）；happens-before
+  是跨线程的可见性契约
 memory_points:
-  - happens-before 不是时间顺序，是"可见性 + 有序性"的偏序关系
-  - volatile 两语义：强制刷主存 + 内存屏障禁重排（loadload/loadstore/storestore/storeload）
-  - final 域的初始化安全：构造函数内的 final 写禁止重排出去
-  - synchronized 的 happens-before：unlock happens-before 后续 lock（同一个监视器）
-  - 验证工具：jcstress（OpenJDK）做并发可见性压测，能复现"读到半初始化对象"
+- happens-before 不是时间顺序，是"可见性 + 有序性"的偏序关系
+- volatile 两语义：强制刷主存 + 内存屏障禁重排（loadload/loadstore/storestore/storeload）
+- final 域的初始化安全：构造函数内的 final 写禁止重排出去
+- synchronized 的 happens-before：unlock happens-before 后续 lock（同一个监视器）
+- 验证工具：jcstress（OpenJDK）做并发可见性压测，能复现"读到半初始化对象"
+frequency: high
 ---
 
 # 【Java 后端架构师】Java 内存模型与 happens-before
@@ -365,6 +374,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

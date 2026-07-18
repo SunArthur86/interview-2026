@@ -19,6 +19,7 @@ memory_points:
 - 索引选型：HNSW 读多写少精度高，IVF 平衡速度内存，DiskANN 省成本。
 - 注意度量方式一致性，Embedding 用余弦则库也需配置余弦距离。
 - 混合检索时需设计“最小召回阈值”，防止标量过滤后返回不相关结果。
+frequency: high
 ---
 
 # 向量数据库有哪些选择？各有什么特点？
@@ -104,6 +105,30 @@ LIMIT 5;
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Choose start
+    class Chroma process
+    class FAISS decision
+    class Factors special
+    class Milvus error
+    class Options info
+    class PgVector start
+    class Pinecone process
+    class Postgres decision
+    class Qdrant special
+    class Rust error
+    class SaaS info
+    class Use1 start
+    class Use2 process
+    class Use3 decision
+    class Weaviate special
+    class br error
+    class pgvector info
     Choose["向量数据库选型"] --> Options["主流选项"]
     Options --> Pinecone["Pinecone<br/>(托管 SaaS)"]
     Options --> Milvus["Milvus<br/>(开源/分布式)"]

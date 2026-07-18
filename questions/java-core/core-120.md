@@ -15,6 +15,7 @@ memory_points:
 - FIFO：简单先进先出，但可能淘汰热点，且存在缺页率反常的 Belady 异常
 - LRU：淘汰最久未访问页面，命中率高但硬件开销大，适合内存与Redis缓存
 - Clock：环形链表加访问位，若 Use=1 则改0给二次机会，若 Use=0 则淘汰
+frequency: medium
 ---
 
 # 什么是页面置换算法？
@@ -116,6 +117,34 @@ class LRUCache:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class Belady special
+    class C error
+    class C1 info
+    class C2 start
+    class CLOCK process
+    class D decision
+    class D1 special
+    class D2 error
+    class E info
+    class E1 start
+    class E2 process
+    class F decision
+    class F1 special
+    class FIFO error
+    class LFU info
+    class LRU start
+    class NRU process
+    class OPT decision
+    class br special
     A[页面置换算法] --> B[OPT 最佳置换<br/>理论下界]
     A --> C[FIFO 先进先出]
     A --> D[LRU 最近最久未使用]

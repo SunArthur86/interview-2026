@@ -34,6 +34,7 @@ memory_points:
 - 跳出三板斧：注入反思Prompt("你已经试过X了") → 强制切换策略 → 返回部分结果
 - 兜底防线：最大轮次(通常15-20) + Token上限 + 超时控制
 - 连续失败3次应停止当前路径，回退到上一步换方法
+frequency: medium
 ---
 
 # 【宇树科技二面】ReAct 循环中，如何检测并跳出无效的"思考—行动"循环？
@@ -261,6 +262,7 @@ flowchart TD
     style ACTION fill:#FF9800,color:#fff
     style OBS fill:#9C27B0,color:#fff
     style REFLECT fill:#FFC107,color:#000
+
 ```
 
 ## 结构化回答

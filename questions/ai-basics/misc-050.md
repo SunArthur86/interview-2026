@@ -21,6 +21,7 @@ memory_points:
 - 范式转变：从预训练Scaling(参数)转向推理Scaling(算力)。
 - 策略：更长CoT、Best-of-N采样、搜索验证。
 - 代表：OpenAI o1和DeepSeek-R1，用算力换复杂推理能力。
+frequency: medium
 ---
 
 # Test-Time Compute Scaling是什么?为什么说它是推理模型的新范式
@@ -162,6 +163,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

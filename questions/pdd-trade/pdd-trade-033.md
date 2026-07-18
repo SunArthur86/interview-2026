@@ -27,14 +27,15 @@ first_principle:
   - 必须可回滚可监控
   rebuild: Prompt 版本管理 + 离线评估集 + 在线 A/B + 监控告警 + 灰度回滚。
 follow_up:
-  - prompt 怎么版本管理？——Git+模板引擎（Jinja2）+变量注入
-  - 怎么评估 LLM 输出好坏？——人工标注集+自动指标（BLEU/LLM-as-judge）+业务转化率
-  - LLM 灰度怎么做？——流量分桶（5%/20%/100%）+指标对比+自动止损
+- prompt 怎么版本管理？——Git+模板引擎（Jinja2）+变量注入
+- 怎么评估 LLM 输出好坏？——人工标注集+自动指标（BLEU/LLM-as-judge）+业务转化率
+- LLM 灰度怎么做？——流量分桶（5%/20%/100%）+指标对比+自动止损
 memory_points:
-  - Harness = prompt 管理+评估+监控+灰度
-  - 评估：离线标注集+在线 A/B
-  - 监控：RT/成本/幻觉/满意度
-  - LLMOps：版本化+回滚+审计
+- Harness = prompt 管理+评估+监控+灰度
+- 评估：离线标注集+在线 A/B
+- 监控：RT/成本/幻觉/满意度
+- LLMOps：版本化+回滚+审计
+frequency: medium
 ---
 
 # 【拼多多交易】AI Harness 怎么工程化？
@@ -254,6 +255,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

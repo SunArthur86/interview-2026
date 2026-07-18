@@ -12,7 +12,8 @@ tags:
 - 服务调用
 feynman:
   essence: Feign/Dubbo 把"远程 HTTP/RPC 调用"伪装成"本地方法调用"，底层封装了注册中心寻址、负载均衡、序列化、重试、熔断。
-  analogy: RPC 像快递——你只管把包裹（参数）给快递员（stub），不用关心走哪条路、用什么车。Feign 是声明式（注解接口），Dubbo 是高性能（TCP 长连接）。
+  analogy: RPC 像快递——你只管把包裹（参数）给快递员（stub），不用关心走哪条路、用什么车。Feign 是声明式（注解接口），Dubbo 是高性能（TCP
+    长连接）。
   first_principle: 远程调用本质是"序列化+网络传输+反序列化"，复杂度高；把它包装成本地调用降低使用成本，让业务代码不感知分布式。
   key_points:
   - Feign：声明式 HTTP（注解接口），集成 Ribbon/LoadBalancer + Sentinel
@@ -36,6 +37,7 @@ memory_points:
 - Dubbo = TCP 长连接 + SPI 扩展 + 高性能
 - 集群容错：Failover（默认重试）、Failfast、Forking、Broadcast
 - 负载均衡：随机（Dubbo 默认）、轮询、一致性哈希、最短响应
+frequency: high
 ---
 
 # 【蚂蚁风控】微服务之间怎么调用？Feign 和 Dubbo 区别？怎么治理？
@@ -373,6 +375,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

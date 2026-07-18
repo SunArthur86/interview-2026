@@ -18,7 +18,8 @@ feynman:
   - 'LoRA: 只训练A和B两个小矩阵，W_new = W_quantized + BA'
 first_principle:
   essence: 大模型微调的参数更新具有低秩特性，可以用远少于原始参数的矩阵来表达
-  derivation: LoRA假设权重更新ΔW是低秩的，分解为ΔW = B×A（rank r << d）。QLoRA进一步将原始W量化为4bit，只需存储量化后的W + fp16的A/B矩阵，总存储 = 0.5bytes×N + 4bytes×2×r×d
+  derivation: LoRA假设权重更新ΔW是低秩的，分解为ΔW = B×A（rank r << d）。QLoRA进一步将原始W量化为4bit，只需存储量化后的W
+    + fp16的A/B矩阵，总存储 = 0.5bytes×N + 4bytes×2×r×d
   conclusion: QLoRA使得65B模型可在单张48GB GPU上微调，而全参微调需要>40张A100
 follow_up:
 - 为什么选择NF4而不是INT4或FP4？
@@ -28,6 +29,7 @@ memory_points:
 - 4bit冻结+16bit训练：NF4量化冻结原权重，仅训练fp16的LoRA低秩矩阵。
 - NF4契合正态分布：传统INT4均匀划分导致0附近精度差，NF4按正态分位点信息论最优。
 - 显存极限压榨：NF4减存储+Double Quant减常量+Paged Optim防峰值溢出。
+frequency: medium
 ---
 
 # QLoRA降低训练资源成本的核心逻辑是什么？为什么选择NF4与FP16的组合？
@@ -240,6 +242,7 @@ flowchart TD
     style DEPLOY fill:#009688,color:#fff
     style Q4 fill:#FF9800,color:#fff
     style ADJUST fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

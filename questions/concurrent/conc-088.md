@@ -17,6 +17,7 @@ memory_points:
 - 内存对比：多线程共享进程的堆和方法区，但各自拥有独立的栈和PC。
 - 切换对比：线程切换仅存寄存器和栈，而进程切换需刷新TLB导致开销大。
 - 易错提醒：启动线程必调start()实现并发，调run()仅是普通串行方法执行。
+frequency: high
 ---
 
 # 什么是多线程？
@@ -115,6 +116,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -15,6 +15,7 @@ memory_points:
 - 因为类型擦除，泛型参数必须是引用类型而不能是基本类型（如用Integer不用int）。
 - PECS原则：频繁读取用Producer Extends，频繁写入用Consumer Super。
 - List<String>和List<Object>无继承关系不可协变；反序列化复杂对象需用TypeReference。
+frequency: medium
 ---
 
 # 说一说你对泛型的理解？
@@ -73,6 +74,42 @@ public static <T> void copyElements(List<? extends T> src,
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class B decision
+    class C special
+    class Consumer error
+    class D info
+    class E start
+    class Erasure process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class Java process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class O start
+    class Object process
+    class PECS decision
+    class Provider special
+    class T error
+    class Type info
+    class V start
+    class bound process
+    class br decision
+    class extends special
+    class new error
+    class super info
     A[Java 泛型] --> B[类型参数化<br/>E T K V]
     A --> C[编译期类型检查]
     A --> D[类型擦除 Type Erasure]

@@ -16,6 +16,7 @@ memory_points:
 - 唯一保证：因为集群规则限定，所以同一个 Term 内最多只能产生一个 Leader
 - 防脑裂机制：若节点发现更大的 Term，必须立即更新 Term 并降级为 Follower，拒绝旧 Term 请求
 - 新旧比较：比较两份日志新旧时，第一维度永远是看 Term，Term 相同再看 Index
+frequency: medium
 ---
 
 # Raft算法中Term（任期）的作用是什么？
@@ -120,6 +121,7 @@ flowchart TD
     style COMMIT fill:#2196F3,color:#fff
     style VOTE fill:#9C27B0,color:#fff
     style STEP_DOWN fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

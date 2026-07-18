@@ -31,6 +31,7 @@ memory_points:
 - Trace能力：全链路追踪Prompt、Response、Token和工具调用，定位具体出错步骤
 - 控制能力：防止Agent陷入死循环或调用危险工具，限制成本和步数
 - 评估迭代：支持A/B测试与指标监控，量化对比不同模型或Prompt的效果
+frequency: medium
 ---
 
 # 没有Agent Harness大模型会遇到什么瓶颈？
@@ -225,6 +226,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

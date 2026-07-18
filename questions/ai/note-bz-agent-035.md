@@ -30,6 +30,7 @@ memory_points:
 - 重试必加指数退避：针对超时或网络错，按2^n秒间隔重试以防雪崩
 - 参数错误让LLM自愈：拦截异常报错并抛给大模型，引导其修正后重新生成
 - 对比重试与放弃：瞬时错重试到底，而权限或致命错立即放弃并友好告知用户
+frequency: high
 ---
 
 # 工具调用失败如何治理？
@@ -246,6 +247,7 @@ flowchart TD
     style EXEC fill:#FF9800,color:#fff
     style FALL fill:#F44336,color:#fff
     style HITL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

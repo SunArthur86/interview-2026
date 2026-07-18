@@ -16,6 +16,7 @@ memory_points:
 - 优先级坑：因映射依赖OS底层逻辑，所以跨平台不一致不可靠
 - 状态流转：阻塞或等待会交出CPU，解除后重回RUNNABLE竞争
 - 让步方法：yield仅暗示让出CPU，因不保证生效故不能作同步控制
+frequency: high
 ---
 
 # Java线程调度的机制是什么？
@@ -142,6 +143,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

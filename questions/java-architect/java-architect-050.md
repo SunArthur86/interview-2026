@@ -9,9 +9,12 @@ tags:
 - 隔离
 - 安全
 feynman:
-  essence: 多租户隔离有三种物理形态：独立数据库（隔离最强成本最高）、共享数据库独立 Schema（中间态）、共享数据库共享 Schema（在表里加 tenant_id 字段，成本最低但隔离最弱）。SaaS 系统通常混合用——大客户独立库，中小客户共享库加 tenant_id。核心机制是"路由层 + 数据层"：路由层根据请求识别租户，数据层保证租户间数据物理或逻辑隔离。
-  analogy: 像写字楼出租。独立数据库是"独栋别墅"（一个租户一栋，私密最强但贵）；独立 Schema 是"同楼不同层"（一栋楼里租一层，电梯分卡）；共享 Schema 是"开放式工位"（同一层不同工位，靠工位号区分）。小公司租工位（共享 Schema），大公司包一层（独立 Schema），超大户买独栋（独立数据库）。
-  first_principle: 为什么要多租户？因为 SaaS 服务的多个客户共享同一套代码，但数据必须隔离。独立数据库的隔离成本是"每个租户一套 DB 实例"（贵但安全），共享 Schema 的成本是"每条数据带 tenant_id 且查询必须过滤"（便宜但隔离弱）。选型本质是在"隔离强度"和"成本"之间权衡。
+  essence: 多租户隔离有三种物理形态：独立数据库（隔离最强成本最高）、共享数据库独立 Schema（中间态）、共享数据库共享 Schema（在表里加 tenant_id
+    字段，成本最低但隔离最弱）。SaaS 系统通常混合用——大客户独立库，中小客户共享库加 tenant_id。核心机制是"路由层 + 数据层"：路由层根据请求识别租户，数据层保证租户间数据物理或逻辑隔离。
+  analogy: 像写字楼出租。独立数据库是"独栋别墅"（一个租户一栋，私密最强但贵）；独立 Schema 是"同楼不同层"（一栋楼里租一层，电梯分卡）；共享
+    Schema 是"开放式工位"（同一层不同工位，靠工位号区分）。小公司租工位（共享 Schema），大公司包一层（独立 Schema），超大户买独栋（独立数据库）。
+  first_principle: 为什么要多租户？因为 SaaS 服务的多个客户共享同一套代码，但数据必须隔离。独立数据库的隔离成本是"每个租户一套 DB 实例"（贵但安全），共享
+    Schema 的成本是"每条数据带 tenant_id 且查询必须过滤"（便宜但隔离弱）。选型本质是在"隔离强度"和"成本"之间权衡。
   key_points:
   - 三种隔离模式：DB-per-tenant / Schema-per-tenant / Shared-DB-with-tenant_id
   - 租户识别：域名（acme.saas.com）/ 请求头（X-Tenant-Id）/ JWT 中的 tenant claim
@@ -24,19 +27,25 @@ first_principle:
   - 租户数据隔离是合规底线（GDPR/等保要求），泄露是严重事故
   - 独立 DB 隔离最强但成本随租户线性增长（万级租户不可行）
   - 共享 DB + tenant_id 成本最低但隔离靠应用层保证（拦截器不能漏）
-  rebuild: 分层隔离。大客户（KA，< 5%）用独立数据库，合规要求高且付费得起；腰部客户（20%）用独立 Schema，同库不同 Schema 隔离；长尾客户（75%）共享 Schema + tenant_id 字段，成本最优。租户识别在网关层（从域名/JWT 解析 tenant_id 放入上下文），数据隔离在 MyBatis 拦截器（自动 WHERE tenant_id），资源隔离在中间件（每租户限流配额）。
+  rebuild: 分层隔离。大客户（KA，< 5%）用独立数据库，合规要求高且付费得起；腰部客户（20%）用独立 Schema，同库不同 Schema 隔离；长尾客户（75%）共享
+    Schema + tenant_id 字段，成本最优。租户识别在网关层（从域名/JWT 解析 tenant_id 放入上下文），数据隔离在 MyBatis
+    拦截器（自动 WHERE tenant_id），资源隔离在中间件（每租户限流配额）。
 follow_up:
-  - tenant_id 泄露（跨租户访问）怎么防？——MyBatis 拦截器强制注入 WHERE tenant_id，所有 SQL 必须经过拦截器。定期扫描"没有 tenant_id 条件的查询"（用 SQL 审计）。测试用"租户 A 的 token 查租户 B 的数据"必须返回空。
-  - 独立 Schema 怎么做动态切换？——动态数据源（AbstractRoutingDataSource），每次请求根据 tenant_id 路由到对应的 DataSource。或用 Schema 切换（SET search_path TO tenant_acme）。
-  - 多租户的备份和恢复怎么做？——共享 Schema 按 tenant_id 条件导出（SELECT * FROM order WHERE tenant_id=?）；独立 Schema 直接备份 Schema。恢复时不能覆盖其他租户数据。
-  - 租户迁移（从共享迁到独立）怎么做？——双写期（新老都写）→ 数据同步（历史迁移）→ 切读（读新库）→ 停老。中间做数据校验。
-  - 多租户和分库分表怎么结合？——分片键通常用 tenant_id（大租户独占分片），或 tenant_id + 业务 ID 复合分片。保证同一租户数据在同一分片，跨租户查询（平台运营）走专用通道。
+- tenant_id 泄露（跨租户访问）怎么防？——MyBatis 拦截器强制注入 WHERE tenant_id，所有 SQL 必须经过拦截器。定期扫描"没有
+  tenant_id 条件的查询"（用 SQL 审计）。测试用"租户 A 的 token 查租户 B 的数据"必须返回空。
+- 独立 Schema 怎么做动态切换？——动态数据源（AbstractRoutingDataSource），每次请求根据 tenant_id 路由到对应的 DataSource。或用
+  Schema 切换（SET search_path TO tenant_acme）。
+- 多租户的备份和恢复怎么做？——共享 Schema 按 tenant_id 条件导出（SELECT * FROM order WHERE tenant_id=?）；独立
+  Schema 直接备份 Schema。恢复时不能覆盖其他租户数据。
+- 租户迁移（从共享迁到独立）怎么做？——双写期（新老都写）→ 数据同步（历史迁移）→ 切读（读新库）→ 停老。中间做数据校验。
+- 多租户和分库分表怎么结合？——分片键通常用 tenant_id（大租户独占分片），或 tenant_id + 业务 ID 复合分片。保证同一租户数据在同一分片，跨租户查询（平台运营）走专用通道。
 memory_points:
-  - 三种隔离：独立 DB（最强贵）/ 独立 Schema（中间）/ 共享 Schema+tenant_id（便宜弱）
-  - 租户识别：域名 / 请求头 / JWT claim
-  - 数据隔离：MyBatis 拦截器自动 WHERE tenant_id
-  - 资源隔离：每租户限流配额，防 Noisy Neighbor
-  - 混合策略：KA 独立库，长尾共享库
+- 三种隔离：独立 DB（最强贵）/ 独立 Schema（中间）/ 共享 Schema+tenant_id（便宜弱）
+- 租户识别：域名 / 请求头 / JWT claim
+- 数据隔离：MyBatis 拦截器自动 WHERE tenant_id
+- 资源隔离：每租户限流配额，防 Noisy Neighbor
+- 混合策略：KA 独立库，长尾共享库
+frequency: low
 ---
 
 # 【Java 后端架构师】多租户架构与数据隔离策略
@@ -470,6 +479,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

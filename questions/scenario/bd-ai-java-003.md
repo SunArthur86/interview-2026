@@ -27,6 +27,7 @@ memory_points:
 - 因为Token按次消费，所以Agent需通过限流+缓存+模型路由控制成本
 - 状态隔离：传统Web用ThreadLocal，Agent须用ChatMemory+Redis防上下文串扰
 - 测试差异：传统Web靠断点分支，Agent靠准确率指标与Bad Case分析
+frequency: medium
 ---
 
 # 【字节面经】传统 Web 应用和 AI Agent 应用有什么不同？结合你的开发经历谈谈。
@@ -143,6 +144,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

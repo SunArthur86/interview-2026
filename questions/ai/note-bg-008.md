@@ -34,6 +34,7 @@ memory_points:
 - DP机制：每卡独立算前向反向，最后AllReduce通信平均梯度
 - TP变慢原因：因层内频繁AllReduce通信开销暴增，故切卡过多反降计算效率
 - PP气泡问题：因层间串行执行需前后等待，导致GPU产生大量空闲流水线气泡
+frequency: high
 ---
 
 # 【八股总结】TP/PP/DP 分布式策略 & TP 开大为什么变慢
@@ -392,6 +393,7 @@ flowchart TD
     style COMBINED fill:#2196F3,color:#fff
     style NF4 fill:#FF9800,color:#fff
     style OPT fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

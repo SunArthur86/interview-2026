@@ -35,6 +35,7 @@ memory_points:
 - 令牌桶（突发）/漏桶（匀速）/滑动窗口（统计）
 - 超时必须分级：连接/读/总，且总超时 < 用户容忍
 - 重试必须幂等 + 指数退避 + 限次数 + 配熔断
+frequency: high
 ---
 
 # 【蚂蚁风控】高可用三件套——限流、降级、超时重试，怎么设计？
@@ -448,6 +449,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

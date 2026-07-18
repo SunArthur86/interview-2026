@@ -28,6 +28,7 @@ memory_points:
 - 防重保障：接口用Redis Token防抖，数据层对out_trade_no建唯一索引做终极兜底
 - 状态机与异步：订单流转必走状态机校验，支付结果依赖异步回调+防重放验签
 - 资金最终一致：核心用本地消息表或TCC，T+1定时对账平账（长款补单、短款冲正）
+frequency: high
 ---
 
 # 如何设计一个支付系统？支持千万级日订单，金额零误差。
@@ -136,6 +137,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

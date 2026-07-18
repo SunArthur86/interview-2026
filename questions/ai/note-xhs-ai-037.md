@@ -11,8 +11,9 @@ tags:
 - 前端AI
 - 面经
 feynman:
-  essence: "多轮对话的上下文处理有三种策略：拼历史query检索、LLM摘要压缩、query改写补全指代——根据对话长度和token预算选择"
-  analogy: "你在跟客服多轮聊天。短对话=把之前的聊天记录都带上（全量拼接）；长对话=让客服先看个摘要（摘要压缩）；最聪明的方式=把'它多少钱'自动改成'iPhone 15多少钱'（query改写补全指代）"
+  essence: 多轮对话的上下文处理有三种策略：拼历史query检索、LLM摘要压缩、query改写补全指代——根据对话长度和token预算选择
+  analogy: 你在跟客服多轮聊天。短对话=把之前的聊天记录都带上（全量拼接）；长对话=让客服先看个摘要（摘要压缩）；最聪明的方式=把'它多少钱'自动改成'iPhone
+    15多少钱'（query改写补全指代）
   key_points:
   - 方式一：历史对话拼到当前query里一起检索（适合短对话）
   - 方式二：LLM对历史做摘要作为额外上下文（适合长对话，省token）
@@ -20,9 +21,9 @@ feynman:
   - 核心挑战：指代消解（"它"→具体指代什么）和省略补全
   - 长对话需要摘要+滑动窗口的组合策略
 first_principle:
-  essence: "多轮对话的检索难题是当前query可能包含指代和省略（如'它多少钱'），直接用这种query检索会失败。需要先消解指代再检索"
-  derivation: "单轮对话的query是自包含的（'iPhone 15多少钱'可以直接检索）。但多轮对话中，用户通常用代词和省略（第二轮'它呢'、第三轮'有折扣吗'）。这些query的embedding与文档embedding不匹配——'它'的embedding与任何商品都无关。因此需要在检索前用历史对话补全query的语义，使其变成自包含的查询"
-  conclusion: "多轮对话RAG的关键预处理是query改写——把依赖上下文的省略query转化为自包含的检索query"
+  essence: 多轮对话的检索难题是当前query可能包含指代和省略（如'它多少钱'），直接用这种query检索会失败。需要先消解指代再检索
+  derivation: 单轮对话的query是自包含的（'iPhone 15多少钱'可以直接检索）。但多轮对话中，用户通常用代词和省略（第二轮'它呢'、第三轮'有折扣吗'）。这些query的embedding与文档embedding不匹配——'它'的embedding与任何商品都无关。因此需要在检索前用历史对话补全query的语义，使其变成自包含的查询
+  conclusion: 多轮对话RAG的关键预处理是query改写——把依赖上下文的省略query转化为自包含的检索query
 follow_up:
 - query改写用什么模型？大模型还是小模型？
 - 摘要压缩会不会丢失关键信息？怎么保证摘要质量？
@@ -33,6 +34,7 @@ memory_points:
 - query改写：用历史对话补全指代和省略
 - 它多少钱→iPhone 15多少钱（指代消解示例）
 - 长对话用摘要+滑动窗口
+frequency: medium
 ---
 
 # 【RAG多轮对话】多轮对话怎么处理上下文？
@@ -227,6 +229,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

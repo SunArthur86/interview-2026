@@ -17,6 +17,7 @@ memory_points:
 - 缺页中断：当访问的数据不在物理内存(PTE Present=0)时，触发缺页异常并向磁盘换入换出
 - 淘汰算法：因为LRU实现成本高，所以Linux底层采用访问位循环扫描的Clock算法近似替代
 - Swap陷阱：Redis等高频访问服务若触发Swap换入换出会引发严重延迟，建议锁定物理内存
+frequency: medium
 ---
 
 # 什么是Linux虚拟内存？
@@ -123,6 +124,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

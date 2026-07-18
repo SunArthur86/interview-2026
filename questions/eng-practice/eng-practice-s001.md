@@ -19,6 +19,7 @@ memory_points:
 - 高级技巧：Self-Consistency（多数投票）、ToT（树状探索）、ReAct（推理+行动）。
 - 工程实践：Prompt 模板化管理（Git），A/B 测试，结构化输出（JSON Mode/Pydantic）。
 - 注意事项：CoT 适合复杂推理但增加延迟，简单任务慎用；Few-shot 样本需动态检索。
+frequency: medium
 ---
 
 # LLM应用的Prompt工程有哪些最佳实践？
@@ -81,6 +82,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CoT special
+    class Consistency error
+    class D info
+    class E start
+    class F process
+    class Few decision
+    class G special
+    class Git error
+    class H info
+    class I start
+    class J process
+    class JSON decision
+    class LangChain special
+    class Pydantic error
+    class Query info
+    class ReAct start
+    class Self process
+    class shot decision
     A[用户输入 Query] --> B{任务复杂度判断}
     B -->|简单任务| C[基础Prompt: 角色设定/Few-shot]
     B -->|复杂推理| D[CoT: 逐步分解思考]

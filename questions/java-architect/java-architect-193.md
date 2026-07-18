@@ -9,35 +9,44 @@ tags:
 - 兼容
 - 废弃
 feynman:
-  essence: API 版本兼容的核心是"向前兼容（新增不破坏旧客户端）+ 向后兼容（新客户端能用旧 API）"。机制上用语义化版本（SemVer）+ Sunset Header + @Deprecated 渐进废弃 + OpenAPI diff 自动检测破坏性变更。废弃不是"通知一声就下线"，而是"Sunset Header 预告 → 监控调用方迁移 → 联系未迁移者 → 灰度下线"的完整流程，否则就是事故。
-  analogy: 像 PCI DSS 升级——不是"明天换新版本，旧版本不能用"（商家全挂），而是"V1 还能用 2 年，V2 同步发布，Sunset Header 告诉你 V1 什么时候下线，监控你迁移了没，没迁移的主动联系"。API 兼容性就是给调用方"迁移时间"和"迁移信号"。
-  first_principle: API 是契约，调用方依赖契约工作。破坏性变更（删字段、改类型、改语义）会让调用方崩溃。版本兼容的第一性是"把破坏性变更变成渐进式、可观测、可回退的流程"——用 SemVer 标识变更严重程度，用 OpenAPI diff 自动检测破坏性变更，用 Sunset Header 通知调用方，用监控追踪迁移进度，用灰度下线降低风险。
+  essence: API 版本兼容的核心是"向前兼容（新增不破坏旧客户端）+ 向后兼容（新客户端能用旧 API）"。机制上用语义化版本（SemVer）+ Sunset
+    Header + @Deprecated 渐进废弃 + OpenAPI diff 自动检测破坏性变更。废弃不是"通知一声就下线"，而是"Sunset Header
+    预告 → 监控调用方迁移 → 联系未迁移者 → 灰度下线"的完整流程，否则就是事故。
+  analogy: 像 PCI DSS 升级——不是"明天换新版本，旧版本不能用"（商家全挂），而是"V1 还能用 2 年，V2 同步发布，Sunset Header
+    告诉你 V1 什么时候下线，监控你迁移了没，没迁移的主动联系"。API 兼容性就是给调用方"迁移时间"和"迁移信号"。
+  first_principle: API 是契约，调用方依赖契约工作。破坏性变更（删字段、改类型、改语义）会让调用方崩溃。版本兼容的第一性是"把破坏性变更变成渐进式、可观测、可回退的流程"——用
+    SemVer 标识变更严重程度，用 OpenAPI diff 自动检测破坏性变更，用 Sunset Header 通知调用方，用监控追踪迁移进度，用灰度下线降低风险。
   key_points:
   - 语义化版本（SemVer）：MAJOR.MINOR.PATCH，MAJOR 变更=破坏性
   - 兼容性原则：新增字段兼容（可选）、删字段/改类型不兼容（要新版本）
-  - "@Deprecated 标注 + Sunset Header 通知废弃时间表"
+  - '@Deprecated 标注 + Sunset Header 通知废弃时间表'
   - OpenAPI diff 自动检测破坏性变更（CI 阻断）
   - 废弃流程：Sunset 预告 → 监控迁移 → 联系未迁移者 → 灰度下线
 first_principle:
-  problem: 如何在 API 演进（加功能、改字段、废弃旧版本）时，既不破坏现有调用方，又能推进新版本 adoption，避免"一改 API 全网炸"或"老 API 永远不敢下线"？
+  problem: 如何在 API 演进（加功能、改字段、废弃旧版本）时，既不破坏现有调用方，又能推进新版本 adoption，避免"一改 API 全网炸"或"老
+    API 永远不敢下线"？
   axioms:
   - API 是契约，破坏性变更（删字段/改类型）让调用方崩溃
   - 调用方迁移需要时间，不能一刀切下线
   - 「通知一声就下线」= 事故，必须监控迁移进度
   - 破坏性变更要自动检测（OpenAPI diff），不能靠人 review
-  rebuild: 用 SemVer 标识变更（MAJOR=破坏性，MINOR=新增兼容，PATCH=修复）。破坏性变更必须升 MAJOR 版本（v1→v2），旧版本保留过渡期。OpenAPI diff 在 CI 自动检测：新增字段/可选字段变更=兼容（绿灯），删字段/改类型/改必填=破坏性（红灯阻断）。废弃走完整流程：@Deprecated 标注 + Sunset Header（预告下线日期）→ 监控调用方迁移进度 → 主动联系未迁移者 → 灰度下线（先 5% 流量摘除，观察，再全下）。
+  rebuild: 用 SemVer 标识变更（MAJOR=破坏性，MINOR=新增兼容，PATCH=修复）。破坏性变更必须升 MAJOR 版本（v1→v2），旧版本保留过渡期。OpenAPI
+    diff 在 CI 自动检测：新增字段/可选字段变更=兼容（绿灯），删字段/改类型/改必填=破坏性（红灯阻断）。废弃走完整流程：@Deprecated 标注
+    + Sunset Header（预告下线日期）→ 监控调用方迁移进度 → 主动联系未迁移者 → 灰度下线（先 5% 流量摘除，观察，再全下）。
 follow_up:
-  - SemVer 三段是什么？——MAJOR.MINOR.PATCH。MAJOR=破坏性变更，MINOR=向后兼容新增，PATCH=bug 修复
-  - Sunset Header 是什么？——HTTP 标准草案，响应头里告知"这个 API/版本将在 X 日期下线"。调用方可读 Header 提前迁移
-  - OpenAPI diff 怎么自动检测？——对比新旧 OpenAPI spec，新增端点/可选字段=兼容，删端点/改类型/加必填=破坏性。CI 阻断破坏性变更
-  - 同时维护多个版本怎么办？——版本越多维护成本越高。原则：最多维护 2 个版本（N 和 N-1），用版本废弃流程压缩旧版本
-  - "API 版本在 URL 还是 Header？——URL 版本（/v1/api）更直观、易路由、易缓存，业界主流。Header 版本（Accept: application/vnd.jd.v1+json）更 RESTful 但调试难"
+- SemVer 三段是什么？——MAJOR.MINOR.PATCH。MAJOR=破坏性变更，MINOR=向后兼容新增，PATCH=bug 修复
+- Sunset Header 是什么？——HTTP 标准草案，响应头里告知"这个 API/版本将在 X 日期下线"。调用方可读 Header 提前迁移
+- OpenAPI diff 怎么自动检测？——对比新旧 OpenAPI spec，新增端点/可选字段=兼容，删端点/改类型/加必填=破坏性。CI 阻断破坏性变更
+- 同时维护多个版本怎么办？——版本越多维护成本越高。原则：最多维护 2 个版本（N 和 N-1），用版本废弃流程压缩旧版本
+- 'API 版本在 URL 还是 Header？——URL 版本（/v1/api）更直观、易路由、易缓存，业界主流。Header 版本（Accept: application/vnd.jd.v1+json）更
+  RESTful 但调试难'
 memory_points:
-  - SemVer：MAJOR（破坏性）.MINOR（新增兼容）.PATCH（修复）
-  - 兼容性：新增可选字段兼容，删字段/改类型/改必填=破坏性
-  - "@Deprecated + Sunset Header 通知废弃时间表"
-  - OpenAPI diff CI 阻断破坏性变更
-  - 废弃流程：Sunset 预告 → 监控迁移 → 联系未迁移者 → 灰度下线
+- SemVer：MAJOR（破坏性）.MINOR（新增兼容）.PATCH（修复）
+- 兼容性：新增可选字段兼容，删字段/改类型/改必填=破坏性
+- '@Deprecated + Sunset Header 通知废弃时间表'
+- OpenAPI diff CI 阻断破坏性变更
+- 废弃流程：Sunset 预告 → 监控迁移 → 联系未迁移者 → 灰度下线
+frequency: low
 ---
 
 # 【Java 后端架构师】平台 API 如何做版本兼容与废弃策略
@@ -449,6 +458,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

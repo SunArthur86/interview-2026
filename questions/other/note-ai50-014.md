@@ -31,6 +31,7 @@ memory_points:
 - 因为Agent常遇网络I/O，所以用异步避免串行阻塞，大幅降低总耗时。
 - 核心API：async def定义协程，await挂起等待，asyncio.gather并发调用。
 - 核心场景：并行工具调用提效，流式输出（astream）提升前端交互体验。
+frequency: high
 ---
 
 # Python异步编程在Agent开发中的应用
@@ -273,6 +274,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

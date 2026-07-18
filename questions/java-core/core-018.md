@@ -17,6 +17,7 @@ memory_points:
 - SCAN像电梯双向清扫，C-SCAN单向清扫且快速重置起点
 - LOOK是SCAN优化，只需移动到最远请求处而非磁盘物理边缘
 - 现代OLTP数据库常选Deadline调度，防读写请求被饿死
+frequency: low
 ---
 
 # 什么是常见磁盘调度算法？
@@ -91,6 +92,31 @@ int find_closest(int current, int requests[], int n) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class C1 special
+    class D error
+    class D1 info
+    class E start
+    class E1 process
+    class F decision
+    class F1 special
+    class FCFS error
+    class G info
+    class G1 start
+    class H process
+    class I decision
+    class LOOK special
+    class SCAN error
+    class SSTF info
+    class br start
     A[磁盘调度算法] --> B[请求队列 98 183 37 122 14 124 65 67]
     A --> C[FCFS 先来先服务]
     A --> D[SSTF 最短寻道时间优先]

@@ -29,6 +29,7 @@ memory_points:
 - 离线四步曲：加载文档 → 文本切分 → 向量化 → 存入向量库。
 - 在线五步曲：查询向量化 → 检索Top-K → 重排序精排 → 组装Prompt → LLM生成。
 - 准确率结论：无法保证100%准确，因为受限于检索召回率及大模型固有的幻觉问题。
+frequency: medium
 ---
 
 # RAG是什么？怎么构建？评价体系是什么？能不能确保100%准确率？
@@ -204,6 +205,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

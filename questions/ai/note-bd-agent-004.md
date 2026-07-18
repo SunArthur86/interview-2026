@@ -31,6 +31,7 @@ memory_points:
 - 接入四步走：定义边界(Schema) -> 封装Tool(执行) -> 注册Client(动态发现) -> 规范通信(JSON-RPC)
 - Skill定义核心三要素：触发条件、输入/输出Schema、执行约束(超时与频控)
 - 安全与控制：MCP接入必须配套动态注册、权限校验和超时熔断机制
+frequency: medium
 ---
 
 # 如何给Agent生成Skill并通过MCP接入外部能力？
@@ -258,6 +259,7 @@ flowchart TD
     style FC fill:#FF9800,color:#fff
     style SKILL fill:#9C27B0,color:#fff
     style MCP fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

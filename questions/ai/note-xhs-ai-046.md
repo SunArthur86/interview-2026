@@ -10,8 +10,8 @@ tags:
 - 摘要压缩
 - 面经
 feynman:
-  essence: "Function Calling准确率提升靠的是结构化工具描述+Few-shot示例+参数校验重试；长多轮对话压缩靠的是分层摘要+关键信息常驻+滚动窗口"
-  analogy: "Function Calling像培训新员工用内部工具——光给说明书不够，还要演示几遍(Few-shot)，员工填错表单时让他重填(校验重试)。长对话压缩像会议纪要——核心决议常驻白板(常驻)，讨论细节定期摘要归档(压缩)"
+  essence: Function Calling准确率提升靠的是结构化工具描述+Few-shot示例+参数校验重试；长多轮对话压缩靠的是分层摘要+关键信息常驻+滚动窗口
+  analogy: Function Calling像培训新员工用内部工具——光给说明书不够，还要演示几遍(Few-shot)，员工填错表单时让他重填(校验重试)。长对话压缩像会议纪要——核心决议常驻白板(常驻)，讨论细节定期摘要归档(压缩)
   key_points:
   - 工具描述结构化：参数名/类型/描述/示例四要素齐全
   - Few-shot示例：给出正确调用的input→output示例
@@ -19,9 +19,10 @@ feynman:
   - 长对话分层摘要：对话历史→摘要→超长摘要→只保留关键
   - 关键信息常驻：用户偏好/任务状态不受压缩影响
 first_principle:
-  essence: "Function Calling准确率取决于LLM理解工具描述的程度——描述越精确、示例越丰富，准确率越高"
-  derivation: "LLM的function calling本质是：给定工具描述+用户query，生成正确的JSON调用。这个过程的质量取决于：1) 工具描述的清晰度（LLM能否理解参数含义）；2) 是否有示例参考（Few-shot比纯指令有效）；3) 参数约束的严格度（类型/范围/枚举值）。每一项的改进都直接提升准确率"
-  conclusion: "Function Calling不是'写了就能用'——需要在工具描述、示例、校验三个层面持续优化，配合量化评估形成闭环"
+  essence: Function Calling准确率取决于LLM理解工具描述的程度——描述越精确、示例越丰富，准确率越高
+  derivation: LLM的function calling本质是：给定工具描述+用户query，生成正确的JSON调用。这个过程的质量取决于：1) 工具描述的清晰度（LLM能否理解参数含义）；2)
+    是否有示例参考（Few-shot比纯指令有效）；3) 参数约束的严格度（类型/范围/枚举值）。每一项的改进都直接提升准确率
+  conclusion: Function Calling不是'写了就能用'——需要在工具描述、示例、校验三个层面持续优化，配合量化评估形成闭环
 follow_up:
 - Function Calling准确率怎么量化评估？
 - 参数校验失败后让LLM重试会不会陷入死循环？
@@ -32,6 +33,7 @@ memory_points:
 - 工具描述四要素：参数名/类型/描述/示例
 - 长对话压缩：分层摘要+关键信息常驻+滚动窗口
 - 摘要用小模型（省成本），生成用大模型
+frequency: high
 ---
 
 # 【快手AI大模型】Function Calling准确率怎么提升？长多轮对话怎么压缩？
@@ -339,6 +341,7 @@ flowchart TD
     style EXEC fill:#FF9800,color:#fff
     style FALL fill:#F44336,color:#fff
     style HITL fill:#9C27B0,color:#fff
+
 ```
 
 ## 结构化回答

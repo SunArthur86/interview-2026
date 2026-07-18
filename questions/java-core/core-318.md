@@ -16,6 +16,7 @@ memory_points:
 - 六大限制：因为运行时无类型，所以不能new T()、不能new T[]、不能用instanceof判断带泛型类型。
 - 反射绕过：可通过ParameterizedType获取父类或字段的泛型真实类型（如Spring的泛型注入）。
 - 通配符口诀：PECS（Producer Extends, Consumer Super），即上界只读，下界只写。
+frequency: medium
 ---
 
 # Java泛型擦除的原理和影响是什么？
@@ -131,6 +132,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

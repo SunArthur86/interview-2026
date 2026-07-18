@@ -31,6 +31,7 @@ memory_points:
 - 实现层面：Synchronized 是 JVM 关键字自动释放，ReentrantLock 是 JDK API 需手动 unlock。
 - 高级特性：ReentrantLock 支持公平锁、可中断、多条件变量。
 - 条件变量对比：Synchronized 只有一个 WaitSet 随机唤醒，而 ReentrantLock 可绑定多个 Condition 精确唤醒。
+frequency: high
 ---
 
 # ReentrantLock 相比 synchronized 多了哪些高级功能？什么场景该用 ReentrantLock？
@@ -158,6 +159,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -28,6 +28,7 @@ memory_points:
 - 核心流程：Agent执行 → 风险引擎打分 → 超阈值转人工审核
 - 人工审核需独立系统与角色分离，确保审计追溯
 - 设计超时降级策略，防止审核员离线导致任务无限挂起
+frequency: medium
 ---
 
 # 如何设计一个Human-in-the-Loop（人机协作）的AI Agent系统？在关键决策点引入人工审核。
@@ -165,6 +166,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

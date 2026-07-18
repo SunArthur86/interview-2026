@@ -29,6 +29,7 @@ memory_points:
 - Redis ZSet存实时热词TopN(O(logN)极速排序)，ES Completion负责长尾前缀/模糊匹配
 - 个性化推荐融合全局热词与用户历史画像加权打分
 - 性能优化：前端输入防抖(200ms)，后端布隆过滤器拦无效前缀
+frequency: high
 ---
 
 # 如何设计一个商品搜索的搜索建议和热词推荐系统？
@@ -146,6 +147,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

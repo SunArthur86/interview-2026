@@ -28,6 +28,7 @@ memory_points:
 - 核心三要素：State(状态：流转数据)、Node(节点：执行动作)、Edge(边：流转控制)
 - 搭建四步法：1.定义State结构体 → 2.编写节点动作函数 → 3.连线(含条件分支) → 4.编译运行
 - 条件边是灵魂：根据State中的变量(如是否需人工)动态决定下一跳节点，实现智能路由
+frequency: medium
 ---
 
 # 如何基于 LangGraph 搭建一个 Agent 应用？
@@ -297,6 +298,7 @@ flowchart TD
     style LG fill:#FF9800,color:#fff
     style LS fill:#9C27B0,color:#fff
     style STATE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

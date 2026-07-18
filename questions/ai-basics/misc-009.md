@@ -19,6 +19,7 @@ memory_points:
 - PPO需4个模型（Policy/Value/RM/Ref），显存大且难调参，易Reward Hacking
 - DPO直接优化偏好数据，利用闭式解隐去Reward模型，只需Policy和Ref
 - DPO优势：显存减半、训练稳、无需采样交互，是目前主流对齐方案
+frequency: medium
 ---
 
 # RLHF的完整流程是什么?为什么需要它?PPO和DPO有什么区别
@@ -35,6 +36,48 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Advantage process
+    class Ans decision
+    class B special
+    class Bradley error
+    class C info
+    class DPO start
+    class Forcing process
+    class Lose decision
+    class PPO special
+    class Prompt error
+    class RLHF info
+    class RM start
+    class Ranking process
+    class S1 decision
+    class S1A special
+    class S1B error
+    class S1C info
+    class S2 start
+    class S2A process
+    class S2B decision
+    class S2C special
+    class S2D error
+    class S2E info
+    class S3 start
+    class S3A process
+    class S3B decision
+    class S3C special
+    class S3D error
+    class S3E info
+    class S3F start
+    class SFT process
+    class Teacher decision
+    class Terry special
+    class Win error
+    class br info
     subgraph S1["阶段一: 有监督微调 (SFT)"]
         S1A["人类标注数据<br/>(Prompt, Ans)"] --> S1B["SFT 训练<br/>(Teacher Forcing)"]
         S1B --> S1C["SFT 基座模型<br/>(会对话但笨)"]

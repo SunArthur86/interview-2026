@@ -4,8 +4,17 @@ difficulty: L2
 category: java-architect
 subcategory: 缓存
 title: Binlog 订阅与缓存一致性治理
-tags: [Binlog, Canal, Debezium, 缓存一致性, 延迟双删]
-related: [java-architect-141, java-architect-026, java-architect-134]
+tags:
+- Binlog
+- Canal
+- Debezium
+- 缓存一致性
+- 延迟双删
+related:
+- java-architect-141
+- java-architect-026
+- java-architect-134
+frequency: high
 ---
 
 # Binlog 订阅与缓存一致性治理
@@ -344,6 +353,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

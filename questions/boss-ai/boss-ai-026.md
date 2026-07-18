@@ -13,37 +13,42 @@ tags:
 - 评估
 - 迭代闭环
 feynman:
-  essence: "AI Harness/LLMOps 是把 LLM 应用当工业品来运营的全链路工程——从模型网关、推理服务、评估体系、监控、版本管理到迭代闭环，让 LLM 应用像传统软件一样可度量、可治理、可演进。"
-  analogy: "像 DevOps 之于传统软件——LLMOps 之于 AI 应用。DevOps 让代码从开发到上线可控，LLMOps 让模型从 prompt 到上线到迭代可控，多了评估和数据闭环这一环。"
-  first_principle: "LLM 应用是概率系统（输出不确定、数据驱动、模型会漂移），传统软件工程（CI/CD）不够用。必须扩展加评估、监控漂移、数据闭环，把'概率系统'纳入工程治理。"
+  essence: AI Harness/LLMOps 是把 LLM 应用当工业品来运营的全链路工程——从模型网关、推理服务、评估体系、监控、版本管理到迭代闭环，让
+    LLM 应用像传统软件一样可度量、可治理、可演进。
+  analogy: 像 DevOps 之于传统软件——LLMOps 之于 AI 应用。DevOps 让代码从开发到上线可控，LLMOps 让模型从 prompt
+    到上线到迭代可控，多了评估和数据闭环这一环。
+  first_principle: LLM 应用是概率系统（输出不确定、数据驱动、模型会漂移），传统软件工程（CI/CD）不够用。必须扩展加评估、监控漂移、数据闭环，把'概率系统'纳入工程治理。
   key_points:
-  - "网关：统一接入、路由、限流、成本治理"
-  - "推理：池化、batching、缓存、自部署 vs API"
-  - "评估：离线评测集 + 在线 A/B + LLM-as-Judge"
-  - "监控：质量/成本/延迟/漂移（数据/概念漂移）"
-  - "闭环：数据回流 → 标注 → 训练/prompt 迭代 → 上线"
+  - 网关：统一接入、路由、限流、成本治理
+  - 推理：池化、batching、缓存、自部署 vs API
+  - 评估：离线评测集 + 在线 A/B + LLM-as-Judge
+  - 监控：质量/成本/延迟/漂移（数据/概念漂移）
+  - 闭环：数据回流 → 标注 → 训练/prompt 迭代 → 上线
   socratic:
-  - "传统 DevOps 和 LLMOps 多了什么？为什么要多这一环？"
-  - "LLM 上线后质量慢慢变差（漂移），怎么发现？怎么救？"
-  - "没有评估集就改 prompt，怎么知道改好了还是改坏了？"
-  - "用户骂角色说错话了，这条数据怎么变成改进模型的燃料？"
-  - "LLMOps 这套基础设施投入很大，对小公司值得吗？"
+  - 传统 DevOps 和 LLMOps 多了什么？为什么要多这一环？
+  - LLM 上线后质量慢慢变差（漂移），怎么发现？怎么救？
+  - 没有评估集就改 prompt，怎么知道改好了还是改坏了？
+  - 用户骂角色说错话了，这条数据怎么变成改进模型的燃料？
+  - LLMOps 这套基础设施投入很大，对小公司值得吗？
 first_principle:
-  problem: "如何把不确定的、数据驱动的、会漂移的 LLM 应用，纳入可度量、可治理、可演进的工程体系？"
+  problem: 如何把不确定的、数据驱动的、会漂移的 LLM 应用，纳入可度量、可治理、可演进的工程体系？
   axioms:
-  - "LLM 应用是概率系统，输出不确定"
-  - "模型和数据会漂移（分布变化）"
-  - "传统 CI/CD 不够，需要评估和数据闭环"
-  rebuild: "构建 LLMOps 全链路：网关（接入治理）+ 推理（高效服务）+ 评估（度量）+ 监控（漂移检测）+ 数据闭环（持续改进），把 LLM 应用从'API 调用'升级为'可工程化运营的系统'。"
+  - LLM 应用是概率系统，输出不确定
+  - 模型和数据会漂移（分布变化）
+  - 传统 CI/CD 不够，需要评估和数据闭环
+  rebuild: 构建 LLMOps 全链路：网关（接入治理）+ 推理（高效服务）+ 评估（度量）+ 监控（漂移检测）+ 数据闭环（持续改进），把 LLM 应用从'API
+    调用'升级为'可工程化运营的系统'。
 follow_up:
-- "评估集怎么建？——业务关键场景抽样 + 人工标注（input/期望 output）+ 多维度评分（人设/安全/有用）；持续扩充。"
-- "数据漂移怎么检测？——监控输入分布（embedding 距离/关键词分布）+ 输出分布（长度/风格/审核拦截率）变化；显著偏移告警。"
-- "LLMOps 工具栈？——LangSmith/LangFuse（追踪评估）/ MLflow（实验）/ PromptLayer（prompt 管理）/ Evidently（漂移检测）/ 自研。"
+- 评估集怎么建？——业务关键场景抽样 + 人工标注（input/期望 output）+ 多维度评分（人设/安全/有用）；持续扩充。
+- 数据漂移怎么检测？——监控输入分布（embedding 距离/关键词分布）+ 输出分布（长度/风格/审核拦截率）变化；显著偏移告警。
+- LLMOps 工具栈？——LangSmith/LangFuse（追踪评估）/ MLflow（实验）/ PromptLayer（prompt 管理）/ Evidently（漂移检测）/
+  自研。
 memory_points:
-- "LLMOps = DevOps + 评估 + 数据闭环"
-- "网关/推理/评估/监控/闭环五环"
-- "漂移：数据漂移+概念漂移"
-- "闭环：数据→标注→训练→上线"
+- LLMOps = DevOps + 评估 + 数据闭环
+- 网关/推理/评估/监控/闭环五环
+- 漂移：数据漂移+概念漂移
+- 闭环：数据→标注→训练→上线
+frequency: medium
 ---
 
 # 【巨剧核 AI 陪伴】AI Harness / LLMOps 全链路怎么建？
@@ -280,6 +285,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

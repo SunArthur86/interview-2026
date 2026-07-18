@@ -29,6 +29,7 @@ memory_points:
 - 因为高频保局部细节不缩放，低频管全局结构做拉伸，所以YaRN成外推首选
 - Qwen2靠YaRN+DCA辅切分外推128K，Qwen2.5直接原生喂入真实长文数据
 - 实战配置：transformers中rope_scaling参数指定yarn及factor缩放倍数
+frequency: medium
 ---
 
 # 【美团面经】Qwen 是怎么做长度外推的？
@@ -94,6 +95,26 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ABF process
+    class B decision
+    class C special
+    class C1 error
+    class C2 info
+    class C3 start
+    class D process
+    class E decision
+    class F special
+    class NTK error
+    class Qwen info
+    class RoPE start
+    class YaRN process
     A[训练长度 8K] --> B[扩展到 32K/128K]
     B --> C{Qwen 长度外推}
     C --> C1[YaRN: NTK 插值]

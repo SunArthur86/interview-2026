@@ -4,8 +4,17 @@ difficulty: L2
 category: java-architect
 subcategory: 分库分表
 title: TiDB / 分布式数据库的适用场景与代价
-tags: [TiDB, NewSQL, 分布式数据库, HTAP, 分库分表]
-related: [java-architect-151, java-architect-149, java-architect-150]
+tags:
+- TiDB
+- NewSQL
+- 分布式数据库
+- HTAP
+- 分库分表
+related:
+- java-architect-151
+- java-architect-149
+- java-architect-150
+frequency: high
 ---
 
 # TiDB / 分布式数据库的适用场景与代价
@@ -350,6 +359,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

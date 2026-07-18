@@ -19,6 +19,7 @@ memory_points:
 - Zero-shot CoT：加一句“Let's think step by step”，无需示例。
 - Few-shot CoT：提供带推理过程的示例，效果更好但耗Token。
 - 注意：CoT仅对大模型(>100B)有效，适用于逻辑推理，不适用于常识问答。
+frequency: medium
 ---
 
 # Chain-of-Thought (CoT) 提示的原理是什么?Zero-shot CoT vs Few-shot CoT有什么区别
@@ -96,6 +97,32 @@ A: Let's think step by step."""
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CoT special
+    class D error
+    class E info
+    class F start
+    class Few process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class Let process
+    class Zero decision
+    class by special
+    class s error
+    class shot info
+    class step start
+    class think process
     A[复杂推理问题] --> B{是否提供提示范例?}
 
     B -- 否 --> C[Zero-shot CoT]

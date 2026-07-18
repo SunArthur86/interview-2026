@@ -27,6 +27,7 @@ memory_points:
 - 执行闭环：Claude Code能执行命令看编译结果，实现秒级调试闭环。
 - 场景划分：补全小修改用Cursor，多文件重构用Agent，方案设计用网页。
 - 安全避坑：AI工具可能泄露隐私，且修改关联文件易遗漏，人工Review必选。
+frequency: low
 ---
 
 # 【字节面经】你平常使用什么 AI 工具？AI 编程工具和传统网页问答 AI 有什么区别？
@@ -86,6 +87,12 @@ flowchart LR
     ID --> FS[读写文件/执行命令]
     FS --> DEV[秒级开发周期]
     style ID fill:#d4edda
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 

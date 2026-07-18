@@ -9,11 +9,14 @@ tags:
 - 质量度量
 - 平台
 feynman:
-  essence: 研发效能不是"代码行数多/发版多"，而是"用 DORA 四指标（部署频率、变更前置时间、变更失败率、MTTR）度量交付的稳、快、稳"。平台要把指标自动采集（从 Git/CI/CD/监控拿数据，而非人工填表），并把全局指标下钻到团队/服务/PR 粒度，让"度量"驱动"改进"而不是"考核"。
+  essence: 研发效能不是"代码行数多/发版多"，而是"用 DORA 四指标（部署频率、变更前置时间、变更失败率、MTTR）度量交付的稳、快、稳"。平台要把指标自动采集（从
+    Git/CI/CD/监控拿数据，而非人工填表），并把全局指标下钻到团队/服务/PR 粒度，让"度量"驱动"改进"而不是"考核"。
   analogy: 像工厂的 MES 系统：不数工人数手数了多少件，而是用传感器记录每道工序的开始时间、结束时间、合格率、返工时间。DORA 四指标就是这四个传感器读数，平台是数据看板，改进动作才是产线优化。
-  first_principle: 「测不准则改不动」。研发效能度量第一性是「用客观、自动、可下钻的指标，替代主观汇报」。DORA 四指标是行业共识基线（Google《Accelerate》DORA 团队提出），因为它覆盖了「稳（失败率/MTTR）」和「快（频率/前置时间）」两端，且都能从工具链自动采集，不被人为修饰。
+  first_principle: 「测不准则改不动」。研发效能度量第一性是「用客观、自动、可下钻的指标，替代主观汇报」。DORA 四指标是行业共识基线（Google《Accelerate》DORA
+    团队提出），因为它覆盖了「稳（失败率/MTTR）」和「快（频率/前置时间）」两端，且都能从工具链自动采集，不被人为修饰。
   key_points:
-  - DORA 四指标：部署频率 Deployment Frequency、变更前置时间 Lead Time for Changes、变更失败率 Change Failure Rate、MTTR Mean Time to Restore
+  - DORA 四指标：部署频率 Deployment Frequency、变更前置时间 Lead Time for Changes、变更失败率 Change Failure
+    Rate、MTTR Mean Time to Restore
   - 自动采集优先：从 Git/CI/CD/监控系统拿数据，禁止人工填表
   - 全局→团队→服务→PR 四级下钻，定位瓶颈具体在哪
   - 度量用于改进而非考核，否则指标会被刷（"刷部署频率"=拆小提交但不减少 bug）
@@ -25,19 +28,21 @@ first_principle:
   - 代码行数/commit 数是 vanity metrics，刷这些不代表真有产出
   - 度量目标 ≠ 考核目标：度量用于改进，考核会让指标异化
   - 指标必须可自动采集、可下钻、可比，否则只是数字游戏
-  rebuild: 以 DORA 四指标为框架，从工具链（GitHub/GitLab、Jenkins、ArgoCD、Prometheus）自动采集事件（commit、PR、部署、回滚、告警），按"全局→团队→服务→PR"四级聚合下钻，用看板呈现趋势和瓶颈。指标用作改进的对话工具（"为什么订单团队 lead_time 是库存团队的 5 倍"），而非 KPI 考核工具。
+  rebuild: 以 DORA 四指标为框架，从工具链（GitHub/GitLab、Jenkins、ArgoCD、Prometheus）自动采集事件（commit、PR、部署、回滚、告警），按"全局→团队→服务→PR"四级聚合下钻，用看板呈现趋势和瓶颈。指标用作改进的对话工具（"为什么订单团队
+    lead_time 是库存团队的 5 倍"），而非 KPI 考核工具。
 follow_up:
-  - DORA 四指标怎么定义边界？——部署频率：单位时间成功部署到生产次数；前置时间：commit 合并到生产部署的时间；失败率：导致回滚/紧急修复的部署占比；MTTR：从故障检测到恢复的时间
-  - 为什么不用代码行数/commit 数？——这是 vanity metrics，刷它们不产生业务价值（拆提交、加注释就能刷）。DORA 指标都绑定业务结果（部署/故障），不易刷
-  - 怎么防止"刷部署频率"？——不要把部署频率当 KPI 考核，当改进指标。配合"失败率不上升"约束：部署快但失败率高=在制造问题
-  - 平台怎么自动采集 MTTR？——从告警系统（Prometheus/钉钉）拿检测时间，从发布平台/工单拿恢复时间，自动算差值
-  - 度量出来发现问题，下一步怎么改进？——瓶颈前置时间卡在 Code Review？看 review 等待时长、评论轮数；MTTR 高？看告警准确性、回滚机制
+- DORA 四指标怎么定义边界？——部署频率：单位时间成功部署到生产次数；前置时间：commit 合并到生产部署的时间；失败率：导致回滚/紧急修复的部署占比；MTTR：从故障检测到恢复的时间
+- 为什么不用代码行数/commit 数？——这是 vanity metrics，刷它们不产生业务价值（拆提交、加注释就能刷）。DORA 指标都绑定业务结果（部署/故障），不易刷
+- 怎么防止"刷部署频率"？——不要把部署频率当 KPI 考核，当改进指标。配合"失败率不上升"约束：部署快但失败率高=在制造问题
+- 平台怎么自动采集 MTTR？——从告警系统（Prometheus/钉钉）拿检测时间，从发布平台/工单拿恢复时间，自动算差值
+- 度量出来发现问题，下一步怎么改进？——瓶颈前置时间卡在 Code Review？看 review 等待时长、评论轮数；MTTR 高？看告警准确性、回滚机制
 memory_points:
-  - DORA 四指标：部署频率、变更前置时间、变更失败率、MTTR
-  - Elite 基线：日多次部署 / 前置时间<1h / 失败率<15% / MTTR<1h
-  - 自动采集优先，从 Git/CI/CD/监控拿数据，禁止人工填表
-  - 四级下钻：全局→团队→服务→PR
-  - 度量用于改进而非考核，否则指标异化
+- DORA 四指标：部署频率、变更前置时间、变更失败率、MTTR
+- Elite 基线：日多次部署 / 前置时间<1h / 失败率<15% / MTTR<1h
+- 自动采集优先，从 Git/CI/CD/监控拿数据，禁止人工填表
+- 四级下钻：全局→团队→服务→PR
+- 度量用于改进而非考核，否则指标异化
+frequency: low
 ---
 
 # 【Java 后端架构师】研发效能平台如何度量交付质量
@@ -68,6 +73,44 @@ DORA（DevOps Research and Assessment，Google《Accelerate》提出）是研发
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ARGOCD start
+    class ArgoCD process
+    class BOARD decision
+    class BUS special
+    class CI error
+    class DORA info
+    class ENGINE start
+    class GH process
+    class GitHub decision
+    class GitLab special
+    class GitLabCI error
+    class JENKINS info
+    class Jenkins start
+    class K8s process
+    class Kafka decision
+    class MON special
+    class MTTR error
+    class P0 info
+    class P1 start
+    class PR process
+    class alert decision
+    class alert_at special
+    class br error
+    class commit info
+    class deploy start
+    class deploy_count process
+    class event decision
+    class first_commit special
+    class restored_at error
+    class rollback_count info
+    class time start
+    class webhook process
     GH["GitHub/GitLab<br/>(commit/PR)"]
     JENKINS["Jenkins/GitLabCI<br/>(CI 构建)"]
     ARGOCD["ArgoCD/K8s<br/>(部署事件)"]

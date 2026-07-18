@@ -15,6 +15,7 @@ memory_points:
 - 对比：熔断是保护自己不被下游拖垮（保险丝），降级是整体权衡弃车保帅（保核心）
 - 熔断三态：关闭->(失败率达阈值)->开启->(冷却超时)->半开(试探少量请求)->关闭/开启
 - 因为故障会引发线程池耗尽层层蔓延，所以需要熔断降级来防止服务雪崩
+frequency: high
 ---
 
 # 什么是服务熔断、服务降级？
@@ -130,6 +131,7 @@ flowchart TD
     style TO_CLOSED fill:#009688,color:#fff
     style TO_HALF fill:#FF9800,color:#fff
     style DEGRADE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

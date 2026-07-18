@@ -33,6 +33,7 @@ memory_points:
 - 第一招：合并相似职责，能单Agent搞定就不拆，直接减少通信节点
 - 第二招：用共享状态(黑板模式)或消息总线取代直接对话，变N²为N通信
 - 第三招：小模型传结构化意图代替自然语言通信；采用Manager-Worker层级化管理
+frequency: medium
 ---
 
 # 【某讯面经】多 Agent 协作中通信成本高怎么办？
@@ -259,6 +260,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

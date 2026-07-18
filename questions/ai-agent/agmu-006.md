@@ -17,6 +17,7 @@ memory_points:
 - 黑板模式：适合多 Agent 协作求解同一对象，状态变更触发专家响应。
 - MQ 模式：适合任务分发、削峰填谷，强调顺序和可靠投递。
 - 避坑指南：黑板需处理并发写冲突，MQ 顺序消费可能导致积压。
+frequency: medium
 ---
 
 # 黑板模式和消息队列有什么相似与不同
@@ -155,6 +156,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

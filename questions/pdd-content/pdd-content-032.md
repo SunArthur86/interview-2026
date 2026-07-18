@@ -29,14 +29,15 @@ first_principle:
   - 复杂/情绪化要人审
   rebuild: LLM+RAG+工具+人审兜底。
 follow_up:
-  - 怎么防幻觉？——RAG 接入真实数据+置信度+人审
-  - 多轮怎么记忆？——会话状态+摘要+长期记忆
-  - 怎么衡量效果？——解决率/转人工率/满意度
+- 怎么防幻觉？——RAG 接入真实数据+置信度+人审
+- 多轮怎么记忆？——会话状态+摘要+长期记忆
+- 怎么衡量效果？——解决率/转人工率/满意度
 memory_points:
-  - 核心：LLM+RAG+工具+人审
-  - RAG：FAQ/政策/商品知识
-  - 工具：订单/物流/退款
-  - 兜底：复杂/情绪化转人
+- 核心：LLM+RAG+工具+人审
+- RAG：FAQ/政策/商品知识
+- 工具：订单/物流/退款
+- 兜底：复杂/情绪化转人
+frequency: medium
 ---
 
 # 【拼多多内容】LLM 智能客服 Agent 怎么设计？
@@ -301,6 +302,33 @@ RAG 召回失败的常见根因：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Agent process
+    class CK decision
+    class F special
+    class FAQ error
+    class H info
+    class HU start
+    class K process
+    class LLM decision
+    class Q special
+    class R error
+    class RD info
+    class RP start
+    class SO process
+    class SS decision
+    class T special
+    class TG error
+    class Top info
+    class U start
+    class UP process
+    class br decision
     U[用户提问] --> R[意图识别与路由]
     R -- 高频简单问题 --> T[模板/FAQ缓存秒回]
     R -- 复杂个性化问题 --> A[LLM 客服 Agent]

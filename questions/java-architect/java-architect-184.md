@@ -10,7 +10,8 @@ tags:
 - 配置隔离
 - Feature Flag
 feynman:
-  essence: 租户级灰度发布的核心是"Feature Flag + 租户路由 + 配置隔离"。功能开关（Feature Flag）控制新功能对哪些租户可见。灰度路由按租户 ID 白名单/百分比分流——部分租户走新版本，其余走老版本。配置隔离让每租户有独立配置（如不同租户不同阈值）。
+  essence: 租户级灰度发布的核心是"Feature Flag + 租户路由 + 配置隔离"。功能开关（Feature Flag）控制新功能对哪些租户可见。灰度路由按租户
+    ID 白名单/百分比分流——部分租户走新版本，其余走老版本。配置隔离让每租户有独立配置（如不同租户不同阈值）。
   analogy: 像商场试营业——新店铺先邀请 VIP 客户体验（白名单灰度），没问题再开放给 10% 顾客（百分比灰度），最后全量开业。每个 VIP 有专属优惠配置（配置隔离）。
   first_principle: 新功能全量上线风险高（bug 影响所有租户）。灰度发布——小范围先上，验证没问题再扩量。租户级灰度比用户级更适合 SaaS（整租户体验一致，不串户）。配置隔离让租户个性化（不同租户不同规则）。
   key_points:
@@ -26,19 +27,22 @@ first_principle:
   - 租户级灰度比用户级好（整租户体验一致，不串户）
   - 出问题要快速回滚（重新发版慢，Feature Flag 秒级）
   - 不同租户可能需要不同配置（个性化）
-  rebuild: Feature Flag（Apollo/Nacos 配置中心）控制功能开关。灰度策略：白名单（指定租户先试）→ 5%（hash(tenantId) % 100 < 5）→ 25% → 100%，逐步扩量。路由层判断当前租户是否命中灰度（查 flag + 租户白名单 + 百分比）。配置隔离——每租户独立 namespace 或配置 key 带 tenantId 前缀。出问题关闭 flag 秒级回滚（老版本代码还在，只是 flag 关闭走老逻辑）。
+  rebuild: Feature Flag（Apollo/Nacos 配置中心）控制功能开关。灰度策略：白名单（指定租户先试）→ 5%（hash(tenantId)
+    % 100 < 5）→ 25% → 100%，逐步扩量。路由层判断当前租户是否命中灰度（查 flag + 租户白名单 + 百分比）。配置隔离——每租户独立
+    namespace 或配置 key 带 tenantId 前缀。出问题关闭 flag 秒级回滚（老版本代码还在，只是 flag 关闭走老逻辑）。
 follow_up:
-  - Feature Flag 怎么实现？——Apollo/Nacos 配置中心。key=feature.xxx.enabled，value=true/false 或租户白名单。应用监听配置变化实时生效。
-  - 灰度百分比怎么算？——hash(tenantId) % 100 < ratio。hash 要稳定（同一租户要么一直在灰度要么一直不在）。用 MurmurHash。
-  - 配置怎么隔离？——每租户独立 namespace（Apollo）或配置 key 带 tenantId 前缀（config.{tenantId}.threshold）。应用启动时加载本租户配置。
-  - 灰度和 AB 测试区别？——灰度是为安全上线（逐步扩量），AB 测试是为数据决策（分流比较指标）。灰度可复用 AB 测试的分流通用能力。
-  - 出问题怎么回滚？——关闭 Feature Flag（秒级，配置中心推送）。应用监听到 flag 变化走老逻辑。不用重新发版（老代码保留）。
+- Feature Flag 怎么实现？——Apollo/Nacos 配置中心。key=feature.xxx.enabled，value=true/false 或租户白名单。应用监听配置变化实时生效。
+- 灰度百分比怎么算？——hash(tenantId) % 100 < ratio。hash 要稳定（同一租户要么一直在灰度要么一直不在）。用 MurmurHash。
+- 配置怎么隔离？——每租户独立 namespace（Apollo）或配置 key 带 tenantId 前缀（config.{tenantId}.threshold）。应用启动时加载本租户配置。
+- 灰度和 AB 测试区别？——灰度是为安全上线（逐步扩量），AB 测试是为数据决策（分流比较指标）。灰度可复用 AB 测试的分流通用能力。
+- 出问题怎么回滚？——关闭 Feature Flag（秒级，配置中心推送）。应用监听到 flag 变化走老逻辑。不用重新发版（老代码保留）。
 memory_points:
-  - Feature Flag：Apollo/Nacos，key=feature.xxx.enabled
-  - 灰度路由：白名单 + hash(tenantId) % 100 < ratio
-  - 配置隔离：每租户 namespace 或 config.{tenantId}.xxx
-  - 灰度策略：白名单 → 5% → 25% → 100%
-  - 回滚：关闭 flag 秒级（老代码保留，flag 关走老逻辑）
+- Feature Flag：Apollo/Nacos，key=feature.xxx.enabled
+- 灰度路由：白名单 + hash(tenantId) % 100 < ratio
+- 配置隔离：每租户 namespace 或 config.{tenantId}.xxx
+- 灰度策略：白名单 → 5% → 25% → 100%
+- 回滚：关闭 flag 秒级（老代码保留，flag 关走老逻辑）
+frequency: low
 ---
 
 # 【Java 后端架构师】租户级灰度发布与配置隔离
@@ -363,6 +367,40 @@ public class RolloutService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class Apollo process
+    class Application decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class C1 start
+    class C2 process
+    class Client decision
+    class ConfigCenter special
+    class D1 error
+    class D2 info
+    class Feature start
+    class Flag process
+    class Gateway decision
+    class Gray special
+    class Hash error
+    class Header info
+    class NewReportService start
+    class OldReportService process
+    class TenantId decision
+    class Version special
+    class X error
+    class br info
+    class config start
+    class default process
+    class rolloutPercent decision
+    class tenantId special
     subgraph Client [客户端]
         A1[租户发起请求]
     end

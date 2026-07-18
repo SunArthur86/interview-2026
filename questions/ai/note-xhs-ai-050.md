@@ -11,7 +11,8 @@ tags:
 - 推理优化
 - 面经
 feynman:
-  essence: Prefix Cache是缓存公共Prompt前缀经过Attention计算后的KV状态，后续相同前缀的请求可以跳过Prefill阶段直接复用。它与普通KV Cache的区别在于跨请求共享——普通KV Cache属于单个序列，Prefix Cache跨请求复用可共享的公共前缀块。
+  essence: Prefix Cache是缓存公共Prompt前缀经过Attention计算后的KV状态，后续相同前缀的请求可以跳过Prefill阶段直接复用。它与普通KV
+    Cache的区别在于跨请求共享——普通KV Cache属于单个序列，Prefix Cache跨请求复用可共享的公共前缀块。
   analogy: 就像备课——老师第一次讲新课需要认真备课（Prefill计算），但如果三个班上同一门课，备课内容可以复用（Prefix Cache），只需要为每个班补充不同的习题（Decode阶段）。
   key_points:
   - Prefix Cache保存公共前缀的KV状态，跳过重复Prefill计算
@@ -21,7 +22,8 @@ feynman:
   - 淘汰策略需综合考虑缓存大小、重算成本和命中频率
 first_principle:
   essence: Prefix Cache = 避免对相同前缀重复做Attention计算，核心是"KV状态可复用"
-  derivation: 多个请求共享相同System Prompt → 每次都对相同前缀做Prefill计算KV → 浪费 → 缓存公共前缀的KV状态 → 后续请求跳过Prefill直接Decode → 降低TTFT和计算量
+  derivation: 多个请求共享相同System Prompt → 每次都对相同前缀做Prefill计算KV → 浪费 → 缓存公共前缀的KV状态 → 后续请求跳过Prefill直接Decode
+    → 降低TTFT和计算量
   conclusion: Prefix Cache通过跨请求复用KV状态大幅降低首字延迟(TTFT)，对多轮对话和模板化Prompt场景效果显著
 follow_up:
 - Prefix Cache的命中率受什么影响？（前缀长度、块粒度、请求模式）
@@ -34,6 +36,7 @@ memory_points:
 - 部分匹配：找最长公共前缀块复用，块粒度影响命中率（太粗=命中率低，太细=碎片多）
 - 调度：cache-aware routing，优先路由到有缓存前缀的GPU节点
 - 淘汰：综合缓存大小+重算成本+命中频率+租户配额
+frequency: high
 ---
 
 # 【AI Infra面经】Prefix Cache 的工作原理？为什么不同于 KV Cache 的普通复用？
@@ -227,6 +230,7 @@ flowchart TD
     style PAGED fill:#FF9800,color:#fff
     style OFFLOAD fill:#F44336,color:#fff
     style BATCH fill:#9C27B0,color:#fff
+
 ```
 
 ## 结构化回答

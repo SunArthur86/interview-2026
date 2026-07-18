@@ -29,6 +29,7 @@ memory_points:
 - 目标张力：引入缓存与小模型求实时性，与加严格校验求一致性存在天然矛盾
 - 实时四招：流式输出降首字延迟、L1到语义多级缓存、复杂度模型路由、异步预计算
 - 一致手段：引入状态版本号乐观锁防并发冲突，结合全局校验器确保跨轮信息不悖
+frequency: high
 ---
 
 # 大模型应用如何保证实时性和多轮对话一致性？
@@ -297,6 +298,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

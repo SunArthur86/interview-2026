@@ -17,6 +17,7 @@ memory_points:
 - 高效原因：二进制格式+TLV结构，摒弃冗余文本分隔符，体积小解析快。
 - Compact协议：结合VarInt+ZigZag变长编码，压缩率极高，生产环境首选。
 - 兼容性原则：支持新增字段，严禁修改已有Field ID或类型，保证服务平滑升级。
+frequency: high
 ---
 
 # Thrift序列化框架的原理和特点是什么？
@@ -84,6 +85,48 @@ service UserService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Buffered decision
+    class C special
+    class D error
+    class Dubbo info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class HTTP error
+    class Hessian2 info
+    class I start
+    class IDC process
+    class IDL decision
+    class J special
+    class JSON error
+    class K info
+    class Kryo start
+    class L process
+    class M decision
+    class N special
+    class O error
+    class Processor info
+    class Protobuf start
+    class Protocol process
+    class RPC decision
+    class Server special
+    class TCP error
+    class TNonblockingServer info
+    class TSimpleServer start
+    class TThreadedServer process
+    class Thrift decision
+    class Transport special
+    class br error
+    class gRPC info
     A[Thrift 序列化框架] --> B[IDL 接口定义语言]
     B --> C[生成多语言代码]
     D[架构分层] --> E[Transport 传输<br/>TCP/HTTP/Buffered]

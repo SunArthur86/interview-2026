@@ -30,6 +30,7 @@ memory_points:
 - 核心机制：利用Spring将所有规则Bean注入List<IRule>，实现自动构建责任链。
 - 接入步骤：新规则只需实现IRule接口，加@Component和@Order注解即可自动接入。
 - 设计原则：零改老代码完美践行开闭原则；拦截型规则@Order小排前，增强型规则排后。
+frequency: medium
 ---
 
 # 【滴滴面经】你前面提到用责任链和组合模式做规则引擎，那新增的付费用户加权规则怎么接入原来的规则链？
@@ -388,6 +389,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

@@ -4,8 +4,17 @@ difficulty: L3
 category: java-architect
 subcategory: 系统解耦
 title: Debezium 在 Java 数据同步中的应用
-tags: [Debezium, CDC, 数据同步, Binlog, Kafka Connect]
-related: [java-architect-140, java-architect-142, java-architect-137]
+tags:
+- Debezium
+- CDC
+- 数据同步
+- Binlog
+- Kafka Connect
+related:
+- java-architect-140
+- java-architect-142
+- java-architect-137
+frequency: high
 ---
 
 # Debezium 在 Java 数据同步中的应用
@@ -290,6 +299,41 @@ JD 中台三套库，搜索风控和数仓，
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Connector special
+    class D error
+    class Debezium info
+    class E start
+    class Elasticsearch process
+    class F decision
+    class G special
+    class H error
+    class Java info
+    class Kafka start
+    class MySQL process
+    class ROW decision
+    class Redis special
+    class Registry error
+    class Schema info
+    class Topic start
+    class at process
+    class binlog_format decision
+    class br special
+    class c error
+    class d info
+    class event_id start
+    class least process
+    class once decision
+    class r special
+    class u error
     subgraph 数据源
         A[("MySQL 主库<br/>binlog_format=ROW")] -->|低延迟无侵入| B["Debezium Connector"]
     end

@@ -16,6 +16,7 @@ memory_points:
 - 核心好处：因为不可变，所以天然线程安全、绝对适合做HashMap的Key、能安全复用实现常量池。
 - 性能优化：不可变保证hashCode只算一次就能被永久缓存，大幅提升Map查询速度。
 - 易混对比：String不可变，而StringBuilder（非线程安全）与StringBuffer（加锁安全）均可变。
+frequency: medium
 ---
 
 # String为什么设计为不可变？有什么好处？
@@ -138,6 +139,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

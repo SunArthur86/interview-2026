@@ -12,9 +12,13 @@ tags:
 - 质检
 - 系统设计
 feynman:
-  essence: 用 Agent 思想重构传统 AI 任务链路（数据标注/模型训练/质检），核心是把每个环节从"人工"变成"Agent 编排"：数据标注用多 Agent 协同（抽取Agent+校验Agent+仲裁Agent）替代纯人工；模型训练用 Agent 自动化超参搜索+消融实验+失败分析；质检用 LLM-as-Judge Agent 替代人工抽检。关键是用 Agent 处理"需要判断力但重复"的环节，人工只兜底边界 case。
-  analogy: 像传统工厂变智能制造——原来每个工位全是人（人工标注/调参/质检），现在每个工位放一个 AI 主管（Agent），AI 干重复判断活，人只处理 AI 搞不定的疑难件。整条流水线从"人工串联"变成"Agent 编排"。
-  first_principle: 传统 AI 链路的瓶颈是"需要判断力的人工环节"。Agent 的价值是"LLM 提供判断力 + 自动化编排"，能替代大部分重复性判断工作，人工只兜底边界 case。
+  essence: 用 Agent 思想重构传统 AI 任务链路（数据标注/模型训练/质检），核心是把每个环节从"人工"变成"Agent 编排"：数据标注用多 Agent
+    协同（抽取Agent+校验Agent+仲裁Agent）替代纯人工；模型训练用 Agent 自动化超参搜索+消融实验+失败分析；质检用 LLM-as-Judge
+    Agent 替代人工抽检。关键是用 Agent 处理"需要判断力但重复"的环节，人工只兜底边界 case。
+  analogy: 像传统工厂变智能制造——原来每个工位全是人（人工标注/调参/质检），现在每个工位放一个 AI 主管（Agent），AI 干重复判断活，人只处理
+    AI 搞不定的疑难件。整条流水线从"人工串联"变成"Agent 编排"。
+  first_principle: 传统 AI 链路的瓶颈是"需要判断力的人工环节"。Agent 的价值是"LLM 提供判断力 + 自动化编排"，能替代大部分重复性判断工作，人工只兜底边界
+    case。
   key_points:
   - '数据标注: 多Agent协同(抽取+校验+仲裁)替代纯人工'
   - '模型训练: Agent自动化超参搜索+消融实验+失败分析'
@@ -34,6 +38,7 @@ memory_points:
 - 训练重构：实验编排Agent串联规划-执行-分析闭环，实现贝叶斯超参自动搜索
 - 质检重构：用LLM-as-Judge全量自动质检，多模型投票+Golden Set校准防偏见
 - 核心价值：用多Agent流打破人工瓶颈，实现全量自动化与高置信度人工兜底结合
+frequency: high
 ---
 
 # 【字节面经】结合 Agent 思想，如何重构传统 AI 任务（数据标注、模型训练、质检）的完整链路？
@@ -234,6 +239,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

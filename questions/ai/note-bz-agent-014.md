@@ -32,6 +32,7 @@ memory_points:
 - 选型决策树：需外部工具用ReAct，多步且明确用Plan-Execute，可验证难题加Reflexion
 - 场景对比：纯脑内计算用CoT，查新闻用ReAct，写长篇报告用Plan-Execute
 - 生产实践：常组合使用，如Plan做骨架，ReAct执行步骤，Reflexion处理失败
+frequency: high
 ---
 
 # 主流认知框架（CoT/ReAct/Plan-Execute/Reflexion）各自适用什么场景？
@@ -233,6 +234,7 @@ flowchart TD
     style ACTION fill:#FF9800,color:#fff
     style OBS fill:#9C27B0,color:#fff
     style REFLECT fill:#FFC107,color:#000
+
 ```
 
 ## 记忆要点

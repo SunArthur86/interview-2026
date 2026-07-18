@@ -10,7 +10,8 @@ tags:
 feynman:
   essence: 读写分离的本质是"写主库、读从库，用多个从库分摊读压力"。核心矛盾是主从复制延迟——写主库后从库异步同步有秒级延迟，导致"写完立即读不到"。兜底方案按一致性强度选：强一致场景走主库、容忍延迟用缓存过渡、跨机房用半同步复制。
   analogy: 像报社的"主编辑部 + 各地印刷厂"。记者写稿交主编辑部（写主库），各地印刷厂同步印刷（从库复制）。但同步有延迟（运输时间），可能出现"刚交稿去当地买报纸发现还没印"（写后读不到）。解法：重要新闻指定看主编辑部原稿（读主库），或等印刷完成通知（等待复制完成）。
-  first_principle: 为什么读写分离？因为大部分业务读多写少（读写比 10:1 到 100:1），单库承受不了读压力。把读分摊到多个从库，主库只负责写，整体吞吐提升 N 倍（N 是从库数）。代价是主从延迟引入的一致性问题。
+  first_principle: 为什么读写分离？因为大部分业务读多写少（读写比 10:1 到 100:1），单库承受不了读压力。把读分摊到多个从库，主库只负责写，整体吞吐提升
+    N 倍（N 是从库数）。代价是主从延迟引入的一致性问题。
   key_points:
   - 主从复制：binlog → relay log → replay，异步（默认）或半同步
   - 复制延迟来源：网络、大事务、慢 SQL、从库单线程 replay
@@ -23,20 +24,28 @@ first_principle:
   - 业务读多写少，单库读压力是瓶颈
   - 异步复制有延迟（秒级），写后立即读可能读到旧数据
   - 强一致读要回主库（牺牲分离收益），最终一致读走从库
-  rebuild: 主库负责写，多个从库负责读（读写分离）。复制用 binlog 异步同步（默认）或半同步（至少一个从库确认）。写后读一致性问题用三种兜底：第一，关键业务（如支付后查订单）强制读主库；第二，写后在 Redis 标记"该用户 N 秒内读主库"（缓存过渡）；第三，用半同步复制降低延迟（从库收到 binlog 才算提交成功，延迟降到毫秒级但写入变慢）。从库延迟监控用 Seconds_Behind_Master，超阈值告警。
+  rebuild: 主库负责写，多个从库负责读（读写分离）。复制用 binlog 异步同步（默认）或半同步（至少一个从库确认）。写后读一致性问题用三种兜底：第一，关键业务（如支付后查订单）强制读主库；第二，写后在
+    Redis 标记"该用户 N 秒内读主库"（缓存过渡）；第三，用半同步复制降低延迟（从库收到 binlog 才算提交成功，延迟降到毫秒级但写入变慢）。从库延迟监控用
+    Seconds_Behind_Master，超阈值告警。
 follow_up:
-  - Seconds_Behind_Master 是什么？——从库复制延迟指标（秒），表示从库落后主库多少秒。SHOW SLAVE STATUS 查看。超 1s 告警，超 5s 可能影响业务。但这个指标有局限（基于 binlog 时间戳，不完全准确），MySQL 8.0 用 performance_schema.replication_applier_status 更准确
-  - 半同步复制（semi-sync）是什么？——主库提交事务后，至少等一个从库收到 binlog（ack）才算提交成功。降低延迟（从库收到即接近同步）但写入变慢（等 ack）。适合对一致性敏感的场景
-  - 从库延迟大怎么排查？——常见原因：从库单线程 replay（MySQL 5.7+ 支持并行复制 multi-threaded slave）、大事务（一个事务阻塞后续）、慢 SQL（从库查询阻塞 replay）、网络抖动。用 SHOW SLAVE STATUS 看 Seconds_Behind_Master 和 Slave_IO/SQL_Running
-  - 读写分离怎么路由？——中间件（ShardingSphere/ProxySQL）自动路由（解析 SQL，SELECT 走从库，DML 走主库）；注解（@Master/@Slave 手动指定）；客户端感知（如写后在 ThreadLocal 标记强制读主）。注解更灵活但侵入代码
-  - 主库挂了怎么办？——从库提升为主（failover）。用 MHA/MGR/Orchestrator 自动切换。切换时要处理：选最新的从库、重定向应用连接、处理延迟（等从库追平）。切换过程有短暂不可用（秒到分钟级）
+- Seconds_Behind_Master 是什么？——从库复制延迟指标（秒），表示从库落后主库多少秒。SHOW SLAVE STATUS 查看。超 1s 告警，超
+  5s 可能影响业务。但这个指标有局限（基于 binlog 时间戳，不完全准确），MySQL 8.0 用 performance_schema.replication_applier_status
+  更准确
+- 半同步复制（semi-sync）是什么？——主库提交事务后，至少等一个从库收到 binlog（ack）才算提交成功。降低延迟（从库收到即接近同步）但写入变慢（等
+  ack）。适合对一致性敏感的场景
+- 从库延迟大怎么排查？——常见原因：从库单线程 replay（MySQL 5.7+ 支持并行复制 multi-threaded slave）、大事务（一个事务阻塞后续）、慢
+  SQL（从库查询阻塞 replay）、网络抖动。用 SHOW SLAVE STATUS 看 Seconds_Behind_Master 和 Slave_IO/SQL_Running
+- 读写分离怎么路由？——中间件（ShardingSphere/ProxySQL）自动路由（解析 SQL，SELECT 走从库，DML 走主库）；注解（@Master/@Slave
+  手动指定）；客户端感知（如写后在 ThreadLocal 标记强制读主）。注解更灵活但侵入代码
+- 主库挂了怎么办？——从库提升为主（failover）。用 MHA/MGR/Orchestrator 自动切换。切换时要处理：选最新的从库、重定向应用连接、处理延迟（等从库追平）。切换过程有短暂不可用（秒到分钟级）
 memory_points:
-  - 读写分离：写主库、读从库，分摊读压力
-  - 复制延迟：binlog → relay log → replay，秒级
-  - 写后读一致：强制读主、缓存过渡、半同步
-  - 延迟监控：Seconds_Behind_Master，超 1s 告警
-  - 半同步：至少一个从库 ack 才提交，延迟毫秒级但写入变慢
-  - 路由：中间件自动 / 注解手动 / ThreadLocal 感知
+- 读写分离：写主库、读从库，分摊读压力
+- 复制延迟：binlog → relay log → replay，秒级
+- 写后读一致：强制读主、缓存过渡、半同步
+- 延迟监控：Seconds_Behind_Master，超 1s 告警
+- 半同步：至少一个从库 ack 才提交，延迟毫秒级但写入变慢
+- 路由：中间件自动 / 注解手动 / ThreadLocal 感知
+frequency: high
 ---
 
 # 【Java 后端架构师】读写分离、主从延迟与一致性兜底
@@ -471,6 +480,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

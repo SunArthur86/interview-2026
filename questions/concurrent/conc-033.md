@@ -16,6 +16,7 @@ memory_points:
 - 调度频率对比：高级最低（分钟级），低级最高（毫秒级，最核心）。
 - 算法对比：FCFS 公平易护航，SJF 等待短难预测，RR 适合分时系统，多级反馈队列综合最优。
 - 评价指标：CPU利用率、吞吐量、周转时间、响应时间和公平性。
+frequency: low
 ---
 
 # 什么是进程调度？
@@ -120,6 +121,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

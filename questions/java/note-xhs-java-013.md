@@ -13,8 +13,9 @@ tags:
 - JVM
 - 面经
 feynman:
-  essence: "G1将堆划分为多个等大Region（1-32MB），Mixed GC同时回收新生代和部分老年代Region，触发条件是堆使用率超过InitiatingHeapOccupancyPercent(默认45%)"
-  analogy: "G1就像城市环卫系统——把城市分成若干街区（Region），每个街区可以是住宅区（Eden）、商业区（Old）或空地（Free）。Mixed GC就是大扫除时，不仅清理住宅区，还挑选商业区里最脏的几个一起打扫"
+  essence: G1将堆划分为多个等大Region（1-32MB），Mixed GC同时回收新生代和部分老年代Region，触发条件是堆使用率超过InitiatingHeapOccupancyPercent(默认45%)
+  analogy: G1就像城市环卫系统——把城市分成若干街区（Region），每个街区可以是住宅区（Eden）、商业区（Old）或空地（Free）。Mixed
+    GC就是大扫除时，不仅清理住宅区，还挑选商业区里最脏的几个一起打扫
   key_points:
   - G1堆被划分为2048个左右的Region（等大，1-32MB）
   - Region角色可变：Eden/Survivor/Old/Humongous
@@ -22,9 +23,10 @@ feynman:
   - 触发条件：堆使用率 > IHOP(默认45%)
   - Mixed GC由多个GC cycle组成，每轮回收一部分Old Region
 first_principle:
-  essence: "G1的设计目标是'可预测的停顿时间'。通过Region化+优先回收垃圾最多的Region实现"
-  derivation: "传统GC全堆扫描→停顿时间长→将堆分成Region→每次只回收部分Region→控制停顿时间→优先选垃圾最多的Region(Garbage First)→Mixed GC在Young GC基础上额外回收Old Region"
-  conclusion: "G1 = Region化堆 + 垃圾优先策略 + 可预测停顿时间。Mixed GC是G1回收老年代的核心机制"
+  essence: G1的设计目标是'可预测的停顿时间'。通过Region化+优先回收垃圾最多的Region实现
+  derivation: 传统GC全堆扫描→停顿时间长→将堆分成Region→每次只回收部分Region→控制停顿时间→优先选垃圾最多的Region(Garbage
+    First)→Mixed GC在Young GC基础上额外回收Old Region
+  conclusion: G1 = Region化堆 + 垃圾优先策略 + 可预测停顿时间。Mixed GC是G1回收老年代的核心机制
 follow_up:
 - G1和CMS有什么区别？为什么JDK9默认G1？
 - G1的Remembered Set是什么？有什么作用？
@@ -36,6 +38,7 @@ memory_points:
 - IHOP默认45%：堆使用率超过45%触发并发标记→Mixed GC
 - Mixed GC回收范围 = 全部Young + 部分Old（垃圾最多的优先）
 - -XX:MaxGCPauseMillis=200 控制目标停顿时间
+frequency: high
 ---
 
 # 【拼多多 Java服务端】G1收集器的Mixed GC触发条件是什么？Region大小怎么划分？
@@ -225,6 +228,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

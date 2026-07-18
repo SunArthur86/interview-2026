@@ -32,6 +32,7 @@ memory_points:
 - 真实数据：分布最贴合线上场景，但必须严格进行人脸、GPS、EXIF 等隐私脱敏。
 - 定向补全：针对真实分布中稀缺的边缘场景（如极端天气、夜景）进行人工补齐。
 - 合成优势：3D渲染能低成本生成现实中极难采集的困难样本，且自带精确 Ground Truth。
+frequency: medium
 ---
 
 # 【华为面经】华为手机拍照场景训练数据采集与标注方案
@@ -401,6 +402,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

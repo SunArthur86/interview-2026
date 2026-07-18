@@ -28,6 +28,7 @@ memory_points:
 - 游标分页：记录上一页最大ID，Where id > ? 翻页，性能极高但不支持跳页。
 - 延迟关联：子查询利用覆盖索引先查主键，再JOIN回表，大幅减少无效IO。
 - ES限制：深度分页禁用from+size(易OOM)，实时查询用search_after，导出用Scroll。
+frequency: medium
 ---
 
 # 如何设计一个通用的分页方案？深度分页问题如何解决？
@@ -120,6 +121,7 @@ flowchart TD
     CUR --> FAST[性能恒定]
     style SLOW fill:#ffcccc
     style FAST fill:#d4edda
+
 ```
 
 

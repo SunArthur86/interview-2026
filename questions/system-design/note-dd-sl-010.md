@@ -31,6 +31,7 @@ memory_points:
 - 并发控权：必须配独立线程池+调大HikariCP连接池(>64)，否则耗尽资源拖垮全系统
 - 分页优化：各表只取前N条合并，深分页必须改用游标分页(WHERE create_time < ?)防内存溢出
 - 终极方案：并发查询治标，新建用户维度(user_id)索引表才是治本首选
+frequency: high
 ---
 
 # 【滴滴面经】极端情况下，一个用户的短链可能分布在 64 张表里，这种情况下怎么提升查询性能？
@@ -227,6 +228,23 @@ public class DualWriteConsumer implements RocketMQListener<ShortLink> {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
     A[查询用户短链列表] --> B{是否使用索引表}
     B -->|未使用 并发查询| C[CompletableFuture并发扫描64张表]
     B -->|使用索引表| D[查询user_id分片索引表]

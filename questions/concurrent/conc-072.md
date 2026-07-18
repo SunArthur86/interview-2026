@@ -15,6 +15,7 @@ memory_points:
 - synchronized锁只能升级不能降级：无锁 -> 偏向锁 -> 轻量级锁(自旋) -> 重量级锁。
 - volatile保证可见性和有序性（禁止重排序），但绝不保证复合操作的原子性。
 - CAS核心缺陷：ABA问题、高竞争下自旋消耗大、仅能保证单变量原子操作。
+frequency: high
 ---
 
 # 什么是Java 线程安全的实现？
@@ -136,6 +137,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

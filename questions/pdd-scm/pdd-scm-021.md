@@ -10,7 +10,8 @@ tags:
 - 架构
 - 亿级流量
 feynman:
-  essence: 拼多多供应链架构核心是"中台化（商品/库存/订单共享）+ 异步化（领域事件串联）+ 多仓多活（就近发货）"，支撑千万级商品、亿级订单、日百亿级 GMV。
+  essence: 拼多多供应链架构核心是"中台化（商品/库存/订单共享）+ 异步化（领域事件串联）+ 多仓多活（就近发货）"，支撑千万级商品、亿级订单、日百亿级
+    GMV。
   analogy: 供应链架构像全国连锁物流网——中央调度（中台）+ 各地分仓（多仓多活）+ 标准流程（领域事件），让"哪里有货哪里发、哪个环节慢就异步"。
   first_principle: 供应链 = 商品流 + 信息流 + 资金流，三流解耦（中台化）+ 异步（事件驱动）+ 就近（多仓）才能支撑规模。
   key_points:
@@ -34,6 +35,7 @@ memory_points:
 - 异步：领域事件 + 本地消息表
 - 多仓多活：按区域分仓就近发货
 - 数据中台：Flink 实时 + Spark 离线
+frequency: low
 ---
 
 # 【拼多多供应链】设计拼多多级供应链架构（千万商品、亿订单）
@@ -44,6 +46,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class App start
+    class Flink process
+    class H5 decision
+    class K8s special
+    class L1 error
+    class L2 info
+    class L3A start
+    class L3B process
+    class L3C decision
+    class L3D special
+    class L3E error
+    class L4A info
+    class L4B start
+    class L4C process
+    class L4D decision
+    class L4E special
+    class L5 error
+    class L6 info
+    class Spark start
+    class T process
+    class br decision
     L1["接入层 网关、限流"]
     L2["业务层 App/H5/小程序"]
     L3A[商品中心]

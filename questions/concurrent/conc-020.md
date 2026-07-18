@@ -17,6 +17,7 @@ memory_points:
 - 可重入锁：同一线程可多次获取同一把锁不阻塞，因底层记录持有者与重入次数，加1减1到0才真释放。
 - 公平对比：公平锁严格排队无饥饿，而非公平锁允许插队所以吞吐量更高。
 - 实战避坑：双检锁单例必须用volatile修饰实例，因指令重排会导致获取锁后读到半初始化对象引发NPE。
+frequency: high
 ---
 
 # 什么是互斥锁Mutex？
@@ -148,6 +149,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

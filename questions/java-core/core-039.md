@@ -16,6 +16,7 @@ memory_points:
 - 头部优化：1.1重复发送，2.0使用HPACK算法建立字典压缩头部
 - 新增特性：2.0支持服务端主动推送资源，减少请求往返延迟
 - 隐患限制：2.0虽解决HTTP层阻塞，但单TCP连接一旦丢包会阻塞所有流
+frequency: medium
 ---
 
 # HTTP/2.0和HTTP1.1有什么区别？
@@ -101,6 +102,40 @@ server {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Alive process
+    class B decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class B4 start
+    class C process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class C5 start
+    class D process
+    class D1 decision
+    class D2 special
+    class D3 error
+    class D4 info
+    class HOL start
+    class HPACK process
+    class HTTP decision
+    class IP special
+    class Keep error
+    class QUIC info
+    class RTT start
+    class TCP process
+    class UDP decision
+    class br special
     A[HTTP 协议演进] --> B["HTTP/1.1"]
     B --> B1[文本协议]
     B --> B2[持久连接 Keep-Alive]

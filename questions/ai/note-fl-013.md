@@ -11,9 +11,12 @@ tags:
 - Kafka
 - 消息队列
 feynman:
-  essence: Redis Stream vs Kafka——Redis Stream 看持久化模式(RDB/AOF)，AOF everysec 仍可能丢1s；Kafka 磁盘顺序写+副本更强。吞吐 Redis 单机十万级，Kafka 单机百万级。两者都有消费组+ACK。Redis Stream 未ACK消息留 Pending List，挂掉的 consumer 重启能 claim 回去。已有Redis+量不大+想少组件→Stream；高吞吐+跨团队+严格一致→Kafka。
+  essence: Redis Stream vs Kafka——Redis Stream 看持久化模式(RDB/AOF)，AOF everysec 仍可能丢1s；Kafka
+    磁盘顺序写+副本更强。吞吐 Redis 单机十万级，Kafka 单机百万级。两者都有消费组+ACK。Redis Stream 未ACK消息留 Pending
+    List，挂掉的 consumer 重启能 claim 回去。已有Redis+量不大+想少组件→Stream；高吞吐+跨团队+严格一致→Kafka。
   analogy: Redis Stream 像小区快递柜（够用、就近、偶尔丢件），Kafka 像专业物流中心（吞吐大、可追溯、跨城市）。小社区用快递柜够了，跨国电商必须物流中心。
-  first_principle: 消息队列的本质诉求是"解耦 + 削峰 + 可靠投递"。Redis Stream 胜在轻量（已有 Redis 就能用），Kafka 胜在专业（高吞吐 + 强一致 + 生态）。
+  first_principle: 消息队列的本质诉求是"解耦 + 削峰 + 可靠投递"。Redis Stream 胜在轻量（已有 Redis 就能用），Kafka
+    胜在专业（高吞吐 + 强一致 + 生态）。
   key_points:
   - 持久化：Redis看模式(AOF everysec可能丢1s)，Kafka磁盘顺序写+副本更强
   - 吞吐：Redis单机十万级，Kafka单机百万级
@@ -22,7 +25,8 @@ feynman:
   - 选型：已有Redis+量不大→Stream；高吞吐+跨团队+严格一致→Kafka
 first_principle:
   essence: 消息队列 = 解耦 + 削峰 + 可靠投递
-  derivation: 生产者消费者需解耦 → 引入中间层 → 中间层要可靠投递(ACK/重试) → 要削峰(缓冲) → Redis Stream 轻量满足小规模，Kafka 专业满足大规模
+  derivation: 生产者消费者需解耦 → 引入中间层 → 中间层要可靠投递(ACK/重试) → 要削峰(缓冲) → Redis Stream 轻量满足小规模，Kafka
+    专业满足大规模
   conclusion: 消息队列选型 = 规模 + 可靠性需求 + 已有基础设施 的综合权衡
 follow_up:
 - Redis Stream 能保证消息不丢吗？什么配置下接近不丢？
@@ -33,6 +37,7 @@ memory_points:
 - Redis Stream精华：未ACK消息留在Pending List，挂掉的Consumer重启可被XCLAIM认领
 - 选型策略：中小规模/已有Redis用Stream，大数据管道/严格一致性(金融)用Kafka
 - Redis保数据不丢较难(本质内存)，Kafka靠多副本同步(acks=all)与ISR机制保不丢
+frequency: high
 ---
 
 # 【字节飞连面经】Redis Stream vs Kafka：怎么选？
@@ -112,6 +117,33 @@ consumer 从 Stream 读消息（XREADGROUP）→ 消息进入该 consumer 的 Pe
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Consumer decision
+    class Consumer1 special
+    class Consumer2 error
+    class Kafka info
+    class List start
+    class MQ process
+    class Monitor decision
+    class P special
+    class Pending error
+    class Prod info
+    class Redis start
+    class S1 process
+    class S2 decision
+    class Stream special
+    class XADD error
+    class XCLAIM info
+    class XPENDING start
+    class XREAD process
+    class br decision
     Prod["Agent事件生产者"] --> MQ{消息队列选型}
     MQ -->|中小规模/已有Redis| Stream["Redis Stream<br/>亚毫秒延迟"]
     MQ -->|百万级QPS/严格不丢| Kafka["Kafka<br/>磁盘顺序写与多副本"]

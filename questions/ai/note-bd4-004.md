@@ -31,6 +31,7 @@ memory_points:
 - 六大核心职责：调度(并发/编排)、熔断(超时/重试)、上下文管理
 - 还包含：可观测性(Tracing)、错误隔离兜底、安全审计与人机协同
 - 因为LLM API易超时打满，所以Harness层必须实现并发控制与三层超时兜底机制
+frequency: high
 ---
 
 # 什么是 Harness Engineering？Agent Harness 层包含哪些职责？
@@ -39,6 +40,51 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Agent start
+    class Approval process
+    class Audit decision
+    class BRAIN special
+    class Brain error
+    class Breaker info
+    class Checkpt start
+    class Circuit process
+    class Context decision
+    class Cost special
+    class Fallback error
+    class H info
+    class Harness start
+    class Human process
+    class LLM decision
+    class Limit special
+    class Loop error
+    class Memory info
+    class Metrics start
+    class Mgr process
+    class O1 decision
+    class O2 special
+    class O3 error
+    class Prompt info
+    class Rate start
+    class Retry process
+    class S1 decision
+    class S2 special
+    class S3 error
+    class SEC1 info
+    class SEC2 start
+    class SEC3 process
+    class Scheduler decision
+    class Security special
+    class State error
+    class Tools info
+    class Tracing start
+    class Tracker process
+    class br decision
     subgraph H["Agent Harness 层 (包裹在Agent核心逻辑外面的工程保障层)"]
         S1["调度引擎 Scheduler"]
         S2["超时熔断 Circuit Breaker"]

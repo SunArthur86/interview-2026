@@ -26,6 +26,7 @@ memory_points:
 - 漏斗模型：前端→网关限流→应用过滤，层层递减退掉无效流量
 - 原子防超卖：Redis执行Lua脚本扣减库存，因为需保证“判断+扣减”串行原子性
 - 异步落库：因为DB无法承受并发写入，所以Redis扣减成功后发MQ异步落DB下单
+frequency: high
 ---
 
 # 设计一个秒杀系统，核心要点是什么？
@@ -416,6 +417,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

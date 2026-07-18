@@ -16,6 +16,7 @@ memory_points:
 - Hash扰动优化：(h ^ h>>>16)让高位特征混入低位，(n-1)&hash计算高效定位索引。
 - 冲突处理逻辑：链表尾插法（>8转红黑树），遇到相同Key则直接覆盖旧Value。
 - 高效定位：因为hash按位与运算要求容量为2的幂，所以扩容时只需判断最高位即可平分原链表。
+frequency: medium
 ---
 
 # 什么是Map put的过程？
@@ -176,6 +177,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

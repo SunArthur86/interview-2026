@@ -31,6 +31,7 @@ memory_points:
 - 事实表记录业务事件且长瘦高速增长（含外键度量），维度表存描述属性且短胖缓慢增长
 - 事实表分三种：事务型（单次事件）、周期快照（全量状态）、累计快照（里程碑时间戳）
 - 缓慢变化维(SCD)：Type1直接覆盖，Type2拉链表加行（最常用），Type3增加旧值列
+frequency: medium
 ---
 
 # 【神州专车面经】事实表和维度表怎么设计？
@@ -170,6 +171,25 @@ A         | A     | 2026-07-01     | 9999-12-31   | true
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
     A[业务系统日志] --> B[ETL数据清洗]
     B --> C{事实表类型选择}
     C -->|单次事件| D[事务型事实表]

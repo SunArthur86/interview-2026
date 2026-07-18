@@ -16,6 +16,7 @@ memory_points:
 - 时间局部性：刚被访问的信息近期极可能再次访问（如循环变量、热点数据）
 - 空间局部性：被访问地址的邻近区域极可能被访问（如连续数组遍历）
 - 系统应用：因为局部性，所以CPU引入多级Cache，OS引入磁盘预读和页表缓存
+frequency: low
 ---
 
 # 局部性原理是什么？
@@ -76,6 +77,38 @@ public class LhsAdder {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CPU special
+    class Cache error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class L1 decision
+    class L2 special
+    class L3 error
+    class Locality info
+    class M start
+    class N process
+    class O decision
+    class Page special
+    class Redis error
+    class br info
+    class key start
+    class vs process
     A[局部性原理 Locality] --> B[时间局部性]
     A --> C[空间局部性]
     B --> D[刚访问的数据<br/>不久还会访问]

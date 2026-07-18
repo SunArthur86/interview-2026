@@ -25,6 +25,7 @@ memory_points:
 - 消费者取：获取锁，若空则await挂起；成功取出后signal唤醒生产者
 follow_up: []
 tags: []
+frequency: high
 ---
 
 # 什么是Java中的阻塞队列？
@@ -151,6 +152,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

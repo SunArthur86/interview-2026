@@ -29,6 +29,7 @@ memory_points:
 - 缓存层：语义缓存命中30%直接省30%成本，适合高频重复问题。
 - 预算管理：租户/用户/功能三级配额，超额限流，实时告警。
 - 成本估算：日均10万次请求，全GPT-4约$300/天，路由优化混合约$80/天。
+frequency: high
 ---
 
 # 如何设计LLM的Token成本控制系统？在不降低用户体验的前提下削减50%以上成本。
@@ -115,6 +116,28 @@ def truncate_context(prompt: str, max_len: int = 4000):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E1 error
+    class E2 info
+    class E3 start
+    class F process
+    class G decision
+    class GPT special
+    class H error
+    class I info
+    class J start
+    class K process
+    class L decision
+    class br special
     A["用户请求<br/>(LLM调用)"] --> B["请求层预处理<br/>(Prompt精简与上下文裁剪)"]
     B --> C{"语义缓存<br/>命中?"}
     C -- "命中 (省Token)" --> H["直接返回缓存结果"]

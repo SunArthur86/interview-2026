@@ -17,6 +17,7 @@ memory_points:
 - 关键阈值记忆：链表超8且数组满64转红黑树，退化为6；初始16，扩容2倍。
 - 并发致命Bug：因为JDK1.7头插法导致死循环，所以JDK1.8改为尾插法（但依然非线程安全）。
 - 避坑指南：已知数据量时务必预设容量（expectedSize / 0.75 + 1）防止频繁扩容抖动。
+frequency: high
 ---
 
 # 什么是HashMap？
@@ -107,6 +108,39 @@ final void treeifyBin(Node<K,V>[] tab, int hash) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class HashMap decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class Node special
+    class O error
+    class Rehash info
+    class Value start
+    class br process
+    class equals decision
+    class hash special
+    class hashCode error
+    class key info
+    class log start
+    class n process
+    class oldCap decision
     A[HashMap 键值对存取] --> B[计算 key 的 hashCode]
     B --> C[扰动函数 hash]
     C --> D["定位桶索引 (n-1) & hash"]

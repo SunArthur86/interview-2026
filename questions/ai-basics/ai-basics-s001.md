@@ -17,6 +17,7 @@ memory_points:
 - 解决消失：用ReLU（导数恒为1）替代Sigmoid，或用残差连接（梯度旁路）。
 - 解决爆炸：梯度裁剪，强制将梯度范数限制在阈值内。
 - 通用方案：BatchNorm归一化输入分布，稳定梯度；合理初始化权重。
+frequency: medium
 ---
 
 # 梯度消失和梯度爆炸的原因和解决方案？
@@ -105,6 +106,32 @@ class DeepNet(nn.Module):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BatchNorm decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class F1 process
+    class F2 decision
+    class F3 special
+    class G error
+    class G1 info
+    class G2 start
+    class L process
+    class LayerNorm decision
+    class W special
+    class Xavier error
+    class br info
+    class x start
+    class y process
     A["反向传播<br/>链式法则"] --> B["梯度连乘积<br/>∂L/∂W = σ'·W..."]
     B --> C{"逐层梯度绝对值"}
     C -->|"< 1 连乘N次"| D["梯度消失<br/>浅层参数不更新"]

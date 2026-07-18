@@ -28,6 +28,7 @@ memory_points:
 - 核心表：SPU表、规格表、SKU表、以及SKU与规格值的关联表(唯一索引)
 - SKU组合防笛卡尔积爆炸：限制规格数量，前端依赖邻接矩阵算法置灰无货属性
 - 库存按SKU维度管，Redis预扣防超卖，ES以SPU建索引存min/max_price
+frequency: low
 ---
 
 # 如何设计一个电商SKU和SPU的数据模型？支持多规格商品管理。
@@ -143,6 +144,7 @@ flowchart TD
     MAP --> SKU
     style SPU fill:#e6f2ff
     style SKU fill:#fff4e6
+
 ```
 
 

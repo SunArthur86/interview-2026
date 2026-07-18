@@ -13,37 +13,42 @@ tags:
 - AutoGen
 - CrewAI
 feynman:
-  essence: "Agent 框架选型是'按你的控制欲和场景挑'——LangChain 全家桶生态全，LangGraph 图式精细可控，Dify 低代码快搭，AutoGen 多 Agent 对话，CrewAI 角色分工。控制欲越强越偏代码框架，越想快搭越偏低代码。"
-  analogy: "像选交通工具——LangChain 是瑞士军刀（啥都有但杂），LangGraph 是手动挡跑车（精细控制但要会开），Dify 是自动驾驶（快但定制弱），AutoGen 是会议室（多 Agent 开会），CrewAI 是剧组（角色分工演戏）。按场景选车。"
-  first_principle: "不同 Agent 框架在'抽象层级、可控性、学习成本、生态、适用场景'上差异大。选型本质是'匹配你的团队能力、控制需求和上线节奏'——要精细控制选代码框架，要快速验证选低代码，要生产可靠往往自研+框架结合。"
+  essence: Agent 框架选型是'按你的控制欲和场景挑'——LangChain 全家桶生态全，LangGraph 图式精细可控，Dify 低代码快搭，AutoGen
+    多 Agent 对话，CrewAI 角色分工。控制欲越强越偏代码框架，越想快搭越偏低代码。
+  analogy: 像选交通工具——LangChain 是瑞士军刀（啥都有但杂），LangGraph 是手动挡跑车（精细控制但要会开），Dify 是自动驾驶（快但定制弱），AutoGen
+    是会议室（多 Agent 开会），CrewAI 是剧组（角色分工演戏）。按场景选车。
+  first_principle: 不同 Agent 框架在'抽象层级、可控性、学习成本、生态、适用场景'上差异大。选型本质是'匹配你的团队能力、控制需求和上线节奏'——要精细控制选代码框架，要快速验证选低代码，要生产可靠往往自研+框架结合。
   key_points:
-  - "LangChain：生态全（链/记忆/工具/检索），抽象重，适合学习和小项目"
-  - "LangGraph：图式状态机，精细可控循环/分支，适合复杂生产级 Agent"
-  - "Dify：低代码可视化，快速搭 RAG/Agent，定制弱"
-  - "AutoGen：多 Agent 对话协作，适合多角色研讨"
-  - "CrewAI：角色化分工（agent+task+crew），适合流水线式多 Agent"
+  - LangChain：生态全（链/记忆/工具/检索），抽象重，适合学习和小项目
+  - LangGraph：图式状态机，精细可控循环/分支，适合复杂生产级 Agent
+  - Dify：低代码可视化，快速搭 RAG/Agent，定制弱
+  - AutoGen：多 Agent 对话协作，适合多角色研讨
+  - CrewAI：角色化分工（agent+task+crew），适合流水线式多 Agent
   socratic:
-  - "团队不会 AI，想两周搭个 RAG 应用，选哪个？"
-  - "生产级 Agent 要精细控制每一步和循环，选 LangChain 还是 LangGraph？"
-  - "Dify 拖拽很快，但企业级能用吗？什么场景适合？"
-  - "多个 Agent 要协作讨论（如医生+药师+文献员），用哪个框架？"
-  - "为什么很多生产系统最后还是自研而不是用框架？"
+  - 团队不会 AI，想两周搭个 RAG 应用，选哪个？
+  - 生产级 Agent 要精细控制每一步和循环，选 LangChain 还是 LangGraph？
+  - Dify 拖拽很快，但企业级能用吗？什么场景适合？
+  - 多个 Agent 要协作讨论（如医生+药师+文献员），用哪个框架？
+  - 为什么很多生产系统最后还是自研而不是用框架？
 first_principle:
-  problem: "如何按团队/场景/控制需求选最合适的 Agent 框架？"
+  problem: 如何按团队/场景/控制需求选最合适的 Agent 框架？
   axioms:
-  - "不同框架在抽象/可控性/成本/生态上差异大"
-  - "生产级需精细控制和可靠，原型级需快速验证"
-  - "框架抽象和业务定制常有摩擦"
-  rebuild: "按维度选型——生态/学习选 LangChain，精细控制选 LangGraph，快速低代码选 Dify，多 Agent 对话选 AutoGen，角色分工选 CrewAI；生产级常框架+自研结合。"
+  - 不同框架在抽象/可控性/成本/生态上差异大
+  - 生产级需精细控制和可靠，原型级需快速验证
+  - 框架抽象和业务定制常有摩擦
+  rebuild: 按维度选型——生态/学习选 LangChain，精细控制选 LangGraph，快速低代码选 Dify，多 Agent 对话选 AutoGen，角色分工选
+    CrewAI；生产级常框架+自研结合。
 follow_up:
-- "LangChain 和 LangGraph 什么关系？——同公司，LangChain 是链式生态（工具/记忆/检索），LangGraph 是其图式编排引擎（状态机），复杂 Agent 用 LangGraph。"
-- "Dify 适合什么场景？——中小团队快速搭 RAG/客服/知识库，低代码可视化；深度定制和大规模生产可能受限，常做原型验证。"
-- "自研值得吗？——强合规/审计/特殊流程/性能极致时值得；否则用框架+定制更快，避免重复造轮子。"
+- LangChain 和 LangGraph 什么关系？——同公司，LangChain 是链式生态（工具/记忆/检索），LangGraph 是其图式编排引擎（状态机），复杂
+  Agent 用 LangGraph。
+- Dify 适合什么场景？——中小团队快速搭 RAG/客服/知识库，低代码可视化；深度定制和大规模生产可能受限，常做原型验证。
+- 自研值得吗？——强合规/审计/特殊流程/性能极致时值得；否则用框架+定制更快，避免重复造轮子。
 memory_points:
-- "LangChain 全/重，LangGraph 精细可控"
-- "Dify 低代码快，AutoGen 多 Agent 对话"
-- "CrewAI 角色分工"
-- "生产常框架+自研结合"
+- LangChain 全/重，LangGraph 精细可控
+- Dify 低代码快，AutoGen 多 Agent 对话
+- CrewAI 角色分工
+- 生产常框架+自研结合
+frequency: high
 ---
 
 # 【生物医药 AI】Agent 框架怎么对比与选型（LangChain/LangGraph/Dify/AutoGen/CrewAI）？
@@ -173,6 +178,26 @@ Agent 框架选型本质是**"匹配团队能力、控制需求和上线节奏"*
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Agent process
+    class AutoGen decision
+    class B special
+    class C error
+    class CrewAI info
+    class D start
+    class Dify process
+    class E decision
+    class F special
+    class G error
+    class H info
+    class LangChain start
+    class LangGraph process
     A[Agent 框架选型需求] --> B{控制粒度与场景?}
     B -- 复杂流程/强合规 --> C[LangGraph 状态图]
     B -- 快速原型/低代码 --> D[Dify 可视化]

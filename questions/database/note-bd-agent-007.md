@@ -29,6 +29,7 @@ memory_points:
 - 防超卖方案：因为高并发下MySQL行锁慢，所以用Redis配合Lua脚本做原子库存预扣。
 - 分布式锁实现：短耗时用SetNX，长链路用Redisson自动续期。
 - 数据类型：热点数据(如配置)做缓存，异步任务用消息队列(如List/Stream)。
+frequency: high
 ---
 
 # Redis在业务项目中主要解决了哪些问题？
@@ -195,6 +196,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -35,6 +35,7 @@ memory_points:
 - 本地消息表：业务+消息同事务，定时投递 MQ
 - 下游必须幂等（业务唯一键去重）
 - 供应链用最终一致（业务容忍秒级）
+frequency: high
 ---
 
 # 【拼多多供应链】分布式事务怎么解决？下单扣库存跨服务怎么保证一致？
@@ -211,6 +212,28 @@ RocketMQ 事务消息确实省了 outbox 表，但有取舍：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class Kafka info
+    class MQ start
+    class Outbox process
+    class RocketMQ decision
+    class br special
     subgraph 订单服务
         A["创建订单<br/>本地事务"] --> B[("Outbox<br/>本地消息表")]
     end

@@ -29,6 +29,7 @@ memory_points:
 - 数据同步：写操作发出领域事件，读模型异步订阅事件，达到最终一致性。
 - 事务方案：2PC强一致但阻塞，TCC高复杂需资源预留，Saga/本地消息表适合长事务最终一致。
 - 事件溯源：只存状态变更事件不存当前状态，通过回放重建状态，需结合快照优化。
+frequency: high
 ---
 
 # 如何设计微服务的数据一致性方案？CQRS和事件驱动架构。
@@ -176,6 +177,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

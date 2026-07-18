@@ -15,6 +15,7 @@ memory_points:
 - 限流神器：Semaphore控制同时访问的线程数量，常用于资源池
 - 性能对比：低并发Synchronized极高(JVM优化)，高并发ReentrantLock更灵活
 - 单变量并发：优先用AtomicInteger(CAS乐观锁无阻塞)，避免加锁开销
+frequency: high
 ---
 
 # Java线程锁的特点/性能和使用场景是什么？
@@ -139,6 +140,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

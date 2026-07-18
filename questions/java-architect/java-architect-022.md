@@ -8,8 +8,10 @@ tags:
 - 锁
 - 事务
 feynman:
-  essence: MVCC（多版本并发控制）的本质是"给每行数据维护多个版本，读事务读快照（不加锁），写事务加行锁写新版本"——让读写不互相阻塞，大幅提升并发。InnoDB 通过隐藏列（trx_id、roll_pointer）+ undo log 构建版本链，ReadView 决定事务能看到哪个版本，实现 RC（读已提交）和 RR（可重复读）两个隔离级别。
-  analogy: 像协作编辑的文档系统。悲观锁是"一个人编辑时其他人只能看不能改"（串行）；MVCC 是"每次编辑存历史版本，读者选择看某个时刻的快照"——读者看旧版本不加锁，编辑者写新版本互不干扰。RR 隔离级别是"事务开始时拍快照，之后只看这个快照"；RC 是"每次 SELECT 都重新拍快照，总能看到最新已提交的"。
+  essence: MVCC（多版本并发控制）的本质是"给每行数据维护多个版本，读事务读快照（不加锁），写事务加行锁写新版本"——让读写不互相阻塞，大幅提升并发。InnoDB
+    通过隐藏列（trx_id、roll_pointer）+ undo log 构建版本链，ReadView 决定事务能看到哪个版本，实现 RC（读已提交）和 RR（可重复读）两个隔离级别。
+  analogy: 像协作编辑的文档系统。悲观锁是"一个人编辑时其他人只能看不能改"（串行）；MVCC 是"每次编辑存历史版本，读者选择看某个时刻的快照"——读者看旧版本不加锁，编辑者写新版本互不干扰。RR
+    隔离级别是"事务开始时拍快照，之后只看这个快照"；RC 是"每次 SELECT 都重新拍快照，总能看到最新已提交的"。
   first_principle: 为什么不用悲观锁（读写都加锁）？因为悲观锁让读写串行（读阻塞写、写阻塞读），高并发下性能差。MVCC 的洞察是"读多写少"——读不修改数据，没必要加锁，给读一个历史版本快照即可。只有写之间才需要锁（同一行不能同时被两个事务修改）。
   key_points:
   - InnoDB 隐藏列：DB_TRX_ID（事务 ID）、DB_ROLL_PTR（指向 undo log 的回滚指针）
@@ -23,20 +25,25 @@ first_principle:
   - 读写互斥（悲观锁）会让读阻塞写、写阻塞读，并发度低
   - 读不修改数据，读历史版本快照即可（不需要加锁）
   - 只有写之间才真冲突（同一行不能同时被两个事务修改）
-  rebuild: 给每行数据维护多个版本（通过 undo log 版本链）。读事务根据自己的 ReadView（记录可见的事务范围）从版本链选一个可见版本读取，不加锁。写事务加行锁修改数据，生成新版本。这样读读不阻塞、读写不阻塞（读旧版本）、只有写写阻塞（行锁）。隔离级别由 ReadView 生成时机决定——RC 每次 SELECT 生成新 ReadView（看到最新已提交），RR 事务首次读生成 ReadView 之后不变（快照重复读）。
+  rebuild: 给每行数据维护多个版本（通过 undo log 版本链）。读事务根据自己的 ReadView（记录可见的事务范围）从版本链选一个可见版本读取，不加锁。写事务加行锁修改数据，生成新版本。这样读读不阻塞、读写不阻塞（读旧版本）、只有写写阻塞（行锁）。隔离级别由
+    ReadView 生成时机决定——RC 每次 SELECT 生成新 ReadView（看到最新已提交），RR 事务首次读生成 ReadView 之后不变（快照重复读）。
 follow_up:
-  - MVCC 解决了幻读吗？——RR 级别下，快照读（普通 SELECT）用 MVCC 不会幻读（快照固定）。但当前读（SELECT FOR UPDATE、UPDATE、DELETE）会看到新数据，可能幻读。InnoDB 用临键锁（next-key lock）在当前读时锁住范围，防止其他事务插入，解决幻读
-  - 间隙锁（Gap Lock）是什么？——锁住索引记录之间的"间隙"，防止其他事务在间隙插入。如锁住 (10, 20) 间隙，其他事务不能插入 id=15。只在 RR 级别生效（解决幻读），RC 没有间隙锁
-  - 死锁怎么产生的？——两个事务互相等待对方持有的锁。如 T1 锁了 A 等待 B，T2 锁了 B 等待 A。InnoDB 有死锁检测（innodb_deadlock_detect），检测到死锁自动回滚代价较小的事务
-  - 当前读和快照读区别？——快照读（普通 SELECT）读 MVCC 版本链的快照，不加锁。当前读（SELECT FOR UPDATE、UPDATE、DELETE、INSERT）读最新数据并加锁。更新操作必须当前读（不能更新旧版本）
-  - 为什么 MySQL 默认 RR 而不是 RC？——历史原因（早期 binlog 只有 statement 格式，RC 下主从复制会错乱）+ 安全（RR 防幻读）。但现在 binlog 用 row 格式，RC 也能正确复制，很多互联网公司（如阿里）改用 RC（并发更高，间隙锁少）
+- MVCC 解决了幻读吗？——RR 级别下，快照读（普通 SELECT）用 MVCC 不会幻读（快照固定）。但当前读（SELECT FOR UPDATE、UPDATE、DELETE）会看到新数据，可能幻读。InnoDB
+  用临键锁（next-key lock）在当前读时锁住范围，防止其他事务插入，解决幻读
+- 间隙锁（Gap Lock）是什么？——锁住索引记录之间的"间隙"，防止其他事务在间隙插入。如锁住 (10, 20) 间隙，其他事务不能插入 id=15。只在 RR
+  级别生效（解决幻读），RC 没有间隙锁
+- 死锁怎么产生的？——两个事务互相等待对方持有的锁。如 T1 锁了 A 等待 B，T2 锁了 B 等待 A。InnoDB 有死锁检测（innodb_deadlock_detect），检测到死锁自动回滚代价较小的事务
+- 当前读和快照读区别？——快照读（普通 SELECT）读 MVCC 版本链的快照，不加锁。当前读（SELECT FOR UPDATE、UPDATE、DELETE、INSERT）读最新数据并加锁。更新操作必须当前读（不能更新旧版本）
+- 为什么 MySQL 默认 RR 而不是 RC？——历史原因（早期 binlog 只有 statement 格式，RC 下主从复制会错乱）+ 安全（RR 防幻读）。但现在
+  binlog 用 row 格式，RC 也能正确复制，很多互联网公司（如阿里）改用 RC（并发更高，间隙锁少）
 memory_points:
-  - MVCC = 多版本（undo log 版本链）+ ReadView（可见性判断）
-  - RC 每次 SELECT 新 ReadView；RR 首次读后 ReadView 不变
-  - 行锁三态：记录锁（锁行）、间隙锁（锁间隙，防插入）、临键锁（记录+间隙）
-  - 快照读（普通 SELECT）不加锁；当前读（FOR UPDATE）加锁
-  - RR 用临键锁解决幻读；RC 无间隙锁并发高
-  - 死锁检测 innodb_deadlock_detect 自动回滚
+- MVCC = 多版本（undo log 版本链）+ ReadView（可见性判断）
+- RC 每次 SELECT 新 ReadView；RR 首次读后 ReadView 不变
+- 行锁三态：记录锁（锁行）、间隙锁（锁间隙，防插入）、临键锁（记录+间隙）
+- 快照读（普通 SELECT）不加锁；当前读（FOR UPDATE）加锁
+- RR 用临键锁解决幻读；RC 无间隙锁并发高
+- 死锁检测 innodb_deadlock_detect 自动回滚
+frequency: high
 ---
 
 # 【Java 后端架构师】InnoDB MVCC、锁与事务隔离
@@ -398,6 +405,32 @@ T2: 插入成功
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class C1 start
+    class C2 process
+    class C3 decision
+    class DELETE special
+    class FOR error
+    class Log info
+    class MVCC start
+    class ReadView process
+    class SELECT decision
+    class UPDATE special
+    class Undo error
+    class br info
+    class roll_ptr start
+    class trx_id process
     subgraph 当前读与写事务
         A1[SELECT FOR UPDATE<br/>UPDATE/DELETE]
         A1 -->|加X锁| A2[InnoDB行锁机制]

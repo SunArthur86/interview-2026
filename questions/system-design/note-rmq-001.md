@@ -34,6 +34,7 @@ memory_points:
 - 同步刷盘 vs 异步刷盘：同步=写磁盘才返回ACK(可靠慢)，异步=写内存就返回(快但宕机丢)
 - 消费者必须幂等！因为网络超时会导致同一条消息被投递多次
 - 终极方案：本地消息表(业务表+消息表同库事务)，RocketMQ事务消息(半消息+回查)
+frequency: high
 ---
 
 # 【大厂二面】RocketMQ 消息丢失怎么处理？
@@ -284,6 +285,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -13,7 +13,7 @@ tags:
 - 面经
 feynman:
   essence: ReAct是"边想边做"——每一步先思考再行动再观察，适合动态不确定的任务；Plan & Execute是"先规划后执行"——先生成完整计划再逐步执行，适合目标明确的多步任务。两者不是互斥关系，而是互补配合使用。
-  analogy: "ReAct就像探险家——走到哪看到哪，根据眼前情况决定下一步（发现岔路→想→选一条走→看到新线索→再想→再选）。Plan & Execute就像建筑工程师——开工前先画完整施工图，然后按图纸一步步施工。现实中两者常配合：工程师先做总体规划(Plan)，施工中遇到突发问题现场解决(React)。"
+  analogy: ReAct就像探险家——走到哪看到哪，根据眼前情况决定下一步（发现岔路→想→选一条走→看到新线索→再想→再选）。Plan & Execute就像建筑工程师——开工前先画完整施工图，然后按图纸一步步施工。现实中两者常配合：工程师先做总体规划(Plan)，施工中遇到突发问题现场解决(React)。
   key_points:
   - ReAct = Observation-Thought-Action 循环，单步推理+执行，灵活但上下文易爆炸
   - Plan & Execute = 先全局规划再分步执行，稳定但灵活性差，重新规划成本高
@@ -22,7 +22,7 @@ feynman:
   - 现实Agent系统通常混合使用：Plan做顶层规划，ReAct执行每个子任务
 first_principle:
   essence: 推理范式的本质是"思考深度"与"执行灵活性"的权衡
-  derivation: "任务复杂度 ↑ → 需要更长的推理链 → 上下文窗口有限 → 必须在「逐步思考(ReAct)」和「预先规划(Plan&Execute)」之间选择。ReAct的优势是每步都能感知环境变化，劣势是长链推理时上下文爆炸。Plan&Execute的优势是规划阶段集中思考，执行阶段上下文干净，劣势是环境变化时计划失效需要重新规划。"
+  derivation: 任务复杂度 ↑ → 需要更长的推理链 → 上下文窗口有限 → 必须在「逐步思考(ReAct)」和「预先规划(Plan&Execute)」之间选择。ReAct的优势是每步都能感知环境变化，劣势是长链推理时上下文爆炸。Plan&Execute的优势是规划阶段集中思考，执行阶段上下文干净，劣势是环境变化时计划失效需要重新规划。
   conclusion: 最优策略是分层混合——Plan&Execute做任务分解和全局规划，ReAct在每个子任务内部做灵活执行和工具调用。
 follow_up:
 - ReAct的Thought步骤能否用Chain-of-Thought(CoT)替代？有什么区别？
@@ -34,6 +34,7 @@ memory_points:
 - ReAct致命弱点：上下文爆炸——每步的Obs+Thought+Action都累积在prompt中
 - Plan&Execute拆分为Planner和Executor两个角色，执行阶段上下文独立干净
 - 混合范式是工业界标配：Claude Code在"create a todo list"指令时用Plan&Execute，每个task内用ReAct
+frequency: medium
 ---
 
 # 【阿里淘天AI二面】介绍ReAct范式和Plan & Execute范式？什么情况下用哪种？
@@ -327,6 +328,7 @@ flowchart TD
     style ACTION fill:#FF9800,color:#fff
     style OBS fill:#9C27B0,color:#fff
     style REFLECT fill:#FFC107,color:#000
+
 ```
 
 ## 结构化回答

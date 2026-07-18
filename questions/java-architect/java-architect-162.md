@@ -9,9 +9,12 @@ tags:
 - 状态机
 - 补偿
 feynman:
-  essence: Agent 多步骤任务的本质是"有限状态机 + Saga 补偿"——每个步骤是一个状态，步骤间有明确流转规则，任何一步失败都要能从上一个 checkpoint 恢复或反向补偿已执行的副作用。和分布式事务的 Saga 模式同构，区别是 Agent 的步骤由 LLM 动态决策而非预先编排。
-  analogy: 像一个会自主规划的旅行团导游——他决定先去 A 景点再去 B 酒店（动态规划），但如果 B 酒店订满了，他要能取消 A 景点的门票（补偿）或改订 C 酒店（重试）。每一步都有备案，不会卡死在半路。
-  first_principle: Agent 多步执行有三个工程难点：(1) 中间失败要恢复不能从头重来（已执行的副作用不能重复）；(2) 步骤间有数据依赖（B 步骤要 A 的结果）；(3) LLM 决策可能跳步或回退。状态机解决流转约束，checkpoint 解决恢复，Saga 解决副作用补偿。
+  essence: Agent 多步骤任务的本质是"有限状态机 + Saga 补偿"——每个步骤是一个状态，步骤间有明确流转规则，任何一步失败都要能从上一个 checkpoint
+    恢复或反向补偿已执行的副作用。和分布式事务的 Saga 模式同构，区别是 Agent 的步骤由 LLM 动态决策而非预先编排。
+  analogy: 像一个会自主规划的旅行团导游——他决定先去 A 景点再去 B 酒店（动态规划），但如果 B 酒店订满了，他要能取消 A 景点的门票（补偿）或改订
+    C 酒店（重试）。每一步都有备案，不会卡死在半路。
+  first_principle: Agent 多步执行有三个工程难点：(1) 中间失败要恢复不能从头重来（已执行的副作用不能重复）；(2) 步骤间有数据依赖（B
+    步骤要 A 的结果）；(3) LLM 决策可能跳步或回退。状态机解决流转约束，checkpoint 解决恢复，Saga 解决副作用补偿。
   key_points:
   - 状态机：CREATED → RUNNING → PAUSED → SUCCEEDED / FAILED，每步有明确前驱后继
   - checkpoint：每步执行后持久化（taskId + step + state + history），失败从最近 checkpoint 恢复
@@ -27,17 +30,22 @@ first_principle:
   - 恢复时间窗口有限（用户不会等 30 分钟）
   rebuild: 把任务建模为状态机 + Saga。每个步骤有前置条件和补偿动作，状态每步 checkpoint。第 4 步失败时，反向执行第 3、2、1 步的补偿（反向用券、回滚库存），恢复到初始状态；或暂停任务人工介入。对不可逆操作（已退款）标记为"需人工处理"，不自动补偿。
 follow_up:
-  - Saga 补偿和分布式事务的 TCC 区别？——TCC 是 TRY-CONFIRM-CANCEL 三阶段，资源预留；Saga 是正向执行 + 反向补偿，不预留。Agent 适合 Saga（步骤由 LLM 动态决策，无法预知全部步骤）。
-  - 怎么知道哪些步骤需要补偿？——所有有副作用的步骤都要注册补偿动作。执行时把 (step, action, compensateAction) 记录到 saga_log，失败时按逆序执行 compensateAction。
-  - 补偿也失败了怎么办？——补偿失败重试 3 次，仍失败标记为"需人工介入"，告警并暂停任务。人工处理后标记任务为 SUCCEEDED_MANUAL 或 FAILED。
-  - LLM 决策跳步怎么办？——状态机强制校验前置条件。LLM 想从 step1 跳到 step4，但 step4 的前置是 step3，状态机拒绝跳转并提示 LLM"必须先执行 step3"。
-  - checkpoint 存什么？——taskId、currentStep、stepResults（每步的输出）、history（完整对话）、sagaLog（已执行的副作用及补偿动作）。history 要完整存，因为 LLM 恢复后需要上下文继续决策。
+- Saga 补偿和分布式事务的 TCC 区别？——TCC 是 TRY-CONFIRM-CANCEL 三阶段，资源预留；Saga 是正向执行 + 反向补偿，不预留。Agent
+  适合 Saga（步骤由 LLM 动态决策，无法预知全部步骤）。
+- 怎么知道哪些步骤需要补偿？——所有有副作用的步骤都要注册补偿动作。执行时把 (step, action, compensateAction) 记录到 saga_log，失败时按逆序执行
+  compensateAction。
+- 补偿也失败了怎么办？——补偿失败重试 3 次，仍失败标记为"需人工介入"，告警并暂停任务。人工处理后标记任务为 SUCCEEDED_MANUAL 或 FAILED。
+- LLM 决策跳步怎么办？——状态机强制校验前置条件。LLM 想从 step1 跳到 step4，但 step4 的前置是 step3，状态机拒绝跳转并提示 LLM"必须先执行
+  step3"。
+- checkpoint 存什么？——taskId、currentStep、stepResults（每步的输出）、history（完整对话）、sagaLog（已执行的副作用及补偿动作）。history
+  要完整存，因为 LLM 恢复后需要上下文继续决策。
 memory_points:
-  - 状态机：CREATED → RUNNING → PAUSED → SUCCEEDED/FAILED，每步前置校验
-  - checkpoint：每步持久化（taskId+step+history+sagaLog），失败恢复
-  - Saga 补偿：有副作用的步骤注册 compensateAction，失败逆序执行
-  - 幂等：idempotency_key 兜底，重复执行无副作用
-  - 恢复策略：重试（瞬时）/补偿（业务）/人工（不可逆）
+- 状态机：CREATED → RUNNING → PAUSED → SUCCEEDED/FAILED，每步前置校验
+- checkpoint：每步持久化（taskId+step+history+sagaLog），失败恢复
+- Saga 补偿：有副作用的步骤注册 compensateAction，失败逆序执行
+- 幂等：idempotency_key 兜底，重复执行无副作用
+- 恢复策略：重试（瞬时）/补偿（业务）/人工（不可逆）
+frequency: high
 ---
 
 # 【Java 后端架构师】Agent 多步骤任务的状态机与补偿
@@ -433,6 +441,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

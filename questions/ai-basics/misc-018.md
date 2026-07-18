@@ -20,6 +20,7 @@ memory_points:
 - RAG（快/新/准）：外挂实时知识，适合高频更新场景
 - Prompt（浅/廉）：控制格式与逻辑，适合简单任务
 - 最佳实践：CPT内化术语 -> SFT调整格式 -> RAG补充实时信息
+frequency: medium
 ---
 
 # 领域模型适配的三大范式(CPT vs RAG vs Prompt)如何选择
@@ -130,6 +131,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

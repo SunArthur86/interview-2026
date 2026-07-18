@@ -11,8 +11,8 @@ tags:
 - 前端AI
 - 面经
 feynman:
-  essence: "RAG效果不好时从五个方向排查：chunk大小、query改写、多路召回、rerank精排、上下文压缩——逐个诊断才能对症下药"
-  analogy: "RAG像一条流水线：原料仓库（chunk分块）→找货（检索）→精选（rerank）→包装（context压缩）→出货（生成）。任何一环出问题，最终产品质量都不行。排查要从源头到终端逐站检查"
+  essence: RAG效果不好时从五个方向排查：chunk大小、query改写、多路召回、rerank精排、上下文压缩——逐个诊断才能对症下药
+  analogy: RAG像一条流水线：原料仓库（chunk分块）→找货（检索）→精选（rerank）→包装（context压缩）→出货（生成）。任何一环出问题，最终产品质量都不行。排查要从源头到终端逐站检查
   key_points:
   - chunk大小：太大稀释精度，太小丢上下文，通常300-800字符
   - query改写：原始query太短/模糊时，用LLM改写（HyDE方法）
@@ -20,9 +20,9 @@ feynman:
   - rerank：加Cross-Encoder重排序
   - 上下文压缩：检索内容太长时用LLM压缩后再送入生成
 first_principle:
-  essence: "RAG的效果取决于「正确的文档被检索到」和「LLM理解了正确的上下文」两个条件同时满足。优化就是分别提升这两个环节"
-  derivation: "RAG = Retrieve + Augment + Generate。Retrieve质量取决于chunk策略、检索方法、排序算法；Generate质量取决于上下文质量、prompt工程、模型能力。如果Retrieve漏掉了正确文档（recall低），无论Generate多强都无法回答；如果Retrieve召回了但排序靠后被截断（precision低），LLM看不到正确信息；如果正确文档被检索到但被无关内容淹没（信噪比低），LLM可能被干扰"
-  conclusion: "RAG优化是系统工程——chunk→检索→rerank→context→generate 全链路优化，不能只改一个环节"
+  essence: RAG的效果取决于「正确的文档被检索到」和「LLM理解了正确的上下文」两个条件同时满足。优化就是分别提升这两个环节
+  derivation: RAG = Retrieve + Augment + Generate。Retrieve质量取决于chunk策略、检索方法、排序算法；Generate质量取决于上下文质量、prompt工程、模型能力。如果Retrieve漏掉了正确文档（recall低），无论Generate多强都无法回答；如果Retrieve召回了但排序靠后被截断（precision低），LLM看不到正确信息；如果正确文档被检索到但被无关内容淹没（信噪比低），LLM可能被干扰
+  conclusion: RAG优化是系统工程——chunk→检索→rerank→context→generate 全链路优化，不能只改一个环节
 follow_up:
 - HyDE具体怎么实现？有什么风险？
 - chunk overlap设置多少合适？
@@ -33,6 +33,7 @@ memory_points:
 - chunk通常300-800字符，需实验调优
 - HyDE：让LLM先生成假设答案再用答案去检索
 - 逐个方向排查，对症下药
+frequency: medium
 ---
 
 # 【RAG优化】RAG效果不好怎么优化？
@@ -247,6 +248,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

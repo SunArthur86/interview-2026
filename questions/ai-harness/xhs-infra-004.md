@@ -26,6 +26,7 @@ memory_points:
 - v1：引入分块和在线 Softmax，Kernel 融合减少读写。
 - v2：优化工作分区和 Warp-level 并行，减少非矩阵运算，A100 加速明显。
 - v3：利用 H100 FP8 Tensor Core 和 TMA 异步加载，速度接近理论峰值。
+frequency: high
 ---
 
 # FlashAttention v1/v2/v3的核心改进分别是什么？为什么能减少内存访问？
@@ -96,6 +97,26 @@ out = acc / l_curr
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class HBM start
+    class IO process
+    class K decision
+    class N special
+    class O error
+    class Online info
+    class Output start
+    class Q process
+    class QKV decision
+    class SRAM special
+    class Softmax error
+    class Tile info
+    class aware start
+    class br process
     QKV[Q/K/V矩阵] --> Tile[Tiling分块<br/>IO-aware]
     Tile --> SRAM[(SRAM<br/>快速缓存)]
     SRAM --> Online[Online Softmax<br/>不存N^2矩阵]

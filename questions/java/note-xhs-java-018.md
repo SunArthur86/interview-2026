@@ -29,16 +29,17 @@ first_principle:
   - 重量级锁（synchronized）开销太大，需要轻量级方案
   rebuild: 在变量前加volatile修饰符 → 编译器在读写操作前后插入内存屏障 → CPU触发缓存一致性协议，使其他核心的缓存行失效 → 修改后的值对所有核心立即可见。同时屏障阻止指令重排序。
 follow_up:
-  - volatile能替代synchronized吗？为什么？
-  - volatile的i++为什么不是原子操作？怎么修复？
-  - DCL单例模式中，volatile修饰实例变量的作用是什么？
-  - volatile和final有什么关系？final域的重排序规则是什么？
-  - 什么是伪共享（False Sharing）？volatile会导致伪共享吗？如何解决？
+- volatile能替代synchronized吗？为什么？
+- volatile的i++为什么不是原子操作？怎么修复？
+- DCL单例模式中，volatile修饰实例变量的作用是什么？
+- volatile和final有什么关系？final域的重排序规则是什么？
+- 什么是伪共享（False Sharing）？volatile会导致伪共享吗？如何解决？
 memory_points:
-  - volatile两保证一不保证：保证可见性+有序性，不保证原子性
-  - 底层：Store Barrier（写后插入）+ Load Barrier（读前插入）
-  - DCL单例必须用volatile——防止new对象时的指令重排序（分配内存→赋值引用→初始化，重排为分配→赋值→其他线程拿到未初始化对象）
-  - 替代方案：AtomicInteger保证原子性、synchronized保证互斥
+- volatile两保证一不保证：保证可见性+有序性，不保证原子性
+- 底层：Store Barrier（写后插入）+ Load Barrier（读前插入）
+- DCL单例必须用volatile——防止new对象时的指令重排序（分配内存→赋值引用→初始化，重排为分配→赋值→其他线程拿到未初始化对象）
+- 替代方案：AtomicInteger保证原子性、synchronized保证互斥
+frequency: high
 ---
 
 # 【拼多多一面】volatile 关键字的作用和底层实现
@@ -255,6 +256,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

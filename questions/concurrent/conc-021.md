@@ -16,6 +16,7 @@ memory_points:
 - 策略对比：互斥锁抢不到就阻塞挂起，自旋锁抢不到就死循环空转
 - 适用场景：临界区长且并发高用互斥锁；临界区极短用自旋锁
 - Java 对应：synchronized 关键字与 JUC 下的 ReentrantLock
+frequency: high
 ---
 
 # 什么是什么情况下会产生死锁？
@@ -128,6 +129,7 @@ flowchart TD
     style CYCLE fill:#F44336,color:#fff
     style JSTACK fill:#FF9800,color:#fff
     style FIX_C4 fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -29,6 +29,7 @@ memory_points:
 - 点积：方向乘模长，受向量长度影响，若向量已归一化则等同于余弦。
 - 欧氏距离：衡量绝对位置差，受模长和方向双重影响，RAG中较少用。
 - RAG首选：因长文本模长大易作弊，通常用余弦或提前归一化后用点积加速。
+frequency: medium
 ---
 
 # 向量间相似度如何计算？
@@ -216,6 +217,7 @@ flowchart TD
     style VEC fill:#FF9800,color:#fff
     style STORE fill:#9C27B0,color:#fff
     style COS fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

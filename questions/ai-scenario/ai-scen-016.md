@@ -29,6 +29,7 @@ memory_points:
 - 流式优化：TTFT<500ms，客户端断开立即取消推理任务释放GPU。
 - 安全合规：输入防注入，输出动态擦除敏感词，延迟缓冲防滞后。
 - 高并发：无状态API+Redis存会话，模型路由分级（简单小模型，复杂大模型）。
+frequency: high
 ---
 
 # 如何设计一个类似ChatGPT的对话系统？支持流式输出、多轮对话、插件调用。
@@ -125,6 +126,28 @@ return StreamingResponse(generate_stream(prompt), media_type="text/event-stream"
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class App start
+    class CTX process
+    class Calling decision
+    class Client special
+    class GW error
+    class INF info
+    class ROUTE start
+    class SEC process
+    class SESS decision
+    class SSE special
+    class TOOL error
+    class TTFT info
+    class Web start
+    class WebSocket process
+    class br decision
+    class vLLM special
     Client[客户端 Web/App] -->|WebSocket/SSE 长连接| GW[API网关 负载均衡与限流]
     GW --> SESS[Redis分布式Session 跨设备会话隔离]
     SESS --> CTX[上下文管理 滑动窗口+历史摘要压缩]

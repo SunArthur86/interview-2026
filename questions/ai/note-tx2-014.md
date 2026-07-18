@@ -10,7 +10,9 @@ tags:
 - Pydantic
 - 算法题
 feynman:
-  essence: 实现函数校验模型输出 tool_call JSON 合法性，要 catch 字段缺失/类型错误/枚举越界/多余字段/格式错误五类。用 Pydantic 定义 schema 做自动校验，捕获 ValidationError 分类返回。校验流程：先 json.loads 解析格式 → 再 Pydantic 校验字段（类型/必填/枚举）→ 最后业务校验（如金额>0）。失败要让模型重写（错误信息塞回 prompt），最多重试2次。
+  essence: 实现函数校验模型输出 tool_call JSON 合法性，要 catch 字段缺失/类型错误/枚举越界/多余字段/格式错误五类。用 Pydantic
+    定义 schema 做自动校验，捕获 ValidationError 分类返回。校验流程：先 json.loads 解析格式 → 再 Pydantic 校验字段（类型/必填/枚举）→
+    最后业务校验（如金额>0）。失败要让模型重写（错误信息塞回 prompt），最多重试2次。
   analogy: 像海关检查——先看护照是不是真的(json.loads格式)、再核对信息全不全(必填字段)、再看类型对不对(类型校验)、最后看有没有违禁品(业务规则)。不合格的退回去重新填。
   first_principle: JSON 校验本质是"用 schema 约束 + 分层校验"。先格式后字段后业务，每层 catch 不同错误，分类返回让模型能修正。
   key_points:
@@ -31,6 +33,7 @@ memory_points:
 - 校验三层：先json.loads查格式，再查工具名是否越界，最后用Pydantic查参数
 - Pydantic设计：用Literal约束枚举，extra='forbid'拒绝多余字段，写validator校验业务逻辑
 - 错误分类：精准捕获缺失、类型错误、枚举越界等异常并返回，非简单抛出报错
+frequency: high
 ---
 
 # 【某讯面经】算法题：实现函数校验模型输出的 tool_call JSON 合法性
@@ -223,6 +226,7 @@ flowchart TD
     I -- "否: 超过限制" --> J["抛出最终异常终止"]
     style J fill:#ffcccc,stroke:#ff0000
     style H fill:#ccffcc,stroke:#008000
+
 ```
 
 

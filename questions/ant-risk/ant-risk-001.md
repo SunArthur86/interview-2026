@@ -12,7 +12,8 @@ tags:
 feynman:
   essence: JVM 把内存分成几块各司其职的区域，GC 按对象存活周期分代回收，调优本质是让对象尽快在新生代被回收、避免晋升老年代。
   analogy: JVM 像一个有"前台（栈）""仓库（堆）""档案室（方法区）"的公司。新员工（对象）先进仓库的临时区（Eden），熬过几次盘点晋升到老库（Old），最终只有长期重要的才长期占用老库。
-  first_principle: 内存为什么要分代？因为绝大多数对象"朝生夕灭"，按存活周期分而治之能让 GC 只扫描该扫的区域，把全堆扫描的 O(全堆) 降到 O(某一代)。
+  first_principle: 内存为什么要分代？因为绝大多数对象"朝生夕灭"，按存活周期分而治之能让 GC 只扫描该扫的区域，把全堆扫描的 O(全堆) 降到
+    O(某一代)。
   key_points:
   - 堆分新生代（Eden+S0+S1）和老年代，比例默认 1:2
   - 对象先分配 Eden，Minor GC 后存活进 Survivor，默认 15 岁进 Old
@@ -25,16 +26,19 @@ first_principle:
   - 弱分代假说：绝大多数对象都是朝生夕灭的
   - 熬过越多次 GC 的对象越可能继续存活
   - STW（Stop The World）时间是 GC 优化的北极星指标
-  rebuild: 基于弱分代假说，把堆切成新生代/老年代，新生代用复制算法（适合存活少）、老年代用标记-整理（避免碎片）；再给不同吞吐/延迟场景配不同收集器（Parallel 重吞吐、CMS/G1 重延迟、ZGC 极低延迟）。
+  rebuild: 基于弱分代假说，把堆切成新生代/老年代，新生代用复制算法（适合存活少）、老年代用标记-整理（避免碎片）；再给不同吞吐/延迟场景配不同收集器（Parallel
+    重吞吐、CMS/G1 重延迟、ZGC 极低延迟）。
 follow_up:
 - 你们风控系统用的什么 GC？为什么选它？——G1，因为风控是低延迟交易链路，需要可控停顿（<200ms）
 - 如何定位线上频繁 Full GC？——jstat 看 FGCT/Frequency，jmap dump 分析大对象，用 MAT 找支配树
-- 一次 GC 调优的真实案例？——把 -XX:MaxGCPauseMillis 从 200 调到 100，新生代调大，Full GC 频率从 10min/次降到 2h/次
+- 一次 GC 调优的真实案例？——把 -XX:MaxGCPauseMillis 从 200 调到 100，新生代调大，Full GC 频率从 10min/次降到
+  2h/次
 memory_points:
 - 分代假说是 GC 一切设计的根基：新生代复制算法、老年代标记整理
 - 对象晋升老年代的三条路径：年龄达标(15)、大对象直接进、动态年龄判断
 - 选 GC 收集器：吞吐优先 Parallel、延迟优先 G1、超低延迟 ZGC/Shenandoah
 - 调优不是调参数，是先定位（jstat/jmap/MAT）再对症下药
+frequency: high
 ---
 
 # 【蚂蚁风控】讲一下 JVM 内存模型与 GC 机制，你在风控系统里是如何做 GC 调优的？
@@ -265,6 +269,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

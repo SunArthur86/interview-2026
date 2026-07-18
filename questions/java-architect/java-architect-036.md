@@ -9,9 +9,12 @@ tags:
 - 索引
 - 搜索
 feynman:
-  essence: ES 是倒排索引的分布式实现——写入时分词建倒排（term → doc list），查询时按 term 倒排召回。索引建模的核心是"按查询设计 mapping"（哪些字段索引、哪些分词、哪些聚合）、分片数决定并行度、refresh_interval 决定实时性。
-  analogy: 像 JD 图书检索：正排索引是"按书号找书"（O(1) 但要遍历所有书找关键词），倒排索引是"按关键词找书号清单"（关键词 → [书1,书5,书9]，O(1) 召回）。ES 是后者，所以搜索快但写入慢（要先分词建倒排）。
-  first_principle: 为什么不用 MySQL LIKE 做搜索？因为 B+Tree 是按字段值排序，LIKE '%关键词%' 用不上索引（全表扫描）。倒排索引把"文档包含哪些词"预先算好，查询时直接查词的文档清单，O(1) 召回。代价是写入时要做分词 + 建倒排，所以 ES 写比 MySQL 慢。
+  essence: ES 是倒排索引的分布式实现——写入时分词建倒排（term → doc list），查询时按 term 倒排召回。索引建模的核心是"按查询设计
+    mapping"（哪些字段索引、哪些分词、哪些聚合）、分片数决定并行度、refresh_interval 决定实时性。
+  analogy: 像 JD 图书检索：正排索引是"按书号找书"（O(1) 但要遍历所有书找关键词），倒排索引是"按关键词找书号清单"（关键词 → [书1,书5,书9]，O(1)
+    召回）。ES 是后者，所以搜索快但写入慢（要先分词建倒排）。
+  first_principle: 为什么不用 MySQL LIKE 做搜索？因为 B+Tree 是按字段值排序，LIKE '%关键词%' 用不上索引（全表扫描）。倒排索引把"文档包含哪些词"预先算好，查询时直接查词的文档清单，O(1)
+    召回。代价是写入时要做分词 + 建倒排，所以 ES 写比 MySQL 慢。
   key_points:
   - 倒排索引：Analysis 分词 → 建倒排（term → doc list），是 ES 搜索快的根因
   - mapping 设计：text（分词）vs keyword（不分词，精确匹配/聚合），按查询模式选
@@ -24,19 +27,26 @@ first_principle:
   - 关系数据库 B+Tree 不适合全文检索（LIKE 用不上索引）
   - 倒排索引（term → doc list）是全文检索的数学最优解
   - 单机存不下 + 单机算不动，必须分布式（分片 + 副本）
-  rebuild: ES 用倒排索引做召回（毫秒级），用分片做水平扩展（每个分片是一个 Lucene 索引），用副本做高可用。索引建模按"查询模式"设计——精确匹配用 keyword、全文搜索用 text+分词器、聚合用 doc_values。写入时 Analysis 分词建倒排，查询时按分词结果召回。refresh_interval 控制"近实时"程度（默认 1s 可见），写入密集时调大省 CPU。
+  rebuild: ES 用倒排索引做召回（毫秒级），用分片做水平扩展（每个分片是一个 Lucene 索引），用副本做高可用。索引建模按"查询模式"设计——精确匹配用
+    keyword、全文搜索用 text+分词器、聚合用 doc_values。写入时 Analysis 分词建倒排，查询时按分词结果召回。refresh_interval
+    控制"近实时"程度（默认 1s 可见），写入密集时调大省 CPU。
 follow_up:
-  - text 和 keyword 区别？——text 会被 Analysis 分词建倒排（适合全文搜索），keyword 不分词整个值作为 term（适合精确匹配、排序、聚合）。一个字段常同时定义 text + keyword 子字段
-  - 分片数怎么定？——单分片推荐 30-50GB，分片数 = 总数据量 / 50GB。分片数创建后不能改（只能 reindex），要预留增长
-  - 为什么深分页慢？——from + size 会从每个分片取 from+size 条，协调节点合并排序。from=10000 size=10 要拉 10 万条到 heap 排序，OOM 风险。用 search_after 替代
-  - refresh_interval 调大有什么好处？——默认 1s 每次 refresh 创建新 segment，写入密集时频繁 refresh 烧 CPU 且 segment 太多。调到 30s 减少 segment 数，写入吞吐提升 5-10 倍
-  - ES 和 MySQL 数据怎么同步？——Canal 监听 MySQL binlog → MQ → ES 消费端写入。或用 Logstash JDBC input 定时拉。实时性要求高用前者
+- text 和 keyword 区别？——text 会被 Analysis 分词建倒排（适合全文搜索），keyword 不分词整个值作为 term（适合精确匹配、排序、聚合）。一个字段常同时定义
+  text + keyword 子字段
+- 分片数怎么定？——单分片推荐 30-50GB，分片数 = 总数据量 / 50GB。分片数创建后不能改（只能 reindex），要预留增长
+- 为什么深分页慢？——from + size 会从每个分片取 from+size 条，协调节点合并排序。from=10000 size=10 要拉 10 万条到
+  heap 排序，OOM 风险。用 search_after 替代
+- refresh_interval 调大有什么好处？——默认 1s 每次 refresh 创建新 segment，写入密集时频繁 refresh 烧 CPU 且
+  segment 太多。调到 30s 减少 segment 数，写入吞吐提升 5-10 倍
+- ES 和 MySQL 数据怎么同步？——Canal 监听 MySQL binlog → MQ → ES 消费端写入。或用 Logstash JDBC input
+  定时拉。实时性要求高用前者
 memory_points:
-  - 倒排索引：分词建 term→doc list，是 ES 搜索快的根因
-  - text 分词、keyword 精确匹配；按查询模式选 mapping
-  - 分片数 = 数据量 / 50GB，创建后不能改
-  - refresh_interval 默认 1s，写入密集调 30s
-  - 深分页用 search_after，不用 from/size
+- 倒排索引：分词建 term→doc list，是 ES 搜索快的根因
+- text 分词、keyword 精确匹配；按查询模式选 mapping
+- 分片数 = 数据量 / 50GB，创建后不能改
+- refresh_interval 默认 1s，写入密集调 30s
+- 深分页用 search_after，不用 from/size
+frequency: high
 ---
 
 # 【Java 后端架构师】Elasticsearch 索引建模与搜索性能
@@ -488,6 +498,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

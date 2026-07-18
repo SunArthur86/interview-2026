@@ -25,6 +25,7 @@ memory_points:
 - Snowflake结构：1位符号+41位时间+10位机器+12位序列(防时钟回拨是考点)
 - 号段模式双Buffer：内存发号极速，消耗10%异步加载下一段，防DB单点瓶颈
 - Redis自增做ID易回退，强依赖可用性，K8s下雪花WorkerID用ZK注册防冲突
+frequency: high
 ---
 
 # 如何设计一个高性能的分布式 ID 生成方案？对比 Snowflake、号段、UUID 的优劣。
@@ -134,6 +135,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

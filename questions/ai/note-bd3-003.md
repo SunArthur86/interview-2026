@@ -27,6 +27,7 @@ memory_points:
 - KV头数渐变缩：MHA全独立，MQA全共享，GQA分组共享折中两者。
 - 显存推理两极化：MQA缓存最小最快但效果掉，MHA效果最好但显存大。
 - GQA平衡成主流：按组共享K/V，显存大幅减少且效果逼近MHA，代表LLaMA-2。
+frequency: low
 ---
 
 # 请对比MHA、MQA、GQA三种注意力机制的区别
@@ -37,6 +38,51 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Attention start
+    class Cache process
+    class G decision
+    class GQA special
+    class GRP error
+    class Grouped info
+    class H1 start
+    class Head process
+    class K decision
+    class K1 special
+    class K2 error
+    class K3 info
+    class KV start
+    class K_A process
+    class K_B decision
+    class K_C special
+    class K_D error
+    class K_shared info
+    class L start
+    class MHA process
+    class MQA decision
+    class Multi special
+    class N_heads error
+    class Q info
+    class Q1 start
+    class Q2 process
+    class Q3 decision
+    class Query special
+    class SH error
+    class V info
+    class V1 start
+    class V2 process
+    class V3 decision
+    class V_A special
+    class V_B error
+    class V_C info
+    class V_D start
+    class V_shared process
+    class d decision
     subgraph MHA["MHA (Multi-Head Attention) - 特点: 每个头独立K/V → KV Cache = 2 × N_heads × d × L"]
         Q1["Q: Q₁ Q₂ Q₃ Q₄ Q₅ Q₆ Q₇ Q₈"]
         K1["K: K₁ K₂ K₃ K₄ K₅ K₆ K₇ K₈"]

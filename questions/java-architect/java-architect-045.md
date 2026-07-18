@@ -9,9 +9,12 @@ tags:
 - 领域模型
 - 架构
 feynman:
-  essence: DDD 的落地本质是用"统一语言 + 限界上下文 + 聚合"把业务复杂度圈在可控边界内。技术实现上靠四层架构（Interface/Application/Domain/Infrastructure）把领域逻辑从 ORM、RPC、MQ 里隔离出来，让 Order、Inventory、Payment 这些核心对象的行为由领域规则驱动，而不是由数据库表结构驱动。
-  analogy: 像城市规划。限界上下文是行政区（订单区、库存区、支付区各有自己的市政厅和法规），上下文映射是跨区协议（订单区要扣库存得按库存区的接口调用），统一语言是区内居民用的方言（订单区说"下单/履约"，物流区说"揽件/派送"，不混着用）。贫血的 Order 就是个空壳开发区，充血的 Order 才是有人管的真实街区。
-  first_principle: 为什么要先建模再写代码？因为业务规则的复杂度在代码里蔓延的成本是非线性的。一个"订单能不能取消"的规则如果散落在 Controller、Service、DAO 三层，每改一次业务就要改三处。DDD 把规则收敛到 Order 聚合根的 cancel() 方法里，规则变化只改一处——这是把"业务规则的物理位置"从分散降到收敛。
+  essence: DDD 的落地本质是用"统一语言 + 限界上下文 + 聚合"把业务复杂度圈在可控边界内。技术实现上靠四层架构（Interface/Application/Domain/Infrastructure）把领域逻辑从
+    ORM、RPC、MQ 里隔离出来，让 Order、Inventory、Payment 这些核心对象的行为由领域规则驱动，而不是由数据库表结构驱动。
+  analogy: 像城市规划。限界上下文是行政区（订单区、库存区、支付区各有自己的市政厅和法规），上下文映射是跨区协议（订单区要扣库存得按库存区的接口调用），统一语言是区内居民用的方言（订单区说"下单/履约"，物流区说"揽件/派送"，不混着用）。贫血的
+    Order 就是个空壳开发区，充血的 Order 才是有人管的真实街区。
+  first_principle: 为什么要先建模再写代码？因为业务规则的复杂度在代码里蔓延的成本是非线性的。一个"订单能不能取消"的规则如果散落在 Controller、Service、DAO
+    三层，每改一次业务就要改三处。DDD 把规则收敛到 Order 聚合根的 cancel() 方法里，规则变化只改一处——这是把"业务规则的物理位置"从分散降到收敛。
   key_points:
   - 战略设计：限界上下文划边界，上下文映射定协作（合作/共享内核/客户-供应商/防腐层）
   - 战术设计：实体（有唯一标识）、值对象（无标识不可变）、聚合（一致性边界）、领域服务（无状态跨聚合逻辑）
@@ -24,19 +27,24 @@ first_principle:
   - 业务规则的本质是约束（不变量），约束必须被集中保护，不能散落
   - 数据库表是"持久化形态"，不是"业务形态"，两者不能混为一谈
   - 跨上下文协作必然有翻译成本，防腐层（ACL）是显式承担这个成本的地方
-  rebuild: 用限界上下文把系统切成业务内聚的块（订单/库存/支付），每块内部用聚合根封装不变量（订单的金额必须等于明细之和），聚合通过仓储持久化（不暴露 SQL），应用层编排用例和事务（下单 = 创建订单 + 锁库存 + 发事件），领域事件解耦上下文（OrderPaid → 触发发货）。这样规则收敛在聚合，协作收敛在事件，数据形态和业务形态解耦。
+  rebuild: 用限界上下文把系统切成业务内聚的块（订单/库存/支付），每块内部用聚合根封装不变量（订单的金额必须等于明细之和），聚合通过仓储持久化（不暴露
+    SQL），应用层编排用例和事务（下单 = 创建订单 + 锁库存 + 发事件），领域事件解耦上下文（OrderPaid → 触发发货）。这样规则收敛在聚合，协作收敛在事件，数据形态和业务形态解耦。
 follow_up:
-  - 聚合粒度怎么定？——按"事务一致性边界"定。一个聚合内的所有修改必须在同一个数据库事务里完成。Order 和 OrderItem 通常在同一事务，是一个聚合；Order 和 Inventory 跨服务，不可能同事务，是两个聚合。
-  - 领域事件怎么落地？——Spring 用 ApplicationEventPublisher 发本地事件，跨进程用 MQ（RocketMQ 事务消息保证和业务一致）。事件要带版本号和幂等键，消费方幂等。
-  - 仓储用 MyBatis 还是 JPA？——JPA 对聚合友好（@OneToMany cascade 自动管理聚合内实体），MyBatis 更灵活但要手写聚合重建逻辑。京东内部多用 MyBatis + 手写 Assembler 把 DO 转成聚合。
-  - 贫血模型为什么是反模式？——OrderDO 只有 getter/setter，业务规则散落在 OrderService，规则一改要找遍 Service。充血模型的 cancel() 方法把规则封在对象里，改规则只改 Order.cancel()。
-  - DDD 和微服务什么关系？——限界上下文是微服务拆分的天然边界，但不是 1:1。早期一个微服务可承载多个上下文（单体先跑起来），后期再拆。强行 1:1 会过度拆分。
+- 聚合粒度怎么定？——按"事务一致性边界"定。一个聚合内的所有修改必须在同一个数据库事务里完成。Order 和 OrderItem 通常在同一事务，是一个聚合；Order
+  和 Inventory 跨服务，不可能同事务，是两个聚合。
+- 领域事件怎么落地？——Spring 用 ApplicationEventPublisher 发本地事件，跨进程用 MQ（RocketMQ 事务消息保证和业务一致）。事件要带版本号和幂等键，消费方幂等。
+- 仓储用 MyBatis 还是 JPA？——JPA 对聚合友好（@OneToMany cascade 自动管理聚合内实体），MyBatis 更灵活但要手写聚合重建逻辑。京东内部多用
+  MyBatis + 手写 Assembler 把 DO 转成聚合。
+- 贫血模型为什么是反模式？——OrderDO 只有 getter/setter，业务规则散落在 OrderService，规则一改要找遍 Service。充血模型的
+  cancel() 方法把规则封在对象里，改规则只改 Order.cancel()。
+- DDD 和微服务什么关系？——限界上下文是微服务拆分的天然边界，但不是 1:1。早期一个微服务可承载多个上下文（单体先跑起来），后期再拆。强行 1:1 会过度拆分。
 memory_points:
-  - 战略 = 限界上下文 + 上下文映射；战术 = 实体/值对象/聚合/领域服务/仓储
-  - 四层架构：Interface → Application → Domain → Infrastructure，依赖方向朝内
-  - 聚合根是唯一入口，仓储只返回聚合，贫血模型是反模式
-  - 领域事件解耦上下文，本地事件用 Spring，跨进程用 MQ + 事务消息
-  - DDD 不是银弹：CRUD 为主的管理系统用 DDD 是过度设计
+- 战略 = 限界上下文 + 上下文映射；战术 = 实体/值对象/聚合/领域服务/仓储
+- 四层架构：Interface → Application → Domain → Infrastructure，依赖方向朝内
+- 聚合根是唯一入口，仓储只返回聚合，贫血模型是反模式
+- 领域事件解耦上下文，本地事件用 Spring，跨进程用 MQ + 事务消息
+- DDD 不是银弹：CRUD 为主的管理系统用 DDD 是过度设计
+frequency: high
 ---
 
 # 【Java 后端架构师】领域驱动设计在 Java 架构中的落地
@@ -384,6 +392,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

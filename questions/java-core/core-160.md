@@ -16,6 +16,7 @@ memory_points:
 - 静态内部类不持有外部引用，可直接new且只能访问外部静态成员。
 - 非静态内部类隐式持有外部引用(this$0)，可访问外部所有成员，但易致内存泄漏。
 - 局部/匿名内部类访问局部变量时，变量必须事实上的final。
+frequency: low
 ---
 
 # Java内部类有哪几种？各自的特点和使用场景？
@@ -110,6 +111,38 @@ public class OuterClass {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Anonymous process
+    class B decision
+    class B1 special
+    class Builder error
+    class C info
+    class C1 start
+    class D process
+    class D1 decision
+    class E special
+    class E1 error
+    class E2 info
+    class F start
+    class G process
+    class H decision
+    class HashMap special
+    class I error
+    class Inner info
+    class Java start
+    class Lambda process
+    class Local decision
+    class Member special
+    class Nested error
+    class Node info
+    class Static start
+    class br process
     A[Java 内部类] --> B[成员内部类<br/>Member Inner]
     A --> C[静态内部类<br/>Static Nested]
     A --> D[局部内部类<br/>Local Inner]

@@ -36,6 +36,7 @@ memory_points:
 - 没有volatile的风险：线程B拿到非null引用但对象还没初始化 → NPE
 - 替代方案：静态内部类( JVM类加载保证线程安全)、枚举(最佳实践)
 - 面试手撕：volatile + synchronized + 两次if null检查
+frequency: high
 ---
 
 # 【字节三面手撕】实现双重检查锁（DCL）单例模式
@@ -265,6 +266,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

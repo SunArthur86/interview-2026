@@ -15,6 +15,7 @@ memory_points:
 - 核心状态：volatile int state代表同步状态，通过CAS保证修改原子性。
 - 核心队列：CLH变种双向链表，负责封装与阻塞获取资源失败的线程。
 - 设计模式：采用模板方法，使用者重写tryAcquire/tryRelease即可，无需关心底层排队。
+frequency: high
 ---
 
 # 什么是AQS？
@@ -153,6 +154,7 @@ flowchart TB
     classDef sem fill:#fff3e0,stroke:#ef6c00
     class State,CLH,Template core
     class S1,S2,S3 sem
+
 ```
 
 

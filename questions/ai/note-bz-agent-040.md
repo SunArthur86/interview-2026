@@ -29,6 +29,7 @@ memory_points:
 - 对比差异：Prompt是低复用文本，Skill是高复用、可管理、带Schema的结构化模块。
 - 核心五步：加元数据(可发现)→加工具依赖(声明式)→加流程(可复现)→加Schema(可测试)→加示例(提质量)。
 - 总结口诀：从裸文本进化为带身份、依赖、流程、接口和例子的标准化组件。
+frequency: medium
 ---
 
 # Prompt 不等于 Skill，怎么把 Prompt 升级为 Skill？
@@ -292,6 +293,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

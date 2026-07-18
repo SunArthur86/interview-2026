@@ -30,6 +30,7 @@ memory_points:
 - 前置流水线设计：选文件后立即执行格式、完整性、权限校验，避免错误流转到云端推理才报错。
 - 内容相关性预检：提取摘要和关键字段，利用小模型快速判断文件内容与Prompt是否匹配。
 - 兜底安全保护：针对格式混乱（如扫描件PDF）或文件损坏等难以读取的情况，必须提前预警。
+frequency: medium
 ---
 
 # 【月之暗面面经】如果用户给了错误的文件上下文，前端怎样尽早发现并提示？
@@ -51,6 +52,22 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class F1 start
+    class F2 process
+    class F3 decision
+    class F4 special
+    class F5 error
+    class F6 info
+    class IN start
+    class OK process
+    class URL decision
+    class br special
     IN["用户选择文件/URL"]
     F1["格式校验<br/>不支持的格式？→ ⚠️ 提示替换"]
     F2["完整性校验<br/>空文件/损坏文件？→ ⚠️ 提示重新选择"]

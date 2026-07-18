@@ -16,6 +16,7 @@ memory_points:
 - 核心数字：默认每次扩容为原容量的1.5倍（oldCap + oldCap>>1）
 - 底层动作：本质是创建新长数组，并通过Arrays.copyOf迁移旧数据
 - 实战避坑：预知大容量时务必初始化指定容量，避免频繁扩容和GC
+frequency: medium
 ---
 
 # ArrayList的扩容机制是什么？
@@ -100,6 +101,34 @@ private void grow(int minCapacity) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayList process
+    class Arrays decision
+    class B special
+    class C error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class MAX_ARRAY_SIZE start
+    class add process
+    class br decision
+    class capacity special
+    class copyOf error
+    class e info
+    class elementData start
+    class minCapacity process
+    class oldCap decision
+    class size special
     A[ArrayList 扩容] --> B["add 时检查 size+1 > capacity"]
     B --> C{需要扩容?}
     C -->|否| D[直接 elementData size = e]

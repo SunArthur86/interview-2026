@@ -29,6 +29,7 @@ memory_points:
 - 冲突解决：去中心化靠共识协议，中心化靠Manager一票否决
 - 容错机制：心跳监测异常，支持任务重分配，防单点故障阻塞全局
 - 防死锁口诀：全局超时必须有，权重冲突必仲裁
+frequency: medium
 ---
 
 # 多智能体系统中如何设计协同机制？策略冲突时如何解决？
@@ -39,6 +40,43 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AA process
+    class AB decision
+    class AGG special
+    class ARB error
+    class Agent info
+    class B start
+    class DISP process
+    class Debate decision
+    class Hierarchical special
+    class MGR error
+    class Manager info
+    class P1 start
+    class P1A process
+    class P1B decision
+    class P1C special
+    class P1D error
+    class P1OUT info
+    class P2 start
+    class P2OUT process
+    class P3 decision
+    class P3OUT special
+    class P4 error
+    class PA info
+    class PB start
+    class PC process
+    class Parallel decision
+    class Pipeline special
+    class W1 error
+    class W2 info
+    class Worker start
     subgraph P1["1. 串行流水线 (Pipeline) - 每个Agent处理一个阶段,顺序传递"]
         P1A["研究"] --> P1B["写作"] --> P1C["审核"] --> P1D["修改"] --> P1OUT["输出"]
     end

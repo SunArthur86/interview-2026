@@ -16,6 +16,7 @@ memory_points:
 - RUNNABLE 是个大筐：Java 将操作系统的就绪和运行状态合并，甚至包含部分 I/O 阻塞。
 - 因为获取 monitor 失败，所以进入 BLOCKED 状态（专指 synchronized 锁）。
 - 无限期等待（WAITING）靠 notify/notifyAll 唤醒，限期等待（TIMED_WAITING）靠超时自动唤醒。
+frequency: medium
 ---
 
 # 什么是线程的生命周期？
@@ -129,6 +130,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

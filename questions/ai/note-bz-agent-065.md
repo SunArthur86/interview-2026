@@ -31,6 +31,7 @@ memory_points:
 - 状态(State)要分离：业务数据、流程状态与执行记录字段需独立隔离维护
 - 条件路由控制流：如支付后按金额分大额审核与正常发货，按错误次数走重试或降级
 - 进阶能力：Fan-out/Fan-in实现任务并发，子图实现模块化封装，检查点保障长任务恢复
+frequency: medium
 ---
 
 # LangGraph 的核心 Graph 如何设计？如何打造企业级复杂工作流？
@@ -310,6 +311,7 @@ flowchart TD
     style LG fill:#FF9800,color:#fff
     style LS fill:#9C27B0,color:#fff
     style STATE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

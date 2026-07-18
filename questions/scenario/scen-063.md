@@ -30,6 +30,7 @@ memory_points:
 - OAuth2常用：授权码模式最安全常用，引导用户授权拿Code，后端换Token。
 - JWT特性：无状态自包含跨域友好，但难主动失效，Payload切忌存敏感信息。
 - 双Token机制：短AccessToken访问，长RefreshToken续期，兼顾安全与体验。
+frequency: medium
 ---
 
 # 如何设计统一认证授权系统（SSO/OAuth2/JWT）？
@@ -158,6 +159,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

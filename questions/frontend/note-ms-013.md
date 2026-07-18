@@ -32,6 +32,7 @@ memory_points:
 - 三层 Diff 架构：L1自然语言摘要（新手）、L2块级/函数级（中级）、L3行/Token级（高手）
 - 交互原则就地展开：从摘要下钻到行级不跳页面，且支持双向导航
 - 精细化审查：每个变更单元支持独立接受/拒绝，而非全量覆盖
+frequency: medium
 ---
 
 # 【月之暗面面经】如何设计 AI 桌面端的产物 diff，既能给新手看，也能给高手看？
@@ -444,6 +445,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

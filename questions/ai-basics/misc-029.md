@@ -21,6 +21,7 @@ memory_points:
 - Step-Back：将具体问题抽象化，先检索背景知识，适合复杂推理。
 - Multi-Query：生成多个问题变体，多路召回并融合，适合语义模糊。
 - 注意：HyDE对精确事实查询(如ID号)可能因幻觉误导，需慎用。
+frequency: high
 ---
 
 # RAG中的查询改写技术有哪些?HyDE和Step-Back Prompting分别解决什么问题
@@ -155,6 +156,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -33,6 +33,7 @@ memory_points:
 - 规则纠错：专治格式与形近字(如巳经变已经)，利用领域词典高效修正
 - 模型纠错：BERT解决上下文连贯性，LLM应对复杂版面语义场景
 - 系统纠偏：多OCR引擎字符级投票取最优，低置信度区域强制转入人工审核
+frequency: medium
 ---
 
 # OCR结果有噪声或错误时，如何做纠错或提升解析质量？
@@ -240,6 +241,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

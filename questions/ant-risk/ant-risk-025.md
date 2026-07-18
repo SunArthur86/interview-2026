@@ -34,6 +34,7 @@ memory_points:
 - 稳定性 vs 唯一性 trade-off
 - 客户端 SDK 采集 + 服务端生成 + 关联图
 - 多账号关联同一设备是强风险信号
+frequency: low
 ---
 
 # 【蚂蚁风控】设备指纹系统怎么设计？怎么反作弊？
@@ -419,6 +420,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

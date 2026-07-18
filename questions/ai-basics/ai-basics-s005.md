@@ -18,6 +18,7 @@ memory_points:
 - Q/K/V含义：Query查，Key被匹配，Value是实际内容。
 - NLP优势：解决长距离依赖（O(1)距离），支持并行计算，可解释性强。
 - 多头机制：不同头关注不同子空间（如语法、语义），增强表达。
+frequency: low
 ---
 
 # 什么是注意力机制？为什么在NLP中有效？
@@ -152,6 +153,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

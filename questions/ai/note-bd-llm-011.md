@@ -34,6 +34,7 @@ memory_points:
 - 外挂状态隔离：因重试日志易撑爆窗口，故用外部数据库存状态与报错，上下文只留摘要。
 - 多级记忆治理：重试失败错误折叠成总结，用KV缓存复用前缀，防止上下文膨胀。
 - 回滚机制：失败时读取外部检查点，并在上下文中写入指令引导Agent退回上一安全步。
+frequency: high
 ---
 
 # 【字节面经】如果 Agent 在多步推理过程中某一步调用工具失败，你如何设计容错和回滚机制，同时不让上下文窗口膨胀失控？
@@ -446,6 +447,7 @@ flowchart TD
     style DEG fill:#F44336,color:#fff
     style ZIP fill:#2196F3,color:#fff
     style CP fill:#4CAF50,color:#fff
+
 ```
 
 ### SVG 版（静态精绘 · data URI 嵌入）

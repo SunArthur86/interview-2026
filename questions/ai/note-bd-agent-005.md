@@ -30,6 +30,7 @@ memory_points:
 - 评测防随机：因为Agent输出有随机性，所以单测例必须跑多次(n_runs)取平均统计
 - Trace查节点：记录Prompt到Tool调用的树形Span结构，用于定位错误链路和Token成本
 - 核心监控指标：任务完成率、工具调用成功率、P99延迟和Token成本追踪
+frequency: medium
 ---
 
 # 从工程化角度看，Agent Harness主要解决哪些问题？
@@ -217,6 +218,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

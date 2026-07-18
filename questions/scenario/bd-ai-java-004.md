@@ -27,6 +27,7 @@ memory_points:
 - 压缩策略对比：滑动窗口省Token但丢信息，对话摘要法保真度高
 - 分层记忆架构：当前约束(工作)、近N轮(短期)、向量库(长期)、快照(事件)
 - Java实操：发请求前必用JTokKit预计算Token，超限则触发动态截断
+frequency: medium
 ---
 
 # 【字节面经】如何解决 Agent 的上下文漂移问题？如何在有限上下文窗口内做短期和长期记忆压缩？
@@ -90,6 +91,7 @@ flowchart TD
     SUM --> AGENT
     VDB -->|按需召回| AGENT
     style SUM fill:#d4edda
+
 ```
 
 

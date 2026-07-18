@@ -28,14 +28,15 @@ first_principle:
   - 单一职责
   rebuild: 创建/结构/行为三大类模式。
 follow_up:
-  - 单例怎么实现？——饿汉/懒汉 DCL/静态内部类/枚举
-  - 策略模式怎么消除 if/else？——Map<type, Strategy> + 注入
-  - Spring 用了哪些模式？——工厂（BeanFactory）/单例/代理（AOP）/观察者（事件）
+- 单例怎么实现？——饿汉/懒汉 DCL/静态内部类/枚举
+- 策略模式怎么消除 if/else？——Map<type, Strategy> + 注入
+- Spring 用了哪些模式？——工厂（BeanFactory）/单例/代理（AOP）/观察者（事件）
 memory_points:
-  - 创建：单例/工厂/建造者
-  - 结构：适配器/装饰器/代理
-  - 行为：策略/观察者/责任链
-  - 原则：SOLID
+- 创建：单例/工厂/建造者
+- 结构：适配器/装饰器/代理
+- 行为：策略/观察者/责任链
+- 原则：SOLID
+frequency: high
 ---
 
 # 【拼多多内容】设计模式在内容场景的应用？
@@ -290,6 +291,34 @@ public class FeedFactory {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AudioAuditStrategy process
+    class Audit decision
+    class AuditStrategyFactory special
+    class B error
+    class C info
+    class Chain start
+    class D process
+    class E decision
+    class F special
+    class G error
+    class H info
+    class I start
+    class ImageAuditStrategy process
+    class J decision
+    class K special
+    class L error
+    class M info
+    class N start
+    class TextAuditStrategy process
+    class VideoAuditStrategy decision
+    class br special
     A[内容审核请求] --> B[AuditStrategyFactory<br/>策略工厂自动收集]
     B -- 根据类型路由 --> C{内容类型判断}
 

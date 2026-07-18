@@ -29,6 +29,7 @@ memory_points:
 - 高可用容灾：配置中心不可用时，客户端使用本地快照缓存继续维持运行。
 - 推送机制：Apollo/Nacos基于HTTP长轮询，秒级感知配置变更推送到客户端。
 - 最佳实践：敏感配置必须加密存储，大体积数据（如图片）切勿放入配置中心。
+frequency: medium
 ---
 
 # 如何设计配置中心？支持动态配置、灰度发布、多环境管理。
@@ -163,6 +164,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

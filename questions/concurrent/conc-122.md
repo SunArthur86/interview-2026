@@ -16,6 +16,7 @@ memory_points:
 - ConcurrentHashMap：JDK 8抛弃Segment改用 Node数组+链表+红黑树
 - CHM加锁本质：JDK 7分段锁，JDK 8细化为 CAS + synchronized锁头节点
 - 典型场景：CopyOnWrite适合读多写少，阻塞队列常配合线程池消费
+frequency: high
 ---
 
 # 什么是并发容器？Java 有哪些并发容器？
@@ -99,6 +100,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

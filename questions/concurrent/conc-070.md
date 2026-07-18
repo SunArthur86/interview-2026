@@ -24,6 +24,7 @@ memory_points:
 - epoll的O(1)前提是活跃连接数少；若全部活跃，复杂度退化为O(M)。
 follow_up: []
 tags: []
+frequency: high
 ---
 
 # 什么是IO复用？
@@ -164,6 +165,7 @@ flowchart TD
     style WORKER fill:#009688,color:#fff
     style BOSS fill:#9C27B0,color:#fff
     style ZERO_COPY fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

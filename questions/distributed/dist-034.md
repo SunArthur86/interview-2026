@@ -15,6 +15,7 @@ memory_points:
 - Redis实现：必须SET NX PX保证原子互斥，释放需Lua防误删。
 - 进阶机制：Redisson看门狗解决过期续期；Redlock算法解决主从切换丢锁。
 - ZK原理：临时顺序节点+监听前一节点，天然防死锁与羊群效应。
+frequency: high
 ---
 
 # 分布式锁有哪些实现方案？
@@ -129,6 +130,7 @@ flowchart TD
     style LUA fill:#009688,color:#fff
     style DOG fill:#9C27B0,color:#fff
     style WARN fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

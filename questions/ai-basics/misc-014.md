@@ -22,6 +22,7 @@ memory_points:
 - 代码核心价值：提升推理与结构化表达，非仅为生成代码
 - 小模型陷阱：参数<1B时代码比例需<5%，否则挤占语言容量
 - 实战影响：代码比例降5%会导致数学成绩显著下降及JSON格式变差
+frequency: high
 ---
 
 # 预训练数据配比如何设计?代码数据为什么重要
@@ -83,6 +84,29 @@ dataloader = DataLoader(ConcatDataset(datasets), sampler=sampler)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Calling special
+    class D error
+    class E info
+    class F start
+    class Function process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class N special
+    class br error
     A["预训练语料库"] --> B{"数据配比策略设计"}
     B --> C["英文文本<br/>约 40%"]
     B --> D["中文文本<br/>约 30%"]

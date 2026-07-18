@@ -9,8 +9,11 @@ tags:
 - 高可用
 - 容量规划
 feynman:
-  essence: Redis 高可用的本质是"数据分片解决单机容量/性能瓶颈，主从复制解决单点故障，自动故障转移解决人工干预延迟"。主从（一主多从，手动切换）→ 哨兵（Sentinel 监控+自动选主，但单分片）→ Cluster（多分片+多主从，16384 槽位路由，去中心化）。容量规划要算"内存、QPS、带宽、连接数"四个维度，按业务峰值留 50% 余量。
-  analogy: 像连锁店管理。主从复制是"总店（主）和分店（从）同步商品目录（数据），客人查商品去分店（读分离）"。哨兵是"有个监工盯着总店，总店出事监工选个分店升为总店"（自动选主）。Cluster 是"全国分多个大区（分片），每个大区有总店和分店，客人按商品编号（key 的 CRC16）去对应大区"（分片+每分片主从）。
+  essence: Redis 高可用的本质是"数据分片解决单机容量/性能瓶颈，主从复制解决单点故障，自动故障转移解决人工干预延迟"。主从（一主多从，手动切换）→
+    哨兵（Sentinel 监控+自动选主，但单分片）→ Cluster（多分片+多主从，16384 槽位路由，去中心化）。容量规划要算"内存、QPS、带宽、连接数"四个维度，按业务峰值留
+    50% 余量。
+  analogy: 像连锁店管理。主从复制是"总店（主）和分店（从）同步商品目录（数据），客人查商品去分店（读分离）"。哨兵是"有个监工盯着总店，总店出事监工选个分店升为总店"（自动选主）。Cluster
+    是"全国分多个大区（分片），每个大区有总店和分店，客人按商品编号（key 的 CRC16）去对应大区"（分片+每分片主从）。
   first_principle: 为什么需要 Cluster？——单 Redis 有上限：内存（单机几十 G 到顶）、QPS（单实例 10 万左右）、单点风险（宕机全挂）。解决方法：水平分片（Cluster，数据分散多节点）、读写分离（从库分担读）、高可用（主从+自动切换）。核心权衡是"分片提升容量但引入路由复杂度（跨槽位命令受限）"。
   key_points:
   - 主从复制：全量（RDB）+ 增量（repl_backlog）
@@ -25,19 +28,27 @@ first_principle:
   - 单实例 QPS 有上限（10 万左右，CPU 单核瓶颈）
   - 单点故障不可接受（宕机全业务受影响）
   - 分布式系统要权衡 CAP（Redis 选 AP：高可用+最终一致）
-  rebuild: 用数据分片解决容量/性能（Cluster，16384 槽位 CRC16 路由，每分片独立主从），用主从复制解决读压力和单点故障（从库分担读，主库宕机从库提升），用哨兵或 Cluster 内置故障转移解决人工干预延迟（自动选主）。容量规划按"内存（数据量×2 留碎片和膨胀）、QPS（峰值×1.5）、带宽（大 value 慎用）、连接数（应用实例数×连接池）"四维度算，留 50% 余量。跨分片操作受限（mget/事务/管道要同槽位），用 hash tag {} 强制同槽。
+  rebuild: 用数据分片解决容量/性能（Cluster，16384 槽位 CRC16 路由，每分片独立主从），用主从复制解决读压力和单点故障（从库分担读，主库宕机从库提升），用哨兵或
+    Cluster 内置故障转移解决人工干预延迟（自动选主）。容量规划按"内存（数据量×2 留碎片和膨胀）、QPS（峰值×1.5）、带宽（大 value 慎用）、连接数（应用实例数×连接池）"四维度算，留
+    50% 余量。跨分片操作受限（mget/事务/管道要同槽位），用 hash tag {} 强制同槽。
 follow_up:
-  - 哨兵和 Cluster 什么区别，怎么选？——哨兵是"单分片主从+独立监控进程"，适合数据量小（单机装得下）只需高可用的场景。Cluster 是"多分片+每分片主从+内置路由"，适合数据量大（超单机内存）需要水平扩展的场景。新项目优先 Cluster（未来扩展空间大）
-  - Cluster 为什么用 16384 个槽位？——Antirez 解释：①心跳包携带槽位信息，16384/8=2KB（可控）；②Redis 集群建议 1000 节点以内，16384 槽位足够分散；③如果用 65536 槽位，心跳包 8KB 太大。16384 是性能和扩展性的平衡
-  - Cluster 怎么处理跨槽位命令？——mset/mget/事务/Lua 跨槽位会报错（CROSSSLOT）。解法：①用 hash tag {} 让相关 key 同槽位（如 user:{1001}:info 和 user:{1001}:order 同槽）；②应用层拆分多次请求；③用 pipeline（每条命令独立路由）
-  - 哨兵的故障转移流程？——①主观下线（SDOWN）：单个哨兵 ping 主库超时；②客观下线（ODOWN）：多数哨兵确认主库异常；③选举 leader 哨兵（Raft）；④leader 选最优从库（优先级+偏移量+runid）提升为主；⑤通知客户端新主地址
-  - 容量规划怎么算 Redis 内存？——数据量×单 value 大小×2（留 hash 表膨胀和内存碎片）+ 主从复制 buffer。如 1 亿用户×1KB=100GB，Redis 内存要预留 200GB+。大 key（如 hash 存百万 field）要单独评估
+- 哨兵和 Cluster 什么区别，怎么选？——哨兵是"单分片主从+独立监控进程"，适合数据量小（单机装得下）只需高可用的场景。Cluster 是"多分片+每分片主从+内置路由"，适合数据量大（超单机内存）需要水平扩展的场景。新项目优先
+  Cluster（未来扩展空间大）
+- Cluster 为什么用 16384 个槽位？——Antirez 解释：①心跳包携带槽位信息，16384/8=2KB（可控）；②Redis 集群建议 1000
+  节点以内，16384 槽位足够分散；③如果用 65536 槽位，心跳包 8KB 太大。16384 是性能和扩展性的平衡
+- Cluster 怎么处理跨槽位命令？——mset/mget/事务/Lua 跨槽位会报错（CROSSSLOT）。解法：①用 hash tag {} 让相关 key
+  同槽位（如 user:{1001}:info 和 user:{1001}:order 同槽）；②应用层拆分多次请求；③用 pipeline（每条命令独立路由）
+- 哨兵的故障转移流程？——①主观下线（SDOWN）：单个哨兵 ping 主库超时；②客观下线（ODOWN）：多数哨兵确认主库异常；③选举 leader 哨兵（Raft）；④leader
+  选最优从库（优先级+偏移量+runid）提升为主；⑤通知客户端新主地址
+- 容量规划怎么算 Redis 内存？——数据量×单 value 大小×2（留 hash 表膨胀和内存碎片）+ 主从复制 buffer。如 1 亿用户×1KB=100GB，Redis
+  内存要预留 200GB+。大 key（如 hash 存百万 field）要单独评估
 memory_points:
-  - 主从：全量 RDB + 增量 repl_backlog
-  - 哨兵：SDOWN→ODOWN→选 leader→提升从库
-  - Cluster：16384 槽位，CRC16 路由，每分片主从
-  - Gossip：节点间 ping/pong 传播集群状态
-  - 容量：内存（数据×2）+ QPS（峰值×1.5）+ 带宽 + 连接数
+- 主从：全量 RDB + 增量 repl_backlog
+- 哨兵：SDOWN→ODOWN→选 leader→提升从库
+- Cluster：16384 槽位，CRC16 路由，每分片主从
+- Gossip：节点间 ping/pong 传播集群状态
+- 容量：内存（数据×2）+ QPS（峰值×1.5）+ 带宽 + 连接数
+frequency: high
 ---
 
 # 【Java 后端架构师】Redis 高可用架构与容量规划
@@ -473,6 +484,34 @@ redis-cli -c -p 7000 cluster countkeysinslot <slot>
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CRC16 special
+    class Cluster error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class Gossip special
+    class H error
+    class I info
+    class J start
+    class K process
+    class L decision
+    class Leader special
+    class M error
+    class Master info
+    class N start
+    class Raft process
+    class Redis decision
+    class Replica special
     A[Redis 客户端] -->|读写命令| B[Cluster 路由节点]
     B -->|CRC16 计算| C[16384 槽位映射]
     C --> D{目标节点}

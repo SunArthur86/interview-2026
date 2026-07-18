@@ -9,9 +9,14 @@ tags:
 - 幂等
 - 错误码
 feynman:
-  essence: REST 幂等的本质是"同一请求重复执行结果不变"——GET/PUT/DELETE 天然幂等（语义保证），POST 不幂等（需开发者通过 idempotency key 实现）。幂等的工程实现是"客户端生成唯一 key，服务端按 key 去重 + 返回缓存结果"，覆盖网络重试、用户重复点击、消息重投三个场景。错误码体系设计的核心是"错误码是机器可消费的契约"——HTTP status code 表传输层结果，业务 error code 表业务语义，error message 表人类描述。三者分层，机器按 code 路由（重试/降级/告警），人类按 message 排查。
-  analogy: 像银行转账。幂等 key 是"交易凭证号"，你拿同一凭证号去银行转账，银行第一次扣款成功，第二次发现凭证号重复直接返回上次结果，不会重复扣。错误码分层是银行的"状态码 + 业务码 + 描述"——状态码（成功/失败/处理中）、业务码（余额不足/账户冻结/超限额）、描述（详细原因）。
-  first_principle: 为什么 POST 要专门做幂等？因为 POST 是非幂等的语义（每次创建新资源），但网络层重试不可避免（超时不知道服务端处理没有）。客户端不知道是该重试（怕重复创建）还是放弃（怕丢失请求），idempotency key 让"重试 = 上次结果"成为可能。
+  essence: REST 幂等的本质是"同一请求重复执行结果不变"——GET/PUT/DELETE 天然幂等（语义保证），POST 不幂等（需开发者通过 idempotency
+    key 实现）。幂等的工程实现是"客户端生成唯一 key，服务端按 key 去重 + 返回缓存结果"，覆盖网络重试、用户重复点击、消息重投三个场景。错误码体系设计的核心是"错误码是机器可消费的契约"——HTTP
+    status code 表传输层结果，业务 error code 表业务语义，error message 表人类描述。三者分层，机器按 code 路由（重试/降级/告警），人类按
+    message 排查。
+  analogy: 像银行转账。幂等 key 是"交易凭证号"，你拿同一凭证号去银行转账，银行第一次扣款成功，第二次发现凭证号重复直接返回上次结果，不会重复扣。错误码分层是银行的"状态码
+    + 业务码 + 描述"——状态码（成功/失败/处理中）、业务码（余额不足/账户冻结/超限额）、描述（详细原因）。
+  first_principle: 为什么 POST 要专门做幂等？因为 POST 是非幂等的语义（每次创建新资源），但网络层重试不可避免（超时不知道服务端处理没有）。客户端不知道是该重试（怕重复创建）还是放弃（怕丢失请求），idempotency
+    key 让"重试 = 上次结果"成为可能。
   key_points:
   - 天然幂等：GET/PUT/DELETE（语义保证）；POST 不幂等（需 idempotency key）
   - 幂等 key 三种生成方式：UUID、业务唯一键（订单号+操作）、hash(请求体)
@@ -24,19 +29,25 @@ first_principle:
   - 网络超时不知道服务端是否处理过，必须假设"可能处理过"
   - 客户端重试是稳定性必需（不能因一次超时放弃）
   - 重复执行的业务后果（重复扣款）严重到必须避免
-  rebuild: 客户端为每个写请求生成唯一 idempotency key（如 req_uuid 或 订单号+操作类型），Header 传递；服务端先查 Redis（key → 结果缓存），命中直接返回，未命中执行业务（用唯一索引兜底防并发），执行完写 Redis。这样无论重试多少次都返回第一次的结果。错误码用 HTTP status + business code 分层，机器按 code 路由（5xx 重试、4xx 不重试、业务码判断降级）。
+  rebuild: 客户端为每个写请求生成唯一 idempotency key（如 req_uuid 或 订单号+操作类型），Header 传递；服务端先查 Redis（key
+    → 结果缓存），命中直接返回，未命中执行业务（用唯一索引兜底防并发），执行完写 Redis。这样无论重试多少次都返回第一次的结果。错误码用 HTTP status
+    + business code 分层，机器按 code 路由（5xx 重试、4xx 不重试、业务码判断降级）。
 follow_up:
-  - 幂等 key 用什么生成？——前端生成 UUID（每次按钮点击生成一个）；或用业务唯一键（订单号+操作类型）；或 hash(请求体)（适合纯函数式 RPC）。
-  - Redis 挂了幂等怎么办？——必须用数据库唯一索引兜底（idempotency_key 表 + unique constraint）。Redis 是性能优化，DB 是正确性兜底。
-  - 错误码 5xx 都重试吗？——不是。500/502/503 重试，504（网关超时）慎重重试（可能服务端处理了但响应慢）。业务码层面，如 ORDER_LOCKED 这种业务错误不重试。
-  - 错误码怎么国际化？——message 不直出，用 i18n key（如 `error.order.locked`），客户端按用户 locale 翻译。错误码本身语言无关。
-  - PATCH 幂等吗？——不一定。PATCH 如果是 atomic replace（PUT 语义）幂等；如果是增量操作（如 amount += 10）不幂等。RFC 7396 的 Merge PATCH 也不幂等。
+- 幂等 key 用什么生成？——前端生成 UUID（每次按钮点击生成一个）；或用业务唯一键（订单号+操作类型）；或 hash(请求体)（适合纯函数式 RPC）。
+- Redis 挂了幂等怎么办？——必须用数据库唯一索引兜底（idempotency_key 表 + unique constraint）。Redis 是性能优化，DB
+  是正确性兜底。
+- 错误码 5xx 都重试吗？——不是。500/502/503 重试，504（网关超时）慎重重试（可能服务端处理了但响应慢）。业务码层面，如 ORDER_LOCKED
+  这种业务错误不重试。
+- 错误码怎么国际化？——message 不直出，用 i18n key（如 `error.order.locked`），客户端按用户 locale 翻译。错误码本身语言无关。
+- PATCH 幂等吗？——不一定。PATCH 如果是 atomic replace（PUT 语义）幂等；如果是增量操作（如 amount += 10）不幂等。RFC
+  7396 的 Merge PATCH 也不幂等。
 memory_points:
-  - GET/PUT/DELETE 天然幂等，POST 必须做幂等
-  - 幂等三件套：idempotency key header + Redis SETNX + DB 唯一索引兜底
-  - 错误码三层：HTTP status（传输）+ business code（业务）+ message（描述）
-  - 5xx 重试、4xx 不重试；业务码判断降级 vs 重试 vs 告警
-  - 错误码是契约：code 值稳定，message 可变，新增不改老
+- GET/PUT/DELETE 天然幂等，POST 必须做幂等
+- 幂等三件套：idempotency key header + Redis SETNX + DB 唯一索引兜底
+- 错误码三层：HTTP status（传输）+ business code（业务）+ message（描述）
+- 5xx 重试、4xx 不重试；业务码判断降级 vs 重试 vs 告警
+- 错误码是契约：code 值稳定，message 可变，新增不改老
+frequency: high
 ---
 
 # 【Java 后端架构师】REST 幂等语义与错误码体系设计
@@ -446,6 +457,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

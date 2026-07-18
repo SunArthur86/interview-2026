@@ -21,7 +21,8 @@ feynman:
   - '本质差异: "记住这个项目怎么工作" vs "记住用户是谁、习惯什么"'
 first_principle:
   essence: 记忆是Agent从"一次性工具"进化为"长期助手"的关键基础设施。
-  derivation: Agent每次会话从零开始 → 无法积累经验 → 需要持久化记忆 → 但记忆太多会噪声干扰 → 需要分层管理(什么值得记/什么该遗忘) → 不同场景的记忆需求不同 → 不同记忆系统设计
+  derivation: Agent每次会话从零开始 → 无法积累经验 → 需要持久化记忆 → 但记忆太多会噪声干扰 → 需要分层管理(什么值得记/什么该遗忘)
+    → 不同场景的记忆需求不同 → 不同记忆系统设计
   conclusion: 记忆系统的复杂度应与Agent的使用场景匹配——简单场景轻量够用，复杂场景需要分层体系
 follow_up:
 - Agent的记忆应该永远保留吗？什么时候应该遗忘？
@@ -29,10 +30,11 @@ follow_up:
 - 多用户场景下记忆怎么隔离？
 - 记忆系统和RAG知识库的区别是什么？
 memory_points:
-- "Claude Code: CLAUDE.md(项目指令) + 会话上下文 → 轻量文件驱动"
-- "Hermes: Memory(跨会话持久) + Skills(程序性知识) + Session(会话内) + Profile(隔离)"
-- "记忆四层模型: 工作记忆(当前任务) → 短期(会话) → 长期(持久) → 元认知(反思)"
-- "设计原则: 记忆价值 = 频率 × 重要度 - 噪声成本"
+- 'Claude Code: CLAUDE.md(项目指令) + 会话上下文 → 轻量文件驱动'
+- 'Hermes: Memory(跨会话持久) + Skills(程序性知识) + Session(会话内) + Profile(隔离)'
+- '记忆四层模型: 工作记忆(当前任务) → 短期(会话) → 长期(持久) → 元认知(反思)'
+- '设计原则: 记忆价值 = 频率 × 重要度 - 噪声成本'
+frequency: high
 ---
 
 # Claude Code和Hermes在记忆系统上的差别
@@ -49,6 +51,46 @@ Claude Code = 项目文件夹上的便利贴（每次打开项目就看到，简
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CC start
+    class CC1 process
+    class CC2 decision
+    class CC3 special
+    class CLAUDE error
+    class Claude info
+    class Code start
+    class DB process
+    class Environment decision
+    class HM special
+    class HM1 error
+    class HM2 info
+    class HM3 start
+    class HM4 process
+    class Hermes decision
+    class History special
+    class Knowledge error
+    class Layer info
+    class Learned start
+    class Lessons process
+    class Memory decision
+    class OS special
+    class Persistent error
+    class Procedural info
+    class Profile start
+    class Session process
+    class Skills decision
+    class User special
+    class Working error
+    class br info
+    class commit start
+    class lint process
+    class md decision
+    class test special
     subgraph CC["Claude Code 记忆系统 - 特点: 文件驱动 | 项目级 | 生命周期=项目存在时间"]
         CC1["CLAUDE.md (项目级指令)<br/>- 编码规范<br/>- 项目结构<br/>- 测试命令"]
         CC2["会话上下文 (对话历史)<br/>- 当前任务<br/>- 工具调用历史<br/>- 代码变更记录"]

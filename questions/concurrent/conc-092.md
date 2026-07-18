@@ -17,6 +17,7 @@ memory_points:
 - 核心角色：管理硬件与软件资源，提供系统调用作为用户态访问内核态的桥梁。
 - 态切换：用户程序需操作硬件时，必须通过系统调用陷入内核态执行。
 - 进程视角：OS是首个启动的基础软件，负责管控后续所有进程的完整生命周期。
+frequency: low
 ---
 
 # 什么是操作系统基础？
@@ -116,6 +117,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

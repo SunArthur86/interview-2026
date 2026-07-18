@@ -48,6 +48,7 @@ memory_points:
 - 三级：规则→模型→人工
 - 维度：文本/图片/视频/音频
 - 模式：策略+责任链+工厂
+frequency: high
 ---
 
 # 【拼多多内容】UGC 内容审核架构怎么设计？
@@ -340,6 +341,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

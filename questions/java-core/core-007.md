@@ -16,6 +16,7 @@ memory_points:
 - 常考301与302对比：301代表永久重定向，而302代表临时重定向。
 - 区别权限类错误：401是未认证(没登录)，而403是禁止访问(无权限)。
 - 实战要点：触发限流应返回429(配Retry-After头)，以便客户端指数退避。
+frequency: low
 ---
 
 # 什么是HTTP状态码？
@@ -70,6 +71,26 @@ res.status(204).end();
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class HTTP decision
+    class I special
+    class J error
+    class OK info
+    class br start
+    class vs process
     A[HTTP 状态码] --> B["1xx 信息<br/>协议切换等"]
     A --> C["2xx 成功<br/>200 OK/201 创建/206 分片"]
     A --> D["3xx 重定向<br/>301 永久/302 临时/304 缓存"]

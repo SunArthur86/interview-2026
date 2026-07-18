@@ -13,7 +13,8 @@ tags:
 feynman:
   essence: SGD是用"当前坡度"决定走哪一步，Adam是用"历史坡度的滑动平均+自适应步长"决定走哪一步。本质区别是Adam引入了"动量(惯性)"和"自适应学习率(每参数不同步长)"。
   analogy: SGD像一个蒙眼下山的人，每一步只看脚下坡度（容易在山谷里来回震荡）。Adam像一个有经验的山地向导——记住刚才走过的方向（动量，类似惯性），还能根据每处地形的崎岖程度调整步幅（自适应学习率，平坦处大步，崎岖处小步）。
-  first_principle: 优化器的本质是"在参数空间中寻找loss的最小值"。SGD只用当前梯度∇L(θ)；Adam用历史梯度的指数移动平均（一阶动量）+ 历史梯度平方的指数移动平均（二阶动量），分别提供方向稳定性和自适应步长。大模型用AdamW而非Adam，是因为AdamW修正了权重衰减（L2正则）与自适应学习率的耦合bug。
+  first_principle: 优化器的本质是"在参数空间中寻找loss的最小值"。SGD只用当前梯度∇L(θ)；Adam用历史梯度的指数移动平均（一阶动量）+
+    历史梯度平方的指数移动平均（二阶动量），分别提供方向稳定性和自适应步长。大模型用AdamW而非Adam，是因为AdamW修正了权重衰减（L2正则）与自适应学习率的耦合bug。
   key_points:
   - SGD：θ←θ−η∇L，仅用当前梯度
   - Momentum：θ←θ−η·v，v=βv+(1-β)∇L，引入惯性
@@ -22,7 +23,8 @@ feynman:
   - 大模型几乎只用AdamW（SGD泛化好但调参难，Adam收敛快）
 first_principle:
   essence: 优化器的核心矛盾是"收敛速度" vs "泛化能力"
-  derivation: SGD只用当前梯度，方差大、震荡严重，但能找到flat minima（泛化好）。Adam用动量平滑梯度方差，用自适应学习率加速稀疏参数更新，收敛快但易陷sharp minima（泛化差）。权重衰减（正则化）本应约束参数大小，但Adam的自适应学习率破坏了L2正则的尺度一致性——AdamW通过解耦修复了这个bug。
+  derivation: SGD只用当前梯度，方差大、震荡严重，但能找到flat minima（泛化好）。Adam用动量平滑梯度方差，用自适应学习率加速稀疏参数更新，收敛快但易陷sharp
+    minima（泛化差）。权重衰减（正则化）本应约束参数大小，但Adam的自适应学习率破坏了L2正则的尺度一致性——AdamW通过解耦修复了这个bug。
   conclusion: 大模型训练=AdamW（收敛快+正则正确），传统CV任务偶尔用SGD（追求泛化极限）
 follow_up:
 - 为什么Adam有时泛化不如SGD？sharp/flat minima理论
@@ -33,6 +35,7 @@ memory_points:
 - Adam机制：维护一阶动量定方向，二阶动量做自适应步长，并用偏差修正解决冷启动偏小问题。
 - 步长特性：历史梯度大则缩小步长防过拟合，梯度小则放大步长，等效给每个参数专属学习率。
 - 为何用 AdamW：修复了 Adam 将权重衰减与梯度耦合的 Bug，实现真正的解耦权重衰减。
+frequency: low
 ---
 
 # 【华为面经】优化器 Adam 与 SGD 的本质区别？大模型为什么用 AdamW？
@@ -324,6 +327,38 @@ optimizer_llm = torch.optim.AdamW(
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Adam process
+    class AdamW decision
+    class B special
+    class C error
+    class Cosine info
+    class D start
+    class Decay process
+    class E decision
+    class F special
+    class G error
+    class Gradient info
+    class H start
+    class I process
+    class J decision
+    class K special
+    class L error
+    class M info
+    class Momentum start
+    class SGD process
+    class Warmup decision
+    class Weight special
+    class br error
+    class m info
+    class t start
+    class v process
     A["梯度计算<br/>Gradient"] --> B["一阶动量 m<br/>滑动平均(方向)"]
     A --> C["二阶动量 v<br/>平方滑动平均(步长)"]
     

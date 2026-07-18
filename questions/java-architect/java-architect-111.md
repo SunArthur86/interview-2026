@@ -9,9 +9,13 @@ tags:
 - Jakarta EE
 - 升级
 feynman:
-  essence: Spring Boot 3 强制把 javax.* 全部改成 jakarta.*（Java EE → Jakarta EE 9+ 的命名空间迁移），这是一次"包名变更"，不是"API 行为变更"。但因为 javax.* 在 Java 生态渗透极深（Servlet/JPA/JMS/Validation/...），所有依赖都要同步升级，是事实上的"生态级 break change"。
+  essence: Spring Boot 3 强制把 javax.* 全部改成 jakarta.*（Java EE → Jakarta EE 9+ 的命名空间迁移），这是一次"包名变更"，不是"API
+    行为变更"。但因为 javax.* 在 Java 生态渗透极深（Servlet/JPA/JMS/Validation/...），所有依赖都要同步升级，是事实上的"生态级
+    break change"。
   analogy: 像把全国所有"长安街"改名"建国街"——街道没变、商店没变，但所有地图、导航、快递地址都要更新。改的不只是地址（包名），还有依赖地址的所有系统（库、框架、文档）。
-  first_principle: Java EE 是 Oracle 给 Eclipse Foundation 时要求的"改名条件"——javax.* 是 Oracle 商标，Jakarta 不能继续用。所以 Jakarta EE 9+ 把所有 javax.* 改成 jakarta.*，Spring Boot 3 跟随 Jakarta EE 9，强制升级。
+  first_principle: Java EE 是 Oracle 给 Eclipse Foundation 时要求的"改名条件"——javax.* 是 Oracle
+    商标，Jakarta 不能继续用。所以 Jakarta EE 9+ 把所有 javax.* 改成 jakarta.*，Spring Boot 3 跟随 Jakarta
+    EE 9，强制升级。
   key_points:
   - Spring Boot 3 强制 javax.* → jakarta.*（命名空间迁移）
   - 影响范围：Servlet/JPA/JMS/Validation/Annotation/WebSocket 全部
@@ -24,20 +28,28 @@ first_principle:
   - javax.* → jakarta.* 是 Spring Boot 3 的硬性要求
   - 改名涉及整个 Java EE 生态（Servlet/JPA/JMS/...）
   - 间接依赖（传递依赖）的 javax 残留是最隐蔽的风险
-  rebuild: 升级分三步：① 业务代码 javax.* → jakarta.*（IDE 一键替换）；② 直接依赖升级到 Jakarta 版本（Hibernate 6+/Tomcat 10+）；③ 间接依赖排查（mvn dependency:tree 找 javax 残留，替换或排除）。用 Spring Boot Migrator / OpenRewrite 自动化。最后用压测验证行为不变（包名变了 API 不变）。
+  rebuild: 升级分三步：① 业务代码 javax.* → jakarta.*（IDE 一键替换）；② 直接依赖升级到 Jakarta 版本（Hibernate
+    6+/Tomcat 10+）；③ 间接依赖排查（mvn dependency:tree 找 javax 残留，替换或排除）。用 Spring Boot Migrator
+    / OpenRewrite 自动化。最后用压测验证行为不变（包名变了 API 不变）。
 follow_up:
-  - 为什么不改成 javax 保留兼容？——Oracle 商标要求，javax 是 Oracle 资产，Jakarta 不能继续用。Eclipse Foundation 必须改名才能拿到 Java EE 商标授权
-  - Jakarta EE 9 之后的 API 行为有变吗？——大多数 API 行为不变（只是包名变），少数 API 有微调（如 Servlet 6 的 Declarative Support 移除）
-  - 业务代码改 import 工作量大吗？——一两个服务的代码量可接受，IDE 全局替换 import 即可。但跨服务的 API 契约（如 gRPC/Thrift 生成的代码）要重新生成
-  - Spring Boot 2.7 还有 LTS 吗？——Spring Boot 2.7 的 OSS 支持已结束（2023.11），商业支持（VMware Spring Runtime）持续到 2026.8。生产建议尽早升级到 3.x
-  - 升级时 Hibernate 5 → 6 有什么坑？——Hibernate 6 的类型系统重构（AttributeConverter）、Criteria API 改动、Schema 生成器变化。要全面回归测试
+- 为什么不改成 javax 保留兼容？——Oracle 商标要求，javax 是 Oracle 资产，Jakarta 不能继续用。Eclipse Foundation
+  必须改名才能拿到 Java EE 商标授权
+- Jakarta EE 9 之后的 API 行为有变吗？——大多数 API 行为不变（只是包名变），少数 API 有微调（如 Servlet 6 的 Declarative
+  Support 移除）
+- 业务代码改 import 工作量大吗？——一两个服务的代码量可接受，IDE 全局替换 import 即可。但跨服务的 API 契约（如 gRPC/Thrift
+  生成的代码）要重新生成
+- Spring Boot 2.7 还有 LTS 吗？——Spring Boot 2.7 的 OSS 支持已结束（2023.11），商业支持（VMware Spring
+  Runtime）持续到 2026.8。生产建议尽早升级到 3.x
+- 升级时 Hibernate 5 → 6 有什么坑？——Hibernate 6 的类型系统重构（AttributeConverter）、Criteria API
+  改动、Schema 生成器变化。要全面回归测试
 memory_points:
-  - Spring Boot 3 强制 javax.* → jakarta.*（Jakarta EE 9 命名空间迁移）
-  - 影响范围：Servlet/JPA/JMS/Validation/Annotation/WebSocket 全部
-  - 直接依赖升级：Hibernate 6+ / Tomcat 10+ / Jersey 3+
-  - 间接依赖排查：mvn dependency:tree 找 javax 残留
-  - 工具：Spring Boot Migrator / OpenRewrite 自动重构
-  - JDK 要求：Spring Boot 3 最低 JDK 17
+- Spring Boot 3 强制 javax.* → jakarta.*（Jakarta EE 9 命名空间迁移）
+- 影响范围：Servlet/JPA/JMS/Validation/Annotation/WebSocket 全部
+- 直接依赖升级：Hibernate 6+ / Tomcat 10+ / Jersey 3+
+- 间接依赖排查：mvn dependency:tree 找 javax 残留
+- 工具：Spring Boot Migrator / OpenRewrite 自动重构
+- JDK 要求：Spring Boot 3 最低 JDK 17
+frequency: high
 ---
 
 # 【Java 后端架构师】Spring Boot 3.x 升级到 Jakarta EE 的风险治理
@@ -408,6 +420,7 @@ flowchart TD
 
     style A fill:#f9d0c4,stroke:#e06666
     style M fill:#d9ead3,stroke:#93c47d
+
 ```
 
 ## 视频脚本

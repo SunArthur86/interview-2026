@@ -26,18 +26,20 @@ first_principle:
   - 全量快照（RDB）恢复快但创建开销大且有数据窗口
   - 增量日志（AOF）数据完整但文件膨胀恢复慢
   - 不存在完美方案，只有适合场景的权衡
-  rebuild: RDB定期全量快照（如每5分钟）作为底座 + AOF每秒追加增量命令作为补充 → 恢复时先加载RDB快照（快），再重放AOF增量（补齐丢失部分）。这就是Redis 4.0+混合持久化的核心思想。
+  rebuild: RDB定期全量快照（如每5分钟）作为底座 + AOF每秒追加增量命令作为补充 → 恢复时先加载RDB快照（快），再重放AOF增量（补齐丢失部分）。这就是Redis
+    4.0+混合持久化的核心思想。
 follow_up:
-  - RDB的bgsave过程中如果有写请求，Redis怎么保证数据一致性？
-  - AOF文件越来越大怎么办？重写的原理是什么？
-  - 如果AOF文件损坏了，怎么恢复？
-  - 生产环境中Redis持久化和主从复制可以只用一个吗？为什么？
-  - Redis 7.0的AOF多文件机制（multi-part AOF）解决了什么问题？
+- RDB的bgsave过程中如果有写请求，Redis怎么保证数据一致性？
+- AOF文件越来越大怎么办？重写的原理是什么？
+- 如果AOF文件损坏了，怎么恢复？
+- 生产环境中Redis持久化和主从复制可以只用一个吗？为什么？
+- Redis 7.0的AOF多文件机制（multi-part AOF）解决了什么问题？
 memory_points:
-  - RDB口诀：快照小恢复快，但两次快照间数据可能丢
-  - AOF口诀：日志全不丢数据，但文件大恢复慢
-  - 混合持久化 = RDB全量快照 + AOF增量命令，Redis 4.0+默认推荐
-  - 刷盘三策略：always最安全最慢，everysec平衡推荐，no最快最危险
+- RDB口诀：快照小恢复快，但两次快照间数据可能丢
+- AOF口诀：日志全不丢数据，但文件大恢复慢
+- 混合持久化 = RDB全量快照 + AOF增量命令，Redis 4.0+默认推荐
+- 刷盘三策略：always最安全最慢，everysec平衡推荐，no最快最危险
+frequency: high
 ---
 
 # 【拼多多一面】Redis 持久化方式(RDB/AOF)及优缺点
@@ -239,6 +241,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 结构化回答
 

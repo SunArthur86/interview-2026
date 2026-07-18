@@ -30,6 +30,7 @@ memory_points:
 - 核心目标：长任务执行时，必须让用户能放心离开再无缝回来
 - 四子系统协同：任务中心(看全局)、通知系统(知节点)、上下文恢复(回现场)、断点续传(接着跑)
 - 状态独立：任务状态与上下文必须脱离UI组件，存活于独立Store中
+frequency: low
 ---
 
 # 【月之暗面面经】桌面端长任务执行时，前端怎样做通知、回看和继续执行？
@@ -50,6 +51,38 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class CheckpointMgr process
+    class E1 decision
+    class E2 special
+    class E3 error
+    class EL info
+    class Electron start
+    class Notification process
+    class NotificationQueue decision
+    class Pinia special
+    class S1 error
+    class S2 info
+    class S3 start
+    class SM process
+    class TaskCenter decision
+    class TaskDetail special
+    class TaskExecutor error
+    class TaskStateMachine info
+    class TaskStore start
+    class Toast process
+    class U1 decision
+    class U2 special
+    class U3 error
+    class UI info
+    class Worker start
+    class br process
     subgraph UI["用户交互层"]
         U1["任务中心面板 TaskCenter"]
         U2["系统通知 (Toast + Notification)"]

@@ -11,8 +11,8 @@ tags:
 - 前端AI
 - 面经
 feynman:
-  essence: "Embedding模型选择看四个维度：效果（MTEB排名）、维度（精度vs成本）、语言（中文优化）、成本（API vs 本地）"
-  analogy: "选Embedding模型像选翻译：英文翻译（OpenAI）通用但贵，中文翻译（BGE/M3E）专业且免费，小语种翻译（多语言模型）覆盖广但不够精。看你要翻译什么、预算多少、对质量要求多高"
+  essence: Embedding模型选择看四个维度：效果（MTEB排名）、维度（精度vs成本）、语言（中文优化）、成本（API vs 本地）
+  analogy: 选Embedding模型像选翻译：英文翻译（OpenAI）通用但贵，中文翻译（BGE/M3E）专业且免费，小语种翻译（多语言模型）覆盖广但不够精。看你要翻译什么、预算多少、对质量要求多高
   key_points:
   - MTEB排行榜是效果评估的金标准
   - 维度越高精度越好但存储和检索成本越高
@@ -20,9 +20,10 @@ feynman:
   - API调用方便但有成本和隐私问题，本地部署免费但需GPU
   - 常见选择：text-embedding-3-small（便宜通用）、BGE-large-zh（中文开源）
 first_principle:
-  essence: "Embedding模型把文本映射到高维向量空间，映射质量决定了向量检索的上限——模型选错了，后续的chunk优化和rerank都救不回来"
-  derivation: "Embedding模型的训练目标是让语义相似的文本在向量空间中距离近，不相似的远。不同模型的训练数据、架构、维度不同，导致向量空间的质量不同。MTEB（Massive Text Embedding Benchmark）在多个任务（检索、分类、聚类、重排）上评估模型，综合排名反映模型质量。选择时需要在效果、维度（成本）、语言适配、部署方式之间做权衡"
-  conclusion: "Embedding是RAG系统的地基——选对模型比优化检索算法更重要，因为垃圾输入产出垃圾输出"
+  essence: Embedding模型把文本映射到高维向量空间，映射质量决定了向量检索的上限——模型选错了，后续的chunk优化和rerank都救不回来
+  derivation: Embedding模型的训练目标是让语义相似的文本在向量空间中距离近，不相似的远。不同模型的训练数据、架构、维度不同，导致向量空间的质量不同。MTEB（Massive
+    Text Embedding Benchmark）在多个任务（检索、分类、聚类、重排）上评估模型，综合排名反映模型质量。选择时需要在效果、维度（成本）、语言适配、部署方式之间做权衡
+  conclusion: Embedding是RAG系统的地基——选对模型比优化检索算法更重要，因为垃圾输入产出垃圾输出
 follow_up:
 - MTEB排行榜上中文检索任务哪个模型最好？
 - 不同维度的embedding能混用吗？（不行，维度不同无法计算相似度）
@@ -33,6 +34,7 @@ memory_points:
 - 中文优先：BGE-large-zh、M3E
 - API方便：text-embedding-3-small
 - 维度越高精度越好但成本越高
+frequency: medium
 ---
 
 # 【RAG基础】Embedding模型怎么选？
@@ -203,6 +205,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

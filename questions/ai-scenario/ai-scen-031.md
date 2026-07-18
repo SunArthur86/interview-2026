@@ -29,6 +29,7 @@ memory_points:
 - 合规对接：满足欧盟AI Act/金融SEC要求，日志保留3-7年。
 - 存储优化：冷热分离，热数据存ES，冷数据存S3，PII脱敏存储。
 - 防篡改：采用WORM介质或区块链哈希链，确保日志不可变。
+frequency: medium
 ---
 
 # 如何设计AI审计与合规系统？记录AI系统的完整决策链路，满足监管要求。
@@ -108,6 +109,30 @@ def log_tool_call(tool_name, inputs, outputs, cost_tokens):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class E1 info
+    class E2 start
+    class E3 process
+    class E4 decision
+    class F special
+    class G error
+    class H info
+    class I start
+    class J process
+    class Prompt decision
+    class RAG special
+    class S3 error
+    class br info
     A["用户查询输入"] --> B["TraceID生成器"]
     B --> C["RAG检索召回"]
     B --> D["LLM推理过程"]

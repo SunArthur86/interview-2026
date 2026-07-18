@@ -13,7 +13,7 @@ tags:
 - 面经
 feynman:
   essence: SSE是基于HTTP长连接的服务端单向推流技术，WebSocket是基于TCP的全双工双向通信协议。SSE适合服务器主动推流（如LLM流式输出），WebSocket适合双向实时通信（如聊天室）。本质区别：SSE是HTTP协议的延伸（单向），WebSocket是独立的双向协议。
-  analogy: "SSE就像广播电台——只能电台→听众单向播放（服务器→客户端），听众不能给电台打电话。WebSocket就像电话通话——双方都能随时说话（双向通信）。想听广播用SSE（简单、够用），想打电话用WebSocket（灵活、复杂）。"
+  analogy: SSE就像广播电台——只能电台→听众单向播放（服务器→客户端），听众不能给电台打电话。WebSocket就像电话通话——双方都能随时说话（双向通信）。想听广播用SSE（简单、够用），想打电话用WebSocket（灵活、复杂）。
   key_points:
   - SSE基于HTTP，WebSocket基于TCP（需要握手升级协议）
   - SSE是单向（Server→Client），WebSocket是双向（全双工）
@@ -22,7 +22,8 @@ feynman:
   - WebSocket适合：聊天室、协同编辑、多人游戏、实时交易
 first_principle:
   essence: 通信协议选择 = 通信方向需求 × 实现复杂度 × 兼容性
-  derivation: "HTTP是请求-响应模型，服务器不能主动推送。SSE用HTTP长连接 + chunked transfer实现服务端推送（轻量级，兼容性好）。WebSocket通过HTTP Upgrade升级到独立的双向TCP连接（重量级，功能强大）。"
+  derivation: HTTP是请求-响应模型，服务器不能主动推送。SSE用HTTP长连接 + chunked transfer实现服务端推送（轻量级，兼容性好）。WebSocket通过HTTP
+    Upgrade升级到独立的双向TCP连接（重量级，功能强大）。
   conclusion: AI应用中LLM流式输出首选SSE（简单、兼容、单向够用），需要双向交互时选WebSocket
 follow_up:
 - SSE如何实现断线重连？Last-Event-ID机制是什么？
@@ -35,6 +36,7 @@ memory_points:
 - WebSocket本质：HTTP Upgrade握手→升级为独立TCP连接→全双工双向通信
 - AI场景铁律：LLM流式输出(ChatGPT风格)用SSE，多人实时交互用WebSocket
 - SSE更简单(5行代码)、更兼容(纯HTTP)、更省资源(一个TCP连接)；WebSocket更强大(双向)但更复杂
+frequency: medium
 ---
 
 # 【阿里淘天AI二面】SSE和WebSocket的区别？
@@ -339,6 +341,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 结构化回答

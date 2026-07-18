@@ -19,6 +19,7 @@ memory_points:
 - 生成优化：Self-RAG 自我反思检索必要性，Adaptive RAG 路由不同链路。
 - Long Context 适合全景总结，但存在“迷失中间”现象，不能替代精准检索。
 - 避免盲目堆叠技术，需根据场景（如探索性 vs 精确性）权衡成本与收益。
+frequency: medium
 ---
 
 # RAG有哪些进阶技术？
@@ -98,6 +99,30 @@ for q in queries.split("\n"):
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Adapt start
+    class Advanced process
+    class Agentic decision
+    class Benefit special
+    class Benefit2 error
+    class Benefit3 info
+    class CRAG start
+    class Corrective process
+    class Doc decision
+    class Graph special
+    class HyDE error
+    class Multi info
+    class MultiModal start
+    class Query process
+    class RAG decision
+    class Rerank special
+    class Tech error
+    class br info
     Advanced["RAG 进阶技术"] --> Tech["技术栈"]
     Tech --> HyDE["HyDE<br/>假设文档检索"]
     Tech --> Multi["Multi-Query<br/>多查询扩展"]

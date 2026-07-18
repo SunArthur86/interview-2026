@@ -30,6 +30,7 @@ memory_points:
 - 因为单一检索易漏召，所以索引层建父子/多粒度，查询层多改写。
 - 检索层广撒网：混合检索（向量加BM25）加上多路召回（不同chunk/模型）。
 - 后处理精选：用Cross-Encoder做Rerank提精度，上下文扩展补全信息。
+frequency: high
 ---
 
 # 如何提升 RAG 的检索召回率？（全链路优化）
@@ -244,6 +245,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

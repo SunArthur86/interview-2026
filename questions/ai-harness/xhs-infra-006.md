@@ -27,6 +27,7 @@ memory_points:
 - Tensor Core：使用 WMMA API，要求 FP16/BF16 输入和 FP32 累加，数据布局需对齐。
 - 流水线：Double Buffering 异步加载，隐藏内存延迟，掩盖数据传输时间。
 - 性能分析：用 Roofline 模型判断是 Memory Bound 还是 Compute Bound，对症下药。
+frequency: medium
 ---
 
 # CUDA Kernel优化：如何写一个高效的GEMM（矩阵乘法）？bank conflict和Tensor Core如何优化？
@@ -132,6 +133,30 @@ __global__ void wmma_gemm(half *A, half *B, float *C, int M, int N, int K) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class Buffering process
+    class Coalescing decision
+    class Conflict special
+    class Core error
+    class Double info
+    class Matrix start
+    class Memory process
+    class Padding decision
+    class Pipe special
+    class Roofline error
+    class Shared info
+    class TC start
+    class Tensor process
+    class Tile decision
+    class Tiling special
+    class WMMA error
+    class br info
     Matrix[矩阵乘法GEMM] --> Tile[Shared Memory Tiling]
     Tile --> Coalescing[Coalescing合并访问]
     Coalescing --> Padding[Padding消Bank Conflict]

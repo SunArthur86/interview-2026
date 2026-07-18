@@ -28,6 +28,7 @@ memory_points:
 - 架构四层：数据接入(DICOM/EMR)、AI诊断(影像/文本/多模态融合)、知识层(指南/图谱)、解释层。
 - 技术选型：影像分割用U-Net/MedSAM，分类用ResNet/ViT，多模态需特征对齐融合。
 - 隐私安全：数据脱敏、本地化部署不出院、访问审计、患者知情同意。
+frequency: medium
 ---
 
 # 如何设计一个AI医疗辅助诊断系统？支持医学影像分析、病历理解、辅助诊断建议。
@@ -106,6 +107,29 @@ def multimodal_fusion(image_feat, text_feat):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class B1 special
+    class C error
+    class D1 info
+    class D2 start
+    class E1 process
+    class E2 decision
+    class F1 special
+    class F2 error
+    class G info
+    class H start
+    class I process
+    class S1 decision
+    class S2 special
+    class S3 error
     subgraph S1 ["数据接入层 (院内本地化)"]
         A1[医学影像DICOM]
         A2[电子病历EMR文本]

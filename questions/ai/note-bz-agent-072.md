@@ -29,6 +29,7 @@ memory_points:
 - 口诀「约束+原生+兜底」三层保障：Prompt约束，原生API，后处理校验
 - 最可靠方案：调用底层原生Function Calling或JSON模式，而非纯指望Prompt
 - 兜底防线：程序解析必须正则清洗去冗余词，并搭配JSON Repair修复格式
+frequency: medium
 ---
 
 # 如何稳定地让大模型输出符合业务规范的 JSON/XML 格式？
@@ -282,6 +283,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

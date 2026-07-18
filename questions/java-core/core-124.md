@@ -17,6 +17,7 @@ memory_points:
 - 规范：别吞异常、别抓 Throwable、尽量捕获具体异常，JDK 7+ 用 try-with-resources。
 - 规则：子类重写方法抛出的异常范围不能比父类更宽（窄或相等）。
 - 事务坑：Spring 默认只在抛 RuntimeException 或 Error 时回滚。
+frequency: medium
 ---
 
 # 如何处理异常？
@@ -94,6 +95,32 @@ Java 中所有的异常和错误都继承自 `Throwable` 类。
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class JVM error
+    class K info
+    class L start
+    class M process
+    class br decision
+    class catch special
+    class finally error
+    class resources info
+    class try start
+    class with process
     A[异常处理流程] --> B[try 块执行]
     B --> C{是否抛出异常?}
     C -->|否| D[正常执行 finally]

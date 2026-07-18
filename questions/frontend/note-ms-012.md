@@ -31,6 +31,7 @@ memory_points:
 - 三层架构：录制管理层、持久化存储层、前端回放交互层
 - 核心模型双管齐下：事件流记录动作轨迹，快照保障状态极速恢复
 - 支持分支探索：利用 DAG（有向无环图）结构管理版本树，实现分支重跑对比
+frequency: low
 ---
 
 # 【月之暗面面经】AI-Native 桌面产品怎样做结果回放，才能支持问题复盘和用户学习？
@@ -528,6 +529,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

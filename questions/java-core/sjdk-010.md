@@ -16,6 +16,7 @@ memory_points:
 - 核心API：StructuredTaskScope，配合ShutdownOnFailure(一败俱败)或OnSuccess(竞速)使用
 - 机制对比：因为Scope退出前保证子任务全部结束，所以能自动取消未完成任务并聚合异常
 - 底层绑定：因为需管理父子线程树，所以通常配合虚拟线程使用并依赖中断机制取消任务
+frequency: medium
 ---
 
 # JDK 21中的Structured Concurrency（结构化并发）是什么？
@@ -146,6 +147,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -30,6 +30,7 @@ memory_points:
 - 存储分工：Redis存高频核心指标(GMV/UV)，ClickHouse存海量明细供下钻查询
 - 大屏推送：后端通过WebSocket主动推，前端按秒级频率接收，分指标差异化刷新
 - 容灾降级：Flink宕机不可用时，大屏自动降级展示Redis或CDN内的近期缓存数据
+frequency: medium
 ---
 
 # 如何设计一个实时数据大屏系统？类似双11大屏。
@@ -127,6 +128,7 @@ flowchart TD
     FAIL[实时失败] --> CST[降级展示缓存]
     style FL fill:#ffe4b5
     style WS fill:#d4edda
+
 ```
 
 

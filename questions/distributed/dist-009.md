@@ -16,6 +16,7 @@ memory_points:
 - 核心优势：因为相同资源请求总落同节点，所以能极致提升本地（如 Guava）缓存命中率
 - 副作用对比：IP Hash 保证「同一客户端」粘滞，而 URL Hash 保证「同一资源」粘滞
 - 致命缺点：若遇突发热点 URL（如秒杀），会导致 Hash 规则失效，流量倾斜至单机引发过载
+frequency: low
 ---
 
 # 什么是URL散列？
@@ -113,6 +114,7 @@ flowchart TD
     style EVENTUAL fill:#9C27B0,color:#fff
     style FAIL_FAST fill:#F44336,color:#fff
     style COORD fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

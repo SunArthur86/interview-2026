@@ -16,6 +16,7 @@ memory_points:
 - 流转铁律：阻塞状态恢复后不能直接回运行，必须先重回就绪队列排队。
 - 挂起与阻塞对比：阻塞在内存等事件，挂起被调至外存腾空间。
 - 状态细分：五状态模型在三态基础上，增加创建状态和终止状态。
+frequency: low
 ---
 
 # 什么是进程的状态有哪些？
@@ -122,6 +123,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

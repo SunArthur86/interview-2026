@@ -15,6 +15,7 @@ memory_points:
 - TCC核心：Try预留、Confirm确认、Cancel回滚，需代码手写防悬挂。
 - AT模式：Seata改良版，一阶段直接提交并记Undo Log，实现零侵入回滚。
 - 最终一致：本地消息表+MQ异步方案，下游务必利用唯一索引做幂等校验。
+frequency: high
 ---
 
 # 分布式事务有哪些解决方案？
@@ -133,6 +134,7 @@ flowchart TB
     class Root root
     class Rigid,Flex cat
     class XAFit,ThreePCFit,TCCFit,SagaFit,AsyncFit,NotifyFit fit
+
 ```
 
 

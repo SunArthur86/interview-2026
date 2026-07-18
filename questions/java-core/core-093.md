@@ -16,6 +16,7 @@ memory_points:
 - 流转机制：第三次握手成功后，连接从半连接移至全连接队列
 - 溢出后果：半连满丢弃SYN(或开Cookie)，全连满丢弃ACK致客户端超时
 - 核心参数：tcp_max_syn_backlog 控半连，somaxconn 控全连
+frequency: low
 ---
 
 # 什么是半连接队列？
@@ -110,6 +111,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

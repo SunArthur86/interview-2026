@@ -9,9 +9,12 @@ tags:
 - 事件驱动
 - 自动伸缩
 feynman:
-  essence: KEDA（Kubernetes Event-Driven Autoscaling）是 K8s 的事件驱动伸缩器——基于队列深度/消息积压等"外部信号"伸缩 Pod，而非 CPU/内存。解决 HPA 基于 CPU 的盲区：CPU 高不一定需要扩容（可能是 GC），队列积压才真的需要扩容（消费不过来）。KEDA 集成 Kafka/RabbitMQ/Redis Streams/AWS SQS 等 60+ 事件源，让 Java 消费者按"待处理消息数"精确扩容。
+  essence: KEDA（Kubernetes Event-Driven Autoscaling）是 K8s 的事件驱动伸缩器——基于队列深度/消息积压等"外部信号"伸缩
+    Pod，而非 CPU/内存。解决 HPA 基于 CPU 的盲区：CPU 高不一定需要扩容（可能是 GC），队列积压才真的需要扩容（消费不过来）。KEDA 集成
+    Kafka/RabbitMQ/Redis Streams/AWS SQS 等 60+ 事件源，让 Java 消费者按"待处理消息数"精确扩容。
   analogy: 像"餐厅按排队人数调服务员"——HPA 是"按厨房温度调服务员"（温度高不一定忙），KEDA 是"按门口排队人数调服务员"（排队多才真忙）。排队（队列积压）是真实的负载信号。
-  first_principle: 伸缩的本质是"让资源匹配负载"。HPA 基于 CPU/内存——但 CPU 高可能是 GC（不需要扩容），队列积压才是真负载。KEDA 基于"外部指标"（queue depth / lag / 积压数），直接反映业务负载。KEDA 还支持 scale-to-zero（无消息时缩到 0），省成本。
+  first_principle: 伸缩的本质是"让资源匹配负载"。HPA 基于 CPU/内存——但 CPU 高可能是 GC（不需要扩容），队列积压才是真负载。KEDA
+    基于"外部指标"（queue depth / lag / 积压数），直接反映业务负载。KEDA 还支持 scale-to-zero（无消息时缩到 0），省成本。
   key_points:
   - KEDA = K8s 事件驱动伸缩（基于外部信号，非 CPU）
   - ScaledObject：定义伸缩对象 + 触发器（trigger）
@@ -25,21 +28,28 @@ first_principle:
   - HPA 基于 CPU，但消费者 CPU 低（IO 密集，等 Kafka）
   - CPU 低不代表不忙——可能在等下游/IO
   - 真实负载是"待消费消息数"（queue lag）
-  rebuild: KEDA 部署为 K8s Operator，监听 ScaledObject CRD。ScaledObject 定义：① 目标 Deployment；② 触发器（如 Kafka，topic + consumerGroup + lag 阈值）；③ 伸缩范围（min/max replicas）。KEDA 定期查询 Kafka lag，lag > 阈值 → 扩容；lag < 阈值 → 缩容；lag = 0 → scale-to-zero。Java 消费者零改动——KEDA 只调 Deployment replicas，业务代码不感知。典型：订单消费组 lag > 1000 → 扩到 20 Pod；lag = 0 → 缩到 0。
+  rebuild: KEDA 部署为 K8s Operator，监听 ScaledObject CRD。ScaledObject 定义：① 目标 Deployment；②
+    触发器（如 Kafka，topic + consumerGroup + lag 阈值）；③ 伸缩范围（min/max replicas）。KEDA 定期查询
+    Kafka lag，lag > 阈值 → 扩容；lag < 阈值 → 缩容；lag = 0 → scale-to-zero。Java 消费者零改动——KEDA
+    只调 Deployment replicas，业务代码不感知。典型：订单消费组 lag > 1000 → 扩到 20 Pod；lag = 0 → 缩到 0。
 follow_up:
-  - KEDA 和 HPA 区别？——HPA 基于 CPU/内存（内置指标），KEDA 基于外部事件源（Kafka lag / 队列深度）。两者可共存
-  - KEDA 怎么查 Kafka lag？——KEDA 定期调 Kafka API（consumer group lag = LOG-END-OFFSET - CURRENT-OFFSET），和 consumer 视角一致
-  - scale-to-zero 安全吗？——无消息时缩到 0，来消息时从 0 启动（冷启动 10-30 秒）。对延迟敏感场景设 minReplicaCount=1 避免冷启动
-  - KEDA 和 Knative 区别？——Knative 是全栈 Serverless（流量/伸缩/部署），KEDA 只管伸缩（轻量）。KEDA 更专注事件驱动伸缩
-  - Java 消费者怎么配合 KEDA？——消费者用 partition 并行消费（一个 Pod 消费多个 partition），扩容后多 Pod 分摊 partition。注意：partition 数是消费并行度上限
+- KEDA 和 HPA 区别？——HPA 基于 CPU/内存（内置指标），KEDA 基于外部事件源（Kafka lag / 队列深度）。两者可共存
+- KEDA 怎么查 Kafka lag？——KEDA 定期调 Kafka API（consumer group lag = LOG-END-OFFSET - CURRENT-OFFSET），和
+  consumer 视角一致
+- scale-to-zero 安全吗？——无消息时缩到 0，来消息时从 0 启动（冷启动 10-30 秒）。对延迟敏感场景设 minReplicaCount=1
+  避免冷启动
+- KEDA 和 Knative 区别？——Knative 是全栈 Serverless（流量/伸缩/部署），KEDA 只管伸缩（轻量）。KEDA 更专注事件驱动伸缩
+- Java 消费者怎么配合 KEDA？——消费者用 partition 并行消费（一个 Pod 消费多个 partition），扩容后多 Pod 分摊 partition。注意：partition
+  数是消费并行度上限
 memory_points:
-  - KEDA = K8s 事件驱动伸缩（基于外部信号，非 CPU）
-  - ScaledObject：Deployment + 触发器（Kafka/RabbitMQ/...）+ min/max
-  - 60+ 事件源：Kafka / RabbitMQ / Redis Streams / SQS / Prometheus
-  - scale-to-zero：无消息缩到 0（省成本，冷启动有延迟）
-  - 部署为 Operator，Java 代码零改动
-  - 解决 HPA 盲区：CPU 低不代表不忙（IO 密集）
-  - 消费并行度上限 = partition 数（Kafka）
+- KEDA = K8s 事件驱动伸缩（基于外部信号，非 CPU）
+- ScaledObject：Deployment + 触发器（Kafka/RabbitMQ/...）+ min/max
+- 60+ 事件源：Kafka / RabbitMQ / Redis Streams / SQS / Prometheus
+- scale-to-zero：无消息缩到 0（省成本，冷启动有延迟）
+- 部署为 Operator，Java 代码零改动
+- 解决 HPA 盲区：CPU 低不代表不忙（IO 密集）
+- 消费并行度上限 = partition 数（Kafka）
+frequency: high
 ---
 
 # 【Java 后端架构师】KEDA 事件驱动伸缩与队列消费扩容
@@ -439,6 +449,36 @@ spec:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CPU special
+    class Cluster error
+    class Consumer info
+    class D start
+    class E process
+    class F decision
+    class G special
+    class HPA error
+    class Java info
+    class K8s start
+    class KEDA process
+    class Kafka decision
+    class N special
+    class Operator error
+    class Partitions info
+    class Pod start
+    class ScaledObject process
+    class Topic decision
+    class br special
+    class lag error
+    class replicas info
     subgraph K8s Cluster
         direction LR
         A["Kafka Topic<br/>30 Partitions"] -- "消费 lag 指标" --> B("KEDA Operator")

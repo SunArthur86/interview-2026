@@ -16,6 +16,7 @@ memory_points:
 - 安全缺陷：因计算速度过快且存在碰撞漏洞，极易被彩虹表反向破解。
 - 实战结论：严禁用于密码存储等安全场景，密码加密必须改用BCrypt等慢算法。
 - 局限应用：目前仅适用于非安全场景的文件完整性校验或数字签名。
+frequency: low
 ---
 
 # MD5哈希算法的原理和安全性问题是什么？
@@ -45,6 +46,23 @@ MD5 处理数据分为四个主要阶段，具体流程如下：
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class B1 start
+    class BN process
+    class Block decision
+    class Dots special
+    class Group error
+    class Input info
+    class N start
+    class Pad process
+    class bit decision
+    class br special
+    class mod error
     Input[输入数据] --> Pad["1. 填充与补长<br/>先补 1 个 bit '1'，再补若干 '0'，使长度 ≡ 448 (mod 512)<br/>最后附加 64 位原始数据长度（小端序）<br/>结果：总长度为 512 的整数倍"]
     Pad --> Group["2. 分组处理<br/>将数据分割为每组 512 位 (64 字节) 的块"]
     Group --> B1["512-bit Block 1"]

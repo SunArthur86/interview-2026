@@ -18,6 +18,7 @@ memory_points:
 - 检测死循环需组合策略：步数上限、状态哈希去重、无进展检测。
 - 哈希粒度选关键参数，避免微小差异导致失效。
 - 预算熔断是保护成本的最后一道防线。
+frequency: high
 ---
 
 # 如何检测多 Agent 系统的「死循环」
@@ -146,6 +147,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

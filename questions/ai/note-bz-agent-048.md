@@ -30,6 +30,7 @@ memory_points:
 - 检索中：核心是混合检索（向量加BM25），外加元数据过滤缩小范围。
 - 检索后：必做Rerank重排精选上下文，并配合去重压缩降噪音。
 - 数据层：分块决定上限，推荐父子分块（小块检索，大块返回保留上下文）。
+frequency: high
 ---
 
 # RAG 有哪些优化技巧？（十种）
@@ -285,6 +286,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

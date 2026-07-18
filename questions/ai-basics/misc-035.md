@@ -22,6 +22,7 @@ memory_points:
 - 防御分层：输入过滤、Prompt隔离（XML标签）、输出格式校验
 - 架构层：最小权限原则，禁止LLM直接执行高危操作
 - RAG防御：清洗检索内容，对文档进行摘要或意图预检
+frequency: high
 ---
 
 # 什么是Prompt Injection攻击?如何防御
@@ -144,6 +145,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

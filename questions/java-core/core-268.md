@@ -15,6 +15,7 @@ memory_points:
 - 角色关系：装饰器实现原接口，内部聚合(持有)一个被装饰组件对象。
 - 执行逻辑：执行附加增强行为，再通过聚合的对象转发原方法调用。
 - 模式对比：装饰模式为增加功能，代理模式为控制访问（重点考点）。
+frequency: low
 ---
 
 # 什么是装饰模式？
@@ -146,6 +147,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

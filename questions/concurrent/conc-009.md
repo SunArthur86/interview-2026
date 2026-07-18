@@ -16,6 +16,7 @@ memory_points:
 - Cached特性：核心为0且最大无穷，因无限创线程易耗尽CPU
 - 其他两种：Single串行执行保顺序，Scheduled支持定时周期任务
 - 最佳实践：因内置池均有OOM或耗尽风险，所以生产禁用 Executors
+frequency: high
 ---
 
 # Java内置的4种线程池各自的特点和使用场景是什么？
@@ -119,6 +120,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

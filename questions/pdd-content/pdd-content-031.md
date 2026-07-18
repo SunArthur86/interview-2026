@@ -11,7 +11,8 @@ tags:
 - LLM
 - 多模态
 feynman:
-  essence: AI Agent 改造内容审核是"用 LLM+工具调用替代部分规则/模型审核"——LLM 理解语义+多模态+推理，机审覆盖率从 80% 提到 95%+，人审大幅减少。
+  essence: AI Agent 改造内容审核是"用 LLM+工具调用替代部分规则/模型审核"——LLM 理解语义+多模态+推理，机审覆盖率从 80% 提到
+    95%+，人审大幅减少。
   analogy: 传统审核像查字典（规则），AI Agent 像读全文理解意思（LLM）+必要时翻资料（工具调用）。
   first_principle: 规则审核覆盖窄、模型审核贵且不灵活，LLM 理解+推理+工具可大幅提升审核效果。
   key_points:
@@ -28,14 +29,15 @@ first_principle:
   - 工具调用扩展能力
   rebuild: Agent（LLM+工具+流程）替代部分机审+人审。
 follow_up:
-  - LLM 审核延迟怎么降？——小模型蒸馏+批量推理+缓存
-  - 怎么防 LLM 误判？——置信度阈值+人审兜底+对抗样本
-  - 成本怎么控？——分级调用（简单规则，复杂 LLM）
+- LLM 审核延迟怎么降？——小模型蒸馏+批量推理+缓存
+- 怎么防 LLM 误判？——置信度阈值+人审兜底+对抗样本
+- 成本怎么控？——分级调用（简单规则，复杂 LLM）
 memory_points:
-  - Agent：LLM+工具+流程
-  - 多模态：图/视频/音频
-  - 工具：敏感词/黑名单/知识库
-  - 落地：分级+人审兜底
+- Agent：LLM+工具+流程
+- 多模态：图/视频/音频
+- 工具：敏感词/黑名单/知识库
+- 落地：分级+人审兜底
+frequency: medium
 ---
 
 # 【拼多多内容】AI Agent 怎么改造内容审核？
@@ -288,6 +290,25 @@ Agent 审核的效果衡量：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AI process
+    class Agent decision
+    class B special
+    class C error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
     A[评价/直播内容] --> B[规则引擎过滤]
     B -->|80% 明显拦截放行| C[传统小模型分类]
     C -->|15% 常规违规| D[AI Agent 兜底]

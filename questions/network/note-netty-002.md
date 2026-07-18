@@ -10,7 +10,8 @@ tags:
 - IO模型
 - 网络编程
 feynman:
-  essence: BIO 是"一对一专车"（一个连接独占一个线程傻等），NIO 是"定时巡检"（一个线程轮流问所有连接有没有数据），AIO 是"到货通知"（操作系统读完数据主动叫你）。三者的本质区别是"线程如何知道 I/O 就绪"。
+  essence: BIO 是"一对一专车"（一个连接独占一个线程傻等），NIO 是"定时巡检"（一个线程轮流问所有连接有没有数据），AIO 是"到货通知"（操作系统读完数据主动叫你）。三者的本质区别是"线程如何知道
+    I/O 就绪"。
   analogy: 用点外卖来理解——BIO：坐在门口小板凳死等外卖小哥到；NIO：每隔一段时间去门口看一眼，没到就回来写代码；AIO：外卖到了小哥主动打电话叫你去拿。
   key_points:
   - BIO=阻塞+一连接一线程→并发上万时线程爆炸
@@ -26,14 +27,15 @@ first_principle:
   - 操作系统内核能知道哪些连接就绪(事件通知)
   rebuild: 从"线程等I/O"出发→BIO让线程死等(浪费)→NIO让线程去问内核(轮询,一个线程问多个连接)→AIO让内核做完再通知(最理想)。NIO的Selector是关键:它用事件通知API判断哪些非阻塞socket就绪,所以一个线程能处理多个并发连接。
 follow_up:
-  - Selector 的底层实现（epoll/poll/select）？
-  - 为什么 Netty 选 NIO 不选 AIO？
-  - 零拷贝与 NIO 的关系？
+- Selector 的底层实现（epoll/poll/select）？
+- 为什么 Netty 选 NIO 不选 AIO？
+- 零拷贝与 NIO 的关系？
 memory_points:
-  - BIO痛点：大量线程等待I/O就绪→每线程1MB栈→万连接万线程→上下文切换开销巨大+内存爆炸+网络利用率低
-  - NIO两大优势：①较少线程处理多连接(省内存省切换)②无I/O时线程可做其他任务
-  - NIO三件套：Channel(通道)+Buffer(缓冲)+Selector(选择器)
-  - 外卖比喻：BIO死等/NIO定时看/AIO到货打电话
+- BIO痛点：大量线程等待I/O就绪→每线程1MB栈→万连接万线程→上下文切换开销巨大+内存爆炸+网络利用率低
+- NIO两大优势：①较少线程处理多连接(省内存省切换)②无I/O时线程可做其他任务
+- NIO三件套：Channel(通道)+Buffer(缓冲)+Selector(选择器)
+- 外卖比喻：BIO死等/NIO定时看/AIO到货打电话
+frequency: high
 ---
 
 # Java 三种 IO 模型 BIO / NIO / AIO 的区别？
@@ -270,6 +272,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

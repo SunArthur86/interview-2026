@@ -4,8 +4,17 @@ difficulty: L3
 category: java-architect
 subcategory: 实时计算
 title: Flink 状态、Checkpoint 与 Exactly Once
-tags: [Flink, Checkpoint, Exactly-Once, State, 两阶段提交]
-related: [java-architect-155, java-architect-153, java-architect-137]
+tags:
+- Flink
+- Checkpoint
+- Exactly-Once
+- State
+- 两阶段提交
+related:
+- java-architect-155
+- java-architect-153
+- java-architect-137
+frequency: low
 ---
 
 # Flink 状态、Checkpoint 与 Exactly Once
@@ -418,6 +427,27 @@ RocksDB 存大状态，增量 CP 省 IO。
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class JobManager special
+    class MySQL error
+    class Redis info
+    class Sink start
+    class Source process
+    class State decision
     A[JobManager] -->|定期发射| B[Barrier检查点信号]
     B --> C[Source: Kafka消费位点]
     C -->|对齐Barrier| D[State Backend状态快照]

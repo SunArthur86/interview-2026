@@ -31,6 +31,7 @@ memory_points:
 - 核心原因：AI产出不可控，为防止不可逆操作，必须引入Human-in-the-loop
 - 三步闭环：编辑(改草案) -> 确认(看Diff) -> 发布(真落地)
 - 状态机设计：draft -> editing -> review -> published，每一步均可回退
+frequency: low
 ---
 
 # 【月之暗面面经】桌面端为什么要把结果编辑、确认和发布拆成三步？
@@ -1335,6 +1336,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

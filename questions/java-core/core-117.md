@@ -16,6 +16,7 @@ memory_points:
 - 特权：普通内部类不能有静态成员，而静态内部类可以
 - 避坑：Handler 用静态内部类加弱引用，避免隐式持有导致内存泄漏
 - 单例：因为利用类加载机制，所以天然实现懒加载且线程安全
+frequency: low
 ---
 
 # 什么是静态内部类（Static Inner Class）？
@@ -92,6 +93,38 @@ public class Singleton {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Builder decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HashMap special
+    class I error
+    class Inner info
+    class J start
+    class K process
+    class L decision
+    class M special
+    class N error
+    class Nested info
+    class Node start
+    class O process
+    class Outer decision
+    class Static special
+    class br error
+    class new info
+    class static start
+    class this process
     A[静态内部类 Static Nested] --> B[static 修饰]
     B --> C[不依赖外部实例]
     B --> D[可直接 new Outer.Inner]

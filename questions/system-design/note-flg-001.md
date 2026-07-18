@@ -22,7 +22,8 @@ feynman:
   - '选型原则: 小规模可靠通信→RabbitMQ, 高吞吐业务→RocketMQ, 遗留系统→ActiveMQ'
 first_principle:
   essence: MQ选型的根本问题是"你的业务最不能牺牲什么"——是消息绝对不能丢(RabbitMQ)、还是吞吐量必须扛住(RocketMQ)、还是必须兼容JMS(ActiveMQ)。
-  derivation: 消息中间件的核心功能是解耦+异步+削峰 → 不同业务场景对这三个能力的权重不同 → 金融场景需要事务消息(RocketMQ) → 微服务通信需要灵活路由(RabbitMQ) → 所以不存在"最好的MQ"只有"最合适的MQ"
+  derivation: 消息中间件的核心功能是解耦+异步+削峰 → 不同业务场景对这三个能力的权重不同 → 金融场景需要事务消息(RocketMQ) → 微服务通信需要灵活路由(RabbitMQ)
+    → 所以不存在"最好的MQ"只有"最合适的MQ"
   conclusion: 选型 = 明确约束条件(吞吐/延迟/可靠性/团队熟悉度) → 匹配MQ能力 → 选择
 follow_up:
 - Kafka和这三个MQ有什么区别？什么时候用Kafka？
@@ -30,10 +31,11 @@ follow_up:
 - RocketMQ的事务消息原理是什么？
 - 如果MQ宕机了怎么办？怎么保证高可用？
 memory_points:
-- "RabbitMQ: AMQP + Exchange灵活路由 + 万级TPS + Erlang底层"
-- "RocketMQ: 事务消息 + 定时消息 + 十万级TPS + Java底层 + 阿里开源"
-- "ActiveMQ: JMS全功能 + 性能最弱 + 遗留系统维护"
-- "选型矩阵: 低吞吐高可靠→RabbitMQ, 高吞吐→RocketMQ, 大数据流→Kafka"
+- 'RabbitMQ: AMQP + Exchange灵活路由 + 万级TPS + Erlang底层'
+- 'RocketMQ: 事务消息 + 定时消息 + 十万级TPS + Java底层 + 阿里开源'
+- 'ActiveMQ: JMS全功能 + 性能最弱 + 遗留系统维护'
+- '选型矩阵: 低吞吐高可靠→RabbitMQ, 高吞吐→RocketMQ, 大数据流→Kafka'
+frequency: high
 ---
 
 # RabbitMQ、RocketMQ和ActiveMQ的主要差异及选型
@@ -260,6 +262,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

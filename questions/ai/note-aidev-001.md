@@ -30,6 +30,7 @@ memory_points:
 - 面试话术：一定要用'AB测试+百分比变化'展示（如：转人工率降30%，处理量升4倍）
 - 实验设计：强调对照组设计，说出具体的流量分配、样本量和置信度
 - 兜底策略：强调遇指标不及预期时，能通过日志快速定位场景并迭代数据
+frequency: medium
 ---
 
 # AI 项目如何量化业务收益？面试怎么说？
@@ -196,6 +197,7 @@ flowchart TD
     style DEPLOY fill:#009688,color:#fff
     style Q4 fill:#FF9800,color:#fff
     style ADJUST fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

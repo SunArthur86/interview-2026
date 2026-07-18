@@ -30,6 +30,7 @@ memory_points:
 - 策略1任务拆解：按边界切分子任务独立上下文，实现物理隔绝省Token
 - 策略2记忆分层：核心记忆始终留，早期历史转摘要，近期留原文，长尾靠检索
 - 对比传统全量加载：分层后上下文仅保留核心+摘要+近期，按需加载外存
+frequency: medium
 ---
 
 # 多轮对话越聊越贵，如何优化 Token 成本？
@@ -293,6 +294,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

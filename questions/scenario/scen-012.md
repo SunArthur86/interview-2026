@@ -29,6 +29,7 @@ memory_points:
 - 核心指令：记录用SETBIT，统计总数用BITCOUNT，算连续天数用BITFIELD。
 - 存储分离：明细存Redis，全站活动总人数统计交由HyperLogLog去重计算。
 - 冷热隔离：近3个月热数据留存Redis，历史签到冷数据归档至MySQL或ES。
+frequency: high
 ---
 
 # 如何设计一个签到打卡系统？支持亿级用户每日签到 + 签到统计。
@@ -102,6 +103,12 @@ flowchart TD
     DAY --> SYNC[异步落 MySQL]
     SYNC --> STAT[月/年统计]
     style BIT fill:#d4edda
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 

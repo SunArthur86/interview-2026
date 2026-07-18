@@ -33,6 +33,7 @@ memory_points:
 - 因果句：因为32B拥有更强逻辑链，所以复杂多步规划与创意生成必须用它托底
 - 口诀法：蒸馏部署是用32B生成高质量标签，通过LoRA微调让7B学生模型快速学习
 - 对比句：意图分类用7B极速响应，单步推理用14B均衡算力，多步规划必须上32B
+frequency: medium
 ---
 
 # 7B和32B大模型选型逻辑，什么场景用小模型蒸馏部署？
@@ -199,6 +200,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

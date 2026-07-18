@@ -29,6 +29,7 @@ memory_points:
 - 核心难点：医疗需极高准确率、零幻觉、强解释性，天然适合多Agent会诊模式
 - 核心流程：分诊Agent路由 → 专科Agent群基于RAG并行诊断 → 主任Agent综合审核
 - 安全底线：必须设立安全官Agent拦截高风险，任何不确定情况强制转交人工处理
+frequency: medium
 ---
 
 # 医疗辅助诊断多智能体怎么落地？
@@ -312,6 +313,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

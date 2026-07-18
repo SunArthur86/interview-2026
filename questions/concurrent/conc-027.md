@@ -16,6 +16,7 @@ memory_points:
 - OS 角色是魔术师与管理员，通过系统调用为上层提供统一安全的接口。
 - 权限对比：用户态权限低（Ring 3）不可碰硬件，内核态权限高（Ring 0）掌控一切。
 - 因为系统调用涉及状态切换与上下文保存，所以其开销远大于普通函数调用。
+frequency: low
 ---
 
 # 什么是用户程序与操作系统的关系？
@@ -120,6 +121,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

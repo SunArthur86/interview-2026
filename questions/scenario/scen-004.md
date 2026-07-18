@@ -28,6 +28,7 @@ memory_points:
 - 防超卖锁粒度：不用整列车死锁，采用分段锁或Lua脚本区间批量扣减
 - 消峰三宝：排队系统前置拦截、查票走缓存、购票走Master并分库分表
 - 履约机制：下单锁座配延时队列，30分钟超时未付自动回滚库存触发候补
+frequency: high
 ---
 
 # 如何设计12306火车票售票系统？高峰期日访问量千亿级。
@@ -136,6 +137,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

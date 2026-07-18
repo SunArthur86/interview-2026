@@ -10,7 +10,8 @@ tags:
 - 会话隔离
 - 多租户
 feynman:
-  essence: 高并发多用户会话隔离的核心是"每用户独立上下文 + 全局资源竞争控制"。会话隔离用 session_id 维度隔离 Redis(每会话独立key)+Thread-local/协程上下文(每请求独立LLM实例)。并发控制用令牌桶限流(每用户QPS限)+信号量(LLM并发槽位)+队列(超限排队)。数据隔离用 user_id 做 row-level 权限，绝不交叉。
+  essence: 高并发多用户会话隔离的核心是"每用户独立上下文 + 全局资源竞争控制"。会话隔离用 session_id 维度隔离 Redis(每会话独立key)+Thread-local/协程上下文(每请求独立LLM实例)。并发控制用令牌桶限流(每用户QPS限)+信号量(LLM并发槽位)+队列(超限排队)。数据隔离用
+    user_id 做 row-level 权限，绝不交叉。
   analogy: 像酒店管理——每个客人住独立房间(会话隔离)，大堂/餐厅是共享资源要排队(并发控制)，客人的物品绝不能进别人房间(数据隔离)。
   first_principle: 多用户并发的本质是"资源共享 + 状态隔离"。共享资源(LLM/DB/工具)要限流防过载，用户状态(会话/历史)要严格隔离防串扰。
   key_points:
@@ -31,6 +32,7 @@ memory_points:
 - 会话隔离：每请求用ThreadLocal/ContextVars存用户ID，绝不共享全局上下文
 - 并发控制：令牌桶限制单用户QPS防滥用，信号量限制LLM总并发槽位防雪崩
 - 数据隔离：DB用行级安全(RLS)，向量库检索强制带user_id过滤表达式防越权
+frequency: high
 ---
 
 # 【某讯面经】高并发多用户会话隔离设计
@@ -256,6 +258,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

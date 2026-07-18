@@ -11,7 +11,8 @@ tags:
 - Starter
 - 模型服务
 feynman:
-  essence: Spring Boot 自动装配是"约定优于配置"——引入 Starter 依赖，Spring 通过 SPI（spring.factories / AutoConfiguration.imports）自动注册 Bean，业务零配置即用。
+  essence: Spring Boot 自动装配是"约定优于配置"——引入 Starter 依赖，Spring 通过 SPI（spring.factories
+    / AutoConfiguration.imports）自动注册 Bean，业务零配置即用。
   analogy: 像买精装房——开发商（Starter）按标准装好水电（Bean），你拎包入住（直接用），不用自己拉线装管。
   first_principle: 配置多了人容易错、易遗漏；约定优于配置 + 自动扫描注册能消除样板代码。
   key_points:
@@ -27,14 +28,15 @@ first_principle:
   - 默认约定能覆盖 80% 场景
   rebuild: Starter（打包依赖）+ AutoConfiguration（条件注册 Bean）+ properties（可覆盖默认）。
 follow_up:
-  - 怎么排查 Bean 没装配？——启动 --debug 看条件报告 / 看 spring.factories 是否扫描
-  - 怎么覆盖默认配置？——application.yml 配 properties / @Primary 自定义 Bean
-  - 2.7 为什么改 AutoConfiguration.imports？——spring.factories 全扫描慢，新方案更精简
+- 怎么排查 Bean 没装配？——启动 --debug 看条件报告 / 看 spring.factories 是否扫描
+- 怎么覆盖默认配置？——application.yml 配 properties / @Primary 自定义 Bean
+- 2.7 为什么改 AutoConfiguration.imports？——spring.factories 全扫描慢，新方案更精简
 memory_points:
-  - '@SpringBootApplication 三合一'
-  - spring.factories（旧）/AutoConfiguration.imports（2.7+）
-  - '@ConditionalOnXxx 控制装配条件'
-  - Starter = 依赖 + AutoConfig + properties
+- '@SpringBootApplication 三合一'
+- spring.factories（旧）/AutoConfiguration.imports（2.7+）
+- '@ConditionalOnXxx 控制装配条件'
+- Starter = 依赖 + AutoConfig + properties
+frequency: high
 ---
 
 # 【拼多多 AI 中台】Spring Boot 自动装配原理与模型服务 Starter 怎么设计？
@@ -256,6 +258,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

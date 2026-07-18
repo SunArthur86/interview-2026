@@ -26,14 +26,15 @@ first_principle:
   - 告警过多会麻木
   rebuild: 三支柱 + 统一协议（traceId/SLO） + 告警治理。
 follow_up:
-  - traceId 怎么跨进程透传？——HTTP header/Kafka header 透传
-  - 告警风暴怎么收敛？——按根因聚合+降噪+分级值班
-  - SLO 怎么定？——核心接口 RT p99 < 200ms、可用性 99.99%
+- traceId 怎么跨进程透传？——HTTP header/Kafka header 透传
+- 告警风暴怎么收敛？——按根因聚合+降噪+分级值班
+- SLO 怎么定？——核心接口 RT p99 < 200ms、可用性 99.99%
 memory_points:
-  - 三支柱：Metrics/Logs/Traces
-  - 跨团队：统一 traceId + SLO
-  - 错误预算驱动优先级
-  - 治理：标准化接入
+- 三支柱：Metrics/Logs/Traces
+- 跨团队：统一 traceId + SLO
+- 错误预算驱动优先级
+- 治理：标准化接入
+frequency: medium
 ---
 
 # 【拼多多交易】可观测性怎么治理跨团队？
@@ -270,6 +271,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

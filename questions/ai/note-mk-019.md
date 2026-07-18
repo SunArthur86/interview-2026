@@ -30,6 +30,7 @@ memory_points:
 - 月一理主链路：梳理状态机与统一产物对象，确保任务独立于组件生命周期
 - 月二建信任：实施L1-L4分层授权，强制写入前Diff预览与敏感文件过滤
 - 月三抓质量：搭建执行回放系统，设计分层次Diff视图，沉淀Bad Case闭环
+frequency: medium
 ---
 
 # 【月之暗面面经】如果让你接手这类桌面产品，你前三个月先补哪三块？
@@ -223,6 +224,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

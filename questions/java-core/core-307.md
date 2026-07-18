@@ -16,6 +16,7 @@ memory_points:
 - 核心解耦：主题和观察者只依赖抽象接口，主题无需感知具体的下游业务。
 - Java 经典实现：Subject 维护 List，提供 register、remove、notify 方法。
 - 实战致命坑：因为注册后会持有引用，所以忘记 unregister 必定导致内存泄漏(OOM)。
+frequency: medium
 ---
 
 # 观察者模式的原理是什么？Java中如何实现？
@@ -148,6 +149,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

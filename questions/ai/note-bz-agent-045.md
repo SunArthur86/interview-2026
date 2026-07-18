@@ -28,6 +28,7 @@ memory_points:
 - 一句话定义：检索增强生成，相当于让大模型从闭卷变开卷考试。
 - 离线阶段(数据准备)：文档加载→分块→向量化→存入向量库。
 - 在线阶段(查询回答)：问题向量化→检索Top-K文档→组装增强Prompt→LLM生成带引用的答案。
+frequency: medium
 ---
 
 # 什么是 RAG？整体流程是怎样的？
@@ -242,6 +243,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

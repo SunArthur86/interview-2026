@@ -10,9 +10,12 @@ tags:
 - 多端同步
 - BitMap
 feynman:
-  essence: IM 已读未读的核心是"BitMap 压缩计数 + sequence number 多端同步"。每个会话维护一个 BitMap（每位对应用户是否已读），统计未读数用 BitCount。多端同步靠全局递增的 sequence number，客户端上报 lastSeq，服务端返回 > lastSeq 的消息。
-  analogy: 像群通知——班长的本子上每人一栏打勾（BitMap 位图，1=已读 0=未读），数未交作业的人用 BitCount（O(1) 统计位为 0 的数）。多端同步像快递单号——每个包裹有序号（seq），你换手机登录只要说"我收到 100 号"，服务端补发 101 号之后的。
-  first_principle: IM 难点是"群消息的写放大"（一条群消息要算 N 个人的未读）。传统做法每人一个计数器（写放大 N 次）。BitMap 反转思路——一个会话一个 BitMap，N 位对应 N 个用户，统计未读用 BitCount O(1)。多端同步靠 sequence number 保证幂等。
+  essence: IM 已读未读的核心是"BitMap 压缩计数 + sequence number 多端同步"。每个会话维护一个 BitMap（每位对应用户是否已读），统计未读数用
+    BitCount。多端同步靠全局递增的 sequence number，客户端上报 lastSeq，服务端返回 > lastSeq 的消息。
+  analogy: 像群通知——班长的本子上每人一栏打勾（BitMap 位图，1=已读 0=未读），数未交作业的人用 BitCount（O(1) 统计位为 0 的数）。多端同步像快递单号——每个包裹有序号（seq），你换手机登录只要说"我收到
+    100 号"，服务端补发 101 号之后的。
+  first_principle: IM 难点是"群消息的写放大"（一条群消息要算 N 个人的未读）。传统做法每人一个计数器（写放大 N 次）。BitMap 反转思路——一个会话一个
+    BitMap，N 位对应 N 个用户，统计未读用 BitCount O(1)。多端同步靠 sequence number 保证幂等。
   key_points:
   - 已读未读：Redis BitMap（key=conv:read:{convId}，offset=userId）
   - 未读数：BitCount（统计位为 0 的数）+ 会话级未读聚合
@@ -26,19 +29,24 @@ first_principle:
   - 多端登录（手机+PC+Web）要消息一致，不能漏不能重
   - 已读状态要实时（秒级同步到其他端）
   - 离线用户的消息不能丢，上线要补发
-  rebuild: 用 BitMap 反转——一个会话一个 BitMap（key=conv:read:{convId}，offset=userId），发消息时把所有用户的位清 0（未读），用户读时把自己的位置 1（已读）。未读数 = BitCount 位为 0 的数 O(1)。多端同步靠 sequence number——每条消息有全局递增 seq，客户端上报 lastSeq，服务端返回 seq > lastSeq 的消息。这是增量同步。
+  rebuild: 用 BitMap 反转——一个会话一个 BitMap（key=conv:read:{convId}，offset=userId），发消息时把所有用户的位清
+    0（未读），用户读时把自己的位置 1（已读）。未读数 = BitCount 位为 0 的数 O(1)。多端同步靠 sequence number——每条消息有全局递增
+    seq，客户端上报 lastSeq，服务端返回 seq > lastSeq 的消息。这是增量同步。
 follow_up:
-  - BitMap 怎么存？——Redis BitMap。SETBIT conv:read:{convId} userId 1（标记已读），GETBIT 查某用户状态，BITCOUNT 统计已读数，未读数 = 群成员数 - 已读数。
-  - sequence number 怎么生成？——Redis INCR 全局递增（每条消息一个 seq）。或 Snowflake 改造（时间戳 + 自增）。客户端持久化 lastSeq。
-  - 多端怎么同步已读状态？——已读事件走 MQ 广播。某端标记已读后，发 MQ 事件，其他端收到后同步本地未读数。
-  - 离线消息怎么存？——离线消息表（user_id, msg_id, seq），用户上线时查 seq > lastSeq 的消息。定期清理 30 天前的。
-  - 群消息用写扩散还是读扩散？——小群（< 500 人）写扩散（每人 inbox 推一份），大群读扩散（成员读时实时拉）。
+- BitMap 怎么存？——Redis BitMap。SETBIT conv:read:{convId} userId 1（标记已读），GETBIT 查某用户状态，BITCOUNT
+  统计已读数，未读数 = 群成员数 - 已读数。
+- sequence number 怎么生成？——Redis INCR 全局递增（每条消息一个 seq）。或 Snowflake 改造（时间戳 + 自增）。客户端持久化
+  lastSeq。
+- 多端怎么同步已读状态？——已读事件走 MQ 广播。某端标记已读后，发 MQ 事件，其他端收到后同步本地未读数。
+- 离线消息怎么存？——离线消息表（user_id, msg_id, seq），用户上线时查 seq > lastSeq 的消息。定期清理 30 天前的。
+- 群消息用写扩散还是读扩散？——小群（< 500 人）写扩散（每人 inbox 推一份），大群读扩散（成员读时实时拉）。
 memory_points:
-  - 已读未读：BitMap（conv:read:{convId}，offset=userId，1=已读）
-  - 未读数：群成员数 - BitCount（已读数）
-  - 多端同步：全局 seq，客户端上报 lastSeq，返回 seq > lastSeq
-  - 消息投递：在线长连接推，离线消息表补发
-  - 群扩散：小群（<500）写扩散，大群读扩散
+- 已读未读：BitMap（conv:read:{convId}，offset=userId，1=已读）
+- 未读数：群成员数 - BitCount（已读数）
+- 多端同步：全局 seq，客户端上报 lastSeq，返回 seq > lastSeq
+- 消息投递：在线长连接推，离线消息表补发
+- 群扩散：小群（<500）写扩散，大群读扩散
+frequency: low
 ---
 
 # 【Java 后端架构师】IM 消息已读未读与多端同步
@@ -390,6 +398,35 @@ public class GroupMessageService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B1 process
+    class BitCount decision
+    class BitMap special
+    class C1 error
+    class C2 info
+    class D1 start
+    class E1 process
+    class E2 decision
+    class E3 special
+    class F1 error
+    class G1 info
+    class H1 start
+    class INCR process
+    class Redis decision
+    class SETBIT special
+    class Seq error
+    class br info
+    class conv start
+    class convId process
+    class lastSeq decision
+    class read special
+    class seq error
     A1["发送群消息"] --> B1{"群成员数量"}
     B1 -- "小群(<500人)" --> C1["写扩散: 推送每人Inbox"]
     B1 -- "大群(>=500人)" --> C2["读扩散: 仅存一份群消息表"]

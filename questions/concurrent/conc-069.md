@@ -15,6 +15,7 @@ memory_points:
 - BIO是同步阻塞，一连接一线程，并发低；NIO是同步非阻塞，靠轮询控制。
 - 多路复用核心：一个线程管理多个连接，监听事件就绪后集中处理（Redis/Nginx）。
 - 注意NIO不等于纯非阻塞IO，Java NIO底层默认采用多路复用实现。
+frequency: medium
 ---
 
 # 什么是I/O模型？
@@ -131,6 +132,7 @@ flowchart TD
     style WORKER fill:#009688,color:#fff
     style BOSS fill:#9C27B0,color:#fff
     style ZERO_COPY fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

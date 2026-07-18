@@ -16,6 +16,7 @@ memory_points:
 - Buffer核心：靠flip()切换读写模式，靠三个指针（position/limit/capacity）控制边界。
 - Channel特性：区别于流的单向性，通道支持双向读写且可设为非阻塞模式。
 - Selector原理：单线程管理多Channel，事件驱动（OP_ACCEPT/READ等），解决BIO的线程爆炸问题。
+frequency: high
 ---
 
 # NIO的三大核心组件是什么？
@@ -56,6 +57,34 @@ NIO 的三大核心组件是 Buffer（缓冲区）、Channel（通道）和 Sele
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Accept process
+    class B decision
+    class C special
+    class CA error
+    class CB info
+    class CC start
+    class Channel process
+    class Client decision
+    class Connection special
+    class Non error
+    class Read info
+    class Ready start
+    class Selector process
+    class Server decision
+    class SocketChannel special
+    class TCP error
+    class Thread info
+    class Write start
+    class blocking process
+    class br decision
+    class select special
     Client["Client<br/>SocketChannel (Non-blocking)"] -->|"TCP Connection"| Selector
     subgraph Server["Server (Selector Thread)"]
         Selector["Selector (多路复用)<br/>select() 阻塞等待 → 事件就绪"]

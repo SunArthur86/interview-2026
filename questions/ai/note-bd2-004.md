@@ -31,6 +31,7 @@ memory_points:
 - 向量检索：长期记忆通过Embedding和ANN检索历史交互。
 - 实体记忆：用图或KV数据库存储结构化的用户画像与实体关系。
 - 压缩策略：上下文满载时用摘要压缩或时间衰减机制清理低价值信息。
+frequency: high
 ---
 
 # Agent的Memory如何进行管理？存在哪些地方？
@@ -39,6 +40,29 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AM start
+    class Agent process
+    class E decision
+    class Embedding special
+    class Entity error
+    class Graph info
+    class JSON start
+    class Knowledge process
+    class L decision
+    class Long special
+    class Memory error
+    class S info
+    class Short start
+    class Term process
+    class Working decision
+    class br special
+    class tokens error
     subgraph AM["Agent Memory 架构"]
         S["短期记忆 (Short-Term / Working Memory)<br/>存储: LLM上下文窗口 (128K tokens)<br/>内容: 当前会话的对话历史<br/>特点: 快速访问,自动遗忘(会话结束清空)<br/>技术: 直接放入Prompt"]
         L["长期记忆 (Long-Term Memory)<br/>存储: 向量库 + 数据库 + KV存储<br/>内容: 跨会话的用户画像、历史交互<br/>特点: 持久化,需要检索才能使用<br/>技术: Embedding + ANN检索"]

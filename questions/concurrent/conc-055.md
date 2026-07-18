@@ -15,6 +15,7 @@ memory_points:
 - 核心机制：许可数<=0时获取线程入队阻塞，释放许可时唤醒队列后继线程
 - 核心场景：控制同时访问资源的线程数，如限流、数据库连接池管理
 - 组件对比：Semaphore许可可循环用，而CountDownLatch是一次性不可重置
+frequency: high
 ---
 
 # Semaphore信号量的原理和使用场景是什么？
@@ -142,6 +143,7 @@ flowchart TD
     style PARK fill:#9C27B0,color:#fff
     style UNPARK fill:#009688,color:#fff
     style BLOCK fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

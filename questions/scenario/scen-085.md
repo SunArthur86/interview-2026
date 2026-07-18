@@ -29,6 +29,7 @@ memory_points:
 - 精细化埋点：核心接口需打上业务Tag（如UserId、成功或失败原因），方便追踪特定问题。
 - 立体监控维度：不仅盯业务成功率与QPS，更要监控Redis/MQ等基础依赖组件的健康度。
 - 告警分级：P0级超卖/宕机需电话拉起，P1级异常波动/P99延迟走高发钉钉告警。
+frequency: low
 ---
 
 # 如何设计一个秒杀系统的全链路追踪和监控？
@@ -171,6 +172,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

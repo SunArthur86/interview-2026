@@ -29,6 +29,7 @@ memory_points:
 - 核心原理：自回归生成，中间推理步骤为最终答案提供了上下文约束
 - 两种方式：Zero-shot加上“一步一步思考”，Few-shot提供带推理的示例
 - 适用条件：大模型涌现能力，对复杂推理提升显著，简单任务无明显效果
+frequency: medium
 ---
 
 # 大模型思维链（CoT）原理是什么？
@@ -226,6 +227,7 @@ flowchart TD
     style ACTION fill:#FF9800,color:#fff
     style OBS fill:#9C27B0,color:#fff
     style REFLECT fill:#FFC107,color:#000
+
 ```
 
 ## 记忆要点

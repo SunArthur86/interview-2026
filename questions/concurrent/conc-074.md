@@ -15,6 +15,7 @@ memory_points:
 - epoll底层结构：红黑树管理监听fd，就绪链表存放活跃fd。
 - 虚拟内存核心：MMU负责地址转换，通过分页机制和缺页中断实现内存按需分配。
 - 内存布局对比：栈由系统自动分配速度快，堆由程序员控制空间大速度慢。
+frequency: low
 ---
 
 # 什么是Linux？
@@ -140,6 +141,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

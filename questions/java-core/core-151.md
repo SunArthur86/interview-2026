@@ -17,6 +17,7 @@ memory_points:
 - 报错根因：后续get操作遍历到成环节点时陷入while(true)死循环
 - 版本差异：1.7头插致并发死循环，1.8改尾插保持顺序解决死循环，但仍有数据覆盖问题
 - 解决方案：多线程并发必须舍弃HashMap，使用ConcurrentHashMap替代
+frequency: high
 ---
 
 # HashMap中的循环链表是如何产生的？
@@ -100,6 +101,39 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class HashMap decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class Node special
+    class O error
+    class Rehash info
+    class Value start
+    class br process
+    class equals decision
+    class hash special
+    class hashCode error
+    class key info
+    class log start
+    class n process
+    class oldCap decision
     A[HashMap 键值对存取] --> B[计算 key 的 hashCode]
     B --> C[扰动函数 hash]
     C --> D["定位桶索引 (n-1) & hash"]

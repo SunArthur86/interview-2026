@@ -31,6 +31,7 @@ memory_points:
 - 四大记忆类型：短期（会话上下文）、长期（跨会话向量库）、工作（暂存区）、情景（轨迹复盘）
 - 写入四步策略：重要性打分、向量相似度去重合并、LLM提取压缩、打标签附TTL
 - 检索策略：采用多路召回（向量语义+关键词等）结合重排序，精准提取Top-K
+frequency: high
 ---
 
 # Agent Memory 怎么设计？
@@ -287,6 +288,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

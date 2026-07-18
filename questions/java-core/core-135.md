@@ -15,6 +15,7 @@ memory_points:
 - IO 优化：磁盘到内存的加载由 DMA 技术完成，无需 CPU 干预提升效率。
 - 内存映射：高并发大文件加载推荐 mmap 和按需分页技术，降低内存峰值。
 - 执行阶段：CPU 程序计数器（PC）按序执行取指、译码、执行循环。
+frequency: medium
 ---
 
 # 程序执行流程是什么？
@@ -115,6 +116,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

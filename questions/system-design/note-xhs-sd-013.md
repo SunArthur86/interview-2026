@@ -14,8 +14,8 @@ tags:
 - 削峰
 - 面经
 feynman:
-  essence: "12306抢票系统的核心是'漏斗式分层削峰'——从外到内层层过滤：CDN+缓存拦截读流量→Redis原子扣减防超卖→MQ异步削峰保护数据库→最终一致性保障"
-  analogy: "就像春运火车站的多道关卡：第一道大门限流(网关)→候车厅分流(CDN/缓存)→检票口原子操作(Redis扣库存)→安检通道排队(MQ削峰)→最终上车(数据库落盘)。每层都在减少到达下一层的流量"
+  essence: 12306抢票系统的核心是'漏斗式分层削峰'——从外到内层层过滤：CDN+缓存拦截读流量→Redis原子扣减防超卖→MQ异步削峰保护数据库→最终一致性保障
+  analogy: 就像春运火车站的多道关卡：第一道大门限流(网关)→候车厅分流(CDN/缓存)→检票口原子操作(Redis扣库存)→安检通道排队(MQ削峰)→最终上车(数据库落盘)。每层都在减少到达下一层的流量
   key_points:
   - 分层削峰：CDN→缓存→Redis→MQ→DB，每层过滤大量流量
   - 超卖防控：Redis Lua脚本原子扣减，保证库存不超卖
@@ -23,11 +23,11 @@ feynman:
   - 排队机制：令牌桶+排队等候，用户侧显示排队进度
   - 最终一致：异步落库+分布式事务补偿
 first_principle:
-  essence: "12306的核心矛盾是'瞬间极高峰值流量 vs 有限座位资源'。解法是'层层削减到达数据库的流量'"
-  derivation: "百万人同时抢票→如果直接打数据库→DB崩溃→必须分层过滤→CDN拦截静态资源→缓存拦截查询→Redis原子操作扣减库存→MQ异步处理写请求→DB只承受可承受的写量"
-  conclusion: "分层削峰 = 漏斗模型。每一层都在大幅减少到达下一层的流量，最终只有少量请求到达数据库"
+  essence: 12306的核心矛盾是'瞬间极高峰值流量 vs 有限座位资源'。解法是'层层削减到达数据库的流量'
+  derivation: 百万人同时抢票→如果直接打数据库→DB崩溃→必须分层过滤→CDN拦截静态资源→缓存拦截查询→Redis原子操作扣减库存→MQ异步处理写请求→DB只承受可承受的写量
+  conclusion: 分层削峰 = 漏斗模型。每一层都在大幅减少到达下一层的流量，最终只有少量请求到达数据库
 follow_up:
-- "12306的余票查询如何实现低延迟？（Hint: 多级缓存+余票预计算+ES）"
+- '12306的余票查询如何实现低延迟？（Hint: 多级缓存+余票预计算+ES）'
 - 如何解决Redis扣减库存和数据库库存的一致性问题？
 - 如果用户抢到票但15分钟内未支付，库存怎么回滚？
 - 排队系统如何设计？用户怎么感知自己在队列中的位置？
@@ -38,6 +38,7 @@ memory_points:
 - 异步削峰：MQ(Kafka/RocketMQ)平滑消费
 - 最终一致：异步落库+定时对账+补偿机制
 - 布隆过滤器：防止无效车次查询穿透到DB
+frequency: high
 ---
 
 # 【系统设计】如何设计12306抢票系统，支持百万并发？
@@ -48,6 +49,30 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CDN start
+    class Kafka process
+    class L1 decision
+    class L2 special
+    class L3 error
+    class L4 info
+    class L5 start
+    class L6 process
+    class MQ decision
+    class MySQL special
+    class Nginx error
+    class Redis info
+    class RocketMQ start
+    class Sentinel process
+    class U decision
+    class br special
+    class decrement error
+    class s info
     U["用户层: 1000万用户同时抢票"]
     L1["L1: CDN + 前端限流<br/>静态资源CDN加速、验证码、按钮防重<br/>过滤: ~60%请求(静态资源、爬虫、无效点击)"]
     L2["L2: 网关限流 (Nginx/Sentinel)<br/>IP限流、用户维度限流、接口级限流<br/>过滤: ~50%超额请求"]

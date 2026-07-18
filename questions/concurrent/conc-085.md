@@ -17,6 +17,7 @@ memory_points:
 - 口诀记忆6种：饿汉、懒汉(不安全/安全)、DCL、静态内部类、枚举。
 - 懒汉需加锁，DCL须配volatile防指令重排。
 - 静态内部类利用类加载保线程安全且实现懒加载；枚举天然防反序列化攻击最简。
+frequency: medium
 ---
 
 # 什么是单例模式的6种实现？
@@ -187,6 +188,7 @@ flowchart TD
     style ORD fill:#F44336,color:#fff
     style VOL fill:#9C27B0,color:#fff
     style BAR fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

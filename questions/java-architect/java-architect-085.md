@@ -9,14 +9,18 @@ tags:
 - 版本化
 - 契约测试
 feynman:
-  essence: 接口兼容性的本质是"在不停止演进的前提下，保证已发布的接口对调用方永远可用"。核心机制是"契约（Schema/语义）+ 版本化（v1/v2 并存）+ 契约测试（Pact 验证消费方期望）"。难点是兼容性分类（向后/向前/完全兼容）的边界、何时该出 v2、如何自动检测破坏性变更。
-  analogy: 像手机操作系统升级。旧 App（已发布接口的调用方）必须在新系统（新版服务）上能跑（向后兼容）。新系统不能悄悄删功能（删除字段=破坏性）。新 App 可以用旧系统没有的功能（降级）。系统升级前先跑兼容性测试（契约测试），确保所有 App 不崩。
-  first_principle: 服务演进的根本矛盾是"业务要变（加字段、改逻辑）vs 调用方要稳（已上线代码不能改）"。解法是语义化版本（SemVer）+ 兼容性规则——加字段是向后兼容（老调用方忽略新字段），删字段或改语义是破坏性（必须出 v2）。契约测试（Pact）从消费方视角验证：消费方定义期望（请求/响应样例），提供方跑测试确保满足所有消费方的期望，CI 里卡破坏性变更。
+  essence: 接口兼容性的本质是"在不停止演进的前提下，保证已发布的接口对调用方永远可用"。核心机制是"契约（Schema/语义）+ 版本化（v1/v2 并存）+
+    契约测试（Pact 验证消费方期望）"。难点是兼容性分类（向后/向前/完全兼容）的边界、何时该出 v2、如何自动检测破坏性变更。
+  analogy: 像手机操作系统升级。旧 App（已发布接口的调用方）必须在新系统（新版服务）上能跑（向后兼容）。新系统不能悄悄删功能（删除字段=破坏性）。新
+    App 可以用旧系统没有的功能（降级）。系统升级前先跑兼容性测试（契约测试），确保所有 App 不崩。
+  first_principle: 服务演进的根本矛盾是"业务要变（加字段、改逻辑）vs 调用方要稳（已上线代码不能改）"。解法是语义化版本（SemVer）+ 兼容性规则——加字段是向后兼容（老调用方忽略新字段），删字段或改语义是破坏性（必须出
+    v2）。契约测试（Pact）从消费方视角验证：消费方定义期望（请求/响应样例），提供方跑测试确保满足所有消费方的期望，CI 里卡破坏性变更。
   key_points:
   - 兼容性三分类：向后兼容（Backward，老调用方调新服务）、向前兼容（Forward，新调用方调老服务）、完全兼容（两者都满足）
   - 破坏性变更：删字段、改字段类型、改字段语义、改必填性（可选→必填）、收紧校验
   - 非破坏性变更：加可选字段、加新接口、放宽校验、加可选请求参数
-  - "版本化策略：URL 版本（/v1/v2）、Header 版本（Accept: application/vnd.foo.v2+json）、协议版本（proto package）"
+  - '版本化策略：URL 版本（/v1/v2）、Header 版本（Accept: application/vnd.foo.v2+json）、协议版本（proto
+    package）'
   - 契约测试：Pact（消费方驱动），CDC 验证提供方满足所有消费方期望
   - API 演进工具：OpenAPI diff、protobuf buf breaking 检测
 first_principle:
@@ -25,20 +29,28 @@ first_principle:
   - 已上线的调用方代码不能被强制修改（移动端 App 发版周期 1-2 周）
   - 业务持续演进（加字段、改逻辑不可避免）
   - 破坏性变更（删字段、改语义）必须被检测和阻止
-  rebuild: 四层防御——第一，兼容性规则（加字段 OK，删字段/改类型/改必填是破坏性，必须出 v2 并存）。第二，版本化（URL /v1/v2 并存，老版本至少维护 6 个月给调用方迁移）。第三，契约测试（Pact CDC，每个消费方定义期望，提供方 CI 跑测试确保满足，破坏性变更直接卡 CI）。第四，自动化检测（OpenAPI diff 或 protobuf buf breaking，PR 阶段自动标注破坏性变更）。四层组合，接口演进安全可控。
+  rebuild: 四层防御——第一，兼容性规则（加字段 OK，删字段/改类型/改必填是破坏性，必须出 v2 并存）。第二，版本化（URL /v1/v2 并存，老版本至少维护
+    6 个月给调用方迁移）。第三，契约测试（Pact CDC，每个消费方定义期望，提供方 CI 跑测试确保满足，破坏性变更直接卡 CI）。第四，自动化检测（OpenAPI
+    diff 或 protobuf buf breaking，PR 阶段自动标注破坏性变更）。四层组合，接口演进安全可控。
 follow_up:
-  - 什么时候该出 v2 而不是在 v1 演进？——当变更破坏性且无法兼容（如改核心语义、重构数据模型），或 v1 包袱太重（历史错误决策）无法平滑演进。v2 与 v1 并存，老调用方用 v1，新调用方用 v2，给迁移期（6 个月+）
-  - Pact 契约测试和单元测试区别？——单元测试测"提供方自己的逻辑对不对"，Pact 测"提供方是否满足消费方的期望"。消费方定义"我调 /v1/orders 期望返回 {id, amount}"，提供方跑这个 Pact 测试，确保不会删 id 或 amount 字段（删了就违反契约，CI 失败）
-  - 移动端 App 怎么做兼容？——App 发版慢（1-2 周审核 + 用户升级率），所以移动端的接口必须严格向后兼容。加字段 OK，删字段/改语义要等所有版本 App 都升级（或占比 <1%）才删。用强制升级兜底（极老版本强制升级）
-  - gRPC 的兼容性怎么保证？——protobuf 用 buf 工具检测 breaking change（buf breaking --against）。规则：不能删字段、不能改字段编号、不能改字段类型。加字段用新编号即可。proto package 版本化（foo.v1 vs foo.v2）
-  - "如何优雅下线老版本接口？——先标记 @Deprecated（文档 + 日志告警 + Header 提示），监控调用量，调用量低于阈值（如 <1%）后下线。给迁移期（至少 6 个月），联系 TOP 调用方推动迁移"
+- 什么时候该出 v2 而不是在 v1 演进？——当变更破坏性且无法兼容（如改核心语义、重构数据模型），或 v1 包袱太重（历史错误决策）无法平滑演进。v2 与 v1
+  并存，老调用方用 v1，新调用方用 v2，给迁移期（6 个月+）
+- Pact 契约测试和单元测试区别？——单元测试测"提供方自己的逻辑对不对"，Pact 测"提供方是否满足消费方的期望"。消费方定义"我调 /v1/orders
+  期望返回 {id, amount}"，提供方跑这个 Pact 测试，确保不会删 id 或 amount 字段（删了就违反契约，CI 失败）
+- 移动端 App 怎么做兼容？——App 发版慢（1-2 周审核 + 用户升级率），所以移动端的接口必须严格向后兼容。加字段 OK，删字段/改语义要等所有版本 App
+  都升级（或占比 <1%）才删。用强制升级兜底（极老版本强制升级）
+- gRPC 的兼容性怎么保证？——protobuf 用 buf 工具检测 breaking change（buf breaking --against）。规则：不能删字段、不能改字段编号、不能改字段类型。加字段用新编号即可。proto
+  package 版本化（foo.v1 vs foo.v2）
+- 如何优雅下线老版本接口？——先标记 @Deprecated（文档 + 日志告警 + Header 提示），监控调用量，调用量低于阈值（如 <1%）后下线。给迁移期（至少
+  6 个月），联系 TOP 调用方推动迁移
 memory_points:
-  - 兼容三分类：向后（老调新）、向前（新调老）、完全（两者）
-  - 破坏性变更：删字段、改类型、改必填、收紧校验
-  - 非破坏性：加可选字段、加接口、放宽校验
-  - 版本化：URL /v1/v2 并存，老版本维护 6 个月
-  - 契约测试：Pact CDC，消费方定义期望，提供方 CI 验证
-  - 自动检测：OpenAPI diff、protobuf buf breaking
+- 兼容三分类：向后（老调新）、向前（新调老）、完全（两者）
+- 破坏性变更：删字段、改类型、改必填、收紧校验
+- 非破坏性：加可选字段、加接口、放宽校验
+- 版本化：URL /v1/v2 并存，老版本维护 6 个月
+- 契约测试：Pact CDC，消费方定义期望，提供方 CI 验证
+- 自动检测：OpenAPI diff、protobuf buf breaking
+frequency: low
 ---
 
 # 【Java 后端架构师】接口兼容性、版本化与契约测试
@@ -423,6 +435,23 @@ buf breaking --against '.git#branch=main'
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class App start
+    class Broker process
+    class CDC decision
+    class CI special
+    class Order error
+    class Pact info
+    class Web start
+    class amount process
+    class as decision
+    class v1 special
+    class v2 error
     participant App as 调用方 App/Web
     participant Broker as Pact Broker
     participant CI as 提供方订单服务 CI

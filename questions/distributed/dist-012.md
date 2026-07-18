@@ -16,6 +16,7 @@ memory_points:
 - 注册对比：客户端自注册需集成 SDK 耦合高，而第三方注册（如 K8s）对业务零侵入
 - 发现对比：客户端发现直连性能高但逻辑重，而服务端发现（如经过 Nginx）多一跳但极简
 - 代表组件：Spring Cloud Eureka 属客户端模式，而 K8s Service 属服务端模式
+frequency: medium
 ---
 
 # 什么是服务注册发现？
@@ -159,6 +160,7 @@ flowchart TD
     style REGISTRY fill:#FF9800,color:#fff
     style EVICT fill:#F44336,color:#fff
     style DEREG fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

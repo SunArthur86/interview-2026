@@ -30,6 +30,7 @@ memory_points:
 - 对比记忆：Redisson内置自动续期、可重入、安全释放，而SetNX轻量但需手动写Lua防误删
 - 关键数字：watchdog底层机制是每10秒自动续期，把过期时间重置为30秒
 - 一句话原则：锁粒度按业务实体设计（如订单ID），不同实体不互斥，坚决避免全局锁
+frequency: high
 ---
 
 # Redis里的分布式锁你们具体用了什么方案？
@@ -195,6 +196,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

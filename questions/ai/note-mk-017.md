@@ -30,6 +30,7 @@ memory_points:
 - 多窗口状态治理：问多窗口编辑冲突如何解决，考察强同步与不同步的分层状态管理经验。
 - 云边协同全链路：是否掌握本地索引、云端推理、本地导出的差异化状态机与Trace设计。
 - 权限与异常恢复：看其是否主动关注文件授权四层模型、心跳检测、断点续跑等工程难点。
+frequency: low
 ---
 
 # 【月之暗面面经】你如何判断候选人真的做过 AI-Native 桌面产品，而不是普通 Web 前端？
@@ -211,6 +212,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

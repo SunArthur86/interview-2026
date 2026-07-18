@@ -16,6 +16,7 @@ memory_points:
 - 易混对比：单一职责(SRP)管类内逻辑，接口隔离(ISP)管对外契约。
 - 解决痛点：避免实现类被迫实现空方法或抛出异常造成接口污染。
 - 识别信号：实现接口时出现无关的空方法，说明违反ISP需重构拆分。
+frequency: low
 ---
 
 # 什么是接口隔离？
@@ -88,6 +89,38 @@ class WeChatPayService implements PaymentAction, RefundAction {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class Eatable info
+    class F start
+    class Fat process
+    class G decision
+    class H special
+    class I error
+    class ISP info
+    class Interface start
+    class J process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class Robot start
+    class Sleepable process
+    class Workable decision
+    class Worker special
+    class br error
+    class eat info
+    class sleep start
+    class work process
     A[接口隔离原则 ISP] --> B[客户端不应依赖<br/>它不需要的方法]
     B --> C[胖接口 Fat Interface]
     C --> D[拆分为多个<br/>专用小接口]

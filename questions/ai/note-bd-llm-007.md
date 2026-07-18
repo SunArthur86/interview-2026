@@ -10,7 +10,8 @@ tags:
 - 评估
 - RAG质量
 feynman:
-  essence: RAG评估需要分别评估检索质量和生成质量。RAGAS从Faithfulness/Answer Relevancy/Context Precision/Context Recall四个维度量化。
+  essence: RAG评估需要分别评估检索质量和生成质量。RAGAS从Faithfulness/Answer Relevancy/Context Precision/Context
+    Recall四个维度量化。
   analogy: 就像评估一个研究员——要看他查资料的能力(检索)和写报告的能力(生成)，不能只看最终报告。
   first_principle: RAG = 检索 + 生成，必须分解评估，否则无法定位问题。
   key_points:
@@ -32,6 +33,7 @@ memory_points:
 - 忠实度：检查答案是否完全基于检索上下文，因为能有效衡量并降低模型幻觉率
 - 答案相关性：让LLM根据答案反向生成问题，因为可通过对比相似度来验证答案是否切题
 - 检索指标：独立评测检索器需依赖人工标注Golden Set，关注Recall@K与MRR等传统指标
+frequency: high
 ---
 
 # 【字节面经】如何评估 RAG 系统的回答质量？你用过 RAGAS 或类似的评测框架吗？
@@ -351,6 +353,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

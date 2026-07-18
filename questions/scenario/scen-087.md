@@ -29,6 +29,7 @@ memory_points:
 - 号段模式高可用：双Buffer提前异步加载，DB宕机时降级使用本地紧急号段。
 - 防猜测加随机因子：在序列号或机器位混入随机数，保证趋势递增但表面无规律。
 - 机器ID分配：启动时通过ZK/etcd注册获取，保证全局唯一不重复。
+frequency: low
 ---
 
 # 如何设计一个全局唯一订单号生成方案？包含时间、机器、序列号。
@@ -135,6 +136,7 @@ flowchart TD
     CH -->|大| ABT[报错/弃用]
     style INC fill:#d4edda
     style CLK fill:#ffcccc
+
 ```
 
 

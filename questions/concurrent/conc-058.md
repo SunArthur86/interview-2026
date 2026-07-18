@@ -16,6 +16,7 @@ memory_points:
 - 升级口诀：无锁 -> 偏向(单线程记ID) -> 轻量(多线程CAS自旋) -> 重量(OS阻塞)
 - 自旋策略：自旋成功防阻塞，自旋超限或激烈竞争才升级重量级锁防CPU空转
 - 调优避坑：多线程交替频繁场景，偏向锁撤销需STW开销极大，建议关闭偏向锁
+frequency: high
 ---
 
 # Synchronized 反向理解是什么？
@@ -159,6 +160,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

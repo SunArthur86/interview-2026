@@ -17,6 +17,7 @@ memory_points:
 - 工具开发常客：JSON序列化、动态代理与JUnit扫描测试
 - 缺点是性能差(慢1-2个数量级)且破坏封装，需缓存优化
 - 私有成员访问：通过setAccessible(true)跳过安全检查
+frequency: medium
 ---
 
 # 什么是反射的应用场合？
@@ -105,6 +106,42 @@ public class ReflectionDemo {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AOP process
+    class B decision
+    class Bean special
+    class C error
+    class Class info
+    class Constructor start
+    class D process
+    class E decision
+    class F special
+    class Field error
+    class G info
+    class H start
+    class I process
+    class IoC decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class Method process
+    class N decision
+    class O special
+    class ORM error
+    class Spring info
+    class br start
+    class class process
+    class forName decision
+    class getClass special
+    class setAccessible error
+    class true info
     A[反射机制] --> B[运行时获取类信息]
     A --> C[动态创建对象/调用方法]
     D[获取 Class 的 3 种方式] --> E["类名.class"]

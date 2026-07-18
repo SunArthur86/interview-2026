@@ -12,7 +12,8 @@ tags:
 feynman:
   essence: 设计多Agent协作系统（如客服中心）要解决分工/通信/状态管理/容错四件事。分工按角色（路由Agent分流/工单Agent查单/退款Agent处理退款/质检Agent抽检）。通信走共享状态（不直接对话），用消息总线异步。状态管理用分布式存储+版本号防冲突。容错用超时熔断+任务重试+人工兜底。核心是Orchestrator统一调度，子Agent无状态。
   analogy: 像客服中心运转——前台(路由Agent)分流，售后(工单Agent)查单，财务(退款Agent)退钱，主管(质检Agent)抽检。员工之间不直接喊话(走工单系统共享状态)，每个人超时了有备份接手(容错)。
-  first_principle: 多 Agent 协作的本质是"分治"。复杂任务一个 Agent 做不好，拆给多个专业 Agent。但分治带来通信和协调成本，核心是"用 Orchestrator 统一调度 + 子 Agent 无状态"。
+  first_principle: 多 Agent 协作的本质是"分治"。复杂任务一个 Agent 做不好，拆给多个专业 Agent。但分治带来通信和协调成本，核心是"用
+    Orchestrator 统一调度 + 子 Agent 无状态"。
   key_points:
   - '分工按角色: 路由/工单/退款/质检 Agent'
   - 通信走共享状态(不直接对话)+消息总线异步
@@ -21,7 +22,8 @@ feynman:
   - '核心: Orchestrator统一调度，子Agent无状态'
 first_principle:
   essence: 多 Agent = 分治 + 协调
-  derivation: 复杂任务单 Agent 做不好 → 分给专业子 Agent → 分治带来通信成本 → 用 Orchestrator 统一调度 + 共享状态通信 → 子 Agent 无状态化便于容错
+  derivation: 复杂任务单 Agent 做不好 → 分给专业子 Agent → 分治带来通信成本 → 用 Orchestrator 统一调度 + 共享状态通信
+    → 子 Agent 无状态化便于容错
   conclusion: 多 Agent 不是"越多越好"，而是"分工边界清晰 + 通信成本可控"
 follow_up:
 - 子 Agent 之间需要直接对话吗？什么时候需要？
@@ -32,6 +34,7 @@ memory_points:
 - 通信：Agent之间禁止直接对话，统一通过共享状态和消息总线解耦异步通信
 - 状态管理：共享态存Redis，多Agent并发写冲突用乐观锁（CAS机制）解决
 - 容错设计：严控工具超时时间，失败自动重试，核心业务挂掉需能平滑兜底转人工
+frequency: high
 ---
 
 # 【某讯面经】设计一个多 Agent 协作系统（如客服中心）：分工、通信、状态管理、容错
@@ -250,6 +253,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

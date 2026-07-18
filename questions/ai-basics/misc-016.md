@@ -22,6 +22,7 @@ memory_points:
 - 效果：速度提升2-4倍，显存从O(n²)降至O(n)
 - 性质：数学精确等价，非近似算法
 - 边界：极短序列(<512)可能因Kernel开销反而变慢
+frequency: high
 ---
 
 # Flash Attention的原理是什么?为什么能同时加速和省显存
@@ -149,6 +150,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

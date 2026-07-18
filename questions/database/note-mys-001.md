@@ -35,6 +35,7 @@ memory_points:
 - 核心交易表遵循三范式，查询展示表适度冗余
 - 反范式最大风险：数据更新不同步 → 需要补偿机制
 - 实际项目中"适度反范式"是常态——完全范式化是学院派理想
+frequency: high
 ---
 
 # 【美云智数终面】复杂业务下如何做数据库表设计？三范式和反范式怎么取舍？
@@ -230,6 +231,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 结构化回答
 

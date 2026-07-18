@@ -32,6 +32,7 @@ memory_points:
 - 交互：无需手动复制粘贴，直接在终端环境形成闭环，遇到错误自动修复。
 - 最佳实践：任务粒度适中，给约束比给步骤好，利用Git checkpoint控制风险。
 - 踩坑：防止死循环和过度工程化，长任务需定期重复关键约束或使用pause。
+frequency: medium
 ---
 
 # 【字节面经】Claude Code的使用经验？与传统网页问答AI有什么核心区别？
@@ -103,6 +104,27 @@ claude
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AI process
+    class B decision
+    class C special
+    class Claude error
+    class Code info
+    class D start
+    class E process
+    class F decision
+    class F1 special
+    class F2 error
+    class F3 info
+    class F4 start
+    class G process
+    class H decision
     A[网页问答 AI] --> B[单轮对话生成]
     B --> C[仅文本输出]
     C --> D[无文件/执行权限]

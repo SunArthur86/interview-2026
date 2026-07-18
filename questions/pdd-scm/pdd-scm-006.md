@@ -10,7 +10,8 @@ tags:
 - 缓存
 - 缓存一致性
 feynman:
-  essence: Redis 缓存加速靠"内存读取 + 多级缓存"，一致性靠"Cache Aside（先改 DB 再删缓存）+ 延迟双删 + Canal 订阅 binlog 异步刷新"，解决穿透/击穿/雪崩三大问题。
+  essence: Redis 缓存加速靠"内存读取 + 多级缓存"，一致性靠"Cache Aside（先改 DB 再删缓存）+ 延迟双删 + Canal 订阅
+    binlog 异步刷新"，解决穿透/击穿/雪崩三大问题。
   analogy: 缓存像仓库的"前台样品柜"——常买的商品放前台（Redis），客户取货快；某样品卖了要及时更新（一致性）；大家同时抢同一个样品要排队（击穿）。
   first_principle: 数据库慢（毫秒级），内存快（纳秒级）；把热数据放内存减少 DB 访问，但引入"数据可能过期"的一致性问题。
   key_points:
@@ -33,6 +34,7 @@ memory_points:
 - Cache Aside：先改 DB，再删缓存（不是更新）
 - 穿透=查不存在（布隆过滤）；击穿=热 key 失效（互斥锁）；雪崩=大量失效（TTL 抖动）
 - 多级缓存：Caffeine → Redis → MySQL，命中率 95%+
+frequency: high
 ---
 
 # 【拼多多供应链】Redis 缓存怎么保证和 DB 一致？三大缓存问题怎么解？
@@ -219,6 +221,27 @@ T4: 线程A SET cache = 99  (旧值回填!)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class App start
+    class C process
+    class Caffeine decision
+    class Canal special
+    class Client error
+    class DB_Layer info
+    class L start
+    class M process
+    class MySQL decision
+    class R special
+    class RA error
+    class Redis info
+    class W start
+    class br process
+    class miss decision
     subgraph Client
         R["读请求"]
         W["写请求"]

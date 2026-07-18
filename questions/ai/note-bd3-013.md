@@ -29,6 +29,7 @@ memory_points:
 - 致命暗坑：文档已删但向量残留，导致返回幽灵数据
 - 更新机制：构建增量同步管道，坚决拒绝无脑全量重建
 - 版本强控：Embedding模型升级必须重刷全量，混用新老向量会导致精度崩塌
+frequency: high
 ---
 
 # RAG系统运行一段时间后召回效果变差，可能有哪些原因？如何设计知识更新机制？
@@ -279,6 +280,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

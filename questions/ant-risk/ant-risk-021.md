@@ -35,6 +35,7 @@ memory_points:
 - 同步链路四大步：黑名单 → 特征 → 规则 → 模型
 - 99% 交易正常 → 前置粗筛剔除大部分，少数走精细决策
 - 容量公式：QPS × RT = 并发数；亿级 QPS 靠分层 + 缓存 + 扩容
+frequency: medium
 ---
 
 # 【蚂蚁风控】设计一个亿级 QPS 的风控系统，你怎么做？
@@ -60,6 +61,29 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Bloom start
+    class Dubbo process
+    class Flink decision
+    class HTTP special
+    class Kafka error
+    class L1 info
+    class L2A start
+    class L2B process
+    class L2C decision
+    class L2D special
+    class L3 error
+    class L4 info
+    class ML start
+    class SDK process
+    class Spark decision
+    class T special
+    class br error
     L1["接入层 万兆网络<br/>SDK / 网关 / 事件订阅 → 风控入口 HTTP/Dubbo/Kafka"]
     L2A[名单服务<br/>布隆过滤 Bloom]
     L2B[特征服务<br/>Redis缓存 HBase查]

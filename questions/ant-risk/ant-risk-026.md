@@ -38,6 +38,7 @@ memory_points:
 - 缓存三问题：穿透（空值缓存）/击穿（互斥锁）/雪崩（TTL 抖动）
 - 池化必须上界，无界 = 定时炸弹
 - 队列削峰本质：把同步洪峰转成稳定的处理速率
+frequency: high
 ---
 
 # 【蚂蚁风控】高并发五件套——池化、缓存、扩容、异步、队列，怎么用？
@@ -382,6 +383,27 @@ public Feature getFeatureSafe(String uid) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class Async process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class Backend info
+    class C1 start
+    class C2 process
+    class C3 decision
+    class Cache special
+    class Client error
+    class D1 info
+    class D2 start
+    class D3 process
+    class Kafka decision
     subgraph Client[客户端请求]
         A1[风控决策请求]
     end

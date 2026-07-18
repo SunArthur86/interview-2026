@@ -27,14 +27,15 @@ first_principle:
   - 故障要可恢复（最终一致）
   rebuild: 分域微服务 + 幂等接口 + 分布式事务（TCC/Saga）+ 事件总线 + 全链路可观测。
 follow_up:
-  - 下单到支付中间挂了怎么办？——订单待支付态，超时关单+回库存（MQ 延时队列）
-  - 分布式事务怎么选型？——TCC（资金强一致）/Saga（长流程）/本地消息表（最终一致）
-  - 全链路怎么追踪？——SkyWalking/Pinpoint，traceId 全链路透传
+- 下单到支付中间挂了怎么办？——订单待支付态，超时关单+回库存（MQ 延时队列）
+- 分布式事务怎么选型？——TCC（资金强一致）/Saga（长流程）/本地消息表（最终一致）
+- 全链路怎么追踪？——SkyWalking/Pinpoint，traceId 全链路透传
 memory_points:
-  - 七段：下单→风控→创单→库存→支付→履约→结算
-  - 幂等：traceId+幂等键贯穿
-  - 分布式事务：TCC/Saga/本地消息表
-  - 事件驱动：Kafka 解耦下游
+- 七段：下单→风控→创单→库存→支付→履约→结算
+- 幂等：traceId+幂等键贯穿
+- 分布式事务：TCC/Saga/本地消息表
+- 事件驱动：Kafka 解耦下游
+frequency: high
 ---
 
 # 【拼多多交易】交易全链路架构怎么设计？
@@ -251,6 +252,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

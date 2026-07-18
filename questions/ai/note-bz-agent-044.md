@@ -29,6 +29,7 @@ memory_points:
 - 定位：作为Agent的数据查询技能，将自然语言转为SQL查询并解读结果。
 - 执行五步：Schema检索找相关表→LLM生成SQL→SQL校验(防错/注入)→只读执行→结构化返回。
 - 安全底线：必须限制数据库为只读权限，且执行前必须进行SQL合法性校验。
+frequency: medium
 ---
 
 # Text2SQL 在 Agent 里怎么用？
@@ -311,6 +312,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

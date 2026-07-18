@@ -28,14 +28,15 @@ first_principle:
   - 工程化（IDE/RAG/Agent）是关键
   rebuild: AI 代码助手（IDE 集成 + RAG + Agent + 工程化）。
 follow_up:
-  - 怎么保证代码安全？——私有部署 + 不外传 + 权限控制
-  - 补全准确率怎么提升？——项目级上下文 + 代码库 RAG + 微调
-  - 怎么衡量提效？——代码量/PR 时长/缺陷率/开发者满意度
+- 怎么保证代码安全？——私有部署 + 不外传 + 权限控制
+- 补全准确率怎么提升？——项目级上下文 + 代码库 RAG + 微调
+- 怎么衡量提效？——代码量/PR 时长/缺陷率/开发者满意度
 memory_points:
-  - 能力：补全/生成/解释/重构/测试/Review
-  - 上下文：当前/相关/代码库/规范
-  - RAG：检索代码/文档/PR
-  - Agent：自动建 PR/跑测试
+- 能力：补全/生成/解释/重构/测试/Review
+- 上下文：当前/相关/代码库/规范
+- RAG：检索代码/文档/PR
+- Agent：自动建 PR/跑测试
+frequency: high
 ---
 
 # 【拼多多 AI 中台】AI 代码助手怎么落地？
@@ -420,6 +421,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

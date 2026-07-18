@@ -43,6 +43,7 @@ memory_points:
 - 核心原理：前端切片计算MD5，后端比对MD5实现秒传，校验Redis分片索引实现断点续传。
 - 性能与并发：分片大小推荐1-10MB（折中5MB），并发上传但乱序到达时按chunkIndex合并。
 - 秒传设计：利用文件MD5作为物理路径去重，数据库仅存引用记录。
+frequency: medium
 ---
 
 # 如何设计一个网盘系统？类似百度网盘，支持大文件上传下载。
@@ -155,6 +156,7 @@ flowchart TD
     CHK --> MERGE[合并为完整文件]
     SHARE[分享] --> TOK[Token鉴权+时效]
     style INSTANT fill:#d4edda
+
 ```
 
 

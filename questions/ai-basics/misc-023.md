@@ -23,6 +23,7 @@ memory_points:
 - Attention架构：Ring Attention（多机环形）、StreamingLLM（滑动窗口+Sink）
 - Ring Attention：支持1M+超长上下文，通过Ring All-Pass通信传递KV
 - 实战：长文本下调大vLLM的block_size至256可减少元数据开销
+frequency: high
 ---
 
 # 处理100K+长上下文推理时,KV Cache和Attention如何优化
@@ -133,6 +134,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

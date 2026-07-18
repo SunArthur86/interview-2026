@@ -31,6 +31,7 @@ memory_points:
 - B+树优势：按页组织（16KB）且Fanout极大（约1170），三层就能存千万数据，IO仅2-3次
 - 跳表劣势：节点随机分配致空间局部性差，树高约20层，若放磁盘将导致不可接受的20+次随机IO
 - 范围查询对比：B+树叶子链表契合磁盘顺序预读，而跳表链表跳跃更适合内存范围扫描
+frequency: high
 ---
 
 # 为什么MySQL索引用B+树，而不是Redis跳表这类结构？
@@ -182,6 +183,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -27,14 +27,15 @@ first_principle:
   - 不同 key 可能哈希冲突
   rebuild: 桶数组 + 哈希函数 + 冲突处理（链表/树）+ 动态扩容。
 follow_up:
-  - HashMap 链表为什么转红黑树？——冲突长链 O(n) 退化成 O(logn)
-  - 扩容为什么翻倍？——保证容量为 2 的幂，位运算代替取模
-  - ConcurrentHashMap 1.7 vs 1.8？——1.7 分段锁，1.8 锁桶头 + CAS + 红黑树
+- HashMap 链表为什么转红黑树？——冲突长链 O(n) 退化成 O(logn)
+- 扩容为什么翻倍？——保证容量为 2 的幂，位运算代替取模
+- ConcurrentHashMap 1.7 vs 1.8？——1.7 分段锁，1.8 锁桶头 + CAS + 红黑树
 memory_points:
-  - 桶 + 链表/树（≥8 转树）
-  - 负载因子 0.75，2 倍扩容
-  - 1.8 尾插 + 红黑树（防退化/死循环）
-  - 并发用 ConcurrentHashMap
+- 桶 + 链表/树（≥8 转树）
+- 负载因子 0.75，2 倍扩容
+- 1.8 尾插 + 红黑树（防退化/死循环）
+- 并发用 ConcurrentHashMap
+frequency: high
 ---
 
 # 【拼多多 AI 中台】HashMap 原理与中台特征存储怎么用？
@@ -252,6 +253,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

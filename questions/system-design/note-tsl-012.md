@@ -19,7 +19,8 @@ feynman:
   - GPS轨迹实时追踪+历史回放
   - 哨兵模式(视频录制)
 first_principle:
-  essence: 防盗 = 状态监控(车在做什么) + 异常判断(正不正常) + 告警响应(通知谁做什么)。监控是数据采集问题，判断是规则/模型问题，响应是通信问题。关键在于端到端延迟（异常发生到车主收到告警 < 10秒）。
+  essence: 防盗 = 状态监控(车在做什么) + 异常判断(正不正常) + 告警响应(通知谁做什么)。监控是数据采集问题，判断是规则/模型问题，响应是通信问题。关键在于端到端延迟（异常发生到车主收到告警
+    < 10秒）。
   derivation: 一辆车每秒产生位置/速度/车门/车窗/IMU等数据。千万辆 → 每秒亿条消息。异常检测必须流式实时处理，不能批量。告警推送必须多通道冗余（App+短信+电话），防任一通道延迟。
   conclusion: 架构 = IoT数据流 + 规则引擎(实时异常检测) + 多通道推送 + GPS轨迹服务 + 哨兵视频。
 follow_up:
@@ -31,6 +32,7 @@ memory_points:
 - 秒级低延迟：传感器数据入Kafka，Flink实时流计算+规则匹配，端到端<10s
 - 多通道预警：触发告警后App/短信/电话多通道并推，授权后可远程锁车
 - 闭环全追踪：Redis GEO存实时异常轨迹，S3加密存哨兵视频供回溯取证
+frequency: high
 ---
 
 # 车辆出现异常启动、移动时触发预警，如何设计后端架构，支持预警信息实时推送、异常轨迹追踪？
@@ -373,6 +375,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

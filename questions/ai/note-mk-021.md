@@ -30,6 +30,7 @@ memory_points:
 - 核心解法：抽取统一的Artifact对象模型，沉淀通用结构化内容容器
 - 扩展机制：建立产物类型注册表，新Agent只需动态注册新产物Spec
 - 对比优势：任务与权限层共性中等，输入与回放层差异大故暂缓平台化
+frequency: medium
 ---
 
 # 【月之暗面面经】如果产品要扩到更多桌面能力，哪层前端架构最该先做成平台？
@@ -38,6 +39,20 @@ memory_points:
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AXIS process
+    class B decision
+    class C1 special
+    class C2 error
+    class D1 info
+    class D2 start
+    class br process
     AXIS["共性 ▲ (高→低)<br/>扩展频率 → (低→高)"]
     A["产物协议层 ⭐<br/>← 共性最高 + 扩展最频繁 = 优先平台化<br/>(高共性, 高扩展)"]
     B["任务中心<br/>← 共性高 + 扩展中等<br/>(高共性, 中扩展)"]

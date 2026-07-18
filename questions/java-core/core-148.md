@@ -16,6 +16,7 @@ memory_points:
 - 取数条件：元素必须实现Delayed接口，且getDelay<=0时才能被取出
 - 并发优化：采用Leader-Follower模式，仅Leader线程阻塞等待队首，避免多线程无效唤醒
 - 实战避坑：因无界且消费慢易引发OOM，高并发场景建议替换为时间轮或Redis
+frequency: medium
 ---
 
 # DelayQueue（缓存失效、定时任务 ）是什么？
@@ -126,6 +127,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

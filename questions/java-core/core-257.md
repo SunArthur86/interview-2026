@@ -16,6 +16,7 @@ memory_points:
 - 三大基础：对象::实例方法、类::静态方法、类::实例方法。
 - 特殊引用：类::new构造器引用，以及类型[]::new数组引用。
 - 匹配规则：引用方法的参数列表与返回类型，需匹配函数式接口。
+frequency: low
 ---
 
 # 什么是方法引用？
@@ -82,6 +83,44 @@ Map<String, User> userMap = users.stream()
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayList process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class Lambda process
+    class M decision
+    class Math special
+    class N error
+    class O info
+    class Stream start
+    class String process
+    class System decision
+    class abs special
+    class body error
+    class br info
+    class forEachSystem start
+    class forEachs process
+    class length decision
+    class list special
+    class new error
+    class out info
+    class println start
+    class printlns process
     A[方法引用] --> B["Lambda 的简写<br/>当 body 只是调用某方法"]
     C[四种形式] --> D["类名::静态方法<br/>Math::abs"]
     C --> E["对象::实例方法<br/>System.out::println"]

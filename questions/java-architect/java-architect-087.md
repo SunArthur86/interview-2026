@@ -9,9 +9,11 @@ tags:
 - Java
 - 架构
 feynman:
-  essence: LLM 是"慢且贵的不可靠外部依赖"，接入 Java 后端的核心是画清边界——确定性逻辑（事务、权限、幂等、审计）留在 Java 侧，LLM 只负责理解/生成/推荐这类概率性能力，中间用 DTO 契约 + 超时 + 降级 + 成本护栏隔离。
+  essence: LLM 是"慢且贵的不可靠外部依赖"，接入 Java 后端的核心是画清边界——确定性逻辑（事务、权限、幂等、审计）留在 Java 侧，LLM
+    只负责理解/生成/推荐这类概率性能力，中间用 DTO 契约 + 超时 + 降级 + 成本护栏隔离。
   analogy: 像给一个反应快但偶尔会幻觉的高级顾问配流程——他可以出方案草稿，但盖章、转账、改库存必须由带权限章的正式员工（Java 服务）执行，且每次咨询都要登记耗时和预算。
-  first_principle: LLM 推理是非确定性的（temperature>0 同输入不同输出）、高延迟的（秒级）、按 token 计费的、可能幻觉的。这四点和传统 Java 服务的确定性、低延迟、固定成本、可断言完全相反。架构边界的作用就是用工程手段把这个"反义体"接进来而不污染主系统。
+  first_principle: LLM 推理是非确定性的（temperature>0 同输入不同输出）、高延迟的（秒级）、按 token 计费的、可能幻觉的。这四点和传统
+    Java 服务的确定性、低延迟、固定成本、可断言完全相反。架构边界的作用就是用工程手段把这个"反义体"接进来而不污染主系统。
   key_points:
   - LLM 调用当外部不稳定依赖：超时、重试、熔断、降级、线程池隔离
   - 输入输出走 DTO 契约 + JSON Schema 校验，不能让模型直接操作领域对象
@@ -25,19 +27,24 @@ first_principle:
   - LLM 延迟和成本随 token 线性增长，无上限就是无底洞
   - LLM 可能幻觉：生成不存在的事实、伪造 API、越权建议
   - Java 主系统的不变量（一致性、权限、审计）不能因为接入 LLM 而被破坏
-  rebuild: 把 LLM 封装成一个"带护栏的外部依赖"——通过 ChatClient/Spring AI 做统一抽象，调用前做预算和脱敏校验，调用中做超时和熔断，调用后做 schema 校验和敏感词检测，最终结果作为"建议"喂给 Java 的确定性执行层（状态机、幂等、事务），而不是让模型直接驱动状态变更。
+  rebuild: 把 LLM 封装成一个"带护栏的外部依赖"——通过 ChatClient/Spring AI 做统一抽象，调用前做预算和脱敏校验，调用中做超时和熔断，调用后做
+    schema 校验和敏感词检测，最终结果作为"建议"喂给 Java 的确定性执行层（状态机、幂等、事务），而不是让模型直接驱动状态变更。
 follow_up:
-  - Spring AI 和 LangChain4j 怎么选？——Spring AI 绑定 Spring 生态（Boot 配置、Actuator、Retry），适合已有 Spring Cloud 体系；LangChain4j 框架无关、社区活跃、对 Agent/Tool 抽象更成熟，适合多框架混合或非 Spring 项目。
-  - LLM 调用超时设多少？——按模型和场景：流式输出首 token < 2s、整体 < 30s；同步调用 < 15s。超时后不重试（幂等问题），直接降级到规则引擎或缓存回复。
-  - 怎么防止 prompt injection？——输入侧做系统提示隔离（system message 不可被用户覆盖）、关键词黑名单、长度限制；输出侧做 schema 校验 + 工具白名单；高敏操作走人工确认。
-  - token 成本怎么控？——按用户/租户设日预算（Redis 计数）、长上下文做摘要压缩、cheap 模型做意图分类后再路由到 expensive 模型、相同 prompt 做语义缓存。
-  - 怎么保证 LLM 改造可回滚？——LLM 能力走 feature flag（开关），按租户/流量灰度，出问题秒级切回规则引擎，不动 Java 主链路。
+- Spring AI 和 LangChain4j 怎么选？——Spring AI 绑定 Spring 生态（Boot 配置、Actuator、Retry），适合已有
+  Spring Cloud 体系；LangChain4j 框架无关、社区活跃、对 Agent/Tool 抽象更成熟，适合多框架混合或非 Spring 项目。
+- LLM 调用超时设多少？——按模型和场景：流式输出首 token < 2s、整体 < 30s；同步调用 < 15s。超时后不重试（幂等问题），直接降级到规则引擎或缓存回复。
+- 怎么防止 prompt injection？——输入侧做系统提示隔离（system message 不可被用户覆盖）、关键词黑名单、长度限制；输出侧做 schema
+  校验 + 工具白名单；高敏操作走人工确认。
+- token 成本怎么控？——按用户/租户设日预算（Redis 计数）、长上下文做摘要压缩、cheap 模型做意图分类后再路由到 expensive 模型、相同
+  prompt 做语义缓存。
+- 怎么保证 LLM 改造可回滚？——LLM 能力走 feature flag（开关），按租户/流量灰度，出问题秒级切回规则引擎，不动 Java 主链路。
 memory_points:
-  - LLM 当外部不稳定依赖：超时 + 熔断 + 线程池隔离 + 降级，和调一个慢 RPC 没本质区别
-  - 输入输出走 DTO + JSON Schema，模型产出先校验再进业务，绝不直接写库
-  - 成本护栏四件套：模型路由、token 预算、语义缓存、摘要压缩
-  - 安全护栏：prompt injection 防护、PII 脱敏、输出敏感词、高敏操作人工确认
-  - 边界一句话：LLM 给建议，Java 做决策，状态机和审计永不交给模型
+- LLM 当外部不稳定依赖：超时 + 熔断 + 线程池隔离 + 降级，和调一个慢 RPC 没本质区别
+- 输入输出走 DTO + JSON Schema，模型产出先校验再进业务，绝不直接写库
+- 成本护栏四件套：模型路由、token 预算、语义缓存、摘要压缩
+- 安全护栏：prompt injection 防护、PII 脱敏、输出敏感词、高敏操作人工确认
+- 边界一句话：LLM 给建议，Java 做决策，状态机和审计永不交给模型
+frequency: high
 ---
 
 # 【Java 后端架构师】LLM 接入 Java 后端的架构边界
@@ -410,6 +417,30 @@ public OrderSuggestion recommend(UserQuery q) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class API decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class B4 start
+    class C1 process
+    class Feature decision
+    class GPT special
+    class JSON error
+    class Java info
+    class LLM start
+    class S1 process
+    class S2 decision
+    class S3 special
+    class Tomcat error
+    class br info
     subgraph S1 [业务接入与隔离层]
         A1[Java 业务主链路<br/>Tomcat 线程池] -->|异步解耦| A2[LLM 独立线程池<br/>Resilience4j隔离]
     end

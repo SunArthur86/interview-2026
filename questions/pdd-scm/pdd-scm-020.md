@@ -35,6 +35,7 @@ memory_points:
 - 每环节独立聚合根 + 状态机
 - 领域事件串联 + 最终一致
 - 逆向流程（退货）是反向状态机
+frequency: low
 ---
 
 # 【拼多多供应链】采购到结算的全流程怎么设计？
@@ -213,6 +214,26 @@ XA 在供应链完全不可行：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class B1 special
+    class B2 error
+    class C1 info
+    class C2 start
+    class D1 process
+    class D2 decision
+    class D3 special
+    class E1 error
+    class E2 info
+    class QC start
+    class T process
     subgraph 采购域
         A1[创建采购单] --> A2[供应商发货]
         A2 --> A3[到货确认状态]

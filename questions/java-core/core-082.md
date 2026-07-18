@@ -16,6 +16,7 @@ memory_points:
 - return避坑：finally中没有return时，修改基本变量不影响已暂存的返回值
 - 异常吞噬：若在finally中return或抛出新异常，会导致掩盖try块中原有的业务异常
 - 资源释放：为避免底层IO关闭异常被吞，推荐用try-with-resources替代传统finally手动close
+frequency: medium
 ---
 
 # 什么是finally？
@@ -118,6 +119,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

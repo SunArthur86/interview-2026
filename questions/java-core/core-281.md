@@ -15,6 +15,7 @@ memory_points:
 - 算法步骤：按当前位分配到0-9桶，按桶顺序收集，重复至最高位
 - 复杂度：时间O(nk)，空间O(n+k)，因不交换元素所以是稳定排序
 - 底层依赖：分配收集时必须借助稳定排序（如计数排序）处理每一位
+frequency: low
 ---
 
 # 基数排序的原理是什么？
@@ -136,6 +137,39 @@ for (int i = n - 1; i >= 0; i--) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class LSD start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class Q info
+    class R start
+    class Radix process
+    class S decision
+    class T special
+    class U error
+    class br info
+    class d start
+    class k process
+    class n decision
     A[基数排序 Radix] --> B[多关键字排序]
     B --> C[按位 LSD 最低位优先]
     C --> D[第 1 轮 个位]

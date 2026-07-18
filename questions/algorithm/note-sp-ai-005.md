@@ -30,6 +30,7 @@ memory_points:
 - 核心特性：冒泡是稳定排序，因为相等元素不交换相对位置。
 - 对比选择排序：冒泡每轮可多次交换且稳定，而选择每轮只交换一次且不稳定。
 - 加分提醒：实际开发中，同为O(n²)级别，插入排序的性能通常优于冒泡排序。
+frequency: low
 ---
 
 # 冒泡排序的时间复杂度？
@@ -149,6 +150,29 @@ O(1) — 原地排序，只用常数级额外空间
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Break decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class O error
+    class arr_j info
+    class br start
+    class false process
+    class n decision
+    class swapped special
+    class true error
     A["未排序数组"] --> B["外层遍历控制轮次"]
     B --> C["相邻元素两两比较"]
     C --> D{"判断 arr_j > arr_j+1"}

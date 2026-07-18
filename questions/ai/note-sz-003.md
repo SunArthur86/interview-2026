@@ -10,7 +10,8 @@ tags:
 - 连续登录
 - 窗口函数
 feynman:
-  essence: 找连续7天登录的司机ID，核心思路是利用"连续日期-序号=恒定值"的特征分组。三种主流写法：①ROW_NUMBER()差值法（用登录日期的序号减行号，连续天会得到相同分组键）②LEAD/LAG判断相邻法 ③自连接法（性能差不推荐）。最优是 ROW_NUMBER 差值法——简洁高效且易扩展到"连续N天"。
+  essence: 找连续7天登录的司机ID，核心思路是利用"连续日期-序号=恒定值"的特征分组。三种主流写法：①ROW_NUMBER()差值法（用登录日期的序号减行号，连续天会得到相同分组键）②LEAD/LAG判断相邻法
+    ③自连接法（性能差不推荐）。最优是 ROW_NUMBER 差值法——简洁高效且易扩展到"连续N天"。
   analogy: 像查谁连续打卡7天——给每天的打卡编个流水号（行号），再把日期转成数字序号。如果一个人连续打卡，日期序号和行号的差值会一直不变（因为两个都每天+1）；一旦断了一天，差值就变了。相同差值的连续打卡归为一组，数每组有几天就行。
   first_principle: 连续的数学特征是"等差数列"。日期是自然序（每天+1），连续登录的行号也是等差（+1），两者相减得到恒定分组键。利用这个不变量就能把"连续"转化成"分组"。
   key_points:
@@ -31,6 +32,7 @@ memory_points:
 - 核心口诀：日期减去行号等于相同分组键（DATE - ROW_NUMBER = Grp）
 - 因连续日期递增与行号递增相减得常数，断线则常数变，借此巧妙分组
 - 通用解题框架：先DISTINCT去重，再用窗口打行号，最后GroupBy并Having判定大于等于N天
+frequency: low
 ---
 
 # 【神州专车面经】手写 SQL：找出连续7天都有登录的司机ID
@@ -159,6 +161,28 @@ WHERE login_date >= DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BY decision
+    class C special
+    class COUNT error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class GROUP special
+    class Grp error
+    class H info
+    class HAVING start
+    class PARTITION process
+    class br decision
+    class driver_id special
     A["司机原始登录记录表"] --> B["按司机与日期DISTINCT去重"]
     B --> C["ROW_NUMBER分组排序<br/>PARTITION BY driver_id"]
     C --> D["计算差值恒定分组键<br/>日期序号 - 行序号 = Grp"]

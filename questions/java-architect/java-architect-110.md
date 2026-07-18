@@ -9,9 +9,13 @@ tags:
 - Native Image
 - 冷启动
 feynman:
-  essence: Native Image 是 GraalVM 的 AOT（Ahead-Of-Time）编译——把 Spring Boot 应用编译成原生可执行文件，启动时间从 30 秒降到 50ms，内存占用从 1GB 降到 100MB。代价是失去 JIT 优化（峰值吞吐降 10-30%）、反射/动态代理要配置（reflect-config.json）、构建时间长（5-10 分钟）。它是 Serverless / 函数计算 / CLI 工具的杀手锏，但不是长运行服务的最佳选择。
-  analogy: 像把一部汽车（JVM + JIT）拆了重装成自行车（Native Image）：启动快（一脚蹬就跑）、占地小（自行车棚就够），但跑不快（没有 JIT 优化），改装麻烦（要重新设计零件）。短途出行（Serverless）选自行车，长途高速（长运行服务）选汽车。
-  first_principle: JVM 启动慢是因为要加载类、初始化、JIT 预热——前 1-2 分钟性能差。Serverless 场景要求冷启动 < 1 秒，JVM 模式做不到。Native Image 在构建时（AOT）完成所有类加载和初始化，把"运行时的工作"前置到构建时，启动只需执行已经编译好的机器码。
+  essence: Native Image 是 GraalVM 的 AOT（Ahead-Of-Time）编译——把 Spring Boot 应用编译成原生可执行文件，启动时间从
+    30 秒降到 50ms，内存占用从 1GB 降到 100MB。代价是失去 JIT 优化（峰值吞吐降 10-30%）、反射/动态代理要配置（reflect-config.json）、构建时间长（5-10
+    分钟）。它是 Serverless / 函数计算 / CLI 工具的杀手锏，但不是长运行服务的最佳选择。
+  analogy: 像把一部汽车（JVM + JIT）拆了重装成自行车（Native Image）：启动快（一脚蹬就跑）、占地小（自行车棚就够），但跑不快（没有
+    JIT 优化），改装麻烦（要重新设计零件）。短途出行（Serverless）选自行车，长途高速（长运行服务）选汽车。
+  first_principle: JVM 启动慢是因为要加载类、初始化、JIT 预热——前 1-2 分钟性能差。Serverless 场景要求冷启动 < 1 秒，JVM
+    模式做不到。Native Image 在构建时（AOT）完成所有类加载和初始化，把"运行时的工作"前置到构建时，启动只需执行已经编译好的机器码。
   key_points:
   - Native Image（GraalVM）：AOT 编译，启动 < 100ms，内存降 80%
   - 代价：无 JIT（峰值吞吐降 10-30%）、反射/动态代理要配置、构建慢（5-10 分钟）
@@ -25,21 +29,27 @@ first_principle:
   - Serverless 要求冷启动 < 1 秒（用户感知）
   - JVM 启动要加载类、初始化、JIT 预热，30 秒起步
   - Serverless 实例短命（几秒到几分钟），JIT 还没热就销毁
-  rebuild: 用 AOT 编译替代 JIT 解释启动。构建时：GraalVM 的 native-image 工具扫描应用，做封闭世界分析（closed-world analysis），把所有可达的类、方法、反射都固化进原生二进制。运行时：直接执行机器码（无 JVM 解释、无 JIT 编译），启动只需加载已编译代码到内存。代价：封闭世界假设（运行时不能动态加载新类）、反射要预先配置。
+  rebuild: 用 AOT 编译替代 JIT 解释启动。构建时：GraalVM 的 native-image 工具扫描应用，做封闭世界分析（closed-world
+    analysis），把所有可达的类、方法、反射都固化进原生二进制。运行时：直接执行机器码（无 JVM 解释、无 JIT 编译），启动只需加载已编译代码到内存。代价：封闭世界假设（运行时不能动态加载新类）、反射要预先配置。
 follow_up:
-  - Native Image 和 JVM 模式怎么选？——Serverless / Function / CLI / 短生命周期选 Native；长运行高吞吐选 JVM。两者不冲突，可同代码两套构建
-  - 反射怎么处理？——封闭世界分析自动检测部分，剩下的要 reflect-config.json 显式配置。Spring Boot 3 的 Spring AOT 自动生成 95% 配置
-  - 性能差异多大？——启动 < 100ms vs JVM 30s（百倍）；峰值吞吐 Native 低 10-30%（无 JIT 优化）；首次请求延迟 Native < 1ms vs JVM 几百毫秒（JIT 还没热）
-  - 怎么调试？——和 JVM 模式一样，但 Native Image 调试需要 GraalVM 支持（native-image -H:GenerateDebugInfo=true），IDE 支持 Spring Boot 3 的双模式调试
-  - 兼容性问题？——动态代理（CGLIB）、反射加载（Class.forName）、运行时字节码生成（ByteBuddy）都需要配置或替换。Hibernate 6.2+ / Spring Boot 3 已支持
+- Native Image 和 JVM 模式怎么选？——Serverless / Function / CLI / 短生命周期选 Native；长运行高吞吐选 JVM。两者不冲突，可同代码两套构建
+- 反射怎么处理？——封闭世界分析自动检测部分，剩下的要 reflect-config.json 显式配置。Spring Boot 3 的 Spring AOT 自动生成
+  95% 配置
+- 性能差异多大？——启动 < 100ms vs JVM 30s（百倍）；峰值吞吐 Native 低 10-30%（无 JIT 优化）；首次请求延迟 Native
+  < 1ms vs JVM 几百毫秒（JIT 还没热）
+- 怎么调试？——和 JVM 模式一样，但 Native Image 调试需要 GraalVM 支持（native-image -H:GenerateDebugInfo=true），IDE
+  支持 Spring Boot 3 的双模式调试
+- 兼容性问题？——动态代理（CGLIB）、反射加载（Class.forName）、运行时字节码生成（ByteBuddy）都需要配置或替换。Hibernate 6.2+
+  / Spring Boot 3 已支持
 memory_points:
-  - Native Image（GraalVM AOT）：启动 < 100ms、内存降 80%
-  - 代价：无 JIT（峰值吞吐降 10-30%）、反射要配置、构建 5-10 分钟
-  - 配置：reflect-config.json / resource-config.json / proxy-config.json
-  - Spring Boot 3 + Spring AOT 自动生成 95% 配置
-  - 适合：Serverless / Function / CLI / 短生命周期服务
-  - 不适合：长运行高吞吐、强依赖反射的库
-  - 命令：native-image -jar app.jar app 或 mvn native:compile
+- Native Image（GraalVM AOT）：启动 < 100ms、内存降 80%
+- 代价：无 JIT（峰值吞吐降 10-30%）、反射要配置、构建 5-10 分钟
+- 配置：reflect-config.json / resource-config.json / proxy-config.json
+- Spring Boot 3 + Spring AOT 自动生成 95% 配置
+- 适合：Serverless / Function / CLI / 短生命周期服务
+- 不适合：长运行高吞吐、强依赖反射的库
+- 命令：native-image -jar app.jar app 或 mvn native:compile
+frequency: high
 ---
 
 # 【Java 后端架构师】Native Image 与 JVM 模式如何选型
@@ -450,6 +460,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

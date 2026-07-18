@@ -29,6 +29,7 @@ memory_points:
 - 五大组件：索引器(数据向量化)、查询处理器(改写/扩展)、检索器(向量/BM25)、后处理器(重排/过滤)、生成器(带引用回答)。
 - 检索前优化：用HyDE生成假设答案或Multi-Query多角度扩展以提升召回。
 - 检索后精排：必须引入Rerank重排模型和元数据过滤，将最相关文档前置。
+frequency: high
 ---
 
 # RAG 系统的核心组件及工作逻辑？
@@ -246,6 +247,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

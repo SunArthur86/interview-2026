@@ -25,6 +25,7 @@ memory_points:
 - 串联关键：因为TraceId注入MDC，所以日志和链路能打通关联分析
 - 告警分级：P0核心错误电话叫醒，P1延迟翻倍企微通知，P2非核心看日报
 - 日志对比：ELK重全文检索但成本高，而Loki仅索引Label适合低成本场景
+frequency: medium
 ---
 
 # 如何从零搭建微服务的全链路可观测性体系？覆盖 Metrics、Logging、Tracing 三大支柱。
@@ -94,6 +95,7 @@ flowchart TD
     L --> CAUSE[查明原因]
     T --> LOC[定位链路段]
     style TID fill:#ffe4b5
+
 ```
 
 

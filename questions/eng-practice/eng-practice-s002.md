@@ -17,6 +17,7 @@ memory_points:
 - 在线评估：用户反馈（点赞/点踩），业务指标（任务完成率/交互轮数）。
 - RAGAS 核心：Faithfulness（忠实度）、Relevancy（相关性）、Context Recall（召回）。
 - 评估策略：逻辑用 LLM-as-Judge，语气用用户指标；离线测选型，在线测价值。
+frequency: low
 ---
 
 # 如何评估LLM应用的效果？
@@ -157,6 +158,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

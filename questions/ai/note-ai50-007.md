@@ -30,6 +30,7 @@ memory_points:
 - 四大核心指标：忠实度、答案相关性、上下文精确率和召回率。
 - 反幻觉看Faithfulness：把答案拆解为原子陈述，计算能被上下文支持的陈述比例。
 - Context Recall看信息覆盖率，Context Precision看Top-K文档中有用文档的比例。
+frequency: medium
 ---
 
 # Ragas框架如何评估RAG系统中的幻觉？
@@ -241,6 +242,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

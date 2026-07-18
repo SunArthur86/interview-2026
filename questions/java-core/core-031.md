@@ -20,6 +20,7 @@ memory_points:
 - 解释器模式是行为型设计模式，核心是定义文法并构建抽象语法树（AST）来解释特定语言
 - 主要角色分终结符与非终结符表达式，通常配合组合模式递归调用解析规则
 - 典型应用场景：规则引擎、SQL解析器、正则表达式引擎及自定义DSL，缺点是易类膨胀
+frequency: medium
 ---
 
 # 解释器模式的原理和应用场景是什么？
@@ -139,6 +140,40 @@ class Context {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AST process
+    class And decision
+    class B special
+    class C error
+    class Context info
+    class D start
+    class Drools process
+    class E decision
+    class Expression special
+    class F error
+    class G info
+    class H start
+    class I process
+    class Interpreter decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class Not decision
+    class O special
+    class Or error
+    class P info
+    class SQL start
+    class SpEL process
+    class Spring decision
+    class interpret special
     A[解释器模式 Interpreter] --> B[给定语言 定义文法]
     B --> C[每个规则用一个表达式类]
     D[抽象表达式 Expression] --> E[interpret Context]

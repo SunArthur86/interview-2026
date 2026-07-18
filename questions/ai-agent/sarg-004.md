@@ -19,6 +19,7 @@ memory_points:
 - Rerank 仅处理 Top-100，性价比极高，是锦上添花而非雪中送炭。
 - 核心对比：向量检索适合海量捞取，Rerank 适合精准排序 Top-K。
 - 注意截断策略和空输入处理，避免超长文本报错或异常降级。
+frequency: medium
 ---
 
 # 什么是Reranking？为什么RAG需要它？
@@ -140,6 +141,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

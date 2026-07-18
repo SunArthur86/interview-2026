@@ -21,6 +21,7 @@ memory_points:
 - Contrastive Search结合概率与退化惩罚，解决重复问题，适合长文本/RAG，参数alpha通常0.5-0.7。
 - Nucleus Sampling (Top-p) 随机采样，多样性高，适合创意写作，但可能产生幻觉。
 - 决策口诀：事实问答用Contrastive，创意对话用Nucleus，机器翻译用Beam。
+frequency: low
 ---
 
 # 对比常见解码策略:Greedy/Beam Search/Contrastive Search各自的优缺点
@@ -133,6 +134,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

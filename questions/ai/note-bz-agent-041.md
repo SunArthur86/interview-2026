@@ -29,6 +29,7 @@ memory_points:
 - 万物指代：API、脚本、文档、SOP、外部服务等皆可封装为统一Skill。
 - 统一规范六要素：元数据(身份)、触发器(何时用)、工具依赖、输入输出Schema、执行流程、示例。
 - 核心价值：通过统一规范，让异构能力(AI/人工/数据)标准化，供Agent按需动态调度。
+frequency: medium
 ---
 
 # 如何基于统一规范实现"万物皆可 Skill"？
@@ -294,6 +295,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

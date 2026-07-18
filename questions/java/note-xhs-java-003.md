@@ -11,7 +11,7 @@ tags:
 - 线程安全
 feynman:
   essence: ConcurrentHashMap 是线程安全的HashMap。1.7用分段锁（把数据切成16段每段一把锁），1.8改为锁单个桶头节点+CAS，粒度更细并发更高。
-  analogy: "想象一个大食堂：1.7 版本是分成16个独立小餐厅每个有自己的门锁（最多16人同时吃饭）；1.8 版本是开放大食堂，每张桌子有自己的锁（几百人同时吃不同桌）。"
+  analogy: 想象一个大食堂：1.7 版本是分成16个独立小餐厅每个有自己的门锁（最多16人同时吃饭）；1.8 版本是开放大食堂，每张桌子有自己的锁（几百人同时吃不同桌）。
   key_points:
   - 1.7=Segment+ReentrantLock，并发度固定16
   - 1.8=CAS+synchronized锁桶头，并发度=桶数
@@ -19,18 +19,19 @@ feynman:
   - synchronized经过JVM锁升级优化后性能不输ReentrantLock
   - size()用baseCount+CounterCell分散CAS热点
 first_principle:
-  problem: "多线程并发读写HashMap需要保证线程安全，但全局锁（Hashtable）并发度太低，如何实现高并发安全哈希表？"
+  problem: 多线程并发读写HashMap需要保证线程安全，但全局锁（Hashtable）并发度太低，如何实现高并发安全哈希表？
   axioms:
   - 锁粒度越细，并发度越高
   - 无锁（CAS）比有锁性能更好但只适用于简单操作
   - 锁升级（偏向→轻量→重量）可以兼顾无竞争和有竞争场景
   - 分散热点（CounterCell）比单点CAS在高并发下吞吐量更高
-  rebuild: "从并发安全哈希表需求出发：全局锁→分段锁(1.7)→桶级锁+CAS(1.8)，每次演进都在降低锁粒度，同时利用JVM锁优化和CPU原子指令减少开销"
+  rebuild: 从并发安全哈希表需求出发：全局锁→分段锁(1.7)→桶级锁+CAS(1.8)，每次演进都在降低锁粒度，同时利用JVM锁优化和CPU原子指令减少开销
 follow_up:
 - ConcurrentHashMap 的 get() 需要加锁吗？为什么？
 - ConcurrentHashMap 的 put 为什么不允许 null key/value？
 - CounterCell 和 LongAdder 的关系是什么？
 - 1.8 的 ConcurrentHashMap 在扩容时如何支持并发？
+frequency: high
 ---
 
 # ConcurrentHashMap JDK 1.7 和 1.8 的差异与优化？（华为od Java一面）
@@ -217,6 +218,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

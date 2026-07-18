@@ -17,6 +17,7 @@ memory_points:
 - 三个指针：SND.UNA 指向未确认起点，SND.NXT 指向可发送起点，二者夹角为可用窗口大小
 - 窗口对比：滑动窗口(rwnd)是流量控制保护接收方，拥塞窗口(cwnd)是拥塞控制保护网络
 - 零窗口死锁：接收方通告窗口为 0 时发送方停止，依靠坚持定时器发探测包解决死锁
+frequency: low
 ---
 
 # 什么是TCP的滑动窗口？
@@ -118,6 +119,36 @@ if (send_window == 0) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ACK process
+    class ACKed decision
+    class B special
+    class C error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class N special
+    class Not error
+    class Receivable info
+    class Sent start
+    class TCP process
+    class UnACKed decision
+    class br special
+    class n error
+    class rwnd info
     A[TCP 滑动窗口] --> B[发送方窗口]
     B --> C[已确认 Sent/ACKed]
     B --> D[可发送 Sent UnACKed]

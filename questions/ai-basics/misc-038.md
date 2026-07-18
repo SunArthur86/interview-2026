@@ -20,6 +20,7 @@ memory_points:
 - 零样本分类：构造Prompt（如A photo of dog），算图像与类别文本相似度
 - 训练目标：InfoNCE Loss，同时优化以图找文和以文找图
 - 局限：细粒度分类弱，抽象概念理解差，依赖Prompt Engineering
+frequency: low
 ---
 
 # CLIP的原理是什么?为什么它能实现零样本图像分类
@@ -141,6 +142,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

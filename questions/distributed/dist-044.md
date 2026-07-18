@@ -16,6 +16,7 @@ memory_points:
 - 半开状态仅放行极少探测请求，成功则恢复，失败则继续熔断
 - 框架对比：Hystrix已停更，Sentinel基于滑动窗口支持动态规则
 - 核心区别：熔断是被动保护机制，而降级是主动兜底策略
+frequency: medium
 ---
 
 # 熔断器的三种状态是什么？
@@ -118,6 +119,7 @@ flowchart TD
     style TO_CLOSED fill:#009688,color:#fff
     style TO_HALF fill:#FF9800,color:#fff
     style DEGRADE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

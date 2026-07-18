@@ -31,6 +31,7 @@ memory_points:
 - Top-P核采样：只选累积概率达P的最小词集，动态截断长尾
 - Top-K硬截断：死板只选概率最高的K个词，不及Top-P自适应
 - 业务调优：代码计算用低温(0~0.2)，而创意发散用高温(0.7+)
+frequency: high
 ---
 
 # 生成参数 Temperature、Top-P、Top-K 在业务中如何调优？
@@ -238,6 +239,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -4,8 +4,17 @@ difficulty: L4
 category: java-architect
 subcategory: 实时计算
 title: 实时数仓指标口径一致性治理
-tags: [实时数仓, 指标口径, OneData, 数据治理, DSL]
-related: [java-architect-153, java-architect-154, java-architect-156]
+tags:
+- 实时数仓
+- 指标口径
+- OneData
+- 数据治理
+- DSL
+related:
+- java-architect-153
+- java-architect-154
+- java-architect-156
+frequency: medium
 ---
 
 # 实时数仓指标口径一致性治理
@@ -443,6 +452,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

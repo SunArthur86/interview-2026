@@ -16,6 +16,7 @@ memory_points:
 - 拼接三剑客：String不可变，而Builder非线程安全高性能，Buffer线程安全低性能
 - 扩容机制：StringBuilder/StringBuffer初始容量16，底层按左移1位加2进行扩容
 - 高频方法：indexOf查索引，substring截取子串（注意JDK7后为新建数组防泄漏）
+frequency: high
 ---
 
 # String类的常见方法有哪些是什么？
@@ -82,6 +83,42 @@ for (int i = 0; i < 1000; i++) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class JDK error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class Q info
+    class String start
+    class StringBuilder process
+    class StringUtils decision
+    class br special
+    class byte error
+    class char info
+    class coder start
+    class concat process
+    class final decision
+    class hashCode special
+    class intern error
+    class private info
     A[String 不可变] --> B[final 修饰类]
     A --> C[private final char / byte 数组]
     B --> D[不可继承]

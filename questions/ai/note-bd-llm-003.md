@@ -31,6 +31,7 @@ memory_points:
 - 正文策略：因为Markdown具有天然层级，所以用标题感知切片能完美保留上下文结构
 - 表格策略：表格必须结构化切片，因为要避免行数据断裂，所以保持整表或按行分组并带上表头
 - 多模态策略：图表用VLM解析转为文字描述再切片，从而实现图文语义的统一关联
+frequency: medium
 ---
 
 # 【字节面经】如果用户的文档同时包含大段正文和密集的表格数据，你会采用统一的切片策略吗？
@@ -551,6 +552,7 @@ flowchart TD
     style TBL fill:#FF9800,color:#fff
     size_note([过大→检索信号被平均<br/>过小→语义割裂]) -.-> SIZE
     style PARENT fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

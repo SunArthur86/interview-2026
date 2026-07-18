@@ -28,6 +28,7 @@ memory_points:
 - 任务编排用DAG图建模，支持并行执行与依赖管理
 - 通信模式选共享黑板（解耦）或消息传递（明确流程）
 - 必须设置超时熔断与死锁检测，防止单点故障挂起系统
+frequency: medium
 ---
 
 # 如何设计一个多Agent协作系统？例如多个AI Agent协同完成一个复杂的数据分析报告。
@@ -163,6 +164,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

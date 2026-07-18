@@ -12,8 +12,8 @@ tags:
 - CP
 - 面经
 feynman:
-  essence: "Nacos用两种一致性协议——临时实例用Distro(AP)追求可用性，持久实例用Raft(CP)追求一致性。选错协议会导致服务发现出问题"
-  analogy: "临时实例像外卖骑手——随时上线下线（AP优先，宁可短暂看到已下线的骑手也不能让系统卡住）。持久实例像实体店——数据必须准确一致（CP优先，宁可短暂不可用也不能数据错乱）。用外卖骑手的方式管理实体店地址=灾难"
+  essence: Nacos用两种一致性协议——临时实例用Distro(AP)追求可用性，持久实例用Raft(CP)追求一致性。选错协议会导致服务发现出问题
+  analogy: 临时实例像外卖骑手——随时上线下线（AP优先，宁可短暂看到已下线的骑手也不能让系统卡住）。持久实例像实体店——数据必须准确一致（CP优先，宁可短暂不可用也不能数据错乱）。用外卖骑手的方式管理实体店地址=灾难
   key_points:
   - 临时实例=客户端心跳维持，断连自动摘除→Distro协议(AP)
   - 持久实例=服务端主动探测，永久存储→Raft协议(CP)
@@ -21,9 +21,9 @@ feynman:
   - Raft：CP模式，Leader写+半数确认，强一致但Leader选举期间不可用
   - 典型坑：面试中说"都是Raft"→记混了，临时实例是Distro
 first_principle:
-  essence: "CAP定理：分布式系统在一致性(C)和可用性(A)之间必须权衡。Nacos的设计是让用户根据业务特征选择AP或CP"
-  derivation: "服务注册发现的场景中：微服务实例(如Spring Cloud服务)频繁上下线，用AP模式(Distro)即使Nacos某节点宕机也能继续提供服务发现，代价是短暂的不一致（可能看到已下线的实例，但客户端重试即可）。数据库/存储类服务需要精确的实例信息，用CP模式(Raft)保证所有节点看到一致的实例列表，代价是Leader选举期间(几秒)不可用"
-  conclusion: "Nacos双协议的设计精髓是：不要用一种协议解决所有问题——临时性服务选AP，持久性服务选CP"
+  essence: CAP定理：分布式系统在一致性(C)和可用性(A)之间必须权衡。Nacos的设计是让用户根据业务特征选择AP或CP
+  derivation: 服务注册发现的场景中：微服务实例(如Spring Cloud服务)频繁上下线，用AP模式(Distro)即使Nacos某节点宕机也能继续提供服务发现，代价是短暂的不一致（可能看到已下线的实例，但客户端重试即可）。数据库/存储类服务需要精确的实例信息，用CP模式(Raft)保证所有节点看到一致的实例列表，代价是Leader选举期间(几秒)不可用
+  conclusion: Nacos双协议的设计精髓是：不要用一种协议解决所有问题——临时性服务选AP，持久性服务选CP
 follow_up:
 - Distro协议和Raft协议的具体区别是什么？
 - Nacos怎么判断一个实例是临时的还是持久的？
@@ -34,6 +34,7 @@ memory_points:
 - Distro：各节点独立写入，异步同步
 - Raft：Leader写+半数确认
 - 典型坑："都是Raft"→错！临时实例是Distro
+frequency: high
 ---
 
 # 【Java微服务】Nacos临时实例vs持久实例的区别？各自的一致性协议？
@@ -230,6 +231,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

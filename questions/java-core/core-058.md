@@ -15,6 +15,7 @@ memory_points:
 - 递归查询：客户端向本地DNS发起递归查询（本地DNS负责跑腿拿结果）。
 - 迭代查询：本地DNS向根、顶级、权威服务器逐级发起迭代查询（只指路不给结果）。
 - 缓存与负载：解析结果受TTL控制进行各级缓存，权威DNS可通过返回多IP实现负载均衡。
+frequency: medium
 ---
 
 # 什么是DNS解析过程？
@@ -105,6 +106,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

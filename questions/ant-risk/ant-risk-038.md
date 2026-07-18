@@ -34,6 +34,7 @@ memory_points:
 - 平台能力：自助接入、可视化配置、灰度发布
 - AI 加持：Agent 编排、自然语言配置、自动迭代
 - 衡量：RT、迭代速度、自助率、AI 占比
+frequency: medium
 ---
 
 # 【蚂蚁风控】设计一个智能风控平台
@@ -58,6 +59,38 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AI start
+    class API process
+    class Agent decision
+    class DAG special
+    class HBase error
+    class Harness info
+    class L1 start
+    class L2A process
+    class L2B decision
+    class L3A special
+    class L3B error
+    class L3C info
+    class L3D start
+    class L3E process
+    class L3F decision
+    class L3G special
+    class L3H error
+    class L4 info
+    class L5 start
+    class L6 process
+    class LLM decision
+    class Milvus special
+    class MySQL error
+    class Redis info
+    class SDK start
+    class br process
     L1[接入层<br/>SDK / API / 事件订阅 / 控制台]
     L2A[DAG 引擎<br/>传统编排 顺序+并行+短路]
     L2B[Agent 引擎<br/>AI 编排 LLM 自主调工具]

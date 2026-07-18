@@ -32,6 +32,7 @@ memory_points:
 - 组装逻辑：按相关性召回长期和向量记忆，结合短期上下文，受Token预算严格控制
 - 防污染手段1：原始错误信息须先摘要成规则再写回，严禁直接塞入主Context
 - 防污染手段2：反思与中间推理过程存独立scratchpad，只把最终结论合并进主Context
+frequency: high
 ---
 
 # 【某讯面经】设计 Agent 的 Memory 系统（短期+长期+向量记忆），如何避免上下文污染
@@ -258,6 +259,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

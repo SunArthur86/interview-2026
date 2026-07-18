@@ -28,14 +28,15 @@ first_principle:
   - 开源生态降低门槛
   rebuild: 按场景选型（极致/通用/快速）+ 关注核心指标（吞吐/延迟/显存）。
 follow_up:
-  - 为什么 TRT-LLM 比 vLLM 快？——官方 kernel（FlashAttention/MMA）+ 算子融合 + 平铺更细
-  - 怎么从 HF 模型转 TRT-LLM？——convert_checkpoint.py 转 engine，需校准/精度配置
-  - vLLM 生态为什么火？——开源易用、社区活跃、模型支持快
+- 为什么 TRT-LLM 比 vLLM 快？——官方 kernel（FlashAttention/MMA）+ 算子融合 + 平铺更细
+- 怎么从 HF 模型转 TRT-LLM？——convert_checkpoint.py 转 engine，需校准/精度配置
+- vLLM 生态为什么火？——开源易用、社区活跃、模型支持快
 memory_points:
-  - TRT-LLM：NVIDIA 官方极致优化，部署复杂
-  - vLLM：PagedAttention 易用通用
-  - TGI：HF 出品简单
-  - lightLLM：轻量模块化
+- TRT-LLM：NVIDIA 官方极致优化，部署复杂
+- vLLM：PagedAttention 易用通用
+- TGI：HF 出品简单
+- lightLLM：轻量模块化
+frequency: high
 ---
 
 # 【拼多多 AI 中台】TensorRT-LLM 和 vLLM/TGI 怎么对比选型？
@@ -299,6 +300,34 @@ TGI 简单但性能和功能都落后于 vLLM。第一，**性能差距**——T
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class B1 error
+    class B2 info
+    class B3 start
+    class B4 process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class D start
+    class LLM process
+    class NVIDIA decision
+    class PagedAttention special
+    class S1 error
+    class S2 info
+    class S3 start
+    class TGI process
+    class TRT decision
+    class vLLM special
     subgraph S1["TRT-LLM"]
         A1["NVIDIA 官方Kernel"] --> A2["吞吐极高"]
         A3["闭源引擎编译"] --> A4["部署灵活度低"]

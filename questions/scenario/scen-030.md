@@ -42,6 +42,7 @@ memory_points:
 - 场景选型：新增用唯一索引，更新用乐观锁/状态机，复杂逻辑用分布式锁
 - Token机制：一次性消耗，因后端删Token是原子操作，故可防表单重放
 - 关键细节：判断与业务必须同事务原子执行，且缓存的结果需与首次绝对一致
+frequency: high
 ---
 
 # 如何设计一个防重提交/幂等方案？适用于下单、支付等核心业务。
@@ -169,6 +170,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

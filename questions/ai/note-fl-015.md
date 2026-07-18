@@ -11,7 +11,9 @@ tags:
 - RLHF
 - DPO
 feynman:
-  essence: SFT 监督微调让模型学会"指令→答案"格式；RLHF 用人类偏好训 Reward Model 再用 PPO 优化策略；DPO 直接用偏好数据优化策略跳过 RM。为什么 SFT 后还要偏好优化？SFT 只会"模仿"标注答案格式，不会区分"哪个回答更好"——偏好优化让模型学到 helpful/harmless/honest 排序信号，对话体验质变。工业主流是 SFT→DPO（PPO 太贵少用）。
+  essence: SFT 监督微调让模型学会"指令→答案"格式；RLHF 用人类偏好训 Reward Model 再用 PPO 优化策略；DPO 直接用偏好数据优化策略跳过
+    RM。为什么 SFT 后还要偏好优化？SFT 只会"模仿"标注答案格式，不会区分"哪个回答更好"——偏好优化让模型学到 helpful/harmless/honest
+    排序信号，对话体验质变。工业主流是 SFT→DPO（PPO 太贵少用）。
   analogy: SFT 像教小孩照着范文抄写（学会格式），RLHF/DPO 像老师批改"这个回答比那个好"（学会排序）。只会抄写的小孩不会分辨好坏，需要批改反馈才能进步。
   first_principle: SFT 学的是"模仿"，偏好优化学的是"排序"。模仿只能达到标注数据上限，排序能让模型学到超越标注的偏好信号（什么回答更 helpful/harmless）。
   key_points:
@@ -33,6 +35,7 @@ memory_points:
 - RLHF 学偏好排序：训 RM+PPO，能实现3H(有用无害诚实)，但4个模型同跑导致显存爆炸且不稳。
 - DPO 主流替代：跳过显式训 RM，直接用偏好对数据一步优化策略，更稳定省钱。
 - 加分项：说出 DPO 基于 Bradley-Terry 模型将最优 RM 与策略建立解析关系。
+frequency: medium
 ---
 
 # 【字节飞连面经】SFT vs RLHF vs DPO：做什么 / 数据形态 / 难点
@@ -127,6 +130,35 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Chosen special
+    class D error
+    class DPO info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class Model special
+    class N error
+    class PPO info
+    class Prompt start
+    class RLHF process
+    class Rejected decision
+    class Reward special
+    class br error
     A["指令数据 (指令, 答案)"] --> B["阶段一: SFT模型<br/>(监督微调)"]
     B --> C{"是否满足3H要求?<br/>(有用/无害/诚实)"}
     C -- "否: 无法区分好坏回答" --> D["阶段二: 偏好对齐优化"]

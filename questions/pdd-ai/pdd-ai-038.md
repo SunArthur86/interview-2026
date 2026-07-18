@@ -12,7 +12,8 @@ tags:
 - LangGraph
 feynman:
   essence: 智能 AI 中台是"用 Agent 编排中台能力"，把传统中台（被动调 API）升级为"会思考、会自主调用、会协作"的智能平台。
-  analogy: 像把传统中央厨房升级为智能厨房——之前厨师（业务）按菜谱做菜（调 API），现在智能主厨（Agent）按订单自主调度食材/调料/工序，多 Agent 协作出宴席。
+  analogy: 像把传统中央厨房升级为智能厨房——之前厨师（业务）按菜谱做菜（调 API），现在智能主厨（Agent）按订单自主调度食材/调料/工序，多 Agent
+    协作出宴席。
   first_principle: 中台能力成熟 + LLM 推理能力 + Function Calling → Agent 能自主完成之前要人编排的复杂任务。
   key_points:
   - 编排框架：LangGraph/AutoGen/自研
@@ -28,14 +29,15 @@ first_principle:
   - 任务复杂需要分工
   rebuild: 智能 AI 中台（多 Agent + 编排 + 中台工具化 + 治理）。
 follow_up:
-  - 多 Agent 怎么分工？——按职能（规划/执行/审查）+ 按域（业务/数据/算法）
-  - 怎么保证 Agent 决策正确？——工具白名单 + 约束规则 + 人工兜底 + 监控
-  - Agent 编排和工作流引擎区别？——工作流是固定 DAG，Agent 是动态决策（更灵活但更难控）
+- 多 Agent 怎么分工？——按职能（规划/执行/审查）+ 按域（业务/数据/算法）
+- 怎么保证 Agent 决策正确？——工具白名单 + 约束规则 + 人工兜底 + 监控
+- Agent 编排和工作流引擎区别？——工作流是固定 DAG，Agent 是动态决策（更灵活但更难控）
 memory_points:
-  - 框架：LangGraph/AutoGen/自研
-  - 多 Agent：Planner/Worker/Critic
-  - 中台能力 → Tool
-  - 状态：共享记忆
+- 框架：LangGraph/AutoGen/自研
+- 多 Agent：Planner/Worker/Critic
+- 中台能力 → Tool
+- 状态：共享记忆
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】智能 AI 中台（Agent 编排）怎么设计？
@@ -491,6 +493,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

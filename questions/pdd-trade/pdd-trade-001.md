@@ -33,6 +33,7 @@ memory_points:
 - 状态转移表定义合法转移
 - 事件驱动（支付事件/发货事件）
 - 拼团/预售扩展态
+frequency: low
 ---
 
 # 【拼多多交易】订单状态机怎么设计？
@@ -217,6 +218,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

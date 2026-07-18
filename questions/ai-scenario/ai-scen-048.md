@@ -28,6 +28,7 @@ memory_points:
 - 架构四层：实时特征(画像/图特征)、模型层(规则+XGBoost+GNN)、决策层(放行/验证/拦截)、反馈闭环。
 - 模型融合：规则引擎兜底黑名单，ML模型评分，GNN检测团伙，LLM辅助解释。
 - 关键指标：欺诈检出率>95%，误拦率<0.1%，KS值>0.4；冷启动用通用画像或强规则。
+frequency: low
 ---
 
 # 如何设计一个AI金融风控系统？实时交易反欺诈、信用评分、反洗钱。
@@ -166,6 +167,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

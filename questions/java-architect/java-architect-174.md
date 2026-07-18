@@ -9,9 +9,11 @@ tags:
 - 延迟
 - 一致性
 feynman:
-  essence: 搜索索引双写一致性的本质是"MySQL（主库）和 Elasticsearch（索引）是两个独立系统，写入要么都成功要么都失败"。解法是"同步双写（事务）或异步 CDC（最终一致）"——同步双写用事务/补偿保证强一致但性能差，异步 CDC 用 binlog 监听保证最终一致但有延迟。核心权衡是"一致性 vs 性能"。
+  essence: 搜索索引双写一致性的本质是"MySQL（主库）和 Elasticsearch（索引）是两个独立系统，写入要么都成功要么都失败"。解法是"同步双写（事务）或异步
+    CDC（最终一致）"——同步双写用事务/补偿保证强一致但性能差，异步 CDC 用 binlog 监听保证最终一致但有延迟。核心权衡是"一致性 vs 性能"。
   analogy: 像超市的货架和库存系统——你在收银台买了东西（MySQL），货架标签（ES 索引）也要更新。同步是收银时同时改标签（慢但准），异步是收银后派人去改标签（快但有几秒延迟）。
-  first_principle: MySQL 是 OLTP（事务强一致），ES 是搜索（全文检索倒排索引）。两者数据模型和存储不同，不能共用。写入 MySQL 后要同步到 ES 供搜索。双写的问题是"网络/故障下两个系统可能不一致"。
+  first_principle: MySQL 是 OLTP（事务强一致），ES 是搜索（全文检索倒排索引）。两者数据模型和存储不同，不能共用。写入 MySQL
+    后要同步到 ES 供搜索。双写的问题是"网络/故障下两个系统可能不一致"。
   key_points:
   - 三种同步模式：同步双写（事务）、异步 MQ（最终一致）、CDC binlog（解耦最终一致）
   - 延迟来源：MQ 投递 + ES 刷新（refresh interval，默认 1 秒）
@@ -25,19 +27,23 @@ first_principle:
   - 网络故障/服务宕机可能导致双写一个成功一个失败
   - ES 的 refresh_interval 导致写入到可搜索有固有延迟（默认 1 秒）
   - 搜索场景允许秒级延迟（不像交易要强一致）
-  rebuild: 异步 CDC 方案——MySQL 写入后，Debezium 监听 binlog 发到 Kafka，消费端写 ES。失败重试 + 死信队列 + T+1 对账兜底。ES refresh_interval 按业务调（实时搜索 200ms，离线 30s）。
+  rebuild: 异步 CDC 方案——MySQL 写入后，Debezium 监听 binlog 发到 Kafka，消费端写 ES。失败重试 + 死信队列 +
+    T+1 对账兜底。ES refresh_interval 按业务调（实时搜索 200ms，离线 30s）。
 follow_up:
-  - 同步双写和异步 CDC 怎么选？——核心交易用同步双写（事务保证），搜索/推荐用异步 CDC（秒级延迟可接受）。JD 商品搜索用 CDC。
-  - ES 写入失败怎么办？——消费 MQ 失败重试（指数退避），重试 3 次进死信队列人工处理。T+1 对账发现 MySQL 有但 ES 没有的数据补偿写入。
-  - binlog 乱序怎么处理？——Debezium 保留 binlog 顺序，Kafka 单分区有序。消费端按 productId hash 到同一分区保证同商品顺序。
-  - 怎么减少 ES 写入延迟？——bulk 批量写入（一次 100-1000 条），refresh_interval 调大（30s）攒批量刷新。实时要求高的用 1s 或手动 refresh。
-  - 双写后搜索不到怎么办？——ES refresh 延迟（默认 1s），写入后立即搜可能搜不到。解决：用 GET by id（实时），不用 search（等 refresh）。或强制 refresh（性能差）。
+- 同步双写和异步 CDC 怎么选？——核心交易用同步双写（事务保证），搜索/推荐用异步 CDC（秒级延迟可接受）。JD 商品搜索用 CDC。
+- ES 写入失败怎么办？——消费 MQ 失败重试（指数退避），重试 3 次进死信队列人工处理。T+1 对账发现 MySQL 有但 ES 没有的数据补偿写入。
+- binlog 乱序怎么处理？——Debezium 保留 binlog 顺序，Kafka 单分区有序。消费端按 productId hash 到同一分区保证同商品顺序。
+- 怎么减少 ES 写入延迟？——bulk 批量写入（一次 100-1000 条），refresh_interval 调大（30s）攒批量刷新。实时要求高的用 1s
+  或手动 refresh。
+- 双写后搜索不到怎么办？——ES refresh 延迟（默认 1s），写入后立即搜可能搜不到。解决：用 GET by id（实时），不用 search（等 refresh）。或强制
+  refresh（性能差）。
 memory_points:
-  - 三模式：同步双写（事务）/异步 MQ / CDC binlog（解耦）
-  - 延迟：MQ 投递 + ES refresh_interval（默认 1s）
-  - CDC：Debezium 监听 binlog → Kafka → 消费写 ES
-  - 失败：重试 + 死信 + T+1 对账补偿
-  - ES refresh：默认 1s，实时可调 200ms，离线 30s
+- 三模式：同步双写（事务）/异步 MQ / CDC binlog（解耦）
+- 延迟：MQ 投递 + ES refresh_interval（默认 1s）
+- CDC：Debezium 监听 binlog → Kafka → 消费写 ES
+- 失败：重试 + 死信 + T+1 对账补偿
+- ES refresh：默认 1s，实时可调 200ms，离线 30s
+frequency: high
 ---
 
 # 【Java 后端架构师】搜索索引延迟与双写一致性
@@ -352,6 +358,33 @@ MySQL→ES 同步本质是跨系统数据复制，受 CAP 约束：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class ES info
+    class Elasticsearch start
+    class F process
+    class G decision
+    class H special
+    class Hash error
+    class I info
+    class J start
+    class Kafka process
+    class MySQL decision
+    class T special
+    class binlog error
+    class br info
+    class count start
+    class refresh_interval process
+    class vs decision
     A[商品中心<br/>写入数据] --> B[本地事务<br/>业务表+Outbox表]
     B --> C[MySQL binlog<br/>数据变更记录]
     C --> D[CDC组件<br/>Debezium监听]

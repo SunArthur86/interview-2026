@@ -35,6 +35,7 @@ memory_points:
 - TCC：Try/Confirm/Cancel（强一致，业务侵入大）
 - Seata AT 模式：自动回滚 SQL
 - 交易组合：核心 TCC + 非核心消息表
+frequency: high
 ---
 
 # 【拼多多交易】分布式事务怎么解决？下单跨服务怎么一致？
@@ -235,6 +236,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

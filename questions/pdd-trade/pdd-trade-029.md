@@ -11,7 +11,8 @@ tags:
 - 钱学森
 - 系统工程
 feynman:
-  essence: 预案（事前演练）+ 回滚（事中止血）是稳定性的最后一道闸——用钱学森系统工程思维把"故障应对"标准化：还原论（拆解子系统）+ 整体论（系统涌现性）+ 浮现式控制（预案自动化）。
+  essence: 预案（事前演练）+ 回滚（事中止血）是稳定性的最后一道闸——用钱学森系统工程思维把"故障应对"标准化：还原论（拆解子系统）+ 整体论（系统涌现性）+
+    浮现式控制（预案自动化）。
   analogy: 像消防系统——预案是定期消防演练（每个故障场景有 SOP），回滚是喷淋系统（异常自动触发灭火），钱学森思维是"既看每个喷头（还原），又看整体疏散（涌现）"。
   first_principle: 大规模系统故障必然发生，必须从事后救火升级为事前预案+事中自动回滚。
   key_points:
@@ -27,14 +28,15 @@ first_principle:
   - 系统工程可定量化管理
   rebuild: 预案库（分级 SOP）+ 自动回滚（蓝绿/灰度）+ 混沌演练 + 系统工程方法论。
 follow_up:
-  - 回滚和预案区别？——回滚是发布/变更的反向（事中），预案是故障场景 SOP（事后）
-  - 数据怎么回滚（已写库）？——灰度发布前小流量验证+Binlog 反向补偿+备份恢复
-  - 混沌工程怎么落地？——ChaosBlade 注入故障（kill 实例/延迟/丢包）验证预案
+- 回滚和预案区别？——回滚是发布/变更的反向（事中），预案是故障场景 SOP（事后）
+- 数据怎么回滚（已写库）？——灰度发布前小流量验证+Binlog 反向补偿+备份恢复
+- 混沌工程怎么落地？——ChaosBlade 注入故障（kill 实例/延迟/丢包）验证预案
 memory_points:
-  - 预案：分级 P0-P3 + SOP + 演练
-  - 回滚：蓝绿/灰度 + 配置 + 数据
-  - 钱学森：还原论+整体论+系统工程
-  - 自动化：检测→匹配→执行
+- 预案：分级 P0-P3 + SOP + 演练
+- 回滚：蓝绿/灰度 + 配置 + 数据
+- 钱学森：还原论+整体论+系统工程
+- 自动化：检测→匹配→执行
+frequency: low
 ---
 
 # 【拼多多交易】预案/回滚怎么做？钱学森工程思维？
@@ -221,6 +223,27 @@ public class AutoPlanExecutor {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
     A[线上P0级故障] --> B[自动化预案系统]
     B --> C[监控指标采集]
     C --> D{多指标交叉诊断}

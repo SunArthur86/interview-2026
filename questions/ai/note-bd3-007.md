@@ -27,6 +27,7 @@ memory_points:
 - ZeRO本质做切分：将数据并行中的冗余状态(优化器/梯度/权重)按GPU切片。
 - ZeRO-1切优化器：仅分片优化器状态，省显存最多且通信开销极小。
 - ZeRO-3全切分：优化器、梯度、权重全分片，显存省最多但前向需All-Gather通信。
+frequency: medium
 ---
 
 # DeepSpeed ZeRO-1、ZeRO-2和ZeRO-3分别做了哪些优化？
@@ -37,6 +38,35 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class DP start
+    class DP0 process
+    class DP1 decision
+    class DP2 special
+    class Data error
+    class GPU info
+    class Opt start
+    class Parallelism process
+    class W decision
+    class Z1 special
+    class Z10 error
+    class Z11 info
+    class Z12 start
+    class Z2 process
+    class Z20 decision
+    class Z21 special
+    class Z22 error
+    class Z3 info
+    class Z30 start
+    class Z31 process
+    class Z32 decision
+    class ZeRO special
+    class br error
     subgraph DP["传统数据并行 (Data Parallelism) - 每卡存全部,3卡存3份冗余"]
         DP0["GPU 0<br/>W (完整)<br/>∇W (完整)<br/>Opt (完整)"]
         DP1["GPU 1<br/>W (完整)<br/>∇W (完整)<br/>Opt (完整)"]

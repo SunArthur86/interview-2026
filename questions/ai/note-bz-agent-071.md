@@ -29,6 +29,7 @@ memory_points:
 - 管理同代码：独立文件存储，遵循语义化版本号（不兼容变主版）
 - 模块化拆分：把Prompt拆为角色、规则、工具、示例等可复用零件
 - 动态组装核心：因为用户和任务不同，所以按上下文变量（如身份）按需拼接模块
+frequency: medium
 ---
 
 # 如何对 Prompt 做版本控制与动态组装？
@@ -265,6 +266,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

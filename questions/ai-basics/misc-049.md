@@ -19,6 +19,7 @@ memory_points:
 - 原因：注意力机制偏向首尾，类似人类首因/近因效应。
 - 缓解：重排(重要放两头)、文档压缩、结构化Prompt。
 - 实战：检索Top-K文档用XML标签分隔，显式提示关注中间。
+frequency: low
 ---
 
 # 为什么LLM存在「Lost in the Middle」问题?如何缓解
@@ -155,6 +156,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

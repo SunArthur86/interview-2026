@@ -9,13 +9,17 @@ tags:
 - 分区
 - 消费
 feynman:
-  essence: Kafka 把一个 Topic 切成多个 Partition 分布在不同 Broker 上做并行，每个 Partition 又有多副本（Leader/Follower）做高可用。分区是并发单元（决定吞吐上限），副本是可用性单元（决定 RPO/数据零丢失），消费语义（at-most / at-least / exactly-once）是 offset 提交与业务幂等的组合选择。
-  analogy: 像 JD 快递分拣中心：Topic 是一类包裹（如"订单事件"），Partition 是 N 条独立传送带（每条单线顺序、多条并行），副本是每条传送带旁录了一份"备份录像"的副手（Leader 挂了副手接管）。消费者组是 N 个分拣员，每人盯一条传送带，offset 就是他在传送带上贴的"已处理到第几件"标签。
-  first_principle: 为什么不是"一个 Topic 一份数据存一台机器"？因为单机吞吐和可用性都有上限。分区把写入/消费并行度从 1 提到 N（线性扩展），副本把数据持久性从"单机一崩即丢"提到"多机同时崩才丢"。两者结合，吞吐靠分区、可用性靠副本、一致性靠 ISR+acks 控制。
+  essence: Kafka 把一个 Topic 切成多个 Partition 分布在不同 Broker 上做并行，每个 Partition 又有多副本（Leader/Follower）做高可用。分区是并发单元（决定吞吐上限），副本是可用性单元（决定
+    RPO/数据零丢失），消费语义（at-most / at-least / exactly-once）是 offset 提交与业务幂等的组合选择。
+  analogy: 像 JD 快递分拣中心：Topic 是一类包裹（如"订单事件"），Partition 是 N 条独立传送带（每条单线顺序、多条并行），副本是每条传送带旁录了一份"备份录像"的副手（Leader
+    挂了副手接管）。消费者组是 N 个分拣员，每人盯一条传送带，offset 就是他在传送带上贴的"已处理到第几件"标签。
+  first_principle: 为什么不是"一个 Topic 一份数据存一台机器"？因为单机吞吐和可用性都有上限。分区把写入/消费并行度从 1 提到 N（线性扩展），副本把数据持久性从"单机一崩即丢"提到"多机同时崩才丢"。两者结合，吞吐靠分区、可用性靠副本、一致性靠
+    ISR+acks 控制。
   key_points:
   - 分区是并行单元：吞吐 ≈ 分区数 × 单分区吞吐，分区数决定消费并行度
   - 副本是可用性单元：Leader 读写，Follower 从 Leader 拉取同步，ISR 集合决定谁能当选
-  - 三种消费语义：at-most-once（先提交 offset 再处理）、at-least-once（先处理再提交，默认）、exactly-once（幂等 producer + 事务或业务幂等）
+  - 三种消费语义：at-most-once（先提交 offset 再处理）、at-least-once（先处理再提交，默认）、exactly-once（幂等 producer
+    + 事务或业务幂等）
   - acks 控制写入可靠性：acks=0 不等确认、acks=1 Leader 确认、acks=all/all ISR 确认（最安全）
   - rebalance 是消费组动态伸缩机制，但 stop-the-world 期间消费暂停，需用 CooperativeRebalanceStrategy 减少抖动
 first_principle:
@@ -24,19 +28,29 @@ first_principle:
   - 一条传送带（单分区）是单线顺序的，吞吐有上限；并行多带（多分区）可线性扩展
   - 单份数据单机宕机即丢；多副本 + 多数派确认才能做到"少数节点全损也不丢"
   - 消息系统本质是"日志"，追加写快、顺序消费快，offset 是位移指针而非消息标识
-  rebuild: 把 Topic 横切成 N 个 Partition 分布在多 Broker（并行），每个 Partition 配 R 个副本其中 1 个 Leader（冗余）。生产者写 Leader，Follower 拉取追平，只有追平的副本进 ISR；提交时按 acks 决定要 ISR 中多少个确认。消费者按消费组分配分区，提交 offset 到 __consumer_offsets topic，重平衡时按分区重分配。这套设计让吞吐、可用性、一致性三者参数化（分区数、副本数、acks、min.insync.replicas），架构师按 SLA 拧旋钮。
+  rebuild: 把 Topic 横切成 N 个 Partition 分布在多 Broker（并行），每个 Partition 配 R 个副本其中 1 个 Leader（冗余）。生产者写
+    Leader，Follower 拉取追平，只有追平的副本进 ISR；提交时按 acks 决定要 ISR 中多少个确认。消费者按消费组分配分区，提交 offset
+    到 __consumer_offsets topic，重平衡时按分区重分配。这套设计让吞吐、可用性、一致性三者参数化（分区数、副本数、acks、min.insync.replicas），架构师按
+    SLA 拧旋钮。
 follow_up:
-  - 分区数怎么定？——经验公式：分区数 ≥ 目标吞吐 / 单分区吞吐，且 ≥ 消费者最大并发数。JD 大促下单 topic 通常 100-200 分区。注意分区数只能加不能减，定多了浪费，定少了扩容要重建 topic
-  - ISR 缩小意味着什么？——ISR（In-Sync Replicas）是追上 Leader 的副本集合。ISR 缩小说明 Follower 落后，ack=all 时写入被阻塞或丢数据。监控 under_replicated_partitions 必须告警
-  - at-least-once 重复怎么解？——offset 提交前宕机会重复消费，必须在消费端做业务幂等（唯一键/状态机/Redis 令牌）。不要幻想 Kafka 给你 exactly-once
-  - producer 幂等和事务区别？——幂等（enable.idempotence=true）防单 producer 重试重复；事务（transactional.id）跨分区跨 producer 原子写。消费端 exactly-once 还是要业务幂等
-  - rebalance 风暴怎么治？——session.timeout.ms / heartbeat 调大、max.poll.records 调小、用 CooperativeRebalanceStrategy（增量重平衡）、长任务用 pause/resume 避免被踢
+- 分区数怎么定？——经验公式：分区数 ≥ 目标吞吐 / 单分区吞吐，且 ≥ 消费者最大并发数。JD 大促下单 topic 通常 100-200 分区。注意分区数只能加不能减，定多了浪费，定少了扩容要重建
+  topic
+- ISR 缩小意味着什么？——ISR（In-Sync Replicas）是追上 Leader 的副本集合。ISR 缩小说明 Follower 落后，ack=all
+  时写入被阻塞或丢数据。监控 under_replicated_partitions 必须告警
+- at-least-once 重复怎么解？——offset 提交前宕机会重复消费，必须在消费端做业务幂等（唯一键/状态机/Redis 令牌）。不要幻想 Kafka
+  给你 exactly-once
+- producer 幂等和事务区别？——幂等（enable.idempotence=true）防单 producer 重试重复；事务（transactional.id）跨分区跨
+  producer 原子写。消费端 exactly-once 还是要业务幂等
+- rebalance 风暴怎么治？——session.timeout.ms / heartbeat 调大、max.poll.records 调小、用 CooperativeRebalanceStrategy（增量重平衡）、长任务用
+  pause/resume 避免被踢
 memory_points:
-  - 分区=并发单元（吞吐），副本=可用单元（RPO），ISR=all+min.insync.replicas=2 是生产标配
-  - acks=all + min.insync.replicas=2 + replication.factor=3 是"零丢失又不卡写"的金三角
-  - offset 提交三选一：enable.auto.commit=false 手动 commitSync（最稳） / commitAsync（最快可能丢） / 混合
-  - 三消费语义：at-most（先提交）、at-least（先处理后提交，必须幂等）、exactly-once（producer 事务 + 隔离级别 read_committed 或业务幂等）
-  - 监控四件套：consumer_lag（积压）、under_replicated_partitions（副本落后）、isr_shrink_rate（ISR 抖动）、rebalance_rate（消费者抖动）
+- 分区=并发单元（吞吐），副本=可用单元（RPO），ISR=all+min.insync.replicas=2 是生产标配
+- acks=all + min.insync.replicas=2 + replication.factor=3 是"零丢失又不卡写"的金三角
+- offset 提交三选一：enable.auto.commit=false 手动 commitSync（最稳） / commitAsync（最快可能丢） / 混合
+- 三消费语义：at-most（先提交）、at-least（先处理后提交，必须幂等）、exactly-once（producer 事务 + 隔离级别 read_committed
+  或业务幂等）
+- 监控四件套：consumer_lag（积压）、under_replicated_partitions（副本落后）、isr_shrink_rate（ISR 抖动）、rebalance_rate（消费者抖动）
+frequency: high
 ---
 
 # 【Java 后端架构师】Kafka 分区、副本与消费语义
@@ -408,6 +422,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

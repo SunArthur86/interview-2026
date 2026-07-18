@@ -30,6 +30,7 @@ memory_points:
 - 执行引擎核心：基于拓扑排序调度节点，控制并行与防死循环，是框架心脏
 - 实现复杂流的关键：支持条件路由分发、状态合并与异步并发调度
 - 企业级特性壁垒：长任务中断恢复(检查点机制)与全链路Trace监控是自研难点
+frequency: medium
 ---
 
 # 如何实现一个对标 LangGraph 的 AI Agents 框架？
@@ -339,6 +340,7 @@ flowchart TD
     style LG fill:#FF9800,color:#fff
     style LS fill:#9C27B0,color:#fff
     style STATE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

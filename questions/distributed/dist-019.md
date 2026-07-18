@@ -17,6 +17,7 @@ memory_points:
 - 配置要求：RS 必须支持 IP 隧道协议，且需在 lo 接口绑定 VIP。
 - 模式对比：TUN 支持跨网段且响应不经调度器，而 DR 模式限制在同一物理网段。
 - 实战避坑：因为多了一层 IP 头封装，所以必须在 RS 上注意调整 MTU 长度防丢包。
+frequency: low
 ---
 
 # LVS TUN模式的工作原理是什么？
@@ -126,6 +127,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

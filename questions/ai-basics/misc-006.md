@@ -23,6 +23,7 @@ memory_points:
 - 大模型倾向BPE/SentencePiece：子词覆盖好、多语言友好、无UNK且可逆
 - SentencePiece是框架，支持BPE/Unigram，统一处理空格解决多语言一致性问题
 - 实战：中文在未优化词表中效率低，需针对性优化词表或使用SentencePiece
+frequency: high
 ---
 
 # BPE、WordPiece、SentencePiece分词算法有什么区别?为什么大模型多用BPE
@@ -116,6 +117,36 @@ def get_stats(vocab):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BERT decision
+    class BPE special
+    class C error
+    class D info
+    class E start
+    class F process
+    class GPT decision
+    class GPT_LLaMA special
+    class H error
+    class I info
+    class J start
+    class K process
+    class L decision
+    class LLaMA special
+    class M error
+    class N info
+    class O start
+    class SentencePiece process
+    class T5 decision
+    class Unigram special
+    class WordPiece error
+    class br info
     A["原始文本语料"] --> B["预处理拆分字符"] 
     B --> C{选择分词算法}
     C --> D["BPE<br/>按频率合并高频字节对"]

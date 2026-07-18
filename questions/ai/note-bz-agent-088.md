@@ -30,6 +30,7 @@ memory_points:
 - 挖掘五字诀：准（准确率）、快（延迟/并发）、省（Token/路由）、稳（降级/熔断）、架（多智能体设计）
 - 牢记STAR+数据结构：因为交代了痛点与方案，所以必须用量化结果证明业务价值
 - 灵魂拷问出素材：因为项目的Trade-off选型（为何用A不用B）和最耗时调优点必被深问，所以重点准备
+frequency: medium
 ---
 
 # Agent 简历项目怎么找到可以深挖的点？
@@ -192,6 +193,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

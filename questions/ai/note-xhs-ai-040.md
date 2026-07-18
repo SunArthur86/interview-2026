@@ -10,8 +10,9 @@ tags:
 - 降级策略
 - 面经
 feynman:
-  essence: "模型幻觉调用不存在的API是Agent最危险的线上事故——需要三层防护：Schema校验拦截+白名单限制+降级兜底"
-  analogy: "LLM像一个过度自信的实习生——你说'帮我订机票'，他可能瞎编一个'超级订票API'来调用。防护措施：1) 工具说明书(白名单)——只有列表里的工具能用；2) 参数检查(schema校验)——调用参数必须合规；3) Plan B(降级)——工具挂了有备选方案"
+  essence: 模型幻觉调用不存在的API是Agent最危险的线上事故——需要三层防护：Schema校验拦截+白名单限制+降级兜底
+  analogy: LLM像一个过度自信的实习生——你说'帮我订机票'，他可能瞎编一个'超级订票API'来调用。防护措施：1) 工具说明书(白名单)——只有列表里的工具能用；2)
+    参数检查(schema校验)——调用参数必须合规；3) Plan B(降级)——工具挂了有备选方案
   key_points:
   - Schema校验：LLM输出的function call参数必须通过JSON Schema验证
   - 白名单机制：只有预注册的工具能被调用，拒绝未注册的工具名
@@ -19,9 +20,10 @@ feynman:
   - 降级方案：超时→重试→缓存→默认值→人工兜底
   - 监控：记录所有被拒绝的调用尝试，分析幻觉模式
 first_principle:
-  essence: "LLM是概率模型，输出的function call本质上是token采样——有一定概率生成不存在的工具名或错误参数。必须用确定性逻辑（校验）来约束概率输出"
-  derivation: "LLM生成function call的过程：给定工具列表和用户query，LLM采样输出一段JSON。这段JSON可能：1) 工具名不存在（幻觉）；2) 参数类型错误（如期望int给了string）；3) 参数值无效（如给了不存在的API路径）。传统Java开发中编译器/IDE会拦截这些错误，但LLM的输出没有编译期检查，必须运行时校验"
-  conclusion: "Agent的工具调用必须遵循「不信任LLM输出」原则——所有function call都要经过严格的schema校验和白名单检查才能执行"
+  essence: LLM是概率模型，输出的function call本质上是token采样——有一定概率生成不存在的工具名或错误参数。必须用确定性逻辑（校验）来约束概率输出
+  derivation: LLM生成function call的过程：给定工具列表和用户query，LLM采样输出一段JSON。这段JSON可能：1) 工具名不存在（幻觉）；2)
+    参数类型错误（如期望int给了string）；3) 参数值无效（如给了不存在的API路径）。传统Java开发中编译器/IDE会拦截这些错误，但LLM的输出没有编译期检查，必须运行时校验
+  conclusion: Agent的工具调用必须遵循「不信任LLM输出」原则——所有function call都要经过严格的schema校验和白名单检查才能执行
 follow_up:
 - JSON Schema校验用什么库？性能如何？
 - 工具调用准确率怎么量化评估？
@@ -32,6 +34,7 @@ memory_points:
 - 幻觉根因：LLM编造看似合理的工具名/参数
 - 降级链：超时→重试→缓存→默认值→人工
 - 不信任原则：所有LLM输出都要运行时校验
+frequency: high
 ---
 
 # 【AI Agent工程】模型幻觉调用不存在API如何拦截？工具调用降级方案？
@@ -279,6 +282,7 @@ flowchart TD
     style REFUSE fill:#FF9800,color:#fff
     style HALL fill:#F44336,color:#fff
     style REGEN fill:#9C27B0,color:#fff
+
 ```
 
 ## 结构化回答

@@ -26,6 +26,7 @@ memory_points:
 - 加速原理：利用小模型速度快，大模型并行验证只花一次 Forward，期望加速 1.5-2.5x。
 - 高 Batch 优势：验证阶段计算密集，GPU 利用率高，常与 PagedAttention 组合。
 - 关键指标：接受率决定加速比，需确保 Draft Model 与 Target Model 分布对齐。
+frequency: low
 ---
 
 # Speculative Decoding（投机解码）的原理是什么？在高batch场景下如何加速推理？
@@ -94,6 +95,20 @@ def speculative_decode(prompt, draft_model, target_model, max_spec_steps=5):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Accept start
+    class Draft process
+    class Free decision
+    class Output special
+    class Prompt error
+    class Resample info
+    class Verify start
+    class br process
     Prompt[Prompt] --> Draft[小模型Draft<br/>快速生成候选]
     Draft --> Verify[大模型Target<br/>并行验证]
     Verify --> Accept{接受正确前缀}

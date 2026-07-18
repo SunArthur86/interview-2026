@@ -10,8 +10,10 @@ tags:
 - 无锁化
 - Reactor
 feynman:
-  essence: EventLoop 是 Netty 处理连接生命周期内所有事件的核心抽象——它本质上是一个"绑定单一线程、死循环处理任务"的执行器。它的精妙在于串行无锁化设计：一个 EventLoop 终身绑定一个线程，一个 Channel 终身注册到一个 EventLoop，于是同一个 Channel 的所有 I/O 都在同一个线程串行执行，完全不需要加锁。
-  analogy: EventLoop 像银行的"专属柜员"。一位柜员（EventLoop/线程）固定服务几个客户（Channel），客户的所有业务（I/O 事件）都由这位柜员一个人按顺序办，从不串台——因为只有一个柜员在动这个客户的资料，根本不需要锁柜子。EventLoopGroup 是整个柜台组（一群柜员），老板（Acceptor）把新来的客户分配给空闲的柜员。
+  essence: EventLoop 是 Netty 处理连接生命周期内所有事件的核心抽象——它本质上是一个"绑定单一线程、死循环处理任务"的执行器。它的精妙在于串行无锁化设计：一个
+    EventLoop 终身绑定一个线程，一个 Channel 终身注册到一个 EventLoop，于是同一个 Channel 的所有 I/O 都在同一个线程串行执行，完全不需要加锁。
+  analogy: EventLoop 像银行的"专属柜员"。一位柜员（EventLoop/线程）固定服务几个客户（Channel），客户的所有业务（I/O 事件）都由这位柜员一个人按顺序办，从不串台——因为只有一个柜员在动这个客户的资料，根本不需要锁柜子。EventLoopGroup
+    是整个柜台组（一群柜员），老板（Acceptor）把新来的客户分配给空闲的柜员。
   key_points:
   - EventLoop=处理连接生命周期事件的执行器,每个任务是Runnable
   - 五大关系:EventLoopGroup含多EventLoop;EventLoop终身绑一线程;I/O在专属线程处理;Channel终身注册一EventLoop;一EventLoop可被分给多Channel
@@ -25,13 +27,15 @@ first_principle:
   - 事件循环(死循环拉取任务)是高效的事件处理模式
   rebuild: 从"消除锁竞争"出发→让一个EventLoop绑定一个线程(永不切换)→让一个Channel终身注册到一个EventLoop→于是该Channel的所有I/O事件都在这个线程串行处理→无竞争→无需加锁→这就是Netty高性能并发模型的根基(Reactor单线程串行化思想)。
 follow_up:
-  - BossGroup 和 WorkerGroup 的分工？
-  - EventLoop 处理耗时的业务任务会阻塞 I/O 吗？
-  - Netty 的 Reactor 模式有哪几种？
+- BossGroup 和 WorkerGroup 的分工？
+- EventLoop 处理耗时的业务任务会阻塞 I/O 吗？
+- Netty 的 Reactor 模式有哪几种？
 memory_points:
-  - EventLoop 定义：处理连接生命周期中所发生的事件，运行任务（每个任务是个 Runnable 实例）
-  - 五大绑定关系：①EventLoopGroup含1+EventLoop ②EventLoop终身绑1Thread ③I/O在专属Thread处理 ④Channel终身注册1EventLoop ⑤1EventLoop可分给多Channel
-  - 王炸结论：给定 Channel 的 I/O 操作都由相同 Thread 执行，实际上消除了对同步的需要
+- EventLoop 定义：处理连接生命周期中所发生的事件，运行任务（每个任务是个 Runnable 实例）
+- 五大绑定关系：①EventLoopGroup含1+EventLoop ②EventLoop终身绑1Thread ③I/O在专属Thread处理 ④Channel终身注册1EventLoop
+  ⑤1EventLoop可分给多Channel
+- 王炸结论：给定 Channel 的 I/O 操作都由相同 Thread 执行，实际上消除了对同步的需要
+frequency: high
 ---
 
 # EventLoop 的核心原理与线程模型？
@@ -315,6 +319,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

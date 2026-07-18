@@ -26,14 +26,15 @@ first_principle:
   - 不同业务隔离防止互相拖累
   rebuild: 线程池复用 + 队列削峰 + 拒绝策略兜底 + 业务隔离。
 follow_up:
-  - 线程数怎么配？——CPU 密集 N+1，IO 密集 2N（N=CPU 核），结合压测
-  - 队列满了怎么办？——CallerRuns 反压上游降速；或降级丢部分非核心任务
-  - 线程池怎么监控？——暴露活跃/队列/拒绝数到 Prometheus + 报警
+- 线程数怎么配？——CPU 密集 N+1，IO 密集 2N（N=CPU 核），结合压测
+- 队列满了怎么办？——CallerRuns 反压上游降速；或降级丢部分非核心任务
+- 线程池怎么监控？——暴露活跃/队列/拒绝数到 Prometheus + 报警
 memory_points:
-  - 七参数：core/max/keepAlive/queue/factory/reject
-  - 执行序：核心→队列→最大→拒绝
-  - CallerRuns 反压降速
-  - 评价/Feed 池隔离
+- 七参数：core/max/keepAlive/queue/factory/reject
+- 执行序：核心→队列→最大→拒绝
+- CallerRuns 反压降速
+- 评价/Feed 池隔离
+frequency: high
 ---
 
 # 【拼多多内容】评价/Feed 写入线程池怎么设计与隔离？
@@ -181,6 +182,23 @@ CallerRunsPolicy 是"用应用自身线程兜底"，确实会反伤 Tomcat。权
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class B1 start
+    class B2 process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class M start
+    class O1 process
+    class O2 decision
+    class P special
+    class R error
     R[高并发写入请求] --> P{任务类型路由}
     
     P -- 评价写入 --> B1[评价独立线程池]

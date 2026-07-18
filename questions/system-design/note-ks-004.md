@@ -14,7 +14,7 @@ tags:
 - 面经
 feynman:
   essence: 雪花算法(Snowflake)生成64位ID：1位符号+41位时间戳+10位机器ID+12位序列号。ID冲突的两大原因：(1)时钟回拨——系统时间回退导致同一毫秒内生成重复的时间戳；(2)WorkerID重复——多台机器配置了相同的机器号。解决方案：时钟回拨检测+WorkerID通过ZK/数据库全局分配。
-  analogy: "雪花算法就像一个工厂给产品打编号——时间戳是'日期'(41位精确到毫秒)，机器ID是'车间号'(10位)，序列号是'当天产线序号'(12位)。冲突原因：(1)车间时钟走慢了(时钟回拨)→和别的车间撞了日期；(2)两个车间挂了同一个车牌(WorkerID重复)。"
+  analogy: 雪花算法就像一个工厂给产品打编号——时间戳是'日期'(41位精确到毫秒)，机器ID是'车间号'(10位)，序列号是'当天产线序号'(12位)。冲突原因：(1)车间时钟走慢了(时钟回拨)→和别的车间撞了日期；(2)两个车间挂了同一个车牌(WorkerID重复)。
   key_points:
   - Snowflake结构：1+41+10+12=64位，每毫秒每机器最多4096个ID
   - 冲突根因1：时钟回拨(NTP同步导致时间回退)
@@ -23,7 +23,7 @@ feynman:
   - WorkerID方案：ZK/数据库/Redis全局分配，启动时获取，宕机时释放
 first_principle:
   essence: 分布式ID唯一性 = 时间戳唯一性 × 机器标识唯一性 × 序列号不溢出
-  derivation: "ID = f(timestamp, workerId, sequence)。唯一性条件：(1)timestamp单调递增（时钟回拨破坏此条件）；(2)workerId全局唯一（配置重复破坏此条件）；(3)sequence在每毫秒内从0递增，不超过4095。"
+  derivation: ID = f(timestamp, workerId, sequence)。唯一性条件：(1)timestamp单调递增（时钟回拨破坏此条件）；(2)workerId全局唯一（配置重复破坏此条件）；(3)sequence在每毫秒内从0递增，不超过4095。
   conclusion: 确保唯一性需要保证时钟单调递增 + WorkerID全局唯一分配
 follow_up:
 - 雪花算法为什么用64位？128位有什么问题？
@@ -36,6 +36,7 @@ memory_points:
 - 冲突两大根因：时钟回播(NTP同步) + WorkerID重复(手动配置)
 - 时钟回拨解法：记录lastTimestamp→回拨<5ms则等待→>5ms则抛异常/借用未来时间
 - WorkerID解法：ZK临时顺序节点分配→启动时获取→宕机时自动释放
+frequency: high
 ---
 
 # 【快手Java一面】分库分表后，雪花算法生成的ID出现冲突，如何解决？
@@ -379,6 +380,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

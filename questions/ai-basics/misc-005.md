@@ -21,6 +21,7 @@ memory_points:
 - 权衡：K/V头越少，显存和带宽占用越小，推理越快，但表达能力略降
 - 大模型选GQA：兼顾MHA的质量和MQA的速度，KV Cache减至1/G
 - 注意：训练和推理架构必须一致，MHA不能直接切GQA，需Uptraining
+frequency: medium
 ---
 
 # MHA、MQA、GQA三者有什么区别?为什么大模型倾向用GQA
@@ -149,6 +150,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

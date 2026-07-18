@@ -16,6 +16,7 @@ memory_points:
 - 三种模式对比：简单工厂(多产品) vs 工厂方法(单产品) vs 抽象工厂(产品族)
 - 工厂方法：一个具体工厂对应创建一个具体产品，完全符合开闭原则
 - 抽象工厂：一个工厂创建多个相关联的产品(产品族)，扩展产品族极难
+frequency: medium
 ---
 
 # 什么是工厂模式？
@@ -149,6 +150,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

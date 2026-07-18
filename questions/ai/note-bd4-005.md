@@ -29,6 +29,7 @@ memory_points:
 - 事中运行时限制：最大轮数限制(兜底)、调用参数去重(拦截相同调用)
 - 事前防御：用Few-shot禁止连续2次相同调用，强制要求汇报当前进度
 - 事后监控：通过向量相似度检测输出结果是否发生隐性重复循环
+frequency: medium
 ---
 
 # Agent 出现无限循环或规划混乱怎么防？
@@ -197,6 +198,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

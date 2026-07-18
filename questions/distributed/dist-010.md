@@ -16,6 +16,7 @@ memory_points:
 - 唯一标识：Zxid 由高 32 位 epoch（防旧Leader复辟）与低 32 位 counter（事务递增）组成
 - 两大模式：集群正常时走「消息广播」，Leader 挂掉时进「崩溃恢复」
 - 广播流程：核心是两阶段提交，即 Leader 发起 Proposal -> 过半 ACK -> 广播 Commit
+frequency: high
 ---
 
 # 什么是ZAB协议？
@@ -138,6 +139,7 @@ flowchart TD
     style COMMIT fill:#2196F3,color:#fff
     style VOTE fill:#9C27B0,color:#fff
     style STEP_DOWN fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

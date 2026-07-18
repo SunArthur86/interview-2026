@@ -30,6 +30,7 @@ memory_points:
 - 主动性对比：LLM是被动单步应答，而Agent是主动达成多步目标
 - 状态与行动：LLM无状态且只输出文本，而Agent有跨轮记忆且能调用工具产生真实效果
 - 依赖关系：因为LLM是Agent的决策大脑，所以LLM是Agent的必要组件，但LLM≠Agent
+frequency: medium
 ---
 
 # 什么是 AI Agent？它和单纯的大模型（LLM）有什么区别和关系？
@@ -163,6 +164,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

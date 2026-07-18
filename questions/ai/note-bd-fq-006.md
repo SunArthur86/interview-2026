@@ -32,6 +32,7 @@ memory_points:
 - 混合策略最优：同时设置K上限和最低分阈值，并保证至少返回1条避免业务中断
 - K值四考量：受限于上下文Token(建议占20%)，RAG质量最佳为5~10条，兼顾业务与成本
 - 高级截断：计算相邻文档得分差，在得分骤降拐点动态截断以规避尾部噪声
+frequency: medium
 ---
 
 # Rerank之后的截断策略是怎么设计的？为什么选这个K值？
@@ -137,6 +138,24 @@ def elbow_truncate(reranked: list) -> list:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class B start
+    class D process
+    class E decision
+    class H special
+    class K error
+    class L info
+    class O start
+    class Q process
+    class R decision
+    class S special
+    class Top error
+    class br info
     Q[用户Query] --> R[Reranker模型打分排序]
     R --> D{得分骤降拐点检测}
     D -->|无明显拐点| H[混合策略截断]

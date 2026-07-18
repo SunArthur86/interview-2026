@@ -29,15 +29,16 @@ first_principle:
   - 数据洞察有金矿
   rebuild: 内容中台+AI 能力全链路整合。
 follow_up:
-  - AIGC 内容怎么保证质量？——模板+人审+质量打分
-  - AI 分发怎么平衡效果与体验？——多样性重排+EE 探索
-  - 怎么衡量智能化收益？——成本/效率/效果/体验指标
+- AIGC 内容怎么保证质量？——模板+人审+质量打分
+- AI 分发怎么平衡效果与体验？——多样性重排+EE 探索
+- 怎么衡量智能化收益？——成本/效率/效果/体验指标
 memory_points:
-  - 生产：AIGC（图/文/视频）
-  - 审核：Agent（LLM+多模态）
-  - 分发：推荐+搜索个性化
-  - 分析：智能洞察
-  - 平台：能力统一开放
+- 生产：AIGC（图/文/视频）
+- 审核：Agent（LLM+多模态）
+- 分发：推荐+搜索个性化
+- 分析：智能洞察
+- 平台：能力统一开放
+frequency: high
 ---
 
 # 【拼多多内容】智能内容中台怎么建设？
@@ -357,6 +358,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

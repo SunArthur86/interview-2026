@@ -19,7 +19,8 @@ feynman:
   - '加速比: 2-3x，取决于draft模型准确率和k值'
 first_principle:
   essence: 自回归生成的瓶颈是每步只产生1个token，投机解码通过预判+验证实现每步产生多个token
-  derivation: '大模型逐token生成慢 → 小模型生成快但不够准 → 用小模型预判k个token → 大模型并行验证 → 接受正确的、拒绝错误的 → 净效果: 多token并行验证'
+  derivation: '大模型逐token生成慢 → 小模型生成快但不够准 → 用小模型预判k个token → 大模型并行验证 → 接受正确的、拒绝错误的 →
+    净效果: 多token并行验证'
   conclusion: 投机解码是一种无损加速方法，输出分布与纯大模型完全一致
 follow_up:
 - Draft模型怎么选？一定要小模型吗？
@@ -30,6 +31,7 @@ memory_points:
 - 无损加速机制：基于拒绝采样（接受率=min(1, 目标概率/草稿概率)），绝不损失大模型生成质量。
 - 因为大模型解码是计算密集的串行访存，所以投机解码能把多次串行转化为一次并行验证。
 - 速度关键：草稿模型必须极小且与目标模型分布相近，猜对率越高，加速比越大。
+frequency: high
 ---
 
 # 什么是投机解码(Speculative Decoding)？
@@ -195,6 +197,7 @@ flowchart TD
     style PAGED fill:#FF9800,color:#fff
     style OFFLOAD fill:#F44336,color:#fff
     style BATCH fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

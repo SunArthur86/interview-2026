@@ -29,6 +29,7 @@ memory_points:
 - 日志规范：必须包含timestamp、level、traceId和业务核心字段，采用JSON格式。
 - 性能优化：写入靠批量与Kafka削峰，存储靠冷热分离与按天滚动，查询避免通配符。
 - 容灾设计：Agent端需具备本地缓存能力，防止收集中心网络抖动时日志丢失。
+frequency: medium
 ---
 
 # 如何设计一个完整的日志收集分析系统？
@@ -109,6 +110,12 @@ flowchart LR
     TID[TraceID 结构化] --> AG
     style KF fill:#ffe4b5
     style ES fill:#d4edda
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 

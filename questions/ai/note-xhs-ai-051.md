@@ -35,6 +35,7 @@ memory_points:
 - Prefill(compute-bound)阶段INT4的GEMM利用率可能低于FP16
 - 关键变量：GPU低精度指令(Tensor Core INT4/FP8支持)+量化格式(group-wise等)
 - 评测铁律：固定模型+输入输出长度+并发度+采样参数，否则不可比
+frequency: high
 ---
 
 # 【AI Infra面经】消费级 GPU 部署量化模型，INT4 一定比 FP16 更快吗？
@@ -229,6 +230,7 @@ flowchart TD
     style DEPLOY fill:#009688,color:#fff
     style Q4 fill:#FF9800,color:#fff
     style ADJUST fill:#F44336,color:#fff
+
 ```
 
 ## 结构化回答

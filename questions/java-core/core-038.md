@@ -14,6 +14,7 @@ memory_points:
 - 语义本质：GET 是只读幂等操作，POST 是提交修改操作通常非幂等
 - 传参位置：GET 参数拼接在 URL（有长度限制），POST 放在 Request Body（无大小限制）
 - GET 参数暴露且默认能被浏览器缓存，POST 相对安全且默认不缓存
+frequency: low
 ---
 
 # GET和POST请求的区别？
@@ -90,6 +91,30 @@ fetch('/api/search', {
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class G1 start
+    class G2 process
+    class G3 decision
+    class G4 special
+    class G5 error
+    class GET info
+    class HTTPS start
+    class Note process
+    class P1 decision
+    class P2 special
+    class P3 error
+    class P4 info
+    class P5 start
+    class POST process
+    class TCP decision
+    class URL special
+    class body error
+    class br info
     subgraph GET
         G1[语义 安全 幂等]
         G2[参数在 URL 查询串]

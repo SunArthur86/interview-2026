@@ -31,6 +31,7 @@ memory_points:
 - 对比：单轮仅靠内部知识，而ReAct能借助外部工具获取实时信息
 - 对比：单轮出错无法挽回，而ReAct可基于Observation动态纠错与迭代
 - 代价：因为需要多轮调用工具，所以ReAct延迟更高、成本更大
+frequency: high
 ---
 
 # ReAct的原理和与单轮问答的本质区别
@@ -250,6 +251,7 @@ flowchart TD
     style ACTION fill:#FF9800,color:#fff
     style OBS fill:#9C27B0,color:#fff
     style REFLECT fill:#FFC107,color:#000
+
 ```
 
 ## 记忆要点

@@ -17,6 +17,7 @@ memory_points:
 - 动态分配：适合探索性任务、非结构化问题，前步输出决定后步动作。
 - 混合模式：主干用 Pipeline 保证流程，关键节点插动态分配处理复杂分支。
 - 避坑指南：动态分配有不可控风险，需设预算上限和最大递归深度。
+frequency: medium
 ---
 
 # 动态任务分配和固定 Pipeline 各适合什么场景
@@ -139,6 +140,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

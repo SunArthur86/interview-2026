@@ -19,6 +19,7 @@ memory_points:
 - 显存降维打击：GQA/MQA减KV头数，INT8/INT4量化直接减半或削减75%存储。
 - 系统级调度：vLLM的PagedAttention按页分配消灭碎片，Prefix Sharing复用系统提示词。
 - 架构级拓展：Sliding Window限长丢弃旧Token，Offloading时间换空间卸载至CPU内存。
+frequency: high
 ---
 
 # LLM中的KV Cache如何优化？
@@ -161,6 +162,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

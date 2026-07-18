@@ -17,6 +17,7 @@ memory_points:
 - 私网IP段口诀：A(10.)、B(172.16.-31.)、C(192.168.)，公网唯一但私网可复用（靠NAT）。
 - 特殊IP对比：127.0.0.1是本机环回，0.0.0.0代表本机所有网卡，255.255.255.255为全网广播。
 - 进化对比：IPv4为32位且依赖ARP广播，IPv6为128位且废除广播改用组播。
+frequency: low
 ---
 
 # 什么是IP地址？
@@ -72,6 +73,33 @@ IPv4 地址为 32 位，通常分为 A、B、C、D、E 五类：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CIDR special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class IP error
+    class IPv4 info
+    class IPv6 start
+    class J process
+    class K decision
+    class L special
+    class M error
+    class NAT info
+    class br start
+    class vs process
+    class x decision
     A[IP 地址] --> B[IPv4 32 位<br/>4 字节点分十进制]
     A --> C[IPv6 128 位<br/>8 组十六进制]
     B --> D[分类 A/B/C/D/E]

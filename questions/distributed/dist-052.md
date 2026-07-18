@@ -26,6 +26,7 @@ memory_points:
 - Sentinel三大熔断策略：慢调用比例、异常比例、异常数
 - 限流算法：漏桶匀速平滑，令牌桶允许突发，Sentinel默认滑动窗口
 - 核心区别：熔断是遇故障断开保护，降级是兜底返回默认值或缓存
+frequency: high
 ---
 
 # Sentinel 和 Hystrix 的区别？熔断降级的核心策略是什么？
@@ -114,6 +115,7 @@ flowchart TD
     style TO_CLOSED fill:#009688,color:#fff
     style TO_HALF fill:#FF9800,color:#fff
     style DEGRADE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

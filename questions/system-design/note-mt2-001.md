@@ -32,6 +32,7 @@ memory_points:
 - 锁粒度：锁ID设计为“业务域+实体ID+操作类型”，因为细粒度控制能避免不同操作互相竞争
 - 高可用兜底：纯Redis不安全，所以用RedLock过半节点成功机制来防单点故障
 - 终极防线：状态机+DB乐观锁(version版本号)，即使缓存锁全挂，数据库层依然能拦截并发修改
+frequency: high
 ---
 
 # 分布式流程引擎如何保证状态一致性？Redis 锁故障怎么兜底？
@@ -257,6 +258,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

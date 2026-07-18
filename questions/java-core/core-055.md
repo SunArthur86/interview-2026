@@ -16,6 +16,7 @@ memory_points:
 - 一来一回：1个MSL等被动方重传FIN，1个MSL等重发ACK消失，共2MSL。
 - 防丢兜底：确保最后的ACK丢失时，主动方能重发并让被动方正常关闭。
 - 清空残留：确保当前连接的所有报文在网络中彻底消亡，防新连错收旧包。
+frequency: low
 ---
 
 # 为什么 TIME_WAIT 等待的时间是 2MSL？
@@ -92,6 +93,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -29,6 +29,7 @@ memory_points:
 - 核心矛盾：既要给AI文件能力，又要保障用户的知情与控制权
 - 分层授权金字塔：从下到上为会话只读、文件级、目录级、全盘授权
 - 动作越重提示越强：只读轻提示，写入需确认，批量删除等高危操作强警告
+frequency: medium
 ---
 
 # 【月之暗面面经】桌面 AI 产品接入本地文件和目录时，前端如何设计权限提示？
@@ -550,6 +551,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

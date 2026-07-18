@@ -26,6 +26,7 @@ memory_points:
 - GQA优势：KV头数减少g倍(如8倍)，显存和带宽压力骤降，质量接近MHA远超MQA。
 - 头数权衡：Q头数h不变，KV头数h/g。通过Repeat扩展KV匹配Q计算。
 - 实战收益：长文本场景显存瓶颈显著缓解，吞吐提升，PPL几乎无损。
+frequency: high
 ---
 
 # 【智谱Infra面经】GLM-4 为什么选择 GQA？GQA vs MHA/MQA 的头数/维度权衡？KV Cache 节省多少？
@@ -90,6 +91,21 @@ def gqa_forward(q, k, v, n_rep):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class GQA start
+    class K process
+    class MHA decision
+    class MQA special
+    class Match error
+    class Repeat info
+    class Save start
+    class br process
+    class h decision
     MHA[MHA<br/>h个Q/K/V头] --> MQA[MQA<br/>h个Q头 1个KV]
     MHA --> GQA[GQA<br/>h个Q头 h/g个KV]
     GQA --> Repeat[Repeat扩展KV匹配Q]

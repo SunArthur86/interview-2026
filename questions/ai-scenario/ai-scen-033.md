@@ -29,6 +29,7 @@ memory_points:
 - 模型选择：Judge能力需高于被测模型，常用GPT-4o/Claude-3.5。
 - 成本优化：日常CI用Mini模型，正式评测用旗舰模型。
 - 一致性：人工抽检5%样本，计算Cohen's Kappa > 0.6为合格。
+frequency: low
 ---
 
 # 如何设计LLM-as-Judge评测管道？用大模型自动评测其他模型的输出质量。
@@ -126,6 +127,22 @@ def pairwise_compare(query, answer_a, answer_b, judge_llm):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
     A[待评测模型A] --> C[评测输入数据集]
     B[待评测模型B] --> C
     C --> D[构造Pairwise提示词]

@@ -10,8 +10,8 @@ tags:
 - Plan-and-Solve
 - 面经
 feynman:
-  essence: "多工具冲突不能只靠if-else硬编码——需要用ReAct（推理+行动循环）或Plan-and-Solve（先规划再执行）让LLM动态决策工具选择和执行顺序"
-  analogy: "if-else调度像固定流程的工厂流水线——每个零件按固定路线走。ReAct像一个有判断力的工人——遇到问题先想想用什么工具、用完看看结果、不对再换一个。Plan-and-Solve像一个项目经理——先列出所有步骤和依赖关系，再按计划执行"
+  essence: 多工具冲突不能只靠if-else硬编码——需要用ReAct（推理+行动循环）或Plan-and-Solve（先规划再执行）让LLM动态决策工具选择和执行顺序
+  analogy: if-else调度像固定流程的工厂流水线——每个零件按固定路线走。ReAct像一个有判断力的工人——遇到问题先想想用什么工具、用完看看结果、不对再换一个。Plan-and-Solve像一个项目经理——先列出所有步骤和依赖关系，再按计划执行
   key_points:
   - if-else硬编码的问题：不灵活、无法应对新需求、维护成本高
   - ReAct：Thought→Action→Observation循环，LLM实时决策
@@ -19,9 +19,9 @@ feynman:
   - 动态调度核心：工具选择+执行顺序+并行vs串行决策
   - 常见框架：LangGraph状态机、AutoGPT ReAct、CrewAI角色分工
 first_principle:
-  essence: "工具调度的本质是任务分解和执行编排。LLM的推理能力使得基于语义的动态调度成为可能，取代传统硬编码逻辑"
-  derivation: "传统规则引擎（if-else/Drools）需要人工预先定义所有可能的条件和路径。但用户需求是无限的——'帮我订机票并安排接机'涉及航班查询、预订、酒店、打车等多个工具的编排，用if-else无法穷举所有组合。LLM可以根据用户意图动态选择工具和决定执行顺序，这就是ReAct和Plan-and-Solve的核心价值"
-  conclusion: "动态调度的关键是让LLM做「调度决策」而非「执行」——LLM输出'下一步用哪个工具'，框架负责安全执行"
+  essence: 工具调度的本质是任务分解和执行编排。LLM的推理能力使得基于语义的动态调度成为可能，取代传统硬编码逻辑
+  derivation: 传统规则引擎（if-else/Drools）需要人工预先定义所有可能的条件和路径。但用户需求是无限的——'帮我订机票并安排接机'涉及航班查询、预订、酒店、打车等多个工具的编排，用if-else无法穷举所有组合。LLM可以根据用户意图动态选择工具和决定执行顺序，这就是ReAct和Plan-and-Solve的核心价值
+  conclusion: 动态调度的关键是让LLM做「调度决策」而非「执行」——LLM输出'下一步用哪个工具'，框架负责安全执行
 follow_up:
 - ReAct和Plan-and-Solve哪个更好？什么场景用哪个？
 - LangGraph的状态机怎么实现工具编排？
@@ -32,6 +32,7 @@ memory_points:
 - ReAct循环：Thought→Action→Observation
 - Plan-and-Solve：LLM生成DAG→拓扑序执行
 - 核心思想：LLM做调度决策，框架做安全执行
+frequency: medium
 ---
 
 # 【AI Agent工程】多工具冲突除了if-else有什么动态调度方案？
@@ -244,6 +245,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

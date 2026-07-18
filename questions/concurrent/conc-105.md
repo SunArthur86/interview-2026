@@ -17,6 +17,7 @@ memory_points:
 - Java实现：ReentrantReadWriteLock 将锁分为共享的读锁和排他的写锁
 - 进阶优化：StampedLock支持乐观读，允许读操作不阻塞写操作，极大提升读并发
 - 风险提示：读锁过多可能导致写饥饿，且锁升级（读转写）容易引发死锁需谨慎
+frequency: high
 ---
 
 # 什么是读写锁？
@@ -105,6 +106,7 @@ flowchart LR
     class Read,ReadMore read
     class Write,WriteRe write
     class WaitW,WaitR wait
+
 ```
 
 

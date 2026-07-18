@@ -12,7 +12,8 @@ tags:
 - 分布式系统
 - 面经
 feynman:
-  essence: CDC(Change Data Capture)通过监听数据库Binlog实时捕获数据变更，将变更事件推送到MQ，多个下游系统各自消费实现数据同步。核心是"单数据源 → MQ扇出 → 多消费者各自处理"。
+  essence: CDC(Change Data Capture)通过监听数据库Binlog实时捕获数据变更，将变更事件推送到MQ，多个下游系统各自消费实现数据同步。核心是"单数据源
+    → MQ扇出 → 多消费者各自处理"。
   analogy: 像报社发新闻——记者写好稿子（数据源变更），编辑发到通讯社（CDC+MQ），报纸、网站、APP各自从通讯社取稿子（下游消费），格式各不相同但源头只有一个。
   key_points:
   - CDC核心：监听Binlog而非定时轮询，实现毫秒级延迟
@@ -35,6 +36,7 @@ memory_points:
 - 消费者必须幂等！Binlog重放或MQ重试都会导致重复消息
 - 断点续传：记录消费到的Binlog position/GTID，CDC工具重启后从断点继续
 - 一对多扇出：一个Topic多个Consumer Group各自维护offset，互不影响
+frequency: high
 ---
 
 # 【字节一面】基于 CDC 思想设计一个数据同步系统：单一数据源同步到多个下游系统，使用 MQ
@@ -262,6 +264,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

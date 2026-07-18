@@ -30,6 +30,7 @@ memory_points:
 - 排查顺序：从网络、应用CPU到Redis和DB，依链路逐层定位
 - Redis瓶颈：单线程模型致大Key或复杂命令易阻塞，需重点防
 - DB连接池：穿透导致连接池满，优化网络IO与控制连接数上限
+frequency: low
 ---
 
 # 【滴滴面经】压测过程中，实际性能瓶颈在哪里？
@@ -224,6 +225,21 @@ Step 3: 端到端压测（全链路）
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
     A[压测请求涌入] --> B[网络层: TCP连接与带宽]
     B --> C[应用层: 线程池与GC停顿]
     C --> D[缓存层: Redis单线程瓶颈]

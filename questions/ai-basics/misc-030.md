@@ -21,6 +21,7 @@ memory_points:
 - 优势：解决传统RAG无法回答“整体数据讲了什么”的全局性问题。
 - 模式：Local Search查具体实体，Global Search查社区摘要。
 - 代价：构建成本高(需大量LLM调用抽取实体)，更新维护比向量库难。
+frequency: high
 ---
 
 # GraphRAG(微软提出)是什么?相比传统向量RAG有什么优势
@@ -163,6 +164,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

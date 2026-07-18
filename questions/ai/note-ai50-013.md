@@ -32,6 +32,7 @@ memory_points:
 - 安全底线：每个节点必须强制嵌入危机检测，一旦命中（如自伤倾向）立即熔断并转人工
 - 状态流转：按'共情倾听→情绪评估(PHQ-9)→认知干预→总结建议'规范对话走向
 - 强制干预：在每轮对话后执行Safety_check与Safety_filter双重内容过滤
+frequency: medium
 ---
 
 # 心理咨询Agent如何用LangGraph控制对话走向？
@@ -317,6 +318,7 @@ flowchart TD
     style LG fill:#FF9800,color:#fff
     style LS fill:#9C27B0,color:#fff
     style STATE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

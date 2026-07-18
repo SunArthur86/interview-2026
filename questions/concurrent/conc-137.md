@@ -25,6 +25,7 @@ memory_points:
 - 核心原理：利用Continuation实现挂起与恢复，IO阻塞时自动卸载释放载体线程
 - 致命雷区：synchronized会钉住载体线程，必须用ReentrantLock替代
 - 架构改变：虚拟线程即用即销毁，无需池化，改用Semaphore限流
+frequency: high
 ---
 
 # JDK 21 虚拟线程（Virtual Thread）的原理是什么？它和平台线程有什么本质区别？
@@ -167,6 +168,7 @@ flowchart TD
     style FREE_CARRIER fill:#9C27B0,color:#fff
     style PIN fill:#F44336,color:#fff
     style REMOUNT fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

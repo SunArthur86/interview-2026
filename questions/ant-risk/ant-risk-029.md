@@ -35,6 +35,7 @@ memory_points:
 - 应急五步：发现→通知→定位→止损→恢复→复盘
 - SRE 四指标：MTTD（发现）/MTTI（定位）/MTTF（修复）/MTTR（恢复）
 - 回滚必须先想清楚数据兼容性
+frequency: low
 ---
 
 # 【蚂蚁风控】高可用——预案、回滚、应急响应怎么做？
@@ -410,6 +411,31 @@ public void autoRollback() {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class B4 info
+    class B5 start
+    class C1 process
+    class C2 decision
+    class C3 special
+    class C4 error
+    class Chaos info
+    class D1 start
+    class D2 process
+    class Monitor decision
+    class P0 special
+    class P1 error
+    class Response info
+    class Rollback start
     subgraph Monitor[监控告警]
         A1[SRE黄金指标异常]
         A2[风控决策失败率飙升]

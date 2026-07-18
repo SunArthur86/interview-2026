@@ -15,6 +15,7 @@ memory_points:
 - Web三剑客：HTML编内容、HTTP传报文、URL定地址
 - 安全破局：因为明文传输有窃听篡改风险，所以需引入HTTPS(SSL/TLS)加密
 - 状态保持：HTTP本身无状态，靠Cookie/Session/JWT维持会话
+frequency: low
 ---
 
 # 什么是HTTP特性与简述？
@@ -135,6 +136,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

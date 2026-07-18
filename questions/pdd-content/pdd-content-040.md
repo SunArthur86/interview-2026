@@ -28,14 +28,15 @@ first_principle:
   - 工程化是工程师优势
   rebuild: 补 LLM 应用+AI 工程化，用工程能力构建差异化。
 follow_up:
-  - 要学模型训练吗？——了解原理即可，深耕看个人兴趣
-  - Prompt 工程是临时技能吗？——底层（理解 LLM）长期，具体技巧演进
-  - Java 还要学 Python 吗？——要（生态主流），但 Java 也有 LLM 框架
+- 要学模型训练吗？——了解原理即可，深耕看个人兴趣
+- Prompt 工程是临时技能吗？——底层（理解 LLM）长期，具体技巧演进
+- Java 还要学 Python 吗？——要（生态主流），但 Java 也有 LLM 框架
 memory_points:
-  - 补：LLM 应用（Prompt/RAG/Agent）
-  - 学：AI 工程化（推理/评测/Harness）
-  - 用：工程能力差异化
-  - 实战：审核/客服/代码助手
+- 补：LLM 应用（Prompt/RAG/Agent）
+- 学：AI 工程化（推理/评测/Harness）
+- 用：工程能力差异化
+- 实战：审核/客服/代码助手
+frequency: medium
 ---
 
 # 【拼多多内容】Java 工程师怎么转型 AI？
@@ -333,6 +334,27 @@ Java vs Python 在 AI 生态的权衡：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AI process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class Engineer start
+    class Engineering process
+    class F decision
+    class G special
+    class H error
+    class Java info
+    class Prompt start
+    class RAG process
+    class Stack decision
     subgraph Java Engineer ["传统Java后端能力"]
         A["高并发/分布式经验"]
         B["系统架构稳定性治理"]

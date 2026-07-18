@@ -17,6 +17,7 @@ memory_points:
 - 偏向锁：仅记录线程ID无CAS，适合单线程重入，但竞争时撤销代价极高
 - 轻量级锁：竞争轻度时用 CAS+自旋避免线程阻塞，但自旋消耗 CPU
 - 编译器优化：基于逃逸分析做锁消除，以及合并相邻同步块的锁粗化
+frequency: high
 ---
 
 # JVM中有哪些锁优化技术？
@@ -147,6 +148,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

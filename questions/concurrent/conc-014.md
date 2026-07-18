@@ -16,6 +16,7 @@ memory_points:
 - 锁机制：sleep 睡觉不释放锁，wait 等待必须释放锁
 - 位置要求：wait 必须在 synchronized 块内，sleep 随处可用
 - 唤醒方式：sleep 超时自动醒，wait 需 notify 或超时
+frequency: medium
 ---
 
 # sleep与wait 区别？
@@ -133,6 +134,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -9,9 +9,11 @@ tags:
 - GC
 - 调优
 feynman:
-  essence: JVM 把内存分成堆/栈/方法区/直接内存各司其职，GC 按对象存活周期分代回收，调优本质是让对象尽快在新生代被回收、避免晋升老年代、控制 Full GC 停顿。
+  essence: JVM 把内存分成堆/栈/方法区/直接内存各司其职，GC 按对象存活周期分代回收，调优本质是让对象尽快在新生代被回收、避免晋升老年代、控制 Full
+    GC 停顿。
   analogy: 像一个有"前台（栈）""仓库（堆）""档案室（方法区）"的公司。新员工（对象）先进仓库临时区（Eden），熬过几次盘点晋升到老库（Old），最终只有长期重要的才长期占用老库。
-  first_principle: 内存为什么要分代？因为绝大多数对象"朝生夕灭"，按存活周期分而治之能让 GC 只扫描该扫的区域，把全堆扫描的 O(全堆) 降到 O(某一代)。
+  first_principle: 内存为什么要分代？因为绝大多数对象"朝生夕灭"，按存活周期分而治之能让 GC 只扫描该扫的区域，把全堆扫描的 O(全堆) 降到
+    O(某一代)。
   key_points:
   - 堆分新生代（Eden+S0+S1）和老年代，比例默认 1:2
   - 对象先分配 Eden，Minor GC 后存活进 Survivor，默认 15 岁进 Old
@@ -24,19 +26,21 @@ first_principle:
   - 弱分代假说：绝大多数对象都是朝生夕灭的
   - 熬过越多次 GC 的对象越可能继续存活
   - STW（Stop The World）时间是 GC 优化的北极星指标
-  rebuild: 基于弱分代假说，把堆切成新生代/老年代，新生代用复制算法（适合存活少）、老年代用标记-整理（避免碎片）；再给不同吞吐/延迟场景配不同收集器（Parallel 重吞吐、G1 重延迟、ZGC 极低延迟）。
+  rebuild: 基于弱分代假说，把堆切成新生代/老年代，新生代用复制算法（适合存活少）、老年代用标记-整理（避免碎片）；再给不同吞吐/延迟场景配不同收集器（Parallel
+    重吞吐、G1 重延迟、ZGC 极低延迟）。
 follow_up:
-  - 对象一定在堆上吗？——不一定，JIT 逃逸分析可让未逃逸对象在栈上分配（标量替换）
-  - 怎么定位频繁 Full GC？——jstat 看 FGCT/Frequency，jmap dump 分析大对象，MAT 找支配树
-  - 一次 GC 调优真实案例？——把 MaxGCPauseMillis 从 200 调到 100，新生代调大，Full GC 从 10min/次降到 2h/次
-  - Metaspace 和永久代区别？——永久代在堆里固定大小易 OOM；Metaspace 用本地内存自动扩容
-  - 为什么 Survivor 有两个？——复制算法需要 From/To 交替使用，保证总有一个空着做复制目标
+- 对象一定在堆上吗？——不一定，JIT 逃逸分析可让未逃逸对象在栈上分配（标量替换）
+- 怎么定位频繁 Full GC？——jstat 看 FGCT/Frequency，jmap dump 分析大对象，MAT 找支配树
+- 一次 GC 调优真实案例？——把 MaxGCPauseMillis 从 200 调到 100，新生代调大，Full GC 从 10min/次降到 2h/次
+- Metaspace 和永久代区别？——永久代在堆里固定大小易 OOM；Metaspace 用本地内存自动扩容
+- 为什么 Survivor 有两个？——复制算法需要 From/To 交替使用，保证总有一个空着做复制目标
 memory_points:
-  - 分代假说是 GC 一切设计的根基：新生代复制算法、老年代标记整理
-  - 对象晋升老年代三条路径：年龄达标(15)、大对象直接进、动态年龄判断
-  - 选 GC 收集器：吞吐优先 Parallel、延迟优先 G1、超低延迟 ZGC/Shenandoah
-  - 调优不是调参数，是先定位（jstat/jmap/MAT）再对症下药
-  - 容器化要设 -XX:+UseContainerSupport 和 -XX:MaxRAMPercentage，否则 JVM 看不到 cgroup 限制
+- 分代假说是 GC 一切设计的根基：新生代复制算法、老年代标记整理
+- 对象晋升老年代三条路径：年龄达标(15)、大对象直接进、动态年龄判断
+- 选 GC 收集器：吞吐优先 Parallel、延迟优先 G1、超低延迟 ZGC/Shenandoah
+- 调优不是调参数，是先定位（jstat/jmap/MAT）再对症下药
+- 容器化要设 -XX:+UseContainerSupport 和 -XX:MaxRAMPercentage，否则 JVM 看不到 cgroup 限制
+frequency: high
 ---
 
 # 【Java 后端架构师】JVM 内存模型、GC 机制与线上调优实战
@@ -308,6 +312,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

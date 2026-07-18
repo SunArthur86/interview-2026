@@ -9,9 +9,12 @@ tags:
 - 分流
 - 归因
 feynman:
-  essence: 增长实验平台的本质是"用分流哈希把用户分桶、用互斥域避免干扰、用统计显著性归因"。分流是 userId 哈希到 [0,100) 的桶，实验组对照组各占 N%。互斥域避免多个实验互相干扰（A 实验改 UI、B 实验也改 UI 会污染）。归因用假设检验（p-value < 0.05 才可信）+ 增量计算（实验组转化率 - 对照组）。
+  essence: 增长实验平台的本质是"用分流哈希把用户分桶、用互斥域避免干扰、用统计显著性归因"。分流是 userId 哈希到 [0,100) 的桶，实验组对照组各占
+    N%。互斥域避免多个实验互相干扰（A 实验改 UI、B 实验也改 UI 会污染）。归因用假设检验（p-value < 0.05 才可信）+ 增量计算（实验组转化率
+    - 对照组）。
   analogy: 像医学临床试验——病人随机分组（分流）、不同药物试验不能混（互斥域）、统计显著性才能下结论（p-value）。不能"试了 3 个人有效就说有效"。
-  first_principle: 增长决策不能靠直觉（"我觉得这个 UI 好"），必须用数据驱动。实验平台让"假设 → 验证 → 决策"可量化：假设新按钮提升转化，分流 5% 流量跑一周，统计显著性通过则全量。
+  first_principle: 增长决策不能靠直觉（"我觉得这个 UI 好"），必须用数据驱动。实验平台让"假设 → 验证 → 决策"可量化：假设新按钮提升转化，分流
+    5% 流量跑一周，统计显著性通过则全量。
   key_points:
   - 分流哈希：userId + 实验层 hash 到 [0,100)，保证同一用户始终同一桶
   - 正交分层：layer_1 做 UI 实验、layer_2 做推荐实验，互不干扰
@@ -25,19 +28,22 @@ first_principle:
   - 多个实验可能互相干扰（A 改 UI、B 改算法，效果叠加无法归因）
   - 实验结果可能有随机波动（小样本时噪音大），必须统计显著性检验
   - 分流比例必须精确（配 5% 不能实际分到 6%）
-  rebuild: 正交分层分流——每层（layer）用 userId+layerId 哈希独立分桶，层间正交（互不影响），层内互斥（同用户只进一个实验）。归因用 T 检验算 p-value（< 0.05 显著）+ 增量百分比。SRM 检查（卡方检验）发现分流异常。
+  rebuild: 正交分层分流——每层（layer）用 userId+layerId 哈希独立分桶，层间正交（互不影响），层内互斥（同用户只进一个实验）。归因用
+    T 检验算 p-value（< 0.05 显著）+ 增量百分比。SRM 检查（卡方检验）发现分流异常。
 follow_up:
-  - 分流哈希为什么要带 layerId？——保证层间正交。只用 userId 哈希的话，不同层的分桶结果相关（同用户在所有层都进桶 1）。加 layerId 后每层独立哈希，用户在 layer_1 进桶 1 在 layer_2 可能进桶 2。
-  - 实验要多大样本？——按效果大小算。检测 1% 提升需要更大样本，检测 10% 提升小样本即可。用功效分析（power analysis）算最小样本量。
-  - 实验跑多久？——至少一个完整周期（7 天覆盖周一到周日），避免工作日/周末偏差。长期实验要考虑 novelty effect（新鲜感退去效果衰减）。
-  - SRM 怎么检测？——卡方检验。配置 50/50 但实际 48/52，卡方值超阈值说明分流异常（可能有 bug 或某个浏览器不兼容导致用户被过滤）。
-  - 互斥和正交区别？——互斥是同层内只能进一个实验（UI 实验 A 和 B 不能同时做）；正交是不同层独立（UI 实验和推荐实验可同时进行）。
+- 分流哈希为什么要带 layerId？——保证层间正交。只用 userId 哈希的话，不同层的分桶结果相关（同用户在所有层都进桶 1）。加 layerId 后每层独立哈希，用户在
+  layer_1 进桶 1 在 layer_2 可能进桶 2。
+- 实验要多大样本？——按效果大小算。检测 1% 提升需要更大样本，检测 10% 提升小样本即可。用功效分析（power analysis）算最小样本量。
+- 实验跑多久？——至少一个完整周期（7 天覆盖周一到周日），避免工作日/周末偏差。长期实验要考虑 novelty effect（新鲜感退去效果衰减）。
+- SRM 怎么检测？——卡方检验。配置 50/50 但实际 48/52，卡方值超阈值说明分流异常（可能有 bug 或某个浏览器不兼容导致用户被过滤）。
+- 互斥和正交区别？——互斥是同层内只能进一个实验（UI 实验 A 和 B 不能同时做）；正交是不同层独立（UI 实验和推荐实验可同时进行）。
 memory_points:
-  - 分流：hash(userId + layerId) % 100 → 桶号，稳定且正交
-  - 正交分层：层间独立（UI 层 + 推荐层），层内互斥（同用户一个实验）
-  - 归因：增量（实验组-对照组）+ p-value < 0.05（显著性）
-  - SRM 检查：卡方检验发现分流比例异常
-  - 样本量：power analysis 算最小样本，至少跑 7 天
+- 分流：hash(userId + layerId) % 100 → 桶号，稳定且正交
+- 正交分层：层间独立（UI 层 + 推荐层），层内互斥（同用户一个实验）
+- 归因：增量（实验组-对照组）+ p-value < 0.05（显著性）
+- SRM 检查：卡方检验发现分流比例异常
+- 样本量：power analysis 算最小样本，至少跑 7 天
+frequency: low
 ---
 
 # 【Java 后端架构师】增长实验平台的分流、互斥与归因
@@ -295,6 +301,30 @@ public class ExperimentLogger {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Apollo process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class Layer start
+    class Nacos process
+    class br decision
+    class hash special
+    class layerId error
+    class userId info
     A[用户请求] --> B[API网关<br/>携带 userId]
     B --> C[配置中心<br/>Apollo/Nacos 实验配置]
     C --> D[正交分层分流引擎]

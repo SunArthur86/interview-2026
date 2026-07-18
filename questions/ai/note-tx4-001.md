@@ -31,6 +31,7 @@ memory_points:
 - DPO解决质量好坏：通过好vs坏偏好对，教自主判断、调用顺序与停止
 - 因为SFT无法区分逻辑好坏(如死循环)，所以必须接DPO优化决策
 - 训练三部曲：预训练打底 → SFT学格式工具 → DPO/RLHF对齐偏好
+frequency: high
 ---
 
 # 大模型工具调用(Function Calling)能力是如何训练出来的？SFT和DPO分别解决什么问题？
@@ -237,6 +238,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

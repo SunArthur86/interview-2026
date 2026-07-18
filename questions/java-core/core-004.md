@@ -16,6 +16,7 @@ memory_points:
 - PC寄存器存下一条指令地址，而IR存当前正在执行的指令。
 - 对比架构：CISC(如x86)指令复杂功耗高，而RISC(如ARM)精简低功耗。
 - 高并发痛点：多核修改同一缓存行会导致伪共享，需加@Contended填充。
+frequency: low
 ---
 
 # 什么是CPU？
@@ -78,6 +79,47 @@ MOV [c], EAX   ; 控制器控制：将结果写回内存(或缓存)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CPU special
+    class Cache error
+    class Contended info
+    class D start
+    class DRAM process
+    class E decision
+    class Exclusive special
+    class F error
+    class False info
+    class G start
+    class GB process
+    class H decision
+    class HDD special
+    class I error
+    class Invalid info
+    class J start
+    class K process
+    class L decision
+    class L1 special
+    class L2 error
+    class L3 info
+    class Line start
+    class MB process
+    class MESI decision
+    class Modified special
+    class N error
+    class Registers info
+    class SSD start
+    class Shared process
+    class Sharing decision
+    class br special
+    class cycle error
     A[CPU 多级缓存] --> B[寄存器 Registers<br/>1 cycle 最快]
     B --> C[L1 Cache<br/>私有 1ns 32KB]
     C --> D[L2 Cache<br/>私有 3-10ns 256KB]

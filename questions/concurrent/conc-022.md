@@ -25,6 +25,7 @@ memory_points:
 - 必做动作：release()必须在finally中执行，避免异常导致许可泄漏死锁
 follow_up: []
 tags: []
+frequency: medium
 ---
 
 # 什么是信号量？
@@ -122,6 +123,7 @@ flowchart TD
     classDef wait fill:#fff3e0,stroke:#ef6c00
     class Dec,Inc,Wake ok
     class Block,Park wait
+
 ```
 
 

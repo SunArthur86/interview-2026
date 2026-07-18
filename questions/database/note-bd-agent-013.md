@@ -31,6 +31,7 @@ memory_points:
 - 性能对比：B树查询速度不稳定（中途可能命中），而B+树查询必须到叶子，性能极其稳定
 - 范围查询：B树靠中序遍历需大量随机IO，而B+树靠叶子节点双向链表顺序IO极快
 - 磁盘IO：因为B+树非叶子只存key（Fanout大），所以树更矮（通常2-3层），磁盘IO次数远少于B树
+frequency: high
 ---
 
 # B树和B+树在数据库索引里的核心区别是什么？
@@ -142,6 +143,7 @@ flowchart TD
     IN_B --> RAN_B[范围查询需回溯]
     style LEAF_BP fill:#d4edda
     style LEAF_B fill:#ffe4b5
+
 ```
 
 

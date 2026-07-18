@@ -22,7 +22,8 @@ feynman:
   - '事务边界: 去重检查+业务执行在同一事务中(原子性)'
 first_principle:
   essence: 重复消费是分布式系统中的必然事件（网络不可靠→at-least-once），消费者必须设计为幂等的。
-  derivation: MQ保证消息至少投递一次 → 网络超时/Consumer重启→消息重投 → 同一消息可能被消费多次 → 如果业务不是幂等的(如扣款)→重复扣款 → 所以必须在消费端做幂等控制
+  derivation: MQ保证消息至少投递一次 → 网络超时/Consumer重启→消息重投 → 同一消息可能被消费多次 → 如果业务不是幂等的(如扣款)→重复扣款
+    → 所以必须在消费端做幂等控制
   conclusion: 幂等消费 = 唯一键去重 + 原子事务 + 并发控制
 follow_up:
 - 如果Redis宕机导致分布式锁失效怎么办？
@@ -30,10 +31,11 @@ follow_up:
 - 幂等去重表越来越大怎么清理？
 - 消息处理失败后重试，怎么区分"重复投递"和"首次失败重试"？
 memory_points:
-- "核心方案: idempotent_key去重表 + 同一DB事务(去重检查+业务执行)"
-- "并发控制: SELECT FOR UPDATE悲观锁 / version乐观锁"
-- "状态机方案: 状态流转(PENDING→PROCESSING→SUCCESS)天然幂等"
-- "注意: 去重记录在事务提交后保留(TTL清理)，不能在事务内删除"
+- '核心方案: idempotent_key去重表 + 同一DB事务(去重检查+业务执行)'
+- '并发控制: SELECT FOR UPDATE悲观锁 / version乐观锁'
+- '状态机方案: 状态流转(PENDING→PROCESSING→SUCCESS)天然幂等'
+- '注意: 去重记录在事务提交后保留(TTL清理)，不能在事务内删除'
+frequency: high
 ---
 
 # 设计MQ幂等消费函数
@@ -302,6 +304,25 @@ class RedisIdempotentConsumer:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class PROCESSING info
+    class SUCCESS start
     A[MQ重复投递消息] --> B[消费函数接收]
     B --> C[Redis分布式锁拦截]
     C --> D{去重表查询状态}

@@ -36,6 +36,7 @@ memory_points:
 - Sentinel 信号量隔离（轻量）vs Hystrix 线程池隔离（强但有上下文切换开销）
 - 限流维度：QPS / 并发数 / 链路；流控效果：拒绝/Warm Up/排队
 - 集群限流：Token Server 集中算 QPS，避免单机限流偏差
+frequency: high
 ---
 
 # 【蚂蚁风控】Spring Cloud 里的熔断和限流怎么实现的？Sentinel 原理？风控怎么用？
@@ -315,6 +316,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

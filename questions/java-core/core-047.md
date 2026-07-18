@@ -17,6 +17,7 @@ memory_points:
 - 对象信息：默认toString打印全类名与哈希码，业务类通常需重写此方法
 - 克隆机制：clone()提供浅拷贝，深拷贝需手动复制引用或使用序列化
 - 线程通信：wait/notify底层依赖Monitor锁，必须在synchronized代码块中调用
+frequency: low
 ---
 
 # Object类的常见方法有哪些是什么？
@@ -89,6 +90,40 @@ synchronized (lock) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Class special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class JDK info
+    class K start
+    class L process
+    class Object decision
+    class br special
+    class clone error
+    class equals info
+    class finalize start
+    class getClass process
+    class hash decision
+    class hashCode special
+    class int error
+    class notify info
+    class notifyAll start
+    class protected process
+    class toString decision
+    class wait special
     A[Object 类 所有类根基] --> B["hashCode 返回 int"]
     A --> C["equals 默认比较引用"]
     A --> D["toString<br/>默认 类名@hash"]

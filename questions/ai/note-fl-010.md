@@ -10,9 +10,13 @@ tags:
 - Redis
 - 数据结构
 feynman:
-  essence: Redis 五大数据结构各有场景——String 做计数/缓存对象/分布式锁，Hash 做对象字段级读写（最适合 Agent 会话状态），List 做消息队列/日志，Set 做去重/标签，ZSet 做排行榜/延时队列。Agent 会话状态推荐 Hash：字段级 update 不用读整个对象，省带宽；TTL 整体设在 key 上。状态复杂需嵌套时反推 JSON 存 String。
-  analogy: String 像便签纸（一条信息），Hash 像表格（一行多列可单独改），List 像排队队列（先进先出），Set 像标签云（去重），ZSet 像带分数的排行榜（自动排序）。
-  first_principle: 数据结构的选择 = 访问模式 + 性能特征的匹配。字段级读写选 Hash（O(1) 改单字段），排队选 List（O(1) 头尾操作），排序选 ZSet（O(logN) 排序）。
+  essence: Redis 五大数据结构各有场景——String 做计数/缓存对象/分布式锁，Hash 做对象字段级读写（最适合 Agent 会话状态），List
+    做消息队列/日志，Set 做去重/标签，ZSet 做排行榜/延时队列。Agent 会话状态推荐 Hash：字段级 update 不用读整个对象，省带宽；TTL
+    整体设在 key 上。状态复杂需嵌套时反推 JSON 存 String。
+  analogy: String 像便签纸（一条信息），Hash 像表格（一行多列可单独改），List 像排队队列（先进先出），Set 像标签云（去重），ZSet
+    像带分数的排行榜（自动排序）。
+  first_principle: 数据结构的选择 = 访问模式 + 性能特征的匹配。字段级读写选 Hash（O(1) 改单字段），排队选 List（O(1) 头尾操作），排序选
+    ZSet（O(logN) 排序）。
   key_points:
   - String：计数器(INCR)/缓存对象JSON/分布式锁
   - Hash：对象字段级读写，Agent 会话状态首选
@@ -32,6 +36,7 @@ memory_points:
 - 状态结构若需深度嵌套(如消息列表)，退而求其次序列化为JSON存String
 - 状态去重用Set，事件流/日志用List，延时队列(按时间戳)用ZSet
 - 加分点：ZSet底层是跳表+哈希表双结构，Hash字段少时用ziplist省内存
+frequency: high
 ---
 
 # 【字节飞连面经】Redis 数据结构：String/Hash/List/Set/ZSet 各适合什么？Agent 会话状态用哪种？
@@ -104,6 +109,40 @@ EXPIRE session:{user_id}:{conv_id} 1800   # 30 min
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class APPEND start
+    class Client process
+    class H decision
+    class HD special
+    class HSET error
+    class Hash info
+    class HashTable start
+    class JSON process
+    class K1 decision
+    class K2 special
+    class L error
+    class List info
+    class O start
+    class Redis process
+    class S1 decision
+    class S2 special
+    class Set error
+    class SkipList info
+    class String start
+    class Z1 process
+    class ZD decision
+    class ZSet special
+    class br error
+    class hashtable info
+    class id start
+    class messages process
+    class session decision
+    class ziplist special
     Client[Agent服务] -->|读写状态| Redis[(Redis)]
     subgraph S1 [Agent混合状态存储选型]
         H["Hash<br/>扁平控制字段"] -->|"HSET/O(1)<br/>单字段更新省带宽"| K1["session:id"]

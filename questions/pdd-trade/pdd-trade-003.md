@@ -34,6 +34,7 @@ memory_points:
 - 单元化：按 UID 切，每单元独立完整链路
 - 切流：DNS/SLB 秒级
 - 机房间独立故障域
+frequency: low
 ---
 
 # 【拼多多交易】多活容灾怎么设计？核心交易怎么保证不挂？
@@ -214,6 +215,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

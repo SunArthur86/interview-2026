@@ -31,6 +31,7 @@ memory_points:
 - 离线建库：文档切分为Chunk→批量Embedding→L2归一化→存入向量库。
 - 在线检索：Query向量化→近似最近邻(ANN)检索→召回Top-K。
 - 关键点：FAISS等库用内积IP等价计算余弦相似度，需提前做归一化。
+frequency: medium
 ---
 
 # Embedding原理和RAG向量检索过程
@@ -283,6 +284,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

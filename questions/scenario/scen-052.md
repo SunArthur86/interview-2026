@@ -29,6 +29,7 @@ memory_points:
 - 高可用设计：网关自身必须无状态以支持横向扩容，配合多机房与本地降级缓存。
 - 动态路由：路由规则存放在配置中心，网关监听变更实现热更新，无需重启。
 - 选型对比：Nginx+Lua/APISIX主打极致高并发，Spring Cloud Gateway契合Java生态。
+frequency: high
 ---
 
 # 如何设计API网关？统一鉴权、限流、路由、监控。
@@ -124,6 +125,7 @@ flowchart TD
     ROUTE --> SV2[服务B]
     ROUTE --> GRAY[灰度版本]
     style GW fill:#ffe4b5
+
 ```
 
 

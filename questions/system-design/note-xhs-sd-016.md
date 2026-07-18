@@ -30,16 +30,17 @@ first_principle:
   - 削峰填谷是应对洪峰流量的标准手段
   rebuild: 请求到API网关 → Redis Lua脚本原子扣减库存（毫秒级）→ 扣减成功发MQ消息 → 消费者异步创建订单到DB → 返回用户"排队中"。Redis扛住洪峰，MQ削峰，DB按自己的节奏消费。
 follow_up:
-  - Lua脚本扣减失败了怎么办？用户等了半天发现没货？
-  - 如果MQ消息积压了，大量库存已扣但订单没创建，怎么办？
-  - 热点商品（百万人抢购）Redis单key会成为瓶颈吗？怎么解决？
-  - 如何保证Redis扣减和DB最终一致？如果DB创建订单失败了要不要回滚Redis？
-  - 大促结束后怎么对账？发现Redis和DB库存不一致怎么办？
+- Lua脚本扣减失败了怎么办？用户等了半天发现没货？
+- 如果MQ消息积压了，大量库存已扣但订单没创建，怎么办？
+- 热点商品（百万人抢购）Redis单key会成为瓶颈吗？怎么解决？
+- 如何保证Redis扣减和DB最终一致？如果DB创建订单失败了要不要回滚Redis？
+- 大促结束后怎么对账？发现Redis和DB库存不一致怎么办？
 memory_points:
-  - 核心链路：限流 → Redis Lua原子扣减 → MQ异步 → DB落库 → 补偿兜底
-  - 防超卖关键：Lua脚本保证CHECK+DEDUCT原子性，不能用先查后减
-  - 削峰关键：MQ异步解耦，DB按消费速率平稳写入
-  - 幂等保证：订单号/requestId去重，防止重复扣减
+- 核心链路：限流 → Redis Lua原子扣减 → MQ异步 → DB落库 → 补偿兜底
+- 防超卖关键：Lua脚本保证CHECK+DEDUCT原子性，不能用先查后减
+- 削峰关键：MQ异步解耦，DB按消费速率平稳写入
+- 幂等保证：订单号/requestId去重，防止重复扣减
+frequency: high
 ---
 
 # 【拼多多一面】大促时如何用 Redis+消息队列做库存扣减与订单异步创建？
@@ -350,6 +351,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -32,6 +32,7 @@ memory_points:
 - 选型看场景：重RAG选LlamaIndex，生产级单体选LangGraph，多Agent协作用CrewAI/AutoGen
 - 选型看团队：非技术团队用Dify拖拽，资深研发或特殊需求建议自研框架
 - 主流框架痛点：抽象过度、API迭代快、多Agent调试复杂且成本高
+frequency: high
 ---
 
 # 字节 AI 二面：对主流 Agent 框架有什么看法？怎么选型？
@@ -230,6 +231,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

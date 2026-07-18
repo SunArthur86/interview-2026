@@ -31,6 +31,7 @@ memory_points:
 - 核心思路：输入方式是多面，任务执行是核心
 - 路由分发：以 / 开头走命令解析，否则走自然语言LLM解析
 - 底层统一：无论哪种输入，最终都映射为同一个Task对象走相同执行链路
+frequency: low
 ---
 
 # 【月之暗面面经】如果产品要支持命令式输入和自然语言输入并存，前端会怎么做？
@@ -55,6 +56,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CP start
+    class CommandParser process
+    class EX decision
+    class InputRouter special
+    class NLP error
+    class NLParser info
+    class NO start
+    class Parser process
+    class R decision
+    class T special
+    class Task error
+    class TaskExecutor info
+    class U1 start
+    class U2 process
+    class UI decision
+    class YES special
+    class br error
+    class confidence info
+    class prompt start
+    class tokenize process
+    class validate decision
     subgraph UI["用户输入层"]
         U1["命令式输入框<br/>(以 / 开头)"]
         U2["自然语言对话框<br/>(直接打字)"]

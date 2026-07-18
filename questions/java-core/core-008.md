@@ -16,6 +16,7 @@ memory_points:
 - 包含关系：JDK包含JRE和开发工具，而JRE包含JVM和核心类库。
 - 跨平台核心是JVM：不同系统装不同版JVM，负责将字节码解释为机器码。
 - 实战避坑：仅装JRE无法使用jstat等监控工具排查生产故障。
+frequency: medium
 ---
 
 # 什么是Java概述？
@@ -26,6 +27,42 @@ Java 是一门面向对象、跨平台的编程语言，核心特性是「Write 
 
 ```mermaid
 graph TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Area start
+    class CL process
+    class Class decision
+    class Data special
+    class Dev error
+    class EE info
+    class Engine start
+    class Environment process
+    class Execution decision
+    class GC special
+    class JDK error
+    class JIT info
+    class JRE start
+    class JVM process
+    class Java decision
+    class Kit special
+    class LIB error
+    class Loader info
+    class Machine start
+    class RDA process
+    class Runtime decision
+    class TOOLS special
+    class Virtual error
+    class br info
+    class etc start
+    class jar process
+    class javac decision
+    class jconsole special
+    class jdb error
+    class jstat info
     JDK["JDK Java Dev Kit"]
     JRE["JRE Java Runtime Environment"]
     JVM["JVM Java Virtual Machine"]

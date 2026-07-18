@@ -30,6 +30,7 @@ memory_points:
 - 基准量级：单机Redis读写QPS约8万至10万
 - 高性能因：纯内存操作加epoll多路复用，单线程免锁无切换
 - 瓶颈限制：千兆网卡约12万QPS即达上限，禁用O(N)复杂命令
+frequency: high
 ---
 
 # 【滴滴面经】单 Redis 的 QPS 大概是什么量级？
@@ -322,6 +323,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

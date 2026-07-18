@@ -15,6 +15,7 @@ memory_points:
 - 虚拟主机靠Host：因为1.1新增Host字段，所以一个IP能托管多个Web站点
 - 缓存与断点：引入ETag解决精度问题；支持Range请求且返回206实现断点续传
 - 连接特性：1.0默认短连接，1.1默认Keep-Alive长连接
+frequency: high
 ---
 
 # 什么是HTTP1.1有什么特性？
@@ -91,6 +92,40 @@ app.get('/app.js', (req, res) => {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Alive process
+    class B decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class B4 start
+    class C process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class C5 start
+    class D process
+    class D1 decision
+    class D2 special
+    class D3 error
+    class D4 info
+    class HOL start
+    class HPACK process
+    class HTTP decision
+    class IP special
+    class Keep error
+    class QUIC info
+    class RTT start
+    class TCP process
+    class UDP decision
+    class br special
     A[HTTP 协议演进] --> B["HTTP/1.1"]
     B --> B1[文本协议]
     B --> B2[持久连接 Keep-Alive]

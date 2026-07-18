@@ -29,6 +29,7 @@ memory_points:
 - 百亿级容量：采用双维度拆分如128库乘128表，保障单表容量在百万级最优区间。
 - 分片键植入：将分片信息隐含在业务ID中（如Snowflake变种），实现从ID反查路由。
 - 跨库查询破局：非分片键查询通过ES建立二级索引，采用CQRS读写分离架构。
+frequency: medium
 ---
 
 # 如何设计一个百亿级数据的分库分表方案？
@@ -120,6 +121,7 @@ flowchart TD
     MIG[迁移扩容] --> DW[双写+binlog同步]
     style HS fill:#d4edda
     style JOIN fill:#ffe4b5
+
 ```
 
 

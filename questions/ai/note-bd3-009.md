@@ -28,6 +28,7 @@ memory_points:
 - 速度对比：因为AWQ无需复杂矩阵运算，所以量化极快(2分vs30分)且推理最快
 - 精度对比：GPTQ精度最优，而AWQ接近GPTQ且优于普通RTN
 - 生态对比：GPTQ代表实现为AutoGPTQ，而AWQ主推vLLM和TensorRT-LLM
+frequency: medium
 ---
 
 # 请对比GPTQ和AWQ两种量化方法的原理、量化精度和推理速度差异
@@ -222,6 +223,7 @@ flowchart TD
     style DEPLOY fill:#009688,color:#fff
     style Q4 fill:#FF9800,color:#fff
     style ADJUST fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

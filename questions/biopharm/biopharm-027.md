@@ -12,37 +12,41 @@ tags:
 - 规范
 - 提效度量
 feynman:
-  essence: "AI Coding 团队规范是'让 AI 编程助手从个人玩具变成团队生产力'——统一工具+ prompt/规则规范+代码审查+提效度量，让 AI 写的代码可控、一致、可度量。"
-  analogy: "像给施工队配电动工具——光发工具不行，还要统一操作规范（怎么用）、安全规程（代码审查）、质量验收（提效度量），不然各干各的反而出乱子。"
-  first_principle: "AI 编程助手（Cursor/Claude Code）能大幅提效，但无规范会导致：风格不一、质量参差、依赖失控、安全隐患、难度量。AI Coding 规范的本质是'用工程化约束让 AI 辅助编程的产出可控、一致、可度量、可审计'。"
+  essence: AI Coding 团队规范是'让 AI 编程助手从个人玩具变成团队生产力'——统一工具+ prompt/规则规范+代码审查+提效度量，让 AI
+    写的代码可控、一致、可度量。
+  analogy: 像给施工队配电动工具——光发工具不行，还要统一操作规范（怎么用）、安全规程（代码审查）、质量验收（提效度量），不然各干各的反而出乱子。
+  first_principle: AI 编程助手（Cursor/Claude Code）能大幅提效，但无规范会导致：风格不一、质量参差、依赖失控、安全隐患、难度量。AI
+    Coding 规范的本质是'用工程化约束让 AI 辅助编程的产出可控、一致、可度量、可审计'。
   key_points:
-  - "工具统一：Cursor/Claude Code + 规则文件（.cursorrules/CLAUDE.md）"
-  - "规则规范：编码规范+架构约束+安全红线注入 AI 上下文"
-  - "代码审查：AI 生成代码必须人工 review（不能盲信）"
-  - "提效度量：效率指标（提速比/缺陷率）+ 质量指标"
-  - "分工：AI 写样板/测试/重构，人写核心逻辑/审查/决策"
+  - 工具统一：Cursor/Claude Code + 规则文件（.cursorrules/CLAUDE.md）
+  - 规则规范：编码规范+架构约束+安全红线注入 AI 上下文
+  - 代码审查：AI 生成代码必须人工 review（不能盲信）
+  - 提效度量：效率指标（提速比/缺陷率）+ 质量指标
+  - 分工：AI 写样板/测试/重构，人写核心逻辑/审查/决策
   socratic:
-  - "团队每人用不同 AI 工具，代码风格五花八门，怎么统一？"
-  - "AI 写的代码能直接合吗？盲信会出什么问题？"
-  - "怎么让 AI 按团队的架构规范和编码风格写代码？"
-  - "老板问'用 AI 到底提效多少'，怎么用数字回答？"
-  - "AI 写代码和人工写代码，怎么分工最合理？"
+  - 团队每人用不同 AI 工具，代码风格五花八门，怎么统一？
+  - AI 写的代码能直接合吗？盲信会出什么问题？
+  - 怎么让 AI 按团队的架构规范和编码风格写代码？
+  - 老板问'用 AI 到底提效多少'，怎么用数字回答？
+  - AI 写代码和人工写代码，怎么分工最合理？
 first_principle:
-  problem: "如何让 AI 编程助手的产出可控、一致、可度量、安全，成为团队生产力而非个人玩具？"
+  problem: 如何让 AI 编程助手的产出可控、一致、可度量、安全，成为团队生产力而非个人玩具？
   axioms:
-  - "AI 辅助编程能提效但产出参差"
-  - "无规范会风格不一/质量失控/难度量"
-  - "AI 会生成错误/不安全代码，需审查"
-  rebuild: "统一工具+规则文件注入团队规范、AI 生成代码必经人工审查、用效率和质量指标度量提效、人机合理分工（AI 写样板/测试，人写核心/审查），让 AI Coding 工程化可控。"
+  - AI 辅助编程能提效但产出参差
+  - 无规范会风格不一/质量失控/难度量
+  - AI 会生成错误/不安全代码，需审查
+  rebuild: 统一工具+规则文件注入团队规范、AI 生成代码必经人工审查、用效率和质量指标度量提效、人机合理分工（AI 写样板/测试，人写核心/审查），让
+    AI Coding 工程化可控。
 follow_up:
-- ".cursorrules/CLAUDE.md 写什么？——编码规范、架构约束、技术栈、禁止项、测试要求、目录结构、命名规范；让 AI 每次都遵守。"
-- "怎么防 AI 写出不安全代码？——规则注入安全红线 + 依赖审查（别乱引包）+ secrets 扫描 + code review。"
-- "提效怎么度量？——提速比（同任务 AI vs 手工时长）、PR 大小/频率、缺陷率、返工率；分任务类型看（样板快，核心逻辑提速有限）。"
+- .cursorrules/CLAUDE.md 写什么？——编码规范、架构约束、技术栈、禁止项、测试要求、目录结构、命名规范；让 AI 每次都遵守。
+- 怎么防 AI 写出不安全代码？——规则注入安全红线 + 依赖审查（别乱引包）+ secrets 扫描 + code review。
+- 提效怎么度量？——提速比（同任务 AI vs 手工时长）、PR 大小/频率、缺陷率、返工率；分任务类型看（样板快，核心逻辑提速有限）。
 memory_points:
-- "统一工具 + 规则文件注入规范"
-- "AI 代码必经人工 review"
-- "提效度量：提速比/缺陷率"
-- "人机分工：AI 样板/测试，人核心/审查"
+- 统一工具 + 规则文件注入规范
+- AI 代码必经人工 review
+- 提效度量：提速比/缺陷率
+- 人机分工：AI 样板/测试，人核心/审查
+frequency: medium
 ---
 
 # 【生物医药 AI】AI Coding 团队规范怎么落地（Cursor/Claude Code）？
@@ -178,6 +182,26 @@ AI Coding 团队规范本质是**"用工程化约束让 AI 辅助编程的产出
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AI process
+    class B decision
+    class C special
+    class Claude error
+    class Code info
+    class Cursor start
+    class D process
+    class E decision
+    class F special
+    class G error
+    class H info
+    class Review start
+    class cursorrules process
     A[团队统一开发环境 Cursor/Claude] --> B[注入规则文件 .cursorrules]
     B --> C{AI 生成代码/补全}
     C --> D[依赖与密钥安全扫描拦截]

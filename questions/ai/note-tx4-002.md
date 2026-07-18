@@ -19,7 +19,8 @@ feynman:
   - '全链路审计: 记忆CRUD全部留日志'
 first_principle:
   essence: 记忆系统 = 存储 + 一致性 + 隔离 + 生命周期管理
-  derivation: 用户偏好会变 → 前后矛盾 → 不能简单覆盖(丢信息) → 需要版本+置信度 → 冲突时确认 → 多用户 → 需要租户隔离 → 记忆会过时 → 需要TTL淘汰
+  derivation: 用户偏好会变 → 前后矛盾 → 不能简单覆盖(丢信息) → 需要版本+置信度 → 冲突时确认 → 多用户 → 需要租户隔离 → 记忆会过时
+    → 需要TTL淘汰
   conclusion: 生产级Agent记忆系统是分布式状态管理问题，不是简单的向量库查询
 follow_up:
 - 记忆存在哪？向量库还是关系数据库？
@@ -30,6 +31,7 @@ memory_points:
 - 高置信度旧记忆遇冲突时：新记忆高优写入，并异步主动询问用户确认真相
 - 多租户防泄露：检索时强制双层过滤(tenant_id + user_id)
 - 防越权读取：必须经过权限网关，校验当前会话用户与记忆所有者严格一致
+frequency: high
 ---
 
 # 设计多用户在线 Agent 长期记忆系统，用户前后说法矛盾产生记忆冲突怎么处理？多租户如何防止记忆泄露？
@@ -244,6 +246,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

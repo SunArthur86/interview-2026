@@ -26,6 +26,7 @@ memory_points:
 - 选型对比：字节流处理二进制(图片/视频)，字符流处理纯文本防乱码
 follow_up: []
 tags: []
+frequency: low
 ---
 
 # 字节流和字符流的区别？
@@ -117,6 +118,36 @@ InputStream bis = new BufferedInputStream(is);   // 装饰流，增强功能
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ASCII process
+    class B decision
+    class Byte special
+    class C error
+    class Char info
+    class D start
+    class Decode process
+    class E decision
+    class Encode special
+    class F error
+    class G info
+    class GBK start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
+    class UTF special
+    class Unicode error
+    class br info
     A[字符编码流程] --> B[字符 Char Unicode]
     B --> C[编码 Encode]
     C --> D[字节 Byte<br/>UTF-8/GBK]

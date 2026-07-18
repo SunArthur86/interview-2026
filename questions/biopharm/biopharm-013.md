@@ -11,37 +11,41 @@ tags:
 - 编排
 - DAG
 feynman:
-  essence: "Workflow+Agent 编排引擎是把'确定性流程'和'概率性决策'融合的调度核心——外层 Workflow 控骨架（DAG/审批/恢复），内层局部用 Agent 灵活决策，兼得可靠与灵活。"
-  analogy: "像拍电视剧——总导演定剧本骨架（Workflow：第几场戏什么顺序、关键场景要审），每场戏的即兴发挥交给演员（Agent 灵活演）。骨架保证剧情连贯合规，即兴保证生动。"
-  first_principle: "Workflow 可靠但不灵活（流程固定），Agent 灵活但不可靠（概率决策）。真实业务既需确定性骨架（合规/审批/恢复），又需局部灵活性。编排引擎的本质是把两者融合——Workflow 定骨架，Agent 填血肉。"
+  essence: Workflow+Agent 编排引擎是把'确定性流程'和'概率性决策'融合的调度核心——外层 Workflow 控骨架（DAG/审批/恢复），内层局部用
+    Agent 灵活决策，兼得可靠与灵活。
+  analogy: 像拍电视剧——总导演定剧本骨架（Workflow：第几场戏什么顺序、关键场景要审），每场戏的即兴发挥交给演员（Agent 灵活演）。骨架保证剧情连贯合规，即兴保证生动。
+  first_principle: Workflow 可靠但不灵活（流程固定），Agent 灵活但不可靠（概率决策）。真实业务既需确定性骨架（合规/审批/恢复），又需局部灵活性。编排引擎的本质是把两者融合——Workflow
+    定骨架，Agent 填血肉。
   key_points:
-  - "Workflow 控骨架（DAG/状态机/审批/恢复），Agent 填局部决策"
-  - "引擎核心：任务图 + 调度器 + 状态机 + 执行器 + 检查点"
-  - "三种节点：LLM 节点 / 工具节点 / 人工节点 / 子流程节点"
-  - "支持并行、分支、循环、子流程、断点恢复"
-  - "可观测：每节点输入输出/耗时/状态全追踪"
+  - Workflow 控骨架（DAG/状态机/审批/恢复），Agent 填局部决策
+  - 引擎核心：任务图 + 调度器 + 状态机 + 执行器 + 检查点
+  - 三种节点：LLM 节点 / 工具节点 / 人工节点 / 子流程节点
+  - 支持并行、分支、循环、子流程、断点恢复
+  - 可观测：每节点输入输出/耗时/状态全追踪
   socratic:
-  - "纯 Workflow 太死板（流程固定），纯 Agent 太随机（不可控），怎么融合？"
-  - "一个节点既调 LLM 又要人工审批，引擎怎么编排？"
-  - "引擎跑一个大流程，怎么知道现在跑到哪一步、卡在哪？"
-  - "流程里有循环（查不到就重查），引擎怎么支持而不死循环？"
-  - "编排引擎和 LangGraph 这种框架什么关系？要不要自研？"
+  - 纯 Workflow 太死板（流程固定），纯 Agent 太随机（不可控），怎么融合？
+  - 一个节点既调 LLM 又要人工审批，引擎怎么编排？
+  - 引擎跑一个大流程，怎么知道现在跑到哪一步、卡在哪？
+  - 流程里有循环（查不到就重查），引擎怎么支持而不死循环？
+  - 编排引擎和 LangGraph 这种框架什么关系？要不要自研？
 first_principle:
-  problem: "如何设计一个既能承载确定性流程、又能融合概率性 Agent 决策的可靠编排引擎？"
+  problem: 如何设计一个既能承载确定性流程、又能融合概率性 Agent 决策的可靠编排引擎？
   axioms:
-  - "业务需确定性骨架（合规/审批/恢复）"
-  - "局部需灵活性（开放问答/探索）"
-  - "复杂流程要可恢复、可观测、可回滚"
-  rebuild: "引擎核心抽象为'任务图+状态机'：Workflow 定义骨架（DAG/分支/审批），Agent 作为节点填局部决策，调度器驱动执行，检查点保恢复，全链路追踪保可观测，兼得可靠与灵活。"
+  - 业务需确定性骨架（合规/审批/恢复）
+  - 局部需灵活性（开放问答/探索）
+  - 复杂流程要可恢复、可观测、可回滚
+  rebuild: 引擎核心抽象为'任务图+状态机'：Workflow 定义骨架（DAG/分支/审批），Agent 作为节点填局部决策，调度器驱动执行，检查点保恢复，全链路追踪保可观测，兼得可靠与灵活。
 follow_up:
-- "自研 vs LangGraph/Temporal？——自研灵活可控（医药强定制/审计）、LangGraph 适合 AI 图式编排、Temporal 适合长事务；强合规+长流程可 Temporal 骨架+LangGraph 局部。"
-- "怎么防 Agent 死循环？——最大步数/超时/重复检测（相同状态N次即终止）+ 人工介入兜底。"
-- "引擎怎么支持灰度？——流程定义版本化，按租户/流量灰度新版本，可回滚。"
+- 自研 vs LangGraph/Temporal？——自研灵活可控（医药强定制/审计）、LangGraph 适合 AI 图式编排、Temporal 适合长事务；强合规+长流程可
+  Temporal 骨架+LangGraph 局部。
+- 怎么防 Agent 死循环？——最大步数/超时/重复检测（相同状态N次即终止）+ 人工介入兜底。
+- 引擎怎么支持灰度？——流程定义版本化，按租户/流量灰度新版本，可回滚。
 memory_points:
-- "Workflow 控骨架，Agent 填局部"
-- "引擎核心：任务图+状态机+调度+检查点"
-- "四类节点：LLM/工具/人工/子流程"
-- "可观测：每节点追踪"
+- Workflow 控骨架，Agent 填局部
+- 引擎核心：任务图+状态机+调度+检查点
+- 四类节点：LLM/工具/人工/子流程
+- 可观测：每节点追踪
+frequency: medium
 ---
 
 # 【生物医药 AI】Workflow + Agent 编排引擎架构怎么设计？
@@ -173,6 +177,31 @@ edges:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class DAG error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class JSON info
+    class K start
+    class LLM process
+    class RAG decision
+    class S1 special
+    class S2 error
+    class YAML info
+    class br start
     A["前端可视化拖拽"] --> B["YAML/JSON<br/>流程定义"]
     subgraph S1 ["编排引擎核心"]
         B --> C["DAG 解析器"]

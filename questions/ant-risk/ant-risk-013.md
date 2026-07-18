@@ -36,6 +36,7 @@ memory_points:
 - 实时特征（Flink 流式增量）+ 离线特征（Spark 批量）双轨
 - 特征平台：统一特征定义、计算、存储、服务（避免重复造轮子）
 - 风控特征 RT 要求 <50ms，靠 HBase 存 + Redis 热缓存
+frequency: medium
 ---
 
 # 【蚂蚁风控】风控的特征工程怎么做的？实时特征怎么算？
@@ -327,6 +328,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

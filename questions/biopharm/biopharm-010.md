@@ -11,37 +11,38 @@ tags:
 - token 优化
 - 并发优化
 feynman:
-  essence: "AI 系统的成本控制是'让每一分 token 花在刀刃上'——小模型前置、缓存复用、prompt 压缩、并发批处理，在不降体验前提下把单位成本压到最低。"
-  analogy: "像家庭理财——大额支出（大模型）要用在刀刃上，日常零花用小模型，相同东西别买两次（缓存），优惠券凑单（批处理），记账（监控）才知道钱花哪了。"
-  first_principle: "LLM 推理成本 = token 量 × 单价 × 调用次数，三者都可控。成本控制本质是'在不损害用户体验（质量/延迟）的前提下，系统性地降低这三者的乘积'，核心手段是路由、缓存、压缩、批处理、复用。"
+  essence: AI 系统的成本控制是'让每一分 token 花在刀刃上'——小模型前置、缓存复用、prompt 压缩、并发批处理，在不降体验前提下把单位成本压到最低。
+  analogy: 像家庭理财——大额支出（大模型）要用在刀刃上，日常零花用小模型，相同东西别买两次（缓存），优惠券凑单（批处理），记账（监控）才知道钱花哪了。
+  first_principle: LLM 推理成本 = token 量 × 单价 × 调用次数，三者都可控。成本控制本质是'在不损害用户体验（质量/延迟）的前提下，系统性地降低这三者的乘积'，核心手段是路由、缓存、压缩、批处理、复用。
   key_points:
-  - "成本公式：token 量 × 单价 × 次数，三管齐下"
-  - "路由：简单问题用小模型（降单价）"
-  - "缓存：语义缓存命中复用（降次数）"
-  - "prompt 压缩：精简上下文（降 token 量）"
-  - "批处理+并发：提升 GPU 利用率（降单位成本）"
+  - 成本公式：token 量 × 单价 × 次数，三管齐下
+  - 路由：简单问题用小模型（降单价）
+  - 缓存：语义缓存命中复用（降次数）
+  - prompt 压缩：精简上下文（降 token 量）
+  - 批处理+并发：提升 GPU 利用率（降单位成本）
   socratic:
-  - "用 GPT-4 跑所有请求，账单从几千涨到几十万，钱都花哪了？怎么查？"
-  - "用户反复问同一个问题，每次都重新调 LLM，浪费在哪？"
-  - "把整本说明书塞进 prompt 做问答，token 爆炸，怎么省？"
-  - "小模型便宜但答得差，大模型好但贵，怎么兼顾成本和质量？"
-  - "GPU 利用率只有 20%，是不是在烧钱？怎么提升？"
+  - 用 GPT-4 跑所有请求，账单从几千涨到几十万，钱都花哪了？怎么查？
+  - 用户反复问同一个问题，每次都重新调 LLM，浪费在哪？
+  - 把整本说明书塞进 prompt 做问答，token 爆炸，怎么省？
+  - 小模型便宜但答得差，大模型好但贵，怎么兼顾成本和质量？
+  - GPU 利用率只有 20%，是不是在烧钱？怎么提升？
 first_principle:
-  problem: "如何在不损害体验的前提下，系统性降低 LLM 推理的单位成本？"
+  problem: 如何在不损害体验的前提下，系统性降低 LLM 推理的单位成本？
   axioms:
-  - "成本 = token 量 × 单价 × 调用次数"
-  - "任务难度长尾分布（多数简单）"
-  - "相同/相似请求大量重复"
-  rebuild: "降单价（路由到小模型/自部署）、降次数（语义缓存/历史复用）、降 token 量（prompt 压缩/精炼上下文）、提利用率（批处理/并发），四管齐下把成本压到帕累托最优。"
+  - 成本 = token 量 × 单价 × 调用次数
+  - 任务难度长尾分布（多数简单）
+  - 相同/相似请求大量重复
+  rebuild: 降单价（路由到小模型/自部署）、降次数（语义缓存/历史复用）、降 token 量（prompt 压缩/精炼上下文）、提利用率（批处理/并发），四管齐下把成本压到帕累托最优。
 follow_up:
-- "语义缓存怎么实现？——query embedding 找相似历史问答，相似度超阈值且知识未更新则返回缓存；注意知识库更新要清相关缓存。"
-- "prompt 压缩有哪些手段？——摘要历史/裁剪无关片段/去掉冗余指令/用更紧凑的格式（JSON 精简）/contextual retrieval 只塞相关。"
-- "自部署模型什么时候省钱？——量大且任务固定时，自部署开源模型（7B/14B）单 token 成本远低于 API，但要算 GPU+运维成本。"
+- 语义缓存怎么实现？——query embedding 找相似历史问答，相似度超阈值且知识未更新则返回缓存；注意知识库更新要清相关缓存。
+- prompt 压缩有哪些手段？——摘要历史/裁剪无关片段/去掉冗余指令/用更紧凑的格式（JSON 精简）/contextual retrieval 只塞相关。
+- 自部署模型什么时候省钱？——量大且任务固定时，自部署开源模型（7B/14B）单 token 成本远低于 API，但要算 GPU+运维成本。
 memory_points:
-- "成本 = token × 单价 × 次数"
-- "路由降单价，缓存降次数，压缩降 token"
-- "批处理提 GPU 利用率"
-- "监控计量是省钱前提"
+- 成本 = token × 单价 × 次数
+- 路由降单价，缓存降次数，压缩降 token
+- 批处理提 GPU 利用率
+- 监控计量是省钱前提
+frequency: high
 ---
 
 # 【生物医药 AI】AI 系统的性能与成本怎么控制？
@@ -168,6 +169,22 @@ query embedding → 找相似历史问答 → 相似度 > 阈值 → 返回
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Batch start
+    class Generate process
+    class Large decision
+    class Request special
+    class Response error
+    class Retrieve info
+    class ReturnCache start
+    class Router process
+    class SemanticCache decision
+    class Small special
     Request[用户提问] --> Router[模型路由器]
     Router -->|简单问题| Small[小模型处理 降单价]
     Router -->|复杂问题| Large[大模型处理]

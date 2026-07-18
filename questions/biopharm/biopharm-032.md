@@ -12,37 +12,41 @@ tags:
 - Few-shot
 - 结构化输出
 feynman:
-  essence: "Prompt 工程是'用自然语言编程 LLM'——CoT 让它分步推理，ReAct 让它边想边调工具，Few-shot 给范例对齐格式，结构化输出约束格式，版本管理让 prompt 像代码一样可演进。"
-  analogy: "像教新人干活——CoT 是'别急着想清楚一步步来'，ReAct 是'边查资料边思考'，Few-shot 是'先看几个例子照着做'，结构化输出是'按这个表格填'，版本管理是'上次有效的教程存档别弄丢'。"
-  first_principle: "LLM 是基于上下文预测下一个 token 的概率模型，prompt 决定了它'看到什么'就'生成什么'。Prompt 工程的本质是'用上下文工程化引导 LLM 的概率分布，让它更可能输出符合预期的结果'。"
+  essence: Prompt 工程是'用自然语言编程 LLM'——CoT 让它分步推理，ReAct 让它边想边调工具，Few-shot 给范例对齐格式，结构化输出约束格式，版本管理让
+    prompt 像代码一样可演进。
+  analogy: 像教新人干活——CoT 是'别急着想清楚一步步来'，ReAct 是'边查资料边思考'，Few-shot 是'先看几个例子照着做'，结构化输出是'按这个表格填'，版本管理是'上次有效的教程存档别弄丢'。
+  first_principle: LLM 是基于上下文预测下一个 token 的概率模型，prompt 决定了它'看到什么'就'生成什么'。Prompt 工程的本质是'用上下文工程化引导
+    LLM 的概率分布，让它更可能输出符合预期的结果'。
   key_points:
-  - "CoT（Chain-of-Thought）：让 LLM 分步推理，提升复杂问题准确率"
-  - "ReAct：Thought-Action-Observation 循环，推理+工具调用"
-  - "Few-shot：给范例对齐格式/风格/逻辑"
-  - "结构化输出：JSON schema/Function Calling 约束输出格式"
-  - "Prompt 版本管理：像代码一样版本化+评测+灰度"
+  - CoT（Chain-of-Thought）：让 LLM 分步推理，提升复杂问题准确率
+  - ReAct：Thought-Action-Observation 循环，推理+工具调用
+  - Few-shot：给范例对齐格式/风格/逻辑
+  - 结构化输出：JSON schema/Function Calling 约束输出格式
+  - Prompt 版本管理：像代码一样版本化+评测+灰度
   socratic:
-  - "直接问 LLM 一个复杂数学题，和让它'一步步想'，结果差多少？"
-  - "要 LLM 调工具，怎么让它知道什么时候调、调完怎么用？"
-  - "LLM 输出格式乱七八糟，下游没法解析，怎么约束？"
-  - "改了一版 prompt 好像变好了又好像变差了，怎么科学判断？"
-  - "Few-shot 给几个例子才合适？给多了有用吗？"
+  - 直接问 LLM 一个复杂数学题，和让它'一步步想'，结果差多少？
+  - 要 LLM 调工具，怎么让它知道什么时候调、调完怎么用？
+  - LLM 输出格式乱七八糟，下游没法解析，怎么约束？
+  - 改了一版 prompt 好像变好了又好像变差了，怎么科学判断？
+  - Few-shot 给几个例子才合适？给多了有用吗？
 first_principle:
-  problem: "如何用上下文工程化引导 LLM 稳定输出符合预期的结果？"
+  problem: 如何用上下文工程化引导 LLM 稳定输出符合预期的结果？
   axioms:
-  - "LLM 是基于上下文预测 token 的概率模型"
-  - "prompt 决定 LLM '看到什么就生成什么'"
-  - "复杂任务/格式约束需特定技巧"
-  rebuild: "CoT 引导分步推理提准确率，ReAct 让推理+工具循环，Few-shot 给范例对齐，结构化输出（schema/Function Calling）约束格式，版本管理+评测让 prompt 可演进，把'调 API'变成可工程化的上下文编程。"
+  - LLM 是基于上下文预测 token 的概率模型
+  - prompt 决定 LLM '看到什么就生成什么'
+  - 复杂任务/格式约束需特定技巧
+  rebuild: CoT 引导分步推理提准确率，ReAct 让推理+工具循环，Few-shot 给范例对齐，结构化输出（schema/Function Calling）约束格式，版本管理+评测让
+    prompt 可演进，把'调 API'变成可工程化的上下文编程。
 follow_up:
-- "CoT 为什么有效？——分步推理让 LLM 把复杂问题拆成简单步，每步预测更准（中间 token 给模型思考空间）；Zero-shot CoT（'一步步想'）也有效。"
-- "结构化输出怎么保证可靠？——Function Calling/JSON mode + schema 校验 + 失败重试 + 兜底解析；不要纯靠 prompt 提示（不稳）。"
-- "Prompt 版本怎么管？——Git/专门平台存版本，绑定评测集，变更触发回归，灰度上线，A/B 验证（见025 LLMOps）。"
+- CoT 为什么有效？——分步推理让 LLM 把复杂问题拆成简单步，每步预测更准（中间 token 给模型思考空间）；Zero-shot CoT（'一步步想'）也有效。
+- 结构化输出怎么保证可靠？——Function Calling/JSON mode + schema 校验 + 失败重试 + 兜底解析；不要纯靠 prompt 提示（不稳）。
+- Prompt 版本怎么管？——Git/专门平台存版本，绑定评测集，变更触发回归，灰度上线，A/B 验证（见025 LLMOps）。
 memory_points:
-- "CoT 分步推理提准确率"
-- "ReAct：Thought-Action-Observation"
-- "Few-shot 对齐格式/逻辑"
-- "结构化输出 + 版本管理"
+- CoT 分步推理提准确率
+- ReAct：Thought-Action-Observation
+- Few-shot 对齐格式/逻辑
+- 结构化输出 + 版本管理
+frequency: medium
 ---
 
 # 【生物医药 AI】Prompt 工程怎么进阶（CoT/ReAct/Few-shot/结构化输出/版本管理）？
@@ -194,6 +198,44 @@ Prompt 工程本质是**"用上下文工程化引导 LLM 的概率分布"**。Co
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class A3 special
+    class B error
+    class B1 info
+    class B2 start
+    class B3 process
+    class B4 decision
+    class B5 special
+    class C1 error
+    class C2 info
+    class C3 start
+    class C4 process
+    class Calling decision
+    class CoT special
+    class D1 error
+    class D2 info
+    class D3 start
+    class Few process
+    class Function decision
+    class JSON special
+    class Mode error
+    class Prompt info
+    class ReAct start
+    class S1 process
+    class S2 decision
+    class S3 special
+    class S4 error
+    class Schema info
+    class shot start
+    class token process
     subgraph S1 [Prompt 输入层]
         A1[角色设定与指令] --> A2[分隔符隔离数据]
         A3[Few-shot 示例对齐]

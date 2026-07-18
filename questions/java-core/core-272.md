@@ -15,6 +15,7 @@ memory_points:
 - 标量替换：对象不逃逸且可拆解，打散为基本类型直接在栈寄存器分配。
 - 同步消除：确认对象仅单线程访问，编译器自动擦除冗余的同步锁。
 - 栈上分配：对象不逃逸仅线程内用，随栈帧弹出自动回收，免GC扫描。
+frequency: medium
 ---
 
 # 什么是逃逸分析？
@@ -96,6 +97,34 @@ public void test() {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Analysis process
+    class B decision
+    class C special
+    class D error
+    class DoEscapeAnalysis info
+    class E start
+    class Escape process
+    class F decision
+    class G special
+    class GC error
+    class H info
+    class I start
+    class J process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class O start
+    class XX process
+    class br decision
+    class synchronized special
     A[逃逸分析 Escape Analysis] --> B[分析对象作用域]
     B --> C{对象是否逃出方法?}
     C -->|未逃出 方法内| D[优化]

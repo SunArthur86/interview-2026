@@ -4,8 +4,17 @@ difficulty: L2
 category: java-architect
 subcategory: MySQL
 title: 数据库在线 DDL 与无损变更
-tags: [DDL, gh-ost, pt-online-schema-change, 无锁变更, MySQL]
-related: [java-architect-150, java-architect-142, java-architect-141]
+tags:
+- DDL
+- gh-ost
+- pt-online-schema-change
+- 无锁变更
+- MySQL
+related:
+- java-architect-150
+- java-architect-142
+- java-architect-141
+frequency: high
 ---
 
 # 数据库在线 DDL 与无损变更
@@ -357,6 +366,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

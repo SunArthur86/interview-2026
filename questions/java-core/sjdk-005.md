@@ -16,6 +16,7 @@ memory_points:
 - JDK 21核心：分代ZGC(参数ZGenerational)落地，利用弱分代假说提升吞吐
 - ZGC原理：依赖64位染色指针与读屏障自愈，而Shenandoah依赖转发指针
 - 选型：低延迟选ZGC，兼顾吞吐选Shenandoah，Web通用场景选G1
+frequency: high
 ---
 
 # JDK 21中的ZGC和Shenandoah GC有什么特点？如何选择GC？
@@ -103,6 +104,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

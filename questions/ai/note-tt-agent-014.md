@@ -33,6 +33,7 @@ memory_points:
 - 因果句：因为模型容易编造参数死循环，所以第一层必须做Pydantic参数强校验
 - 因果句：因为大模型易陷入重试泥潭，所以同一参数组合要设计幂等缓存直接返回
 - 对比句：参数校验防幻觉，幂等缓存防死循环，连续失败超过阈值拉入工具黑名单
+frequency: high
 ---
 
 # 频繁出现模型反复调用错误工具怎么处理？
@@ -182,6 +183,23 @@ def graceful_degradation(tool_name: str, user_intent: str):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class Pydantic special
+    class br error
     A["大模型发起<br/>错误工具调用"] --> B{"第一层: Pydantic<br/>参数类型/范围强校验"}
     B -- "校验失败" --> C["大模型自我修正<br/>携带错误信息反馈"]
     B -- "校验通过" --> D{"第二层: 幂等设计<br/>检查请求缓存"}

@@ -21,6 +21,7 @@ memory_points:
 - 优势：非线性表达能力强，梯度平滑，比ReLU/GELU性能更好
 - 代价：参数量增加50%（多一个门控矩阵），需调整隐藏层维度保持总参平衡
 - 初始化：A随机初始化，B初始化为0，保证训练开始时等价于原始模型
+frequency: high
 ---
 
 # 为什么现代大模型(LLaMA/GLM)用SwiGLU替代ReLU/GELU作为FFN激活函数
@@ -50,6 +51,45 @@ SwiGLU 是由 Swish 激活函数与 GLU (Gated Linear Unit，门控线性单元)
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Activation start
+    class Element process
+    class FFN decision
+    class GELU special
+    class Input error
+    class Linear info
+    class Multiply start
+    class Output process
+    class ReLU decision
+    class SwiGLU special
+    class Swish error
+    class W1 info
+    class W2 start
+    class W_G process
+    class W_in decision
+    class W_out special
+    class fact error
+    class ffn info
+    class fin start
+    class fout process
+    class fw1 decision
+    class fw2 special
+    class mul error
+    class swiglu info
+    class swish start
+    class wg process
+    class win decision
+    class wise special
+    class wout error
+    class x info
+    class xW_G start
+    class xin process
+    class xout decision
     subgraph ffn["标准 FFN（ReLU/GELU）"]
         fin["Input (x)"]
         fw1["Linear (W1)"]

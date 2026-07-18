@@ -11,7 +11,8 @@ tags:
 - 时序差分
 - TD
 feynman:
-  essence: 蒙特卡洛（MC）和时序差分（TD）是 RL 估计价值函数的两种方法。核心差异：MC 要等一整条轨迹结束用"实际总回报"更新（无偏但方差大、必须等终止）；TD 只看一步用"即时奖励 + 下一步估计价值"更新（有偏但方差小、每步都能学）。MC 是"事后总结"，TD 是"边走边学"。
+  essence: 蒙特卡洛（MC）和时序差分（TD）是 RL 估计价值函数的两种方法。核心差异：MC 要等一整条轨迹结束用"实际总回报"更新（无偏但方差大、必须等终止）；TD
+    只看一步用"即时奖励 + 下一步估计价值"更新（有偏但方差小、每步都能学）。MC 是"事后总结"，TD 是"边走边学"。
   analogy: MC 像考完试看总分（要等整场考完才知道这次考得好不好，单次偶然性大）；TD 像每做一道题就预估"这道对了，目前分数大概 X"（不用等考完，但预估可能不准）。
   first_principle: 价值估计的本质是"用回报更新估计"。MC 用完整轨迹的实际回报（无偏），TD 用单步奖励 + 下一步估计（bootstrap，有偏但快）。差异在于"等多久"和"是否依赖自身估计"。
   key_points:
@@ -34,6 +35,7 @@ memory_points:
 - TD目标含估计值V(s')而MC用真实总回报
 - 因为RLHF需要训练稳定，所以PPO用TD融合版GAE而不用纯MC
 - GAE用λ参数在MC和TD之间做插值
+frequency: low
 ---
 
 # 【阶跃星辰面经】蒙特卡洛模拟与时序差分估计，核心差异在哪里
@@ -145,6 +147,26 @@ TD(λ) / GAE：用 (γλ)^k 衰减权重融合所有 n 步 → 最优折中
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Bootstrapping start
+    class E process
+    class F decision
+    class MC special
+    class O error
+    class S1 info
+    class S2 start
+    class S3 process
+    class TD decision
+    class U special
+    class V error
+    class br info
+    class r start
+    class s process
     subgraph MC["蒙特卡洛 MC"]
         direction TB
         E["等待整条轨迹结束"]

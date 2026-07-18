@@ -29,6 +29,7 @@ memory_points:
 - Trace追踪：OpenTelemetry全链路追踪，记录每步耗时与Prompt上下文。
 - 告警体系：P0服务不可用（电话），P1延迟恶化（飞书），P2质量下降（邮件）。
 - 对比：传统监控看SLA，AI可观测性看幻觉率、逻辑正确性及成本归因。
+frequency: medium
 ---
 
 # 如何设计AI系统的可观测性方案？监控模型行为、输出质量和用户体验。
@@ -124,6 +125,24 @@ OpenTelemetry标准，一次请求的完整Trace：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class C1 info
+    class C2 start
+    class M process
+    class N decision
+    class S1 special
+    class S2 error
+    class S3 info
     subgraph S1[基础设施层]
         A1[GPU利用率/显存] --> A2[延迟与重试熔断监控]
     end

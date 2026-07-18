@@ -16,6 +16,7 @@ memory_points:
 - 访问限制：访问外部局部变量必须是 Effectively Final（不可变）。
 - 原理：因内部类生命周期可能长于方法栈帧，局部变量必须作为拷贝存入内部类。
 - 成员限制：不能随意定义静态成员（JDK16+ 仅允许 static final 常量）。
+frequency: low
 ---
 
 # 局部内部类（定义在方法中的类）是什么？
@@ -185,6 +186,34 @@ public class Service {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Comparator special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class Inner error
+    class J info
+    class K start
+    class L process
+    class Lambda decision
+    class Local special
+    class M error
+    class N info
+    class O start
+    class br process
+    class effectively decision
+    class final special
     A[局部内部类 Local Inner] --> B[定义在方法/作用域内]
     B --> C[作用域仅方法内]
     B --> D[不能加访问修饰符]

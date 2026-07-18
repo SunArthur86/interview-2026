@@ -30,6 +30,7 @@ memory_points:
 - 查询稳定性：B树查询可能在非叶子提前命中故不稳定，而B+树必须查到叶子节点故极其稳定
 - 范围查询优势：B树中序遍历回溯产生随机IO，而B+树顺着叶子链表直接做顺序IO极速扫描
 - Fanout差异：因为B+树非叶子不存Data，单页能容纳更多Key（约1170个），树高更矮，磁盘IO更少
+frequency: high
 ---
 
 # B树和B+树的区别？
@@ -160,6 +161,7 @@ flowchart TD
     BT --> NOCHAIN[无链表 需中序回溯]
     style RG fill:#d4edda
     style NOCHAIN fill:#ffe4b5
+
 ```
 
 

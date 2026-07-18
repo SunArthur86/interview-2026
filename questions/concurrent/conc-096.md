@@ -17,6 +17,7 @@ memory_points:
 - 死锁预防：破坏必要条件，最实用的是保证加锁顺序一致性以破坏循环等待。
 - 锁态度分类：乐观锁(CAS适合读多) vs 悲观锁(适合写多)。
 - 锁特性分类：公平/非公平、可重入、独享/共享(读写锁)、自旋锁(不放弃CPU)。
+frequency: high
 ---
 
 # 什么是线程同步和锁？
@@ -148,6 +149,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -33,6 +33,7 @@ memory_points:
 - MCP：标准化传输协议，解耦Agent和工具，一次开发多端接入，抽象层级居中。
 - 关系：Skills编排Tools，MCP传输Tools/数据，实现真正的插件化。
 - 选型：简单调用用Tools，复用能力用Skills，通用服务接入选MCP。
+frequency: high
 ---
 
 # 【字节面经】Skills、Tools、MCP三者的区别是什么？如果自己实现工具服务，选哪种方案？
@@ -137,6 +138,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

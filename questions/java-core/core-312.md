@@ -16,6 +16,7 @@ memory_points:
 - 易混点：protected跨包时，子类只能用super调父类实例，不能直接new父类调用
 - 局部变量无权限：方法内的变量不可加任何访问修饰符，仅作用于方法内部
 - 设计原则：最小权限法，能private绝不default，为扩展留protected钩子
+frequency: low
 ---
 
 # 说一说你对Java访问权限的了解？
@@ -99,6 +100,38 @@ public class MyService extends BaseService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Builder decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HashMap special
+    class I error
+    class Inner info
+    class J start
+    class K process
+    class L decision
+    class M special
+    class N error
+    class Nested info
+    class Node start
+    class O process
+    class Outer decision
+    class Static special
+    class br error
+    class new info
+    class static start
+    class this process
     A[静态内部类 Static Nested] --> B[static 修饰]
     B --> C[不依赖外部实例]
     B --> D[可直接 new Outer.Inner]

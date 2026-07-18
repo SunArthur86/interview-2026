@@ -30,6 +30,7 @@ memory_points:
 - 架构三模块：等级状态机管升降，规则引擎配权益，实时+批处理管账单
 - 事件驱动：消费Kafka触发升级，等级变更后同步Redis毫秒级生效权益
 - 计费统计：充电结算实时算折扣，Flink算日账单，Spark汇月账单
+frequency: medium
 ---
 
 # 会员享受充电折扣、优先预约等权益，如何设计后端架构，支持会员等级管理、权益实时生效与账单统计？
@@ -63,6 +64,22 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class BILL start
+    class EVT process
+    class Gold decision
+    class MS special
+    class Platinum error
+    class RC info
+    class RR start
+    class STAT process
+    class Silver decision
+    class br special
     EVT["用户行为事件流<br/>充电/消费/推荐 → Kafka事件流"]
     MS["会员等级服务 (状态机)<br/>消费累计 → 触发升级检查 → 更新等级 → 发布等级变更事件"]
     RC["Redis权益缓存<br/>等级→权益快照<br/>毫秒级查询"]

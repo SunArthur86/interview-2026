@@ -16,6 +16,7 @@ memory_points:
 - PC端状态获取：HTTP短轮询（简单但费性能）或 WebSocket长连接（实时推荐）
 - 因为临时票据需自动过期且高频读写，所以用Redis保存状态机并设置过期时间
 - 核心安全点：二维码绑定随机UUID防重放，服务端校验APP的授权Token
+frequency: medium
 ---
 
 # 扫码登录怎么设计？
@@ -97,6 +98,20 @@ memory_points:
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class D start
+    class PC process
+    class S decision
+    class TTL special
+    class W error
+    class as info
+    class br start
+    class uuid process
     autonumber
     participant W as Web浏览器 PC
     participant S as 服务端

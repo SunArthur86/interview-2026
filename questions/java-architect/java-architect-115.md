@@ -9,9 +9,12 @@ tags:
 - 分布式追踪
 - W3C TraceContext
 feynman:
-  essence: OpenTelemetry（OTel）是 CNCF 的可观测性统一标准，三件事——Trace（链路）/Metrics（指标）/Logs（日志）的采集 SDK + 数据格式（OTLP 协议）。本质是解决厂商锁定：应用代码只调 OTel API，数据通过 OTLP 协议发到 Collector，Collector 转发到任意后端（Jaeger/Tempo/SkyWalking/Datadog）。换后端不改应用代码。
+  essence: OpenTelemetry（OTel）是 CNCF 的可观测性统一标准，三件事——Trace（链路）/Metrics（指标）/Logs（日志）的采集
+    SDK + 数据格式（OTLP 协议）。本质是解决厂商锁定：应用代码只调 OTel API，数据通过 OTLP 协议发到 Collector，Collector
+    转发到任意后端（Jaeger/Tempo/SkyWalking/Datadog）。换后端不改应用代码。
   analogy: 像 USB-C 标准——设备（应用）只有 USB-C 接口（OTel API），通过转接头（Collector）连到任意显示器（Jaeger/Tempo/SkyWalking）。换显示器不用换设备。
-  first_principle: 分布式追踪的本质是"把一次请求在多个服务间的因果关系重建出来"。OTel 用 trace context（W3C traceparent：traceId-spanId-flags）在服务间传播，每个 span 记录一段处理，通过 parentSpanId 串成树。指标和日志共享 traceId，三支柱可联动下钻。
+  first_principle: 分布式追踪的本质是"把一次请求在多个服务间的因果关系重建出来"。OTel 用 trace context（W3C traceparent：traceId-spanId-flags）在服务间传播，每个
+    span 记录一段处理，通过 parentSpanId 串成树。指标和日志共享 traceId，三支柱可联动下钻。
   key_points:
   - OTel 三支柱：Trace / Metrics / Logs（统一标准）
   - W3C TraceContext（traceparent header）跨服务传播
@@ -25,21 +28,28 @@ first_principle:
   - 每个服务独立日志，没有统一 ID 无法关联
   - 追踪要重建"调用链"（谁调谁、耗时多少、哪里慢）
   - 不同监控后端（Jaeger/SkyWalking）格式不兼容，厂商锁定
-  rebuild: "OTel 定义三件事统一标准。① API：应用调 OTel API 创建 span（traceId/spanId/parentSpanId）。② 传播：W3C TraceContext（traceparent: 00-{traceId}-{spanId}-{flags}）在 HTTP header/gRPC metadata/MQ 消息属性间透传。③ 协议：OTLP 发到 Collector。Collector 做转发/采样/脱敏，推到任意后端。Java 用 Agent 字节码注入（无侵入给 HTTP/JDBC/Redis 加 span），业务代码零改动。"
+  rebuild: 'OTel 定义三件事统一标准。① API：应用调 OTel API 创建 span（traceId/spanId/parentSpanId）。②
+    传播：W3C TraceContext（traceparent: 00-{traceId}-{spanId}-{flags}）在 HTTP header/gRPC
+    metadata/MQ 消息属性间透传。③ 协议：OTLP 发到 Collector。Collector 做转发/采样/脱敏，推到任意后端。Java 用 Agent
+    字节码注入（无侵入给 HTTP/JDBC/Redis 加 span），业务代码零改动。'
 follow_up:
-  - OTel 和 SkyWalking / Jaeger 区别？——OTel 是标准（API+协议），SkyWalking/Jaeger 是后端（存储+UI）。OTel 替代各家私有 SDK，后端可切换
-  - "W3C TraceContext 长啥样？——`traceparent: 00-{version}-{traceId-32hex}-{spanId-16hex}-{flags-2hex}`。traceId 全局唯一，spanId 本地唯一，flags 控制采样"
-  - 采样策略？——头部采样（TraceIDRatio，按比例，简单但可能漏关键）/尾部采样（Collector 决策，可保留全错误链路，但需缓存全链路）
-  - Java Agent 原理？——Instrumentation API 在类加载时改字节码，给 HTTP client/server、JDBC、Kafka 等加 span 创建逻辑。业务代码无感
-  - 三支柱怎么联动？——Metrics 告警 → 通过 exemplar 关联 trace → trace 看慢在哪 → traceId 关联 logs 看具体日志
+- OTel 和 SkyWalking / Jaeger 区别？——OTel 是标准（API+协议），SkyWalking/Jaeger 是后端（存储+UI）。OTel
+  替代各家私有 SDK，后端可切换
+- 'W3C TraceContext 长啥样？——`traceparent: 00-{version}-{traceId-32hex}-{spanId-16hex}-{flags-2hex}`。traceId
+  全局唯一，spanId 本地唯一，flags 控制采样'
+- 采样策略？——头部采样（TraceIDRatio，按比例，简单但可能漏关键）/尾部采样（Collector 决策，可保留全错误链路，但需缓存全链路）
+- Java Agent 原理？——Instrumentation API 在类加载时改字节码，给 HTTP client/server、JDBC、Kafka 等加
+  span 创建逻辑。业务代码无感
+- 三支柱怎么联动？——Metrics 告警 → 通过 exemplar 关联 trace → trace 看慢在哪 → traceId 关联 logs 看具体日志
 memory_points:
-  - OTel 是 CNCF 可观测性统一标准（Trace/Metrics/Logs）
-  - W3C TraceContext：traceparent header 跨服务传播
-  - Span = traceId + spanId + parentSpanId（串成树）
-  - OTLP 协议发到 Collector，Collector 转发任意后端
-  - Java Agent 字节码注入（无侵入）
-  - 采样：头部（TraceIDRatio）vs 尾部（Collector 决策）
-  - 三支柱联动：Metrics → Exemplar → Trace → Logs
+- OTel 是 CNCF 可观测性统一标准（Trace/Metrics/Logs）
+- W3C TraceContext：traceparent header 跨服务传播
+- Span = traceId + spanId + parentSpanId（串成树）
+- OTLP 协议发到 Collector，Collector 转发任意后端
+- Java Agent 字节码注入（无侵入）
+- 采样：头部（TraceIDRatio）vs 尾部（Collector 决策）
+- 三支柱联动：Metrics → Exemplar → Trace → Logs
+frequency: high
 ---
 
 # 【Java 后端架构师】OpenTelemetry 在 Java 微服务中的落地
@@ -484,6 +494,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

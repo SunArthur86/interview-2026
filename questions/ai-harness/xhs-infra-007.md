@@ -26,6 +26,7 @@ memory_points:
 - OOM诊断：显存=模型+优化器(2x)+梯度+激活+KV。解法用ZeRO-3切片、Checkpoint换显存、SP切分序列。
 - 低MFU诊断：算力Bound查Kernel利用率，内存Bound查HBM带宽。解法通信Overlap、算子融合、IO加速。
 - Hang诊断：设NCCL_DEBUG=INFO查通信，用py-spy抓堆栈。常见死锁或IB网卡MTU不一致。
+frequency: high
 ---
 
 # 大模型训练中如何诊断OOM、低MFU和hang？常用的Profiler工具有哪些？
@@ -111,6 +112,23 @@ train_loader = DataLoader(
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Fix start
+    class Hang process
+    class Issue decision
+    class NCCL special
+    class OOM error
+    class Profile info
+    class Stack start
+    class Training process
+    class ZeRO decision
+    class br special
+    class py error
     Training[训练任务] --> Issue{问题诊断}
     Issue -->|OOM| ZeRO[ZeRO-3切片<br/>Checkpointing换显存]
     Issue -->|低MFU| Profile[Profiler查Kernel]

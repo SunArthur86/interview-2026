@@ -28,6 +28,7 @@ memory_points:
 - 核心路由是意图识别：分流至FAQ匹配、业务API、或人工接管
 - 转人工四信号：情绪愤怒、连续失败两次、用户主动要求、业务逻辑极度复杂
 - FAQ优化靠RAG混合检索：向量抓语义，BM25抓专有词，Rerank精排提召回
+frequency: high
 ---
 
 # 智能客服 Agent 如何设计？FAQ 匹配算法怎么优化？
@@ -293,6 +294,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

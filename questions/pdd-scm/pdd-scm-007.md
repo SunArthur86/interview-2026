@@ -34,6 +34,7 @@ memory_points:
 - 看门狗续期防业务超时
 - Redlock：多数派防主从切换丢锁
 - 锁要带唯一标识（UUID），释放时验证
+frequency: high
 ---
 
 # 【拼多多供应链】分布式锁怎么实现？库存扣减怎么防超卖？
@@ -232,6 +233,20 @@ DB 乐观锁能防超卖，但扛不住大促并发：
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class DB start
+    class Lua process
+    class Order decision
+    class Redis special
+    class as error
+    class order_id info
+    class sku_id start
+    class stock_log process
     participant Order as 订单服务
     participant Redis as Redis
     participant Lua as Lua原子脚本

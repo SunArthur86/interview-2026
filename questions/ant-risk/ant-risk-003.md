@@ -34,6 +34,7 @@ memory_points:
 - 阿里规约：禁用 Executors，必须 new ThreadPoolExecutor 且队列必须有界
 - 4 种拒绝策略，风控常用 CallerRuns（让上游感知压力）或自定义降级
 - IO 密集型线程数 ≈ N×(1 + 等待时间/计算时间)
+frequency: high
 ---
 
 # 【蚂蚁风控】线程池的工作原理？拒绝策略有哪些？你们风控的线程池是怎么配置的？
@@ -314,6 +315,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

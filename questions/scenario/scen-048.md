@@ -28,6 +28,7 @@ memory_points:
 - 金丝雀发布：按流量比例（如10%到100%）渐进式引入真实用户，侧重风险最小化。
 - 选择策略：关键服务用金丝雀，常规服务用K8s滚动，需秒级回滚选蓝绿。
 - 数据兼容：发布期间数据库必须向前向后兼容，禁止Breaking Change。
+frequency: medium
 ---
 
 # 如何设计蓝绿部署和金丝雀发布方案？
@@ -185,6 +186,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

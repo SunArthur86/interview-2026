@@ -30,6 +30,7 @@ memory_points:
 - DB严禁存大文件/图片，只需存URL，避免Buffer Pool被占满拖垮性能
 - 多引擎混合架构：MySQL为主数据源，同步ES做搜索，Flink写CK做BI分析
 - MongoDB胜在Schema灵活，HBase基于LSM写入极高但只适合RowKey查询
+frequency: high
 ---
 
 # 如何设计一个海量数据的存储选型方案？MySQL/MongoDB/HBase/ES如何选择？
@@ -128,6 +129,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

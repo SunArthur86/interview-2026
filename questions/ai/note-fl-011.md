@@ -11,7 +11,8 @@ tags:
 - 过期策略
 - 淘汰策略
 feynman:
-  essence: Redis Key 过期不会立刻删——用惰性删除（下次访问才检查）+ 定期删除（每100ms抽样）组合。内存淘汰策略 8 种 maxmemory-policy：noeviction(默认不删)/allkeys-lru/allkeys-lfu/allkeys-random/volatile-lru/volatile-lfu/volatile-random/volatile-ttl。Agent 会话状态选 allkeys-lru 或 volatile-lru——会话本身有时效性，LRU 自然把最久没碰的踢掉。
+  essence: Redis Key 过期不会立刻删——用惰性删除（下次访问才检查）+ 定期删除（每100ms抽样）组合。内存淘汰策略 8 种 maxmemory-policy：noeviction(默认不删)/allkeys-lru/allkeys-lfu/allkeys-random/volatile-lru/volatile-lfu/volatile-random/volatile-ttl。Agent
+    会话状态选 allkeys-lru 或 volatile-lru——会话本身有时效性，LRU 自然把最久没碰的踢掉。
   analogy: 过期像家里的过期食品——你不会每秒检查每包（太累），而是偶尔翻冰箱（定期删除）+ 拿起来要吃时才看保质期（惰性删除）。淘汰像衣柜满了——丢最久没穿的（LRU）、丢最不常穿的（LFU）、随机丢（random）、按保质期丢（ttl）。
   first_principle: Redis 是内存数据库，内存有限。过期是"主动声明"，淘汰是"被动应对"。两者协同保证 Redis 既不存垃圾也不爆内存。
   key_points:
@@ -33,6 +34,7 @@ memory_points:
 - 8大淘汰策略：noeviction默认报错，allkeys-*管所有键，volatile-*只踢设了TTL的键
 - 淘汰算法看场景：LRU淘汰最久未用(保活跃)，LFU淘汰频次低(保热点)
 - 淘汰非严格LRU，而是采样近似(maxmemory-samples默认取5个选最老)
+frequency: high
 ---
 
 # 【字节飞连面经】Redis 过期删除策略 + 内存淘汰策略：Key 过期会立刻删吗？
@@ -104,6 +106,28 @@ Redis 的 LRU 是**近似 LRU**：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Clear start
+    class Client process
+    class D1 decision
+    class D2 special
+    class E1 error
+    class E2 info
+    class E3 start
+    class Evict process
+    class Exp decision
+    class Redis special
+    class allkeys error
+    class br info
+    class lru start
+    class noeviction process
+    class samples decision
+    class volatile special
     Client[读写命令] --> Redis[(Redis)]
     Redis --> Exp[过期策略组合]
     Redis --> Evict[内存淘汰策略]

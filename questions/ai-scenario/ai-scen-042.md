@@ -29,6 +29,7 @@ memory_points:
 - 排序层：粗排(双塔) → 精排(多目标) → 重排(ListWise) → LLM解释。
 - LLM增强：生成推荐理由，支持对话式交互和动态调整。
 - 核心升级：从关键词匹配升级为语义理解和个性化排序。
+frequency: medium
 ---
 
 # 如何设计一个AI驱动的产品搜索与排序系统？结合语义搜索、个性化排序和LLM增强。
@@ -40,6 +41,44 @@ AI驱动的产品搜索与排序系统旨在解决传统关键词搜索无法理
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ANN start
+    class BM25 process
+    class CF decision
+    class ES special
+    class Embed error
+    class Fusion info
+    class LLM start
+    class LR process
+    class ListWise decision
+    class NER special
+    class NLP error
+    class Q1 info
+    class Q2 start
+    class Q3 process
+    class Q4 decision
+    class QL special
+    class Query error
+    class R1 info
+    class R2 start
+    class R3 process
+    class R4 decision
+    class RL special
+    class RRF error
+    class Result info
+    class S1 start
+    class S2 process
+    class S3 decision
+    class S4 special
+    class SL error
+    class User info
+    class UserCF start
+    class br process
     User[用户查询] --> QL[Query 理解层 LLM/NLP]
     QL --> Q1[意图分类<br/>搜商品/攻略]
     QL --> Q2[实体识别 NER<br/>品牌/属性]

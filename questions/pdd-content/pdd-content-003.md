@@ -11,7 +11,8 @@ tags:
 - 锁
 - ReentrantLock
 feynman:
-  essence: AQS 用"state 变量 + CLH FIFO 双向队列 + CAS"实现同步器框架；ReentrantLock/Semaphore/CountDownLatch 都基于它，是 JUC 的基石。
+  essence: AQS 用"state 变量 + CLH FIFO 双向队列 + CAS"实现同步器框架；ReentrantLock/Semaphore/CountDownLatch
+    都基于它，是 JUC 的基石。
   analogy: AQS 像银行叫号——state 是柜台状态（忙/闲），CLH 队列是排队人群，CAS 是抢号（没人占就进）。
   first_principle: 多线程争抢共享资源需"原子改状态 + 公平排队"，AQS 用 volatile state + CAS + 双向队列抽象这套。
   key_points:
@@ -27,14 +28,15 @@ first_principle:
   - 抢不到要公平排队
   rebuild: volatile state + CAS + CLH 队列 + 模板方法（子类实现语义）。
 follow_up:
-  - ReentrantLock 怎么实现可重入？——state 计数，同线程每次 +1，释放 -1
-  - 公平 vs 非公平？——公平先到先得（看队列），非公平直接抢（吞吐高）
-  - Semaphore 怎么用 AQS？——state 是许可数，acquire -1 release +1
+- ReentrantLock 怎么实现可重入？——state 计数，同线程每次 +1，释放 -1
+- 公平 vs 非公平？——公平先到先得（看队列），非公平直接抢（吞吐高）
+- Semaphore 怎么用 AQS？——state 是许可数，acquire -1 release +1
 memory_points:
-  - 核心：state + CLH + CAS
-  - 独占（ReentrantLock）/共享（Semaphore）
-  - 模板方法：tryAcquire 留给子类
-  - ReentrantLock 用 state 计数可重入
+- 核心：state + CLH + CAS
+- 独占（ReentrantLock）/共享（Semaphore）
+- 模板方法：tryAcquire 留给子类
+- ReentrantLock 用 state 计数可重入
+frequency: high
 ---
 
 # 【拼多多内容】AQS 原理与内容场景应用？
@@ -216,6 +218,29 @@ Semaphore 是"并发数限流"（同时允许 100 个请求在跑），令牌桶
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class B1 error
+    class B2 info
+    class B3 start
+    class CAS process
+    class CLH decision
+    class CountDownLatch special
+    class ReentrantReadWriteLock error
+    class Semaphore info
+    class br start
+    class park process
+    class state decision
+    class unpark special
+    class volatile error
     subgraph AQS核心机制
         A1["volatile state"] --> A2["CAS 原子更新"]
         A2 --> A3["CLH 双向队列"]

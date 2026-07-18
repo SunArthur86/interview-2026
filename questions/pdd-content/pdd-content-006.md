@@ -27,14 +27,15 @@ first_principle:
   - 范围查询常见
   rebuild: B+ 树（多叉降高度+叶子链表支持范围）。
 follow_up:
-  - 为什么用 B+ 树不用 B 树/红黑树？——B+ 树多叉矮（IO 少），叶子链表支持范围
-  - 索引失效场景？——函数运算/类型不一致/最左前缀缺/范围后字段失效/like '%x'
-  - 联合索引顺序怎么定？——区分度高+常用过滤条件+等值在前范围在后
+- 为什么用 B+ 树不用 B 树/红黑树？——B+ 树多叉矮（IO 少），叶子链表支持范围
+- 索引失效场景？——函数运算/类型不一致/最左前缀缺/范围后字段失效/like '%x'
+- 联合索引顺序怎么定？——区分度高+常用过滤条件+等值在前范围在后
 memory_points:
-  - B+ 树：非叶索引+叶子数据+链表
-  - 联合索引最左前缀
-  - 覆盖索引不回表
-  - 回表：二级→主键→数据
+- B+ 树：非叶索引+叶子数据+链表
+- 联合索引最左前缀
+- 覆盖索引不回表
+- 回表：二级→主键→数据
+frequency: high
 ---
 
 # 【拼多多内容】MySQL 索引与评价查询优化？
@@ -219,6 +220,31 @@ EXPLAIN SELECT * FROM review WHERE product_id = 100;
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B process
+    class B1 decision
+    class C1 special
+    class C2 error
+    class D1 info
+    class D2 start
+    class D3 process
+    class D4 decision
+    class D5 special
+    class E1 error
+    class ES info
+    class LIMIT start
+    class WHERE process
+    class br decision
+    class create_time special
+    class offset error
+    class product_id info
+    class status start
     A1["商品评价页翻页请求"] --> B1{"查询优化策略选择"}
     B1 -->|"LIMIT offset > 10000"| C1["ES 分布式检索"]
     B1 -->|"常规分页 WHERE product_id=?"| C2["MySQL联合索引检索"]

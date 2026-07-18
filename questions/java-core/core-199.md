@@ -17,6 +17,7 @@ memory_points:
 - List对比：ArrayList查快增删慢（数组1.5倍扩），LinkedList查慢增删快（双向链表）。
 - Map演进：HashMap非线程安全（允null），高并发必选ConcurrentHashMap。
 - HashSet去重原理：因为底层基于HashMap，所以必须正确重写对象的hashCode和equals。
+frequency: medium
 ---
 
 # 什么是Java集合类有哪些？
@@ -104,6 +105,48 @@ users.add(new User("Alice")); // 重复，不会存入
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayDeque process
+    class ArrayList decision
+    class B special
+    class C error
+    class C1 info
+    class C2 start
+    class C3 process
+    class C4 decision
+    class Collection special
+    class ConcurrentHashMap error
+    class D info
+    class D1 start
+    class D2 process
+    class D3 decision
+    class E special
+    class E1 error
+    class E2 info
+    class E3 start
+    class F process
+    class F1 decision
+    class F2 special
+    class HashMap error
+    class HashSet info
+    class Java start
+    class LinkedHashMap process
+    class LinkedHashSet decision
+    class LinkedList special
+    class List error
+    class Map info
+    class PriorityQueue start
+    class Queue process
+    class Set decision
+    class TreeMap special
+    class TreeSet error
+    class Vector info
     A[Java 集合框架] --> B[Collection 单列]
     A --> C[Map 双列]
     B --> D[List 有序可重复]

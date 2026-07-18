@@ -17,6 +17,7 @@ memory_points:
 - 基础vs包装：基础存栈且有默认值，而包装存堆且默认为null
 - Integer缓存：因为Cache机制，所以-128到127范围内的自动装箱会复用对象
 - 精度避坑：二进制无法精确表示十进制小数，金额计算必须用BigDecimal
+frequency: medium
 ---
 
 # 什么是Java基础数据类型？
@@ -118,6 +119,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

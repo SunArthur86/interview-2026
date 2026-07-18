@@ -30,6 +30,7 @@ memory_points:
 - 隔离避免坑：CompletableFuture默认用commonPool，严禁混用，必须传独立线程池
 - 超时防慢调用：慢任务会占满线程池，必须用orTimeout设超时与熔断隔离
 - 背压兜底：核心采用小队列快速暴露问题，配合CallerRuns让主线程自我限流
+frequency: high
 ---
 
 # 用 Future/线程池做并发，怎么监控线程池状态？怎么防止血崩？
@@ -234,6 +235,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

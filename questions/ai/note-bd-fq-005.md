@@ -32,6 +32,7 @@ memory_points:
 - 几何直觉：余弦看方向(适合语义匹配)，欧氏看绝对距离(适合聚类/异常检测)
 - 数学等价性：向量L2归一化后，欧氏距离与余弦相似度严格单调等价
 - 工业最优解：FAISS中先归一化，再用内积IndexFlatIP，极速实现余弦相似度
+frequency: medium
 ---
 
 # 余弦相似度和欧氏距离在高维空间中的差异是什么？实际怎么选？
@@ -184,6 +185,7 @@ flowchart TD
     style VEC fill:#FF9800,color:#fff
     style STORE fill:#9C27B0,color:#fff
     style COS fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

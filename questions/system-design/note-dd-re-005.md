@@ -30,6 +30,7 @@ memory_points:
 - 核心目标：规则抽离代码转DSL，依托配置中心实现热更新
 - 运行机制：DSL解析转AST语法树，编译结果缓存兼顾灵活性性能
 - 架构闭环：后台管理配置版本，监听变更，本地缓存加速执行
+frequency: medium
 ---
 
 # 【滴滴面经】如果规则引擎要做成动态可配置的，你觉得应该怎么设计？
@@ -54,6 +55,38 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ADMIN start
+    class AST process
+    class Admin decision
+    class Apollo special
+    class BIZ error
+    class CACHE info
+    class CFG start
+    class Console process
+    class DSL decision
+    class EXE special
+    class MQ error
+    class Nacos info
+    class RES start
+    class RT process
+    class Watch decision
+    class YAML special
+    class br error
+    class context info
+    class execute start
+    class key process
+    class ruleEngine decision
+    class ruleSetId special
+    class rule_meta error
+    class rule_publish info
+    class rule_version start
+    class ver process
     ADMIN["管理后台 (Admin Console)<br/>规则编辑器 → DSL校验 → 版本提交 → 发布审批"]
     CFG["配置中心 (Apollo/Nacos/数据库)<br/>rule_meta (元信息)<br/>rule_version (版本)<br/>rule_publish (发布)"]
     MQ["消息总线<br/>(MQ / Watch 通知)"]

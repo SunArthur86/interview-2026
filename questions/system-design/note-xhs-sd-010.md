@@ -11,7 +11,7 @@ tags:
 - 运维
 feynman:
   essence: K8s配置管理用ConfigMap(普通)+Secret(敏感)分离管理。可观测性三支柱：Metrics(指标/Prometheus)+Logging(日志/ELK)+Tracing(链路/SkyWalking)，分别回答「系统状态」「发生了什么」「请求经过了哪」。
-  analogy: "配置管理像公司的文件柜：ConfigMap是公开的操作手册（谁都能看），Secret是保险柜（只有授权人能看密码）。可观测性像医院的监护系统：Metrics是体温血压(实时数值)，Logging是病历(详细记录)，Tracing是转诊单(记录患者经过了哪些科室)。"
+  analogy: 配置管理像公司的文件柜：ConfigMap是公开的操作手册（谁都能看），Secret是保险柜（只有授权人能看密码）。可观测性像医院的监护系统：Metrics是体温血压(实时数值)，Logging是病历(详细记录)，Tracing是转诊单(记录患者经过了哪些科室)。
   key_points:
   - 配置管理：ConfigMap+Secret，支持envFrom和volumeMount
   - 动态配置：@RefreshScope热更新或Nacos/Apollo
@@ -20,18 +20,19 @@ feynman:
   - 'Logging: 结构化JSON日志→EFK栈'
   - 'Tracing: SkyWalking/Jaeger+Java Agent'
 first_principle:
-  problem: "分布式微服务环境下，系统由几十个服务组成，如何管理配置和观测系统健康状态？"
+  problem: 分布式微服务环境下，系统由几十个服务组成，如何管理配置和观测系统健康状态？
   axioms:
   - 配置应与代码分离（12-Factor App原则）
   - 可观测性是分布式系统的「免疫系统」——没有可观测性的系统无法运维
   - Metrics回答「what」（指标异常）、Logging回答「why」（原因）、Tracing回答「where」（位置）
   - K8s的声明式配置 + Secret加密 + 动态刷新 = 生产级配置管理
-  rebuild: "从分布式运维需求出发：ConfigMap+Secret(配置分离)→Prometheus(指标监控+告警)→EFK(日志聚合搜索)→SkyWalking(全链路追踪)。三者互补形成完整的可观测性体系，缺一不可"
+  rebuild: 从分布式运维需求出发：ConfigMap+Secret(配置分离)→Prometheus(指标监控+告警)→EFK(日志聚合搜索)→SkyWalking(全链路追踪)。三者互补形成完整的可观测性体系，缺一不可
 follow_up:
 - K8s 中如何做滚动更新和优雅停机？
 - Prometheus 的 Pull 和 Push 模式有什么区别？K8s 用哪个？
 - 如何用 SkyWalking 排查慢请求？Trace 和 Span 的关系？
 - AI服务的 SLA 怎么定义？P99 延迟如何优化？
+frequency: medium
 ---
 
 # K8s 环境下的配置管理与可观测性方案如何设计？（入职Java复盘）
@@ -417,6 +418,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

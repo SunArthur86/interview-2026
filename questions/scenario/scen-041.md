@@ -28,6 +28,7 @@ memory_points:
 - 单元化核心：按用户ID哈希路由，同用户固定在单机房写，Zone内强一致，Zone间异步同步
 - 切换流程：探针检测机房健康 → 自动/人工DNS切换 → 数据校验 → 逐步流量恢复
 - 跨机房事务：因为分布式事务成本高，所以采用TCC、Saga或可靠消息保最终一致
+frequency: medium
 ---
 
 # 如何设计异地多活架构？保证地域级故障时业务不中断。
@@ -156,6 +157,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -30,6 +30,7 @@ memory_points:
 - 策略对比：固定分块简单但易切碎语义，递归分块找自然边界最常用。
 - 语义分块：用Embedding检测语义跳变点切分，最准但计算成本高。
 - 父子分块：子块（200字）建索引精准匹配，父块（2000字）返回保上下文。
+frequency: medium
 ---
 
 # 文档的加载和分割（Chunking）怎么做？
@@ -207,6 +208,28 @@ document_strategies = {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
+    class br special
     A["原始文档库"] --> B["文档加载器"]
     B --> C["结构解析与提取"]
     C --> D{"文档有无明确结构?"}

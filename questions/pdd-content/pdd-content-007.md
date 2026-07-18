@@ -26,14 +26,15 @@ first_principle:
   - 加锁降吞吐
   rebuild: 版本链 + ReadView 判断可见性（MVCC）。
 follow_up:
-  - RC 和 RR 的快照差异？——RC 每次读生成新 ReadView，RR 第一次读生成
-  - 幻读怎么解决？——RR 用间隙锁（当前读）+ MVCC（快照读）
-  - 当前读 vs 快照读？——当前读取最新（for update），快照读走 MVCC
+- RC 和 RR 的快照差异？——RC 每次读生成新 ReadView，RR 第一次读生成
+- 幻读怎么解决？——RR 用间隙锁（当前读）+ MVCC（快照读）
+- 当前读 vs 快照读？——当前读取最新（for update），快照读走 MVCC
 memory_points:
-  - 隐藏字段：trx_id + roll_pointer
-  - undo 版本链
-  - ReadView：活跃事务列表
-  - RC 每次/RR 首次生成 RV
+- 隐藏字段：trx_id + roll_pointer
+- undo 版本链
+- ReadView：活跃事务列表
+- RC 每次/RR 首次生成 RV
+frequency: high
 ---
 
 # 【拼多多内容】MVCC 原理与评价读写隔离？
@@ -210,6 +211,30 @@ Gap Lock 是 RR 隔离下"当前读"（`SELECT ... FOR UPDATE / LOCK IN SHARE MO
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class A5 error
+    class B1 info
+    class B2 start
+    class B3 process
+    class FOR decision
+    class Log special
+    class MVCC error
+    class ReadView info
+    class SELECT start
+    class UPDATE process
+    class Undo decision
+    class br special
+    class roll_pointer error
+    class trx_id info
     subgraph 读取链路
         A1["用户查询评价列表<br/>MVCC 快照读"] --> A2["读取记录隐藏字段 trx_id"]
         A2 --> A3{"比对 ReadView 活跃事务列表"}

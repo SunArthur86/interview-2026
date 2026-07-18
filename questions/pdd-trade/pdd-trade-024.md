@@ -26,14 +26,15 @@ first_principle:
   - 资金必须准确
   rebuild: T+1 双向对账 + 差错处理 + 自动平账规则。
 follow_up:
-  - 长款怎么处理？——可能通道延迟，挂账 3 天再退
-  - 短款怎么处理？——主动查通道+补单或退款
-  - 大促对账怎么做？——增量对账（每小时）+ 全量 T+1
+- 长款怎么处理？——可能通道延迟，挂账 3 天再退
+- 短款怎么处理？——主动查通道+补单或退款
+- 大促对账怎么做？——增量对账（每小时）+ 全量 T+1
 memory_points:
-  - 三方对账：订单↔支付↔通道
-  - 差错：长款（平台多）/短款（平台少）
-  - 自动平账：小额自动/大额人工
-  - 监控：差错率/未平账金额
+- 三方对账：订单↔支付↔通道
+- 差错：长款（平台多）/短款（平台少）
+- 自动平账：小额自动/大额人工
+- 监控：差错率/未平账金额
+frequency: medium
 ---
 
 # 【拼多多交易】对账系统怎么设计？
@@ -239,6 +240,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

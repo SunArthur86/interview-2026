@@ -29,6 +29,7 @@ memory_points:
 - 首补桌面底座：摸透 Electron/Tauri 底层机制、多进程通信与内存优化
 - 二补AI交互框架：重构流式渲染管线、重写中断恢复与产物落盘生命周期
 - 三补业务与调试闭环：建立用户行为埋点体系，跑通可观测性与反馈调优链路
+frequency: low
 ---
 
 # 【月之暗面面经】如果让你接手这类桌面产品，你前三个月先补哪三块？
@@ -119,6 +120,24 @@ trackEvent('task_complete', { duration, success });
 
 ```mermaid
 graph TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class C error
+    class C1 info
+    class C2 start
+    class C3 process
+    class D decision
+    class D1 special
+    class D2 error
+    class FPS info
     A["接手桌面产品前三个月规划"] --> B["优先级一：桌面底座工程"]
     A --> C["优先级二：AI交互框架"]
     A --> D["优先级三：业务与调试闭环"]

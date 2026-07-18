@@ -25,6 +25,7 @@ memory_points:
 - 短期提速：裁剪非核心逻辑，调大max.poll.records并攒批插入DB
 - 保序扩容：若业务要求严格顺序，禁用多线程消费，只能靠加Partition扩容
 - 底线原则：严禁直接改Offset跳过积压，必须用死信队列或临时Topic承接
+frequency: medium
 ---
 
 # 线上 Kafka 消息积压百万条如何快速处理？给出系统化的排查和恢复方案。
@@ -151,6 +152,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

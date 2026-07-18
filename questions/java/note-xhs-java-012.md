@@ -11,8 +11,8 @@ tags:
 - JVM参数
 - 面经
 feynman:
-  essence: "OOM时没有Dump文件，是因为JVM启动参数没配置自动Dump。解决方法是添加-XX:+HeapDumpOnOutOfMemoryError参数，或手动用jmap/jcmd触发"
-  analogy: "就像出门忘带手机拍照——事故发生了但没有照片证据。解决方法很简单：设置'自动拍照'参数，下次事故自动留证"
+  essence: OOM时没有Dump文件，是因为JVM启动参数没配置自动Dump。解决方法是添加-XX:+HeapDumpOnOutOfMemoryError参数，或手动用jmap/jcmd触发
+  analogy: 就像出门忘带手机拍照——事故发生了但没有照片证据。解决方法很简单：设置'自动拍照'参数，下次事故自动留证
   key_points:
   - 根因：JVM默认不自动生成Heap Dump
   - 启动参数：-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/path
@@ -20,9 +20,9 @@ feynman:
   - 进阶：JMX + 脚本在OOM前自动Dump（设阈值）
   - 预防：上线前就配好Dump参数
 first_principle:
-  essence: "问题的本质是'缺少配置'而非'技术限制'。JVM有能力生成Dump，只是默认不开启"
-  derivation: "OOM发生了→想要分析→需要Heap Dump→但默认不生成→因为性能开销→生产环境应该主动开启→添加JVM参数→下次OOM自动生成"
-  conclusion: "一个JVM参数解决的问题，关键在于上线前配好而不是事后补"
+  essence: 问题的本质是'缺少配置'而非'技术限制'。JVM有能力生成Dump，只是默认不开启
+  derivation: OOM发生了→想要分析→需要Heap Dump→但默认不生成→因为性能开销→生产环境应该主动开启→添加JVM参数→下次OOM自动生成
+  conclusion: 一个JVM参数解决的问题，关键在于上线前配好而不是事后补
 follow_up:
 - Dump文件很大（几个GB），如何高效分析？（MAT可以分析>2GB的Dump，需要调大MAT内存）
 - -XX:+HeapDumpOnOutOfMemoryError对性能有多大影响？（几乎为零，只在OOM时触发）
@@ -30,10 +30,11 @@ follow_up:
 - 如果jmap命令执行也失败了（内存不足），怎么办？（用gcore生成core dump再转换）
 - 生产环境上线前你还配置过哪些JVM参数？
 memory_points:
-- "JVM参数: -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/dumps/"
-- "手动触发: jmap -dump:format=b,file=heap.hprof <pid>"
-- "JDK11+: jcmd <pid> GC.heap_dump /path/heap.hprof"
-- "OOM前的预防性Dump: 脚本监控heap使用率 > 85%时自动触发"
+- 'JVM参数: -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/dumps/'
+- '手动触发: jmap -dump:format=b,file=heap.hprof <pid>'
+- 'JDK11+: jcmd <pid> GC.heap_dump /path/heap.hprof'
+- 'OOM前的预防性Dump: 脚本监控heap使用率 > 85%时自动触发'
+frequency: high
 ---
 
 # 【拼多多 Java服务端】OOM时JVM没自动生成Dump文件怎么办？
@@ -173,6 +174,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -17,6 +17,7 @@ memory_points:
 - 分段按逻辑划分(代码/数据段)，易于共享与保护
 - 分页产生内部碎片，分段导致外部碎片需紧凑
 - 页表驻留内存，需TLB加速地址转换避免双倍访存开销
+frequency: medium
 ---
 
 # 什么是内存分段和分页？作用是什么？
@@ -144,6 +145,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

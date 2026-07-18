@@ -32,6 +32,7 @@ memory_points:
 - 工具差异：CC工具固定不可变，自研具插件化工具注册中心接企业内部API。
 - 优势：可控性极强（数据与模型），能深度定制企业内部专属工作流。
 - 不足：开源模型能力不及闭源SOTA，且生态完善度与工程成熟度有待积累。
+frequency: medium
 ---
 
 # 【腾讯面经】该项目与 Claude Code 的核心差异在哪？有哪些优势及不足？
@@ -44,6 +45,46 @@ memory_points:
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AG start
+    class AG1 process
+    class AG2 decision
+    class AG3 special
+    class AG4 error
+    class AG5 info
+    class AG6 start
+    class AG7 process
+    class AG8 decision
+    class AG9 special
+    class API error
+    class Agent info
+    class Anthropic start
+    class Bash process
+    class CC decision
+    class CC1 special
+    class CC2 error
+    class CC3 info
+    class CC4 start
+    class CC5 process
+    class CC6 decision
+    class CLI special
+    class Claude error
+    class Code info
+    class Coder start
+    class DS process
+    class Execute decision
+    class IDE special
+    class Llama error
+    class Plan info
+    class Qwen start
+    class Sonnet process
+    class Webhook decision
+    class br special
     subgraph CC["Claude Code 架构 - 上下文策略: 滑动窗口 + 自动压缩（黑盒,不可配置）"]
         CC1["CLI 终端 (单进程)"]
         CC2["Anthropic API<br/>(云端,闭源)"]

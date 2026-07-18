@@ -26,6 +26,7 @@ memory_points:
 - 两大避坑核心：因为synchronized会固定线程，所以必须换ReentrantLock；因为百万线程会导致OOM，所以禁用ThreadLocal。
 follow_up: []
 tags: []
+frequency: high
 ---
 
 # 什么是Virtual Threads（虚拟线程）？它与传统线程有什么区别？
@@ -113,6 +114,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

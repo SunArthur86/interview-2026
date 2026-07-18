@@ -8,12 +8,16 @@ tags:
 - starter
 - 工程化
 feynman:
-  essence: 自动配置的本质是"约定优于配置 + 条件化 Bean 注册"——starter 声明一组 Bean 定义，@Conditional 决定哪些生效，Spring Boot 根据类路径/属性/已存在 Bean 自动装配。让业务方加一个依赖就开箱即用。
-  analogy: 像宜家家具的"智能套装"：你买一个"卧室套装"（starter），里面包含床、衣柜、床头柜（一组 Bean），但只有你卧室有窗户时才送窗帘（@ConditionalOnProperty），只有你已有床垫时才送床单（@ConditionalOnBean）。Spring Boot 的 AutoConfiguration 就是这套智能套装系统。
-  first_principle: 为什么需要自动配置？因为传统 Spring 要写大量 XML/注解配置（DataSource、TransactionManager、MVC），重复且易错。自动配置用"类路径里有 mysql-connector 就自动配 DataSource"的约定，把 80% 的通用配置交给框架，业务只配 20% 个性化部分。
+  essence: 自动配置的本质是"约定优于配置 + 条件化 Bean 注册"——starter 声明一组 Bean 定义，@Conditional 决定哪些生效，Spring
+    Boot 根据类路径/属性/已存在 Bean 自动装配。让业务方加一个依赖就开箱即用。
+  analogy: 像宜家家具的"智能套装"：你买一个"卧室套装"（starter），里面包含床、衣柜、床头柜（一组 Bean），但只有你卧室有窗户时才送窗帘（@ConditionalOnProperty），只有你已有床垫时才送床单（@ConditionalOnBean）。Spring
+    Boot 的 AutoConfiguration 就是这套智能套装系统。
+  first_principle: 为什么需要自动配置？因为传统 Spring 要写大量 XML/注解配置（DataSource、TransactionManager、MVC），重复且易错。自动配置用"类路径里有
+    mysql-connector 就自动配 DataSource"的约定，把 80% 的通用配置交给框架，业务只配 20% 个性化部分。
   key_points:
-  - "@SpringBootApplication = @SpringBootConfiguration + @EnableAutoConfiguration + @ComponentScan"
-  - "@EnableAutoConfiguration 通过 SPI 加载 META-INF/spring.factories（2.7+ 改 spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports）"
+  - '@SpringBootApplication = @SpringBootConfiguration + @EnableAutoConfiguration
+    + @ComponentScan'
+  - '@EnableAutoConfiguration 通过 SPI 加载 META-INF/spring.factories（2.7+ 改 spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports）'
   - 条件注解：@ConditionalOnClass/OnBean/OnProperty/OnMissingBean/OnWebApplication
   - starter 设计：autoconfigure 模块（Bean 定义 + 条件）+ starter 模块（仅 pom 聚合依赖）
   - 排除配置：@SpringBootApplication(exclude = XxxAutoConfiguration.class) 或 spring.autoconfigure.exclude
@@ -23,19 +27,27 @@ first_principle:
   - 80% 的项目配置是通用的（DataSource、MVC、事务），20% 是个性化的
   - 配置可以根据"环境信号"推断（类路径有什么 jar、有什么属性、已存在什么 Bean）
   - 约定优于配置：有合理默认值，只在需要时覆盖
-  rebuild: 把通用配置封装成 AutoConfiguration 类（每个含一组 @Bean + @Conditional），打成 starter。@EnableAutoConfiguration 用 SPI 机制加载所有候选 AutoConfiguration，每个 @Conditional 判断是否生效（类路径有 mysql 才配 DataSource）。业务方加 starter 依赖，Spring Boot 自动推断并装配，零配置启动。
+  rebuild: 把通用配置封装成 AutoConfiguration 类（每个含一组 @Bean + @Conditional），打成 starter。@EnableAutoConfiguration
+    用 SPI 机制加载所有候选 AutoConfiguration，每个 @Conditional 判断是否生效（类路径有 mysql 才配 DataSource）。业务方加
+    starter 依赖，Spring Boot 自动推断并装配，零配置启动。
 follow_up:
-  - spring.factories 和 AutoConfiguration.imports 区别？——2.7 之前用 spring.factories（一个文件塞所有）；2.7+ 推 AutoConfiguration.imports（每行一个类，支持 @AutoConfigureBefore/After 排序），3.0 完全废弃 spring.factories
-  - "@ConditionalOnMissingBean 为什么重要？——让业务方可以覆盖默认 Bean：框架定义默认 DataSource @ConditionalOnMissingBean，业务方自己 @Bean DataSource 就覆盖框架默认"
-  - 怎么排查某个 Bean 是哪个 AutoConfiguration 配的？——启动加 --debug 看.ConditionEvaluationReport，或 actuator 的 /conditions 端点
-  - starter 为什么拆 autoconfigure 和 starter 两模块？——autoconfigure 含配置逻辑（可被 exclude），starter 只聚合依赖（业务方加依赖即用），职责分离便于复用
-  - 自动配置生效顺序怎么控制？——@AutoConfigureBefore/After/Order，避免依赖顺序问题（如 DataSourceAutoConfiguration 必须在 TransactionAutoConfiguration 前）
+- spring.factories 和 AutoConfiguration.imports 区别？——2.7 之前用 spring.factories（一个文件塞所有）；2.7+
+  推 AutoConfiguration.imports（每行一个类，支持 @AutoConfigureBefore/After 排序），3.0 完全废弃 spring.factories
+- '@ConditionalOnMissingBean 为什么重要？——让业务方可以覆盖默认 Bean：框架定义默认 DataSource @ConditionalOnMissingBean，业务方自己
+  @Bean DataSource 就覆盖框架默认'
+- 怎么排查某个 Bean 是哪个 AutoConfiguration 配的？——启动加 --debug 看.ConditionEvaluationReport，或
+  actuator 的 /conditions 端点
+- starter 为什么拆 autoconfigure 和 starter 两模块？——autoconfigure 含配置逻辑（可被 exclude），starter
+  只聚合依赖（业务方加依赖即用），职责分离便于复用
+- 自动配置生效顺序怎么控制？——@AutoConfigureBefore/After/Order，避免依赖顺序问题（如 DataSourceAutoConfiguration
+  必须在 TransactionAutoConfiguration 前）
 memory_points:
-  - "@SpringBootApplication 三合一：Configuration + EnableAutoConfiguration + ComponentScan"
-  - SPI 加载：spring.factories（2.7 前）/ AutoConfiguration.imports（2.7+）
-  - 5 个核心 @Conditional：OnClass/OnBean/OnProperty/OnMissingBean/OnWebApplication
-  - "@ConditionalOnMissingBean 是业务覆盖框架默认的扩展点"
-  - 排查：--debug 启动日志或 actuator /conditions 端点
+- '@SpringBootApplication 三合一：Configuration + EnableAutoConfiguration + ComponentScan'
+- SPI 加载：spring.factories（2.7 前）/ AutoConfiguration.imports（2.7+）
+- 5 个核心 @Conditional：OnClass/OnBean/OnProperty/OnMissingBean/OnWebApplication
+- '@ConditionalOnMissingBean 是业务覆盖框架默认的扩展点'
+- 排查：--debug 启动日志或 actuator /conditions 端点
+frequency: high
 ---
 
 # 【Java 后端架构师】Spring Boot 自动配置原理与 starter 设计
@@ -386,6 +398,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

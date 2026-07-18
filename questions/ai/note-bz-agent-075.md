@@ -29,6 +29,7 @@ memory_points:
 - 硬瓶颈：注意力计算复杂度呈O(n²)，且显存随序列长度暴涨
 - 模型级突破：RoPE外推、滑动窗口注意力、Flash Attention工程加速
 - 应用级突破：超大知识库必用RAG外置检索，长文档用分块摘要压缩
+frequency: medium
 ---
 
 # 上下文窗口是什么？突破长上下文有哪些技术？
@@ -263,6 +264,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

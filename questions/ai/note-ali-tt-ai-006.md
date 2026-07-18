@@ -13,7 +13,7 @@ tags:
 - 面经
 feynman:
   essence: JVM调优查看内存对象的核心工具是Arthas——一个线上诊断工具，可以实时查看堆内存中新生代/老年代占用情况、哪些类占用内存最多、对象引用链等。配合jmap、jstack、MAT等工具形成完整的内存分析工具链。
-  analogy: "JVM内存就像一个仓库——Arthas是仓库的'透视镜'，不用停业(停机)就能看到：哪个货架(新生代/老年代)快满了、哪种货物(类/对象)堆得最多、谁在占用货架不放(引用链)。jmap是'盘点清单'，MAT是'深度分析报告'。"
+  analogy: JVM内存就像一个仓库——Arthas是仓库的'透视镜'，不用停业(停机)就能看到：哪个货架(新生代/老年代)快满了、哪种货物(类/对象)堆得最多、谁在占用货架不放(引用链)。jmap是'盘点清单'，MAT是'深度分析报告'。
   key_points:
   - Arthas：阿里开源的Java在线诊断工具，无需停机，实时查看JVM状态
   - 核心命令：dashboard(总览)、heapdump(堆转储)、profiler(CPU/内存火焰图)
@@ -22,7 +22,8 @@ feynman:
   - JVM内存区域：堆(新生代Eden+S0+S1 / 老年代)、元空间、栈、直接内存
 first_principle:
   essence: JVM内存分析 = 定位"谁占用了内存" + "为什么没被回收"
-  derivation: "OOM或频繁GC的根因：对象创建快于回收 → 堆空间不足。分析路径：(1)看整体占用(jstat/dashboard) → (2)看对象分布(jmap -histo) → (3)看对象引用链(MAT/Arthas) → (4)定位代码位置。"
+  derivation: OOM或频繁GC的根因：对象创建快于回收 → 堆空间不足。分析路径：(1)看整体占用(jstat/dashboard) → (2)看对象分布(jmap
+    -histo) → (3)看对象引用链(MAT/Arthas) → (4)定位代码位置。
   conclusion: 在线用Arthas快速定位问题类，离线用MAT深度分析引用链，两者配合是JVM内存调优的标准工作流。
 follow_up:
 - Arthas的watch和trace命令有什么区别？
@@ -35,6 +36,7 @@ memory_points:
 - Arthas三件套：dashboard(总览GC/线程) → heapdump+jmap -histo(对象分布) → profiler(火焰图)
 - MAT用于离线分析：parse heapdump → Dominator Tree(谁占最多) → Leak Suspects(泄漏嫌疑)
 - 对象进入老年代条件：年龄>=15(默认) 或 大对象直接进 或 Survivor区放不下动态年龄判断
+frequency: high
 ---
 
 # 【阿里淘天AI二面】JVM调优时，如何查看内存对象的情况？有了解过开源工具吗？
@@ -45,6 +47,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class DIRECT start
+    class Direct process
+    class EDEN decision
+    class Eden special
+    class Gen error
+    class HEAP info
+    class Heap start
+    class JVM process
+    class META decision
+    class Metaspace special
+    class NIO error
+    class Netty info
+    class OLD start
+    class Old process
+    class S0 decision
+    class S1 special
+    class STACK error
+    class Stack info
+    class YG start
+    class Young process
+    class br decision
     subgraph JVM["JVM 内存结构"]
         subgraph HEAP["堆内存 (Heap)"]
             subgraph YG["新生代 (Young Gen)"]

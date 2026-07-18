@@ -29,6 +29,7 @@ memory_points:
 - 架构演进：MHA转GQA减少KV Cache，通信效率提升30%
 - 长度演进：32K外推 -> YaRN+DCA算法外推128K -> 原生全长训练128K
 - Qwen2.5质变核心：喂入18T海量Token，并衍生Coder/Math专精垂直版本
+frequency: low
 ---
 
 # 【美团面经】串一下 Qwen 系列，几版模型都做了哪些贡献？
@@ -133,6 +134,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

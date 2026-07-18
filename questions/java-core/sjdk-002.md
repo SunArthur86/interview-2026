@@ -16,6 +16,7 @@ memory_points:
 - Switch增强：JDK 21转正，支持复杂对象匹配且必须显式处理case null
 - 卫语句：用when结合布尔表达式，提供比枚举常量更灵活的条件过滤
 - 模式分类：涵盖类型模式、Record解构模式，大幅简化多分支业务逻辑
+frequency: low
 ---
 
 # JDK 21的Pattern Matching（模式匹配）有哪些重要改进？
@@ -190,6 +191,45 @@ class NewStyle {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class Flow start
+    class G process
+    class H decision
+    class I special
+    class Integer error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class Matching special
+    class N error
+    class NPE info
+    class O start
+    class Pattern process
+    class Sensitive decision
+    class String special
+    class br error
+    class case info
+    class i start
+    class if process
+    class instanceof decision
+    class length special
+    class null error
+    class obj info
+    class s start
+    class switch process
+    class when decision
     A[Pattern Matching] --> B["instanceof 增强"]
     A --> C[switch 模式匹配]
     D["instanceof"] --> E["if obj instanceof String s<br/>直接绑定变量 s"]

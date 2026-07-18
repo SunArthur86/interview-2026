@@ -18,6 +18,7 @@ memory_points:
 - 避坑指南：多线程中慎用fork！因为子进程仅复制调用线程，极易死锁于无法释放的锁
 - 伪共享陷阱：多线程修改同一Cache Line(64字节)的变量会导致缓存频繁失效
 - 伪共享解决：通过字节对齐(如alignas(64)或@Contended)强制变量独占缓存行
+frequency: medium
 ---
 
 # 什么是线程属性？
@@ -113,6 +114,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

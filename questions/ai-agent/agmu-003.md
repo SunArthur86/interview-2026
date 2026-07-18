@@ -17,6 +17,7 @@ memory_points:
 - 工程机制：指数退避重试、断路器防雪崩、降级模板兜底。
 - 逻辑容错：需检测部分成功（格式对内容错），引入 Schema 校验层。
 - 避坑指南：逻辑错误无限重试只会浪费 Token，需配合修改提示词策略。
+frequency: medium
 ---
 
 # 多 Agent 的「容错」具体怎么体现
@@ -152,6 +153,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

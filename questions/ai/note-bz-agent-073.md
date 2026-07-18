@@ -29,6 +29,7 @@ memory_points:
 - 角色与指令是基础，而Few-shot示例是最强模式塑形工具
 - 优先级法则：安全 > 准确 > 有用 > 简洁，遇冲突按此降级处理
 - 进阶技巧：要求模型在输出末尾进行Chain-of-Verification自检
+frequency: medium
 ---
 
 # 基于 Prompt 的模型行为控制技术？
@@ -293,6 +294,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

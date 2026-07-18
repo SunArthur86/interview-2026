@@ -11,7 +11,8 @@ tags:
 - 跨团队
 - Metrics/Logs/Traces
 feynman:
-  essence: 可观测性是"系统的眼睛"——Metrics（指标）+ Logs（日志）+ Traces（链路）三件套让系统透明；跨团队治理要统一标准、共享平台、对齐 SLO。
+  essence: 可观测性是"系统的眼睛"——Metrics（指标）+ Logs（日志）+ Traces（链路）三件套让系统透明；跨团队治理要统一标准、共享平台、对齐
+    SLO。
   analogy: 像城市管理——监控摄像头（Metrics）、事件记录仪（Logs）、巡逻路径（Traces），加上统一指挥中心（治理）才能管好城市。
   first_principle: 复杂系统看不见就是黑盒，必须可观测才能诊断/优化/治理；多团队协作要统一标准避免信息孤岛。
   key_points:
@@ -28,14 +29,15 @@ first_principle:
   - SLO 是共同语言
   rebuild: 可观测性平台（三件套 + SLO + 全链路 + 统一治理）。
 follow_up:
-  - Metrics 和日志区别？——Metrics 聚合数值（QPS/RT），日志详细事件
-  - 全链路追踪怎么做？——TraceId 透传（HTTP/gRPC/Kafka/MQ）
-  - 跨团队怎么对齐？——SLO + 错误预算 + 联合复盘
+- Metrics 和日志区别？——Metrics 聚合数值（QPS/RT），日志详细事件
+- 全链路追踪怎么做？——TraceId 透传（HTTP/gRPC/Kafka/MQ）
+- 跨团队怎么对齐？——SLO + 错误预算 + 联合复盘
 memory_points:
-  - 三件套：Metrics/Logs/Traces
-  - SLO/SLI/错误预算
-  - TraceId 全链路透传
-  - 统一标准 + 共享平台
+- 三件套：Metrics/Logs/Traces
+- SLO/SLI/错误预算
+- TraceId 全链路透传
+- 统一标准 + 共享平台
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】可观测性和跨团队治理怎么做？
@@ -411,6 +413,52 @@ SLO 要基于"用户期望 + 历史数据 + 业务价值"综合定。第一，**
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class API special
+    class B1 error
+    class B2 info
+    class B3 start
+    class B4 process
+    class B5 decision
+    class B6 special
+    class C1 error
+    class C2 info
+    class C3 start
+    class D process
+    class E1 decision
+    class E2 special
+    class E3 error
+    class E4 info
+    class ELK start
+    class F process
+    class Grafana decision
+    class HTTP special
+    class Header error
+    class Headers info
+    class Jaeger start
+    class Kafka process
+    class LLM decision
+    class Logs special
+    class Metrics error
+    class Prometheus info
+    class QPS start
+    class SLO process
+    class TaskDecorator decision
+    class Token special
+    class TraceId error
+    class Traces info
+    class Web start
+    class X process
+    class br decision
+    class trace special
     subgraph 数据接入层
         A1[Web/API 请求] --> A2[LLM 推理服务]
         A3[Kafka 异步消息] --> A2

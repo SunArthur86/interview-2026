@@ -20,7 +20,8 @@ feynman:
   - 调度策略：轮询/事件驱动/优先级队列
 first_principle:
   essence: Agent的"自主性"本质是事件驱动的状态机——外部事件和内部决策共同推进状态演进。
-  derivation: Agent不是线性执行的程序，而是响应式系统。它等待事件（用户消息/工具返回/定时器），事件触发状态转换，转换时调用LLM决策，决策产生新动作（工具调用）成为新事件。这就是Reactive Agent的本质。
+  derivation: Agent不是线性执行的程序，而是响应式系统。它等待事件（用户消息/工具返回/定时器），事件触发状态转换，转换时调用LLM决策，决策产生新动作（工具调用）成为新事件。这就是Reactive
+    Agent的本质。
   conclusion: Agent调度 = 状态机（建模） + 事件循环（驱动） + LLM（决策转换）
 follow_up:
 - 多Agent怎么调度？——消息队列+事件总线，每个Agent订阅感兴趣的事件
@@ -31,6 +32,7 @@ memory_points:
 - 核心状态机：IDLE → PLANNING → EXECUTING → OBSERVING → REPLANNING/RESPONDING
 - 驱动机制：由事件队列驱动，根据当前状态和接收到的事件查表决定状态转换
 - 调度闭环：OBSERVING后若未完成或报错，触发循环回到PLANNING进行重规划
+frequency: medium
 ---
 
 # Agent 的底层调度逻辑是什么？
@@ -248,6 +250,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

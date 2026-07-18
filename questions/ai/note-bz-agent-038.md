@@ -29,6 +29,7 @@ memory_points:
 - 定位不同：Skill聚焦应用层管“做什么与怎么做”，MCP聚焦协议层管“怎么连接”。
 - 包含内容：Skill是包含Prompt+Tools+Flow的能力包；MCP是Server+Client的标准化接口。
 - 互补关系：Skill定义业务执行流程，MCP负责将底层工具标准化暴露供Skill调用。
+frequency: medium
 ---
 
 # Agent Skill 与 MCP 的区别？
@@ -220,6 +221,7 @@ flowchart TD
     style FC fill:#FF9800,color:#fff
     style SKILL fill:#9C27B0,color:#fff
     style MCP fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

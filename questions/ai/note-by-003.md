@@ -11,9 +11,11 @@ tags:
 - 算法题
 - 最长无重复子串
 feynman:
-  essence: 求字符串最长无重复字符子串的长度，最优解是滑动窗口+哈希表 O(n)。维护窗口 [left, right]，right 右扩遇到重复字符就把 left 跳到"重复字符上次出现位置+1"。哈希表存每个字符的最新下标，O(1) 判断重复并定位 left 新位置。关键优化：left 不用一步步挪，直接跳到重复字符上次的下一位（哈希表存的值）。
+  essence: 求字符串最长无重复字符子串的长度，最优解是滑动窗口+哈希表 O(n)。维护窗口 [left, right]，right 右扩遇到重复字符就把
+    left 跳到"重复字符上次出现位置+1"。哈希表存每个字符的最新下标，O(1) 判断重复并定位 left 新位置。关键优化：left 不用一步步挪，直接跳到重复字符上次的下一位（哈希表存的值）。
   analogy: 像在书里找最长的不重复段落——用两个手指夹住一段（窗口），右手指往右滑，遇到重复的字就把左手指直接跳到上次这个字之后，继续找。不用每次左手指一格一格挪，直接跳过去最快。
-  first_principle: 无重复子串的"无重复"约束可以用窗口维护——窗口内保证无重复，右扩时若遇重复就收缩左边界到合法。哈希表记录字符位置让收缩可以"跳变"而非"逐格"，降到 O(n)。
+  first_principle: 无重复子串的"无重复"约束可以用窗口维护——窗口内保证无重复，右扩时若遇重复就收缩左边界到合法。哈希表记录字符位置让收缩可以"跳变"而非"逐格"，降到
+    O(n)。
   key_points:
   - 滑动窗口[left,right]+哈希表存字符最新下标
   - right右扩遇重复，left跳到重复字符上次位置+1
@@ -33,6 +35,7 @@ memory_points:
 - 核心优化：遇重复字符，left直接跳到该字符上次出现的下标+1（跳变收缩）
 - 边界判断：跳变前必须检查 char_index[ch] >= left，否则会误跳到窗口外
 - 核心动作：每次移动right更新哈希表，并计算 max_len = max(max_len, right-left+1)
+frequency: low
 ---
 
 # 【字节面经】手撕：求字符串最长无重复字符子串的长度
@@ -196,6 +199,21 @@ def lengthOfLongestSubstringKDistinct(s: str, k: int) -> int:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class br decision
     A1["初始化窗口"] --> B["右边界right遍历字符"]
     B --> C{"当前字符在哈希表且<br/>下标大于等于left?"}
     C -->|"否 无重复"| D["更新哈希表字符下标"]

@@ -9,9 +9,11 @@ tags:
 - 防重放
 - 安全
 feynman:
-  essence: 接口签名解决"防篡改"（请求内容不能被中间人改），防重放解决"防复用"（截获的请求不能被重发）。签名用 HMAC-SHA256（密钥+请求体+时间戳算摘要），防重放用 nonce（一次性随机数）+ timestamp（时间窗口）。敏感数据保护用 TLS 传输加密 + 字段级加密（AES）+ 脱敏存储（手机号哈希）。
+  essence: 接口签名解决"防篡改"（请求内容不能被中间人改），防重放解决"防复用"（截获的请求不能被重发）。签名用 HMAC-SHA256（密钥+请求体+时间戳算摘要），防重放用
+    nonce（一次性随机数）+ timestamp（时间窗口）。敏感数据保护用 TLS 传输加密 + 字段级加密（AES）+ 脱敏存储（手机号哈希）。
   analogy: 像签合同+骑缝章+一次性密码。签名是"签合同"（内容哈希+私钥签名，改一个字签名失效）；防重放是"骑缝章+一次性密码"（每张合同有唯一编号+时间戳，用过作废，不能复印重用）；敏感数据加密是"密封信封"（信件内容用密码锁信封，中途看不到）。
-  first_principle: 为什么 HTTPS 还要接口签名？因为 HTTPS 只防"传输层篡改"（网络中间人），防不了"应用层伪造"（客户端被逆向，密钥被提取）。接口签名在应用层再加一道——即使攻击者抓包成功，没有密钥也无法伪造签名；即使拿到合法请求，因 nonce+timestamp 也无法重放。
+  first_principle: 为什么 HTTPS 还要接口签名？因为 HTTPS 只防"传输层篡改"（网络中间人），防不了"应用层伪造"（客户端被逆向，密钥被提取）。接口签名在应用层再加一道——即使攻击者抓包成功，没有密钥也无法伪造签名；即使拿到合法请求，因
+    nonce+timestamp 也无法重放。
   key_points:
   - 签名算法：HMAC-SHA256(secret, method+path+body+timestamp+nonce)
   - 防重放三要素：timestamp（5 分钟窗口）+ nonce（一次性）+ signature（防篡改）
@@ -24,19 +26,23 @@ first_principle:
   - HTTPS 防网络层中间人，但不防应用层伪造（客户端密钥泄露）
   - 请求一旦被截获，如果没有防重放机制，攻击者可重复提交
   - 敏感数据（身份证/银行卡）明文传输是合规违规
-  rebuild: 签名+防重放组合。客户端用密钥对请求（method+path+body+timestamp+nonce）算 HMAC-SHA256 签名，服务端验签。timestamp 限定 5 分钟窗口（超时拒绝），nonce 是一次性随机数存 Redis（重复拒绝）。这样防篡改（改内容签名失效）+ 防重放（nonce 用过作废+timestamp 过期作废）。敏感数据字段级 AES 加密，密钥用 KMS 管理定期轮换。
+  rebuild: 签名+防重放组合。客户端用密钥对请求（method+path+body+timestamp+nonce）算 HMAC-SHA256 签名，服务端验签。timestamp
+    限定 5 分钟窗口（超时拒绝），nonce 是一次性随机数存 Redis（重复拒绝）。这样防篡改（改内容签名失效）+ 防重放（nonce 用过作废+timestamp
+    过期作废）。敏感数据字段级 AES 加密，密钥用 KMS 管理定期轮换。
 follow_up:
-  - 签名密钥怎么分发？——线下安全渠道（开发者中心下载，邮件加密），或 OAuth2 token 模式（动态获取）。绝对不能明文 URL 传。
-  - nonce 存 Redis 性能够吗？——够。每次请求 SETNX nonce（TTL 5 分钟），O(1) 操作。亿级 QPS 下 Redis 集群可扛。注意 nonce 要全局唯一（UUID 或 雪花 ID）。
-  - 时间不同步怎么办？——客户端和服务端 NTP 同步。timestamp 容忍 ±5 分钟窗口（处理时钟漂移）。超 5 分钟拒绝（防止长期重放）。
-  - 文件上传怎么签名？——大文件签名 body 不现实。对文件算 SHA256 摘要，签摘要+文件名+大小。或用 multipart 签名（只签非文件部分+文件摘要）。
-  - 国密算法（SM2/SM3/SM4）什么时候用？——政务/金融/国企强制用国密。SM2 替代 RSA，SM3 替代 SHA256，SM4 替代 AES。京东金融部分场景用国密合规。
+- 签名密钥怎么分发？——线下安全渠道（开发者中心下载，邮件加密），或 OAuth2 token 模式（动态获取）。绝对不能明文 URL 传。
+- nonce 存 Redis 性能够吗？——够。每次请求 SETNX nonce（TTL 5 分钟），O(1) 操作。亿级 QPS 下 Redis 集群可扛。注意
+  nonce 要全局唯一（UUID 或 雪花 ID）。
+- 时间不同步怎么办？——客户端和服务端 NTP 同步。timestamp 容忍 ±5 分钟窗口（处理时钟漂移）。超 5 分钟拒绝（防止长期重放）。
+- 文件上传怎么签名？——大文件签名 body 不现实。对文件算 SHA256 摘要，签摘要+文件名+大小。或用 multipart 签名（只签非文件部分+文件摘要）。
+- 国密算法（SM2/SM3/SM4）什么时候用？——政务/金融/国企强制用国密。SM2 替代 RSA，SM3 替代 SHA256，SM4 替代 AES。京东金融部分场景用国密合规。
 memory_points:
-  - 签名 = HMAC-SHA256(secret, method+path+body+timestamp+nonce)
-  - 防重放 = timestamp(5min窗口) + nonce(一次性, Redis SETNX)
-  - 敏感数据 = TLS传输 + AES-256字段加密 + 脱敏存储
-  - 密钥管理 = KMS + 定期轮换
-  - 国密 = SM2/SM3/SM4（政务金融强制）
+- 签名 = HMAC-SHA256(secret, method+path+body+timestamp+nonce)
+- 防重放 = timestamp(5min窗口) + nonce(一次性, Redis SETNX)
+- 敏感数据 = TLS传输 + AES-256字段加密 + 脱敏存储
+- 密钥管理 = KMS + 定期轮换
+- 国密 = SM2/SM3/SM4（政务金融强制）
+frequency: medium
 ---
 
 # 【Java 后端架构师】接口签名、防重放与敏感数据保护
@@ -425,6 +431,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

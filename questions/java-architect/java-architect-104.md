@@ -9,9 +9,13 @@ tags:
 - ThreadLocal
 - 上下文传递
 feynman:
-  essence: ScopedValue（JEP 506，JDK 24 GA）是 ThreadLocal 在虚拟线程时代的替代品——不可变、自动清理、bounded lifetime。ThreadLocal 的"可变 + 永不清理 + 继承混乱"在百万虚拟线程下变成内存炸弹和上下文错乱，ScopedValue 用"作用域绑定 + 单次写入"重新设计上下文传递。
-  analogy: ThreadLocal 是"每个工位的抽屉"——员工（线程）随手塞东西进去，离职（线程结束）时抽屉才清空，复用工位（线程池）时上一个员工的垃圾还在。ScopedValue 是"任务工牌"——开工时发，下班时收，不可改，发给谁就只有谁能看。
-  first_principle: ThreadLocal 设计于平台线程时代（线程数少、生命周期长），虚拟线程时代变成百万线程 × ThreadLocal = 内存爆炸。ScopedValue 把"上下文"从"线程属性"改成"作用域属性"，让上下文随调用栈进出而自动生灭。
+  essence: ScopedValue（JEP 506，JDK 24 GA）是 ThreadLocal 在虚拟线程时代的替代品——不可变、自动清理、bounded
+    lifetime。ThreadLocal 的"可变 + 永不清理 + 继承混乱"在百万虚拟线程下变成内存炸弹和上下文错乱，ScopedValue 用"作用域绑定
+    + 单次写入"重新设计上下文传递。
+  analogy: ThreadLocal 是"每个工位的抽屉"——员工（线程）随手塞东西进去，离职（线程结束）时抽屉才清空，复用工位（线程池）时上一个员工的垃圾还在。ScopedValue
+    是"任务工牌"——开工时发，下班时收，不可改，发给谁就只有谁能看。
+  first_principle: ThreadLocal 设计于平台线程时代（线程数少、生命周期长），虚拟线程时代变成百万线程 × ThreadLocal =
+    内存爆炸。ScopedValue 把"上下文"从"线程属性"改成"作用域属性"，让上下文随调用栈进出而自动生灭。
   key_points:
   - ScopedValue（JDK 24 GA）：不可变、bounded to scope、自动清理
   - ThreadLocal 的坑：百万虚拟线程下内存爆炸、继承在 carrier 切换时错乱、永不清理泄漏
@@ -24,20 +28,26 @@ first_principle:
   - ThreadLocal 是"每个线程一份"，百万 VT × 多个 TL = 内存 N 倍
   - InheritableThreadLocal 在虚拟线程 carrier 切换时透传不可靠（VT 不绑定 carrier）
   - 上下文应该是"调用栈属性"，不是"线程属性"
-  rebuild: 引入 ScopedValue，把上下文绑定到调用栈的词法作用域（ScopedValue.where(K, V).run(...) 块）。run 块内可读不可改，run 结束自动清理。配合 StructuredTaskScope，子任务 fork 时自动继承父作用域的所有 ScopedValue（无需 InheritableThreadLocal 的复杂机制）。可变状态（如事务、Buffer）仍用 ThreadLocal，但要 try-finally remove。
+  rebuild: 引入 ScopedValue，把上下文绑定到调用栈的词法作用域（ScopedValue.where(K, V).run(...) 块）。run
+    块内可读不可改，run 结束自动清理。配合 StructuredTaskScope，子任务 fork 时自动继承父作用域的所有 ScopedValue（无需
+    InheritableThreadLocal 的复杂机制）。可变状态（如事务、Buffer）仍用 ThreadLocal，但要 try-finally remove。
 follow_up:
-  - ScopedValue 真的能替代所有 ThreadLocal 吗？——不能。可变状态（数据库连接、事务、Buffer）要 ThreadLocal。ScopedValue 是"不可变、bounded"的，适合请求上下文（userId、traceId、tenantId）
-  - ScopedValue 跨虚拟线程怎么传递？——scope.fork 的子任务自动继承父的 ScopedValue（这是 StructuredTaskScope 的核心机制）。跨普通线程池要用 TransmittableThreadLocal（TTL）
-  - ScopedValue 内存开销多大？——固定开销 + 按调用栈深度（不按线程数）。100 万 VT 共享同一作用域，ScopedValue 只存一份
-  - ScopedValue 和 MDC（日志 traceId）怎么结合？——MDC 内部用 ThreadLocal，要改造成 ScopedValue 或者用 SLF4J 2.x 的 MDCAdapter 桥接
-  - 什么时候还该用 ThreadLocal？——可变状态（事务、Buffer、连接）、第三方库强制 ThreadLocal（如 Spring 的 RequestContextHolder）、不涉及海量虚拟线程的纯计算场景
+- ScopedValue 真的能替代所有 ThreadLocal 吗？——不能。可变状态（数据库连接、事务、Buffer）要 ThreadLocal。ScopedValue
+  是"不可变、bounded"的，适合请求上下文（userId、traceId、tenantId）
+- ScopedValue 跨虚拟线程怎么传递？——scope.fork 的子任务自动继承父的 ScopedValue（这是 StructuredTaskScope
+  的核心机制）。跨普通线程池要用 TransmittableThreadLocal（TTL）
+- ScopedValue 内存开销多大？——固定开销 + 按调用栈深度（不按线程数）。100 万 VT 共享同一作用域，ScopedValue 只存一份
+- ScopedValue 和 MDC（日志 traceId）怎么结合？——MDC 内部用 ThreadLocal，要改造成 ScopedValue 或者用 SLF4J
+  2.x 的 MDCAdapter 桥接
+- 什么时候还该用 ThreadLocal？——可变状态（事务、Buffer、连接）、第三方库强制 ThreadLocal（如 Spring 的 RequestContextHolder）、不涉及海量虚拟线程的纯计算场景
 memory_points:
-  - ScopedValue（JEP 506，JDK 24 GA）：不可变、bounded、自动清理
-  - ThreadLocal 在百万 VT 下：内存爆炸、继承错乱、永不清理泄漏
-  - ScopedValue.where(K, V).run(...) 设置 + ScopedValue.get() 读
-  - 与 StructuredTaskScope 天生搭配：子任务自动继承
-  - 不能完全替代 ThreadLocal：可变状态还要 ThreadLocal
-  - MDC 兼容：用 SLF4J 2.x MDCAdapter 或手动桥接
+- ScopedValue（JEP 506，JDK 24 GA）：不可变、bounded、自动清理
+- ThreadLocal 在百万 VT 下：内存爆炸、继承错乱、永不清理泄漏
+- ScopedValue.where(K, V).run(...) 设置 + ScopedValue.get() 读
+- 与 StructuredTaskScope 天生搭配：子任务自动继承
+- 不能完全替代 ThreadLocal：可变状态还要 ThreadLocal
+- MDC 兼容：用 SLF4J 2.x MDCAdapter 或手动桥接
+frequency: high
 ---
 
 # 【Java 后端架构师】Scoped Values 与 ThreadLocal 的取舍
@@ -361,6 +371,37 @@ ScopedValue 不依赖 carrier，作用域是栈帧属性，子任务通过 Struc
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Buffer decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class GC decision
+    class H special
+    class I error
+    class I1 info
+    class I2 start
+    class I3 process
+    class InheritableThreadLocal decision
+    class ScopedValue special
+    class Streaming error
+    class StructuredTaskScope info
+    class ThreadLocal start
+    class br process
+    class fork decision
+    class run special
+    class traceId error
+    class userId info
+    class where start
     A["百万级虚拟线程并发"] --> B["ThreadLocal 导致<br/>内存爆炸"]
     A --> C["InheritableThreadLocal<br/>carrier复用上下文错乱"]
     B --> D["迁移至 ScopedValue"]

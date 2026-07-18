@@ -26,6 +26,7 @@ memory_points:
 - UDP核心：无连接，不保证可靠与有序，直接发送面向报文的数据。
 follow_up: []
 tags: []
+frequency: low
 ---
 
 # TCP与UDP的概念，特点，区别和对应的使用场景？
@@ -131,6 +132,27 @@ while (true) {
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class ESTABLISHED decision
+    class FIN special
+    class S error
+    class SYN info
+    class TIME_WAIT start
+    class ack process
+    class as decision
+    class seq special
+    class u error
+    class v info
+    class w start
+    class x process
+    class y decision
     participant C as 客户端
     participant S as 服务端
     Note over C,S: 三次握手 建立连接

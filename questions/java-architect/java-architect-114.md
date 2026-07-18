@@ -9,8 +9,11 @@ tags:
 - 指标
 - SLO
 feynman:
-  essence: Micrometer 是 Spring Boot 的"指标门面"（类似 SLF4J 之于日志），定义一套维度（name + tags + 数值）的指标模型，底层可对接 Prometheus / Datadog / NewRelic / CloudWatch。设计指标体系的核心是"少而准"——RED（Rate/Errors/Duration）+ USE（Utilization/Saturation/Errors）+ 业务核心指标（如订单量、支付成功率），用 SLO 倒推采集什么，不是"什么都能采"。
-  analogy: 像汽车仪表盘：油量表（Gauge，当前值）、里程表（Counter，单调递增）、转速表（Histogram，分布）、温度警告灯（报警规则）。Micrometer 是仪表盘的统一驱动，不论装在特斯拉还是比亚迪，仪表盘外观一致。
+  essence: Micrometer 是 Spring Boot 的"指标门面"（类似 SLF4J 之于日志），定义一套维度（name + tags + 数值）的指标模型，底层可对接
+    Prometheus / Datadog / NewRelic / CloudWatch。设计指标体系的核心是"少而准"——RED（Rate/Errors/Duration）+
+    USE（Utilization/Saturation/Errors）+ 业务核心指标（如订单量、支付成功率），用 SLO 倒推采集什么，不是"什么都能采"。
+  analogy: 像汽车仪表盘：油量表（Gauge，当前值）、里程表（Counter，单调递增）、转速表（Histogram，分布）、温度警告灯（报警规则）。Micrometer
+    是仪表盘的统一驱动，不论装在特斯拉还是比亚迪，仪表盘外观一致。
   first_principle: 指标体系的本质是"用最小成本回答最重要的问题"——服务有没有问题（RED）、资源够不够用（USE）、业务正常吗（业务指标）。每个指标都要回答一个具体问题，没有问题的指标是浪费。
   key_points:
   - Micrometer 是指标门面（SLF4J 模式），支持多后端
@@ -24,21 +27,25 @@ first_principle:
   - 指标是聚合数字（QPS/P99/错误率），低成本全量采集
   - 不同信号有不同擅长：指标告警、日志排查、链路定位
   - 指标要回答具体问题（"服务有问题吗" / "资源够吗" / "业务正常吗"）
-  rebuild: 用 RED + USE 框架设计指标。RED（服务视角）：Rate=QPS、Errors=错误率、Duration=P99 延迟，回答"服务有没有问题"。USE（资源视角）：Utilization=CPU/内存利用率、Saturation=线程池/连接池饱和度、Errors=GC/OOM，回答"资源够不够用"。加业务核心指标（订单量、支付成功率）。用 Micrometer 的 Histogram 类型（服务端聚合分位），采集全量但聚合后低成本。SLO 倒推采集：先定 SLO（如 P99 < 200ms），再设计指标（histogram_quantile）。
+  rebuild: 用 RED + USE 框架设计指标。RED（服务视角）：Rate=QPS、Errors=错误率、Duration=P99 延迟，回答"服务有没有问题"。USE（资源视角）：Utilization=CPU/内存利用率、Saturation=线程池/连接池饱和度、Errors=GC/OOM，回答"资源够不够用"。加业务核心指标（订单量、支付成功率）。用
+    Micrometer 的 Histogram 类型（服务端聚合分位），采集全量但聚合后低成本。SLO 倒推采集：先定 SLO（如 P99 < 200ms），再设计指标（histogram_quantile）。
 follow_up:
-  - Histogram 和 Summary 区别？——Histogram 在服务端聚合分位（多个实例可合并算 P99）；Summary 在客户端算分位（跨实例无法合并）。生产用 Histogram
-  - 指标命名怎么规范？——{domain}_{action}_{outcome}_{unit}，如 order_create_duration_seconds。Micrometer 自动规范化（点→下划线）
-  - 高基数标签（cardinality）怎么避免？——不要用 userId / orderId 当标签（每个 ID 一个时序，标签爆炸）。标签应该是有限集合（如 method、status、env）
-  - SLO 怎么定？——SLI（指标）→ SLO（目标，如 P99 < 200ms，错误率 < 0.1%）→ SLA（对外承诺）。SLO 是内部目标，SLA 是合同
-  - 自定义业务指标怎么写？——@Timed 注解 / MeterRegistry 自定义 / Micrometer 注解
+- Histogram 和 Summary 区别？——Histogram 在服务端聚合分位（多个实例可合并算 P99）；Summary 在客户端算分位（跨实例无法合并）。生产用
+  Histogram
+- 指标命名怎么规范？——{domain}_{action}_{outcome}_{unit}，如 order_create_duration_seconds。Micrometer
+  自动规范化（点→下划线）
+- 高基数标签（cardinality）怎么避免？——不要用 userId / orderId 当标签（每个 ID 一个时序，标签爆炸）。标签应该是有限集合（如 method、status、env）
+- SLO 怎么定？——SLI（指标）→ SLO（目标，如 P99 < 200ms，错误率 < 0.1%）→ SLA（对外承诺）。SLO 是内部目标，SLA 是合同
+- 自定义业务指标怎么写？——@Timed 注解 / MeterRegistry 自定义 / Micrometer 注解
 memory_points:
-  - Micrometer 是指标门面（SLF4J 模式），多后端
-  - 四类型：Counter（递增）/Gauge（瞬时）/Histogram（分布）/Timer（延迟+计数）
-  - RED：Rate（QPS）/Errors（错误率）/Duration（P99）
-  - USE：Utilization（利用率）/Saturation（饱和度）/Errors（错误）
-  - Histogram 优于 Summary（服务端聚合，跨实例合并）
-  - 高基数标签要避免（不用 userId/orderId 当标签）
-  - SLO 倒推：先定目标再设计指标
+- Micrometer 是指标门面（SLF4J 模式），多后端
+- 四类型：Counter（递增）/Gauge（瞬时）/Histogram（分布）/Timer（延迟+计数）
+- RED：Rate（QPS）/Errors（错误率）/Duration（P99）
+- USE：Utilization（利用率）/Saturation（饱和度）/Errors（错误）
+- Histogram 优于 Summary（服务端聚合，跨实例合并）
+- 高基数标签要避免（不用 userId/orderId 当标签）
+- SLO 倒推：先定目标再设计指标
+frequency: high
 ---
 
 # 【Java 后端架构师】Micrometer 指标体系如何设计
@@ -454,6 +461,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

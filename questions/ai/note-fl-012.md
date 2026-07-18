@@ -33,6 +33,7 @@ memory_points:
 - 击穿(热Key过期)解法：互斥锁(SETNX)只让单线程回源查DB，或永不过期加异步更新
 - 雪崩(大量同时过期)解法：过期时间加随机扰动打散，配合多级缓存与限流降级
 - 布隆过滤器特性：说不存在100%准，说存在有误判，且标准版不支持删除元素
+frequency: high
 ---
 
 # 【字节飞连面经】缓存穿透 / 击穿 / 雪崩：含义和解法，布隆过滤器
@@ -159,6 +160,7 @@ flowchart TD
     style BF fill:#FF9800,color:#fff
     style MUTEX fill:#9C27B0,color:#fff
     style REJECT_P fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

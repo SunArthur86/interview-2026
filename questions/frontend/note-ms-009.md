@@ -31,6 +31,7 @@ memory_points:
 - 核心对象五大件：Task(任务) + Artifact(产物) + Context(上下文) + Checkpoint(检查点) + Log(日志)
 - Task是调度核心，记录状态机与执行依赖关系
 - Checkpoint保运行快照，Log记操作痕迹，二者保障可追溯与断点续传
+frequency: high
 ---
 
 # 【月之暗面面经】如果让你设计桌面 Agent 的任务中心，会有哪些关键对象？
@@ -128,6 +129,19 @@ function transition(task: Task, next: TaskStatus) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Artifact start
+    class Checkpoint process
+    class Context decision
+    class Log special
+    class SharedTask error
+    class Task info
+    class br start
     Task["聚合根 Task<br/>状态机调度"] -->|1:产生| Artifact["实体 Artifact<br/>产物管理"]
     Task -->|2:携带| Context["字段 Context<br/>输入素材引用"]
     Task -->|3:定期快照| Checkpoint["实体 Checkpoint<br/>断点续传恢复"]

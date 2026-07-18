@@ -16,6 +16,7 @@ memory_points:
 - 内存可见：底层用 volatile 修饰数组引用，保证写后对读线程立即可见
 - 一致性取舍：牺牲强一致性换取高性能，弱一致性迭代不抛 ConcurrentModificationException
 - 适用场景：仅适合读多写少（如黑白名单），高频写或大数组极易引发内存OOM
+frequency: medium
 ---
 
 # CopyOnWriteArrayList是什么？
@@ -140,6 +141,7 @@ flowchart TD
     style LIST fill:#FF9800,color:#fff
     style TREEIFY fill:#9C27B0,color:#fff
     style TRANSFER fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

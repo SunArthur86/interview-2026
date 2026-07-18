@@ -28,6 +28,7 @@ memory_points:
 - 瞬态错误用指数退避重试，超过次数转降级策略
 - 长任务失败需设计补偿动作（Compensation）回滚已执行步骤
 - 记录历史错误路径，防止Agent在相同状态间死循环
+frequency: high
 ---
 
 # 如何设计AI Agent的错误恢复机制？当Agent执行任务中途失败时，如何优雅地处理和恢复。
@@ -169,6 +170,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -14,7 +14,7 @@ tags:
 - 面经
 feynman:
   essence: 评论系统设计的核心是"高并发写入+实时展示"。四层架构：(1)分片存储——按视频ID哈希分片减轻单表压力；(2)读写分离——写主库读从库+Redis缓存最新评论；(3)消息队列削峰——评论先写入Kafka异步落库；(4)多级缓存——本地缓存+Redis+CDN加速读取。
-  analogy: "评论系统就像一个万人演唱会的大屏幕互动——(1)分片存储=多个大屏幕(分库分表)各管一个区域；(2)读写分离=观众看屏幕(读)和发消息(写)走不同通道；(3)消息队列削峰=先收集到中转站(Kafka)，再一批批显示到大屏幕；(4)多级缓存=热门评论放屏幕中央(缓存)，冷门评论放角落(数据库)。"
+  analogy: 评论系统就像一个万人演唱会的大屏幕互动——(1)分片存储=多个大屏幕(分库分表)各管一个区域；(2)读写分离=观众看屏幕(读)和发消息(写)走不同通道；(3)消息队列削峰=先收集到中转站(Kafka)，再一批批显示到大屏幕；(4)多级缓存=热门评论放屏幕中央(缓存)，冷门评论放角落(数据库)。
   key_points:
   - 写入挑战：高并发评论写入（热门视频每秒数千条）
   - 读取挑战：实时展示最新评论+分页加载历史评论
@@ -23,7 +23,8 @@ feynman:
   - 多级缓存：Caffeine(本地)→Redis(分布式)→MySQL(持久化)
 first_principle:
   essence: 评论系统 = 高吞吐写入 + 低延迟读取 + 数据有序性
-  derivation: "快手级评论量：日活3亿，假设10%用户评论，每人每天1条 = 3000万条/天 ≈ 350条/s。热门视频可能瞬间1万条/s。写入瓶颈：单MySQL写入约1万/s → 需要分片+MQ削峰。读取：需要按时间排序+分页 → Redis Sorted Set + 分页缓存。"
+  derivation: 快手级评论量：日活3亿，假设10%用户评论，每人每天1条 = 3000万条/天 ≈ 350条/s。热门视频可能瞬间1万条/s。写入瓶颈：单MySQL写入约1万/s
+    → 需要分片+MQ削峰。读取：需要按时间排序+分页 → Redis Sorted Set + 分页缓存。
   conclusion: 写入走MQ异步+分库分表，读取走多级缓存+读写分离，热点视频特殊处理
 follow_up:
 - 评论的排序规则是什么？如何处理热评vs最新评论？
@@ -36,6 +37,7 @@ memory_points:
 - 写入路径：用户评论→API→Kafka→Consumer批量写入DB（削峰）
 - 读取路径：用户请求→Caffeine→Redis ZSet(按时间排序)→MySQL分页
 - 分片键选择video_id：同一视频的评论在同一分片，避免跨库查询
+frequency: high
 ---
 
 # 【快手Java一面】如何设计快手评论系统，确保高并发写入和实时展示？
@@ -388,6 +390,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

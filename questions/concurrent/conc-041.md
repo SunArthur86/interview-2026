@@ -16,6 +16,7 @@ memory_points:
 - CyclicBarrier：可循环的同步屏障，用于一组线程互相等待至指定数量后齐发
 - Semaphore：许可证限流器，用于控制同时访问特定资源的最大并发线程数
 - 本质对比：前两者是等计数归零触发放行，而信号量是控制有限资源的并发抢占
+frequency: high
 ---
 
 # CyclicBarrier、CountDownLatch、Semaphore的区别和使用场景？
@@ -130,6 +131,7 @@ flowchart TD
     style PARK fill:#9C27B0,color:#fff
     style UNPARK fill:#009688,color:#fff
     style BLOCK fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

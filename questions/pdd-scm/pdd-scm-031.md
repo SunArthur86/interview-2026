@@ -34,6 +34,7 @@ memory_points:
 - ReAct：思考→行动→观察循环
 - 场景：智能补货、异常处理、供应商谈判
 - 分层：规则（毫秒）+ Agent（秒）
+frequency: high
 ---
 
 # 【拼多多供应链】怎么用 AI Agent 改造供应链？
@@ -240,6 +241,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

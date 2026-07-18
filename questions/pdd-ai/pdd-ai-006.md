@@ -26,14 +26,15 @@ first_principle:
   - 代码发版成本高
   rebuild: 规则引擎（规则数据化）+ 动态加载 + 运营后台自助编辑。
 follow_up:
-  - Drools 为什么慢？——Reteoo 网络重，规则上千要预热，不适合超高频
-  - Aviator 和QLExpress 区别？——都是轻量表达式，Aviator 编译字节码快，QLExpress 阿里出品支持流程控制
-  - 规则和 AI 怎么协同？——规则做硬约束（合规/上限），AI 做柔性决策；LLM 可把自然语言转规则
+- Drools 为什么慢？——Reteoo 网络重，规则上千要预热，不适合超高频
+- Aviator 和QLExpress 区别？——都是轻量表达式，Aviator 编译字节码快，QLExpress 阿里出品支持流程控制
+- 规则和 AI 怎么协同？——规则做硬约束（合规/上限），AI 做柔性决策；LLM 可把自然语言转规则
 memory_points:
-  - when-then 模型（条件-动作）
-  - 引擎：Drools 重/Aviator/QLExpress 轻
-  - 规则存 DB + 热加载
-  - 规则（硬约束）+ AI（柔性）
+- when-then 模型（条件-动作）
+- 引擎：Drools 重/Aviator/QLExpress 轻
+- 规则存 DB + 热加载
+- 规则（硬约束）+ AI（柔性）
+frequency: low
 ---
 
 # 【拼多多 AI 中台】业务规则中台怎么设计？规则引擎选型？
@@ -281,6 +282,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

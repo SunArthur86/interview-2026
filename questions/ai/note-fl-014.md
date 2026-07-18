@@ -10,8 +10,11 @@ tags:
 - Transformer
 - Attention
 feynman:
-  essence: Self-Attention 每个 token 算 Q/K/V 三向量，注意力分数 = softmax(Q·K^T/√d_k)·V，除√d_k 防止大 d_k 下梯度消失。Multi-Head 把 Q/K/V 切 h 份并行做注意力，让模型在不同子空间关注不同信息（句法/语义/位置），最后 concat+线性层融合。GPT 是 Decoder-only+因果mask 适合生成；BERT 是 Encoder-only+双向 适合理解分类抽取。现代主流全是 Decoder-only。
-  analogy: Self-Attention 像开会时每个人同时听所有人说话并决定关注谁（Q=我想问什么，K=别人能答什么，V=别人实际说的）。Multi-Head 像派多个分身同时关注不同方面（一个听内容、一个听语气、一个看位置）。GPT 像只能听前面人说话（因果mask），BERT 像能听到全场。
+  essence: Self-Attention 每个 token 算 Q/K/V 三向量，注意力分数 = softmax(Q·K^T/√d_k)·V，除√d_k
+    防止大 d_k 下梯度消失。Multi-Head 把 Q/K/V 切 h 份并行做注意力，让模型在不同子空间关注不同信息（句法/语义/位置），最后 concat+线性层融合。GPT
+    是 Decoder-only+因果mask 适合生成；BERT 是 Encoder-only+双向 适合理解分类抽取。现代主流全是 Decoder-only。
+  analogy: Self-Attention 像开会时每个人同时听所有人说话并决定关注谁（Q=我想问什么，K=别人能答什么，V=别人实际说的）。Multi-Head
+    像派多个分身同时关注不同方面（一个听内容、一个听语气、一个看位置）。GPT 像只能听前面人说话（因果mask），BERT 像能听到全场。
   first_principle: 注意力的本质是"加权聚合信息"。Q/K 决定权重（谁和谁相关），V 决定聚合内容。多头让模型在不同子空间学不同关系，提升表达力。
   key_points:
   - 'Self-Attention: softmax(Q·K^T/√d_k)·V，除√d_k 防梯度消失'
@@ -32,6 +35,7 @@ memory_points:
 - 多头机制：把 Q/K/V 切成 h 份（如 8 头）并行算，让模型在不同子空间学不同特征。
 - GPT vs BERT：GPT 是 Decoder 做单向生成（续写），BERT 是 Encoder 做双向理解（完形填空）。
 - 主流原因：现代大模型全用 Decoder-only，因其生成上限高、支持 Zero-shot 理解且 Scaling 表现好。
+frequency: high
 ---
 
 # 【字节飞连面经】Transformer 基础：Self-Attention / 多头 / GPT vs BERT
@@ -101,6 +105,37 @@ d_model = 512, h = 8
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Arch start
+    class Attention process
+    class BERT decision
+    class Decoder special
+    class Dot error
+    class Encoder info
+    class GPT start
+    class Head process
+    class Input decision
+    class K special
+    class M error
+    class Modern info
+    class Mul start
+    class Multi process
+    class Q decision
+    class QKV special
+    class Scale error
+    class Scaling info
+    class Soft start
+    class T process
+    class V decision
+    class br special
+    class d_k error
+    class only info
+    class vs start
     Input[输入Token序列] --> M["Multi-Head Attention<br/>多头并行注意力"]
     Input --> QKV["线性变换生成 Q / K / V"]
     QKV --> M

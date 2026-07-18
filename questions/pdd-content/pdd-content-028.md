@@ -27,14 +27,15 @@ first_principle:
   - 容量需预知
   rebuild: 多层负载+多层隔离+全链路压测。
 follow_up:
-  - 一致性 hash 解决什么？——节点增减时迁移最少
-  - 隔离怎么选？——线程池（计算密集）vs 信号量（IO 密集）
-  - 全链路压测怎么做？——影子库表+压测标识透传+mock 外部
+- 一致性 hash 解决什么？——节点增减时迁移最少
+- 隔离怎么选？——线程池（计算密集）vs 信号量（IO 密集）
+- 全链路压测怎么做？——影子库表+压测标识透传+mock 外部
 memory_points:
-  - LB：DNS/网关/服务/数据
-  - 隔离：线程/信号量/机房/业务
-  - 压测：单机/集群/全链路
-  - 算法：轮询/权重/最少连接/一致性 hash
+- LB：DNS/网关/服务/数据
+- 隔离：线程/信号量/机房/业务
+- 压测：单机/集群/全链路
+- 算法：轮询/权重/最少连接/一致性 hash
+frequency: high
 ---
 
 # 【拼多多内容】负载均衡/隔离/压测怎么做？
@@ -267,6 +268,25 @@ Feed 写扩散（独立池）→ 不影响实时查询
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class Nginx error
+    class Pressure info
+    class X start
     A[用户请求] --> B[网关层 Nginx]
     B -->|一致性Hash分发| C[评价服务集群]
     C -->|线程池隔离| D[下游ES/DB调用]

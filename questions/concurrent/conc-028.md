@@ -16,6 +16,7 @@ memory_points:
 - 开销对比：进程切换开销最大（刷新TLB），线程其次，协程最低（用户态不进内核）。
 - 因为锁竞争会导致线程频繁阻塞唤醒，所以用 CAS 无锁编程能减少内核态切换。
 - 优化口诀：无锁并发、使用协程、合理控制线程数量。
+frequency: medium
 ---
 
 # 什么是线程上下文切换？如何减少上下文切换？
@@ -113,6 +114,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

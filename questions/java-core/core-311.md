@@ -16,6 +16,7 @@ memory_points:
 - 核心角色：Subject管状态发通知，Observer听更新做响应
 - 高并发避坑：同步阻塞通知会拖垮全链路，实战必须升级为异步MQ或EventBus
 - 线程安全注意点：多线程下注册和遍历观察者，需用CopyOnWriteArrayList防并发修改异常
+frequency: medium
 ---
 
 # 说一说你了解的观察者模式？
@@ -154,6 +155,41 @@ class AsyncEventStation {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ApplicationEvent process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class EventBus start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class N special
+    class O error
+    class Observer info
+    class P start
+    class Reactor process
+    class RxJava decision
+    class Spring special
+    class Subject error
+    class attach info
+    class br start
+    class detach process
+    class notify decision
+    class observers special
+    class update error
     A[观察者模式 Observer] --> B[Subject 主题]
     B --> C[持有 observers 列表]
     B --> D[attach 注册]

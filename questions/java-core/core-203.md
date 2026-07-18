@@ -15,6 +15,7 @@ memory_points:
 - 核心特征：元素有序、允许重复、支持基于索引的随机访问。
 - 特有迭代器：ListIterator支持双向遍历（hasPrevious），允许在遍历中修改或添加元素。
 - 对比Set：List有序且允许重复，而Set通常无序且不允许重复。
+frequency: medium
 ---
 
 # 什么是List接口？
@@ -71,6 +72,36 @@ System.out.println(list); // 输出 [A, B-Modified, B-Plus, C]
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayList process
+    class B decision
+    class C special
+    class CopyOnWriteArrayList error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class LinkedList process
+    class List decision
+    class ListIterator special
+    class Vector error
+    class add info
+    class br start
+    class get process
+    class indexOf decision
+    class lastIndexOf special
+    class remove error
+    class set info
     A[List 接口] --> B[有序 可重复]
     A --> C[核心方法]
     C --> D[add/get/set/remove]

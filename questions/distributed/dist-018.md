@@ -17,6 +17,7 @@ memory_points:
 - 高可用方案：自身配合 Keepalived 可实现双机热备防止单点故障。
 - 场景对比：LVS 属内核态纯转发，HAProxy 侧重用户态高级 ACL 与会话保持。
 - 高可用避坑：利用 slowstart（慢启动）防止节点恢复瞬间被大流量打挂。
+frequency: medium
 ---
 
 # HAProxy负载均衡器的特点和使用场景是什么？
@@ -126,6 +127,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

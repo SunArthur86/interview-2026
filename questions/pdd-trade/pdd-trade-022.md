@@ -26,14 +26,15 @@ first_principle:
   - 单通道有配额/限额
   rebuild: 路由决策层（规则+模型）+ 实时成功率反馈 + 自动降级。
 follow_up:
-  - 怎么知道通道成功率？——实时统计（滑动窗口）+ 离线汇总
-  - 路由决策放客户端还是服务端？——服务端（统一控制+可热切换）
-  - 支付失败重试策略？——失败立即切通道，最多 3 次（限流防套）
+- 怎么知道通道成功率？——实时统计（滑动窗口）+ 离线汇总
+- 路由决策放客户端还是服务端？——服务端（统一控制+可热切换）
+- 支付失败重试策略？——失败立即切通道，最多 3 次（限流防套）
 memory_points:
-  - 路由维度：成功率/费率/限额/配额
-  - 策略：规则+模型（动态成功率）
-  - 降级：主备通道自动切换
-  - 对账：T+1 差错处理
+- 路由维度：成功率/费率/限额/配额
+- 策略：规则+模型（动态成功率）
+- 降级：主备通道自动切换
+- 对账：T+1 差错处理
+frequency: low
 ---
 
 # 【拼多多交易】支付路由怎么设计？
@@ -193,6 +194,30 @@ class RateWindow {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
+    class P special
+    class T error
+    class br info
     subgraph 客户端交互
       A[用户支付请求] --> B[用户选择支付大类]
     end

@@ -10,7 +10,9 @@ tags:
 - AICoding
 - ClaudeCode
 feynman:
-  essence: AI 编程工具的使用流程是——先在 CLAUDE.md 写项目规则（架构约定/风格/禁忌）→ 用 plan 模式让它先出方案而非直接写代码 → 小步实施+每步跑测试 → 完成后人工 review diff + 跑完整测试套件。质量靠三层兜底：项目规则文件（约束生成方向）、单测/集成测试（防回归）、人工 Code Review（catch 设计问题）。
+  essence: AI 编程工具的使用流程是——先在 CLAUDE.md 写项目规则（架构约定/风格/禁忌）→ 用 plan 模式让它先出方案而非直接写代码 →
+    小步实施+每步跑测试 → 完成后人工 review diff + 跑完整测试套件。质量靠三层兜底：项目规则文件（约束生成方向）、单测/集成测试（防回归）、人工
+    Code Review（catch 设计问题）。
   analogy: 像带实习生——先给团队规范手册（CLAUDE.md），再让他先写方案（plan）你 review，然后小步实现每步验收，最后整体 Code Review。不能丢给他一个任务就不管，也不能事事自己来。
   first_principle: AI 生成代码的不确定性高，单点验证不可靠。必须用多层兜底（规则约束方向 + 测试防回归 + 人工 catch 设计问题），且每层都尽早介入（小步实施而非积压）。
   key_points:
@@ -21,7 +23,8 @@ feynman:
   - 留意 AI 代码三个典型问题：过度抽象、无意义兜底 try-catch、自作主张加新依赖
 first_principle:
   essence: AI 编程 = 多层兜底 + 尽早验证
-  derivation: AI 输出不确定 → 单点验证不可靠 → 多层兜底（规则/测试/review）→ 每层成本递增 → 尽早介入（小步实施）才能在低成本层 catch 问题
+  derivation: AI 输出不确定 → 单点验证不可靠 → 多层兜底（规则/测试/review）→ 每层成本递增 → 尽早介入（小步实施）才能在低成本层
+    catch 问题
   conclusion: AI 编程的质量不在"AI 多强"，而在"你的兜底体系多完善"
 follow_up:
 - AI 生成的代码怎么判断"过度抽象"？
@@ -32,6 +35,7 @@ memory_points:
 - 质量三层兜底：规则文件(约束方向)、单测/集成(防回归)、人工Review(抓设计)
 - TDD驱动：让AI先写测试再写实现，或改完立刻跑测试验证，绝不积压改动
 - Review抓AI典型问题：过度抽象、无意义兜底(try-except pass)、自作主张加新依赖
+frequency: high
 ---
 
 # 【字节飞连面经】AI 编程工具的使用流程？怎么保证 AI 生成代码质量？
@@ -102,6 +106,32 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AI process
+    class B decision
+    class C special
+    class CLAUDE error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class G1 special
+    class G2 error
+    class G3 info
+    class H start
+    class I process
+    class Merge decision
+    class Plan special
+    class Review error
+    class TDD info
+    class br start
+    class md process
     A["开发者需求"] --> B["编写 CLAUDE.md<br/>定义架构与禁忌"]
     B --> C["AI 生成 Plan<br/>设计方案"]
     C --> D{"人工 Review Plan"}

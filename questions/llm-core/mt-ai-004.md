@@ -29,6 +29,7 @@ memory_points:
 - 压缩机制：只缓存低维潜向量，恢复投影在 Attention 计算中实时合并，显存换计算。
 - 方案对比：MQA/GQA 是物理硬共享易损精度，而 MLA 是动态压缩，压缩率极高。
 - 阶段差异：Prefill 阶段多算投影略慢，但因 Decode 阶段显存骤降，整体吞吐大幅提升。
+frequency: high
 ---
 
 # 【美团面经】MLA 是怎么对 KV Cache 做优化的？和 MQA/GQA 相比有什么区别？
@@ -116,6 +117,29 @@ class MLA_Compute:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class C special
+    class C1 error
+    class Cache info
+    class D start
+    class D1 process
+    class D2 decision
+    class DeepSeek special
+    class E error
+    class F info
+    class G start
+    class GQA process
+    class KV decision
+    class MLA special
+    class MQA error
     A[KV Cache 优化] --> B[MQA 共享一组 KV]
     A --> C[GQA 分组共享 KV]
     A --> D[MLA 低秩压缩]

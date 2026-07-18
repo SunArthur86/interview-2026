@@ -15,6 +15,7 @@ memory_points:
 - 雪花算法：64位=符号位+时间戳+机器ID+序列号。
 - 痛点解决：引入ZK记录时间或预生成，解决雪花算法的时钟回拨问题。
 - 美团Leaf：双Buffer号段模式，内存发号性能极高，是高并发首选方案。
+frequency: high
 ---
 
 # 分布式ID有哪些生成方案？
@@ -129,6 +130,7 @@ flowchart TD
     style SNOW fill:#FF9800,color:#fff
     style SEG fill:#9C27B0,color:#fff
     style CLK fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

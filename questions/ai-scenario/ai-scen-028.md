@@ -28,6 +28,7 @@ memory_points:
 - 性能权衡：实时性要求<100ms，需平衡误杀（体验）与漏放（合规）。
 - 多模态：文本用BERT，图片用CLIP，视频抽帧+音频转文本。
 - 持续优化：分析FP/FN样本，A/B测试策略，防御对抗试探。
+frequency: low
 ---
 
 # 如何设计一个AI内容审核系统？实时检测文本、图片、视频中的有害内容。
@@ -134,6 +135,29 @@ def audit_pipeline(text: str, modality: str = "text") -> dict:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BERT decision
+    class C special
+    class CLIP error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class UGC special
+    class br error
     A["用户发布内容<br/>UGC"] --> B["多模态特征提取"]
     B --> C["文本特征 (BERT)"]
     B --> D["图片特征 (CLIP)"]

@@ -27,6 +27,7 @@ memory_points:
 - SGLang核心：RadixAttention树状结构，自动共享前缀，适合多轮对话与Agent
 - 结构化输出：SGLang原生支持Regex/JSON约束解码，vLLM通常需后处理
 - 场景选择：通用单轮选vLLM，多轮/长前缀/结构化输出选SGLang
+frequency: high
 ---
 
 # 【智谱Infra面经】vLLM 和 SGLang 有什么区别？各自的优势和适用场景？
@@ -89,6 +90,23 @@ state = phone_extraction.run("Call me at 13812345678.")
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Choice start
+    class Mature process
+    class PagedAttention decision
+    class Prefix special
+    class RadixAttention error
+    class Regex info
+    class SGLang start
+    class SGLang2 process
+    class Scene decision
+    class br special
+    class vLLM error
     Scene[应用场景] --> Choice{引擎选型}
     Choice -->|通用单轮| vLLM[vLLM<br/>PagedAttention]
     Choice -->|多轮/长前缀| SGLang[SGLang<br/>RadixAttention]

@@ -25,6 +25,7 @@ memory_points:
 - 偏向锁假设只有单线程执行，轻量级锁假设多线程交替执行且无激烈竞争
 - 轻量级锁 CAS 失败引发自旋，自旋失败或竞争激烈膨胀为重量级锁，线程进入阻塞
 - JDK15默认关闭偏向锁：因多核高并发场景下撤销偏向锁需STW，维护代价远超带来的性能收益
+frequency: high
 ---
 
 # synchronized 的锁升级过程是怎样的？偏向锁为什么在 JDK 15 后默认关闭？
@@ -142,6 +143,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -16,6 +16,7 @@ memory_points:
 - 动态感知：最少连接（长连接优选）、最短响应时间（感知后端波动）
 - 哈希类：IP Hash保会话，一致性Hash加虚拟节点防数据倾斜
 - 底层对比：四层基于IP端口转发（如LVS），七层基于HTTP内容转发（如Nginx）
+frequency: medium
 ---
 
 # 常见的负载均衡算法有哪些？
@@ -99,6 +100,51 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CDN special
+    class Connections error
+    class D info
+    class DNS start
+    class E process
+    class F decision
+    class F5 special
+    class Fastest error
+    class G info
+    class H start
+    class Haproxy process
+    class Hash decision
+    class I special
+    class IP error
+    class J info
+    class K start
+    class L process
+    class LVS decision
+    class Least special
+    class M error
+    class N info
+    class Nginx start
+    class O process
+    class P decision
+    class Q special
+    class R error
+    class RPC info
+    class Random start
+    class Response process
+    class Robin decision
+    class Round special
+    class S error
+    class WLCP info
+    class WRR start
+    class Web process
+    class br decision
     A[负载均衡算法] --> B[静态算法]
     A --> C[动态算法]
     B --> D[轮询 Round Robin<br/>依次分配]

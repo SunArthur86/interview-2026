@@ -10,8 +10,10 @@ tags:
 - 入站
 - 出站
 feynman:
-  essence: ChannelHandler 是"处理一个事件的业务逻辑单元"，ChannelPipeline 是"把多个 Handler 串成处理链的容器"。两者合起来就是 Netty 的责任链模式——数据流过 Pipeline，被一个个 Handler 按顺序处理（入站从头到尾，出站从尾到头）。这正是事件驱动范式转成应用构件块的体现。
-  analogy: ChannelPipeline 是"后厨流水线"，ChannelHandler 是流水线上的"工位"。一道菜（数据）从下单到上桌要经过：切菜工位（解码 Handler）→ 腌制工位（解析 Handler）→ 炒菜工位（业务 Handler）→ 装盘工位（编码 Handler）。入站（客人点单进来）顺序走，出站（菜端出去）反向走。
+  essence: ChannelHandler 是"处理一个事件的业务逻辑单元"，ChannelPipeline 是"把多个 Handler 串成处理链的容器"。两者合起来就是
+    Netty 的责任链模式——数据流过 Pipeline，被一个个 Handler 按顺序处理（入站从头到尾，出站从尾到头）。这正是事件驱动范式转成应用构件块的体现。
+  analogy: ChannelPipeline 是"后厨流水线"，ChannelHandler 是流水线上的"工位"。一道菜（数据）从下单到上桌要经过：切菜工位（解码
+    Handler）→ 腌制工位（解析 Handler）→ 炒菜工位（业务 Handler）→ 装盘工位（编码 Handler）。入站（客人点单进来）顺序走，出站（菜端出去）反向走。
   key_points:
   - ChannelHandler=处理入站/出站数据逻辑的容器(Netty主要组件)
   - ChannelPipeline=ChannelHandler链的容器+事件传播API
@@ -26,14 +28,15 @@ first_principle:
   - 步骤应该可插拔、可复用(解耦)
   rebuild: 从"分步处理请求"出发→每个步骤封装为一个ChannelHandler(只做一件事)→用ChannelPipeline把Handler按顺序串成链→定义入站事件(如channelRead)从头向尾传播,出站事件(如writeAndFlush)从尾向头传播→Handler可自由插拔组合(HTTP/SSL/粘包等都有现成实现)。
 follow_up:
-  - ChannelHandlerContext 在其中起什么作用？
-  - 入站和出站 Handler 有什么区别？（ChannelInboundHandler vs ChannelOutboundHandler）
-  - 如何在运行时动态添加/移除 Handler？
+- ChannelHandlerContext 在其中起什么作用？
+- 入站和出站 Handler 有什么区别？（ChannelInboundHandler vs ChannelOutboundHandler）
+- 如何在运行时动态添加/移除 Handler？
 memory_points:
-  - ChannelHandler 定位：接收并响应事件通知，是处理入站/出站数据的应用逻辑容器（开发者主要关注的组件）
-  - ChannelHandler 用途：格式转换、异常通知、活动状态通知、注册注销通知、自定义事件通知
-  - ChannelPipeline：提供 ChannelHandler 链的容器，定义在该链上传播入站/出站事件流的 API
-  - 核心：ChannelPipeline 的关键是这些 ChannelHandler 的编排顺序
+- ChannelHandler 定位：接收并响应事件通知，是处理入站/出站数据的应用逻辑容器（开发者主要关注的组件）
+- ChannelHandler 用途：格式转换、异常通知、活动状态通知、注册注销通知、自定义事件通知
+- ChannelPipeline：提供 ChannelHandler 链的容器，定义在该链上传播入站/出站事件流的 API
+- 核心：ChannelPipeline 的关键是这些 ChannelHandler 的编排顺序
+frequency: high
 ---
 
 # ChannelHandler 和 ChannelPipeline 的关系？
@@ -264,6 +267,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

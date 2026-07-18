@@ -16,6 +16,7 @@ memory_points:
 - 口诀记忆八大规则：程序次序、锁、volatile、传递、start、join、中断、终结
 - 核心原理：底层通过插入内存屏障禁止处理器重排序
 - 易混概念：happens-before是JMM语义保证，未必等同于代码实际执行的时间顺序
+frequency: high
 ---
 
 # 什么是happens-before规则？
@@ -103,6 +104,7 @@ flowchart TD
     class R1,R2,R3,R4,R5,R6,R7,R8 rule
     classDef bad fill:#ffebee,stroke:#c62828
     class Without,Reorder bad
+
 ```
 
 

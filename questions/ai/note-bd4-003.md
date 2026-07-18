@@ -19,7 +19,8 @@ feynman:
   - '何时用Naive RAG: 简单FAQ、单文档问答、对延迟敏感的场景'
 first_principle:
   essence: 检索是手段而非目的，何时检索、检索什么、检索结果好不好用都需要判断
-  derivation: LLM的知识有截止日期和覆盖范围限制 → 需要外部知识增强 → 但用户的query可能不精确 → 需要Agent判断和改写查询 → 检索结果可能不相关 → 需要评估和重试
+  derivation: LLM的知识有截止日期和覆盖范围限制 → 需要外部知识增强 → 但用户的query可能不精确 → 需要Agent判断和改写查询 → 检索结果可能不相关
+    → 需要评估和重试
   conclusion: Agentic RAG将检索从静态管道变为动态决策过程
 follow_up:
 - Agentic RAG的延迟怎么控制？
@@ -30,6 +31,7 @@ memory_points:
 - Agentic RAG核心能力：Query改写、结果评估、多跳推理、动态路由
 - 因为Agentic RAG多次调用LLM导致延迟高成本高，所以简单FAQ和低延迟场景用Naive RAG即可
 - 适用Agentic RAG：多跳推理、复杂条件查询、需交叉验证的医疗/法律场景
+frequency: medium
 ---
 
 # Agentic RAG 和普通 Naive RAG 的区别？什么时候需要 Agentic RAG？
@@ -185,6 +187,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

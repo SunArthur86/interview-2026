@@ -25,6 +25,7 @@ memory_points:
 - 核心区别：Prefill算力密集(O(N²))用高算力卡，Decode内存密集(O(N))用高带宽卡。
 - 架构流程：Prefill生成KV，通过RDMA传输给Decode节点，实现硬件异构利用。
 - 边界条件：Prompt极短时网络开销大于收益，耦合架构更优。需解决KV传输延迟。
+frequency: high
 ---
 
 # Prefill-Decode分离（PD分离）是什么？为什么能提升推理效率？
@@ -177,6 +178,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

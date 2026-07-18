@@ -29,6 +29,7 @@ memory_points:
 - 渐进式三步走：先单Agent验证ROI，再多Agent专业化提效，最后沉淀平台化
 - 升级多Agent触发信号：上下文超限、角色指令混淆、需并行提速、对抗校验
 - 四大典型场景：多角色智能客服、流水线软件开发、并行数据分析、内容生产
+frequency: medium
 ---
 
 # 企业级 Agent 构建思路是什么？多 Agent 有哪些应用场景？
@@ -273,6 +274,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

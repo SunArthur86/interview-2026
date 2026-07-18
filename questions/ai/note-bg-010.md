@@ -32,6 +32,7 @@ memory_points:
 - ReAct三步循环：Thought思考行动理由 → Action调用外部工具 → Observation观察结果
 - 触发技巧：Zero-shot用“step by step”启动CoT，Few-shot用样例引导启动ReAct
 - 核心优势：借外部行动打破知识盲区，通过交互补齐最新信息避免幻觉
+frequency: medium
 ---
 
 # 【八股总结】ReAct 基本原理 & 相比 CoT 的优势
@@ -405,6 +406,7 @@ flowchart TD
     style ACTION fill:#FF9800,color:#fff
     style OBS fill:#9C27B0,color:#fff
     style REFLECT fill:#FFC107,color:#000
+
 ```
 
 ## 记忆要点

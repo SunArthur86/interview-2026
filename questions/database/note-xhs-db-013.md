@@ -13,18 +13,19 @@ tags:
 - 事务
 - 面经
 feynman:
-  essence: "三种日志分别解决三个问题：redo log保证崩溃恢复（持久性），undo log保证回滚和MVCC（原子性+隔离性），binlog保证主从复制和数据归档"
-  analogy: "三种日志就像三种不同的记录员：redo log是'黑匣子'——记录已经做了什么，飞机坠毁了也能恢复；undo log是'后悔药'——记录怎么撤销，事务失败时回退；binlog是'广播员'——把操作告诉所有从库"
+  essence: 三种日志分别解决三个问题：redo log保证崩溃恢复（持久性），undo log保证回滚和MVCC（原子性+隔离性），binlog保证主从复制和数据归档
+  analogy: 三种日志就像三种不同的记录员：redo log是'黑匣子'——记录已经做了什么，飞机坠毁了也能恢复；undo log是'后悔药'——记录怎么撤销，事务失败时回退；binlog是'广播员'——把操作告诉所有从库
   key_points:
-  - "redo log: InnoDB引擎层，物理日志，记录'页X偏移Y改了什么'，保证崩溃恢复"
-  - "undo log: InnoDB引擎层，逻辑日志，记录'反向操作'，保证回滚+MVCC"
-  - "binlog: Server层，逻辑日志，记录'SQL语句/行变更'，保证主从复制"
+  - 'redo log: InnoDB引擎层，物理日志，记录''页X偏移Y改了什么''，保证崩溃恢复'
+  - 'undo log: InnoDB引擎层，逻辑日志，记录''反向操作''，保证回滚+MVCC'
+  - 'binlog: Server层，逻辑日志，记录''SQL语句/行变更''，保证主从复制'
   - redo log是循环写，binlog是追加写
   - 三者通过两阶段提交保证一致性（见note-xhs-db-014）
 first_principle:
-  essence: "每种日志解决一个不同的根本问题：崩溃恢复、事务回滚、数据复制"
-  derivation: "数据库需要持久性(Durability)→断电不能丢数据→需要记录已做的修改→redo log→需要原子性(Atomicity)→事务失败要回滚→需要记录反向操作→undo log→需要高可用→主从复制→需要记录所有变更→binlog"
-  conclusion: "三种日志不是冗余，而是各司其职：redo=持久性，undo=原子性+隔离性，binlog=可复制性"
+  essence: 每种日志解决一个不同的根本问题：崩溃恢复、事务回滚、数据复制
+  derivation: 数据库需要持久性(Durability)→断电不能丢数据→需要记录已做的修改→redo log→需要原子性(Atomicity)→事务失败要回滚→需要记录反向操作→undo
+    log→需要高可用→主从复制→需要记录所有变更→binlog
+  conclusion: 三种日志不是冗余，而是各司其职：redo=持久性，undo=原子性+隔离性，binlog=可复制性
 follow_up:
 - redo log和binlog的两阶段提交是怎么保证一致性的？（见note-xhs-db-014）
 - 为什么redo log是物理日志而binlog是逻辑日志？各自的优缺点？
@@ -36,6 +37,7 @@ memory_points:
 - undo log = InnoDB逻辑日志 → 回滚+MVCC → 随事务产生
 - binlog = Server层逻辑日志 → 主从复制+归档 → 追加写
 - 三者通过两阶段提交(2PC)保证一致性
+frequency: high
 ---
 
 # 【拼多多 Java服务端】binlog、redo log、undo log的作用和区别
@@ -187,6 +189,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 结构化回答
 

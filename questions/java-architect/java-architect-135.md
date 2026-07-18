@@ -9,9 +9,13 @@ tags:
 - 不可抵赖
 - 追溯
 feynman:
-  essence: 审计日志的核心是"不可抵赖"（Non-repudiation）——A 做了操作 X，事后 A 不能否认。这要求日志满足四性：(1) 完整性（不能被篡改，用 WORM 存储或 hash chain）；(2) 真实性（来源可验证，用签名或可信链路）；(3) 时序性（操作顺序确定，用单调时钟或区块链）；(4) 可追溯（任何动作能关联到 user + resource + traceId）。Java 后端落地三件套：AOP 拦截操作 + WORM 存储防篡改 + hash chain 防局部篡改。
-  analogy: 像公证处的公证书。普通日志是"自己写的日记"，可改可删；审计日志是"公证处盖章的公证书"，盖了章就不能改、不能赖。WORM 存储是"用钢笔写、装订成册、存入保险柜"；hash chain 是"每页盖上一页的页码章"，撕一页后面都对不上。
-  first_principle: 为什么普通日志不够？因为操作者就是日志的写入者，自己改自己写的日志毫无障碍。审计日志必须让"写入者无法修改"——这是 WORM（Write Once Read Many）存储或 hash chain 的核心。
+  essence: 审计日志的核心是"不可抵赖"（Non-repudiation）——A 做了操作 X，事后 A 不能否认。这要求日志满足四性：(1) 完整性（不能被篡改，用
+    WORM 存储或 hash chain）；(2) 真实性（来源可验证，用签名或可信链路）；(3) 时序性（操作顺序确定，用单调时钟或区块链）；(4) 可追溯（任何动作能关联到
+    user + resource + traceId）。Java 后端落地三件套：AOP 拦截操作 + WORM 存储防篡改 + hash chain 防局部篡改。
+  analogy: 像公证处的公证书。普通日志是"自己写的日记"，可改可删；审计日志是"公证处盖章的公证书"，盖了章就不能改、不能赖。WORM 存储是"用钢笔写、装订成册、存入保险柜"；hash
+    chain 是"每页盖上一页的页码章"，撕一页后面都对不上。
+  first_principle: 为什么普通日志不够？因为操作者就是日志的写入者，自己改自己写的日志毫无障碍。审计日志必须让"写入者无法修改"——这是 WORM（Write
+    Once Read Many）存储或 hash chain 的核心。
   key_points:
   - 不可抵赖四性：完整性 + 真实性 + 时序性 + 可追溯
   - WORM 存储：AWS S3 Object Lock、阿里云 OSS WORM、ES Snapshot
@@ -24,19 +28,26 @@ first_principle:
   - 操作者 = 日志写入者，可改可删，普通日志不可信
   - 单点存储必有内部威胁（DBA 可改库）
   - 时间是不可逆资源，时序必须可证明
-  rebuild: AOP 拦截所有敏感操作，写入审计日志（who/what/when/where/result 六要素）。日志存 WORM 存储（一次性写、不可改不可删），每条日志含上一条 hash 形成 chain，任何局部篡改破坏后续所有 hash。日志同步到独立审计系统（业务团队无权访问），仅合规/安全团队可读。所有日志带数字签名（HSM 私钥），第三方可用公钥验证真实性。
+  rebuild: AOP 拦截所有敏感操作，写入审计日志（who/what/when/where/result 六要素）。日志存 WORM 存储（一次性写、不可改不可删），每条日志含上一条
+    hash 形成 chain，任何局部篡改破坏后续所有 hash。日志同步到独立审计系统（业务团队无权访问），仅合规/安全团队可读。所有日志带数字签名（HSM
+    私钥），第三方可用公钥验证真实性。
 follow_up:
-  - hash chain 怎么实现？——每条日志计算 hash = SHA256(prev_hash + current_content)，prev_hash 是上一条的 hash。篡改任何一条，后续所有 hash 不匹配。
-  - WORM 存储怎么选？——AWS S3 Object Lock（Compliance 模式不可删）；阿里云 OSS 合规保留；自建用 ES Snapshot + 不可变索引；高敏感用专线写入独立审计集群。
-  - 审计日志和业务日志区别？——业务日志面向开发者排障（可改可删、保留期短）；审计日志面向合规（不可改、保留 7 年+）。两者物理隔离存储。
-  - 审计日志多大？——单条 1-2KB，1 亿次操作/日 = 200GB/日，年 70TB。需要冷热分层（热 7 天 ES、温 90 天 ClickHouse、冷 7 年 S3）。
-  - 怎么防"日志丢失"？——producer 写审计日志用同步 + acks=all（如 Kafka replication.factor=3）；丢失立刻告警；关键操作（如支付）"业务 + 审计"原子（同事务或 outbox 模式）。
+- hash chain 怎么实现？——每条日志计算 hash = SHA256(prev_hash + current_content)，prev_hash 是上一条的
+  hash。篡改任何一条，后续所有 hash 不匹配。
+- WORM 存储怎么选？——AWS S3 Object Lock（Compliance 模式不可删）；阿里云 OSS 合规保留；自建用 ES Snapshot +
+  不可变索引；高敏感用专线写入独立审计集群。
+- 审计日志和业务日志区别？——业务日志面向开发者排障（可改可删、保留期短）；审计日志面向合规（不可改、保留 7 年+）。两者物理隔离存储。
+- 审计日志多大？——单条 1-2KB，1 亿次操作/日 = 200GB/日，年 70TB。需要冷热分层（热 7 天 ES、温 90 天 ClickHouse、冷
+  7 年 S3）。
+- 怎么防"日志丢失"？——producer 写审计日志用同步 + acks=all（如 Kafka replication.factor=3）；丢失立刻告警；关键操作（如支付）"业务
+  + 审计"原子（同事务或 outbox 模式）。
 memory_points:
-  - 不可抵赖四性：完整性 + 真实性 + 时序性 + 可追溯
-  - 六要素：who + what + when + where + to_what + result
-  - WORM 存储 + hash chain 防篡改
-  - 业务日志 vs 审计日志：物理隔离
-  - 合规保留：7 年（金融）、3 年（GDPR）、等保三级
+- 不可抵赖四性：完整性 + 真实性 + 时序性 + 可追溯
+- 六要素：who + what + when + where + to_what + result
+- WORM 存储 + hash chain 防篡改
+- 业务日志 vs 审计日志：物理隔离
+- 合规保留：7 年（金融）、3 年（GDPR）、等保三级
+frequency: high
 ---
 
 # 【Java 后端架构师】审计日志如何做到不可抵赖与可追溯
@@ -425,6 +436,38 @@ public void weeklyIntegrityCheck() {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Access process
+    class App decision
+    class Audit special
+    class Auditable error
+    class B info
+    class C start
+    class Chain process
+    class D decision
+    class E special
+    class F error
+    class G info
+    class H start
+    class HSM process
+    class Hash decision
+    class I special
+    class Java error
+    class Kafka info
+    class Lock start
+    class MQ process
+    class Object decision
+    class S3 special
+    class SHA256 error
+    class WORM info
+    class acks start
+    class all process
     subgraph App[业务应用]
         A[Java AOP拦截 @Auditable]
         B[组装六要素与操作前后状态]

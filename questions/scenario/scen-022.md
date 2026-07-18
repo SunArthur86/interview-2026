@@ -29,6 +29,7 @@ memory_points:
 - 最终一致双保险：MQ重试机制或Canal监听Binlog，异步保证缓存必被删除
 - 强一致代价极高：需引入2PC分布式事务或读写加锁串行化，极度牺牲性能
 - 实战避坑：高并发大促切勿先删缓存再更DB，极易引发库存超卖
+frequency: high
 ---
 
 # 如何保证缓存与数据库的数据一致性？最终一致和强一致分别怎么做？
@@ -139,6 +140,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -28,6 +28,7 @@ memory_points:
 - KV管理：Radix Tree共享System Prompt前缀，分层存储（GPU热数据+CPU冷数据）
 - 多模态处理：图片通过VLM编码，特征存入KV Cache或独立索引
 - 负载均衡：基于请求长度和计算量动态调度，优先保证高并发短请求的SLA
+frequency: high
 ---
 
 # 【智谱Infra面经】设计一个支持 1M 上下文 + 多模态的高并发 Agent Serving 系统，如何处理调度、KV 管理和负载均衡？
@@ -38,6 +39,67 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class Active process
+    class Agent decision
+    class Analyzer special
+    class Auth error
+    class BM info
+    class Batcher start
+    class Block process
+    class Cache decision
+    class Chat special
+    class Classifier error
+    class Client info
+    class Cluster start
+    class Controller process
+    class DB decision
+    class Dynamic special
+    class GPU error
+    class GW info
+    class Gateway start
+    class HBM process
+    class Host decision
+    class Hot special
+    class Iterative error
+    class KV info
+    class KVM start
+    class L7 process
+    class LB decision
+    class LLM special
+    class Limit error
+    class Manager info
+    class Mgr start
+    class Models process
+    class Nodes decision
+    class PA special
+    class PagedAttn error
+    class Prefix info
+    class RC start
+    class REQ process
+    class Radix decision
+    class Rate special
+    class Request error
+    class Requests info
+    class Routing start
+    class SC process
+    class SGLang decision
+    class SM special
+    class Scheduler error
+    class Small info
+    class Swap start
+    class Telemetry process
+    class Tree decision
+    class WN special
+    class Worker error
+    class br info
+    class vLLM start
     REQ[Client Requests] --> GW["API Gateway L7 LB<br/>Auth / Rate Limit / Request Routing / Telemetry"]
     GW --> SC
     subgraph SC["Scheduler Controller"]

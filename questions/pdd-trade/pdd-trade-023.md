@@ -26,14 +26,15 @@ first_principle:
   - 数据需实时（不能只靠 T+1）
   rebuild: Binlog 订阅 + 多目标 sink + 幂等保证。
 follow_up:
-  - Binlog 怎么保证顺序？——按主键 hash 到同一分区
-  - 同步延迟怎么排查？——监控 offset 差值+慢消费+反压
-  - 怎么保证不丢？——至少一次 + 下游幂等
+- Binlog 怎么保证顺序？——按主键 hash 到同一分区
+- 同步延迟怎么排查？——监控 offset 差值+慢消费+反压
+- 怎么保证不丢？——至少一次 + 下游幂等
 memory_points:
-  - 数据源：Binlog（Canal/Flink CDC）
-  - 目标：ES/HBase/Kafka/Hive
-  - 保证：有序+不丢+不重（幂等）
-  - 监控：延迟/吞吐/告警
+- 数据源：Binlog（Canal/Flink CDC）
+- 目标：ES/HBase/Kafka/Hive
+- 保证：有序+不丢+不重（幂等）
+- 监控：延迟/吞吐/告警
+frequency: high
 ---
 
 # 【拼多多交易】数据同步平台怎么设计？
@@ -236,6 +237,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

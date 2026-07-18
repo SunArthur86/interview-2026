@@ -28,6 +28,7 @@ memory_points:
 - 并发安全：数据库更新采用乐观锁（update where version=?）防重复操作。
 - 超时支付晚到：回调若发现已取消，不恢复订单而是走异常退款流程保证资金一致。
 - 异步回滚：状态变更后发MQ事件，异步完成库存回滚与优惠券归还。
+frequency: high
 ---
 
 # 如何设计一个电商订单状态机？管理订单生命周期。
@@ -131,6 +132,7 @@ flowchart TD
     CONC[并发修改] --> LOCK[乐观锁版本号]
     style DONE fill:#d4edda
     style ERR fill:#ffcccc
+
 ```
 
 

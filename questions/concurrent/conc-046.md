@@ -15,6 +15,7 @@ memory_points:
 - 锁升级口诀：无 -> 偏向 -> 轻量(自旋CAS) -> 重量(OS阻塞)，因竞争加剧而升级不可降
 - 同步对比：Synchronized是JVM关键字自动释放，ReentrantLock是JDK API需手动finally释放
 - 经典场景：读多写少用乐观锁，高并发秒杀用悲观锁，自旋时间过长会浪费CPU
+frequency: high
 ---
 
 # Java中有哪些锁？它们的分类和特点是什么？
@@ -142,6 +143,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

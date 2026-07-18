@@ -17,6 +17,7 @@ memory_points:
 - 三大子接口：List(有序可重复)、Set(无序不重复)、Queue(FIFO队列)。
 - 去重核心：Set依赖元素的equals()和hashCode()方法判断对象是否相同。
 - 避坑指南：for-each中直接remove抛异常，必须使用Iterator.remove()或Java8 removeIf。
+frequency: medium
 ---
 
 # 什么是Collection接口？
@@ -77,6 +78,45 @@ data.removeIf("b"::equals);
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayDeque process
+    class ArrayList decision
+    class B special
+    class C error
+    class C1 info
+    class Collection start
+    class D process
+    class D1 decision
+    class Deque special
+    class E error
+    class E1 info
+    class F start
+    class F1 process
+    class G decision
+    class H special
+    class HashSet error
+    class I info
+    class Iterable start
+    class J process
+    class LinkedList decision
+    class List special
+    class PriorityQueue error
+    class Queue info
+    class Set start
+    class TreeSet process
+    class add decision
+    class contains special
+    class isEmpty error
+    class iterator info
+    class remove start
+    class size process
+    class toArray decision
     A[Iterable 可迭代] --> B[Collection 集合根接口]
     B --> C[List 有序可重复]
     B --> D[Set 无序不重复]

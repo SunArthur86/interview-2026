@@ -11,37 +11,40 @@ tags:
 - 资源调度
 - 高并发
 feynman:
-  essence: "AI 产品的高并发后端核心是'异步化'——把耗时的 LLM/检索/工具调用从请求线程剥离，用事件循环+任务队列+资源池支撑高吞吐，而非堆线程。"
-  analogy: "像餐厅——同步是一个服务员盯一桌从点菜到吃完（线程阻塞，效率低）；异步是服务员点完单把单子给厨房（提交任务）立刻服务下一桌，厨房用多个灶（资源池）并行做，做完叫铃（回调）端菜。"
-  first_principle: "LLM 调用是 IO 密集的长耗时操作（秒级），若每请求占一个线程同步等待，线程数=并发数会迅速耗尽（线程是昂贵资源）。异步的本质是'等待时不占线程'，用少量线程撑起海量并发 IO。"
+  essence: AI 产品的高并发后端核心是'异步化'——把耗时的 LLM/检索/工具调用从请求线程剥离，用事件循环+任务队列+资源池支撑高吞吐，而非堆线程。
+  analogy: 像餐厅——同步是一个服务员盯一桌从点菜到吃完（线程阻塞，效率低）；异步是服务员点完单把单子给厨房（提交任务）立刻服务下一桌，厨房用多个灶（资源池）并行做，做完叫铃（回调）端菜。
+  first_principle: LLM 调用是 IO 密集的长耗时操作（秒级），若每请求占一个线程同步等待，线程数=并发数会迅速耗尽（线程是昂贵资源）。异步的本质是'等待时不占线程'，用少量线程撑起海量并发
+    IO。
   key_points:
-  - "异步 IO：事件循环（asyncio）/ 回调，等待时不占线程"
-  - "任务队列：耗时任务入队（Celery/RQ），worker 异步消费"
-  - "资源池：连接池/模型推理池/GPU 池，复用昂贵资源"
-  - "背压与限流：下游扛不住时反压，防止雪崩"
-  - "协程 > 线程 > 进程：IO 密集用协程，CPU/GPU 密集用进程/池"
+  - 异步 IO：事件循环（asyncio）/ 回调，等待时不占线程
+  - 任务队列：耗时任务入队（Celery/RQ），worker 异步消费
+  - 资源池：连接池/模型推理池/GPU 池，复用昂贵资源
+  - 背压与限流：下游扛不住时反压，防止雪崩
+  - 协程 > 线程 > 进程：IO 密集用协程，CPU/GPU 密集用进程/池
   socratic:
-  - "每个请求都调一次 LLM（耗时2秒），1000 并发时同步模型扛得住吗？"
-  - "为什么异步 IO 能用几个线程撑起几万并发，线程却不行？"
-  - "LLM 推理要占 GPU，100 个请求同时来，GPU 不够怎么办？"
-  - "任务队列堆积了 10 万个，怎么不把下游打爆？"
-  - "异步代码出了错（异常/超时），怎么追踪和重试？"
+  - 每个请求都调一次 LLM（耗时2秒），1000 并发时同步模型扛得住吗？
+  - 为什么异步 IO 能用几个线程撑起几万并发，线程却不行？
+  - LLM 推理要占 GPU，100 个请求同时来，GPU 不够怎么办？
+  - 任务队列堆积了 10 万个，怎么不把下游打爆？
+  - 异步代码出了错（异常/超时），怎么追踪和重试？
 first_principle:
-  problem: "如何让后端在 LLM 长耗时调用下仍支撑高并发、高吞吐？"
+  problem: 如何让后端在 LLM 长耗时调用下仍支撑高并发、高吞吐？
   axioms:
-  - "LLM/检索是 IO 密集长耗时操作（秒级）"
-  - "线程是昂贵资源（内存/上下文切换），同步等待会耗尽"
-  - "GPU/连接等资源有限且昂贵，必须池化复用"
-  rebuild: "用异步 IO（事件循环/协程）让等待时不占线程；耗时任务入队由 worker 池消费；昂贵资源（GPU/DB 连接）池化复用；加背压限流防雪崩，用少量资源撑起高并发。"
+  - LLM/检索是 IO 密集长耗时操作（秒级）
+  - 线程是昂贵资源（内存/上下文切换），同步等待会耗尽
+  - GPU/连接等资源有限且昂贵，必须池化复用
+  rebuild: 用异步 IO（事件循环/协程）让等待时不占线程；耗时任务入队由 worker 池消费；昂贵资源（GPU/DB 连接）池化复用；加背压限流防雪崩，用少量资源撑起高并发。
 follow_up:
-- "Python asyncio 和 Go goroutine 区别？——asyncio 协程需 await 显式让出，goroutine 抢占式调度更透明；Go 更适合高并发后端，Python 生态 AI 库多。"
-- "任务队列选型？——Celery（功能全/RabbitMQ/Redis）/ RQ（轻量）/ Kafka（流式）；AI 长任务常用 Celery+Redis。"
-- "GPU 怎么调度？——推理请求批处理（vLLM continuous batching）+ 请求队列 + 多模型分时复用 + 优先级调度。"
+- Python asyncio 和 Go goroutine 区别？——asyncio 协程需 await 显式让出，goroutine 抢占式调度更透明；Go
+  更适合高并发后端，Python 生态 AI 库多。
+- 任务队列选型？——Celery（功能全/RabbitMQ/Redis）/ RQ（轻量）/ Kafka（流式）；AI 长任务常用 Celery+Redis。
+- GPU 怎么调度？——推理请求批处理（vLLM continuous batching）+ 请求队列 + 多模型分时复用 + 优先级调度。
 memory_points:
-- "异步核心：等待时不占线程"
-- "任务队列解耦：提交 vs 消费"
-- "资源池复用：连接/GPU/模型"
-- "背压限流防雪崩"
+- 异步核心：等待时不占线程
+- 任务队列解耦：提交 vs 消费
+- 资源池复用：连接/GPU/模型
+- 背压限流防雪崩
+frequency: high
 ---
 
 # 【生物医药 AI】AI 产品的高并发后端怎么做（异步/调度/资源池）？
@@ -146,6 +149,19 @@ async def ask(req):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class Client process
+    class DBPool decision
+    class GPUPool special
+    class MQ error
+    class Worker1 info
+    class Worker2 start
     Client[前端客户端] -->|HTTP请求| API[asyncio事件循环 API入口]
     API -->|长耗时任务| MQ[(Celery任务队列)]
     API -->|实时查询/响应| Client

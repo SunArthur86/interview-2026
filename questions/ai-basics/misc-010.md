@@ -21,6 +21,7 @@ memory_points:
 - 参数量：2×d×r，相比全量微调极大减少，推理时可合并回W无开销
 - 初始化：A随机初始化，B初始化为0，保证训练初始行为不变
 - QLoRA改进：4-bit NF4量化、双重量化、分页优化器，单卡微调70B模型
+frequency: high
 ---
 
 # LoRA的原理是什么?rank r 如何选择?QLoRA做了什么改进
@@ -150,6 +151,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

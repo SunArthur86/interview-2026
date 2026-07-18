@@ -29,6 +29,7 @@ memory_points:
 - 高并发解法：风控耗时大，故核心链路同步轻校验，重逻辑转异步流处理。
 - 团伙防范：因单点无异样，故需用知识图谱挖掘同IP/设备的强连通子图。
 - 误杀处理：严控误伤，策略上线必先跑影子模式观察准确率再拦截。
+frequency: low
 ---
 
 # 如何设计一个防刷系统？防止黄牛/机器人/恶意攻击。
@@ -155,6 +156,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

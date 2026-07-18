@@ -30,6 +30,7 @@ memory_points:
 - 三层披露模型：L1概述常驻(知道有什么) → L2详情按需展开(知道怎么用) → L3全文即时加载(精通细节)
 - 应用场景极广：工具描述、长文档RAG、Agent技能库均可采用此分层加载机制
 - 对比传统方式：全量加载耗Token且易失焦，渐进式用最少Token实现精准唤醒
+frequency: medium
 ---
 
 # 什么是渐进式披露（Progressive Disclosure）？
@@ -226,6 +227,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -37,6 +37,7 @@ tags:
 - 三次握手
 - 四次挥手
 - TIME_WAIT
+frequency: low
 ---
 
 # 什么是TCP三次握手/四次挥手？
@@ -154,6 +155,34 @@ net.ipv4.tcp_max_tw_buckets = 5000
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class CLOSED decision
+    class CLOSE_WAIT special
+    class ESTABLISHED error
+    class FIN info
+    class FIN_WAIT_1 start
+    class FIN_WAIT_2 process
+    class LAST_ACK decision
+    class LISTEN special
+    class S error
+    class SYN info
+    class SYN_RCVD start
+    class SYN_SENT process
+    class TIME_WAIT decision
+    class ack special
+    class as error
+    class seq info
+    class u start
+    class w process
+    class x decision
+    class y special
     autonumber
     participant C as 客户端
     participant S as 服务端

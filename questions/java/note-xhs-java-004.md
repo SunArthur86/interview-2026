@@ -11,7 +11,7 @@ tags:
 - 动态代理
 feynman:
   essence: IOC是「别人帮你创建对象」，AOP是「不改动原代码就能加功能」。依赖注入就是容器主动把依赖塞给你，而不是你自己去new。
-  analogy: "IOC像住酒店不用自己打扫（服务员=容器帮你搞定）；AOP像给所有方法都装了监控摄像头（不用改每个方法，统一拦截）。三级缓存解决循环依赖就像：A和B互相等对方（循环依赖），酒店先给A一个临时房卡（半成品），等B办好了再换正式卡。"
+  analogy: IOC像住酒店不用自己打扫（服务员=容器帮你搞定）；AOP像给所有方法都装了监控摄像头（不用改每个方法，统一拦截）。三级缓存解决循环依赖就像：A和B互相等对方（循环依赖），酒店先给A一个临时房卡（半成品），等B办好了再换正式卡。
   key_points:
   - IOC=对象创建权交给容器，DI=容器自动注入依赖
   - 构造器注入最推荐（可final、不可变、强制依赖）
@@ -19,18 +19,19 @@ feynman:
   - AOP默认JDK代理(有接口)/CGLIB(无接口)
   - 内部方法调用绕过代理→AOP失效，需注入自身代理
 first_principle:
-  problem: "软件系统中对象之间的依赖关系管理复杂，且横切关注点（日志/事务/权限）散布在各业务方法中。如何解耦对象创建和功能增强？"
+  problem: 软件系统中对象之间的依赖关系管理复杂，且横切关注点（日志/事务/权限）散布在各业务方法中。如何解耦对象创建和功能增强？
   axioms:
   - 控制反转：对象不应自己创建依赖，应由容器统一管理
   - 单一职责：业务逻辑不应混入日志/事务等横切关注点
   - 动态代理：运行时生成代理对象可以在不修改源码的前提下增强功能
   - 提前暴露：循环依赖可通过暴露半成品引用来解决
-  rebuild: "从对象依赖管理出发：工厂模式→IOC容器(统一管理)→DI(自动注入)→三级缓存(解决循环依赖)→AOP(代理增强)→AOP失效场景(内部调用绕过代理)"
+  rebuild: 从对象依赖管理出发：工厂模式→IOC容器(统一管理)→DI(自动注入)→三级缓存(解决循环依赖)→AOP(代理增强)→AOP失效场景(内部调用绕过代理)
 follow_up:
 - Spring 三级缓存为什么不能是两级缓存？
 - '@Autowired 和 @Resource 的区别？'
 - Spring AOP 和 AspectJ 的区别？
 - Bean 的作用域有哪些？prototype 的循环依赖能解决吗？
+frequency: high
 ---
 
 # Spring IOC、AOP 原理及依赖注入实现方式？（华为od Java一面）
@@ -291,6 +292,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -16,6 +16,7 @@ memory_points:
 - 两套机制：Last-Modified(看修改时间) vs ETag(比对内容Hash)
 - 性能与精度：Last-Modified性能好但秒级精度低，ETag精度高但耗计算
 - 优先级：ETag优先级高于Last-Modified，且能解决1秒内多次改的问题
+frequency: medium
 ---
 
 # 什么是协商缓存？
@@ -142,6 +143,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -26,7 +26,8 @@ first_principle:
   - 实例 IP 动态变化（弹性扩缩、故障）
   - 名字（服务名）是稳定的逻辑标识
   - 通知比轮询更高效
-  rebuild: 引入"名字服务"组件——Provider 注册 IP+端口+元数据，Consumer 按名订阅，变更通过长连接推送。用 CAP 取舍决定 AP（可用优先）还是 CP（一致优先）。
+  rebuild: 引入"名字服务"组件——Provider 注册 IP+端口+元数据，Consumer 按名订阅，变更通过长连接推送。用 CAP 取舍决定 AP（可用优先）还是
+    CP（一致优先）。
 follow_up:
 - Eureka 和 Nacos 区别？——Eureka 只 AP 且无配置中心；Nacos 同时支持 AP/CP，集成配置
 - 为什么风控选 Nacos 而不是 Zookeeper？——ZK 是 CP，主从切换时注册不可用；风控要求高可用，AP 的 Nacos 注册数据短暂不一致不影响调用
@@ -36,6 +37,7 @@ memory_points:
 - 临时实例=客户端心跳维持、宕机即摘除；持久实例=服务端探测、需主动注销
 - Nacos 2.x 用 gRPC 长连接取代长轮询，推送延迟从秒级到亚秒
 - 客户端缓存实例列表，注册中心宕机仍可降级调用
+frequency: high
 ---
 
 # 【蚂蚁风控】Spring Cloud 服务注册与发现原理？Nacos 为什么比 Eureka 更适合风控？
@@ -313,6 +315,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

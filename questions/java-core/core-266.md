@@ -16,6 +16,7 @@ memory_points:
 - 加速机制：依赖MMU翻译，靠TLB(快表)缓存近期映射极速转换地址。
 - 缺页处理：Valid位为0触发缺页异常，OS接管并执行页面置换算法。
 - 多级页表：将页表分级，避免大地址空间页表必须连续占用大内存。
+frequency: medium
 ---
 
 # 什么是虚拟内存？
@@ -136,6 +137,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

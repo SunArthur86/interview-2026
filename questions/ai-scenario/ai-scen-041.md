@@ -29,6 +29,7 @@ memory_points:
 - 匹配引擎：硬性条件(学历/年限)漏斗过滤 + Embedding语义匹配。
 - 实体对齐：构建技能图谱，解决AWS与Amazon Web Services归一。
 - 易错点：关键词匹配需防Java包含JavaScript误判。
+frequency: medium
 ---
 
 # 如何设计一个AI简历筛选系统？日均处理10000+简历，自动匹配岗位要求。
@@ -187,6 +188,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

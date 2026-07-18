@@ -27,6 +27,7 @@ memory_points:
 - 代理与真实类的关系：都实现Subject接口，代理持有真实类的引用。
 - 执行逻辑：Proxy在调用真实方法前后，附加pre和post增强逻辑。
 - 设计原则：客户端只依赖Subject接口，不感知真实对象与代理的切换。
+frequency: medium
 ---
 
 # 什么是代理模式结构图？
@@ -163,6 +164,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

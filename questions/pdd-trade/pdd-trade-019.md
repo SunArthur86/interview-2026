@@ -30,6 +30,7 @@ memory_points:
 - 离线 Spark T+1 + 实时 Flink 毫秒
 - HBase（全量）+ Redis（热）
 - 服务：推荐/营销/风控
+frequency: high
 ---
 
 # 【拼多多交易】用户画像系统怎么设计？
@@ -150,6 +151,29 @@ Redis 存不下亿级用户的全量画像。亿级用户 × 每用户几 KB 画
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class HBase decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class ProfileService decision
+    class RegionServer special
+    class br error
     subgraph 数据源
       A[用户行为日志]
       B[订单交易记录]

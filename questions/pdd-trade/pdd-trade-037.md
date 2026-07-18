@@ -28,14 +28,15 @@ first_principle:
   - 需隔离和公平
   rebuild: GPU 池化 + 优先级调度 + 推理/训练平台 + 弹性 + 计费。
 follow_up:
-  - GPU 怎么池化？——物理 GPU 切片（MIG）+ 虚拟 + 任务级复用
-  - 推理和训练怎么不抢资源？——分池 + 优先级 + 分时（白天推理/夜间训练）
-  - 怎么降本？——弹性扩缩+ Spot 实例+蒸馏量化+路由小模型
+- GPU 怎么池化？——物理 GPU 切片（MIG）+ 虚拟 + 任务级复用
+- 推理和训练怎么不抢资源？——分池 + 优先级 + 分时（白天推理/夜间训练）
+- 怎么降本？——弹性扩缩+ Spot 实例+蒸馏量化+路由小模型
 memory_points:
-  - GPU 池化+优先级调度
-  - 推理平台：vLLM/Triton 服务化
-  - 训练平台：队列+隔离
-  - 弹性+计费+监控
+- GPU 池化+优先级调度
+- 推理平台：vLLM/Triton 服务化
+- 训练平台：队列+隔离
+- 弹性+计费+监控
+frequency: low
 ---
 
 # 【拼多多交易】AI Infra 怎么搭？
@@ -302,6 +303,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

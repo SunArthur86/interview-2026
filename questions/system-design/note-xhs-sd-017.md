@@ -27,18 +27,20 @@ first_principle:
   - 磁盘可能损坏（Broker宕机丢数据）
   - 消费者可能在处理完消息但提交Offset前崩溃（重启后重复消费）
   - 每个环节都不能假设上一环节可靠
-  rebuild: 每个环节都加确认和重试机制 → Producer等Broker所有ISR副本确认（acks=all）→ Broker多副本保证单机故障不丢 → Consumer处理完业务再提交Offset → 幂等设计防止重试导致的重复 → 端到端Exactly-Once语义。
+  rebuild: 每个环节都加确认和重试机制 → Producer等Broker所有ISR副本确认（acks=all）→ Broker多副本保证单机故障不丢 →
+    Consumer处理完业务再提交Offset → 幂等设计防止重试导致的重复 → 端到端Exactly-Once语义。
 follow_up:
-  - Kafka的ISR机制是什么？如果ISR只剩一个副本怎么办？
-  - Consumer的auto.offset.reset参数有什么作用？设置为latest还是earliest？
-  - 幂等生产者的原理是什么？它靠什么字段去重？
-  - Kafka事务能实现跨分区的Exactly-Once吗？原理是什么？
-  - 如果Consumer处理消息很慢，导致rebalance时Offset没提交，怎么避免重复消费？
+- Kafka的ISR机制是什么？如果ISR只剩一个副本怎么办？
+- Consumer的auto.offset.reset参数有什么作用？设置为latest还是earliest？
+- 幂等生产者的原理是什么？它靠什么字段去重？
+- Kafka事务能实现跨分区的Exactly-Once吗？原理是什么？
+- 如果Consumer处理消息很慢，导致rebalance时Offset没提交，怎么避免重复消费？
 memory_points:
-  - 不丢消息口诀：Producer acks=all + Broker ISR≥2 + Consumer手动提交Offset
-  - 不重复口诀：Producer幂等(producerID+sequenceNumber) + Consumer业务幂等(唯一键去重)
-  - Exactly-Once = 幂等生产者 + 事务（Kafka 0.11+）
-  - 关键参数：acks=all, min.insync.replicas≥2, enable.idempotence=true
+- 不丢消息口诀：Producer acks=all + Broker ISR≥2 + Consumer手动提交Offset
+- 不重复口诀：Producer幂等(producerID+sequenceNumber) + Consumer业务幂等(唯一键去重)
+- Exactly-Once = 幂等生产者 + 事务（Kafka 0.11+）
+- 关键参数：acks=all, min.insync.replicas≥2, enable.idempotence=true
+frequency: high
 ---
 
 # 【拼多多二面 + XHS视频帖】Kafka 如何保证消息不丢失、不重复消费？
@@ -324,6 +326,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

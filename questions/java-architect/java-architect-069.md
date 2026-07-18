@@ -10,9 +10,12 @@ tags:
 - Flink
 - 特征工程
 feynman:
-  essence: 实时特征平台是"用流式计算实时算特征，秒级更新到在线存储"。核心矛盾是"低延迟（< 10ms 查询）vs 计算复杂（滑窗/聚合/关联）"。解法是"流批一体 + 分层计算"——Flink 流计算实时聚合（写 Redis），在线服务从 Redis 秒级查询。典型特征："用户近 5 分钟点击数""商品实时销量""搜索实时热度"——这些特征时间窗口短（分钟级），需实时算。
-  analogy: 像股票行情。股价（特征）实时变化，投资者（模型）要实时拿到最新价决策。股票系统用流式计算（实时聚合交易数据）+ 内存缓存（行情推送）保证低延迟。实时特征平台一样——事件流（点击/下单）实时聚合（Flink），结果写 Redis（内存），模型查询毫秒级返回。
-  first_principle: 为什么实时特征不能在线查询时实时算？因为计算复杂（如"近 5 分钟点击数"要扫 5 分钟事件流，每次查都算是灾难）。解法是"预计算 + 缓存"——Flink 实时监听事件流，增量更新聚合值（每来一条事件 INCR Redis），查询时直接读 Redis（预计算结果）。这是"写时计算，读时直接取"。
+  essence: 实时特征平台是"用流式计算实时算特征，秒级更新到在线存储"。核心矛盾是"低延迟（< 10ms 查询）vs 计算复杂（滑窗/聚合/关联）"。解法是"流批一体
+    + 分层计算"——Flink 流计算实时聚合（写 Redis），在线服务从 Redis 秒级查询。典型特征："用户近 5 分钟点击数""商品实时销量""搜索实时热度"——这些特征时间窗口短（分钟级），需实时算。
+  analogy: 像股票行情。股价（特征）实时变化，投资者（模型）要实时拿到最新价决策。股票系统用流式计算（实时聚合交易数据）+ 内存缓存（行情推送）保证低延迟。实时特征平台一样——事件流（点击/下单）实时聚合（Flink），结果写
+    Redis（内存），模型查询毫秒级返回。
+  first_principle: 为什么实时特征不能在线查询时实时算？因为计算复杂（如"近 5 分钟点击数"要扫 5 分钟事件流，每次查都算是灾难）。解法是"预计算
+    + 缓存"——Flink 实时监听事件流，增量更新聚合值（每来一条事件 INCR Redis），查询时直接读 Redis（预计算结果）。这是"写时计算，读时直接取"。
   key_points:
   - 实时特征：短窗口（分钟/小时级）的聚合特征（点击数/销量/热度）
   - 流批一体：Flink 流（实时增量）+ 批（历史回填），同口径
@@ -26,19 +29,22 @@ first_principle:
   - 预计算 + 缓存：Flink 增量算，Redis 存结果
   - 流批口径一致（Flink 和 Spark 同特征同口径）
   - 低延迟查询（模型预测实时取，< 10ms）
-  rebuild: Flink 流计算 + Redis 存储 + 特征服务。Flink 消费事件流（点击/下单），按时间窗口（5min/1h）增量聚合，结果写 Redis（INCR/LIST）。特征服务从 Redis 查询（MGET 批量），< 10ms。流批一体——Flink 流和 Spark 批同口径（DSL 生成），离线训练和在线预测一致。监控 feature_freshness（特征新鲜度，秒级）和 query_rt（查询延迟）。
+  rebuild: Flink 流计算 + Redis 存储 + 特征服务。Flink 消费事件流（点击/下单），按时间窗口（5min/1h）增量聚合，结果写 Redis（INCR/LIST）。特征服务从
+    Redis 查询（MGET 批量），< 10ms。流批一体——Flink 流和 Spark 批同口径（DSL 生成），离线训练和在线预测一致。监控 feature_freshness（特征新鲜度，秒级）和
+    query_rt（查询延迟）。
 follow_up:
-  - 滑动窗口怎么实现（不是翻滚）？——Flink sliding window（滑动，窗口重叠）或 Redis ZSet（按 timestamp 范围查）。
-  - 特征怎么去重（同一事件多次触发）？——事件 ID 去重（Flink 状态去重）或 Redis SET 去重。
-  - 大促时事件量暴增，Flink 怎么扩容？——增加并发度（parallelism）+ Kafka 分区匹配。
-  - 特征怎么回填（新上线补历史）？——Spark 批回算历史事件流，写离线特征仓库。
-  - 实时特征和离线特征怎么组合？——查询时合并（Redis 实时 + MySQL 离线），模型同时用。
+- 滑动窗口怎么实现（不是翻滚）？——Flink sliding window（滑动，窗口重叠）或 Redis ZSet（按 timestamp 范围查）。
+- 特征怎么去重（同一事件多次触发）？——事件 ID 去重（Flink 状态去重）或 Redis SET 去重。
+- 大促时事件量暴增，Flink 怎么扩容？——增加并发度（parallelism）+ Kafka 分区匹配。
+- 特征怎么回填（新上线补历史）？——Spark 批回算历史事件流，写离线特征仓库。
+- 实时特征和离线特征怎么组合？——查询时合并（Redis 实时 + MySQL 离线），模型同时用。
 memory_points:
-  - 实时特征：短窗口聚合（5min/1h）
-  - Flink 流计算 + Redis 存储
-  - 写时预计算，读时直接取
-  - 流批一体（Flink + Spark 同口径）
-  - 查询 < 10ms（Redis MGET）
+- 实时特征：短窗口聚合（5min/1h）
+- Flink 流计算 + Redis 存储
+- 写时预计算，读时直接取
+- 流批一体（Flink + Spark 同口径）
+- 查询 < 10ms（Redis MGET）
+frequency: high
 ---
 
 # 【Java 后端架构师】实时特征平台与低延迟计算链路
@@ -560,6 +566,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

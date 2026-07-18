@@ -22,6 +22,7 @@ memory_points:
 - 融合方法：RRF(倒数排名融合，无需归一化，最常用) 或 加权平均(需归一化)。
 - RRF公式：sum(1/(k+rank))，k通常取60。
 - 适用场景：专业术语多(医疗/法律)、包含缩写或需同时处理语义和拼写错误。
+frequency: high
 ---
 
 # 什么是混合检索(Hybrid Search)?BM25和向量检索如何融合
@@ -169,6 +170,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

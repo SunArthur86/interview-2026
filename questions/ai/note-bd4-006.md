@@ -19,7 +19,8 @@ feynman:
   - '成本: GraphRAG建图成本高，但查询时能减少幻觉'
 first_principle:
   essence: 知识有两种结构：语义相似性(向量空间)和关系拓扑性(图结构)
-  derivation: 用户问'A餐厅附近有什么景点' → 向量RAG只能找到相似文本 → 不知道A和景点的空间关系 → GraphRAG通过图遍历找到A→商圈→景点的关联 → 回答更准确
+  derivation: 用户问'A餐厅附近有什么景点' → 向量RAG只能找到相似文本 → 不知道A和景点的空间关系 → GraphRAG通过图遍历找到A→商圈→景点的关联
+    → 回答更准确
   conclusion: 有复杂实体关系的数据用GraphRAG，纯文档问答用向量RAG
 follow_up:
 - GraphRAG的知识图谱怎么自动构建？
@@ -30,6 +31,7 @@ memory_points:
 - 因为GraphRAG建图成本高，所以纯文本评论仍用向量RAG，关系查询用图
 - 本地生活天然是图结构：餐厅到商圈/地铁站的关系极其适合GraphRAG精确过滤
 - 生产级最佳实践：混合检索(Hybrid)，先用意图判断决定走Graph还是走向量
+frequency: medium
 ---
 
 # GraphRAG 和普通向量 RAG 的区别？适合本地生活知识库吗？
@@ -206,6 +208,7 @@ flowchart TD
     style GRAPH fill:#FF9800,color:#fff
     style COMM fill:#9C27B0,color:#fff
     style MAP fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

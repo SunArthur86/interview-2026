@@ -35,6 +35,7 @@ memory_points:
 - 多级降级链路：高优模型→低优模型→历史缓存→规则兜底，确保核心链路彻底崩溃时也能优雅响应
 - 熔断机制：因为连续失败会导致整个服务雪崩，所以触发熔断阈值后直接拦截请求快速失败
 - 缓存保护：利用Redis缓存相似Query结果，因为能在服务限流或宕机时提供良好的兜底体验
+frequency: high
 ---
 
 # 【字节面经】你在项目里遇到过大模型接口调用超时或限流的问题吗？怎么设计重试与降级机制？
@@ -655,6 +656,7 @@ flowchart TD
     style BATCH fill:#FF9800,color:#fff
     style CB fill:#F44336,color:#fff
     style RETRY fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

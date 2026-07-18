@@ -17,6 +17,7 @@ memory_points:
 - 容量机制：HashMap初始16且按2倍扩容，Hashtable初始11按2n+1扩容
 - 结构演进：HashMap继承AbstractMap，Hashtable继承过时的Dictionary
 - 实战建议：Hashtable已被淘汰，单线程用HashMap，多线程必用ConcurrentHashMap
+frequency: high
 ---
 
 # HashMap和Hashtabe的区别？
@@ -79,6 +80,39 @@ HashMap : 16 -> 32 -> 64 -> 128 ... (保证2的幂，利用 hash & (n-1) 替代 
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class HashMap decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class Node special
+    class O error
+    class Rehash info
+    class Value start
+    class br process
+    class equals decision
+    class hash special
+    class hashCode error
+    class key info
+    class log start
+    class n process
+    class oldCap decision
     A[HashMap 键值对存取] --> B[计算 key 的 hashCode]
     B --> C[扰动函数 hash]
     C --> D["定位桶索引 (n-1) & hash"]

@@ -10,9 +10,11 @@ tags:
 - 结构化输出
 - SFT
 feynman:
-  essence: Function Calling 底层原理是模型经 SFT 学会"按JSON Schema格式生成工具调用意图"。SFT 阶段用大量(指令, 工具schema, 正确调用JSON)数据微调，让模型把"用户意图+工具描述"映射到"结构化JSON输出"。RLHF 起辅助作用——用偏好数据(正确调用>错误调用)优化，让模型在多个合法调用里选最优。本质是把"自然语言→结构化意图"这一映射通过监督学习+偏好优化固化进模型权重。
+  essence: Function Calling 底层原理是模型经 SFT 学会"按JSON Schema格式生成工具调用意图"。SFT 阶段用大量(指令,
+    工具schema, 正确调用JSON)数据微调，让模型把"用户意图+工具描述"映射到"结构化JSON输出"。RLHF 起辅助作用——用偏好数据(正确调用>错误调用)优化，让模型在多个合法调用里选最优。本质是把"自然语言→结构化意图"这一映射通过监督学习+偏好优化固化进模型权重。
   analogy: 像教小孩填表——先给他看很多"问题+空白表+填好的表"的例子(SFT 监督学习)，他学会怎么填；再告诉他"这种填法比那种好"(RLHF 偏好优化)，他学会填得更准。最后看到新问题，他能自动填出正确的表。
-  first_principle: 结构化输出的本质是"约束生成空间"。自然语言生成空间无限大，JSON Schema 把它约束到合法结构。SFT 让模型学会这个约束，RLHF 让模型在约束内选最优。
+  first_principle: 结构化输出的本质是"约束生成空间"。自然语言生成空间无限大，JSON Schema 把它约束到合法结构。SFT 让模型学会这个约束，RLHF
+    让模型在约束内选最优。
   key_points:
   - 'SFT 阶段: (指令+工具schema, 正确调用JSON) 监督微调'
   - 'RLHF 辅助: 偏好数据(正确调用>错误调用)优化选最优'
@@ -21,7 +23,8 @@ feynman:
   - 推理时用 constrained decoding 强制合法JSON
 first_principle:
   essence: 结构化输出 = 约束生成空间
-  derivation: 自然语言空间无限 → JSON Schema 约束到合法结构 → SFT 学会约束 → RLHF 在约束内选最优 → 推理时 constrained decoding 强制合法
+  derivation: 自然语言空间无限 → JSON Schema 约束到合法结构 → SFT 学会约束 → RLHF 在约束内选最优 → 推理时 constrained
+    decoding 强制合法
   conclusion: Function Calling 不是"模型理解了工具语义"，而是"模型学会了按 schema 生成结构化文本"
 follow_up:
 - Structured Output（response_format json_schema）和 Function Calling 区别？
@@ -33,6 +36,7 @@ memory_points:
 - RLHF的作用：在SFT基础上，用偏好排序优化参数质量（如绝对日期优于相对词）
 - 双保险机制：模型侧靠SFT学格式，推理侧靠约束解码(Constrained Decoding)兜底
 - 底层实现：约束解码常将JSON结构转化为有限状态机(FSM)限制token生成空间
+frequency: high
 ---
 
 # 【某讯面经】Function Calling 底层原理：模型如何学会输出结构化工具参数？SFT/RLHF 起什么作用
@@ -169,6 +173,29 @@ OpenAI/Anthropic/混元 的 function calling 接口：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class B decision
+    class C1 special
+    class C2 error
+    class D info
+    class E1 start
+    class E2 process
+    class F decision
+    class FSM special
+    class G error
+    class H info
+    class RLHF start
+    class S1 process
+    class S2 decision
+    class S3 special
+    class br error
     subgraph S1 ["数据准备"]
         A1["自然语言<br/>用户意图"] --> A2["工具描述<br/>Schema规范"]
         A1 & A2 --> B["构建问答对<br/>指令微调数据集"]

@@ -10,9 +10,11 @@ tags:
 - 职业发展
 - Java 工程师
 feynman:
-  essence: 拼多多供应链 Java 工程师转 AI 不是"放弃 Java"，而是"Java+AI"——用 AI 工具提效、集成 AI 能力、向 AI 工程化（Harness/Infra）和 FDE 演进，供应链业务理解是独特优势。
+  essence: 拼多多供应链 Java 工程师转 AI 不是"放弃 Java"，而是"Java+AI"——用 AI 工具提效、集成 AI 能力、向 AI 工程化（Harness/Infra）和
+    FDE 演进，供应链业务理解是独特优势。
   analogy: AI 时代像从手工到机械化——不是让工匠失业，而是会用机器的工匠价值更高。
-  first_principle: AI 替代模式化编码，不替代系统设计+业务理解+工程判断。供应链 Java 工程师的核心竞争力（分布式/架构/业务）在 AI 时代仍稀缺。
+  first_principle: AI 替代模式化编码，不替代系统设计+业务理解+工程判断。供应链 Java 工程师的核心竞争力（分布式/架构/业务）在 AI
+    时代仍稀缺。
   key_points:
   - 转型四阶段：用 AI → 集成 AI → 工程化 AI → 设计 AI 方案
   - 保持 Java 优势：分布式/性能/架构/业务
@@ -34,6 +36,7 @@ memory_points:
 - 保持 Java 优势（分布式/架构/业务）
 - 供应链+AI 是高薪热点
 - 复合能力（工程+AI+业务）最稀缺
+frequency: medium
 ---
 
 # 【拼多多供应链】Java 工程师怎么转 AI？供应链方向的转型路径
@@ -212,6 +215,29 @@ AI 时代工程师价值演进：代码工人 → 工程师 → AI 工程师 →
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class C special
+    class C1 error
+    class C2 info
+    class Cursor start
+    class D process
+    class D1 decision
+    class D2 special
+    class E error
+    class E1 info
+    class F1 start
+    class F2 process
+    class G decision
+    class Stage special
+    class vLLM error
     A[供应链Java开发] --> B(Stage 1: AI工具使用)
     B --> C(Stage 2: AI应用集成)
     C --> D(Stage 3: AI工程化基建)

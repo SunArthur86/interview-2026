@@ -29,6 +29,7 @@ memory_points:
 - 上下文：AST解析跨文件依赖，历史PR上下文增强。
 - 效果优化：Few-shot注入历史Review，路径白名单过滤误报。
 - 集成：Pre-commit快速查，PR自动Review，Critical阻断合并。
+frequency: low
 ---
 
 # 如何设计一个AI代码审查系统？自动检测PR中的Bug、安全漏洞和性能问题。
@@ -197,6 +198,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

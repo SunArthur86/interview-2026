@@ -34,6 +34,7 @@ memory_points:
 - 幂等：支付流水号唯一 + 状态机校验
 - 异步清结算（支付成功后分账）
 - T+1 对账（与第三方支付机构）
+frequency: high
 ---
 
 # 【拼多多交易】支付系统怎么设计？怎么保证资金安全？
@@ -181,6 +182,29 @@ PaySuccessEvent → 清分服务
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class PAID process
+    class PENDING decision
+    class T special
+    class br error
     A["第三方支付机构<br/>(微信/支付宝)"] -- "支付成功回调(可能重试)" --> B["支付网关: onNotify接口"]
     B --> C["基于outTradeNo定位订单"]
     C --> D{"校验订单状态"}

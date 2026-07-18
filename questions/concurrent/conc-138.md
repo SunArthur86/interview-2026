@@ -32,6 +32,7 @@ memory_points:
 - 双核心机制：volatile int state（配合CAS修改） + CLH变种双向等待队列。
 - 两大模式：独占模式（如ReentrantLock）与共享模式（如Semaphore、CountDownLatch）。
 - 模板方法设计：子类仅需重写tryAcquire/tryRelease管理state，入队与阻塞交由AQS负责。
+frequency: high
 ---
 
 # AQS（AbstractQueuedSynchronizer）的底层实现原理是什么？CLH 队列是如何工作的？
@@ -167,6 +168,7 @@ flowchart TD
     style PARK fill:#9C27B0,color:#fff
     style UNPARK fill:#009688,color:#fff
     style BLOCK fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

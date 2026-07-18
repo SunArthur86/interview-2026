@@ -35,6 +35,7 @@ memory_points:
 - RETE 算法：编译规则成网络，复用公共条件，匹配效率高
 - 规则热加载（不重启）+ 版本管理（灰度、回滚）是生产必备
 - 风控规则常按"专家规则 + 机器学习模型"组合决策
+frequency: low
 ---
 
 # 【蚂蚁风控】讲一下风控规则引擎怎么设计？用什么实现？怎么让规则动态生效？
@@ -330,6 +331,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

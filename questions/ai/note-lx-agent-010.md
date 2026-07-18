@@ -32,6 +32,7 @@ memory_points:
 - 鲁棒性测试：构建边界、对抗及工具失败场景，考察异常处理能力
 - 一致性：相同输入多次运行结果是否稳定，杜绝不可控的随机发散
 - 成本考量：监控平均消耗 Token 与轮数，用最少代价完成任务才算好
+frequency: high
 ---
 
 # 设计一个Agent，怎么判断它是真的"好"，而不是只是会演示？
@@ -207,6 +208,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

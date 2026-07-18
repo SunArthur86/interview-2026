@@ -30,6 +30,7 @@ memory_points:
 - Exactly-Once端到端：依赖Checkpoint+Barrier对齐，结合Sink端两阶段提交(2PC)。
 - State后端对比：Memory纯内存极快易OOM，RocksDB存磁盘安全支持TB级但较慢。
 - 计算场景口诀：聚合用Window，去重用HLL，风控用CEP。
+frequency: low
 ---
 
 # 如何设计一个系统来处理海量数据的实时计算？Flink/Spark Streaming。
@@ -137,6 +138,7 @@ flowchart TD
     CKP[Checkpoint 快照] --> EOS[Exactly-Once]
     FL --> SINK[输出 Sink]
     style EOS fill:#d4edda
+
 ```
 
 

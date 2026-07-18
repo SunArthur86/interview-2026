@@ -30,6 +30,7 @@ memory_points:
 - 原始算法：累加概率前缀和遍历匹配，时间复杂度为O(K)，包含多次浮点计算与分支预测。
 - 性能瓶颈：因为高QPS场景延迟会成倍放大，所以必须用O(1)避免CPU算力迅速吃紧。
 - 优化对比：即使二分查找达O(log K)，但O(1)的随机取模与连续内存命中仍具绝对优势。
+frequency: medium
 ---
 
 # 【滴滴面经】为什么这个场景需要优化到 O(1)？原始算法复杂度是多少？
@@ -247,6 +248,26 @@ O(1) 算法延迟**恒定**，P99 = P50 = P1，对 SLA 承诺至关重要。
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class A3 special
+    class A4 error
+    class A5 info
+    class B start
+    class B1 process
+    class B2 decision
+    class B3 special
+    class B4 error
+    class K info
+    class N start
+    class O process
     subgraph A ["原始算法 O(K)"]
         A1([开始抽奖]) --> A2[遍历奖品列表]
         A2 --> A3[累加概率前缀和]

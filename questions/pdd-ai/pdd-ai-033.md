@@ -11,7 +11,8 @@ tags:
 - Harness
 - 评估
 feynman:
-  essence: LLMOps/Harness 是"LLM 应用的全生命周期工程化"——Prompt/模型/数据版本管理、离线/在线评估、监控/灰度/回滚，把"调通 demo"升级为"稳定上线的产品"。
+  essence: LLMOps/Harness 是"LLM 应用的全生命周期工程化"——Prompt/模型/数据版本管理、离线/在线评估、监控/灰度/回滚，把"调通
+    demo"升级为"稳定上线的产品"。
   analogy: 像电视剧制作——剧本（Prompt）+ 演员（模型）+ 排练（评估）+ 试播（灰度）+ 正式播出（上线）+ 收视率监控（监控），每环节都管控。
   first_principle: LLM 应用有幻觉/概率性/效果难量化，必须工程化（版本/评估/监控/迭代）才能稳定上线。
   key_points:
@@ -28,14 +29,15 @@ first_principle:
   - 上线后需要持续监控迭代
   rebuild: LLMOps 平台（版本管理 + 评估 + 监控 + 灰度 + 迭代）。
 follow_up:
-  - Prompt 怎么版本管理？——Git 风格（diff/branch/merge）+ 业务标签
-  - 离线评估怎么做？——自动指标（BLEU/ROUGE）+ LLM-as-Judge + 人工
-  - 怎么监控幻觉？——抽样人工标注 + 规则校验 + 用户反馈（点踩率）
+- Prompt 怎么版本管理？——Git 风格（diff/branch/merge）+ 业务标签
+- 离线评估怎么做？——自动指标（BLEU/ROUGE）+ LLM-as-Judge + 人工
+- 怎么监控幻觉？——抽样人工标注 + 规则校验 + 用户反馈（点踩率）
 memory_points:
-  - 版本：Prompt/模型/数据
-  - 评估：离线+在线
-  - 监控：延迟/幻觉/满意度/成本
-  - Harness：全链路编排
+- 版本：Prompt/模型/数据
+- 评估：离线+在线
+- 监控：延迟/幻觉/满意度/成本
+- Harness：全链路编排
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】AI Harness 工程化（LLMOps 全链路）怎么做？
@@ -382,6 +384,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

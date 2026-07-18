@@ -29,6 +29,7 @@ memory_points:
 - 监控指标：质量（满意度/重试率）、性能（延迟）、安全（有害率）。
 - 回滚机制：关键指标恶化自动回滚，配置版本化管理（模型/Prompt/参数）。
 - 实战教训：未灰度直接全量导致术语翻译幻觉，需监控“用户修改率”。
+frequency: medium
 ---
 
 # 如何设计LLM模型的灰度发布系统？安全地上线新模型或更新Prompt，支持快速回滚。
@@ -105,6 +106,32 @@ model_version = route_model("user_12345", config)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class Golden process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class O special
+    class Set error
+    class V1 info
+    class V2 start
+    class Z process
     A["模型/请求发布"] --> B["Golden Set 回归测试"]
     B -- "失败" --> Z["阻断发布"]
     B -- "通过" --> C["影子流量测试"]

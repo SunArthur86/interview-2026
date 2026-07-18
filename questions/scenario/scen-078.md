@@ -28,6 +28,7 @@ memory_points:
 - 致命坑点：因为极易忘记设置过期时间，所以Redis Session必须配置TTL（如1800秒）防内存泄漏。
 - JWT安全实践：采用双Token机制（短Access+长Refresh），且因Base64易解码，绝对不能存敏感信息。
 - 主动失效：JWT退出登录时，因自身无法立即失效，必须结合Redis黑名单或删除RefreshToken。
+frequency: high
 ---
 
 # 如何设计一个分布式Session方案？微服务下Session如何管理？
@@ -131,6 +132,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

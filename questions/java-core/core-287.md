@@ -21,6 +21,7 @@ memory_points:
 - 过程口诀：选序列、分多组、组内插入排序、逐次缩gap直至1
 - 复杂度对比：空间O(1)且不稳定，时间取决于gap序列，最优可突破O(n²)
 - 优劣对比：因为宏观基本有序，所以最后一轮普通插入极快
+frequency: medium
 ---
 
 # 希尔排序的原理是什么？
@@ -105,6 +106,38 @@ public static void shellSort(int[] arr) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class Hibbard decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class Q info
+    class R start
+    class Sedgewick process
+    class Shell decision
+    class br special
+    class gap error
+    class k info
+    class log start
+    class n process
     A[希尔排序 Shell] --> B[分组插入排序]
     B --> C["按增量 gap 分组"]
     C --> D["每组内插入排序"]

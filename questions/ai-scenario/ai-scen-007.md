@@ -28,6 +28,7 @@ memory_points:
 - Faithfulness衡量忠实度（反幻觉），Context Recall衡量检索是否漏掉关键信息
 - 构建Golden Set（200-500条）包含常见、边缘及对抗样本，用于回归测试
 - 集成CI/CD：设定阈值（如Recall@5>0.8），不达标阻断发布
+frequency: medium
 ---
 
 # 如何为RAG系统设计完整的评测体系？包括检索质量评测和生成质量评测。
@@ -100,6 +101,46 @@ def run_evaluation(dataset):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Answer process
+    class B decision
+    class C1 special
+    class C2 error
+    class C3 info
+    class CI start
+    class Context process
+    class D1 decision
+    class D2 special
+    class D3 error
+    class E1 info
+    class E2 start
+    class E3 process
+    class F1 decision
+    class F2 special
+    class Faithfulness error
+    class G info
+    class GPT start
+    class Judge process
+    class K decision
+    class L1 special
+    class L2 error
+    class L3 info
+    class LLM start
+    class MRR process
+    class NDCG decision
+    class Precision special
+    class RAGAS error
+    class Recall info
+    class Relevancy start
+    class Set process
+    class as decision
+    class br special
     A["构建Golden Set<br/>200-500条多维度样本"]
     A --> B[RAG系统链路]
     B --> C1[检索质量评测]

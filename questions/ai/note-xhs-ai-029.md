@@ -10,8 +10,8 @@ tags:
 - vLLM
 - 面经
 feynman:
-  essence: "KV Cache offloading把放不下的KV块从GPU显存溢出到CPU内存或SSD，但PCIe数据搬运成为计算单元的等待瓶颈"
-  analogy: "你在办公桌（GPU）上写代码，桌太小放不下所有参考文档（KV Cache），于是把一部分放到了走廊文件柜（CPU内存）。每写一行代码都要跑去走廊翻资料——跑路时间远超写代码时间。解法是提前预取（让助手在你写到一半时就去拿下一份资料）"
+  essence: KV Cache offloading把放不下的KV块从GPU显存溢出到CPU内存或SSD，但PCIe数据搬运成为计算单元的等待瓶颈
+  analogy: 你在办公桌（GPU）上写代码，桌太小放不下所有参考文档（KV Cache），于是把一部分放到了走廊文件柜（CPU内存）。每写一行代码都要跑去走廊翻资料——跑路时间远超写代码时间。解法是提前预取（让助手在你写到一半时就去拿下一份资料）
   key_points:
   - 根因：GPU计算与CPU/SSD数据加载未重叠，compute单元空等数据
   - 三级流水线：当前步GPU计算时，异步预取下两步KV块到GPU
@@ -19,9 +19,10 @@ feynman:
   - vLLM有async copy kernel，SGLang有分层调度器
   - 仅保留GPU↔CPU两级热路径，SSD仅作持久化备份
 first_principle:
-  essence: "TPOT（Time Per Output Token）= GPU计算时间 + 数据等待时间。Offloading增加了数据等待时间（PCIe传输延迟）"
-  derivation: "PCIe 4.0 x16带宽约32GB/s（双向）。单个KV block（16 tokens × 4096 dim × 2(K,V) × 2 bytes = 256KB）传输需~8μs。如果每生成一个token需要从CPU加载10个block，传输延迟=80μs。而GPU计算一个token约5-10μs。数据等待时间是计算时间的8-16倍，GPU严重空等"
-  conclusion: "Offloading的关键不是减少数据搬运量，而是让搬运与计算重叠——流水线化是唯一出路"
+  essence: TPOT（Time Per Output Token）= GPU计算时间 + 数据等待时间。Offloading增加了数据等待时间（PCIe传输延迟）
+  derivation: PCIe 4.0 x16带宽约32GB/s（双向）。单个KV block（16 tokens × 4096 dim × 2(K,V) ×
+    2 bytes = 256KB）传输需~8μs。如果每生成一个token需要从CPU加载10个block，传输延迟=80μs。而GPU计算一个token约5-10μs。数据等待时间是计算时间的8-16倍，GPU严重空等
+  conclusion: Offloading的关键不是减少数据搬运量，而是让搬运与计算重叠——流水线化是唯一出路
 follow_up:
 - 如何确定哪些KV block是「热」的应该留在GPU，哪些是「冷」的可以offload？
 - 如果CPU内存也放不下，SSD的IOPS瓶颈怎么解决？
@@ -32,6 +33,7 @@ memory_points:
 - 三级流水线：当前步计算→异步预取下两步→温数据CPU/冷数据SSD
 - vLLM async copy kernel + SGLang分层调度器
 - 只保留GPU↔CPU热路径，SSD仅做持久化
+frequency: high
 ---
 
 # 【AI Infra推理优化】Offloading到CPU/SSD为何拖慢TPOT？如何缓解？
@@ -179,6 +181,7 @@ flowchart TD
     style BATCH fill:#FF9800,color:#fff
     style CB fill:#F44336,color:#fff
     style RETRY fill:#9C27B0,color:#fff
+
 ```
 
 ## 结构化回答

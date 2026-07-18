@@ -29,6 +29,7 @@ memory_points:
 - 量化指标：三个9允许每月停机43分钟，四个9仅4.3分钟，五个9为26秒。
 - 核心机制：因为消耗错误预算，所以预算耗尽时冻结非必要发布，专注稳定性。
 - 保障体系：监控告警、容量规划、变更管理与混沌工程，结合Google 50%工程时间原则。
+frequency: medium
 ---
 
 # 如何设计一个 SLA/SLO 保障体系？量化系统可靠性目标。
@@ -104,6 +105,12 @@ flowchart LR
     SLO --> SLA[SLA 对外承诺]
     style FREEZE fill:#ffcccc
     style REL fill:#d4edda
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 

@@ -17,6 +17,7 @@ memory_points:
 - 核心优势：同一线程再次进入仅需比对 ID，无需 CAS，实现近乎零开销
 - 升级触发：一旦出现第二线程竞争，需达 Safepoint 撤销并升级为轻量级锁
 - 注：对象计算过 hashCode 会占满 Mark Word，导致无法使用偏向锁
+frequency: high
 ---
 
 # 什么是偏向锁（Biased Locking）？
@@ -143,6 +144,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -30,6 +30,7 @@ memory_points:
 - 核心机制：Act(行动) -> Eval(评估) -> Reflect(反思)，失败后总结经验重试
 - 对比普通Agent：普通Agent失败盲目重试，Reflexion会将反思存入记忆指导下轮
 - 适用场景：有明确成败反馈且可验证的任务，如代码生成和Bug修复
+frequency: high
 ---
 
 # Thinking and Self-Reflection（思考与自我反思）框架？
@@ -270,6 +271,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

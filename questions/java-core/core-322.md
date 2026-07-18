@@ -16,6 +16,7 @@ memory_points:
 - 防NPE利器：Optional容器，优雅链式处理多层嵌套对象的null判断。
 - 接口增强：引入default方法让接口能具备默认实现，完美解决向后兼容问题。
 - 异步与时间：CompletableFuture实现多任务编排，java.time包提供更安全的全新日期API。
+frequency: low
 ---
 
 # Java 8有哪些新特性？
@@ -123,6 +124,49 @@ CompletableFuture.allOf(userF, ordersF)        // 等两个任务都完成
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class B decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class B4 start
+    class B5 process
+    class C decision
+    class C1 special
+    class C2 error
+    class C3 info
+    class C4 start
+    class C5 process
+    class D decision
+    class D1 special
+    class D2 error
+    class D3 info
+    class D4 start
+    class Generational process
+    class JPMS decision
+    class Java special
+    class LTS error
+    class Lambda info
+    class Matching start
+    class NPE process
+    class Optional decision
+    class Pattern special
+    class Records error
+    class Sealed info
+    class Stream start
+    class ZGC process
+    class instanceof decision
+    class java special
+    class switch error
+    class time info
+    class var start
     A[Java 关键新特性] --> B["Java 8"]
     B --> B1[Lambda + 方法引用]
     B --> B2[Stream 流式 API]

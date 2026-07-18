@@ -26,6 +26,7 @@ memory_points:
 - 通信瓶颈：All-to-All易拥塞。优化用EP+TP混合减少跨域，通信计算重叠，EDP分担负载。
 - 负载均衡：Auxiliary Loss让fi接近1/N，Noisy Top-K增加探索，共享专家兜底。
 - 实战调优：Loss尖峰查通信耗时方差，调大Aux权重，避免专家负载倾斜。
+frequency: high
 ---
 
 # MoE（Mixture of Experts）训练中All-to-All通信瓶颈如何优化？专家负载不均衡怎么解决？
@@ -166,6 +167,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

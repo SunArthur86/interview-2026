@@ -10,7 +10,8 @@ tags:
 - LLM 网关
 - 推理优化
 feynman:
-  essence: AI Harness 把"调 LLM API"升级为"工程化系统"——LLM 网关（多模型路由+限流+成本）+ 推理优化（vLLM/量化）+ 工具管理（MCP）+ 评估闭环，让 LLM 在供应链生产环境可靠运行。
+  essence: AI Harness 把"调 LLM API"升级为"工程化系统"——LLM 网关（多模型路由+限流+成本）+ 推理优化（vLLM/量化）+
+    工具管理（MCP）+ 评估闭环，让 LLM 在供应链生产环境可靠运行。
   analogy: AI Harness 像 LLM 的"操作系统"——管理模型资源、调度推理、提供工具、监控运行，让上层 Agent 不操心底层。
   first_principle: 单个 LLM 调用简单，但生产要兼顾成本/性能/稳定/安全，必须工程化。
   key_points:
@@ -34,6 +35,7 @@ memory_points:
 - vLLM PagedAttention 提升吞吐 5-10 倍
 - LLM 网关：路由/限流/成本/降级/审计
 - 评估闭环：决策回流→标注→微调→上线
+frequency: high
 ---
 
 # 【拼多多供应链】AI Harness 怎么工程化？让 LLM 生产级运行
@@ -233,6 +235,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

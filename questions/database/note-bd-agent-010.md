@@ -30,6 +30,7 @@ memory_points:
 - 对比记忆：裸SetNX无重入无排队，Redisson开箱即用内置watchdog、Pub/Sub等待及重入机制
 - 可重入原理：因为Redisson底层用Hash结构（key+UUID+threadId+重入次数），所以同线程可多次获取锁
 - 安全释放：必须通过Lua脚本校验value唯一标识后再执行DEL，以保证释放操作的原子性
+frequency: high
 ---
 
 # 直接用SetNX做分布式锁会有什么问题？和Redisson有什么区别？
@@ -183,6 +184,7 @@ flowchart TD
     RS --> S3[Hash 计数 可重入]
     style SN fill:#ffcccc
     style RS fill:#d4edda
+
 ```
 
 

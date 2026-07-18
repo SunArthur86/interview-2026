@@ -27,6 +27,7 @@ memory_points:
 - SmoothQuant：Per-channel/tensor。数学等价变换，将激活难度迁移至权重，适合W8A8。
 - AWQ：Per-group。保留1%显著权重为FP16，其余INT4量化，激活感知，推理快。
 - GPTQ：Per-column。基于Hessian二阶信息补偿权重误差，纯INT4，精度高。
+frequency: medium
 ---
 
 # 【智谱Infra面经】按照量化粒度说明一下 SmoothQuant、AWQ、GPTQ 分别是什么粒度的？它们的作用流程是什么？
@@ -89,6 +90,25 @@ def smooth_quant_transform(activation, weight, alpha=0.5):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AWQ start
+    class Choice process
+    class GPTQ decision
+    class Model special
+    class Per error
+    class Smooth info
+    class SmoothQuant start
+    class W8A8 process
+    class br decision
+    class channel special
+    class column error
+    class group info
+    class tensor start
     Model[FP模型] --> Choice{量化粒度}
     Choice -->|Per-channel/tensor| Smooth[SmoothQuant<br/>W8A8]
     Choice -->|Per-group| AWQ[AWQ<br/>1%显著权重FP16]

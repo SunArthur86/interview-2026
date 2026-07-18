@@ -24,6 +24,7 @@ memory_points:
 - 优势：知识实时更新、减少幻觉、答案可溯源、无需微调成本低。
 - 核心挑战：检索质量（需混合检索）、分块策略（父子分块）、多跳推理、Lost in the Middle现象。
 - 解法：引入CoT提示分析相关文档，或使用Reranker精排Top-K以提升准确率。
+frequency: high
 ---
 
 # RAG的基本流程是什么?相比纯LLM有什么优势?核心挑战有哪些
@@ -32,6 +33,38 @@ memory_points:
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Chunks start
+    class Docs process
+    class History decision
+    class K special
+    class LLM error
+    class Prompt info
+    class Query start
+    class Question process
+    class Rerank decision
+    class Retrieved special
+    class Rewrite error
+    class Search info
+    class System start
+    class Top process
+    class User decision
+    class Vector special
+    class ans error
+    class br info
+    class llm start
+    class post process
+    class prompt decision
+    class q special
+    class rerank error
+    class rewrite info
+    class topk start
+    class vec process
     q["用户问题"]
     rewrite["Query Rewrite"]
     vec["Vector Search"]

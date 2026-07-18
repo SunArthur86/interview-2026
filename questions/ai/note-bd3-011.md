@@ -18,7 +18,8 @@ feynman:
   - '第四优先: 框架开销(PagedAttention/激活值)'
 first_principle:
   essence: 推理显存 = 模型权重 + KV Cache + 激活值 + 框架开销
-  derivation: 模型权重是固定开销，KV Cache = f(seq_len × batch)，激活值 = g(seq_len × batch)。当batch或seq_len增大时，KV Cache是主要增长项
+  derivation: 模型权重是固定开销，KV Cache = f(seq_len × batch)，激活值 = g(seq_len × batch)。当batch或seq_len增大时，KV
+    Cache是主要增长项
   conclusion: OOM排查应按"权重→KV Cache→并发→激活值"的优先级逐项优化
 follow_up:
 - 如何监控推理过程中的显存使用？
@@ -29,6 +30,7 @@ memory_points:
 - 优先级1(模型权重)：模型装不下直接量化(INT8/INT4最立竿见影)
 - 优先级2(KV Cache)：随并发和Seq_len呈倍数增长，是OOM最大变量
 - 优先级3(并发控制)：通过限制batch_size和降低gpu_memory_utilization缓解
+frequency: high
 ---
 
 # 大模型推理时遇到OOM问题，你会从哪些方面入手排查和解决？
@@ -221,6 +223,7 @@ flowchart TD
     style W_FIX fill:#009688,color:#fff
     style KV_FIX fill:#FF9800,color:#fff
     style OFFL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

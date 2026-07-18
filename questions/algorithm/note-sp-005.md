@@ -11,7 +11,8 @@ tags:
 - 面经
 - LeetCode98
 feynman:
-  essence: 验证BST = 检查每个节点是否满足"左子树所有节点 < 当前节点 < 右子树所有节点"。关键陷阱是只检查直接子节点不够，必须确保整棵左子树的最大值 < 当前节点 < 整棵右子树的最小值。
+  essence: 验证BST = 检查每个节点是否满足"左子树所有节点 < 当前节点 < 右子树所有节点"。关键陷阱是只检查直接子节点不够，必须确保整棵左子树的最大值
+    < 当前节点 < 整棵右子树的最小值。
   analogy: 就像查字典的页码——左边所有页码必须比当前页小，右边所有页码必须比当前页大。不能只看相邻页，因为中间穿插的页也可能乱序。
   first_principle: BST的定义是全局有序——每个节点的值必须大于左子树中的所有节点值，小于右子树中的所有节点值。不是局部的"左子<根<右子"，而是全局的。
   key_points:
@@ -21,7 +22,8 @@ feynman:
   - '注意: BST定义可能包含等于(左<=根<右)或不包含(严格不等)，LeetCode用严格不等'
 first_principle:
   essence: BST的有效性是递归传递的——每个节点的合法值域由其所有祖先节点共同决定。
-  derivation: 根节点无约束 → 左子节点必须 < root → 左子节点的右子节点必须 > 左子节点 但 < root → 所以每个节点的合法值域是(max_of_left_ancestors, min_of_right_ancestors)
+  derivation: 根节点无约束 → 左子节点必须 < root → 左子节点的右子节点必须 > 左子节点 但 < root → 所以每个节点的合法值域是(max_of_left_ancestors,
+    min_of_right_ancestors)
   conclusion: 递归传递(min, max)边界是第一性原理的解法
 follow_up:
 - BST和二叉树的区别是什么？
@@ -29,10 +31,11 @@ follow_up:
 - BST的删除操作怎么处理？
 - 如果BST节点值有重复，怎么处理？
 memory_points:
-- "最优解: 递归传递(min, max)值域，O(n)时间O(h)空间"
-- "等价判断: 中序遍历结果严格递增"
-- "常见错误: 只比较直接父子，忽略孙子节点可能违反BST性质"
-- "LeetCode定义: 严格不等(不能有重复值)"
+- '最优解: 递归传递(min, max)值域，O(n)时间O(h)空间'
+- '等价判断: 中序遍历结果严格递增'
+- '常见错误: 只比较直接父子，忽略孙子节点可能违反BST性质'
+- 'LeetCode定义: 严格不等(不能有重复值)'
+frequency: medium
 ---
 
 # 验证二叉搜索树（LeetCode 98）
@@ -263,6 +266,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 结构化回答

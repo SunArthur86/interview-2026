@@ -17,6 +17,7 @@ memory_points:
 - 调度策略：RR 轮询、weight 权重、ip_hash 会话保持、least_conn 最少连接。
 - 容错参数：利用 max_fails 和 fail_timeout 控制健康检查与失败剔除。
 - 避坑要点：因为默认 60s 超时易断开，慢接口需单独调大 proxy_read_timeout。
+frequency: medium
 ---
 
 # Nginx如何实现反向代理和负载均衡？
@@ -154,6 +155,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

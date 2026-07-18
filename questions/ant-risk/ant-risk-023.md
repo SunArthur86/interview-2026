@@ -36,6 +36,7 @@ memory_points:
 - 在线查询（图数据库，毫秒）+ 离线分析（图计算，T+1）
 - 核心算法：社区发现、连通分量、中心度、路径
 - 团伙欺诈靠网络拓扑识别，单点规则失效
+frequency: low
 ---
 
 # 【蚂蚁风控】用图数据库做风控关系网络怎么设计？怎么发现团伙欺诈？
@@ -426,6 +427,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

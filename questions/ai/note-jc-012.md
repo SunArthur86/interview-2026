@@ -11,9 +11,12 @@ tags:
 - 分布式训练
 - NCCL
 feynman:
-  essence: GPU 死锁指多个 GPU（或 GPU 内多个流）互相等待对方释放资源，导致全部卡住。分布式训练常见死锁原因：①NCCL all-reduce/all-gather 的顺序不一致（部分 GPU 先发后收，其他相反）②负载不均导致某些 GPU 先到同步点干等③异常处理不当（一个 GPU 报错挂起，其他 GPU 在 collective op 处无限等）④流间依赖成环。排查靠 NCCL_DEBUG 看卡在哪个 collective。
+  essence: GPU 死锁指多个 GPU（或 GPU 内多个流）互相等待对方释放资源，导致全部卡住。分布式训练常见死锁原因：①NCCL all-reduce/all-gather
+    的顺序不一致（部分 GPU 先发后收，其他相反）②负载不均导致某些 GPU 先到同步点干等③异常处理不当（一个 GPU 报错挂起，其他 GPU 在 collective
+    op 处无限等）④流间依赖成环。排查靠 NCCL_DEBUG 看卡在哪个 collective。
   analogy: 像四个人互相传东西必须同时给同时收——如果 A 先给 B 再收 C，但 B 先收 A 再给 C，顺序不一致就互相干等。或者一个人突然手抖（报错），其他三个人拿着东西等他，永远传不下去。
-  first_principle: 分布式训练用 collective op（all-reduce 等）同步，这些 op 要求所有 rank 同时参与。任何一个 rank 的顺序错乱、卡住、报错，都会让其他 rank 在 collective 处无限等待 → 死锁。
+  first_principle: 分布式训练用 collective op（all-reduce 等）同步，这些 op 要求所有 rank 同时参与。任何一个
+    rank 的顺序错乱、卡住、报错，都会让其他 rank 在 collective 处无限等待 → 死锁。
   key_points:
   - 死锁=多个GPU互相等待对方释放资源，全部卡住
   - '原因1: NCCL collective 顺序不一致（部分先发后收）'
@@ -35,6 +38,7 @@ memory_points:
 - 其他诱因：负载不均干等、异常处理跳过同步点、单卡内 CUDA 流成环
 - 排查手段：NCCL_DEBUG=INFO 查通信卡点，py-spy dump 看死锁堆栈
 - 预防机制：保证代码路径一致，设置超时时间，异常时同步退出
+frequency: high
 ---
 
 # 【阶跃星辰面经】GPU 死锁是什么情况
@@ -197,6 +201,28 @@ sampler = DistributedSampler(dataset, drop_last=True)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Block start
+    class Cluster1 process
+    class Cluster2 decision
+    class P special
+    class R0 error
+    class R1 info
+    class Rank start
+    class S1 process
+    class S2 decision
+    class T1 special
+    class T2 error
+    class T3 info
+    class T4 start
+    class br process
+    class py decision
+    class spy special
     subgraph Cluster1 [多GPU/多进程训练]
         direction LR
         R0["Rank 0 进程"]

@@ -32,6 +32,7 @@ memory_points:
 - 逐行与分块：文本最常按行迭代，无换行大文件或二进制则按固定size分块读取
 - 高阶处理：用yield生成器封装可实现惰性求值，完美支持链式管道内存零堆积
 - 性能极致：mmap内存映射走内核页缓存，性能近内存，特别适合随机访问大文件
+frequency: medium
 ---
 
 # 【美团面经】Python如何读取大文件？
@@ -224,6 +225,37 @@ for line in f:
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class A3 special
+    class A4 error
+    class B1 info
+    class B2 start
+    class C1 process
+    class C2 decision
+    class D1 special
+    class D2 error
+    class E1 info
+    class E2 start
+    class O1 process
+    class br decision
+    class chunk_size special
+    class f error
+    class filter info
+    class for start
+    class in process
+    class line decision
+    class map special
+    class read error
+    class sum info
+    class yield start
     subgraph A[Python大文件读取方案对比]
       direction LR
       subgraph A1[方案一: 逐行迭代]

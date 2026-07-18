@@ -33,6 +33,7 @@ memory_points:
 - 记忆分层：短期记忆控Token防溢出，长期记忆保人设与剧情连贯不遗忘
 - 核心循环：审稿发现问题→定向修复（不全量重写）→再审，最多3次防死循环
 - 成效对比：单纯单次生成准确率约70%，引入审稿修复工作流后可提升至95%+
+frequency: medium
 ---
 
 # 如何搭建Agent工作流并提升生成准确性？
@@ -174,6 +175,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

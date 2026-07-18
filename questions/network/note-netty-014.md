@@ -12,8 +12,10 @@ tags:
 - HTTP
 - WebSocket
 feynman:
-  essence: 编解码器（Codec）是特殊的 ChannelHandler——解码器（Decoder）把入站的原始字节流翻译成业务消息（解决粘包/半包、协议解析），编码器（Encoder）把业务消息翻译成出站的字节流。Netty 把编解码逻辑从业务 Handler 中剥离出来，让业务只关心 Java 对象。
-  analogy: 编解码器像"翻译官"。客户端和服务端都说着不同的"方言"——网络上只能传字节，但你的业务逻辑只懂 Java 对象。Decoder 把收到的字节"翻译"成对象给业务用；Encoder 把业务要发的对象"翻译"成字节发出去。Netty 还预装了各协议的翻译官（HTTP/SSL/WebSocket）。
+  essence: 编解码器（Codec）是特殊的 ChannelHandler——解码器（Decoder）把入站的原始字节流翻译成业务消息（解决粘包/半包、协议解析），编码器（Encoder）把业务消息翻译成出站的字节流。Netty
+    把编解码逻辑从业务 Handler 中剥离出来，让业务只关心 Java 对象。
+  analogy: 编解码器像"翻译官"。客户端和服务端都说着不同的"方言"——网络上只能传字节，但你的业务逻辑只懂 Java 对象。Decoder 把收到的字节"翻译"成对象给业务用；Encoder
+    把业务要发的对象"翻译"成字节发出去。Netty 还预装了各协议的翻译官（HTTP/SSL/WebSocket）。
   key_points:
   - 编解码器=特殊的ChannelHandler,分离编解码逻辑与业务逻辑
   - 核心:Decoder(decode)字节→对象;Encoder(encode)对象→字节
@@ -27,14 +29,15 @@ first_principle:
   - 入站需要解码(字节→对象),出站需要编码(对象→字节)
   rebuild: 从"屏蔽字节流复杂性"出发→把字节→对象的转换封装为Decoder→把对象→字节的转换封装为Encoder→两者都是特殊的ChannelHandler,挂在Pipeline上自动处理→业务Handler只收到完整对象→再针对粘包提供基于分隔符/长度的拆包Decoder→针对HTTP/SSL/WebSocket等协议预置现成编解码器开箱即用。
 follow_up:
-  - TCP 粘包/半包是怎么产生的？Netty 如何解决？
-  - LengthFieldBasedFrameDecoder 的工作原理？
-  - 如何自定义一个协议的编解码器？
+- TCP 粘包/半包是怎么产生的？Netty 如何解决？
+- LengthFieldBasedFrameDecoder 的工作原理？
+- 如何自定义一个协议的编解码器？
 memory_points:
-  - 核心：decode（解码，入站字节→消息）+ encode（编码，出站消息→字节）
-  - 关键基类：ByteToMessageCodec（字节↔消息）、MessageToMessageCodec（消息↔消息）
-  - 解码基于分隔符的协议和基于长度的协议（拆包）
-  - 预置能力：SSL（SslHandler）/ HTTP（FullHttpRequest/Response）/ WebSocket / UDP / 序列化（PB 等）
+- 核心：decode（解码，入站字节→消息）+ encode（编码，出站消息→字节）
+- 关键基类：ByteToMessageCodec（字节↔消息）、MessageToMessageCodec（消息↔消息）
+- 解码基于分隔符的协议和基于长度的协议（拆包）
+- 预置能力：SSL（SslHandler）/ HTTP（FullHttpRequest/Response）/ WebSocket / UDP / 序列化（PB 等）
+frequency: medium
 ---
 
 # Netty 的编解码器（Codec）机制？
@@ -311,6 +314,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

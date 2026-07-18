@@ -29,6 +29,7 @@ memory_points:
 - 深分页禁区：因from+size会拉取海量数据到内存排序引发OOM，故禁用，改用search_after游标
 - 亿级架构：按时间滚动建索引（ILM），单分片限50GB，批量写入并调大refresh_interval
 - 查询优化：用Filter上下文替代Query（走缓存免算分），结合routing指定精准分片查询
+frequency: high
 ---
 
 # 如何设计一个全文搜索引擎？支持亿级文档的实时搜索。
@@ -153,6 +154,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

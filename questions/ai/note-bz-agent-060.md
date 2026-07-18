@@ -28,6 +28,7 @@ memory_points:
 - 定位：大模型应用的“脚手架”，自身不提供LLM和向量库，只做统一封装
 - 核心组件六件套：Models(模型)、Prompts(模板)、Memory(记忆)、Chains(编排)、Retrievers(检索)、Agents(智能体)
 - 三大典型应用场景：RAG知识库问答、带记忆的多轮对话机器人、自主调用工具的Agent
+frequency: high
 ---
 
 # LangChain 框架有哪些应用场景？
@@ -205,6 +206,7 @@ flowchart TD
     style LG fill:#FF9800,color:#fff
     style LS fill:#9C27B0,color:#fff
     style STATE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

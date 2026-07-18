@@ -32,6 +32,7 @@ memory_points:
 - 第一层防线：Redis Lua脚本合并检查与扣减，单次RTT拦截99.99%的高并发请求。
 - 第二层防重：Redisson分布式锁保护多步临界区业务（如防重复抽奖、写记录）。
 - 第三层兜底：DB乐观锁（WHERE stock>0）利用行锁保证系统最终一致性。
+frequency: high
 ---
 
 # 【滴滴面经】抽奖场景里，奖品库存超卖是怎么控制的？
@@ -61,6 +62,35 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AND start
+    class CHECK process
+    class DB decision
+    class DEDUCT special
+    class L1 error
+    class L2 info
+    class L3 start
+    class Lua process
+    class OK decision
+    class QPS special
+    class Redis error
+    class Redisson info
+    class SET start
+    class U process
+    class UPDATE decision
+    class WHERE special
+    class activityId error
+    class br info
+    class id start
+    class lock process
+    class lottery decision
+    class prize special
+    class stock error
     U["用户请求 (QPS 10万+)"]
     L1["第一层：Redis Lua 原子扣减（主防线）<br/>Lua脚本: CHECK stock → DEDUCT stock<br/>原子执行,单次RTT,拦截99.99%+请求<br/>库存不足 → 直接返回奖品发完,不进入下层<br/>耗时: <1ms │ 吞吐: 10万+ QPS"]
     L2["第二层：Redisson 分布式锁（业务逻辑保护）<br/>锁粒度: lottery:lock:{activityId}<br/>保护: 用户资格校验 + 防重复抽奖 + 写中奖记录<br/>看门狗自动续期,防业务超时导致死锁<br/>耗时: 5-20ms │ 适用: 需要多步操作的临界区"]

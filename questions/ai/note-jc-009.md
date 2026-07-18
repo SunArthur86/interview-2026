@@ -11,9 +11,12 @@ tags:
 - 混合精度
 - 浮点数
 feynman:
-  essence: BF16 和 FP16 都是 16 位浮点数，但位分配不同。FP16=1符号+5指数+10尾数（精度高但范围小，最大65504易溢出），BF16=1符号+8指数+7尾数（范围和FP32一样大但精度低）。BF16 用 8 位指数（和 FP32 同）所以动态范围大不易溢出，是 LLM 训练首选；FP16 精度高但容易上溢/下溢需 loss scaling。
-  analogy: 都是用16位记一个数。FP16 像"5位记整数部分+10位记小数"（精度高但整数部分小，大数记不下溢出）；BF16 像"8位记整数部分+7位记小数"（整数部分大能记大数，但小数精度低）。LLM 训练数值范围大，BF16 的"大范围低精度"更安全。
-  first_principle: 浮点数 = 符号位 + 指数位（决定范围）+ 尾数位（决定精度）。位数固定，指数多则范围大精度低，尾数多则精度高范围小。BF16 和 FP16 是不同的权衡。
+  essence: BF16 和 FP16 都是 16 位浮点数，但位分配不同。FP16=1符号+5指数+10尾数（精度高但范围小，最大65504易溢出），BF16=1符号+8指数+7尾数（范围和FP32一样大但精度低）。BF16
+    用 8 位指数（和 FP32 同）所以动态范围大不易溢出，是 LLM 训练首选；FP16 精度高但容易上溢/下溢需 loss scaling。
+  analogy: 都是用16位记一个数。FP16 像"5位记整数部分+10位记小数"（精度高但整数部分小，大数记不下溢出）；BF16 像"8位记整数部分+7位记小数"（整数部分大能记大数，但小数精度低）。LLM
+    训练数值范围大，BF16 的"大范围低精度"更安全。
+  first_principle: 浮点数 = 符号位 + 指数位（决定范围）+ 尾数位（决定精度）。位数固定，指数多则范围大精度低，尾数多则精度高范围小。BF16
+    和 FP16 是不同的权衡。
   key_points:
   - 'FP16: 1符号+5指数+10尾数（精度高，范围小，易溢出）'
   - 'BF16: 1符号+8指数+7尾数（范围大=FP32，精度低）'
@@ -34,6 +37,7 @@ memory_points:
 - 防溢出机制：FP16需额外loss scaling，而BF16因范围等FP32无需此操作
 - 结论：LLM训练首选BF16，因其动态范围大，避免梯度上/下溢出
 - 位宽基础：浮点数由符号位、指数位（定范围）、尾数位（定精度）组成
+frequency: medium
 ---
 
 # 【阶跃星辰面经】BF16 和 FP16 两种精度有什么区别？
@@ -166,6 +170,29 @@ PyTorch 自动混合精度（AMP）：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BF16 decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class FP16 process
+    class FP32 decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class K process
+    class Loss decision
+    class Scaling special
+    class br error
     A["FP32 主权重<br/>(32位: 1符+8指+23尾)"] --> B{"混合精度转换"}
 
     B -->|"高位截断/补零<br/>无指数重映射"| C["BF16<br/>(1符+8指+7尾)"]

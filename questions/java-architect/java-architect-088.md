@@ -25,20 +25,24 @@ first_principle:
   - 直接把全量知识塞进 prompt 不现实（context window 有限且贵）
   - 检索质量决定生成质量（garbage in garbage out）
   - 权限是硬约束：A 部门用户不能看到 B 部门的机密文档，哪怕语义相关
-  rebuild: 文档经切片+embedding 入向量库，查询时先做权限过滤（pre-filter）缩小候选集，再做混合检索（向量+BM25）召回 Top-K，cross-encoder 重排取 Top-3，喂给 LLM 生成带引用的回答，无法回答时拒答。索引通过 CDC（Change Data Capture）或定时任务保持新鲜度。
+  rebuild: 文档经切片+embedding 入向量库，查询时先做权限过滤（pre-filter）缩小候选集，再做混合检索（向量+BM25）召回 Top-K，cross-encoder
+    重排取 Top-3，喂给 LLM 生成带引用的回答，无法回答时拒答。索引通过 CDC（Change Data Capture）或定时任务保持新鲜度。
 follow_up:
-  - 向量库怎么选？——Milvus（分布式、亿级、Java SDK 成熟）适合大规模；pgvector（Postgres 扩展、ACID、运维简单）适合中小规模且已有 PG；Pinecone（托管、贵）适合不想运维。JD 这种规模一般自建 Milvus。
-  - 切片（chunk）多大合适？——一般 256-512 token，重叠 50 token。太小丢上下文，太大稀释相关性。按语义切（标题/段落）比固定长度切更好。
-  - 权限过滤怎么做？——pre-filter：向量库的 metadata filter（如 Milvus 的 expr="dept in ['sales','public']"），把无权限文档在检索阶段就排除。绝不能 post-filter（先召回再过滤，会漏且慢）。
-  - 索引怎么保持新鲜？——文档变更走 CDC（Debezium 监听 binlog）或消息队列，增量 re-embedding 后 upsert 向量库。监控 index_freshness_seconds（文档更新到可检索的延迟）。
-  - 怎么知道召回好不好？——建评测集（query + 相关文档标注），跑 retrieval_hit_rate@k（Top-K 里是否包含相关文档）和 MRR（平均倒数排名）。低于阈值就调切片/embedding/重排。
+- 向量库怎么选？——Milvus（分布式、亿级、Java SDK 成熟）适合大规模；pgvector（Postgres 扩展、ACID、运维简单）适合中小规模且已有
+  PG；Pinecone（托管、贵）适合不想运维。JD 这种规模一般自建 Milvus。
+- 切片（chunk）多大合适？——一般 256-512 token，重叠 50 token。太小丢上下文，太大稀释相关性。按语义切（标题/段落）比固定长度切更好。
+- 权限过滤怎么做？——pre-filter：向量库的 metadata filter（如 Milvus 的 expr="dept in ['sales','public']"），把无权限文档在检索阶段就排除。绝不能
+  post-filter（先召回再过滤，会漏且慢）。
+- 索引怎么保持新鲜？——文档变更走 CDC（Debezium 监听 binlog）或消息队列，增量 re-embedding 后 upsert 向量库。监控 index_freshness_seconds（文档更新到可检索的延迟）。
+- 怎么知道召回好不好？——建评测集（query + 相关文档标注），跑 retrieval_hit_rate@k（Top-K 里是否包含相关文档）和 MRR（平均倒数排名）。低于阈值就调切片/embedding/重排。
 memory_points:
-  - RAG 四难：对（相关）、新（freshness）、全（不漏）、合规（权限）
-  - 权限必须 pre-filter（检索前），绝不能 post-filter（检索后）——会漏召回 + 泄露风险
-  - 混合检索 = 向量（语义）+ BM25（关键词），cross-encoder 重排提精度
-  - 切片 256-512 token + 重叠 50，按语义切优于固定长度
-  - 答案必带 citation，无法回答必拒答——这是防幻觉的最后防线
-  - 评估金指标：retrieval_hit_rate、answer_citation_rate、permission_filter_miss、index_freshness_seconds
+- RAG 四难：对（相关）、新（freshness）、全（不漏）、合规（权限）
+- 权限必须 pre-filter（检索前），绝不能 post-filter（检索后）——会漏召回 + 泄露风险
+- 混合检索 = 向量（语义）+ BM25（关键词），cross-encoder 重排提精度
+- 切片 256-512 token + 重叠 50，按语义切优于固定长度
+- 答案必带 citation，无法回答必拒答——这是防幻觉的最后防线
+- 评估金指标：retrieval_hit_rate、answer_citation_rate、permission_filter_miss、index_freshness_seconds
+frequency: high
 ---
 
 # 【Java 后端架构师】RAG 服务的索引、召回与权限过滤
@@ -347,6 +351,45 @@ public class RagAnswerService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class A5 error
+    class B1 info
+    class B2 start
+    class B3 process
+    class B4 decision
+    class BM25 special
+    class C1 error
+    class C2 info
+    class C3 start
+    class Cross process
+    class D1 decision
+    class D2 special
+    class D3 error
+    class D4 info
+    class D5 start
+    class Embedding process
+    class Encoder decision
+    class Filter special
+    class K error
+    class LLM info
+    class Milvus start
+    class Pre process
+    class Query decision
+    class S1 special
+    class S2 error
+    class S3 info
+    class Token start
+    class Top process
+    class br decision
     subgraph S1 [索引构建层]
         A1[知识库文档] --> A2[文档切片 256 Token]
         A2 --> A3[Embedding 向量化]

@@ -29,6 +29,7 @@ memory_points:
 - 核心定位：专注“数据连接”的RAG专精框架（LangChain偏通用综合）
 - 三层核心架构：数据层(200+数据连接器) → 索引层(多结构索引) → 查询层(检索合成)
 - 五大索引结构：向量、摘要、知识图谱(多跳)、树状、关键词，满足不同检索推理需求
+frequency: high
 ---
 
 # LlamaIndex 在 RAG 系统中的架构？
@@ -50,6 +51,47 @@ vs LangChain:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AGENT start
+    class Agent process
+    class Connections decision
+    class DATA special
+    class Data error
+    class Documents info
+    class Engine start
+    class GitHub process
+    class IDX decision
+    class Indexing special
+    class Indices error
+    class KeywordTableIndex info
+    class KnowledgeGraphIndex start
+    class LI process
+    class LlamaHub decision
+    class LlamaIndex special
+    class Loaders error
+    class Nodes info
+    class Notion start
+    class PDF process
+    class Postprocessor decision
+    class QE special
+    class Query error
+    class Readers info
+    class Response start
+    class Retriever process
+    class Router decision
+    class SQL special
+    class Salesforce error
+    class Slack info
+    class SummaryIndex start
+    class Synthesizer process
+    class TreeIndex decision
+    class VectorStoreIndex special
+    class br error
     subgraph LI["LlamaIndex 架构"]
         DATA["数据层 (Data Connections)<br/>Readers/Loaders: LlamaHub 200+数据源<br/>(PDF/Notion/Slack/GitHub/SQL/Salesforce)<br/>Documents → Nodes(分块) → Indexing"]
         IDX["索引层 (Indices)<br/>VectorStoreIndex (向量索引)<br/>SummaryIndex (摘要索引)<br/>KnowledgeGraphIndex (知识图谱索引)<br/>TreeIndex (树状索引)<br/>KeywordTableIndex (关键词索引)"]

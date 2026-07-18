@@ -12,7 +12,8 @@ tags:
 - NVLink
 - 存储
 feynman:
-  essence: AI Infra 是"大模型训练/推理的硬件基础设施"，核心是 GPU 集群 + 高速互联（NVLink 机内 + RDMA/IB 机间）+ 高性能存储 + 调度系统。
+  essence: AI Infra 是"大模型训练/推理的硬件基础设施"，核心是 GPU 集群 + 高速互联（NVLink 机内 + RDMA/IB 机间）+
+    高性能存储 + 调度系统。
   analogy: 像超算中心——计算节点（GPU）、内部总线（NVLink）、机房间光缆（IB）、磁盘阵列（Lustre）、操作系统（K8s），缺一不可跑大模型。
   first_principle: 大模型训练需要千卡协同、TB/s 通信、PB 级数据，单机不可能承载，必须建专用基础设施。
   key_points:
@@ -30,14 +31,15 @@ first_principle:
   - 数据 IO 要跟得上
   rebuild: AI Infra（GPU + 高速互联 + 存储 + 调度 + 容错）。
 follow_up:
-  - NVLink 和 PCIe 区别？——NVLink 是 GPU 直连（300+GB/s），PCIe 是通用总线（64GB/s），差 5x
-  - InfiniBand 和 RoCE 区别？——IB 专用网络协议（贵稳），RoCE 基于以太网（便宜）
-  - 千卡训练为什么频繁挂？——硬件故障率 × 卡数，单卡 MTBF 1000 小时，千卡每周 N 次故障
+- NVLink 和 PCIe 区别？——NVLink 是 GPU 直连（300+GB/s），PCIe 是通用总线（64GB/s），差 5x
+- InfiniBand 和 RoCE 区别？——IB 专用网络协议（贵稳），RoCE 基于以太网（便宜）
+- 千卡训练为什么频繁挂？——硬件故障率 × 卡数，单卡 MTBF 1000 小时，千卡每周 N 次故障
 memory_points:
-  - GPU：A100/H100/B200
-  - 机内 NVLink，机间 IB/RoCE
-  - 存储：Lustre/CephFS（TB/s）
-  - 容错：checkpoint + 自动恢复
+- GPU：A100/H100/B200
+- 机内 NVLink，机间 IB/RoCE
+- 存储：Lustre/CephFS（TB/s）
+- 容错：checkpoint + 自动恢复
+frequency: low
 ---
 
 # 【拼多多 AI 中台】AI Infra（GPU 集群/RDMA/NVLink）怎么构建？
@@ -48,6 +50,44 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A100 start
+    class App process
+    class B200 decision
+    class CPU special
+    class CephFS error
+    class Compute info
+    class Direct start
+    class GB process
+    class GPU decision
+    class Gbps special
+    class H100 error
+    class InfiniBand info
+    class K8s start
+    class Lustre process
+    class NDR decision
+    class NVLink special
+    class NVMe error
+    class NVSwitch info
+    class Network start
+    class Operator process
+    class QPS decision
+    class RDMA special
+    class RoCE error
+    class S3 info
+    class SSD start
+    class Sched process
+    class Storage decision
+    class Volcano special
+    class br error
+    class checkpoint info
+    class s start
+    class token process
     App["应用层：训练（万亿 token）/ 推理（百万 QPS）"]
     Sched["调度层：K8s + GPU Operator + Volcano<br/>- 任务调度（拓扑感知）<br/>- 资源池化（在线/离线混部）<br/>- 容错（checkpoint + 自动恢复）"]
     Compute["计算层：GPU 集群<br/>- A100/H100/B200<br/>- CPU 节点（数据预处理/服务）"]

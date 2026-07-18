@@ -17,6 +17,7 @@ memory_points:
 - FAT表：内存中存链表关系，查表快但表大会吃内存（如Windows）。
 - i节点：多级索引(直接+间接指针)，支持高效随机访问（如Linux）。
 - 日志结构：记录元数据变更日志，崩溃后快速恢复一致性（如ext4）。
+frequency: low
 ---
 
 # 什么是文件系统的实现？
@@ -156,6 +157,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

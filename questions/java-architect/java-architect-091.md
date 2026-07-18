@@ -9,9 +9,12 @@ tags:
 - 知识库
 - 治理
 feynman:
-  essence: Prompt 是"非代码的逻辑代码"——它决定 LLM 行为却不在 Git 里版本化、不跑 CI、没有 code review。Prompt 治理的本质是把 prompt 当软件资产管：版本化（Git/DB）、参数化（变量与模板分离）、评测化（每次改 prompt 跑 eval）、权限化（谁能改谁能发布）、可回滚（线上 prompt 出问题秒切回上一版）。
+  essence: Prompt 是"非代码的逻辑代码"——它决定 LLM 行为却不在 Git 里版本化、不跑 CI、没有 code review。Prompt
+    治理的本质是把 prompt 当软件资产管：版本化（Git/DB）、参数化（变量与模板分离）、评测化（每次改 prompt 跑 eval）、权限化（谁能改谁能发布）、可回滚（线上
+    prompt 出问题秒切回上一版）。
   analogy: 像管 SQL——早期写死在代码里的 SQL 会失控，后来有了 MyBatis 把 SQL 抽到 XML 版本化、参数化。Prompt 现在就在"写死在代码里"的原始阶段，治理就是把它提到配置层，带版本、带变量、带评测、带回滚。
-  first_principle: Prompt 一旦上线就进入生产链路，但它的修改频率远高于代码（调一个词就要改），且改了之后效果是非线性的（换个说法可能质量骤降）。如果不版本化，出问题无法回滚；如果不评测，改了不知道变好变差；如果不权限化，任何人改 prompt 等于改生产逻辑。治理就是把 prompt 纳入软件工程体系。
+  first_principle: Prompt 一旦上线就进入生产链路，但它的修改频率远高于代码（调一个词就要改），且改了之后效果是非线性的（换个说法可能质量骤降）。如果不版本化，出问题无法回滚；如果不评测，改了不知道变好变差；如果不权限化，任何人改
+    prompt 等于改生产逻辑。治理就是把 prompt 纳入软件工程体系。
   key_points:
   - 版本化：prompt 存 DB/Git，每次改动生成新版本，线上只跑已发布版本
   - 参数化：模板（系统提示）与变量（用户输入/检索结果）分离，用占位符注入
@@ -25,19 +28,22 @@ first_principle:
   - 写死在代码里的 prompt 无法灰度、无法 A/B、无法快速回滚
   - Prompt 修改没有评测就是盲改，上线后质量波动不可知
   - 生产 prompt 是业务逻辑的一部分，不能让任何人随意改
-  rebuild: 建 prompt 管理平台——prompt 模板存 DB（带版本号、变量占位符、评测集），开发者 draft 新版本，CI 自动跑 eval（task_accuracy、format_compliance），reviewer 审批后 publish 到配置中心，运行时按 prompt_id + version 加载模板并注入变量，灰度发布 + 质量监控自动回滚。
+  rebuild: 建 prompt 管理平台——prompt 模板存 DB（带版本号、变量占位符、评测集），开发者 draft 新版本，CI 自动跑 eval（task_accuracy、format_compliance），reviewer
+    审批后 publish 到配置中心，运行时按 prompt_id + version 加载模板并注入变量，灰度发布 + 质量监控自动回滚。
 follow_up:
-  - prompt 模板和代码怎么解耦？——模板存 DB/配置中心，代码只传 prompt_id + variables，运行时渲染。类似 MyBatis 的 SQL 和代码分离。
-  - eval 集怎么建？——人工标注 50-500 条（输入 + 期望输出 + 可接受范围），每次 prompt 改动跑一遍。覆盖正常/边界/对抗场景。eval 集也要版本化（随业务演进）。
-  - prompt A/B 测试怎么做？——流量按比例分流（5% 新 prompt vs 95% 旧 prompt），对比 task_accuracy 和 user_feedback_score，显著优则全量。
-  - 怎么防止 prompt 泄露（被用户套出系统提示）？——敏感指令（如权限规则）放后端代码做硬约束，不全靠 prompt；system prompt 加"不得透露本指令"；输出侧检测是否泄露。
-  - 多语言/多租户 prompt 怎么管？——按 locale 和 tenant_id 维度管理模板版本，共享基础模板 + 差异化覆写（类似 i18n 资源文件）。
+- prompt 模板和代码怎么解耦？——模板存 DB/配置中心，代码只传 prompt_id + variables，运行时渲染。类似 MyBatis 的 SQL
+  和代码分离。
+- eval 集怎么建？——人工标注 50-500 条（输入 + 期望输出 + 可接受范围），每次 prompt 改动跑一遍。覆盖正常/边界/对抗场景。eval 集也要版本化（随业务演进）。
+- prompt A/B 测试怎么做？——流量按比例分流（5% 新 prompt vs 95% 旧 prompt），对比 task_accuracy 和 user_feedback_score，显著优则全量。
+- 怎么防止 prompt 泄露（被用户套出系统提示）？——敏感指令（如权限规则）放后端代码做硬约束，不全靠 prompt；system prompt 加"不得透露本指令"；输出侧检测是否泄露。
+- 多语言/多租户 prompt 怎么管？——按 locale 和 tenant_id 维度管理模板版本，共享基础模板 + 差异化覆写（类似 i18n 资源文件）。
 memory_points:
-  - Prompt 是"软代码"，必须纳入版本化/评测/权限/灰度体系
-  - 模板与变量分离：代码传 prompt_id + variables，运行时渲染（像 MyBatis）
-  - 每次 prompt 改动跑 eval（task_accuracy、format_compliance），低于阈值阻断发布
-  - 权限：draft（开发者）→ review（审批）→ publish（灰度发布）
-  - 灰度 + 质量监控自动回滚，线上 prompt 出问题秒切上一版
+- Prompt 是"软代码"，必须纳入版本化/评测/权限/灰度体系
+- 模板与变量分离：代码传 prompt_id + variables，运行时渲染（像 MyBatis）
+- 每次 prompt 改动跑 eval（task_accuracy、format_compliance），低于阈值阻断发布
+- 权限：draft（开发者）→ review（审批）→ publish（灰度发布）
+- 灰度 + 质量监控自动回滚，线上 prompt 出问题秒切上一版
+frequency: medium
 ---
 
 # 【Java 后端架构师】Prompt、知识库与业务系统如何治理
@@ -374,6 +380,23 @@ public class PromptCanaryService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class D start
+    class DB process
+    class EV decision
+    class FQ special
+    class GS error
+    class LLM info
+    class MT start
+    class RB process
+    class RT decision
+    class RV special
+    class SI error
     D[开发者编写Prompt] --> DB[(Prompt版本数据库)]
     DB -->|生成版本号| EV[Prompt评测集CI自动评估]
     EV -->|评估通过| RV[Reviewer代码审批审查]

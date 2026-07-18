@@ -29,6 +29,7 @@ memory_points:
 - 同步与清理：因最终一致用Canal监听Binlog，故确认归档后再逻辑删除热库
 - 跨界限查询：路由层拆解请求，冷热库并行查后内存聚合
 - 冷数据回热：异步加载至Redis并设短TTL，防污染热库
+frequency: medium
 ---
 
 # 如何设计一个海量数据的冷热分离方案？热数据百亿，冷数据千亿。
@@ -145,6 +146,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

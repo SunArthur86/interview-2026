@@ -10,7 +10,8 @@ tags:
 - 回调
 - ChannelFutureListener
 feynman:
-  essence: JDK 的 Future 只能"主动去问"操作完没完（get() 阻塞死等或循环 isDone），非常繁琐；Netty 的 ChannelFuture 支持"操作完成主动通知你"（注册 Listener 回调），消除了手动检查。本质区别是"轮询 vs 推送"。
+  essence: JDK 的 Future 只能"主动去问"操作完没完（get() 阻塞死等或循环 isDone），非常繁琐；Netty 的 ChannelFuture
+    支持"操作完成主动通知你"（注册 Listener 回调），消除了手动检查。本质区别是"轮询 vs 推送"。
   analogy: JDK Future 像"查快递单号"——你只能主动去网站查"发货了吗？发货了吗？"，要么死等要么反复刷。ChannelFuture 像"快递签收短信"——你留个手机号（Listener），送达瞬间系统自动给你发短信，你完全不用主动查。
   key_points:
   - JDK Future=只能手动检查是否完成或阻塞等待(繁琐)
@@ -26,15 +27,16 @@ first_principle:
   - 多个监听者可能都关心同一操作的结果
   rebuild: 从"如何感知异步完成"出发→JDK Future的get()阻塞或isDone()轮询都很差→设计ChannelFuture支持addListener注册多个监听器→操作完成时(无论成败)自动回调operateComplete()→调用方无需主动检查→实现真正的推送式异步通知。
 follow_up:
-  - ChannelFutureListener 和 GenericFutureListener 的关系？
-  - 如何处理 ChannelFuture 失败的情况？
-  - 为什么说"同一 Channel 的操作保证按调用顺序执行"？
+- ChannelFutureListener 和 GenericFutureListener 的关系？
+- 如何处理 ChannelFuture 失败的情况？
+- 为什么说"同一 Channel 的操作保证按调用顺序执行"？
 memory_points:
-  - JDK Future 痛点：只允许手动检查或阻塞等待，非常繁琐
-  - Netty ChannelFuture 改进：addListener 注册监听器，完成时回调 operateComplete()
-  - 消除手动检查操作是否完成的必要
-  - 每个 Netty 出站 I/O 操作都返回 ChannelFuture，全不阻塞
-  - 同 Channel 操作保证按调用顺序执行
+- JDK Future 痛点：只允许手动检查或阻塞等待，非常繁琐
+- Netty ChannelFuture 改进：addListener 注册监听器，完成时回调 operateComplete()
+- 消除手动检查操作是否完成的必要
+- 每个 Netty 出站 I/O 操作都返回 ChannelFuture，全不阻塞
+- 同 Channel 操作保证按调用顺序执行
+frequency: medium
 ---
 
 # ChannelFuture 与 JDK Future 的区别？
@@ -232,6 +234,21 @@ JDK Future（如 FutureTask）设计为"轮询模型"——`future.isDone()` 检
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class BizThread start
+    class CF process
+    class ChannelFuture decision
+    class EL special
+    class NettyIO error
+    class as info
+    class br start
+    class setFailure process
+    class setSuccess decision
     participant BizThread as 业务线程
     participant CF as ChannelFuture
     participant EL as EventLoop线程

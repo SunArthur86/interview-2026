@@ -31,6 +31,7 @@ memory_points:
 - 网关挡全局洪峰，会话防单用户恶意刷量
 - 模型层必做熔断：因为LLM调用慢且贵，过载不及时熔断会引发连环雪崩
 - 工具调用失败时执行降级：保底返回缓存或默认回复以维持系统可用
+frequency: high
 ---
 
 # Agent 高并发如何做防护？（网关限流+会话限流+模型熔断+工具降级）
@@ -295,6 +296,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

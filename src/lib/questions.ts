@@ -72,6 +72,7 @@ function loadAll(): Question[] {
         first_principle: data.first_principle || undefined,
         createdAt: gitDates[path.relative(process.cwd(), absPath)]
           || (() => { try { return fs.statSync(absPath).mtime.toISOString(); } catch { return ''; } })(),
+        frequency: String(data.frequency || 'medium'),
       });
     }
   }

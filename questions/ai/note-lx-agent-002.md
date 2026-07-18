@@ -33,6 +33,7 @@ memory_points:
 - 延迟瓶颈1：VAD 端点检测耗时较长，约占 300-500ms
 - 延迟瓶颈2：声学模型推理耗时，约占 50-100ms
 - 延迟瓶颈3：网络传输与解码耗时，合理控制可优化整体首字延迟
+frequency: medium
 ---
 
 # ASR选型怎么做，为什么不能只看字错率？流式ASR延迟由哪些环节决定？
@@ -200,6 +201,7 @@ flowchart TD
     style BATCH fill:#FF9800,color:#fff
     style CB fill:#F44336,color:#fff
     style RETRY fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

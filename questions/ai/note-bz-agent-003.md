@@ -30,6 +30,7 @@ memory_points:
 - 核心范式：ReAct循环，即Thought（推理）→Action（行动）→Observation（观察）的交替
 - 闭环控制：每次行动后的Observation会作为新的观察输入，直到达成目标或触发步数兜底
 - 能力分工：决策环节靠规划，观察环节靠记忆读写，行动环节靠工具调用
+frequency: medium
 ---
 
 # AI Agent 的工作原理是什么？三大核心能力分别指什么？
@@ -199,6 +200,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

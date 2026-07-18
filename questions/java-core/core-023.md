@@ -17,6 +17,7 @@ memory_points:
 - 验证流程：接收方用公钥解出摘要A，自算原文摘要B，相等则合法
 - 核心对比：私钥加密为签名验身份，公钥加密为保密防窃听
 - 防中间人伪造公钥：引入权威CA颁发数字证书绑定真实身份
+frequency: low
 ---
 
 # 什么是摘要算法+数字签名？
@@ -112,6 +113,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -15,6 +15,7 @@ memory_points:
 - 加锁流程：CAS改state(0变1)成功则获锁，失败入队并LockSupport.park阻塞
 - 重入机制：判断当前线程是否持锁，若是则state加1，释放时减至0才唤醒后继节点
 - 公平差异：非公平锁直接CAS抢占，而公平锁先检查队列前驱(遵循FIFO)
+frequency: high
 ---
 
 # ReentrantLock的实现原理是什么？
@@ -140,6 +141,7 @@ flowchart TD
     style PARK fill:#9C27B0,color:#fff
     style UNPARK fill:#009688,color:#fff
     style BLOCK fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

@@ -32,6 +32,7 @@ memory_points:
 - RLHF破局点：从人工标注转向自动反馈(如代码能否跑通)，用DPO简化流程
 - DPO优势：无需显式Reward Model，直接在偏好对上优化，工程落地简单
 - 基模变强：SFT靠数据蒸馏，RLHF靠规则验证(Verifiable Reward)
+frequency: medium
 ---
 
 # 【字节面经】SFT和RLHF哪个更适合快速迭代？在基模能力越来越强的情况下，这两者的破局点是什么？
@@ -122,6 +123,7 @@ flowchart TD
     style PPO fill:#4CAF50,color:#fff
     style DPO fill:#9C27B0,color:#fff
     style EVAL fill:#f44336,color:#fff
+
 ```
 
 ## 记忆要点

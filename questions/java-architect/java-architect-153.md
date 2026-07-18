@@ -4,8 +4,17 @@ difficulty: L3
 category: java-architect
 subcategory: 实时计算
 title: ClickHouse 在实时分析场景中的架构
-tags: [ClickHouse, MergeTree, 列存, 实时分析, OLAP]
-related: [java-architect-152, java-architect-141, java-architect-155]
+tags:
+- ClickHouse
+- MergeTree
+- 列存
+- 实时分析
+- OLAP
+related:
+- java-architect-152
+- java-architect-141
+- java-architect-155
+frequency: low
 ---
 
 # ClickHouse 在实时分析场景中的架构
@@ -450,6 +459,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

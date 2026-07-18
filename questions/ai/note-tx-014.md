@@ -32,6 +32,7 @@ memory_points:
 - 复杂度转换：等距设置√N个检查点，激活显存从O(N)降至O(√N)
 - 计算代价：因反向需重算前向片段，所以总训练时间变长约2倍
 - 工程调用：PyTorch中直接使用`torch.utils.checkpoint`包裹模块
+frequency: medium
 ---
 
 # 【腾讯面经】梯度检查点（Gradient Checkpointing）原理是什么？
@@ -345,6 +346,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -28,14 +28,15 @@ first_principle:
   - 流量动态需弹性
   rebuild: 模型服务平台（网关 + 路由 + 多后端 + 弹性 + 监控）。
 follow_up:
-  - 推理网关和 API 网关区别？——推理网关额外管模型版本/路由/批次/GPU 调度
-  - 怎么选路由策略？——LLM 用 KV 命中率/GPU 利用率，CV 用最少请求
-  - 怎么降成本？——量化 + batching + 弹性 + 多模型共享 GPU
+- 推理网关和 API 网关区别？——推理网关额外管模型版本/路由/批次/GPU 调度
+- 怎么选路由策略？——LLM 用 KV 命中率/GPU 利用率，CV 用最少请求
+- 怎么降成本？——量化 + batching + 弹性 + 多模型共享 GPU
 memory_points:
-  - 网关：鉴权/限流/路由/AB/灰度
-  - 路由：GPU 利用率/最少请求/模型亲和
-  - 后端：Triton/vLLM/TRT-LLM
-  - 弹性：QPS/利用率/队列
+- 网关：鉴权/限流/路由/AB/灰度
+- 路由：GPU 利用率/最少请求/模型亲和
+- 后端：Triton/vLLM/TRT-LLM
+- 弹性：QPS/利用率/队列
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】模型服务平台架构怎么设计？
@@ -57,6 +58,44 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class CV decision
+    class Cloud special
+    class ELK error
+    class GPU info
+    class Gateway start
+    class HPA process
+    class HTTP decision
+    class Java special
+    class K8s error
+    class LLM info
+    class MLflow start
+    class NLP process
+    class Nacos decision
+    class Operator special
+    class Pod error
+    class Prometheus info
+    class Spring start
+    class TRT process
+    class Triton decision
+    class VPA special
+    class biz error
+    class br info
+    class cross start
+    class gRPC process
+    class gateway decision
+    class sched special
+    class triton error
+    class trtllm info
+    class vLLM start
+    class vllm process
     biz["业务方（推荐/搜索/客服/...）"]
     gateway["推理网关（Java/Spring Cloud Gateway）<br/>鉴权/限流/熔断 · 模型路由 · A/B 分流 · 灰度发布 · 协议转换 · 请求/响应日志"]
     triton["Triton 集群<br/>CV/NLP/推荐"]

@@ -12,8 +12,8 @@ tags:
 - CAS
 - 面经
 feynman:
-  essence: "LRU缓存淘汰策略——最近最少使用的先淘汰，核心是HashMap+双向链表的O(1)查找+O(1)删除，并发安全需无锁化设计"
-  analogy: "想象一个只能放5本书的书架。每次看一本书就把它放最前面，书架满了时把最后那本（最久没看的）扔掉。多个人同时拿书时不能互相打架——用CAS无锁操作替代加锁"
+  essence: LRU缓存淘汰策略——最近最少使用的先淘汰，核心是HashMap+双向链表的O(1)查找+O(1)删除，并发安全需无锁化设计
+  analogy: 想象一个只能放5本书的书架。每次看一本书就把它放最前面，书架满了时把最后那本（最久没看的）扔掉。多个人同时拿书时不能互相打架——用CAS无锁操作替代加锁
   key_points:
   - HashMap提供O(1)查找，双向链表提供O(1)移动到头部/删除尾部
   - 基础版用ReentrantLock保证线程安全，但get频繁时锁竞争激烈
@@ -21,9 +21,9 @@ feynman:
   - 面试要求手写get/put + 考虑并发安全
   - PDD追问：get频繁锁竞争激烈→CAS方案
 first_principle:
-  essence: "缓存的本质是'用空间换时间'。LRU的约束是'容量有限'，推导出'必须淘汰'。淘汰策略选择LRU是因为'时间局部性原理'——最近访问的数据更可能再次访问"
-  derivation: "缓存容量有限→必须淘汰→淘汰谁？→选最不可能再被访问的→时间局部性原理告诉我们最近访问的更可能再访问→所以淘汰最久没访问的→需要O(1)完成查找+移动+淘汰→HashMap+双向链表"
-  conclusion: "LRU = HashMap(O(1)查找) + 双向链表(O(1)增删移动)。并发场景下，锁粒度从全局锁→分段锁→CAS无锁逐步优化"
+  essence: 缓存的本质是'用空间换时间'。LRU的约束是'容量有限'，推导出'必须淘汰'。淘汰策略选择LRU是因为'时间局部性原理'——最近访问的数据更可能再次访问
+  derivation: 缓存容量有限→必须淘汰→淘汰谁？→选最不可能再被访问的→时间局部性原理告诉我们最近访问的更可能再访问→所以淘汰最久没访问的→需要O(1)完成查找+移动+淘汰→HashMap+双向链表
+  conclusion: LRU = HashMap(O(1)查找) + 双向链表(O(1)增删移动)。并发场景下，锁粒度从全局锁→分段锁→CAS无锁逐步优化
 follow_up:
 - 如果get操作远多于put，如何优化锁粒度？（提示：读写锁 vs CAS）
 - LRU和LFU的区别是什么？什么场景下LFU更优？
@@ -35,6 +35,7 @@ memory_points:
 - 并发安全三阶段：ReentrantLock → 读写锁 → ConcurrentHashMap+CAS
 - 双向链表dummyHead/dummyTail简化边界处理
 - CAS通过AtomicReference+自旋实现无锁更新
+frequency: high
 ---
 
 # 【拼多多 Java服务端】手撕LRU缓存，要求并发安全
@@ -336,6 +337,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

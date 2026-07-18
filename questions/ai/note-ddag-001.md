@@ -22,7 +22,8 @@ feynman:
   - '共同点: 都基于LLM+Tool Use的Agentic Loop'
 first_principle:
   essence: Agent架构是场景约束的产物——没有银弹，不同的使用场景决定了不同的设计取舍。
-  derivation: 编码场景特点(高确定性/长会话/需要精确执行) → Claude Code的Fixed Loop+深度工具集成 → 通用场景特点(高灵活性/跨平台/需要可扩展) → Hermes的动态编排+插件体系 → 不同约束→不同架构
+  derivation: 编码场景特点(高确定性/长会话/需要精确执行) → Claude Code的Fixed Loop+深度工具集成 → 通用场景特点(高灵活性/跨平台/需要可扩展)
+    → Hermes的动态编排+插件体系 → 不同约束→不同架构
   conclusion: 架构对比的本质是理解"每个设计决策背后的场景约束"
 follow_up:
 - 如果让Hermes支持编码场景，需要做哪些改造？
@@ -30,10 +31,11 @@ follow_up:
 - 如何评估一个Agent框架的设计质量？
 - 你在项目中遇到过Agent设计模式的什么坑？
 memory_points:
-- "Claude Code: 专精编码 + 固定编排 + 深度IDE集成 + 单一终端"
-- "Hermes: 通用助手 + 动态编排 + 多平台通信 + 插件/技能体系"
-- "设计模式核心维度: 编排策略(固定/动态) + 上下文管理 + 工具集成深度 + 扩展性"
-- "通用原则: 场景约束决定架构取舍，没有银弹"
+- 'Claude Code: 专精编码 + 固定编排 + 深度IDE集成 + 单一终端'
+- 'Hermes: 通用助手 + 动态编排 + 多平台通信 + 插件/技能体系'
+- '设计模式核心维度: 编排策略(固定/动态) + 上下文管理 + 工具集成深度 + 扩展性'
+- '通用原则: 场景约束决定架构取舍，没有银弹'
+frequency: high
 ---
 
 # 对比Claude Code和Hermes在设计模式上的区别
@@ -50,6 +52,60 @@ Claude Code = F1赛车（在赛道上极致性能，配件高度定制化）；H
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Act start
+    class Agent process
+    class Bash decision
+    class CC special
+    class CC_CLI error
+    class CC_Int info
+    class CC_Loop start
+    class CC_T1 process
+    class CC_T2 decision
+    class CC_T3 special
+    class CC_U error
+    class CLI info
+    class Claude start
+    class Code process
+    class Cron decision
+    class Delegate special
+    class Discord error
+    class Dynamic info
+    class Feishu start
+    class Gateway process
+    class HM decision
+    class HM_DP special
+    class HM_GW error
+    class HM_P info
+    class HM_T1 start
+    class HM_T2 process
+    class HM_T3 decision
+    class HM_T4 special
+    class HM_T5 error
+    class Hermes info
+    class Interface start
+    class Loop process
+    class Plan decision
+    class Planner special
+    class Plugins error
+    class Read info
+    class Review start
+    class Skills process
+    class Sub decision
+    class Telegram special
+    class Terminal error
+    class Think info
+    class Tools start
+    class Web process
+    class agents decision
+    class br special
+    class git error
+    class grep info
     subgraph CC["Claude Code (编码专精型 Agent) - 特点: 单一场景 + 深度集成 + 固定Loop"]
         CC_U["用户(终端)"]
         CC_CLI["CLI Interface"]

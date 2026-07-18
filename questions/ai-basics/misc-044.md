@@ -21,6 +21,7 @@ memory_points:
 - 两阶段：SL-CAI(自我批评修正)与RL-CAI(AI生成偏好数据)。
 - 对比RLHF：CAI用AI评估(低成本/高一致)，RLHF用人工(高成本)。
 - 核心优势：价值观显式(宪法)，可扩展性强，Claude系列采用。
+frequency: high
 ---
 
 # Constitutional AI (CAI)是什么?它和RLHF有什么区别
@@ -159,6 +160,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

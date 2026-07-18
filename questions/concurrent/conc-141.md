@@ -27,6 +27,7 @@ memory_points:
 - 为什么改 CAS+sync：因为并发度从 Segment 提升至数组长度，且利用了 JVM 底层 sync 的优化，省内存。
 - 因为 Node 的 val 和 next 被 volatile 修饰，所以读操作完全无锁且并发安全。
 - 统计 size：借鉴 LongAdder，通过 baseCount + CounterCell[] 分段累加，避免全局竞争。
+frequency: high
 ---
 
 # ConcurrentHashMap 在 JDK 8 中的实现原理是什么？为什么从分段锁改成 CAS+synchronized？
@@ -156,6 +157,7 @@ flowchart TD
     style LIST fill:#FF9800,color:#fff
     style TREEIFY fill:#9C27B0,color:#fff
     style TRANSFER fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

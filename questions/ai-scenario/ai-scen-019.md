@@ -29,6 +29,7 @@ memory_points:
 - 信息补全：检查缺槽位，一次追问一个关键信息，推荐选项降低成本。
 - 技术演进：传统规则→框架驱动→LLM Native（强泛化），混合方案最佳。
 - 指代消解：结合实体链接，将“它”、“那个”映射到具体槽位值。
+frequency: low
 ---
 
 # 如何设计一个多轮对话管理系统？支持上下文继承、话题切换、信息补全追问。
@@ -115,6 +116,24 @@ def update_state_with_llm(user_input: str, current_state: BookingState) -> Booki
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Ask start
+    class Check process
+    class DST decision
+    class Intent special
+    class N error
+    class Slots info
+    class Summary start
+    class Task process
+    class Topic decision
+    class U special
+    class Update error
+    class Win info
     subgraph 客户端交互
         U[用户输入] --> N[NLU实体提取与指代消解]
     end

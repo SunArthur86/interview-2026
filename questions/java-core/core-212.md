@@ -23,6 +23,7 @@ memory_points:
 - 三大实现：HashSet 无序 O(1)，LinkedHashSet 维护插入顺序，TreeSet 基于红黑树自动排序 O(logN)
 - 高频考点：因为 HashMap 允许 null 键，所以 HashSet 最多允许存入一个 null 元素
 - 集合运算：retainAll 求交集，addAll 求并集，removeAll 求差集
+frequency: low
 ---
 
 # 什么是Set接口？
@@ -103,6 +104,32 @@ s1.removeAll(s2);  // 差集 → [A]
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CopyOnWriteArraySet special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HashMap special
+    class HashSet error
+    class I info
+    class LinkedHashSet start
+    class O process
+    class Set decision
+    class TreeMap special
+    class TreeSet error
+    class br info
+    class equals start
+    class hashCode process
     A[Set 接口] --> B[无序 不可重复]
     A --> C[核心约束 hashCode+equals]
     A --> D[主要实现]

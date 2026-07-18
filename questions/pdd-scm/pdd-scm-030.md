@@ -34,6 +34,7 @@ memory_points:
 - SLO/SLI/错误预算（可用性量化）
 - 跨团队：接口契约 + 联合演练 + 变更协同
 - 钱学森"协调运转"的落地
+frequency: medium
 ---
 
 # 【拼多多供应链】可观测性、稳定性治理、跨团队推进怎么做？
@@ -218,6 +219,31 @@ Redis 连接超时的根因通常不是 Redis 本身，是"连接池配置或网
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class P0 process
+    class P1 decision
+    class P2 special
+    class S1 error
+    class S2 info
+    class S3 start
     subgraph S1[可观测性三支柱]
         A[Prometheus指标] --> D[告警收敛去重]
         B[ELK集中日志] --> D

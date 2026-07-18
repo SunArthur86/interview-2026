@@ -28,6 +28,7 @@ memory_points:
 - 合并收益：W_base直接相加B×A，实现零额外计算开销，延迟降到最低
 - 不合并代价：虽占用极高显存(需存N个完整模型)，但额外延迟极低(r极小约增加1%)
 - 决策口诀：多路复用/A-B测试不合并，边缘/单任务部署必合并
+frequency: medium
 ---
 
 # 为了减少LoRA带来的延迟，你会不会做权重合并？有什么利弊？
@@ -232,6 +233,7 @@ flowchart TD
     style COMBINED fill:#2196F3,color:#fff
     style NF4 fill:#FF9800,color:#fff
     style OPT fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

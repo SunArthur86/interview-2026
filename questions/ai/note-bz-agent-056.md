@@ -30,6 +30,7 @@ memory_points:
 - Agent四能力：决定是否查、改写拆解问、评估检索结果、多源路由（KG/SQL/Web）。
 - 特性对比：Agent具备自我纠错和多跳推理能力，但相比传统RAG速度慢且成本高。
 - 实现范式：ReAct模式加工具调用，思考-行动-观察多轮循环。
+frequency: medium
 ---
 
 # 什么是 Agentic RAG？和传统 RAG 的区别？
@@ -240,6 +241,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

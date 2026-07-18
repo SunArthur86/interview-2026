@@ -8,9 +8,11 @@ tags:
 - SPI
 - 插件化
 feynman:
-  essence: 类加载的本质是"把字节码变成 Class 对象 + 隔离命名空间"。双亲委派是为了安全（核心类不被篡改），SPI/打破委派是为了扩展（让框架能加载用户实现）——两者看似矛盾，实则是"安全"与"开放"在同一个 ClassLoader 层级的平衡。
+  essence: 类加载的本质是"把字节码变成 Class 对象 + 隔离命名空间"。双亲委派是为了安全（核心类不被篡改），SPI/打破委派是为了扩展（让框架能加载用户实现）——两者看似矛盾，实则是"安全"与"开放"在同一个
+    ClassLoader 层级的平衡。
   analogy: 像公司审批：双亲委派是"先报上级批"——上级能批的就不用自己签，防止下级乱盖章（伪造 java.lang.String）；SPI 是"上级发了个招标公告，让外部供应商把方案投到指定信箱（META-INF/services）"，上级用专门的快递员（ContextClassLoader）去取，绕开层层上报。
-  first_principle: 一个类的唯一性由 ClassLoader + 类全限定名共同决定。这个"二元标识"让 Java 天然支持命名空间隔离——同一份字节码在不同 ClassLoader 下是两个不同的 Class。所有插件化、模块化、热部署都建立在这个公理上。
+  first_principle: 一个类的唯一性由 ClassLoader + 类全限定名共同决定。这个"二元标识"让 Java 天然支持命名空间隔离——同一份字节码在不同
+    ClassLoader 下是两个不同的 Class。所有插件化、模块化、热部署都建立在这个公理上。
   key_points:
   - 加载流程：加载→验证→准备→解析→初始化（5 阶段）
   - 双亲委派：先委派父加载器，父加载不到才自己加载
@@ -23,19 +25,23 @@ first_principle:
   - 类的唯一性 = ClassLoader 实例 + 全限定名（不是单纯全限定名）
   - 核心类（java.*）必须由 Bootstrap 唯一加载，否则类型系统崩溃
   - 扩展类（用户实现）的可见性受限于"父 ClassLoader 看不到子 ClassLoader 加载的类"
-  rebuild: 用双亲委派保证核心类的单一来源（安全），用 ContextClassLoader/SPI 机制让父加载器能"反向"调用子加载器加载扩展实现（开放）。安全与扩展通过"委派链 + 线程上下文"分层实现。
+  rebuild: 用双亲委派保证核心类的单一来源（安全），用 ContextClassLoader/SPI 机制让父加载器能"反向"调用子加载器加载扩展实现（开放）。安全与扩展通过"委派链
+    + 线程上下文"分层实现。
 follow_up:
-  - 为什么 JDBC 用 SPI 而不是直接 new？——因为 DriverManager 在 rt.jar（Bootstrap 加载），而 MySQL 驱动在 classpath（AppClassLoader），父看不到子，必须用 ContextClassLoader 反向加载
-  - Tomcat 是怎么隔离多个 Web 应用的？——每个 WebApp 一个 WebappClassLoader，违反双亲委派：先自己加载（避免应用间类污染），加载不到再委派
-  - OSGi 的网状加载怎么实现的？——每个 bundle 一个 ClassLoader，按导出/导入包做网状委派，打破树形结构
-  - JDK 9 模块化后双亲委派还在吗？——还在，但层级变成 平台类加载器/应用类加载器，且模块边界（module-info）参与查找
-  - 线上 ClassNotFound 怎么排查？——jcmd VM.classloader_stats 看每个 ClassLoader 加载了哪些 jar，确认 jar 是否真的在 classpath/WEB-INF/lib
+- 为什么 JDBC 用 SPI 而不是直接 new？——因为 DriverManager 在 rt.jar（Bootstrap 加载），而 MySQL 驱动在 classpath（AppClassLoader），父看不到子，必须用
+  ContextClassLoader 反向加载
+- Tomcat 是怎么隔离多个 Web 应用的？——每个 WebApp 一个 WebappClassLoader，违反双亲委派：先自己加载（避免应用间类污染），加载不到再委派
+- OSGi 的网状加载怎么实现的？——每个 bundle 一个 ClassLoader，按导出/导入包做网状委派，打破树形结构
+- JDK 9 模块化后双亲委派还在吗？——还在，但层级变成 平台类加载器/应用类加载器，且模块边界（module-info）参与查找
+- 线上 ClassNotFound 怎么排查？——jcmd VM.classloader_stats 看每个 ClassLoader 加载了哪些 jar，确认 jar
+  是否真的在 classpath/WEB-INF/lib
 memory_points:
-  - 类唯一性 = ClassLoader + 全限定名，这是插件化/热部署的基石
-  - 双亲委派三句话：收到加载请求→委派父加载器→父加载不到自己加载
-  - 打破委派三场景：SPI（ContextClassLoader 反向）、Tomcat（先自己后父亲）、OSGi（网状委派）
-  - JDK 9+ 加载器层级：Bootstrap（C++）→ PlatformClassLoader（原 Extension）→ AppClassLoader
-  - 排查命令：-verbose:class、jcmd VM.classloader_stats、-Xlog:class+load
+- 类唯一性 = ClassLoader + 全限定名，这是插件化/热部署的基石
+- 双亲委派三句话：收到加载请求→委派父加载器→父加载不到自己加载
+- 打破委派三场景：SPI（ContextClassLoader 反向）、Tomcat（先自己后父亲）、OSGi（网状委派）
+- JDK 9+ 加载器层级：Bootstrap（C++）→ PlatformClassLoader（原 Extension）→ AppClassLoader
+- 排查命令：-verbose:class、jcmd VM.classloader_stats、-Xlog:class+load
+frequency: high
 ---
 
 # 【Java 后端架构师】类加载机制、双亲委派与 SPI 扩展
@@ -303,6 +309,32 @@ java -Xlog:class+load=info:file=classload.log -jar app.jar
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AppClassLoader process
+    class B decision
+    class Bootstrap special
+    class C error
+    class Class info
+    class ClassLoader start
+    class D process
+    class E decision
+    class F special
+    class G error
+    class H info
+    class I start
+    class Metaspace process
+    class PlatformClassLoader decision
+    class ServiceLoader special
+    class String error
+    class br info
+    class java start
+    class lang process
     A[自定义 ClassLoader] -->|委派| B[AppClassLoader]
     B -->|委派| C[PlatformClassLoader]
     C -->|委派| D[Bootstrap ClassLoader]

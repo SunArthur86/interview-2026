@@ -20,7 +20,8 @@ feynman:
   - 三者缺一不可，否则退化为At-Least-Once
 first_principle:
   essence: 分布式流处理的Exactly-Once = Source幂等 + 处理Checkpoint + Sink事务提交
-  derivation: Kafka可能重发 → 需要幂等生产者 → Flink可能崩溃重启 → 需要Checkpoint恢复状态 → 输出可能重复 → 需要事务Sink → 三层组合才能保证端到端
+  derivation: Kafka可能重发 → 需要幂等生产者 → Flink可能崩溃重启 → 需要Checkpoint恢复状态 → 输出可能重复 → 需要事务Sink
+    → 三层组合才能保证端到端
   conclusion: Exactly-Once不是单一机制，而是Source+Process+Sink三层的事务性保证
 follow_up:
 - Flink Checkpoint的Barrier对齐有什么问题？
@@ -31,6 +32,7 @@ memory_points:
 - 聚簇差异：MySQL主键叶子存完整行（极快），而PgSQL所有索引叶子只存CTID物理指针（均需回表）
 - 二级索引差异：MySQL二级索引存主键值（需二次回表），而PgSQL均存物理CTID
 - 适用场景：MySQL适合读多写少及KV主键查询，PgSQL凭借JSONB及pgvector更适合复杂查询与AI向量检索
+frequency: medium
 ---
 
 # 如何保证 Kafka 到 Flink 的数据不丢失、不重复(Exactly-Once)？
@@ -177,6 +179,29 @@ kafka-consumer-groups --describe --group flink-consumer
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class Commit decision
+    class Coordinator special
+    class P1 error
+    class P2 info
+    class Participant start
+    class Prepare process
+    class Voting decision
+    class YES special
+    class as error
+    class br info
+    class commit start
+    class log process
+    class prepare decision
+    class redo special
+    class rollback error
     autonumber
     participant C as 协调者 Coordinator
     participant P1 as 参与者1 Participant

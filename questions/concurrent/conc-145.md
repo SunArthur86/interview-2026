@@ -24,6 +24,7 @@ memory_points:
 - 乐观读流程：tryOptimisticRead 获取票据 -> 读局部变量 -> validate 校验 -> 失败则升级悲观读锁。
 - 因为乐观读期间完全无锁，所以读多写少的高并发缓存场景特别适合。
 - 注意避坑：StampedLock 不可重入，且 readLock 阻塞期间被中断会导致 CPU 飙升。
+frequency: high
 ---
 
 # AtomicLong 和 LongAdder 有什么区别？高并发计数为什么用 LongAdder？
@@ -132,6 +133,7 @@ flowchart TD
     style FAIL fill:#F44336,color:#fff
     style NOTE fill:#FF9800,color:#fff
     style LONGADDER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

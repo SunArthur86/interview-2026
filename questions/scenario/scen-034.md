@@ -30,6 +30,7 @@ memory_points:
 - 可靠投递：服务端全局唯一ID+幂等，客户端重发兜底，双端ACK机制保证送达与已读
 - 存储选型：私聊/小群用写扩散（写多读少直接拉收件箱），大群用读扩散（只写群Timeline）
 - 顺序与同步：单聊递增序列号保证顺序，多端拉取靠客户端记录syncKey做增量同步
+frequency: medium
 ---
 
 # 如何设计即时通讯（IM）系统？类似微信/QQ，支持亿级在线。
@@ -129,6 +130,7 @@ flowchart TD
     OFFLINE[离线用户] --> STORE[离线消息存储]
     style WD fill:#ffe4b5
     style RD fill:#d4edda
+
 ```
 
 

@@ -28,6 +28,7 @@ memory_points:
 - 幻觉四种类型：事实编造、无视文档(忠实性)、逻辑错误、伪造来源
 - 缓解三阶段：生成前靠RAG给事实+Prompt约束；生成中降温度+CoT拆解；生成后交叉自检
 - 最有效防幻觉手段是RAG，并在Prompt强制要求“无依据则拒答”
+frequency: medium
 ---
 
 # 如何有效缓解 / 检测 / 抑制大模型幻觉？
@@ -268,6 +269,7 @@ flowchart TD
     style REFUSE fill:#FF9800,color:#fff
     style HALL fill:#F44336,color:#fff
     style REGEN fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

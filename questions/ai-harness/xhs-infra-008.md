@@ -26,6 +26,7 @@ memory_points:
 - 负载均衡：L7按内容/用户画像路由，长文本去高显存节点。会话亲和命中KV Cache。
 - 调度优化：Continuous Batching动态剔除Padding。Prefill(算力)与Decode(带宽)分离调度。
 - 成本优化：异构GPU池(A100算力/L40S带宽)。投机采样用小模型加速。前缀缓存共享Prompt。
+frequency: high
 ---
 
 # 设计一个支持百万QPS的大模型Serving系统（结合推荐场景）。如何做负载均衡和成本优化？
@@ -121,6 +122,24 @@ Please rank the candidates by relevance to the query. Return only the sorted IDs
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Affinity start
+    class Batching process
+    class Cache decision
+    class Continuous special
+    class Cost error
+    class Hetero info
+    class LB start
+    class PD process
+    class Prefill decision
+    class Request special
+    class Schedule error
+    class br info
     Request[百万QPS请求] --> LB[L7负载均衡<br/>用户画像路由]
     LB --> Affinity[会话亲和<br/>命中KV Cache]
     Affinity --> Schedule[Continuous Batching<br/>剔除Padding]

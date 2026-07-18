@@ -9,7 +9,8 @@ tags:
 - 规则冲突
 - 预算
 feynman:
-  essence: 营销活动系统的核心是"规则优先级仲裁 + 预算账户原子扣减"。多个优惠（满减/优惠券/折扣/赠品）可能同时命中，必须按优先级和互斥规则决定哪些生效。预算是硬约束——每个活动有预算账户，扣减必须原子（防超发），用 Redis CAS 或数据库乐观锁保证。
+  essence: 营销活动系统的核心是"规则优先级仲裁 + 预算账户原子扣减"。多个优惠（满减/优惠券/折扣/赠品）可能同时命中，必须按优先级和互斥规则决定哪些生效。预算是硬约束——每个活动有预算账户，扣减必须原子（防超发），用
+    Redis CAS 或数据库乐观锁保证。
   analogy: 像商场的促销结算——你有满 200 减 30 的券、会员 9 折、店庆额外 95 折。收银员按规则算：折扣能不能叠加？先算哪个？活动预算还有没有？算错了商场亏钱或用户投诉。
   first_principle: 营销规则的本质是"条件 → 动作"（满 200 → 减 30）。难点是规则间的关系：互斥（不能同享）、叠加（可组合）、优先级（先算谁）。预算的本质是"有限资源的并发分配"，原子扣减防超发。
   key_points:
@@ -25,19 +26,24 @@ first_principle:
   - 活动预算是有限资源，并发扣减必须原子防超发
   - 试算（展示）和实算（扣减）可能因并发不一致（试算时有预算，下单时没了）
   - 规则会频繁变更（运营加活动），必须配置化不发版
-  rebuild: 规则引擎（Drools 或自研）声明规则的条件和动作，配置优先级和互斥关系。仲裁器按优先级排序 + 互斥过滤决定生效规则集。预算账户用 Redis 原子扣减（DECR 防超发）+ 失败回退。试算用快照（不扣预算），实算才扣。
+  rebuild: 规则引擎（Drools 或自研）声明规则的条件和动作，配置优先级和互斥关系。仲裁器按优先级排序 + 互斥过滤决定生效规则集。预算账户用 Redis
+    原子扣减（DECR 防超发）+ 失败回退。试算用快照（不扣预算），实算才扣。
 follow_up:
-  - 规则引擎选 Drools 还是自研？——简单满减/折扣自研表达式引擎（QLExpress/Aviatorator）即可；复杂规则（嵌套条件/时间窗/用户分群）用 Drools。JD 实践自研轻量规则引擎 + 配置化。
-  - 互斥规则怎么配置？——规则带 group 和 exclusivity 字段。同 group 互斥（只生效优先级最高的），exclusivity=EXCLUSIVE 表示独占（生效后其他全不生效）。运营在后台配置。
-  - 预算超发怎么防？——Redis DECR 原子扣减，返回值 < 0 说明扣超了，回滚（INCR 回去）并返回"预算不足"。下单时实算扣预算，支付超时释放预算（INCR 回去）。
-  - 试算和实算不一致怎么办？——试算展示"预计优惠 30 元"，下单时预算没了只优惠 20 元。用户体验差。对策：试算时预扣预算（TTL 5 分钟），下单确认扣，超时释放。
-  - 优惠金额计算顺序？——先算满减（基于原价），再算折扣（基于满减后价格），最后算券（抵扣）。顺序影响最终金额，必须在引擎里固化。
+- 规则引擎选 Drools 还是自研？——简单满减/折扣自研表达式引擎（QLExpress/Aviatorator）即可；复杂规则（嵌套条件/时间窗/用户分群）用
+  Drools。JD 实践自研轻量规则引擎 + 配置化。
+- 互斥规则怎么配置？——规则带 group 和 exclusivity 字段。同 group 互斥（只生效优先级最高的），exclusivity=EXCLUSIVE
+  表示独占（生效后其他全不生效）。运营在后台配置。
+- 预算超发怎么防？——Redis DECR 原子扣减，返回值 < 0 说明扣超了，回滚（INCR 回去）并返回"预算不足"。下单时实算扣预算，支付超时释放预算（INCR
+  回去）。
+- 试算和实算不一致怎么办？——试算展示"预计优惠 30 元"，下单时预算没了只优惠 20 元。用户体验差。对策：试算时预扣预算（TTL 5 分钟），下单确认扣，超时释放。
+- 优惠金额计算顺序？——先算满减（基于原价），再算折扣（基于满减后价格），最后算券（抵扣）。顺序影响最终金额，必须在引擎里固化。
 memory_points:
-  - 规则引擎：QLExpress/Aviator/Drools，条件→动作，配置化
-  - 优先级仲裁：priority 排序 + group 互斥 + exclusivity 独占
-  - 预算账户：Redis DECR 原子扣减防超发，失败回滚
-  - 试算 vs 实算：试算快照不扣预算，实算才扣
-  - 计算顺序：满减（原价）→ 折扣（满减后）→ 券（抵扣）
+- 规则引擎：QLExpress/Aviator/Drools，条件→动作，配置化
+- 优先级仲裁：priority 排序 + group 互斥 + exclusivity 独占
+- 预算账户：Redis DECR 原子扣减防超发，失败回滚
+- 试算 vs 实算：试算快照不扣预算，实算才扣
+- 计算顺序：满减（原价）→ 折扣（满减后）→ 券（抵扣）
+frequency: high
 ---
 
 # 【Java 后端架构师】营销活动系统的规则冲突与预算控制
@@ -382,6 +388,25 @@ public class MarketingService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class Lua special
+    class QLExpress error
+    class Redis info
+    class br start
     A[营销活动集合<br/>满减/折扣/优惠券] --> B[条件匹配引擎<br/>QLExpress]
     B -->|命中规则| C[规则仲裁器]
     C --> D[同组互斥判断<br/>同组取最高优先级]

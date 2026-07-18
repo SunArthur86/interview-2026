@@ -17,6 +17,7 @@ memory_points:
 - 核心线程不满创核心，满则排队，队列满创非核心，极限触发拒绝策略
 - 注意：无界队列（如默认 LinkedBlockingQueue）永远不满，maxThreads 失效易致 OOM
 - 空闲超时回收：非核心线程超 keepAliveTime 会被销毁
+frequency: high
 ---
 
 # 什么是Java线程池工作过程？
@@ -132,6 +133,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

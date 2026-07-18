@@ -17,6 +17,7 @@ memory_points:
 - 改进方案：设证据门槛（引用来源）、红蓝对抗（主动挑错）、专家一票否决。
 - 权重陷阱：高权重 Agent 幻觉会带偏系统，需结合信心分动态调整。
 - 避坑指南：Agent 准确率低于 50% 时，增加数量反而降低整体正确性。
+frequency: low
 ---
 
 # 为什么光有投票不够
@@ -83,6 +84,27 @@ def weighted_vote(agent_votes, agent_weights):
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class Add1 special
+    class Add2 error
+    class Add3 info
+    class Agent start
+    class Calib process
+    class Conf decision
+    class Corr special
+    class Limit error
+    class Q info
+    class Robust start
+    class Vote process
+    class br decision
     Q["问题"] --> A1["Agent 1 回答"]
     Q --> A2["Agent 2 回答"]
     Q --> A3["Agent 3 回答"]

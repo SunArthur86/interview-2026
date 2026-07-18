@@ -10,7 +10,8 @@ tags:
 - 翻车点
 - AI桌面
 feynman:
-  essence: 翻车点：1.长任务稳定性(超时/断线/内存泄漏) 2.产物质量不稳定(幻觉/格式错误) 3.权限安全(文件误操作) 4.性能(大文件/多任务卡顿) 5.多窗口状态混乱。
+  essence: 翻车点：1.长任务稳定性(超时/断线/内存泄漏) 2.产物质量不稳定(幻觉/格式错误) 3.权限安全(文件误操作) 4.性能(大文件/多任务卡顿)
+    5.多窗口状态混乱。
   analogy: 就像Demo车到量产车——Demo只管能跑(功能)，量产要管耐久(稳定性)、安全(权限)、油耗(性能)、流水线(工程化)。
   first_principle: Demo→商用的核心差距 = 稳定性 × 安全性 × 性能 × 可运维性。
   key_points:
@@ -32,6 +33,7 @@ memory_points:
 - 边界安全：因AI产物不可控，所以必须对生成的DOM/脚本做严格XSS消毒与沙箱隔离
 - 状态管控：因为流式渲染极易掉帧，所以需做DOM差量更新与渲染节流（如绝对分块）
 - 极限健壮：大段输出易崩溃，必须做指令截断、撤销栈隔离及复杂文档的降级渲染
+frequency: medium
 ---
 
 # 【月之暗面面经】AI-Native 桌面产品从 Demo 到商用，前端最容易在哪些点翻车？
@@ -118,6 +120,22 @@ const undoStacks = new Map<string, Operation[]>();   // key = 段落 id
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class iframe special
     subgraph AI产物处理风险防线
         A["AI模型输出超长文本"] --> B{"指令长度截断拦截"}
         B -- "超限" --> C["复杂文档降级纯文本"]

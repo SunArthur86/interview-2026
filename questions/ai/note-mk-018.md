@@ -31,6 +31,7 @@ memory_points:
 - 产物编辑：从只读预览转变为内嵌可视化工作台直接迭代
 - Agent协作：从单Agent串行演变为多Agent协同编排
 - 人机节奏：因为体验快慢影响信任，所以需按耗时分层设计UI反馈
+frequency: medium
 ---
 
 # 【月之暗面面经】你怎么看桌面 AI 产品前端未来一年的主战场？
@@ -214,6 +215,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

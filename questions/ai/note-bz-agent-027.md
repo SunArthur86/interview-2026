@@ -28,6 +28,7 @@ memory_points:
 - 破坏连贯三主因：早期上下文丢失、突发话题跳跃、多轮指代不明（如“它”指代谁）
 - 上下文防丢：LLM实时抽取核心事实存入系统提示词，结合记忆库按需检索历史
 - 话题与指代：使用话题追踪器记录并识别跳转，利用LLM执行指代消解还原代词主语
+frequency: medium
 ---
 
 # 多轮对话的连贯性如何保持？
@@ -36,6 +37,23 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AI start
+    class Coreference process
+    class D1 decision
+    class D2 special
+    class D3 error
+    class R1 info
+    class R2 start
+    class R3 process
+    class Resolution decision
+    class U special
+    class br error
     subgraph R1["原因1：上下文丢失 → 对策：长期记忆 + 关键信息持久化"]
         D1["U: 我叫张三<br/>...(过了20轮)...<br/>U: 你还记得我叫什么吗？<br/>AI: 抱歉,你还没告诉我名字 ← 忘了"]
     end

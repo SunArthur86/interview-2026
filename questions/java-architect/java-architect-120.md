@@ -9,9 +9,14 @@ tags:
 - 流量摘除
 - SIGTERM
 feynman:
-  essence: 优雅停机是 Java 服务"无感下线"的核心——收到 SIGTERM 后，按"摘流量 → 等处理完 → 销毁资源"的顺序退出，保证在途请求不丢、消息不重复消费、连接不泄漏。Spring Boot 的 graceful shutdown + ApplicationListener<ContextClosedEvent> + K8s preStop hook 三层协作。坑点：SIGTERM 被吞（PID 1 问题）、preStop sleep 时间不够、线程池 shutdown 顺序错、消费者 offset 未提交。
-  analogy: 像"餐厅关门"——粗暴关（kill -9）是直接赶走客人（请求中断），优雅关是"门口挂停业牌（摘流量）→ 等桌上的客人吃完（在途请求完成）→ 关灯锁门（释放资源）"。客人无感，餐厅不浪费。
-  first_principle: 优雅停机的本质是"流量摘除"和"资源清理"的有序解耦。流量先摘（LB/注册中心剔除），新请求不再来，在途请求有时间完成。资源清理（线程池/连接池/消费者）在请求处理完后才执行。坑点在于"时序"——摘流量要时间传播（LB 轮询刷新），处理要时间完成（慢请求），资源清理要有序（先停消费者，再关连接池）。
+  essence: 优雅停机是 Java 服务"无感下线"的核心——收到 SIGTERM 后，按"摘流量 → 等处理完 → 销毁资源"的顺序退出，保证在途请求不丢、消息不重复消费、连接不泄漏。Spring
+    Boot 的 graceful shutdown + ApplicationListener<ContextClosedEvent> + K8s preStop
+    hook 三层协作。坑点：SIGTERM 被吞（PID 1 问题）、preStop sleep 时间不够、线程池 shutdown 顺序错、消费者 offset
+    未提交。
+  analogy: 像"餐厅关门"——粗暴关（kill -9）是直接赶走客人（请求中断），优雅关是"门口挂停业牌（摘流量）→ 等桌上的客人吃完（在途请求完成）→
+    关灯锁门（释放资源）"。客人无感，餐厅不浪费。
+  first_principle: 优雅停机的本质是"流量摘除"和"资源清理"的有序解耦。流量先摘（LB/注册中心剔除），新请求不再来，在途请求有时间完成。资源清理（线程池/连接池/消费者）在请求处理完后才执行。坑点在于"时序"——摘流量要时间传播（LB
+    轮询刷新），处理要时间完成（慢请求），资源清理要有序（先停消费者，再关连接池）。
   key_points:
   - 三层协作：Spring Boot graceful + ApplicationListener + K8s preStop
   - 摘流量：注册中心注销（Eureka/Nacos）+ LB 刷新 + 网关路由更新
@@ -25,21 +30,27 @@ first_principle:
   - kill -9 会中断在途请求（用户报错）
   - 新请求还在来（LB/注册中心没剔除）
   - 资源未释放（连接泄漏、消费者 offset 未提交）
-  rebuild: 优雅停机分三阶段。① 摘流量——K8s preStop 先执行（sleep 等 LB 刷新 + 主动调注册中心注销），新请求不再来。② 等处理完——Spring graceful shutdown 拒绝新请求（HTTP 503），等在途请求完成（timeout 30s）。③ 销毁资源——按顺序：停消费者（不拉新消息）→ 等在途消息处理完 + 提交 offset → 关线程池（shutdown → await）→ 关连接池 → 销毁 Bean。坑点：PID 1 问题（SIGTERM 没传给 JVM，要用 exec 或 spring-boot:run）、preStop sleep 不够（LB 还在转发）。
+  rebuild: 优雅停机分三阶段。① 摘流量——K8s preStop 先执行（sleep 等 LB 刷新 + 主动调注册中心注销），新请求不再来。② 等处理完——Spring
+    graceful shutdown 拒绝新请求（HTTP 503），等在途请求完成（timeout 30s）。③ 销毁资源——按顺序：停消费者（不拉新消息）→
+    等在途消息处理完 + 提交 offset → 关线程池（shutdown → await）→ 关连接池 → 销毁 Bean。坑点：PID 1 问题（SIGTERM
+    没传给 JVM，要用 exec 或 spring-boot:run）、preStop sleep 不够（LB 还在转发）。
 follow_up:
-  - 为什么不能 kill -9？——SIGKILL 无法捕获，JVM 立即退出，在途请求中断、连接泄漏、消费者 offset 未提交（消息重复消费）
-  - preStop 为什么要 sleep？——K8s 删 Pod 时，kube-proxy 更新 iptables 有延迟（1-2 秒），期间 LB 还会转发请求到已下线的 Pod。sleep 5-10 秒等 iptables 刷新
-  - Spring graceful shutdown 原理？——ContextClosedEvent 触发，Tomcat 停止接受新请求，等在途请求完成（spring.lifecycle.timeout-per-shutdown-phase）
-  - 消费者怎么优雅停？——container.stop() 停止拉取新消息，等当前批次处理完，提交 offset，再关闭
-  - PID 1 问题？——容器 ENTRYPOINT 用 shell 启动（sh -c java ...），JVM 不是 PID 1，SIGTERM 发给 shell 没转发给 JVM。用 exec java 或 spring-boot:run 解决
+- 为什么不能 kill -9？——SIGKILL 无法捕获，JVM 立即退出，在途请求中断、连接泄漏、消费者 offset 未提交（消息重复消费）
+- preStop 为什么要 sleep？——K8s 删 Pod 时，kube-proxy 更新 iptables 有延迟（1-2 秒），期间 LB 还会转发请求到已下线的
+  Pod。sleep 5-10 秒等 iptables 刷新
+- Spring graceful shutdown 原理？——ContextClosedEvent 触发，Tomcat 停止接受新请求，等在途请求完成（spring.lifecycle.timeout-per-shutdown-phase）
+- 消费者怎么优雅停？——container.stop() 停止拉取新消息，等当前批次处理完，提交 offset，再关闭
+- PID 1 问题？——容器 ENTRYPOINT 用 shell 启动（sh -c java ...），JVM 不是 PID 1，SIGTERM 发给 shell
+  没转发给 JVM。用 exec java 或 spring-boot:run 解决
 memory_points:
-  - 三层协作：Spring graceful + ApplicationListener + K8s preStop
-  - 摘流量：注册中心注销 + LB 刷新 + preStop sleep
-  - SIGTERM → ContextClosedEvent → graceful shutdown
-  - 线程池：shutdown() → awaitTermination() → shutdownNow()
-  - 消费者：停拉取 → 处理完 → 提交 offset
-  - K8s：preStop sleep + terminationGracePeriodSeconds=60
-  - PID 1 问题：用 exec java，不用 sh -c
+- 三层协作：Spring graceful + ApplicationListener + K8s preStop
+- 摘流量：注册中心注销 + LB 刷新 + preStop sleep
+- SIGTERM → ContextClosedEvent → graceful shutdown
+- 线程池：shutdown() → awaitTermination() → shutdownNow()
+- 消费者：停拉取 → 处理完 → 提交 offset
+- K8s：preStop sleep + terminationGracePeriodSeconds=60
+- PID 1 问题：用 exec java，不用 sh -c
+frequency: high
 ---
 
 # 【Java 后端架构师】Java 服务优雅停机与流量摘除
@@ -481,6 +492,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

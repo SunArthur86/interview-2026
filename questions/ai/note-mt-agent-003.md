@@ -31,6 +31,7 @@ memory_points:
 - 与传统对比：传统LLM Chain是无状态单次流水线，而Agent是有记忆的动态自循环
 - 记忆机制：依赖短期上下文窗口与长期向量检索库，实现多轮状态感知
 - 行动机制：Agent能自主调用外部API与代码执行环境，而非仅生成文本
+frequency: medium
 ---
 
 # 【美团面经】简述Agent的基本架构组成，并解释其与传统LLM Chain的区别
@@ -41,6 +42,31 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class Action process
+    class CoT decision
+    class Episodic special
+    class FB error
+    class IN info
+    class M1 start
+    class M2 process
+    class Memory decision
+    class P1 special
+    class P2 error
+    class P3 info
+    class P4 start
+    class Perception process
+    class Planning decision
+    class ReAct special
+    class Semantic error
+    class Working info
+    class br start
     IN["用户输入/环境事件<br/>'帮我查下北京明天的天气'"]
     P1["① 感知模块 Perception<br/>• 意图识别<br/>• 实体抽取<br/>• 多模态解析<br/>• 环境状态感知"]
     P2["② 规划模块 Planning<br/>• 任务分解<br/>• 推理链(CoT)<br/>• 策略选择<br/>• 步骤排序"]

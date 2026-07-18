@@ -23,6 +23,7 @@ memory_points:
 - 因为点积方差随$d_k$线性增长，导致Softmax进入饱和区引发梯度消失，所以需除以根号$d_k$。
 - 除以根号$d_k$刚好使点积方差缩放回1，而除以$d_k$会导致区分度不足退化为均值。
 - 口诀：根号缩放保方差，大维不惧梯度降。
+frequency: high
 ---
 
 # Self-Attention 为什么除以根号 d_k？
@@ -256,6 +257,7 @@ flowchart TD
     style SCALE fill:#FF9800,color:#fff
     style SOFT fill:#9C27B0,color:#fff
     style WEIGHT fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

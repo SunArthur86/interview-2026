@@ -29,15 +29,16 @@ first_principle:
   - 检索+生成比微调灵活
   rebuild: RAG（检索增强生成）。
 follow_up:
-  - 怎么提升召回？——查询改写+混合检索+重排
-  - 切片策略？——按语义（段落）/固定长度/递归
-  - 怎么防幻觉？——带引用+置信度+事实核查
+- 怎么提升召回？——查询改写+混合检索+重排
+- 切片策略？——按语义（段落）/固定长度/递归
+- 怎么防幻觉？——带引用+置信度+事实核查
 memory_points:
-  - 构建：切片+Embedding+向量库
-  - 检索：向量+关键词混合
-  - 重排：Cross-Encoder
-  - 生成：带引用
-  - 场景：UGC 检索+审核参考
+- 构建：切片+Embedding+向量库
+- 检索：向量+关键词混合
+- 重排：Cross-Encoder
+- 生成：带引用
+- 场景：UGC 检索+审核参考
+frequency: high
 ---
 
 # 【拼多多内容】RAG 在 UGC 检索与审核的应用？
@@ -330,6 +331,34 @@ Cross-Encoder 重排解决不了召回率低（它只重排已召回的，不增
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BGE decision
+    class C special
+    class C1 error
+    class C2 info
+    class Cross start
+    class D process
+    class E decision
+    class Embedding special
+    class F error
+    class G info
+    class H start
+    class I process
+    class J decision
+    class K special
+    class Recall error
+    class Vector info
+    class base start
+    class bge process
+    class br decision
+    class reranker special
     A["用户输入Query<br/>(待审UGC/评价)"] --> B["LLM查询改写<br/>(多语义变体扩展)"]
     B --> C["多路混合检索"]
     B --> D["关键词检索<br/>(BM25精确匹配)"]

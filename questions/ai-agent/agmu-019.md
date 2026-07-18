@@ -19,6 +19,7 @@ memory_points:
 - 单 Agent 适合简单任务，上下文连贯成本低。
 - 多 Agent 适合需角色隔离、并行处理或对抗评审的复杂任务。
 - 避免过度设计，简单任务勿增实体。
+frequency: high
 ---
 
 # 多 Agent 与「单 Agent + 多个工具」取舍
@@ -153,6 +154,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

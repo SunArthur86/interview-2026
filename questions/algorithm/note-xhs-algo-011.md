@@ -25,18 +25,20 @@ first_principle:
   - 每个节点的next指针需要改变方向
   - 改变next指针前必须保存原next，否则丢失后续节点
   - 只需要遍历一次即可完成
-  rebuild: 维护prev指针（初始null）→ 遍历每个节点：先存next→再把curr.next指向prev→然后prev=curr→curr=next → 循环直到curr为null → prev就是新头节点。
+  rebuild: 维护prev指针（初始null）→ 遍历每个节点：先存next→再把curr.next指向prev→然后prev=curr→curr=next
+    → 循环直到curr为null → prev就是新头节点。
 follow_up:
-  - 递归和迭代哪种更好？各有什么优缺点？
-  - 反转链表的一部分（从第m个到第n个）怎么做？
-  - K个一组反转链表怎么做？注意什么？
-  - 如何判断回文链表？能用反转链表的思想吗？
-  - 如果链表有环，反转后会发生什么？
+- 递归和迭代哪种更好？各有什么优缺点？
+- 反转链表的一部分（从第m个到第n个）怎么做？
+- K个一组反转链表怎么做？注意什么？
+- 如何判断回文链表？能用反转链表的思想吗？
+- 如果链表有环，反转后会发生什么？
 memory_points:
-  - 迭代三指针：prev=null, curr=head, next暂存 → 每轮翻转一个
-  - 递归：base case(head==null||head.next==null) → head.next.next=head → head.next=null
-  - 时空复杂度：迭代O(n)/O(1)，递归O(n)/O(n)
-  - 口诀：存next、转指针、移prev、移curr
+- 迭代三指针：prev=null, curr=head, next暂存 → 每轮翻转一个
+- 递归：base case(head==null||head.next==null) → head.next.next=head → head.next=null
+- 时空复杂度：迭代O(n)/O(1)，递归O(n)/O(n)
+- 口诀：存next、转指针、移prev、移curr
+frequency: low
 ---
 
 # 【拼多多一面】手撕算法：反转单链表
@@ -251,6 +253,26 @@ public ListNode reverseKGroup(ListNode head, int k) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class End start
+    class Init process
+    class Loop decision
+    class MoveCurr special
+    class MovePrev error
+    class Reverse info
+    class SaveNext start
+    class Start process
+    class br decision
+    class curr special
+    class head error
+    class next info
+    class null start
+    class prev process
     Start([开始: head传入]) --> Init["初始化<br/>prev=null, curr=head"]
     Init --> Loop{"curr != null ?"}
     Loop -- "是" --> SaveNext["1. 暂存下一个节点<br/>next = curr.next"]

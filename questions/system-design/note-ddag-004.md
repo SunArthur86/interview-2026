@@ -22,7 +22,8 @@ feynman:
   - '对抗性: 黑产换店铺/品类→需要抽象层特征(行为模式而非具体商品)'
 first_principle:
   essence: 检索系统的设计由"什么定义相似"决定。风控场景的相似是"行为模式相似"而非"语义内容相似"。
-  derivation: 黑产和正常用户可能买同类商品 → 文本语义相似但风险不同 → 所以不能按商品语义检索 → 需要提取行为特征序列 → 按行为模式相似度检索 → 黑产换品类但行为模式(批量/夜间/新设备)不变 → 所以行为特征要抽象到模式层
+  derivation: 黑产和正常用户可能买同类商品 → 文本语义相似但风险不同 → 所以不能按商品语义检索 → 需要提取行为特征序列 → 按行为模式相似度检索
+    → 黑产换品类但行为模式(批量/夜间/新设备)不变 → 所以行为特征要抽象到模式层
   conclusion: 风控检索 = 行为序列编码 + 异常模式匹配 + 动态规则引擎
 follow_up:
 - 行为模式向量怎么构建？用什么模型？
@@ -30,10 +31,11 @@ follow_up:
 - 召回率和误报率怎么平衡？
 - 这个系统跟Agentic RAG有什么本质区别？
 memory_points:
-- "核心挑战: 语义相似≠风险相似，需要从\"文本检索\"转为\"行为模式检索\""
-- "特征抽象层: 商品→品类→行为模式(解决黑产换品类)"
-- "系统架构: 行为向量检索 + 异常评分 + 规则引擎 + 人工审核"
-- "vs Agentic RAG: 一个是\"找相似信息辅助生成\"一个是\"找相似风险辅助决策\""
+- '核心挑战: 语义相似≠风险相似，需要从"文本检索"转为"行为模式检索"'
+- '特征抽象层: 商品→品类→行为模式(解决黑产换品类)'
+- '系统架构: 行为向量检索 + 异常评分 + 规则引擎 + 人工审核'
+- 'vs Agentic RAG: 一个是"找相似信息辅助生成"一个是"找相似风险辅助决策"'
+frequency: high
 ---
 
 # 设计信贷风控场景的检索系统
@@ -50,6 +52,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class DEC start
+    class DTW process
+    class ENC decision
+    class EVT special
+    class F1 error
+    class F2 info
+    class FAISS start
+    class FE process
+    class FUSE decision
+    class GraphSAGE special
+    class Milvus error
+    class R1 info
+    class R2 start
+    class R3 process
+    class R4 decision
+    class RET special
+    class Transformer error
+    class br info
+    class shapelet start
+    class si process
+    class wi decision
     EVT["当前交易事件"]
     subgraph FE["特征提取层"]
         F1["交易特征<br/>金额/频率<br/>设备指纹<br/>地理位置"]

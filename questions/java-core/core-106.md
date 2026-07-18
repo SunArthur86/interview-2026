@@ -15,6 +15,7 @@ memory_points:
 - 信任链机制：客户端通过内置根证书逐级向下验签，确认服务器证书合法性
 - 标准格式：遵循X.509规范，内含公钥、身份信息(CN/SAN)、有效期及CA签名
 - 状态校验：通过CRL或OCSP机制确认证书是否被意外吊销
+frequency: medium
 ---
 
 # 什么是数字证书？
@@ -104,6 +105,44 @@ server {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CA special
+    class CRL error
+    class CSR info
+    class D start
+    class E process
+    class End decision
+    class Entity special
+    class F error
+    class G info
+    class H start
+    class HTTPS process
+    class I decision
+    class Intermediate special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class O special
+    class OCSP error
+    class P info
+    class PKI start
+    class Q process
+    class R decision
+    class Root special
+    class S error
+    class TLS info
+    class X start
+    class br process
     A[数字证书体系 PKI] --> B[CA 证书颁发机构]
     B --> C[生成密钥对<br/>公钥+私钥]
     C --> D[CSR 证书签名请求]

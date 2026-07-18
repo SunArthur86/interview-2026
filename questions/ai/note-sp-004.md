@@ -21,7 +21,8 @@ feynman:
   - '可观测性: 全链路日志 + 操作溯源 + 效果评估闭环'
 first_principle:
   essence: Agent自动化带来了效率，但不可逆操作一旦执行错误可能造成重大损失。风险控制的本质是建立"安全边界"。
-  derivation: Agent可以自主决策和执行 → 但错误决策的代价随操作影响范围增长 → 需要在不同风险等级设置不同门槛 → 低风险直接做(效率优先) → 高风险需人审(安全优先) → 极高风险禁止(零容忍)
+  derivation: Agent可以自主决策和执行 → 但错误决策的代价随操作影响范围增长 → 需要在不同风险等级设置不同门槛 → 低风险直接做(效率优先)
+    → 高风险需人审(安全优先) → 极高风险禁止(零容忍)
   conclusion: 分级权限 + Human-in-the-Loop + 回滚能力 = 安全的告警Agent
 follow_up:
 - 人工审批会拖慢处理速度，怎么平衡效率和安全性？
@@ -33,6 +34,7 @@ memory_points:
 - Human-in-the-Loop三种模式：Approval(审批后执行) / Review(执行后审查) / Shadow(只观察不执行)
 - 安全护栏：操作白名单 + 参数范围限制 + 预检查 + 回滚快照
 - 全链路可观测：trace_id串联 → 意图→决策→执行→结果→反馈
+frequency: medium
 ---
 
 # 告警Agent如何控制风险，人工在哪一步介入？
@@ -49,6 +51,27 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AL start
+    class D process
+    class DO decision
+    class EXE special
+    class FAIL error
+    class HR info
+    class L1 start
+    class L2 process
+    class L3 decision
+    class OK special
+    class PC error
+    class R info
+    class VRF start
+    class br process
+    class oncall decision
     AL["告警触发"]
     D["Agent诊断引擎 (分析告警原因)"]
     R["风险评估模块 (评估操作风险)"]

@@ -16,6 +16,7 @@ memory_points:
 - 触发条件：正常执行结束，或抛出未捕获的异常导致意外退出。
 - 因为 stop() 极易导致数据不一致，所以废弃 stop()，推荐用 interrupt 标志位优雅停止。
 - 死亡即终局：一旦进入 TERMINATED 状态，不能再次 start()，否则抛 IllegalThreadStateException。
+frequency: medium
 ---
 
 # 什么是线程死亡（DEAD）？
@@ -114,6 +115,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

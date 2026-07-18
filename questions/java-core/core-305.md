@@ -18,6 +18,7 @@ memory_points:
 - 修复手段：破坏规则时，通过左旋、右旋和变色来恢复平衡。
 - Java 应用重点：JDK 1.8 中 HashMap 链表大于 8 且数组大于 64 转红黑树，小于等于 6 退化为链表。
 - 对比 AVL 树：红黑树非严格平衡所以增删最多2次旋转，常用于写多场景。
+frequency: medium
 ---
 
 # 红黑树的特性是什么？它在Java中的哪些地方被使用？
@@ -122,6 +123,32 @@ if (parent == null) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CFS special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HashMap special
+    class I error
+    class J info
+    class Linux start
+    class O process
+    class TreeMap decision
+    class TreeSet special
+    class br error
+    class log info
+    class n start
+    class nil process
     A[红黑树特性] --> B[1. 节点非红即黑]
     A --> C[2. 根节点必黑]
     A --> D[3. 叶子 nil 为黑]

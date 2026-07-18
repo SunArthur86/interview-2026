@@ -22,6 +22,7 @@ memory_points:
 - 三大风险：模型坍缩（多样性减）、偏见放大、幻觉传播
 - 缓解措施：混合30%以上真实数据、质量过滤、多样性去重
 - 误区：低质量合成数据是毒药，会导致灾难性遗忘
+frequency: high
 ---
 
 # 大模型训练中为什么大量使用合成数据?合成数据有什么风险
@@ -87,6 +88,25 @@ def filter_hallucination(samples, teacher_model, threshold=0.5):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
     A[合成数据生成] --> B[领域数据不足补充]
     A --> C[SFT指令与偏好对构造]
     A --> D[自动生成CoT推理路径]

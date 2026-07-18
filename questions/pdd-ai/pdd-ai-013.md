@@ -28,14 +28,15 @@ first_principle:
   - 故障要隔离防扩散
   rebuild: 微服务全家桶（注册中心 + 配置中心 + RPC + 限流 + 事务 + 网关）。
 follow_up:
-  - Nacos 注册和配置区别？——注册发现服务地址，配置中心管配置；2.x 后订阅通知合并
-  - Sentinel 和 Hystrix 区别？——Sentinel 流控/系统保护强，Hystrix 熔断隔离优（已停止维护）
-  - Seata AT 模式原理？——SQL 解析生成反向 SQL（前镜像+后镜像），自动回滚
+- Nacos 注册和配置区别？——注册发现服务地址，配置中心管配置；2.x 后订阅通知合并
+- Sentinel 和 Hystrix 区别？——Sentinel 流控/系统保护强，Hystrix 熔断隔离优（已停止维护）
+- Seata AT 模式原理？——SQL 解析生成反向 SQL（前镜像+后镜像），自动回滚
 memory_points:
 - Nacos：注册+配置（推/长轮询）
 - Sentinel：流控/熔断/系统保护
 - Seata：AT/TCC/SAGA/XA
 - Dubbo：高性能 RPC
+frequency: high
 ---
 
 # 【拼多多 AI 中台】Spring Cloud Alibaba 微服务体系怎么用？
@@ -298,6 +299,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

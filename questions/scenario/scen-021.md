@@ -29,6 +29,7 @@ memory_points:
 - RedLock核心：向5个独立实例申请，超半数（3个）成功且耗时小于锁 TTL 方有效
 - ZK强一致原理：靠创建临时顺序节点，监听前节点事件，会话断开自动释放防死锁
 - 选型对比：高并发求性能用Redis，强一致求可靠用ZK/etcd
+frequency: high
 ---
 
 # 如何设计一个分布式锁？从单机到RedLock到ZK，分别适用什么场景？
@@ -97,6 +98,7 @@ flowchart TD
     UNLOCK[释放锁] --> LUA[Lua+UUID 原子校验]
     style ZK fill:#d4edda
     style LK2 fill:#ffcccc
+
 ```
 
 

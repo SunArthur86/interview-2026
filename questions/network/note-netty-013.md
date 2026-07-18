@@ -10,8 +10,10 @@ tags:
 - ChannelInboundHandler
 - Netty
 feynman:
-  essence: Netty 的两个生命周期——Channel 生命周期描述"一个连接从注册到注销"的状态变迁（registered→active→inactive→unregistered）；ChannelHandler 生命周期描述"一个处理器被加入到链、被调用、被移除"的回调节点。两者交织，让你能在连接/处理器的每个关键节点插入自定义逻辑。
-  analogy: Channel 生命周期像"一个员工从入职到离职"——入职登记(registered)、上班打卡(active)、下班(inactive)、注销工号(unregistered)。ChannelHandler 生命周期像"一个项目被分配给你"——分给你(handlerAdded)、激活开始干活(channelRegistered/Active)、结束移除(handlerRemoved)。
+  essence: Netty 的两个生命周期——Channel 生命周期描述"一个连接从注册到注销"的状态变迁（registered→active→inactive→unregistered）；ChannelHandler
+    生命周期描述"一个处理器被加入到链、被调用、被移除"的回调节点。两者交织，让你能在连接/处理器的每个关键节点插入自定义逻辑。
+  analogy: Channel 生命周期像"一个员工从入职到离职"——入职登记(registered)、上班打卡(active)、下班(inactive)、注销工号(unregistered)。ChannelHandler
+    生命周期像"一个项目被分配给你"——分给你(handlerAdded)、激活开始干活(channelRegistered/Active)、结束移除(handlerRemoved)。
   key_points:
   - Channel生命周期:unregistered→registered→active→inactive→unregistered
   - ChannelHandler生命周期:handlerAdded→channelRegistered→...(业务事件)→handlerRemoved
@@ -25,14 +27,15 @@ first_principle:
   - 回调是"在特定时机介入"的最佳方式
   rebuild: 从"资源生命周期管理"出发→定义Channel的4个状态(注册/活跃/失活/注销)→为每个状态变迁提供回调方法→ChannelHandler复用这套回调+自己的添加/移除回调→开发者在对应回调里做资源初始化/清理→实现连接全生命周期的可控管理。
 follow_up:
-  - channelActive 和 channelRegistered 的区别？时序？
-  - 如何在 handlerAdded 里做资源初始化，handlerRemoved 里清理？
-  - IdleStateHandler 如何利用生命周期做空闲检测？
+- channelActive 和 channelRegistered 的区别？时序？
+- 如何在 handlerAdded 里做资源初始化，handlerRemoved 里清理？
+- IdleStateHandler 如何利用生命周期做空闲检测？
 memory_points:
-  - Channel 生命周期四状态变迁：channelRegistered → channelActive → channelInactive → channelUnregistered
-  - ChannelHandler 生命周期：handlerAdded → channelRegistered → ... → channelInactive → handlerRemoved
-  - ChannelInboundHandler：处理入站事件，是生命周期回调的核心接口
-  - 实战：在 channelActive 初始化连接资源，在 channelInactive/handlerRemoved 清理
+- Channel 生命周期四状态变迁：channelRegistered → channelActive → channelInactive → channelUnregistered
+- ChannelHandler 生命周期：handlerAdded → channelRegistered → ... → channelInactive → handlerRemoved
+- ChannelInboundHandler：处理入站事件，是生命周期回调的核心接口
+- 实战：在 channelActive 初始化连接资源，在 channelInactive/handlerRemoved 清理
+frequency: medium
 ---
 
 # Channel 和 ChannelHandler 的生命周期？
@@ -324,6 +327,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

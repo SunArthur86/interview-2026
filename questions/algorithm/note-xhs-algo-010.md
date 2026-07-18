@@ -12,8 +12,8 @@ tags:
 - 手撕代码
 - 面经
 feynman:
-  essence: "沿街排列的房屋每间有不同金额，不能偷相邻两间，求最大收益。本质是每个位置做二选一决策：偷当前+跳过下一间 vs 不偷当前"
-  analogy: "你站在一排商店前面，每家店有不同价值的商品。规则是：偷了一家就不能偷隔壁。你站在每家门口只需要想一件事——'偷这家（那隔壁不能偷）还是不偷（继承到上一家为止的最佳收益）'"
+  essence: 沿街排列的房屋每间有不同金额，不能偷相邻两间，求最大收益。本质是每个位置做二选一决策：偷当前+跳过下一间 vs 不偷当前
+  analogy: 你站在一排商店前面，每家店有不同价值的商品。规则是：偷了一家就不能偷隔壁。你站在每家门口只需要想一件事——'偷这家（那隔壁不能偷）还是不偷（继承到上一家为止的最佳收益）'
   key_points:
   - 状态定义：dp[i] = 前i家能偷到的最大金额
   - 状态转移：dp[i] = max(dp[i-1], dp[i-2] + nums[i])
@@ -21,9 +21,9 @@ feynman:
   - 边界条件：dp[0] = nums[0], dp[1] = max(nums[0], nums[1])
   - 可扩展为环形、树形打家劫舍
 first_principle:
-  essence: "每个位置只有两种选择：偷或不偷。偷当前屋，则前一屋必须跳过，收益 = dp[i-2] + nums[i]；不偷当前屋，收益 = dp[i-1]。取较大值"
-  derivation: "问题本质是'不相邻子序列的最大权和'。对于第i个元素，要么选（则不能选i-1），要么不选。最优子结构 = max(选i的收益, 不选i的收益)"
-  conclusion: "打家劫舍 = 逐位贪心 + 最优子结构，状态转移方程 dp[i] = max(dp[i-1], dp[i-2]+nums[i])"
+  essence: 每个位置只有两种选择：偷或不偷。偷当前屋，则前一屋必须跳过，收益 = dp[i-2] + nums[i]；不偷当前屋，收益 = dp[i-1]。取较大值
+  derivation: 问题本质是'不相邻子序列的最大权和'。对于第i个元素，要么选（则不能选i-1），要么不选。最优子结构 = max(选i的收益, 不选i的收益)
+  conclusion: 打家劫舍 = 逐位贪心 + 最优子结构，状态转移方程 dp[i] = max(dp[i-1], dp[i-2]+nums[i])
 follow_up:
 - 如果房屋排成环形呢？（力扣213）
 - 如果房屋排列成二叉树呢？（力扣337）
@@ -34,6 +34,7 @@ memory_points:
 - 状态转移方程：dp[i] = max(dp[i-1], dp[i-2] + nums[i])
 - 空间优化：用 prev2 和 prev1 两个变量代替整个dp数组
 - 核心思想：偷当前 + dp[i-2] vs 不偷当前 + dp[i-1]
+frequency: low
 ---
 
 # 【拼多多 Java服务端】力扣198：打家劫舍
@@ -224,6 +225,7 @@ flowchart TD
     classDef start fill:#2563eb,stroke:#1e3a8a,color:#fff,stroke-width:2px;
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
+
 ```
 
 ## 结构化回答

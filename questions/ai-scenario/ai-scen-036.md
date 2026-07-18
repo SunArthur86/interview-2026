@@ -29,6 +29,7 @@ memory_points:
 - 图表提取：识别类型 → 读取坐标轴 → 输出CSV/JSON数据。
 - 技术选型：固定表单用传统CV，复杂语义用MLLM，成本精度平衡。
 - 边界处理：低分辨率图先超分，复杂表格用MLLM修正版面。
+frequency: low
 ---
 
 # 如何设计一个图文理解系统？支持文档图片OCR、图表数据提取、视觉问答（VQA）。
@@ -120,6 +121,24 @@ def extract_chart_data(image_path):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class C1 info
+    class C2 start
+    class D process
+    class Data_Input decision
+    class E special
+    class Image_Proc error
+    class Multi_Modal info
     subgraph Data_Input[数据输入层]
         A1[文档图像输入] --> A2[图像预处理/超分去噪]
     end

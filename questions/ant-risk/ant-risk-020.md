@@ -35,6 +35,7 @@ memory_points:
 - Metrics 4 种：Counter/Gauge/Histogram/Summary
 - Trace = 多个 Span（每个调用一个），用 traceId 串联
 - 全链路 traceId 透传（HTTP/MQ/线程池都要处理）
+frequency: high
 ---
 
 # 【蚂蚁风控】分布式系统的全链路监控怎么做？可观测性三支柱？
@@ -390,6 +391,34 @@ eBPF 确实无侵入（内核层抓包分析），但它有局限。一是语义
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Agent process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class Kafka start
+    class Logs process
+    class Metrics decision
+    class MySQL special
+    class P99 error
+    class RPC info
+    class Redis start
+    class SkyWalking process
+    class Span decision
+    class Trace special
     A[风控请求入口] --> B[SkyWalking Agent 自动埋点]
     B --> C[生成全局 Trace 上下文]
     C --> D[决策引擎评估业务逻辑]

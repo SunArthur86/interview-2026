@@ -15,6 +15,7 @@ memory_points:
 - 时间复杂度：平均与最坏为O(n²)，最优带标志位优化可达O(n)
 - 空间复杂度：O(1)原地交换，且是稳定排序算法
 - 优化考点：可设置标志位，若一轮无交换则提前结束
+frequency: low
 ---
 
 # 冒泡排序的原理和时间复杂度是什么？
@@ -78,6 +79,29 @@ public static void bubbleSort1(int [] a, int n){
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
+    class P special
+    class n error
     A[冒泡排序] --> B["相邻元素两两比较"]
     B --> C[大的往后冒泡]
     C --> D[每轮确定 1 个最大值到末尾]

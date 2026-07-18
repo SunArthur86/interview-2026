@@ -16,6 +16,7 @@ memory_points:
 - 底层原理：本质是HashMap数组+双向链表，链表负责记录和维持元素的迭代顺序。
 - 性能对比：增删查时间复杂度维持O(1)，但因维护链表性能略逊于HashSet。
 - 实战场景：用户浏览记录去重等需要「去重+保序」的业务场景。
+frequency: medium
 ---
 
 # LinkHashSet（HashSet+LinkedHashMap）是什么？
@@ -99,6 +100,32 @@ System.out.println(viewHistory);
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class Entry info
+    class F start
+    class G process
+    class H decision
+    class HashMap special
+    class LRU error
+    class LinkedHashMap info
+    class accessOrder start
+    class br process
+    class false decision
+    class head special
+    class removeEldestEntry error
+    class table info
+    class tail start
+    class true process
     A["LinkedHashMap<br/>HashMap + 双向链表"] --> B[数组桶 table]
     B --> C[桶内节点 Entry]
     C --> D{维护顺序类型?}

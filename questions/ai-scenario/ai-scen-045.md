@@ -28,6 +28,7 @@ memory_points:
 - 单元测重Mock：自动识别依赖生成Stub；API测重文档：基于Swagger生成用例；集成测重环境。
 - 核心流程：静态分析提取特征→LLM生成代码→执行验证→覆盖率反馈→迭代修复。
 - 质量保障：生成测试必须能运行，配合Mutation Testing检测有效性，人工Review兜底。
+frequency: high
 ---
 
 # 如何设计一个AI测试生成系统？自动生成单元测试、API测试，提升测试覆盖率。
@@ -111,6 +112,26 @@ def test_get_user_success():
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class C1 special
+    class C2 error
+    class C3 info
+    class D start
+    class E process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class K process
     A[源代码与AST解析] --> B[控制流与依赖分析]
     B --> C["测试策略层"]
     subgraph C["测试策略层"]

@@ -27,6 +27,7 @@ memory_points:
 - v1重计算：前向不存Attention矩阵，反向重算以换空间，解决显存瓶颈
 - v2优化：调整线程块与并行策略，减少非Matmul计算，提升算力利用率
 - v3特性：利用H100的TMA异步搬运与FP8 Tensor Core，实现计算与传输重叠
+frequency: high
 ---
 
 # 【智谱Infra面经】FlashAttention 的核心原理是什么？v1/v2/v3 各有什么改进？
@@ -97,6 +98,28 @@ def flash_attn_impl(q, k, v):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Core start
+    class FP8 process
+    class H100 decision
+    class Online special
+    class Peak error
+    class Softmax info
+    class TMA start
+    class Tensor process
+    class Tiling decision
+    class V1 special
+    class V2 error
+    class V3 info
+    class br start
+    class v1 process
+    class v2 decision
+    class v3 special
     Core[核心:Tiling+Online Softmax] --> V1[v1<br/>重计算换空间]
     V1 --> V2[v2<br/>Warp级并行优化]
     V2 --> V3[v3<br/>H100 TMA+FP8 Tensor Core]

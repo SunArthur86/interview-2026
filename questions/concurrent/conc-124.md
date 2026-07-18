@@ -16,6 +16,7 @@ memory_points:
 - 悲观实现：SQL使用 for update 添加排他锁，保证强一致性但并发度低
 - 乐观实现：通过版本号机制或条件更新（如 where count>0）实现CAS思想
 - 反转考点：高并发写冲突场景下，乐观锁重试风暴反而比悲观锁更慢更耗CPU
+frequency: medium
 ---
 
 # 数据库悲观锁和乐观锁的原理和使用场景有哪些？
@@ -117,6 +118,7 @@ flowchart TD
     style FAIL fill:#F44336,color:#fff
     style NOTE fill:#FF9800,color:#fff
     style LONGADDER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

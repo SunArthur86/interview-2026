@@ -32,6 +32,7 @@ memory_points:
 - 五大刚需：因知识库量级大、需实时更新、要精确溯源、成本延迟高，所以企业级场景必用RAG。
 - Lost in the Middle：长上下文注意力呈U型曲线，模型极易忽略中间位置信息，全塞入反而召回差。
 - 成本对比：长上下文单次动辄消耗128k token且首字极慢，而RAG仅需约4k token且响应快。
+frequency: medium
 ---
 
 # 【字节面经】128k 超长上下文模型已经很普遍了，你认为在实际业务中它能完全替代传统 RAG 的向量检索吗？有哪些场景仍然必须用 RAG？
@@ -239,6 +240,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

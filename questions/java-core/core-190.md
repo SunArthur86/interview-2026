@@ -26,6 +26,7 @@ memory_points:
 - 附加优化：支持HPACK头部压缩且突破HTTP1.1同域6连接数限制。
 follow_up: []
 tags: []
+frequency: low
 ---
 
 # 什么是HTTP/2？
@@ -102,6 +103,40 @@ server {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Alive process
+    class B decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class B4 start
+    class C process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class C5 start
+    class D process
+    class D1 decision
+    class D2 special
+    class D3 error
+    class D4 info
+    class HOL start
+    class HPACK process
+    class HTTP decision
+    class IP special
+    class Keep error
+    class QUIC info
+    class RTT start
+    class TCP process
+    class UDP decision
+    class br special
     A[HTTP 协议演进] --> B["HTTP/1.1"]
     B --> B1[文本协议]
     B --> B2[持久连接 Keep-Alive]

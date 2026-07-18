@@ -16,6 +16,7 @@ memory_points:
 - 因为 stop() 会瞬间释放所有锁并破坏原子性，导致对象状态不一致
 - interrupt 遇到阻塞会抛异常，遇到运行态仅置标志位需主动检查
 - 两阶段终止模式：catch 异常后需再次调用 interrupt() 恢复中断状态
+frequency: medium
 ---
 
 # Java终止线程有哪几种方式？为什么stop()被废弃？
@@ -138,6 +139,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

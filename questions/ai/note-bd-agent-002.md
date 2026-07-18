@@ -29,6 +29,7 @@ memory_points:
 - 记忆分层：短期记忆存Redis(会话级)，长期记忆走向量库(永久级)防人设崩塌
 - RAG细节：使用向量检索+关键词的混合检索，重排序后再组装上下文
 - 工具调用：敏感操作必须有明确的Schema定义、超时重试及权限校验机制
+frequency: medium
 ---
 
 # AI Agent项目实际用到了哪些Agent技术能力？
@@ -165,6 +166,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

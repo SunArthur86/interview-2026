@@ -32,6 +32,7 @@ memory_points:
 - 生成前：RAG事实约束，检索外部知识注入Context限定范围。
 - 生成中：约束解码限制候选Token，结合置信度过滤低概率词。
 - 生成后：NLI蕴含矛盾校验，交叉验证事实，结合多次采样投票。
+frequency: medium
 ---
 
 # 【字节面经】除了在 Prompt 中加约束，还有哪些工程手段可以在生成阶段降低模型幻觉？
@@ -42,6 +43,25 @@ Prompt 约束（如"请基于已知事实回答"、"不知道就说不知道"）
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Consistency start
+    class During process
+    class GBNF decision
+    class Generation special
+    class L0 error
+    class L1 info
+    class L2 start
+    class L3 process
+    class Post decision
+    class Pre special
+    class Self error
+    class br info
+    class logprob start
     L0["第0层 · 生成前 (Pre-Generation)<br/>RAG事实约束: 检索外部知识 → 注入Context → 限定生成范围"]
     L1["第1层 · 生成中 (During Generation)<br/>约束解码(GBNF): 语法级限制token候选集<br/>置信度过滤(logprob): 低置信token触发fallback"]
     L2["第2层 · 生成后 (Post-Generation)<br/>NLI校验: 蕴含/矛盾/中立三分类 → 矛盾则丢弃或重生成<br/>事实核查API: 交叉验证关键事实<br/>多路投票: 多次采样 → Self-Consistency"]

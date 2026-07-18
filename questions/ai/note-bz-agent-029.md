@@ -29,6 +29,7 @@ memory_points:
 - 策略1通用兜底：用基础人设提供平衡回复，同时异步收集偏好
 - 策略2主动提问：在用户不紧急的对话适当时机，自然追问偏好与目标
 - 策略3默认校准：预设中等水平画像，基于首句专业词汇快速推断修正
+frequency: medium
 ---
 
 # 对话系统的冷启动如何解决？
@@ -294,6 +295,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

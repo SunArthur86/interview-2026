@@ -14,7 +14,7 @@ tags:
 - 面经
 feynman:
   essence: 缓存击穿是热点Key突然失效，大量请求直接打到数据库。除了互斥锁外，三级防御：(1)本地缓存(Caffeine)设短TTL做第一层拦截；(2)Redis逻辑过期(不设TTL，后台异步刷新)；(3)热点Key探测+主动预热。
-  analogy: "缓存就像超市的促销商品货架。缓存击穿=特价商品卖完了(缓存失效)，所有顾客都涌向仓库(数据库)抢货。防御：(1)在货架旁放个小推车备货(Caffeine本地缓存)；(2)让理货员在后台悄悄补货(逻辑过期+异步刷新)；(3)提前预测哪些商品会火，提前备足(热点探测+预热)。"
+  analogy: 缓存就像超市的促销商品货架。缓存击穿=特价商品卖完了(缓存失效)，所有顾客都涌向仓库(数据库)抢货。防御：(1)在货架旁放个小推车备货(Caffeine本地缓存)；(2)让理货员在后台悄悄补货(逻辑过期+异步刷新)；(3)提前预测哪些商品会火，提前备足(热点探测+预热)。
   key_points:
   - 缓存击穿=单个热点Key失效导致大量请求穿透到DB
   - 互斥锁方案：只让一个线程查DB重建缓存，其他等待（已有方案）
@@ -23,7 +23,7 @@ feynman:
   - 核弹方案：Flink实时热点探测 + 主动预热
 first_principle:
   essence: 缓存击穿防御 = 减少到达DB的并发请求数 × 缩短缓存重建窗口
-  derivation: "热点Key失效瞬间 → N个线程同时请求DB → DB压力突增 → 雪崩。防御原理：(1)多级缓存(Caffeine+Redis)减少到达DB的请求数；(2)逻辑过期+异步刷新缩短/消除重建窗口；(3)互斥锁限制只有一个线程重建。"
+  derivation: 热点Key失效瞬间 → N个线程同时请求DB → DB压力突增 → 雪崩。防御原理：(1)多级缓存(Caffeine+Redis)减少到达DB的请求数；(2)逻辑过期+异步刷新缩短/消除重建窗口；(3)互斥锁限制只有一个线程重建。
   conclusion: 多级缓存 + 逻辑过期是最优解——零停机、无锁竞争、用户无感知
 follow_up:
 - 缓存击穿、缓存穿透、缓存雪崩三者的区别和各自防御方案？
@@ -36,6 +36,7 @@ memory_points:
 - 三级防御：Caffeine本地缓存(短TTL拦截)→Redis逻辑过期(不设TTL异步刷新)→热点探测+预热
 - 逻辑过期核心：缓存值中存expireTime字段，逻辑判断过期后返回旧值+异步刷新(用户无感)
 - 互斥锁是基础方案，逻辑过期是进阶方案(无锁等待、用户体验更好)
+frequency: high
 ---
 
 # 【快手Java一面】热点Key突然失效，数据库被打到限流，除了互斥锁还有什么方案？
@@ -327,6 +328,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

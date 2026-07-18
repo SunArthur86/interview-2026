@@ -32,6 +32,7 @@ memory_points:
 - 五大手段：RAG注入事实、Function Calling查实时数据、Structured Output约束格式、Prompt说不知道、多轮验证
 - 实战组合：RAG(背景)+FC(实时)+结构化输出+引用溯源(防投诉)
 - 检测：不要信自信语气，用LogProbs看熵值，熵高表示不确定
+frequency: high
 ---
 
 # 【字节面经】幻觉是怎么产生的？你有哪些方法可以减轻模型幻觉？
@@ -104,6 +105,7 @@ flowchart LR
     style FEW fill:#2196F3,color:#fff
     style COT fill:#4CAF50,color:#fff
     style GUARD fill:#f44336,color:#fff
+
 ```
 
 ## 记忆要点

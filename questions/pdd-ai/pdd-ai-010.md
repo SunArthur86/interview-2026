@@ -27,14 +27,15 @@ first_principle:
   - 模型多、版本多要治理
   rebuild: 模型服务平台（推理引擎 + 路由网关 + 弹性调度 + 监控治理）。
 follow_up:
-  - Triton 和 vLLM 区别？——Triton 通用多框架（CV/NLP/语音），vLLM 专精 LLM（PagedAttention）
-  - 怎么提高 GPU 利用率？——动态 batching + 多模型共享卡 + INT8 量化
-  - 推理延迟 P99 怎么优化？—— batching + KV Cache + 量化 + 弹性扩容
+- Triton 和 vLLM 区别？——Triton 通用多框架（CV/NLP/语音），vLLM 专精 LLM（PagedAttention）
+- 怎么提高 GPU 利用率？——动态 batching + 多模型共享卡 + INT8 量化
+- 推理延迟 P99 怎么优化？—— batching + KV Cache + 量化 + 弹性扩容
 memory_points:
-  - 推理引擎：Triton（通用）/vLLM（LLM）
-  - 服务化：注册→路由→推理→监控
-  - GPU：动态 batch + 显存池化 + 多模型共享
-  - 弹性：基于利用率/QPS 自动扩缩
+- 推理引擎：Triton（通用）/vLLM（LLM）
+- 服务化：注册→路由→推理→监控
+- GPU：动态 batch + 显存池化 + 多模型共享
+- 弹性：基于利用率/QPS 自动扩缩
+frequency: high
 ---
 
 # 【拼多多 AI 中台】模型服务平台怎么设计？Triton 怎么用？
@@ -290,6 +291,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

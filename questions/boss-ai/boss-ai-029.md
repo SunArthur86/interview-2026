@@ -13,37 +13,41 @@ tags:
 - Copilot
 - 提效度量
 feynman:
-  essence: "AI Coding 是把'人写代码、AI 辅助'升级为'AI 写代码、人审核'的协作新范式——用 Cursor/Claude Code/Codex 把工程效率从 1x 提升到 3-10x，但要配套规范、度量、风控。"
-  analogy: "像从'手工作坊'升级为'AI 工程师团队'——你不再亲手敲每行代码，而是像技术总监管理一群 AI 工程师（Cursor/Claude Code），分配任务、审核产出、定规范，效率指数级提升但要管得住。"
-  first_principle: "代码生成模型已具备处理中等复杂度任务的能力，人工逐行写是资源浪费。但 AI 会出错、会写不安全代码、会乱改架构。必须建立规范、Code Review、提效度量，把'AI 辅助'升级为'AI 主写 + 人审核'的受控协作。"
+  essence: AI Coding 是把'人写代码、AI 辅助'升级为'AI 写代码、人审核'的协作新范式——用 Cursor/Claude Code/Codex
+    把工程效率从 1x 提升到 3-10x，但要配套规范、度量、风控。
+  analogy: 像从'手工作坊'升级为'AI 工程师团队'——你不再亲手敲每行代码，而是像技术总监管理一群 AI 工程师（Cursor/Claude Code），分配任务、审核产出、定规范，效率指数级提升但要管得住。
+  first_principle: 代码生成模型已具备处理中等复杂度任务的能力，人工逐行写是资源浪费。但 AI 会出错、会写不安全代码、会乱改架构。必须建立规范、Code
+    Review、提效度量，把'AI 辅助'升级为'AI 主写 + 人审核'的受控协作。
   key_points:
-  - "工具栈：Cursor（IDE）/ Claude Code（终端）/ Codex / Copilot 各有侧重"
-  - "规范：CLAUDE.md/AGENTS.md 工程约定 + Code Review + 测试门禁"
-  - "协作模式：人主导设计 + AI 实现 + 人审核"
-  - "提效度量：PR 速度 / bug 率 / 单测覆盖 / 主观效率"
-  - "风险：代码质量/安全/依赖AI无深度思考/知识断层"
+  - 工具栈：Cursor（IDE）/ Claude Code（终端）/ Codex / Copilot 各有侧重
+  - 规范：CLAUDE.md/AGENTS.md 工程约定 + Code Review + 测试门禁
+  - 协作模式：人主导设计 + AI 实现 + 人审核
+  - 提效度量：PR 速度 / bug 率 / 单测覆盖 / 主观效率
+  - 风险：代码质量/安全/依赖AI无深度思考/知识断层
   socratic:
-  - "AI 写的代码能直接合入主干吗？为什么必须 Code Review？"
-  - "怎么让 AI 写出符合团队规范的代码？AI 不知道你们的约定怎么办？"
-  - "用了 AI 后效率真的提升了吗？怎么证明？看什么指标？"
-  - "新人用 AI 写代码，会不会让他学不到真本事？长期是好事吗？"
-  - "AI 把代码写完了，但没人懂细节，出问题怎么维护？"
+  - AI 写的代码能直接合入主干吗？为什么必须 Code Review？
+  - 怎么让 AI 写出符合团队规范的代码？AI 不知道你们的约定怎么办？
+  - 用了 AI 后效率真的提升了吗？怎么证明？看什么指标？
+  - 新人用 AI 写代码，会不会让他学不到真本事？长期是好事吗？
+  - AI 把代码写完了，但没人懂细节，出问题怎么维护？
 first_principle:
-  problem: "如何把 AI 代码生成能力，转化为团队可受控、可度量、可持续的工程效率提升？"
+  problem: 如何把 AI 代码生成能力，转化为团队可受控、可度量、可持续的工程效率提升？
   axioms:
-  - "AI 已能写中等复杂度代码，人工逐行写是浪费"
-  - "AI 会出错/写不安全代码/乱改架构，必须受控"
-  - "提效不靠工具本身，靠配套规范+度量+文化"
-  rebuild: "建立 AI Coding 协作体系：选合适工具栈 + 写工程约定（AI 能读懂的规范）+ 严格 Code Review + 测试门禁 + 提效度量 + 知识沉淀，把'个人用 AI'升级为'团队级 AI 工程协作'。"
+  - AI 已能写中等复杂度代码，人工逐行写是浪费
+  - AI 会出错/写不安全代码/乱改架构，必须受控
+  - 提效不靠工具本身，靠配套规范+度量+文化
+  rebuild: 建立 AI Coding 协作体系：选合适工具栈 + 写工程约定（AI 能读懂的规范）+ 严格 Code Review + 测试门禁 + 提效度量
+    + 知识沉淀，把'个人用 AI'升级为'团队级 AI 工程协作'。
 follow_up:
-- "CLAUDE.md/AGENTS.md 写什么？——项目架构、编码规范、禁用 API、测试要求、目录结构、提交规范；让 AI 像新人一样读懂团队约定。"
-- "怎么防 AI 写出安全漏洞？——Code Review + 静态扫描（SAST）+ 依赖扫描 + 安全测试 + AI 输出审计；不盲信 AI。"
-- "团队怎么推广 AI Coding？——先小范围试点 + 度量效果 + 沉淀 best practice + 培训 + 激励；强推会反弹。"
+- CLAUDE.md/AGENTS.md 写什么？——项目架构、编码规范、禁用 API、测试要求、目录结构、提交规范；让 AI 像新人一样读懂团队约定。
+- 怎么防 AI 写出安全漏洞？——Code Review + 静态扫描（SAST）+ 依赖扫描 + 安全测试 + AI 输出审计；不盲信 AI。
+- 团队怎么推广 AI Coding？——先小范围试点 + 度量效果 + 沉淀 best practice + 培训 + 激励；强推会反弹。
 memory_points:
-- "工具栈：Cursor/Claude Code/Codex/Copilot"
-- "规范：AGENTS.md + Review + 测试门禁"
-- "协作：人设计+AI 实现+人审核"
-- "度量：PR 速度/bug 率/单测/主观效率"
+- 工具栈：Cursor/Claude Code/Codex/Copilot
+- 规范：AGENTS.md + Review + 测试门禁
+- 协作：人设计+AI 实现+人审核
+- 度量：PR 速度/bug 率/单测/主观效率
+frequency: low
 ---
 
 # 【巨剧核 AI 陪伴】AI Coding 团队规范怎么落地？
@@ -272,6 +276,31 @@ AI Coding 的本质是**"把'人写代码'升级为'人机协作写代码'，效
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CI start
+    class CLD process
+    class CR decision
+    class CUR special
+    class Claude error
+    class Code info
+    class Cursor start
+    class D process
+    class E decision
+    class E2E special
+    class IDE error
+    class M info
+    class P start
+    class PRD process
+    class R decision
+    class Review special
+    class T error
+    class br info
+    class md start
     P("产品需求/PRD") --> D["架构师/开发者<br/>设计架构与AGENTS.md"]
     D --> T{"任务分发"}
     T -- "交互式开发" --> CUR["Cursor IDE<br/>编写核心业务"]

@@ -26,6 +26,7 @@ memory_points:
 - CAS乐观锁：基于硬件指令，无阻塞性能高，但存在ABA问题（可加版本号解决）
 follow_up: []
 tags: []
+frequency: high
 ---
 
 # 什么是种线程锁？
@@ -160,6 +161,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

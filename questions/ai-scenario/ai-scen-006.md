@@ -30,6 +30,7 @@ memory_points:
 - 融合策略常用RRF（倒数排名融合）或加权线性插值（需归一化）
 - RRF公式：Σ 1/(k+rank)，参数k通常取60，鲁棒性强
 - 混合检索后接Reranker精排，可提升MRR 20%-40%
+frequency: medium
 ---
 
 # 如何设计RAG系统的混合检索方案？结合BM25关键词检索和Dense向量检索的优势。
@@ -102,6 +103,38 @@ def weighted_merge(bm25_results, dense_results, alpha=0.5):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Cross special
+    class D error
+    class E1 info
+    class E2 start
+    class Encoder process
+    class F1 decision
+    class F2 special
+    class G error
+    class H info
+    class I start
+    class Milvus process
+    class Qdrant decision
+    class S1 special
+    class S2 error
+    class Top info
+    class bge start
+    class br process
+    class k decision
+    class m3 special
+    class rank_i error
+    class reranker info
+    class score start
+    class v2 process
     A[用户查询Query] --> B[Query意图分析与路由]
     B --> C[Sparse稀疏检索路径]
     B --> D[Dense稠密向量路径]

@@ -29,6 +29,7 @@ memory_points:
 - 核心思想：让大模型自问自答，将复杂问题分解为一串子问题
 - 工作流：生成子问题 -> 检索答案 -> 基于答案生成下个子问题 -> 综合
 - 适用对比：专攻多跳事实问答；不如ReAct灵活，不如Plan-Execute全局
+frequency: medium
 ---
 
 # Self-Ask 框架是什么？
@@ -219,6 +220,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

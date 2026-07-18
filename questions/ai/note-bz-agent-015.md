@@ -19,7 +19,8 @@ feynman:
   - 挑战：冲突、死循环、成本控制
 first_principle:
   essence: 复杂性需要专业化——单Agent做所有事会顾此失彼。
-  derivation: 单Agent上下文有限，塞太多角色指令会混淆。多Agent让每个Agent专注一个角色（prompt精简、能力强），通过消息传递整合结果。本质是"分治"+ "专业化"。
+  derivation: 单Agent上下文有限，塞太多角色指令会混淆。多Agent让每个Agent专注一个角色（prompt精简、能力强），通过消息传递整合结果。本质是"分治"+
+    "专业化"。
   conclusion: 多Agent = 角色专业化 + 消息通信 + 分治整合，突破单Agent的能力上限
 follow_up:
 - 多Agent一定比单Agent好吗？——不一定，简单任务多Agent反而更慢更贵
@@ -29,6 +30,7 @@ memory_points:
 - 单Agent瓶颈：上下文有限、角色混淆、无法并行，多Agent实现专业化
 - 三要素：角色(Roles)、通信(Communication)、协作流程(Workflow)
 - 典型模式：主管-工人分发，流水线串行，多Agent辩论择优
+frequency: medium
 ---
 
 # 如何设计一个多 Agent 协作系统架构？
@@ -267,6 +269,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

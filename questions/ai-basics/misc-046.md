@@ -21,6 +21,7 @@ memory_points:
 - DeepSeek-R1：R1-Zero纯RL涌现推理，R1加SFT冷启动优化。
 - GRPO算法：组内相对优势，无需Critic，显存占用低。
 - 新范式：Test-Time Compute Scaling，用推理算力换智力。
+frequency: medium
 ---
 
 # OpenAI o1模型的推理能力和传统模型有什么本质区别?DeepSeek-R1是如何复现的
@@ -156,6 +157,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

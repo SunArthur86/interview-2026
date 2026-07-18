@@ -12,7 +12,8 @@ tags:
 - DAPO
 - 强化学习
 feynman:
-  essence: PPO是用"裁剪的比率"约束策略更新幅度的on-policy算法；GRPO是PPO的简化版（去掉Critic，用组内相对优势）；DPO是直接用偏好对训练（省略Reward Model）；DAPO是GRPO的改进版（动态采样+解耦裁剪）。
+  essence: PPO是用"裁剪的比率"约束策略更新幅度的on-policy算法；GRPO是PPO的简化版（去掉Critic，用组内相对优势）；DPO是直接用偏好对训练（省略Reward
+    Model）；DAPO是GRPO的改进版（动态采样+解耦裁剪）。
   analogy: PPO像一个"小心翼翼的登山者"——每步都用ratio裁剪防止走太远。GRPO像"登山小组投票"——不用单独的向导(Critic)，组内成员比较谁高谁低决定方向。DPO像"直接学评委的品味"——不学打分模型，直接从偏好对学。DAPO像"聪明的登山小组"——根据难度动态调整探索，且对正确和错误的处理分开。
   first_principle: RLHF的核心是"用人类偏好优化策略"。PPO通过RM间接学偏好（RM打分→PPO优化）；DPO证明了"偏好学习可以被转化为策略的对比学习"，省略RM。GRPO/DAPO针对PPO的工程痛点（Critic显存大、优势估计难）做了简化。
   key_points:
@@ -22,7 +23,8 @@ feynman:
   - DAPO：动态采样(过滤全对全错)+解耦裁剪(正面负面分开)
 first_principle:
   essence: 偏好优化的数学本质是"让被偏好的输出概率相对上升，被拒绝的相对下降"
-  derivation: RLHF的目标是最大化 E[r(x,y)] 同时不偏离参考策略。PPO用RM近似r，用KL约束不偏离。DPO通过推导发现，最优解 π*/π_ref = exp(r/β)，把r用π表示后，偏好对的对比loss可以直接优化π，无需显式RM。GRPO发现，用"组内均值做baseline"代替Critic估计的value，效果相当且省一半显存。
+  derivation: RLHF的目标是最大化 E[r(x,y)] 同时不偏离参考策略。PPO用RM近似r，用KL约束不偏离。DPO通过推导发现，最优解 π*/π_ref
+    = exp(r/β)，把r用π表示后，偏好对的对比loss可以直接优化π，无需显式RM。GRPO发现，用"组内均值做baseline"代替Critic估计的value，效果相当且省一半显存。
   conclusion: PPO→GRPO(省Critic)→DAPO(动态采样)是on-policy线的演进；DPO是另一条off-policy路线
 follow_up:
 - GRPO去掉Critic后，优势估计的方差会变大吗？
@@ -34,6 +36,7 @@ memory_points:
 - GRPO原理：同prompt采样G个回答，组内分数标准化作为优势值，免去价值网络
 - DAPO优化：因全对全错样本梯度为0，故动态剔除以提升有效梯度密度
 - DPO本质：直接偏好优化，通过构造闭式解跳过RL和RM，全离线训练
+frequency: medium
 ---
 
 # 【八股总结】PPO、GRPO、DPO、DAPO 的基本原理
@@ -409,6 +412,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

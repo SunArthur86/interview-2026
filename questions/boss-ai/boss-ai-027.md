@@ -12,37 +12,41 @@ tags:
 - 量化
 - 批处理
 feynman:
-  essence: "LLM 推理优化是把'一次只能处理一个请求、慢且贵'的原始推理，变成'批量复用、缓存共享、量化精简'的高效服务，让 GPU 利用率从 10% 提升到 80%+。"
-  analogy: "像把'每次只煮一碗饭'升级为'大锅饭 + 保温桶 + 压缩饼干'——批量煮饭（batching）、保温桶复用米饭（KV Cache）、压缩饼干省空间（量化），整体效率几十倍提升。"
-  first_principle: "LLM 推理的瓶颈是 GPU 算力和显存带宽，单请求推理浪费严重（GPU 空转 + KV Cache 不复用 + 全精度参数占显存）。必须从'单次'优化到'批量+共享+精简'。"
+  essence: LLM 推理优化是把'一次只能处理一个请求、慢且贵'的原始推理，变成'批量复用、缓存共享、量化精简'的高效服务，让 GPU 利用率从 10%
+    提升到 80%+。
+  analogy: 像把'每次只煮一碗饭'升级为'大锅饭 + 保温桶 + 压缩饼干'——批量煮饭（batching）、保温桶复用米饭（KV Cache）、压缩饼干省空间（量化），整体效率几十倍提升。
+  first_principle: LLM 推理的瓶颈是 GPU 算力和显存带宽，单请求推理浪费严重（GPU 空转 + KV Cache 不复用 + 全精度参数占显存）。必须从'单次'优化到'批量+共享+精简'。
   key_points:
-  - "Continuous batching：动态合并并发请求，GPU 满载"
-  - "KV Cache 复用：共享前缀（system prompt）省显存省算力"
-  - "量化：INT8/INT4 降精度，显存和带宽减半"
-  - "投机解码：小模型起草+大模型校验，2-3 倍加速"
-  - "工程框架：vLLM/SGLang/TGI 主流"
+  - Continuous batching：动态合并并发请求，GPU 满载
+  - KV Cache 复用：共享前缀（system prompt）省显存省算力
+  - 量化：INT8/INT4 降精度，显存和带宽减半
+  - 投机解码：小模型起草+大模型校验，2-3 倍加速
+  - 工程框架：vLLM/SGLang/TGI 主流
   socratic:
-  - "100 个用户同时聊，原始推理是一个一个排队还是一起算？哪种高效？"
-  - "100 个对话都用同一个 system prompt（角色人设），这部分计算能复用吗？"
-  - "70B 模型要 140GB 显存，单卡装不下，怎么办？量化降精度会损失多少？"
-  - "为什么 LLM 推理比训练慢得多？瓶颈在哪？"
-  - "投机解码用小模型起草、大模型校验，听起来更慢，为什么反而快？"
+  - 100 个用户同时聊，原始推理是一个一个排队还是一起算？哪种高效？
+  - 100 个对话都用同一个 system prompt（角色人设），这部分计算能复用吗？
+  - 70B 模型要 140GB 显存，单卡装不下，怎么办？量化降精度会损失多少？
+  - 为什么 LLM 推理比训练慢得多？瓶颈在哪？
+  - 投机解码用小模型起草、大模型校验，听起来更慢，为什么反而快？
 first_principle:
-  problem: "如何把 LLM 推理从'慢、贵、低利用'优化为'快、省、高利用'？"
+  problem: 如何把 LLM 推理从'慢、贵、低利用'优化为'快、省、高利用'？
   axioms:
-  - "LLM 推理瓶颈是 GPU 算力和显存带宽"
-  - "单请求推理浪费严重（GPU 空转 + 无复用 + 全精度）"
-  - "并发请求往往有相似性（同 system prompt / 同任务）"
-  rebuild: "用三大手段：continuous batching（并发合并满载 GPU）+ KV Cache 复用（共享前缀省算力）+ 量化（降精度省显存）+ 投机解码（小模型加速大模型），把 GPU 利用率从 10% 提升到 80%+。"
+  - LLM 推理瓶颈是 GPU 算力和显存带宽
+  - 单请求推理浪费严重（GPU 空转 + 无复用 + 全精度）
+  - 并发请求往往有相似性（同 system prompt / 同任务）
+  rebuild: 用三大手段：continuous batching（并发合并满载 GPU）+ KV Cache 复用（共享前缀省算力）+ 量化（降精度省显存）+
+    投机解码（小模型加速大模型），把 GPU 利用率从 10% 提升到 80%+。
 follow_up:
-- "vLLM 为什么快？——PagedAttention（分页式 KV Cache，无碎片）+ continuous batching（动态批）+ 高效调度；比朴素推理快 10-20 倍。"
-- "量化会损失质量吗？——INT8 几乎无损，INT4 略损但可接受；要按场景评估；GPTQ/AWQ 是常用算法。"
-- "自部署 vs API 怎么算账？——QPS 高时自部署便宜（边际成本递减），QPS 低时 API 便宜（按量）；ROI 平衡点要算。"
+- vLLM 为什么快？——PagedAttention（分页式 KV Cache，无碎片）+ continuous batching（动态批）+ 高效调度；比朴素推理快
+  10-20 倍。
+- 量化会损失质量吗？——INT8 几乎无损，INT4 略损但可接受；要按场景评估；GPTQ/AWQ 是常用算法。
+- 自部署 vs API 怎么算账？——QPS 高时自部署便宜（边际成本递减），QPS 低时 API 便宜（按量）；ROI 平衡点要算。
 memory_points:
-- "三大优化：batching/复用/量化"
-- "Continuous batching：动态并发批处理"
-- "KV Cache 复用：共享前缀"
-- "vLLM：PagedAttention + continuous batching"
+- 三大优化：batching/复用/量化
+- Continuous batching：动态并发批处理
+- KV Cache 复用：共享前缀
+- vLLM：PagedAttention + continuous batching
+frequency: high
 ---
 
 # 【巨剧核 AI 陪伴】LLM 推理优化怎么做（vLLM/KV Cache/量化/batching）？
@@ -281,6 +285,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

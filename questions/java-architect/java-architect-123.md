@@ -9,9 +9,11 @@ tags:
 - SDK
 - 微服务治理
 feynman:
-  essence: Sidecar（代理）和 SDK（库）是微服务治理的两种模式。SDK：治理逻辑编译进应用（Sentinel/Feign/Eureka），优势是性能（无额外跳）、灵活（可深度定制），劣势是多语言不统一、升级困难。Sidecar：治理逻辑下沉到独立进程（Envoy），优势是多语言统一、升级无感，劣势是延迟（1-3ms）和资源开销。取舍维度：语言数量、性能要求、团队规模、治理复杂度。混合模式（关键服务 SDK + 非关键 Sidecar）是趋势。
+  essence: Sidecar（代理）和 SDK（库）是微服务治理的两种模式。SDK：治理逻辑编译进应用（Sentinel/Feign/Eureka），优势是性能（无额外跳）、灵活（可深度定制），劣势是多语言不统一、升级困难。Sidecar：治理逻辑下沉到独立进程（Envoy），优势是多语言统一、升级无感，劣势是延迟（1-3ms）和资源开销。取舍维度：语言数量、性能要求、团队规模、治理复杂度。混合模式（关键服务
+    SDK + 非关键 Sidecar）是趋势。
   analogy: 像"自驾 vs 公交"——SDK 是自驾（性能好，自己决定路线，但要自己开车/维护车），Sidecar 是公交（统一管理，不用操心，但绕路慢、不灵活）。长途高速选自驾（SDK，性能优先），市内通勤选公交（Sidecar，省心）。
-  first_principle: 治理逻辑（路由/熔断/重试/追踪）必须存在，问题是放在哪。放在应用内（SDK）性能好但耦合 + 多语言重复；放在独立进程（Sidecar）解耦 + 统一但有延迟。取舍本质是"性能 vs 通用性"——追求极致性能选 SDK，追求多语言统一选 Sidecar。混合模式兼顾两者。
+  first_principle: 治理逻辑（路由/熔断/重试/追踪）必须存在，问题是放在哪。放在应用内（SDK）性能好但耦合 + 多语言重复；放在独立进程（Sidecar）解耦
+    + 统一但有延迟。取舍本质是"性能 vs 通用性"——追求极致性能选 SDK，追求多语言统一选 Sidecar。混合模式兼顾两者。
   key_points:
   - SDK：治理编译进应用（Sentinel/Feign/Eureka）
   - Sidecar：治理在独立进程（Envoy）
@@ -26,21 +28,26 @@ first_principle:
   - 治理逻辑必须存在（微服务必备能力）
   - SDK 性能好但多语言重复 + 升级难
   - Sidecar 统一但有延迟和资源开销
-  rebuild: 按场景取舍。SDK 适合：① 单语言生态（Java 全家桶，Sentinel/Feign 够用）；② 极致性能（P99 < 10ms，Sidecar 延迟不可接受）；③ 深度定制（业务和治理紧耦合，如电商秒杀的精准限流）。Sidecar 适合：① 多语言生态（Java/Go/Python 统一治理）；② 标准化治理（不追求定制，统一即可）；③ 频繁迭代（灰度/AB 测试）。混合模式：核心链路（订单/支付）用 SDK（性能优先），非核心（推荐/搜索）用 Sidecar（统一治理）。演进方向：资源网格（RSM，节点级代理替代每 Pod）+ eBPF（内核层加速）。
+  rebuild: 按场景取舍。SDK 适合：① 单语言生态（Java 全家桶，Sentinel/Feign 够用）；② 极致性能（P99 < 10ms，Sidecar
+    延迟不可接受）；③ 深度定制（业务和治理紧耦合，如电商秒杀的精准限流）。Sidecar 适合：① 多语言生态（Java/Go/Python 统一治理）；②
+    标准化治理（不追求定制，统一即可）；③ 频繁迭代（灰度/AB 测试）。混合模式：核心链路（订单/支付）用 SDK（性能优先），非核心（推荐/搜索）用 Sidecar（统一治理）。演进方向：资源网格（RSM，节点级代理替代每
+    Pod）+ eBPF（内核层加速）。
 follow_up:
-  - SDK 升级为什么难？——治理 SDK 编译进应用 JAR，升级要重新编译 + 灰度发布所有服务。Sentinel 1.8 → 1.9 升级可能要 3 个月（灰度所有服务）
-  - Sidecar 延迟怎么算？——每个请求多 2 跳（本端 Envoy + 对端 Envoy），每跳 0.5-1.5ms（连接建立 + 路由决策 + 转发），总计 1-3ms。连接复用后可降到 0.5-1ms
-  - 混合模式怎么落地？——核心服务（订单/支付）用 SDK（Sentinel + Feign）保性能，非核心（推荐/搜索）用 Sidecar（Istio）统治理。逐步迁移，不是一刀切
-  - 资源网格（RSM）是什么？——节点级 Sidecar（每节点一个 Envoy，非每 Pod），减少 Sidecar 数量。类似 CNI 插件模式
-  - eBPF 怎么替代 Sidecar？——内核层做 mTLS/路由，无 Sidecar 进程（无用户态切换），延迟极低。Cilium Service Mesh 是代表
+- SDK 升级为什么难？——治理 SDK 编译进应用 JAR，升级要重新编译 + 灰度发布所有服务。Sentinel 1.8 → 1.9 升级可能要 3 个月（灰度所有服务）
+- Sidecar 延迟怎么算？——每个请求多 2 跳（本端 Envoy + 对端 Envoy），每跳 0.5-1.5ms（连接建立 + 路由决策 + 转发），总计
+  1-3ms。连接复用后可降到 0.5-1ms
+- 混合模式怎么落地？——核心服务（订单/支付）用 SDK（Sentinel + Feign）保性能，非核心（推荐/搜索）用 Sidecar（Istio）统治理。逐步迁移，不是一刀切
+- 资源网格（RSM）是什么？——节点级 Sidecar（每节点一个 Envoy，非每 Pod），减少 Sidecar 数量。类似 CNI 插件模式
+- eBPF 怎么替代 Sidecar？——内核层做 mTLS/路由，无 Sidecar 进程（无用户态切换），延迟极低。Cilium Service Mesh 是代表
 memory_points:
-  - SDK：治理编译进应用（Sentinel/Feign/Eureka）
-  - Sidecar：治理在独立进程（Envoy）
-  - SDK 优势：性能好、深度定制、可观测细
-  - Sidecar 优势：多语言统一、升级无感、解耦
-  - 取舍：语言数量/性能/团队/治理复杂度
-  - 混合模式：核心 SDK + 边缘 Sidecar（趋势）
-  - 演进：资源网格（RSM）+ eBPF（内核层）
+- SDK：治理编译进应用（Sentinel/Feign/Eureka）
+- Sidecar：治理在独立进程（Envoy）
+- SDK 优势：性能好、深度定制、可观测细
+- Sidecar 优势：多语言统一、升级无感、解耦
+- 取舍：语言数量/性能/团队/治理复杂度
+- 混合模式：核心 SDK + 边缘 Sidecar（趋势）
+- 演进：资源网格（RSM）+ eBPF（内核层）
+frequency: medium
 ---
 
 # 【Java 后端架构师】Sidecar 与 SDK 治理模式如何取舍
@@ -461,6 +468,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

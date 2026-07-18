@@ -15,6 +15,7 @@ memory_points:
 - FIN_WAIT优化：降低tcp_orphan_retries重传次数清理孤儿连接。
 - TIME_WAIT两大作用：防止历史报文干扰新连接，确保被动关闭方能正常关闭。
 - TIME_WAIT时长2MSL：应对最后ACK丢失重传；优化靠tcp_tw_reuse复用端口。
+frequency: medium
 ---
 
 # 什么是主动方的优化？
@@ -136,6 +137,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

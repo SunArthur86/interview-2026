@@ -28,6 +28,7 @@ memory_points:
 - Web是单线消息流，桌面端是任务-上下文-产物三区架构
 - 因为桌面端能调用系统能力（文件/进程/全局快捷键），所以上下文极大丰富
 - Web产物是纯文本，而桌面端产物是结构化文件（可直接落地保存）
+frequency: low
 ---
 
 # 【月之暗面面经】AI-Native 桌面产品为什么不能只照搬 Web 聊天页？
@@ -248,6 +249,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

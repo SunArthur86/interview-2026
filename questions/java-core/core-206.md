@@ -21,6 +21,7 @@ memory_points:
 - 核心特征：独立于Collection体系，存储键值对映射，Key绝不允许重复。
 - 自定义Key铁律：必须重写hashCode()和equals()，否则会导致内存泄漏或缓存失效。
 - 遍历最优解：推荐使用entrySet，一次取出KV，避免keySet的二次get查找开销。
+frequency: medium
 ---
 
 # 什么是Map接口？
@@ -92,6 +93,42 @@ map.forEach((k, v) -> System.out.println(k + ":" + v));
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class ConcurrentHashMap special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HashMap special
+    class Hashtable error
+    class I info
+    class J start
+    class K process
+    class L decision
+    class LinkedHashMap special
+    class M error
+    class Map info
+    class TreeMap start
+    class containsKey process
+    class containsValue decision
+    class entrySet special
+    class get error
+    class key info
+    class keySet start
+    class null process
+    class put decision
+    class remove special
+    class value error
+    class values info
     A[Map 接口] --> B[key-value 映射]
     A --> C[key 唯一 可 null]
     A --> D[核心方法]

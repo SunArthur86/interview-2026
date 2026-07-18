@@ -21,6 +21,7 @@ memory_points:
 - Scaling Law：性能与算力、参数量、数据量呈幂律关系
 - Chinchilla定律：最优训练Token数约为参数量的20倍，重视数据量
 - 实战：端侧模型常采用Long Chinchilla策略，用更多数据训练小模型以提升上限
+frequency: medium
 ---
 
 # 大模型的涌现能力(Emergent Abilities)是什么?Scaling Law如何指导模型训练
@@ -148,6 +149,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

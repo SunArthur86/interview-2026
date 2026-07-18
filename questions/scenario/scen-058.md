@@ -30,6 +30,7 @@ memory_points:
 - 双写与切流：先双写（老主新辅），后灰度切读（1%到100%），最后切写。
 - 一致性保障：业务双写非原子，必须依赖异步对账修复数据。
 - 关键防线：切流前务必确保新老库数据完全追平校验，并设计回滚开关。
+frequency: high
 ---
 
 # 如何设计一个大规模数据迁移方案？不停机迁移百亿数据。
@@ -169,6 +170,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -30,6 +30,7 @@ memory_points:
 - 全链路追踪：必须使用唯一的traceId贯穿本地解析、云端大模型与本地文件写入。
 - 分段状态机：总状态等于各段状态的组合，前端需针对不同阶段展示独立的加载与失败态。
 - 拒绝一降到底：不能用单一Loading掩盖所有过程，需分段提示（如提取中、生成中、保存中）。
+frequency: medium
 ---
 
 # 【月之暗面面经】本地索引、云端推理和产物导出是三段链路，前端怎样串起来？
@@ -262,6 +263,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

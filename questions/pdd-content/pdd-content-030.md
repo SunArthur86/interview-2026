@@ -29,14 +29,15 @@ first_principle:
   - 跨团队依赖多
   rebuild: 三支柱+SLO+协同机制。
 follow_up:
-  - 三支柱怎么关联？——traceId 串联日志/指标/链路
-  - SLO 怎么定？——可用性 99.9%+延迟 P99 <200ms
-  - 跨团队故障怎么定责？——联合复盘+无指责文化+SLO 兜底
+- 三支柱怎么关联？——traceId 串联日志/指标/链路
+- SLO 怎么定？——可用性 99.9%+延迟 P99 <200ms
+- 跨团队故障怎么定责？——联合复盘+无指责文化+SLO 兜底
 memory_points:
-  - 三支柱：Logging/Metrics/Tracing
-  - 关联：traceId 串联
-  - SLO：可用性+延迟
-  - 协同：on-call+复盘
+- 三支柱：Logging/Metrics/Tracing
+- 关联：traceId 串联
+- SLO：可用性+延迟
+- 协同：on-call+复盘
+frequency: medium
 ---
 
 # 【拼多多内容】可观测性与跨团队治理？
@@ -304,6 +305,27 @@ Tracing：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class ELK info
+    class F start
+    class G process
+    class H decision
+    class Logging special
+    class Metrics error
+    class On info
+    class Prometheus start
+    class SkyWalking process
+    class Tracing decision
     A[业务请求] --> B[traceId生成透传]
     B --> C[应用服务]
     subgraph 可观测性三支柱

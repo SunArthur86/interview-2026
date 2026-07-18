@@ -4,8 +4,17 @@ difficulty: L2
 category: java-architect
 subcategory: 交易架构
 title: 热点账户与热点库存的串行化设计
-tags: [热点账户, 热点库存, Redis Lua, 串行化, 扣减]
-related: [java-architect-026, java-architect-138, java-architect-143]
+tags:
+- 热点账户
+- 热点库存
+- Redis Lua
+- 串行化
+- 扣减
+related:
+- java-architect-026
+- java-architect-138
+- java-architect-143
+frequency: high
 ---
 
 # 热点账户与热点库存的串行化设计
@@ -331,6 +340,26 @@ Redis Lua 原子扣，单实例八万 QPS。
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class Lua info
+    class Redis start
+    class br process
     A["10万秒杀请求"] --> B["网关限流拦截"]
     B --> C["用户Hash路由分配桶"]
     C --> D["Redis Lua<br/>分桶原子扣减"]

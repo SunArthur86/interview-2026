@@ -16,6 +16,7 @@ memory_points:
 - CF优势：实现流式异步回调，彻底解决回调地狱
 - API对比：thenApply(转换) vs thenAccept(消费) vs thenRun(执行)
 - 多任务编排：allOf等全部完成，anyOf任一完成即触发；支持handle统一处理异常
+frequency: medium
 ---
 
 # Future和CompletableFuture有什么区别？
@@ -137,6 +138,7 @@ flowchart TB
     classDef cf fill:#e8f5e9,stroke:#2e7d32
     class F1,F2,F3,F4,FPain future
     class C1,C2,C3,C4,C5,C6,Chain,Pool cf
+
 ```
 
 

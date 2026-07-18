@@ -35,6 +35,7 @@ memory_points:
 - 融合策略：优先级、加权、风险分层、级联
 - 模型上线：影子流量 → 灰度 → 全量
 - 可解释性：决策必须输出命中规则 + 模型分 + 解释
+frequency: low
 ---
 
 # 【蚂蚁风控】设计一个实时风控决策引擎，融合规则、模型、名单
@@ -59,6 +60,28 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class DAG start
+    class Event process
+    class Feat decision
+    class Fuse special
+    class HTTP error
+    class Kafka info
+    class LLM start
+    class List process
+    class List2 decision
+    class ML special
+    class Model error
+    class Out info
+    class RPC start
+    class Rule process
+    class Three decision
+    class br special
     Event["事件接入<br/>HTTP / Kafka / RPC"]
     subgraph DAG["决策编排（DAG）"]
         List["名单<br/>白名单直放 / 黑名单直拦"]

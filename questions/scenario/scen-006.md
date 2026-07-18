@@ -28,6 +28,7 @@ memory_points:
 - 热度算法公式：互动量乘以权重，再乘以exp(-λΔt)的时间衰减因子
 - 防刷与熔断：同IP降权去噪，QPS环比激增10倍以上触发快照锁定人工审核
 - 防热点单Key：Redis ZSet必做分桶，并配本地Local Cache缓存Top榜单
+frequency: high
 ---
 
 # 如何设计微博热搜榜单系统？实时统计热搜词并排序。
@@ -138,6 +139,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

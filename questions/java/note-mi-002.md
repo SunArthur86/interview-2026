@@ -31,6 +31,7 @@ memory_points:
 - 队列选型：因为无界队列会OOM，所以线上必须强制使用有界队列
 - 拒绝策略：核心链路用Abort防积压，可降级异步用CallerRuns主线程背压
 - 容灾监控：不可丢任务用自定义Kafka兜底补偿，线上必须监控队列积压与拒绝率
+frequency: high
 ---
 
 # 线程池怎么配置？线上拒绝策略怎么选？
@@ -148,6 +149,34 @@ executor.setMaximumPoolSize(newMax);   // 运行时修改
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AbortPolicy process
+    class B decision
+    class C special
+    class CallerRunsPolicy error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class N special
+    class O error
+    class P info
+    class S1 start
+    class S2 process
+    class S3 decision
+    class br special
     subgraph S1[任务提交与分配]
         A[业务线程<br/>提交任务] --> B{当前活跃线程数<br/>是否小于核心线程数}
         B -- 是 --> C[创建核心线程<br/>直接执行任务]

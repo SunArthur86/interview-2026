@@ -30,6 +30,7 @@ memory_points:
 - 两阶段：Phase1 Planner生成步骤列表，Phase2 Executor逐步执行
 - 对比ReAct：ReAct走一步看一步，Plan-Execute有全局视角避免局部贪心
 - 模型搭配：Planner可用强模型，Executor可用便宜模型
+frequency: medium
 ---
 
 # Plan-and-Execute（计划-执行）认知框架怎么工作？
@@ -243,6 +244,7 @@ flowchart TD
     style ACTION fill:#FF9800,color:#fff
     style OBS fill:#9C27B0,color:#fff
     style REFLECT fill:#FFC107,color:#000
+
 ```
 
 ## 记忆要点

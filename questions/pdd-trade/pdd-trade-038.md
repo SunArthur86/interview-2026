@@ -26,14 +26,15 @@ first_principle:
   - 需统一标准和治理
   rebuild: 分层中台（数据→特征→模型→服务→应用）+ 能力服务化 + 低代码接入。
 follow_up:
-  - 中台和业务边界？——中台提供通用能力，业务做定制（prompt/规则/数据）
-  - 怎么避免"中台不中"（变成瓶颈）？——开放+自治+SLA+可绕过
-  - AB 实验平台怎么搭？——流量分桶+指标统计+显著检验
+- 中台和业务边界？——中台提供通用能力，业务做定制（prompt/规则/数据）
+- 怎么避免"中台不中"（变成瓶颈）？——开放+自治+SLA+可绕过
+- AB 实验平台怎么搭？——流量分桶+指标统计+显著检验
 memory_points:
-  - 分层：数据/特征/模型/服务/应用
-  - 能力：推荐/搜索/风控/对话 API
-  - 接入：低代码+SDK
-  - 治理：版本/AB/归因
+- 分层：数据/特征/模型/服务/应用
+- 能力：推荐/搜索/风控/对话 API
+- 接入：低代码+SDK
+- 治理：版本/AB/归因
+frequency: medium
 ---
 
 # 【拼多多交易】智能交易中台怎么搭？
@@ -238,6 +239,31 @@ SLA：中台 RT < 50ms，可用性 99.99%
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AB start
+    class B1 process
+    class B2 decision
+    class Cap special
+    class Eval error
+    class F info
+    class Flink start
+    class HBase process
+    class M decision
+    class Min special
+    class Platform error
+    class R info
+    class RT start
+    class Redis process
+    class S decision
+    class SDK special
+    class Spark error
+    class T info
+    class T1 start
     B1[商品详情页业务] --> SDK[统一接入SDK与API]
     B2[营销活动页业务] --> SDK
     SDK --> AB[AB正交流量分桶路由]

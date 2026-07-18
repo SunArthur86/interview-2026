@@ -28,6 +28,7 @@ memory_points:
 - 合规四层防御：输入过滤防、模型对齐内化、输出审核查、流程审计追
 - 输入层拦截：敏感词脱敏+防Prompt注入；模型层靠SFT/RLHF守规矩
 - 输出层必审：内容安全分类器拦截违规响应；全链路打日志保证可追溯问责
+frequency: medium
 ---
 
 # 如何保证大模型生成内容的合规性？
@@ -288,6 +289,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -19,7 +19,8 @@ feynman:
   - 部署层：vLLM/TensorRT/边缘部署
 first_principle:
   essence: 推理成本 = 参数量 × Token数 × 单位计算成本。
-  derivation: 降本三途径：1.减参数(量化8bit/4bit，蒸馏小模型) 2.减Token(缓存复用，Prompt压缩，早停) 3.降单位成本(KV Cache避免重算，批量摊销，vLLM优化)。全链路优化。
+  derivation: 降本三途径：1.减参数(量化8bit/4bit，蒸馏小模型) 2.减Token(缓存复用，Prompt压缩，早停) 3.降单位成本(KV
+    Cache避免重算，批量摊销，vLLM优化)。全链路优化。
   conclusion: 推理优化 = 减参数(量化) + 减Token(缓存/压缩) + 提效率(KV Cache/批量/vLLM)
 follow_up:
 - 量化损失大吗？——8bit几乎无损，4bit轻微损失
@@ -30,6 +31,7 @@ memory_points:
 - 因为INT8几乎无损且省一半显存，所以是量化生产首选；显存极度紧张选INT4
 - 简单任务走小模型，复杂走大模型，模型路由机制能降70%以上总成本
 - 投机解码：小模型猜+大模型验，质量无损吞吐翻倍；KV Cache复用降计算量
+frequency: high
 ---
 
 # 如何降低大模型 API 推理延迟和成本？如何部署优化？
@@ -292,6 +294,7 @@ flowchart TD
     style BATCH fill:#FF9800,color:#fff
     style CB fill:#F44336,color:#fff
     style RETRY fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

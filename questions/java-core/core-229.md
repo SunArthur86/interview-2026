@@ -16,6 +16,7 @@ memory_points:
 - 控制器关键组件PC：程序计数器，存下一条指令地址并自增
 - 核心瓶颈：CPU远快于内存，引发冯诺依曼瓶颈，靠多级缓存缓解
 - 实战应用：利用数据空间局部性优化数组遍历，提升CPU缓存命中率
+frequency: medium
 ---
 
 # 什么是冯诺依曼模型？
@@ -28,6 +29,24 @@ memory_points:
 **核心架构图 (ASCII)**：
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ALU start
+    class CPU process
+    class CPU_SUB decision
+    class CU special
+    class IN error
+    class IR info
+    class MEM start
+    class OUT process
+    class PC decision
+    class REG special
+    class Registers error
+    class br info
     IN[输入设备]
     MEM["主存储器<br/>存放指令和数据"]
     CPU_SUB

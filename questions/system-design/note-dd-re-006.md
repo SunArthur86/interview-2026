@@ -30,6 +30,7 @@ memory_points:
 - 核心方案：规则集模板化，各活动绑定独立规则集实现解耦
 - 灵活扩展：私有规则可覆盖模板，结合SPI加载定制化逻辑
 - 路由机制：以活动ID为Key，动态路由并装载对应规则组合
+frequency: medium
 ---
 
 # 【滴滴面经】如果不同活动下规则组合不一样，系统要怎么支持？
@@ -52,6 +53,27 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class EXE start
+    class IN process
+    class ROUTER decision
+    class RuleEngine special
+    class RuleSetRouter error
+    class SA info
+    class SB start
+    class SC process
+    class SETS decision
+    class SPI special
+    class SPIExtensionLoader error
+    class activityId info
+    class br start
+    class context process
+    class execute decision
     IN["业务请求入口<br/>(activityId + context)"]
     ROUTER["规则集路由器 RuleSetRouter<br/>根据 activityId 查找"]
     subgraph SETS["规则集"]

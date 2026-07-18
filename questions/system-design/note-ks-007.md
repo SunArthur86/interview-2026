@@ -13,8 +13,10 @@ tags:
 - 位图
 - 面经
 feynman:
-  essence: 10亿昵称去重且内存限制1GB，核心方案是布隆过滤器(Bloom Filter)。10亿数据 × 每个元素约1.2字节(最优参数) ≈ 1.2GB，用1GB可以通过分治+布隆过滤器实现：按哈希分文件 → 每个文件用布隆过滤器去重 → 合并结果。或者用Bitmap+哈希压缩。
-  analogy: "10亿人查重名且只有一个小房间(1GB)——(1)布隆过滤器就像一个超大的'指纹登记本'：不需要存每个人的名字，只需记录'这个名字的指纹是否存在过'。用几个哈希函数算出位置打勾，查重时看这些位置是否都打了勾。(2)如果登记本也放不下 → 分成几个小房间(分治)，每个房间处理一部分人。"
+  essence: 10亿昵称去重且内存限制1GB，核心方案是布隆过滤器(Bloom Filter)。10亿数据 × 每个元素约1.2字节(最优参数) ≈ 1.2GB，用1GB可以通过分治+布隆过滤器实现：按哈希分文件
+    → 每个文件用布隆过滤器去重 → 合并结果。或者用Bitmap+哈希压缩。
+  analogy: 10亿人查重名且只有一个小房间(1GB)——(1)布隆过滤器就像一个超大的'指纹登记本'：不需要存每个人的名字，只需记录'这个名字的指纹是否存在过'。用几个哈希函数算出位置打勾，查重时看这些位置是否都打了勾。(2)如果登记本也放不下
+    → 分成几个小房间(分治)，每个房间处理一部分人。
   key_points:
   - 布隆过滤器：k个哈希函数 + 位数组，空间O(n×m bits)，假阳性率可控
   - 10亿数据1GB：每个元素约1 byte，1GB=10亿byte → 刚好够用（低误判率）
@@ -22,7 +24,8 @@ feynman:
   - Bitmap方案：如果昵称可以映射为整数ID，用BitSet去重(每个元素1 bit)
 first_principle:
   essence: 去重 = 在有限空间内判断"是否出现过"
-  derivation: "精确去重需要存储所有元素 → 10亿×avg 10字节=100GB → 远超1GB。必须用概率数据结构：布隆过滤器只存'指纹'(位图)，不存原始数据 → 空间O(n) bytes而非O(n×avg_string_length)。"
+  derivation: 精确去重需要存储所有元素 → 10亿×avg 10字节=100GB → 远超1GB。必须用概率数据结构：布隆过滤器只存'指纹'(位图)，不存原始数据
+    → 空间O(n) bytes而非O(n×avg_string_length)。
   conclusion: 布隆过滤器是内存受限场景下大数据去重的最优解。1GB可存10亿元素，误判率约1-3%
 follow_up:
 - 布隆过滤器的假阳性率如何计算？如何选择最优k值？
@@ -35,6 +38,7 @@ memory_points:
 - 10亿元素1GB：m=80亿bits=1GB, k=7, 假阳性率≈2.5%
 - 分治法：hash(name)%N分N个文件→每个文件独立布隆过滤器→合并
 - 精确去重1GB不够：10亿×10字节=100GB，必须用概率结构或外部排序
+frequency: high
 ---
 
 # 【快手Java一面】10亿用户昵称去重，内存限制1GB？
@@ -376,6 +380,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

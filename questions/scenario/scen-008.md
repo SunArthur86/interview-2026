@@ -29,6 +29,7 @@ memory_points:
 - 数据一致性：因为要严防超发，所以校验与扣减必须用Lua脚本保证绝对原子性。
 - 多级限流：因为后端无法承接千万QPS，所以必须在网关或CDN层直接按比例错峰丢弃请求。
 - 异步解耦：抢红包结果仅返回前端，账务落库与防重记录交由MQ异步结算处理。
+frequency: high
 ---
 
 # 如何设计一个春运红包雨系统？春晚期间瞬时并发千万级。
@@ -150,6 +151,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

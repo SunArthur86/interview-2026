@@ -17,6 +17,7 @@ memory_points:
 - 工作四步曲：注册通道 -> select阻塞监听 -> selectedKeys获取就绪键 -> 遍历事件分发处理
 - 底层基石：Linux系统下底层调用是epoll（早期为select/poll），支持海量并发连接
 - 避坑指南：警惕早期版本空轮询Bug导致CPU 100%，实战多用Netty底层封装
+frequency: high
 ---
 
 # Java NIO中Selector的作用是什么？
@@ -123,6 +124,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

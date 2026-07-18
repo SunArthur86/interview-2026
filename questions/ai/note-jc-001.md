@@ -10,9 +10,13 @@ tags:
 - GAE
 - 优势函数
 feynman:
-  essence: GAE（Generalized Advantage Estimation）是一种用指数加权平均融合多步 TD 估计来计算优势函数 A(s,a) 的方法。它通过参数 λ 在"高偏差低方差的 1 步 TD"和"低偏差高方差的蒙特卡洛"之间插值，λ=0 退化为 TD(0)，λ=1 退化为蒙特卡洛。核心是把 n 步优势 A_t^(1)=δ_t, A_t^(2)=δ_t+γδ_{t+1}... 用 (γλ)^{k-1} 加权求和，兼顾偏差与方差。
-  analogy: 像 GPS 导航估算到达时间——只看下一步路况（1步TD）估计准但短视（偏差大），看全程历史记录（蒙特卡洛）全面但受单次异常影响（方差大）。GAE 像把"看 1 步、看 2 步…看全程"的多个估计加权平均，平衡短视和噪声。
-  first_principle: RL 中优势函数 A=Q-V 度量"动作比平均好多少"。估算 A 要在偏差（用近似 V* 引入）和方差（轨迹越长噪声越大）间权衡。GAE 用指数衰减权重融合所有 n 步估计，参数 λ 控制融合程度，是偏差-方差的最优折中。
+  essence: GAE（Generalized Advantage Estimation）是一种用指数加权平均融合多步 TD 估计来计算优势函数 A(s,a)
+    的方法。它通过参数 λ 在"高偏差低方差的 1 步 TD"和"低偏差高方差的蒙特卡洛"之间插值，λ=0 退化为 TD(0)，λ=1 退化为蒙特卡洛。核心是把
+    n 步优势 A_t^(1)=δ_t, A_t^(2)=δ_t+γδ_{t+1}... 用 (γλ)^{k-1} 加权求和，兼顾偏差与方差。
+  analogy: 像 GPS 导航估算到达时间——只看下一步路况（1步TD）估计准但短视（偏差大），看全程历史记录（蒙特卡洛）全面但受单次异常影响（方差大）。GAE
+    像把"看 1 步、看 2 步…看全程"的多个估计加权平均，平衡短视和噪声。
+  first_principle: RL 中优势函数 A=Q-V 度量"动作比平均好多少"。估算 A 要在偏差（用近似 V* 引入）和方差（轨迹越长噪声越大）间权衡。GAE
+    用指数衰减权重融合所有 n 步估计，参数 λ 控制融合程度，是偏差-方差的最优折中。
   key_points:
   - GAE 用指数加权融合多步 TD 估计优势函数
   - λ=0 退化为 TD(0)（1步，高偏差低方差）
@@ -33,6 +37,7 @@ memory_points:
 - 公式核心：衰减权重(γλ)^k融合多步TD误差
 - 参数记忆：λ=0退化为TD，λ=1退化为MC，λ常取0.95配合γ=0.99
 - GAE专供Critic网络算A用，而GRPO省Critic用组均值代替
+frequency: high
 ---
 
 # 【阶跃星辰面经】说说你对 GAE 的理解
@@ -141,6 +146,26 @@ GAE 提供 A 的估计：
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AC process
+    class Actor decision
+    class C special
+    class CR error
+    class Critic info
+    class G start
+    class GAE process
+    class M decision
+    class P special
+    class S error
+    class T info
+    class br start
+    class n process
     subgraph C["优势函数估计的两种极端"]
         direction TB
         T["1步TD估计<br/>(高偏差/低方差)"]

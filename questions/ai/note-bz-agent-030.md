@@ -30,6 +30,7 @@ memory_points:
 - 奖励设计是成败关键，须组合即时反馈(点赞)、中期任务(完成率)、长期价值(留存)
 - 因为真实用户反馈稀疏，所以常引入LLM-as-Judge评估单轮回复质量作补充
 - 加入效率惩罚：奖励设计需考量解决轮数，鼓励用最少对话完成任务
+frequency: medium
 ---
 
 # 基于强化学习的对话策略如何优化？
@@ -296,6 +297,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

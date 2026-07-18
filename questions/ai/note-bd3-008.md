@@ -8,8 +8,10 @@ tags:
 - 面经
 - 二面
 feynman:
-  essence: KV Cache缓存已计算的Key/Value避免重复计算；PagedAttention像操作系统的虚拟内存分页管理KV Cache；Continuous Batching像流水线动态组批
-  analogy: KV Cache像读书时做笔记——翻过的页不用重新读，只看笔记。PagedAttention像图书馆——不必每人搬一整套书，按页借阅用完归还。Continuous Batching像超市收银——不等所有人到齐才开收银台，来一个结一个
+  essence: KV Cache缓存已计算的Key/Value避免重复计算；PagedAttention像操作系统的虚拟内存分页管理KV Cache；Continuous
+    Batching像流水线动态组批
+  analogy: KV Cache像读书时做笔记——翻过的页不用重新读，只看笔记。PagedAttention像图书馆——不必每人搬一整套书，按页借阅用完归还。Continuous
+    Batching像超市收银——不等所有人到齐才开收银台，来一个结一个
   first_principle: 自回归生成的每一步都要重新计算所有token的attention，但历史token的K/V不变，缓存它们可以避免O(n²)的重复计算
   key_points:
   - 'KV Cache: 存储历史token的K/V矩阵，推理时只计算新token'
@@ -27,6 +29,7 @@ memory_points:
 - KV Cache省算力：避免重复计算历史token，将推理复杂度从O(n³)降至O(n²)。
 - PagedAttention治碎片：仿OS虚拟内存按块离散分配，打破连续预分配，显存利用达97%。
 - Continuous Batching提吞吐：请求级别动态拼Batch，消除队列等待，GPU不空转。
+frequency: high
 ---
 
 # KV Cache的工作原理是什么？vLLM的PagedAttention和Continuous Batching解决了什么问题？
@@ -227,6 +230,7 @@ flowchart TD
     style PAGED fill:#FF9800,color:#fff
     style OFFLOAD fill:#F44336,color:#fff
     style BATCH fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

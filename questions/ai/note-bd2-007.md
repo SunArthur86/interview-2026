@@ -31,6 +31,7 @@ memory_points:
 - Benchmark分类记三点：基础能力(MMLU/HumanEval)、Agent能力(GAIA/ToolBench)、安全对齐。
 - UTBench核心评估：工具选对没、参数对没、调用时机对没、结果解析对没。
 - 主流工具评测：ToolBench看API调用，GAIA考多步推理，WebArena测网页操作。
+frequency: medium
 ---
 
 # UTBench等Benchmark如何衡量模型生成效果？
@@ -247,6 +248,7 @@ flowchart TD
     style FIX_RET fill:#FF9800,color:#fff
     style FIX_GEN fill:#9C27B0,color:#fff
     style FIX_Q fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

@@ -29,14 +29,15 @@ first_principle:
   - 核心要保住
   rebuild: 限流（防过载）+降级（保核心）+超时（防雪崩）+重试（保成功）。
 follow_up:
-  - 令牌桶和漏桶区别？——令牌桶允许突发，漏桶匀速
-  - 降级怎么触发？——异常率/慢调用/手动开关
-  - 重试风暴怎么防？——退避+熔断+限制重试次数
+- 令牌桶和漏桶区别？——令牌桶允许突发，漏桶匀速
+- 降级怎么触发？——异常率/慢调用/手动开关
+- 重试风暴怎么防？——退避+熔断+限制重试次数
 memory_points:
-  - 限流：令牌桶/漏桶+Sentinel
-  - 降级：核心优先+默认值
-  - 超时：连接+读取分层
-  - 重试：幂等+退避+限次
+- 限流：令牌桶/漏桶+Sentinel
+- 降级：核心优先+默认值
+- 超时：连接+读取分层
+- 重试：幂等+退避+限次
+frequency: high
 ---
 
 # 【拼多多内容】限流降级超时重试怎么设计？
@@ -304,6 +305,28 @@ degrade.setTimeWindow(10);             // 熔断 10s
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class Open decision
+    class br special
     A[直播弹幕/评价请求] --> B{Sentinel网关拦截}
     B -- 超限 --> C[令牌桶/单点登录限流<br/>返回系统繁忙]
     B -- 放行 --> D[业务接口调用]

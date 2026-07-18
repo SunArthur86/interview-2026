@@ -16,6 +16,7 @@ memory_points:
 - 标记机制：实现空接口Serializable，显式定义serialVersionUID以防版本不兼容。
 - 排除字段：transient修饰的实例变量和static静态变量不参与序列化。
 - 安全红线：原生反序列化存在RCE漏洞，严禁对不可信数据执行反序列化。
+frequency: medium
 ---
 
 # Java序列化机制的原理和使用场景是什么？
@@ -93,6 +94,42 @@ ObjectInputStream ois = new ObjectInputStream(in) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class Externalizable info
+    class F start
+    class Fastjson process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class JSON start
+    class Jackson process
+    class Java decision
+    class K special
+    class L error
+    class M info
+    class N start
+    class O process
+    class Protobuf decision
+    class RPC special
+    class Serializable error
+    class Thrift info
+    class br start
+    class readExternal process
+    class serialVersionUID decision
+    class static special
+    class transient error
+    class writeExternal info
     A[Java 序列化] --> B[对象 → 字节流]
     B --> C[存储到磁盘]
     B --> D[网络传输 RPC]

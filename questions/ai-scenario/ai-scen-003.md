@@ -28,6 +28,7 @@ memory_points:
 - 生成层：强约束Prompt(仅基于Context)，低Temperature，要求标注来源ID
 - 检测层：NLI模型校验回答与文档的蕴含关系，低置信度触发兜底策略
 - 核心逻辑：先判断检索内容是否充足，生成后验证事实是否忠实于原文
+frequency: medium
 ---
 
 # 如何设计RAG系统的幻觉治理方案？确保生成的回答忠实于检索到的文档。
@@ -151,6 +152,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

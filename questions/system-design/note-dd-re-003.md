@@ -30,6 +30,7 @@ memory_points:
 - 数量阈值：规则超10个线性链必乱，需升级树或分组结构
 - 架构演进：通过责任链路由分组，组内按优先级，组间用策略模式短路
 - 治理核心：将硬编码改为动态配置，提升可读性、可测性与执行效率
+frequency: high
 ---
 
 # 【滴滴面经】如果后面不是加一个规则，而是连续加十几个规则，会不会越来越乱？
@@ -54,6 +55,34 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class ACC decision
+    class AccessGroup special
+    class HIGH error
+    class IN info
+    class LOW start
+    class M1 process
+    class M2 decision
+    class MEDIUM special
+    class MKT error
+    class MarketingGroup info
+    class R1 start
+    class R2 process
+    class R3 decision
+    class RISK special
+    class ROUTER error
+    class RiskGroup info
+    class RuleEngine start
+    class RuleGroupRouter process
+    class br decision
+    class category special
     IN["RuleEngine 入口<br/>接收RuleContext,返回RuleResult"]
     ROUTER["RuleGroupRouter (分组路由)<br/>按 category(风控/营销/准入) 路由到不同规则组"]
     subgraph RISK["RiskGroup<br/>优先级: HIGH<br/>短路策略: 命中即返回"]

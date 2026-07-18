@@ -21,7 +21,8 @@ feynman:
   - '降级: 大V发博时跳过推送，改为粉丝主动拉取'
 first_principle:
   essence: Feed流的核心是时间线(Timeline)的构建方式
-  derivation: '用户刷新Feed → 需要看到关注人的最新内容 → 方式1: 发博时推到粉丝收件箱(推) → 方式2: 刷新时实时聚合(拉) → 大V粉丝太多 → 推成本爆炸 → 推拉结合'
+  derivation: '用户刷新Feed → 需要看到关注人的最新内容 → 方式1: 发博时推到粉丝收件箱(推) → 方式2: 刷新时实时聚合(拉) → 大V粉丝太多
+    → 推成本爆炸 → 推拉结合'
   conclusion: 千万粉丝级别必须用推拉结合，纯推或纯拉都无法承受
 follow_up:
 - 推拉结合的切换阈值怎么定？
@@ -32,6 +33,7 @@ memory_points:
 - 推拉分界：普通用户(粉丝<10万)用推模式，因为发博成本低，粉丝读O(1)极快
 - 大V特判：大V(粉丝>10万)用拉模式，因为写扩散会瞬间撑爆Redis，改为粉丝活跃时再拉取
 - 数据结构：收发件箱(in/outbox)均用Redis ZSET，因为Score存时间戳天然支持按时间倒序排
+frequency: high
 ---
 
 # 微博千万网红 Feed 流量如何扛住不崩？
@@ -236,6 +238,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

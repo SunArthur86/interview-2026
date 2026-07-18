@@ -29,6 +29,7 @@ memory_points:
 - 模型选型：中文首选BGE/Qwen，英文OpenAI，专业领域必须用对比学习微调。
 - 分块策略：固定大小易切断语义，最推荐递归分块保边界，语义分块最精准。
 - 进阶索引：多建多粒度索引，父子分块用小块精准命中，用大块返回完整上下文。
+frequency: high
 ---
 
 # Embedding 策略怎么定？如何构建高精度向量检索体系？
@@ -272,6 +273,7 @@ flowchart TD
     style VEC fill:#FF9800,color:#fff
     style STORE fill:#9C27B0,color:#fff
     style COS fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

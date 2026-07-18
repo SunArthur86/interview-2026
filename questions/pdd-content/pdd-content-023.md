@@ -28,14 +28,15 @@ first_principle:
   - 个性化（千人千面）
   rebuild: 召回+排序多级漏斗+模型预测。
 follow_up:
-  - 冷启动怎么做？——新内容用内容特征+热度兜底；新用户用兴趣探测
-  - 怎么解决信息茧房？——多样性重排+探索（EE 策略）
-  - 实时性怎么保证？——特征实时化（Flink）+模型在线学习
+- 冷启动怎么做？——新内容用内容特征+热度兜底；新用户用兴趣探测
+- 怎么解决信息茧房？——多样性重排+探索（EE 策略）
+- 实时性怎么保证？——特征实时化（Flink）+模型在线学习
 memory_points:
-  - 召回：多路（协同/向量/标签/热点）
-  - 粗排：双塔快速过滤
-  - 精排：DIN/DeepFM CTR
-  - 重排：多样性/广告
+- 召回：多路（协同/向量/标签/热点）
+- 粗排：双塔快速过滤
+- 精排：DIN/DeepFM CTR
+- 重排：多样性/广告
+frequency: medium
 ---
 
 # 【拼多多内容】Feed 推荐架构怎么设计？
@@ -291,6 +292,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

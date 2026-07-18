@@ -21,6 +21,7 @@ memory_points:
 - 软标签：概率分布，含暗知识(类间相似度)，需温度T平滑。
 - 蒸馏核心：用教师软标签(KL散度)指导学生模型学习。
 - 实战：大模型蒸馏需防幻觉，常混合硬软标签训练。
+frequency: high
 ---
 
 # 知识蒸馏在大模型中如何应用?软标签和硬标签的区别是什么
@@ -155,6 +156,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

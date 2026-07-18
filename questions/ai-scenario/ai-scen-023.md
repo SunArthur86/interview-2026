@@ -29,6 +29,7 @@ memory_points:
 - Prefix缓存：复用公共前缀计算结果，不影响质量，仅加速推理。
 - 风险控制：Hash Key包含Temperature参数，模型更新自动失效旧缓存。
 - 实战效果：语义缓存命中率达30%，延迟从800ms降至15ms，大幅降本。
+frequency: high
 ---
 
 # 如何设计LLM推理的缓存策略？通过精确缓存、语义缓存和Prefix缓存降低成本和延迟。
@@ -170,6 +171,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

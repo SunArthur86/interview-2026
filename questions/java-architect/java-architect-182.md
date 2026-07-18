@@ -10,9 +10,11 @@ tags:
 - 转码
 - 元数据一致性
 feynman:
-  essence: 对象存储回调的核心是"上传回调 + 异步转码 + 元数据最终一致"。客户端直传对象存储（省服务端带宽），上传成功后对象存储回调服务端。转码（图片缩放/视频转 H.264）异步触发，转码完更新元数据。元数据一致性靠回调 + 状态机 + 对账保证。
+  essence: 对象存储回调的核心是"上传回调 + 异步转码 + 元数据最终一致"。客户端直传对象存储（省服务端带宽），上传成功后对象存储回调服务端。转码（图片缩放/视频转
+    H.264）异步触发，转码完更新元数据。元数据一致性靠回调 + 状态机 + 对账保证。
   analogy: 像快递自提——客户直接把包裹放快递柜（客户端直传对象存储），快递柜通知商家"已入库"（回调）。特殊包裹要加工（图片转码/视频压缩），加工完更新库存信息（元数据更新）。
-  first_principle: 大文件直传服务端会耗尽服务端带宽（GB 文件 × 万用户）。让客户端直传对象存储（带签名），服务端只处理回调通知。转码是 CPU 密集任务，异步执行不阻塞上传。元数据（文件名/大小/转码状态）分布在 DB 和对象存储，靠回调 + 对账保证一致。
+  first_principle: 大文件直传服务端会耗尽服务端带宽（GB 文件 × 万用户）。让客户端直传对象存储（带签名），服务端只处理回调通知。转码是 CPU
+    密集任务，异步执行不阻塞上传。元数据（文件名/大小/转码状态）分布在 DB 和对象存储，靠回调 + 对账保证一致。
   key_points:
   - 客户端直传：服务端发签名 URL，客户端直传对象存储（省服务端带宽）
   - 上传回调：对象存储上传成功后回调服务端（POST callback）
@@ -26,19 +28,23 @@ first_principle:
   - 转码是 CPU 密集（秒级~分钟级），不能阻塞上传接口
   - 元数据在 DB，实际文件在对象存储，两者可能不一致（上传成功但回调失败）
   - 客户端直传需要授权（不能让客户端随意写对象存储）
-  rebuild: 客户端直传——服务端发 STS 签名 URL（临时授权，有效期 15 分钟），客户端直传对象存储（不经过服务端）。上传成功后对象存储 POST 回调服务端（带 fileId/自定义参数）。服务端收到回调更新 DB 元数据状态为 UPLOADED，触发异步转码。转码（图片缩放/视频转 H.264）异步执行，完更新状态为 READY。元数据一致性靠状态机（UPLOADED→TRANSCODING→READY）+ T+1 对账（扫对象存储和 DB 比对）。
+  rebuild: 客户端直传——服务端发 STS 签名 URL（临时授权，有效期 15 分钟），客户端直传对象存储（不经过服务端）。上传成功后对象存储 POST
+    回调服务端（带 fileId/自定义参数）。服务端收到回调更新 DB 元数据状态为 UPLOADED，触发异步转码。转码（图片缩放/视频转 H.264）异步执行，完更新状态为
+    READY。元数据一致性靠状态机（UPLOADED→TRANSCODING→READY）+ T+1 对账（扫对象存储和 DB 比对）。
 follow_up:
-  - 客户端怎么直传？——服务端发 STS 签名 URL（临时 token + 权限 + 有效期），客户端用这个 URL 直接 PUT 到对象存储，不经过服务端。
-  - 回调失败怎么办？——重试。对象存储回调失败自动重试 3 次。仍失败的进死信队列人工处理。或客户端兜底通知（上传完客户端也调服务端一次）。
-  - 转码怎么异步？——MQ。回调收到后发转码任务到 MQ，转码 worker 消费执行（FFmpeg/图片库）。转码完更新 DB。
-  - 元数据怎么一致？——状态机（UPLOADED→TRANSCODING→READY）。回调成功才 UPLOADED，转码完才 READY。T+1 对账扫对象存储和 DB 比对。
-  - 签名 URL 安全吗？——STS 临时授权（15 分钟过期），限制操作（只能 PUT 指定 key）+ 大小限制。不能用永久 AK/SK 给客户端。
+- 客户端怎么直传？——服务端发 STS 签名 URL（临时 token + 权限 + 有效期），客户端用这个 URL 直接 PUT 到对象存储，不经过服务端。
+- 回调失败怎么办？——重试。对象存储回调失败自动重试 3 次。仍失败的进死信队列人工处理。或客户端兜底通知（上传完客户端也调服务端一次）。
+- 转码怎么异步？——MQ。回调收到后发转码任务到 MQ，转码 worker 消费执行（FFmpeg/图片库）。转码完更新 DB。
+- 元数据怎么一致？——状态机（UPLOADED→TRANSCODING→READY）。回调成功才 UPLOADED，转码完才 READY。T+1 对账扫对象存储和
+  DB 比对。
+- 签名 URL 安全吗？——STS 临时授权（15 分钟过期），限制操作（只能 PUT 指定 key）+ 大小限制。不能用永久 AK/SK 给客户端。
 memory_points:
-  - 客户端直传：STS 签名 URL（15 分钟有效），客户端直传对象存储
-  - 回调：对象存储 POST callback 通知服务端，重试 3 次
-  - 转码：异步 MQ + FFmpeg/图片库，状态 TRANSCODING→READY
-  - 一致性：状态机 + T+1 对账（扫对象存储和 DB 比对）
-  - 安全：STS 临时授权，限制 key + size，不用永久 AK/SK
+- 客户端直传：STS 签名 URL（15 分钟有效），客户端直传对象存储
+- 回调：对象存储 POST callback 通知服务端，重试 3 次
+- 转码：异步 MQ + FFmpeg/图片库，状态 TRANSCODING→READY
+- 一致性：状态机 + T+1 对账（扫对象存储和 DB 比对）
+- 安全：STS 临时授权，限制 key + size，不用永久 AK/SK
+frequency: medium
 ---
 
 # 【Java 后端架构师】对象存储回调、转码与元数据一致性
@@ -366,6 +372,21 @@ public class ClientNotifyService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class MySQL decision
     A[商家客户端] -->|1.请求临时凭证| B(业务服务端)
     B -->|2.返回STS签名URL| A
     A -->|3.直传视频/图片| C[(对象存储OSS)]

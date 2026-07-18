@@ -20,7 +20,8 @@ feynman:
   - 解决数据倾斜：加盐打散、两阶段聚合、自定义Partitioner
 first_principle:
   essence: 分布式聚合的性能上界由最大partition决定，而非平均partition
-  derivation: 在MapReduce/Spark中，数据按key的hash分布到N个partition并行处理，总耗时=max(各partition耗时)。当某个key的频次远超其他（如null、空字符串、热门ID），其所在partition成为瓶颈。窗口函数通过预排序+滑动窗口，避免了GROUP BY的shuffle代价。
+  derivation: 在MapReduce/Spark中，数据按key的hash分布到N个partition并行处理，总耗时=max(各partition耗时)。当某个key的频次远超其他（如null、空字符串、热门ID），其所在partition成为瓶颈。窗口函数通过预排序+滑动窗口，避免了GROUP
+    BY的shuffle代价。
   conclusion: 性能优化=让数据分布均匀(治倾斜)+让计算本地化(减少shuffle+合理用窗口函数)
 follow_up:
 - ROWS BETWEEN和RANGE BETWEEN的区别？
@@ -31,6 +32,7 @@ memory_points:
 - 三要素：语法包含 PARTITION BY(分组)、ORDER BY(组内排序)、ROWS/RANGE(框架范围)。
 - 函数分类：聚合类做累计求和，排名类(ROW_NUMBER等)常用于去重，偏移类(LAG/LEAD)算同比。
 - 倾斜处理：因 Key 分布不均导致，优化常靠打散重组、加盐扩容或开启 Skew Join 参数。
+frequency: medium
 ---
 
 # 【华为面经】SQL 窗口函数与数据倾斜问题如何处理？
@@ -350,6 +352,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

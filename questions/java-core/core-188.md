@@ -17,6 +17,7 @@ memory_points:
 - 生效时机：数据不会即时进入！必须等SqlSession执行commit或close后才刷入。
 - 底层实现：基于CachingExecutor装饰器，拦截查询请求优先检查缓存。
 - 致命缺陷：多表联查极易脏读，分布式不同步，强一致性业务严禁使用。
+frequency: high
 ---
 
 # 二级缓存原理（mapper基本）是什么？
@@ -110,6 +111,45 @@ public class MybatisRedisCache implements Cache {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Cache special
+    class Control error
+    class D info
+    class E start
+    class ETag process
+    class Expires decision
+    class F special
+    class G error
+    class H info
+    class HTTP start
+    class I process
+    class If decision
+    class J special
+    class K error
+    class L info
+    class Last start
+    class M process
+    class Match decision
+    class Modified special
+    class N error
+    class None info
+    class Not start
+    class Since process
+    class age decision
+    class body special
+    class br error
+    class cache info
+    class from start
+    class max process
+    class network decision
     A[HTTP 缓存决策] --> B{本地有无缓存?}
     B -->|否| C[向服务器请求<br/>200 from network]
     B -->|是| D{Cache-Control/Expires<br/>是否过期?}

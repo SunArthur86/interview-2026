@@ -32,6 +32,7 @@ memory_points:
 - 检索端：设相似度阈值低分过滤，加Rerank模型剔除噪声，避免LLM误用上下文
 - 生成端：Prompt强制溯源引用并校验chunk_id，限制只用给定Context，温度调低
 - 验证端：独立事实校验子Agent逐句比对（推荐换不同模型防同源偏差），不支持即拦截
+frequency: medium
 ---
 
 # 【某讯面经】缓解 RAG 幻觉手段：溯源引用、相似度阈值过滤、事实校验子Agent、重排模型
@@ -202,6 +203,24 @@ temperature: 0.1-0.3（降低随机性，减少编造）
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Cross special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class K error
+    class br info
     A["用户提问Query"] --> B["向量检索Top-K"]
     B --> C["相似度阈值过滤<br/>剔除低分无关Chunk"]
     C --> D["Rerank重排模型<br/>Cross-Encoder精排"]

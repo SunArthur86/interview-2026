@@ -10,8 +10,10 @@ tags:
 - Netty
 - 传输API
 feynman:
-  essence: Channel 是 Netty 对"一个开放的网络连接"的抽象（封装了 Socket），大大降低了直接用 Socket 类的复杂性。它的一个关键工程价值是线程安全——你可以放心地把一个 Channel 引用存起来，在多个线程里随时向它写数据，因为同一个 Channel 的 I/O 操作始终由同一个 EventLoop（同一个线程）串行执行。
-  analogy: Channel 像一个"线程安全的对讲机"。普通对讲机（原生 Socket）如果 10 个人同时按按钮说话，信号会串台乱套；Netty 的 Channel 对讲机配了一个专属接线员（EventLoop），所有人想说话都先把话递给接线员，由他一个人按顺序发出去，永远不会串台。
+  essence: Channel 是 Netty 对"一个开放的网络连接"的抽象（封装了 Socket），大大降低了直接用 Socket 类的复杂性。它的一个关键工程价值是线程安全——你可以放心地把一个
+    Channel 引用存起来，在多个线程里随时向它写数据，因为同一个 Channel 的 I/O 操作始终由同一个 EventLoop（同一个线程）串行执行。
+  analogy: Channel 像一个"线程安全的对讲机"。普通对讲机（原生 Socket）如果 10 个人同时按按钮说话，信号会串台乱套；Netty 的 Channel
+    对讲机配了一个专属接线员（EventLoop），所有人想说话都先把话递给接线员，由他一个人按顺序发出去，永远不会串台。
   key_points:
   - Channel=对开放连接(如网络socket)的抽象,封装底层Socket
   - 基本I/O操作:bind/connect/read/write,依赖底层传输原语
@@ -26,15 +28,16 @@ first_principle:
   - 串行化的最佳方式是绑定单一执行线程(无锁化)
   rebuild: 从"抽象连接"出发→Channel接口封装Socket的bind/connect/read/write,屏蔽底层复杂性→为保证并发写安全,设计上让一个Channel绑定一个EventLoop(单线程)→所有I/O操作都在这个线程执行→天然线程安全,无需加锁→上层可以放心多线程共享Channel引用(聊天室场景)。
 follow_up:
-  - Channel 和 EventLoop 如何绑定？
-  - write() 和 writeAndFlush() 的区别？
-  - 为什么说"消除对同步的需要"？
+- Channel 和 EventLoop 如何绑定？
+- write() 和 writeAndFlush() 的区别？
+- 为什么说"消除对同步的需要"？
 memory_points:
-  - Channel定义：到实体（硬件/文件/socket/程序组件）的开放连接，可执行I/O操作
-  - 核心 I/O：bind() / connect() / read() / write()
-  - writeAndFlush()：写数据并冲刷到远程节点
-  - 线程安全根因：同一 Channel 的 I/O 由同一 EventLoop（单线程）串行执行，消除同步需要
-  - 聊天室场景：缓存每个 Channel 引用，多线程发送消息
+- Channel定义：到实体（硬件/文件/socket/程序组件）的开放连接，可执行I/O操作
+- 核心 I/O：bind() / connect() / read() / write()
+- writeAndFlush()：写数据并冲刷到远程节点
+- 线程安全根因：同一 Channel 的 I/O 由同一 EventLoop（单线程）串行执行，消除同步需要
+- 聊天室场景：缓存每个 Channel 引用，多线程发送消息
+frequency: high
 ---
 
 # Channel 的作用是什么？为什么是线程安全的？
@@ -269,6 +272,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

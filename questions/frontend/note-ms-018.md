@@ -30,6 +30,7 @@ memory_points:
 - 全链路体验闭环：主战场从单一对话框转向多 Agent 协同与产物自动落盘
 - 深度系统级集成：依托原生能力打破浏览器沙箱，实现全局呼出与底层操控
 - 可解释性与掌控感：通过执行回放、产物 Diff 削弱黑盒感，建立用户信任
+frequency: medium
 ---
 
 # 【月之暗面面经】你怎么看桌面 AI 产品前端未来一年的主战场？
@@ -114,6 +115,22 @@ function renderReplay(steps: AgentStep[]) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Agent process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class br special
     subgraph 混合AI与可解释性架构
         A["桌面主入口<br/>全局快捷键呼出"] --> B["Agent 编排引擎<br/>DAG任务图"]
         B --> C["云端大模型<br/>复杂低频任务"]

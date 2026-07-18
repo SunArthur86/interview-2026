@@ -17,6 +17,7 @@ memory_points:
 - tcp_tw_recycle：NAT 环境下会丢包导致连接失败，高版本 Linux 已废弃禁用，切勿使用
 - tcp_fin_timeout：控制主动方在 FIN_WAIT_2 状态的超时时间，默认 60s，可减小防资源占用
 - tcp_max_tw_buckets：全局限制 TIME_WAIT 总数，超限直接销毁防内存和端口耗尽
+frequency: low
 ---
 
 # 什么是TCP内核参数？
@@ -98,6 +99,27 @@ net.ipv4.tcp_max_tw_buckets = 5000
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class ESTABLISHED decision
+    class FIN special
+    class S error
+    class SYN info
+    class TIME_WAIT start
+    class ack process
+    class as decision
+    class seq special
+    class u error
+    class v info
+    class w start
+    class x process
+    class y decision
     participant C as 客户端
     participant S as 服务端
     Note over C,S: 三次握手 建立连接

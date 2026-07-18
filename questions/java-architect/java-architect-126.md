@@ -9,14 +9,18 @@ tags:
 - 契约优先
 - 接口治理
 feynman:
-  essence: API 契约优先设计（Design-First）是指先写 OpenAPI 规范作为"机器可读的契约"，再生成桩代码、Mock、文档、SDK，最后双方按契约并行开发；OpenAPI 治理是在企业内部把"契约版本化、兼容性校验、Linter 规则、Mock/Stub、文档中心、SDK 自动下发"串成一条流水线，让契约成为服务端与客户端、上游与下游协作的唯一真相源（single source of truth）。
-  analogy: 像盖楼先出施工图纸（OpenAPI YAML），所有工种（前端、后端、QA、网关、文档）都按同一张图纸作业，不允许私自改承重墙。图纸变了要走变更评审（breaking change check），不兼容变更要发新版本号（v2），旧版本号保留 6 个月兼容期。
-  first_principle: 为什么不写完代码再用 swagger 注解生成文档？因为代码生成文档是"事后描述"，已经丢失了"契约约束力"——上游按旧接口调，下游改了字段没通知，集成阶段才发现不兼容。契约优先把"接口"从代码里抽出来变成独立工件，在 PR 阶段就能用 spectral/openapi-diff 拦截破坏性变更。
+  essence: API 契约优先设计（Design-First）是指先写 OpenAPI 规范作为"机器可读的契约"，再生成桩代码、Mock、文档、SDK，最后双方按契约并行开发；OpenAPI
+    治理是在企业内部把"契约版本化、兼容性校验、Linter 规则、Mock/Stub、文档中心、SDK 自动下发"串成一条流水线，让契约成为服务端与客户端、上游与下游协作的唯一真相源（single
+    source of truth）。
+  analogy: 像盖楼先出施工图纸（OpenAPI YAML），所有工种（前端、后端、QA、网关、文档）都按同一张图纸作业，不允许私自改承重墙。图纸变了要走变更评审（breaking
+    change check），不兼容变更要发新版本号（v2），旧版本号保留 6 个月兼容期。
+  first_principle: 为什么不写完代码再用 swagger 注解生成文档？因为代码生成文档是"事后描述"，已经丢失了"契约约束力"——上游按旧接口调，下游改了字段没通知，集成阶段才发现不兼容。契约优先把"接口"从代码里抽出来变成独立工件，在
+    PR 阶段就能用 spectral/openapi-diff 拦截破坏性变更。
   key_points:
   - Design-First：OpenAPI YAML 是工件，进 Git，参与 Code Review，先于代码
   - 兼容性三类：non-breaking（加可选字段）、breaking（删字段/改类型/改必填）、risky（语义变化）
   - 治理四件套：Linter（spectral）、Diff（openapi-diff）、Mock（prism/ventus）、SDK 生成（openapi-generator）
-  - "版本化：URL 路径版本（/v1/v2）最简单；媒体类型版本（Accept: application/vnd.x.v1+json）更优雅但难调试"
+  - '版本化：URL 路径版本（/v1/v2）最简单；媒体类型版本（Accept: application/vnd.x.v1+json）更优雅但难调试'
   - 弃用流程：deprecated 标记 → sunset header → 监控调用方 → 邮件/合同通知 → 下线
 first_principle:
   problem: 微服务团队如何在不阻塞对方的前提下，保证 API 修改不破坏既有调用方？
@@ -24,19 +28,28 @@ first_principle:
   - 任何"代码即文档"的方案都滞后于真实集成——集成在代码完成前就开始了
   - 大多数"线上事故"是隐性契约被破坏（字段必填变可选、枚举值删除、状态机迁移）
   - API 一旦发布就有外部依赖，破坏性变更的成本随调用方数量指数增长
-  rebuild: 把 OpenAPI YAML 当作 Git 里的第一公民工件，PR 阶段跑 spectral 规则集（命名、错误码、分页、鉴权）+ openapi-diff 识别破坏性变更，CI 通过后用 prism 起 Mock 让前端先联调，用 openapi-generator 生成多语言 SDK 发到内网 Nexus。契约变更走独立的"契约 PR"，业务 PR 依赖契约 PR 合并。这样把"接口不兼容"从事故降为编译期失败。
+  rebuild: 把 OpenAPI YAML 当作 Git 里的第一公民工件，PR 阶段跑 spectral 规则集（命名、错误码、分页、鉴权）+ openapi-diff
+    识别破坏性变更，CI 通过后用 prism 起 Mock 让前端先联调，用 openapi-generator 生成多语言 SDK 发到内网 Nexus。契约变更走独立的"契约
+    PR"，业务 PR 依赖契约 PR 合并。这样把"接口不兼容"从事故降为编译期失败。
 follow_up:
-  - 为什么不用 GraphQL 替代 OpenAPI？——GraphQL 适合"客户端驱动、字段灵活、聚合多源"场景（如 App 首页），OpenAPI 适合"服务端主导、稳定契约、强类型"场景（如开放平台、内部 RPC）。两者并存，不是替代关系。
-  - 破坏性变更怎么平滑迁移？——双端点并行（/v1 和 /v2 共存）+ 流量比例监控 + sunset header + 调用方迁移 checklist + 强制下线日历。JD 开放平台要求 ISV 在 90 天内迁移，否则 sunset 后 401。
-  - OpenAPI 怎么跟 gRPC/Protobuf 协同？——内部用 gRPC（proto 是契约），网关用 grpc-gateway 或 buf 生成 OpenAPI 暴露给外部 REST 调用方。proto 是源头，OpenAPI 是派生工件。
-  - OpenAPI 文档怎么跟代码不漂移？——Design-First 模式下代码只是契约的实现，CI 跑 contract test（Pact/spring-cloud-contract）保证实现符合契约；Code-First 模式下用 swagger-inline 注解 + CI 校验注解和 YAML 一致。
-  - LLM Agent 接 API 用 OpenAPI 还是 Function Calling？——OpenAPI 可以自动转成 Function Calling Schema（如 OpenAI 的 actions / plugins），所以 OpenAPI 是 LLM 时代的"机器可读契约"基础，治理好的企业能直接把 API 喂给 Agent。
+- 为什么不用 GraphQL 替代 OpenAPI？——GraphQL 适合"客户端驱动、字段灵活、聚合多源"场景（如 App 首页），OpenAPI 适合"服务端主导、稳定契约、强类型"场景（如开放平台、内部
+  RPC）。两者并存，不是替代关系。
+- 破坏性变更怎么平滑迁移？——双端点并行（/v1 和 /v2 共存）+ 流量比例监控 + sunset header + 调用方迁移 checklist + 强制下线日历。JD
+  开放平台要求 ISV 在 90 天内迁移，否则 sunset 后 401。
+- OpenAPI 怎么跟 gRPC/Protobuf 协同？——内部用 gRPC（proto 是契约），网关用 grpc-gateway 或 buf 生成 OpenAPI
+  暴露给外部 REST 调用方。proto 是源头，OpenAPI 是派生工件。
+- OpenAPI 文档怎么跟代码不漂移？——Design-First 模式下代码只是契约的实现，CI 跑 contract test（Pact/spring-cloud-contract）保证实现符合契约；Code-First
+  模式下用 swagger-inline 注解 + CI 校验注解和 YAML 一致。
+- LLM Agent 接 API 用 OpenAPI 还是 Function Calling？——OpenAPI 可以自动转成 Function Calling
+  Schema（如 OpenAI 的 actions / plugins），所以 OpenAPI 是 LLM 时代的"机器可读契约"基础，治理好的企业能直接把 API
+  喂给 Agent。
 memory_points:
-  - Design-First：YAML 先行，PR 拦截 breaking change
-  - 治理流水线：spectral（lint）→ openapi-diff（兼容性）→ prism（mock）→ openapi-generator（SDK）
-  - 兼容性三档：non-breaking / breaking / risky；breaking 必须 bump version
-  - 版本策略：URL 路径版本（/v2）最常用，Sunset header 配合 90 天弃用窗口
-  - 工具链：Stoplight Studio / Redocly / Apifox 是商业方案，spectral/prism/openapi-generator 是开源
+- Design-First：YAML 先行，PR 拦截 breaking change
+- 治理流水线：spectral（lint）→ openapi-diff（兼容性）→ prism（mock）→ openapi-generator（SDK）
+- 兼容性三档：non-breaking / breaking / risky；breaking 必须 bump version
+- 版本策略：URL 路径版本（/v2）最常用，Sunset header 配合 90 天弃用窗口
+- 工具链：Stoplight Studio / Redocly / Apifox 是商业方案，spectral/prism/openapi-generator 是开源
+frequency: medium
 ---
 
 # 【Java 后端架构师】API 契约优先设计与 OpenAPI 治理
@@ -424,6 +437,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 结构化回答

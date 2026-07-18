@@ -10,7 +10,8 @@ tags:
 - volatile
 - JMM
 feynman:
-  essence: volatile 用"内存屏障"保证可见性+禁止指令重排，但不保证复合操作原子性；内容场景如直播在线人数、Feed 计数常用 volatile 做标志位。
+  essence: volatile 用"内存屏障"保证可见性+禁止指令重排，但不保证复合操作原子性；内容场景如直播在线人数、Feed 计数常用 volatile
+    做标志位。
   analogy: volatile 像公告板——你改了立刻所有人看见（可见性），且顺序不会乱（禁止重排），但抢着改还是会冲突（不保证原子）。
   first_principle: 多核 CPU 各自有缓存+指令重排，导致共享变量不可见/乱序，需内存屏障约束。
   key_points:
@@ -26,14 +27,15 @@ first_principle:
   - 单读单写不需要锁
   rebuild: 内存屏障（volatile）保证可见+有序，复合原子用 Atomic。
 follow_up:
-  - volatile 和 synchronized 区别？——volatile 轻量（不阻塞），只保证可见/有序；synchronized 保证原子+可见
-  - i++ 加 volatile 安全吗？——不安全，要用 AtomicInteger
-  - 单例的 volatile 有什么用？——防止 new 对象重排（分配→赋值→初始化乱序）
+- volatile 和 synchronized 区别？——volatile 轻量（不阻塞），只保证可见/有序；synchronized 保证原子+可见
+- i++ 加 volatile 安全吗？——不安全，要用 AtomicInteger
+- 单例的 volatile 有什么用？——防止 new 对象重排（分配→赋值→初始化乱序）
 memory_points:
-  - 可见性：刷主存+失效缓存
-  - 禁止重排：内存屏障
-  - 不保证原子：i++ 要 Atomic
-  - 单例双重锁必备
+- 可见性：刷主存+失效缓存
+- 禁止重排：内存屏障
+- 不保证原子：i++ 要 Atomic
+- 单例双重锁必备
+frequency: high
 ---
 
 # 【拼多多内容】volatile 关键字原理与直播计数场景？
@@ -178,6 +180,27 @@ AtomicInteger 在低并发（<1000 QPS）完全够用，但直播弹幕高峰能
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AtomicInteger start
+    class CAS process
+    class E1 decision
+    class E2 special
+    class J error
+    class LongAdder info
+    class P1 start
+    class P2 process
+    class R1 decision
+    class R2 special
+    class S1 error
+    class S2 info
+    class S3 start
+    class S4 process
+    class V decision
     J[Java内存模型JMM] --> V[volatile关键字修饰]
     
     V --> P1[内存屏障机制]

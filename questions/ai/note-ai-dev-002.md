@@ -28,6 +28,7 @@ memory_points:
 - 四大优化：语义切分加桥接、Query改写加过滤、混合检索加重排、监控加指标。
 - 结构化语义切分加上下文桥接（保留前块尾句），解决硬截断导致的上下文丢失问题。
 - 不换大模型，死磕数据工程细节：混合检索（向量+关键词）配合LambdaMART精排。
+frequency: medium
 ---
 
 # 大厂P7：RAG准确率从60%提升到85%的4个关键优化
@@ -333,6 +334,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

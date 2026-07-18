@@ -17,6 +17,7 @@ memory_points:
 - 决策树：需多视角协作、严格审批或并行提速时，必须上多 Agent。
 - 架构优势：多 Agent 易调试（白盒）、可并行、容错性高，但 Token 成本增加。
 - 避坑指南：简单任务勿过度设计，通信需用结构化约束减少噪音。
+frequency: medium
 ---
 
 # 单 Agent 和多 Agent 的本质区别是什么?什么时候该上多 Agent
@@ -159,6 +160,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

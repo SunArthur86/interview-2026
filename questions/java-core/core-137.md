@@ -15,6 +15,7 @@ memory_points:
 - LRU用哈希表+双向链表实现O(1)复杂度；FIFO实现简单但性能较差。
 - 因为分配页数增加缺页率反而上升，所以叫Belady异常，仅FIFO会出现。
 - LRU关注时间，LFU关注频率；Redis等缓存实战中常用LFU避免缓存污染。
+frequency: medium
 ---
 
 # 解释一下页面置换算法，例如LRU（最近最少使用）、FIFO（先进先出）等？
@@ -102,6 +103,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

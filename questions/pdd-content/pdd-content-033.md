@@ -29,15 +29,16 @@ first_principle:
   - 生产要可控
   rebuild: 编排+评测+监控+版本+护栏。
 follow_up:
-  - 怎么评测 Agent？——构建测试集+自动打分+人工抽检
-  - 怎么控制成本？——分级调用+缓存+小模型蒸馏
-  - 怎么做 A/B？——流量分桶+指标对比+灰度
+- 怎么评测 Agent？——构建测试集+自动打分+人工抽检
+- 怎么控制成本？——分级调用+缓存+小模型蒸馏
+- 怎么做 A/B？——流量分桶+指标对比+灰度
 memory_points:
-  - 编排：LangGraph/Dify
-  - 评测：benchmark+自动+人工
-  - 监控：延迟/成本/幻觉
-  - 版本：prompt/模型/数据
-  - 护栏：校验+过滤+人审
+- 编排：LangGraph/Dify
+- 评测：benchmark+自动+人工
+- 监控：延迟/成本/幻觉
+- 版本：prompt/模型/数据
+- 护栏：校验+过滤+人审
+frequency: medium
 ---
 
 # 【拼多多内容】AI Harness 工程化怎么落地？
@@ -309,6 +310,33 @@ Agent AB 的特殊性：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AB process
+    class BM decision
+    class Dify special
+    class EV error
+    class HU info
+    class I start
+    class IG process
+    class Judge decision
+    class LLM special
+    class LangGraph error
+    class M info
+    class N start
+    class O process
+    class OG decision
+    class Prompt special
+    class RS error
+    class T info
+    class VG start
+    class as process
+    class br decision
     subgraph Agent编排层
         I[业务请求输入] --> N[Workflow节点编排<br/>LangGraph/Dify]
         N --> M[大语言模型组件]

@@ -18,6 +18,7 @@ memory_points:
 - 极致简写是方法引用（如类::静态方法），常配合Stream API或集合遍历使用。
 - 对比内部类：Lambda无独立class文件且this指向外部类，仅限函数式接口。
 - 实战亮点：利用其惰性求值特性，可完美避免日志打印中的字符串拼接浪费。
+frequency: low
 ---
 
 # 什么是Lambda 表达式？
@@ -79,6 +80,50 @@ names.sort(String::compareToIgnoreCase);
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Consumer special
+    class D error
+    class E info
+    class F start
+    class Filter process
+    class Function decision
+    class FunctionalInterface special
+    class G error
+    class H info
+    class I start
+    class J process
+    class Java decision
+    class K special
+    class L error
+    class Lambda info
+    class LambdaMetafactory start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class Predicate info
+    class Q start
+    class R process
+    class Supplier decision
+    class T special
+    class body error
+    class boolean info
+    class br start
+    class effectively process
+    class final decision
+    class forEach special
+    class invokedynamic error
+    class map info
+    class params start
+    class void process
     A["Lambda 表达式 Java 8"] --> B["(params) --> body"]
     A --> C[本质: 函数式接口实例]
     D[函数式接口] --> E[只有一个抽象方法]

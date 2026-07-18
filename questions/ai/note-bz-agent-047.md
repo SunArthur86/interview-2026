@@ -29,6 +29,7 @@ memory_points:
 - 四层深挖：数据层(基础)、检索层(核心)、生成层(呈现)、评估层(驱动)。
 - 数据层提效：采用父子分块(小块检索大块返回)，并丰富文档Metadata以便过滤。
 - 检索层提效：用查询改写+HyDE优化查询，并采用向量与BM25的混合检索机制。
+frequency: medium
 ---
 
 # RAG 可以从哪些细节深挖？
@@ -282,6 +283,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

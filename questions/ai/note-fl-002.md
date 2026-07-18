@@ -10,9 +10,11 @@ tags:
 - ToolCalling
 - FunctionCalling
 feynman:
-  essence: Tool Calling 的本质是"模型生成结构化意图，服务端解析并执行"。Schema 用 JSON Schema（模型侧）+ Pydantic（服务端侧）双层校验；失败按"参数错→重prompt""权限错→拒""执行错→重试3次"分类；危险工具绝不暴露给 LLM，由服务端二次确认。
+  essence: Tool Calling 的本质是"模型生成结构化意图，服务端解析并执行"。Schema 用 JSON Schema（模型侧）+ Pydantic（服务端侧）双层校验；失败按"参数错→重prompt""权限错→拒""执行错→重试3次"分类；危险工具绝不暴露给
+    LLM，由服务端二次确认。
   analogy: 就像餐厅点单——客人（LLM）按菜单（Schema）写"宫保鸡丁、不要花生"（结构化意图），服务员（服务端）核对菜单（Pydantic 校验），有毒食材（危险工具）不上菜单，必须经理（二次确认）签字才下单。
-  first_principle: LLM 输出有不确定性，但工具执行需要确定性。所以模型只负责"说意图"，服务端负责"解析 + 校验 + 执行 + 审计"。两层分离 = 可控可审计。
+  first_principle: LLM 输出有不确定性，但工具执行需要确定性。所以模型只负责"说意图"，服务端负责"解析 + 校验 + 执行 + 审计"。两层分离
+    = 可控可审计。
   key_points:
   - JSON Schema（模型侧描述）+ Pydantic（服务端解析）双层校验
   - 失败三分类：参数错→重prompt（最多2次）/权限错→拒/执行错→指数退避重试3次
@@ -32,6 +34,7 @@ memory_points:
 - 工具失败分类处理：网络错指数退避重试，参数错报错让模型重写，业务拒绝立即透传终止
 - 高危工具物理隔离：destructive类操作绝不可见，由LLM提交意图后触发人工二次确认（飞书卡片）
 - 分发优于直暴：永远由服务端统一分发工具，因为天然隔离了危险操作且统一了鉴权与限流
+frequency: high
 ---
 
 # 【字节飞连面经】怎么设计 Tool Calling？Schema 怎么定义？防危险工具？
@@ -122,6 +125,32 @@ class GetUserInfoParams(BaseModel):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class JSON error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class Q info
+    class R start
+    class br process
     A["LLM生成工具意图"] --> B["服务端统一分发器<br/>鉴权/限流/路由"]
     B --> C{"工具安全等级判定"}
     C -- "只读查询类" --> D["自动审批执行"]

@@ -16,6 +16,7 @@ memory_points:
 - 单线程原因：避免上下文切换与锁竞争，瓶颈在内存与网络而非CPU。
 - 基础5类型：String至Zset依次实现缓存、对象、队列、去重、排行。
 - 高级4扩展：BitMap签到、HyperLogLog去重UV、GEO附近人、Stream可靠队列。
+frequency: high
 ---
 
 # Redis数据类型的应用场景是什么？
@@ -142,6 +143,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

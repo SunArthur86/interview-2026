@@ -15,6 +15,7 @@ memory_points:
 - 一句话总览：Java锁是按设计思想、实现机制、特性等多维度的分类统称
 - 核心四维度对比：乐观/悲观、公平/非公平、可重入/不可、独占/共享
 - synchronized专属特性：包含自旋优化与无锁到重量级锁的升级状态
+frequency: medium
 ---
 
 # 介绍一下几种典型的锁？
@@ -130,6 +131,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

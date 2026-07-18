@@ -26,6 +26,7 @@ memory_points:
 - 诊断：显存碎片、预分配浪费(短请求占长空间)、前缀无法共享。
 - 修复：PagedAttention分页管理(利用率40%→96%)，Continuous Batching动态调度。
 - 其他：Radix Tree复用前缀，KV量化(FP8/INT8)，GQA减少头数。
+frequency: high
 ---
 
 # 【智谱Infra面经】KV Cache 导致推理成本远高于预期，如何诊断和修复？
@@ -100,11 +101,32 @@ class BlockTable:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Diagnose start
+    class GQA process
+    class INT8 decision
+    class Issue special
+    class PA error
+    class PagedAttention info
+    class Quant start
+    class Radix process
+    class br decision
     Issue[推理成本高] --> Diagnose{诊断}
     Diagnose -->|显存碎片| PA[PagedAttention<br/>40%到96%]
     Diagnose -->|前缀无法共享| Radix[Radix Tree复用]
     Diagnose -->|带宽瓶颈| Quant[KV量化FP8/INT8]
     Diagnose -->|头数过多| GQA[GQA减少头数]
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 

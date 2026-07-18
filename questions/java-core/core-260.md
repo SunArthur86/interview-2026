@@ -16,6 +16,7 @@ memory_points:
 - 运行时：保留策略为RUNTIME，依赖反射API读取（如JUnit/Spring）。
 - 编译时：保留策略为SOURCE，编译期生成Java文件（如Lombok）。
 - 核心限制：编译时处理器不能修改原有AST，只能生成新的源码文件。
+frequency: medium
 ---
 
 # 什么是注解处理器？
@@ -117,6 +118,43 @@ public class FruitInfoUtil {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class APT process
+    class Annotation decision
+    class B special
+    class Bean error
+    class ButterKnife info
+    class C start
+    class D process
+    class Dagger2 decision
+    class Data special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class Java error
+    class K info
+    class L start
+    class Lombok process
+    class M decision
+    class MapStruct special
+    class N error
+    class O info
+    class P start
+    class Processor process
+    class Round decision
+    class br special
+    class getter error
+    class javac info
+    class process start
     A[APT Annotation Processor] --> B[javac 编译阶段触发]
     B --> C[扫描源码中的注解]
     C --> D[Processor.process]

@@ -28,6 +28,7 @@ memory_points:
 - 记忆模块：分层管理（工作/短期/长期），结合Auto-Compact防上下文溢出。
 - 工具沙箱：通过MCP接入外部接口，代码执行必须在Docker等安全沙箱内。
 - 整体流程：接收请求→意图理解→规划拆解→循环执行（带记忆与工具）→结果聚合。
+frequency: medium
 ---
 
 # 【腾讯面经】你这个 Agent 项目怎么设计的？包含什么模块？Agent 整体运行流程是什么？
@@ -329,6 +330,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

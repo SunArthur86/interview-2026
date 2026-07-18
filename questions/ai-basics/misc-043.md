@@ -22,6 +22,7 @@ memory_points:
 - 防御重点：输入隔离（XML标签）、输出过滤、最小权限原则、API速率限制
 - 工具：Garak（漏洞扫描）、PyRIT（微软）、PAIR（自动越狱）
 - RAG风险：间接注入（文档隐藏指令），需清洗检索内容并做权限隔离
+frequency: medium
 ---
 
 # 什么是AI红队测试(Red Teaming)?常见的攻击面有哪些
@@ -138,6 +139,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

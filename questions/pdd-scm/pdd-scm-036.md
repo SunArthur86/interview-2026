@@ -34,6 +34,7 @@ memory_points:
 - 模型：时序（Prophet/LSTM）+ 树（XGBoost）
 - 驱动补货：预测×提前期 - 现库存
 - 准确率指标：MAPE（平均绝对百分比误差）
+frequency: low
 ---
 
 # 【拼多多供应链】怎么用 AI 做销量预测和智能补货？
@@ -215,6 +216,32 @@ Agent: 调预测 Tool（销量 2000）+ 供应商 Tool（A 最优）+ 库存 Too
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class B error
+    class C info
+    class D start
+    class E process
+    class F decision
+    class G1 special
+    class G2 error
+    class H info
+    class I start
+    class Inputs process
+    class J decision
+    class K special
+    class L error
+    class Transformer info
+    class XGBoost start
+    class vs process
     subgraph Inputs ["特征工程输入"]
         A1["历史销量序列"]
         A2["价格与促销特征"]

@@ -32,6 +32,7 @@ memory_points:
 - 缓存机制：命中缓存直接极速响应，未命中则向源站回源拉取并缓存。
 - 对比浏览器：CDN是多用户共享的边缘缓存，浏览器是单用户独享的本地缓存。
 follow_up: []
+frequency: medium
 ---
 
 # CDN 原理是什么？
@@ -127,6 +128,39 @@ server {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CDN special
+    class CNAME error
+    class Cache info
+    class Control start
+    class D process
+    class DNS decision
+    class E special
+    class F error
+    class G info
+    class GSLB start
+    class H process
+    class HTTPS decision
+    class I special
+    class IP error
+    class J info
+    class K start
+    class L process
+    class LocalDNS decision
+    class M special
+    class N error
+    class O info
+    class Origin start
+    class br process
+    class from decision
     A[用户请求资源] --> B{LocalDNS 解析}
     B --> C[域名 CNAME 到 CDN GSLB]
     C --> D[GSLB 智能调度<br/>返回最近边缘节点 IP]

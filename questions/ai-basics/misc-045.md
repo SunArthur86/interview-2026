@@ -21,6 +21,7 @@ memory_points:
 - Pre-Norm：先Norm再残差，梯度传得稳，支持深模型。
 - Post-Norm：先残差后Norm，深层易梯度消失，训练难。
 - 实战：LLaMA用RMSNorm+Pre-Norm解决Loss震荡问题。
+frequency: medium
 ---
 
 # 为什么LLaMA用RMSNorm而不是LayerNorm?Pre-Norm和Post-Norm有什么区别
@@ -151,6 +152,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

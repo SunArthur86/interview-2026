@@ -17,6 +17,7 @@ memory_points:
 - String原子递增(INCR)：专做计数器与分布式锁；Hash：专做对象字段更新。
 - List底层演进：双向链表+压缩列表升级为QuickList，兼顾效率与内存。
 - Zset底层核心：跳表保证范围查询高效，哈希表保证单成员查询O(1)。
+frequency: high
 ---
 
 # Redis五种数据结构和应用场景是什么？
@@ -117,6 +118,46 @@ while (true) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class Bitmap special
+    class C error
+    class C1 info
+    class D start
+    class D1 process
+    class E decision
+    class E1 special
+    class F error
+    class F1 info
+    class G start
+    class H process
+    class HLL decision
+    class Hash special
+    class I error
+    class J info
+    class K start
+    class L process
+    class List decision
+    class M special
+    class Redis error
+    class SDS info
+    class Set start
+    class Stream process
+    class String decision
+    class ZSet special
+    class br error
+    class dict info
+    class listpack start
+    class quicklist process
+    class skiplist decision
+    class ziplist special
     A[Redis 数据类型] --> B[String 字符串]
     A --> C[Hash 哈希表]
     A --> D[List 列表]

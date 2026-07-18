@@ -29,6 +29,7 @@ memory_points:
 - 实例选型：临时实例用AP(心跳保活)，永久实例用CP(主动探测)。
 - 为何选AP：注册中心重在服务发现，网络分区时可用性优于强一致防阻断。
 - 高可用兜底：服务端集群Raft，客户端遇故障靠本地缓存和文件续命。
+frequency: high
 ---
 
 # 如何设计一个高可用的注册中心集群？Nacos/Eureka对比。
@@ -146,6 +147,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -27,14 +27,15 @@ first_principle:
   - 决策要基于证据不是直觉
   rebuild: A/B 实验平台（分流 + 对照 + 指标度量 + 显著性检验）。
 follow_up:
-  - 怎么保证分流均匀？——MurmurHash + 流量分桶，监控每桶用户画像分布
-  - 多实验同时跑会互相干扰吗？——正交分层（每层独立分流，层间哈希正交）
-  - 指标显著但业务没用怎么办？——看效应大小（不只 p 值），看长期影响（留存/口碑）
+- 怎么保证分流均匀？——MurmurHash + 流量分桶，监控每桶用户画像分布
+- 多实验同时跑会互相干扰吗？——正交分层（每层独立分流，层间哈希正交）
+- 指标显著但业务没用怎么办？——看效应大小（不只 p 值），看长期影响（留存/口碑）
 memory_points:
-  - 分流：hash(uid) % 流量，稳定随机
-  - 正交分层：避免多实验干扰
-  - 核心指标 + 显著性（p<0.05）
-  - 灰度：小流量验证再放量
+- 分流：hash(uid) % 流量，稳定随机
+- 正交分层：避免多实验干扰
+- 核心指标 + 显著性（p<0.05）
+- 灰度：小流量验证再放量
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】实验平台（A/B Test）怎么设计？
@@ -206,6 +207,18 @@ SRM 的常见根因有四个。第一，分流哈希本身的偏差——MurmurH
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class E1 start
+    class E2 process
+    class M decision
+    class R special
+    class U error
+    class as info
     participant U as 用户请求
     participant R as 实验平台分流网关
     participant E1 as 推荐模型层

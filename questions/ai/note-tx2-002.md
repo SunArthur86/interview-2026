@@ -13,7 +13,8 @@ tags:
 feynman:
   essence: 四种推理范式——CoT(链式思维，线性逐步推理)适合简单推理题；ReAct(推理+行动循环)适合需要调工具的任务，边想边查；ToT(树状思维，多路径探索+回溯)适合需要探索多方案的复杂问题；Plan&Execute(先全局规划后执行)适合步骤明确的长任务。选型按"任务复杂度+是否需探索+步骤确定性"三维度。
   analogy: CoT像走直线（一条路走到黑），ReAct像边走边问路（想一步做一步），ToT像走迷宫（多条路试探，错了回溯），Plan&Execute像先看地图规划路线再出发。
-  first_principle: 推理范式 = 在"规划深度"和"执行灵活性"之间权衡。CoT 最简单但僵硬，ReAct 灵活但可能发散，ToT 全面但昂贵，Plan&Execute 结构化但规划可能过时。
+  first_principle: 推理范式 = 在"规划深度"和"执行灵活性"之间权衡。CoT 最简单但僵硬，ReAct 灵活但可能发散，ToT 全面但昂贵，Plan&Execute
+    结构化但规划可能过时。
   key_points:
   - 'CoT: 链式逐步推理，简单推理题，无工具调用'
   - 'ReAct: Thought-Action-Observation循环，边推理边调工具'
@@ -22,7 +23,8 @@ feynman:
   - 选型：简单→CoT；需工具→ReAct；需探索→ToT；步骤明确→Plan&Execute
 first_principle:
   essence: 推理范式 = 规划深度 × 执行灵活性的权衡
-  derivation: 简单任务一条链够(CoT) → 需调工具加循环(ReAct) → 需探索多方案加分支回溯(ToT) → 步骤明确先规划(Plan&Execute) → 复杂度递增，成本递增
+  derivation: 简单任务一条链够(CoT) → 需调工具加循环(ReAct) → 需探索多方案加分支回溯(ToT) → 步骤明确先规划(Plan&Execute)
+    → 复杂度递增，成本递增
   conclusion: 没有最好的范式，只有最匹配任务复杂度的范式
 follow_up:
 - ReAct 怎么防止"想太多"无限循环？
@@ -34,6 +36,7 @@ memory_points:
 - 防死循环：ReAct必须设步数硬上限、参数去重及早停机制
 - 控制成本：ToT极贵，必须限制树的深度、分支数并配合早期剪枝
 - 黄金组合：Plan&Execute架构中，单步Execute底层常使用ReAct兼顾灵活
+frequency: medium
 ---
 
 # 【某讯面经】CoT / ReAct / ToT / Plan&Verify 适用场景对比，项目怎么选型
@@ -199,6 +202,7 @@ flowchart TD
     style ACTION fill:#FF9800,color:#fff
     style OBS fill:#9C27B0,color:#fff
     style REFLECT fill:#FFC107,color:#000
+
 ```
 
 ## 记忆要点

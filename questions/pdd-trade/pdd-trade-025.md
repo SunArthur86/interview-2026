@@ -26,14 +26,15 @@ first_principle:
   - 风控可能挂（要降级）
   rebuild: 同步轻量决策（规则+模型）+ 多级降级 + 数据回流闭环。
 follow_up:
-  - 风控决策放同步还是异步？——核心拦截同步（下单前），非核心异步（领券后）
-  - 风控挂了怎么办？——超时降级放行+异步复核，宁可漏拦不阻塞正常用户
-  - 风控规则怎么热更新？——规则中心+热加载（动态配置）
+- 风控决策放同步还是异步？——核心拦截同步（下单前），非核心异步（领券后）
+- 风控挂了怎么办？——超时降级放行+异步复核，宁可漏拦不阻塞正常用户
+- 风控规则怎么热更新？——规则中心+热加载（动态配置）
 memory_points:
-  - 触发：下单/支付/领券/退款
-  - 同步决策 < 100ms（规则+模型）
-  - 降级：超时放行+异步复核
-  - 数据回流：交易行为→风控
+- 触发：下单/支付/领券/退款
+- 同步决策 < 100ms（规则+模型）
+- 降级：超时放行+异步复核
+- 数据回流：交易行为→风控
+frequency: medium
 ---
 
 # 【拼多多交易】交易和风控怎么联调？
@@ -203,6 +204,30 @@ IF 新用户首单 > 1000 元 THEN review
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class GBDT process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class br info
     subgraph 交易链路拦截
       A[用户下单/支付] --> B{同步风控拦截}
       C[用户领券/退款] --> D[异步事后复核]

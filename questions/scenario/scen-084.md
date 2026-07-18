@@ -29,6 +29,7 @@ memory_points:
 - 决策与反馈：综合风险分=规则分*W1+模型分*W2，大于0.9拦截，0.6验证，小于则放行。
 - 防漏杀利器：Flink实时计算特征进Redis，结合图数据库分析关联网络（同IP多账号）检测团伙欺诈。
 - 系统底线：风控决策延迟必须<100ms，且高可用降级策略为宁可放行也不阻断交易。
+frequency: low
 ---
 
 # 如何设计一个实时风控系统？毫秒级识别欺诈交易。
@@ -146,6 +147,7 @@ flowchart TD
     DOWN[风控挂掉] --> DEG[自动降级放行]
     style BLOCK fill:#ffcccc
     style PASS fill:#d4edda
+
 ```
 
 

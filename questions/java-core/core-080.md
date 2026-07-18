@@ -17,6 +17,7 @@ memory_points:
 - Error处理：OOM等Error属于JVM严重故障不可恢复，不建议在业务代码中捕获
 - 保留异常链：抛出自定义业务异常时必须传入原异常e，避免吞掉底层Root Cause排查线索
 - 常用API：getMessage()获取简述，而printStackTrace()常用于直接打印详细调用栈
+frequency: medium
 ---
 
 # 什么是Throwable？
@@ -111,6 +112,45 @@ public class BizCheckedException extends Exception {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class C info
+    class CheckedException start
+    class ClassCastException process
+    class ClassNotFoundException decision
+    class D special
+    class D1 error
+    class D2 info
+    class D3 start
+    class E process
+    class E1 decision
+    class E2 special
+    class E3 error
+    class Error info
+    class Exception start
+    class F process
+    class G decision
+    class IOException special
+    class IndexOutOfBoundsException error
+    class NullPointerException info
+    class OutOfMemoryError start
+    class RuntimeException process
+    class SQLException decision
+    class StackOverflowError special
+    class Throwable error
+    class VirtualMachineError info
+    class catch start
+    class throws process
+    class try decision
     A[Throwable] --> B[Error 错误]
     A --> C[Exception 异常]
     B --> B1[OutOfMemoryError]

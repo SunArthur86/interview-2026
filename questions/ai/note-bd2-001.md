@@ -32,6 +32,7 @@ memory_points:
 - 定义规范：通过System Prompt下发工具描述和参数Schema。
 - 结构化输出：模型按JSON格式输出工具名和参数列表。
 - 循环反馈：工具执行结果作为Observation拼接到上下文，指导下一步生成。
+frequency: high
 ---
 
 # Agent工具调用的完整机制和判断逻辑
@@ -274,6 +275,7 @@ flowchart TD
     style EXEC fill:#FF9800,color:#fff
     style FALL fill:#F44336,color:#fff
     style HITL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

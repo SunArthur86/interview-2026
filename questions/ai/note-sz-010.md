@@ -12,7 +12,8 @@ tags:
 feynman:
   essence: 神州是B2C（公司自营司机和车辆，司机是员工），滴滴是C2C（平台撮合，司机是加盟个体）。B2C模式对数据架构的影响：①数据所有权完整（司机/车辆/订单全在自己手里，无需对账）②服务确定性高（不能拒单，数据上拒单率极低）③强管控（司机行为/培训/绩效全可追溯）④合规性（专车资质统一）。C2C相反：数据分散、需多方对账、服务不确定。
   analogy: B2C像连锁餐厅（厨师是员工，菜品/流程/卫生全可控），C2C像外卖平台（撮合各家餐厅，品质参差不齐，要处理纠纷对账）。连锁餐厅的数据干净统一，外卖平台数据要和无数商家对账。
-  first_principle: 业务模式决定数据所有权和控制力。B2C 全链路自营，数据完整一致；C2C 多方撮合，数据分散且需对账。这直接决定数仓的复杂度——B2C 简单（单数据源），C2C 复杂（多数据源对账）。
+  first_principle: 业务模式决定数据所有权和控制力。B2C 全链路自营，数据完整一致；C2C 多方撮合，数据分散且需对账。这直接决定数仓的复杂度——B2C
+    简单（单数据源），C2C 复杂（多数据源对账）。
   key_points:
   - '神州B2C: 公司自营司机车辆，司机是员工，数据所有权完整'
   - '滴滴C2C: 平台撮合，司机是加盟个体，数据分散需对账'
@@ -32,6 +33,7 @@ memory_points:
 - 因果句：因为滴滴存在平台与司机的抽成分账，所以必须搭建专门的数据一致性对账层
 - 因果句：因为神州司机为员工且强派单，所以不需要复杂事件流，只需HR与薪酬数仓
 - 对比句：神州看自营确定性与履约质量，滴滴看动态定价与派单拒单链路分析
+frequency: low
 ---
 
 # 【神州专车面经】滴滴和神州的业务模式差异，对数据架构有什么影响？
@@ -162,6 +164,25 @@ C2C：多车型多资质（快车/专车/顺风车），合规数据复杂
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class B1 error
+    class B2 info
+    class B2C start
+    class B3 process
+    class B4 decision
+    class B5 special
+    class C1 error
+    class C2 info
+    class C2C start
     subgraph B2C [神州 B2C 模式]
         A1[公司自营车辆与员工司机]
         A2[单一业务数据源闭环]

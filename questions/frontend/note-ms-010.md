@@ -31,6 +31,7 @@ memory_points:
 - 分层解耦架构：前端通过统一任务调度层串联三段链路，不相互阻塞
 - 因为异步链路耗时久，所以必须有全生命周期的状态机（执行/等待/完成）
 - 产物导出需防丢失，前端应拦截退出并做断点续传机制
+frequency: medium
 ---
 
 # 【月之暗面面经】本地索引、云端推理和产物导出是三段链路，前端怎样串起来？
@@ -119,6 +120,31 @@ window.addEventListener('beforeunload', (e) => {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class C_API start
+    class C_SSE process
+    class E_Data decision
+    class E_File special
+    class L_Files error
+    class L_Index info
+    class S1 start
+    class S2 process
+    class S3 decision
+    class S4 special
+    class S5 error
+    class Stage1 info
+    class Stage2 start
+    class Stage3 process
+    class done decision
+    class exporting special
+    class indexing error
+    class inferring info
+    class pending start
     subgraph 前端调度层 统一状态机
         direction LR
         S1[pending] --> S2[indexing]

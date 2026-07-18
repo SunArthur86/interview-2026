@@ -29,6 +29,7 @@ memory_points:
 - Metrics方案：Prometheus主动Pull拉取指标，结合Grafana展示与Alertmanager分级告警
 - Logging规范：必须打上traceId贯穿全链路，采集Filebeat→缓冲Kafka→搜索ES→展示Kibana
 - Tracing原理：入口生成TraceId，跨服务靠HTTP Header传播，按耗时和异常定位慢节点
+frequency: medium
 ---
 
 # 如何设计一个全链路监控系统？覆盖日志、指标、链路追踪。
@@ -109,6 +110,7 @@ flowchart TD
     TID -.串联.-> L
     PR --> AL[告警]
     style TID fill:#ffe4b5
+
 ```
 
 

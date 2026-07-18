@@ -15,6 +15,7 @@ memory_points:
 - 一致性：日志文件系统(如Ext4)先写日志再改数据，崩溃靠重放避免全盘扫
 - 读写优化：顺序预读减少IO等待，延迟写(脏页)批量落盘提升吞吐量
 - 经典异常：inode节点耗尽会导致磁盘有空间但报 No space left on device
+frequency: medium
 ---
 
 # 什么是文件系统的管理和优化？
@@ -89,6 +90,37 @@ xfs_io -c 'resbsp 1048576' /path/to/large_file
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Block decision
+    class Boot special
+    class C error
+    class D info
+    class Data start
+    class E process
+    class F decision
+    class G special
+    class H error
+    class HDFS info
+    class I start
+    class Inode process
+    class J decision
+    class K special
+    class L error
+    class M info
+    class N start
+    class O process
+    class Super decision
+    class XFS special
+    class br error
+    class ext4 info
+    class journaling start
     A[文件系统] --> B[Boot Block 引导块]
     A --> C[Super Block 超级块<br/>全局元信息]
     A --> D[Inode 区 索引节点]

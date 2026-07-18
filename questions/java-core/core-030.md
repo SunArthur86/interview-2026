@@ -15,6 +15,7 @@ memory_points:
 - HTTP缓存分强缓存与协商缓存，强缓存命中不发请求，协商缓存命中返回304
 - 强缓存核心看 Cache-Control（max-age/no-store/no-cache），优先级高于Expires
 - 协商缓存核心看 ETag（内容哈希，精确度高）与 Last-Modified（秒级时间），ETag 优先级更高
+frequency: medium
 ---
 
 # 缓存机制是什么？
@@ -142,6 +143,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

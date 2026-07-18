@@ -16,6 +16,7 @@ memory_points:
 - 调用：推荐直接使用类名调用，而不是通过具体对象实例调用
 - 工厂：静态工厂方法可自定义命名、返回子类型，优于构造器
 - 多态：子类同名静态方法是隐藏而非重写，因为静态方法不参与多态
+frequency: low
 ---
 
 # 什么是静态字段与静态方法？
@@ -99,6 +100,26 @@ public class Counter {
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class F1 start
+    class F2 process
+    class F3 decision
+    class F4 special
+    class F5 error
+    class Note info
+    class S1 start
+    class S2 process
+    class S3 decision
+    class S4 special
+    class S5 error
+    class br info
+    class final start
+    class static process
     subgraph static
         S1[属于类 不属于实例]
         S2[类加载时初始化]

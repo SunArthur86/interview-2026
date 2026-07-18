@@ -16,6 +16,7 @@ memory_points:
 - 关键状态：主动方最终必经TIME_WAIT且等待2MSL才真正关闭
 - 设计目的：因为要保证最后ACK送达且防旧报文干扰，所以要等2MSL
 - 握手对比：建连SYN和ACK可合并，但断开FIN和ACK通常分开发
+frequency: low
 ---
 
 # 什么是四次挥手？
@@ -122,6 +123,7 @@ flowchart TD
     style SYN_C fill:#FF9800,color:#fff
     style TIME_WAIT fill:#9C27B0,color:#fff
     style TLS fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

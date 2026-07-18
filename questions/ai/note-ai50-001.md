@@ -30,6 +30,7 @@ memory_points:
 - 核心流水线：检测表格区域、跨页表格合并、切片豁免保护。
 - 跨页合并判断依据：上页表格在底部切断且下页表格在顶部，列数相同即合并并去重表头。
 - 切片豁免：表格转为Markdown格式作为独立Chunk，绝对不参与常规文本切分。
+frequency: medium
 ---
 
 # 工业PDF跨页大表格的切片处理策略
@@ -190,6 +191,7 @@ flowchart TD
     style TBL fill:#FF9800,color:#fff
     size_note([过大→检索信号被平均<br/>过小→语义割裂]) -.-> SIZE
     style PARENT fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

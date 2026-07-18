@@ -30,6 +30,7 @@ memory_points:
 - 循环机制：Thought(思考) -> Action(行动) -> Observation(观察)循环执行
 - 解决痛点：纯CoT易产生幻觉，纯Act缺乏全局规划，ReAct结合两者优势
 - 终止条件：Action输出为Finish时，代表获得最终答案，结束循环
+frequency: high
 ---
 
 # 什么是 ReAct 框架？它的原理是什么？
@@ -209,6 +210,23 @@ response = client.chat.completions.create(
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Action process
+    class Ans decision
+    class F special
+    class Finish error
+    class O info
+    class Observation start
+    class P process
+    class T decision
+    class Thought special
+    class U error
     U["用户提问"] --> T["Thought: 推理当前状态"]
     T --> A["Action: 选择并调用外部工具"]
     A --> O["Observation: 获取工具返回结果"]

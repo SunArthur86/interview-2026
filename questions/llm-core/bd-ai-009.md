@@ -32,6 +32,7 @@ memory_points:
 - 可扩展性：注册表自动发现、版本管理(向后兼容)、组合编排、权限隔离、热插拔
 - 实现：定义BaseSkill基类统一接口，用装饰器自动注册到中心目录
 - 对比：传统Plugin靠配置扫描，Agent Skill靠语义理解路由，适配难度更低
+frequency: medium
 ---
 
 # 【字节面经】Agent系统如何设计能力复用和Skill管理，保证可扩展性？
@@ -136,6 +137,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

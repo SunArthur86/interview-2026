@@ -15,6 +15,7 @@ memory_points:
 - 设置时机铁律：必须在thread.start()前调用setDaemon(true)，否则抛异常。
 - 严重误区：守护线程被强制终止时，其finally块可能不执行，严禁做核心资源释放。
 - 继承特性：守护线程中派生的新线程，默认依然是守护线程。
+frequency: high
 ---
 
 # 什么是Java守护线程（Daemon Thread）？
@@ -121,6 +122,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -17,6 +17,7 @@ memory_points:
 - 缓解核心：拆解子目标缩短上下文，单 Agent 单责，使用结构化中间态传递。
 - 对比：单 Agent 易迷失首尾，多 Agent 聚焦局部，注意力更集中。
 - 避坑指南：单纯增加 Token 不能解决漂移，需配合 RAG 或分层摘要。
+frequency: medium
 ---
 
 # 什么是「注意力漂移」?多 Agent 如何缓解
@@ -83,6 +84,28 @@ message = {
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Agent start
+    class Annot process
+    class Drift decision
+    class Focus special
+    class Forget error
+    class Long info
+    class Mitigation start
+    class Pin process
+    class Problem decision
+    class Prompt special
+    class Role error
+    class Sum info
+    class System start
+    class Token process
+    class Win decision
+    class br special
     subgraph Problem["注意力漂移问题"]
         Long["长对话/多 Agent"] --> Drift["注意力分散到无关信息"]
         Drift --> Forget["关键指令被稀释/遗忘"]

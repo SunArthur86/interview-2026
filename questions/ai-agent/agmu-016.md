@@ -16,6 +16,7 @@ memory_points:
 - 多 Agent 独立上下文易导致接口不一致，需单一契约源。
 - 引入 OpenAPI/Schema 作为唯一真理，QA Agent 强校验。
 - 采用 Schema First 或 Reflexion 模式自我修正。
+frequency: high
 ---
 
 # 多 Agent 会不会降低「一致性」(同一产品前后端接口对不上)
@@ -144,6 +145,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

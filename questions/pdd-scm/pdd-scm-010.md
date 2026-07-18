@@ -34,6 +34,7 @@ memory_points:
 - BM25 打分：词频高、文档短、词罕见的得分高
 - 中文分词：IK（pdd_keyword 细粒度 / pdd_smart 智能）
 - 深分页用 search_after，不用 from+size
+frequency: high
 ---
 
 # 【拼多多供应链】ES 怎么做商品搜索？倒排索引原理？
@@ -248,6 +249,36 @@ ES 深分页的根本矛盾——from+size 在 `from=10000` 后性能骤降（ES
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BM25 decision
+    class Binlog special
+    class C error
+    class Canal info
+    class D start
+    class Dictionary process
+    class E decision
+    class Elasticsearch special
+    class F error
+    class G info
+    class H start
+    class I process
+    class IK decision
+    class J special
+    class List error
+    class MySQL info
+    class Posting start
+    class Term process
+    class explain decision
+    class ik_max_word special
+    class ik_smart error
+    class search_after info
     subgraph 数据源
         A[(MySQL 商品表)]
     end

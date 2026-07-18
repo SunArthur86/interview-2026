@@ -32,6 +32,7 @@ memory_points:
 - 渲染端护栏：为防卡顿崩溃，必须限制DOM节点数量并自动降级处理复杂节点
 - 行为端护栏：沙箱执行JS防篡改，且必须强制接入用户的二次确认拦截危险操作
 - 兜底机制：构建产物特征打分模型与可观测链路，发现卡顿或异常即刻安全回滚
+frequency: low
 ---
 
 # 【月之暗面面经】如果桌面产物质量忽高忽低，前端能做哪些护栏？
@@ -134,6 +135,30 @@ function renderWithRollback(art: Artifact) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class AI special
+    class Action error
+    class B1 info
+    class B2 start
+    class C1 process
+    class C2 decision
+    class D1 special
+    class D2 error
+    class DOM info
+    class Fallback start
+    class Input process
+    class JS decision
+    class Render special
+    class Schema error
+    class iframe info
     subgraph Input[输入端护栏]
       A1[AI 产物原始输出]
       A2[Schema 强校验]

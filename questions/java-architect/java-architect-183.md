@@ -11,9 +11,11 @@ tags:
 - 配额
 - 限流
 feynman:
-  essence: 多租户 SaaS 的核心是"tenant_id 隔离 + 套餐配额 + 限流降级"。所有表带 tenant_id 字段实现逻辑隔离（共享 DB 共享 Schema）。套餐（免费/基础/企业）决定配额（用户数/API 调用/存储）。配额用 Redis 计数器实时统计，超限拒绝或降级。
+  essence: 多租户 SaaS 的核心是"tenant_id 隔离 + 套餐配额 + 限流降级"。所有表带 tenant_id 字段实现逻辑隔离（共享 DB
+    共享 Schema）。套餐（免费/基础/企业）决定配额（用户数/API 调用/存储）。配额用 Redis 计数器实时统计，超限拒绝或降级。
   analogy: 像写字楼——所有公司共用一栋楼（共享 DB），每家公司有独立门牌（tenant_id 隔离）。免费套餐用公共会议室（限流），企业套餐有专属电梯（高配额）。超员了保安拦住（配额超限）。
-  first_principle: 多租户的核心矛盾是"资源隔离 vs 成本"。物理隔离（每租户独立 DB）安全但成本高。逻辑隔离（共享 DB + tenant_id）成本低但要防数据串户（A 租户看到 B 租户数据）。配额防单租户耗尽共享资源（"吵闹的邻居"问题）。
+  first_principle: 多租户的核心矛盾是"资源隔离 vs 成本"。物理隔离（每租户独立 DB）安全但成本高。逻辑隔离（共享 DB + tenant_id）成本低但要防数据串户（A
+    租户看到 B 租户数据）。配额防单租户耗尽共享资源（"吵闹的邻居"问题）。
   key_points:
   - tenant_id 隔离：所有表带 tenant_id，MyBatis 拦截器自动注入 WHERE tenant_id=?
   - 套餐定义：免费/基础/企业，定义配额（用户数/API/存储/功能）
@@ -27,19 +29,24 @@ first_principle:
   - 逻辑隔离要防数据串户（SQL 漏 WHERE tenant_id 会导致 A 看 B 数据）
   - 不同套餐配额不同（免费 100 用户，企业 10000 用户）
   - 单租户可能耗尽共享资源（"吵闹的邻居"），必须配额限流
-  rebuild: 所有表带 tenant_id 字段，MyBatis 拦截器自动注入 WHERE tenant_id=?（防漏写）。套餐表定义配额（plan_id → 用户数/API/存储上限）。Redis 计数器实时统计用量（tenant:quota:{tenantId}:{resource}:{period}），每次操作 incr + 判断超限。令牌桶限流（单租户 QPS），超限返回 429。配额耗尽降级（免费套餐超限转只读或拒绝）。
+  rebuild: 所有表带 tenant_id 字段，MyBatis 拦截器自动注入 WHERE tenant_id=?（防漏写）。套餐表定义配额（plan_id
+    → 用户数/API/存储上限）。Redis 计数器实时统计用量（tenant:quota:{tenantId}:{resource}:{period}），每次操作
+    incr + 判断超限。令牌桶限流（单租户 QPS），超限返回 429。配额耗尽降级（免费套餐超限转只读或拒绝）。
 follow_up:
-  - 怎么防数据串户？——MyBatis 拦截器自动注入 WHERE tenant_id。ThreadLocal 存当前 tenantId（从 token 解析），所有 SQL 自动加 tenant_id 条件。开发不用手写。
-  - 套餐配额怎么存？——plan 表定义各套餐上限（用户数/API/存储）。租户订阅套餐（tenant → planId）。配额用 Redis 计数器实时统计（incr + 过期）。
-  - 配额超限怎么办？——拒绝（创建用户失败/API 返回 429）或降级（免费套餐超限转只读）。结合套餐策略，企业套餐可超额付费。
-  - 怎么限流？——令牌桶。单租户 QPS 限流（如免费 10 QPS，企业 1000 QPS）。Redis + Lua 实现令牌桶。超限返回 429 + Retry-After。
-  - 怎么计费？——按用量计费。统计 API 调用次数/存储量/用户数，月底出账单。Redis 计数器数据持久化到 DB 做对账。
+- 怎么防数据串户？——MyBatis 拦截器自动注入 WHERE tenant_id。ThreadLocal 存当前 tenantId（从 token 解析），所有
+  SQL 自动加 tenant_id 条件。开发不用手写。
+- 套餐配额怎么存？——plan 表定义各套餐上限（用户数/API/存储）。租户订阅套餐（tenant → planId）。配额用 Redis 计数器实时统计（incr
+  + 过期）。
+- 配额超限怎么办？——拒绝（创建用户失败/API 返回 429）或降级（免费套餐超限转只读）。结合套餐策略，企业套餐可超额付费。
+- 怎么限流？——令牌桶。单租户 QPS 限流（如免费 10 QPS，企业 1000 QPS）。Redis + Lua 实现令牌桶。超限返回 429 + Retry-After。
+- 怎么计费？——按用量计费。统计 API 调用次数/存储量/用户数，月底出账单。Redis 计数器数据持久化到 DB 做对账。
 memory_points:
-  - tenant_id 隔离：所有表带字段，MyBatis 拦截器自动注入 WHERE
-  - 套餐：plan 表（免费/基础/企业），定义配额上限
-  - 配额统计：Redis 计数器 tenant:quota:{tenantId}:{resource}:{period}
-  - 限流：令牌桶（单租户 QPS），超限返回 429
-  - 降级：配额耗尽转只读或拒绝，企业可超额付费
+- tenant_id 隔离：所有表带字段，MyBatis 拦截器自动注入 WHERE
+- 套餐：plan 表（免费/基础/企业），定义配额上限
+- 配额统计：Redis 计数器 tenant:quota:{tenantId}:{resource}:{period}
+- 限流：令牌桶（单租户 QPS），超限返回 429
+- 降级：配额耗尽转只读或拒绝，企业可超额付费
+frequency: high
 ---
 
 # 【Java 后端架构师】多租户 SaaS 的套餐、配额与限流
@@ -425,6 +432,25 @@ public class DegradeService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class After process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class Retry start
     A[租户API请求] --> B[解析JWT获取tenant_id]
     B --> C[TenantContext线程池隔离]
     C --> D{令牌桶QPS限流检查}

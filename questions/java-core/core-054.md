@@ -26,6 +26,7 @@ memory_points:
 - 全双工同步：三次是建立全双工可靠通信，并同步双向状态的理论最小次数。
 follow_up: []
 tags: []
+frequency: low
 ---
 
 # 三次握手的过程，以及为什么是三次，而不是四次，两次？
@@ -97,6 +98,34 @@ net.ipv4.tcp_syn_retries = 2
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class CLOSED decision
+    class CLOSE_WAIT special
+    class ESTABLISHED error
+    class FIN info
+    class FIN_WAIT_1 start
+    class FIN_WAIT_2 process
+    class LAST_ACK decision
+    class LISTEN special
+    class S error
+    class SYN info
+    class SYN_RCVD start
+    class SYN_SENT process
+    class TIME_WAIT decision
+    class ack special
+    class as error
+    class seq info
+    class u start
+    class w process
+    class x decision
+    class y special
     autonumber
     participant C as 客户端
     participant S as 服务端

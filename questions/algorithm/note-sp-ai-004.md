@@ -30,6 +30,7 @@ memory_points:
 - 数学等式：因为路径长度 a+c+b = b+c+a，所以双指针必然在交点相遇。
 - 无交点处理：若两链表不相交，两指针最终同时走到 null 结束。
 - 空间最优：时间复杂度O(n+m)，空间复杂度仅需O(1)。
+frequency: low
 ---
 
 # 怎么判断链表相交？
@@ -182,6 +183,27 @@ def getIntersectionNode_len(headA, headB):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class a info
+    class b start
+    class br process
+    class c decision
     A["pA指针: A头节点"] -->|"走A独有部分a"| B["走到A链表尾部"]
     B -->|"pA切换至headB"| C["pA从B头出发"]
     C -->|"走B独有部分b"| D{"走到交点或Null?"}

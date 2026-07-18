@@ -29,6 +29,7 @@ memory_points:
 - 位运算拆解：必须熟记Snowflake的1位符号、41位毫秒时间、10位机器、12位序列。
 - 最大痛点：因为强依赖机器时钟，所以必须解决NTP时钟回拨导致的重号问题。
 - 回拨解决：时钟回拨通常采用休眠等待追上，或抛异常并启用备用机器号机制。
+frequency: high
 ---
 
 # 如何设计一个分布式 UUID / ID 生成器？要求全局唯一、趋势递增、高可用。
@@ -115,6 +116,7 @@ flowchart TD
     CLK[时钟回拨] --> WT[等待/报错]
     style SF fill:#d4edda
     style CLK fill:#ffcccc
+
 ```
 
 

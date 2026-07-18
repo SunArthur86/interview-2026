@@ -16,6 +16,7 @@ memory_points:
 - MySQL 8.0已移除查询缓存，现在仅靠外部缓存（如Redis）。
 - 分析器负责词法和语法检查，优化器负责生成执行计划并基于成本选择索引。
 - 执行器调存储引擎API逐行获取数据，是Server层与底层磁盘交互的桥梁。
+frequency: low
 ---
 
 # 一条SQL查询语句是如何执行的？
@@ -148,6 +149,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -8,9 +8,12 @@ tags:
 - BASE
 - 一致性
 feynman:
-  essence: CAP 是"分区容忍下，一致性和可用性二选一"的定理——网络分区必然发生（P 必选），所以实际是 CP 还是 AP 的取舍。BASE 是 CAP 工程化的妥协方案：放弃强一致（C），选可用（A），通过最终一致在分区恢复后收敛。一致性模型（线性一致性/顺序一致性/因果一致性/读己写）定义了"多强"的具体含义，落地时按业务选不同级别。
-  analogy: 像"两地三中心的库存管理"。CP 是"两地必须实时同步一致才能下单"（强一致但同步等待慢）；AP 是"各地各自可下单，事后对账同步"（可用但有超卖风险）。BASE 是 AP 的妥协——允许短暂超卖（软状态），但对账后修正（最终一致）。一致性级别是"对账多严"——线性一致是"任一时刻全局唯一库存数"，最终一致是"一段时间后收敛到一致"。
-  first_principle: 为什么 CAP 三者不可兼得？因为网络分区时，两个分区的节点无法通信，要么拒绝写（保 C 牺牲A），要么各自接受写（保 A 牺牲 C）。这是物理限制，不是工程问题。分区恢复后的"调和"（reconciliation）决定了最终一致的速度和正确性。
+  essence: CAP 是"分区容忍下，一致性和可用性二选一"的定理——网络分区必然发生（P 必选），所以实际是 CP 还是 AP 的取舍。BASE 是 CAP
+    工程化的妥协方案：放弃强一致（C），选可用（A），通过最终一致在分区恢复后收敛。一致性模型（线性一致性/顺序一致性/因果一致性/读己写）定义了"多强"的具体含义，落地时按业务选不同级别。
+  analogy: 像"两地三中心的库存管理"。CP 是"两地必须实时同步一致才能下单"（强一致但同步等待慢）；AP 是"各地各自可下单，事后对账同步"（可用但有超卖风险）。BASE
+    是 AP 的妥协——允许短暂超卖（软状态），但对账后修正（最终一致）。一致性级别是"对账多严"——线性一致是"任一时刻全局唯一库存数"，最终一致是"一段时间后收敛到一致"。
+  first_principle: 为什么 CAP 三者不可兼得？因为网络分区时，两个分区的节点无法通信，要么拒绝写（保 C 牺牲A），要么各自接受写（保 A 牺牲
+    C）。这是物理限制，不是工程问题。分区恢复后的"调和"（reconciliation）决定了最终一致的速度和正确性。
   key_points:
   - CAP：分区容忍（P）必然存在，实际是 CP vs AP 二选一
   - BASE：Basically Available（基本可用）+ Soft state（软状态）+ Eventually consistent（最终一致）
@@ -23,19 +26,23 @@ first_principle:
   - 网络分区是客观存在的（交换机故障、光缆断、机房断网），不能假装没有
   - 分区时，两个分区的节点无法通信，对同一数据的写会分裂
   - 分区恢复后，分裂的写必须调和（reconcile）才能回到一致
-  rebuild: P 必选（不能假装网络不分区），所以实际是 CP 还是 AP。CP（Zookeeper/etcd/配置中心）——分区时拒绝写保一致，代价是牺牲可用性（部分请求失败）。AP（Nacos 注册/Eureka/Cassandra）——分区时各自可读写保可用，代价是数据短暂不一致，恢复后调和。互联网业务大多选 AP（保可用），用 BASE 妥协一致——允许软状态（中间不一致状态），最终一致（分区恢复后收敛）。一致性级别按业务选：金融交易用线性一致（Quorum W+R>N），社交 feed 用最终一致（异步同步）。
+  rebuild: P 必选（不能假装网络不分区），所以实际是 CP 还是 AP。CP（Zookeeper/etcd/配置中心）——分区时拒绝写保一致，代价是牺牲可用性（部分请求失败）。AP（Nacos
+    注册/Eureka/Cassandra）——分区时各自可读写保可用，代价是数据短暂不一致，恢复后调和。互联网业务大多选 AP（保可用），用 BASE 妥协一致——允许软状态（中间不一致状态），最终一致（分区恢复后收敛）。一致性级别按业务选：金融交易用线性一致（Quorum
+    W+R>N），社交 feed 用最终一致（异步同步）。
 follow_up:
-  - CAP 中的 C 和 ACID 中的 C 是一回事吗？——不是。CAP 的 C 是"多副本间强一致"（同一时刻所有节点看到同样的值）；ACID 的 C 是"业务约束一致"（转账前后总金额不变，由业务逻辑保证）。两者是不同维度
-  - 最终一致需要多久？——取决于复制延迟和调和策略。主从异步复制通常毫秒到秒级；跨机房秒到分钟级；用 gossip 协议可能更慢。可通过读修复（read repair）和反熵（anti-entropy）加速收敛
-  - Quorum 机制怎么保证强一致？——N 个副本，写成功 W 个，读成功 R 个，W+R>N 保证读的副本里至少有一个是最新的（有交集）。如 N=3, W=2, R=2，写 2 个读 2 个，交集至少 1 个最新
-  - 线性一致性和顺序一致性区别？——线性一致性要求操作看起来是瞬时完成的（有全局时间顺序），顺序一致性只要求所有节点看到操作顺序一致（但不一定符合真实时间）。线性一致更强但实现成本更高（要用共识算法）
-  - BASE 的"软状态"具体是什么？——系统允许存在"中间不一致状态"，如订单"处理中"（已下单但库存还没扣）。这个状态对外可见但不影响业务正确性，最终会收敛到一致状态（库存扣完）。软状态是强一致和可用之间的缓冲
+- CAP 中的 C 和 ACID 中的 C 是一回事吗？——不是。CAP 的 C 是"多副本间强一致"（同一时刻所有节点看到同样的值）；ACID 的 C 是"业务约束一致"（转账前后总金额不变，由业务逻辑保证）。两者是不同维度
+- 最终一致需要多久？——取决于复制延迟和调和策略。主从异步复制通常毫秒到秒级；跨机房秒到分钟级；用 gossip 协议可能更慢。可通过读修复（read repair）和反熵（anti-entropy）加速收敛
+- Quorum 机制怎么保证强一致？——N 个副本，写成功 W 个，读成功 R 个，W+R>N 保证读的副本里至少有一个是最新的（有交集）。如 N=3, W=2,
+  R=2，写 2 个读 2 个，交集至少 1 个最新
+- 线性一致性和顺序一致性区别？——线性一致性要求操作看起来是瞬时完成的（有全局时间顺序），顺序一致性只要求所有节点看到操作顺序一致（但不一定符合真实时间）。线性一致更强但实现成本更高（要用共识算法）
+- BASE 的"软状态"具体是什么？——系统允许存在"中间不一致状态"，如订单"处理中"（已下单但库存还没扣）。这个状态对外可见但不影响业务正确性，最终会收敛到一致状态（库存扣完）。软状态是强一致和可用之间的缓冲
 memory_points:
-  - CAP：P 必选，实际是 CP vs AP 二选一
-  - BASE = 基本可用 + 软状态 + 最终一致（AP 的工程妥协）
-  - 一致性级别：线性 > 顺序 > 因果 > 读己写 > 最终
-  - Quorum：W+R>N 保证强一致
-  - 选型：注册中心 AP、配置中心 CP、库存 CP、缓存社交 AP
+- CAP：P 必选，实际是 CP vs AP 二选一
+- BASE = 基本可用 + 软状态 + 最终一致（AP 的工程妥协）
+- 一致性级别：线性 > 顺序 > 因果 > 读己写 > 最终
+- Quorum：W+R>N 保证强一致
+- 选型：注册中心 AP、配置中心 CP、库存 CP、缓存社交 AP
+frequency: high
 ---
 
 # 【Java 后端架构师】CAP、BASE 与一致性模型如何落地
@@ -354,6 +361,33 @@ public boolean deductStock(Long skuId, int quantity) {
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AP process
+    class B decision
+    class BASE special
+    class C error
+    class CAP info
+    class CP start
+    class D process
+    class E decision
+    class Eureka special
+    class F error
+    class G info
+    class H start
+    class I process
+    class J decision
+    class K special
+    class L error
+    class Nacos info
+    class Zookeeper start
+    class br process
+    class etcd decision
     subgraph CAP定理 [CAP 定理 P必选]
         direction LR
         A[CP 强一致性] --> B[分区时拒绝写牺牲可用]

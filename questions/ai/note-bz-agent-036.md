@@ -29,6 +29,7 @@ memory_points:
 - 对比Tool与Skill：Tool是底层原子操作(如search)，Skill是多步组合的复杂业务能力(如调研)
 - Skill五大核心组件：触发条件、提示词、依赖工具、执行流程、输入输出Schema
 - 本质是高内聚低耦合：将常用复杂Agent处理逻辑固化为能力包，实现跨场景复用
+frequency: medium
 ---
 
 # 什么是 Skill？Agent 架构中 Skill 的本质是什么？
@@ -237,6 +238,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

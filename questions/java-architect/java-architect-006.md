@@ -8,9 +8,11 @@ tags:
 - 隔离
 - 容量规划
 feynman:
-  essence: 线程池参数设计的本质是"按业务模型对资源做预算"——CPU 密集型把线程数压到核数（多则上下文切换浪费），IO 密集型放大线程数（多则等 IO 时让出 CPU）。拒绝策略和队列是流量整形工具，不是简单兜底。
+  essence: 线程池参数设计的本质是"按业务模型对资源做预算"——CPU 密集型把线程数压到核数（多则上下文切换浪费），IO 密集型放大线程数（多则等 IO
+    时让出 CPU）。拒绝策略和队列是流量整形工具，不是简单兜底。
   analogy: 像餐厅运营：CPU 密集型是"师傅做菜"（后厨核数有限，多派人没用），IO 密集型是"服务员等菜出餐口"（等的时候可以去别桌服务，多派服务员提升翻台率）。队列是等位区，拒绝策略是"客满了劝退或改天"。
-  first_principle: 线程是稀缺资源（每条线程占 ~1MB 栈 + 调度开销）。线程池的存在是用"池化复用"摊薄创建销毁成本。参数设计的核心是回答"多少线程能让 CPU/IO 都不闲着又不打架"，这取决于任务是 CPU bound 还是 IO bound。
+  first_principle: 线程是稀缺资源（每条线程占 ~1MB 栈 + 调度开销）。线程池的存在是用"池化复用"摊薄创建销毁成本。参数设计的核心是回答"多少线程能让
+    CPU/IO 都不闲着又不打架"，这取决于任务是 CPU bound 还是 IO bound。
   key_points:
   - 七大参数：corePoolSize、maximumPoolSize、keepAliveTime、workQueue、threadFactory、rejectedExecutionHandler、unit
   - 提交流程：核心线程→队列→非核心线程→拒绝策略
@@ -23,19 +25,22 @@ first_principle:
   - CPU 核数是硬上限，超过则上下文切换损耗大于收益
   - 线程数太少 → CPU 闲置；线程数太多 → 调度开销 + 内存压力
   - 任务等待 IO 时线程让出 CPU，可被其他线程使用
-  rebuild: 用利特尔法则（Little's Law）推导：线程数 = QPS × 单任务耗时。再按 CPU/IO 比例修正——纯 CPU 任务线程数 = N+1（少量冗余抗尖峰），IO 任务线程数 = N×(1 + IO时间/CPU时间)。队列和拒绝策略做流量整形，超出处理能力的请求要么排队要么快速失败保护系统。
+  rebuild: 用利特尔法则（Little's Law）推导：线程数 = QPS × 单任务耗时。再按 CPU/IO 比例修正——纯 CPU 任务线程数 =
+    N+1（少量冗余抗尖峰），IO 任务线程数 = N×(1 + IO时间/CPU时间)。队列和拒绝策略做流量整形，超出处理能力的请求要么排队要么快速失败保护系统。
 follow_up:
-  - 为什么核心线程满了先进队列而不是先开非核心线程？——JDK 设计倾向于复用核心线程 + 用队列缓冲，避免频繁创建销毁非核心线程。但这导致 LinkedBlockingQueue 默认无界时 maximumPoolSize 永远不生效
-  - 队列该选有界还是无界？——必须有界。无界队列堆积导致 OOM，且 maximumPoolSize 失效。生产用 ArrayBlockingQueue 设容量
-  - CallerRunsPolicy 为什么是好的拒绝策略？——降速反压，让调用线程自己执行任务，天然限流避免下游被打垮
-  - 线程池怎么动态调参？——Hippo4j/Dynamic-TP 支持运行时改 corePoolSize/maximum，配合配置中心热更新
-  - 怎么监控线程池健康？——getActiveCount/getQueue.size()/getCompletedTaskCount() 暴露到 Micrometer，告警队列堆积率
+- 为什么核心线程满了先进队列而不是先开非核心线程？——JDK 设计倾向于复用核心线程 + 用队列缓冲，避免频繁创建销毁非核心线程。但这导致 LinkedBlockingQueue
+  默认无界时 maximumPoolSize 永远不生效
+- 队列该选有界还是无界？——必须有界。无界队列堆积导致 OOM，且 maximumPoolSize 失效。生产用 ArrayBlockingQueue 设容量
+- CallerRunsPolicy 为什么是好的拒绝策略？——降速反压，让调用线程自己执行任务，天然限流避免下游被打垮
+- 线程池怎么动态调参？——Hippo4j/Dynamic-TP 支持运行时改 corePoolSize/maximum，配合配置中心热更新
+- 怎么监控线程池健康？——getActiveCount/getQueue.size()/getCompletedTaskCount() 暴露到 Micrometer，告警队列堆积率
 memory_points:
-  - 七参数：核心、最大、存活时间、队列、线程工厂、拒绝策略、单位
-  - 提交流程：核心满→进队列→队列满→开非核心→达最大→拒绝
-  - CPU 密集 N+1，IO 密集 2N 或 N×(1+wait/compute)
-  - 队列必须有界，拒绝策略首选 CallerRunsPolicy（反压）
-  - 监控：队列堆积率、活跃线程比、拒绝次数、任务 P99 耗时
+- 七参数：核心、最大、存活时间、队列、线程工厂、拒绝策略、单位
+- 提交流程：核心满→进队列→队列满→开非核心→达最大→拒绝
+- CPU 密集 N+1，IO 密集 2N 或 N×(1+wait/compute)
+- 队列必须有界，拒绝策略首选 CallerRunsPolicy（反压）
+- 监控：队列堆积率、活跃线程比、拒绝次数、任务 P99 耗时
+frequency: high
 ---
 
 # 【Java 后端架构师】线程池参数如何按业务模型设计
@@ -296,6 +301,26 @@ Metrics.counter("thread.pool.rejected").increment();   // 拒绝时 +1
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CallerRunsPolicy special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class br error
+    class corePoolSize info
+    class maximumPoolSize start
+    class workQueue process
     A[业务请求] --> B{corePoolSize<br/>核心线程是否满?}
     B -- 否 --> C[创建核心线程执行]
     B -- 是 --> D{workQueue<br/>有界队列是否满?}

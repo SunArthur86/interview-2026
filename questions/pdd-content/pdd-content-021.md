@@ -28,15 +28,16 @@ first_principle:
   - 多下游订阅（ES/统计/推荐）
   rebuild: 分层服务+事件驱动+多存储分工。
 follow_up:
-  - 评分怎么实时？——Redis 增量 + 定时校准
-  - 审核挂了评价还能发吗？——不能上架（status=0），但 DB 写入正常
-  - 评价量太大怎么办？——按 product_id 分库分表 + ES 索引分片
+- 评分怎么实时？——Redis 增量 + 定时校准
+- 审核挂了评价还能发吗？——不能上架（status=0），但 DB 写入正常
+- 评价量太大怎么办？——按 product_id 分库分表 + ES 索引分片
 memory_points:
-  - 三层：接入/服务/数据
-  - 服务：写入/审核/聚合分
-  - 数据：MySQL+Redis+ES+OSS
-  - 事件：Kafka 扩散
-  - 反作弊：内容+行为
+- 三层：接入/服务/数据
+- 服务：写入/审核/聚合分
+- 数据：MySQL+Redis+ES+OSS
+- 事件：Kafka 扩散
+- 反作弊：内容+行为
+frequency: high
 ---
 
 # 【拼多多内容】评价系统整体架构怎么设计？
@@ -273,6 +274,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

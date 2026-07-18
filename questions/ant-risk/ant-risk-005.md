@@ -35,6 +35,7 @@ memory_points:
 - 桶定位：(n-1) & hash，n 必须是 2 的幂
 - 扰动函数：高 16 位异或低 16 位，让高位影响桶分布
 - 扩容翻倍迁移：原位 or 原位+oldCap（用 hash 的高一位判定）
+frequency: high
 ---
 
 # 【蚂蚁风控】HashMap 的底层原理？扩容机制？为什么初始容量要预估？
@@ -294,6 +295,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

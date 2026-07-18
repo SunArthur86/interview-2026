@@ -29,6 +29,7 @@ memory_points:
 - 结构改进二：采用无偏置设计叠加 RoPE 旋转位置编码，减少参数且支持长度外推。
 - 核心激活：FFN 层换用 SwiGLU，平滑且收敛快。
 - 训练贡献：验证 Scaling Law，以小参数+海量公开数据实现极高性价比并繁荣开源生态。
+frequency: low
 ---
 
 # 【美团面经】说一下 LLaMA 的结构吧，它在结构和训练上都做了哪些贡献？
@@ -201,6 +202,35 @@ class LlamaBlock(nn.Module):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BPE decision
+    class C special
+    class D error
+    class Decoder info
+    class E start
+    class F process
+    class FFN decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class LLaMA process
+    class Norm decision
+    class Pre special
+    class RMSNorm error
+    class RoPE info
+    class SentencePiece start
+    class SwiGLU process
+    class Transformer decision
+    class bias special
+    class only error
     A[LLaMA 架构] --> B[Decoder-only Transformer]
     B --> C[Pre-Norm RMSNorm]
     B --> D[SwiGLU FFN]

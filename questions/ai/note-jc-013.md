@@ -10,9 +10,13 @@ tags:
 - 时间复杂度
 - 快速排序
 feynman:
-  essence: 常见排序复杂度——冒泡/选择/插入 O(n²)（简单但慢），归并/快排/堆排 O(nlogn)（高效），桶排/计数 O(n+k)（线性但受限）。快排原理：选基准(pivot)，比它小的放左大的放右，递归排两边。最坏 O(n²) 出现在每次 pivot 都选到极值（已序数组选首/尾）。实际很少触发最坏因为①随机选 pivot ②实际数据分布让极值概率低 ③三数取中法避免。平均 O(nlogn)。
-  analogy: 快排像整理书架——随便抽一本书当标准（pivot），比它矮的放左边高的放右边，然后左右两边各再抽一本当标准继续分。最坏情况是书已经按高矮排好了你每次抽第一本（永远是当前最矮），就只能一本本挪 O(n²)。随机抽就不容易遇到这种情况。
-  first_principle: 快排基于分治——选 pivot 把问题分成两个子问题。理想情况 pivot 是中位数（每次分两半，O(nlogn)）；最坏 pivot 是极值（每次分 1 和 n-1，O(n²)）。
+  essence: 常见排序复杂度——冒泡/选择/插入 O(n²)（简单但慢），归并/快排/堆排 O(nlogn)（高效），桶排/计数 O(n+k)（线性但受限）。快排原理：选基准(pivot)，比它小的放左大的放右，递归排两边。最坏
+    O(n²) 出现在每次 pivot 都选到极值（已序数组选首/尾）。实际很少触发最坏因为①随机选 pivot ②实际数据分布让极值概率低 ③三数取中法避免。平均
+    O(nlogn)。
+  analogy: 快排像整理书架——随便抽一本书当标准（pivot），比它矮的放左边高的放右边，然后左右两边各再抽一本当标准继续分。最坏情况是书已经按高矮排好了你每次抽第一本（永远是当前最矮），就只能一本本挪
+    O(n²)。随机抽就不容易遇到这种情况。
+  first_principle: 快排基于分治——选 pivot 把问题分成两个子问题。理想情况 pivot 是中位数（每次分两半，O(nlogn)）；最坏 pivot
+    是极值（每次分 1 和 n-1，O(n²)）。
   key_points:
   - 冒泡/选择/插入 O(n²)；归并/快排/堆排 O(nlogn)；桶排/计数 O(n+k)
   - '快排: 选pivot，小左大右，递归两边'
@@ -32,6 +36,7 @@ memory_points:
 - 快排三步：选基准 pivot，小于放左大于放右，递归排两边
 - 最坏情况：已排序数组选首尾极值导致划分极度不均，退化为 O(n²)
 - 优化最坏：随机选 pivot 或三数取中法，避免极端不平衡划分
+frequency: medium
 ---
 
 # 【阶跃星辰面经】排序算法时间复杂度 + 快排原理与最坏情况
@@ -181,6 +186,24 @@ def median_of_three(arr, low, high):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Bad decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class O special
+    class Start error
+    class br info
     Start["无序数组输入"] --> A["选择Pivot基准元素"]
     A -->|"工程优化策略"| B["三数取中法<br/>或 随机化选择"]
     B --> C["Partition分区操作<br/>顺序扫描与交换"]

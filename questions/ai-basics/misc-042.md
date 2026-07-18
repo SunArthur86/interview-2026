@@ -20,6 +20,7 @@ memory_points:
 - 对话基准：MT-Bench（多轮对话，GPT-4打分）、Arena-Hard（高难度，强区分度）
 - 局限性：数据污染、过拟合、无法覆盖真实场景、多选题偏差
 - 最佳实践：静态基准 + 模型裁判 + 真实业务A/B测试组合评估
+frequency: medium
 ---
 
 # 大模型的主流评估基准有哪些?各自评估什么能力?有什么局限性
@@ -141,6 +142,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -31,6 +31,7 @@ memory_points:
 - 合规与部署：企业核心代码禁止出网，必须内网全链路私有化部署。
 - 定制工作流：需深度对接内部自研CI/CD、代码规范及Monorepo构建系统。
 - 成本翻转：团队超50人时，SaaS线性计费爆炸，私有化边际成本趋近于零。
+frequency: medium
 ---
 
 # 【腾讯面经】既然 Claude Code 已经问世，为何还要耗费精力去复刻一个类似的项目？
@@ -270,6 +271,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

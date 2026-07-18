@@ -10,7 +10,9 @@ tags:
 - ClaudeCode
 - Memory
 feynman:
-  essence: Claude Code 的 Memory 分三层——项目级 CLAUDE.md（跟仓库走，团队共享）、用户级 ~/.claude/CLAUDE.md（跟机器走，个人偏好）、会话级 context（关窗即丢）。三层在每次请求拼到 system prompt，但生命周期不同，靠文件路径天然隔离。上下文过长靠 auto-compact（到阈值自动总结历史 + 保留近期消息）。
+  essence: Claude Code 的 Memory 分三层——项目级 CLAUDE.md（跟仓库走，团队共享）、用户级 ~/.claude/CLAUDE.md（跟机器走，个人偏好）、会话级
+    context（关窗即丢）。三层在每次请求拼到 system prompt，但生命周期不同，靠文件路径天然隔离。上下文过长靠 auto-compact（到阈值自动总结历史
+    + 保留近期消息）。
   analogy: 就像公司规章——公司章程（CLAUDE.md，全公司遵守）、个人工作习惯笔记（~/.claude，只你用）、本次会议记录（会话 context，会开完就丢）。三层不混，各管各的。
   first_principle: 记忆的价值与共享粒度强相关。团队规则必须进 git 才能共享；个人偏好不该污染团队仓库；会话细节关窗就该消失。三种生命周期决定了三种存储位置。
   key_points:
@@ -21,7 +23,8 @@ feynman:
   - prompt cache（5-min TTL）让长 system prompt 不付每次 input cost
 first_principle:
   essence: Memory 分层 = 按生命周期和共享粒度组织记忆
-  derivation: 记忆有价值差异 → 团队规则需共享（进git）→ 个人偏好不该共享（不进git）→ 会话细节无需持久（内存）→ 三种生命周期 → 三种存储位置 → 天然隔离
+  derivation: 记忆有价值差异 → 团队规则需共享（进git）→ 个人偏好不该共享（不进git）→ 会话细节无需持久（内存）→ 三种生命周期 → 三种存储位置
+    → 天然隔离
   conclusion: 分层的本质不是"分几层"，而是"按生命周期 + 共享粒度"组织，让该共享的共享、该私有的私有、该消失的消失
 follow_up:
 - Claude Code 的 memory/ 子目录（auto memory）怎么用 frontmatter 标 type？
@@ -32,6 +35,7 @@ memory_points:
 - 分层是为了隔离职责与共享粒度：团队约定与个人习惯解耦，防止换人乱套
 - 上下文过长应对：触发auto-compact自动摘要，结合5分钟TTL的prompt cache省钱
 - 突破上限靠检索：不塞全量历史，向量化后按相关性召回Top-K片段拼prompt
+frequency: high
 ---
 
 # 【字节飞连面经】Claude Code 的 Memory 机制：为什么分层？上下文过长怎么办？
@@ -147,6 +151,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

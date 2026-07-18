@@ -29,6 +29,7 @@ memory_points:
 - 人机协作：转人工时自动生成对话摘要，情绪愤怒优先排队。
 - 技术选型：首选RAG+LLM，维护成本低；传统FAQ仅用于极简单业务。
 - 实战优化：接入结构化数据库，通过Function Calling直接判断退货规则。
+frequency: medium
 ---
 
 # 如何设计一个AI智能客服系统？要求能处理80%的常见问题，复杂问题转人工。
@@ -179,6 +180,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

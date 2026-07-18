@@ -31,6 +31,7 @@ memory_points:
 - 静态权重：分数归一化后按固定比例分配，文本为主通常文本权重设0.6-0.8。
 - 动态路由：用轻量分类器识别意图是文本还是图像，动态调整两路权重。
 - 工业主流：图文各路扩大召回量，合并去重后用Cross-Encoder重排得到最终结果。
+frequency: medium
 ---
 
 # 多模态检索中图文向量混合检索的权重分配
@@ -227,6 +228,7 @@ flowchart TD
     style VEC fill:#FF9800,color:#fff
     style BM fill:#9C27B0,color:#fff
     style RRF fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -31,6 +31,7 @@ memory_points:
 - 核心流程图：理解→计划→执行→观察，在观察节点设置条件分支（继续/完成/转人工）闭环编排
 - 高可用记忆系统：Redis负责短期低延迟会话状态，VectorDB负责跨会话的长期经验沉淀
 - 红线约束：因为高危操作（发邮件/删库）代价不可逆，所以绝不让LLM直接执行，必须引入Human审核
+frequency: medium
 ---
 
 # 实战：带工具调用的复杂 Agent 智能体怎么构建？
@@ -248,6 +249,7 @@ flowchart TD
     style EXEC fill:#FF9800,color:#fff
     style FALL fill:#F44336,color:#fff
     style HITL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

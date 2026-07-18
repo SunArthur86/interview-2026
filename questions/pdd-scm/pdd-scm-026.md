@@ -36,6 +36,7 @@ memory_points:
 - 池化必须有界，缓存多级，扩容无状态
 - 异步：CompletableFuture 并行 + MQ 解耦
 - 队列削峰：洪峰转稳定流
+frequency: high
 ---
 
 # 【拼多多供应链】高并发五件套怎么用？
@@ -195,6 +196,25 @@ kafka.send("order-created", event);  // 不阻塞主流程
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Caffeine start
+    class CompletableFuture process
+    class M decision
+    class N special
+    class O error
+    class P info
+    class Q start
+    class R process
+    class Redis decision
+    class T special
+    class U error
+    class User info
+    class br start
     User[高并发请求] --> M[网关入口]
     M --> N[多级缓存策略<br/>Caffeine+Redis]
     N -- 命中 --> R[快速响应聚合]

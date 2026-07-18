@@ -30,6 +30,7 @@ memory_points:
 - 核心北极星：任务完成率（健康>85%）和产物采纳率（健康>70%）最直接反映AI价值。
 - 关键负向指标：重跑率（健康<15%）直接暴露AI结果不好用或上下文引入错误。
 - 桌面端专属指标：多窗口状态丢失率、长任务失败恢复率、文件操作错误率决定端上体验底线。
+frequency: low
 ---
 
 # 【月之暗面面经】你会用哪些指标判断桌面 AI 产品前端做得好不好？
@@ -38,6 +39,28 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AI start
+    class Active process
+    class Adoption decision
+    class Artifact special
+    class Completion error
+    class L1 info
+    class L2 start
+    class L3 process
+    class Layer decision
+    class Native special
+    class Rate error
+    class SYS info
+    class Task start
+    class Tasks process
+    class Weekly decision
+    class br special
     subgraph SYS["AI-Native 桌面前端指标体系"]
         L3["Layer 3: 北极星指标（产品级）<br/>• 任务完成率 (Task Completion Rate)<br/>• 产物采纳率 (Artifact Adoption Rate)<br/>• 周活跃任务数 (Weekly Active Tasks)"]
         L2["Layer 2: 效率指标（体验级）<br/>• 平均任务耗时（从发起到产物确认）<br/>• 重跑率（用户重新执行的比例）<br/>• 上下文补充次数（任务执行中补充素材的频率）<br/>• 回到任务现场耗时（从通知到恢复上下文的延迟）"]

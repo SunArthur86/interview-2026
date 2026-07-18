@@ -32,6 +32,7 @@ memory_points:
 - CDN预缓存拦截：因为短链302响应极小，所以推边缘节点可拦98%源站QPS，优先用301浏览器缓存
 - 多级缓存抗量：因为单Redis有瓶颈，所以用Caffeine(L1)挡80%流量，Redis降一个数量级压力
 - 连接池调优：消除隐性瓶颈，按核心数调整HikariCP最大连接数，防止高并发排队
+frequency: medium
 ---
 
 # 【滴滴面经】你这个架构比较简单，理论上做到 5 万 QPS 应该不难，你觉得还有哪些优化空间？
@@ -348,6 +349,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

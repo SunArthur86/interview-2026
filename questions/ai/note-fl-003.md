@@ -10,8 +10,11 @@ tags:
 - BadCase
 - Prompt优化
 feynman:
-  essence: 模型不听指令时，按"从便宜到贵"的优先级解：流程约束（最便宜，框架层硬规则）→ 后处理（regex/strip兜底）→ Prompt优化（加few-shot）→ 模型参数（temperature↓）→ 微调（最贵，几千条才值得）。定位必须有端到端 trace，每个改完跑 200 条 bad case 回归集看"修复率 vs 回归率"。
-  analogy: 就像小孩不听话——先立规矩（流程约束：不写完作业不能看电视），再纠小错（后处理：擦掉错别字），再讲道理（Prompt优化：举几个好例子），再调状态（模型参数：让 ta 冷静点 temperature↓），最后才请家教（微调：专项训练）。
+  essence: 模型不听指令时，按"从便宜到贵"的优先级解：流程约束（最便宜，框架层硬规则）→ 后处理（regex/strip兜底）→ Prompt优化（加few-shot）→
+    模型参数（temperature↓）→ 微调（最贵，几千条才值得）。定位必须有端到端 trace，每个改完跑 200 条 bad case 回归集看"修复率
+    vs 回归率"。
+  analogy: 就像小孩不听话——先立规矩（流程约束：不写完作业不能看电视），再纠小错（后处理：擦掉错别字），再讲道理（Prompt优化：举几个好例子），再调状态（模型参数：让
+    ta 冷静点 temperature↓），最后才请家教（微调：专项训练）。
   first_principle: LLM 输出的不确定性是本质特征。纠正手段的成本和收益呈反比——越便宜的越先试，越贵的越留到最后。所有纠正都要可量化（评测集），否则就是盲目调参。
   key_points:
   - 解决优先级：流程约束 > 后处理 > Prompt > 模型参数 > 微调
@@ -21,7 +24,8 @@ feynman:
   - 反思结果要摘要后再写回，不留原始错误文本（否则污染上下文）
 first_principle:
   essence: 不确定性纠正 = 成本递增的层级防御
-  derivation: LLM 输出不确定 → 单点纠正不可靠 → 多层防御（流程>后处理>prompt>参数>微调）→ 每层成本递增效果递增 → 按性价比从低到高试 → 每层都需量化评测验证
+  derivation: LLM 输出不确定 → 单点纠正不可靠 → 多层防御（流程>后处理>prompt>参数>微调）→ 每层成本递增效果递增 → 按性价比从低到高试
+    → 每层都需量化评测验证
   conclusion: 模型不听指令不是"调 prompt"一个问题，而是"5 层防御 + 量化评测"的工程体系
 follow_up:
 - LLM-as-a-Judge 做自动评测有什么偏差？怎么校准？
@@ -32,6 +36,7 @@ memory_points:
 - 因为定位靠猜是大忌，所以每步的Input/Output必须落库，通过trace_id查SQL精准定位崩溃节点
 - 解决手段看性价比：从流程约束、后处理到调Prompt和降Temperature，因为微调极贵，所以作为最后手段
 - 反思必须防污染：原始报错文本绝不塞回上下文，必须摘要成规则经验或写入隔离的Scratchpad
+frequency: high
 ---
 
 # 【字节飞连面经】项目中模型不听指令怎么办？怎么定位？反思会污染上下文吗？
@@ -125,6 +130,32 @@ ORDER BY ts;
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Case special
+    class D error
+    class DPO info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class Input info
+    class J start
+    class K process
+    class L decision
+    class M special
+    class N error
+    class O info
+    class br start
+    class vs process
     A["线上Bad Case<br/>模型不听指令"] --> B["提取trace_id"]
     B --> C[("查询全链路Trace表<br/>Input/Output落库")]
     C --> D{"崩溃节点定位"}

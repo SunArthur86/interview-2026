@@ -23,6 +23,7 @@ memory_points:
 - 指令技巧：Let's think step by step激发思维链，专家角色激活领域知识
 - 易错点：指令过载（不超过3-5条核心），避免过多负面暗示
 - 长Prompt处理：核心Identity保留，规则可用检索提取，每轮重注
+frequency: high
 ---
 
 # System Prompt设计的最佳实践是什么?如何设计有效的角色和约束
@@ -142,6 +143,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

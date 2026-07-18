@@ -16,6 +16,7 @@ memory_points:
 - CGLib代理：基于ASM生成子类重写方法，因为基于继承所以不能代理final类或方法
 - 对比核心：JDK看接口，CGLib看子类，Spring Boot 2.x默认倾向CGLib
 - 避坑指南：类内部方法自调用(如this.method())不走代理，会导致AOP或事务失效
+frequency: low
 ---
 
 # 实现原理是什么？
@@ -133,6 +134,46 @@ public class OrderService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AOP process
+    class ASM decision
+    class B special
+    class C error
+    class CGLib info
+    class D start
+    class E process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class InvocationHandler start
+    class J process
+    class JDK decision
+    class K special
+    class L error
+    class M info
+    class MethodInterceptor start
+    class N process
+    class O decision
+    class P special
+    class Proxy error
+    class Q info
+    class R start
+    class S process
+    class Spring decision
+    class SpringBoot special
+    class br error
+    class final info
+    class intercept start
+    class invoke process
+    class this decision
+    class x special
     A[动态代理实现原理] --> B["JDK Proxy"]
     A --> C[CGLib]
     B --> D[基于反射<br/>运行时生成接口实现类]

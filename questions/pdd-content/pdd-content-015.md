@@ -26,14 +26,15 @@ first_principle:
   - 评分需准确（不能被刷分污染）
   rebuild: 审核流 + 评分聚合 + 反作弊 + 行家加权。
 follow_up:
-  - 怎么防止刷好评？——设备/账号/行为多维度反作弊 + IP 频控 + 内容相似度
-  - 评分怎么聚合？——增量计算（+评价/减评价）+ 定时校准（防漂移）
-  - 行家评价怎么加权？——领域权威度评分 + 标签体系
+- 怎么防止刷好评？——设备/账号/行为多维度反作弊 + IP 频控 + 内容相似度
+- 评分怎么聚合？——增量计算（+评价/减评价）+ 定时校准（防漂移）
+- 行家评价怎么加权？——领域权威度评分 + 标签体系
 memory_points:
-  - 生命周期：提交→机审→人审→上架
-  - 评分：增量+定时校准
-  - 防刷：内容+行为双维
-  - 行家：垂直权威度加权
+- 生命周期：提交→机审→人审→上架
+- 评分：增量+定时校准
+- 防刷：内容+行为双维
+- 行家：垂直权威度加权
+frequency: medium
 ---
 
 # 【拼多多内容】评价业务怎么设计（含行家社区）？
@@ -250,6 +251,29 @@ Redis 的 hincrby 本身原子，但"业务操作 + Redis 更新"不是原子的
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class D decision
+    class E special
+    class F error
+    class G info
+    class H start
+    class I process
+    class J decision
+    class K special
+    class L error
+    class Redis info
+    class SimHash start
+    class br process
+    class count decision
+    class hincrby special
+    class score error
     A["用户提交评价UGC"] --> B["机审拦截<br/>敏感词/NLP模型"]
     B -->|"置信度 > 0.95"| D["自动通过上架"]
     B -->|"置信度 < 0.5"| E["自动拒绝违规"]

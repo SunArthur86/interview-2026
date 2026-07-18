@@ -32,6 +32,7 @@ memory_points:
 - 状态隔离：各Agent保持独立的上下文记忆，避免窗口超载。
 - 共享黑板：设立全局状态空间，各Agent读写任务结果实现解耦协作。
 - 状态传递：上级拆解任务，附带必要只读上下文下发给子Agent。
+frequency: medium
 ---
 
 # 多Agent协作、上下文管理和任务状态传递
@@ -331,6 +332,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -10,7 +10,8 @@ tags:
 feynman:
   essence: JIT 的本质是"用运行时数据指导优化"——只有热点代码才值得编译，只有没逃逸的对象才能在栈上分配。JVM 用 Profiling 收集谁热、谁逃逸，再决定编译/内联/标量替换，把解释执行的灵活性和本地代码的性能结合起来。
   analogy: 像翻译公司：解释执行是"口译"——慢但灵活；C1 是"实习生速译"——快但不精；C2 是"资深译审"——基于上下文（Profiling）做意译（激进优化），如果上下文错了还能回退（逆优化）。逃逸分析是"判断这份资料会不会流出公司"，不流出的就在内部消化（栈分配），不进档案室（堆）。
-  first_principle: 为什么 Java 能接近 C 的性能？因为 JVM 知道运行时实际调用了哪些方法、对象是否逃逸——这些信息 C 编译期不知道。JIT 用"运行时已知"换"编译期未知"，做到 C 做不到的内联和标量替换。
+  first_principle: 为什么 Java 能接近 C 的性能？因为 JVM 知道运行时实际调用了哪些方法、对象是否逃逸——这些信息 C 编译期不知道。JIT
+    用"运行时已知"换"编译期未知"，做到 C 做不到的内联和标量替换。
   key_points:
   - 分层编译：解释 → C1（Client，快速编译）→ C2（Server，激进优化）
   - 热点探测：方法调用计数器 + 回边计数器，默认 10000/17000 触发
@@ -23,19 +24,23 @@ first_principle:
   - 80% 时间花在 20% 代码上（热点）
   - 运行时才知道真实调用关系和对象逃逸情况
   - 激进优化（假设某种情况发生）能大幅提升性能，但假设错了必须能回退
-  rebuild: 先解释执行 + Profiling 收集热点；热点达到阈值交给 C1 快速编译（保证基本性能）；收集足够 Profile 后交 C2 做激进优化（内联、标量替换、逃逸分析）；运行时如果假设被打破（罕见类型出现），逆优化回解释态重新 Profiling。
+  rebuild: 先解释执行 + Profiling 收集热点；热点达到阈值交给 C1 快速编译（保证基本性能）；收集足够 Profile 后交 C2 做激进优化（内联、标量替换、逃逸分析）；运行时如果假设被打破（罕见类型出现），逆优化回解释态重新
+    Profiling。
 follow_up:
-  - 为什么 JIT 不一开始就编译？——冷代码编译是浪费（编译开销 + 占 CodeCache），Profiling 也需要解释阶段积累数据
-  - 逃逸分析失败会怎样？——对象正常在堆分配，GC 负担不降反升。常见失败原因：对象赋值给静态字段、作为参数传给未知方法、返回值
-  - C2 和 Graal 区别？——Graal 是 Java 写的 JIT（JDK 10+ 实验性），可替代 C2，优化更激进但成熟度差，JDK 17 已标记移除 AOT
-  - 什么时候关 JIT 反而快？——超短运行（启动即退出，编译开销未回收）、调试场景、CodeCache OOM 时
-  - 线上怎么发现 JIT 逆优化风暴？——-XX:+PrintCompilation 看是否大量 made not entrant，JFR 看 jkm.Deoptimization 事件频率
+- 为什么 JIT 不一开始就编译？——冷代码编译是浪费（编译开销 + 占 CodeCache），Profiling 也需要解释阶段积累数据
+- 逃逸分析失败会怎样？——对象正常在堆分配，GC 负担不降反升。常见失败原因：对象赋值给静态字段、作为参数传给未知方法、返回值
+- C2 和 Graal 区别？——Graal 是 Java 写的 JIT（JDK 10+ 实验性），可替代 C2，优化更激进但成熟度差，JDK 17 已标记移除
+  AOT
+- 什么时候关 JIT 反而快？——超短运行（启动即退出，编译开销未回收）、调试场景、CodeCache OOM 时
+- 线上怎么发现 JIT 逆优化风暴？——-XX:+PrintCompilation 看是否大量 made not entrant，JFR 看 jkm.Deoptimization
+  事件频率
 memory_points:
-  - JIT 三层：解释 → C1 → C2，分层编译（Tiered Compilation）JDK 8 默认开启
-  - 热点触发：方法计数器 1500（OSR 回边）、默认编译阈值受 -XX:CompileThreshold 控制（分层模式下失效）
-  - 逃逸分析红利：标量替换（拆字段）、栈上分配、锁消除（同步消除）
-  - 激进优化的代价：Deoptimization，类型 Profile 错就回退，逆优化风暴会拖垮性能
-  - 排查工具：-XX:+PrintCompilation、-XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining、JITWatch、JFR
+- JIT 三层：解释 → C1 → C2，分层编译（Tiered Compilation）JDK 8 默认开启
+- 热点触发：方法计数器 1500（OSR 回边）、默认编译阈值受 -XX:CompileThreshold 控制（分层模式下失效）
+- 逃逸分析红利：标量替换（拆字段）、栈上分配、锁消除（同步消除）
+- 激进优化的代价：Deoptimization，类型 Profile 错就回退，逆优化风暴会拖垮性能
+- 排查工具：-XX:+PrintCompilation、-XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining、JITWatch、JFR
+frequency: high
 ---
 
 # 【Java 后端架构师】JIT、逃逸分析与性能优化边界
@@ -325,6 +330,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

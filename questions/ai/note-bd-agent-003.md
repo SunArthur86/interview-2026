@@ -29,6 +29,7 @@ memory_points:
 - Workflow优势：流程固定节点可测，失败可精准定位，Token成本可控不发散
 - Runtime基建：生产级Agent本质是分布式系统，极其依赖状态管理与错误恢复
 - 面试策略：务实回答，拒谈空泛AGI，强调从Workflow+RAG场景切入解决实际问题
+frequency: medium
 ---
 
 # 怎么看Agent技术发展方向？哪些更容易工程落地？
@@ -156,6 +157,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

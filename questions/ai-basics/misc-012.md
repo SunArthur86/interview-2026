@@ -22,6 +22,7 @@ memory_points:
 - 损失函数：基于Chosen和Rejected的Log-ratio差值，直接优化策略
 - 优势：无需训练Critic和RM，显存占用低，避免Reward Hacking
 - 参考模型作用：pi_ref用于计算KL散度约束，防止模型偏离过远
+frequency: high
 ---
 
 # DPO的数学推导核心是什么?为什么能跳过奖励模型
@@ -128,6 +129,37 @@ logits = beta * torch.clamp(pi_ratio - ref_ratio, min=-5, max=5)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Chosen special
+    class Critic error
+    class D info
+    class DPO start
+    class E process
+    class F decision
+    class G special
+    class H error
+    class Hacking info
+    class I start
+    class J process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class RLHF start
+    class RM process
+    class Rejected decision
+    class Reward special
+    class br error
+    class log info
+    class r start
     A["RLHF 优化目标<br/>最大化奖励并约束KL散度"] --> B["求解KL约束最优策略<br/>得到闭式解"]
     B --> C["反解出奖励函数表达式<br/>r = β·log(π/π_ref) + 常数"]
     C --> D["隐式包含了奖励模型 RM"]

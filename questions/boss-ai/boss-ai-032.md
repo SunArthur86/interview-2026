@@ -59,6 +59,7 @@ memory_points:
 - 算子 DAG：依赖+并行+失败重试
 - GPU 调度：池化+优先级+抢占
 - 状态机持久化 → 断点恢复
+frequency: low
 ---
 
 # 【巨剧核 AI 陪伴】视频生成任务系统怎么设计？
@@ -340,6 +341,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

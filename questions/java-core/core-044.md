@@ -15,6 +15,7 @@ memory_points:
 - 两种顺序：默认保持插入顺序，设accessOrder=true则变为访问顺序
 - LRU神器：因为访问会移至链表尾，所以重写removeEldestEntry即可实现LRU缓存
 - 性能对比：查询复杂度同为O(1)，但LinkedHashMap因维护链表略慢于HashMap
+frequency: medium
 ---
 
 # LinkHashMap（记录插入顺序）是什么？
@@ -87,6 +88,32 @@ String val = lruCache.get("key1"); // 访问后，key1 会移至链表尾部
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class Entry info
+    class F start
+    class G process
+    class H decision
+    class HashMap special
+    class LRU error
+    class LinkedHashMap info
+    class accessOrder start
+    class br process
+    class false decision
+    class head special
+    class removeEldestEntry error
+    class table info
+    class tail start
+    class true process
     A["LinkedHashMap<br/>HashMap + 双向链表"] --> B[数组桶 table]
     B --> C[桶内节点 Entry]
     C --> D{维护顺序类型?}

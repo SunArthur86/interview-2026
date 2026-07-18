@@ -36,6 +36,7 @@ memory_points:
 - Token方案：先获取Token→请求带Token→服务端校验Token状态→处理或拒绝
 - 唯一索引：业务流水号做唯一约束，重复插入报错直接返回上次结果
 - 面试加分：方案描述不能只说"用Redis"，需具体到键值设计和校验逻辑
+frequency: high
 ---
 
 # 【中国电信面试】微服务架构下，如何保证服务之间调用的幂等性？请列举至少两种实现方案
@@ -289,6 +290,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

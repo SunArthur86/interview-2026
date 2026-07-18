@@ -32,6 +32,7 @@ memory_points:
 - 避坑指南：因start只能调一次，所以严禁直接调run()（那仅是普通函数执行）
 - GIL限制：因GIL同一时刻只允许单线程执行，故多线程仅适合IO密集型任务
 - 线程安全：多线程操作共享变量必须加锁，推荐用 with lock 上下文管理自动释放
+frequency: high
 ---
 
 # 【美团面经】Python怎么实现多线程？
@@ -260,6 +261,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

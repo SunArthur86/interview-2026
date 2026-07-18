@@ -27,6 +27,7 @@ memory_points:
 - 因为百亿数据需扩展，所以MySQL按短码Hash分128库x128表
 - 性能扛十亿读：读路径CDN->布隆过滤->Redis->MySQL，重定向不走Java
 - 跳转核心选型：302临时重定向利于业务统计，301永久重定向省带宽缓存
+frequency: high
 ---
 
 # 如何设计一个短链系统？数据量约百亿级别，日均访问量十亿次。
@@ -141,6 +142,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

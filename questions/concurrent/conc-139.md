@@ -24,6 +24,7 @@ memory_points:
 - 因为 CPU 密集型需减少切换，所以线程数设为 N+1；而 IO 密集型需利用等待，设为 2N。
 - 实战避坑：核心数极小而无界队列极大，会导致任务堆积拖垮 RT，建议用有界队列防 OOM。
 - 拒绝策略选型：限流降级用 CallerRunsPolicy，快速失败用 AbortPolicy，容忍丢失用 DiscardPolicy。
+frequency: high
 ---
 
 # 线程池如何调优？核心线程数、最大线程数、队列大小应该怎么设置？
@@ -151,6 +152,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -28,6 +28,7 @@ memory_points:
 - OT算法：操作转换，强依赖中心服务器定序，转换函数极难实现（Google Docs代表）
 - CRDT算法：无冲突复制数据类型，不依赖中心，数学上保证自然收敛，但元数据开销大（Figma代表）
 - 工程落地：长连接广播Op日志，高频操作按100ms时间窗口合并压缩，文档快照+Op回放恢复
+frequency: high
 ---
 
 # 如何设计一个在线协同编辑系统？类似Google Docs / 腾讯文档。
@@ -156,6 +157,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

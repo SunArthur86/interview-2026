@@ -32,6 +32,7 @@ memory_points:
 - CoT场景：解决复杂推理易遗漏中间步骤，擅长数学与逻辑推理，通过生成中间token铺路
 - 组合使用：Few-shot CoT是终极形态，在示例中不仅给答案更给出完整推导链路
 - 避坑指南：简单任务用CoT可能过度复杂化降低性能，且小模型(<60B)用CoT反而变差
+frequency: medium
 ---
 
 # 【字节面经】Few-shot 和 Chain-of-Thought 在什么场景下分别更有效？两者能否组合使用？
@@ -403,6 +404,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

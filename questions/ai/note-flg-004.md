@@ -21,7 +21,8 @@ feynman:
   - '适用边界: 高合规→传统引擎, 高灵活→Dify, 混合→两者协作'
 first_principle:
   essence: 流程编排系统设计由"控制流的决策者"决定——是预先编码的规则还是运行时AI推理。
-  derivation: 传统业务流程(审批/报销)步骤固定且需要合规审计 → 确定性引擎 → AI场景(智能客服/知识问答)需要动态决策 → LLM编排 → 两者各有适用边界 → 实际系统可能混合使用
+  derivation: 传统业务流程(审批/报销)步骤固定且需要合规审计 → 确定性引擎 → AI场景(智能客服/知识问答)需要动态决策 → LLM编排 → 两者各有适用边界
+    → 实际系统可能混合使用
   conclusion: 不存在替代关系，而是互补——传统引擎管确定性流程，Dify管智能决策环节
 follow_up:
 - Dify的可靠性怎么保证？LLM决策不稳定怎么办？
@@ -29,10 +30,11 @@ follow_up:
 - Dify和LangChain/LangGraph有什么区别？
 - 什么场景适合用Dify，什么不适合？
 memory_points:
-- "传统引擎: BPMN + 确定性 + 强事务 + Activiti/Camunda"
-- "Dify: 可视化AI编排 + LLM节点 + 动态决策 + 开源"
-- "核心差异: 控制流由\"预设规则\"还是\"LLM运行时决策\""
-- "混合模式: 传统引擎的某些节点用Dify做智能决策"
+- '传统引擎: BPMN + 确定性 + 强事务 + Activiti/Camunda'
+- 'Dify: 可视化AI编排 + LLM节点 + 动态决策 + 开源'
+- '核心差异: 控制流由"预设规则"还是"LLM运行时决策"'
+- '混合模式: 传统引擎的某些节点用Dify做智能决策'
+frequency: medium
 ---
 
 # 传统工作流引擎与Dify AI编排平台的区别
@@ -215,6 +217,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 结构化回答

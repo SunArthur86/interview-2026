@@ -15,6 +15,7 @@ memory_points:
 - 递归查询：你问我我必答到底，客户端负担轻而服务器负担重（多用于客户端查Local DNS）
 - 迭代查询：你问我我给线索，只返回下级地址让请求方自己去查（多用于DNS服务器之间）
 - 客户端到本地DNS通常是递归，而本地DNS向根及权威域名服务器查询通常是迭代
+frequency: low
 ---
 
 # 什么是递归查询和迭代查询？
@@ -103,6 +104,37 @@ Client      Local DNS      Root Server    .com Server    google.com NS
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class DNS error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class IP error
+    class J info
+    class K start
+    class L process
+    class LDNS decision
+    class M special
+    class N error
+    class O info
+    class P start
+    class Q process
+    class R decision
+    class TLD special
+    class br error
+    class com info
+    class hosts start
     A[浏览器输入域名] --> B[查本地 hosts]
     B --> C[查本地 DNS 缓存]
     C --> D[问本地域名服务器 LDNS]

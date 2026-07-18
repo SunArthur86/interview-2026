@@ -27,14 +27,15 @@ first_principle:
   - 落地需分步
   rebuild: FDE 全链路方案设计。
 follow_up:
-  - 怎么平衡短期与长期？——MVP 快速验证+架构留扩展
-  - 怎么说服业务投入？——ROI 量化+对标行业
-  - 跨团队怎么推动？——共目标+分工+联合 KPI
+- 怎么平衡短期与长期？——MVP 快速验证+架构留扩展
+- 怎么说服业务投入？——ROI 量化+对标行业
+- 跨团队怎么推动？——共目标+分工+联合 KPI
 memory_points:
-  - 业务：痛点/目标/约束
-  - 方案：架构/选型/取舍
-  - 落地：分期/里程碑
-  - 衡量：指标/对比/迭代
+- 业务：痛点/目标/约束
+- 方案：架构/选型/取舍
+- 落地：分期/里程碑
+- 衡量：指标/对比/迭代
+frequency: low
 ---
 
 # 【拼多多内容】FDE 解决方案设计（内容合规案例）？
@@ -295,6 +296,26 @@ FDE 价值的量化证明：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Agent process
+    class B decision
+    class Business special
+    class C error
+    class D info
+    class E start
+    class F process
+    class FDE decision
+    class G special
+    class H error
+    class I info
+    class System start
+    class br process
     subgraph Business ["业务诉求(输入)"]
         A["业务痛点: 审核慢且漏判"]
         B["合规要求: 零漏判底线"]

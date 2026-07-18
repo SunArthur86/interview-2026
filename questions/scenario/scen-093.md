@@ -29,6 +29,7 @@ memory_points:
 - 前置削峰：CDN静态隔离+验证码拉长请求+按钮防抖，拦截90%无效流量。
 - 库存防超卖：Redis预扣减(DECR原子操作)，成功后异步化入MQ。
 - 网关保护：根据单用户和总QPS维度令牌桶限流，拦截突发洪峰。
+frequency: high
 ---
 
 # 如何设计一个秒杀系统的流量削峰方案？保护后端不被压垮。
@@ -138,6 +139,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

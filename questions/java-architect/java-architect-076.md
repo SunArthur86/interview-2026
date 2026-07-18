@@ -9,8 +9,10 @@ tags:
 - 质量
 - 制品
 feynman:
-  essence: CI/CD 流水线的本质是"把质量保障从人工评审变成自动化门禁"。流水线分阶段（构建→单测→集成测试→安全扫描→制品→部署），每阶段设质量门禁（覆盖率、漏洞数、镜像大小、性能基线），门禁不过自动阻断。制品治理保证"可追溯、可回滚、不可篡改"——每个制品绑定 commit、测试报告、SBOM。
-  analogy: 像汽车总装线。每个工位（流水线阶段）有质检关卡（门禁）：焊接工位检查焊点数，涂装检查漆膜厚度，总装检查扭矩。一个工位不合格，整车不能流入下一工位。最终出厂的每辆车（制品）都有 VIN 号（版本）和质检报告（SBOM/测试报告）。
+  essence: CI/CD 流水线的本质是"把质量保障从人工评审变成自动化门禁"。流水线分阶段（构建→单测→集成测试→安全扫描→制品→部署），每阶段设质量门禁（覆盖率、漏洞数、镜像大小、性能基线），门禁不过自动阻断。制品治理保证"可追溯、可回滚、不可篡改"——每个制品绑定
+    commit、测试报告、SBOM。
+  analogy: 像汽车总装线。每个工位（流水线阶段）有质检关卡（门禁）：焊接工位检查焊点数，涂装检查漆膜厚度，总装检查扭矩。一个工位不合格，整车不能流入下一工位。最终出厂的每辆车（制品）都有
+    VIN 号（版本）和质检报告（SBOM/测试报告）。
   first_principle: 线上事故的根因往往是"未经验证的代码上了生产"。CI/CD 的核心是"把验证自动化、把门禁强制化"——每个 PR 自动跑测试、扫描、构建，门禁不过不让合并；每个制品有唯一指纹（digest），部署只能用经过验证的制品，回滚秒级切上一个版本。
   key_points:
   - 流水线六阶段：Build → Unit Test → Integration Test → Security Scan → Artifact → Deploy
@@ -24,20 +26,27 @@ first_principle:
   - 人工 Code Review 会遗漏（疲劳、认知盲区）
   - 测试和扫描必须自动化才能覆盖每次提交
   - 制品不可变 + 可追溯才能快速回滚
-  rebuild: 建立强制流水线——每个 PR 触发 Build + Unit Test（覆盖率门禁 > 80%）+ Sonar（零 Blocker）+ 集成测试 + Trivy 镜像扫描。门禁不过 PR 不能合并。合并后构建不可变镜像（SHA digest），打标签绑定 commit，生成 SBOM。部署分环境（dev→staging→prod），每环境自动测试，生产用金丝雀（先 1% 流量观察指标），异常自动回滚。监控 DORA 指标持续优化。
+  rebuild: 建立强制流水线——每个 PR 触发 Build + Unit Test（覆盖率门禁 > 80%）+ Sonar（零 Blocker）+ 集成测试
+    + Trivy 镜像扫描。门禁不过 PR 不能合并。合并后构建不可变镜像（SHA digest），打标签绑定 commit，生成 SBOM。部署分环境（dev→staging→prod），每环境自动测试，生产用金丝雀（先
+    1% 流量观察指标），异常自动回滚。监控 DORA 指标持续优化。
 follow_up:
-  - 质量门禁设太严会怎样？——开发效率下降（PR 堆积、门禁频繁失败）。门禁要分层：Blocker 必须阻断、Critical 警告、Minor 提醒。覆盖率从当前基线逐步提升（如每月 +2%），不要一步到位
-  - 制品为什么用 digest 不用 tag？——tag 可变（latest 会被覆盖），digest 是内容哈希不可篡改。部署用 digest 保证拉到的是验证过的镜像。tag 用于人类可读（v1.2.3），digest 用于机器精确引用
-  - 金丝雀发布怎么自动判断是否回滚？——对比金丝雀实例和稳定实例的核心指标（错误率、P99、CPU），金丝雀指标劣化超阈值（如错误率 +1%）自动回滚。关键是有明确的回滚规则，不能靠人判断
-  - SBOM 是什么，为什么重要？——Software Bill of Materials，软件物料清单，列出所有依赖（直接+间接）及版本。用于漏洞追踪（某个 CVE 爆出，查 SBOM 看哪些制品受影响）和合规（供应链安全）
-  - 流水线跑太久怎么办？——并行化（单测和扫描并行）、缓存（Maven/Gradle 缓存、Docker layer cache）、增量构建（只测变更模块）。目标：PR 流水线 < 10 分钟
+- 质量门禁设太严会怎样？——开发效率下降（PR 堆积、门禁频繁失败）。门禁要分层：Blocker 必须阻断、Critical 警告、Minor 提醒。覆盖率从当前基线逐步提升（如每月
+  +2%），不要一步到位
+- 制品为什么用 digest 不用 tag？——tag 可变（latest 会被覆盖），digest 是内容哈希不可篡改。部署用 digest 保证拉到的是验证过的镜像。tag
+  用于人类可读（v1.2.3），digest 用于机器精确引用
+- 金丝雀发布怎么自动判断是否回滚？——对比金丝雀实例和稳定实例的核心指标（错误率、P99、CPU），金丝雀指标劣化超阈值（如错误率 +1%）自动回滚。关键是有明确的回滚规则，不能靠人判断
+- SBOM 是什么，为什么重要？——Software Bill of Materials，软件物料清单，列出所有依赖（直接+间接）及版本。用于漏洞追踪（某个 CVE
+  爆出，查 SBOM 看哪些制品受影响）和合规（供应链安全）
+- 流水线跑太久怎么办？——并行化（单测和扫描并行）、缓存（Maven/Gradle 缓存、Docker layer cache）、增量构建（只测变更模块）。目标：PR
+  流水线 < 10 分钟
 memory_points:
-  - 流水线六阶段：Build → Test → Integration → Security → Artifact → Deploy
-  - 质量门禁：覆盖率 80%、Sonar 零 Blocker、CVE 扫描、性能回归 5%
-  - 制品：digest（不可变）> tag（可变），SBOM 可追溯
-  - 部署：金丝雀 + 自动回滚（错误率/P99 劣化）
-  - DORA 指标：部署频率、lead_time、变更失败率、MTTR
-  - 流水线目标：PR < 10 分钟（并行+缓存+增量）
+- 流水线六阶段：Build → Test → Integration → Security → Artifact → Deploy
+- 质量门禁：覆盖率 80%、Sonar 零 Blocker、CVE 扫描、性能回归 5%
+- 制品：digest（不可变）> tag（可变），SBOM 可追溯
+- 部署：金丝雀 + 自动回滚（错误率/P99 劣化）
+- DORA 指标：部署频率、lead_time、变更失败率、MTTR
+- 流水线目标：PR < 10 分钟（并行+缓存+增量）
+frequency: low
 ---
 
 # 【Java 后端架构师】CI/CD 流水线、质量门禁与制品治理
@@ -50,6 +59,33 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Artifact start
+    class Blocker process
+    class Build decision
+    class Deploy special
+    class Gradle error
+    class Integration info
+    class License start
+    class Maven process
+    class PR decision
+    class SBOM special
+    class Sonar error
+    class Test info
+    class Trivy start
+    class UT process
+    class Unit decision
+    class br special
+    class dev error
+    class digest info
+    class main start
+    class prod process
+    class staging decision
     PR[PR 提交] --> Build["1. Build（构建）<br/>Maven/Gradle 编译<br/>编译错误阻断<br/>门禁：编译通过"]
     Build --> UT["2. Unit Test<br/>覆盖率 80%"]
     Build --> Sonar["3. Sonar 代码质量<br/>Blocker=0"]

@@ -29,6 +29,7 @@ memory_points:
 - 流量治理：限流（RPM/TPM）、熔断（连续错误暂停）、重试（指数退避）。
 - 成本管理：Token计量关联租户，预算控制超额拒绝，Key加密存储。
 - 实战价值：网关熔断防OpenAI宕机瘫痪，动态Key刷新防Git泄露风险。
+frequency: high
 ---
 
 # 如何设计一个模型网关（Model Gateway）系统？统一管理多个LLM供应商的路由、限流和成本。
@@ -111,6 +112,28 @@ class OpenAIAdapter(ProviderAdapter):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class App start
+    class Cost process
+    class Dispatch decision
+    class Fallback special
+    class Fuse error
+    class GPT info
+    class Gateway start
+    class Limit process
+    class P1 decision
+    class P2 special
+    class P3 error
+    class RPM info
+    class Resp start
+    class Router process
+    class TPM decision
+    class Trace special
     App[AI应用请求] --> Gateway[统一API网关入口]
     Gateway --> Limit[限流控制 RPM/TPM]
     Limit --> Router[智能路由决策中心]

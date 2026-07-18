@@ -16,6 +16,7 @@ memory_points:
 - MDL元数据锁在事务提交才释放，长事务极易阻塞DDL致库雪崩
 - 意向锁作用：快速判断表是否有行锁，避免全表扫描资源消耗
 - 行锁三兄弟：Record锁单行、Gap锁间隙防幻读、Next-Key前开后闭
+frequency: medium
 ---
 
 # 什么是锁的种类？
@@ -162,6 +163,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

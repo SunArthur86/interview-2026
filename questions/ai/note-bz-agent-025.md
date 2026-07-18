@@ -29,6 +29,7 @@ memory_points:
 - 三类状态：会话状态（高频读写）、上下文状态（中频组装）、业务状态（低频持久）
 - 分层架构：热存储Redis存会话（<1ms），温存储本地缓存存画像，冷存储DB存历史
 - 读写要点：热数据要求毫秒级延迟，跨轮次一致性需依赖带版本号的乐观锁机制
+frequency: high
 ---
 
 # 实时对话系统的状态管理方案？
@@ -320,6 +321,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

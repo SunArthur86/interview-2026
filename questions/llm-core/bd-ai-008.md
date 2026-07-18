@@ -31,6 +31,7 @@ memory_points:
 - 校验流程：白名单检查→Schema解析(类型/格式)→业务逻辑校验→执行
 - 实战技巧：参数强制类型(如int)可减少90%解析崩溃，错误信息需结构化反馈
 - 防御：Prompt注入用分隔符和指令层级隔离，ReAct循环设最大步数防死循环
+frequency: medium
 ---
 
 # 【字节面经】如何解决Agent的上下文漂移问题？如何防止工具调用出现幻觉？
@@ -117,6 +118,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

@@ -29,6 +29,7 @@ memory_points:
 - 扩容策略：提前预扩容+定时扩容应对规律，HPA自动扩容应对突发，手动预案兜底。
 - 瓶颈放大：因为下层依赖无法按需扩容（如DB），所以必须设置自治限流保护。
 - 有状态扩容难点：DB主库需分库分表，Redis需数据迁移，Kafka吞吐受限于Partition数。
+frequency: high
 ---
 
 # 如何设计容量评估和扩容方案？应对大促/活动流量。
@@ -188,6 +189,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

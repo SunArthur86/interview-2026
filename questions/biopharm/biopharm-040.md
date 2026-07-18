@@ -12,37 +12,40 @@ tags:
 - Agent 时代
 - 职业展望
 feynman:
-  essence: "生物医药 AI 的未来是'AI4Science 加速发现、精准医疗个体化诊疗、Agent 时代自动化科研'——工程师的价值从'写 CRUD'升级为'用工程能力把 AI 转化成医药突破的杠杆'。"
-  analogy: "像从马车时代到汽车时代——AI4Science 是新引擎（加速药物发现），精准医疗是个性化导航（因人而异治病），Agent 是自动驾驶（科研流程自动化）。工程师从'造马车零件'升级为'设计整车交通系统'，价值放大。"
-  first_principle: "生物医药是高风险/高成本/长周期的领域，瓶颈在信息处理和试错。AI 的本质是'用算力+模型把这两类瓶颈加速'，工程师的价值在于'把 AI 能力工程化成可落地的医药突破工具'。"
+  essence: 生物医药 AI 的未来是'AI4Science 加速发现、精准医疗个体化诊疗、Agent 时代自动化科研'——工程师的价值从'写 CRUD'升级为'用工程能力把
+    AI 转化成医药突破的杠杆'。
+  analogy: 像从马车时代到汽车时代——AI4Science 是新引擎（加速药物发现），精准医疗是个性化导航（因人而异治病），Agent 是自动驾驶（科研流程自动化）。工程师从'造马车零件'升级为'设计整车交通系统'，价值放大。
+  first_principle: 生物医药是高风险/高成本/长周期的领域，瓶颈在信息处理和试错。AI 的本质是'用算力+模型把这两类瓶颈加速'，工程师的价值在于'把
+    AI 能力工程化成可落地的医药突破工具'。
   key_points:
-  - "AI4Science：分子/蛋白质/材料发现加速（AlphaFold/分子生成）"
-  - "精准医疗：基因组/个体化诊疗/预测模型"
-  - "Agent 时代：自动化科研流程（文献/实验/临床）"
-  - "工程师价值：把 AI 转化成医药突破的工程杠杆"
-  - "就业形势：AI 工程化人才稀缺，医药+AI 复合更稀缺"
+  - AI4Science：分子/蛋白质/材料发现加速（AlphaFold/分子生成）
+  - 精准医疗：基因组/个体化诊疗/预测模型
+  - Agent 时代：自动化科研流程（文献/实验/临床）
+  - 工程师价值：把 AI 转化成医药突破的工程杠杆
+  - 就业形势：AI 工程化人才稀缺，医药+AI 复合更稀缺
   socratic:
-  - "AlphaFold 解了蛋白质结构，这对医药意味着什么？"
-  - "为什么精准医疗喊了多年，现在 AI 才让它落地？"
-  - "Agent 时代的医药研发流程会变成什么样？"
-  - "AI 会让医药工程师失业吗？还是更值钱？"
-  - "生物医药 AI 领域，工程师的核心竞争力是什么？"
+  - AlphaFold 解了蛋白质结构，这对医药意味着什么？
+  - 为什么精准医疗喊了多年，现在 AI 才让它落地？
+  - Agent 时代的医药研发流程会变成什么样？
+  - AI 会让医药工程师失业吗？还是更值钱？
+  - 生物医药 AI 领域，工程师的核心竞争力是什么？
 first_principle:
-  problem: "生物医药 AI 的未来在哪？工程师如何在其中创造价值？"
+  problem: 生物医药 AI 的未来在哪？工程师如何在其中创造价值？
   axioms:
-  - "医药瓶颈在信息处理和试错"
-  - "AI 能加速这两类瓶颈"
-  - "AI 能力到医药突破需工程转化"
-  rebuild: "AI4Science 加速发现、精准医疗个体化、Agent 自动化科研是三大趋势；工程师价值在于用工程能力把 AI 转化成医药突破的可落地工具，医药+AI+工程复合人才极稀缺。"
+  - 医药瓶颈在信息处理和试错
+  - AI 能加速这两类瓶颈
+  - AI 能力到医药突破需工程转化
+  rebuild: AI4Science 加速发现、精准医疗个体化、Agent 自动化科研是三大趋势；工程师价值在于用工程能力把 AI 转化成医药突破的可落地工具，医药+AI+工程复合人才极稀缺。
 follow_up:
-- "AI4Science 有哪些突破？——AlphaFold（蛋白质结构）/分子生成（候选药）/材料发现/反应预测；英矾智能等 AI 药物进临床。"
-- "精准医疗落地难在哪？——多组学数据整合难、个体化模型泛化差、临床验证周期长、数据合规；AI 帮助但非一蹴而就。"
-- "Agent 时代工程师怎么定位？——从写代码到设计 Agent 系统（编排/工具/校验/治理），让 AI 自主完成科研流程，工程师做'AI 的架构师'。"
+- AI4Science 有哪些突破？——AlphaFold（蛋白质结构）/分子生成（候选药）/材料发现/反应预测；英矾智能等 AI 药物进临床。
+- 精准医疗落地难在哪？——多组学数据整合难、个体化模型泛化差、临床验证周期长、数据合规；AI 帮助但非一蹴而就。
+- Agent 时代工程师怎么定位？——从写代码到设计 Agent 系统（编排/工具/校验/治理），让 AI 自主完成科研流程，工程师做'AI 的架构师'。
 memory_points:
-- "三大趋势：AI4Science/精准医疗/Agent 时代"
-- "工程师=AI 到医药突破的工程杠杆"
-- "医药+AI+工程复合极稀缺"
-- "价值从写CRUD升级为造突破工具"
+- 三大趋势：AI4Science/精准医疗/Agent 时代
+- 工程师=AI 到医药突破的工程杠杆
+- 医药+AI+工程复合极稀缺
+- 价值从写CRUD升级为造突破工具
+frequency: medium
 ---
 
 # 【生物医药 AI】的未来与就业（AI4Science/精准医疗/Agent 时代）
@@ -184,6 +187,21 @@ Agent 时代：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
     subgraph AI赋能医药研发
       A[海量多组学/分子数据]
     end

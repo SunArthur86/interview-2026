@@ -30,6 +30,7 @@ memory_points:
 - 新手看摘要：屏蔽代码细节，提炼一句话总结（如新增表格、修改标题）降低认知门槛。
 - 高手看细节：提供字符级或行级纯文本对比，支持快速定位特定代码改动。
 - 灵活UI设计：采用渐进式展示，默认只给摘要，提供下拉或开关让用户自由切换深度。
+frequency: low
 ---
 
 # 【月之暗面面经】如何设计 AI 桌面端的产物 diff，既能给新手看，也能给高手看？
@@ -259,6 +260,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

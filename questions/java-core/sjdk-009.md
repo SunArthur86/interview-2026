@@ -16,6 +16,7 @@ memory_points:
 - 核心原理：基于Continuation续体，遇阻塞IO则从载体线程Unmount卸载
 - 避坑：synchronized或本地方法会导致Pinning(钉住)，高并发下耗尽载体线程
 - 解决：摒弃synchronized改用ReentrantLock，且上下文传递改用ScopedValue
+frequency: high
 ---
 
 # 什么是Project Loom？虚拟线程如何改变Java并发编程模型？
@@ -132,6 +133,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

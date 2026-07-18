@@ -15,6 +15,7 @@ memory_points:
 - 常量优化：纯字面量拼接在编译期直接合为一个常量，不走StringBuilder
 - 变量拼接：底层被编译器优化为 StringBuilder 的 append 与 toString 操作
 - 性能雷区：循环内使用+拼接，每次都会 new 对象，应改为循环外提创建 SB
+frequency: high
 ---
 
 # 什么是字符串拼接发生了什么？
@@ -108,6 +109,41 @@ String result = sb.toString();
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class JEP error
+    class Java info
+    class K start
+    class L process
+    class M decision
+    class N special
+    class O error
+    class P info
+    class String start
+    class StringBuffer process
+    class StringBuilder decision
+    class append special
+    class br error
+    class concat info
+    class intern start
+    class invokedynamic process
+    class javac decision
+    class join special
+    class new error
     A["字符串拼接 +"] --> B[编译期 javac 优化]
     B --> C{常量拼接?}
     C -->|是| D[直接合并为常量<br/>进入常量池]

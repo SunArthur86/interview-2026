@@ -9,9 +9,13 @@ tags:
 - Caffeine
 - 缓存一致性
 feynman:
-  essence: 多级缓存的本质是"用空间换时间，用层级换性能"。L1 本地缓存（Caffeine，应用内存，纳秒级）→ L2 集中式缓存（Redis，毫秒级）→ L3 DB。每层性能差 2-3 个数量级。核心难题是"一致性"——本地缓存各实例独立，更新如何通知所有实例失效？解法有四：TTL 过期（简单但有脏读窗口）、广播失效（Redis Pub/Sub 或 MQ）、binlog 订阅（Canal 监听 DB 变更）、版本号校验（强一致但复杂）。
-  analogy: 像图书馆的书籍借阅体系。L1 是"你桌上的书"（最快，但只有你有），L2 是"楼层书架"（同事也能看，慢一点），L3 是"总馆仓库"（最慢最全）。你更新了一本书的内容，怎么保证别人桌上那本旧版也更新？TTL 是"规定书上架 10 分钟必须换新版"（到期前别人可能看旧版）。广播失效是"大喇叭喊一声'书更新了，大家把旧版扔了'"（实时但占带宽）。版本号是"每次看书先核对版本号"（最准但麻烦）。
-  first_principle: 为什么需要多级缓存？——本地缓存比 Redis 快 100 倍（纳秒 vs 毫秒），但本地缓存有容量限制（应用内存有限）和一致性难题（多实例独立）。多级缓存用 L1 挡大部分流量（热点 key），L2 兜底（全量数据），L3 数据源。核心权衡是"性能 vs 一致性 vs 复杂度"。
+  essence: 多级缓存的本质是"用空间换时间，用层级换性能"。L1 本地缓存（Caffeine，应用内存，纳秒级）→ L2 集中式缓存（Redis，毫秒级）→
+    L3 DB。每层性能差 2-3 个数量级。核心难题是"一致性"——本地缓存各实例独立，更新如何通知所有实例失效？解法有四：TTL 过期（简单但有脏读窗口）、广播失效（Redis
+    Pub/Sub 或 MQ）、binlog 订阅（Canal 监听 DB 变更）、版本号校验（强一致但复杂）。
+  analogy: 像图书馆的书籍借阅体系。L1 是"你桌上的书"（最快，但只有你有），L2 是"楼层书架"（同事也能看，慢一点），L3 是"总馆仓库"（最慢最全）。你更新了一本书的内容，怎么保证别人桌上那本旧版也更新？TTL
+    是"规定书上架 10 分钟必须换新版"（到期前别人可能看旧版）。广播失效是"大喇叭喊一声'书更新了，大家把旧版扔了'"（实时但占带宽）。版本号是"每次看书先核对版本号"（最准但麻烦）。
+  first_principle: 为什么需要多级缓存？——本地缓存比 Redis 快 100 倍（纳秒 vs 毫秒），但本地缓存有容量限制（应用内存有限）和一致性难题（多实例独立）。多级缓存用
+    L1 挡大部分流量（热点 key），L2 兜底（全量数据），L3 数据源。核心权衡是"性能 vs 一致性 vs 复杂度"。
   key_points:
   - L1 Caffeine：W-TinyLFU 算法，命中率比 LRU 高，纳秒级访问
   - L2 Redis：全量缓存，毫秒级，集中式
@@ -25,19 +29,28 @@ first_principle:
   - 本地缓存容量有限（应用内存 GB 级，Redis 可以 TB 级）
   - 多实例本地缓存相互独立（更新 A 实例，B 实例不知道）
   - 一致性和性能是矛盾的（强一致要同步，慢；弱一致用 TTL/通知，快但有脏读窗口）
-  rebuild: 用 L1 本地缓存（Caffeine，挡热点 key 流量，纳秒级）+ L2 Redis（全量数据，毫秒级，集中式）+ L3 DB（数据源）。读流程：L1 → L2 → DB，逐级回种。写流程：更新 DB → 删 L2 → 广播通知所有实例删 L1（或依赖 TTL 自然过期）。一致性方案按业务选：弱一致用 TTL（简单，秒级脏读窗口）；较强一致用广播失效（Redis Pub/Sub 或 MQ 通知所有实例）；强一致用版本号校验（每次读校验 L1 和 L2 的版本号，不一致则更新）。本地缓存用 Caffeine（W-TinyLFU 算法，命中率比 LRU 高 30%+），设短 TTL（如 10s）控制脏读窗口。
+  rebuild: 用 L1 本地缓存（Caffeine，挡热点 key 流量，纳秒级）+ L2 Redis（全量数据，毫秒级，集中式）+ L3 DB（数据源）。读流程：L1
+    → L2 → DB，逐级回种。写流程：更新 DB → 删 L2 → 广播通知所有实例删 L1（或依赖 TTL 自然过期）。一致性方案按业务选：弱一致用 TTL（简单，秒级脏读窗口）；较强一致用广播失效（Redis
+    Pub/Sub 或 MQ 通知所有实例）；强一致用版本号校验（每次读校验 L1 和 L2 的版本号，不一致则更新）。本地缓存用 Caffeine（W-TinyLFU
+    算法，命中率比 LRU 高 30%+），设短 TTL（如 10s）控制脏读窗口。
 follow_up:
-  - 本地缓存和分布式缓存什么区别？——本地缓存（Caffeine/Guava Cache）在应用 JVM 内存，纳秒级访问但各实例独立、容量小、重启丢失。分布式缓存（Redis/Memcached）独立部署，毫秒级但集中共享、容量大、持久化。两者互补：本地缓存挡热点，分布式缓存兜底
-  - 怎么保证本地缓存一致性？——四种方案：①TTL 短过期（如 10s，脏读窗口小但存在）；②广播失效（Redis Pub/Sub 或 MQ，更新时通知所有实例删本地，近实时）；③binlog 订阅（Canal 监听 DB 变更，发 MQ 通知所有实例，解耦但延迟）；④版本号校验（本地缓存带版本号，读时比对 Redis 版本号，强一致但每次读 Redis 降性能）
-  - Caffeine 比 Guava Cache 好在哪？——①W-TinyLFU 算法（结合 LRU+LFU，命中率比 LRU 高 30%+，抗扫描污染）；②异步刷新（afterRefresh 异步执行，不阻塞读）；③性能更高（并发优化，吞吐量高）。新项目用 Caffeine，老项目 Guava Cache 仍可用
-  - 广播失效用 Pub/Sub 还是 MQ？——Redis Pub/Sub 简单（Redis 原生），但消息不持久（订阅者不在线就丢）。MQ（Kafka/RocketMQ）可靠（持久化+重试），但引入 MQ 依赖。生产推荐 MQ——保证消息不丢，一致性更可靠。Pub/Sub 适合容忍丢消息的场景（如短 TTL 兜底）
-  - 热点 key 怎么用本地缓存扛？——识别热点 key（redis-cli --hotkeys 或监控 QPS TOP N）→ 配置进 Caffeine（本地缓存）→ 请求先查本地（纳秒级）→ miss 才查 Redis。本地缓存挡住大部分流量，Redis QPS 降一个数量级。注意本地缓存 TTL 短（如 5s），防止数据过旧
+- 本地缓存和分布式缓存什么区别？——本地缓存（Caffeine/Guava Cache）在应用 JVM 内存，纳秒级访问但各实例独立、容量小、重启丢失。分布式缓存（Redis/Memcached）独立部署，毫秒级但集中共享、容量大、持久化。两者互补：本地缓存挡热点，分布式缓存兜底
+- 怎么保证本地缓存一致性？——四种方案：①TTL 短过期（如 10s，脏读窗口小但存在）；②广播失效（Redis Pub/Sub 或 MQ，更新时通知所有实例删本地，近实时）；③binlog
+  订阅（Canal 监听 DB 变更，发 MQ 通知所有实例，解耦但延迟）；④版本号校验（本地缓存带版本号，读时比对 Redis 版本号，强一致但每次读 Redis
+  降性能）
+- Caffeine 比 Guava Cache 好在哪？——①W-TinyLFU 算法（结合 LRU+LFU，命中率比 LRU 高 30%+，抗扫描污染）；②异步刷新（afterRefresh
+  异步执行，不阻塞读）；③性能更高（并发优化，吞吐量高）。新项目用 Caffeine，老项目 Guava Cache 仍可用
+- 广播失效用 Pub/Sub 还是 MQ？——Redis Pub/Sub 简单（Redis 原生），但消息不持久（订阅者不在线就丢）。MQ（Kafka/RocketMQ）可靠（持久化+重试），但引入
+  MQ 依赖。生产推荐 MQ——保证消息不丢，一致性更可靠。Pub/Sub 适合容忍丢消息的场景（如短 TTL 兜底）
+- 热点 key 怎么用本地缓存扛？——识别热点 key（redis-cli --hotkeys 或监控 QPS TOP N）→ 配置进 Caffeine（本地缓存）→
+  请求先查本地（纳秒级）→ miss 才查 Redis。本地缓存挡住大部分流量，Redis QPS 降一个数量级。注意本地缓存 TTL 短（如 5s），防止数据过旧
 memory_points:
-  - L1 Caffeine（本地）→ L2 Redis（集中）→ L3 DB
-  - Caffeine 用 W-TinyLFU（比 LRU 命中率高 30%）
-  - 一致性四方案：TTL / 广播（Pub-Sub+MQ）/ binlog（Canal）/ 版本号
-  - 读流程：逐级查，miss 回种；写流程：更新 DB→删 Redis→广播删本地
-  - 热点 key：本地缓存挡流量，Redis QPS 降一个数量级
+- L1 Caffeine（本地）→ L2 Redis（集中）→ L3 DB
+- Caffeine 用 W-TinyLFU（比 LRU 命中率高 30%）
+- 一致性四方案：TTL / 广播（Pub-Sub+MQ）/ binlog（Canal）/ 版本号
+- 读流程：逐级查，miss 回种；写流程：更新 DB→删 Redis→广播删本地
+- 热点 key：本地缓存挡流量，Redis QPS 降一个数量级
+frequency: high
 ---
 
 # 【Java 后端架构师】本地缓存与多级缓存一致性
@@ -636,6 +649,39 @@ public Product getHotProduct(Long skuId) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Caffeine special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class Key start
+    class L process
+    class L1 decision
+    class L2 special
+    class L3 error
+    class M info
+    class MQ start
+    class Miss process
+    class MySQL decision
+    class N special
+    class O error
+    class P info
+    class Redis start
+    class Redisson process
+    class TTL decision
     A[应用请求] --> B[L1 Caffeine 本地缓存]
     B -->|Miss 未命中| C[L2 Redis 分布式缓存]
     C -->|Miss 未命中| D[L3 MySQL 数据库]

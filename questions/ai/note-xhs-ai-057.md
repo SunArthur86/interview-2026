@@ -27,18 +27,20 @@ first_principle:
   - 工具需要被LLM"看到"才能被"使用"——需要标准化描述
   - 多轮对话需要维护上下文——对话历史和长期记忆
   - Agent需要自主决策何时调用工具、调用哪个、用什么参数
-  rebuild: 工具注册表（@Tool注解自动生成schema）→ LLM接收工具描述+用户问题 → 输出Function Calling JSON → Java反射执行 → 结果回传LLM → 循环直到完成。记忆层：Redis存短期对话，向量库存长期记忆。
+  rebuild: 工具注册表（@Tool注解自动生成schema）→ LLM接收工具描述+用户问题 → 输出Function Calling JSON → Java反射执行
+    → 结果回传LLM → 循环直到完成。记忆层：Redis存短期对话，向量库存长期记忆。
 follow_up:
-  - Java实现Agent和Python（LangChain）比有什么优势和劣势？
-  - 如果LLM返回的JSON格式不对（比如少了括号），怎么处理？
-  - 会话记忆用Redis还是数据库？各有什么考虑？
-  - Agent循环调用工具如果死循环了（一直在调用但解决不了问题），怎么终止？
-  - Spring AI和LangChain4j在Agent实现上有什么区别？
+- Java实现Agent和Python（LangChain）比有什么优势和劣势？
+- 如果LLM返回的JSON格式不对（比如少了括号），怎么处理？
+- 会话记忆用Redis还是数据库？各有什么考虑？
+- Agent循环调用工具如果死循环了（一直在调用但解决不了问题），怎么终止？
+- Spring AI和LangChain4j在Agent实现上有什么区别？
 memory_points:
-  - Agent三要素：工具注册表（@Tool注解）+ Function Calling（LLM→JSON→反射）+ 会话记忆（短期Redis+长期向量）
-  - ReAct循环：Think→Act→Observe→Answer，最多N轮防死循环
-  - Spring AI @Tool注解自动生成schema，LangChain4j @P注解描述参数
-  - 记忆分层：短期（对话窗口/摘要压缩）、长期（向量检索相似记忆）
+- Agent三要素：工具注册表（@Tool注解）+ Function Calling（LLM→JSON→反射）+ 会话记忆（短期Redis+长期向量）
+- ReAct循环：Think→Act→Observe→Answer，最多N轮防死循环
+- Spring AI @Tool注解自动生成schema，LangChain4j @P注解描述参数
+- 记忆分层：短期（对话窗口/摘要压缩）、长期（向量检索相似记忆）
+frequency: high
 ---
 
 # 【拼多多二面】用Java实现AI Agent：ToolCalling和会话记忆设计
@@ -377,6 +379,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 结构化回答

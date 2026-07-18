@@ -17,6 +17,7 @@ memory_points:
 - 切换开销：因为线程切换不涉及地址空间变化（无CR3和页表切换），所以比进程切换快
 - 通信方式：进程通信需跨越内核边界（IPC开销大），线程通信用直接读写共享内存（快但需加锁）
 - 容错对比：进程间相互隔离崩溃互不影响，而线程的非法内存访问会导致整个进程崩溃
+frequency: medium
 ---
 
 # 什么是进程和线程？它们的区别是什么？
@@ -114,6 +115,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

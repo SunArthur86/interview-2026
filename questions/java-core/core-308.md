@@ -17,6 +17,7 @@ memory_points:
 - 切换途径只有三种：系统调用、异常、外围设备中断。
 - 性能损耗：因为切换需保存恢复上下文，所以高频系统调用极耗性能。
 - 高频考点：传统 BIO 性能差是因为频繁上下文切换，IO多路复用(如epoll)可大幅减少切换。
+frequency: low
 ---
 
 # 解释一下用户态和核心态？
@@ -121,6 +122,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

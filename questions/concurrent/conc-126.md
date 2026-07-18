@@ -16,6 +16,7 @@ memory_points:
 - 核心四方法对比：抛异常(add/remove)、返特殊(offer/poll)、阻塞(put/take)、超时退
 - 底层实现：ReentrantLock 配合两个 Condition (notEmpty/notFull) 实现阻塞唤醒
 - 两大主力对比：Array必须设容量且单锁；Linked默认无界且读写双锁分离吞吐高
+frequency: high
 ---
 
 # 说一说你对BlockingQueue的了解？
@@ -109,6 +110,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

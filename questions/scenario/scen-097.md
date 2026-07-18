@@ -29,6 +29,7 @@ memory_points:
 - 时间戳窗口通常5分钟，Nonce用Redis SETNX保证原子性且过期时间同步
 - 签名防参数篡改，密钥严禁网络传输，推荐HMAC-SHA256
 - 防重放是网关安全拦截(拦恶意)，幂等性是业务兜底(防重复数据)
+frequency: medium
 ---
 
 # 如何设计一个防接口重放攻击的方案？
@@ -130,6 +131,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

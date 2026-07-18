@@ -30,6 +30,7 @@ memory_points:
 - 原因：向量检索（双塔模型）Query与Doc独立编码缺乏深层交互，导致语义相近但答非所问。
 - 重排器（Cross-Encoder）将Query和Doc拼接联合编码，靠Self-Attention计算极高精度的相关性。
 - 工业标准两阶段：第一阶段用Bi-Encoder粗排召回Top-50追求速度，第二阶段用Cross-Encoder精排追求准确度。
+frequency: high
 ---
 
 # 为什么要加Reranker重排？直接拿向量检索结果给模型会有什么问题？
@@ -188,6 +189,7 @@ flowchart TD
     style CE fill:#FF9800,color:#fff
     style RECALL fill:#9C27B0,color:#fff
     style CASCADE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

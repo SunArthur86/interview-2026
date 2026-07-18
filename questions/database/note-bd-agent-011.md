@@ -30,6 +30,7 @@ memory_points:
 - 双核职责：Hash表负责O(1)快速查分数，跳表负责O(logN)范围排名查询
 - 关键阈值：元素数>128或单元素>64字节时触发底层结构升级（Listpack升级为Hash+跳表）
 - 跳表优势：相较于红黑树，跳表实现更简单，且范围查询直接通过层级链表顺序遍历，天然高效
+frequency: high
 ---
 
 # Redis的ZSet底层是怎么实现的？
@@ -38,6 +39,40 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class BIG start
+    class HT process
+    class HashTable decision
+    class L1 special
+    class L2 error
+    class L3 info
+    class LP start
+    class ListPack process
+    class O decision
+    class Redis special
+    class SL error
+    class SMALL info
+    class Set start
+    class SkipList process
+    class Sorted decision
+    class ZSET special
+    class ZSet error
+    class alice info
+    class bob start
+    class br process
+    class carol decision
+    class logN special
+    class member error
+    class member1 info
+    class member2 start
+    class score process
+    class score1 decision
+    class score2 special
     subgraph ZSET["Sorted Set (ZSet)"]
         BIG["数据量 > 128 或 单元素 > 64字节"]
         HT["HashTable<br/>member → score<br/>O(1)查找<br/>'alice' → 95<br/>'bob' → 87<br/>'carol' → 92"]

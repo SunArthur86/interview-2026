@@ -31,6 +31,7 @@ memory_points:
 - 多维特征：从句法、词汇、标点、结构等多维度构建风格画像
 - 防噪机制：利用滑动窗口提取近期特征，样本不足时不更新画像
 - 置信检验：计算特征变异系数，连续稳定达到阈值才确认为长期偏好
+frequency: high
 ---
 
 # 用户近期写作风格怎么获取，怎么防止把偶然噪声学成长期偏好？
@@ -218,6 +219,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

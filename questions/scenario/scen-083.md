@@ -29,6 +29,7 @@ memory_points:
 - 多源聚合并发：利用CompletableFuture并行查基础信息、价格库存与推荐，降低整体响应延迟。
 - 多级缓存：CDN(静态页)→Nginx(API)→Redis(动态数据)→本地缓存，层层拦截拦截海量并发。
 - 防雪崩策略：价格频繁变更不直接刷CDN，而用版本号机制让其自然过期，避免穿透打挂后端。
+frequency: high
 ---
 
 # 如何设计一个商品详情页系统？支持高并发、多数据源聚合。
@@ -156,6 +157,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

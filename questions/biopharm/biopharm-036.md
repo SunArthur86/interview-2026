@@ -11,37 +11,39 @@ tags:
 - RabbitMQ
 - 长任务编排
 feynman:
-  essence: "异步任务系统是'把耗时的 AI 任务从请求线程剥离，丢给后台 worker 慢慢跑'——Celery 编排、RabbitMQ 派单、worker 消费，支撑文档解析/批量推理/训练等长任务不阻塞、可恢复、可监控。"
-  analogy: "像餐厅后厨——服务员点单把单子夹到传送带（RabbitMQ 队列）就回去服务下一桌（不阻塞），后厨按顺序取单做菜（worker 消费），复杂的宴席菜还能拆成多步（编排），做完按铃（回调）端菜。"
-  first_principle: "AI 任务（文档解析/批量推理/训练）耗时长（分钟~小时级），同步处理会阻塞请求、耗尽线程。异步任务系统的本质是'用队列解耦生产消费，让长任务后台跑、不阻塞、可恢复、可监控、可编排'。"
+  essence: 异步任务系统是'把耗时的 AI 任务从请求线程剥离，丢给后台 worker 慢慢跑'——Celery 编排、RabbitMQ 派单、worker
+    消费，支撑文档解析/批量推理/训练等长任务不阻塞、可恢复、可监控。
+  analogy: 像餐厅后厨——服务员点单把单子夹到传送带（RabbitMQ 队列）就回去服务下一桌（不阻塞），后厨按顺序取单做菜（worker 消费），复杂的宴席菜还能拆成多步（编排），做完按铃（回调）端菜。
+  first_principle: AI 任务（文档解析/批量推理/训练）耗时长（分钟~小时级），同步处理会阻塞请求、耗尽线程。异步任务系统的本质是'用队列解耦生产消费，让长任务后台跑、不阻塞、可恢复、可监控、可编排'。
   key_points:
-  - "三角色：生产者（提交）+ Broker（RabbitMQ 派单）+ Worker（消费）"
-  - "Celery：Python 任务队列框架，编排/重试/定时/追踪"
-  - "RabbitMQ：消息中间件，可靠投递/路由/持久化"
-  - "长任务编排：任务链/组/和弦，支持多步 DAG"
-  - "可靠性：持久化+ack+幂等+重试+死信，任务不丢不重"
+  - 三角色：生产者（提交）+ Broker（RabbitMQ 派单）+ Worker（消费）
+  - Celery：Python 任务队列框架，编排/重试/定时/追踪
+  - RabbitMQ：消息中间件，可靠投递/路由/持久化
+  - 长任务编排：任务链/组/和弦，支持多步 DAG
+  - 可靠性：持久化+ack+幂等+重试+死信，任务不丢不重
   socratic:
-  - "用户上传 100 页 PDF 让解析，HTTP 请求挂 5 分钟等结果合理吗？"
-  - "1000 个批量推理任务同时来，怎么不把系统打爆？"
-  - "worker 跑到一半进程挂了，任务丢了吗？怎么补？"
-  - "一个任务要分三步（解析→抽取→总结），怎么编排？"
-  - "任务积压 10 万个，怎么发现和处理？"
+  - 用户上传 100 页 PDF 让解析，HTTP 请求挂 5 分钟等结果合理吗？
+  - 1000 个批量推理任务同时来，怎么不把系统打爆？
+  - worker 跑到一半进程挂了，任务丢了吗？怎么补？
+  - 一个任务要分三步（解析→抽取→总结），怎么编排？
+  - 任务积压 10 万个，怎么发现和处理？
 first_principle:
-  problem: "如何让耗时的 AI 长任务不阻塞请求、可恢复、可编排、可监控？"
+  problem: 如何让耗时的 AI 长任务不阻塞请求、可恢复、可编排、可监控？
   axioms:
-  - "AI 长任务不能同步阻塞"
-  - "任务会失败需重试，进程会挂需恢复"
-  - "复杂任务需多步编排"
-  rebuild: "用任务队列（Celery+RabbitMQ）解耦生产消费——生产者提交任务到 broker，worker 池按速率消费，支持持久化/ack/重试/幂等保不丢不重，任务链/组编排多步，监控积压，支撑长任务可靠运行。"
+  - AI 长任务不能同步阻塞
+  - 任务会失败需重试，进程会挂需恢复
+  - 复杂任务需多步编排
+  rebuild: 用任务队列（Celery+RabbitMQ）解耦生产消费——生产者提交任务到 broker，worker 池按速率消费，支持持久化/ack/重试/幂等保不丢不重，任务链/组编排多步，监控积压，支撑长任务可靠运行。
 follow_up:
-- "Celery 和 RQ/Kafka 区别？——Celery 功能全（编排/重试/定时/追踪）适合任务队列；RQ 轻量简单；Kafka 是流式消息平台适合事件流，非典型任务队列。"
-- "怎么保证任务不丢不重？——broker 持久化+消息 ack（消费成功才 ack）+ worker 崩溃消息重回队列 + 任务幂等（幂等键防重复执行）。"
-- "长任务怎么不阻塞监控？——任务状态持久化（PENDING/STARTED/SUCCESS/FAILED）+ 进度上报 + 结果后端存储 + 超时熔断。"
+- Celery 和 RQ/Kafka 区别？——Celery 功能全（编排/重试/定时/追踪）适合任务队列；RQ 轻量简单；Kafka 是流式消息平台适合事件流，非典型任务队列。
+- 怎么保证任务不丢不重？——broker 持久化+消息 ack（消费成功才 ack）+ worker 崩溃消息重回队列 + 任务幂等（幂等键防重复执行）。
+- 长任务怎么不阻塞监控？——任务状态持久化（PENDING/STARTED/SUCCESS/FAILED）+ 进度上报 + 结果后端存储 + 超时熔断。
 memory_points:
-- "三角色：生产者+Broker(RabbitMQ)+Worker"
-- "Celery 编排，RabbitMQ 派单"
-- "可靠：持久化+ack+幂等+重试"
-- "长任务编排：链/组/和弦"
+- 三角色：生产者+Broker(RabbitMQ)+Worker
+- Celery 编排，RabbitMQ 派单
+- 可靠：持久化+ack+幂等+重试
+- 长任务编排：链/组/和弦
+frequency: medium
 ---
 
 # 【生物医药 AI】异步任务系统怎么做（Celery/RabbitMQ/长任务编排）？
@@ -246,6 +248,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

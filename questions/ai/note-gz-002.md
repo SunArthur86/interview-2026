@@ -30,6 +30,7 @@ memory_points:
 - 画像增强：用 LLM 从原始对话中抽取隐式购车偏好（预算、品牌），弥补传统行为数据不足。
 - 辅助定价：让大模型理解非结构化的车损描述（如补漆），转化为具体定价影响因子。
 - 数据闭环：构建对话采集、清洗标注到回流微调的数据飞轮，持续反哺业务系统。
+frequency: medium
 ---
 
 # 如何利用大模型挖掘瓜子二手车的数据价值？
@@ -227,6 +228,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

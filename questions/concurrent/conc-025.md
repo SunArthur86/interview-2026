@@ -16,6 +16,7 @@ memory_points:
 - 动作对比：start() 启动新线程，run() 仅普通方法调用（主线程执行）。
 - 因为底层维护状态标志，所以一个 Thread 对象只能 start 一次，重复调用抛 IllegalThreadStateException。
 - 生命周期记忆：新建 NEW 后，运行 RUNNABLE，遇锁 BLOCKED，无期 WAITING，限期 TIMED_WAITING，终老 TERMINATED。
+frequency: medium
 ---
 
 # 什么是新建状态（NEW）？
@@ -114,6 +115,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -23,6 +23,7 @@ memory_points:
 - Cohere v3：多语言极强，适合长文本检索，API调用。
 - E5/GTE：通用性强，中英均衡，适合混合场景。
 - 实战：RAG推荐BGE-M3，混合检索(向量+BM25)效果更佳。
+frequency: high
 ---
 
 # 如何选择Embedding模型?BGE、E5、Cohere各有什么特点?中文场景推荐什么
@@ -154,6 +155,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

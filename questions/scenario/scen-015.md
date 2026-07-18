@@ -29,6 +29,7 @@ memory_points:
 - 大文件上传：大文件必须分块并发上传，支持断点续传以提升弱网体验。
 - 传輸优化：应用服务器下发预签名URL，让客户端直传存储层彻底解放带宽。
 - 高可用底座：通过EC纠删码或多副本机制保障，Quorum机制确保读写一致性。
+frequency: medium
 ---
 
 # 如何设计一个分布式文件存储系统？类似七牛云/阿里云OSS。
@@ -114,6 +115,7 @@ flowchart TD
     DOWN[下载请求] --> CDN[CDN加速]
     STORE --> CDN
     style SEC fill:#d4edda
+
 ```
 
 

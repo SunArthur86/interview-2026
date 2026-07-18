@@ -30,6 +30,7 @@ memory_points:
 - 意图识别定动作(如订座)，槽位填充抓关键参数(如地点/价格/菜系)
 - 因为LLM输出JSON不稳定，所以生产级最佳实践需增加结构化解析与兜底处理
 - 小模型方案常采用BERT分类头定意图，配合BERT-CRF序列标注做槽位提取
+frequency: medium
 ---
 
 # 本地生活场景下怎么做意图识别与槽位填充(Slot Filling)？
@@ -200,6 +201,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

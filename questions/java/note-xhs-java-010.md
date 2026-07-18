@@ -12,8 +12,8 @@ tags:
 - 死循环排查
 - 面经
 feynman:
-  essence: "死锁是两个或多个线程互相持有对方需要的锁导致永久阻塞；CPU飙高通常是死循环或频繁GC，用top -Hp定位线程再jstack看堆栈"
-  analogy: "死锁就像两个人过独木桥：A拿了桥这端的通行证，B拿了桥那端的通行证，A要B的通行证才肯让路，B要A的通行证才肯让路——谁也不让，永远僵持"
+  essence: 死锁是两个或多个线程互相持有对方需要的锁导致永久阻塞；CPU飙高通常是死循环或频繁GC，用top -Hp定位线程再jstack看堆栈
+  analogy: 死锁就像两个人过独木桥：A拿了桥这端的通行证，B拿了桥那端的通行证，A要B的通行证才肯让路，B要A的通行证才肯让路——谁也不让，永远僵持
   key_points:
   - 死锁四条件：互斥、持有等待、不可剥夺、循环等待
   - jstack可直接检测死锁：自动打印"Found one Java-level deadlock"
@@ -21,9 +21,9 @@ feynman:
   - 死循环 vs 死锁：死锁是BLOCKED状态CPU低，死循环是RUNNABLE状态CPU高
   - 面试要求手写死锁代码并说出排查命令
 first_principle:
-  essence: "死锁的本质是'资源竞争中的循环依赖'。打破任一条件即可预防"
-  derivation: "多线程需共享资源→需要锁→锁是互斥的→线程持有锁A同时请求锁B→另一线程持有B请求A→循环等待→永久阻塞→必须打破四条件之一"
-  conclusion: "预防死锁：固定锁顺序(打破循环等待)、锁超时(打破不可剥夺)、死锁检测+回滚"
+  essence: 死锁的本质是'资源竞争中的循环依赖'。打破任一条件即可预防
+  derivation: 多线程需共享资源→需要锁→锁是互斥的→线程持有锁A同时请求锁B→另一线程持有B请求A→循环等待→永久阻塞→必须打破四条件之一
+  conclusion: 预防死锁：固定锁顺序(打破循环等待)、锁超时(打破不可剥夺)、死锁检测+回滚
 follow_up:
 - 如何用代码层面预防死锁？（锁排序、tryLock超时）
 - 数据库的死锁和Java死锁有什么区别？数据库如何自动检测？
@@ -35,6 +35,7 @@ memory_points:
 - jstack自动检测死锁，CPU飙高用top -Hp + jstack组合排查
 - 死锁=BLOCKED(CPU低)，死循环=RUNNABLE(CPU高)
 - 十六进制nid是排查关键：printf "%x\n" tid
+frequency: high
 ---
 
 # 【拼多多 Java服务端】手写死锁代码，如何排查？CPU飙高怎么排查？
@@ -268,6 +269,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -29,6 +29,7 @@ memory_points:
 - 监控三维：业务看效果(完成/留存)、技术看性能(P99/首字延迟)、安全看风险(幻觉/违规)
 - 关键首字延迟指标TTFT，决定流式交互的用户体验，必须重点监控
 - 安全监控防注入：异步检测faithfulness和内容合规，超标立刻触发Critical告警
+frequency: medium
 ---
 
 # 大模型监控指标如何设计？安全防护方案？
@@ -327,6 +328,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

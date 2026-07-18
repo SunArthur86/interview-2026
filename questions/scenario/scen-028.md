@@ -29,6 +29,7 @@ memory_points:
 - 核心模型：双塔做向量召回，DeepFM做特征交叉，DIN引入注意力机制捕捉用户历史序列兴趣
 - 工程构建：离线Hive/Spark训练，近线Flink更新特征，在线TF-Serving推理
 - 评估体系：离线看AUC/NDCG，在线看CTR/CVR；新用户用热门冷启，新物用内容召回
+frequency: medium
 ---
 
 # 如何设计一个推荐系统？类似抖音/淘宝的个性化推荐。
@@ -137,6 +138,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -30,6 +30,7 @@ memory_points:
 - 放权与收权：样板代码与测试用例（~80%）放权给AI，而核心业务与架构设计（~0%）人工主导。
 - 人机协作流：人工定架构接口 -> AI生成框架与测试 -> 人工强审查 -> AI辅助排错。
 - 核心价值定调：虽然约半数代码由AI生成，但100%的逻辑与安全必须经过人工把关。
+frequency: medium
 ---
 
 # 【美团面经】你用了多少AI Coding来开发Agent系统？怎么用AI的？
@@ -342,6 +343,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

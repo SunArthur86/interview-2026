@@ -12,7 +12,8 @@ tags:
 - JMM
 feynman:
   essence: synchronized 在 JDK 6 后有"偏向锁→轻量级锁→重量级锁"自适应升级，用 CAS 自旋应对低竞争、用 OS Mutex 应对高竞争，在供应链系统的高并发扣减场景里实现"无竞争零成本、有竞争优雅降级"。
-  analogy: synchronized 像共享会议室的门锁——只有一个人用时不锁（偏向锁），两三个人偶尔撞见就先在门口等一下自旋（轻量级锁），抢的人多了就发号牌去休息区等 OS 叫号（重量级锁）。
+  analogy: synchronized 像共享会议室的门锁——只有一个人用时不锁（偏向锁），两三个人偶尔撞见就先在门口等一下自旋（轻量级锁），抢的人多了就发号牌去休息区等
+    OS 叫号（重量级锁）。
   first_principle: 线程竞争强度是动态变化的，用单一策略（全自旋浪费 CPU、全阻塞浪费上下文切换）都不优；分级升级让锁成本匹配实际竞争强度。
   key_points:
   - 锁状态存对象头 Mark Word（54 bit）
@@ -29,13 +30,15 @@ first_principle:
   rebuild: 分级锁——低竞争用偏向（近乎零成本）、中竞争用 CAS 自旋（用户态乐观）、高竞争用 OS Mutex（悲观阻塞），自适应升级让成本匹配场景。
 follow_up:
 - 偏向锁为什么 JDK 15 后默认禁用？——维护成本高（撤销需 STW）、现代应用多线程化偏向收益小
-- synchronized 和 ReentrantLock 选哪个？——可控性需求（超时/中断/多 Condition）选 ReentrantLock，简单互斥用 synchronized（JDK 6 后性能接近）
+- synchronized 和 ReentrantLock 选哪个？——可控性需求（超时/中断/多 Condition）选 ReentrantLock，简单互斥用
+  synchronized（JDK 6 后性能接近）
 - 供应链里哪里用 synchronized？——单机库存扣减、本地状态机变更（跨机用 Redis/ZK 分布式锁）
 memory_points:
 - 锁升级三阶段：偏向（单线程）→ 轻量级（CAS 自旋）→ 重量级（OS Mutex）
 - 锁状态存在对象头的 Mark Word（不是独立字段）
 - 升级不可逆——偏向锁一旦撤销不会回到偏向
 - JDK 15+ 偏向锁默认禁用（维护成本 > 收益）
+frequency: high
 ---
 
 # 【拼多多供应链】synchronized 的锁升级过程？JMM 怎么保证可见性？
@@ -218,6 +221,36 @@ LongAdder 解决的是"统计计数"（只增不减、最终一致），它的 `
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AtomicLong process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class Lua process
+    class M decision
+    class Mutex special
+    class N1 error
+    class N2 info
+    class N3 start
+    class OS process
+    class Park decision
+    class Redis special
+    class StoreStore error
+    class br info
     A["访问同步块"] --> B{"是否存在竞争?"}
     B -- "无竞争 (单线程)" --> C["偏向锁<br/>记录ThreadID"]
     C --> D{"另一线程进入?"}

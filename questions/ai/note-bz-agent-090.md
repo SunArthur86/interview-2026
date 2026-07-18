@@ -29,6 +29,7 @@ memory_points:
 - 四大天然优势：因为Agent本质是多组件集成系统，所以程序员的工程、架构与调试能力远比纯算法更稀缺
 - 四阶段爬坑法：会用（调API/Prompt）→ 会搭（ReAct/RAG全链）→ 会优（评估/高并发）→ 会创
 - 实战倒逼学习：切忌只看理论，必须手搓1-2个如客服或数据分析的Agent项目并深挖上线痛点
+frequency: medium
 ---
 
 # 程序员如何抢占 Agent 开发红利？
@@ -203,6 +204,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -23,6 +23,7 @@ memory_points:
 - UTF-8是典型应用：兼容ASCII，英文1字节中文常3字节
 - Varint(Protobuf)用最高位(MSB)做延续标志，小数值占字节少
 - 大坑：负数补码致Varint膨胀，需用ZigZag编码转无符号
+frequency: low
 ---
 
 # 什么是可变长度编码？
@@ -126,6 +127,36 @@ public static byte[] writeVarInt(int value) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ASCII process
+    class B decision
+    class Byte special
+    class C error
+    class Char info
+    class D start
+    class Decode process
+    class E decision
+    class Encode special
+    class F error
+    class G info
+    class GBK start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
+    class UTF special
+    class Unicode error
+    class br info
     A[字符编码流程] --> B[字符 Char Unicode]
     B --> C[编码 Encode]
     C --> D[字节 Byte<br/>UTF-8/GBK]

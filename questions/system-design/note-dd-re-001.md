@@ -30,6 +30,7 @@ memory_points:
 - 结论：绝不能硬编码，因为规则与流程强耦合严重违反开闭原则（OCP）。
 - 硬编码痛点：新增规则必改核心代码，导致类膨胀、测试难、发版回归风险极高。
 - 重构方案：用责任链+组合模式构建规则引擎，将每条规则封装为独立Handler实现解耦。
+frequency: high
 ---
 
 # 【滴滴面经】你会把付费用户加权这种规则直接写死在抽奖流程里吗？为什么？
@@ -310,6 +311,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

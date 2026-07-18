@@ -28,6 +28,7 @@ memory_points:
 - 架构四层：知识库(法规/模板)、生成层(模板填充+严格约束)、审查层(风险检测)、审计层(追溯)。
 - 生成vs审查：生成重逻辑自洽与模板填充；审查重OCR纠错与风险评级。
 - 安全合规：数据加密存储、权限控制、电子签名集成，严格遵循地域法律差异。
+frequency: low
 ---
 
 # 如何设计一个AI法律合同生成与审查系统？确保法律准确性和合规性。
@@ -105,6 +106,32 @@ def check_compliance_clause(clause_text, jurisdiction='CN'):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class D1 info
+    class D2 start
+    class D3 process
+    class D4 decision
+    class E1 special
+    class F1 error
+    class G1 info
+    class H1 start
+    class K1 process
+    class K2 decision
+    class K3 special
+    class S1 error
+    class S2 info
+    class U start
+    class br process
     U([用户请求: 生成/审查合同]) --> A[请求解析与参数提取]
     subgraph S1 [知识库层]
         K1[法律法规库]

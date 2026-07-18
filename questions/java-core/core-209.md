@@ -17,6 +17,7 @@ memory_points:
 - 非线程安全：ArrayDeque 基于数组作栈/队列最快，LinkedList 基于链表，PriorityQueue 基于堆出队按优先级
 - 阻塞队列对比：ArrayBlockingQueue 有界单锁；LinkedBlockingQueue 默认无界（易OOM）双锁并发高
 - 特殊阻塞：SynchronousQueue 不存数据直接握手传递，常用于 CachedThreadPool
+frequency: low
 ---
 
 # 什么是 Java 的 Queue 接口？有哪些常见实现？
@@ -126,6 +127,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

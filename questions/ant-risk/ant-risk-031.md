@@ -10,7 +10,8 @@ tags:
 - LLM
 - 系统设计
 feynman:
-  essence: 用 AI Agent 改造风控系统，把"固定 DAG 决策"升级为"Agent 自主编排"——LLM 做意图理解+工具调用，规则和模型变成 Agent 的工具，决策更灵活、配置更自然。
+  essence: 用 AI Agent 改造风控系统，把"固定 DAG 决策"升级为"Agent 自主编排"——LLM 做意图理解+工具调用，规则和模型变成 Agent
+    的工具，决策更灵活、配置更自然。
   analogy: 传统风控像自动售货机（按钮→固定流程），AI Agent 风控像便利店店员（理解需求→灵活组合商品→应对新场景）。
   first_principle: 传统规则引擎是"if-then"硬编码，新型欺诈层出不穷难维护；LLM 有泛化能力，能理解场景语义、动态组合工具，让"防欺诈"从"配置规则"变成"对话决策"。
   key_points:
@@ -24,7 +25,8 @@ first_principle:
   - LLM 有泛化能力（理解新场景）
   - 工具调用让 LLM 能执行具体动作
   - Multi-Agent 协作能拆解复杂决策
-  rebuild: Agent 架构——LLM 做意图理解和决策编排，把规则/模型/特征/关系网络包装成 MCP 工具，Agent 自主选择调用，多 Agent 协作完成决策。
+  rebuild: Agent 架构——LLM 做意图理解和决策编排，把规则/模型/特征/关系网络包装成 MCP 工具，Agent 自主选择调用，多 Agent
+    协作完成决策。
 follow_up:
 - LLM 推理慢（秒级）怎么实时风控？——分层：简单场景规则秒级、复杂场景 Agent 异步复核
 - 怎么防 LLM 幻觉？——结果验证（决策必须可解释）+ 工具结果约束 + 关键场景双 Agent 交叉验证
@@ -34,6 +36,7 @@ memory_points:
 - ReAct：思考→行动→观察循环
 - 把规则/模型/特征包装成 MCP 工具，Agent 自主调用
 - 实时链路分层：简单走规则（毫秒）、复杂走 Agent 复核（秒）
+frequency: medium
 ---
 
 # 【蚂蚁风控】如何用 AI Agent 改造风控系统？
@@ -415,6 +418,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 结构化回答

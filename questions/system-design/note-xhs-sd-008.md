@@ -11,7 +11,7 @@ tags:
 - LLM
 feynman:
   essence: AI网关模式就是定义一套统一的接口（适配器模式），让业务层不关心底层调的是哪家AI厂商。各厂商API差异封装在各自的Adapter里，路由层决定用哪个厂商。
-  analogy: "AI网关像国际快递公司。你只需要说「寄到国外」，快递公司（网关）自动选择走空运(OpenAI快)、海运(通义便宜)还是陆运(文心)。你不用关心每家航空公司的规定，快递公司帮你处理所有差异。"
+  analogy: AI网关像国际快递公司。你只需要说「寄到国外」，快递公司（网关）自动选择走空运(OpenAI快)、海运(通义便宜)还是陆运(文心)。你不用关心每家航空公司的规定，快递公司帮你处理所有差异。
   key_points:
   - 适配器模式：统一接口+各厂商Adapter实现
   - 路由策略：按任务类型/成本/质量/延迟选模型
@@ -19,18 +19,19 @@ feynman:
   - 工程化：计费/缓存/限流/审计/灰度
   - 设计模式：Adapter(接口适配)+Strategy(路由)+Factory(创建)
 first_principle:
-  problem: "多个AI厂商API格式各异，业务代码不应与具体厂商耦合。如何设计可扩展的多模型适配架构？"
+  problem: 多个AI厂商API格式各异，业务代码不应与具体厂商耦合。如何设计可扩展的多模型适配架构？
   axioms:
   - 依赖倒置：业务层依赖抽象接口，不依赖具体厂商
   - 开闭原则：新增厂商不改现有代码（加新Adapter即可）
   - 单一职责：适配器只做格式转换，路由只做决策
   - 故障隔离：单个厂商故障不影响其他厂商
-  rebuild: "从多厂商适配需求出发：定义统一接口(AIModelAdapter)→各厂商实现(OpenAIAdapter/ClaudeAdapter)→路由层选最优(策略模式)→降级链容错→网关层加缓存/计费/限流。核心是适配器模式解耦业务与厂商"
+  rebuild: 从多厂商适配需求出发：定义统一接口(AIModelAdapter)→各厂商实现(OpenAIAdapter/ClaudeAdapter)→路由层选最优(策略模式)→降级链容错→网关层加缓存/计费/限流。核心是适配器模式解耦业务与厂商
 follow_up:
 - AI网关如何做成本优化？Token预算管理怎么做？
 - 多个AI厂商的流式响应格式不同，如何统一？
 - 如何防止Prompt注入攻击？AI网关的安全策略？
 - OpenAI的Function Calling和Claude的Tool Use如何统一适配？
+frequency: medium
 ---
 
 # 如何设计多 AI 厂商接口统一适配方案？（入职Java复盘）
@@ -360,6 +361,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

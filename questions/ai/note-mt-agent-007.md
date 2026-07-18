@@ -31,6 +31,7 @@ memory_points:
 - 因为作用不同，所以存储引擎不同：短期用上下文/缓存，而长期依赖向量数据库。
 - 生命周期与容量：短期受限于上下文窗口（秒~分级），长期近乎无限（需TTL淘汰）。
 - 核心机制：短期记忆需通过“置信度判断”与“高频引用”的检验，才能固化为长期记忆。
+frequency: medium
 ---
 
 # 【美团面经】短期记忆和长期记忆有什么区别？
@@ -395,6 +396,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

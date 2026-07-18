@@ -36,6 +36,7 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [favOnly, setFavOnly] = useState(false);
+  const [frequency, setFrequency] = useState<string>('all');
   const [renderedCount, setRenderedCount] = useState(PAGE_SIZE);
   const [modalId, setModalId] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -68,6 +69,9 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
     if (favOnly) {
       list = list.filter((q) => store.favorites.includes(q.id));
     }
+    if (frequency !== 'all') {
+      list = list.filter((q) => (q.frequency || 'medium') === frequency);
+    }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       list = list.filter(
@@ -89,7 +93,7 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
       sorted.sort((a, b) => (a.createdAt || '').localeCompare(b.createdAt || ''));
     }
     return sorted;
-  }, [questions, currentCategory, difficulty, subcategory, selectedTags, favOnly, searchQuery, store.favorites, store.sortOrder]);
+  }, [questions, currentCategory, difficulty, subcategory, selectedTags, favOnly, searchQuery, store.favorites, store.sortOrder, frequency]);
 
   // difficulty distribution
   const diffDist = useMemo(() => {
@@ -264,6 +268,17 @@ export default function HomeClient({ questions }: { questions: Question[] }) {
           {sortOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>{opt.label}</option>
           ))}
+        </select>
+        <select
+          value={frequency}
+          onChange={(e) => setFrequency(e.target.value)}
+          title="面试频率"
+          style={{ ...iconBtn, cursor: 'pointer', appearance: 'auto' }}
+        >
+          <option value="all">🔥 全部频率</option>
+          <option value="high">🔴 高频</option>
+          <option value="medium">🟡 中频</option>
+          <option value="low">⚪ 低频</option>
         </select>
         <button onClick={() => setFavOnly((v) => !v)} title="仅看收藏" style={iconBtnActive(favOnly)}>
           {favOnly ? '★' : '☆'}

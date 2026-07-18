@@ -29,6 +29,7 @@ memory_points:
 - 缩小选择空间：利用分类索引或RAG动态检索，将候选工具集压缩至5个以内
 - 粗排结合精排：先用向量召回Top-10，再用LLM结合Few-shot做精准Rerank
 - 闭环反馈学习：从历史日志提取正误模式，自动沉淀优质Few-shot并优化描述
+frequency: high
 ---
 
 # Agent Skill/工具过多，如何提升命中率？
@@ -211,6 +212,22 @@ def evaluate_hit_rate(test_cases):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Ex start
+    class FB process
+    class L decision
+    class M special
+    class R error
+    class RR info
+    class T1 start
+    class T2 process
+    class U decision
+    class V special
     U["用户Query"] --> R["向量召回Top-10候选工具"]
     R --> RR["LLM结合Few-shot做Rerank"]
     RR --> M["选出Top-1工具"]

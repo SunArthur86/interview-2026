@@ -42,6 +42,7 @@ memory_points:
 - 模型路由：场景+成本+延迟，带 fallback
 - 工具调用让 LLM 突破"只懂训练数据"局限
 - 输出审核三层：安全/合规/人设
+frequency: medium
 ---
 
 # 【巨剧核 AI 陪伴】Agent 编排全链路怎么设计？
@@ -159,6 +160,31 @@ Agent 编排本质是**"把无状态 LLM 升级为有状态、有约束、有能
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class C process
+    class F decision
+    class GPT special
+    class L1 error
+    class L2 info
+    class M start
+    class O process
+    class P decision
+    class P1 special
+    class P2 error
+    class P3 info
+    class P4 start
+    class Prompt process
+    class R decision
+    class Res special
+    class S1 error
+    class T info
+    class U start
     U([用户输入]) --> P[组装 Prompt]
 
     subgraph S1 [上下文与记忆组装]

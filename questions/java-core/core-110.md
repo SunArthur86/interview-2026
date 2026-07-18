@@ -16,6 +16,7 @@ memory_points:
 - 限制：因为静态成员在类加载时确定，所以不能使用类的泛型参数 T
 - 禁忌：因为类型擦除会破坏数组类型检查，所以禁止直接创建泛型数组
 - 限制：因为运行时已擦除，所以不能用 instanceof 判断泛型类型
+frequency: medium
 ---
 
 # 什么是泛型类<T>？
@@ -95,6 +96,42 @@ public class NumericBox<T extends Number> {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class B decision
+    class C special
+    class Consumer error
+    class D info
+    class E start
+    class Erasure process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class Java process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class O start
+    class Object process
+    class PECS decision
+    class Provider special
+    class T error
+    class Type info
+    class V start
+    class bound process
+    class br decision
+    class extends special
+    class new error
+    class super info
     A[Java 泛型] --> B[类型参数化<br/>E T K V]
     A --> C[编译期类型检查]
     A --> D[类型擦除 Type Erasure]

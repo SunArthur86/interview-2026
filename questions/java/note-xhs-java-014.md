@@ -11,8 +11,8 @@ tags:
 - 并发
 - 面经
 feynman:
-  essence: "线程池 = 预创建的线程集合 + 任务队列 + 拒绝策略。7个核心参数控制线程创建、排队和拒绝行为"
-  analogy: "线程池就像一家餐厅——corePoolSize是常驻厨师，maxPoolSize是高峰期最多雇佣的厨师，workQueue是候餐区，rejectHandler是客人太多时的处理方式（拒绝/叫外卖/等位）"
+  essence: 线程池 = 预创建的线程集合 + 任务队列 + 拒绝策略。7个核心参数控制线程创建、排队和拒绝行为
+  analogy: 线程池就像一家餐厅——corePoolSize是常驻厨师，maxPoolSize是高峰期最多雇佣的厨师，workQueue是候餐区，rejectHandler是客人太多时的处理方式（拒绝/叫外卖/等位）
   key_points:
   - 7个参数：corePoolSize、maxPoolSize、keepAliveTime、unit、workQueue、threadFactory、handler
   - 任务处理流程：核心线程→队列→非核心线程→拒绝策略
@@ -20,9 +20,9 @@ feynman:
   - 常见队列：LinkedBlockingQueue(无界)、ArrayBlockingQueue(有界)、SynchronousQueue(直接交换)
   - 阿里规约禁止Executors.newFixedThreadPool()，要用new ThreadPoolExecutor()
 first_principle:
-  essence: "线程创建/销毁有开销(约1ms)，池化复用减少开销。但有界资源需要策略控制何时扩容、何时排队、何时拒绝"
-  derivation: "任务来了 → 先用常驻线程(core) → 不够用就排队(queue) → 队列满了就临时扩容(max) → 都满了就拒绝(reject)。这是'先复用→再缓冲→后扩容→最后保护'的渐进式策略"
-  conclusion: "线程池设计 = 核心线程(常态) + 队列(缓冲) + 最大线程(峰值) + 拒绝策略(保护)"
+  essence: 线程创建/销毁有开销(约1ms)，池化复用减少开销。但有界资源需要策略控制何时扩容、何时排队、何时拒绝
+  derivation: 任务来了 → 先用常驻线程(core) → 不够用就排队(queue) → 队列满了就临时扩容(max) → 都满了就拒绝(reject)。这是'先复用→再缓冲→后扩容→最后保护'的渐进式策略
+  conclusion: 线程池设计 = 核心线程(常态) + 队列(缓冲) + 最大线程(峰值) + 拒绝策略(保护)
 follow_up:
 - 线程池是如何区分核心线程和非核心线程的？
 - 为什么阿里禁止用Executors创建线程池？
@@ -34,6 +34,7 @@ memory_points:
 - 流程口诀：核心满→入队列→队列满→开到max→都满→拒绝
 - CPU密集型：线程数 ≈ CPU核数+1；IO密集型：线程数 ≈ CPU核数×2或更多
 - 4种拒绝策略：Abort(抛异常)、CallerRuns(调用者跑)、Discard(静默丢)、DiscardOldest(丢最旧)
+frequency: high
 ---
 
 # 【拼多多 Java服务端】Java线程池有哪些参数？提交任务时的处理流程是什么？
@@ -273,6 +274,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

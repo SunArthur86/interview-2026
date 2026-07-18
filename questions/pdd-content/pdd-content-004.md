@@ -26,14 +26,15 @@ first_principle:
   - STW 影响用户体验
   rebuild: 分代回收 + 可达性分析 + 并发标记（G1/ZGC）降 STW。
 follow_up:
-  - G1 和 CMS 区别？——G1 分 Region 可预测停顿，CMS 用标记清除有碎片
-  - 怎么选 GC？——堆 <8G 用 Parallel，8-32G 用 G1，>32G 用 ZGC
-  - Full GC 怎么排查？——看老年代占用/Survivor 太小晋升快/Metaspace 溢出
+- G1 和 CMS 区别？——G1 分 Region 可预测停顿，CMS 用标记清除有碎片
+- 怎么选 GC？——堆 <8G 用 Parallel，8-32G 用 G1，>32G 用 ZGC
+- Full GC 怎么排查？——看老年代占用/Survivor 太小晋升快/Metaspace 溢出
 memory_points:
-  - 分代：新生代（Eden+S0/S1）/老年代
-  - 算法：复制（新）/标记清除/整理（老）
-  - G1：Region + 可预测停顿
-  - GC Roots：栈/静态/常量/JNI
+- 分代：新生代（Eden+S0/S1）/老年代
+- 算法：复制（新）/标记清除/整理（老）
+- G1：Region + 可预测停顿
+- GC Roots：栈/静态/常量/JNI
+frequency: high
 ---
 
 # 【拼多多内容】GC 原理与 G1 调优（评价/直播服务）？
@@ -221,6 +222,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

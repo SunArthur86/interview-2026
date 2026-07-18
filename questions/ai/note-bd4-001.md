@@ -31,6 +31,7 @@ memory_points:
 - 调度核心：P绑定M执行，空闲时触发Work Stealing(从全局拿或偷别人一半)
 - 泄漏定义：goroutine因channel无接收或缺select永久阻塞，无法退出
 - 排查修复：go工具看pprof，阻塞必加context，发数据必用缓冲
+frequency: high
 ---
 
 # Golang 的 GMP 调度模型是什么？什么情况下会造成 goroutine 泄漏？
@@ -199,6 +200,7 @@ flowchart TD
     style FREE_CARRIER fill:#9C27B0,color:#fff
     style PIN fill:#F44336,color:#fff
     style REMOUNT fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

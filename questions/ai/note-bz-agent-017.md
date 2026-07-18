@@ -30,6 +30,7 @@ memory_points:
 - 直接调用：同步阻塞紧耦合，效率最高，适合极少固定Agent
 - 共享黑板：Agent读写共享状态，松耦合，适合需协作开发的场景
 - 消息总线：发布/订阅模式，完全解耦，支持动态扩展和一对多通信
+frequency: medium
 ---
 
 # Multi-Agent 之间的连接（通信）方式有哪几种？
@@ -285,6 +286,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

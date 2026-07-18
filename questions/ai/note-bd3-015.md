@@ -29,6 +29,7 @@ memory_points:
 - 闭环系统：核心链路是任务规划→调用工具→观察反馈的循环
 - 记忆模块：区分短期记忆(上下文)和长期记忆(向量库检索)
 - 规划核心：通过任务分解与多步反思，实现从单一问答到自主行动的跨越
+frequency: high
 ---
 
 # 一个完整的LLM Agent系统通常由哪些核心模块组成？
@@ -39,6 +40,28 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Central start
+    class Core process
+    class IN decision
+    class LLM special
+    class M error
+    class Memory info
+    class OBS start
+    class OUT process
+    class Observation decision
+    class P special
+    class Planning error
+    class Reasoner info
+    class T start
+    class Tool process
+    class Use decision
+    class br special
     IN["用户输入"]
     LLM["LLM Core (推理引擎)<br/>← 大脑 Central Reasoner"]
     P["Planning (规划)<br/>任务分解 / 反思修正 / 策略选择 / 优先级排序"]

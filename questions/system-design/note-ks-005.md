@@ -13,7 +13,7 @@ tags:
 - 面经
 feynman:
   essence: Kafka积压100万消息的三步应急：(1)扩容消费者实例并行处理；(2)跳过非关键数据优先处理核心业务消息；(3)修复后通过Lag监控确保积压完全消费。如果消费者是瓶颈，临时增加Consumer实例数即可快速消化积压。
-  analogy: "Kafka积压就像快递站爆仓——100万个包裹堆积。应急三步：(1)临时多招快递员(增加Consumer实例)并行送货；(2)先送加急件(跳过非关键消息，优先处理核心业务)；(3)送完后看监控(ConsumerLag)确认仓库清空。"
+  analogy: Kafka积压就像快递站爆仓——100万个包裹堆积。应急三步：(1)临时多招快递员(增加Consumer实例)并行送货；(2)先送加急件(跳过非关键消息，优先处理核心业务)；(3)送完后看监控(ConsumerLag)确认仓库清空。
   key_points:
   - 消费者宕机→消息积压→快速恢复需要增加消费能力
   - 扩容消费者：增加Consumer实例，注意分区数限制（Consumer数≤Partition数才有意义）
@@ -22,7 +22,8 @@ feynman:
   - 长期方案：增加分区数、优化消费逻辑(批量处理/异步写入)
 first_principle:
   essence: 消息积压 = 生产速率 > 消费速率，恢复需要 消费速率 > 生产速率
-  derivation: "积压100万消息，正常消费速率5000/s，生产速率2000/s → 需要100万/(5000-2000) ≈ 333秒追平。如果增加Consumer实例使消费速率达到20000/s → 100万/(20000-2000) ≈ 55秒追平。"
+  derivation: 积压100万消息，正常消费速率5000/s，生产速率2000/s → 需要100万/(5000-2000) ≈ 333秒追平。如果增加Consumer实例使消费速率达到20000/s
+    → 100万/(20000-2000) ≈ 55秒追平。
   conclusion: 短期靠扩容消费者实例，长期靠优化消费逻辑+增加分区
 follow_up:
 - Kafka的Consumer数量为什么不能超过Partition数量？
@@ -35,6 +36,7 @@ memory_points:
 - 三步应急：扩容Consumer→跳过非关键消息→ConsumerLag监控确认
 - ConsumerLag = LogEndOffset - ConsumerOffset = 还没消费的消息数
 - 长期优化：批量消费(max.poll.records)、增加分区数、异步处理
+frequency: high
 ---
 
 # 【快手Java一面】Kafka消费者宕机后，积压100万消息，如何快速恢复？
@@ -334,6 +336,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

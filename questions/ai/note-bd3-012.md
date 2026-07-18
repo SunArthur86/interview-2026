@@ -30,6 +30,7 @@ memory_points:
 - Chunk过大的坑：嵌入稀释导致召回降准，且极易超出LLM上下文窗口限制
 - Chunk过小的坑：全局语义割裂，上下文碎片化导致推理缺乏连贯性
 - 保底策略：设置重叠区，在切断语义与丢失上下文之间寻找平衡
+frequency: medium
 ---
 
 # 如何确定Chunk的大小和切分策略？过大或过小分别会带来什么问题？
@@ -274,6 +275,7 @@ flowchart TD
     style TBL fill:#FF9800,color:#fff
     size_note([过大→检索信号被平均<br/>过小→语义割裂]) -.-> SIZE
     style PARENT fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -28,6 +28,7 @@ memory_points:
 - 演进模式：采用绞杀者模式，通过API网关路由，新功能微服务化，逐步替换老单体。
 - 数据迁移：遵循双写并行 → 数据同步校验 → 读流量切换 → 写流量切换的不停服流程。
 - 避坑指南：切忌过度拆分（变纳米服务），避免服务间循环依赖和共享数据库。
+frequency: medium
 ---
 
 # 如何从单体架构演进到微服务架构？微服务拆分的原则和方法。
@@ -104,6 +105,39 @@ memory_points:
 【架构演进图】
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class After start
+    class Before process
+    class DB decision
+    class DB1 special
+    class Domain error
+    class Event info
+    class Logic start
+    class Migrate process
+    class Module decision
+    class Monolith special
+    class ODB error
+    class OL info
+    class OM start
+    class OSvc process
+    class Order decision
+    class PDB special
+    class PL error
+    class PM info
+    class PSvc start
+    class Prod process
+    class RPC decision
+    class Svc special
+    class UDB error
+    class UL info
+    class UM start
+    class USvc process
+    class User decision
     subgraph Before["演进前：单体架构"]
         Monolith["单体应用"]
         Monolith --> UM["User Module"]

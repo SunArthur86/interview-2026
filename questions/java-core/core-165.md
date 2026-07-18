@@ -16,6 +16,7 @@ memory_points:
 - Retention决定生命周期：默认CLASS，SOURCE编译丢弃，RUNTIME可反射(框架常用)。
 - 底层原理：注解本质继承自Annotation接口，运行时由动态代理生成实例。
 - 两种解析时机：编译期APT生成代码(如Lombok)，运行期反射读取(如Spring)。
+frequency: high
 ---
 
 # Java 注解的工作原理是什么？如何自定义注解？
@@ -104,6 +105,49 @@ public Object cacheInterceptor(ProceedingJoinPoint pjp, MyCache myCache) throws 
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class APT process
+    class ASM decision
+    class Annotation special
+    class B error
+    class ButterKnife info
+    class C start
+    class CGLIB process
+    class Class decision
+    class Component special
+    class D error
+    class Documented info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class Inherited info
+    class J start
+    class JUnit process
+    class K decision
+    class L special
+    class Lombok error
+    class M info
+    class N start
+    class O process
+    class Override decision
+    class P special
+    class Q error
+    class Retention info
+    class Runtime start
+    class Source process
+    class Spring decision
+    class SpringBoot special
+    class Target error
+    class View info
+    class br start
     A[注解 Annotation] --> B[元注解 标注注解]
     B --> C[Target 目标位置]
     B --> D[Retention 保留期]

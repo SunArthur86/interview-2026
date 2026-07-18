@@ -12,7 +12,7 @@ tags:
 - 召回
 feynman:
   essence: 向量召回就是：把文本用AI模型转成一组数字（向量），这组数字代表了文本的「语义坐标」。找相似文本就是在坐标系里找距离最近的点，用ANN算法快速搜索。
-  analogy: "想象每段文字都有一个GPS坐标（向量）。语义相近的文字坐标也近。你提问时，先把问题转成坐标，然后在地图上找最近的K个标记点，对应的文字就是最相关的内容。不需要文字完全匹配，只要意思相近就能找到。"
+  analogy: 想象每段文字都有一个GPS坐标（向量）。语义相近的文字坐标也近。你提问时，先把问题转成坐标，然后在地图上找最近的K个标记点，对应的文字就是最相关的内容。不需要文字完全匹配，只要意思相近就能找到。
   key_points:
   - Embedding把文本编码成高维向量(768/1536维)
   - 向量距离≈语义相似度，常用余弦相似度
@@ -20,18 +20,19 @@ feynman:
   - HNSW=分层跳表思想，从粗到细搜索
   - 向量数据库(Milvus/Pinecone)专做ANN搜索+过滤
 first_principle:
-  problem: "人类语言有无限的组合方式，如何让计算机判断两段文本的语义相似度？"
+  problem: 人类语言有无限的组合方式，如何让计算机判断两段文本的语义相似度？
   axioms:
   - 语义可以被映射到连续向量空间（Embedding Space）
   - 在好的Embedding空间中，语义相似度↔向量距离
   - 高维空间中最近邻搜索是O(N)的，需要近似算法(ANN)来加速
   - ANN通过构建空间索引结构(HNSW/IVF)将搜索降到O(logN)
-  rebuild: "从语义匹配需求出发：文本→Embedding(语义编码)→向量空间(距离=相似度)→ANN索引(加速搜索)→TopK召回→Rerank精排→LLM生成。整个链路将模糊的语言匹配问题转化为精确的数学计算问题"
+  rebuild: 从语义匹配需求出发：文本→Embedding(语义编码)→向量空间(距离=相似度)→ANN索引(加速搜索)→TopK召回→Rerank精排→LLM生成。整个链路将模糊的语言匹配问题转化为精确的数学计算问题
 follow_up:
 - HNSW 的构建过程是怎样的？为什么查询快？
 - 向量检索和全文检索（BM25）的区别？如何结合（Hybrid Search）？
 - RAG 系统中 chunking 策略对召回效果的影响？
 - 如何评估 Embedding 模型的质量？MTEB 排行榜怎么看？
+frequency: medium
 ---
 
 # 向量检索召回原理：怎么通过一个向量就能找到对应的文本或文件？（小红书Java一面）
@@ -264,6 +265,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 结构化回答

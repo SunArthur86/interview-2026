@@ -8,9 +8,13 @@ tags:
 - AQS
 - 并发
 feynman:
-  essence: 锁升级的本质是"用最小开销拿到锁"——无竞争用 CAS（偏向锁/轻量级锁），短竞争自旋等待（轻量级锁），长竞争才进入内核挂起（重量级锁）。AQS 则是 JUC 锁的"脚手架"：用 state 变量 + CLH 等待队列，让 ReentrantLock/Semaphore/CountDownLatch 共享同一套框架。
-  analogy: 锁升级像停车场管理：偏向锁是"专属车位写你名字，没竞争直接停"；轻量级锁是"车位没锁但有人抢，先原地等几秒（自旋）"；重量级锁是"排队拿号，保安（操作系统）叫号进"。AQS 是停车场的"号牌系统"——state 是剩余车位数，CLH 队列是等号的车队。
-  first_principle: 为什么锁要升级？因为加锁场景竞争强度不同——99% 时间无竞争（用 CAS 足够），少数有竞争（自旋），极少激烈竞争（内核挂起）。固定用一种锁要么浪费（无竞争也走内核）要么不抗（激烈竞争还自旋烧 CPU）。升级机制按实际竞争强度动态选择最优策略。
+  essence: 锁升级的本质是"用最小开销拿到锁"——无竞争用 CAS（偏向锁/轻量级锁），短竞争自旋等待（轻量级锁），长竞争才进入内核挂起（重量级锁）。AQS
+    则是 JUC 锁的"脚手架"：用 state 变量 + CLH 等待队列，让 ReentrantLock/Semaphore/CountDownLatch
+    共享同一套框架。
+  analogy: 锁升级像停车场管理：偏向锁是"专属车位写你名字，没竞争直接停"；轻量级锁是"车位没锁但有人抢，先原地等几秒（自旋）"；重量级锁是"排队拿号，保安（操作系统）叫号进"。AQS
+    是停车场的"号牌系统"——state 是剩余车位数，CLH 队列是等号的车队。
+  first_principle: 为什么锁要升级？因为加锁场景竞争强度不同——99% 时间无竞争（用 CAS 足够），少数有竞争（自旋），极少激烈竞争（内核挂起）。固定用一种锁要么浪费（无竞争也走内核）要么不抗（激烈竞争还自旋烧
+    CPU）。升级机制按实际竞争强度动态选择最优策略。
   key_points:
   - synchronized 锁升级：无锁→偏向锁→轻量级锁（自旋）→重量级锁（monitor）
   - Mark Word：对象头里记录锁状态、线程 ID、HashCode
@@ -23,19 +27,23 @@ first_principle:
   - 大多数锁实际无竞争（偏向锁的统计基础）
   - 短暂竞争可用自旋等待（避免内核切换开销）
   - 激烈竞争必须挂起线程（自旋空耗 CPU 没意义）
-  rebuild: 用 Mark Word 记录锁状态，运行时按竞争强度动态升级：无竞争→偏向锁（CAS 写线程 ID）；有竞争但短→轻量级锁（CAS + 自旋）；竞争激烈→重量级锁（OS mutex 挂起）。升级不可降级（偏向锁可批量撤销）。这套自适应机制让 synchronized 在各场景都接近手工调优的 ReentrantLock。
+  rebuild: 用 Mark Word 记录锁状态，运行时按竞争强度动态升级：无竞争→偏向锁（CAS 写线程 ID）；有竞争但短→轻量级锁（CAS + 自旋）；竞争激烈→重量级锁（OS
+    mutex 挂起）。升级不可降级（偏向锁可批量撤销）。这套自适应机制让 synchronized 在各场景都接近手工调优的 ReentrantLock。
 follow_up:
-  - 偏向锁为什么 JDK 15 默认弃用？——偏向锁撤销成本高（要 safepoint），现代应用多线程竞争普遍，偏向锁收益不抵开销；且维护成本大（影响其他特性）
-  - synchronized 和 ReentrantLock 怎么选？——简单同步用 synchronized（JVM 优化好、自动释放）；需要公平锁、可中断、tryLock、多 Condition 用 ReentrantLock
-  - AQS 的 state 怎么用？——ReentrantLock 用 state 表示重入次数；Semaphore 用 state 表示剩余许可；CountDownLatch 用 state 表示剩余计数
-  - CLH 队列为什么是双向的？——取消节点要唤醒前驱的后继，需要前向指针；MCS 是单向但只能从队首唤醒
-  - 公平锁和非公平锁区别？——公平锁严格 FIFO（先到先得），非公平锁新线程先 tryAcquire 抢一次（插队），减少上下文切换提升吞吐
+- 偏向锁为什么 JDK 15 默认弃用？——偏向锁撤销成本高（要 safepoint），现代应用多线程竞争普遍，偏向锁收益不抵开销；且维护成本大（影响其他特性）
+- synchronized 和 ReentrantLock 怎么选？——简单同步用 synchronized（JVM 优化好、自动释放）；需要公平锁、可中断、tryLock、多
+  Condition 用 ReentrantLock
+- AQS 的 state 怎么用？——ReentrantLock 用 state 表示重入次数；Semaphore 用 state 表示剩余许可；CountDownLatch
+  用 state 表示剩余计数
+- CLH 队列为什么是双向的？——取消节点要唤醒前驱的后继，需要前向指针；MCS 是单向但只能从队首唤醒
+- 公平锁和非公平锁区别？——公平锁严格 FIFO（先到先得），非公平锁新线程先 tryAcquire 抢一次（插队），减少上下文切换提升吞吐
 memory_points:
-  - synchronized 锁升级：无锁→偏向→轻量（自旋）→重量（monitor），不可降级
-  - Mark Word 存锁状态（2bit）+ 线程 ID + HashCode
-  - AQS = volatile state + CLH 双向队列 + 独占/共享两种模式
-  - 非公平锁默认：新线程先抢，提升吞吐；公平锁严格 FIFO
-  - 临界区优化三原则：缩小范围、读写分离、无锁化（CAS/ThreadLocal/分区）
+- synchronized 锁升级：无锁→偏向→轻量（自旋）→重量（monitor），不可降级
+- Mark Word 存锁状态（2bit）+ 线程 ID + HashCode
+- AQS = volatile state + CLH 双向队列 + 独占/共享两种模式
+- 非公平锁默认：新线程先抢，提升吞吐；公平锁严格 FIFO
+- 临界区优化三原则：缩小范围、读写分离、无锁化（CAS/ThreadLocal/分区）
+frequency: high
 ---
 
 # 【Java 后端架构师】锁升级、AQS 与高并发临界区优化
@@ -419,6 +427,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

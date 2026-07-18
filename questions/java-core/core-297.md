@@ -16,6 +16,7 @@ memory_points:
 - Prim算法（点法）：归并点，每次找连通集到非连通集的最短边，适合稠密图
 - Kruskal算法（边法）：归并边，全部边排序后从小到大挑（并查集查环），适合稀疏图
 - 数据结构对比：Prim靠优先队列维护候选边，Kruskal靠并查集防成环
+frequency: low
 ---
 
 # 最小生成树算法（Prim/Kruskal）的原理是什么？
@@ -136,6 +137,34 @@ void kruskal(List<Edge> edges, int vertexCount) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class Kruskal info
+    class L start
+    class M process
+    class MST decision
+    class N special
+    class O error
+    class P info
+    class Prim start
+    class V process
+    class log decision
+    class n special
     A[最小生成树 MST] --> B[连通图 n 个顶点 n-1 条边]
     B --> C[边权和最小]
     D[Prim 算法] --> E[从一点出发]

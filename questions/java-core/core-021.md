@@ -17,6 +17,7 @@ memory_points:
 - 增长公式：每收到1个ACK，cwnd增加 1/cwnd
 - 核心目的并非避免拥塞，而是温和探测带宽，延缓拥塞发生
 - 对比慢启动：慢起抢占带宽极陡，拥塞避免寻找瓶颈较平缓
+frequency: low
 ---
 
 # 什么是拥塞避免？
@@ -118,6 +119,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

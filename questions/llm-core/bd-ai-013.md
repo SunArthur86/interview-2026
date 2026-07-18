@@ -32,6 +32,7 @@ memory_points:
 - 微调优势：延迟低、省Token、风格稳定；劣势：成本高、知识易陈旧
 - 必须微调场景：特定输出格式、特定推理逻辑、特定领域风格(如法律文书)
 - 决策：知识更新快/低成本优先RAG；特定风格/推理模式/降延迟优先微调
+frequency: medium
 ---
 
 # 【字节面经】微调（Fine-tuning）和RAG的使用场景有什么区别？什么场景必须微调？
@@ -117,6 +118,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

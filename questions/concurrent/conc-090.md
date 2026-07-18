@@ -17,6 +17,7 @@ memory_points:
 - 内存分配策略：内存规整用指针碰撞，不规整用空闲列表。
 - 并发分配保障：高并发下采用CAS重试或TLAB线程私有缓冲区。
 - 防重排机制：DCL单例模式中的分配与初始化指令重排，须用volatile修饰。
+frequency: high
 ---
 
 # 什么是对象的创建？
@@ -123,6 +124,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

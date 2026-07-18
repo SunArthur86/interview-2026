@@ -19,6 +19,7 @@ memory_points:
 - 解决方案：RAG（提供外部知识）、Prompt 约束（不知道/引用）、RLHF/DPO（对齐）。
 - 解码策略：降低 Temperature，调整 Top_p，Constrained Decoding（限制候选集）。
 - 检测方法：LogProbs 分析（置信度低），Self-Check（自问自答），后处理事实核查。
+frequency: medium
 ---
 
 # 如何处理LLM的幻觉（Hallucination）问题？
@@ -157,6 +158,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -29,6 +29,7 @@ memory_points:
 - 消费防争抢：多消费者操作时，必须借助Lua脚本实现取出与删除的绝对原子性。
 - 内存优化：因为ZSet存大JSON易内存膨胀，所以只存任务ID再关联Hash取详情。
 - 海量分片：针对百万级高并发，按Hash取模将任务打散至多个ZSet队列并行消费。
+frequency: high
 ---
 
 # 如何设计一个延迟队列？支持百万级延迟任务的精确触发。
@@ -127,6 +128,7 @@ flowchart TD
     EXE --> IDEM{幂等校验}
     IDEM -->|已执行| SKIP[跳过]
     style TW fill:#d4edda
+
 ```
 
 

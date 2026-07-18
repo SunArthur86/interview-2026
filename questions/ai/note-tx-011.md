@@ -32,6 +32,7 @@ memory_points:
 - 架构三要素：编排器路由聚合、专职Agent（规划/执行/审查）、共享内存通信
 - 两大协同模式：流水线（串行）与扇出汇聚（并行）
 - 加分点：类比传统微服务架构，强调标准通信协议与容错机制设计
+frequency: medium
 ---
 
 # 【腾讯面经】多 Agent 协同机制怎么设计的？
@@ -54,6 +55,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CD start
+    class Coder process
+    class Coordinator decision
+    class EX special
+    class Executor error
+    class IN info
+    class MEM start
+    class Memory process
+    class ORC decision
+    class Orchestrator special
+    class PL error
+    class Planner info
+    class QA start
+    class RS process
+    class RV decision
+    class Researcher special
+    class Reviewer error
+    class Shared info
+    class State start
+    class Tester process
+    class br decision
     IN["用户请求 / 任务输入"]
     ORC["Orchestrator (Coordinator)<br/>← 编排器(路由/调度/聚合)"]
     PL["Planner (规划Agent)"]

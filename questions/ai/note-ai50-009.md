@@ -32,6 +32,7 @@ memory_points:
 - 模型层：直接使用JSON Mode或Function Calling保证底座输出约90%合法
 - 校验层：用Pydantic或JSON Schema验证字段，精准拦截格式异常
 - 兜底层：遇错带提示重试、正则强行提取或默认值降级，保100%可用
+frequency: medium
 ---
 
 # 怎么保证大模型稳定输出JSON？格式不对怎么兜底？
@@ -311,6 +312,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -4,8 +4,17 @@ difficulty: L3
 category: java-architect
 subcategory: 限流
 title: 限流从单机到分布式如何演进
-tags: [限流, 令牌桶, Redis Lua, 漏桶, Sentinel]
-related: [java-architect-145, java-architect-138, java-architect-026]
+tags:
+- 限流
+- 令牌桶
+- Redis Lua
+- 漏桶
+- Sentinel
+related:
+- java-architect-145
+- java-architect-138
+- java-architect-026
+frequency: high
 ---
 
 # 限流从单机到分布式如何演进
@@ -370,6 +379,28 @@ Lua 令牌桶，支持突发抗脉冲。
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class After process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HTTP special
+    class I error
+    class J info
+    class K start
+    class Lua process
+    class Redis decision
+    class br special
     A["API请求"] --> B["网关层入口"]
     B --> C["本地批量预扣令牌"]
     C -- "本地余量充足" --> H["放行请求"]

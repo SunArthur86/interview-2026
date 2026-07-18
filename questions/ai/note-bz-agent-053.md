@@ -29,6 +29,7 @@ memory_points:
 - 性能对比：向量召回快但粗，Rerank极准但慢（无法预计算）。
 - 标准流程：两阶段Pipeline（先Bi召回Top20，再Cross精排选Top5）。
 - 模型推荐：开源首选bge-reranker，商业可用Cohere。
+frequency: medium
 ---
 
 # 重排算法（Rerank）如何提升检索匹配精度？
@@ -206,6 +207,7 @@ flowchart TD
     style CE fill:#FF9800,color:#fff
     style RECALL fill:#9C27B0,color:#fff
     style CASCADE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

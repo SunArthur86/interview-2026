@@ -22,7 +22,8 @@ feynman:
   - 'Outlines/LMQL: 开源结构化生成框架'
 first_principle:
   essence: 约束越靠前(解码层)越可靠，越靠后(后处理)越脆弱
-  derivation: LLM概率生成→可能输出无效JSON→后处理修复(脆弱)→Few-shot引导(较稳定)→JSON Mode(更稳定)→约束解码(最稳定)→Function Calling(厂商保障)
+  derivation: LLM概率生成→可能输出无效JSON→后处理修复(脆弱)→Few-shot引导(较稳定)→JSON Mode(更稳定)→约束解码(最稳定)→Function
+    Calling(厂商保障)
   conclusion: 结构化输出的可靠性 = 约束施加的层级深度
 follow_up:
 - Outlines的GBNF语法怎么写？
@@ -33,6 +34,7 @@ memory_points:
 - 约束解码：每步将非法Token的logit设为负无穷强制掩盖。
 - 实现库：Outlines用FSM，llama.cpp用GBNF语法实现Schema限制。
 - JSON Mode：API级约束保证整体是合法JSON，但不约束内部字段类型。
+frequency: high
 ---
 
 # 【字节面经】让模型稳定输出符合 Schema 的 JSON 数据，除了 Function Calling，你还用过哪些方法？各有什么适用边界？
@@ -511,6 +513,7 @@ flowchart TD
     style EXEC fill:#FF9800,color:#fff
     style FALL fill:#F44336,color:#fff
     style HITL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

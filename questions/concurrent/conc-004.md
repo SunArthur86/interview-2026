@@ -16,6 +16,7 @@ memory_points:
 - 资源监控：top看CPU负载，df看磁盘空间，iostat看I/O瓶颈
 - 网络排查：ss -lntp看端口占用，tcpdump抓包分析网络流量
 - 文件查找：find按名或大小区间查找，chmod 755修改读写执行权限
+frequency: low
 ---
 
 # 什么是常用的Linux命令？
@@ -122,6 +123,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

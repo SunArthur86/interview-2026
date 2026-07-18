@@ -30,6 +30,7 @@ memory_points:
 - 业务场景：黑名单拦截与VIP加权同时命中，属于动作冲突
 - 一票否决：安全风控类规则拥有绝对优先权，命中直接拦截
 - 分层裁决：安全>风控>营销分层执行，上层结果覆盖下层
+frequency: medium
 ---
 
 # 【滴滴面经】如果规则之间存在优先级冲突怎么办？比如黑名单和VIP概率提升同时命中。
@@ -437,6 +438,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

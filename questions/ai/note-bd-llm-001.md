@@ -30,6 +30,7 @@ memory_points:
 - 索引职责：将文档解析、切片、向量化并入库，负责把原始数据转化为可高效检索的特征库
 - 检索职责：在线对Query预处理并Embedding，结合向量相似度与重排序(Rerank)精准召回
 - 优化目标：因为检索决定上限，所以索引重切片质量，检索重召回与精排的准确度
+frequency: high
 ---
 
 # 【字节面经】RAG 系统的整体流程是什么？索引阶段和检索阶段分别承担哪些职责？
@@ -412,6 +413,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

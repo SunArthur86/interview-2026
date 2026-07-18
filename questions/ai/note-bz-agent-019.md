@@ -29,6 +29,7 @@ memory_points:
 - 一句话本质：多Agent平台就是Agent的“操作系统”（类比K8s之于容器）
 - 平台六大核心能力：生命周期、注册发现、通信、资源调度、监控、安全
 - 核心组件类比：注册中心相当于微服务发现，调度器负责扩缩容与负载均衡
+frequency: medium
 ---
 
 # 如何理解和打造一个多 Agent 平台？
@@ -277,6 +278,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

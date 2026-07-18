@@ -11,7 +11,8 @@ tags:
 - Decode
 - RDMA
 feynman:
-  essence: PD 分离是把 LLM 推理的 Prefill（首 token，算力瓶颈）和 Decode（续写，带宽瓶颈）拆到不同实例，各自优化硬件和调度，整体吞吐和 SLO 双提升。
+  essence: PD 分离是把 LLM 推理的 Prefill（首 token，算力瓶颈）和 Decode（续写，带宽瓶颈）拆到不同实例，各自优化硬件和调度，整体吞吐和
+    SLO 双提升。
   analogy: 像快递分拣中心——大批量卸货（Prefill，重活，壮汉团队）和分送上门（Decode，碎活，配送团队）分开，效率比一队人两头跑高。
   first_principle: Prefill 和 Decode 资源画像完全不同（算力 vs 带宽），混部会互相阻塞，分离后各自最大化利用。
   key_points:
@@ -28,14 +29,15 @@ first_principle:
   - 资源互斥会互相干扰
   rebuild: PD 分离（独立集群/实例）+ KV Cache 跨节点传输。
 follow_up:
-  - KV 怎么传？——RDMA（GPU Direct）/NVLink（同机）/TCP（兜底）
-  - 什么时候不用 PD 分离？——小模型或低 QPS 场景，分离的开销 > 收益
-  - Chunked Prefill 是什么？——把长 Prefill 切块和 Decode 混跑，避免完全分离的 KV 传输
+- KV 怎么传？——RDMA（GPU Direct）/NVLink（同机）/TCP（兜底）
+- 什么时候不用 PD 分离？——小模型或低 QPS 场景，分离的开销 > 收益
+- Chunked Prefill 是什么？——把长 Prefill 切块和 Decode 混跑，避免完全分离的 KV 传输
 memory_points:
-  - Prefill 算力瓶颈，Decode 带宽瓶颈
-  - 混部互相阻塞
-  - 分离 + KV 跨传（RDMA）
-  - 代表：Mooncake/Splitwise/DeepSeek-V3
+- Prefill 算力瓶颈，Decode 带宽瓶颈
+- 混部互相阻塞
+- 分离 + KV 跨传（RDMA）
+- 代表：Mooncake/Splitwise/DeepSeek-V3
+frequency: high
 ---
 
 # 【拼多多 AI 中台】PD 分离（Prefill-Decode Disaggregation）是什么？
@@ -290,6 +292,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

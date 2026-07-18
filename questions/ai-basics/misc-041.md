@@ -22,6 +22,7 @@ memory_points:
 - 推理类幻觉：用CoT思维链或自一致性（多次采样投票）缓解
 - 事实性幻觉：生成后用NLI或LLM作为Judge进行引用校验
 - 注意：RAG不能完全解决幻觉，需防检索错误或模型忽略上下文
+frequency: medium
 ---
 
 # 大模型幻觉(Hallucination)的成因是什么?如何缓解
@@ -146,6 +147,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

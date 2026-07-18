@@ -16,6 +16,7 @@ memory_points:
 - URN特性：URN与物理位置无关，通过特定名称定位资源(如磁力链接或ISBN号)
 - 结构拆解：协议+主机名+端口+路径+查询参数+片段标识符共同组成完整URL
 - 编码避坑：URL拼接时必须用URLEncoder处理特殊字符，且仅对查询参数编码，切勿整体编码
+frequency: low
 ---
 
 # 什么是URL和URI是什么？
@@ -116,6 +117,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

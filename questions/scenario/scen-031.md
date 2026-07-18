@@ -30,6 +30,7 @@ memory_points:
 - TCC拆解：Try冻结资源，Confirm确认扣减，Cancel异常解冻补偿
 - 本地消息表：本地业务与写消息表同事务，定时任务轮询投递MQ保证最终一致
 - 基石理论：CAP优先选AP，BASE拥抱最终一致，所有分布式事务均需配合接口幂等
+frequency: high
 ---
 
 # 如何设计一个分布式事务方案？对比2PC/TCC/Saga/本地消息表。
@@ -105,6 +106,7 @@ flowchart TD
     LMT --> FIN
     style FIN fill:#d4edda
     style BLK fill:#ffcccc
+
 ```
 
 

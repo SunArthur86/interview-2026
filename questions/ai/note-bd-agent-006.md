@@ -31,6 +31,7 @@ memory_points:
 - 同步与异步：LangGraph适合简单状态图同步流，复杂解耦依赖MQ异步通信
 - 防死循环三板斧：设置最大迭代次数、条件收敛检测、DLQ(死信队列)异常兜底
 - 状态隔离：多Agent共享状态需引入StateGraph维护，避免状态污染
+frequency: medium
 ---
 
 # 如果一个Agent需要调用另一个Agent，怎么做编排和防失控？
@@ -231,6 +232,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

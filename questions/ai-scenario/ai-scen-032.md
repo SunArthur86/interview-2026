@@ -29,6 +29,7 @@ memory_points:
 - 评测执行：规则校验（必过）+ LLM-as-Judge（语义评分）+ 语义相似度。
 - CI集成：Pre-merge通过率>95%，Pre-release>90%，下降>5%阻断发布。
 - 对比：Golden Set离线快且无风险，A/B测试在线慢但看真实业务指标。
+frequency: low
 ---
 
 # 如何设计AI应用的Golden Set评测系统？构建高质量评测集，保障每次迭代不退化。
@@ -117,6 +118,44 @@ def evaluate_golden_set(model_outputs, golden_data):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class A3 special
+    class B error
+    class B1 info
+    class B2 start
+    class B3 process
+    class BERTScore decision
+    class Bad special
+    class C error
+    class Core info
+    class D1 start
+    class D2 process
+    class E decision
+    class E1 special
+    class E2 error
+    class E3 info
+    class E4 start
+    class F process
+    class Full decision
+    class G special
+    class GPT error
+    class Golden info
+    class H start
+    class Judge process
+    class LLM decision
+    class Pre special
+    class Set error
+    class as info
+    class br start
+    class merge process
     A["数据来源池"] --> B["标注与规范设计"]
     subgraph A ["多源数据采集"]
         A1["线上真实日志"]

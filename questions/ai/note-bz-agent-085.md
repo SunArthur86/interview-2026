@@ -29,6 +29,7 @@ memory_points:
 - HyDE反向假设：先让大模型生成假设答案，再拿答案去向量库做相似度检索
 - 多路融合检索：向量搜语义，BM25搜关键词，RRF算法融合去重提升长尾覆盖
 - 精排保精准：粗筛后用交叉编码器Rerank，解决向量检索的噪音问题
+frequency: medium
 ---
 
 # 文档问答系统的检索召回率如何提升？
@@ -291,6 +292,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

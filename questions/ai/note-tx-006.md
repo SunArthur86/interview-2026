@@ -27,6 +27,7 @@ memory_points:
 - 数据差异：科研跑干净静态Benchmark，工业处理脏数据与长尾分布。
 - 成本延迟：科研不计成本，工业必须分层模型路由降本并严控SLA延迟。
 - 容错评估：科研报平均分，工业需完整降级兜底并依赖线上A/B测试。
+frequency: medium
 ---
 
 # 【腾讯面经】科研场景和工业场景的 Agent 有什么区别？
@@ -294,6 +295,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

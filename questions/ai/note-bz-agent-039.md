@@ -28,6 +28,7 @@ memory_points:
 - 通信架构：Client(Agent侧)与Server(工具侧)基于JSON-RPC 2.0协议通信。
 - 传输方式：本地用stdio，远程用SSE。
 - 开发三步：1.定义工具(参数与Schema)；2.用SDK实现Server(@list_tools与@call_tool)；3.配置Agent连接。
+frequency: medium
 ---
 
 # 如何从 0 搭建一个专属 MCP 服务？
@@ -324,6 +325,7 @@ flowchart TD
     style FC fill:#FF9800,color:#fff
     style SKILL fill:#9C27B0,color:#fff
     style MCP fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

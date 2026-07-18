@@ -30,6 +30,7 @@ memory_points:
 - 流量管理核心：VirtualService定路由（灰度），DestinationRule定策略（熔断）。
 - 流量劫持：基于iptables NAT表重定向出入站流量到Sidecar（如15001端口）。
 - 演进：Sidecar引入1-3ms延迟，趋势是eBPF或Ambient去Sidecar化。
+frequency: high
 ---
 
 # 如何设计 Service Mesh（服务网格）架构？Istio 的核心概念。
@@ -162,6 +163,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

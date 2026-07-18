@@ -32,6 +32,7 @@ memory_points:
 - 多模态并发易冲突：语音、文本、工具结果同时到达，必须设置事件优先级
 - 分层状态机：全局调度器把控主流程，各模态拥有独立子状态机
 - 事件队列定优先级：因为用户中断(P0)最关键，所以必须打断ASR(P2)或LLM(P1)
+frequency: medium
 ---
 
 # 如果一个Agent要同时处理语音、文本和工具结果，状态机应该怎么设计才不容易乱？
@@ -264,6 +265,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

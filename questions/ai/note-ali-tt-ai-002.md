@@ -12,8 +12,9 @@ tags:
 - Agent通信
 - 面经
 feynman:
-  essence: Multi-Agent系统的核心是"分工协作"——把复杂任务拆分给多个Agent，关键挑战是上下文如何共享。两种基础范式：层级式（父-子Agent，子任务独立）和协作式（Agent Team，子任务有依赖）。上下文共享通过直接通信（消息传递）和间接通信（共享状态/文件）实现。子Agent通常不会获得父Agent的全部Context，而是只接收必要的任务描述和结果。
-  analogy: "层级式就像公司部门——CEO(父Agent)把任务分给各部门经理(子Agent)，各部门独立干活，互不通信，最后汇报。协作式就像项目组——产品经理和开发坐在一起(通信)，互相讨论(共享上下文)，因为任务有依赖。子Agent不会拿到CEO的全部信息(战略规划)，只会拿到与任务相关的部分(具体需求文档)。"
+  essence: Multi-Agent系统的核心是"分工协作"——把复杂任务拆分给多个Agent，关键挑战是上下文如何共享。两种基础范式：层级式（父-子Agent，子任务独立）和协作式（Agent
+    Team，子任务有依赖）。上下文共享通过直接通信（消息传递）和间接通信（共享状态/文件）实现。子Agent通常不会获得父Agent的全部Context，而是只接收必要的任务描述和结果。
+  analogy: 层级式就像公司部门——CEO(父Agent)把任务分给各部门经理(子Agent)，各部门独立干活，互不通信，最后汇报。协作式就像项目组——产品经理和开发坐在一起(通信)，互相讨论(共享上下文)，因为任务有依赖。子Agent不会拿到CEO的全部信息(战略规划)，只会拿到与任务相关的部分(具体需求文档)。
   key_points:
   - 层级式(Hierarchical)：父Agent拆解任务→调度子Agent→子Agent执行→结果汇报
   - 协作式(Collaborative)：Planner-Executor模型，多个Agent之间相互通信协作
@@ -23,7 +24,7 @@ feynman:
   - Claude Code的Multi-Agent方案：文件系统作为消息队列(inbox目录)
 first_principle:
   essence: Multi-Agent的本质是"关注点分离"——每个Agent有独立的上下文窗口和职责，通过受控的信息交换实现协作
-  derivation: "单Agent问题：任务复杂→上下文爆炸→推理质量下降。Multi-Agent解决：任务拆分→每个Agent上下文独立且聚焦→推理质量提高。但拆分带来新问题：信息如何传递？→通信机制。传递多少？→上下文边界设计。"
+  derivation: 单Agent问题：任务复杂→上下文爆炸→推理质量下降。Multi-Agent解决：任务拆分→每个Agent上下文独立且聚焦→推理质量提高。但拆分带来新问题：信息如何传递？→通信机制。传递多少？→上下文边界设计。
   conclusion: 子Agent不应该使用父Agent的全部Context。原因：(1)上下文窗口有限，全量传递会再次爆炸；(2)信息过载降低推理质量；(3)安全边界——子Agent不应获得超出其职责的信息。
 follow_up:
 - 层级式和协作式如何选择？各自的优缺点是什么？
@@ -35,7 +36,9 @@ memory_points:
 - 层级式(SubAgents)：子Agent之间无通信，适合子任务相互独立；协作式(Agent Team)：子Agent之间可通信，适合子任务彼此依赖
 - 上下文共享两大方式：直接通信(RPC/WebSocket/暴露为Tool) + 间接通信(共享文件/数据库/共享状态)
 - 子Agent不用父Agent全部Context：只传任务描述+必要上下文+结果约束
-- Claude Code Multi-Agent方案：文件系统消息队列(~/.claude/teams/inboxes/)，Agent给谁发消息就往对方inbox JSON追加记录，Agent执行时收不到消息必须等turn结束
+- Claude Code Multi-Agent方案：文件系统消息队列(~/.claude/teams/inboxes/)，Agent给谁发消息就往对方inbox
+  JSON追加记录，Agent执行时收不到消息必须等turn结束
+frequency: medium
 ---
 
 # 【阿里淘天AI二面】Multi-Agent是如何共享上下文的？子Agent会使用父Agent的所有Context吗？
@@ -341,6 +344,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

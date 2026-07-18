@@ -31,6 +31,7 @@ memory_points:
 - 破局死循环：引入旁观者监督Agent检测语义重复，配合最大步数硬限制强制终止。
 - 破局冗余：采用黑板模式共享记忆单写多读，配合结构化摘要做差异增量传输。
 - 路由去重：计算内容指纹与语义Embedding相似度，拦截重复与互相踢皮球的无效消息。
+frequency: medium
 ---
 
 # 【美团面经】多智能体如何解决无限循环或者信息冗余问题？
@@ -474,6 +475,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

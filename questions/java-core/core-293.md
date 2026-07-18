@@ -16,6 +16,7 @@ memory_points:
 - 最坏情况O(n²)：当数组完全正序或逆序时，递归树退化为链表
 - 特性对比：平均效率极高但为不稳定排序，空间复杂度取决于递归深度为O(log n)
 - 常考优化：三数取中选基准、小区间切换插入排序
+frequency: low
 ---
 
 # 快速排序的原理和最坏时间复杂度是什么？
@@ -103,6 +104,49 @@ public class QuickSort {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Arrays process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class Hoare special
+    class I error
+    class J info
+    class JDK start
+    class K process
+    class L decision
+    class Lomuto special
+    class M error
+    class N info
+    class O start
+    class P process
+    class Partition decision
+    class Q special
+    class Quick error
+    class R info
+    class S start
+    class Sort process
+    class Step1 decision
+    class Step2 special
+    class Step3 error
+    class T info
+    class U start
+    class V process
+    class br decision
+    class log special
+    class n error
+    class pivot info
+    class sort start
     A[快速排序 Quick Sort] --> B[分治策略]
     B --> C[Step1 选基准 pivot]
     B --> D["Step2 分区 Partition<br/>小左大右"]

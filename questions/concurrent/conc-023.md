@@ -16,6 +16,7 @@ memory_points:
 - 核心操作：acquire 获取许可（减1），release 释放许可（加1）
 - 典型场景：常用于限流或资源池控制（如数据库连接池限流）
 - 对比互斥锁：不强调归属权，任何线程都能 release，初始为1时功能类似锁
+frequency: medium
 ---
 
 # 什么是协同式调度？
@@ -125,6 +126,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

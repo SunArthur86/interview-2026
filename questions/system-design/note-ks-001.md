@@ -13,7 +13,7 @@ tags:
 - 面经
 feynman:
   essence: TP99从50ms飙到2s但MySQL CPU正常，说明瓶颈不在数据库，而在应用层。快速定位四步法：(1)链路追踪定位RT高的模块→(2)jstack看线程状态(是否阻塞)→(3)连接池分析(是否耗尽)→(4)限流兜底防雪崩。
-  analogy: "就像城市交通堵塞——路口A→B→C→D，你说从A到D的时间从5分钟变成40分钟，但D停车场不挤(MySQL正常)。那堵在哪？(1)先看导航(SkyWalking)找出堵在哪段路；(2)看每个路口的红绿灯状态(线程状态)；(3)看是不是某个路口的加油站(连接池)排满了车；(4)先限流别让更多车进来。"
+  analogy: 就像城市交通堵塞——路口A→B→C→D，你说从A到D的时间从5分钟变成40分钟，但D停车场不挤(MySQL正常)。那堵在哪？(1)先看导航(SkyWalking)找出堵在哪段路；(2)看每个路口的红绿灯状态(线程状态)；(3)看是不是某个路口的加油站(连接池)排满了车；(4)先限流别让更多车进来。
   key_points:
   - 排查顺序：先看链路追踪定位慢节点→再看线程dump→然后连接池→最后限流保护
   - MySQL CPU正常排除数据库瓶颈，重点排查应用层（线程阻塞、连接池、GC、锁竞争）
@@ -22,7 +22,7 @@ feynman:
   - Druid/HikariCP连接池活跃连接数暴增说明有连接泄漏或慢SQL
 first_principle:
   essence: 性能瓶颈定位 = 排除法 + 逐层下钻
-  derivation: "请求链路：Client→Gateway→Service→DB。TP99升高但DB CPU正常 → 排除DB → 瓶颈在Service层。Service层可能的瓶颈：线程阻塞(锁/IO等待)、连接池耗尽、GC停顿、下游服务慢。"
+  derivation: 请求链路：Client→Gateway→Service→DB。TP99升高但DB CPU正常 → 排除DB → 瓶颈在Service层。Service层可能的瓶颈：线程阻塞(锁/IO等待)、连接池耗尽、GC停顿、下游服务慢。
   conclusion: 系统化排查路径：链路追踪(定位模块)→线程分析(定位原因)→连接池(定位资源)→限流(保护系统)
 follow_up:
 - 如果链路追踪发现是某个下游RPC服务变慢，如何进一步排查？
@@ -35,6 +35,7 @@ memory_points:
 - MySQL CPU正常=排除数据库，重点查应用层：线程阻塞、连接池耗尽、Full GC
 - SkyWalking是分布式链路追踪的核心——一个请求在所有微服务中的耗时一目了然
 - jstack关键指标：BLOCKED线程(锁竞争)、WAITING线程(资源等待)、RUNNABLE线程(CPU消耗)
+frequency: high
 ---
 
 # 【快手Java一面】促销活动时订单服务TP99从50ms飙到2s，MySQL CPU正常，如何快速定位？
@@ -321,6 +322,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

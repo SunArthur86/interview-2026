@@ -29,6 +29,7 @@ memory_points:
 - 负负得正：因为栈是LIFO，所以两个栈串联倒灌两次即可实现队列的FIFO。
 - 关键时机：只有当出队栈为空时，才将入队栈全部倒入出队栈。
 - 均摊O(1)：因为每个元素最多被搬运一次，所以平摊到每次操作复杂度为O(1)。
+frequency: low
 ---
 
 # 怎么用两个栈实现队列？
@@ -212,6 +213,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

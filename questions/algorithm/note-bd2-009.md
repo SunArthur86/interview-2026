@@ -31,6 +31,7 @@ memory_points:
 - 遍历条件判断：因为当前区间start <= 上一区间end意味着重叠，所以合并并取较大的end。
 - 不重叠直接追加：若当前start > 上一区间end，则直接加入结果集。
 - 复杂度记忆：排序耗时O(n log n)，单次遍历O(n)，总时间复杂度为O(n log n)。
+frequency: low
 ---
 
 # 手撕：力扣56.合并区间
@@ -212,6 +213,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

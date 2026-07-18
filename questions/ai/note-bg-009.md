@@ -12,9 +12,12 @@ tags:
 - PagedAttention
 - Continuous Batching
 feynman:
-  essence: vLLM和SGLang都是高性能LLM推理框架。vLLM的核心创新是PagedAttention（类虚拟内存的KV-Cache管理）+ Continuous Batching（动态拼batch）；SGLang的核心是RadixAttention（前缀共享缓存）+ 结构化生成约束，适合Agent/多轮场景。
-  analogy: vLLM像高效的"出租车调度"——用PagedAttention把显存当虚拟内存管理，不浪费碎片空间，Continuous Batching让请求随到随走不用等。SGLang像"共享班车"——多个请求有共同前缀（如system prompt）就共享同一份缓存，特别适合Agent反复调用同一套prompt。
-  first_principle: LLM推理瓶颈是KV-Cache显存管理。vLLM用分页机制消除碎片（显存利用率从60%→95%+），用连续批处理消除padding浪费（吞吐提升3-5倍）。SGLang在此基础上发现"多请求常共享前缀"，用Radix Tree自动复用前缀缓存，进一步降低重复计算。
+  essence: vLLM和SGLang都是高性能LLM推理框架。vLLM的核心创新是PagedAttention（类虚拟内存的KV-Cache管理）+ Continuous
+    Batching（动态拼batch）；SGLang的核心是RadixAttention（前缀共享缓存）+ 结构化生成约束，适合Agent/多轮场景。
+  analogy: vLLM像高效的"出租车调度"——用PagedAttention把显存当虚拟内存管理，不浪费碎片空间，Continuous Batching让请求随到随走不用等。SGLang像"共享班车"——多个请求有共同前缀（如system
+    prompt）就共享同一份缓存，特别适合Agent反复调用同一套prompt。
+  first_principle: LLM推理瓶颈是KV-Cache显存管理。vLLM用分页机制消除碎片（显存利用率从60%→95%+），用连续批处理消除padding浪费（吞吐提升3-5倍）。SGLang在此基础上发现"多请求常共享前缀"，用Radix
+    Tree自动复用前缀缓存，进一步降低重复计算。
   key_points:
   - vLLM核心：PagedAttention(分页KV) + Continuous Batching(动态批)
   - SGLang核心：RadixAttention(前缀缓存树) + 结构化生成
@@ -33,6 +36,7 @@ memory_points:
 - vLLM吞吐：Continuous Batching随走随加，请求完成即刻释放不空等
 - SGLang核心：RadixAttention自动复用共享前缀(如System Prompt)的KV-Cache
 - 适用对比：通用高并发选vLLM，而复杂Agent多轮/共享前缀场景选SGLang
+frequency: high
 ---
 
 # 【八股总结】vLLM 和 SGLang 的核心原理与适用场景
@@ -436,6 +440,7 @@ flowchart TD
     style PAGED fill:#FF9800,color:#fff
     style OFFLOAD fill:#F44336,color:#fff
     style BATCH fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -24,6 +24,7 @@ memory_points:
 - Faithfulness：答案陈述是否被Context支持，防幻觉。
 - Context Recall：标准答案信息是否在Context中找到，防漏检。
 - 评估流程：RAG输出 -> LLM-as-a-Judge -> 打分。无需人工标注但需注意评估模型偏见。
+frequency: high
 ---
 
 # 如何评估RAG系统的质量?Ragas框架的核心指标有哪些
@@ -171,6 +172,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

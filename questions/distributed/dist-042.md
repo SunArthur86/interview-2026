@@ -16,6 +16,7 @@ memory_points:
 - 漏桶强制恒定速率，而令牌桶允许突发流量（推荐）
 - 应用分层：Nginx网关用漏桶整形，应用层用令牌桶/滑动窗口
 - 分布式限流：因要保证原子性，所以用 Redis + Lua 脚本实现
+frequency: medium
 ---
 
 # 常见的限流算法有哪些？
@@ -143,6 +144,7 @@ flowchart TD
     style CLUSTER fill:#9C27B0,color:#fff
     style REJECT fill:#F44336,color:#fff
     style DEGRADE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

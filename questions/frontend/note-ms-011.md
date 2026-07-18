@@ -30,6 +30,7 @@ memory_points:
 - 主从架构隔离：主窗口管状态，子窗口只负责 UI 视图展示
 - 本地跨窗口通信：通过主进程 IPC 或 BroadcastChannel 广播状态变更
 - 冲突解决机制：操作入队列串行处理，底座用乐观锁（版本号）防数据打架
+frequency: medium
 ---
 
 # 【月之暗面面经】如果桌面端支持多窗口协作，前端怎么避免不同窗口状态打架？
@@ -110,6 +111,21 @@ channel.postMessage({ diff: mutation, version });
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class br decision
     subgraph 主从多窗口架构
         A["子窗口A<br/>视图副本展示"] -- "发操作请求" --> B["主进程/主窗口<br/>单一状态源"]
         C["子窗口B<br/>视图副本展示"] -- "发操作请求" --> B

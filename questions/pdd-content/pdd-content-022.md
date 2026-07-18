@@ -28,14 +28,15 @@ first_principle:
   - 实时审核必须
   rebuild: 流走 CDN+转码，信令走长连接+Kafka 削峰。
 follow_up:
-  - 怎么降延迟？——WebRTC 替代 RTMP（<500ms）
-  - 弹幕怎么扛百万 QPS？——Kafka+限流+客户端节流
-  - 直播审核怎么做？——抽帧+视觉模型+音转文字 NLP
+- 怎么降延迟？——WebRTC 替代 RTMP（<500ms）
+- 弹幕怎么扛百万 QPS？——Kafka+限流+客户端节流
+- 直播审核怎么做？——抽帧+视觉模型+音转文字 NLP
 memory_points:
-  - 流：推流→转码→CDN→播
-  - 信令：长连→Kafka→广播
-  - 转码：多档+录制
-  - 弹幕：Kafka+限流+节流
+- 流：推流→转码→CDN→播
+- 信令：长连→Kafka→广播
+- 转码：多档+录制
+- 弹幕：Kafka+限流+节流
+frequency: medium
 ---
 
 # 【拼多多内容】直播系统整体架构怎么设计？
@@ -316,6 +317,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

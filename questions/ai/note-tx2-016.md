@@ -21,7 +21,8 @@ feynman:
   - '分阶段上线: MVP单Agent → 多Agent → 多Agent+质检'
 first_principle:
   essence: 多智能体客服 = 专业分工 + 自动化降本
-  derivation: 单Agent处理所有问题能力有限 → 按意图分流到专业子Agent → 提升解决率 → 自动化降低人力成本 → 但多Agent调用贵+延迟大 → 要平衡
+  derivation: 单Agent处理所有问题能力有限 → 按意图分流到专业子Agent → 提升解决率 → 自动化降低人力成本 → 但多Agent调用贵+延迟大
+    → 要平衡
   conclusion: 落地不是"架构多炫"，而是"解决率提升多少 + 成本降多少 + 用户体验如何"
 follow_up:
 - 怎么衡量多智能体相比单Agent的提升？
@@ -32,6 +33,7 @@ memory_points:
 - 子Agent无状态化：会话上下文存Redis，数据存PG，保障水平扩展
 - 成本和延迟控制：简单问题用单Agent，小模型分类大模型生成
 - 辅以SSE流式输出和异步质检Agent，优化体验与质量
+frequency: medium
 ---
 
 # 【某讯面经】业务场景：某讯客服中心多智能体落地，设计思路
@@ -238,6 +240,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

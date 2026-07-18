@@ -9,9 +9,11 @@ tags:
 - Tracing
 - 指标
 feynman:
-  essence: 可观测性三件套是"指标（Metrics，聚合数字）+ 日志（Logs，离散事件）+ 链路（Traces，请求路径）"，三者通过 traceId/exemplar 串联。指标看"有没有问题"、日志看"发生了什么"、链路看"在哪里、为什么"。
+  essence: 可观测性三件套是"指标（Metrics，聚合数字）+ 日志（Logs，离散事件）+ 链路（Traces，请求路径）"，三者通过 traceId/exemplar
+    串联。指标看"有没有问题"、日志看"发生了什么"、链路看"在哪里、为什么"。
   analogy: 像 JD 医院急诊：指标是"体温/血压/心率"监护仪（每秒一个数字，异常报警）、日志是"病历"（每件事件的详细记录）、链路是"病人就诊路径"（从分诊→化验→CT→医生的完整调用链）。三者结合才能诊断病因。
-  first_principle: 分布式系统一个请求要经过 N 个服务，单看一个服务的日志/指标无法定位问题。需要跨服务的关联视图——traceId 串联整条链路，exemplar 串联指标和链路，结构化日志串联日志和 traceId。三者各有所长，缺一不可。
+  first_principle: 分布式系统一个请求要经过 N 个服务，单看一个服务的日志/指标无法定位问题。需要跨服务的关联视图——traceId 串联整条链路，exemplar
+    串联指标和链路，结构化日志串联日志和 traceId。三者各有所长，缺一不可。
   key_points:
   - Metrics：聚合数字（QPS、P99、错误率），低成本高频采集，适合告警
   - Logs：离散事件（结构化 JSON），高保真但高成本，适合排查
@@ -24,19 +26,24 @@ first_principle:
   - 单服务视角不够（问题可能在上下游）
   - 全量采集太贵（日志/链路 PB 级存储）
   - 不同信号有不同擅长：指标适合告警、日志适合排查、链路适合定位
-  rebuild: 三件套分工——Metrics 做聚合数字（QPS/P99/错误率），低成本全量采集，用于大盘监控和告警；Logs 做结构化事件（JSON 带 traceId），按需采样或全量，用于排查具体问题；Traces 做请求路径（span 树），按采样率采集（如 1%），用于定位瓶颈服务。三者通过 traceId 关联，形成"指标报警 → 链路定位服务 → 日志看详情"的排查链路。
+  rebuild: 三件套分工——Metrics 做聚合数字（QPS/P99/错误率），低成本全量采集，用于大盘监控和告警；Logs 做结构化事件（JSON 带
+    traceId），按需采样或全量，用于排查具体问题；Traces 做请求路径（span 树），按采样率采集（如 1%），用于定位瓶颈服务。三者通过 traceId
+    关联，形成"指标报警 → 链路定位服务 → 日志看详情"的排查链路。
 follow_up:
-  - 三件套采样率怎么定？——Metrics 全量（聚合数据成本低）、Traces 采样（1%-10%，全量太贵）、Logs 按级别（ERROR 全量、WARN 采样、DEBUG 关）。可动态调整（异常时临时全量）
-  - traceId 怎么跨服务透传？——HTTP 用 traceparent/tracestate 头（W3C 标准）、消息队列放消息属性、线程池用 TTL（TransmittableThreadLocal）透传
-  - OpenTelemetry 和 SkyWalking 区别？——OpenTelemetry 是 CNCF 标准（厂商中立），SkyWalking 是 Apache 项目（APM 平台）。OpenTelemetry 是采集标准，SkyWalking 是后端实现之一
-  - 日志和指标冲突吗？——不冲突，互补。指标是从日志/事件聚合而来（如错误率从错误日志数算）。可观测性建设成熟后，日志、指标、链路统一采集（OpenTelemetry）
-  - 排查一个问题用哪件套？——先看指标定位"有没有问题 + 影响面"、再看链路定位"在哪个服务"、最后看日志定位"具体什么错"
+- 三件套采样率怎么定？——Metrics 全量（聚合数据成本低）、Traces 采样（1%-10%，全量太贵）、Logs 按级别（ERROR 全量、WARN 采样、DEBUG
+  关）。可动态调整（异常时临时全量）
+- traceId 怎么跨服务透传？——HTTP 用 traceparent/tracestate 头（W3C 标准）、消息队列放消息属性、线程池用 TTL（TransmittableThreadLocal）透传
+- OpenTelemetry 和 SkyWalking 区别？——OpenTelemetry 是 CNCF 标准（厂商中立），SkyWalking 是 Apache
+  项目（APM 平台）。OpenTelemetry 是采集标准，SkyWalking 是后端实现之一
+- 日志和指标冲突吗？——不冲突，互补。指标是从日志/事件聚合而来（如错误率从错误日志数算）。可观测性建设成熟后，日志、指标、链路统一采集（OpenTelemetry）
+- 排查一个问题用哪件套？——先看指标定位"有没有问题 + 影响面"、再看链路定位"在哪个服务"、最后看日志定位"具体什么错"
 memory_points:
-  - Metrics 看有没有问题（聚合数字、告警）
-  - Logs 看发生了什么（结构化、带 traceId）
-  - Traces 看在哪里为什么（span 树、跨服务）
-  - traceId 串联三件套，exemplar 串联指标和链路
-  - 采集成本：Metrics 全量、Traces 采样 1%-10%、Logs 按级别
+- Metrics 看有没有问题（聚合数字、告警）
+- Logs 看发生了什么（结构化、带 traceId）
+- Traces 看在哪里为什么（span 树、跨服务）
+- traceId 串联三件套，exemplar 串联指标和链路
+- 采集成本：Metrics 全量、Traces 采样 1%-10%、Logs 按级别
+frequency: medium
 ---
 
 # 【Java 后端架构师】日志、指标、链路追踪三件套怎么建设
@@ -517,6 +524,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

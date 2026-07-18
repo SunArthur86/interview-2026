@@ -10,7 +10,8 @@ tags:
 - ReentrantLock
 - CAS
 feynman:
-  essence: AQS 用 volatile state + CLH 变种双向队列实现独占/共享同步，是 ReentrantLock/Semaphore/CountDownLatch 的公共基类。
+  essence: AQS 用 volatile state + CLH 变种双向队列实现独占/共享同步，是 ReentrantLock/Semaphore/CountDownLatch
+    的公共基类。
   analogy: AQS 像医院叫号——state 是"叫到几号"，队列是排队患者；独占锁（取号机 1 台）一人用，共享锁（N 台）N 人用。
   first_principle: 用一个变量+一个队列统一表达所有同步语义。
   key_points:
@@ -33,6 +34,7 @@ memory_points:
 - 独占（ReentrantLock）/共享（Semaphore/CountDownLatch）
 - 公平先排后抢，非公平先抢后排
 - park/unpark 比 wait/notify 优（unpark 可先发）
+frequency: high
 ---
 
 # 【拼多多交易】AQS 原理？ReentrantLock 的公平/非公平？
@@ -160,6 +162,24 @@ synchronized 没有"死锁检测"，它一样会死锁（两个 synchronized 块
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CLH start
+    class T1 process
+    class T2 decision
+    class T3 special
+    class as error
+    class hasQueuedPredecessors info
+    class park start
+    class state process
+    class true decision
+    class tryAcquire special
+    class unlock error
+    class unpark info
     participant T1 as 线程A
     participant CLH as AQS同步队列
     participant T2 as 持锁线程B

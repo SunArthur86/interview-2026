@@ -17,6 +17,7 @@ memory_points:
 - 触发模式对比：LT水平触发只要满足条件就一直通知，而ET边缘触发仅状态变化通知一次
 - 内核交互：Epoll利用mmap共享内存，避免了用户态和内核态间的频繁数据拷贝
 - 连接上限瓶颈：突破C10K不仅靠Epoll，还需调整内核参数fs.file-max和ulimit突破文件句柄数限制
+frequency: high
 ---
 
 # 什么是Linux网络？
@@ -136,6 +137,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

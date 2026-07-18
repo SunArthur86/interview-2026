@@ -16,6 +16,7 @@ memory_points:
 - 路由规则：顺时针方向寻找最近的节点，Java常用TreeMap的ceilingEntry实现
 - 核心解决数据倾斜：引入虚拟节点（通常150-200个），让物理节点均匀打散在环上
 - 对比单调性：增删节点时，仅影响顺时针相邻的小部分数据（约1/N），无需全量迁移
+frequency: high
 ---
 
 # 一致性Hash的原理和特性是什么？它在分布式系统中的应用？
@@ -123,6 +124,7 @@ flowchart TD
     style RING fill:#FF9800,color:#fff
     style VN fill:#9C27B0,color:#fff
     style MIGRATE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

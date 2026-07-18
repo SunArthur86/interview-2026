@@ -23,6 +23,7 @@ memory_points:
 - U-Net核心：全卷积结构、跳跃连接（补充高频细节）、Cross-Attention注入文本条件
 - Stable Diffusion改进：在VAE压缩的潜空间做扩散，大幅降低计算量
 - 时间步注入：通过AdaLN将时间t嵌入网络，告知当前噪声水平
+frequency: high
 ---
 
 # 扩散模型(Diffusion)的前向和反向过程是什么?为什么U-Net是核心架构
@@ -163,6 +164,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

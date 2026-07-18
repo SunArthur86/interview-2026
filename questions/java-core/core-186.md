@@ -17,6 +17,7 @@ memory_points:
 - static：随类加载，存于方法区。修饰方法不可被重写，静态块仅执行一次。
 - final：修饰类不可继承，修饰方法不可重写，修饰变量地址不可变（但对象内部可变）。
 - 内存陷阱：static final基本类型若为编译期常量，会发生宏替换直接指向常量池。
+frequency: low
 ---
 
 # static和final有什么区别？
@@ -77,6 +78,26 @@ public class FinalTest {
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class F1 start
+    class F2 process
+    class F3 decision
+    class F4 special
+    class F5 error
+    class Note info
+    class S1 start
+    class S2 process
+    class S3 decision
+    class S4 special
+    class S5 error
+    class br info
+    class final start
+    class static process
     subgraph static
         S1[属于类 不属于实例]
         S2[类加载时初始化]

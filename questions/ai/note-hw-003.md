@@ -20,7 +20,8 @@ feynman:
   - 华为盘古L0/L1分层：L0通用语料 → L1行业语料 → L2领域微调
 first_principle:
   essence: 数据湖的本质是"存算分离的原始数据集中地 + 统一治理层"
-  derivation: 传统数仓要求先建schema再写入（ETL），无法应对大模型数据的"先有数据后有用途"特性。数据湖以对象存储（OBS/S3）为底座，schema推迟到读取时（schema-on-read），元数据层（Lakehouse/Hive Metastore）提供结构和治理。对大模型而言，还需要在数据湖之上构建"数据预处理pipeline"和"数据质量评估"，形成"数据→信息→知识→训练数据"的转化链路。
+  derivation: 传统数仓要求先建schema再写入（ETL），无法应对大模型数据的"先有数据后有用途"特性。数据湖以对象存储（OBS/S3）为底座，schema推迟到读取时（schema-on-read），元数据层（Lakehouse/Hive
+    Metastore）提供结构和治理。对大模型而言，还需要在数据湖之上构建"数据预处理pipeline"和"数据质量评估"，形成"数据→信息→知识→训练数据"的转化链路。
   conclusion: 数据湖是大模型数据基础设施的核心，决定了从原始数据到模型能力的转化效率和成本
 follow_up:
 - 数据湖和数据仓库、Lakehouse有什么区别？
@@ -31,6 +32,7 @@ memory_points:
 - 时代演进：相比传统数仓，大模型数据湖转向多模态格式，PB级海量吞吐与随机采样。
 - 全链路角色：涵盖采集、原始存储、清洗去重质检，到版本化交付训练集群的完整生命周期。
 - 治理重点：大模型数据更关注质量过滤、毒性检测、PII脱敏与训练可复现性。
+frequency: medium
 ---
 
 # 【华为面经】AI DC 数据基础设施/数据湖在大模型训练中的角色
@@ -307,6 +309,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

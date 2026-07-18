@@ -19,6 +19,7 @@ memory_points:
 - 递归分割：优先按段落、句子切分，保持语义完整性，LangChain默认策略
 - 语义切分：基于句向量相似度突变切分，边界清晰但计算成本高
 - 父子索引：小块检索（精准），返回大块给LLM（上下文全），兼顾检索与生成
+frequency: medium
 ---
 
 # RAG的Chunking策略有哪些？
@@ -95,6 +96,25 @@ docs = text_splitter.create_documents([long_legal_text])
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Chunk start
+    class Chunking process
+    class Code decision
+    class Doc special
+    class DocStruct error
+    class Fixed info
+    class Large start
+    class Overlap process
+    class Recursive decision
+    class Semantic special
+    class Small error
+    class Trade info
+    class br start
     Doc["文档"] --> Chunk["Chunking 策略"]
     Chunk --> Fixed["固定大小"]
     Chunk --> Recursive["递归分割<br/>(按分隔符)"]

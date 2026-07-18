@@ -16,6 +16,7 @@ memory_points:
 - MetaGPT 模拟软件公司 SOP，产出标准文档与代码。
 - 结构化程度高但链路长，成本高、耗时长，不适合直接上生产。
 - 适合 Demo 演示与原型验证，CrewAI 更适合垂直业务流。
+frequency: low
 ---
 
 # MetaGPT 适合直接上生产吗
@@ -146,6 +147,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

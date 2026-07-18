@@ -24,6 +24,7 @@ memory_points:
 - 继承允许子类复用父类属性方法，体现Is-a层次关系
 follow_up: []
 tags: []
+frequency: low
 ---
 
 # 什么是面向对象程序设计概述？
@@ -182,6 +183,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

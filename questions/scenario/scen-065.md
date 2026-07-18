@@ -31,6 +31,7 @@ memory_points:
 - CSRF防范：因恶意网站可伪造请求，故表单加Token或设SameSite=Strict/Lax。
 - SSRF防御：后端发请求需配URL白名单，且必须校验解析后的IP防内网穿透。
 - 越权与重放：接口强校验归属权限防越权，用时间戳加Nonce防请求重放。
+frequency: low
 ---
 
 # 如何防范常见的Web安全攻击？SQL注入/XSS/CSRF/SSRF等。
@@ -171,6 +172,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

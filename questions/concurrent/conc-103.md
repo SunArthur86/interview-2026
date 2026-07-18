@@ -17,6 +17,7 @@ memory_points:
 - 本质区别：限流是拒绝请求保系统，熔断是切断调用防蔓延，降级是提供兜底保核心
 - 降级策略：通常采用返回默认值、返回本地或静态旧缓存、返回空列表或友好提示
 - 恢复机制：服务恢复探针成功后，熔断器进入半开状态尝试放行，成功则全开恢复
+frequency: high
 ---
 
 # 什么是缓存降级？什么场景下需要降级？
@@ -118,6 +119,7 @@ flowchart TD
     style BF fill:#FF9800,color:#fff
     style MUTEX fill:#9C27B0,color:#fff
     style REJECT_P fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

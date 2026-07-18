@@ -34,6 +34,7 @@ memory_points:
 - DDD 战术：实体/值对象/聚合根/领域服务/领域事件
 - 聚合根 = 一致性边界，外部只引用不直改
 - 领域事件 + 本地消息表 = 最终一致
+frequency: low
 ---
 
 # 【拼多多供应链】DDD 怎么落地？供应链的领域模型怎么设计？
@@ -279,6 +280,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

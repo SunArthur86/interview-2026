@@ -20,7 +20,8 @@ feynman:
   - 业务基模常基于通用基模继续训练（领域适配）
 first_principle:
   essence: 模型价值 = 在目标场景的预期表现，而非在通用测试集的分数
-  derivation: 通用benchmark（MMLU、C-Eval）衡量的是"通用知识储备"，但业务场景是长尾、具体的。一个MMLU 80分的通用模型，在特定业务（如法律合同审查）可能不如MMLU 60分但专训过法律数据的业务模型。因此业务基模的评估必须回到"业务任务的真实表现"。
+  derivation: 通用benchmark（MMLU、C-Eval）衡量的是"通用知识储备"，但业务场景是长尾、具体的。一个MMLU 80分的通用模型，在特定业务（如法律合同审查）可能不如MMLU
+    60分但专训过法律数据的业务模型。因此业务基模的评估必须回到"业务任务的真实表现"。
   conclusion: 业务基模评估=业务数据集(主) + 通用benchmark(防退化) + 在线实验(最终验证)
 follow_up:
 - 业务基模训练时如何防止通用能力退化？
@@ -30,6 +31,7 @@ memory_points:
 - 通用基模重广度均衡，业务基模重私有领域数据的深度与护城河
 - 主流构建路径：通用基模续训(CPT) + 领域SFT，需混入30%通用数据防退化
 - 评估看权重：业务指标(60%)为核心，辅以通用benchmark(防退化)与线上AB测试
+frequency: low
 ---
 
 # 【八股总结】业务基模和通用基模有什么区别？业务基模效果如何评估？
@@ -386,6 +388,7 @@ flowchart TD
     style FIX_RET fill:#FF9800,color:#fff
     style FIX_GEN fill:#9C27B0,color:#fff
     style FIX_Q fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

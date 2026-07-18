@@ -28,6 +28,7 @@ memory_points:
 - 临时Topic大法：原Topic分区不够时，新建N倍分区临时Topic做中转搬运并行。
 - 单机提效：拉取大批量数据，配合异步线程池或批量DB操作减少交互耗时。
 - 处理重试风暴：设置最大重试次数，超限进死信队列(DLQ)防阻塞。
+frequency: high
 ---
 
 # 如何设计消息积压的处理方案？百万级消息积压如何快速消费？
@@ -136,6 +137,7 @@ flowchart LR
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

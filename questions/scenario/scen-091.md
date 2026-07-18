@@ -28,6 +28,7 @@ memory_points:
 - Broker保不丢：同步刷盘+多副本机制，Kafka必须设acks=all且min.insync>1。
 - 消费者保不重：关闭自动提交，业务执行成功后再手动ACK，且消费端必须幂等。
 - 事务消息流程：发半消息>执行本地事务>提交/回滚，异常断连靠Broker主动回查。
+frequency: high
 ---
 
 # 如何设计一个消息的可靠投递方案？从生产到消费的端到端保证。
@@ -142,6 +143,7 @@ flowchart LR
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

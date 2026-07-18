@@ -11,7 +11,8 @@ tags:
 - 容灾
 - 系统设计
 feynman:
-  essence: 高可用风控架构的核心是"冗余（多副本）+ 隔离（爆炸半径）+ 自愈（自动恢复）+ 降级（保核心）"，用 99.99% 的代价换不到 100% 的边际收益。
+  essence: 高可用风控架构的核心是"冗余（多副本）+ 隔离（爆炸半径）+ 自愈（自动恢复）+ 降级（保核心）"，用 99.99% 的代价换不到 100%
+    的边际收益。
   analogy: 高可用像飞机的"双发冗余+多重导航+自动飞控+备降机场"——单一失效仍能安全飞行，多重保险确保万无一失。
   first_principle: 任何单点都会故障，系统级可用性靠"冗余 × 自愈 × 隔离"的组合，单点故障率 1% 的组件经冗余后系统故障率可降到 0.01%。
   key_points:
@@ -35,6 +36,7 @@ memory_points:
 - 同城双活（强一致，50km 内）+ 异地灾备（最终一致）
 - 容量冗余 N+1（挂一个仍可用）
 - 99.99% 可用 = 月停 4.3 分钟，靠多重冗余实现
+frequency: medium
 ---
 
 # 【蚂蚁风控】怎么设计一个 99.99% 可用性的亿级 QPS 风控架构？
@@ -474,6 +476,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

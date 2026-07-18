@@ -29,6 +29,7 @@ memory_points:
 - Encoder结构：核心是全局Self-Attention（Q=K=V），不设掩码。
 - Decoder特有Mask：因为有Masked Self-Attn遮挡未来词，所以只能按序自回归生成。
 - Decoder特征融合：通过Cross-Attention（Q来自Decoder，K与V来自Encoder）获取源句信息。
+frequency: medium
 ---
 
 # Transformer的整体结构是怎样的？Encoder和Decoder分别做什么？
@@ -209,6 +210,7 @@ flowchart TD
     style E2 fill:#FF9800,color:#fff
     style D3 fill:#9C27B0,color:#fff
     style SOFT fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

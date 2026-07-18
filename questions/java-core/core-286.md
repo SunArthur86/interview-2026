@@ -16,6 +16,7 @@ memory_points:
 - 对比简单工厂：新增产品无需改原代码，符合开闭原则，避免工厂类过于臃肿
 - 四大核心角色：抽象/具体产品，抽象/具体工厂（一一对应创建）
 - 显著优缺点：解耦且扩展性极强，但会导致系统中类的数量成对增加
+frequency: medium
 ---
 
 # 工厂方法模式的设计思想和应用场景是什么？
@@ -110,6 +111,43 @@ public class DatabaseLoggerFactory implements LoggerFactory {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BeanFactory decision
+    class Button special
+    class C error
+    class Checkbox info
+    class ConcreteFactoryA start
+    class ConcreteProductA process
+    class D decision
+    class Dark special
+    class DriverManager error
+    class E info
+    class F start
+    class Factory process
+    class G decision
+    class H special
+    class I error
+    class Input info
+    class J start
+    class JDBC process
+    class K decision
+    class L special
+    class Light error
+    class M info
+    class N start
+    class Product process
+    class Spring decision
+    class UI special
+    class br error
+    class createProduct info
+    class switch start
     A[工厂模式] --> B[简单工厂<br/>一个工厂方法+switch]
     A --> C[工厂方法<br/>每类产品对应一个工厂]
     A --> D[抽象工厂<br/>产品族 多维度]

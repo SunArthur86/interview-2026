@@ -9,9 +9,11 @@ tags:
 - 索引重建
 - 版本
 feynman:
-  essence: Embedding 模型升级的核心难点不是"换个模型"，而是"旧向量和新向量不兼容"——不同模型的向量空间完全不同，旧 query 向量在旧索引上能召回，换模型后必须用新模型重新 embedding 所有文档重建索引。工程上是"双索引并行 + 流量切换 + 回滚兜底"的无感升级方案。
+  essence: Embedding 模型升级的核心难点不是"换个模型"，而是"旧向量和新向量不兼容"——不同模型的向量空间完全不同，旧 query 向量在旧索引上能召回，换模型后必须用新模型重新
+    embedding 所有文档重建索引。工程上是"双索引并行 + 流量切换 + 回滚兜底"的无感升级方案。
   analogy: 像把图书馆所有书从"按拼音分类"改成"按语义分类"——书的数量没变，但索引体系全换了。读者查询时要么全用新体系，要么全用旧体系，不能混用。迁移期间两套目录并存，确认新目录没问题再撤旧的。
-  first_principle: 向量相似度的前提是"query 和 doc 在同一向量空间"。换 embedding 模型 = 换向量空间，旧 doc 向量和新 query 向量不在一个空间，余弦相似度无意义。所以必须全量重建，不能用增量。
+  first_principle: 向量相似度的前提是"query 和 doc 在同一向量空间"。换 embedding 模型 = 换向量空间，旧 doc 向量和新
+    query 向量不在一个空间，余弦相似度无意义。所以必须全量重建，不能用增量。
   key_points:
   - 向量版本化：每个向量记录 embedding_model + model_version，绝不混用
   - 双索引切换：新索引后台重建，建好后原子切换别名，支持秒级回滚
@@ -25,19 +27,25 @@ first_principle:
   - 全量重建亿级索引耗时长（数小时到数天），期间不能停服
   - 重建期间有增量数据变更，新索引必须同步这些变更
   - 升级可能引入质量退化（新模型在某些 query 上更差），必须可回滚
-  rebuild: 双索引并行方案——新建 v2 collection，后台批量重建全量数据；重建期间 CDC 把增量变更同步到 v2；建好后跑一致性校验和 A/B 评测；切别名把流量从 v1 切到 v2；保留 v1 索引 N 天可回滚。
+  rebuild: 双索引并行方案——新建 v2 collection，后台批量重建全量数据；重建期间 CDC 把增量变更同步到 v2；建好后跑一致性校验和 A/B
+    评测；切别名把流量从 v1 切到 v2；保留 v1 索引 N 天可回滚。
 follow_up:
-  - 重建亿级索引要多快？——embedding 是瓶颈（GPU 推理），亿级文档 1024 维，单卡 A100 吞吐约 1000 doc/s，10 张卡并行约 3 小时。Milvus 批量插入约 10 万/s，索引构建 HNSW 约 1 小时。
-  - 重建期间增量数据怎么不漏？——CDC 监听 binlog，变更同时写 v1 和 v2。或记录 rebuild_start_time，重建完成后补 [start_time, now] 的增量。
-  - 切换后怎么验证没问题？——A/B 测试：5% 流量切 v2 跑 3 天，对比 recall@10、answer_citation_rate、用户满意度。无退化再全量。
-  - 新模型维度变了怎么办？——v1 是 768 维 collection，v2 是 1024 维 collection，Milvus 里是两个独立 collection，别名切换。不能在同一个 collection 改维度。
-  - 回滚要多久？——别名切回 v1 秒级生效。但如果 v2 期间有大量增量数据只写了 v2，回滚后 v1 缺数据。所以增量要双写（v1 和 v2 都写）直到确认 v2 稳定。
+- 重建亿级索引要多快？——embedding 是瓶颈（GPU 推理），亿级文档 1024 维，单卡 A100 吞吐约 1000 doc/s，10 张卡并行约 3
+  小时。Milvus 批量插入约 10 万/s，索引构建 HNSW 约 1 小时。
+- 重建期间增量数据怎么不漏？——CDC 监听 binlog，变更同时写 v1 和 v2。或记录 rebuild_start_time，重建完成后补 [start_time,
+  now] 的增量。
+- 切换后怎么验证没问题？——A/B 测试：5% 流量切 v2 跑 3 天，对比 recall@10、answer_citation_rate、用户满意度。无退化再全量。
+- 新模型维度变了怎么办？——v1 是 768 维 collection，v2 是 1024 维 collection，Milvus 里是两个独立 collection，别名切换。不能在同一个
+  collection 改维度。
+- 回滚要多久？——别名切回 v1 秒级生效。但如果 v2 期间有大量增量数据只写了 v2，回滚后 v1 缺数据。所以增量要双写（v1 和 v2 都写）直到确认 v2
+  稳定。
 memory_points:
-  - 向量版本化：embedding_model + model_version 字段，绝不混用
-  - 双索引切换：新索引后台重建 + CDC 增量同步 + 别名原子切换
-  - 全量重建：GPU 批量 embedding + Milvus 批量插入 + HNSW 构建
-  - 一致性校验：抽样对比新旧召回结果，A/B 评测 recall@k
-  - 回滚：保留旧索引 N 天，别名秒级切回
+- 向量版本化：embedding_model + model_version 字段，绝不混用
+- 双索引切换：新索引后台重建 + CDC 增量同步 + 别名原子切换
+- 全量重建：GPU 批量 embedding + Milvus 批量插入 + HNSW 构建
+- 一致性校验：抽样对比新旧召回结果，A/B 评测 recall@k
+- 回滚：保留旧索引 N 天，别名秒级切回
+frequency: high
 ---
 
 # 【Java 后端架构师】Embedding 模型升级与向量索引重建
@@ -303,6 +311,33 @@ public class GrayscaleRouter {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Collection special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class S1 process
+    class S2 decision
+    class S3 special
+    class Spring error
+    class bge info
+    class br start
+    class large process
+    class v1 decision
     A[亿级商品文档源数据] --> B[Spring Batch分片读取]
     subgraph S1 [后台并行重建中心]
         B --> C[GPU集群批量向量化<br/>bge-large-v1.5模型]

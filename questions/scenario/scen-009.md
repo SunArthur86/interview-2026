@@ -29,6 +29,7 @@ memory_points:
 - 读写分离：写请求异步入库分片，读请求优先查Redis ZSet获取热门列表。
 - 分片规则：因为要避免跨库JOIN，所以必须按目标帖子ID进行分库分表。
 - 防刷缓存：细化缓存Key到单帖子维度，配合布隆过滤器拦截恶意刷赞请求。
+frequency: high
 ---
 
 # 如何设计一个评论系统？支持千万级帖子，每篇帖子上万评论。
@@ -150,6 +151,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

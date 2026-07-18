@@ -15,6 +15,7 @@ memory_points:
 - 对象头双核心：Mark Word存锁状态与哈希，Class Pointer指向类元数据。
 - 访问方式对比：句柄访问利于对象移动，HotSpot默认用直接指针追求访问速度。
 - 内存对齐目的：避免跨Cache Line读取提升IO效率，同时保证long的读写原子性。
+frequency: medium
 ---
 
 # 什么是内存中对象？
@@ -122,6 +123,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

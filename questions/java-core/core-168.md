@@ -16,6 +16,7 @@ memory_points:
 - 访问方式差异：List支持索引下标O(1)访问，Map通过Key映射快速获取Value。
 - Null值处理：List通常允许多个null，HashMap仅允许1个null Key。
 - 选型口诀：线性排序选List，键值映射与快速查找选Map。
+frequency: low
 ---
 
 # List和Map有什么区别？
@@ -114,6 +115,7 @@ flowchart LR
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

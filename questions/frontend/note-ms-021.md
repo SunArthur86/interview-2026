@@ -31,6 +31,7 @@ memory_points:
 - 统一标准：因原生与Web协议异构，所以需定义统一的消息协议与安全鉴权机制
 - 能力注册：需做成插件化架构，新能力只需实现标准接口即可动态注册接入
 - 资源调度：前端作为调度中枢，需平台化管理权限分配与多窗口的生命周期事件分发
+frequency: medium
 ---
 
 # 【月之暗面面经】如果产品要扩到更多桌面能力，哪层前端架构最该先做成平台？
@@ -133,6 +134,33 @@ const content = await bridge.invoke('fs.read', { path: '/tmp/a.txt' });
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class API decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class C1 start
+    class C2 process
+    class Client decision
+    class D1 special
+    class D2 error
+    class IPC info
+    class Native start
+    class Node process
+    class Platform decision
+    class Plugin special
+    class RPC error
+    class Rust info
+    class UI start
+    class Web process
+    class js decision
     subgraph Client[客户端]
       A1[渲染进程 Web UI]
       A2[窗口生命周期管理]

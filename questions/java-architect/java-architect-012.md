@@ -8,9 +8,12 @@ tags:
 - AOP
 - 一致性
 feynman:
-  essence: Spring 事务的本质是"AOP 代理 + ThreadLocal 绑定 Connection"——通过动态代理在方法前后加 begin/commit/rollback，用 ThreadLocal 让同一事务的多条 SQL 共用一个 Connection。失效场景都源于"绕过了代理"或"异常被吞"。
-  analogy: 像快递公司的"保价通道"：@Transactional 是给包裹贴保价标签，AOP 代理是快递员（必须经过它才能享受保价），ThreadLocal 是每个快递员自己的保价单（线程隔离）。你跳过快递员自己送（this 调用）、保价单写错类型（异常被吞）、或换快递员送（多线程），保价就失效。
-  first_principle: 为什么要用 AOP 而不是手动 begin/commit？因为事务边界要声明式（注解）而非编程式（手动），让业务代码干净。AOP 代理拦截方法调用实现自动开关事务，ThreadLocal 保证同一事务的 SQL 走同一 Connection（否则 commit 不了）。
+  essence: Spring 事务的本质是"AOP 代理 + ThreadLocal 绑定 Connection"——通过动态代理在方法前后加 begin/commit/rollback，用
+    ThreadLocal 让同一事务的多条 SQL 共用一个 Connection。失效场景都源于"绕过了代理"或"异常被吞"。
+  analogy: 像快递公司的"保价通道"：@Transactional 是给包裹贴保价标签，AOP 代理是快递员（必须经过它才能享受保价），ThreadLocal
+    是每个快递员自己的保价单（线程隔离）。你跳过快递员自己送（this 调用）、保价单写错类型（异常被吞）、或换快递员送（多线程），保价就失效。
+  first_principle: 为什么要用 AOP 而不是手动 begin/commit？因为事务边界要声明式（注解）而非编程式（手动），让业务代码干净。AOP
+    代理拦截方法调用实现自动开关事务，ThreadLocal 保证同一事务的 SQL 走同一 Connection（否则 commit 不了）。
   key_points:
   - 7 种传播行为：REQUIRED/REQUIRES_NEW/NESTED/SUPPORTS/NOT_SUPPORTED/NEVER/MANDATORY
   - 4 种隔离级别：DEFAULT/READ_UNCOMMITTED/READ_COMMITTED/REPEATABLE_READ/SERIALIZABLE
@@ -23,19 +26,23 @@ first_principle:
   - 事务边界要清晰（方法级）、业务代码要干净（无事务样板）
   - 同一事务的 SQL 必须共用 Connection，否则 commit/rollback 不一致
   - 多线程下 Connection 不能跨线程（数据库连接非线程安全）
-  rebuild: 用 AOP 代理拦截 @Transactional 方法，方法前 begin + 绑定 Connection 到 ThreadLocal，方法后根据异常 commit/rollback。同一事务的后续方法调用从 ThreadLocal 取同一 Connection。传播行为决定"是加入现有事务还是新开"，解决方法调用链的事务边界组合问题。
+  rebuild: 用 AOP 代理拦截 @Transactional 方法，方法前 begin + 绑定 Connection 到 ThreadLocal，方法后根据异常
+    commit/rollback。同一事务的后续方法调用从 ThreadLocal 取同一 Connection。传播行为决定"是加入现有事务还是新开"，解决方法调用链的事务边界组合问题。
 follow_up:
-  - 同类内部调用为什么事务失效？——this 调用绕过代理对象，AOP 拦截不生效。解法：注入自己（@Autowired self）、AopContext.currentProxy()、或拆到不同类
-  - REQUIRES_NEW 和 NESTED 区别？——REQUIRES_NEW 挂起当前事务开新连接（独立提交/回滚）；NESTED 在当前事务内开 savepoint（部分回滚但外层失败内层也失败）
-  - 多线程为什么事务失效？——ThreadLocal 线程隔离，子线程拿不到主线程的 Connection，新开连接不在事务内。解法：子线程内手动加 @Transactional 或编程式事务
-  - rollbackFor 默认只回滚 RuntimeException，为什么？——Spring 默认假设检查异常是业务可恢复的（不该回滚），RuntimeException 是不可恢复的。要回滚所有异常加 rollbackFor = Exception.class
-  - 长事务为什么有害？——事务持有 Connection 和锁，长事务导致连接池耗尽、锁竞争、死锁概率上升。要拆事务、异步化非核心操作
+- 同类内部调用为什么事务失效？——this 调用绕过代理对象，AOP 拦截不生效。解法：注入自己（@Autowired self）、AopContext.currentProxy()、或拆到不同类
+- REQUIRES_NEW 和 NESTED 区别？——REQUIRES_NEW 挂起当前事务开新连接（独立提交/回滚）；NESTED 在当前事务内开 savepoint（部分回滚但外层失败内层也失败）
+- 多线程为什么事务失效？——ThreadLocal 线程隔离，子线程拿不到主线程的 Connection，新开连接不在事务内。解法：子线程内手动加 @Transactional
+  或编程式事务
+- rollbackFor 默认只回滚 RuntimeException，为什么？——Spring 默认假设检查异常是业务可恢复的（不该回滚），RuntimeException
+  是不可恢复的。要回滚所有异常加 rollbackFor = Exception.class
+- 长事务为什么有害？——事务持有 Connection 和锁，长事务导致连接池耗尽、锁竞争、死锁概率上升。要拆事务、异步化非核心操作
 memory_points:
-  - 事务 = AOP 代理拦截 + ThreadLocal 绑定 Connection
-  - 7 传播：REQUIRED（默认加入）/REQUIRES_NEW（独立新事务）/NESTED（savepoint）
-  - 5 失效：this 调用、非 public、异常吞、异常类型不匹配、多线程
-  - rollbackFor 默认只回滚 RuntimeException，要回滚检查异常显式配置
-  - AOP 代理生成在 BeanPostProcessor 后置（见 011 题）
+- 事务 = AOP 代理拦截 + ThreadLocal 绑定 Connection
+- 7 传播：REQUIRED（默认加入）/REQUIRES_NEW（独立新事务）/NESTED（savepoint）
+- 5 失效：this 调用、非 public、异常吞、异常类型不匹配、多线程
+- rollbackFor 默认只回滚 RuntimeException，要回滚检查异常显式配置
+- AOP 代理生成在 BeanPostProcessor 后置（见 011 题）
+frequency: high
 ---
 
 # 【Java 后端架构师】Spring 事务传播、隔离级别与失效场景
@@ -394,6 +401,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

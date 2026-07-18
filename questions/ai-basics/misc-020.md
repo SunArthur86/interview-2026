@@ -22,6 +22,7 @@ memory_points:
 - Continuous Batching：动态调度请求，移除暂停/完成并插入新任务
 - Prefix Caching：复用System Prompt等前缀计算，降低首字延迟
 - 效果：相比HuggingFace吞吐量提升10倍（50 vs 5 tok/s）
+frequency: high
 ---
 
 # vLLM的核心技术创新是什么?为什么比HuggingFace推理快10倍
@@ -152,6 +153,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

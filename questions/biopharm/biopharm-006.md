@@ -12,37 +12,40 @@ tags:
 - Milvus
 - Elasticsearch
 feynman:
-  essence: "向量数据库选型是在'规模、运维、一致性、混合检索'四象限里挑——FAISS 轻量单机，PGVector 与业务库一体，Milvus 大规模分布式，ES 强在向量+全文混合。"
-  analogy: "像选仓库——FAISS 是随身背包（小快）、PGVector 是和办公室连一起的柜子（数据在一处）、Milvus 是大型自动化立体库（海量但要专人管）、ES 是能同时按图按文找的智能仓。"
-  first_principle: "向量检索的核心需求是'在高维向量空间快速找近邻（ANN）'。不同选型的差异本质上是在'规模/延迟/运维成本/与业务数据的一致性/混合检索能力'上的不同取舍，没有银弹。"
+  essence: 向量数据库选型是在'规模、运维、一致性、混合检索'四象限里挑——FAISS 轻量单机，PGVector 与业务库一体，Milvus 大规模分布式，ES
+    强在向量+全文混合。
+  analogy: 像选仓库——FAISS 是随身背包（小快）、PGVector 是和办公室连一起的柜子（数据在一处）、Milvus 是大型自动化立体库（海量但要专人管）、ES
+    是能同时按图按文找的智能仓。
+  first_principle: 向量检索的核心需求是'在高维向量空间快速找近邻（ANN）'。不同选型的差异本质上是在'规模/延迟/运维成本/与业务数据的一致性/混合检索能力'上的不同取舍，没有银弹。
   key_points:
-  - "FAISS：库（非服务），单机高性能，适合原型/中小规模"
-  - "PGVector：PostgreSQL 扩展，向量与业务数据一体，事务一致"
-  - "Milvus：分布式专用向量库，十亿级规模，运维重"
-  - "Elasticsearch：向量+全文+结构化混合检索，运维成熟"
-  - "选型四问：数据量？要混合检索吗？要和业务一致吗？运维能力？"
+  - FAISS：库（非服务），单机高性能，适合原型/中小规模
+  - PGVector：PostgreSQL 扩展，向量与业务数据一体，事务一致
+  - Milvus：分布式专用向量库，十亿级规模，运维重
+  - Elasticsearch：向量+全文+结构化混合检索，运维成熟
+  - 选型四问：数据量？要混合检索吗？要和业务一致吗？运维能力？
   socratic:
-  - "为什么不直接用 numpy 算余弦相似度，要专门向量库？"
-  - "知识库的向量要和业务表（如文档元数据）一起查询，分开存会有什么麻烦？"
-  - "十亿级向量，FAISS 单机扛不住，怎么办？"
-  - "向量检索召回的不相关结果，怎么用关键词/结构化条件过滤？"
-  - "PGVector 和 Milvus 都能存向量，企业该选哪个？"
+  - 为什么不直接用 numpy 算余弦相似度，要专门向量库？
+  - 知识库的向量要和业务表（如文档元数据）一起查询，分开存会有什么麻烦？
+  - 十亿级向量，FAISS 单机扛不住，怎么办？
+  - 向量检索召回的不相关结果，怎么用关键词/结构化条件过滤？
+  - PGVector 和 Milvus 都能存向量，企业该选哪个？
 first_principle:
-  problem: "如何在高维向量空间中，按规模/一致性/混合检索/运维成本选最合适的存储与检索方案？"
+  problem: 如何在高维向量空间中，按规模/一致性/混合检索/运维成本选最合适的存储与检索方案？
   axioms:
-  - "暴力计算余弦是 O(N)，大规模不可行，需 ANN 近似检索"
-  - "向量常需与业务元数据（权限/版本/标签）联合查询"
-  - "规模和运维成本正相关"
-  rebuild: "按四象限选型——小规模/原型用 FAISS，要业务一致用 PGVector，海量规模用 Milvus，要向量+全文混合用 ES；本质是在规模、一致性、混合检索、运维四维上做取舍。"
+  - 暴力计算余弦是 O(N)，大规模不可行，需 ANN 近似检索
+  - 向量常需与业务元数据（权限/版本/标签）联合查询
+  - 规模和运维成本正相关
+  rebuild: 按四象限选型——小规模/原型用 FAISS，要业务一致用 PGVector，海量规模用 Milvus，要向量+全文混合用 ES；本质是在规模、一致性、混合检索、运维四维上做取舍。
 follow_up:
-- "HNSW 和 IVF 怎么选？——HNSW 召回高/内存大/查询快，IVF 可接受稍低召回/省内存/可分布式；海量+省内存选 IVF+PQ。"
-- "PGVector 性能瓶颈？——百万级以下够用，更大要建 HNSW 索引并调参；超千万建议上专用向量库。"
-- "怎么实现权限过滤？——元数据预过滤（检索前按 tenant/权限筛）或后过滤（检索后过滤，可能不足 k 个），PGVector/ES 支持预过滤。"
+- HNSW 和 IVF 怎么选？——HNSW 召回高/内存大/查询快，IVF 可接受稍低召回/省内存/可分布式；海量+省内存选 IVF+PQ。
+- PGVector 性能瓶颈？——百万级以下够用，更大要建 HNSW 索引并调参；超千万建议上专用向量库。
+- 怎么实现权限过滤？——元数据预过滤（检索前按 tenant/权限筛）或后过滤（检索后过滤，可能不足 k 个），PGVector/ES 支持预过滤。
 memory_points:
-- "FAISS 轻、PGVector 一体、Milvus 大、ES 混合"
-- "选型四问：规模/混合检索/业务一致/运维"
-- "ANN：HNSW（快准内存大）vs IVF（省内存）"
-- "权限过滤：预过滤优于后过滤"
+- FAISS 轻、PGVector 一体、Milvus 大、ES 混合
+- 选型四问：规模/混合检索/业务一致/运维
+- ANN：HNSW（快准内存大）vs IVF（省内存）
+- 权限过滤：预过滤优于后过滤
+frequency: high
 ---
 
 # 【生物医药 AI】向量数据库怎么选型与优化（FAISS/PGVector/Milvus/ES）？
@@ -151,6 +154,30 @@ query → embedding → 在百万/亿级向量中找最相似的 top-k
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class Elasticsearch info
+    class F start
+    class FAISS process
+    class G decision
+    class H special
+    class HNSW error
+    class I info
+    class IVF start
+    class Milvus process
+    class PGVector decision
+    class PQ special
+    class SQ error
+    class br info
     subgraph 向量库选型决策
         A(业务需求输入) --> B{核心约束权衡}
         B -->|原型验证与中小规模| C[FAISS<br/>单机库无服务]

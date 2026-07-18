@@ -16,6 +16,7 @@ memory_points:
 - 人机在环是高风险决策的安全防线，也是 RLHF 数据来源。
 - 低置信度或高风险触发人工审核，修正数据用于微调。
 - 需校准置信度，防止模型对错误回答过度自信。
+frequency: low
 ---
 
 # 为什么需要「人机在环」
@@ -138,6 +139,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

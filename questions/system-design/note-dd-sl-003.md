@@ -30,6 +30,7 @@ memory_points:
 - 旁路缓存：标准模式为先更新DB，再删除Redis缓存
 - 为何删除：删缓存幂等防并发覆盖，更新非原子易引发竞态
 - 业务妥协：短链读多极少改，无需强一致，靠TTL兜底即可
+frequency: high
 ---
 
 # 【滴滴面经】怎么保证 Redis 里的短链数据和 DB 一致？这个场景下是否一定要强一致？
@@ -446,6 +447,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

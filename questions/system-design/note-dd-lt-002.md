@@ -32,6 +32,7 @@ memory_points:
 - incr局限：单命令虽原子，但无法保护扣减后的多步逻辑，故需配合分布式锁。
 - Redisson特性：支持可重入，且自带看门狗自动续期，防止业务超时引发死锁。
 - 互补关系：incr作高性能前置过滤，而Redisson锁兜底复杂业务逻辑一致性。
+frequency: high
 ---
 
 # 【滴滴面经】Redis 的 incr 和 Redisson 锁你都用了，它们分别解决什么问题？为什么两个都要上？
@@ -432,6 +433,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

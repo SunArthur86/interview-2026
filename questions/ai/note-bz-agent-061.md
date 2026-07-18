@@ -30,6 +30,7 @@ memory_points:
 - LCEL优势：管道符`|`串联组件，替代黑盒Chain，原生支持流式、异步与批处理
 - LangGraph解决复杂流：引入图结构，原生支持循环(ReAct)、条件分支、人工干预(HITL)与状态检查点
 - LangSmith做全链路追踪：提供Trace调试、评估测试与线上监控闭环
+frequency: high
 ---
 
 # LangChain 1.2 生产级架构是什么样？
@@ -247,6 +248,7 @@ flowchart TD
     style LG fill:#FF9800,color:#fff
     style LS fill:#9C27B0,color:#fff
     style STATE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

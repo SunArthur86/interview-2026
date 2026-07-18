@@ -29,6 +29,7 @@ memory_points:
 - 七步精装：角色→工具→记忆→安全→评估→成本→迭代。
 - 核心三要素：明确定位与边界(角色)，配置治理与路由(工具)，分级与摘要隔离(记忆)。
 - 运行保障三支柱：防注入与高危确认(安全)，模型路由与缓存(成本)，指标监控与BadCase收集(评估与迭代)。
+frequency: medium
 ---
 
 # Hermes Agent 七步精装，让智能体真正会干活？
@@ -244,6 +245,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

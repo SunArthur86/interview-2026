@@ -10,7 +10,9 @@ tags:
 - AgenticRAG
 - ReAct
 feynman:
-  essence: 传统 RAG 是 retrieve-once → generate 的一步流程；Agentic RAG 是 plan → retrieve → reflect → re-retrieve → generate 的多步循环，每步允许 LLM 决定下一步动作。Query Rewrite 严格说不算 Agentic（无决策回路），要算 Agentic 至少要有"根据上一轮结果决定要不要再检索"这个决策点。成本靠硬上限（最多N轮）+ 早停（置信度够高就停）。
+  essence: 传统 RAG 是 retrieve-once → generate 的一步流程；Agentic RAG 是 plan → retrieve →
+    reflect → re-retrieve → generate 的多步循环，每步允许 LLM 决定下一步动作。Query Rewrite 严格说不算 Agentic（无决策回路），要算
+    Agentic 至少要有"根据上一轮结果决定要不要再检索"这个决策点。成本靠硬上限（最多N轮）+ 早停（置信度够高就停）。
   analogy: 传统 RAG 像一次性外卖——下单（检索）→ 收餐（生成）→ 结束。Agentic RAG 像跟研究员合作——你说需求，他先查一轮，觉得不够再查一轮，边查边反思，直到凑齐证据才给报告。
   first_principle: 简单事实查询用一步检索就够；但多跳推理、跨文档对比、深度研究需要"边查边想"。决策点的引入让系统从"固定流程"升级为"自适应流程"，代价是成本和复杂度上升。
   key_points:
@@ -21,7 +23,8 @@ feynman:
   - 成本控制：硬上限（3-5轮）+ 早停（置信度τ）+ 缓存 + 降级 + 小模型决策
 first_principle:
   essence: Agentic = 决策回路引入
-  derivation: 一步检索只能答简单事实 → 多跳推理需要多次检索 → 谁决定"要不要再查"→ LLM决策回路 → 决策点带来灵活性也带来失败点和成本 → 必须加上下界控制
+  derivation: 一步检索只能答简单事实 → 多跳推理需要多次检索 → 谁决定"要不要再查"→ LLM决策回路 → 决策点带来灵活性也带来失败点和成本 →
+    必须加上下界控制
   conclusion: Agentic RAG 的核心不是"检索多次"，而是"LLM 决定要不要再检索"——决策回路是把双刃剑
 follow_up:
 - Anthropic 的 deep-research / multi-agent research 论文怎么拆分研究任务？
@@ -32,6 +35,7 @@ memory_points:
 - Query Rewrite不算Agentic，缺乏“看结果决定是否再查”的决策回路
 - 多轮检索三范式：Self-Ask拆子问题、ReAct边想边查、Plan-and-Execute先规划
 - 控制高成本与不稳定性：设最大轮数上限、置信度早停、失败则降级传统RAG
+frequency: medium
 ---
 
 # 【字节飞连面经】Agentic RAG 和传统 RAG 区别？Query Rewrite 算 Agentic 吗？
@@ -114,6 +118,29 @@ Agentic RAG：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Agent process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class Execute start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class LLM start
+    class Plan process
+    class Query decision
+    class ReAct special
+    class br error
     A["复杂用户 Query"] --> B{"Agent 决策判断"}
     B -- "需要多跳" --> C["Plan-and-Execute<br/>拆分子问题"]
     C --> D["ReAct 边查边想<br/>多轮检索"]

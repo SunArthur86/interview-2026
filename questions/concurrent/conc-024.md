@@ -16,6 +16,7 @@ memory_points:
 - 因为单核通过时间片轮转实现宏观同时微观交替，所以并发是并行前提（单核并发，多核并行）。
 - 共享分两类：互斥共享需加锁（如打印机），同时共享可并发（如磁盘读）。
 - 虚拟靠复用技术：空分复用造虚拟内存，时分复用造虚拟处理器。
+frequency: low
 ---
 
 # 什么是操作系统的特征？
@@ -145,6 +146,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

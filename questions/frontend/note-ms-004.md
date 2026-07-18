@@ -30,6 +30,7 @@ memory_points:
 - 核心原则：上下文不是大数据池，而是分层引用系统
 - 三层架构：来源对象层(存引用)、提取结果层(存文本/OCR/摘要)、任务引用层(挂载到对话)
 - 异步处理：大文件先存引用，后台异步提取，避免阻塞UI交互
+frequency: low
 ---
 
 # 【月之暗面面经】多模态输入同时有网页、文档和本地截图时，桌面端该怎样做上下文管理？
@@ -48,6 +49,66 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AI process
+    class B decision
+    class CX special
+    class ContextReference error
+    class E1 info
+    class E2 start
+    class E2note process
+    class E3 decision
+    class E4 special
+    class Extraction error
+    class ExtractionResult info
+    class I1 start
+    class I2 process
+    class I3 decision
+    class I4 special
+    class L1 error
+    class L2 info
+    class L3 start
+    class LLM process
+    class Layer decision
+    class R1 special
+    class R2 error
+    class R3note info
+    class Reference start
+    class Request process
+    class S1 decision
+    class S1note special
+    class S2 error
+    class S3 info
+    class S4 start
+    class Source process
+    class SourceObject decision
+    class Store special
+    class Task error
+    class UI info
+    class blob start
+    class br process
+    class document decision
+    class fetched special
+    class file error
+    class id info
+    class image start
+    class meta process
+    class mime decision
+    class pages special
+    class path error
+    class ref info
+    class size start
+    class source process
+    class thumbnail decision
+    class title special
+    class url error
+    class webpage info
     subgraph UI["用户交互层"]
         I1["网页拖入"]
         I2["PDF上传"]

@@ -8,9 +8,12 @@ tags:
 - 热点
 - 计数
 feynman:
-  essence: LongAdder 和 ConcurrentHashMap 的共同本质是"用空间换并发度"——把一个热点变量拆成多个 Cell/Segment，让不同线程操作不同分区，最后汇总。热点不再阻塞，并发度从 1（单点 CAS）提升到 N（分区数）。
-  analogy: 像超市收银：AtomicLong 是"一个收银台"——所有人排队 CAS，高峰期拥堵；LongAdder 是"开 N 个收银台"——每个线程去自己的收银台结账，最后把所有收银台金额加总。ConcurrentHashMap 是"商品分到 N 个货架"，每个货架独立锁，不互相阻塞。
-  first_principle: 单点热点（AtomicLong 的 value）在高并发下 CAS 冲突率高——N 个线程同时改一个变量，只有一个成功，其他重试烧 CPU。把热点分区后，N 个线程分散到 N 个分区，冲突率从接近 100% 降到 1/N。
+  essence: LongAdder 和 ConcurrentHashMap 的共同本质是"用空间换并发度"——把一个热点变量拆成多个 Cell/Segment，让不同线程操作不同分区，最后汇总。热点不再阻塞，并发度从
+    1（单点 CAS）提升到 N（分区数）。
+  analogy: 像超市收银：AtomicLong 是"一个收银台"——所有人排队 CAS，高峰期拥堵；LongAdder 是"开 N 个收银台"——每个线程去自己的收银台结账，最后把所有收银台金额加总。ConcurrentHashMap
+    是"商品分到 N 个货架"，每个货架独立锁，不互相阻塞。
+  first_principle: 单点热点（AtomicLong 的 value）在高并发下 CAS 冲突率高——N 个线程同时改一个变量，只有一个成功，其他重试烧
+    CPU。把热点分区后，N 个线程分散到 N 个分区，冲突率从接近 100% 降到 1/N。
   key_points:
   - LongAdder：Cell[] 分区 + base，sum 时累加，写多读少场景吊打 AtomicLong
   - ConcurrentHashMap JDK 8：Node 数组 + CAS + synchronized（锁桶头），废弃分段锁
@@ -23,19 +26,23 @@ first_principle:
   - 热点的根因是"多写一"——多个线程竞争修改同一个存储位置
   - 如果让不同线程改不同位置，热点就消失了
   - 最终值 = 所有分区值之和（读时聚合，写时分散）
-  rebuild: LongAdder 把单个 long 拆成 Cell[]（默认大小 = CPU 核数的最近 2 的幂），每个线程通过 hash 落到某个 Cell，只对自己的 Cell 做 CAS（几乎无冲突）。读时 sum 遍历所有 Cell 累加。ConcurrentHashMap 同理——JDK 7 用 Segment 分段锁，JDK 8 演进为锁桶头（Node 数组每个槽独立锁）。核心思想都是"分区消除热点"。
+  rebuild: LongAdder 把单个 long 拆成 Cell[]（默认大小 = CPU 核数的最近 2 的幂），每个线程通过 hash 落到某个 Cell，只对自己的
+    Cell 做 CAS（几乎无冲突）。读时 sum 遍历所有 Cell 累加。ConcurrentHashMap 同理——JDK 7 用 Segment 分段锁，JDK
+    8 演进为锁桶头（Node 数组每个槽独立锁）。核心思想都是"分区消除热点"。
 follow_up:
-  - LongAdder.sum() 精确吗？——不精确，遍历 Cell 期间可能有新写入，是弱一致估算。但对计数场景够用
-  - CHM JDK 7 和 8 区别？——7 用 Segment（16 段，每段一个 ReentrantLock），并发度固定 16；8 用 Node 数组 + 桶头 synchronized + CAS，并发度 = 桶数，更细粒度
-  - computeIfAbsent 性能问题？——JDK 8 有死循环 bug（嵌套 computeIfAbsent），JDK 9 修复；且 lambda 阻塞会锁住整个桶
-  - 为什么 CHM 不允许 null key/value？——并发下 null 有歧义（是没这个 key 还是 value 就是 null），强制非 null 避免二义性
-  - 热点 key 怎么处理？——一个 key 被高频访问导致单桶锁竞争，要用 ConcurrentHashMap + 细分 key 或 Caffeine 缓存
+- LongAdder.sum() 精确吗？——不精确，遍历 Cell 期间可能有新写入，是弱一致估算。但对计数场景够用
+- CHM JDK 7 和 8 区别？——7 用 Segment（16 段，每段一个 ReentrantLock），并发度固定 16；8 用 Node 数组 + 桶头
+  synchronized + CAS，并发度 = 桶数，更细粒度
+- computeIfAbsent 性能问题？——JDK 8 有死循环 bug（嵌套 computeIfAbsent），JDK 9 修复；且 lambda 阻塞会锁住整个桶
+- 为什么 CHM 不允许 null key/value？——并发下 null 有歧义（是没这个 key 还是 value 就是 null），强制非 null 避免二义性
+- 热点 key 怎么处理？——一个 key 被高频访问导致单桶锁竞争，要用 ConcurrentHashMap + 细分 key 或 Caffeine 缓存
 memory_points:
-  - LongAdder = Cell[] 分区 + base，写散列到 Cell，读 sum 聚合
-  - CHM JDK 8 = Node 数组 + 桶头 synchronized + CAS（链表→红黑树阈值 8）
-  - 计数选型：低并发 AtomicLong，高并发 LongAdder
-  - computeIfAbsent 原子替代 get-then-put，但避免嵌套和长 lambda
-  - size() 是弱一致性估算，精确计数用 LongAdder.sum 或加版本号
+- LongAdder = Cell[] 分区 + base，写散列到 Cell，读 sum 聚合
+- CHM JDK 8 = Node 数组 + 桶头 synchronized + CAS（链表→红黑树阈值 8）
+- 计数选型：低并发 AtomicLong，高并发 LongAdder
+- computeIfAbsent 原子替代 get-then-put，但避免嵌套和长 lambda
+- size() 是弱一致性估算，精确计数用 LongAdder.sum 或加版本号
+frequency: high
 ---
 
 # 【Java 后端架构师】LongAdder、ConcurrentHashMap 与热点计数
@@ -387,6 +394,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

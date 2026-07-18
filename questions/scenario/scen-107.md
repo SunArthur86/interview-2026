@@ -25,6 +25,7 @@ memory_points:
 - 生产推荐组合：Redis ZSet做持久化待办表，扫描后投递MQ异步执行(解耦)
 - ZSet方案：Score存执行时间，Lua脚本保证读取+删除的原子性防重复消费
 - 百万级任务需分片并行扫，消费端必须幂等(状态机/唯一索引)，失败入死信DLQ
+frequency: high
 ---
 
 # 如何设计一个支持百万级任务的延迟队列？要求精确触发、高可用。
@@ -125,6 +126,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

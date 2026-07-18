@@ -30,6 +30,7 @@ memory_points:
 - 强同步防数据冲突：任务、产物、权限等核心状态必须立即广播至所有窗口保证强一致。
 - 不同步防互相干扰：滚动位置、输入框草稿等窗口本地状态绝对不跨窗口同步。
 - 并发编辑冲突解决：引入编辑锁机制，持有锁的窗口才能编辑，并设置超时自动释放防死锁。
+frequency: low
 ---
 
 # 【月之暗面面经】如果桌面端支持多窗口协作，前端怎么避免不同窗口状态打架？
@@ -290,6 +291,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -30,6 +30,7 @@ memory_points:
 - 推荐原生Function Calling：大模型原生输出结构化JSON，参数提取稳定可靠
 - 对比Prompt硬解：对于不支持FC的旧模型，只能通过提示词约束并正则强行解析输出
 - 面试一句话：Tool Use本质是赋予了LLM调用外部API与动态获取实时数据的能力
+frequency: high
 ---
 
 # LLM 工具调用（Tool Use）机制是什么？如何实践？
@@ -274,6 +275,7 @@ flowchart TD
     style EXEC fill:#FF9800,color:#fff
     style FALL fill:#F44336,color:#fff
     style HITL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

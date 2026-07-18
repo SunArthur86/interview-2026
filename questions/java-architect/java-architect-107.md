@@ -9,9 +9,13 @@ tags:
 - 对象头
 - 内存优化
 feynman:
-  essence: Compact Object Headers（JEP 519，JDK 25 GA）把 Java 对象头从 12 字节（64 位 + 压缩指针）压到 8 字节——把标记字（mark word）和类指针（klass pointer）合并成一个 64 位字。一个 16 字节的 Java 对象（8 头 + 2 字段 + 6 对齐）压到 8 字节，整个堆内存占用降 10-20%，对缓存友好的现代 CPU 是显著性能提升。
-  analogy: 像快递面单：原来每件货有"发货单 + 物流单 + 标签"三张纸（12 字节头），Compact Object Headers 把它们合并成一张"二维码面单"（8 字节头），信息没丢但占地少。一卡车 100 万件货，省下的纸钱够再装 20 万件。
-  first_principle: JVM 对象头是每个对象都付的"固定税"——小对象（如 Integer、Point）字段才几字节，头却占 12 字节，比例失衡。压缩对象头让"头占比"从 60% 降到 30%，整个堆密度提升，缓存命中率上升，GC 扫描更少内存。
+  essence: Compact Object Headers（JEP 519，JDK 25 GA）把 Java 对象头从 12 字节（64 位 + 压缩指针）压到
+    8 字节——把标记字（mark word）和类指针（klass pointer）合并成一个 64 位字。一个 16 字节的 Java 对象（8 头 + 2
+    字段 + 6 对齐）压到 8 字节，整个堆内存占用降 10-20%，对缓存友好的现代 CPU 是显著性能提升。
+  analogy: 像快递面单：原来每件货有"发货单 + 物流单 + 标签"三张纸（12 字节头），Compact Object Headers 把它们合并成一张"二维码面单"（8
+    字节头），信息没丢但占地少。一卡车 100 万件货，省下的纸钱够再装 20 万件。
+  first_principle: JVM 对象头是每个对象都付的"固定税"——小对象（如 Integer、Point）字段才几字节，头却占 12 字节，比例失衡。压缩对象头让"头占比"从
+    60% 降到 30%，整个堆密度提升，缓存命中率上升，GC 扫描更少内存。
   key_points:
   - Compact Object Headers（JEP 519，JDK 25 GA）：12B → 8B
   - 合并 mark word + klass pointer 为一个 64 位字
@@ -24,20 +28,25 @@ first_principle:
   - 64 位 JVM 的 mark word 是 64 位（存 hash/lock/GC 分代）
   - klass pointer 默认 64 位，开启压缩指针（CompressedOops）后 32 位
   - mark word 大部分字段（hash/lock/age）实际占用的位数远少于 64 位
-  rebuild: 把 mark word 和 klass pointer 合并到一个 64 位字里——mark word 留 22 位（hash 22 位足够）、klass 留 42 位（支持 4TB 堆）、保留 1 位标志。通过把 lock 状态外移到 ObjectMonitor（按需创建）和分代标记外移到 forward pointer，让 mark word 大幅瘦身。结果是对象头从 12 字节（mark + 压缩 klass）降到 8 字节。
+  rebuild: 把 mark word 和 klass pointer 合并到一个 64 位字里——mark word 留 22 位（hash 22 位足够）、klass
+    留 42 位（支持 4TB 堆）、保留 1 位标志。通过把 lock 状态外移到 ObjectMonitor（按需创建）和分代标记外移到 forward pointer，让
+    mark word 大幅瘦身。结果是对象头从 12 字节（mark + 压缩 klass）降到 8 字节。
 follow_up:
-  - JDK 25 之前怎么优化对象头？——压缩指针（CompressedOops，JDK 默认开），klass pointer 从 64 位压到 32 位。JDK 25 的 Compact Object Headers 是把 mark + klass 合并，进一步压缩
-  - 对哪些对象收益最大？——小对象（Integer、Point、Money 这种字段少的）。大对象（如 byte[]）头占比本来就低，收益小
-  - 性能提升多少？——堆内存降 10-20%（取决于对象大小分布），GC 扫描时间相应下降，CPU 缓存命中率提升带来的应用加速 5-10%
-  - 启用方式？——JDK 25 默认开启 -XX:+UseCompactObjectHeaders（JEP 519）。JDK 24 是预览（需显式开 -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders）
-  - 有什么风险？——锁状态外移到 ObjectMonitor 有微弱开销（首次锁竞争时创建 monitor），但现代 JIT + 偏向锁已废弃（JDK 15+）后影响可忽略
+- JDK 25 之前怎么优化对象头？——压缩指针（CompressedOops，JDK 默认开），klass pointer 从 64 位压到 32 位。JDK
+  25 的 Compact Object Headers 是把 mark + klass 合并，进一步压缩
+- 对哪些对象收益最大？——小对象（Integer、Point、Money 这种字段少的）。大对象（如 byte[]）头占比本来就低，收益小
+- 性能提升多少？——堆内存降 10-20%（取决于对象大小分布），GC 扫描时间相应下降，CPU 缓存命中率提升带来的应用加速 5-10%
+- 启用方式？——JDK 25 默认开启 -XX:+UseCompactObjectHeaders（JEP 519）。JDK 24 是预览（需显式开 -XX:+UnlockExperimentalVMOptions
+  -XX:+UseCompactObjectHeaders）
+- 有什么风险？——锁状态外移到 ObjectMonitor 有微弱开销（首次锁竞争时创建 monitor），但现代 JIT + 偏向锁已废弃（JDK 15+）后影响可忽略
 memory_points:
-  - Compact Object Headers（JEP 519，JDK 25 GA）：12B → 8B
-  - 合并 mark word + klass pointer 为 64 位单字
-  - 整堆内存降 10-20%，小对象场景降 30%
-  - 启用：-XX:+UseCompactObjectHeaders（JDK 25 默认开）
-  - 锁状态外移到 ObjectMonitor，偏向锁已废弃（JDK 15+）
-  - 缓存命中率提升带来的应用加速 5-10%
+- Compact Object Headers（JEP 519，JDK 25 GA）：12B → 8B
+- 合并 mark word + klass pointer 为 64 位单字
+- 整堆内存降 10-20%，小对象场景降 30%
+- 启用：-XX:+UseCompactObjectHeaders（JDK 25 默认开）
+- 锁状态外移到 ObjectMonitor，偏向锁已废弃（JDK 15+）
+- 缓存命中率提升带来的应用加速 5-10%
+frequency: high
 ---
 
 # 【Java 后端架构师】JDK 25 Compact Object Headers 对内存优化的意义
@@ -393,6 +402,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

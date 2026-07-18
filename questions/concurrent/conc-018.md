@@ -17,6 +17,7 @@ memory_points:
 - 触发时机：轻量级锁自旋失败或竞争激烈时，膨胀为重量级锁
 - 核心结构：_owner 持锁，_cxq 存抢锁失败者，_WaitSet 存 wait 等待者
 - 适用场景：高并发且临界区长的场景，此时阻塞挂起比空转自旋更划算
+frequency: high
 ---
 
 # 什么是重量级锁（Heavyweight Lock）？
@@ -131,6 +132,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

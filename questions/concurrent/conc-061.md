@@ -15,6 +15,7 @@ memory_points:
 - 高并发三板斧：纯内存操作 + IO多路复用(epoll) + 高效数据结构。
 - 版本演进：6.0 引入多线程仅处理网络读写，命令执行依然单线程以保原子性。
 - 致命避坑：单线程怕阻塞，生产环境严禁使用 KEYS * 等时间复杂度 O(N) 的命令。
+frequency: high
 ---
 
 # redis是单线程的吗？那如何支持高并发是什么？
@@ -110,6 +111,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

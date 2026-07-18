@@ -29,6 +29,7 @@ memory_points:
 - 缓存策略：Prefix Cache复用系统Prompt，KV Cache共享，减少重复计算。
 - 容量规划：70B模型需4卡A100，支持50-100并发，吞吐约2000 tokens/s。
 - 高可用：API网关统一鉴权，GPU感知调度，动态扩缩容防OOM。
+frequency: high
 ---
 
 # 如何设计一个高并发的LLM模型推理服务？支持1000+QPS、流式输出、多模型管理。
@@ -96,6 +97,34 @@ outputs = llm.generate(prompts, sampling_params)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Batch start
+    class Batching process
+    class Cache decision
+    class Client special
+    class Continuous error
+    class Decoding info
+    class Direct start
+    class FP16 process
+    class Gateway decision
+    class INT4 special
+    class LB error
+    class Model info
+    class Opt start
+    class PagedAttention process
+    class Prefix decision
+    class Queue special
+    class Spec error
+    class Speculative info
+    class Stream start
+    class Streaming process
+    class Tokens decision
+    class vLLM special
     Client[客户端请求] --> Gateway[API网关与统一鉴权]
     Gateway --> LB[GPU感知负载均衡调度]
 

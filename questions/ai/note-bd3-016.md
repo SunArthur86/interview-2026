@@ -29,6 +29,7 @@ memory_points:
 - 破局循环：维护历史动作哈希，拦截完全相同的失败重试请求
 - 容错降级：连续失败3次立即熔断，转向更换备用工具或人工接管
 - Prompt优化：将失败次数明确注入上下文，迫使LLM改变解题思路
+frequency: high
 ---
 
 # Agent经常出现循环调用工具无法停止的问题，你会采取哪些解决方案？连续失败三次应如何处理？
@@ -335,6 +336,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

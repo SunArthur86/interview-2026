@@ -32,6 +32,7 @@ memory_points:
 - 并发差异：1.7扩容头插易致链表成环死循环，1.8改尾插解决了死循环但仍有数据覆盖
 - 高效扩容：1.8不需要重算hash，仅判断hash&(oldCap)==0，结果0留原位，非0变原位+旧容量
 follow_up: []
+frequency: high
 ---
 
 # HashMap的JDK7和JDK8有什么区别？
@@ -118,6 +119,39 @@ final V putVal(int hash, K key, V value) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class HashMap decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class Node special
+    class O error
+    class Rehash info
+    class Value start
+    class br process
+    class equals decision
+    class hash special
+    class hashCode error
+    class key info
+    class log start
+    class n process
+    class oldCap decision
     A[HashMap 键值对存取] --> B[计算 key 的 hashCode]
     B --> C[扰动函数 hash]
     C --> D["定位桶索引 (n-1) & hash"]

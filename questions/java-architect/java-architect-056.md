@@ -9,9 +9,14 @@ tags:
 - 超卖
 - 预占
 feynman:
-  essence: 库存扣减的核心挑战是"高并发下的超卖防控"——100 个人抢 10 件商品，必须保证只卖 10 件不多卖。Redis Lua 脚本实现原子扣减（CHECK + DEC 一个脚本内完成，无竞态）。预占释放是"超时未支付的库存回收"——下单时预占库存（frozen+1），支付成功确认扣减（frozen-1, available-1），超时未支付释放（frozen-1, available 不变）。
-  analogy: 像酒店订房。available 是"空房数"，frozen 是"已预订未入住"。客人下单预订（frozen+1），入住确认（frozen-1, available-1），取消预订（frozen-1）。超卖就是"订出 11 间但只有 10 间"——客人到店没房，是严重事故。
-  first_principle: 为什么 MySQL 的 UPDATE WHERE stock>0 不够？因为高并发下多个请求同时读到 stock=1，都判断 >0 都执行 UPDATE，结果 stock 变成负数（超卖）。MySQL 的行锁可以保证串行化（SELECT FOR UPDATE），但性能差。Redis 单线程模型 + Lua 脚本保证原子性（CHECK + DEC 不可分割），性能远优于 DB 行锁。
+  essence: 库存扣减的核心挑战是"高并发下的超卖防控"——100 个人抢 10 件商品，必须保证只卖 10 件不多卖。Redis Lua 脚本实现原子扣减（CHECK
+    + DEC 一个脚本内完成，无竞态）。预占释放是"超时未支付的库存回收"——下单时预占库存（frozen+1），支付成功确认扣减（frozen-1, available-1），超时未支付释放（frozen-1,
+    available 不变）。
+  analogy: 像酒店订房。available 是"空房数"，frozen 是"已预订未入住"。客人下单预订（frozen+1），入住确认（frozen-1,
+    available-1），取消预订（frozen-1）。超卖就是"订出 11 间但只有 10 间"——客人到店没房，是严重事故。
+  first_principle: 为什么 MySQL 的 UPDATE WHERE stock>0 不够？因为高并发下多个请求同时读到 stock=1，都判断
+    >0 都执行 UPDATE，结果 stock 变成负数（超卖）。MySQL 的行锁可以保证串行化（SELECT FOR UPDATE），但性能差。Redis
+    单线程模型 + Lua 脚本保证原子性（CHECK + DEC 不可分割），性能远优于 DB 行锁。
   key_points:
   - 库存模型：available（可用）+ frozen（预占）+ sold（已售）
   - Redis Lua 原子扣减：if stock >= n then stock -= n return 1 else return 0
@@ -24,19 +29,26 @@ first_principle:
   - MySQL UPDATE WHERE stock>0 在高并发下有竞态（同时读到 stock=1 都 UPDATE）
   - Redis 单线程 + Lua 脚本保证原子性（CHECK 和 DEC 不可分割）
   - 库存有"预占"生命周期（下单预占→支付确认/超时释放），不是简单的 -1
-  rebuild: Redis Lua 原子扣减。Lua 脚本里 CHECK（stock >= n）+ DEC（stock -= n）一气呵成，Redis 单线程保证不被打断。库存模型用 available + frozen 双字段——下单时 frozen+1（预占），支付成功 frozen-1 + sold+1（确认），超时 frozen-1（释放）。DB 层加 CHECK 约束（stock >= 0）兜底，即使 Redis 异常也不会超卖。热点商品分桶库存（stock_1 到 stock_10），分散单 key 压力。
+  rebuild: Redis Lua 原子扣减。Lua 脚本里 CHECK（stock >= n）+ DEC（stock -= n）一气呵成，Redis 单线程保证不被打断。库存模型用
+    available + frozen 双字段——下单时 frozen+1（预占），支付成功 frozen-1 + sold+1（确认），超时 frozen-1（释放）。DB
+    层加 CHECK 约束（stock >= 0）兜底，即使 Redis 异常也不会超卖。热点商品分桶库存（stock_1 到 stock_10），分散单 key
+    压力。
 follow_up:
-  - Redis 和 DB 库存怎么同步？——Redis 是主（扣减在 Redis），DB 是从（异步同步）。Redis 扣减后发 MQ，消费方异步更新 DB。对账兜底（定期比对 Redis 和 DB）。
-  - 分桶库存怎么设计？——10 件库存分 5 桶（每桶 2 件），key 为 stock_skuId_1 到 stock_skuId_5。扣减时随机选桶，桶空了换下一桶。降低单 key QPS 压力。
-  - 预占超时怎么释放？——下单时记录预占时间，定时任务扫超时预占（> 30 分钟），调释放逻辑（frozen-1, available+1）。或用 Redis 的过期事件（key 带 TTL，过期触发释放）。
-  - 库存扣减失败（售罄）怎么优雅返回？——Lua 脚本返回 0（库存不足），应用层转"售罄"提示，前端展示"已抢完"。可以引导用户到"相似商品"或"下次开抢"。
-  - 分布式库存（多仓）怎么管？——每个仓独立库存（北京仓 100 + 上海仓 200），扣减时按就近原则选仓。跨仓调拨是异步流程。
+- Redis 和 DB 库存怎么同步？——Redis 是主（扣减在 Redis），DB 是从（异步同步）。Redis 扣减后发 MQ，消费方异步更新 DB。对账兜底（定期比对
+  Redis 和 DB）。
+- 分桶库存怎么设计？——10 件库存分 5 桶（每桶 2 件），key 为 stock_skuId_1 到 stock_skuId_5。扣减时随机选桶，桶空了换下一桶。降低单
+  key QPS 压力。
+- 预占超时怎么释放？——下单时记录预占时间，定时任务扫超时预占（> 30 分钟），调释放逻辑（frozen-1, available+1）。或用 Redis 的过期事件（key
+  带 TTL，过期触发释放）。
+- 库存扣减失败（售罄）怎么优雅返回？——Lua 脚本返回 0（库存不足），应用层转"售罄"提示，前端展示"已抢完"。可以引导用户到"相似商品"或"下次开抢"。
+- 分布式库存（多仓）怎么管？——每个仓独立库存（北京仓 100 + 上海仓 200），扣减时按就近原则选仓。跨仓调拨是异步流程。
 memory_points:
-  - 库存模型：available（可用）+ frozen（预占）+ sold（已售）
-  - Redis Lua 原子扣减：if stock >= n then dec else fail
-  - 预占三阶段：下单 frozen+1 → 支付确认 frozen-1/sold+1 → 超时释放 frozen-1
-  - DB CHECK 约束兜底：stock >= 0
-  - 分桶库存：热点商品分多 key 降单点压力
+- 库存模型：available（可用）+ frozen（预占）+ sold（已售）
+- Redis Lua 原子扣减：if stock >= n then dec else fail
+- 预占三阶段：下单 frozen+1 → 支付确认 frozen-1/sold+1 → 超时释放 frozen-1
+- DB CHECK 约束兜底：stock >= 0
+- 分桶库存：热点商品分多 key 降单点压力
+frequency: high
 ---
 
 # 【Java 后端架构师】库存扣减、超卖防控与预占释放
@@ -454,6 +466,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

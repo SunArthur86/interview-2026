@@ -11,9 +11,13 @@ tags:
 - 优势函数
 - baseline
 feynman:
-  essence: GRPO（Group Relative Policy Optimization）的优势值 A_i = (R_i - mean(R)) / std(R)，即"组内相对优势"——对同一 prompt 采样 G 个回答，用组内回报的均值和标准差归一化。baseline 就是组均值 mean(R)，作用是降方差（减去平均回报，让正负优势对称分布）。相比 PPO 不需要 Critic 网络（用组内统计代替 V），省一半显存。
-  analogy: 像班级排名——同一份卷子（prompt）全班（G个回答）一起考，你的分数减去班级平均分再除以标准差就是你的"相对排名优势"。不用知道"满分多少"（不需要 Critic 估绝对价值），只看你在班里相对位置。baseline 是平均分，减去它让正负分数对称。
-  first_principle: 策略梯度需要 A=Q-V 降方差。PPO 用 Critic 网络估 V（准但贵），GRPO 用组内平均回报代替 V（粗糙但免费）。baseline=mean(R) 减去它保证"比平均好的正、差的负"，是 REINFORCE 降方差技巧的组内版本。
+  essence: GRPO（Group Relative Policy Optimization）的优势值 A_i = (R_i - mean(R)) / std(R)，即"组内相对优势"——对同一
+    prompt 采样 G 个回答，用组内回报的均值和标准差归一化。baseline 就是组均值 mean(R)，作用是降方差（减去平均回报，让正负优势对称分布）。相比
+    PPO 不需要 Critic 网络（用组内统计代替 V），省一半显存。
+  analogy: 像班级排名——同一份卷子（prompt）全班（G个回答）一起考，你的分数减去班级平均分再除以标准差就是你的"相对排名优势"。不用知道"满分多少"（不需要
+    Critic 估绝对价值），只看你在班里相对位置。baseline 是平均分，减去它让正负分数对称。
+  first_principle: 策略梯度需要 A=Q-V 降方差。PPO 用 Critic 网络估 V（准但贵），GRPO 用组内平均回报代替 V（粗糙但免费）。baseline=mean(R)
+    减去它保证"比平均好的正、差的负"，是 REINFORCE 降方差技巧的组内版本。
   key_points:
   - 'GRPO 优势: A_i = (R_i - mean(R_group)) / std(R_group)'
   - baseline = 组均值 mean(R)，降方差让正负优势对称
@@ -22,7 +26,8 @@ feynman:
   - 除 std 进一步归一化，让优势尺度稳定
 first_principle:
   essence: GRPO 优势 = 组内相对排名
-  derivation: 策略梯度需 A 降方差 → PPO 用 Critic 估 V（贵）→ GRPO 用组内 mean(R) 当 V → 组内归一化得相对优势 → 省 Critic
+  derivation: 策略梯度需 A 降方差 → PPO 用 Critic 估 V（贵）→ GRPO 用组内 mean(R) 当 V → 组内归一化得相对优势
+    → 省 Critic
   conclusion: GRPO 的核心创新是用"组内统计"代替"Critic 网络"，牺牲一点精度换巨大显存节省
 follow_up:
 - GRPO 的 G（组大小）怎么选？
@@ -34,6 +39,7 @@ memory_points:
 - Baseline作用：减均值不改梯度期望，但有效降低方差
 - RLHF优势：省显存训大模型，且避免Critic难收敛问题
 - DAPO是改进版，DeepSeek-R1标志性应用
+frequency: high
 ---
 
 # 【阶跃星辰/字节面经】GRPO 里的优势值是什么？怎么计算？baseline 起什么作用
@@ -171,6 +177,7 @@ flowchart TD
 
     style C fill:#f9f,stroke:#333,stroke-width:2px
     style A fill:#bbf,stroke:#333,stroke-width:2px
+
 ```
 
 

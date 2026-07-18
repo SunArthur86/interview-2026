@@ -36,6 +36,7 @@ memory_points:
 - 建立项目圣经bible.md：精炼核心设定、大纲与规则，每次完整带入
 - 按需加载(RAG)：每次开新会话只带入(圣经+近3章摘要+涉及角色卡)
 - 全局一致性检查：交给无状态的Subagent分章节异步扫描
+frequency: medium
 ---
 
 # 用AI辅助写一本书，内容很长容易超过上下文长度，你怎么处理？
@@ -242,6 +243,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -32,6 +32,7 @@ memory_points:
 - 数据流：FC是Query→API→JSON→LLM；RAG是Query→向量检索→Context→LLM
 - RAG关键：Embedding转向量，向量库做语义检索，非关键词匹配
 - 实战：静态知识(公积金)用RAG，个性化鉴权数据(年假)必须用FC
+frequency: high
 ---
 
 # 【字节面经】Function Calling与RAG的区别和联系是什么？什么时候用Function Calling，什么时候用RAG？
@@ -137,6 +138,7 @@ flowchart LR
     style FEW fill:#2196F3,color:#fff
     style COT fill:#4CAF50,color:#fff
     style GUARD fill:#f44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -22,6 +22,7 @@ memory_points:
 - 加密解密：公钥(e,n)加密为C=M^e mod n，私钥(d,n)解密为M=C^d mod n。
 - 易混对比：加密用公钥保证机密性，而签名用私钥保证不可抵赖性。
 - 实战避坑：禁用默认填充，必须用OAEP防重放，相同明文每次密文不同。
+frequency: low
 ---
 
 # RSA非对称加密算法的原理是什么？
@@ -138,6 +139,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

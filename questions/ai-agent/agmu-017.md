@@ -18,6 +18,7 @@ memory_points:
 - 评估分层进行：单元测单 Agent，集成测交互，E2E 测任务成功率。
 - 配合 LLM-as-a-judge 和 Golden Set，防偏见。
 - Tracing 可视化全链路，定位 Token 消耗与中间状态。
+frequency: high
 ---
 
 # 多 Agent 的评估怎么做
@@ -157,6 +158,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

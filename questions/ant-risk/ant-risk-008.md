@@ -13,7 +13,8 @@ tags:
 feynman:
   essence: InnoDB 用 B+ 树索引，主键索引和数据一体（聚簇），二级索引存主键值（需回表）；最左前缀匹配、覆盖索引、避免回表是优化的核心。
   analogy: B+ 树像一本按拼音排序的字典：根节点是字母大分类（A/B/C...），中间节点是声母/韵母，叶子节点是词条定义。叶子间用链表连，方便范围扫。
-  first_principle: 磁盘 IO 是数据库性能瓶颈，B+ 树把"数据有序 + 矮胖（多路）+ 叶子链表"组合，让单次查询 IO 次数 = 树高 ≈ log(1000,n)，亿级数据也只要 3-4 次 IO。
+  first_principle: 磁盘 IO 是数据库性能瓶颈，B+ 树把"数据有序 + 矮胖（多路）+ 叶子链表"组合，让单次查询 IO 次数 = 树高 ≈
+    log(1000,n)，亿级数据也只要 3-4 次 IO。
   key_points:
   - InnoDB 聚簇索引：叶子存整行；二级索引叶子存主键
   - B+ 树：非叶子只存索引（多路）、叶子存数据、叶子双向链表
@@ -26,7 +27,8 @@ first_principle:
   - 磁盘 IO 是瓶颈（毫秒级，比内存纳秒级慢 1 万倍）
   - 单次 IO 能读一页（16KB），树越矮 IO 越少
   - 有序数据支持范围查询
-  rebuild: 用 B+ 树——非叶子只存 key（一页能放更多 key，扇出大、树矮）；叶子存数据并双向链表（范围扫 O(1) 下一节点）。聚簇索引让数据按主键有序存储，点查和范围查都只需 log(n) 次 IO。
+  rebuild: 用 B+ 树——非叶子只存 key（一页能放更多 key，扇出大、树矮）；叶子存数据并双向链表（范围扫 O(1) 下一节点）。聚簇索引让数据按主键有序存储，点查和范围查都只需
+    log(n) 次 IO。
 follow_up:
 - 为什么 MySQL 用 B+ 树不用 B 树或红黑树？——B+ 树非叶子不存数据扇出更大（矮），红黑树是二叉树亿级数据树高 30+ 次 IO
 - 联合索引 (a,b,c) 哪些查询用不到？——WHERE b=1（跳过 a）、WHERE a=1 AND c=1（中间断）
@@ -36,6 +38,7 @@ memory_points:
 - B+ 树：非叶子只存 key（多路矮胖），叶子存数据 + 双向链表
 - 最左前缀匹配 + 全值匹配 + 范围之后失效
 - EXPLAIN 三看：type（ref/range 优于 ALL）、rows（扫描行数）、Extra（Using index 最佳）
+frequency: high
 ---
 
 # 【蚂蚁风控】MySQL 索引底层是什么？联合索引最左前缀怎么生效？EXPLAIN 怎么看？
@@ -338,6 +341,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

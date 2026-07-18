@@ -9,9 +9,11 @@ tags:
 - 降级
 - 成本
 feynman:
-  essence: 模型服务网关 = LLM 版的 API Gateway，核心职责是统一接入（多模型多供应商）、流量治理（限流/熔断/降级）、成本控制（token 预算/模型路由/缓存）、可观测（延迟/成本/质量指标）。降级的关键不是"换个模型"，而是换模型后质量是否可接受（quality SLO）。
+  essence: 模型服务网关 = LLM 版的 API Gateway，核心职责是统一接入（多模型多供应商）、流量治理（限流/熔断/降级）、成本控制（token
+    预算/模型路由/缓存）、可观测（延迟/成本/质量指标）。降级的关键不是"换个模型"，而是换模型后质量是否可接受（quality SLO）。
   analogy: 像一个多语种翻译调度台——有贵的金牌翻译（GPT-4）、便宜的新手翻译（小模型）、离线备用的翻译机（规则引擎）。调度员根据任务难度、紧急程度、当日预算，把请求分发给合适的人，谁请假了（供应商宕机）立刻换人，月底还要算总账不超预算。
-  first_principle: 单一模型供应商 = 单点故障（OpenAI 曾多次宕机）、单一成本结构（无议价空间）、单一能力上限。引入多供应商 + 网关后，可在供应商级故障时降级、在成本压力下路由到便宜模型、在质量要求下路由到强模型。但引入新复杂度：模型能力差异（A 的 GPT-4 和 B 的 GPT-4 输出质量不同）、token 计费方式不同、SLA 不同。网关的核心价值就是用统一抽象屏蔽这些差异。
+  first_principle: 单一模型供应商 = 单点故障（OpenAI 曾多次宕机）、单一成本结构（无议价空间）、单一能力上限。引入多供应商 + 网关后，可在供应商级故障时降级、在成本压力下路由到便宜模型、在质量要求下路由到强模型。但引入新复杂度：模型能力差异（A
+    的 GPT-4 和 B 的 GPT-4 输出质量不同）、token 计费方式不同、SLA 不同。网关的核心价值就是用统一抽象屏蔽这些差异。
   key_points:
   - 多供应商统一抽象：OpenAI/Anthropic/通义/自部署 统一 ChatClient 接口，配置化切换
   - 降级链：主模型（贵强）→ 备模型（便宜次）→ 规则引擎（确定性兜底），按 RT/错误率/预算触发
@@ -26,19 +28,25 @@ first_principle:
   - 强模型（GPT-4）和弱模型（GPT-4o-mini）成本差 10-30 倍，全用强模型账单失控
   - 降级不是无代价：弱模型质量更差，必须监控质量指标决定降级是否可接受
   - 成本和质量是跷跷板：网关的职责是在两者间找到当前最优解
-  rebuild: 建模型服务网关层——统一抽象多供应商（LiteLLM/Spring AI 多 ChatModel），按 SLA/成本/质量三维路由（主→备→规则引擎降级链），token 预算和语义缓存控成本，质量监控（task_accuracy）做降级回切的闭环。网关本身走 Java 服务的全部稳定性实践（限流、熔断、隔离、灰度）。
+  rebuild: 建模型服务网关层——统一抽象多供应商（LiteLLM/Spring AI 多 ChatModel），按 SLA/成本/质量三维路由（主→备→规则引擎降级链），token
+    预算和语义缓存控成本，质量监控（task_accuracy）做降级回切的闭环。网关本身走 Java 服务的全部稳定性实践（限流、熔断、隔离、灰度）。
 follow_up:
-  - 多供应商怎么保证输出一致？——不可能完全一致（同 prompt 不同模型输出不同）。工程上：对结构化输出用 JSON Schema 强制约束降低差异；对自由文本输出做 A/B 看用户满意度差异；关键场景锁定单一供应商不降级。
-  - 语义缓存命中率多少正常？——FAQ 类场景 30-50%（相似问题多），对话类场景 5-10%（每次上下文不同）。缓存用 embedding 相似度（> 0.95 视为命中），TTL 按 prompt 类型设。
-  - 模型路由怎么实现？——规则路由（按 task_type 字段）最简单；LLM 路由（用 cheap 模型先分类再决定走哪个模型）更智能但多一次调用。生产先用规则，有数据后再上 LLM 路由。
-  - token 预算超了怎么办？——三级响应：警告（80% 提醒）、限流（95% 对非核心请求拒绝）、熔断（100% 只保留核心请求走便宜模型）。预算按租户/天/月分维度设。
-  - 怎么验证降级后质量可接受？——上线前离线 eval（弱模型在评测集上 task_accuracy 是否达阈值）；上线后 A/B（5% 流量降级，对比 user_feedback_score 和业务转化率），质量跌就回切。
+- 多供应商怎么保证输出一致？——不可能完全一致（同 prompt 不同模型输出不同）。工程上：对结构化输出用 JSON Schema 强制约束降低差异；对自由文本输出做
+  A/B 看用户满意度差异；关键场景锁定单一供应商不降级。
+- 语义缓存命中率多少正常？——FAQ 类场景 30-50%（相似问题多），对话类场景 5-10%（每次上下文不同）。缓存用 embedding 相似度（> 0.95
+  视为命中），TTL 按 prompt 类型设。
+- 模型路由怎么实现？——规则路由（按 task_type 字段）最简单；LLM 路由（用 cheap 模型先分类再决定走哪个模型）更智能但多一次调用。生产先用规则，有数据后再上
+  LLM 路由。
+- token 预算超了怎么办？——三级响应：警告（80% 提醒）、限流（95% 对非核心请求拒绝）、熔断（100% 只保留核心请求走便宜模型）。预算按租户/天/月分维度设。
+- 怎么验证降级后质量可接受？——上线前离线 eval（弱模型在评测集上 task_accuracy 是否达阈值）；上线后 A/B（5% 流量降级，对比 user_feedback_score
+  和业务转化率），质量跌就回切。
 memory_points:
-  - 网关四职责：统一接入、流量治理、成本控制、可观测
-  - 降级链：主模型 → 备模型 → 规则引擎，按 RT/错误率/预算触发
-  - 成本三件套：模型路由（省最多）、token 预算（防失控）、语义缓存（省重复）
-  - 质量护栏：降级必监控 task_accuracy，跌破阈值自动回切
-  - 供应商级高可用：多供应商 + 自动 failover，单家宕机无感切换
+- 网关四职责：统一接入、流量治理、成本控制、可观测
+- 降级链：主模型 → 备模型 → 规则引擎，按 RT/错误率/预算触发
+- 成本三件套：模型路由（省最多）、token 预算（防失控）、语义缓存（省重复）
+- 质量护栏：降级必监控 task_accuracy，跌破阈值自动回切
+- 供应商级高可用：多供应商 + 自动 failover，单家宕机无感切换
+frequency: high
 ---
 
 # 【Java 后端架构师】模型服务网关、降级与成本控制
@@ -49,6 +57,27 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class Access process
+    class Biz decision
+    class ChatClient special
+    class Cost error
+    class Flow info
+    class Gateway start
+    class Llama process
+    class Model decision
+    class Obs special
+    class OpenAI error
+    class Qwen info
+    class Self start
+    class br process
+    class traceId decision
     Biz["业务系统（客服 / 搜索 / 推荐 / 内容生成）"]
     Biz -->|"统一 ChatClient 接口"| Gateway
     subgraph Gateway["模型服务网关（Model Gateway）"]

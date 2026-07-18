@@ -16,6 +16,7 @@ memory_points:
 - UTF-8特性：变长存储，英文1字节，中文常用3字节，Emoji占4字节
 - 乱码根源：编码与解码使用的字符集规则不一致导致映射错误
 - 实战避坑：MySQL旧版utf8仅支持3字节，存Emoji必须用utf8mb4
+frequency: low
 ---
 
 # 什么是字符编码？
@@ -75,6 +76,36 @@ try (BufferedReader reader = new BufferedReader(
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ASCII process
+    class B decision
+    class Byte special
+    class C error
+    class Char info
+    class D start
+    class Decode process
+    class E decision
+    class Encode special
+    class F error
+    class G info
+    class GBK start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
+    class UTF special
+    class Unicode error
+    class br info
     A[字符编码流程] --> B[字符 Char Unicode]
     B --> C[编码 Encode]
     C --> D[字节 Byte<br/>UTF-8/GBK]

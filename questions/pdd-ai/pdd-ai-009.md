@@ -26,14 +26,15 @@ first_principle:
   - 流程要可视化和可重跑
   rebuild: 工作流引擎（DAG 建模 + 调度器 + 执行器 + 状态机 + 监控）。
 follow_up:
-  - Airflow 和 DolphinScheduler 区别？——Airflow Python DAG 重代码，DS 可视化更易用
-  - 任务依赖怎么定义？——DAG 中 set_downstream/set_upstream，引擎拓扑排序调度
-  - 怎么保证不重复执行？——幂等 + 任务实例 ID（run_id + task_id + try_number）
+- Airflow 和 DolphinScheduler 区别？——Airflow Python DAG 重代码，DS 可视化更易用
+- 任务依赖怎么定义？——DAG 中 set_downstream/set_upstream，引擎拓扑排序调度
+- 怎么保证不重复执行？——幂等 + 任务实例 ID（run_id + task_id + try_number）
 memory_points:
-  - DAG：任务+依赖
-  - 调度：时间/事件/上游
-  - 容错：重试/超时/旁路
-  - 选型：Airflow/DS/Temporal
+- DAG：任务+依赖
+- 调度：时间/事件/上游
+- 容错：重试/超时/旁路
+- 选型：Airflow/DS/Temporal
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】工作流引擎怎么选？DAG 调度怎么做？
@@ -325,6 +326,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

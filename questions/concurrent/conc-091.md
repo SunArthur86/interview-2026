@@ -17,6 +17,7 @@ memory_points:
 - Map对比：CHM(JDK8)用CAS+ synchronized锁桶节点，ConcurrentSkipListMap基于跳表实现并发排序。
 - List选型：CopyOnWriteArrayList写时复制，读极快，仅适用于读多写少的场景。
 - 阻塞对比：BlockingQueue依赖ReentrantLock+Condition适合生产消费模型，ConcurrentLinkedQueue用CAS实现非阻塞。
+frequency: high
 ---
 
 # 什么是并发容器分类？
@@ -132,6 +133,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

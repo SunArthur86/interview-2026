@@ -16,6 +16,7 @@ memory_points:
 - 致命风险：因为用无界队列，所以任务堆积会导致OOM
 - 核心源码：实际调用了ThreadPoolExecutor，keepAliveTime为0
 - 生产建议：弃用该内置池，改用有界队列配合拒绝策略
+frequency: high
 ---
 
 # newFixedThreadPool是什么？
@@ -108,6 +109,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

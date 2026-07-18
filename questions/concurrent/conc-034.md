@@ -16,6 +16,7 @@ memory_points:
 - 抛异常 vs 返特殊值：add/remove 遇满空抛异常，而 offer/poll 返 false/null
 - 阻塞 vs 超时：put/take 死等到底，而 offer(e,time) 限时等待防死锁
 - 实战避坑：第三方回调慎用 put 阻塞，推荐用 offer(timeout) 防止超时重试
+frequency: high
 ---
 
 # 什么是阻塞队列的主要方法？
@@ -115,6 +116,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

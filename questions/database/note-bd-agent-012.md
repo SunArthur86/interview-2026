@@ -30,6 +30,7 @@ memory_points:
 - 隔离级别递进：读未提交<读已提交(RC)<可重复读(RR)<串行化。InnoDB默认RR级别
 - 防脏读：提升至RC级别即可（基于MVCC每次SELECT生成新Read View）
 - 防幻读：RR级别下，快照读靠MVCC解决，当前读靠Next-Key Lock（记录锁+间隙锁）解决
+frequency: high
 ---
 
 # MySQL里脏读和幻读分别是什么？数据库怎么避免？
@@ -192,6 +193,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

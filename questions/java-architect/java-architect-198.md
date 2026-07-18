@@ -9,9 +9,13 @@ tags:
 - 团队
 - 质量
 feynman:
-  essence: 架构师带团队做 Code Review 不是"挑错"，而是"传递标准 + 知识共享 + 风险把关"。高质量 CR 的核心是：(1) 有一份团队共识的 PR checklist（不是 reviewer 个人偏好）；(2) 区分 must-fix（阻塞合并）和 nice-to-have（建议）；(3) review 评论要"对事不对人+给方案"（不是"这写得烂"，而是"这里用 Stream 更清晰，示例：xxx"）；(4) 自动化检查（Lint/单测/ArchUnit）能挡的不占用人脑。
-  analogy: 像编辑改稿——好编辑不是标红所有"我觉得不好的地方"（那是个人偏好），而是对照"出版标准"（事实准确/逻辑清晰/语言规范）改，且给作者解释为什么改。Code Review 的 reviewer 就是代码的编辑。
-  first_principle: Code Review 的第一性是"用集体视角降低单点失误 + 沉淀团队标准"。一个人写的代码有盲点（自己看不到的 bug/安全漏洞/性能坑），多人 review 提供视角互补。但 review 要有效，必须有"客观标准"（checklist/Lint/测试），否则变成 reviewer 主观审美争论。
+  essence: 架构师带团队做 Code Review 不是"挑错"，而是"传递标准 + 知识共享 + 风险把关"。高质量 CR 的核心是：(1) 有一份团队共识的
+    PR checklist（不是 reviewer 个人偏好）；(2) 区分 must-fix（阻塞合并）和 nice-to-have（建议）；(3) review
+    评论要"对事不对人+给方案"（不是"这写得烂"，而是"这里用 Stream 更清晰，示例：xxx"）；(4) 自动化检查（Lint/单测/ArchUnit）能挡的不占用人脑。
+  analogy: 像编辑改稿——好编辑不是标红所有"我觉得不好的地方"（那是个人偏好），而是对照"出版标准"（事实准确/逻辑清晰/语言规范）改，且给作者解释为什么改。Code
+    Review 的 reviewer 就是代码的编辑。
+  first_principle: Code Review 的第一性是"用集体视角降低单点失误 + 沉淀团队标准"。一个人写的代码有盲点（自己看不到的 bug/安全漏洞/性能坑），多人
+    review 提供视角互补。但 review 要有效，必须有"客观标准"（checklist/Lint/测试），否则变成 reviewer 主观审美争论。
   key_points:
   - PR checklist：团队共识的检查清单，不是 reviewer 个人偏好
   - must-fix vs nice-to-have：阻塞合并 vs 建议改进，分清优先级
@@ -25,19 +29,22 @@ first_principle:
   - 没有客观标准的 review = 个人审美争论（无意义的辩论）
   - 自动化能挡的（格式/命名/单测覆盖）不占用人脑
   - review 评论方式决定团队文化（攻击式 = 没人敢提交代码）
-  rebuild: 三层防线。第一层自动化：CI 跑 Lint（Checkstyle/SpotBugs）、单测（覆盖率门禁）、ArchUnit（架构边界），这些挡掉 80% 机械问题。第二层 PR checklist：团队共识的检查清单（业务正确性/安全性/性能/异常处理），reviewer 按 checklist 而非个人偏好。第三层人工 review：聚焦自动化挡不了的（业务逻辑、设计权衡、边界场景），评论用"指出问题 + 给方案"格式，区分 must-fix 和 nice-to-have。
+  rebuild: 三层防线。第一层自动化：CI 跑 Lint（Checkstyle/SpotBugs）、单测（覆盖率门禁）、ArchUnit（架构边界），这些挡掉
+    80% 机械问题。第二层 PR checklist：团队共识的检查清单（业务正确性/安全性/性能/异常处理），reviewer 按 checklist 而非个人偏好。第三层人工
+    review：聚焦自动化挡不了的（业务逻辑、设计权衡、边界场景），评论用"指出问题 + 给方案"格式，区分 must-fix 和 nice-to-have。
 follow_up:
-  - PR 多大合适？——单 PR < 400 行改动（研究显示超 400 行 review 缺陷率上升）。大改动拆小 PR
-  - review 多久完成？——24 小时内首次响应，否则阻塞开发节奏。review 时间盒单 PR < 1 小时
-  - must-fix 和 nice-to-have 怎么分？——must-fix：bug/安全/性能/破坏兼容；nice-to-have：命名/重构/优化。后者不阻塞合并
-  - review 评论冲突怎么办？——技术分歧用数据/POC 解决，不在 PR 里辩论。升级到技术负责人决策
-  - review 应该看什么？——(1) 业务正确性；(2) 安全性；(3) 性能；(4) 异常处理；(5) 测试覆盖。不看：格式（Lint 管）、个人风格
+- PR 多大合适？——单 PR < 400 行改动（研究显示超 400 行 review 缺陷率上升）。大改动拆小 PR
+- review 多久完成？——24 小时内首次响应，否则阻塞开发节奏。review 时间盒单 PR < 1 小时
+- must-fix 和 nice-to-have 怎么分？——must-fix：bug/安全/性能/破坏兼容；nice-to-have：命名/重构/优化。后者不阻塞合并
+- review 评论冲突怎么办？——技术分歧用数据/POC 解决，不在 PR 里辩论。升级到技术负责人决策
+- review 应该看什么？——(1) 业务正确性；(2) 安全性；(3) 性能；(4) 异常处理；(5) 测试覆盖。不看：格式（Lint 管）、个人风格
 memory_points:
-  - PR checklist：团队共识，非个人偏好
-  - must-fix vs nice-to-have：阻塞 vs 建议
-  - 评论三要素：对事不对人 + 指出问题 + 给方案
-  - 自动化优先：Lint/单测/ArchUnit 挡 80% 机械问题
-  - review 时间盒：单 PR < 1 小时，24 小时内响应
+- PR checklist：团队共识，非个人偏好
+- must-fix vs nice-to-have：阻塞 vs 建议
+- 评论三要素：对事不对人 + 指出问题 + 给方案
+- 自动化优先：Lint/单测/ArchUnit 挡 80% 机械问题
+- review 时间盒：单 PR < 1 小时，24 小时内响应
+frequency: low
 ---
 
 # 【Java 后端架构师】Java 架构师如何带团队做 Code Review
@@ -479,6 +486,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

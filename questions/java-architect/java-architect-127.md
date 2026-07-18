@@ -9,9 +9,11 @@ tags:
 - CDC
 - 兼容性
 feynman:
-  essence: Consumer-Driven Contract（CDC）测试是把"接口是否符合预期"的检验权交给消费方——每个消费方写一份 Pact 契约（描述"我调用你的什么接口、给什么参数、期望什么响应"），提供方在自己的 CI 跑所有消费方的契约，任何破坏性变更当场红。本质是把"接口集成测试"从"端到端测试"降级到"单机单元测试"——速度快、可定位、可在 PR 期拦截。
+  essence: Consumer-Driven Contract（CDC）测试是把"接口是否符合预期"的检验权交给消费方——每个消费方写一份 Pact 契约（描述"我调用你的什么接口、给什么参数、期望什么响应"），提供方在自己的
+    CI 跑所有消费方的契约，任何破坏性变更当场红。本质是把"接口集成测试"从"端到端测试"降级到"单机单元测试"——速度快、可定位、可在 PR 期拦截。
   analogy: 像装修签合同：业主（消费方）写一份装修需求清单（Pact 契约），施工方（提供方）每改一个施工方案就跑一遍需求清单，任何不满足立刻返工。验收时不用真把业主喊来现场（端到端），看清单通过即可。
-  first_principle: 为什么不写端到端测试而要写 CDC？因为端到端测试要起完整环境（消费方 + 提供方 + 中间件 + 数据库），慢、贵、不稳定（flaky）、定位困难。CDC 把"消费方的预期"抽出来变成可重放的 JSON 工件，提供方单独跑，10 秒出结果，失败当场定位到字段。
+  first_principle: 为什么不写端到端测试而要写 CDC？因为端到端测试要起完整环境（消费方 + 提供方 + 中间件 + 数据库），慢、贵、不稳定（flaky）、定位困难。CDC
+    把"消费方的预期"抽出来变成可重放的 JSON 工件，提供方单独跑，10 秒出结果，失败当场定位到字段。
   key_points:
   - Pact 是 CDC 主流实现（Pact-JVM、Pact-Broker、Pact-Go）
   - 消费方写 Pact（expected request + minimal response）→ 上传 Broker
@@ -24,19 +26,24 @@ first_principle:
   - 端到端测试环境是脆弱的、慢的、跨团队的，无法在 PR 期跑
   - 提供方不知道自己有多少消费方、各自依赖哪些字段
   - 大多数集成 bug 来自隐性契约（字段语义、状态机迁移）而非语法错误
-  rebuild: 让每个消费方用 Pact 写下自己真实使用的请求和最小化响应期望，存到 Pact-Broker。提供方 PR 时拉所有契约 replay，任何一个失败就阻止合并。发布前用 can-i-deploy 检查"当前版本在 Broker 上的 verify 结果"，绿灯才能发。这套机制让"提供方不知情破坏消费方"变得不可能。
+  rebuild: 让每个消费方用 Pact 写下自己真实使用的请求和最小化响应期望，存到 Pact-Broker。提供方 PR 时拉所有契约 replay，任何一个失败就阻止合并。发布前用
+    can-i-deploy 检查"当前版本在 Broker 上的 verify 结果"，绿灯才能发。这套机制让"提供方不知情破坏消费方"变得不可能。
 follow_up:
-  - "Pact 怎么处理动态字段（时间戳、UUID）？——用 matchers（type matching 而非 value matching），如 `like(123)` 只校验是数字、`eachLike({id: like(1)})` 校验数组每项结构。"
-  - Pact 和 OpenAPI diff 有什么区别？——OpenAPI diff 是"结构兼容性"（删字段算 breaking），Pact 是"行为兼容性"（消费方实际怎么用）。两者互补：OpenAPI 治整体契约，Pact 治具体调用。
-  - 消费方不写 Pact 怎么办？——治理上把"上传 Pact"作为服务接入的强制门槛；提供方 PR 卡 can-i-deploy；从最关键的 1-2 个消费方试点扩散。
-  - 跨语言（Java 提供方、Go 消费方）能跑 Pact 吗？——能。Pact 是语言无关的 JSON 工件，Pact-JVM/Go/JS/Rust/Python 互通，统一存 Pact-Broker。
-  - Pact 能测消息驱动（Kafka）吗？——能。Pact 支持消息契约（V4 spec），消费方定义"我期望收到什么消息"，提供方跑 verifier 校验自己发的消息格式。
+- 'Pact 怎么处理动态字段（时间戳、UUID）？——用 matchers（type matching 而非 value matching），如 `like(123)`
+  只校验是数字、`eachLike({id: like(1)})` 校验数组每项结构。'
+- Pact 和 OpenAPI diff 有什么区别？——OpenAPI diff 是"结构兼容性"（删字段算 breaking），Pact 是"行为兼容性"（消费方实际怎么用）。两者互补：OpenAPI
+  治整体契约，Pact 治具体调用。
+- 消费方不写 Pact 怎么办？——治理上把"上传 Pact"作为服务接入的强制门槛；提供方 PR 卡 can-i-deploy；从最关键的 1-2 个消费方试点扩散。
+- 跨语言（Java 提供方、Go 消费方）能跑 Pact 吗？——能。Pact 是语言无关的 JSON 工件，Pact-JVM/Go/JS/Rust/Python
+  互通，统一存 Pact-Broker。
+- Pact 能测消息驱动（Kafka）吗？——能。Pact 支持消息契约（V4 spec），消费方定义"我期望收到什么消息"，提供方跑 verifier 校验自己发的消息格式。
 memory_points:
-  - CDC：契约由消费方写，提供方跑 verify
-  - Pact 三件套：Consumer test（写契约）→ Broker（存契约）→ Provider verify（跑契约）
-  - can-i-deploy：发布前查矩阵，绿灯才发
-  - matchers：用 type matching 处理动态字段，避免 flaky
-  - 与 OpenAPI 互补：OpenAPI 是接口契约，Pact 是行为契约
+- CDC：契约由消费方写，提供方跑 verify
+- Pact 三件套：Consumer test（写契约）→ Broker（存契约）→ Provider verify（跑契约）
+- can-i-deploy：发布前查矩阵，绿灯才发
+- matchers：用 type matching 处理动态字段，避免 flaky
+- 与 OpenAPI 互补：OpenAPI 是接口契约，Pact 是行为契约
+frequency: medium
 ---
 
 # 【Java 后端架构师】Consumer Driven Contract 测试如何落地
@@ -365,6 +372,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -15,6 +15,7 @@ memory_points:
 - Half-Open半开状态仅放行单请求，成功则恢复Closed，失败则重回Open熔断
 - API管理侧重设计态(文档/规范)，而API网关侧重运行态(路由/限流/熔断)
 - API管理核心方案是Swagger/OpenAPI，解决海量接口的文档协作与测试
+frequency: high
 ---
 
 # 微服务中API管理的作用和方案是什么？
@@ -117,6 +118,7 @@ flowchart TD
     style EVENTUAL fill:#9C27B0,color:#fff
     style FAIL_FAST fill:#F44336,color:#fff
     style COORD fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

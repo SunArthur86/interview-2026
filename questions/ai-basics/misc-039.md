@@ -23,6 +23,7 @@ memory_points:
 - 训练两阶段：1.特征对齐（冻ViT/LLM，训投影层） 2.指令微调（训投影+LLM）
 - 为何有效：CLIP提供高质量语义特征，LLM提供强推理，简单MLP足矣
 - 实战优势：多模态理解（如表格结构）比传统CV方案更鲁棒，代码量少
+frequency: high
 ---
 
 # LLaVA的架构是什么?它是如何将视觉信息接入LLM的
@@ -160,6 +161,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

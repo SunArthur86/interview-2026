@@ -28,6 +28,7 @@ memory_points:
 - 路由键和绑定键均按点号切分，必须由单词组成。
 - 通配符对比：*匹配恰好1个单词，而#匹配0或多个单词。
 - 一条消息可同时匹配多个队列，但同一队列只投递一次。
+frequency: medium
 ---
 
 # topic 交换器（模式匹配）是什么？
@@ -140,6 +141,53 @@ public void handleVipOrder(OrderDto order) { }
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AMQP process
+    class B decision
+    class Binding special
+    class C error
+    class Consumer info
+    class D start
+    class Direct process
+    class E decision
+    class Exchange special
+    class F error
+    class Fanout info
+    class G start
+    class H process
+    class Headers decision
+    class I special
+    class J error
+    class K info
+    class Kafka start
+    class L process
+    class M decision
+    class MQ special
+    class N error
+    class O info
+    class P start
+    class Producer process
+    class Q decision
+    class Queue special
+    class R error
+    class RabbitMQ info
+    class RocketMQ start
+    class S process
+    class T decision
+    class Topic special
+    class U error
+    class ack info
+    class br start
+    class confirm process
+    class create decision
+    class durable special
+    class user error
     A[消息中间件 AMQP 模型] --> B[Producer 生产者]
     B --> C[Exchange 交换器]
     C --> D[Queue 队列]

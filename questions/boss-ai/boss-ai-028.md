@@ -57,6 +57,7 @@ memory_points:
 - 算子编排用 DAG，有依赖有并行
 - 状态持久化才能断点恢复
 - 结果回传：回调 + 推送 + 轮询三选一或组合
+frequency: low
 ---
 
 # 【巨剧核 AI 陪伴】音视频 AI 生成工程怎么做（TTS/ASR/数字人/视频服务端编排）？
@@ -314,6 +315,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

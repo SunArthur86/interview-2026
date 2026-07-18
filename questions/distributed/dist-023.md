@@ -17,6 +17,7 @@ memory_points:
 - 核心机制：利用各拦截器在请求头注入 X-B3-TraceId 实现上下文跨服务传播。
 - 四大注解：cs(发) sr(收) 计算网络延迟，ss(处理完) cr(全结束) 记算耗时。
 - 异步避坑：跨线程池传递需用 LazyTraceExecutor 装饰，防丢失链路。
+frequency: high
 ---
 
 # Spring Cloud Sleuth如何实现分布式链路追踪？
@@ -131,6 +132,7 @@ flowchart TD
     style SPAN1 fill:#FF9800,color:#fff
     style WRAP fill:#009688,color:#fff
     style COLL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -17,6 +17,7 @@ memory_points:
 - 发送窗口限制：实际发送窗口由接收方rwnd与网络拥塞cwnd的最小值决定。
 - 四大核心算法：慢启动指数增长、避免线性增长、遇3ACK快重传与快恢复。
 - 超时惩罚重：超时认定严重拥塞，cwnd直接降为1；现代网络常换BBR算法提效。
+frequency: low
 ---
 
 # TCP的拥塞控制机制是什么？
@@ -83,6 +84,27 @@ sysctl -w net.ipv4.tcp_congestion_control=bbr
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class RTT error
+    class TCP info
+    class br start
+    class cwnd process
+    class ssthresh decision
     A[TCP 拥塞控制] --> B[cwnd 拥塞窗口]
     A --> C[ssthresh 慢启动门限]
     D[慢启动] --> E[cwnd 指数增长<br/>每 RTT 翻倍]

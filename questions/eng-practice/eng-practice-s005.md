@@ -20,6 +20,7 @@ memory_points:
 - RAG管道：离线ETL向量化入库，在线检索Rerank，流式非流式分离。
 - 观测性：监控Token用量、首字延迟(TTFT)及端到端延迟。
 - 高可用：多供应商熔断降级，避免单点故障导致服务不可用。
+frequency: low
 ---
 
 # 如何设计一个LLM应用的生产架构？
@@ -30,6 +31,38 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class Azure process
+    class CACHE decision
+    class Cache special
+    class Claude error
+    class ETL info
+    class GPT start
+    class GW process
+    class Gateway decision
+    class Judge special
+    class KV error
+    class LLM info
+    class Milvus start
+    class OBS process
+    class OSS decision
+    class Observability special
+    class PA error
+    class PB info
+    class Pinecone start
+    class RAG process
+    class Rerank decision
+    class USER special
+    class VDB error
+    class WAF info
+    class as start
+    class br process
     USER[用户/客户端]
     GW["API Gateway<br/>鉴权/限流/WAF/负载均衡"]
     LLM["LLM 服务层<br/>路由/重试"]

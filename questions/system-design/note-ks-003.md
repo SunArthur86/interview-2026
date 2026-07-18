@@ -13,8 +13,9 @@ tags:
 - 线程池
 - 面经
 feynman:
-  essence: ThreadLocal内存泄漏的根因是线程池中线程存活时间长，ThreadLocalMap中的Entry虽然WeakReference引用ThreadLocal key，但value是强引用。如果用完不remove()，Entry和value不会被回收。解决方案：每次用完必须调用remove()，用try-finally保证。
-  analogy: "ThreadLocal就像酒店房间的储物柜——每个线程(客人)有自己的柜子(ThreadLocalMap)。问题是：客人退房(ThreadLocal引用没了)但柜子里的东西(value)还在，因为酒店(线程池)不退房，柜子就一直占着空间。解决：客人离开前必须清空柜子(remove())。"
+  essence: ThreadLocal内存泄漏的根因是线程池中线程存活时间长，ThreadLocalMap中的Entry虽然WeakReference引用ThreadLocal
+    key，但value是强引用。如果用完不remove()，Entry和value不会被回收。解决方案：每次用完必须调用remove()，用try-finally保证。
+  analogy: ThreadLocal就像酒店房间的储物柜——每个线程(客人)有自己的柜子(ThreadLocalMap)。问题是：客人退房(ThreadLocal引用没了)但柜子里的东西(value)还在，因为酒店(线程池)不退房，柜子就一直占着空间。解决：客人离开前必须清空柜子(remove())。
   key_points:
   - ThreadLocalMap的Entry是WeakReference(ThreadLocal) + StrongReference(value)
   - ThreadLocal引用被回收后key变null，但value仍被Entry强引用 → 泄漏
@@ -23,7 +24,7 @@ feynman:
   - MAT显示10万个ThreadLocalEntry未回收 → 典型的线程池+ThreadLocal泄漏
 first_principle:
   essence: 内存泄漏 = 对象不再使用但无法被GC回收
-  derivation: "ThreadLocalMap.Entry的设计：key是WeakReference(ThreadLocal可以被回收)，value是StrongReference(防止value被提前回收)。当ThreadLocal外部引用断开后，key被GC回收变为null，但value仍被Entry的强引用持有。在线程池场景下，线程不死→ThreadLocalMap不清理→value永远无法回收。"
+  derivation: ThreadLocalMap.Entry的设计：key是WeakReference(ThreadLocal可以被回收)，value是StrongReference(防止value被提前回收)。当ThreadLocal外部引用断开后，key被GC回收变为null，但value仍被Entry的强引用持有。在线程池场景下，线程不死→ThreadLocalMap不清理→value永远无法回收。
   conclusion: 根因是ThreadLocal设计上value的强引用 + 线程池的长生命周期。解法：每次用完remove()
 follow_up:
 - ThreadLocal和Synchronized有什么区别？各自的适用场景？
@@ -36,6 +37,7 @@ memory_points:
 - 线程池场景下线程长生不死→ThreadLocalMap永不清理→10万个Entry泄漏
 - 铁律：ThreadLocal用完必须remove()，标准写法try{...}finally{tl.remove();}
 - ThreadLocalMap用开放寻址法(非链表法)，弱引用key+强引用value的设计是泄漏的根源
+frequency: high
 ---
 
 # 【快手Java一面】MAT显示10万个ThreadLocalEntry未回收，如何解决？
@@ -334,6 +336,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

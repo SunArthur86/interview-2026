@@ -9,9 +9,16 @@ tags:
 - 死锁
 - 事务证据链
 feynman:
-  essence: 线上频繁死锁告警时，架构师要能用 MySQL 自带的"证据链"还原死锁现场——从 SHOW ENGINE INNODB STATUS 拿最近一次死锁详情（两个事务 + 等待锁 + 持有锁 + 被回滚事务），用 performance_schema.data_lock_waits/data_locks 还原锁等待图（waiting_trx_id → blocking_trx_id），用 threads JOIN events_statements_history_long 把事务 ID 映射回具体 SQL 文本，最后定位到"哪两类 SQL 加锁顺序相反形成环"。核心不是背"死锁是互相等待"，而是能在生产环境把证据一条条串起来。
-  analogy: 像刑侦破案——死锁是案发现场（有尸体=回滚的事务），SHOW ENGINE INNODB STATUS 是现场勘查报告（谁和谁冲突），performance_schema.data_lock_waits 是监控录像（锁等待图），events_statements_history_long 是通讯记录（事务执行过哪些 SQL）。把三份证据串起来，才能锁定"凶手"（加锁顺序相反的两类业务 SQL）。
-  first_principle: MySQL InnoDB 检测到死锁会自动回滚代价较小的事务，并把死锁现场记录在 LATEST DETECTED DEADLOCK。但只看最近一次不够——频繁死锁要打开 innodb_print_all_deadlocks 收集全部，再结合 data_lock_waits/data_locks 还原锁等待图，用 events_statements_history_long 把事务映射回 SQL。证据链完整才能定位根因（加锁顺序/事务过长/索引缺失），对症修复。
+  essence: 线上频繁死锁告警时，架构师要能用 MySQL 自带的"证据链"还原死锁现场——从 SHOW ENGINE INNODB STATUS 拿最近一次死锁详情（两个事务
+    + 等待锁 + 持有锁 + 被回滚事务），用 performance_schema.data_lock_waits/data_locks 还原锁等待图（waiting_trx_id
+    → blocking_trx_id），用 threads JOIN events_statements_history_long 把事务 ID 映射回具体
+    SQL 文本，最后定位到"哪两类 SQL 加锁顺序相反形成环"。核心不是背"死锁是互相等待"，而是能在生产环境把证据一条条串起来。
+  analogy: 像刑侦破案——死锁是案发现场（有尸体=回滚的事务），SHOW ENGINE INNODB STATUS 是现场勘查报告（谁和谁冲突），performance_schema.data_lock_waits
+    是监控录像（锁等待图），events_statements_history_long 是通讯记录（事务执行过哪些 SQL）。把三份证据串起来，才能锁定"凶手"（加锁顺序相反的两类业务
+    SQL）。
+  first_principle: MySQL InnoDB 检测到死锁会自动回滚代价较小的事务，并把死锁现场记录在 LATEST DETECTED DEADLOCK。但只看最近一次不够——频繁死锁要打开
+    innodb_print_all_deadlocks 收集全部，再结合 data_lock_waits/data_locks 还原锁等待图，用 events_statements_history_long
+    把事务映射回 SQL。证据链完整才能定位根因（加锁顺序/事务过长/索引缺失），对症修复。
   key_points:
   - 第一现场：SHOW ENGINE INNODB STATUS 的 LATEST DETECTED DEADLOCK
   - 锁等待图：performance_schema.data_lock_waits JOIN data_locks
@@ -26,19 +33,25 @@ first_principle:
   - performance_schema 保留实时的锁等待和持有关系（data_lock_waits/data_locks）
   - events_statements_history_long 保留线程最近执行的 SQL 历史
   - 死锁根因是"两个事务加锁顺序相反形成环"，不是"锁本身有问题"
-  rebuild: 三步证据链。第一步拿第一现场——SHOW ENGINE INNODB STATUS\G 看 LATEST DETECTED DEADLOCK 的两个 TRANSACTION、等待锁、持有锁。第二步还原锁等待图——performance_schema.data_lock_waits JOIN data_locks，确认事务 A 等 B、B 等 A 形成环。第三步映射回 SQL——threads JOIN events_statements_history_long，定位是哪两类业务 SQL 加锁顺序相反。频繁死锁打开 innodb_print_all_deadlocks 收集全部，结合应用 traceId 定位业务链路。
+  rebuild: 三步证据链。第一步拿第一现场——SHOW ENGINE INNODB STATUS\G 看 LATEST DETECTED DEADLOCK
+    的两个 TRANSACTION、等待锁、持有锁。第二步还原锁等待图——performance_schema.data_lock_waits JOIN data_locks，确认事务
+    A 等 B、B 等 A 形成环。第三步映射回 SQL——threads JOIN events_statements_history_long，定位是哪两类业务
+    SQL 加锁顺序相反。频繁死锁打开 innodb_print_all_deadlocks 收集全部，结合应用 traceId 定位业务链路。
 follow_up:
-  - SHOW ENGINE INNODB STATUS 只保留最近一次死锁怎么办？——SET GLOBAL innodb_print_all_deadlocks = ON，从 error log 收集全部
-  - performance_schema.data_locks 是空的？——确认 MySQL 版本（5.7 用 information_schema.innodb_locks），且 performance_schema 已开启
-  - 事务 ID 映射回 SQL 查不到？——events_statements_history_long 默认只保留最近 10000 条，可能被覆盖。调大参数或案发时立即查
-  - 定位到两类 SQL 后怎么修复？——统一加锁顺序（所有链路先 A 后 B）、缩短事务、补索引避免范围锁
-  - 死锁能完全消除吗？——不能完全消除（并发必然有竞争），但要控制频率（死锁告警阈值 < 10 次/分钟），且业务侧做幂等重试
+- SHOW ENGINE INNODB STATUS 只保留最近一次死锁怎么办？——SET GLOBAL innodb_print_all_deadlocks =
+  ON，从 error log 收集全部
+- performance_schema.data_locks 是空的？——确认 MySQL 版本（5.7 用 information_schema.innodb_locks），且
+  performance_schema 已开启
+- 事务 ID 映射回 SQL 查不到？——events_statements_history_long 默认只保留最近 10000 条，可能被覆盖。调大参数或案发时立即查
+- 定位到两类 SQL 后怎么修复？——统一加锁顺序（所有链路先 A 后 B）、缩短事务、补索引避免范围锁
+- 死锁能完全消除吗？——不能完全消除（并发必然有竞争），但要控制频率（死锁告警阈值 < 10 次/分钟），且业务侧做幂等重试
 memory_points:
-  - 第一现场：SHOW ENGINE INNODB STATUS\G → LATEST DETECTED DEADLOCK
-  - 锁等待图：data_lock_waits JOIN data_locks（waiting → blocking）
-  - SQL 还原：threads JOIN events_statements_history_long
-  - 全量收集：innodb_print_all_deadlocks = ON → error log
-  - 根因修复：统一加锁顺序 / 缩短事务 / 补索引 / 队列串行化
+- 第一现场：SHOW ENGINE INNODB STATUS\G → LATEST DETECTED DEADLOCK
+- 锁等待图：data_lock_waits JOIN data_locks（waiting → blocking）
+- SQL 还原：threads JOIN events_statements_history_long
+- 全量收集：innodb_print_all_deadlocks = ON → error log
+- 根因修复：统一加锁顺序 / 缩短事务 / 补索引 / 队列串行化
+frequency: high
 ---
 
 # 【Java 后端架构师】线上频繁死锁告警：如何用 MySQL 证据链定位死锁
@@ -536,6 +549,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

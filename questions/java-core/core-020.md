@@ -23,6 +23,7 @@ memory_points:
 - 轻微拥塞(3 Dup ACK)：ssthresh减半，cwnd降为ssthresh启动快恢
 - 对比流量控制：拥塞控制防网络过载(全局)，流量防淹没接收方(端到端)
 - 超时意味着链路可能不通，而重复ACK证明网络依然有送达能力
+frequency: low
 ---
 
 # 什么是拥塞发生？
@@ -133,6 +134,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

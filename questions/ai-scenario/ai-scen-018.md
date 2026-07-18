@@ -30,6 +30,7 @@ memory_points:
 - 技术选型：ASR用Whisper/Paraformer，TTS选CosyVoice流式合成。
 - 延迟控制：边说边转，边合成边播，全链路控制在1秒内。
 - 实战难点：噪音环境用双阈值VAD，动态调整灵敏度防误触。
+frequency: medium
 ---
 
 # 如何设计一个实时语音AI助手？支持语音输入、实时对话、语音输出，延迟控制在1秒以内。
@@ -162,6 +163,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

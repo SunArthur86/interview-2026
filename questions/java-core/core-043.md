@@ -15,6 +15,7 @@ memory_points:
 - 版本默认值：HTTP/1.0默认短连接，而HTTP/1.1默认开启Keep-Alive长连接
 - 优势与代价：复用连接减少了握手延迟，但持续占用服务端文件描述符资源
 - 配置双参数：通过timeout控制空闲断开时间，通过max限制最大请求数量
+frequency: low
 ---
 
 # Keep-Alive是什么？
@@ -133,6 +134,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

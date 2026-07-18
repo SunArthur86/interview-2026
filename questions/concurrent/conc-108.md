@@ -27,6 +27,7 @@ memory_points:
 follow_up: []
 tags:
 - 并发
+frequency: high
 ---
 
 # 什么是进程线程基础？
@@ -141,6 +142,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -10,7 +10,8 @@ tags:
 - Planning
 - Memory
 feynman:
-  essence: Agent 四大核心组件——Planning(规划)把复杂任务拆成步骤，Memory(记忆)存历史上下文，Tool(工具)扩展与外部世界交互，Action(行动)执行具体操作。四者构成"感知-决策-执行"闭环：Planning 决定做什么，Tool 提供能力，Action 执行，Memory 记录反馈。LLM 是大脑，四大组件是手脚和记事本。
+  essence: Agent 四大核心组件——Planning(规划)把复杂任务拆成步骤，Memory(记忆)存历史上下文，Tool(工具)扩展与外部世界交互，Action(行动)执行具体操作。四者构成"感知-决策-执行"闭环：Planning
+    决定做什么，Tool 提供能力，Action 执行，Memory 记录反馈。LLM 是大脑，四大组件是手脚和记事本。
   analogy: 像一个厨师——Planning 是菜谱步骤（先切后炒），Memory 是尝过的味道记事本，Tool 是锅碗刀灶，Action 是真正动手切菜/开火。大脑（LLM）指挥，但没手脚（Tool/Action）做不出菜，没记事本（Memory）记不住口味偏好。
   first_principle: Agent 区别于纯 LLM 的本质是"能行动"。LLM 只能说，Agent 能做。四组件分别解决：做什么(Planning)、记得什么(Memory)、能调用什么(Tool)、怎么执行(Action)。
   key_points:
@@ -21,7 +22,8 @@ feynman:
   - 四者构成"感知-决策-执行-反馈"闭环
 first_principle:
   essence: Agent = LLM 大脑 + 四组件手脚
-  derivation: LLM 只能说不能做 → 加 Tool 扩展能力 → 加 Planning 拆解复杂任务 → 加 Memory 积累经验 → 加 Action 执行 → 形成能行动的闭环
+  derivation: LLM 只能说不能做 → 加 Tool 扩展能力 → 加 Planning 拆解复杂任务 → 加 Memory 积累经验 → 加 Action
+    执行 → 形成能行动的闭环
   conclusion: Agent 不是"更强的 LLM"，而是"LLM + 行动能力"的系统
 follow_up:
 - Planning 的四种范式（CoT/ReAct/ToT/Plan&Execute）怎么选？
@@ -33,6 +35,7 @@ memory_points:
 - 概念辨析：Tool是静态的能力清单，而Action是动态的具体执行行为
 - 核心区分：Agent是LLM动态决策（灵活），而Workflow是固定流程（确定）
 - 隐性加分项：Reflection（反思机制）是Agent自我纠错与进化的关键
+frequency: high
 ---
 
 # 【某讯面经】什么是 Agent？核心组件（Planning、Memory、Tool、Action）作用分别是什么？
@@ -201,6 +204,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

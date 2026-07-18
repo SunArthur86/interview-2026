@@ -30,6 +30,7 @@ memory_points:
 - K8s下线坑：摘除Pod是异步，因网络收敛慢，故preStop必须sleep几秒防502。
 - K8s停机：默认30秒等待期，先SIGTERM处理收尾，超时则SIGKILL强杀。
 - 热更新：通过配置中心结合@RefreshScope注解，实现Bean重建与配置刷新。
+frequency: medium
 ---
 
 # 如何设计微服务的优雅上下线和热更新方案？
@@ -164,6 +165,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

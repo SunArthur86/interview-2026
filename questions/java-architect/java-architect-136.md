@@ -9,9 +9,13 @@ tags:
 - Kafka
 - 消息
 feynman:
-  essence: Redis Stream 和 Kafka 都是"日志型消息系统"，但定位完全不同：Redis Stream 是"内存优先、单机为主、低延迟、轻量"——10 万 QPS 单实例、亚毫秒延迟、运维简单；Kafka 是"磁盘优先、分布式、高吞吐、可回溯"——百万 QPS 集群、毫秒延迟、运维复杂。Redis Stream 适合"轻量异步任务、跨实例事件、单机房消息总线"；Kafka 适合"核心业务事件流、跨系统数据管道、大数据分析"。
+  essence: Redis Stream 和 Kafka 都是"日志型消息系统"，但定位完全不同：Redis Stream 是"内存优先、单机为主、低延迟、轻量"——10
+    万 QPS 单实例、亚毫秒延迟、运维简单；Kafka 是"磁盘优先、分布式、高吞吐、可回溯"——百万 QPS 集群、毫秒延迟、运维复杂。Redis Stream
+    适合"轻量异步任务、跨实例事件、单机房消息总线"；Kafka 适合"核心业务事件流、跨系统数据管道、大数据分析"。
   analogy: Redis Stream 像公司内的"协作看板"（轻量、即时、单办公室用）；Kafka 像全国物流网络（重、可追溯历史、跨城市）。看板挂了大家等会儿；物流网络挂了全国停摆。
-  first_principle: 为什么不都用 Kafka？因为 Kafka 运维成本高（ZK/KRaft、Broker 集群、分区管理、监控），轻量场景用 Redis Stream 就够了。反过来，为什么不都用 Redis Stream？因为它持久化弱（AOF/RDB 不是为消息设计）、不支持分区水平扩展到几百个、吞吐天花板低（百万 QPS 难达）。
+  first_principle: 为什么不都用 Kafka？因为 Kafka 运维成本高（ZK/KRaft、Broker 集群、分区管理、监控），轻量场景用 Redis
+    Stream 就够了。反过来，为什么不都用 Redis Stream？因为它持久化弱（AOF/RDB 不是为消息设计）、不支持分区水平扩展到几百个、吞吐天花板低（百万
+    QPS 难达）。
   key_points:
   - Redis Stream：内存优先、单机为主、亚毫秒延迟、10 万 QPS、轻量
   - Kafka：磁盘优先、分布式、毫秒延迟、百万 QPS、可回溯
@@ -24,19 +28,26 @@ first_principle:
   - 内存比磁盘快 10 万倍，但贵 100 倍
   - 单机吞吐有物理上限（CPU/网卡），要百万 QPS 必须分布式
   - 运维复杂度随集群规模指数上升
-  rebuild: 按业务规模分层。轻量场景（< 10 万 QPS、单机房、可容忍偶发消息丢失）用 Redis Stream——运维简单（已有 Redis 复用）、延迟低、上手快。核心业务场景（百万 QPS、跨机房、零丢失、回溯）用 Kafka——多副本持久化、分区水平扩展、生态成熟。中间场景（10-50 万 QPS、强持久化）用 Pulsar 或 RocketMQ，平衡 Redis 轻量和 Kafka 重量。
+  rebuild: 按业务规模分层。轻量场景（< 10 万 QPS、单机房、可容忍偶发消息丢失）用 Redis Stream——运维简单（已有 Redis 复用）、延迟低、上手快。核心业务场景（百万
+    QPS、跨机房、零丢失、回溯）用 Kafka——多副本持久化、分区水平扩展、生态成熟。中间场景（10-50 万 QPS、强持久化）用 Pulsar 或 RocketMQ，平衡
+    Redis 轻量和 Kafka 重量。
 follow_up:
-  - Redis Stream 消息怎么持久化？——AOF（每写 fsync）+ RDB（定期快照）。AOF 性能损失大（fsync 慢），生产用 everysec 折中（最多丢 1 秒）。所以 Redis Stream 不是"零丢失"。
-  - Redis Stream 消费者组怎么管理？——XGROUP CREATE 创建组，XREADGROUP 消费，XACK 确认。pending list 记录未 ack 的消息，可 XCLAIM 转移给其他消费者处理。
-  - Kafka 单分区吞吐多少？——顺序写盘约 10-50MB/s，对应小消息约 5-10 万 QPS。100 分区理论 500-1000 万 QPS。
-  - Redis Stream 能做百万 QPS 吗？——单实例不能（10-20 万 QPS 顶），用 Redis Cluster 分片可以但运维复杂，且内存成本高（百万 QPS 一天 = TB 级内存）。所以高吞吐场景必须 Kafka。
-  - Pulsar 比 Kafka 强在哪？——计算存储分离（BookKeeper）、多租户原生、Topic 数量无上限、延迟更稳定。但生态弱于 Kafka，运维需要 BK。
+- Redis Stream 消息怎么持久化？——AOF（每写 fsync）+ RDB（定期快照）。AOF 性能损失大（fsync 慢），生产用 everysec
+  折中（最多丢 1 秒）。所以 Redis Stream 不是"零丢失"。
+- Redis Stream 消费者组怎么管理？——XGROUP CREATE 创建组，XREADGROUP 消费，XACK 确认。pending list 记录未
+  ack 的消息，可 XCLAIM 转移给其他消费者处理。
+- Kafka 单分区吞吐多少？——顺序写盘约 10-50MB/s，对应小消息约 5-10 万 QPS。100 分区理论 500-1000 万 QPS。
+- Redis Stream 能做百万 QPS 吗？——单实例不能（10-20 万 QPS 顶），用 Redis Cluster 分片可以但运维复杂，且内存成本高（百万
+  QPS 一天 = TB 级内存）。所以高吞吐场景必须 Kafka。
+- Pulsar 比 Kafka 强在哪？——计算存储分离（BookKeeper）、多租户原生、Topic 数量无上限、延迟更稳定。但生态弱于 Kafka，运维需要
+  BK。
 memory_points:
-  - Redis Stream：内存优先、单机、亚毫秒、10 万 QPS、轻量
-  - Kafka：磁盘优先、分布式、毫秒、百万 QPS、可回溯
-  - Redis Stream 持久化弱（AOF everysec 丢 1 秒），Kafka 多副本零丢失
-  - 选型：轻量异步用 Redis，核心业务流用 Kafka
-  - 消费者组：两者都有，Kafka 的更成熟（rebalance、offset）
+- Redis Stream：内存优先、单机、亚毫秒、10 万 QPS、轻量
+- Kafka：磁盘优先、分布式、毫秒、百万 QPS、可回溯
+- Redis Stream 持久化弱（AOF everysec 丢 1 秒），Kafka 多副本零丢失
+- 选型：轻量异步用 Redis，核心业务流用 Kafka
+- 消费者组：两者都有，Kafka 的更成熟（rebalance、offset）
+frequency: high
 ---
 
 # 【Java 后端架构师】Redis Stream 与 Kafka 的场景取舍
@@ -361,6 +372,30 @@ while (running) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AOF process
+    class App decision
+    class B special
+    class C error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class IM error
+    class Kafka info
+    class QPS start
+    class Redis process
+    class Stream decision
+    class br special
+    class everysec error
+    class push info
     subgraph 业务场景层
         A["轻量异步任务<br/>App push/IM"]
         B["核心业务流<br/>订单/支付/埋点"]

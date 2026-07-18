@@ -13,7 +13,7 @@ tags:
 - ZSet
 feynman:
   essence: Redis有5种核心数据结构，每种都针对特定场景优化了底层编码。String是最通用的，Hash适合存对象，List适合队列，Set适合集合运算，ZSet适合排行榜。
-  analogy: "想象一个工具箱：String是万能刀（啥都能干），Hash是收纳盒（分格放东西），List是传送带（有序进出），Set是筛子（去重+交集），ZSet是奖牌榜（排序+带分数）。"
+  analogy: 想象一个工具箱：String是万能刀（啥都能干），Hash是收纳盒（分格放东西），List是传送带（有序进出），Set是筛子（去重+交集），ZSet是奖牌榜（排序+带分数）。
   key_points:
   - 5大基础类型：String/Hash/List/Set/ZSet
   - 每种类型有小编码(ziplist/intset)和大编码(hashtable/skiplist)两种
@@ -21,18 +21,19 @@ feynman:
   - ZSet底层=跳表+字典，跳表O(logN)范围查询+字典O(1)成员查找
   - 特殊类型：Bitmap(签到)、HyperLogLog(UV去重)、Geo(位置)
 first_principle:
-  problem: "内存数据库需要高效存储和操作不同类型的数据，如何在有限内存中为不同数据形态选择最优结构？"
+  problem: 内存数据库需要高效存储和操作不同类型的数据，如何在有限内存中为不同数据形态选择最优结构？
   axioms:
   - 数据量小时紧凑编码(ziplist)更省内存
   - 数据量大时标准结构(hashtable/skiplist)更高效
   - 有序+带分数的需求需要跳表(平衡查询和范围扫描)
   - 集合运算(交并差)需要hash表O(1)查找支撑
-  rebuild: "从内存数据存储需求出发：K/V(String)→字段映射(Hash)→有序序列(List)→无序去重(Set)→有序带分(ZSet)，每种类型都提供了小数据量紧凑编码+大数据量高效编码的自适应切换"
+  rebuild: 从内存数据存储需求出发：K/V(String)→字段映射(Hash)→有序序列(List)→无序去重(Set)→有序带分(ZSet)，每种类型都提供了小数据量紧凑编码+大数据量高效编码的自适应切换
 follow_up:
 - ZSet 为什么用跳表而不是红黑树？
 - ziplist 和 hashtable 的转换阈值是什么？为什么有这个设计？
 - Redis 的 Stream 和 List 做消息队列有什么区别？
 - 如何用 Redis 实现延迟队列？有哪些方案？
+frequency: high
 ---
 
 # Redis 数据类型有哪些？各自的应用场景？（华为od Java一面）
@@ -232,6 +233,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 结构化回答
 

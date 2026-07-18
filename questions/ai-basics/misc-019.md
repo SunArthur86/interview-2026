@@ -22,6 +22,7 @@ memory_points:
 - AWQ原理：保留1%显著权重（激活感知），无需反量化，速度快
 - 对比：AWQ在INT4下精度损失极小且推理更快，GPTQ需特殊算子
 - 实战：70B模型部署AWQ比GPTQ吞吐量更高且显存占用低
+frequency: medium
 ---
 
 # 模型量化的主要方法有哪些?GPTQ和AWQ的区别是什么
@@ -150,6 +151,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

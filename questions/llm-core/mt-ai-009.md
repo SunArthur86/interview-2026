@@ -30,6 +30,7 @@ memory_points:
 - 私有部署首选开源：Qwen/Llama，其中Qwen称霸中文场景，Llama深耕英文定制
 - 闭源天花板：Claude 3.5主导代码/长文，GPT-4o主导多模态与复杂Agent
 - 低成本硬核推理：选DeepSeek系列(MoE架构)，同等性能成本仅闭源十分之一
+frequency: low
 ---
 
 # 【美团面经】使用过的 AI 基座模型有什么？各自的特点和使用场景？
@@ -145,6 +146,12 @@ flowchart TD
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
     style N4 fill:#f44336,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

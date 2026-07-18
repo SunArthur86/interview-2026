@@ -27,6 +27,7 @@ memory_points:
 - 训练效率最高：Decoder做CLM是100%预测利用率，而Encoder的MLM仅15%参与Loss计算。
 - 生成能力最强：因果自回归天然契合next-token prediction，直接支持Few-shot。
 - Scaling Law最优：随参数规模扩大，性能提升曲线最平滑，理解能力可通过规模弥补。
+frequency: medium
 ---
 
 # 为什么当前主流生成式大模型几乎都采用Decoder-only架构？
@@ -172,6 +173,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

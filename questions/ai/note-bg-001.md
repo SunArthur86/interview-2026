@@ -24,7 +24,8 @@ feynman:
   - LoRA/Adapter：领域专用参数避免互相覆盖
 first_principle:
   essence: 多任务学习本质是"共享表征 vs 任务专用"的参数分配问题
-  derivation: 神经网络的底层参数（通用知识）适合多领域共享，高层参数（领域特征）需要专用。若所有参数全共享，领域间梯度冲突导致遗忘；若全隔离，失去迁移收益。最优解是"底层共享+高层专用"的架构 + "按重要性配比"的数据策略。
+  derivation: 神经网络的底层参数（通用知识）适合多领域共享，高层参数（领域特征）需要专用。若所有参数全共享，领域间梯度冲突导致遗忘；若全隔离，失去迁移收益。最优解是"底层共享+高层专用"的架构
+    + "按重要性配比"的数据策略。
   conclusion: 多领域混训 = 合理配比(数据层) + 共享/专用分离(架构层) + 回放防遗忘(训练层)
 follow_up:
 - 如何确定各领域的最优数据配比？有没有自动化方法？
@@ -35,6 +36,7 @@ memory_points:
 - 数据配比口诀：通用基础占大头(>60%)，增强领域不超20%，稀缺领域保底5%
 - 因为新数据覆盖旧知识，所以必须使用经验回放(混入20%旧数据)防遗忘
 - 动态配比法：遵循课程学习，按训练阶段从'通用打基础'过渡到'专业强强化
+frequency: low
 ---
 
 # 【八股总结】多领域数据混训如何避免某能力提升导致其他下降？
@@ -311,6 +313,24 @@ def eval_all_domains(model):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class C start
+    class E process
+    class ER decision
+    class G special
+    class M error
+    class MMLU info
+    class P start
+    class PC process
+    class Replay decision
+    class T special
+    class br error
+    class cos info
     M[基座预训练模型] --> T[多领域数据混训]
 
     subgraph 防遗忘数据层

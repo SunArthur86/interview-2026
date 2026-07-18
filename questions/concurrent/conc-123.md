@@ -16,6 +16,7 @@ memory_points:
 - 过半机制：只要某节点得票数超过半数即可直接当选Leader
 - ZAB三阶段：发现同步最新数据，随后进入正常事务广播阶段
 - 集群建议：为利用少数服从多数原则并防脑裂，通常部署奇数台节点
+frequency: low
 ---
 
 # 投票机制是什么？
@@ -125,6 +126,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

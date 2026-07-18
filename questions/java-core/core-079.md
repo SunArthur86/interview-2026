@@ -17,6 +17,7 @@ memory_points:
 - TCP控制核心：序列号解决乱序，确认号解决丢包，窗口大小负责流量控制
 - TCP标志位：SYN建连、FIN断连、ACK确认、RST重置、PSH直传、URG紧急
 - 实战场景：因为接收方处理不过来导致TCP Window Size变为0，所以会触发WindowFull传输暂停
+frequency: low
 ---
 
 # 什么是TCP与UDP头部格式？
@@ -114,6 +115,27 @@ err = conn.(*net.UDPConn).SetReadBuffer(10 << 20) // 10MB
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class ESTABLISHED decision
+    class FIN special
+    class S error
+    class SYN info
+    class TIME_WAIT start
+    class ack process
+    class as decision
+    class seq special
+    class u error
+    class v info
+    class w start
+    class x process
+    class y decision
     participant C as 客户端
     participant S as 服务端
     Note over C,S: 三次握手 建立连接

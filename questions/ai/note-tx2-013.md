@@ -33,6 +33,7 @@ memory_points:
 - 并发锁防竞争：分布式锁需设TTL防死锁，释放时必须用Lua校验token防误删
 - 熔断防下游雪崩：错误率超阈值快速失败不等待，经历关闭-打开-半开三态恢复
 - 降级保主链路：大模型故障则降级小模型、缓存或规则引擎，核心业务必须兜底
+frequency: high
 ---
 
 # 【某讯面经】并发锁、熔断、限流、降级实现思路
@@ -288,6 +289,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

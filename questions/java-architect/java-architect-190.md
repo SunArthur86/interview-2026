@@ -9,9 +9,12 @@ tags:
 - 架构图
 - 决策记录
 feynman:
-  essence: 架构图和 ADR 是架构师的"两支笔"——架构图画给当下看（沟通工具），ADR 写给未来看（决策档案）。好的架构图分层（C4 模型：Context/Container/Component/Code），每层面向不同受众；好的 ADR 记"为什么这么决策"（Context/Decision/Consequences + 替代方案否决理由），让 3 年后的新人能理解决策上下文。两者一起构成"架构可追溯性"。
-  analogy: 像建筑——建筑效果图是架构图（沟通给业主看），施工图纸和设计计算书是 ADR（给未来的维修工程师看，告诉他"为什么承重墙这么设计，不能拆"）。没有 ADR 的架构就像没有计算书的建筑，3 年后没人敢动。
-  first_principle: 架构是"约束下的取舍"。架构图让取舍"可视化"（看一眼就知道选了什么），ADR 让取舍"可追溯"（知道为什么这么选）。两者解决同一个本质问题——架构知识的传递和沉淀。没有图，沟通靠口口相传（低效）；没有 ADR，决策上下文丢失（3 年后不敢改）。
+  essence: 架构图和 ADR 是架构师的"两支笔"——架构图画给当下看（沟通工具），ADR 写给未来看（决策档案）。好的架构图分层（C4 模型：Context/Container/Component/Code），每层面向不同受众；好的
+    ADR 记"为什么这么决策"（Context/Decision/Consequences + 替代方案否决理由），让 3 年后的新人能理解决策上下文。两者一起构成"架构可追溯性"。
+  analogy: 像建筑——建筑效果图是架构图（沟通给业主看），施工图纸和设计计算书是 ADR（给未来的维修工程师看，告诉他"为什么承重墙这么设计，不能拆"）。没有
+    ADR 的架构就像没有计算书的建筑，3 年后没人敢动。
+  first_principle: 架构是"约束下的取舍"。架构图让取舍"可视化"（看一眼就知道选了什么），ADR 让取舍"可追溯"（知道为什么这么选）。两者解决同一个本质问题——架构知识的传递和沉淀。没有图，沟通靠口口相传（低效）；没有
+    ADR，决策上下文丢失（3 年后不敢改）。
   key_points:
   - C4 模型：Context（系统边界）/Container（进程/服务）/Component（模块）/Code（类）四层
   - ADR 四要素：Status（状态）/Context（背景）/Decision（决策+替代方案）/Consequences（代价收益）
@@ -25,19 +28,22 @@ first_principle:
   - 决策不记录，3 年后没人知道为什么这么选，改了可能推翻关键约束
   - ADR 不写替代方案否决理由 = 未来无法判断"假设是否还成立"
   - 架构图和 ADR 不入 Git 不与代码同生命周期 = 文档和实现脱节
-  rebuild: 用 C4 模型分层画架构图（Context 给业务、Container 给运维、Component 给开发、Code 给作者自己），每层只画关键信息不堆细节。每个关键决策写 ADR（Context/Decision/Consequences + 替代方案），入 Git 与代码同生命周期，CI 门禁核心改动必须引用 ADR。ADR 状态机：Proposed → Accepted → Deprecated/Superseded。
+  rebuild: 用 C4 模型分层画架构图（Context 给业务、Container 给运维、Component 给开发、Code 给作者自己），每层只画关键信息不堆细节。每个关键决策写
+    ADR（Context/Decision/Consequences + 替代方案），入 Git 与代码同生命周期，CI 门禁核心改动必须引用 ADR。ADR
+    状态机：Proposed → Accepted → Deprecated/Superseded。
 follow_up:
-  - C4 模型是什么？——Simon Brown 提出，Context（系统上下文）/Container（容器=进程/服务/数据库）/Component（组件=模块）/Code（类图）四层，从粗到细
-  - ADR 和 RFC 区别？——RFC 是讨论稿（征询意见），ADR 是决策记录（结论）。RFC → 评审 → ADR
-  - 架构图用什么工具？——C4 用 Structurizr/PlantUML/draw.io；实时同步用 Structurizr DSL（图即代码）
-  - ADR 什么时候写？——决策做出时写（不是事后补）。决策可能错，但记录必须真实
-  - ADR 怎么废弃？——Status 改 Deprecated 或 Superseded（被新 ADR 取代），不删除（保留历史）
+- C4 模型是什么？——Simon Brown 提出，Context（系统上下文）/Container（容器=进程/服务/数据库）/Component（组件=模块）/Code（类图）四层，从粗到细
+- ADR 和 RFC 区别？——RFC 是讨论稿（征询意见），ADR 是决策记录（结论）。RFC → 评审 → ADR
+- 架构图用什么工具？——C4 用 Structurizr/PlantUML/draw.io；实时同步用 Structurizr DSL（图即代码）
+- ADR 什么时候写？——决策做出时写（不是事后补）。决策可能错，但记录必须真实
+- ADR 怎么废弃？——Status 改 Deprecated 或 Superseded（被新 ADR 取代），不删除（保留历史）
 memory_points:
-  - C4 四层：Context（系统边界）/Container（进程）/Component（模块）/Code（类）
-  - ADR 四要素：Status/Context/Decision（含替代方案否决）/Consequences
-  - 架构图分层画：业务看 Context，运维看 Container，开发看 Component
-  - ADR 必写替代方案否决理由，否则未来无法判断是否要重新决策
-  - ADR 入 Git 版本化，CI 门禁核心改动引用 ADR
+- C4 四层：Context（系统边界）/Container（进程）/Component（模块）/Code（类）
+- ADR 四要素：Status/Context/Decision（含替代方案否决）/Consequences
+- 架构图分层画：业务看 Context，运维看 Container，开发看 Component
+- ADR 必写替代方案否决理由，否则未来无法判断是否要重新决策
+- ADR 入 Git 版本化，CI 门禁核心改动引用 ADR
+frequency: high
 ---
 
 # 【Java 后端架构师】架构图、ADR 与技术决策记录怎么写
@@ -462,6 +468,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

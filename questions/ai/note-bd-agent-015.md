@@ -29,6 +29,7 @@ memory_points:
 - 易落地场景：流程短、容错高、有人工兜底(如客服/代码辅助/数据简答)
 - 长链路瓶颈：因为错误率指数级累积(10步x90%=35%)，所以多步决策极易全盘崩溃
 - 务实落地观：现阶段做特定场景的效率工具，而非一步到位造通用Agent
+frequency: medium
 ---
 
 # 你对当下Agent能力怎么看待？
@@ -139,6 +140,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

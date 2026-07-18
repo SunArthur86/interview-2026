@@ -29,6 +29,7 @@ memory_points:
 - 熔断三态(关闭-打开-半开)，触发看慢调用/异常比例，半开放行试探
 - 降级保核心：系统过载时弃车保帅，如关闭非核心读写，返回默认值
 - 规则热更新：规则存Nacos等配置中心，推送Sentinel Dashboard，网关本地兜底
+frequency: high
 ---
 
 # 如何设计一个微服务的网关限流降级一体化方案？
@@ -154,6 +155,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

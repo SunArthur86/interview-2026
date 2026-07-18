@@ -29,6 +29,7 @@ memory_points:
 - 性能差异：传统DB暴力O(n)计算极慢，向量库HNSW索引O(logn)毫秒出结果。
 - 三大索引：HNSW最主流快准但吃内存，IVF聚类快但略损，PQ压缩省内存。
 - 选型对比：Milvus适合企业级超大本地部署，Pinecone全托管适合快速上线。
+frequency: medium
 ---
 
 # 为什么选向量数据库而不是传统数据库？向量数据库如何选型对比？
@@ -228,6 +229,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

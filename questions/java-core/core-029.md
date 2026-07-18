@@ -15,6 +15,7 @@ memory_points:
 - 产品维度不同：工厂方法针对单一产品结构（只造鼠标），抽象工厂针对多个产品族（造鼠标+键盘）
 - 工厂方法扩展新产品容易（加工厂即可），而抽象工厂扩展新种类困难（违背开闭原则）
 - 抽象工厂核心用于创建相关联的产品家族，保证多产品组合的一致性（如全套WinUI组件）
+frequency: medium
 ---
 
 # 抽象工厂模式和工厂方法模式的区别是什么？
@@ -115,6 +116,43 @@ public class Application {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BeanFactory decision
+    class Button special
+    class C error
+    class Checkbox info
+    class ConcreteFactoryA start
+    class ConcreteProductA process
+    class D decision
+    class Dark special
+    class DriverManager error
+    class E info
+    class F start
+    class Factory process
+    class G decision
+    class H special
+    class I error
+    class Input info
+    class J start
+    class JDBC process
+    class K decision
+    class L special
+    class Light error
+    class M info
+    class N start
+    class Product process
+    class Spring decision
+    class UI special
+    class br error
+    class createProduct info
+    class switch start
     A[工厂模式] --> B[简单工厂<br/>一个工厂方法+switch]
     A --> C[工厂方法<br/>每类产品对应一个工厂]
     A --> D[抽象工厂<br/>产品族 多维度]

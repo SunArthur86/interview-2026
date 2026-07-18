@@ -9,7 +9,8 @@ tags:
 - 异常拦截
 - 治理
 feynman:
-  essence: 数据质量平台的核心是把"脏数据进、净数据出"做成一条可量化、可拦截、可回溯的流水线。用规则引擎（Drools/自研 DSL）声明字段约束（非空/枚举/范围/正则/跨表一致），在写入前做同步校验、写入后做异步巡检，异常数据进隔离区（quarantine）人工或规则兜底。本质是用"事前拦截 + 事后对账 + 指标看板"把数据可信度从"靠人盯"变成"靠系统保证"。
+  essence: 数据质量平台的核心是把"脏数据进、净数据出"做成一条可量化、可拦截、可回溯的流水线。用规则引擎（Drools/自研 DSL）声明字段约束（非空/枚举/范围/正则/跨表一致），在写入前做同步校验、写入后做异步巡检，异常数据进隔离区（quarantine）人工或规则兜底。本质是用"事前拦截
+    + 事后对账 + 指标看板"把数据可信度从"靠人盯"变成"靠系统保证"。
   analogy: 像一个机场安检流水线——行李先过 X 光（规则校验），可疑的开箱检查（隔离区），通过的贴标签放行（标记可信），全程录像（数据血缘），最后统计违禁品率（质量看板）。
   first_principle: 数据为什么会有质量问题？因为数据来自多源（人工录入/外部接口/日志采集）、多格式、多时点，每个源头都可能有缺失、错误、重复、延迟。数据质量平台的本质是"在数据流转的关键节点插入校验关卡"，把质量问题拦截在扩散之前，而不是等下游报表算错了才发现。
   key_points:
@@ -25,19 +26,22 @@ first_principle:
   - 校验规则会随业务演进（新字段、新枚举、新约束），规则必须可配置可热更
   - 强校验（拒绝写入）影响主链路可用性，弱校验（放行但标记）可能漏过脏数据
   - 质量问题不可完全避免，核心是"早发现、快定位、可回滚"
-  rebuild: 建三层校验体系——事前用规则引擎在 API/ETL 入口同步校验关键字段，失败拒绝或隔离；事中用 Flink 流式实时监测异常模式（如突增、突降）；事后离线跑对账任务（主数据 vs 副本、业务库 vs 数仓）发现一致性偏差。所有规则版本化管理，所有异常进隔离区并告警，核心指标上看板。
+  rebuild: 建三层校验体系——事前用规则引擎在 API/ETL 入口同步校验关键字段，失败拒绝或隔离；事中用 Flink 流式实时监测异常模式（如突增、突降）；事后离线跑对账任务（主数据
+    vs 副本、业务库 vs 数仓）发现一致性偏差。所有规则版本化管理，所有异常进隔离区并告警，核心指标上看板。
 follow_up:
-  - 规则引擎选 Drools 还是自研？——简单字段校验（非空/范围）自研注解即可（@NotNull/@Range）；复杂跨表/跨字段逻辑用 Drools 或自研 DSL。JD 实践：字段级用 Hibernate Validator，业务级用自研 DQL（类似 SQL 语法，数据分析师可写）。
-  - 隔离区的数据怎么处理？——三类：自动修复（有明确修复规则，如缺失默认值）、人工审核（进工单系统）、退回源头（通知上游修复重推）。隔离超过 24h 未处理升级。
-  - 强校验拒绝写入影响主链路怎么办？——关键交易链路用强校验（必须正确），非关键链路用弱校验（标记但放行）。强校验失败要有降级路径（如缓存上次有效值）。
-  - 对账怎么做？——T+1 批量对账（主表 count/sum 与下游汇总比对）+ 实时对账（Flink 双流 JOIN 检测差异）。差异超阈值告警，自动触发补偿任务。
-  - 怎么量化数据质量？——六维评分卡：每维度 0-100 分，加权汇总成 data_quality_score。日报推送，低于 80 分触发治理任务。
+- 规则引擎选 Drools 还是自研？——简单字段校验（非空/范围）自研注解即可（@NotNull/@Range）；复杂跨表/跨字段逻辑用 Drools 或自研
+  DSL。JD 实践：字段级用 Hibernate Validator，业务级用自研 DQL（类似 SQL 语法，数据分析师可写）。
+- 隔离区的数据怎么处理？——三类：自动修复（有明确修复规则，如缺失默认值）、人工审核（进工单系统）、退回源头（通知上游修复重推）。隔离超过 24h 未处理升级。
+- 强校验拒绝写入影响主链路怎么办？——关键交易链路用强校验（必须正确），非关键链路用弱校验（标记但放行）。强校验失败要有降级路径（如缓存上次有效值）。
+- 对账怎么做？——T+1 批量对账（主表 count/sum 与下游汇总比对）+ 实时对账（Flink 双流 JOIN 检测差异）。差异超阈值告警，自动触发补偿任务。
+- 怎么量化数据质量？——六维评分卡：每维度 0-100 分，加权汇总成 data_quality_score。日报推送，低于 80 分触发治理任务。
 memory_points:
-  - 六维度：完整性、准确性、一致性、唯一性、及时性、有效性
-  - 三层拦截：事前同步校验（拒绝/隔离）、事中 Flink 实时、事后 T+1 对账
-  - 规则引擎：字段级 Hibernate Validator，业务级 Drools/自研 DQL，版本化热更
-  - 隔离区：异常数据 quarantine 表 + exception_code，自动修复/人工审核/退回源头
-  - 核心指标：data_valid_rate、quarantine_count、reconcile_diff_rate、data_quality_score
+- 六维度：完整性、准确性、一致性、唯一性、及时性、有效性
+- 三层拦截：事前同步校验（拒绝/隔离）、事中 Flink 实时、事后 T+1 对账
+- 规则引擎：字段级 Hibernate Validator，业务级 Drools/自研 DQL，版本化热更
+- 隔离区：异常数据 quarantine 表 + exception_code，自动修复/人工审核/退回源头
+- 核心指标：data_valid_rate、quarantine_count、reconcile_diff_rate、data_quality_score
+frequency: high
 ---
 
 # 【Java 后端架构师】数据质量平台与异常数据拦截
@@ -416,6 +420,32 @@ public class DataQualityScoreCalculator {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class Hibernate decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class S1 process
+    class S2 decision
+    class S3 special
+    class SKU error
+    class T info
+    class Validator start
+    class br process
     A[上游业务数据<br/>SKU/订单/价格] --> B[业务网关入口]
     subgraph S1 [事前同步拦截层]
         B --> C[Hibernate Validator<br/>字段级校验]

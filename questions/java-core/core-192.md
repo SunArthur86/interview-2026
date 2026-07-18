@@ -17,6 +17,7 @@ memory_points:
 - 混合加密：非对称加密(RSA)交换会话密钥，对称加密(AES)传输实际数据。
 - 防中间人：服务端用CA私钥签名证书，客户端用本地公钥验签，确认身份真伪。
 - 配置陷阱：Nginx配置必须包含完整证书链(域名证书+中间证书)，否则旧设备报错。
+frequency: medium
 ---
 
 # 什么是HTTPS？
@@ -104,6 +105,22 @@ server {
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class C start
+    class CA process
+    class Client decision
+    class ClientHello special
+    class PreMasterSecret error
+    class S info
+    class Server start
+    class ServerHello process
+    class as decision
+    class br special
     participant C as 浏览器 Client
     participant S as 服务器 Server
     participant CA as CA 证书机构

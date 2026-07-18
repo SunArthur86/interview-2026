@@ -32,6 +32,7 @@ memory_points:
 - IVF-Flat(倒排聚类)：利用K-Means划分簇，走低内存路线，通过nprobe灵活调节召回与速度
 - 百万量级选型：HNSW是首选，因为百万级图构建时间可接受且能实现毫秒级95%以上高召回
 - 参数敏感：HNSW受M与ef_search影响极大，而IVF主要调节nprobe扫描簇数控制精度
+frequency: high
 ---
 
 # 【字节面经】HNSW 和 IVF-Flat 两种向量索引结构各有什么优缺点？在百万量级文档下你会如何选择？
@@ -338,6 +339,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

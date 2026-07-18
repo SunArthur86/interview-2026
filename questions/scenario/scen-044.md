@@ -28,6 +28,7 @@ memory_points:
 - 技术实现对比：网关层基于Cookie/Header路由改配置即可，Istio可按权重精准切流免改代码
 - 发布四步曲：部署不接流量 → 1~5%金丝雀观察30分 → 逐步放量15分/次 → 100%全量保旧版24h
 - 数据库兼容：DDL多步走(先加列双写后删旧)，严格保证向前向后兼容以支持秒级回滚
+frequency: low
 ---
 
 # 如何设计灰度发布方案？安全可控地发布新版本。
@@ -111,6 +112,7 @@ flowchart LR
     DB[DB变更] --> COMP[向前向后兼容]
     style RB fill:#ffcccc
     style ALL fill:#d4edda
+
 ```
 
 

@@ -15,6 +15,7 @@ memory_points:
 - 柔性事务基于BASE理论，牺牲强一致性（ACID），换取高可用和最终一致性
 - 最大努力通知：主动方配合本地消息表+定时任务阶梯重试，被动方不需返回结果保证
 - 对比：本地消息表重在内部数据同步一致性，最大努力通知重在跨平台外部结果通知（如支付回调）
+frequency: high
 ---
 
 # 什么是柔性事务？最大努力通知型事务是什么？
@@ -141,6 +142,7 @@ flowchart TD
     style SAGA fill:#9C27B0,color:#fff
     style EVENT fill:#009688,color:#fff
     style COMP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

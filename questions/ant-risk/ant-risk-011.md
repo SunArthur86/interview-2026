@@ -11,8 +11,10 @@ tags:
 - 大数据
 - 列式存储
 feynman:
-  essence: HBase 用 LSM 树（写内存 + 顺序刷盘 + 后台归并）+ Region 分片 + WAL 保证海量数据的高吞吐写入和按 RowKey 查询。
-  analogy: HBase 像一个快递分拣中心：包裹（写入）先放传送带（MemStore 内存），满了批量装车（Flush 到 HFile 顺序写磁盘），夜间合并车辆整理（Compaction 合并小文件）。
+  essence: HBase 用 LSM 树（写内存 + 顺序刷盘 + 后台归并）+ Region 分片 + WAL 保证海量数据的高吞吐写入和按 RowKey
+    查询。
+  analogy: HBase 像一个快递分拣中心：包裹（写入）先放传送带（MemStore 内存），满了批量装车（Flush 到 HFile 顺序写磁盘），夜间合并车辆整理（Compaction
+    合并小文件）。
   first_principle: 磁盘随机写慢但顺序写快，LSM 把"随机写"转成"顺序写+后台合并"，让写吞吐突破磁盘随机写瓶颈。
   key_points:
   - LSM 树：写 MemStore（内存）→ Flush 成 HFile（磁盘）→ Minor/Major Compaction 合并
@@ -26,7 +28,8 @@ first_principle:
   - 磁盘顺序写 >> 随机写（百倍差距）
   - 内存有限，不能放下所有数据
   - 数据需要按 key 可查
-  rebuild: LSM 树——写先入内存 MemStore，顺序 Flush 成有序文件 HFile，后台 Compaction 把多个 HFile 合并成大的；读走"MemStore + 多 HFile + BlockCache"。代价是写放大和读放大，靠布隆过滤器优化读。
+  rebuild: LSM 树——写先入内存 MemStore，顺序 Flush 成有序文件 HFile，后台 Compaction 把多个 HFile 合并成大的；读走"MemStore
+    + 多 HFile + BlockCache"。代价是写放大和读放大，靠布隆过滤器优化读。
 follow_up:
 - HBase 为什么快？——写入是 MemStore + WAL 顺序日志，Flush 也是顺序写；读靠 RowKey 排序 + BlockCache + 布隆过滤
 - HBase 和 Cassandra 区别？——HBase 中心化（HMaster+RegionServer，强一致），Cassandra 去中心化（P2P，最终一致）
@@ -36,6 +39,7 @@ memory_points:
 - WAL 保证写不丢（先写日志再写内存）
 - RowKey 排序，Region 按范围分；RowKey 设计是 HBase 性能关键
 - 写快（顺序写）+ 读靠 RowKey 快，但二级索引和聚合要靠 Phoenix 或 ES
+frequency: high
 ---
 
 # 【蚂蚁风控】HBase 的底层架构？LSM 树原理？风控的用户画像怎么存在 HBase？
@@ -351,6 +355,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

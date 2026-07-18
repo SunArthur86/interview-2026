@@ -29,6 +29,7 @@ memory_points:
 - 写入提速：全量构建时关刷新(refresh=-1)且0副本，Bulk批量写入。
 - 数据同步保障：全量跑完后，用Canal监听Binlog消费追平增量数据。
 - 平滑切换：通过Alias原子动作将路由从V1切至V2，验证无误后删V1。
+frequency: high
 ---
 
 # 如何设计一个搜索系统的索引重建方案？不停机完成百亿数据索引重建。
@@ -160,6 +161,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

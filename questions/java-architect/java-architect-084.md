@@ -11,7 +11,9 @@ tags:
 feynman:
   essence: 大表治理的本质是"把不活跃的历史数据从在线库剥离，让在线表小而快"。核心三步——冷热分层（按时间/状态区分冷热）、归档（冷数据搬到廉价存储）、分区分表（在线表分区/分片降低单表规模）。难点是归档期间数据持续写入，归档操作不能锁在线表影响业务。
   analogy: 像图书馆管理藏书。热门新书（热数据）放前厅随手可取（在线 SSD 库），冷门旧书（冷数据）搬地下书库（归档库/对象存储）。前厅书少（单表小），找书快（查询快）。地下书库容量大、便宜，偶尔有人查（低频访问）。搬书（归档）不能锁门（不锁表），趁夜深（低峰）分批搬。
-  first_principle: 大表的痛点是"B+ 树层级深（4 层）、索引膨胀、查询变慢、DDL 锁表久、备份恢复慢、主从延迟"。一个 10 亿行的订单表，二级索引查询要走 4 层 B+ 树 + 回表，延迟从 1ms 涨到 10ms。归档的本质是减少在线表的数据量——热数据（近 3 个月）留在线上，冷数据（3 个月以上）搬走，单表从 10 亿行降到 3000 万行，查询回到 1ms。
+  first_principle: 大表的痛点是"B+ 树层级深（4 层）、索引膨胀、查询变慢、DDL 锁表久、备份恢复慢、主从延迟"。一个 10 亿行的订单表，二级索引查询要走
+    4 层 B+ 树 + 回表，延迟从 1ms 涨到 10ms。归档的本质是减少在线表的数据量——热数据（近 3 个月）留在线上，冷数据（3 个月以上）搬走，单表从
+    10 亿行降到 3000 万行，查询回到 1ms。
   key_points:
   - 冷热判断：按时间（90 天前冷）、按状态（已完结订单冷）、按访问频率（近 30 天无访问冷）
   - 归档方式：mysqldump 导出 + 删除、pt-archiver 小批量迁移、binlog 同步到冷库
@@ -25,20 +27,26 @@ first_principle:
   - 大表的性能问题随数据量线性恶化（B+ 树深度、索引扫描行数）
   - 归档不能影响在线业务（不锁表、不占满 IO）
   - 冷数据偶尔要查（用户查半年前订单），不能直接删
-  rebuild: 三步——第一，冷热分层（近 90 天热，90 天前冷；或按状态，已完结订单冷）。第二，归档冷数据到冷库（TiDB 做分析、或归档 MySQL 实例）。用 pt-archiver 小批量迁移（每次 1000 行，限速，不锁表）。第三，在线表改分区表（RANGE 分区按月），DROP PARTITION 秒级删历史分区（替代 DELETE 10 亿行的灾难）。应用层查询：先查在线表，miss 走冷库（透明路由）。热表从 10 亿行降到 3000 万行，查询 P99 回到 1ms。
+  rebuild: 三步——第一，冷热分层（近 90 天热，90 天前冷；或按状态，已完结订单冷）。第二，归档冷数据到冷库（TiDB 做分析、或归档 MySQL
+    实例）。用 pt-archiver 小批量迁移（每次 1000 行，限速，不锁表）。第三，在线表改分区表（RANGE 分区按月），DROP PARTITION
+    秒级删历史分区（替代 DELETE 10 亿行的灾难）。应用层查询：先查在线表，miss 走冷库（透明路由）。热表从 10 亿行降到 3000 万行，查询
+    P99 回到 1ms。
 follow_up:
-  - 归档时怎么不锁表？——pt-archiver 小批量（每次 1000 行，SELECT + DELETE），走索引、低峰期执行、限速（--max-load 控制）。或用 binlog 同步（不碰在线表，只读 binlog）
-  - 分区表 DROP PARTITION 和 DELETE 哪个好？——DROP PARTITION 是 DDL（秒级，删整个分区文件），DELETE 是 DML（逐行删、产生大量 binlog、锁表风险）。10 亿行 DELETE 要几小时且影响在线，DROP PARTITION 秒级完成
-  - 冷数据偶尔查怎么办？——应用层先查在线表，miss 走冷库（TiDB/归档 MySQL）。冷库查询慢（100ms）但低频可接受。或统一查询网关自动路由（在线表查不到查冷库）
-  - 分区分表怎么选？——分区表（单实例内分区，DROP PARTITION 方便删历史）适合按时间归档场景。分库分表（多实例，ShardingSphere）适合单表数据量超单实例容量场景。两者可组合（先分库分表，每个分片再按时间分区）
-  - 归档后索引重建？——大表索引膨胀，归档后 OPTIMIZE TABLE 重建表回收空间（但锁表）。或新建表 + 数据导入 + 改名（在线 DDL）
+- 归档时怎么不锁表？——pt-archiver 小批量（每次 1000 行，SELECT + DELETE），走索引、低峰期执行、限速（--max-load 控制）。或用
+  binlog 同步（不碰在线表，只读 binlog）
+- 分区表 DROP PARTITION 和 DELETE 哪个好？——DROP PARTITION 是 DDL（秒级，删整个分区文件），DELETE 是 DML（逐行删、产生大量
+  binlog、锁表风险）。10 亿行 DELETE 要几小时且影响在线，DROP PARTITION 秒级完成
+- 冷数据偶尔查怎么办？——应用层先查在线表，miss 走冷库（TiDB/归档 MySQL）。冷库查询慢（100ms）但低频可接受。或统一查询网关自动路由（在线表查不到查冷库）
+- 分区分表怎么选？——分区表（单实例内分区，DROP PARTITION 方便删历史）适合按时间归档场景。分库分表（多实例，ShardingSphere）适合单表数据量超单实例容量场景。两者可组合（先分库分表，每个分片再按时间分区）
+- 归档后索引重建？——大表索引膨胀，归档后 OPTIMIZE TABLE 重建表回收空间（但锁表）。或新建表 + 数据导入 + 改名（在线 DDL）
 memory_points:
-  - 冷热判断：时间（90 天）、状态（已完结）、访问频率（30 天无访问）
-  - 归档工具：pt-archiver（小批量不锁表）、mysqldump、binlog 同步
-  - 分区表：RANGE 按时间，DROP PARTITION 秒级删历史
-  - 冷库选型：TiDB（分析）、HBase（KV）、S3（原始）
-  - 查询路由：在线表 miss 走冷库，应用层透明
-  - 不锁表：每次 1000 行、限速、低峰期
+- 冷热判断：时间（90 天）、状态（已完结）、访问频率（30 天无访问）
+- 归档工具：pt-archiver（小批量不锁表）、mysqldump、binlog 同步
+- 分区表：RANGE 按时间，DROP PARTITION 秒级删历史
+- 冷库选型：TiDB（分析）、HBase（KV）、S3（原始）
+- 查询路由：在线表 miss 走冷库，应用层透明
+- 不锁表：每次 1000 行、限速、低峰期
+frequency: high
 ---
 
 # 【Java 后端架构师】大表治理、冷热分层与归档
@@ -386,6 +394,40 @@ public class OrderQueryService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class C1 info
+    class D1 start
+    class D2 process
+    class D3 decision
+    class DELETE special
+    class DROP error
+    class E1 info
+    class Java start
+    class Job process
+    class MySQL decision
+    class PARTITION special
+    class Pruning error
+    class RANGE info
+    class S1 start
+    class S2 process
+    class S3 decision
+    class S4 special
+    class S5 error
+    class TiDB info
+    class XXL start
+    class archiver process
+    class br decision
+    class pt special
     subgraph S1 [大表治理在线库]
         A1[在线业务 MySQL<br/>10亿行 500G] --> A2[pt-archiver<br/>小批量迁移 1000行/次]
     end

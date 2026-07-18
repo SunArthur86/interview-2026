@@ -11,37 +11,42 @@ tags:
 - 职业转型
 - AI 工程路径
 feynman:
-  essence: "Java/后端架构师转 AI 工程，不是抛弃过去重学，而是把已有工程能力（架构/高并发/分布式）作为杠杆，补齐 AI 专属知识（LLM/Agent/RAG/LLMOps），在 AI 应用工程层找到新位置。"
-  analogy: "像会开手动挡的老司机转开电动车——驾驶能力（架构思维/工程能力）完全可复用，只需补电动车的特性（电池/电控=LLM/Agent），而且老司机应对复杂路况（高并发/分布式）的经验反而更值钱。"
-  first_principle: "AI 工程大部分是工程问题（架构/高可用/数据/编排），少部分是 AI 算法（模型/训练）。Java/后端架构师的工程能力是稀缺资产，补 AI 专属知识即可转型，且转型到 AI 应用工程层（非算法研究）最匹配。"
+  essence: Java/后端架构师转 AI 工程，不是抛弃过去重学，而是把已有工程能力（架构/高并发/分布式）作为杠杆，补齐 AI 专属知识（LLM/Agent/RAG/LLMOps），在
+    AI 应用工程层找到新位置。
+  analogy: 像会开手动挡的老司机转开电动车——驾驶能力（架构思维/工程能力）完全可复用，只需补电动车的特性（电池/电控=LLM/Agent），而且老司机应对复杂路况（高并发/分布式）的经验反而更值钱。
+  first_principle: AI 工程大部分是工程问题（架构/高可用/数据/编排），少部分是 AI 算法（模型/训练）。Java/后端架构师的工程能力是稀缺资产，补
+    AI 专属知识即可转型，且转型到 AI 应用工程层（非算法研究）最匹配。
   key_points:
-  - "复用：架构/分布式/高并发/数据工程/可观测"
-  - "补齐：LLM 原理/Agent 编排/RAG/Tool Calling/LLMOps"
-  - "定位：AI 应用工程师（非算法研究），工程+AI 复合"
-  - "学习路径：原理→工具→项目→深度"
-  - "差异化：工程深度是 Java 老兵的护城河"
+  - 复用：架构/分布式/高并发/数据工程/可观测
+  - 补齐：LLM 原理/Agent 编排/RAG/Tool Calling/LLMOps
+  - 定位：AI 应用工程师（非算法研究），工程+AI 复合
+  - 学习路径：原理→工具→项目→深度
+  - 差异化：工程深度是 Java 老兵的护城河
   socratic:
-  - "Java 后端工程师会被 AI 取代吗？哪些会被取代，哪些不会？"
-  - "学了 LLM API 调用就算转 AI 了吗？真正的 AI 工程师还要会什么？"
-  - "做算法研究 vs 做 AI 应用工程，哪个更适合 Java 老兵？为什么？"
-  - "架构师经验在 AI 时代还值钱吗？AI 产品的架构难点和传统后端有啥不同？"
-  - "30+ 的 Java 工程师转 AI，从哪开始学最快？怎么避免学一堆用不上的理论？"
+  - Java 后端工程师会被 AI 取代吗？哪些会被取代，哪些不会？
+  - 学了 LLM API 调用就算转 AI 了吗？真正的 AI 工程师还要会什么？
+  - 做算法研究 vs 做 AI 应用工程，哪个更适合 Java 老兵？为什么？
+  - 架构师经验在 AI 时代还值钱吗？AI 产品的架构难点和传统后端有啥不同？
+  - 30+ 的 Java 工程师转 AI，从哪开始学最快？怎么避免学一堆用不上的理论？
 first_principle:
-  problem: "Java/后端架构师如何最大化复用已有能力，高效转型到 AI 工程，找到有竞争力的新位置？"
+  problem: Java/后端架构师如何最大化复用已有能力，高效转型到 AI 工程，找到有竞争力的新位置？
   axioms:
-  - "AI 工程大部分是工程问题（架构/数据/编排）"
-  - "Java 老兵的工程能力是稀缺资产"
-  - "转 AI 应用工程（非算法）最匹配"
-  rebuild: "复用工程能力（架构/高并发/分布式）作杠杆 + 补 AI 专属知识（LLM/Agent/RAG/LLMOps）+ 定位 AI 应用工程师（非算法研究），用'工程深度 × AI 广度'的复合能力在 AI 时代找到差异化位置。"
+  - AI 工程大部分是工程问题（架构/数据/编排）
+  - Java 老兵的工程能力是稀缺资产
+  - 转 AI 应用工程（非算法）最匹配
+  rebuild: 复用工程能力（架构/高并发/分布式）作杠杆 + 补 AI 专属知识（LLM/Agent/RAG/LLMOps）+ 定位 AI 应用工程师（非算法研究），用'工程深度
+    × AI 广度'的复合能力在 AI 时代找到差异化位置。
 follow_up:
-- "要学 Python 吗？——要，AI 生态 Python 主流（PyTorch/HuggingFace/LangChain）；但不必精通，能读能用即可，主力可以是 Java/Go 调 AI 服务。"
-- "要做模型训练吗？——大多数 AI 应用工程师不训练基础模型；做 fine-tune/微调/RAG/Agent 编排是主流；纯训练留给算法研究员。"
-- "学多久能转？——基础 1-2 月（原理+API+小项目），能干活 3-6 月，深度（架构师级）1-2 年；持续学习。"
+- 要学 Python 吗？——要，AI 生态 Python 主流（PyTorch/HuggingFace/LangChain）；但不必精通，能读能用即可，主力可以是
+  Java/Go 调 AI 服务。
+- 要做模型训练吗？——大多数 AI 应用工程师不训练基础模型；做 fine-tune/微调/RAG/Agent 编排是主流；纯训练留给算法研究员。
+- 学多久能转？——基础 1-2 月（原理+API+小项目），能干活 3-6 月，深度（架构师级）1-2 年；持续学习。
 memory_points:
-- "复用：架构/分布式/高并发"
-- "补齐：LLM/Agent/RAG/LLMOps"
-- "定位：AI 应用工程（非算法）"
-- "差异化：工程深度 × AI 广度"
+- 复用：架构/分布式/高并发
+- 补齐：LLM/Agent/RAG/LLMOps
+- 定位：AI 应用工程（非算法）
+- 差异化：工程深度 × AI 广度
+frequency: high
 ---
 
 # 【巨剧核 AI 陪伴】Java/后端架构师转 AI 工程路径？
@@ -297,6 +302,31 @@ AI 时代不是抛弃过去，而是**把过去的工程能力放大到新领域
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class B4 info
+    class C start
+    class C1 process
+    class C2 decision
+    class C3 special
+    class C4 error
+    class Calling info
+    class D start
+    class E process
+    class F decision
+    class Java special
+    class RAG error
+    class Tool info
+    class br start
     A["Java/后端架构师"] --> B("复用已有工程杠杆")
     A --> C("补齐AI专属知识")
     subgraph B ["复用：80%工程能力"]

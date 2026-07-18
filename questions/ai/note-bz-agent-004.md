@@ -30,6 +30,7 @@ memory_points:
 - 搭建四步曲：选大脑（分层模型省钱）、定工具（初期<10个且定义清晰）、写Prompt、做记忆
 - 分层模型策略：简单路由用小模型，主推理用强模型，以平衡成本与效果
 - 工具治理：工具过多时用RAG按需检索工具描述，而非全塞给LLM
+frequency: medium
 ---
 
 # 如何从 0 搭建一个 AI Agent？整体流程是怎样的？
@@ -247,6 +248,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

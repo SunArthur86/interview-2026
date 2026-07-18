@@ -17,6 +17,7 @@ memory_points:
 - 切换开销：因为线程切换无需切换页表（不涉及CR3），所以比进程切换快，TLB命中率高
 - 实现模型：用户线程由用户库管理（一阻全阻），内核线程由OS管理（支持多核并行）
 - 风险隔离：进程间相互隔离，而同进程内的某线程崩溃会导致整个进程崩溃
+frequency: medium
 ---
 
 # 什么是线程基础？
@@ -118,6 +119,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

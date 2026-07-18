@@ -22,6 +22,7 @@ memory_points:
 - Top-k：截断低概率噪声，固定候选集大小（如k=40）
 - Top-p：动态截断长尾，保证累积概率质量（如p=0.9）
 - 组合建议：T+Top-p最常用，代码用T=0.1，创意用T=0.7
+frequency: low
 ---
 
 # Temperature、Top-p、Top-k采样策略各自的作用?如何组合使用
@@ -129,6 +130,31 @@ def sample_with_strategy(logits, temperature=0.7, top_k=40, top_p=0.9):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CoT special
+    class D error
+    class E info
+    class F start
+    class Few process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class Let start
+    class Zero process
+    class by decision
+    class s special
+    class shot error
+    class step info
+    class think start
     A[复杂推理问题] --> B{是否提供范例?}
 
     B -- 否 --> C[Zero-shot CoT]

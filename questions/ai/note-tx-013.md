@@ -31,6 +31,7 @@ memory_points:
 - 三大创新：NF4正态量化、双重量化降显存、分页优化器防OOM
 - 因为按需反量化计算，所以能在单卡48G显存上微调65B大模型
 - 数据类型对比：NF4比INT4更优，因为大模型权重本身符合正态分布
+frequency: medium
 ---
 
 # 【腾讯面经】QLoRA 调参怎么做？核心原理是什么？
@@ -498,6 +499,7 @@ flowchart TD
     style COMBINED fill:#2196F3,color:#fff
     style NF4 fill:#FF9800,color:#fff
     style OPT fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

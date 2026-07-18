@@ -32,6 +32,7 @@ memory_points:
 - 编排核心：状态机控制流转，Plan&Execute分离规划与执行，硬步数上限防死循环
 - 生产高可用：LLM与工具需配熔断降级，大模型挂了降级小模型或缓存，最终退化为规则
 - 成本与安全：小模型做大模型意图识别省钱，写入工具需二次确认防注入
+frequency: high
 ---
 
 # 【某讯面经】设计一个生产可用的 Agent 系统，从0到1怎么搭？
@@ -252,6 +253,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -17,6 +17,7 @@ memory_points:
 - 方法对比：GET参数在URL可缓存，POST参数在Body无限制
 - 版本演进：1.1串行文本传输，2.0支持二进制分帧、多路复用和头部压缩
 - 安全对比：HTTP明文端口80，HTTPS基于SSL/TLS加密端口443
+frequency: low
 ---
 
 # HTTP原理是什么？
@@ -128,6 +129,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

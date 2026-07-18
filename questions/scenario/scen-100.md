@@ -28,6 +28,7 @@ memory_points:
 - WebSocket断线易丢消息，必须配合前端轮询兜底或离线Push
 - MQ消费手动ACK，双写(Redis缓存+MySQL订单)成功后才确认，防消息丢失
 - 防重复通知：推送或轮询前检查TicketID终态，实现接口幂等
+frequency: high
 ---
 
 # 如何设计一个秒杀后的异步通知系统？告知用户抢购结果。
@@ -131,6 +132,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

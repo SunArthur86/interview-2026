@@ -9,8 +9,12 @@ tags:
 - 加密
 - 密钥轮转
 feynman:
-  essence: 数据脱敏/加密的本质是"按敏感等级分层处理"——展示层脱敏（手机号 138****8888）、传输层 TLS、存储层 AES-256 字段加密、备份层 TDE 透明加密。密钥轮转是"加密强度的时间衰减防御"——即使一个密钥泄露，轮转后旧密钥失活，泄露窗口可控。Java 后端落地三个抓手：(1) 自定义注解 + Jackson Serializer 自动脱敏；(2) AES-GCM 字段加密（DEK + KEK 双层密钥，envelope encryption）；(3) HashiCorp Vault 管理密钥，自动轮转 + 审计。
-  analogy: 像物流仓库的"分层防护"。脱敏是出库时贴黑条（用户看不全）；传输加密是运输车带锁（路上安全）；存储加密是仓库保险柜（落库加密）；密钥轮转是定期换保险柜密码（即使旧密码泄露，换后无效）；KMS 是中央密码管理处（统一签发 + 审计 + 销毁）。
+  essence: 数据脱敏/加密的本质是"按敏感等级分层处理"——展示层脱敏（手机号 138****8888）、传输层 TLS、存储层 AES-256 字段加密、备份层
+    TDE 透明加密。密钥轮转是"加密强度的时间衰减防御"——即使一个密钥泄露，轮转后旧密钥失活，泄露窗口可控。Java 后端落地三个抓手：(1) 自定义注解
+    + Jackson Serializer 自动脱敏；(2) AES-GCM 字段加密（DEK + KEK 双层密钥，envelope encryption）；(3)
+    HashiCorp Vault 管理密钥，自动轮转 + 审计。
+  analogy: 像物流仓库的"分层防护"。脱敏是出库时贴黑条（用户看不全）；传输加密是运输车带锁（路上安全）；存储加密是仓库保险柜（落库加密）；密钥轮转是定期换保险柜密码（即使旧密码泄露，换后无效）；KMS
+    是中央密码管理处（统一签发 + 审计 + 销毁）。
   first_principle: 为什么不能只用一个密钥？因为密钥使用越久，泄露概率越大（员工离职、日志泄露、侧信道攻击）。轮转把"长期暴露窗口"切成"N 个短期窗口"，每个窗口结束后旧密钥失活，泄露影响缩小。
   key_points:
   - 脱敏三档：展示脱敏（138****8888）、日志脱敏（不打印 PII）、传输脱敏（HTTPS）
@@ -24,19 +28,24 @@ first_principle:
   - 单一防护层必破——传输加密了存储明文、存储加密了备份明文，等于没加密
   - 密钥不能和应用一起存储（同库同泄露），必须独立 KMS
   - 密钥使用越久泄露风险越大，必须定期轮转
-  rebuild: 分层防护——传输 TLS（防中间人）+ 字段 AES-GCM（防 DB 拖库）+ 备份 TDE（防备份泄露）+ 展示脱敏（防 UI 泄露）。密钥用信封加密（DEK + KEK），DEK 每条数据独立随机（防批量拖库后批量破解），KEK 由 KMS 集中管理定期轮转（90 天）。所有密钥访问进审计日志，离开 KMS 必须授权 + 双因子。
+  rebuild: 分层防护——传输 TLS（防中间人）+ 字段 AES-GCM（防 DB 拖库）+ 备份 TDE（防备份泄露）+ 展示脱敏（防 UI 泄露）。密钥用信封加密（DEK
+    + KEK），DEK 每条数据独立随机（防批量拖库后批量破解），KEK 由 KMS 集中管理定期轮转（90 天）。所有密钥访问进审计日志，离开 KMS 必须授权
+    + 双因子。
 follow_up:
-  - AES-GCM 为什么优于 AES-CBC？——GCM 提供认证加密（AEAD），同时保证机密性 + 完整性；CBC 只机密性，需额外 MAC 防 padding oracle 攻击。GCM 还能并行加速。
-  - DEK 怎么生成？——每条数据用 CSPRNG（如 SecureRandom）生成 256 bit 随机 key，加密后存储。绝对不能复用。
-  - 密钥轮转时旧数据怎么解？——加密时记录 key_version，解密时按 version 查旧 KEK 解密；轮转是"新数据用新密钥"，旧数据按需 lazy re-encrypt 或后台批量迁移。
-  - 脱敏规则怎么配置？——按字段类型（手机号 138****8888、身份证 110***********0010、邮箱 a***@b.com、银行卡 6212**********1234）。
-  - 数据库透明加密（TDE）够吗？——不够。TDE 只防"磁盘丢失"（落盘加密），不防"DBA 查数据库"（数据在内存是明文）。敏感字段必须应用层 AES 加密。
+- AES-GCM 为什么优于 AES-CBC？——GCM 提供认证加密（AEAD），同时保证机密性 + 完整性；CBC 只机密性，需额外 MAC 防 padding
+  oracle 攻击。GCM 还能并行加速。
+- DEK 怎么生成？——每条数据用 CSPRNG（如 SecureRandom）生成 256 bit 随机 key，加密后存储。绝对不能复用。
+- 密钥轮转时旧数据怎么解？——加密时记录 key_version，解密时按 version 查旧 KEK 解密；轮转是"新数据用新密钥"，旧数据按需 lazy re-encrypt
+  或后台批量迁移。
+- 脱敏规则怎么配置？——按字段类型（手机号 138****8888、身份证 110***********0010、邮箱 a***@b.com、银行卡 6212**********1234）。
+- 数据库透明加密（TDE）够吗？——不够。TDE 只防"磁盘丢失"（落盘加密），不防"DBA 查数据库"（数据在内存是明文）。敏感字段必须应用层 AES 加密。
 memory_points:
-  - 脱敏：展示（138****8888）+ 日志（不打印 PII）+ 传输（HTTPS）
-  - 加密：传输 TLS + 字段 AES-GCM + 备份 TDE
-  - 信封加密：DEK 加数据 + KEK 加 DEK，KMS 管 KEK
-  - 密钥轮转：90 天 KEK + 每条独立 DEK
-  - KMS：Vault / AWS KMS，统一签发 + 审计 + 轮转
+- 脱敏：展示（138****8888）+ 日志（不打印 PII）+ 传输（HTTPS）
+- 加密：传输 TLS + 字段 AES-GCM + 备份 TDE
+- 信封加密：DEK 加数据 + KEK 加 DEK，KMS 管 KEK
+- 密钥轮转：90 天 KEK + 每条独立 DEK
+- KMS：Vault / AWS KMS，统一签发 + 审计 + 轮转
+frequency: high
 ---
 
 # 【Java 后端架构师】数据脱敏、加密与密钥轮转架构
@@ -465,6 +474,33 @@ public class VaultKmsClient implements KmsClient {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AES process
+    class API decision
+    class B special
+    class C error
+    class D info
+    class DEK start
+    class E process
+    class F decision
+    class G special
+    class GCM error
+    class H info
+    class Hash start
+    class HashiCorp process
+    class I decision
+    class J special
+    class K error
+    class KEK info
+    class KMS start
+    class Vault process
+    class wrapped_DEK decision
     A[Java业务请求加密数据] --> B[本地生成临时数据密钥 DEK]
     B --> C[AES-GCM 加密明文数据]
     C --> D[生成密文与盲索引 Hash]

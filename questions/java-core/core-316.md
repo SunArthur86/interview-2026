@@ -16,6 +16,7 @@ memory_points:
 - 必会考点：valueOf走缓存，new Integer强制堆内开辟新内存，导致==比较失效
 - 避坑指南：包装类比较必须用equals，超出127的缓存失效极易导致空指针或逻辑错乱
 - 扩展对比：Byte全缓存，Character为0到127，而Float和Double无缓存机制
+frequency: medium
 ---
 
 # Integer缓存池的原理是什么？
@@ -115,6 +116,47 @@ public class IntegerCacheTest {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Boolean decision
+    class C special
+    class Cache error
+    class Character info
+    class D start
+    class E process
+    class F decision
+    class FALSE special
+    class G error
+    class H info
+    class I start
+    class Integer process
+    class IntegerCache decision
+    class J special
+    class K error
+    class L info
+    class Long start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class Q info
+    class TRUE start
+    class a process
+    class b decision
+    class br special
+    class equals error
+    class false info
+    class i start
+    class new process
+    class static decision
+    class true special
+    class valueOf error
     A[Integer 缓存池] --> B["IntegerCache 内部类"]
     B --> C["范围 -128 ~ 127"]
     B --> D[类加载时预创建<br/>static 数组]

@@ -17,6 +17,7 @@ memory_points:
 - 超时重传：基于时间，RTO动态略大于RTT，触发指数退避，认为网络拥塞严重。
 - 快速重传：基于数据，收到3个重复ACK即触发，无需等待超时。
 - SACK与D-SACK：SACK确认收到的分片，D-SACK解决重复接收判断，避免盲目重传。
+frequency: low
 ---
 
 # TCP的重传机制是什么？
@@ -96,6 +97,27 @@ tcpdump -i eth0 'tcp[tcpflags] & tcp-rst != 0 or tcp[tcpflags] & tcp-syn != 0' -
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class ESTABLISHED decision
+    class FIN special
+    class S error
+    class SYN info
+    class TIME_WAIT start
+    class ack process
+    class as decision
+    class seq special
+    class u error
+    class v info
+    class w start
+    class x process
+    class y decision
     participant C as 客户端
     participant S as 服务端
     Note over C,S: 三次握手 建立连接

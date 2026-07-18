@@ -29,6 +29,7 @@ memory_points:
 - 数据隔离三方案：命名空间(高性价比)、行级过滤(加租户ID)、物理隔离(最安全高成本)
 - 资源隔离强保障：按租户独立配置QPS限流和Token日配额上限
 - 向量记忆隔离：检索强制注入租户ID前缀，防止A搜出B的隐私数据
+frequency: high
 ---
 
 # 对话系统的多租户隔离方案？
@@ -241,6 +242,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

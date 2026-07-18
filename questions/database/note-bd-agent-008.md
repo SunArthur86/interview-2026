@@ -31,6 +31,7 @@ memory_points:
 - 写策略口诀：先写DB后删Cache。
 - 反面论证：因为先删Cache时并发读会把旧数据写回，所以极易造成脏读污染。
 - 兜底补偿机制：延迟双删或利用MQ重试机制保证缓存最终必定删除。
+frequency: high
 ---
 
 # Redis和MySQL同时存业务状态时，怎么保证最终一致性？
@@ -224,6 +225,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

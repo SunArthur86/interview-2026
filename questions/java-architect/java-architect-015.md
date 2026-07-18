@@ -8,8 +8,10 @@ tags:
 - 鉴权
 - 灰度
 feynman:
-  essence: 网关的本质是"南北向流量的统一策略执行点"——把鉴权、限流、路由、灰度、协议转换这些横切关注点从后端服务剥离，集中在一个数据平面执行。它用"反向代理 + 过滤器链"模型，每个请求按序穿过 Filter Chain，可前置短路（鉴权失败/限流命中直接返回）也可后置处理（响应改写）。
-  analogy: 像写字楼的"大堂安保 + 前台"。访客（请求）先过安保闸机（鉴权）→ 前台登记分流到不同楼层（路由）→ 高峰期货梯限流放行（限流）→ VIP 走专用电梯（灰度）。后端业务（楼层租户）不用关心安保，专心做业务。一旦安保规则变了（鉴权策略调整），只改大堂不用通知每个租户。
+  essence: 网关的本质是"南北向流量的统一策略执行点"——把鉴权、限流、路由、灰度、协议转换这些横切关注点从后端服务剥离，集中在一个数据平面执行。它用"反向代理
+    + 过滤器链"模型，每个请求按序穿过 Filter Chain，可前置短路（鉴权失败/限流命中直接返回）也可后置处理（响应改写）。
+  analogy: 像写字楼的"大堂安保 + 前台"。访客（请求）先过安保闸机（鉴权）→ 前台登记分流到不同楼层（路由）→ 高峰期货梯限流放行（限流）→ VIP
+    走专用电梯（灰度）。后端业务（楼层租户）不用关心安保，专心做业务。一旦安保规则变了（鉴权策略调整），只改大堂不用通知每个租户。
   first_principle: 为什么要网关而不是每个服务自己鉴权？因为横切关注点（鉴权/限流/日志/灰度）在每个服务重复实现会导致：代码重复、策略难统一变更、性能开销分散难治理。网关把"非业务策略"集中，让业务服务只关心业务，策略变更一处生效。
   key_points:
   - 数据平面（Gateway/Filter）与控制平面（配置中心/限流规则中心）分离，规则热更新不停机
@@ -23,20 +25,28 @@ first_principle:
   - 横切策略（鉴权/限流/灰度）与业务逻辑正交，应解耦
   - 策略集中执行便于统一变更、审计、监控
   - 统一入口不能是单点，自身要高可用
-  rebuild: 用"反向代理 + 过滤器链"构建网关。每个请求按顺序穿过 Filter Chain（pre→route→post），每个 Filter 执行一类策略（AuthFilter 鉴权、RateLimitFilter 限流、GrayFilter 灰度路由）。数据平面（Filter 执行）和控制平面（规则配置）分离，规则放配置中心热更新。网关本身多实例部署 + 客户端负载均衡（SLB/Nginx 前置），单实例故障秒级摘除。限流用令牌桶做单机限流 + Redis 做集群限流（统一计数）。
+  rebuild: 用"反向代理 + 过滤器链"构建网关。每个请求按顺序穿过 Filter Chain（pre→route→post），每个 Filter 执行一类策略（AuthFilter
+    鉴权、RateLimitFilter 限流、GrayFilter 灰度路由）。数据平面（Filter 执行）和控制平面（规则配置）分离，规则放配置中心热更新。网关本身多实例部署
+    + 客户端负载均衡（SLB/Nginx 前置），单实例故障秒级摘除。限流用令牌桶做单机限流 + Redis 做集群限流（统一计数）。
 follow_up:
-  - Spring Cloud Gateway 和 Zuul 区别？——Zuul 1.x 是同步阻塞（Servlet + 每请求一线程），Zuul 2.x 是异步非阻塞（Netty）；SCG 是异步非阻塞（Netty + Reactor），性能比 Zuul 1.x 高 50%+。Spring 官方主推 SCG
-  - 网关怎么做集群限流？——单机令牌桶限流会出现"总流量超限但单机没超"的问题。集群限流用 Redis + Lua 原子扣减令牌，或 Sentinel 集群流控（选一台做 Token Server）。代价是多一次 Redis 往返，QPS 上限受 Redis 制约
-  - 灰度发布怎么保证会话粘连？——用户首次请求路由到灰度实例后，网关在响应头种 Cookie（如 x-gray=v2），后续请求带该 Cookie 就固定路由到 v2。否则同一用户一会儿 v1 一会儿 v2 体验割裂
-  - 网关挂了全站不可用怎么办？——网关是单点强依赖，必须高可用：多实例 + 前置 SLB（如 AWS ALB/阿里 SLB）做健康检查，故障实例秒级摘除；跨可用区部署防机房级故障；降级方案是网关挂时走静态降级页（SLB 配置兜底）
-  - 网关为什么用异步非阻塞（Netty）而不是 Tomcat？——网关 IO 密集（大量转发），Tomcat 同步阻塞模型每请求一线程，万级并发要万级线程，内存和上下文切换扛不住。Netty 异步非阻塞少量线程处理大量连接，背压可控
+- Spring Cloud Gateway 和 Zuul 区别？——Zuul 1.x 是同步阻塞（Servlet + 每请求一线程），Zuul 2.x 是异步非阻塞（Netty）；SCG
+  是异步非阻塞（Netty + Reactor），性能比 Zuul 1.x 高 50%+。Spring 官方主推 SCG
+- 网关怎么做集群限流？——单机令牌桶限流会出现"总流量超限但单机没超"的问题。集群限流用 Redis + Lua 原子扣减令牌，或 Sentinel 集群流控（选一台做
+  Token Server）。代价是多一次 Redis 往返，QPS 上限受 Redis 制约
+- 灰度发布怎么保证会话粘连？——用户首次请求路由到灰度实例后，网关在响应头种 Cookie（如 x-gray=v2），后续请求带该 Cookie 就固定路由到 v2。否则同一用户一会儿
+  v1 一会儿 v2 体验割裂
+- 网关挂了全站不可用怎么办？——网关是单点强依赖，必须高可用：多实例 + 前置 SLB（如 AWS ALB/阿里 SLB）做健康检查，故障实例秒级摘除；跨可用区部署防机房级故障；降级方案是网关挂时走静态降级页（SLB
+  配置兜底）
+- 网关为什么用异步非阻塞（Netty）而不是 Tomcat？——网关 IO 密集（大量转发），Tomcat 同步阻塞模型每请求一线程，万级并发要万级线程，内存和上下文切换扛不住。Netty
+  异步非阻塞少量线程处理大量连接，背压可控
 memory_points:
-  - SCG = Route（路由）+ Predicate（断言）+ Filter（过滤器）三要素
-  - 限流算法：固定窗口（简单有临界突发）、滑动窗口（平滑）、令牌桶（允许突发）、漏桶（强制匀速）
-  - 鉴权 JWT 无状态校验放网关，业务服务不再解析 token
-  - 灰度路由维度：Header/Cookie/IP/UID/权重
-  - 集群限流 = Redis + Lua 原子扣减令牌，或 Sentinel 集群流控
-  - 网关自身高可用：多实例 + SLB + 跨 AZ + 降级页
+- SCG = Route（路由）+ Predicate（断言）+ Filter（过滤器）三要素
+- 限流算法：固定窗口（简单有临界突发）、滑动窗口（平滑）、令牌桶（允许突发）、漏桶（强制匀速）
+- 鉴权 JWT 无状态校验放网关，业务服务不再解析 token
+- 灰度路由维度：Header/Cookie/IP/UID/权重
+- 集群限流 = Redis + Lua 原子扣减令牌，或 Sentinel 集群流控
+- 网关自身高可用：多实例 + SLB + 跨 AZ + 降级页
+frequency: high
 ---
 
 # 【Java 后端架构师】网关鉴权、路由、限流与灰度发布
@@ -513,6 +523,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

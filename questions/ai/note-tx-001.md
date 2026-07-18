@@ -27,6 +27,7 @@ memory_points:
 - 动作拆解：Agent决策分为Write（写）、Retrieve（取）、Forget（忘）。
 - 四层体系：反事实任务奖励（最终质量）、检索引用奖励（被用即得分）、效率奖励（惩罚冗余）、遗忘奖励（淘汰过期）。
 - 优先策略：多依靠检索引用等即时可验证信号，缓解任务奖励的延迟问题。
+frequency: high
 ---
 
 # 【腾讯面经】Memory Agent 的奖励设计怎么做？
@@ -109,6 +110,43 @@ $$R_{\text{forget}} = \begin{cases} +r & \text{if forgetting stale/incorrect inf
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Agent process
+    class B decision
+    class C special
+    class DPO error
+    class Forget info
+    class GRPO start
+    class Judge process
+    class LLM decision
+    class Memory special
+    class Model error
+    class P1 info
+    class P2 start
+    class P3 process
+    class PPO decision
+    class Phase special
+    class RM error
+    class R_efficiency info
+    class R_forget start
+    class R_retrieval process
+    class R_task decision
+    class R_total special
+    class Retrieve error
+    class Reward info
+    class SFT start
+    class Write process
+    class br decision
+    class w1 special
+    class w2 error
+    class w3 info
+    class w4 start
     P1["Phase 1: SFT (监督微调)<br/>收集专家轨迹 → 让Agent学会基本的记忆操作格式和流程<br/>(Write/Retrieve/Forget 的正确格式、时机)"]
     subgraph P2["Phase 2: Reward Model 训练"]
         A["人工标注<br/>(高质量)"]

@@ -9,9 +9,11 @@ tags:
 - 重排
 - 置信度
 feynman:
-  essence: RAG 召回评测的本质是"用标注好的 query-doc 对量化检索质量"——recall@k（Top-K 是否包含相关文档）、MRR（相关文档排名倒数）、NDCG（排序质量）。重排（rerank）是用 cross-encoder 精排双塔召回的粗结果，把"语义相关但排序不准"修正到准确。答案置信度是"让模型自评 + 检索证据支撑度"双信号融合，低置信度触发拒答或转人工。
+  essence: RAG 召回评测的本质是"用标注好的 query-doc 对量化检索质量"——recall@k（Top-K 是否包含相关文档）、MRR（相关文档排名倒数）、NDCG（排序质量）。重排（rerank）是用
+    cross-encoder 精排双塔召回的粗结果，把"语义相关但排序不准"修正到准确。答案置信度是"让模型自评 + 检索证据支撑度"双信号融合，低置信度触发拒答或转人工。
   analogy: 像高考录取——双塔召回是"初筛过线"（量大但粗），cross-encoder 重排是"面试精筛"（慢但准），置信度是"综合分是否够投档线"（不够就补录或退档）。
-  first_principle: 检索质量 = 召回率 × 精确率 × 排序质量。双塔（embedding）召回率高但排序粗（只算向量余弦），cross-encoder 精排排序准但慢（query+doc 拼接过 transformer）。两者级联：双塔取 Top-50，cross-encoder 精排取 Top-5，兼顾召回和精度。
+  first_principle: 检索质量 = 召回率 × 精确率 × 排序质量。双塔（embedding）召回率高但排序粗（只算向量余弦），cross-encoder
+    精排排序准但慢（query+doc 拼接过 transformer）。两者级联：双塔取 Top-50，cross-encoder 精排取 Top-5，兼顾召回和精度。
   key_points:
   - 评测三指标：recall@k（召回率）、MRR（平均倒数排名）、NDCG（归一化折损累积增益）
   - 重排核心：cross-encoder（bge-reranker）比双塔精度高 10-20%，但慢 10 倍，只重排 Top-50
@@ -25,19 +27,26 @@ first_principle:
   - cross-encoder（query+doc 拼接）捕获交互信息，精度高但计算量大（每对都要过 transformer）
   - 召回不相关文档会污染 LLM 上下文导致幻觉，必须用置信度兜底
   - 评测必须离线化（标注集）+ 在线化（用户反馈），不能靠感觉
-  rebuild: 三段式——双塔召回 Top-50（混合向量+BM25 用 RRF 融合）→ cross-encoder 重排 Top-5（bge-reranker）→ 喂 LLM 生成答案并算置信度（logit + citation + retrieval 三信号），低置信度拒答转人工。离线用标注集跑 recall@10/MRR/NDCG，在线看 answer_citation_rate 和 user_feedback。
+  rebuild: 三段式——双塔召回 Top-50（混合向量+BM25 用 RRF 融合）→ cross-encoder 重排 Top-5（bge-reranker）→
+    喂 LLM 生成答案并算置信度（logit + citation + retrieval 三信号），低置信度拒答转人工。离线用标注集跑 recall@10/MRR/NDCG，在线看
+    answer_citation_rate 和 user_feedback。
 follow_up:
-  - cross-encoder 为什么比双塔准？——双塔是 query 和 doc 分别编码后算余弦，交互信息只在最后点积；cross-encoder 是 query+doc 拼接后过 transformer，每层都有 attention 交互，能捕获细粒度匹配（如"退货"和"7天无理由"的语义关联）。
-  - 重排模型怎么选？——中文用 bge-reranker-large（27亿参数，精度高）、bge-reranker-base（560M，性价比高）。英文用 cohere-rerank-3 或 bge-reranker-en。私有化部署首选 BGE 系列（开源）。
-  - 置信度阈值怎么定？——用标注集跑，把"应该能回答"和"应该拒答"两类样本的置信度分布画出来，取两类分布交叉点作为阈值。一般 0.6-0.7。
-  - 召回质量突然下降怎么发现？——在线监控 recall@10（用隐式反馈：用户点了"没有帮助"的 query 回溯看召回结果）+ 离线回归测试（每次索引/embedding 变更跑评测集）。
-  - NDCG 和 MRR 区别？——MRR 只看第一个相关文档的排名；NDCG 考虑所有相关文档的排名且靠前的权重更高（折损）。推荐场景用 NDCG（多相关文档），问答场景用 MRR（一个正确答案）。
+- cross-encoder 为什么比双塔准？——双塔是 query 和 doc 分别编码后算余弦，交互信息只在最后点积；cross-encoder 是 query+doc
+  拼接后过 transformer，每层都有 attention 交互，能捕获细粒度匹配（如"退货"和"7天无理由"的语义关联）。
+- 重排模型怎么选？——中文用 bge-reranker-large（27亿参数，精度高）、bge-reranker-base（560M，性价比高）。英文用 cohere-rerank-3
+  或 bge-reranker-en。私有化部署首选 BGE 系列（开源）。
+- 置信度阈值怎么定？——用标注集跑，把"应该能回答"和"应该拒答"两类样本的置信度分布画出来，取两类分布交叉点作为阈值。一般 0.6-0.7。
+- 召回质量突然下降怎么发现？——在线监控 recall@10（用隐式反馈：用户点了"没有帮助"的 query 回溯看召回结果）+ 离线回归测试（每次索引/embedding
+  变更跑评测集）。
+- NDCG 和 MRR 区别？——MRR 只看第一个相关文档的排名；NDCG 考虑所有相关文档的排名且靠前的权重更高（折损）。推荐场景用 NDCG（多相关文档），问答场景用
+  MRR（一个正确答案）。
 memory_points:
-  - 评测三指标：recall@k（召回）、MRR（首命中排名）、NDCG（排序质量）
-  - 重排：cross-encoder（bge-reranker）比双塔精度高 10-20%，只重排 Top-50
-  - RRF 融合：score = Σ 1/(k+rank)，k=60，向量+BM25 两路合并
-  - 置信度三信号：logit_entropy + citation_coverage + retrieval_score
-  - 拒答：置信度 < 0.6 拒答转人工，防幻觉最后防线
+- 评测三指标：recall@k（召回）、MRR（首命中排名）、NDCG（排序质量）
+- 重排：cross-encoder（bge-reranker）比双塔精度高 10-20%，只重排 Top-50
+- RRF 融合：score = Σ 1/(k+rank)，k=60，向量+BM25 两路合并
+- 置信度三信号：logit_entropy + citation_coverage + retrieval_score
+- 拒答：置信度 < 0.6 拒答转人工，防幻觉最后防线
+frequency: medium
 ---
 
 # 【Java 后端架构师】RAG 召回评测、重排与答案置信度
@@ -351,6 +360,31 @@ RAG 质量问题的根因定位链路：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Cross special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class S1 process
+    class S2 decision
+    class S3 special
+    class br error
+    class rank info
+    class score start
     A[用户Query] --> B[Embedding语义向量化]
     A --> C[BM25关键词分词]
     subgraph S1 [混合召回层]

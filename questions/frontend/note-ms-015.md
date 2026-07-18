@@ -30,6 +30,7 @@ memory_points:
 - 三层校验架构：L1格式（硬拒绝）、L2内容（强提示）、L3语义（软提示）
 - L1查类型大小、L2查可读结构、L3用轻量模型比对任务相关性
 - 校验管道化：各层规则独立，支持异步串联执行并聚合反馈结果
+frequency: low
 ---
 
 # 【月之暗面面经】如果用户给了错误的文件上下文，前端怎样尽早发现并提示？
@@ -783,6 +784,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

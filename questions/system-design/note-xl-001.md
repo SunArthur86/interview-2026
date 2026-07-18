@@ -30,6 +30,7 @@ memory_points:
 - 核心数据流：CDC采集 → Kafka缓冲 → Go服务分词 → 加权计分(转5评3赞1)
 - 实时排名：Redis ZSET维护TOP50热榜，TTL防旧榜，1分钟定时持久化
 - 防刷保稳：Sentinel做接口/用户/IP多维限流，计算层过滤异常互动数据
+frequency: low
 ---
 
 # 从零设计微博热搜实时计算服务
@@ -38,6 +39,36 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CDC start
+    class CK process
+    class CONS decision
+    class FLUSH special
+    class Flume error
+    class IK info
+    class Kafka start
+    class LIMIT process
+    class MQ decision
+    class MySQL special
+    class NLP error
+    class REDIS info
+    class Redis start
+    class SRC process
+    class SYS decision
+    class Sentinel special
+    class T1 error
+    class T2 info
+    class TOP50 start
+    class ZSET process
+    class br decision
+    class partition special
+    class score error
+    class topic info
     subgraph SYS["微博热搜实时计算架构"]
         SRC["博文采集<br/>(Flume/CDC)"]
         MQ["Kafka<br/>(3个 partition)"]

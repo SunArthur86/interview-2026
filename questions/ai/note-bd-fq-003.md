@@ -32,6 +32,7 @@ memory_points:
 - 置信度排序：用户明说 > 行为推断 > 群体假设，结合时间衰减因子综合打分
 - 版本化：记忆更新采用追加而非覆盖，支持快速Rollback到历史状态
 - 终极兜底：当高置信度记忆发生直接语义冲突时，触发澄清机制交给用户决策
+frequency: medium
 ---
 
 # 多轮对话中，如果不同轮次的记忆发生冲突，你如何处理？
@@ -206,6 +207,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

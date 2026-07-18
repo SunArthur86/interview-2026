@@ -30,6 +30,7 @@ memory_points:
 - 计算四步口诀：算内积（Q乘K转置）→缩放（除以根号d）→归一化→加权聚合（乘V）。
 - 缩放原因：因为内积过大会导致Softmax进入饱和区引起梯度消失，所以需除以根号d。
 - 多头机制：因为多组并行计算能捕捉不同子空间特征，所以融合后表达力更强。
+frequency: medium
 ---
 
 # 自注意力机制的计算过程是怎样的？Q、K、V分别是什么？
@@ -244,6 +245,7 @@ flowchart TD
     style SCALE fill:#FF9800,color:#fff
     style SOFT fill:#9C27B0,color:#fff
     style WEIGHT fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

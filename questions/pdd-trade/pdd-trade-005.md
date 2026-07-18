@@ -34,6 +34,7 @@ memory_points:
 - 鉴权统一（JWT/Session）
 - 灰度：按 UID/版本路由
 - 无状态+水平扩容
+frequency: high
 ---
 
 # 【拼多多交易】网关怎么设计？怎么扛百万 QPS？
@@ -217,6 +218,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

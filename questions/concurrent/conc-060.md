@@ -15,6 +15,7 @@ memory_points:
 - 对比记忆：ThreadLocal 是空间换时间（数据隔离），Synchronized 是时间换空间（数据同步）。
 - 经典场景：解决 SimpleDateFormat 线程不安全问题，或用于 MDC 全链路日志追踪。
 - 延迟初始化：重写 initialValue() 或用 withInitial()，只有在首次 get 时才创建对象。
+frequency: high
 ---
 
 # java 并发 中的 ThreadLocal是什么？
@@ -127,6 +128,7 @@ flowchart TD
     style LEAK_RISK fill:#F44336,color:#fff
     style REMOVE fill:#009688,color:#fff
     style TTL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

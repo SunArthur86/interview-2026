@@ -16,6 +16,7 @@ memory_points:
 - 核心机制：入队执行siftUp(上浮)，出队执行siftDown(下沉)，保证堆顶最值。
 - 性能与限制：插入删除复杂度O(log N)；非线程安全且不允许null。
 - 实战应用：常用于海量数据求Top K问题，维护大小为K的小顶堆。
+frequency: medium
 ---
 
 # PriorityQueue是什么？
@@ -92,6 +93,35 @@ System.out.println(maxHeap.poll()); // 20
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class O process
+    class Object decision
+    class PriorityQueue special
+    class br error
+    class log info
+    class n start
+    class offer process
+    class poll decision
+    class siftDown special
+    class siftUp error
     A[PriorityQueue] --> B[底层 Object 数组]
     B --> C[以二叉小顶堆组织]
     C --> D[父节点 ≤ 子节点]

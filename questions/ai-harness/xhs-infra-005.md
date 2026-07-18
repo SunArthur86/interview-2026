@@ -28,6 +28,7 @@ memory_points:
 - AWQ：激活感知量化，保留 1% 关键通道为 FP16，推理速度优于 GPTQ。
 - SmoothQuant：将激活难度迁移至权重，解决异常值问题，适合 INT8。
 - FP8：H100 原生支持，无需软件模拟，量化误差最小，依赖硬件。
+frequency: medium
 ---
 
 # 模型量化方法对比：GPTQ vs AWQ vs FP8 vs SmoothQuant，各有什么优缺点？
@@ -117,6 +118,21 @@ def scale_weights(layer, activation_scale):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AWQ start
+    class Choice process
+    class FP8 decision
+    class GPTQ special
+    class Model error
+    class Smooth info
+    class SmoothQuant start
+    class W8A8 process
+    class br decision
     Model[FP16模型] --> Choice{量化方案}
     Choice -->|二阶梯度| GPTQ[GPTQ<br/>INT4精度高]
     Choice -->|激活感知| AWQ[AWQ<br/>1%关键通道FP16]

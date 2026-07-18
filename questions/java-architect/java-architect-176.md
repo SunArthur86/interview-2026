@@ -11,7 +11,8 @@ tags:
 - 高并发
 feynman:
   essence: 直播弹幕的核心是"房间分片 + 多级消息总线 + 礼物连击合并"。百万级观众的消息不能全走 DB，靠 Redis Pub/Sub + 房间分片把消息路由到对应连接节点。礼物连击（combo）靠滑动窗口合并，减少渲染压力。
-  analogy: 像体育场大屏——观众喊话不能直接上大屏（百万声音会乱），要通过分区主持人（房间分片）收集，按主题过滤后（敏感词）上屏。礼物连击像团购——10 秒内多人送同款合并成一个"XX 送了 99 朵玫瑰"。
+  analogy: 像体育场大屏——观众喊话不能直接上大屏（百万声音会乱），要通过分区主持人（房间分片）收集，按主题过滤后（敏感词）上屏。礼物连击像团购——10
+    秒内多人送同款合并成一个"XX 送了 99 朵玫瑰"。
   first_principle: 直播间的难点是"写放大"（百万观众，每人发消息都要广播给其他人）。单机扛不住，必须分片——房间路由到固定节点，节点内用本地广播。礼物连击是"读放大"（高频渲染），靠窗口合并降频。
   key_points:
   - 房间分片：roomId hash 到固定节点，节点内本地广播
@@ -26,19 +27,22 @@ first_principle:
   - 礼物连击（高频）直接渲染会卡，必须合并
   - UGC 内容有违规风险，必须实时过滤
   - 消息不能丢（礼物涉及钱），但弹幕可以容忍少量丢
-  rebuild: 房间按 hash 路由到固定节点（一致性 hash，节点扩缩容时迁移最小）。节点内维护"本节点连到该房间的所有用户 session"，消息到节点后本地广播。礼物连击用滑动窗口合并（10 秒内同款合并成一个 combo）。敏感词用 AC 自动机（多模式匹配 O(n)）。礼物走 Kafka 保可靠，弹幕走 Redis Pub/Sub 保低延迟。
+  rebuild: 房间按 hash 路由到固定节点（一致性 hash，节点扩缩容时迁移最小）。节点内维护"本节点连到该房间的所有用户 session"，消息到节点后本地广播。礼物连击用滑动窗口合并（10
+    秒内同款合并成一个 combo）。敏感词用 AC 自动机（多模式匹配 O(n)）。礼物走 Kafka 保可靠，弹幕走 Redis Pub/Sub 保低延迟。
 follow_up:
-  - 房间怎么分片？——一致性 hash。roomId hash 到 hash 环，找最近的节点。扩容时只迁移相邻段。虚拟节点（每物理节点 150 个虚拟节点）解决数据倾斜。
-  - 用户连哪个节点？——网关查"房间→节点"路由表（Redis），返回节点 IP，用户 WebSocket 连该节点。
-  - 弹幕和礼物为什么分开通道？——礼物涉及钱走 Kafka（可靠，ack），弹幕容忍丢走 Redis Pub/Sub（低延迟，无 ack）。
-  - 礼物连击怎么实现？——Redis 滑动窗口。key=gift:combo:{roomId}:{giftId}，10 秒内累加 count。定时任务（每 500ms）扫描过期 combo 下发最终结果。
-  - 主播端消息太多怎么办？——聚合下发。主播端不是每条都收，而是每 200ms 聚合一批（最多 50 条）。监控 broadcast_latency。
+- 房间怎么分片？——一致性 hash。roomId hash 到 hash 环，找最近的节点。扩容时只迁移相邻段。虚拟节点（每物理节点 150 个虚拟节点）解决数据倾斜。
+- 用户连哪个节点？——网关查"房间→节点"路由表（Redis），返回节点 IP，用户 WebSocket 连该节点。
+- 弹幕和礼物为什么分开通道？——礼物涉及钱走 Kafka（可靠，ack），弹幕容忍丢走 Redis Pub/Sub（低延迟，无 ack）。
+- 礼物连击怎么实现？——Redis 滑动窗口。key=gift:combo:{roomId}:{giftId}，10 秒内累加 count。定时任务（每 500ms）扫描过期
+  combo 下发最终结果。
+- 主播端消息太多怎么办？——聚合下发。主播端不是每条都收，而是每 200ms 聚合一批（最多 50 条）。监控 broadcast_latency。
 memory_points:
-  - 房间分片：一致性 hash，roomId → 节点，虚拟节点 150
-  - 消息总线：弹幕 Redis Pub/Sub（低延迟），礼物 Kafka（可靠）
-  - 礼物连击：滑动窗口 10s 合并，combo count
-  - 敏感词：AC 自动机 O(n) 多模式匹配
-  - 限流：用户级令牌桶（每秒 N 条），房间级 QPS 上限
+- 房间分片：一致性 hash，roomId → 节点，虚拟节点 150
+- 消息总线：弹幕 Redis Pub/Sub（低延迟），礼物 Kafka（可靠）
+- 礼物连击：滑动窗口 10s 合并，combo count
+- 敏感词：AC 自动机 O(n) 多模式匹配
+- 限流：用户级令牌桶（每秒 N 条），房间级 QPS 上限
+frequency: high
 ---
 
 # 【Java 后端架构师】直播间高并发弹幕与礼物链路
@@ -408,6 +412,31 @@ public class StreamerAggregator {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class B1 special
+    class C1 error
+    class C2 info
+    class D1 start
+    class D2 process
+    class E1 decision
+    class F1 special
+    class G1 error
+    class G2 info
+    class H1 start
+    class Kafka process
+    class LLM decision
+    class Pub special
+    class Redis error
+    class Sub info
+    class br start
     A1["用户进入直播间"] --> A2["网关查询房间路由"]
     A2 --> B1[("一致性Hash环<br/>虚拟节点150")]
     B1 --> A3["建立WebSocket长连接"]

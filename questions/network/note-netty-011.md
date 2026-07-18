@@ -10,8 +10,10 @@ tags:
 - 池化
 - 引用计数
 feynman:
-  essence: ByteBuf 是 Netty 重新设计的字节容器，解决 JDK ByteBuffer"用起来过于复杂繁琐"的痛点。它的核心改进是：读写用两个独立指针（不用 flip）、支持池化和引用计数、内置复合缓冲区实现透明零拷贝、可按需扩容。
-  analogy: JDK ByteBuffer 像"一个指针的磁带"——录音（写）和播放（读）共用一个磁头，写完想读必须先 flip（倒带）再读，忘了 flip 就会读到垃圾或越界。ByteBuf 像"双指针的卷尺"——读指针和写指针各管各的，写完直接读，不用倒带，还能把多段卷尺拼接（零拷贝）。
+  essence: ByteBuf 是 Netty 重新设计的字节容器，解决 JDK ByteBuffer"用起来过于复杂繁琐"的痛点。它的核心改进是：读写用两个独立指针（不用
+    flip）、支持池化和引用计数、内置复合缓冲区实现透明零拷贝、可按需扩容。
+  analogy: JDK ByteBuffer 像"一个指针的磁带"——录音（写）和播放（读）共用一个磁头，写完想读必须先 flip（倒带）再读，忘了 flip
+    就会读到垃圾或越界。ByteBuf 像"双指针的卷尺"——读指针和写指针各管各的，写完直接读，不用倒带，还能把多段卷尺拼接（零拷贝）。
   key_points:
   - JDK ByteBuffer痛点:读写共用一指针,需手动flip(),使用繁琐
   - ByteBuf核心:读写双索引(无需flip)+可扩容+池化+引用计数+复合缓冲区(零拷贝)
@@ -26,14 +28,15 @@ first_principle:
   - 多个缓冲区合并应避免内存拷贝→零拷贝
   rebuild: 从"字节容器该有的样子"出发→读写用两个独立指针(readerIndex/writerIndex)消除flip→容量可按需增长(像StringBuilder)→用池化复用减少GC→用引用计数精确管理生命周期→用复合缓冲区(CompositeByteBuf)实现透明零拷贝→得到ByteBuf。
 follow_up:
-  - ByteBuf 的引用计数（ReferenceCounted）如何工作？内存泄漏如何排查？
-  - 堆内 ByteBuf 和直接 ByteBuf（Direct）的区别？
-  - CompositeByteBuf 如何实现零拷贝？
+- ByteBuf 的引用计数（ReferenceCounted）如何工作？内存泄漏如何排查？
+- 堆内 ByteBuf 和直接 ByteBuf（Direct）的区别？
+- CompositeByteBuf 如何实现零拷贝？
 memory_points:
-  - 痛点：网络数据基本单位是字节；JDK ByteBuffer 使用过于复杂繁琐
-  - 8 大优势：可扩展/复合缓冲区零拷贝/容量可增长/读写不需flip/读写不同索引/链式调用/引用计数/池化
-  - 关键改进：读写双索引 readerIndex + writerIndex，读写切换不需 flip()
-  - ByteBuf 大量被 ChannelHandler 使用
+- 痛点：网络数据基本单位是字节；JDK ByteBuffer 使用过于复杂繁琐
+- 8 大优势：可扩展/复合缓冲区零拷贝/容量可增长/读写不需flip/读写不同索引/链式调用/引用计数/池化
+- 关键改进：读写双索引 readerIndex + writerIndex，读写切换不需 flip()
+- ByteBuf 大量被 ChannelHandler 使用
+frequency: medium
 ---
 
 # ByteBuf 相比 ByteBuffer 的优势？
@@ -303,6 +306,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

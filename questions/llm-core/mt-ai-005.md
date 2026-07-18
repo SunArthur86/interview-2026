@@ -30,6 +30,7 @@ memory_points:
 - SFT 细节：数据质量重于数量，核心是让模型听懂指令并严格遵循输出格式。
 - RLHF vs DPO：因为 RLHF 训练极度复杂且不稳，所以 DPO 免去 RM 直接偏好优化成高性价比首选。
 - 进阶演进：DeepSeek-R1 跳过 SFT 直接进行强化学习，验证了纯 RL 激发深度推理的潜力。
+frequency: medium
 ---
 
 # 【美团面经】说一说大模型后训练（Post-training）的流程？
@@ -109,6 +110,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

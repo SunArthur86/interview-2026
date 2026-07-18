@@ -30,6 +30,7 @@ memory_points:
 - 随机数安全：生成验证码或概率计算必须用SecureRandom，禁用Random防特征预测
 - 短信防刷：Redis强制限制同手机号60s频控及同IP总量，并前置图形验证码拦截脚本
 - 安全闭环：验证通过后必须立刻DEL Redis Key，防止验证码被重放攻击恶意复用
+frequency: medium
 ---
 
 # 如何设计一个短视频推荐系统？类似抖音/TikTok。
@@ -151,6 +152,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

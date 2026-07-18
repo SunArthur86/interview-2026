@@ -30,6 +30,7 @@ memory_points:
 - 容量制约：数据量激增致缓存命中率降，是QPS断崖式下跌主因
 - 命中年人：命中率跌破95%性能明显下降，跌破90%直接断崖
 - 应对策略：引入本地多级缓存顶住热点，配合预热防穿透DB
+frequency: high
 ---
 
 # 【滴滴面经】压测时最多能存多少数据？不同数据量下，短链系统的 QPS 表现怎么样？
@@ -172,6 +173,23 @@ end
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class Go process
+    class H decision
+    class Java special
+    class Z error
     A[客户端发起短链请求] --> B[应用层Nginx+Go/Java]
     B --> C{查询L1本地缓存}
     C -->|未命中| D{查询L2 Redis缓存}

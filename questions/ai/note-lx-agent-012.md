@@ -31,6 +31,7 @@ memory_points:
 - 全量加载导致Token爆炸和选择困难，渐进式按需加载提升准确率
 - 三级架构：Level1常驻摘要列表，Level2按需展开Schema，Level3执行时注入示例
 - 防上下文污染：常驻区只留工具名加一句话简介，预留充足对话空间
+frequency: medium
 ---
 
 # Skill的渐进式披露是什么意思，为什么它能提升Agent的稳定性？
@@ -206,6 +207,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

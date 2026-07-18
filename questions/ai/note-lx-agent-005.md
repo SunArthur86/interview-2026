@@ -32,6 +32,7 @@ memory_points:
 - 方案一：将最近 N 轮历史对话拼入 Prompt 供大模型综合识别
 - 方案二：引入对话状态追踪 DST，持续更新实体与槽位状态
 - 进阶机制：基于意图链推理，预测用户下一步动作以提前准备
+frequency: medium
 ---
 
 # 主Agent的意图识别应该怎么做，为什么单轮分类器经常不够用？
@@ -161,6 +162,27 @@ def multi_intent_detection(user_input: str) -> list:
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Action start
+    class Agent process
+    class Client decision
+    class DST special
+    class E error
+    class L1 info
+    class L2 start
+    class LLM process
+    class O1 decision
+    class P special
+    class R error
+    class S1 info
+    class Server start
+    class U process
+    class br decision
     subgraph Client[用户交互]
         U["多轮对话输入"]
     end

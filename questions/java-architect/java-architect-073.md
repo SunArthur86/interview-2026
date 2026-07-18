@@ -9,9 +9,11 @@ tags:
 - Spring Cloud Alibaba
 - 治理
 feynman:
-  essence: Dubbo 到 SCA（Spring Cloud Alibaba）的迁移本质是"通信协议（Dubbo TCP vs HTTP/Feign）+ 注册发现（Zookeeper/Nacos）+ 治理能力（Dubbo SPI vs SCA 生态）"三件事的切换。风险不在框架本身，而在"迁移过程中新老框架并存调用、注册中心数据不一致、治理规则失效"三类问题。
+  essence: Dubbo 到 SCA（Spring Cloud Alibaba）的迁移本质是"通信协议（Dubbo TCP vs HTTP/Feign）+
+    注册发现（Zookeeper/Nacos）+ 治理能力（Dubbo SPI vs SCA 生态）"三件事的切换。风险不在框架本身，而在"迁移过程中新老框架并存调用、注册中心数据不一致、治理规则失效"三类问题。
   analogy: 像把一条运行中的老铁路（Dubbo 专线）换成新高铁（SCA），不能停运。先修并行新轨道（双注册），让部分列车试跑新线（灰度），新老车站都能接发（双消费），最后全量切到新线。
-  first_principle: 框架迁移的难点是"不停机 + 不丢请求 + 可回滚"。Dubbo 和 SCA 的服务模型不同（Dubbo 私有协议 + 接口级注册，SCA 是 HTTP/Feign + 应用级注册），不能直接替换。必须让新老框架在过渡期并存——同一服务同时注册到 Dubbo 和 Nacos，消费端逐步切到新框架。
+  first_principle: 框架迁移的难点是"不停机 + 不丢请求 + 可回滚"。Dubbo 和 SCA 的服务模型不同（Dubbo 私有协议 + 接口级注册，SCA
+    是 HTTP/Feign + 应用级注册），不能直接替换。必须让新老框架在过渡期并存——同一服务同时注册到 Dubbo 和 Nacos，消费端逐步切到新框架。
   key_points:
   - Dubbo：私有 TCP 协议（默认 dubbo 协议）、接口级注册（每个方法注册到 ZK/Nacos）、SPI 扩展强
   - SCA：HTTP/Feign（或 Dubbo Spring Cloud 两种都行）、应用级注册（Spring Cloud LoadBalancer）、生态广
@@ -24,19 +26,26 @@ first_principle:
   - 迁移期新旧框架必须共存，消费端能同时调用新旧 provider
   - 注册中心是强依赖，切换期间不能丢实例、不能让调用断
   - 治理规则（超时、重试、限流、熔断）必须等价迁移，否则线上行为变化
-  rebuild: 分阶段推进——第一阶段双注册（服务同时注册到 ZK 和 Nacos，消费端仍走 Dubbo）；第二阶段灰度消费（新部署的 SCA 消费端开始调 SCA provider，按流量标签灰度）；第三阶段治理规则等价迁移（Dubbo 的 timeout/retries 转成 SCA 的 Feign 配置或 Sentinel 规则）；第四阶段下线 Dubbo（注册中心摘除 Dubbo 实例）。全程用 traceId 对账，发现调用失败率上升立即回滚。
+  rebuild: 分阶段推进——第一阶段双注册（服务同时注册到 ZK 和 Nacos，消费端仍走 Dubbo）；第二阶段灰度消费（新部署的 SCA 消费端开始调
+    SCA provider，按流量标签灰度）；第三阶段治理规则等价迁移（Dubbo 的 timeout/retries 转成 SCA 的 Feign 配置或
+    Sentinel 规则）；第四阶段下线 Dubbo（注册中心摘除 Dubbo 实例）。全程用 traceId 对账，发现调用失败率上升立即回滚。
 follow_up:
-  - 为什么不直接用 Dubbo 3.x 而要迁 SCA？——Dubbo 3.x 已支持应用级注册和 Triple 协议（HTTP/2），与 SCA 生态融合。如果只是想升级，Dubbo 2→3 比迁 SCA 成本低。但如果要统一到 Spring Cloud 生态（Feign/Gateway/Sentinel/Nacos），才需要迁 SCA
-  - 双注册期间调用会串吗？——会。消费端如果同时订阅 Dubbo 和 SCA 注册中心，可能一会调 Dubbo provider 一会调 SCA provider。要确保新老 provider 行为一致（同一份代码两种协议暴露），或用流量标签隔离
-  - 治理规则怎么等价迁移？——Dubbo 的 timeout=1000 retries=2 对应 Feign 的 client config（connectTimeout/readTimeout）+ Sentinel 重试规则。要逐条对照，不能遗漏（漏了可能线上超时行为变化导致雪崩）
-  - 注册中心怎么平滑切换？——如果用 Nacos，Dubbo 3.x 原生支持 Nacos 注册，可以先把 Dubbo 注册中心从 ZK 切到 Nacos（配置改一下），再考虑框架迁移。注册中心先行，降低风险
-  - 迁移过程中怎么对账？——按 traceId 统计调用成功率，对比迁移前后的 rpc_success_rate。灰度实例的 service_error_rate 不能高于基线，否则立即回滚
+- 为什么不直接用 Dubbo 3.x 而要迁 SCA？——Dubbo 3.x 已支持应用级注册和 Triple 协议（HTTP/2），与 SCA 生态融合。如果只是想升级，Dubbo
+  2→3 比迁 SCA 成本低。但如果要统一到 Spring Cloud 生态（Feign/Gateway/Sentinel/Nacos），才需要迁 SCA
+- 双注册期间调用会串吗？——会。消费端如果同时订阅 Dubbo 和 SCA 注册中心，可能一会调 Dubbo provider 一会调 SCA provider。要确保新老
+  provider 行为一致（同一份代码两种协议暴露），或用流量标签隔离
+- 治理规则怎么等价迁移？——Dubbo 的 timeout=1000 retries=2 对应 Feign 的 client config（connectTimeout/readTimeout）+
+  Sentinel 重试规则。要逐条对照，不能遗漏（漏了可能线上超时行为变化导致雪崩）
+- 注册中心怎么平滑切换？——如果用 Nacos，Dubbo 3.x 原生支持 Nacos 注册，可以先把 Dubbo 注册中心从 ZK 切到 Nacos（配置改一下），再考虑框架迁移。注册中心先行，降低风险
+- 迁移过程中怎么对账？——按 traceId 统计调用成功率，对比迁移前后的 rpc_success_rate。灰度实例的 service_error_rate
+  不能高于基线，否则立即回滚
 memory_points:
-  - 迁移四阶段：双注册 → 灰度消费 → 治理规则等价迁移 → 下线 Dubbo
-  - 三大风险：注册中心数据不一致、治理规则失效、新老并存调用混乱
-  - 优先考虑 Dubbo 3.x（应用级注册 + Triple 协议 + SCA 融合），不一定非迁 SCA
-  - 治理规则逐条对照迁移（Dubbo timeout/retries → Feign/Sentinel）
-  - 用 traceId + service_error_rate + rpc_p99 做迁移期对账
+- 迁移四阶段：双注册 → 灰度消费 → 治理规则等价迁移 → 下线 Dubbo
+- 三大风险：注册中心数据不一致、治理规则失效、新老并存调用混乱
+- 优先考虑 Dubbo 3.x（应用级注册 + Triple 协议 + SCA 融合），不一定非迁 SCA
+- 治理规则逐条对照迁移（Dubbo timeout/retries → Feign/Sentinel）
+- 用 traceId + service_error_rate + rpc_p99 做迁移期对账
+frequency: high
 ---
 
 # 【Java 后端架构师】Dubbo 到 Spring Cloud Alibaba 的迁移治理
@@ -439,6 +448,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

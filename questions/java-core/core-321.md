@@ -16,6 +16,7 @@ memory_points:
 - 致命后果：只重写equals会导致相同对象在HashMap中算出不同Hash，存进去就查不出来。
 - HashMap机制：先用hashCode定位桶位置，再用equals防哈希碰撞，两者缺一不可。
 - Lombok避坑：在继承体系下用@Data，务必加@EqualsAndHashCode(callSuper=true)。
+frequency: high
 ---
 
 # equals()和hashCode()的关系是什么？
@@ -150,6 +151,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

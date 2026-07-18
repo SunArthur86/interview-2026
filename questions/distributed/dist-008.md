@@ -16,6 +16,7 @@ memory_points:
 - 性能导向：响应时间权重会让快机器分到更多请求，最低并发策略则专挑最空闲节点
 - 容错导向：重试策略提供选择失败兜底，可用性过滤会剔除熔断和高并发节点
 - 机房感知：区域感知策略复合判断可用 Zone 与实例，是 Eureka 默认的多机房优选策略
+frequency: high
 ---
 
 # Ribbon内置的负载均衡策略是什么？
@@ -137,6 +138,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

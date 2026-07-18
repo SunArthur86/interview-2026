@@ -9,9 +9,13 @@ tags:
 - 幂等
 - 事务
 feynman:
-  essence: Kafka Exactly-Once（EOS）是"应用可见的恰好一次"——底层仍是 at-least-once（网络可能重投），但通过"幂等 producer（PID + seq 去重）+ 事务（跨分区/跨 producer 原子提交）+ read_committed（只读已提交）"组合，让业务感知不到重复。但 Kafka EOS 只在"Kafka 内部"成立（Kafka-to-Kafka），跨外部系统（写 MySQL/调外部 API）必须业务幂等——这是 EOS 的边界。
+  essence: Kafka Exactly-Once（EOS）是"应用可见的恰好一次"——底层仍是 at-least-once（网络可能重投），但通过"幂等
+    producer（PID + seq 去重）+ 事务（跨分区/跨 producer 原子提交）+ read_committed（只读已提交）"组合，让业务感知不到重复。但
+    Kafka EOS 只在"Kafka 内部"成立（Kafka-to-Kafka），跨外部系统（写 MySQL/调外部 API）必须业务幂等——这是 EOS
+    的边界。
   analogy: Kafka EOS 像快递公司的"签收单系统"——快递员可能送多次（at-least-once），但签收单去重（PID + seq），最终客户只签一次。但如果快递员送完后还要往银行入账，银行系统不知道你只签了一次，必须看你的签收凭证号去重（业务幂等）。
-  first_principle: 为什么 EOS 难？因为分布式系统"恰好一次"是观察者视角——底层一定是 at-least-once + 幂等。Kafka EOS 把"幂等"做到 broker 端（producer 重试 broker 去重），把"原子"做到事务（跨分区提交），但跨边界（外部系统）就管不到了。
+  first_principle: 为什么 EOS 难？因为分布式系统"恰好一次"是观察者视角——底层一定是 at-least-once + 幂等。Kafka EOS
+    把"幂等"做到 broker 端（producer 重试 broker 去重），把"原子"做到事务（跨分区提交），但跨边界（外部系统）就管不到了。
   key_points:
   - 幂等 producer：enable.idempotence=true，PID + sequence number，broker 端去重
   - 事务 producer：transactional.id，beginTransaction + commitTransaction，跨分区原子
@@ -24,19 +28,26 @@ first_principle:
   - 网络重试不可避免，消息可能重复投递
   - producer 重试时不知道 broker 是否已收到，可能写入多次
   - 跨分区/跨系统的多步操作要么全成功要么全失败
-  rebuild: 三层组合。(1) 幂等 producer：每次 send 带 PID + 单调递增 seq，broker 端按 (PID, partition, seq) 去重，重试写入自动去重。(2) 事务 producer：transactional.id 标识事务，beginTransaction → 多分区 send → commitTransaction 原子提交，期间消息对 read_committed 消费者不可见。(3) consume-process-produce：消费者在事务内 sendOffsetsToTransaction，把"消费 offset 提交"和"新消息发送"做原子，实现 Kafka 内 EOS。跨外部系统必须业务幂等。
+  rebuild: 三层组合。(1) 幂等 producer：每次 send 带 PID + 单调递增 seq，broker 端按 (PID, partition,
+    seq) 去重，重试写入自动去重。(2) 事务 producer：transactional.id 标识事务，beginTransaction → 多分区
+    send → commitTransaction 原子提交，期间消息对 read_committed 消费者不可见。(3) consume-process-produce：消费者在事务内
+    sendOffsetsToTransaction，把"消费 offset 提交"和"新消息发送"做原子，实现 Kafka 内 EOS。跨外部系统必须业务幂等。
 follow_up:
-  - 幂等 producer 的 PID 怎么来的？——producer 启动时向 coordinator 申请 PID（Producer ID），PID 对应 transactional.id（用户配置）。PID + partition + seq 唯一标识一条消息。
-  - 事务超时怎么处理？——transaction.timeout.ms（默认 60s），超时 coordinator 主动 abort。长时间事务（如流处理窗口）要调大。
-  - read_committed 性能影响？——broker 要维护 LSO（Last Stable Offset），未提交事务之后的消息对 read_committed 不可见。长事务导致 LSO 滞后，消费延迟。
-  - zombie epoch 是什么？——transactional.id 的"代次"，每次 producer 重启代次 +1，broker 拒绝旧代次 producer 的请求（防僵尸 producer 写入）。
-  - EOS 适合所有场景吗？——不是。EOS 性能开销 10-20%，吞吐下降。只对资金/对账等强一致场景启用，监控/埋点用 at-least-once 就够。
+- 幂等 producer 的 PID 怎么来的？——producer 启动时向 coordinator 申请 PID（Producer ID），PID 对应 transactional.id（用户配置）。PID
+  + partition + seq 唯一标识一条消息。
+- 事务超时怎么处理？——transaction.timeout.ms（默认 60s），超时 coordinator 主动 abort。长时间事务（如流处理窗口）要调大。
+- read_committed 性能影响？——broker 要维护 LSO（Last Stable Offset），未提交事务之后的消息对 read_committed
+  不可见。长事务导致 LSO 滞后，消费延迟。
+- zombie epoch 是什么？——transactional.id 的"代次"，每次 producer 重启代次 +1，broker 拒绝旧代次 producer
+  的请求（防僵尸 producer 写入）。
+- EOS 适合所有场景吗？——不是。EOS 性能开销 10-20%，吞吐下降。只对资金/对账等强一致场景启用，监控/埋点用 at-least-once 就够。
 memory_points:
-  - 幂等 producer：enable.idempotence=true，PID + seq broker 去重
-  - 事务 producer：transactional.id + beginTransaction + commitTransaction
-  - 消费端 isolation.level=read_committed
-  - sendOffsetsToTransaction：consume-process-produce 三段原子
-  - 跨外部系统 EOS 伪命题：业务幂等（唯一键/状态机/Redis 令牌）
+- 幂等 producer：enable.idempotence=true，PID + seq broker 去重
+- 事务 producer：transactional.id + beginTransaction + commitTransaction
+- 消费端 isolation.level=read_committed
+- sendOffsetsToTransaction：consume-process-produce 三段原子
+- 跨外部系统 EOS 伪命题：业务幂等（唯一键/状态机/Redis 令牌）
+frequency: high
 ---
 
 # 【Java 后端架构师】Kafka Exactly Once 语义与业务幂等边界
@@ -395,6 +406,30 @@ public class PaymentProcessor {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class Kafka decision
+    class MySQL special
+    class Offset error
+    class beginTransaction info
+    class br start
+    class commitTransaction process
+    class msg_id decision
+    class producer special
+    class send error
+    class sendOffsetsToTransaction info
     subgraph Kafka内幕原子闭环
         A["消费 Kafka<br/>拉取支付事件"] --> B["开启事务<br/>beginTransaction"]
         B --> C["业务处理<br/>扣款逻辑"]

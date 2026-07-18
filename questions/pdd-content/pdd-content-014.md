@@ -26,14 +26,16 @@ first_principle:
   - 读写比例不同
   rebuild: CAS/分段/复制不同策略的并发结构。
 follow_up:
-  - ConcurrentHashMap 为什么不允许 null？——多线程下 get(null) 有歧义（映射不存在 vs 值就是 null）
-  - CopyOnWriteArrayList 适用场景？——读多写少（监听器列表、配置）
-  - 怎么选阻塞队列？——有界 LinkedBlockingQueue / SynchronousQueue 直接传递 / PriorityBlockingQueue 优先
+- ConcurrentHashMap 为什么不允许 null？——多线程下 get(null) 有歧义（映射不存在 vs 值就是 null）
+- CopyOnWriteArrayList 适用场景？——读多写少（监听器列表、配置）
+- 怎么选阻塞队列？——有界 LinkedBlockingQueue / SynchronousQueue 直接传递 / PriorityBlockingQueue
+  优先
 memory_points:
-  - CHM：JDK8 CAS+synchronized 头节点
-  - COW：写时复制
-  - BlockingQueue：阻塞
-  - 区别：Collections.synchronizedXxx 全锁
+- CHM：JDK8 CAS+synchronized 头节点
+- COW：写时复制
+- BlockingQueue：阻塞
+- 区别：Collections.synchronizedXxx 全锁
+frequency: high
 ---
 
 # 【拼多多内容】高并发集合在内容场景的应用？
@@ -222,6 +224,36 @@ JDK 8 的 computeIfAbsent 有个已知问题：如果加载函数内部又对同
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class A5 error
+    class A6 info
+    class A7 start
+    class A8 process
+    class ArrayBQ decision
+    class ArrayBlockingQueue special
+    class B1 error
+    class B2 info
+    class B3 start
+    class B4 process
+    class B5 decision
+    class B6 special
+    class B7 error
+    class CAS info
+    class CHM start
+    class COW process
+    class ConcurrentHashMap decision
+    class CopyOnWriteArrayList special
+    class br error
+    class newKeySet info
     subgraph 并发集合应用场景
     A1["直播弹幕与送礼"] --> A2["ArrayBlockingQueue<br/>有界队列+背压"]
     A3["本地热点缓存"] --> A4["ConcurrentHashMap<br/>节点级锁/CAS"]

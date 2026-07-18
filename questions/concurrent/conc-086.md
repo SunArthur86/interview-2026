@@ -17,6 +17,7 @@ memory_points:
 - 核心机制：锁内部维护计数器与持有线程标识，重入则加1，退出减1。
 - 底层对比：synchronized基于Monitor，而ReentrantLock基于AQS的state变量。
 - 实战避坑：ReentrantLock必须在finally块中手动执行unlock。
+frequency: high
 ---
 
 # 什么是可重入锁？它的实现原理是什么？
@@ -110,6 +111,7 @@ flowchart TD
     classDef reentry fill:#e3f2fd,stroke:#1565c0
     class CAS1,Reentry reentry
     class Got,Free ok
+
 ```
 
 

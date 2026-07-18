@@ -26,14 +26,15 @@ first_principle:
   - 全栈整合效率高
   rebuild: FDE 全栈能力 + 解决方案思维 + 端到端交付。
 follow_up:
-  - FDE 会不会"样样通样样松"？——T 型人才，广度+一专深
-  - 怎么培养 FDE？——轮岗+全栈项目+导师制
-  - FDE 和架构师区别？——FDE 偏交付执行，架构师偏设计决策
+- FDE 会不会"样样通样样松"？——T 型人才，广度+一专深
+- 怎么培养 FDE？——轮岗+全栈项目+导师制
+- FDE 和架构师区别？——FDE 偏交付执行，架构师偏设计决策
 memory_points:
-  - 全栈：前+后+数据+AI+运维
-  - 思维：方案而非功能
-  - 交易场景：端到端交付
-  - T 型：广度+一专深
+- 全栈：前+后+数据+AI+运维
+- 思维：方案而非功能
+- 交易场景：端到端交付
+- T 型：广度+一专深
+frequency: low
 ---
 
 # 【拼多多交易】FDE 解决方案怎么做？
@@ -247,6 +248,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

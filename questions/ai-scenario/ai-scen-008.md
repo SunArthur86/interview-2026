@@ -28,6 +28,7 @@ memory_points:
 - Upsert逻辑为“删除旧ID+插入新向量”，保证原子性
 - 高频更新场景需批处理合并，防止锁表或性能瓶颈
 - 注意“标记删除”导致的幽灵数据，业务层需用版本号过滤
+frequency: high
 ---
 
 # 设计一个支持实时更新和增量索引的RAG系统。当知识库文档频繁变更时，如何保证检索结果的时效性？
@@ -158,6 +159,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -23,6 +23,7 @@ memory_points:
 - 优化流程：定义Signature -> 优化器搜索最佳Prompt/示例 -> 编译运行
 - 对比：传统靠人工调参，DSPy靠Teacher LLM生成示例和Metric反馈自动调优
 - 局限：Metric设计难主观，依赖Teacher模型能力上限，易过拟合训练集
+frequency: high
 ---
 
 # DSPy框架的核心思想是什么?它如何自动优化Prompt
@@ -41,6 +42,38 @@ memory_points:
 - **优化流程原理图:**
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Chain start
+    class Compiled process
+    class Input decision
+    class LLM special
+    class Metric error
+    class Modules info
+    class Opt start
+    class Output process
+    class Prog decision
+    class Signature special
+    class Student error
+    class Teacher info
+    class Teleprompter start
+    class Thought process
+    class Traces decision
+    class br special
+    class compiled error
+    class def info
+    class metric start
+    class mod process
+    class opt decision
+    class run special
+    class sig error
+    class student info
+    class teacher start
+    class tele process
     subgraph def["定义阶段"]
         sig["Signature（Input/Output）"]
         mod["Modules（Chain of Thought）"]

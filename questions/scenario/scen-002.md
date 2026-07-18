@@ -27,6 +27,7 @@ memory_points:
 - 核心链路：因为同步写库慢，所以Redis扣减成功后必发MQ异步下单
 - 防刷三板斧：前端按钮置灰+验证码，网关IP限频，后端设备指纹
 - 容灾机制：库存扣完自动触发服务熔断拒绝后续，MQ消费失败走死信队列
+frequency: high
 ---
 
 # 如何设计一个秒杀系统？假设某商品1000件，瞬时并发100万。
@@ -134,6 +135,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

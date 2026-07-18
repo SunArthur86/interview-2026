@@ -8,9 +8,12 @@ tags:
 - Redis
 - 一致性
 feynman:
-  essence: Redis 分布式锁的本质是"用 SET NX PX 原子命令实现互斥，用过期时间防死锁，用唯一 value（UUID）+ Lua 原子删锁防误删"。正确性挑战有三个边界：锁超时但业务没完成（别人拿到锁导致并发）、主从切换丢锁（异步复制主库宕机）、GC pause 导致锁失效。RedLock 是 Redisson 提出的多节点多数派方案，但有争议（Martin Kleppmann 批评其依赖时钟假设）。
-  analogy: 僉公共洗手间的门锁。SET NX 是"敲门没人就进并锁门"，PX 过期是"自动开门防人晕里面出不来了"，UUID 是"每个人有专属钥匙牌（防开错门）"，Lua 删锁是"确认是自己钥匙牌才开门（防误开）"。锁超时是"人没上完厕所门自动开了，别人冲进来"。RedLock 是"多个洗手间同时锁，多数锁上才算成功"（防止单个洗手间门坏了）。
-  first_principle: 为什么用 Redis 做锁？因为 Redis 单线程命令原子（SET NX 互斥）、高性能（微秒级）、有过期机制（防死锁）。相比 Zookeeper（强一致但慢）和 DB 锁（性能差），Redis 在性能和正确性之间平衡，适合"高性能但容忍极小概率错误"的场景。
+  essence: Redis 分布式锁的本质是"用 SET NX PX 原子命令实现互斥，用过期时间防死锁，用唯一 value（UUID）+ Lua 原子删锁防误删"。正确性挑战有三个边界：锁超时但业务没完成（别人拿到锁导致并发）、主从切换丢锁（异步复制主库宕机）、GC
+    pause 导致锁失效。RedLock 是 Redisson 提出的多节点多数派方案，但有争议（Martin Kleppmann 批评其依赖时钟假设）。
+  analogy: 僉公共洗手间的门锁。SET NX 是"敲门没人就进并锁门"，PX 过期是"自动开门防人晕里面出不来了"，UUID 是"每个人有专属钥匙牌（防开错门）"，Lua
+    删锁是"确认是自己钥匙牌才开门（防误开）"。锁超时是"人没上完厕所门自动开了，别人冲进来"。RedLock 是"多个洗手间同时锁，多数锁上才算成功"（防止单个洗手间门坏了）。
+  first_principle: 为什么用 Redis 做锁？因为 Redis 单线程命令原子（SET NX 互斥）、高性能（微秒级）、有过期机制（防死锁）。相比
+    Zookeeper（强一致但慢）和 DB 锁（性能差），Redis 在性能和正确性之间平衡，适合"高性能但容忍极小概率错误"的场景。
   key_points:
   - 基础锁：SET key value NX PX 30000（原子命令）
   - 解锁：Lua 脚本（判断 value 相等才删，防误删）
@@ -24,19 +27,27 @@ first_principle:
   - 分布式系统没有真正的互斥（不像单机的 synchronized）
   - 锁要满足：互斥（同一时刻只有一个持有）、防死锁（持有者宕机锁要释放）、可重入（同一线程多次加锁不阻塞）
   - Redis 单线程命令原子，适合实现互斥
-  rebuild: 用 SET key value NX PX 实现加锁（NX 保证互斥，PX 过期防死锁），value 用 UUID 标识持有者（防误删）。解锁用 Lua 脚本（判断 value 相等才删，保证原子）。业务超时风险用看门狗（Redisson Watchdog 后台续期）。主从切换丢锁风险用 RedLock（多节点多数派），但 RedLock 有争议（依赖时钟、GC pause 问题）。强一致需求（金融）不用 Redis 锁用 Zookeeper/etcd（CP），Redis 锁适合"高性能但容忍极小概率错误"的场景（如防重复提交、限频）。
+  rebuild: 用 SET key value NX PX 实现加锁（NX 保证互斥，PX 过期防死锁），value 用 UUID 标识持有者（防误删）。解锁用
+    Lua 脚本（判断 value 相等才删，保证原子）。业务超时风险用看门狗（Redisson Watchdog 后台续期）。主从切换丢锁风险用 RedLock（多节点多数派），但
+    RedLock 有争议（依赖时钟、GC pause 问题）。强一致需求（金融）不用 Redis 锁用 Zookeeper/etcd（CP），Redis 锁适合"高性能但容忍极小概率错误"的场景（如防重复提交、限频）。
 follow_up:
-  - 为什么解锁要 Lua 脚本？——因为"判断 value 相等"和"删除 key"必须是原子的。如果分开（先 GET 判断再 DEL），中间可能锁过期别人拿了新锁，你的 DEL 把别人的锁删了（误删）。Lua 脚本在 Redis 单线程执行保证原子
-  - Redisson 看门狗怎么工作？——加锁时启动一个定时任务（每 1/3 TTL 时间，如 TTL 30s 则每 10s），检查业务是否还在执行，是则续期（重置 TTL 到 30s）。业务完成后关闭定时任务。防止业务执行超过 TTL 导致锁过期
-  - RedLock 为什么有争议？——Martin Kleppmann 指出两个问题：①依赖时钟假设（锁过期判断依赖各节点时钟一致，NTP 同步有误差）；②GC pause（应用 STW 期间锁过期，恢复后误以为自己还持锁）。Antirez（Redis 作者）反驳说实践中时钟误差可控、GC pause 可避免。学术界无定论，生产慎用 RedLock
-  - Redis 锁和 Zookeeper 锁区别？——Redis 锁是 AP（高性能但容忍极小概率错误），主从异步复制可能丢锁。Zookeeper 锁是 CP（强一致），通过临时节点 + Watch 实现锁，客户端宕机临时节点自动删除（无锁过期问题），但性能比 Redis 低
-  - 可重入锁怎么实现？——Redisson 用 Hash 结构存锁：key=锁名，field=线程 ID，value=重入次数。同一线程加锁 value+1，解锁 value-1，归零删 key。保证同一线程多次加锁不阻塞
+- 为什么解锁要 Lua 脚本？——因为"判断 value 相等"和"删除 key"必须是原子的。如果分开（先 GET 判断再 DEL），中间可能锁过期别人拿了新锁，你的
+  DEL 把别人的锁删了（误删）。Lua 脚本在 Redis 单线程执行保证原子
+- Redisson 看门狗怎么工作？——加锁时启动一个定时任务（每 1/3 TTL 时间，如 TTL 30s 则每 10s），检查业务是否还在执行，是则续期（重置
+  TTL 到 30s）。业务完成后关闭定时任务。防止业务执行超过 TTL 导致锁过期
+- RedLock 为什么有争议？——Martin Kleppmann 指出两个问题：①依赖时钟假设（锁过期判断依赖各节点时钟一致，NTP 同步有误差）；②GC pause（应用
+  STW 期间锁过期，恢复后误以为自己还持锁）。Antirez（Redis 作者）反驳说实践中时钟误差可控、GC pause 可避免。学术界无定论，生产慎用 RedLock
+- Redis 锁和 Zookeeper 锁区别？——Redis 锁是 AP（高性能但容忍极小概率错误），主从异步复制可能丢锁。Zookeeper 锁是 CP（强一致），通过临时节点
+  + Watch 实现锁，客户端宕机临时节点自动删除（无锁过期问题），但性能比 Redis 低
+- 可重入锁怎么实现？——Redisson 用 Hash 结构存锁：key=锁名，field=线程 ID，value=重入次数。同一线程加锁 value+1，解锁
+  value-1，归零删 key。保证同一线程多次加锁不阻塞
 memory_points:
-  - 基础锁：SET key uuid NX PX 30000（原子加锁 + 过期防死锁）
-  - 解锁：Lua 脚本（判断 value 相等才删，原子防误删）
-  - 看门狗：Redisson 后台续期，防业务超时
-  - RedLock：多节点多数派，有争议（时钟+GC）
-  - 选型：高性能容忍小概率错误用 Redis，强一致用 ZK/etcd
+- 基础锁：SET key uuid NX PX 30000（原子加锁 + 过期防死锁）
+- 解锁：Lua 脚本（判断 value 相等才删，原子防误删）
+- 看门狗：Redisson 后台续期，防业务超时
+- RedLock：多节点多数派，有争议（时钟+GC）
+- 选型：高性能容忍小概率错误用 Redis，强一致用 ZK/etcd
+frequency: high
 ---
 
 # 【Java 后端架构师】Redis 分布式锁的正确性与 RedLock 争议
@@ -469,6 +480,39 @@ public class OrderController {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CP special
+    class D error
+    class E info
+    class F start
+    class G process
+    class GC decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class Lua process
+    class NX decision
+    class PX special
+    class Pause error
+    class RedLock info
+    class Redis start
+    class Redisson process
+    class SET decision
+    class Server special
+    class Watch error
+    class Zookeeper info
+    class etcd start
+    class key process
+    class uuid decision
     A[客户端业务线程] -->|1. SET key uuid NX PX 30000| B[Redis Server]
     B -->|2. 加锁成功| A
     A -->|3. 业务执行中| C{Redisson 看门狗}

@@ -10,9 +10,11 @@ tags:
 - RAG
 - Rerank
 feynman:
-  essence: RAG 优化四件事——查询改写、混合检索（BM25+向量）、Rerank、动态 Top-K。Rerank 用 cross-encoder 把召回阶段追求的 Recall 转成精排的 Precision；Top-K 按 query 长度+chunk 大小+Rerank 分数阈值动态算；BM25 强在词面命中（专有名词、代码、数字），向量强在同义/近义/跨语言，两者是互补不是替代。
+  essence: RAG 优化四件事——查询改写、混合检索（BM25+向量）、Rerank、动态 Top-K。Rerank 用 cross-encoder 把召回阶段追求的
+    Recall 转成精排的 Precision；Top-K 按 query 长度+chunk 大小+Rerank 分数阈值动态算；BM25 强在词面命中（专有名词、代码、数字），向量强在同义/近义/跨语言，两者是互补不是替代。
   analogy: 就像图书馆找书——先用书名关键词（BM25）+ 内容相似度（向量）各扫一遍把候选搬出来（召回，宁多勿漏），再请馆员逐本翻看挑出真正相关的（Rerank，精排，宁少勿滥）。最终给读者几本精选的。
-  first_principle: 召回和精排的目标相反。召回阶段优先 Recall@K（漏了后面救不回来），精排阶段优先 Precision@K（LLM context 有限，喂进去的每条都该有用）。两阶段模型架构也不同：召回用 bi-encoder（省算力），精排用 cross-encoder（精度高但贵）。
+  first_principle: 召回和精排的目标相反。召回阶段优先 Recall@K（漏了后面救不回来），精排阶段优先 Precision@K（LLM context
+    有限，喂进去的每条都该有用）。两阶段模型架构也不同：召回用 bi-encoder（省算力），精排用 cross-encoder（精度高但贵）。
   key_points:
   - 查询改写 + 混合检索（BM25+向量）+ Rerank + 动态Top-K
   - 召回用 bi-encoder（query/doc 分别编码算余弦），精排用 cross-encoder（拼一起进模型）
@@ -21,7 +23,8 @@ feynman:
   - BM25 词面命中强，向量同义近义强，hybrid 用 RRF 融合
 first_principle:
   essence: RAG = 召回（高 Recall）+ 精排（高 Precision）两阶段
-  derivation: 单阶段无法同时优化 Recall 和 Precision → 拆成两阶段 → 召回用便宜模型宁多勿漏 → 精排用贵模型宁少勿滥 → 两阶段配合达成"不漏 + 不噪"
+  derivation: 单阶段无法同时优化 Recall 和 Precision → 拆成两阶段 → 召回用便宜模型宁多勿漏 → 精排用贵模型宁少勿滥 → 两阶段配合达成"不漏
+    + 不噪"
   conclusion: RAG 优化不是单点调参，而是"召回宽进 + 精排严出"的两阶段协同
 follow_up:
 - Late Interaction（ColBERT v2）相比 bi-encoder 和 cross-encoder 优势在哪？
@@ -32,6 +35,7 @@ memory_points:
 - 加Rerank因模型架构不同：召回用Bi-encoder保Recall，精排用Cross-encoder保Precision
 - 召回保Recall防漏，Rerank保Precision防噪，矛盾时大K召回小K精排
 - BM25擅长精确词面匹配(代码/专名)，向量擅长语义泛化，混合用RRF算法融合排名
+frequency: high
 ---
 
 # 【字节飞连面经】RAG 做过哪些优化？为什么加 Rerank？BM25 够好向量还有必要吗？
@@ -115,6 +119,39 @@ RRF_score(d) = Σ 1 / (k + rank_i(d))   # k 通常取 60
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Bi decision
+    class C special
+    class C1 error
+    class C2 info
+    class Cross start
+    class D process
+    class E decision
+    class F special
+    class Fusion error
+    class G info
+    class H start
+    class I process
+    class K decision
+    class LLM special
+    class Precision error
+    class Query info
+    class RRF start
+    class Rank process
+    class Recall decision
+    class Reciprocal special
+    class Rerank error
+    class Rewrite info
+    class Top start
+    class br process
+    class encoder decision
     A["用户 Query"] --> B["Query Rewrite<br/>查询改写"]
     B --> C["混合检索"]
     subgraph C ["混合检索"]

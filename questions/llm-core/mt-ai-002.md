@@ -29,6 +29,7 @@ memory_points:
 - 机制优势：因为不增加额外矩阵乘法，且具备远程衰减特性，所以计算极其高效。
 - 外推能力：依赖相对距离，对长文本具备一定泛化能力。
 - 对比方案：绝对正弦编码外推差，而 ALiBi 直接加偏置天然外推极强，但 RoPE 仍是绝对主流。
+frequency: medium
 ---
 
 # 【美团面经】说一说 RoPE 的原理，为什么现在 RoPE 更受欢迎？还了解其他位置编码吗？
@@ -94,6 +95,28 @@ def apply_rotary_pos_emb(q, k, cos, sin):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class K_n special
+    class Key error
+    class Q_m info
+    class Query start
+    class R_m process
+    class m decision
+    class n special
     A[位置 m] --> B[构造旋转矩阵 R_m]
     B --> C[对 Query 旋转]
     B --> D[对 Key 旋转]

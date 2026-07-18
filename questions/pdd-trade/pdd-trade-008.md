@@ -10,7 +10,8 @@ tags:
 - 数据同步
 - Kafka
 feynman:
-  essence: 消息队列在交易系统三作用——解耦（订单事件通知多下游）、削峰（秒杀异步）、数据同步（Canal→Kafka→ES/Redis）；选 Kafka（吞吐高）或 RocketMQ（事务消息）。
+  essence: 消息队列在交易系统三作用——解耦（订单事件通知多下游）、削峰（秒杀异步）、数据同步（Canal→Kafka→ES/Redis）；选 Kafka（吞吐高）或
+    RocketMQ（事务消息）。
   analogy: 消息队列像公司内部邮件组——发件人（生产者）发一次，多个收件人（消费者）各取所需，发件人不用等回复（异步）。
   first_principle: 同步调用让服务强耦合且互相等待，MQ 解耦+异步+削峰。
   key_points:
@@ -34,6 +35,7 @@ memory_points:
 - Kafka 吞吐高、RocketMQ 事务消息原生
 - 顺序：同 key 同 partition
 - 可靠性：acks=all + 副本 + 手动 offset + 幂等消费
+frequency: high
 ---
 
 # 【拼多多交易】消息队列怎么用？数据同步怎么做？
@@ -187,6 +189,30 @@ Canal 同步的可靠性靠"失败重试 + 对账补偿"。权衡方案：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Canal special
+    class D error
+    class E info
+    class Elasticsearch start
+    class F process
+    class Flink decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class K process
+    class Kafka decision
+    class MySQL special
+    class RocketMQ error
+    class Topic info
     subgraph 交易核心链路
         A[订单服务创建/支付订单] --> B[(MySQL: 写入订单表)]
         B --> C[生产者: 发送事务消息]

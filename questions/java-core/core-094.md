@@ -15,6 +15,7 @@ memory_points:
 - 实现要点：私有构造防外部new，静态实例提供全局访问点
 - 最佳实践：Java推荐枚举单例，天然防止反射破坏和反序列化重新创建
 - 高阶防御：DCL双重锁需配合volatile防指令重排，避免拿到半初始化对象
+frequency: high
 ---
 
 # 什么是单例模式的应用场景？
@@ -118,6 +119,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

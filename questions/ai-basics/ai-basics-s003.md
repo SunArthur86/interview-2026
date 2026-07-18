@@ -18,6 +18,7 @@ memory_points:
 - 数据层：数据增强（旋转、裁剪）增加样本多样性，减少噪声。
 - 模型层：Dropout随机失活模拟集成，L2正则化限制权重大小。
 - 训练层：Early Stopping监控验证集Loss，不下降即停止。
+frequency: low
 ---
 
 # 什么是过拟合？如何防止？
@@ -104,6 +105,30 @@ class Net(nn.Module):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class D1 error
+    class D2 info
+    class Dropout start
+    class E process
+    class E1 decision
+    class E2 special
+    class Early error
+    class F info
+    class F1 start
+    class F2 process
+    class L1 decision
+    class L2 special
+    class Stopping error
+    class br info
     A["模型容量过大/训练过久"] --> B["过拟合<br/>(死记硬背训练集噪声)"]
     B --> C["验证集表现差<br/>泛化能力弱"]
 

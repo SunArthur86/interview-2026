@@ -32,6 +32,7 @@ memory_points:
 - 分配原则：主 Agent 及复杂安全审核用大模型(如 32B)
 - 子 Agent 分配：高频简单执行用小(7B)，中等理解用中(14B)
 - 动态升级：先用小模型探底，质量自评不达标时自动升级大模型兜底
+frequency: medium
 ---
 
 # 主Agent和子Agent的模型该怎么分配，为什么不一定都用同一个大模型？
@@ -175,6 +176,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

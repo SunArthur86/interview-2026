@@ -16,6 +16,7 @@ memory_points:
 - 选型对比：Protobuf跨语言强且Schema强约束，Kryo极快但限Java
 - 演进机制：Protobuf靠Tag匹配，所以新增字段能兼容但不可改旧Tag
 - 实战替换：RPC或MQ场景中，将JSON换成Protobuf可大幅降带宽提吞吐
+frequency: medium
 ---
 
 # 什么是高性能的序列化框架？
@@ -106,6 +107,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

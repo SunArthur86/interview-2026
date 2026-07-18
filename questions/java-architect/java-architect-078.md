@@ -55,6 +55,7 @@ memory_points:
 - 完整性：ETag（MD5）校验合并后对象
 - 秒传：客户端算 MD5 查库，命中复用 fileId
 - 分片：5MB/片，并行上传，断点续传（upload_chunk 表）
+frequency: medium
 ---
 
 # 【Java 后端架构师】大文件上传、断点续传与对象存储
@@ -76,6 +77,35 @@ memory_points:
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class B start
+    class C process
+    class CompleteMultipartUpload decision
+    class DB special
+    class ETag error
+    class GET info
+    class Java start
+    class MD5 process
+    class Multipart decision
+    class O special
+    class OSS error
+    class PUT info
+    class STS start
+    class SparkMD5 process
+    class URL decision
+    class as special
+    class final error
+    class part info
+    class part1 start
+    class part2 process
+    class part3 decision
+    class partNumber special
+    class uploadId error
     autonumber
     participant C as 客户端 浏览器
     participant B as 后端API Java

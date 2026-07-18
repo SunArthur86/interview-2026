@@ -12,37 +12,38 @@ tags:
 - 低代码
 - 工程化
 feynman:
-  essence: "Dify/LangGraph 可视化编排是'用拖拽搭 Agent 流程 + 工程化补可靠性'——低代码让非开发也能搭，工程化让搭出来的能上生产，关键是分清'原型快搭'和'生产可靠'的边界。"
-  analogy: "像乐高积木+说明书——Dify 是大颗粒乐高（拖拽快搭，适合原型），LangGraph 是精密机械积木（精细控制，适合复杂品）。搭玩具（demo）用大颗粒，造真机器（生产）要精密件+工程加固。"
-  first_principle: "可视化编排降低 AI 应用搭建门槛（拖拽而非写码），但低代码的灵活性和可靠性常不如纯代码。其本质是'用可视化降低上手成本，用工程化补足生产所需的可靠/可控/可观测'，关键是匹配场景。"
+  essence: Dify/LangGraph 可视化编排是'用拖拽搭 Agent 流程 + 工程化补可靠性'——低代码让非开发也能搭，工程化让搭出来的能上生产，关键是分清'原型快搭'和'生产可靠'的边界。
+  analogy: 像乐高积木+说明书——Dify 是大颗粒乐高（拖拽快搭，适合原型），LangGraph 是精密机械积木（精细控制，适合复杂品）。搭玩具（demo）用大颗粒，造真机器（生产）要精密件+工程加固。
+  first_principle: 可视化编排降低 AI 应用搭建门槛（拖拽而非写码），但低代码的灵活性和可靠性常不如纯代码。其本质是'用可视化降低上手成本，用工程化补足生产所需的可靠/可控/可观测'，关键是匹配场景。
   key_points:
-  - "Dify：低代码可视化，拖拽搭 RAG/Agent/Workflow，快但定制弱"
-  - "LangGraph：代码+图抽象，精细可控循环/分支，生产级"
-  - "低代码优势：非开发也能搭、快速原型、可视化调试"
-  - "工程化补足：自定义节点/插件/版本/监控/灰度/审计"
-  - "边界：原型/中小用 Dify，复杂/生产用 LangGraph 或结合"
+  - Dify：低代码可视化，拖拽搭 RAG/Agent/Workflow，快但定制弱
+  - LangGraph：代码+图抽象，精细可控循环/分支，生产级
+  - 低代码优势：非开发也能搭、快速原型、可视化调试
+  - 工程化补足：自定义节点/插件/版本/监控/灰度/审计
+  - 边界：原型/中小用 Dify，复杂/生产用 LangGraph 或结合
   socratic:
-  - "不会写代码的产品经理想搭个 RAG 客服，怎么实现？"
-  - "Dify 拖拽很快，但企业级能用吗？什么场景适合？"
-  - "可视化搭的流程跑不通复杂逻辑（循环/条件），怎么办？"
-  - "低代码搭的 Agent 怎么做版本管理和灰度？"
-  - "Dify 和 LangGraph 怎么结合用？"
+  - 不会写代码的产品经理想搭个 RAG 客服，怎么实现？
+  - Dify 拖拽很快，但企业级能用吗？什么场景适合？
+  - 可视化搭的流程跑不通复杂逻辑（循环/条件），怎么办？
+  - 低代码搭的 Agent 怎么做版本管理和灰度？
+  - Dify 和 LangGraph 怎么结合用？
 first_principle:
-  problem: "如何用可视化降低 AI 编排门槛，同时保证生产所需的可靠/可控/可演进？"
+  problem: 如何用可视化降低 AI 编排门槛，同时保证生产所需的可靠/可控/可演进？
   axioms:
-  - "低代码降低门槛但灵活性弱"
-  - "生产级需可靠/可控/可观测"
-  - "不同场景需求不同（原型 vs 生产）"
-  rebuild: "按场景选——原型/中小/非开发用 Dify 可视化快搭，复杂/生产用 LangGraph 代码精细控制；用自定义节点/插件/版本/监控/灰度把低代码工程化补足生产需求，或两者结合。"
+  - 低代码降低门槛但灵活性弱
+  - 生产级需可靠/可控/可观测
+  - 不同场景需求不同（原型 vs 生产）
+  rebuild: 按场景选——原型/中小/非开发用 Dify 可视化快搭，复杂/生产用 LangGraph 代码精细控制；用自定义节点/插件/版本/监控/灰度把低代码工程化补足生产需求，或两者结合。
 follow_up:
-- "Dify 能上生产吗？——标准场景（RAG/客服/知识库）中小规模可以；强定制/特殊合规/大规模可能受限，常原型验证再迁。"
-- "LangGraph 怎么可视化？——LangGraph Studio 提供图可视化调试，但定义仍是代码（Python），比 Dify 需要开发能力。"
-- "低代码怎么工程化？——自定义节点写复杂逻辑、插件机制扩展、版本管理、CI/CD、监控灰度，把'玩具'变产品。"
+- Dify 能上生产吗？——标准场景（RAG/客服/知识库）中小规模可以；强定制/特殊合规/大规模可能受限，常原型验证再迁。
+- LangGraph 怎么可视化？——LangGraph Studio 提供图可视化调试，但定义仍是代码（Python），比 Dify 需要开发能力。
+- 低代码怎么工程化？——自定义节点写复杂逻辑、插件机制扩展、版本管理、CI/CD、监控灰度，把'玩具'变产品。
 memory_points:
-- "Dify 低代码快搭，LangGraph 精细可控"
-- "低代码：原型/中小，代码：复杂/生产"
-- "工程化补足：自定义节点/版本/监控"
-- "可结合用（Dify 原型→LangGraph 生产）"
+- Dify 低代码快搭，LangGraph 精细可控
+- 低代码：原型/中小，代码：复杂/生产
+- 工程化补足：自定义节点/版本/监控
+- 可结合用（Dify 原型→LangGraph 生产）
+frequency: medium
 ---
 
 # 【生物医药 AI】Dify/LangGraph 可视化 Agent 编排怎么做（低代码+工程化）？
@@ -190,6 +191,33 @@ LangGraph Studio：图可视化调试
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class Agent error
+    class B1 info
+    class B2 start
+    class B3 process
+    class B4 decision
+    class B5 special
+    class C1 error
+    class C2 info
+    class C3 start
+    class Dify process
+    class Engineering decision
+    class LLM special
+    class LangGraph error
+    class Production info
+    class Prompt start
+    class Prototype process
+    class RAG decision
     subgraph Prototype [原型验证: Dify 低代码]
         A1[拖拽可视化节点] --> A2[编排 RAG/简单 Agent]
         A2 --> A3[验证业务流程价值]

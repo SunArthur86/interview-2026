@@ -28,6 +28,7 @@ memory_points:
 - 熔断与降级对比：熔断是自我保护快速失败，降级是提供兜底方案，熔断常触发降级
 - 隔离策略对比：Hystrix线程池隔离彻底但切换开销大，Sentinel信号量隔离轻量主流
 - 防护四板斧：超时设限决不无限等，重试限次防风暴，结果缓存兜底防NPE
+frequency: high
 ---
 
 # 如何设计熔断降级方案？保证系统在故障时仍能提供基本服务。
@@ -134,6 +135,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

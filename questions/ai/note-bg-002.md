@@ -21,7 +21,8 @@ feynman:
   - RL任务前SFT冷启动数据量不需要大（千到万级），但质量要求高
 first_principle:
   essence: RL是"在已有行为策略上做微调优化"，不是"从零学习行为"
-  derivation: Policy Gradient的梯度估计 ∇J = E[∇logπ(a|s) · R]。当π(a|s)接近均匀分布（未训练），几乎所有a的概率都微小，梯度方差爆炸。SFT把π收敛到合理分布后，RL的梯度才有意义。这就是为什么所有RLHF流程都是 SFT → RM → PPO，而不是直接RM → PPO。
+  derivation: Policy Gradient的梯度估计 ∇J = E[∇logπ(a|s) · R]。当π(a|s)接近均匀分布（未训练），几乎所有a的概率都微小，梯度方差爆炸。SFT把π收敛到合理分布后，RL的梯度才有意义。这就是为什么所有RLHF流程都是
+    SFT → RM → PPO，而不是直接RM → PPO。
   conclusion: SFT冷启动是RL的"地基"——它不直接提升上限，但决定了RL能否有效启动
 follow_up:
 - SFT冷启动数据需要多少条？质量vs数量怎么权衡？
@@ -31,6 +32,7 @@ memory_points:
 - RL前必须SFT：SFT教指令遵循和格式模板，RL在此子空间内优化执行质量
 - 若跳过SFT直接RL：探索空间过大导致梯度方差爆炸，Reward信号被噪声淹没
 - SFT收敛输出空间：让模型稳定输出对话格式，RL才能有效区分'好'与'更好
+frequency: medium
 ---
 
 # 【八股总结】SFT 冷启动和后续 RL 的关系是什么？为什么 RL 前需要 SFT？
@@ -352,6 +354,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

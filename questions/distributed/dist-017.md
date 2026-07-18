@@ -17,6 +17,7 @@ memory_points:
 - 查询方式：客户端与本地 DNS 间递归（代劳），本地与各级 DNS 间迭代（指路）。
 - 解析顺序：优先查浏览器与系统缓存，未命中后请求本地 DNS 服务器。
 - TTL 避坑：因为缓存的 TTL 机制，CDN 故障切换需提前调低 TTL 防止旧缓存。
+frequency: medium
 ---
 
 # DNS的工作原理和查询过程是怎样的？
@@ -117,6 +118,7 @@ flowchart TD
     style SYN_C fill:#FF9800,color:#fff
     style TIME_WAIT fill:#9C27B0,color:#fff
     style TLS fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

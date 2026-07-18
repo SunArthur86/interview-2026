@@ -30,6 +30,7 @@ memory_points:
 - 向量检索靠语义相似度（懂同义词），关键词检索靠字面匹配（精准抓专有名词ID）。
 - 向量检索擅长开放性概念提问，而关键词检索擅长特定数值、错误码和代码精确查询。
 - 混合检索用RRF（倒数排名融合）而非加权融合，因为RRF无需分数归一化且对异常值更鲁棒。
+frequency: medium
 ---
 
 # 向量检索和关键词检索各适合什么场景？为什么做混合检索？
@@ -201,6 +202,7 @@ flowchart TD
     style VEC fill:#FF9800,color:#fff
     style BM fill:#9C27B0,color:#fff
     style RRF fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

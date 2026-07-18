@@ -12,37 +12,39 @@ tags:
 - 消息可靠性
 - 推送
 feynman:
-  essence: "IM 消息系统是在不可靠网络上，把'用户↔角色'的文字/语音消息可靠、有序、实时地送达，并支持群聊/离线推送的工程系统。"
-  analogy: "像邮局系统——信件（消息）要挂号（确认）、盖戳（有序号）、走分拣（路由）、到家没人要暂存（离线消息）、重要信件还能加急（推送）。"
-  first_principle: "网络是不可靠的（丢包/延迟/断连），但用户对'消息不丢、不重、有序'的预期是确定的。必须用'应用层确认 + 去重 + 序号'补足网络的不可靠。"
+  essence: IM 消息系统是在不可靠网络上，把'用户↔角色'的文字/语音消息可靠、有序、实时地送达，并支持群聊/离线推送的工程系统。
+  analogy: 像邮局系统——信件（消息）要挂号（确认）、盖戳（有序号）、走分拣（路由）、到家没人要暂存（离线消息）、重要信件还能加急（推送）。
+  first_principle: 网络是不可靠的（丢包/延迟/断连），但用户对'消息不丢、不重、有序'的预期是确定的。必须用'应用层确认 + 去重 + 序号'补足网络的不可靠。
   key_points:
-  - "连接：WebSocket 长连接（双向/低延迟）+ 降级 HTTP 轮询/SSE"
-  - "可靠性：客户端 seq + 服务端 ack + 离线消息存储 + 重传"
-  - "顺序：单会话内单调递增 seq，按 seq 投递"
-  - "投递：在线走长连接，离线走 APNs/FCM/厂商推送"
-  - "群聊：写扩散（小群）vs 读扩散（大群）"
+  - 连接：WebSocket 长连接（双向/低延迟）+ 降级 HTTP 轮询/SSE
+  - 可靠性：客户端 seq + 服务端 ack + 离线消息存储 + 重传
+  - 顺序：单会话内单调递增 seq，按 seq 投递
+  - 投递：在线走长连接，离线走 APNs/FCM/厂商推送
+  - 群聊：写扩散（小群）vs 读扩散（大群）
   socratic:
-  - "用户发了条消息，角色还没回网络就断了，这条消息会丢吗？怎么保证不丢？"
-  - "网络抖动导致同一条消息收到两次，用户看到两条重复的怎么办？"
-  - "群聊里 A 和 B 同时发消息，所有人看到的顺序应该一样吗？怎么做到？"
-  - "用户离线 3 天，回来要收到 1000 条未读，你怎么把这 1000 条不爆流量地给他？"
-  - "WebSocket 断了重连，重连期间的消息去哪了？怎么补？"
+  - 用户发了条消息，角色还没回网络就断了，这条消息会丢吗？怎么保证不丢？
+  - 网络抖动导致同一条消息收到两次，用户看到两条重复的怎么办？
+  - 群聊里 A 和 B 同时发消息，所有人看到的顺序应该一样吗？怎么做到？
+  - 用户离线 3 天，回来要收到 1000 条未读，你怎么把这 1000 条不爆流量地给他？
+  - WebSocket 断了重连，重连期间的消息去哪了？怎么补？
 first_principle:
-  problem: "在不可靠网络上，如何保证用户与陪伴角色之间的消息不丢、不重、有序、实时送达？"
+  problem: 在不可靠网络上，如何保证用户与陪伴角色之间的消息不丢、不重、有序、实时送达？
   axioms:
-  - "网络不可靠（丢包/断连/乱序）"
-  - "用户期望消息必达、不重复、有序、低延迟"
-  - "在线和离线状态随时切换"
-  rebuild: "应用层补足网络不可靠：每条消息带全局唯一 ID 和会话内 seq，服务端持久化后才 ack，未 ack 重传；接收端按 ID 去重、按 seq 排序；离线消息持久化待拉取，配推送唤醒。"
+  - 网络不可靠（丢包/断连/乱序）
+  - 用户期望消息必达、不重复、有序、低延迟
+  - 在线和离线状态随时切换
+  rebuild: 应用层补足网络不可靠：每条消息带全局唯一 ID 和会话内 seq，服务端持久化后才 ack，未 ack 重传；接收端按 ID 去重、按 seq
+    排序；离线消息持久化待拉取，配推送唤醒。
 follow_up:
-- "WebSocket 怎么做心跳？——客户端 30s 发心跳，服务端 3 次未收到判定断连；重连用指数退避。"
-- "消息存哪？——未读存 Redis（ZSet 按 seq 排序）+ 落库 MySQL/分库分表；冷数据归档。"
-- "AI 角色的回复也是消息走 IM 吗？——是的，统一消息模型（角色也是'用户'），生成完走同套投递链路，前端无感知。"
+- WebSocket 怎么做心跳？——客户端 30s 发心跳，服务端 3 次未收到判定断连；重连用指数退避。
+- 消息存哪？——未读存 Redis（ZSet 按 seq 排序）+ 落库 MySQL/分库分表；冷数据归档。
+- AI 角色的回复也是消息走 IM 吗？——是的，统一消息模型（角色也是'用户'），生成完走同套投递链路，前端无感知。
 memory_points:
-- "可靠性三件套：唯一 ID 去重 + seq 排序 + ack 确认"
-- "连接：WebSocket 主，HTTP/SSE 降级"
-- "离线：消息持久化 + APNs/FCM 推送唤醒"
-- "群聊：小群写扩散，大群读扩散"
+- 可靠性三件套：唯一 ID 去重 + seq 排序 + ack 确认
+- 连接：WebSocket 主，HTTP/SSE 降级
+- 离线：消息持久化 + APNs/FCM 推送唤醒
+- 群聊：小群写扩散，大群读扩散
+frequency: medium
 ---
 
 # 【巨剧核 AI 陪伴】IM/消息系统怎么设计？
@@ -160,6 +162,36 @@ IM 的本质是**"用应用层协议补足网络的不可靠，把'尽量送达'
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class Async decision
+    class B1 special
+    class B2 error
+    class C1 info
+    class C2 start
+    class C3 process
+    class C4 decision
+    class C5 special
+    class ClickHouse error
+    class Client info
+    class D1 start
+    class D2 process
+    class E1 decision
+    class E2 special
+    class Gateway error
+    class HTTP info
+    class Logic start
+    class MySQL process
+    class OSS decision
+    class Redis special
+    class Storage error
+    class br info
     subgraph Client [客户端]
         A1[用户/角色交互]
         A2[本地消息队列<br/>seq排序与去重]

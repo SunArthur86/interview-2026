@@ -11,7 +11,8 @@ tags:
 - Function Call
 - Agent工具调用
 feynman:
-  essence: MCP（Model Context Protocol）是连接LLM与外部工具/数据源的标准化协议（类似USB-C）；Skill是预定义的能力包（任务模板+工具+知识）。Function Call是LLM输出结构化函数调用的能力，是所有工具调用的底层机制。
+  essence: MCP（Model Context Protocol）是连接LLM与外部工具/数据源的标准化协议（类似USB-C）；Skill是预定义的能力包（任务模板+工具+知识）。Function
+    Call是LLM输出结构化函数调用的能力，是所有工具调用的底层机制。
   analogy: Function Call是"打电话的能力"（基础机制）。MCP是"统一的电话协议标准"（让所有电话能互通）。Skill是"预设的快捷拨号+通话脚本"（打包好的复杂任务流程）。
   first_principle: Agent调用工具的本质是"LLM输出结构化的函数调用指令"。Function Call是底层能力（输出{tool, args}）。MCP解决了"每个工具都要单独适配LLM"的碎片化问题（标准化接口）。Skill解决了"复杂任务需要多步编排"的问题（预封装流程）。
   key_points:
@@ -32,6 +33,7 @@ memory_points:
 - Function Call：LLM原生能力，直接输出结构化JSON指令替代文本解析
 - MCP协议：Client与Server解耦，把M×N适配降维成M+N的标准化工具生态
 - Skill侧重：Agent内化的业务流，MCP侧重跨模型跨平台的外部工具通信规范
+frequency: high
 ---
 
 # 【八股总结】MCP、Skill、Function Call 的关系与区别
@@ -444,6 +446,7 @@ flowchart TD
     style FC fill:#FF9800,color:#fff
     style SKILL fill:#9C27B0,color:#fff
     style MCP fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

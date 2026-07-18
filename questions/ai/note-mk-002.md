@@ -29,6 +29,7 @@ memory_points:
 - 打破沙箱限制：桌面端可直接操作文件系统，权限管理是建立信任的核心
 - 权限分层金字塔：L1引用、L2读取、L3写入确认、L4系统级操作
 - 设计核心：授权前必须明确告知操作范围与有效期限，危险操作强制二次确认
+frequency: medium
 ---
 
 # 【月之暗面面经】桌面 AI 产品接入本地文件和目录时，前端如何设计权限提示？
@@ -254,6 +255,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

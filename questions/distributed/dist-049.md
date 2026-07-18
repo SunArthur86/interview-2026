@@ -25,6 +25,7 @@ memory_points:
 - 用户体验优先：用户宁可看到旧数据，也不愿忍受服务报错或超时
 - 最终一致实现：本地消息表 + MQ异步重试 + 幂等校验
 - 强一致场景选CP：如金融转账、配置中心、分布式锁防超卖
+frequency: high
 ---
 
 # CAP 定理和 BASE 理论的关系是什么？互联网架构为什么选择 AP+BASE？
@@ -162,6 +163,7 @@ flowchart TD
     style P fill:#9C27B0,color:#fff
     style BASE fill:#2196F3,color:#fff
     style TRADEOFF fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

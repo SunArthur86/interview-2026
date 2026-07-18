@@ -33,6 +33,7 @@ memory_points:
 - 剪枝约束：受is_tight标志位约束，若前序与n一致，当前位上限受n该位限制，否则为9
 - 回退机制：若位数与n相同的情况全超限，则直接退一位并全填最大数字拼成结果
 - 复杂度对比：暴力的O(n^3)不可用，而回溯剪枝能避免全排列，效率极高
+frequency: low
 ---
 
 # 【字节面经】手撕：不大于 n 的最大值
@@ -208,6 +209,23 @@ def largest_power_of_2_leq(n):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
     A["题目输入"] --> B{"澄清题意"}
     B -->|"解读1: 数字拼数"| C["计算可拼最大位数"]
     B -->|"解读2: 查找性质"| D["从n往下贪心构造"]

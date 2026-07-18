@@ -28,6 +28,7 @@ memory_points:
 - 因注意力机制具排列不变性，模型无法区分词序，故需位置编码注入位置信息
 - 正弦编码无需训练且可外推；可学习编码需训练但长度固定且属绝对位置
 - 主流RoPE通过旋转矩阵作用于Q和K，因点积自带相对位置信息故天然支持外推
+frequency: medium
 ---
 
 # 为什么需要位置编码？Transformer的位置编码是怎么做的？
@@ -181,6 +182,30 @@ def apply_rope(q, k, positions):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Ext special
+    class I error
+    class K info
+    class M start
+    class NTK process
+    class O decision
+    class PE special
+    class Q error
+    class RoPE info
+    class Scaling start
+    class T process
+    class Types decision
+    class YaRN special
+    class aware error
+    class br info
     I["词向量特征"] --> PE["注入位置编码"]
     subgraph Types[位置编码方案对比]
         direction TB

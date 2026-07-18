@@ -21,7 +21,8 @@ feynman:
   - '慢查询排查: 慢查询日志→EXPLAIN→优化索引→重写SQL'
 first_principle:
   essence: 数据库查询的瓶颈在于磁盘I/O，优化的本质是减少磁盘读取量
-  derivation: B+树一次I/O读一页(16KB)，全表扫描100万行需要~7000次I/O，走索引只需要3-4次I/O(树高3-4)。索引将I/O从O(n)降到O(log n)
+  derivation: B+树一次I/O读一页(16KB)，全表扫描100万行需要~7000次I/O，走索引只需要3-4次I/O(树高3-4)。索引将I/O从O(n)降到O(log
+    n)
   conclusion: 'SQL优化的第一性原理: 让查询走索引而非全表扫描'
 follow_up:
 - 联合索引的最左前缀原则是什么？
@@ -32,6 +33,7 @@ memory_points:
 - 排查入口：用EXPLAIN看type列，出现ALL（全表扫描）必须加索引优化至range或ref级别
 - 执行计划关注点：重点看type确认连表类型，看Extra排查是否出现Using temporary或Using filesort
 - 排查步骤：开启慢查询日志定位SQL -> EXPLAIN分析执行计划 -> 针对性建索引或重写SQL驱动顺序
+frequency: medium
 ---
 
 # SQL多表查询优化和慢查询排查
@@ -254,6 +256,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -31,6 +31,7 @@ memory_points:
 - 本质是范式转变：因为核心变为意图描述与审查，所以重点考察人机协作理念
 - 答题分三层：展示实操场景、理解局限风险、关联Agent岗位凸显独立思考
 - 答题口诀：别只夸写得快，要突出试错快，强调生成代码必须经人工严格Code Review
+frequency: medium
 ---
 
 # Vibe Coding工具为什么最近会被拿来问，面试里应该怎么答？
@@ -205,6 +206,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

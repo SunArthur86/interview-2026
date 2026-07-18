@@ -16,6 +16,7 @@ memory_points:
 - 行锁退化为口诀：唯一等值退Record，普通等值退Gap
 - RR隔离级别用next-key防幻读，而RC级别无间隙锁仅用Record
 - 乐观锁适合读多写少用版本号，悲观锁适合写多激烈用for update
+frequency: medium
 ---
 
 # 什么是锁的划分？
@@ -148,6 +149,7 @@ flowchart TB
     classDef item fill:#e3f2fd,stroke:#1565c0
     class D1,D2,D3 dim
     class D11,D12,D13,D21,D22,D23,D24,D25,D31,D32,D33,D34 item
+
 ```
 
 

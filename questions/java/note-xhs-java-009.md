@@ -14,8 +14,8 @@ tags:
 - 对象头
 - 面经
 feynman:
-  essence: "synchronized锁升级是JVM自适应性优化——从无锁到偏向锁到轻量级锁到重量级锁，根据竞争程度逐步升级，不可降级（JDK15前可批量撤销偏向）"
-  analogy: "就像公共厕所的门锁进化：一开始不锁门（无锁），后来装个弹簧锁谁推谁进（偏向锁），再后来加个旋钮锁有人等就排队自旋（轻量级锁），最后升级成密码锁由管理员调度（重量级锁）"
+  essence: synchronized锁升级是JVM自适应性优化——从无锁到偏向锁到轻量级锁到重量级锁，根据竞争程度逐步升级，不可降级（JDK15前可批量撤销偏向）
+  analogy: 就像公共厕所的门锁进化：一开始不锁门（无锁），后来装个弹簧锁谁推谁进（偏向锁），再后来加个旋钮锁有人等就排队自旋（轻量级锁），最后升级成密码锁由管理员调度（重量级锁）
   key_points:
   - 对象头Mark Word存储锁状态（32位/64位）
   - 无锁→偏向锁：首次有线程进入
@@ -23,11 +23,11 @@ feynman:
   - 轻量级锁→重量级锁：自旋超过阈值或有多线程等待
   - JDK15后偏向锁默认关闭（JEP 374），因维护成本高于收益
 first_principle:
-  essence: "锁的本质是'保证多线程对共享资源的互斥访问'。锁升级的原理是'按需付费'——竞争越激烈才用越重的锁"
-  derivation: "大多数场景锁竞争很少→全局重量级锁浪费→引入偏向锁（只记线程ID，CAS都不用）→有时有竞争→轻量级锁（CAS自旋）→竞争激烈→重量级锁（OS互斥量，线程阻塞）"
-  conclusion: "锁升级是性能与正确性的平衡——轻量级方案减少上下文切换，重量级方案保证强互斥"
+  essence: 锁的本质是'保证多线程对共享资源的互斥访问'。锁升级的原理是'按需付费'——竞争越激烈才用越重的锁
+  derivation: 大多数场景锁竞争很少→全局重量级锁浪费→引入偏向锁（只记线程ID，CAS都不用）→有时有竞争→轻量级锁（CAS自旋）→竞争激烈→重量级锁（OS互斥量，线程阻塞）
+  conclusion: 锁升级是性能与正确性的平衡——轻量级方案减少上下文切换，重量级方案保证强互斥
 follow_up:
-- "JDK15为什么默认禁用偏向锁？（Hint: 维护成本、CAS指令开销增加）"
+- 'JDK15为什么默认禁用偏向锁？（Hint: 维护成本、CAS指令开销增加）'
 - 偏向锁撤销为什么需要全局安全点（Safepoint）？
 - 轻量级锁的自旋次数如何确定？自适应自旋是什么？
 - synchronized和ReentrantLock在锁实现上有什么本质区别？
@@ -37,6 +37,7 @@ memory_points:
 - 偏向锁→记录线程ID到Mark Word，不加锁不CAS
 - 轻量级锁→CAS替换Mark Word为指向Lock Record的指针
 - 重量级锁→Mark Word指向Monitor对象(ObjectMonitor)
+frequency: high
 ---
 
 # 【拼多多 Java服务端】synchronized锁升级过程，每个状态的标志位在对象头哪里？
@@ -47,6 +48,28 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class B start
+    class G process
+    class H decision
+    class L special
+    class MW error
+    class Mark info
+    class N start
+    class Word process
+    class age decision
+    class br special
+    class epoch error
+    class hashcode info
+    class ptr_to_heavy_monitor start
+    class ptr_to_lock_record process
+    class threadID decision
+    class unused special
     subgraph MW["64位 Mark Word 布局"]
         direction LR
         N["无锁<br/>hashcode(31) age(4) 0<br/>unused(1) 01 (未偏向)"]

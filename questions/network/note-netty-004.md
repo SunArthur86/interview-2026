@@ -10,7 +10,8 @@ tags:
 - 回调
 - ChannelFuture
 feynman:
-  essence: 「异步」让线程发起 I/O 后不等结果就去做别的（结果用 Future/回调领取）；「事件驱动」让系统通过事件（连接建立、数据到达、异常发生）来触发逻辑，而不是顺序轮询。两者结合，Netty 能以任意顺序响应任意时间点的事件，这正是高并发网络服务的本质需求。
+  essence: 「异步」让线程发起 I/O 后不等结果就去做别的（结果用 Future/回调领取）；「事件驱动」让系统通过事件（连接建立、数据到达、异常发生）来触发逻辑，而不是顺序轮询。两者结合，Netty
+    能以任意顺序响应任意时间点的事件，这正是高并发网络服务的本质需求。
   analogy: 异步像寄快递填回执单——你把包裹（I/O 请求）交给快递员就走人，不用站在门口等，送达后快递员按回执单上的电话通知你（回调）。事件驱动像医院叫号——系统不知道哪个病人（事件）先来，但无论谁先到，叫号系统（事件分发器）都能正确地把对应的医生（Handler）叫起来处理。
   key_points:
   - 异步=发起I/O不阻塞+Future/回调拿结果
@@ -26,14 +27,15 @@ first_principle:
   - 事件+Handler是"随机事件→确定性处理"的经典映射
   rebuild: 从"不阻塞"出发→所有I/O操作返回Future占位符立即返回(异步)→操作完成后通过回调通知(不用手动轮询检查)→把"完成"这个事实抽象成"事件"→事件被派发给ChannelHandler处理(事件驱动)→于是系统可以"以任意顺序响应任意时间点的事件",业务逻辑与网络操作彻底解耦。
 follow_up:
-  - ChannelFuture 和 JDK Future 的区别？
-  - 事件驱动和观察者模式的关系？
-  - Netty 的事件有哪些类型？
+- ChannelFuture 和 JDK Future 的区别？
+- 事件驱动和观察者模式的关系？
+- Netty 的事件有哪些类型？
 memory_points:
-  - 异步的两大支撑：Future（结果占位符）+ 回调（完成时通知）
-  - Netty 全异步：每个出站 I/O 操作都返回 ChannelFuture，不阻塞
-  - 事件驱动本质：状态改变/操作状态→发事件→触发动作
-  - 王炸效果：以任意顺序响应任意时间点产生的事件（PPT slide18 原话）
+- 异步的两大支撑：Future（结果占位符）+ 回调（完成时通知）
+- Netty 全异步：每个出站 I/O 操作都返回 ChannelFuture，不阻塞
+- 事件驱动本质：状态改变/操作状态→发事件→触发动作
+- 王炸效果：以任意顺序响应任意时间点产生的事件（PPT slide18 原话）
+frequency: high
 ---
 
 # Netty 的异步和事件驱动机制是怎样的？
@@ -292,6 +294,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

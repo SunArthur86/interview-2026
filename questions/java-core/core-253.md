@@ -16,6 +16,7 @@ memory_points:
 - 读请求：协调者向多节点发请求，比对时间戳返回最新数据给客户端。
 - 后台修复：发现新旧数据不一致时，后台异步把最新值写回旧副本节点。
 - 关键优势：不阻塞当前读请求的响应时间，顺便实现数据的最终一致性。
+frequency: low
 ---
 
 # 什么是数据读请求和后台修复？
@@ -108,6 +109,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

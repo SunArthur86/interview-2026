@@ -17,6 +17,7 @@ memory_points:
 - 安全双雄：因为HttpOnly防XSS窃取，SameSite防CSRF跨站，所以实战必带这两个属性。
 - 容量与分类：Cookie仅约4KB；不设过期时间为内存级Session，设置Expires/Max-Age为硬盘级Persistent。
 - 实战避坑：Chrome 80+跨站请求需显式配对设置 SameSite=None 与 Secure 属性才会携带Cookie。
+frequency: medium
 ---
 
 # Cookie的工作原理是什么？
@@ -122,6 +123,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

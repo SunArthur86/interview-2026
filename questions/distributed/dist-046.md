@@ -16,6 +16,7 @@ memory_points:
 - 选AP：宁可返回旧数据也要服务高可用（如缓存、Eureka）
 - 配置中心通常选CP，因为错误配置比短暂不可用更危险
 - Nacos支持AP/CP切换，而Eureka是纯AP，ZooKeeper是纯CP
+frequency: high
 ---
 
 # CAP理论中如何选择CP还是AP？
@@ -119,6 +120,7 @@ flowchart TD
     style P fill:#9C27B0,color:#fff
     style BASE fill:#2196F3,color:#fff
     style TRADEOFF fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

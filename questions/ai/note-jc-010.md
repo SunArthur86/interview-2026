@@ -10,7 +10,8 @@ tags:
 - 位运算
 - 数据单位
 feynman:
-  essence: bit（位）是计算机最小单位（0或1），byte（字节）是基本存储单位，1 byte = 8 bit。衍生：1KB=1024B，1MB=1024KB...。为什么 1 byte=8 bit？8 位足够编码 256 个值（ASCII 字符），是早期计算机（IBM System/360）确立的工业标准。常见对应：int=4字节=32位，char=1字节=8位，指针(64位)=8字节=64位。
+  essence: bit（位）是计算机最小单位（0或1），byte（字节）是基本存储单位，1 byte = 8 bit。衍生：1KB=1024B，1MB=1024KB...。为什么
+    1 byte=8 bit？8 位足够编码 256 个值（ASCII 字符），是早期计算机（IBM System/360）确立的工业标准。常见对应：int=4字节=32位，char=1字节=8位，指针(64位)=8字节=64位。
   analogy: bit 像开关（开/关，2种状态），byte 像 8 个开关组合（256种状态，够表示一个字符）。bit 是最小零件，byte 是基本包装单位。
   first_principle: 计算机用二进制，bit 是最小信息单元。byte 是为了方便组织数据定义的"标准包装"——8 个 bit 一组，足够编码字符。
   key_points:
@@ -32,6 +33,7 @@ memory_points:
 - 进制规则：计算机存储用1024进制（1KB=1024B），因2的10次方
 - 生活易混：网络带宽用bit（Mbps除8=MB/s），硬盘厂商用1000进制
 - 显存计算：7B模型FP16存参数=14GB，加Adam优化器状态约84GB
+frequency: low
 ---
 
 # 【阶跃星辰面经】bit 和 byte 之间的对应关系
@@ -128,6 +130,34 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class C1 special
+    class C2 error
+    class D info
+    class D1 start
+    class D2 process
+    class E decision
+    class F special
+    class FP16 error
+    class GB info
+    class IBM start
+    class INT8 process
+    class KB decision
+    class KiB special
+    class MiB error
+    class System info
+    class UTF start
+    class bit process
+    class br decision
+    class byte special
     A["bit(位)<br/>最小物理单元"] -->|"IBM System/360确立标准<br/>256值满足编码且为2的幂"| B["1 byte = 8 bit<br/>最小可寻址内存单元"]
     B --> C["数据类型与编码"]
     B --> D["数据容量与带宽"]

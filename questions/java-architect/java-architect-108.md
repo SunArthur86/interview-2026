@@ -9,9 +9,13 @@ tags:
 - 低延迟
 - 分代
 feynman:
-  essence: Generational ZGC（JEP 439，JDK 21 GA）让 ZGC 从单代变成"年轻代 + 老年代"分代，利用弱分代假说把 GC 扫描范围从全堆降到年轻代。结果是：堆 16GB 时 P99 GC pause < 1ms，吞吐损失从单代 ZGC 的 15% 降到 5%。低延迟服务（交易、风控、支付）从此有了一个"既低延迟又高吞吐"的 GC。
-  analogy: 像垃圾分类回收：单代 ZGC 是"所有垃圾混在一起扫"（每次扫全堆，慢）；分代 ZGC 是"湿垃圾（短命对象）每天扫，干垃圾（长期对象）每周扫"——湿垃圾占 90%，每天快速扫掉就完事。
-  first_principle: 弱分代假说：90%+ 对象朝生夕灭。把短命对象放年轻代单独扫描（频率高、范围小），长寿对象放老年代单独扫描（频率低、范围大）。总成本 = 高频×小成本 + 低频×大成本 << 单代的高频×大成本。
+  essence: Generational ZGC（JEP 439，JDK 21 GA）让 ZGC 从单代变成"年轻代 + 老年代"分代，利用弱分代假说把 GC
+    扫描范围从全堆降到年轻代。结果是：堆 16GB 时 P99 GC pause < 1ms，吞吐损失从单代 ZGC 的 15% 降到 5%。低延迟服务（交易、风控、支付）从此有了一个"既低延迟又高吞吐"的
+    GC。
+  analogy: 像垃圾分类回收：单代 ZGC 是"所有垃圾混在一起扫"（每次扫全堆，慢）；分代 ZGC 是"湿垃圾（短命对象）每天扫，干垃圾（长期对象）每周扫"——湿垃圾占
+    90%，每天快速扫掉就完事。
+  first_principle: 弱分代假说：90%+ 对象朝生夕灭。把短命对象放年轻代单独扫描（频率高、范围小），长寿对象放老年代单独扫描（频率低、范围大）。总成本
+    = 高频×小成本 + 低频×大成本 << 单代的高频×大成本。
   key_points:
   - Generational ZGC（JEP 439，JDK 21 GA）：分代版 ZGC
   - P99 GC pause < 1ms（堆 16GB 内）、< 10ms（堆 16TB 内）
@@ -24,20 +28,24 @@ first_principle:
   - 弱分代假说：90%+ 对象朝生夕灭
   - 单代 ZGC 每次都扫全堆，扫描成本随堆大小线性增长
   - 短命对象如果不及时回收会"混进"长期对象的扫描集，浪费 CPU
-  rebuild: 把 ZGC 堆切成年轻代（young）和老年代（old）。年轻代频繁并发回收（小、快），大部分短命对象在这里消失；老年代低频回收（大、慢），只装长寿对象。两者独立并发执行，互不阻塞。结果是：扫描成本大幅下降，吞吐损失从 15% 降到 5%，pause 仍保持 < 1ms。
+  rebuild: 把 ZGC 堆切成年轻代（young）和老年代（old）。年轻代频繁并发回收（小、快），大部分短命对象在这里消失；老年代低频回收（大、慢），只装长寿对象。两者独立并发执行，互不阻塞。结果是：扫描成本大幅下降，吞吐损失从
+    15% 降到 5%，pause 仍保持 < 1ms。
 follow_up:
-  - Generational ZGC 和 G1 区别？——G1 是分代 + STW（Young GC 全停顿，Mixed GC 部分停顿），适合堆 8-32GB；ZGC 是分代 + 全并发（所有阶段都不停顿），适合堆 16GB-16TB。ZGC pause 更低（< 1ms vs G1 100-200ms），但 CPU 占用更高
-  - 什么时候选 ZGC 而不是 G1？——延迟敏感（P99 < 100ms）+ 堆 > 16GB，选 ZGC；延迟不敏感 + 堆 < 8GB，选 G1
-  - 转移（promotion）怎么发生？——年轻代对象熬过 N 次 minor GC 后晋升老年代（动态年龄判断，类似 G1）
-  - 启用方式？——JDK 21：-XX:+UseZGC -XX:+ZGenerational（默认开 ZGenerational）。JDK 25：ZGenerational 默认开，单代 ZGC 被移除
-  - 大对象怎么处理？——ZGC 没有 G1 的 Humongous Region 概念，大对象直接分配在堆里，并发转移
+- Generational ZGC 和 G1 区别？——G1 是分代 + STW（Young GC 全停顿，Mixed GC 部分停顿），适合堆 8-32GB；ZGC
+  是分代 + 全并发（所有阶段都不停顿），适合堆 16GB-16TB。ZGC pause 更低（< 1ms vs G1 100-200ms），但 CPU 占用更高
+- 什么时候选 ZGC 而不是 G1？——延迟敏感（P99 < 100ms）+ 堆 > 16GB，选 ZGC；延迟不敏感 + 堆 < 8GB，选 G1
+- 转移（promotion）怎么发生？——年轻代对象熬过 N 次 minor GC 后晋升老年代（动态年龄判断，类似 G1）
+- 启用方式？——JDK 21：-XX:+UseZGC -XX:+ZGenerational（默认开 ZGenerational）。JDK 25：ZGenerational
+  默认开，单代 ZGC 被移除
+- 大对象怎么处理？——ZGC 没有 G1 的 Humongous Region 概念，大对象直接分配在堆里，并发转移
 memory_points:
-  - Generational ZGC（JEP 439，JDK 21 GA）
-  - P99 GC pause < 1ms（堆 16GB）、< 10ms（堆 16TB）
-  - 吞吐损失从单代 15% 降到 5%
-  - 启用：-XX:+UseZGC -XX:+ZGenerational
-  - 适合：堆 > 16GB + 延迟敏感（交易/支付/风控）
-  - 代价：CPU 占用比 G1 高 5-10%
+- Generational ZGC（JEP 439，JDK 21 GA）
+- P99 GC pause < 1ms（堆 16GB）、< 10ms（堆 16TB）
+- 吞吐损失从单代 15% 降到 5%
+- 启用：-XX:+UseZGC -XX:+ZGenerational
+- 适合：堆 > 16GB + 延迟敏感（交易/支付/风控）
+- 代价：CPU 占用比 G1 高 5-10%
+frequency: high
 ---
 
 # 【Java 后端架构师】Generational ZGC 与低延迟服务调优
@@ -383,6 +391,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

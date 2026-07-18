@@ -28,14 +28,15 @@ first_principle:
   - 长任务会失败
   rebuild: 训练平台（集群管理 + 任务调度 + 并行编排 + 容错 + 监控）。
 follow_up:
-  - 怎么提高 GPU 利用率？——拓扑感知调度 + 通信计算重叠 + 弹性抢占
-  - 训练挂了怎么恢复？——checkpoint + 自动从最近点恢复 + 数据续训
-  - 怎么选并行策略？——按模型大小 + 集群拓扑 + 显存，3D 并行通常最优
+- 怎么提高 GPU 利用率？——拓扑感知调度 + 通信计算重叠 + 弹性抢占
+- 训练挂了怎么恢复？——checkpoint + 自动从最近点恢复 + 数据续训
+- 怎么选并行策略？——按模型大小 + 集群拓扑 + 显存，3D 并行通常最优
 memory_points:
-  - 集群：K8s + GPU 池化 + 拓扑感知
-  - 调度：优先级/抢占/队列
-  - 并行：3D（TP+DP+PP）/ZeRO
-  - 容错：checkpoint 恢复
+- 集群：K8s + GPU 池化 + 拓扑感知
+- 调度：优先级/抢占/队列
+- 并行：3D（TP+DP+PP）/ZeRO
+- 容错：checkpoint 恢复
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】训练平台架构怎么设计？GPU 调度怎么做？
@@ -437,6 +438,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 结构化回答

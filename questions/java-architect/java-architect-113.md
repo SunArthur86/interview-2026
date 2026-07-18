@@ -9,9 +9,13 @@ tags:
 - traceId
 - 日志治理
 feynman:
-  essence: 结构化日志（JSON）+ traceId 关联是分布式排查的"基础设施"——日志不再是给人读的文本，而是给机器查询的结构化数据。一条 traceId 串起网关、订单、库存、支付 N 个服务的日志，秒级定位"用户 A 的订单为什么失败"。治理核心是 traceId 透传（HTTP/MQ/线程池）+ 日志字段标准化 + 采集成本控制。
-  analogy: 像医院病历系统：每个病人有唯一病历号（traceId），所有科室（服务）的检查结果都标这个号。医生输入病历号，立刻看到从分诊 → 化验 → CT → 手术的完整记录。没有病历号，医生只能在 N 个科室的纸质病历里翻找。
-  first_principle: 分布式系统一个请求经过 N 个服务，每个服务有自己的日志文件。没有 traceId 关联，定位问题要 grep N 个文件、肉眼拼凑。traceId 让日志"自带关联"，输入一个 ID 就能拉出整条链路的所有日志。
+  essence: 结构化日志（JSON）+ traceId 关联是分布式排查的"基础设施"——日志不再是给人读的文本，而是给机器查询的结构化数据。一条 traceId
+    串起网关、订单、库存、支付 N 个服务的日志，秒级定位"用户 A 的订单为什么失败"。治理核心是 traceId 透传（HTTP/MQ/线程池）+ 日志字段标准化
+    + 采集成本控制。
+  analogy: 像医院病历系统：每个病人有唯一病历号（traceId），所有科室（服务）的检查结果都标这个号。医生输入病历号，立刻看到从分诊 → 化验 → CT
+    → 手术的完整记录。没有病历号，医生只能在 N 个科室的纸质病历里翻找。
+  first_principle: 分布式系统一个请求经过 N 个服务，每个服务有自己的日志文件。没有 traceId 关联，定位问题要 grep N 个文件、肉眼拼凑。traceId
+    让日志"自带关联"，输入一个 ID 就能拉出整条链路的所有日志。
   key_points:
   - 结构化日志：JSON 格式（不是文本），字段标准化（timestamp/level/traceId/logger/msg/...）
   - traceId 透传：HTTP（W3C traceparent）、MQ（消息属性）、线程池（TTL）
@@ -24,20 +28,24 @@ first_principle:
   - 文本日志无法机器解析（grep 慢、字段不固定）
   - 跨服务日志关联需要唯一 ID（traceId）
   - traceId 必须自动透传（业务代码无感）
-  rebuild: 三层架构。① 日志格式标准化：JSON 结构化，字段统一（timestamp/level/logger/traceId/spanId/msg/业务字段）；② traceId 自动透传：HTTP 用 W3C traceparent 头、MQ 放消息属性、线程池用 TransmittableThreadLocal；③ 采集成本控制：异步日志（不阻塞业务）+ 按级别采集（ERROR 全量、DEBUG 默认关）+ 采样（高频日志）。traceId 通过 MDC 注入到日志，业务代码零侵入。
+  rebuild: 三层架构。① 日志格式标准化：JSON 结构化，字段统一（timestamp/level/logger/traceId/spanId/msg/业务字段）；②
+    traceId 自动透传：HTTP 用 W3C traceparent 头、MQ 放消息属性、线程池用 TransmittableThreadLocal；③
+    采集成本控制：异步日志（不阻塞业务）+ 按级别采集（ERROR 全量、DEBUG 默认关）+ 采样（高频日志）。traceId 通过 MDC 注入到日志，业务代码零侵入。
 follow_up:
-  - traceId 怎么生成？——Snowflake 或 UUID。推荐 OpenTelemetry 的 traceId（128 位，W3C 标准）
-  - 跨消息队列怎么透传？——RocketMQ 放 msg.getUserProperty("traceparent")，消费端解析后注入 MDC
-  - 线程池 traceId 怅失怎么办？——用 TransmittableThreadLocal（TTL）替代 InheritableThreadLocal，配合 TtlExecutors.wrap
-  - 日志格式怎么标准化？——logstash-logback-encoder 输出 JSON，自定义字段（app/service/env/version）
-  - 日志体积大怎么办？——异步日志（AsyncAppender）+ 按级别采集 + 高频日志采样 + 保留期 7-30 天
+- traceId 怎么生成？——Snowflake 或 UUID。推荐 OpenTelemetry 的 traceId（128 位，W3C 标准）
+- 跨消息队列怎么透传？——RocketMQ 放 msg.getUserProperty("traceparent")，消费端解析后注入 MDC
+- 线程池 traceId 怅失怎么办？——用 TransmittableThreadLocal（TTL）替代 InheritableThreadLocal，配合
+  TtlExecutors.wrap
+- 日志格式怎么标准化？——logstash-logback-encoder 输出 JSON，自定义字段（app/service/env/version）
+- 日志体积大怎么办？——异步日志（AsyncAppender）+ 按级别采集 + 高频日志采样 + 保留期 7-30 天
 memory_points:
-  - 结构化日志 = JSON + 标准字段（timestamp/level/traceId/logger/msg）
-  - traceId 透传：HTTP（W3C traceparent）、MQ（消息属性）、线程池（TTL）
-  - MDC + logstash-logback-encoder 自动注入
-  - 异步日志（AsyncAppender）+ 按级别采集 + 高频采样
-  - ELK / Loki 存储查询
-  - 保留期：ERROR 30 天、WARN 14 天、INFO 7 天、DEBUG 关
+- 结构化日志 = JSON + 标准字段（timestamp/level/traceId/logger/msg）
+- traceId 透传：HTTP（W3C traceparent）、MQ（消息属性）、线程池（TTL）
+- MDC + logstash-logback-encoder 自动注入
+- 异步日志（AsyncAppender）+ 按级别采集 + 高频采样
+- ELK / Loki 存储查询
+- 保留期：ERROR 30 天、WARN 14 天、INFO 7 天、DEBUG 关
+frequency: high
 ---
 
 # 【Java 后端架构师】Spring Boot 结构化日志与 trace 关联
@@ -452,6 +460,7 @@ flowchart TD
     K --> M["快速定位下单失败根因"]
     style C fill:#ffe599,stroke:#f1c232
     style I fill:#d9ead3,stroke:#93c47d
+
 ```
 
 ## 视频脚本

@@ -31,6 +31,7 @@ memory_points:
 - 核心原理：同Prompt多次采样，用组内奖励均值作Baseline替代Critic网络
 - 数学本质：用蒙特卡洛经验均值估计优势函数，省去庞大的价值网络
 - 工程意义：DeepSeek-R1借此实现纯RL驱动，验证大规模推理涌现能力
+frequency: high
 ---
 
 # 【腾讯面经】GRPO 算法的原理是什么？和 PPO 有什么区别？
@@ -486,6 +487,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

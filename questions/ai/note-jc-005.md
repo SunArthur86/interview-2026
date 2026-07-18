@@ -12,9 +12,14 @@ tags:
 - GRPO
 - 混合专家
 feynman:
-  essence: RL 训练 MoE 的核心问题是"专家负载不均+路由不稳定+训练效率低"。GRPO 直接用在 MoE 上会加剧负载倾斜（优势高时所有 token 都涌向同一专家），导致某些专家过载某些闲置。GSPO（Group Sequence Policy Optimization）的优化：①序列级优势而非 token 级（避免单 token 梯度加剧路由震荡）②显式负载均衡损失（强制专家使用均匀）③重要性采样修正（适应 MoE 的稀疏激活特性）。GSPO 更适配 MoE 因为它从"序列"而非"token"角度优化，减少路由层的梯度噪声。
-  analogy: MoE 像多车道收费站（多个专家），GRPO 像"每辆车自己选最快车道"→ 所有车涌向一条车道（负载倾斜）。GSPO 像"按车队整体走哪条道分配"（序列级）+ 强制每条道车流量均衡（负载均衡损失）→ 避免一条道堵死其他空。
-  first_principle: MoE 的路由是离散选择（token 选专家），RL 的梯度会反向影响路由。token 级 RL（GRPO）让每个 token 的优势都影响路由，梯度噪声大、易导致路由震荡和负载倾斜。序列级 RL（GSPO）用整条序列一个优势，减少对路由的频繁扰动，更适合 MoE。
+  essence: RL 训练 MoE 的核心问题是"专家负载不均+路由不稳定+训练效率低"。GRPO 直接用在 MoE 上会加剧负载倾斜（优势高时所有 token
+    都涌向同一专家），导致某些专家过载某些闲置。GSPO（Group Sequence Policy Optimization）的优化：①序列级优势而非 token
+    级（避免单 token 梯度加剧路由震荡）②显式负载均衡损失（强制专家使用均匀）③重要性采样修正（适应 MoE 的稀疏激活特性）。GSPO 更适配 MoE
+    因为它从"序列"而非"token"角度优化，减少路由层的梯度噪声。
+  analogy: MoE 像多车道收费站（多个专家），GRPO 像"每辆车自己选最快车道"→ 所有车涌向一条车道（负载倾斜）。GSPO 像"按车队整体走哪条道分配"（序列级）+
+    强制每条道车流量均衡（负载均衡损失）→ 避免一条道堵死其他空。
+  first_principle: MoE 的路由是离散选择（token 选专家），RL 的梯度会反向影响路由。token 级 RL（GRPO）让每个 token
+    的优势都影响路由，梯度噪声大、易导致路由震荡和负载倾斜。序列级 RL（GSPO）用整条序列一个优势，减少对路由的频繁扰动，更适合 MoE。
   key_points:
   - 'MoE RL 问题: 专家负载不均+路由不稳定+训练效率低'
   - 'GRPO 在 MoE: token级优势加剧路由震荡和负载倾斜'
@@ -23,7 +28,8 @@ feynman:
   - 'GSPO 优化3: 重要性采样修正适应稀疏激活'
 first_principle:
   essence: MoE 的路由是离散的，RL 梯度会扰动路由
-  derivation: MoE 路由 = token 选专家(离散) → RL 梯度反传影响路由 → token级RL(GRPO)梯度噪声大 → 路由震荡+负载倾斜 → 序列级RL(GSPO)减少扰动 + 负载均衡约束
+  derivation: MoE 路由 = token 选专家(离散) → RL 梯度反传影响路由 → token级RL(GRPO)梯度噪声大 → 路由震荡+负载倾斜
+    → 序列级RL(GSPO)减少扰动 + 负载均衡约束
   conclusion: MoE 的 RL 不是"换个算法"，而是要专门处理"路由稳定性"和"负载均衡"
 follow_up:
 - MoE 的负载均衡损失怎么设计？
@@ -35,6 +41,7 @@ memory_points:
 - GSPO优化一：序列级优势，平滑梯度减少对单token路由的扰动
 - GSPO优化二：显式负载均衡损失，防止expert collapse（专家死亡）
 - GSPO优化三：token级重要性采样，适配MoE稀疏激活特性
+frequency: high
 ---
 
 # 【阶跃星辰/字节面经】用 RL 训练 MoE 架构容易遇到哪些问题？GSPO 相比 GRPO 做了哪些优化？
@@ -212,6 +219,7 @@ flowchart TD
     style D1 fill:#f66,stroke:#333,stroke-width:2px
     style B2 fill:#9f9,stroke:#333,stroke-width:2px
     style B3 fill:#9f9,stroke:#333,stroke-width:2px
+
 ```
 
 

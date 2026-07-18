@@ -27,6 +27,7 @@ memory_points:
 - GraphRAG核心：离线抽取实体关系建图谱+社区检测生成摘要。
 - 双模检索：Local针对单实体图遍历，Global针对全局Map-Reduce摘要。
 - 场景互补：简单事实用向量，复杂多跳与全局总结用图谱，常建混合架构。
+frequency: medium
 ---
 
 # 【腾讯面经】GraphRAG 跟普通 RAG 的区别是什么？什么场景适合用 GraphRAG？
@@ -361,6 +362,7 @@ flowchart TD
     style GRAPH fill:#FF9800,color:#fff
     style COMM fill:#9C27B0,color:#fff
     style MAP fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

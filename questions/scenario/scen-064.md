@@ -30,6 +30,7 @@ memory_points:
 - 密钥管理：采用信封加密，业务用明文DEK加密数据，仅密文DEK入库由KMS管。
 - 安全检索：因AES加密难查询，故额外存哈希索引兼顾安全检索与解密。
 - GCM模式：推荐用AES-GCM，因它不仅加密还能校验防篡改。
+frequency: medium
 ---
 
 # 如何设计敏感数据加密和脱敏方案？
@@ -157,6 +158,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

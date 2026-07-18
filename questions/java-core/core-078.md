@@ -17,6 +17,7 @@ memory_points:
 - 握手异常：若第三次握手ACK丢包，客户端会重发SYN，服务端重传确认以恢复连接
 - 防御与优化：SYN Cookies防御半连接队列攻击，而TCP Fast Open(TFO)可省去握手RTT
 - 滑动窗口：接收方通过TCP头部的窗口大小字段控制发送速率，0窗口探查用于防止死锁
+frequency: low
 ---
 
 # 什么是TCP 抓包实践？
@@ -84,6 +85,27 @@ socket.setTcpNoDelay(true);
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class ESTABLISHED decision
+    class FIN special
+    class S error
+    class SYN info
+    class TIME_WAIT start
+    class ack process
+    class as decision
+    class seq special
+    class u error
+    class v info
+    class w start
+    class x process
+    class y decision
     participant C as 客户端
     participant S as 服务端
     Note over C,S: 三次握手 建立连接

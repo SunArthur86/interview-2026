@@ -17,6 +17,7 @@ memory_points:
 - 形象比喻：Pipeline 像工厂流水线（强依赖），Boss-Worker 像项目经理排期（弱依赖）。
 - 并行度：Pipeline 受限于最慢阶段（短板），Boss-Worker 易于水平扩展。
 - 避坑指南：简单线性任务用 Pipeline 更快，Boss-Worker 有调度开销。
+frequency: medium
 ---
 
 # Boss-Worker 和 Pipeline 有什么本质差异
@@ -144,6 +145,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

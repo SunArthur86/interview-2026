@@ -9,9 +9,14 @@ tags:
 - 模式匹配
 - 可维护性
 feynman:
-  essence: Record Pattern（JEP 440/441，JDK 21 GA）是"用数据形状做控制流"——把 instanceof + 强转 + 字段提取三步合一，让代数数据类型（ADT）在 Java 里第一次可表达。它的工程价值不是"少写两行代码"，而是把"类型分支"从运行时 instanceof（易 NPE、易漏分支）变成编译期穷尽检查（sealed + switch pattern = 穷尽性校验）。
-  analogy: 像快递分拣：老 instanceof 是"先看是不是包裹，再拆开看里面是什么"（两步、易拆错）；Record Pattern 是"按盒子形状分拣"——长方形盒子里 3 件就直接取 3 件，圆形盒子里 1 件就直接取 1 件，分拣机（编译器）自动校验所有形状都覆盖了。
-  first_principle: 面向对象的"行为多态"（继承 + 重写）解决"同一行为不同实现"，但"数据多态"（同一组数据不同形状）长期靠 instanceof + 强转，编译期不校验穷尽性。Record Pattern + sealed 把 ML/Haskell 的 ADT 引入 Java，让"分支穷尽性"从运行时 NPE 变成编译期错误。
+  essence: Record Pattern（JEP 440/441，JDK 21 GA）是"用数据形状做控制流"——把 instanceof + 强转 +
+    字段提取三步合一，让代数数据类型（ADT）在 Java 里第一次可表达。它的工程价值不是"少写两行代码"，而是把"类型分支"从运行时 instanceof（易
+    NPE、易漏分支）变成编译期穷尽检查（sealed + switch pattern = 穷尽性校验）。
+  analogy: 像快递分拣：老 instanceof 是"先看是不是包裹，再拆开看里面是什么"（两步、易拆错）；Record Pattern 是"按盒子形状分拣"——长方形盒子里
+    3 件就直接取 3 件，圆形盒子里 1 件就直接取 1 件，分拣机（编译器）自动校验所有形状都覆盖了。
+  first_principle: 面向对象的"行为多态"（继承 + 重写）解决"同一行为不同实现"，但"数据多态"（同一组数据不同形状）长期靠 instanceof
+    + 强转，编译期不校验穷尽性。Record Pattern + sealed 把 ML/Haskell 的 ADT 引入 Java，让"分支穷尽性"从运行时
+    NPE 变成编译期错误。
   key_points:
   - Record Pattern（JDK 21 GA）：instanceof 和 switch 都支持
   - 解构：record 的组件类型 + 名称自动提取
@@ -24,20 +29,27 @@ first_principle:
   - 数据的形状（类型 + 组件）应该和分支控制流统一
   - 类型系统应该能在编译期校验"所有形状都被覆盖"
   - 解构提取应该是声明式的，不是命令式的强转
-  rebuild: 用 record 定义不可变数据载体，用 sealed 限定子类型集合（封闭代数），用 Record Pattern 在 instanceof 和 switch 里解构（提取组件）。三者组合：sealed 让编译器知道所有可能形状，switch pattern 强制覆盖所有形状（不覆盖编译错），Record Pattern 自动提取组件（无强转）。这就是 ADT 的 Java 表达，编译期穷尽性是核心收益。
+  rebuild: 用 record 定义不可变数据载体，用 sealed 限定子类型集合（封闭代数），用 Record Pattern 在 instanceof
+    和 switch 里解构（提取组件）。三者组合：sealed 让编译器知道所有可能形状，switch pattern 强制覆盖所有形状（不覆盖编译错），Record
+    Pattern 自动提取组件（无强转）。这就是 ADT 的 Java 表达，编译期穷尽性是核心收益。
 follow_up:
-  - Record Pattern 和访问者模式（Visitor）什么关系？——Record Pattern 让 Visitor 在大多数场景过时。Visitor 是为"按类型分发"造的迂回方案，Record Pattern 直接 switch 类型 + 解构，更直观
-  - sealed 必须和 record 一起用吗？——不必须，但推荐。sealed class 也可以是普通类或接口，record 是隐式 final 的，配合 sealed 接口实现 ADT
-  - Record Pattern 性能怎么样？——编译器优化后和 instanceof + 强转等价，无额外开销。switch pattern 编译成 tableswitch/lookupswitch，性能更好
-  - 解构能用在普通 class 上吗？——JDK 21 只支持 record 的解构。普通 class 要等未来 JEP（deconstruction patterns for classes）
-  - 和 Kotlin 的 sealed class / when 对比？——语义相近，Java 21 终于追上了。Kotlin 的 when 强制穷尽性更早，Java 21 通过 sealed + switch 实现等价能力
+- Record Pattern 和访问者模式（Visitor）什么关系？——Record Pattern 让 Visitor 在大多数场景过时。Visitor 是为"按类型分发"造的迂回方案，Record
+  Pattern 直接 switch 类型 + 解构，更直观
+- sealed 必须和 record 一起用吗？——不必须，但推荐。sealed class 也可以是普通类或接口，record 是隐式 final 的，配合 sealed
+  接口实现 ADT
+- Record Pattern 性能怎么样？——编译器优化后和 instanceof + 强转等价，无额外开销。switch pattern 编译成 tableswitch/lookupswitch，性能更好
+- 解构能用在普通 class 上吗？——JDK 21 只支持 record 的解构。普通 class 要等未来 JEP（deconstruction patterns
+  for classes）
+- 和 Kotlin 的 sealed class / when 对比？——语义相近，Java 21 终于追上了。Kotlin 的 when 强制穷尽性更早，Java
+  21 通过 sealed + switch 实现等价能力
 memory_points:
-  - Record Pattern（JDK 21 GA）：instanceof + switch 都支持
-  - 三件套：record（数据载体）+ sealed（封闭类型）+ pattern switch（穷尽性）
-  - 嵌套解构：Point(Point(int x,_), _) 嵌套提取
-  - 穷尽性校验：sealed + switch 漏 case 编译错
-  - 替代 Visitor 模式：直接 switch 类型 + 解构
-  - 工程价值：消除 instanceof 链、提升可读性、编译期类型安全
+- Record Pattern（JDK 21 GA）：instanceof + switch 都支持
+- 三件套：record（数据载体）+ sealed（封闭类型）+ pattern switch（穷尽性）
+- 嵌套解构：Point(Point(int x,_), _) 嵌套提取
+- 穷尽性校验：sealed + switch 漏 case 编译错
+- 替代 Visitor 模式：直接 switch 类型 + 解构
+- 工程价值：消除 instanceof 链、提升可读性、编译期类型安全
+frequency: low
 ---
 
 # 【Java 后端架构师】Java 21 Record Pattern 与模式匹配的工程价值
@@ -397,6 +409,7 @@ flowchart TD
 
     style I fill:#f9d0c4,stroke:#e06666
     style L fill:#f9d0c4,stroke:#e06666
+
 ```
 
 ## 视频脚本

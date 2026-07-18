@@ -11,7 +11,7 @@ tags:
 - EventSource
 feynman:
   essence: SSE是服务器单向推送的HTTP长连接协议，浏览器原生支持自动重连。断线重连的关键是Last-Event-ID机制——客户端记住最后收到的消息序号，重连时告诉服务端从哪里继续。
-  analogy: "SSE像打电话时对方给你念文章（你只能听不能说）。如果电话断了，你重拨时说「我上次听到第3段了，从第4段继续念」（Last-Event-ID）。如果AI还在生成后面的内容，正好接着念。"
+  analogy: SSE像打电话时对方给你念文章（你只能听不能说）。如果电话断了，你重拨时说「我上次听到第3段了，从第4段继续念」（Last-Event-ID）。如果AI还在生成后面的内容，正好接着念。
   key_points:
   - SSE=HTTP长连接+单向推送，浏览器EventSource自动重连
   - 每个事件带id字段，重连时浏览器自动发Last-Event-ID头
@@ -19,18 +19,19 @@ feynman:
   - 断线重连核心：Redis缓存事件+seq序号+从断点重放
   - Nginx需proxy_buffering off + 长超时配置
 first_principle:
-  problem: "AI大模型生成是逐token流式的，网络不稳定可能导致连接中断，如何保证用户看到完整结果？"
+  problem: AI大模型生成是逐token流式的，网络不稳定可能导致连接中断，如何保证用户看到完整结果？
   axioms:
   - SSE基于HTTP，不需要特殊协议升级（比WebSocket简单）
   - 浏览器EventSource原生支持自动重连和Last-Event-ID
   - 断线重连需要服务端有事件历史缓存才能从断点恢复
   - 幂等性保证：去重防止重连后重复显示
-  rebuild: "从AI流式输出需求出发：LLM SSE流式→服务端SSE代理→每个chunk带seq→Redis缓存事件→客户端记录Last-Event-ID→断线自动重连→服务端从Redis重放历史+继续接收新内容"
+  rebuild: 从AI流式输出需求出发：LLM SSE流式→服务端SSE代理→每个chunk带seq→Redis缓存事件→客户端记录Last-Event-ID→断线自动重连→服务端从Redis重放历史+继续接收新内容
 follow_up:
 - SSE 在 Nginx 反向代理时需要注意什么配置？
 - AI流式输出如何在服务端做缓存（断线重连时不重新生成）？
 - SSE 和 WebSocket 在AI流式场景下各有什么优劣？
 - 如何实现SSE的多设备同步（同一个对话在手机和电脑上看）？
+frequency: high
 ---
 
 # AI应用中 SSE 流式响应如何设计断线重连？（入职Java复盘）
@@ -338,6 +339,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

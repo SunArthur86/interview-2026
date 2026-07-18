@@ -30,6 +30,7 @@ memory_points:
 - 核心矛盾：读写频率极度不对称（读多写少），直接修改数组会导致读到半新半旧中间状态。
 - 解决方案：写时复制（COW），先构建完整新表，再通过AtomicReference原子替换旧表引用。
 - 并发优势：读操作完全无锁零开销，而引用的原子替换（纳秒级）对读线程毫无感知。
+frequency: high
 ---
 
 # 【滴滴面经】如果奖品概率配置临时变了，概率查找表怎么更新？
@@ -515,6 +516,25 @@ public HealthStatus check() {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class AtomicReference decision
+    class C special
+    class Concurrent error
+    class L info
+    class M1 start
+    class M2 process
+    class R1 decision
+    class R2 special
+    class R3 error
+    class RS info
+    class Read start
     C([运营更新配置中心触发]) --> L[应用实例监听变更事件]
     L --> M1[实例1: 构建全新概率表]
     L --> M2[实例2: 构建全新概率表]

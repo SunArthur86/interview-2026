@@ -8,9 +8,12 @@ tags:
 - 缓存
 - 一致性
 feynman:
-  essence: 缓存模式的本质是"用空间换时间——把热点数据放内存加速读取"。Cache-Aside（旁路缓存）是业务代码同时管理缓存和 DB（先查缓存，miss 查 DB 回填）；Read-Through/Write-Through 是缓存层代理 DB 访问；Write-Behind 是异步写 DB。一致性问题的本质是"缓存和 DB 是两个系统，无法原子更新"，兜底靠"延迟双删 + TTL + 订阅 binlog 主动失效"。
+  essence: 缓存模式的本质是"用空间换时间——把热点数据放内存加速读取"。Cache-Aside（旁路缓存）是业务代码同时管理缓存和 DB（先查缓存，miss
+    查 DB 回填）；Read-Through/Write-Through 是缓存层代理 DB 访问；Write-Behind 是异步写 DB。一致性问题的本质是"缓存和
+    DB 是两个系统，无法原子更新"，兜底靠"延迟双删 + TTL + 订阅 binlog 主动失效"。
   analogy: 像图书馆的"热门书架 + 深度书库"。热门书架（缓存）放借阅多的书（热点数据），深度书库（DB）放所有书。学生借书先查热门书架（Cache 读），没有再去深度书库取并放一本到热门书架（回填）。新书入库时（写），先放深度书库再更新热门书架（一致性）——但这两步非原子，中间有人借可能读到旧版。
-  first_principle: 为什么要缓存？因为内存访问比磁盘快 10 万倍（纳秒 vs 毫秒），热点数据放内存能把读延迟从几十毫秒降到亚毫秒。代价是缓存和 DB 一致性维护（两个系统非原子）和内存成本（贵）。
+  first_principle: 为什么要缓存？因为内存访问比磁盘快 10 万倍（纳秒 vs 毫秒），热点数据放内存能把读延迟从几十毫秒降到亚毫秒。代价是缓存和
+    DB 一致性维护（两个系统非原子）和内存成本（贵）。
   key_points:
   - Cache-Aside（最常用）：读先查缓存 miss 查 DB 回填；写先更 DB 再删缓存
   - 一致性策略：先更 DB 后删缓存（推荐）、延迟双删、订阅 binlog 主动失效
@@ -23,19 +26,26 @@ first_principle:
   - 内存访问比磁盘快 10 万倍，热点数据放内存大幅降延迟
   - 缓存和 DB 是两个系统，无法原子更新（除非分布式事务，代价大）
   - 大部分业务能容忍短暂不一致（最终一致），强一致回源 DB
-  rebuild: 用 Cache-Aside 模式——读先查缓存，miss 查 DB 并回填缓存（带 TTL）；写先更新 DB 再删缓存（不是更新缓存）。删缓存而非更新避免并发不一致和资源浪费。一致性兜底：延迟双删（写后删 + 延迟再删防旧值回填）、TTL（最终一致兜底）、订阅 binlog（Canal 监听 DB 变更主动失效缓存）。强一致场景（如资金）绕过缓存直接读 DB。缓存淘汰用 LRU（热点保留）+ TTL（过期兜底）。
+  rebuild: 用 Cache-Aside 模式——读先查缓存，miss 查 DB 并回填缓存（带 TTL）；写先更新 DB 再删缓存（不是更新缓存）。删缓存而非更新避免并发不一致和资源浪费。一致性兜底：延迟双删（写后删
+    + 延迟再删防旧值回填）、TTL（最终一致兜底）、订阅 binlog（Canal 监听 DB 变更主动失效缓存）。强一致场景（如资金）绕过缓存直接读 DB。缓存淘汰用
+    LRU（热点保留）+ TTL（过期兜底）。
 follow_up:
-  - 为什么写操作删缓存而不是更新缓存？——两个原因。第一，并发更新缓存可能数据不一致（A 先更新 DB 但后更新缓存，B 后更新 DB 但先更新缓存，缓存存了 A 的旧值）。第二，有些缓存更新了没人读（浪费写）。删缓存是惰性的——下次读 miss 时回填最新值，简单且一致
-  - 延迟双删是什么？——写操作时先删缓存、再更新 DB、再延迟一段时间（如 500ms）再删一次缓存。第二次删除防止"更新 DB 期间旧数据被其他读请求回填到缓存"。延迟时间要大于一次读请求的耗时（DB 查询 + 缓存回填）
-  - Cache-Aside 的不一致窗口多大？——写操作"先更 DB 后删缓存"之间有不一致窗口（DB 新值但缓存旧值），通常毫秒级。如果删缓存失败，不一致持续到 TTL 过期。所以删缓存失败要重试（或订阅 binlog 兜底）
-  - 订阅 binlog 失效缓存怎么实现？——用 Canal/Debezium 监听 MySQL binlog，DB 变更时发消息到 MQ，消费方删除对应缓存。优点是业务代码不关心缓存失效（解耦），缺点是引入中间件增加复杂度
-  - 多级缓存一致性怎么保证？——本地缓存（Caffeine）+ 分布式缓存（Redis）+ DB。本地缓存一致性最难（多实例各有缓存），用 Redis Pub/Sub 广播失效消息，或订阅 binlog 失效所有实例。见 030 题
+- 为什么写操作删缓存而不是更新缓存？——两个原因。第一，并发更新缓存可能数据不一致（A 先更新 DB 但后更新缓存，B 后更新 DB 但先更新缓存，缓存存了 A
+  的旧值）。第二，有些缓存更新了没人读（浪费写）。删缓存是惰性的——下次读 miss 时回填最新值，简单且一致
+- 延迟双删是什么？——写操作时先删缓存、再更新 DB、再延迟一段时间（如 500ms）再删一次缓存。第二次删除防止"更新 DB 期间旧数据被其他读请求回填到缓存"。延迟时间要大于一次读请求的耗时（DB
+  查询 + 缓存回填）
+- Cache-Aside 的不一致窗口多大？——写操作"先更 DB 后删缓存"之间有不一致窗口（DB 新值但缓存旧值），通常毫秒级。如果删缓存失败，不一致持续到
+  TTL 过期。所以删缓存失败要重试（或订阅 binlog 兜底）
+- 订阅 binlog 失效缓存怎么实现？——用 Canal/Debezium 监听 MySQL binlog，DB 变更时发消息到 MQ，消费方删除对应缓存。优点是业务代码不关心缓存失效（解耦），缺点是引入中间件增加复杂度
+- 多级缓存一致性怎么保证？——本地缓存（Caffeine）+ 分布式缓存（Redis）+ DB。本地缓存一致性最难（多实例各有缓存），用 Redis Pub/Sub
+  广播失效消息，或订阅 binlog 失效所有实例。见 030 题
 memory_points:
-  - Cache-Aside（最常用）：读 miss 查 DB 回填；写先更 DB 后删缓存
-  - 一致性：先更 DB 后删缓存（推荐）、延迟双删、订阅 binlog
-  - 删缓存而非更新（防并发不一致、防浪费）
-  - 不一致窗口：删缓存失败靠 TTL + binlog 兜底
-  - 强一致场景绕过缓存直读 DB
+- Cache-Aside（最常用）：读 miss 查 DB 回填；写先更 DB 后删缓存
+- 一致性：先更 DB 后删缓存（推荐）、延迟双删、订阅 binlog
+- 删缓存而非更新（防并发不一致、防浪费）
+- 不一致窗口：删缓存失败靠 TTL + binlog 兜底
+- 强一致场景绕过缓存直读 DB
+frequency: high
 ---
 
 # 【Java 后端架构师】Redis 缓存模式与一致性治理
@@ -393,6 +403,30 @@ public class ProductService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Binlog start
+    class C1 process
+    class C2 decision
+    class DB1 special
+    class DB2 error
+    class Hit info
+    class M1 start
+    class M2 process
+    class M3 decision
+    class MQ special
+    class Miss error
+    class MySQL info
+    class R1 start
+    class Read process
+    class Redis decision
+    class W1 special
+    class Write error
+    class br info
     subgraph 业务读写请求
         R1[读请求 Read]
         W1[写请求 Write]

@@ -11,7 +11,8 @@ tags:
 - 内存
 feynman:
   essence: 指针是"存储内存地址的变量"——它的值是另一个变量的地址。指针本身也占内存（存这个地址），占用字节数取决于系统寻址空间：32位系统4字节（寻址2^32=4GB），64位系统8字节（寻址2^64）。指针类型（int*/char*）决定"解引用时读几个字节"，但指针本身大小和类型无关，只和系统位数有关。
-  analogy: 指针像一张写着"门牌号"的纸条——纸条上的内容是地址（某变量在哪），纸条本身也占地方（指针自己占内存）。门牌号长短（指针大小）取决于城市有多大（系统位数），和"这家人住的是公寓还是别墅"（int 还是 char）无关。
+  analogy: 指针像一张写着"门牌号"的纸条——纸条上的内容是地址（某变量在哪），纸条本身也占地方（指针自己占内存）。门牌号长短（指针大小）取决于城市有多大（系统位数），和"这家人住的是公寓还是别墅"（int
+    还是 char）无关。
   first_principle: 内存是按地址访问的线性空间。指针是"地址的容器"，让程序能间接访问内存。指针大小 = 寻址所需位数 = 系统位数。
   key_points:
   - 指针 = 存储内存地址的变量，值是另一个变量的地址
@@ -32,6 +33,7 @@ memory_points:
 - 核心结论：指针大小取决于系统位数（64位=8字节），与数据类型无关
 - 指针类型的作用：仅决定解引用时读取的字节数和加减法移动的步长
 - 代码题陷阱：*p=*q改变指向地址的值，而p=q改变指针的指向
+frequency: medium
 ---
 
 # 【阶跃星辰面经】指针的定义是什么？指针本身占用多少字节？
@@ -172,6 +174,33 @@ p = q;       // p 现在指向 b（指针赋值，改的是 p 的值）
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class abc start
+    class br process
+    class char decision
+    class int special
+    class malloc error
+    class new info
+    class p start
+    class q process
+    class void decision
     A["内存地址<br/>0x7ffee...abc"] --> B["指针变量 p<br/>占据8字节(64位系统)"]
     B --> C{"指针类型<br/>(编译期决定)"}
     C -->|"int*"| D["解引用读取4字节<br/>指针+1移动4字节"]

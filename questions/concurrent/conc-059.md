@@ -15,6 +15,7 @@ memory_points:
 - 内存泄漏：因为 Key 是弱引用易被回收，而 Value 是强引用，所以线程池复用时易导致 Value 泄漏。
 - 避坑指南：用完必须在 finally 中调用 remove()，以防线程复用导致的数据污染或内存泄漏。
 - 底层细节：ThreadLocalMap 解决 Hash 冲突使用的是线性探测法，而非链表法。
+frequency: high
 ---
 
 # ThreadLocal的原理和使用场景是什么？内存泄漏问题？
@@ -114,6 +115,7 @@ flowchart TD
     style LEAK_RISK fill:#F44336,color:#fff
     style REMOVE fill:#009688,color:#fff
     style TTL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

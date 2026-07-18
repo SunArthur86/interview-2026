@@ -29,6 +29,7 @@ memory_points:
 - 顺序性保障：因Binlog需顺序消费，Kafka需用表名或主键做Partition Key。
 - 防回环同步：在消息头增加source_id，消费者发现源头等于自身ID时直接丢弃防死循环。
 - 容灾降级：网络分区断开时各中心独立写（AP模式），网络恢复后用版本向量或业务脚本合并冲突。
+frequency: high
 ---
 
 # 如何设计一个分布式系统的数据同步方案？多数据中心数据一致。
@@ -153,6 +154,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

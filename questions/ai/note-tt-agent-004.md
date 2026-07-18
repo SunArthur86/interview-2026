@@ -35,6 +35,7 @@ memory_points:
 - 因果句：因为大模型存在幻觉且不可控，所以必须引入Reflector节点做结果校验
 - 对比句：反思通过则状态流转至完成，反思失败且重试超限则转入降级兜底状态
 - 口诀法：状态机管理节点流转，精准控制重试次数超时限制与人工接管
+frequency: high
 ---
 
 # 简述Agent的Planner-Executor-Reflector闭环实现，工程如何用状态机管控？
@@ -229,6 +230,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

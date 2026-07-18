@@ -16,6 +16,7 @@ memory_points:
 - LayerNorm：沿特征维度统计，不依赖Batch Size，适合Transformer/NLP。
 - 核心区别：BN固定每层特征分布，LN固定单个样本的向量范数。
 - 实战：小Batch Size（如2）下BN失效，Transformer必须用LN。
+frequency: high
 ---
 
 # Batch Normalization和Layer Normalization有什么区别？
@@ -148,6 +149,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

@@ -18,6 +18,7 @@ memory_points:
 - 交叉熵：用于分类，基于最大似然估计，梯度与误差成正比，收敛快。
 - 关键区别：分类不用MSE是因为Sigmoid导数会导致梯度消失，CE抵消了该影响。
 - 实战：LLM训练本质是超大规模多分类，必须使用Cross-Entropy。
+frequency: medium
 ---
 
 # 交叉熵损失和均方误差有什么区别？什么时候用哪个？
@@ -84,6 +85,28 @@ loss = ce_loss(logits, class_targets)
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class B special
+    class B1 error
+    class B2 info
+    class B3 start
+    class C process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class Cross info
+    class Entropy start
+    class MSE process
+    class br decision
+    class y special
     subgraph A["机器学习任务"]
         direction TB
         A1["预测连续值"]

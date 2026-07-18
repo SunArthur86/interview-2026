@@ -20,7 +20,8 @@ feynman:
   - 分区域流量调度
 first_principle:
   essence: 流媒体播放的瓶颈在于"带宽×延迟"的物理限制。对于千万级并发车辆，中心化服务器带宽必然不够。第一性原理：把"内容"和"计算"推到离用户最近的位置，用空间换时间。
-  derivation: 假设千万辆车每辆 2Mbps 流量，峰值带宽需求 = 10M × 2Mbps = 20Tbps。单数据中心最大出口带宽约 100Gbps，需要 200 个数据中心。因此必须依赖全球 CDN 网络（如 Akamai/Cloudflare 数十万边缘节点）。
+  derivation: 假设千万辆车每辆 2Mbps 流量，峰值带宽需求 = 10M × 2Mbps = 20Tbps。单数据中心最大出口带宽约 100Gbps，需要
+    200 个数据中心。因此必须依赖全球 CDN 网络（如 Akamai/Cloudflare 数十万边缘节点）。
   conclusion: 核心架构 = CDN边缘缓存 + ABR自适应码率 + 智能预加载 + P2P辅助分发 + 分区域调度。
 follow_up:
 - 车辆在高速移动中切换基站，如何保证流媒体不中断？
@@ -32,6 +33,7 @@ memory_points:
 - CDN多级缓存：源站转码切片，主动预热热门内容到边缘节点，拦截99%的回源流量
 - 自适应码率(ABR)：因为车机网络波动大，所以需根据实时带宽无缝切换多档码率防卡顿
 - 智能预加载：顺序预加载后续片段或基于用户习惯预测，保障首帧<2s且流畅
+frequency: high
 ---
 
 # 千万辆车辆同步使用车载娱乐功能（音乐、视频），如何设计后端架构，保证流媒体播放流畅，无卡顿且节省车载流量？
@@ -65,6 +67,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CA special
+    class CB error
+    class CC info
+    class CDN start
+    class CDNA process
+    class CDNB decision
+    class CDNC special
+    class ORIGIN error
+    class Origin info
+    class P2P start
+    class Pull process
+    class Push decision
+    class Server special
+    class VA error
+    class VB info
+    class VC start
+    class br process
+    class mesh decision
     ORIGIN["源站 (Origin Server)<br/>内容管理系统 / 转码集群 / DRM加密 / 元数据服务"]
     subgraph CDNA["CDN 区域 A (北美边缘节点)"]
         CA["热门内容缓存 / 转码切片缓存"]

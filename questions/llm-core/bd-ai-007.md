@@ -33,6 +33,7 @@ memory_points:
 - 异常四层防线：超时机制、重试策略、降级方案(挂了用简单方法)、结果校验
 - 工程关键：状态持久化存DB/Redis防丢，Checkpoint机制支持回滚，消息需幂等
 - 并发控制：多子任务时用Semaphore限流，防止资源打满
+frequency: high
 ---
 
 # 【字节面经】多Agent架构下，主Agent和子Agent的通信链路怎么设计？异常如何处理？
@@ -145,6 +146,12 @@ flowchart TD
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
     style N4 fill:#f44336,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

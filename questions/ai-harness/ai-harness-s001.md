@@ -20,6 +20,7 @@ memory_points:
 - 核心优势：结合两者，比 HuggingFace 快 14-24 倍，显存利用率接近极致。
 - 关键配置：Block Size 通常设 16，Prefix Caching 可复用 System Prompt KV。
 - 适用场景：高并发在线服务首选，单任务微调场景优势不明显。
+frequency: high
 ---
 
 # vLLM的核心优化技术有哪些？
@@ -89,6 +90,27 @@ outputs = llm.generate(["Hello, my name is", "The future of AI is"], sampling_pa
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Batching start
+    class Block process
+    class CB decision
+    class Caching special
+    class Continuous error
+    class GPU info
+    class PA start
+    class PC process
+    class PagedAttention decision
+    class Prefix special
+    class Prompt error
+    class Request info
+    class Size start
+    class Speed process
+    class br decision
     Request[推理请求] --> CB[Continuous Batching<br/>动态批处理]
     CB --> PA[PagedAttention<br/>KV分块管理]
     PA --> Block[(Block Size=16)]

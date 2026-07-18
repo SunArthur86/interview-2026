@@ -16,6 +16,7 @@ memory_points:
 - 缓存控制：引入Etag和Cache-Control等灵活字段，替代1.0简陋的Expires。
 - 断点续传：新增Range头支持分段请求资源（返回206状态码）。
 - 致命痛点：管道化要求响应FIFO串行返回，依然存在HTTP层严重的队头阻塞。
+frequency: medium
 ---
 
 # 什么是HTTP/1.1？
@@ -119,6 +120,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

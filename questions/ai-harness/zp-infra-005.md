@@ -27,6 +27,7 @@ memory_points:
 - 基础投机：小模型Draft生成候选，大模型Target并行验证，猜对免费，保证分布一致。
 - Medusa：Target多头并行预测，无需额外模型。EAGLE：特征级投机，接受率高。
 - 并行vs树状：树状单次验证延迟低，并行节点分离吞吐高。低延迟选树状，高吞吐选并行。
+frequency: low
 ---
 
 # 【智谱Infra面经】Speculative Decoding / Medusa / EAGLE / PEARL 在推理加速中的实现细节？并行投机 vs 树状投机？
@@ -99,6 +100,21 @@ def verify_sampling(draft_tokens, target_logits, base_model_probs):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Base start
+    class Branch process
+    class Draft decision
+    class EAGLE special
+    class Medusa error
+    class Parallel info
+    class Target start
+    class Tree process
+    class br decision
     Base[基础投机<br/>Draft+Target] --> Branch{变体}
     Branch -->|多头并行| Medusa[Medusa<br/>无需额外模型]
     Branch -->|特征级| EAGLE[EAGLE<br/>接受率高]

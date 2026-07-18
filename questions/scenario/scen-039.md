@@ -29,6 +29,7 @@ memory_points:
 - 滑动窗口原理：因为固定窗口有临界突发风险，所以细分小格滑动统计平摊流量
 - 分布式限流：Redis+Lua保证读取判断写入的原子性，ZSet实现高精度滑动窗口
 - 令牌桶参数：桶容量=系统最大瞬时并发，生成速率=系统长期平均处理能力
+frequency: high
 ---
 
 # 如何设计一个高可用的限流方案？对比令牌桶、漏桶、滑动窗口算法。
@@ -122,6 +123,7 @@ flowchart LR
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

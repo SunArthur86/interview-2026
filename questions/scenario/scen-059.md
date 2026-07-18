@@ -29,6 +29,7 @@ memory_points:
 - 概念对比：微服务是技术怎么拆，中台是业务沉淀什么给谁用。
 - 个性化解法：中台提供核心能力，业务定制通过SPI扩展点实现。
 - 避坑指南：3个以上业务线有相同需求才做中台，切忌脱离组织盲目建设。
+frequency: low
 ---
 
 # 如何设计中台架构？业务中台、数据中台、技术中台。
@@ -162,6 +163,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -30,6 +30,7 @@ memory_points:
 - 核心特性一：严格的ACID与SSI可序列化隔离，保障多步任务强一致性
 - 核心特性二：MVCC机制实现读写互不阻塞，轻松应对RAG高并发检索
 - 核心特性三：JSONB支持高效查询嵌套字段，是存储Agent上下文的最佳载体
+frequency: medium
 ---
 
 # 【美团面经】为什么选 PostgreSQL？它的特点是什么？
@@ -224,6 +225,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

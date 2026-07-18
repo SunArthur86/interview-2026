@@ -28,6 +28,7 @@ memory_points:
 - Memory Bound：带宽瓶颈，优化方向是合并访问、Shared Memory分块、向量化读写
 - Compute Bound：算力瓶颈，优化方向是Tensor Core利用、指令流水线、减少逻辑判断
 - 工具定位：Nsight Compute看Stall原因，Nsight Systems看计算与通信重叠情况
+frequency: medium
 ---
 
 # 【智谱Infra面经】如何评估一个 CUDA Kernel 的优化空间？怎么判断它是计算 bound 还是内存 bound？
@@ -117,6 +118,26 @@ __global__ void good_add(float4* x, float4* y, float4* out, int n) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AI start
+    class Bound process
+    class Bytes decision
+    class CUDA special
+    class Compare error
+    class Compute info
+    class Core start
+    class FLOPs process
+    class Kernel decision
+    class Memory special
+    class Nsight error
+    class Tensor info
+    class Tool start
+    class br process
     Kernel[CUDA Kernel] --> AI[算术强度AI<br/>FLOPs/Bytes]
     AI --> Compare{对比转折点}
     Compare -->|低于| Memory[Memory Bound<br/>合并访问/分块]

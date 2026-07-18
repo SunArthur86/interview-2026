@@ -9,9 +9,11 @@ tags:
 - OPA
 - Cedar
 feynman:
-  essence: 细粒度权限的核心痛点是"规则散落在业务代码里，改一次要发版 + 全量回归"。策略引擎（Policy Engine）把授权决策从业务代码抽出来变成"独立工件"——业务代码只问"can(user, action, resource)"，决策由外部策略文件（Rego/Cedar）给出。改规则只需改策略文件（热加载），不动业务代码。OPA（Rego）生态成熟、复杂场景强；Cedar（AWS）语法简洁、形式化验证、易上手。
+  essence: 细粒度权限的核心痛点是"规则散落在业务代码里，改一次要发版 + 全量回归"。策略引擎（Policy Engine）把授权决策从业务代码抽出来变成"独立工件"——业务代码只问"can(user,
+    action, resource)"，决策由外部策略文件（Rego/Cedar）给出。改规则只需改策略文件（热加载），不动业务代码。OPA（Rego）生态成熟、复杂场景强；Cedar（AWS）语法简洁、形式化验证、易上手。
   analogy: 像红绿灯系统。业务代码是路口的车（流量大），策略引擎是中央信号控制系统——你不用每辆车自己判断能不能过（业务代码写死规则），信号灯统一决策（策略集中管理）。改规则不用改车（业务），改信号灯程序（策略文件）。
-  first_principle: 为什么要把策略从代码抽出来？因为策略变化频率远高于代码——业务方今天要"manager 可审批 1 万"，明天要"manager 可审批 2 万"，后天加"周末需要双人审批"。如果策略写在代码里，每次改要发版 + 全量回归；策略引擎让"改规则 = 改配置"，热加载生效。
+  first_principle: 为什么要把策略从代码抽出来？因为策略变化频率远高于代码——业务方今天要"manager 可审批 1 万"，明天要"manager
+    可审批 2 万"，后天加"周末需要双人审批"。如果策略写在代码里，每次改要发版 + 全量回归；策略引擎让"改规则 = 改配置"，热加载生效。
   key_points:
   - OPA（Open Policy Agent）：Rego 语言、CNCF 毕业项目、生态最大
   - Cedar：AWS 推出、语法简洁、形式化验证、支持 partial evaluation
@@ -24,19 +26,23 @@ first_principle:
   - 策略变化频率 > 代码变化频率，必须解耦
   - 业务代码不应包含授权逻辑（关心"做什么"，不关心"能不能做"）
   - 授权决策需要可审计、可回放（合规要求）
-  rebuild: 部署独立策略引擎（OPA/Cedar），策略文件用专门 DSL（Rego/Cedar）写，进 Git 管理。业务代码每次操作前调 `authz.check(user, action, resource)`，策略引擎返回 allow/deny + reason。策略变更走 PR 评审 + CI 测试，热加载生效。每次决策落审计日志，支持"为什么这个请求被拒"的回溯。这套让授权决策从"代码细节"升级为"独立可治理工件"。
+  rebuild: 部署独立策略引擎（OPA/Cedar），策略文件用专门 DSL（Rego/Cedar）写，进 Git 管理。业务代码每次操作前调 `authz.check(user,
+    action, resource)`，策略引擎返回 allow/deny + reason。策略变更走 PR 评审 + CI 测试，热加载生效。每次决策落审计日志，支持"为什么这个请求被拒"的回溯。这套让授权决策从"代码细节"升级为"独立可治理工件"。
 follow_up:
-  - OPA 和 Spring Security 配合还是替代？——配合。Spring Security 做"认证 + 接口级鉴权"，OPA 做"业务级细粒度授权"（如"用户能改这个订单"）。Spring Security 先过滤掉匿名，OPA 再做精细判定。
-  - Rego 难学吗？——相对难。Rego 是 Datalog 风格的声明式语言，需要适应"规则匹配"思维。Cedar 语法接近自然语言更易学。
-  - 策略引擎性能怎么样？——in-process 决策 < 1ms（OPA 嵌入 Java/Go），独立服务 5-10ms（HTTP）。生产推荐 in-process。
-  - 怎么让策略可测试？——每个策略配单元测试（输入 → 期望输出），CI 跑；dry-run 模式先记录决策再切 enforce。
-  - ABAC 和 RBAC 能共存吗？——能。RBAC 是粗粒度（role → 大类操作），ABAC 是细粒度（user + resource 属性 → 具体动作）。先用 RBAC 过滤再 ABAC 细判。
+- OPA 和 Spring Security 配合还是替代？——配合。Spring Security 做"认证 + 接口级鉴权"，OPA 做"业务级细粒度授权"（如"用户能改这个订单"）。Spring
+  Security 先过滤掉匿名，OPA 再做精细判定。
+- Rego 难学吗？——相对难。Rego 是 Datalog 风格的声明式语言，需要适应"规则匹配"思维。Cedar 语法接近自然语言更易学。
+- 策略引擎性能怎么样？——in-process 决策 < 1ms（OPA 嵌入 Java/Go），独立服务 5-10ms（HTTP）。生产推荐 in-process。
+- 怎么让策略可测试？——每个策略配单元测试（输入 → 期望输出），CI 跑；dry-run 模式先记录决策再切 enforce。
+- ABAC 和 RBAC 能共存吗？——能。RBAC 是粗粒度（role → 大类操作），ABAC 是细粒度（user + resource 属性 → 具体动作）。先用
+  RBAC 过滤再 ABAC 细判。
 memory_points:
-  - OPA（Rego）：CNCF 毕业、生态成熟、Datalog 风格
-  - Cedar：AWS、语法简洁、形式化验证
-  - ABAC > RBAC：表达"manager 看本部门订单"这种细粒度
-  - 策略即代码：Git 管理 + PR 评审 + CI 测试 + 热加载
-  - 决策审计：每次 allow/deny 落日志，支持回溯
+- OPA（Rego）：CNCF 毕业、生态成熟、Datalog 风格
+- Cedar：AWS、语法简洁、形式化验证
+- ABAC > RBAC：表达"manager 看本部门订单"这种细粒度
+- 策略即代码：Git 管理 + PR 评审 + CI 测试 + 热加载
+- 决策审计：每次 allow/deny 落日志，支持回溯
+frequency: high
 ---
 
 # 【Java 后端架构师】细粒度权限与策略引擎 OPA/Cedar 选型
@@ -431,6 +437,45 @@ public class CedarAuthzService {
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class Action decision
+    class Allow special
+    class B error
+    class Biz info
+    class C start
+    class CI process
+    class Core decision
+    class D special
+    class Deny error
+    class E info
+    class Engine start
+    class F process
+    class G decision
+    class Git special
+    class H error
+    class HTTP info
+    class Hot start
+    class I process
+    class In decision
+    class J special
+    class Mgmt error
+    class OPA info
+    class Rego start
+    class Reload process
+    class Resource decision
+    class SDK special
+    class User error
+    class Webhook info
+    class check start
+    class opa process
+    class process decision
     subgraph Biz[业务代码]
         A[Java微服务调用 opa.check]
     end

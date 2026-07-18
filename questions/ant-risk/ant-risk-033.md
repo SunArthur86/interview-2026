@@ -12,8 +12,10 @@ tags:
 - 工程化
 feynman:
   essence: AI Harness 是把 LLM 从"调用 API"升级为"工程化系统"——网关路由、推理优化、工具管理、可观测、评估闭环，让 LLM 在生产环境可靠运行。
-  analogy: AI Harness 像 LLM 的"操作系统"——管理模型资源（多模型路由）、调度推理（GPU 池化）、提供工具（MCP）、监控运行（trace），让上层 Agent 不操心底层。
-  first_principle: 单个 LLM 调用简单（curl 一下 API），但生产环境要兼顾成本、性能、稳定、安全，必须工程化——把"调 LLM"变成"治理 LLM"。
+  analogy: AI Harness 像 LLM 的"操作系统"——管理模型资源（多模型路由）、调度推理（GPU 池化）、提供工具（MCP）、监控运行（trace），让上层
+    Agent 不操心底层。
+  first_principle: 单个 LLM 调用简单（curl 一下 API），但生产环境要兼顾成本、性能、稳定、安全，必须工程化——把"调 LLM"变成"治理
+    LLM"。
   key_points:
   - LLM 网关：多模型路由、限流、降级、成本控制
   - 推理优化：vLLM/PagedAttention、量化、批处理
@@ -36,6 +38,7 @@ memory_points:
 - vLLM/PagedAttention 大幅提升单 GPU 吞吐
 - LLM 网关：路由、限流、成本、降级、审计
 - 评估闭环：决策回流 → 标注 → 微调 → 上线
+frequency: medium
 ---
 
 # 【蚂蚁风控】AI Harness 工程化怎么设计？让 LLM 在生产稳定运行
@@ -61,6 +64,29 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AI start
+    class Agent process
+    class App decision
+    class Data special
+    class Eval error
+    class GPU info
+    class Gateway start
+    class Harness process
+    class Infer decision
+    class Infra special
+    class LLM error
+    class MCP info
+    class Obs start
+    class Tool process
+    class Trace decision
+    class br special
+    class vLLM error
     App["上层应用（Agent）<br/>决策 Agent、复核 Agent、运营 Agent"]
     subgraph Harness[AI Harness 平台]
         Gateway["LLM 网关<br/>路由限流"]

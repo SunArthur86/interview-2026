@@ -32,6 +32,7 @@ memory_points:
 - 事件拆解：将Agent过程拆分为token流、action_start、observation等独立事件
 - 后端实现：LangChain调用astream_events(version='v2')，按事件类型分别yield数据
 - 前端体验：用EventSource接收，让用户实时看到思考与工具执行过程，消除等待焦虑
+frequency: medium
 ---
 
 # Agent多步任务的流式传输怎么实现？
@@ -249,6 +250,31 @@ async def safe_agent_stream(query):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Agent start
+    class Event process
+    class F decision
+    class G special
+    class ID error
+    class LC info
+    class LangChain start
+    class S process
+    class T1 decision
+    class T2 special
+    class T3 error
+    class T4 info
+    class U start
+    class astream_events_v2 process
+    class br decision
+    class on_chain_end special
+    class on_chat_model_stream error
+    class on_tool_end info
+    class on_tool_start start
     U[用户提问] --> F[前端EventSource发起SSE请求]
     F --> G[Nginx网关<br/>配置长连接与心跳]
     G --> S[后端SSE接口]

@@ -33,6 +33,7 @@ memory_points:
 - 隔离执行：各子任务启用独立上下文，仅通过上下游传递结构化参数
 - 并发控制：按依赖关系分层，无依赖的同层任务可并行执行
 - 结果整合：主 Agent 统一汇总各子任务的结构化输出并生成回复
+frequency: medium
 ---
 
 # 用户一次提多个需求时，Agent的任务分解应该怎么做才不会互相污染？
@@ -200,6 +201,29 @@ def _plan_execution(self, subtasks: list) -> dict:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Agent start
+    class D1 process
+    class F1 decision
+    class Format special
+    class LLM error
+    class M info
+    class M2 start
+    class O process
+    class P decision
+    class Schema special
+    class Sub error
+    class T1 info
+    class T2 start
+    class T3 process
+    class U decision
+    class br special
+    class tasks error
     U["用户复合需求"] --> M["主 Agent 任务分解<br/>LLM 组件"]
     M --> D1["拆分规则与依赖校验"]
     D1 --> P["并行执行无依赖子任务"]

@@ -17,6 +17,7 @@ memory_points:
 - 队列对比：SynchronousQueue直接交接，LinkedBlockingQueue无界易OOM，ArrayBlockingQueue有界保安全
 - 四大拒绝策略：Abort抛异常(默认)、CallerRuns调用者执行、Discard直接丢、DiscardOldest丢最老
 - 参数设置：CPU密集型设N+1，IO密集型设2N（或根据阻塞系数计算）
+frequency: high
 ---
 
 # 什么是线程池的组成？
@@ -136,6 +137,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

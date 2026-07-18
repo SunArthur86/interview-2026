@@ -11,7 +11,8 @@ tags:
 - RDB
 - AOF
 feynman:
-  essence: Redis 持久化两种方式——RDB（全量快照，体积小恢复快但有丢失窗口）和 AOF（追加每条写命令，更安全但体积大），生产用 AOF + RDB 混合。
+  essence: Redis 持久化两种方式——RDB（全量快照，体积小恢复快但有丢失窗口）和 AOF（追加每条写命令，更安全但体积大），生产用 AOF + RDB
+    混合。
   analogy: RDB 像定期拍全仓照（恢复快但丢增量），AOF 像录每笔出入库流水（完整但文件大），混合用最佳。
   first_principle: 纯内存 Redis 重启数据丢，需要持久化兜底；RDB 和 AOF 在"恢复速度 vs 数据安全"上各有取舍。
   key_points:
@@ -35,6 +36,7 @@ memory_points:
 - AOF：追加命令，everysec（最多丢 1s）
 - 混合 4.0+：AOF rewrite = RDB 全量 + 后续命令
 - fork + COW 实现非阻塞快照
+frequency: high
 ---
 
 # 【拼多多供应链】Redis 持久化 RDB 和 AOF 怎么选？
@@ -185,6 +187,32 @@ Redis Cluster 是正解，但有适用前提：
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AOF process
+    class B decision
+    class C special
+    class C1 error
+    class C2 info
+    class C3 start
+    class COW process
+    class D decision
+    class E special
+    class F error
+    class G info
+    class RDB start
+    class Redis process
+    class Rewrite decision
+    class STW special
+    class always error
+    class everysec info
+    class fork start
+    class no process
     subgraph 内存数据
         A[Redis 主进程内存]
     end

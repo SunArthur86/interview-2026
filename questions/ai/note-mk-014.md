@@ -30,6 +30,7 @@ memory_points:
 - 平台加插件架构：抽象统一输入、任务中心、产物面板作为平台底座，各Agent作为适配层接入。
 - 统一三大协议：通过标准化的输入、结果、授权协议，实现底层与具体Agent的解耦。
 - 配置化扩展：新增Agent只需编写配置文件描述其输入约束和产物渲染器，前端零侵入。
+frequency: medium
 ---
 
 # 【月之暗面面经】如果产品要加更多 Agent，前端怎样保持扩展能力而不是越做越重？
@@ -288,6 +289,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

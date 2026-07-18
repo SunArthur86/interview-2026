@@ -31,6 +31,7 @@ memory_points:
 - 技术深度公式：不仅说用了什么，更要说为什么选它、怎么用的、取得了什么量化效果
 - 技术指标转化为业务价值：因为算法提升难直观感知，所以要转化为降本（省XX万）或增效指标
 - 根据工作年限定策略：1-3年重深度与量化，3-5年重架构与选型，5年以上看全局与商业价值
+frequency: medium
 ---
 
 # 如何将企业级 Agent 开发经验融入简历？
@@ -176,6 +177,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

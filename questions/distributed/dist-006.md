@@ -16,6 +16,7 @@ memory_points:
 - 设计目标：Raft 追求「通俗易懂与通用」，而 ZAB 专为 ZooKeeper「协调与高可用」设计
 - 事务标识：Raft 使用 (Term, Index) 标识日志，而 ZAB 使用单一 Zxid（高32位纪元+低32位计数）
 - 广播机制：Raft 直接追加复制并提交，而 ZAB 采用严格的 Proposal 和 Commit 两阶段广播
+frequency: high
 ---
 
 # Raft协议和ZAB协议有什么区别？
@@ -134,6 +135,7 @@ flowchart TD
     style COMMIT fill:#2196F3,color:#fff
     style VOTE fill:#9C27B0,color:#fff
     style STEP_DOWN fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

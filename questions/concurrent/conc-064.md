@@ -15,6 +15,7 @@ memory_points:
 - 底层原理：依赖内存屏障与CPU的lock指令触发MESI缓存一致性协议。
 - DCL单例必加volatile，因为new对象分3步，防止指令重排导致拿到未初始化对象。
 - 对比synchronized：volatile是轻量级无锁同步，不阻塞且无法替代原子计数操作。
+frequency: medium
 ---
 
 # volatile关键字的作用和原理是什么？
@@ -111,6 +112,7 @@ flowchart LR
     class W2,W3,W4,R2,R3 barrier
     classDef danger fill:#ffebee,stroke:#c62828
     class NPE danger
+
 ```
 
 

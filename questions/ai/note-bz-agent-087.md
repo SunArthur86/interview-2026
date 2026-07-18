@@ -29,6 +29,7 @@ memory_points:
 - 管版五大件：权重、Prompt、数据集、系统配置、评估指标，缺一不可
 - 核心价值是四可：出问题可回滚、效果差可AB对比、合规可追溯、团队可协同
 - 上线严流程：注册绑定评估指标，先灰度放小流量，无异常再蓝绿切换全量
+frequency: medium
 ---
 
 # 模型版本管理系统实现要点？
@@ -282,6 +283,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

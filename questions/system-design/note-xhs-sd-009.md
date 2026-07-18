@@ -11,7 +11,7 @@ tags:
 - 缓存一致性
 feynman:
   essence: 多级缓存就是L1(Caffeine本地)→L2(Redis分布式)→L3(MySQL)三层逐级降速的缓存体系。本地缓存最快但各实例独立需处理一致性，分布式缓存共享但多一跳网络。
-  analogy: "多级缓存像快递柜系统：L1是你家门口的快递柜(最快但容量小)、L2是小区快递站(快容量大但多走几步)、L3是远郊仓库(最慢但什么都有)。大部分快递在小区快递站就找到了，不需要去远郊。"
+  analogy: 多级缓存像快递柜系统：L1是你家门口的快递柜(最快但容量小)、L2是小区快递站(快容量大但多走几步)、L3是远郊仓库(最慢但什么都有)。大部分快递在小区快递站就找到了，不需要去远郊。
   key_points:
   - 三级缓存：Caffeine(~1ms)→Redis(~3ms)→MySQL(~10ms)
   - L1容量小速度快但不跨实例共享→需一致性方案
@@ -19,18 +19,19 @@ feynman:
   - AI场景：Embedding缓存+FAQ缓存可省大量API费用
   - 监控命中率：L1目标30-50%，L2目标80-90%
 first_principle:
-  problem: "数据访问有明显的局部性（热点/重复），如何用多层级存储介质平衡速度、容量和一致性？"
+  problem: 数据访问有明显的局部性（热点/重复），如何用多层级存储介质平衡速度、容量和一致性？
   axioms:
   - 存储层级越靠近CPU越快但容量越小（寄存器>L1>L2>L3>内存>磁盘）
   - 缓存命中率决定性能：命中率每提升10%，平均延迟降低一个数量级
   - 多实例本地缓存必然有一致性问题，需要失效广播或TTL兜底
   - AI场景API调用成本高，缓存的ROI（投入产出比）远高于传统场景
-  rebuild: "从数据访问加速需求出发：DB→Redis(L2分布式缓存)→Caffeine(L1本地缓存)。L1解决单实例热点、L2解决跨实例共享。一致性通过Pub/Sub广播失效保证。AI场景API成本高，Embedding/FAQ缓存的ROI极高"
+  rebuild: 从数据访问加速需求出发：DB→Redis(L2分布式缓存)→Caffeine(L1本地缓存)。L1解决单实例热点、L2解决跨实例共享。一致性通过Pub/Sub广播失效保证。AI场景API成本高，Embedding/FAQ缓存的ROI极高
 follow_up:
 - Caffeine 的 W-TinyLFU 淘汰算法比传统 LRU 好在哪？
 - 缓存击穿（热点key过期）如何用布隆过滤器解决？
 - 如何保证多级缓存的最终一致性？Canal 方案的优缺点？
 - AI场景下哪些数据适合缓存？Embedding缓存如何设计？
+frequency: high
 ---
 
 # 多级缓存方案如何设计？AI业务场景下的缓存策略？（入职Java复盘）
@@ -340,6 +341,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -9,9 +9,12 @@ tags:
 - JWT
 - 认证
 feynman:
-  essence: OAuth2 是"授权协议"（让第三方应用拿用户授权的令牌访问资源），JWT 是"令牌格式"（自包含的 JSON 签名 token）。两者常混用但定位不同：OAuth2 定义了授权码、密码、客户端凭证四种 Grant Type，JWT 是 Access Token 的一种编码格式。会话治理的核心是"令牌生命周期管理"——签发、刷新、撤销、续期，既保证安全（令牌泄露可撤销）又保证体验（用户无感续期）。
-  analogy: OAuth2 是酒店房卡的"授权流程"——你（资源所有者）授权前台（认证服务器）给朋友（第三方应用）一张房卡（Access Token），朋友只能进你授权的房间（scope），不能进其他房间。JWT 是房卡本身的"编码方式"——卡上刻着你的名字、房间号、有效期，刷卡时门锁自己验签名（不用查前台）。会话治理是"房卡管理"——丢了要挂失（撤销），快过期了要续（刷新）。
-  first_principle: 为什么 OAuth2 不直接给用户名密码？因为第三方应用拿到密码就能冒充用户做任何事（全权限），且密码泄露后改密码影响所有应用。OAuth2 用"令牌"替代密码——令牌有 scope（限定权限）、有有效期（降低泄露风险）、可撤销（随时吊销）。这是"最小权限 + 可控风险"的设计。
+  essence: OAuth2 是"授权协议"（让第三方应用拿用户授权的令牌访问资源），JWT 是"令牌格式"（自包含的 JSON 签名 token）。两者常混用但定位不同：OAuth2
+    定义了授权码、密码、客户端凭证四种 Grant Type，JWT 是 Access Token 的一种编码格式。会话治理的核心是"令牌生命周期管理"——签发、刷新、撤销、续期，既保证安全（令牌泄露可撤销）又保证体验（用户无感续期）。
+  analogy: OAuth2 是酒店房卡的"授权流程"——你（资源所有者）授权前台（认证服务器）给朋友（第三方应用）一张房卡（Access Token），朋友只能进你授权的房间（scope），不能进其他房间。JWT
+    是房卡本身的"编码方式"——卡上刻着你的名字、房间号、有效期，刷卡时门锁自己验签名（不用查前台）。会话治理是"房卡管理"——丢了要挂失（撤销），快过期了要续（刷新）。
+  first_principle: 为什么 OAuth2 不直接给用户名密码？因为第三方应用拿到密码就能冒充用户做任何事（全权限），且密码泄露后改密码影响所有应用。OAuth2
+    用"令牌"替代密码——令牌有 scope（限定权限）、有有效期（降低泄露风险）、可撤销（随时吊销）。这是"最小权限 + 可控风险"的设计。
   key_points:
   - OAuth2 四种 Grant Type：授权码（最安全，Web 应用）、密码（信任的客户端）、客户端凭证（服务间）、隐式（已废弃，用 PKCE 替代）
   - JWT 三段：Header（算法）.Payload（声明）.Signature（签名）
@@ -24,19 +27,25 @@ first_principle:
   - 用户名密码是"全权限凭证"，泄露后危害大且改密码影响所有应用
   - 第三方应用的可信度不同（官方应用 vs 不知名小应用），需要分级授权
   - 令牌需要有生命周期（短期降低泄露风险）+ 可撤销（泄露后吊销）
-  rebuild: OAuth2 用授权码流程——用户在认证服务器登录并授权，认证服务器给第三方应用一个短时 Access Token（带 scope 限定权限）。Access Token 用 JWT 编码（无状态，服务端验签名）。Access Token 短期（15 分钟）配合 Refresh Token（7 天）——Access Token 过期用 Refresh Token 换新的，用户无感续期。泄露时撤销 Refresh Token，Access Token 自然过期失效。
+  rebuild: OAuth2 用授权码流程——用户在认证服务器登录并授权，认证服务器给第三方应用一个短时 Access Token（带 scope 限定权限）。Access
+    Token 用 JWT 编码（无状态，服务端验签名）。Access Token 短期（15 分钟）配合 Refresh Token（7 天）——Access
+    Token 过期用 Refresh Token 换新的，用户无感续期。泄露时撤销 Refresh Token，Access Token 自然过期失效。
 follow_up:
-  - JWT 怎么主动撤销？——维护黑名单（Redis 存被撤销的 token jti），每次验 token 先查黑名单。代价是失去"无状态"优势（要查 Redis）。折中：只对"主动登出"的 token 加黑名单，其他靠自然过期。
-  - Refresh Token 存哪里？——HttpOnly + Secure Cookie（防 XSS 偷取）或服务端 Session（更安全）。不能存 localStorage（XSS 可读）。
-  - 授权码流程为什么安全？——授权码通过前端重定向传递（URL 参数），即使被拦截，还需要 client_secret 换 token（拦截者没有 secret）。PKCE 补充了"无 secret 场景"（移动端）的安全性。
-  - JWT 签名用什么算法？——HS256（对称，简单但密钥管理难）或 RS256（非对称，公钥验签，适合微服务）。RS256 更安全——签发用私钥（认证中心独有），验签用公钥（所有服务可持有）。
-  - Token 泄露怎么检测？——异常 IP/设备使用同一 token、token 在多地同时使用（不可能的旅行）、高频刷新 token。风控层识别。
+- JWT 怎么主动撤销？——维护黑名单（Redis 存被撤销的 token jti），每次验 token 先查黑名单。代价是失去"无状态"优势（要查 Redis）。折中：只对"主动登出"的
+  token 加黑名单，其他靠自然过期。
+- Refresh Token 存哪里？——HttpOnly + Secure Cookie（防 XSS 偷取）或服务端 Session（更安全）。不能存 localStorage（XSS
+  可读）。
+- 授权码流程为什么安全？——授权码通过前端重定向传递（URL 参数），即使被拦截，还需要 client_secret 换 token（拦截者没有 secret）。PKCE
+  补充了"无 secret 场景"（移动端）的安全性。
+- JWT 签名用什么算法？——HS256（对称，简单但密钥管理难）或 RS256（非对称，公钥验签，适合微服务）。RS256 更安全——签发用私钥（认证中心独有），验签用公钥（所有服务可持有）。
+- Token 泄露怎么检测？——异常 IP/设备使用同一 token、token 在多地同时使用（不可能的旅行）、高频刷新 token。风控层识别。
 memory_points:
-  - OAuth2 = 授权协议，JWT = 令牌格式
-  - 四种 Grant：授权码（Web）、密码（可信）、客户端凭证（服务间）、PKCE（移动端）
-  - JWT 三段：Header.Payload.Signature，无状态验签
-  - Access Token 15min + Refresh Token 7d，滚动续期
-  - JWT 撤销靠黑名单（Redis），PKCE 防授权码拦截
+- OAuth2 = 授权协议，JWT = 令牌格式
+- 四种 Grant：授权码（Web）、密码（可信）、客户端凭证（服务间）、PKCE（移动端）
+- JWT 三段：Header.Payload.Signature，无状态验签
+- Access Token 15min + Refresh Token 7d，滚动续期
+- JWT 撤销靠黑名单（Redis），PKCE 防授权码拦截
+frequency: medium
 ---
 
 # 【Java 后端架构师】OAuth2、JWT 与会话治理
@@ -426,6 +435,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

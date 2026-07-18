@@ -11,7 +11,7 @@ tags:
 - 集合
 feynman:
   essence: HashMap 是一个「数组+链表/红黑树」的哈希表。用hash函数算出位置放入数组，冲突了就在那个位置挂链表，链表太长就变红黑树。
-  analogy: "想象一个有16格的储物柜。你用名字的首字母算出放哪个格子（hash）。如果两个人首字母相同（冲突），就在那个格子挂一个挂钩链（链表）。挂钩链超过8个就改成更高效的标签系统（红黑树）。"
+  analogy: 想象一个有16格的储物柜。你用名字的首字母算出放哪个格子（hash）。如果两个人首字母相同（冲突），就在那个格子挂一个挂钩链（链表）。挂钩链超过8个就改成更高效的标签系统（红黑树）。
   key_points:
   - 数组+链表/红黑树，默认容量16负载因子0.75
   - 扰动函数：(h=key.hashCode())^(h>>>16)减少冲突
@@ -19,18 +19,19 @@ feynman:
   - 扩容翻倍，元素位置=原位置或原位置+oldCap
   - 线程不安全，多线程用ConcurrentHashMap
 first_principle:
-  problem: "需要一种能根据 key 快速定位 value 的数据结构。哈希函数将无限key映射到有限数组，必然产生冲突，如何高效处理冲突？"
+  problem: 需要一种能根据 key 快速定位 value 的数据结构。哈希函数将无限key映射到有限数组，必然产生冲突，如何高效处理冲突？
   axioms:
   - 哈希表平均O(1)查找的前提是冲突率低
   - 冲突处理有两种主流方式：链地址法(HashMap)和开放寻址法(ThreadLocalMap)
   - 空间换时间：负载因子越低冲突越少但内存浪费越多
   - 红黑树将最坏情况从O(n)优化到O(log n)
-  rebuild: "从哈希表第一性原理出发：hash函数→桶定位→冲突处理(链表)→极端冲突优化(红黑树)→动态扩容(2倍)。每一步都在权衡时间与空间"
+  rebuild: 从哈希表第一性原理出发：hash函数→桶定位→冲突处理(链表)→极端冲突优化(红黑树)→动态扩容(2倍)。每一步都在权衡时间与空间
 follow_up:
 - HashMap 的 key 可以为 null 吗？value 呢？
 - 为什么负载因子是 0.75 而不是 1 或 0.5？
 - HashMap 和 Hashtable 的区别？
 - 如何设计一个好的 hashCode() 方法？
+frequency: high
 ---
 
 # HashMap 底层原理及扩容机制？（华为od Java一面）
@@ -225,6 +226,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

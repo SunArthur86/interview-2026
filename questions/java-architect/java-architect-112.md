@@ -10,8 +10,10 @@ tags:
 - 线程池
 feynman:
   essence: Spring Boot 3.2+ 一行配置 `spring.threads.virtual.enabled=true` 开启虚拟线程，但"开启"不等于"调优"。虚拟线程和平台线程池（@Async、TaskExecutor、HikariCP、Reactor）的共存策略——哪些应该改虚拟线程、哪些必须保留平台线程池、哪些要分而治之——才是落地的核心。
-  analogy: 像把一条小河（平台线程池）改造成"主干道 + 毛细血管"系统：主干道（carrier）固定几条负责重活，毛细血管（虚拟线程）百万条负责轻活（IO 等待）。但有些设备（GPU、JNI、第三方 SDK）只能用主干道，强行改造反而出事。
-  first_principle: 不是所有线程都该用虚拟线程。IO 密集用虚拟线程（让出 carrier），CPU 密集用平台线程池（避免 carrier 频繁切换），JNI/GPU 用固定平台线程（避免 pinning）。Spring Boot 的虚拟线程配置只是入口，业务要按场景区分。
+  analogy: 像把一条小河（平台线程池）改造成"主干道 + 毛细血管"系统：主干道（carrier）固定几条负责重活，毛细血管（虚拟线程）百万条负责轻活（IO
+    等待）。但有些设备（GPU、JNI、第三方 SDK）只能用主干道，强行改造反而出事。
+  first_principle: 不是所有线程都该用虚拟线程。IO 密集用虚拟线程（让出 carrier），CPU 密集用平台线程池（避免 carrier 频繁切换），JNI/GPU
+    用固定平台线程（避免 pinning）。Spring Boot 的虚拟线程配置只是入口，业务要按场景区分。
   key_points:
   - spring.threads.virtual.enabled=true（Spring Boot 3.2+）
   - Tomcat / @Async / TaskExecutor 默认改虚拟线程
@@ -25,20 +27,27 @@ first_principle:
   - CPU 密集用虚拟线程无收益（carrier 还是平台线程在跑）
   - JNI/GPU 调用会 pinning，必须用平台线程池
   - 连接池（HikariCP）独立于线程模型，按后端容量配
-  rebuild: Spring Boot 3.2+ 一行配置开启虚拟线程，自动把 Tomcat 请求线程、@Async、TaskExecutor 改成虚拟线程。但要分类处理：CPU 密集任务（计算、加解密）保留 Platform Thread Pool；JNI/GPU（CUDA、ONNX Runtime）用固定平台线程池；IO 密集（HTTP、DB、消息）用虚拟线程。HikariCP 大小按 MySQL 承载能力配，不随线程模型变。
+  rebuild: Spring Boot 3.2+ 一行配置开启虚拟线程，自动把 Tomcat 请求线程、@Async、TaskExecutor 改成虚拟线程。但要分类处理：CPU
+    密集任务（计算、加解密）保留 Platform Thread Pool；JNI/GPU（CUDA、ONNX Runtime）用固定平台线程池；IO 密集（HTTP、DB、消息）用虚拟线程。HikariCP
+    大小按 MySQL 承载能力配，不随线程模型变。
 follow_up:
-  - spring.threads.virtual.enabled 影响哪些组件？——Tomcat 请求线程、@Async 默认 Executor、Spring Boot TaskExecutor、Quartz 调度。不影响 HikariCP（连接池）、JMS Listener（独立配置）、Reactor（已异步）
-  - "@Async 的线程池怎么配？——默认改成 VirtualThreadTaskExecutor。如果要保留平台线程池，自定义 AsyncConfigurer 返回平台线程池"
-  - CPU 密集任务为什么不能用虚拟线程？——虚拟线程的 carrier 是平台线程（CPU 核数个），CPU 密集任务会让 carrier 长时间占用，影响其他虚拟线程调度。用平台线程池控制并发度
-  - WebFlux 要不要开虚拟线程？——没必要。WebFlux 已经异步（Reactor + Netty event loop），线程数固定。但 WebFlux 内部的 blocking call（如 JDBC）可以用虚拟线程包
-  - 怎么监控虚拟线程和平台线程的协作？——JFR 看 jdk.VirtualThreadPinned、jstack 看 carrier 数、Micrometer 1.12+ 暴露 jvm.threads.virtual.count
+- spring.threads.virtual.enabled 影响哪些组件？——Tomcat 请求线程、@Async 默认 Executor、Spring Boot
+  TaskExecutor、Quartz 调度。不影响 HikariCP（连接池）、JMS Listener（独立配置）、Reactor（已异步）
+- '@Async 的线程池怎么配？——默认改成 VirtualThreadTaskExecutor。如果要保留平台线程池，自定义 AsyncConfigurer
+  返回平台线程池'
+- CPU 密集任务为什么不能用虚拟线程？——虚拟线程的 carrier 是平台线程（CPU 核数个），CPU 密集任务会让 carrier 长时间占用，影响其他虚拟线程调度。用平台线程池控制并发度
+- WebFlux 要不要开虚拟线程？——没必要。WebFlux 已经异步（Reactor + Netty event loop），线程数固定。但 WebFlux
+  内部的 blocking call（如 JDBC）可以用虚拟线程包
+- 怎么监控虚拟线程和平台线程的协作？——JFR 看 jdk.VirtualThreadPinned、jstack 看 carrier 数、Micrometer 1.12+
+  暴露 jvm.threads.virtual.count
 memory_points:
-  - spring.threads.virtual.enabled=true（Spring Boot 3.2+）
-  - 自动改：Tomcat 请求线程、@Async、TaskExecutor
-  - 不改：HikariCP（连接池）、JMS Listener、Reactor
-  - 必须保留平台线程池：CPU 密集、JNI/GPU、第三方 SDK
-  - HikariCP 大小按后端容量配（不随线程模型变）
-  - 监控：JFR jdk.VirtualThreadPinned + jvm.threads.virtual.count
+- spring.threads.virtual.enabled=true（Spring Boot 3.2+）
+- 自动改：Tomcat 请求线程、@Async、TaskExecutor
+- 不改：HikariCP（连接池）、JMS Listener、Reactor
+- 必须保留平台线程池：CPU 密集、JNI/GPU、第三方 SDK
+- HikariCP 大小按后端容量配（不随线程模型变）
+- 监控：JFR jdk.VirtualThreadPinned + jvm.threads.virtual.count
+frequency: high
 ---
 
 # 【Java 后端架构师】Spring Boot 虚拟线程配置与线程池共存策略
@@ -450,6 +459,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

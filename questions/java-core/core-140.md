@@ -15,6 +15,7 @@ memory_points:
 - 僵尸进程：子进程已退出，但父进程未调用wait()回收，导致PCB残留占用PID。
 - 僵尸进程无法直接kill，必须杀掉其父进程或让父进程调用wait/waitpid处理。
 - 高并发服务器常见僵尸进程堆积，最终会导致系统Cannot allocate memory报错。
+frequency: low
 ---
 
 # 说一说僵尸进程和孤儿进程？
@@ -87,6 +88,38 @@ int main() {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
+    class Orphan special
+    class PCB error
+    class PID info
+    class SIGCHLD start
+    class SIG_IGN process
+    class Zombie decision
+    class br special
+    class fork error
+    class init info
+    class wait start
+    class waitpid process
     A[进程特殊状态] --> B[孤儿进程 Orphan]
     A --> C[僵尸进程 Zombie]
     B --> D[父进程先退出]

@@ -33,6 +33,7 @@ memory_points:
 - KV Cache：解码阶段复用历史Key-Value，避免重复计算，PagedAttention优化显存
 - 限流器：令牌桶算法防429，主控请求优先级高于子Agent，关键路径优先
 - 权衡：多Agent中子任务用小模型，核心规划用大模型，平衡效率与准确性
+frequency: high
 ---
 
 # 【字节面经】如何降低推理成本？在多任务、多Agent系统中如何权衡效率和准确性？混合路由和限流器为什么重要？
@@ -152,6 +153,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

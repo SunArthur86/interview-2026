@@ -11,37 +11,40 @@ tags:
 - ANN 算法
 - 重排序
 feynman:
-  essence: "向量检索是把'语义相近'变成'几何相近'的工程——文本变向量（嵌入）、向量入库、按距离召回，配 ANN 算法加速、重排序提准，支撑记忆/RAG/推荐的语义召回。"
-  analogy: "像图书馆的语义索引——传统目录按书名字（关键词），语义索引按'讲什么的'（向量）；你说'一个人孤独旅行'，能找到《在路上》《百年孤独》这种'讲孤独/旅行'的书，即使书名没这俩词。"
-  first_principle: "精确检索（线性扫全部向量）O(N) 太慢，亿级数据不可行。必须用 ANN（近似最近邻）算法在毫秒级近似召回，再用重排序精排，把'精确但慢'重构为'近似但快+精排提准'。"
+  essence: 向量检索是把'语义相近'变成'几何相近'的工程——文本变向量（嵌入）、向量入库、按距离召回，配 ANN 算法加速、重排序提准，支撑记忆/RAG/推荐的语义召回。
+  analogy: 像图书馆的语义索引——传统目录按书名字（关键词），语义索引按'讲什么的'（向量）；你说'一个人孤独旅行'，能找到《在路上》《百年孤独》这种'讲孤独/旅行'的书，即使书名没这俩词。
+  first_principle: 精确检索（线性扫全部向量）O(N) 太慢，亿级数据不可行。必须用 ANN（近似最近邻）算法在毫秒级近似召回，再用重排序精排，把'精确但慢'重构为'近似但快+精排提准'。
   key_points:
-  - "嵌入：文本→向量（bge/OpenAI/自训练）"
-  - "ANN 算法：HNSW（图）/ IVF（倒排）/ ScaNN"
-  - "向量库：Milvus/Qdrant/pgvector，按规模选"
-  - "重排序：cross-encoder 精排 bi-encoder 召回结果"
-  - "混合检索：向量+关键词+结构化多路融合"
+  - 嵌入：文本→向量（bge/OpenAI/自训练）
+  - ANN 算法：HNSW（图）/ IVF（倒排）/ ScaNN
+  - 向量库：Milvus/Qdrant/pgvector，按规模选
+  - 重排序：cross-encoder 精排 bi-encoder 召回结果
+  - 混合检索：向量+关键词+结构化多路融合
   socratic:
-  - "用户说'我最近有点 emo'，怎么从 10 亿条记忆里找到'用户上次说工作压力'？关键词搜不到 emo 怎么办？"
-  - "10 亿条向量，每次查询都要算一遍距离吗？怎么做到毫秒级？"
-  - "向量召回的 top-10 里，第 1 名反而不如第 5 名相关，为什么？怎么修？"
-  - "Milvus、Qdrant、pgvector 怎么选？小公司用哪个起步？"
-  - "嵌入模型用现成的还是自己训？什么时候必须训？"
+  - 用户说'我最近有点 emo'，怎么从 10 亿条记忆里找到'用户上次说工作压力'？关键词搜不到 emo 怎么办？
+  - 10 亿条向量，每次查询都要算一遍距离吗？怎么做到毫秒级？
+  - 向量召回的 top-10 里，第 1 名反而不如第 5 名相关，为什么？怎么修？
+  - Milvus、Qdrant、pgvector 怎么选？小公司用哪个起步？
+  - 嵌入模型用现成的还是自己训？什么时候必须训？
 first_principle:
-  problem: "如何在亿级向量中实现毫秒级、高召回、高准确的语义检索？"
+  problem: 如何在亿级向量中实现毫秒级、高召回、高准确的语义检索？
   axioms:
-  - "精确线性扫 O(N) 太慢"
-  - "ANN 牺牲少量精度换巨大速度"
-  - "单路召回（向量）有局限，要混合检索"
-  rebuild: "用嵌入把文本变向量 → ANN 算法（HNSW/IVF）毫秒级近似召回 → 多路融合（向量+关键词+结构化）→ cross-encoder 重排提准 → top-K 注入，把'精确但慢'重构为'近似快+重排准'。"
+  - 精确线性扫 O(N) 太慢
+  - ANN 牺牲少量精度换巨大速度
+  - 单路召回（向量）有局限，要混合检索
+  rebuild: 用嵌入把文本变向量 → ANN 算法（HNSW/IVF）毫秒级近似召回 → 多路融合（向量+关键词+结构化）→ cross-encoder 重排提准
+    → top-K 注入，把'精确但慢'重构为'近似快+重排准'。
 follow_up:
-- "HNSW 为什么快？——分层小世界图，从顶层稀疏入口逐层细化，O(log N) 查询；建图慢但查询极快；目前主流选择。"
-- "重排序为什么用 cross-encoder？——召回用 bi-encoder（query/doc 独立编码，快但粗），重排用 cross-encoder（query+doc 联合编码，准但慢），互补。"
-- "向量库怎么扩到亿级？——分布式分片（按 user_id/hash）+ 副本（高可用）+ 分区（按类别）+ 索引压缩；Milvus/Qdrant 原生支持。"
+- HNSW 为什么快？——分层小世界图，从顶层稀疏入口逐层细化，O(log N) 查询；建图慢但查询极快；目前主流选择。
+- 重排序为什么用 cross-encoder？——召回用 bi-encoder（query/doc 独立编码，快但粗），重排用 cross-encoder（query+doc
+  联合编码，准但慢），互补。
+- 向量库怎么扩到亿级？——分布式分片（按 user_id/hash）+ 副本（高可用）+ 分区（按类别）+ 索引压缩；Milvus/Qdrant 原生支持。
 memory_points:
-- "嵌入：文本→向量"
-- "ANN：HNSW（图）/ IVF（倒排）"
-- "向量库：Milvus/Qdrant/pgvector"
-- "重排：cross-encoder 精排"
+- 嵌入：文本→向量
+- ANN：HNSW（图）/ IVF（倒排）
+- 向量库：Milvus/Qdrant/pgvector
+- 重排：cross-encoder 精排
+frequency: medium
 ---
 
 # 【巨剧核 AI 陪伴】向量检索与召回怎么做（选型/ANN/重排）？
@@ -264,6 +267,35 @@ AI 陪伴推荐：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ANN process
+    class B decision
+    class BM25 special
+    class C error
+    class D info
+    class E start
+    class Elasticsearch process
+    class Embedding decision
+    class F special
+    class G error
+    class H info
+    class HNSW start
+    class I process
+    class IVF decision
+    class J special
+    class K error
+    class L info
+    class LLM start
+    class Milvus process
+    class Rerank decision
+    class Top special
+    class br error
     A["用户输入<br/>文本/语音"] --> B["Embedding<br/>文本转向量"]
     B --> C["向量检索"]
     B --> D["BM25<br/>关键词检索"]

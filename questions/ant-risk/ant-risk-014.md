@@ -11,14 +11,16 @@ tags:
 - SPI
 - Conditional
 feynman:
-  essence: Spring Boot 自动装配通过 spring.factories（或 AutoConfiguration.imports）+ @Conditional 系列注解，让"引入依赖即生效"，约定大于配置。
+  essence: Spring Boot 自动装配通过 spring.factories（或 AutoConfiguration.imports）+ @Conditional
+    系列注解，让"引入依赖即生效"，约定大于配置。
   analogy: 自动装配像宜家家具的"成套包"——你买一个厨房套装，里面的橱柜、电器、灯具按预设自动配齐，不用你一件件挑。@Conditional 像判断条件（"如果有烤箱就装散热"），按需启用。
-  first_principle: Spring 时代要手写一堆 XML/Java 配置才能用组件；自动装配把"组件需要什么 Bean、什么条件启用"封装到 starter 里，引入依赖即按约定装配。
+  first_principle: Spring 时代要手写一堆 XML/Java 配置才能用组件；自动装配把"组件需要什么 Bean、什么条件启用"封装到 starter
+    里，引入依赖即按约定装配。
   key_points:
-  - "spring.factories（2.7 前）/ AutoConfiguration.imports（2.7+）声明自动配置类"
-  - "@ConditionalOnClass / OnMissingBean / OnProperty 按条件装配"
-  - "Starter 模式：依赖 + 自动配置 + 默认配置"
-  - "@EnableAutoConfiguration → AutoConfigurationImportSelector → 加载配置"
+  - spring.factories（2.7 前）/ AutoConfiguration.imports（2.7+）声明自动配置类
+  - '@ConditionalOnClass / OnMissingBean / OnProperty 按条件装配'
+  - Starter 模式：依赖 + 自动配置 + 默认配置
+  - '@EnableAutoConfiguration → AutoConfigurationImportSelector → 加载配置'
 first_principle:
   problem: 如何让一个组件引入依赖后自动接入 Spring 容器，又能在用户需要时覆盖默认行为？
   axioms:
@@ -28,13 +30,14 @@ first_principle:
   rebuild: 用 SPI 机制声明候选配置类 + @Conditional 按条件启用 + Bean 覆盖优先级（用户 > 自动配置）。
 follow_up:
 - 你写过自定义 Starter 吗？——风控的 SDK 都封装成 Starter，引入即用
-- "@ConditionalOnMissingBean 怎么实现用户覆盖默认？——用户 Bean 先注册，自动配置 Bean 检测到已存在就不注册"
-- "Spring Boot 3 有什么变化？——spring.factories 弃用，改用 AutoConfiguration.imports 文件"
+- '@ConditionalOnMissingBean 怎么实现用户覆盖默认？——用户 Bean 先注册，自动配置 Bean 检测到已存在就不注册'
+- Spring Boot 3 有什么变化？——spring.factories 弃用，改用 AutoConfiguration.imports 文件
 memory_points:
-- "自动装配 = spring.factories / AutoConfiguration.imports + @Conditional"
-- "@ConditionalOnClass 类路径有就生效、OnMissingBean 没有就生效、OnProperty 配置满足就生效"
-- "Starter = 依赖 + 自动配置 + 默认 properties"
-- "用户 Bean 优先于自动配置 Bean（@ConditionalOnMissingBean 实现）"
+- 自动装配 = spring.factories / AutoConfiguration.imports + @Conditional
+- '@ConditionalOnClass 类路径有就生效、OnMissingBean 没有就生效、OnProperty 配置满足就生效'
+- Starter = 依赖 + 自动配置 + 默认 properties
+- 用户 Bean 优先于自动配置 Bean（@ConditionalOnMissingBean 实现）
+frequency: high
 ---
 
 # 【蚂蚁风控】Spring Boot 自动装配原理？@SpringBootApplication 干了什么？
@@ -361,6 +364,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

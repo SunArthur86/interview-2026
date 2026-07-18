@@ -32,6 +32,7 @@ memory_points:
 - 阶段：Prefill处理Prompt存入Cache，Decode每步只算新Token的QKV。
 - 复杂度：计算量从O(N²)降为O(N)，显存随序列长度和层数线性增加。
 - 优化：多轮对话Cache命中率低时，可用Prefix Caching/PD分离/Radix Tree优化。
+frequency: high
 ---
 
 # 【字节面经】KV Cache 的核心原理是什么？在多轮对话场景下，KV Cache 命中率低时你会怎么优化？
@@ -430,6 +431,7 @@ flowchart TD
     style PAGED fill:#FF9800,color:#fff
     style OFFLOAD fill:#F44336,color:#fff
     style BATCH fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

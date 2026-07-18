@@ -27,6 +27,7 @@ memory_points:
 - Claude机制：上下文即记忆，强依赖CLAUDE.md做静态长期记忆与Auto-Compact快照压缩。
 - OpenClaw机制：分层外部存储，划分为工作记忆、时序情景记忆与向量语义记忆。
 - 本质差异：CC追求极简但受窗口限制，OpenClaw依赖异步抽取支持跨会话但架构重。
+frequency: high
 ---
 
 # 【腾讯面经】Claude Code 的 memory 是怎么做的？OpenClaw 的 memory 是怎么做的？两者的记忆机制有什么区别？
@@ -240,6 +241,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

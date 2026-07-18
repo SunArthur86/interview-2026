@@ -9,11 +9,14 @@ tags:
 - 连接泄漏
 - 资源排查
 feynman:
-  essence: "线程泄漏与连接泄漏是 Java 服务\"慢性死亡\"的两大元凶。线程泄漏：创建后不复用、不回收，线程数无限增长（最终 OOM: unable to create new native thread）。连接泄漏：借用后不归还，连接池耗尽（最终所有请求阻塞等待连接）。排查思路：① 告警（线程数/连接数超阈值）→ ② dump（jstack/连接池日志）→ ③ 定位泄漏点（栈追溯代码）→ ④ 修复（try-with-resources / 连接池配置）。"
+  essence: '线程泄漏与连接泄漏是 Java 服务"慢性死亡"的两大元凶。线程泄漏：创建后不复用、不回收，线程数无限增长（最终 OOM: unable to
+    create new native thread）。连接泄漏：借用后不归还，连接池耗尽（最终所有请求阻塞等待连接）。排查思路：① 告警（线程数/连接数超阈值）→
+    ② dump（jstack/连接池日志）→ ③ 定位泄漏点（栈追溯代码）→ ④ 修复（try-with-resources / 连接池配置）。'
   analogy: 像"图书馆借书不还"——线程/连接是图书，连接池是图书馆。借了书（borrow）不还（close），最终图书馆空了，新读者借不到书（请求阻塞）。排查就是查借书记录（dump），找谁借了不还。
-  first_principle: 资源泄漏的本质是"借用-归还"契约被破坏。线程池/连接池本质是有界队列，borrow 减少空闲资源，return 归还。如果 borrow 后异常路径没 return，资源永久占用。排查靠"快照 + 栈追溯"——dump 当前状态，看哪个栈持有资源，定位代码。
+  first_principle: 资源泄漏的本质是"借用-归还"契约被破坏。线程池/连接池本质是有界队列，borrow 减少空闲资源，return 归还。如果
+    borrow 后异常路径没 return，资源永久占用。排查靠"快照 + 栈追溯"——dump 当前状态，看哪个栈持有资源，定位代码。
   key_points:
-  - "线程泄漏：线程数无限增长 → OOM: unable to create new native thread"
+  - '线程泄漏：线程数无限增长 → OOM: unable to create new native thread'
   - 连接泄漏：连接不归还 → 连接池耗尽 → 请求阻塞
   - 排查三步：告警 → dump（jstack/连接池日志）→ 栈追溯代码
   - jstack 看线程状态（RUNNABLE/BLOCKED/WAITING）
@@ -25,21 +28,29 @@ first_principle:
   - 资源（线程/连接）是有限的，泄漏会导致耗尽
   - 泄漏是"慢性病"——累积到阈值才暴露
   - dump 当前状态可定位泄漏栈
-  rebuild: 线程泄漏表现为线程数无限增长（ Executors.newCachedThreadPool 无界 / new Thread 不复用 / ThreadLocal 配合线程池不清理）。连接泄漏表现为连接池 active 持续上涨（borrow 后异常没 close / 长事务不释放 / Statement 没 close）。排查：① 告警——线程数 > 500 / 连接池 active = max。② dump——jstack 看线程栈 / HikariCP 开 leakDetectionThreshold 看连接持有栈。③ 定位——栈追溯到代码行。④ 修复——try-with-resources 保证 close / 连接池配置 maxLifetime / 线程池有界 + 命名清晰。
+  rebuild: 线程泄漏表现为线程数无限增长（ Executors.newCachedThreadPool 无界 / new Thread 不复用 / ThreadLocal
+    配合线程池不清理）。连接泄漏表现为连接池 active 持续上涨（borrow 后异常没 close / 长事务不释放 / Statement 没 close）。排查：①
+    告警——线程数 > 500 / 连接池 active = max。② dump——jstack 看线程栈 / HikariCP 开 leakDetectionThreshold
+    看连接持有栈。③ 定位——栈追溯到代码行。④ 修复——try-with-resources 保证 close / 连接池配置 maxLifetime / 线程池有界
+    + 命名清晰。
 follow_up:
-  - 线程泄漏和内存泄漏区别？——线程泄漏是线程数增长（每个线程占 1MB 栈），内存泄漏是堆内对象不回收。两者都会 OOM，但原因不同
-  - 为什么 newCachedThreadPool 危险？——它的线程数无上限（Integer.MAX_VALUE），高 QPS 时创建大量线程，每个线程 1MB 栈，最终 OOM
-  - HikariCP 泄漏检测怎么用？——设 leakDetectionThreshold（如 60000ms），连接被借出超过 60 秒不归还，日志打印持有栈，定位泄漏代码
-  - ThreadLocal 会泄漏吗？——会。ThreadLocal 的 value 被 Entry 弱引用持有，但 Entry 的 key 是弱引用（ThreadLocal 对象）。如果 ThreadLocal 对象被回收，key 变 null，value 永远访问不到 → 泄漏。线程池线程复用，泄漏累积
-  - 生产怎么防？——① 线程池有界（newFixedThreadPool / 自定义 ThreadPoolExecutor）；② 连接池配置（maxLifetime / leakDetectionThreshold）；③ try-with-resources；④ 告警（线程数 / 连接池 active）
+- 线程泄漏和内存泄漏区别？——线程泄漏是线程数增长（每个线程占 1MB 栈），内存泄漏是堆内对象不回收。两者都会 OOM，但原因不同
+- 为什么 newCachedThreadPool 危险？——它的线程数无上限（Integer.MAX_VALUE），高 QPS 时创建大量线程，每个线程 1MB
+  栈，最终 OOM
+- HikariCP 泄漏检测怎么用？——设 leakDetectionThreshold（如 60000ms），连接被借出超过 60 秒不归还，日志打印持有栈，定位泄漏代码
+- ThreadLocal 会泄漏吗？——会。ThreadLocal 的 value 被 Entry 弱引用持有，但 Entry 的 key 是弱引用（ThreadLocal
+  对象）。如果 ThreadLocal 对象被回收，key 变 null，value 永远访问不到 → 泄漏。线程池线程复用，泄漏累积
+- 生产怎么防？——① 线程池有界（newFixedThreadPool / 自定义 ThreadPoolExecutor）；② 连接池配置（maxLifetime
+  / leakDetectionThreshold）；③ try-with-resources；④ 告警（线程数 / 连接池 active）
 memory_points:
-  - "线程泄漏：线程数无限增长 → OOM: unable to create new native thread"
-  - 连接泄漏：连接不归还 → 连接池耗尽 → 请求阻塞
-  - 排查三步：告警 → dump（jstack/HikariCP 日志）→ 栈追溯
-  - newCachedThreadPool 危险：线程数无上限
-  - HikariCP leakDetectionThreshold：连接泄漏检测（打印持有栈）
-  - 修复：try-with-resources + 连接池配置 + 线程池有界
-  - ThreadLocal 泄漏：线程池复用 + value 不可达
+- '线程泄漏：线程数无限增长 → OOM: unable to create new native thread'
+- 连接泄漏：连接不归还 → 连接池耗尽 → 请求阻塞
+- 排查三步：告警 → dump（jstack/HikariCP 日志）→ 栈追溯
+- newCachedThreadPool 危险：线程数无上限
+- HikariCP leakDetectionThreshold：连接泄漏检测（打印持有栈）
+- 修复：try-with-resources + 连接池配置 + 线程池有界
+- ThreadLocal 泄漏：线程池复用 + value 不可达
+frequency: high
 ---
 
 # 【Java 后端架构师】线上线程泄漏与连接泄漏如何排查
@@ -437,6 +448,45 @@ try (CloseableHttpResponse resp = httpClient.execute(request)) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Connection special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HikariCP special
+    class I error
+    class J info
+    class K start
+    class L process
+    class MAT decision
+    class Thread special
+    class ThreadLocal error
+    class active info
+    class borrow start
+    class br process
+    class catch decision
+    class close special
+    class dump error
+    class heap info
+    class jstack start
+    class leakDetectionThreshold process
+    class max decision
+    class newCachedThreadPool special
+    class remove error
+    class resources info
+    class try start
+    class value process
+    class with decision
     A["业务请求<br/>进入"] --> B["try-catch<br/>异常路径"]
     B --> C["borrow 资源<br/>未 close"]
     C --> D["资源不归还"]

@@ -27,6 +27,7 @@ memory_points:
 - 核心原因防饱和：高维点积方差大(d_k)，导致Softmax输出逼近one-hot引发梯度消失。
 - 数学推导记方差：Q和K点积方差为d_k，除以根号d_k刚好把方差缩放回1。
 - 除以d_k不可取：若除d_k方差变1/d_k，分布过度平滑导致注意力退化为均值池化。
+frequency: medium
 ---
 
 # 自注意力机制中为什么要除以√d_k？
@@ -175,6 +176,7 @@ flowchart TD
     style SCALE fill:#FF9800,color:#fff
     style SOFT fill:#9C27B0,color:#fff
     style WEIGHT fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

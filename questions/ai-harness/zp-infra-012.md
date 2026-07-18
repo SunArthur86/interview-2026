@@ -27,6 +27,7 @@ memory_points:
 - 训练优化：3D并行(数据/张量/流水线)，ZeRO-3切分参数，混合精度防溢出
 - CUDA基础：SM/Warp架构，Memory Coalescing合并访问，Shared Memory减少HBM读取
 - 面试重点：项目深挖原理(如vLLM Block机制)，系统设计(高并发推理)，算法推导(FlashAttention)
+frequency: high
 ---
 
 # 【智谱面经】大模型 Infra 岗位怎么准备？必看资料有哪些？面试考察重点是什么？
@@ -99,6 +100,28 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Base start
+    class CUDA process
+    class Cache decision
+    class Coalescing special
+    class Inference error
+    class KV info
+    class Memory start
+    class PagedAttention process
+    class Parallel decision
+    class Prep special
+    class Quant error
+    class SM info
+    class Train start
+    class W8A8 process
+    class Warp decision
+    class ZeRO special
     Prep[Infra岗位准备] --> Inference[推理优化]
     Prep --> Train[训练优化]
     Prep --> CUDA[CUDA基础]

@@ -16,6 +16,7 @@ memory_points:
 - 最坏时间复杂度为O(n²)，发生在数组正序或逆序，退化为冒泡
 - 空间复杂度O(log n)，因存在跨距离交换，所以是不稳定排序
 - 常考优化点：三数取中法选基准、小数组切换插入排序、大量重复元素用三路切分
+frequency: low
 ---
 
 # 归并排序的原理和时间复杂度是什么？
@@ -161,6 +162,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

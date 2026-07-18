@@ -15,6 +15,7 @@ memory_points:
 - '阶段：因为 #include 和宏定义需提前处理，所以预处理最先执行'
 - 区别：静态链接拷贝库代码体积大，而动态链接运行时加载体积小
 - 报错：因为链接器找不到函数实现，所以报 Undefined Reference 错误
+frequency: low
 ---
 
 # 什么是编译系统如何工作？
@@ -136,6 +137,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

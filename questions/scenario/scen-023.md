@@ -29,6 +29,7 @@ memory_points:
 - 积压应急三板斧：紧急扩容消费者、临时增Partition、老消息转发至新Topic分发处理
 - MQ选型：Kafka适合海量日志，RocketMQ适合业务订单（事务/延时），RabbitMQ适合低延微服务
 - 体验设计：因异步削峰无即时结果，故前端需配合反馈排队Token与预估等待时间
+frequency: high
 ---
 
 # 如何设计一个基于消息队列的削峰填谷方案？
@@ -119,6 +120,7 @@ flowchart LR
     U --> QUEUE[返回排队中]
     CONS --> NOTIFY[通知结果]
     style MQ fill:#ffe4b5
+
 ```
 
 

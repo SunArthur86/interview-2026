@@ -19,6 +19,7 @@ memory_points:
 - 防遗忘：混入10-20%预训练数据、使用低学习率、采用LoRA冻结权重
 - 多轮对话：训练时Mask掉历史部分Loss，只计算当前回复梯度
 - 数据飞轮：低质量SFT数据会造成不可逆的模型能力退化
+frequency: medium
 ---
 
 # SFT数据集的构建有哪些最佳实践?如何避免灾难性遗忘
@@ -76,6 +77,32 @@ def compute_sft_loss(logits, labels, user_mask):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Alpaca process
+    class Assistant decision
+    class B special
+    class C error
+    class ChatML info
+    class D start
+    class E process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class K process
+    class L decision
+    class Loss special
+    class M error
+    class Mask info
+    class SFT start
+    class br process
     A["原始SFT指令数据"] --> B["数据构建最佳实践"]
     B --> C["质量严格过滤<br/>(1K精品 > 10万低质)"]
     B --> D["格式统一<br/>(ChatML/Alpaca)"]

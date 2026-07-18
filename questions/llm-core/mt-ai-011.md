@@ -30,6 +30,7 @@ memory_points:
 - 行动环节三层讲：方案选型(为何选Qwen) -> 架构设计(含降级兜底) -> 迭代调优(Bad Case驱动)
 - 量化结果模板：准确率/延迟(TP99) + 业务价值(降本增效DAU提升)
 - 万能架构：Query改写 -> 意图路由 -> 混合检索 -> Rerank精排 -> LLM带溯源生成
+frequency: low
 ---
 
 # 【美团面经】请说说开发过的 AI 产品/功能是什么？用户需求是什么？最终结果如何？（STAR 回答框架）
@@ -156,6 +157,12 @@ flowchart TD
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
     style N4 fill:#f44336,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

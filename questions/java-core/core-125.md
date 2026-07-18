@@ -17,6 +17,7 @@ memory_points:
 - 缓存击穿防：用 Future 包装加载任务，保证同 Key 并发仅加载一次。
 - 高级优化：高性能缓存（如 Caffeine）用 W-TinyLFU 和无锁算法提升吞吐。
 - 淘汰对比：LRU 适合热点少且集中场景，LFU 适合热点区分明显场景。
+frequency: high
 ---
 
 # 如何设计一个本地缓存？
@@ -145,6 +146,42 @@ public class LocalCache<K, V> {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayList process
+    class B decision
+    class BlockingQueue special
+    class C error
+    class CAS info
+    class Collections start
+    class ConcurrentHashMap process
+    class ConcurrentLinkedQueue decision
+    class ConcurrentModificationException special
+    class CopyOnWriteArrayList error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class HashMap error
+    class Hashtable info
+    class I start
+    class J process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class Vector start
+    class br process
+    class concurrent decision
+    class java special
+    class synchronizedXxx error
+    class util info
     A[集合线程安全] --> B[早期同步]
     A --> C[并发包 java.util.concurrent]
     B --> D[Vector 元素同步]

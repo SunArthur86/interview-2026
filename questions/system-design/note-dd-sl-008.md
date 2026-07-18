@@ -31,6 +31,7 @@ memory_points:
 - 核心对比：哈希路由是“计算得出”而路由表是“查询得出”，路由表以极小计算开销换取灵活扩展
 - 扩容优势：哈希取模扩容需迁移近全量数据，而路由表扩容只改部分记录指向，无需全量重算
 - 适用场景：哈希定死规划，一致性Hash平滑扩容，路由表极致灵活细粒度可控，范围分片利于区间查询
+frequency: high
 ---
 
 # 【滴滴面经】短链接数据分片之后，你又加了路由表，这个路由表具体是什么概念？
@@ -490,6 +491,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -27,6 +27,7 @@ memory_points:
 follow_up: []
 tags:
 - 分布式
+frequency: high
 ---
 
 # BASE理论是什么？
@@ -138,6 +139,7 @@ flowchart TD
     style P fill:#9C27B0,color:#fff
     style BASE fill:#2196F3,color:#fff
     style TRADEOFF fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

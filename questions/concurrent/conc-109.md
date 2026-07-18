@@ -17,6 +17,7 @@ memory_points:
 - 亲缘限制：匿名管道只能用于父子或兄弟进程间的单向字节流通信
 - 消息队列：存于内核中的格式化消息链表，克服了管道的流式传输缺点，且无亲缘限制
 - 同步互斥：信号量主要用于进程间的同步控制（PV操作），本身不负责传输大量数据
+frequency: medium
 ---
 
 # 什么是进程通信？
@@ -128,6 +129,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

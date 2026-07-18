@@ -28,6 +28,7 @@ memory_points:
 - 业务痛点：长链致短信成本增加，且无法精准统计点击转化
 - 发号器选型：选号段模式实现全局唯一，避免UUID无序影响索引
 - 性能目标：高并发读3万+QPS，依托多级缓存保障低延迟
+frequency: medium
 ---
 
 # 【滴滴面经】做短链项目的出发点是什么？用了哪些技术？最后达到了什么效果？
@@ -352,6 +353,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

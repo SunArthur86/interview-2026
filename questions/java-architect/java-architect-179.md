@@ -10,7 +10,8 @@ tags:
 - 抢占锁
 - XXL-Job
 feynman:
-  essence: 大规模定时任务的核心是"分片广播 + 抢占锁"。分片广播（XXL-Job ShardingBroadcast）把任务按 shardingItem 切分到多节点并行执行。抢占锁（Redis 分布式锁）保证同一分片只有一个节点执行，防止重复。
+  essence: 大规模定时任务的核心是"分片广播 + 抢占锁"。分片广播（XXL-Job ShardingBroadcast）把任务按 shardingItem
+    切分到多节点并行执行。抢占锁（Redis 分布式锁）保证同一分片只有一个节点执行，防止重复。
   analogy: 像快递分拣——10000 个包裹分给 10 个工人（分片广播，每人处理 shardingItem % 10 == 自己编号的包裹）。每个包裹只有一个人抢到（分布式锁防重复处理）。
   first_principle: 单机定时任务扛不住亿级数据扫描。必须分片——N 个节点并行，每个处理 1/N。但分片要保证不重复不遗漏（每条数据恰好一个节点处理）。抢占锁防节点故障时其他节点接管（failover）。
   key_points:
@@ -26,19 +27,22 @@ first_principle:
   - 多节点并行要保证每条数据恰好处理一次（不重复不遗漏）
   - 节点可能宕机，分片要能被其他节点接管
   - 大任务瞬时打爆 DB，要分批削峰
-  rebuild: XXL-Job 分片广播——调度中心下发分片数 N，每个执行器拿到自己的 shardingItem（0 到 N-1），处理 hash(数据 key) % N == shardingItem 的数据。抢占锁（SETNX lock:job:{jobId}:{shardingItem}）保证原子。大任务分批（每批 1000 条 + sleep 100ms 削峰）。幂等键防重复执行。节点宕机锁过期，其他节点抢占接管。
+  rebuild: XXL-Job 分片广播——调度中心下发分片数 N，每个执行器拿到自己的 shardingItem（0 到 N-1），处理 hash(数据 key)
+    % N == shardingItem 的数据。抢占锁（SETNX lock:job:{jobId}:{shardingItem}）保证原子。大任务分批（每批
+    1000 条 + sleep 100ms 削峰）。幂等键防重复执行。节点宕机锁过期，其他节点抢占接管。
 follow_up:
-  - 分片策略怎么选？——按数据 hash 分片（均匀）或按业务维度（如按 userId 尾号）。XXL-Job ShardingBroadcast 自动下发分片总数和当前分片号。
-  - 怎么保证不重复？——抢占锁 SETNX lock:job:{jobId}:{shardingItem} requestId（UUID）EX 3600。先抢锁再执行，业务层幂等（唯一键约束）兜底。
-  - 节点宕机怎么办？——锁有过期时间（1 小时），节点宕机锁自动释放。其他节点下次调度时抢占接管。监控 job_failover_count。
-  - 大任务怎么削峰？——分批处理。每批 1000 条，批间 sleep 100ms。或按时间窗口限流（每秒最多 10000 条）。避免 DB 瞬时 QPS 爆。
-  - 任务失败怎么重试？——XXL-Job 配置重试次数（3 次）。失败告警（钉钉/邮件）。业务幂等保证重试安全。
+- 分片策略怎么选？——按数据 hash 分片（均匀）或按业务维度（如按 userId 尾号）。XXL-Job ShardingBroadcast 自动下发分片总数和当前分片号。
+- 怎么保证不重复？——抢占锁 SETNX lock:job:{jobId}:{shardingItem} requestId（UUID）EX 3600。先抢锁再执行，业务层幂等（唯一键约束）兜底。
+- 节点宕机怎么办？——锁有过期时间（1 小时），节点宕机锁自动释放。其他节点下次调度时抢占接管。监控 job_failover_count。
+- 大任务怎么削峰？——分批处理。每批 1000 条，批间 sleep 100ms。或按时间窗口限流（每秒最多 10000 条）。避免 DB 瞬时 QPS 爆。
+- 任务失败怎么重试？——XXL-Job 配置重试次数（3 次）。失败告警（钉钉/邮件）。业务幂等保证重试安全。
 memory_points:
-  - 分片广播：XXL-Job ShardingBroadcast，shardingItem = hash(key) % N
-  - 抢占锁：SETNX lock:job:{jobId}:{shard} requestId EX 3600
-  - 幂等键：jobId + shardingItem + 批次号
-  - 失败转移：锁过期自动释放，其他节点抢占
-  - 流量削峰：分批 1000 条 + sleep 100ms
+- 分片广播：XXL-Job ShardingBroadcast，shardingItem = hash(key) % N
+- 抢占锁：SETNX lock:job:{jobId}:{shard} requestId EX 3600
+- 幂等键：jobId + shardingItem + 批次号
+- 失败转移：锁过期自动释放，其他节点抢占
+- 流量削峰：分批 1000 条 + sleep 100ms
+frequency: high
 ---
 
 # 【Java 后端架构师】大规模定时任务分片与抢占
@@ -335,6 +339,32 @@ public class JobIdempotentService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class MOD start
+    class N process
+    class Redis decision
+    class XXL special
+    class br error
+    class job info
+    class lock start
+    class shard process
     A[XXL-Job调度中心] -->|下发分片总数N| B(执行器集群)
     subgraph C [分片抢占与执行流程]
         B --> D[获取本地shardIndex]

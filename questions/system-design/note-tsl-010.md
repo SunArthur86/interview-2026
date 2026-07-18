@@ -30,6 +30,7 @@ memory_points:
 - 处理流水线：快接入 → AI分类去重 → 工单状态机 → 团队流转 → 用户验证闭环
 - AI智能引擎：NLP做意图/情感分析，聚类合并相同Bug，P0紧急度评估定级
 - 动态路由分发：基于SLA和紧急度，P0走快速通道，工单按队列分配团队处理
+frequency: medium
 ---
 
 # 亿级车主提交APP、车载系统反馈，如何设计后端架构，实现反馈分类、流转、处理闭环且实时响应？
@@ -349,6 +350,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

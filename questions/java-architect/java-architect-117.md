@@ -9,9 +9,12 @@ tags:
 - async-profiler
 - 火焰图
 feynman:
-  essence: Profiling 是性能问题的"X 光"——持续采样应用的调用栈，把热点函数（CPU 占比高/分配多/锁等待长）可视化成火焰图。Java 生态核心工具：async-profiler（低开销、准）、JFR（JDK 内建、低开销）、Arthas（交互式、定位用）。本质区别于监控（看趋势）——profiling 看"为什么慢"，定位到具体方法/行号。
-  analogy: 像医生的 X 光片——监控（指标）是体温计量体温（知道发烧），profiling 是 X 光（看到哪发炎）。火焰图是把时间维度压扁，函数占的宽度 = CPU 占比，一眼看出热点。
-  first_principle: 性能优化的本质是"找到瓶颈"——CPU 热点（哪个方法占 CPU 多）、内存热点（哪个方法分配多）、锁热点（哪个锁等待长）。Profiling 通过高频采样（每 10ms 一次调用栈）+ 统计（栈出现的频率 = CPU 占比）定位热点。火焰图把树状调用栈压扁成层叠矩形，宽度 = 占比，高度 = 调用深度。
+  essence: Profiling 是性能问题的"X 光"——持续采样应用的调用栈，把热点函数（CPU 占比高/分配多/锁等待长）可视化成火焰图。Java 生态核心工具：async-profiler（低开销、准）、JFR（JDK
+    内建、低开销）、Arthas（交互式、定位用）。本质区别于监控（看趋势）——profiling 看"为什么慢"，定位到具体方法/行号。
+  analogy: 像医生的 X 光片——监控（指标）是体温计量体温（知道发烧），profiling 是 X 光（看到哪发炎）。火焰图是把时间维度压扁，函数占的宽度
+    = CPU 占比，一眼看出热点。
+  first_principle: 性能优化的本质是"找到瓶颈"——CPU 热点（哪个方法占 CPU 多）、内存热点（哪个方法分配多）、锁热点（哪个锁等待长）。Profiling
+    通过高频采样（每 10ms 一次调用栈）+ 统计（栈出现的频率 = CPU 占比）定位热点。火焰图把树状调用栈压扁成层叠矩形，宽度 = 占比，高度 = 调用深度。
   key_points:
   - async-profiler：低开销（< 1%）、准确（基于 perf_events）、火焰图输出
   - JFR（Java Flight Recorder）：JDK 内建、低开销、事件驱动
@@ -25,21 +28,26 @@ first_principle:
   - 监控看趋势（P99 高），定位看代码（哪个方法慢）
   - 全量埋点不现实（每行代码加耗时统计太贵）
   - 采样统计：高频抓调用栈，栈出现频率 = CPU 占比
-  rebuild: Profiling 通过高频采样（async-profiler 每 10ms 抓一次调用栈）统计每个函数的 CPU 占比。火焰图可视化：每层是一个函数，宽度 = CPU 占比，高度 = 调用深度。一眼看出热点（最宽的方法）。四种维度：① CPU profile（CPU 热点）；② Memory profile（分配热点，找 GC 压力）；③ Lock profile（锁等待，找并发瓶颈）；④ Wall-clock（实际耗时，含 IO 等待）。
+  rebuild: Profiling 通过高频采样（async-profiler 每 10ms 抓一次调用栈）统计每个函数的 CPU 占比。火焰图可视化：每层是一个函数，宽度
+    = CPU 占比，高度 = 调用深度。一眼看出热点（最宽的方法）。四种维度：① CPU profile（CPU 热点）；② Memory profile（分配热点，找
+    GC 压力）；③ Lock profile（锁等待，找并发瓶颈）；④ Wall-clock（实际耗时，含 IO 等待）。
 follow_up:
-  - async-profiler 和 JFR 区别？——async-profiler 基于 perf_events（内核），准确、开销 < 1%；JFR 是 JDK 内建，事件驱动（对象分配/GC/锁），更详细但需要 JDK 商业特性（JDK 11+ 开源）
-  - 火焰图怎么看？——横轴 CPU 占比（宽度），纵轴调用栈（深度）。找最宽的"平顶"——那是热点方法
-  - CPU profile 和 Wall-clock 区别？——CPU profile 只算 CPU 时间（IO 等待不算）；Wall-clock 算墙钟时间（含 sleep/IO 等待）。CPU 密集型用 CPU profile，IO 密集型用 Wall-clock
-  - 生产能持续 profiling 吗？——能。JFR 默认开启（开销 < 1%），持续录制 24h，事件循环覆盖。async-profiler 也可低频持续采样
-  - 为什么不用 jstack？——jstack 是某一时刻的快照（瞬时），profiling 是持续的统计（趋势）。jstack 看死锁，profiling 看热点
+- async-profiler 和 JFR 区别？——async-profiler 基于 perf_events（内核），准确、开销 < 1%；JFR 是 JDK
+  内建，事件驱动（对象分配/GC/锁），更详细但需要 JDK 商业特性（JDK 11+ 开源）
+- 火焰图怎么看？——横轴 CPU 占比（宽度），纵轴调用栈（深度）。找最宽的"平顶"——那是热点方法
+- CPU profile 和 Wall-clock 区别？——CPU profile 只算 CPU 时间（IO 等待不算）；Wall-clock 算墙钟时间（含
+  sleep/IO 等待）。CPU 密集型用 CPU profile，IO 密集型用 Wall-clock
+- 生产能持续 profiling 吗？——能。JFR 默认开启（开销 < 1%），持续录制 24h，事件循环覆盖。async-profiler 也可低频持续采样
+- 为什么不用 jstack？——jstack 是某一时刻的快照（瞬时），profiling 是持续的统计（趋势）。jstack 看死锁，profiling 看热点
 memory_points:
-  - async-profiler：基于 perf_events，开销 < 1%，火焰图
-  - JFR：JDK 内建，事件驱动，低开销持续录制
-  - 火焰图：宽度 = CPU 占比，高度 = 调用深度
-  - 四维度：CPU / Memory（分配）/ Lock（锁）/ Wall-clock（墙钟）
-  - CPU profile vs Wall-clock：CPU 只算 CPU 时间，Wall-clock 含等待
-  - 找"平顶"：火焰图最宽的方法是热点
-  - Arthas：交互式诊断（watch/trace/profiler 命令）
+- async-profiler：基于 perf_events，开销 < 1%，火焰图
+- JFR：JDK 内建，事件驱动，低开销持续录制
+- 火焰图：宽度 = CPU 占比，高度 = 调用深度
+- 四维度：CPU / Memory（分配）/ Lock（锁）/ Wall-clock（墙钟）
+- CPU profile vs Wall-clock：CPU 只算 CPU 时间，Wall-clock 含等待
+- 找"平顶"：火焰图最宽的方法是热点
+- Arthas：交互式诊断（watch/trace/profiler 命令）
+frequency: high
 ---
 
 # 【Java 后端架构师】Profiling 如何定位 CPU 与内存热点
@@ -476,6 +484,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

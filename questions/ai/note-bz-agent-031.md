@@ -30,6 +30,7 @@ memory_points:
 - 应对多工具：使用RAG检索机制，先向量召回最相关的Top-K工具子集再给LLM
 - 决策校验防误选：执行前必须检查意图匹配度、必填参数是否齐全及合法
 - 低置信度处理：显式分析意图，置信度不足时宁可向用户追问，绝不乱猜
+frequency: medium
 ---
 
 # Agent 怎么选工具？如何确保意图决策正确、选中合适工具？
@@ -163,6 +164,21 @@ class IntentAnalyzer:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class C start
+    class E process
+    class Ex decision
+    class I special
+    class R error
+    class RR info
+    class S start
+    class U process
+    class V decision
     U["用户Query"] --> I["意图理解与提取"]
     I --> V{"意图置信度>80%?"}
     V -->|"否"| C["澄清提问"]

@@ -31,6 +31,7 @@ memory_points:
 - 对比句：模型层靠小模型路由与KV缓存，工程层靠无依赖步骤异步并行化处理
 - 因果句：因为工具定义等前缀固定，所以开启Prefix Caching可大幅减少Token计算
 - 因果句：因为Rerank模型极耗时，所以检索层采用粗排召回Top50再精排提速
+frequency: high
 ---
 
 # 自研Agent多步推理带来高延迟，从模型、检索、工程三层给出优化方案？
@@ -229,6 +230,7 @@ flowchart TD
     style BATCH fill:#FF9800,color:#fff
     style CB fill:#F44336,color:#fff
     style RETRY fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

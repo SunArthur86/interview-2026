@@ -34,6 +34,7 @@ memory_points:
 - GraphRAG = 知识图谱 + RAG（检索事实给 LLM）
 - 防 LLM 幻觉：决策必须引用图谱证据
 - 加速：预检索 + 短 prompt + 缓存结果
+frequency: medium
 ---
 
 # 【蚂蚁风控】LLM 风控怎么用？GraphRAG 怎么应用？
@@ -397,6 +398,28 @@ def graphrag_risk_decide(event):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B1 process
+    class B2 decision
+    class B3 special
+    class C1 error
+    class C2 info
+    class C3 start
+    class D1 process
+    class D2 decision
+    class D3 special
+    class Feedback error
+    class Graph info
+    class IP start
+    class LLM process
+    class Request decision
+    class UID special
     subgraph Request[实时风控请求]
         A1[文本/行为序列输入]
     end

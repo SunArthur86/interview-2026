@@ -22,6 +22,7 @@ memory_points:
 - 加速原理：计算复杂度从O(n²)降至O(n)，省去历史token的投影计算
 - 代价：显存占用随序列长度线性增长，公式为2×层数×长度×维度×字节数
 - 瓶颈：长文本推理中KV Cache常比模型权重更占显存，导致Batch受限
+frequency: high
 ---
 
 # 什么是KV Cache?它为什么能加速自回归生成?有什么代价
@@ -142,6 +143,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

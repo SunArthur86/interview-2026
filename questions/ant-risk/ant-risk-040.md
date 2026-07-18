@@ -11,9 +11,11 @@ tags:
 - Java 工程师
 - AI 时代
 feynman:
-  essence: AI 时代 Java 后端工程师的转型不是"放弃 Java"，而是"Java + AI"——用 AI 工具提效、把 AI 能力集成进系统、向 AI 工程化（Harness/Infra）和 AI 解决方案（FDE）演进。
+  essence: AI 时代 Java 后端工程师的转型不是"放弃 Java"，而是"Java + AI"——用 AI 工具提效、把 AI 能力集成进系统、向
+    AI 工程化（Harness/Infra）和 AI 解决方案（FDE）演进。
   analogy: AI 时代像从"手工时代"到"机械化时代"——不是让工匠失业，而是让会用机器的工匠价值更高。Java 工程师的工程思维 + AI 工具 = 复合竞争力。
-  first_principle: AI 替代的是"重复模式化编码"，不替代"系统设计 + 业务理解 + 工程判断"。Java 工程师的核心竞争力（分布式、性能、架构）在 AI 时代仍是稀缺，叠加 AI 能力价值更大。
+  first_principle: AI 替代的是"重复模式化编码"，不替代"系统设计 + 业务理解 + 工程判断"。Java 工程师的核心竞争力（分布式、性能、架构）在
+    AI 时代仍是稀缺，叠加 AI 能力价值更大。
   key_points:
   - 转型路径：用 AI（工具用户）→ 集成 AI（应用工程师）→ 工程化 AI（Harness/Infra）→ 设计 AI 方案（FDE）
   - 保持优势：分布式、性能、架构、业务理解
@@ -25,7 +27,8 @@ first_principle:
   - AI 替代模式化编码
   - 系统设计、业务理解、工程判断 AI 替代不了
   - 复合能力（工程 + AI）最稀缺
-  rebuild: 转型分四阶段——用 AI（提效）→ 集成 AI（应用层）→ 工程化 AI（平台层）→ 设计 AI 方案（方案层）。保持 Java 优势，叠加 AI 能力，向 AI 复合角色演进。
+  rebuild: 转型分四阶段——用 AI（提效）→ 集成 AI（应用层）→ 工程化 AI（平台层）→ 设计 AI 方案（方案层）。保持 Java 优势，叠加
+    AI 能力，向 AI 复合角色演进。
 follow_up:
 - Java 工程师转 AI 最大的坎？——思维方式（确定性 → 概率性）+ 数学基础（统计学、向量）
 - 一定要学算法吗？——不一定，工程化方向（Harness/Infra）更需要 Java 优势
@@ -35,6 +38,7 @@ memory_points:
 - 保持 Java 优势：分布式、性能、架构、业务
 - 学习重点：LLM 原理、AI 工程化、Agent 架构
 - 复合能力（工程 + AI）最稀缺
+frequency: medium
 ---
 
 # 【蚂蚁风控】Java 后端工程师怎么转 AI？转型路径和就业建议
@@ -448,6 +452,33 @@ AI 时代对 Java 后端工程师不是威胁，是机会：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class B special
+    class B1 error
+    class B2 info
+    class B3 start
+    class C1 process
+    class C2 decision
+    class C3 special
+    class D1 error
+    class D2 info
+    class D3 start
+    class Function process
+    class Infra decision
+    class LLM special
+    class S1 error
+    class S2 info
+    class S3 start
+    class S4 process
+    class Stage decision
     A[Java后端工程师] --> B{AI时代转型路径}
     B --> S1
     B --> S2

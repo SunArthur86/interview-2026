@@ -27,6 +27,7 @@ memory_points:
 - MinMax：取绝对最大值定范围。对Outlier敏感，易导致正常数据压缩，适合权重。
 - Percentile：取分位数(如99.9%)截断Outlier。牺牲极值保护主流分布，适合激活值。
 - 其他算法：KL散度最小化分布差异(信息论)，MSE最小化数值误差，ACIQ解析解。
+frequency: medium
 ---
 
 # 【智谱Infra面经】简述 MinMax 和 Percentile 校准算法有什么不同？还知道什么其他校准算法？
@@ -118,6 +119,19 @@ def percentile_calibration(x: torch.Tensor, percentile: float = 99.9):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Choice start
+    class KL process
+    class MSE decision
+    class MinMax special
+    class Percentile error
+    class Tensor info
+    class br start
     Tensor[激活/权重张量] --> Choice{校准算法}
     Choice -->|绝对最大值| MinMax[MinMax<br/>对Outlier敏感]
     Choice -->|分位数| Percentile[Percentile<br/>99.9%截断]

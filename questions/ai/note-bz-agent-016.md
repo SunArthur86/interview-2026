@@ -31,6 +31,7 @@ memory_points:
 - 串行：前一个输出是后一个输入，顺序明确但无法并行易阻塞
 - 并行：主管分发独立子任务并发执行，速度快，最后聚合结果
 - 仲裁：多方独立提方案，由仲裁者综合择优或融合，提升可靠性
+frequency: medium
 ---
 
 # 多 Agent 协作有哪些模式？（串行、并行、仲裁三种）
@@ -298,6 +299,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

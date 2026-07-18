@@ -30,6 +30,7 @@ memory_points:
 - 限流首选令牌桶算法：因为既能控制平均速率，又能容忍瞬时突发流量
 - 熔断器三态转换：正常放行、故障熔断、半开试探，恢复后自动闭合
 - 必须多维度联合限流：因为厂商限制多，所以请求数和Token总数必须同时管控
+frequency: high
 ---
 
 # 大模型 API 的限流熔断如何设计？
@@ -304,6 +305,7 @@ flowchart TD
     style BATCH fill:#FF9800,color:#fff
     style CB fill:#F44336,color:#fff
     style RETRY fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

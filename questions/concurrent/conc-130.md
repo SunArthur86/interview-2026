@@ -16,6 +16,7 @@ memory_points:
 - 易错点：任务是先入队再扩容到max，而不是先扩容再入队
 - CAS原子变量ctl高3位存状态，低29位存线程数，保证并发安全
 - 四拒绝策略：抛异常(默认)、调用者执行、直接丢弃、丢最老任务
+frequency: high
 ---
 
 # 线程池的执行流程是怎样的？
@@ -110,6 +111,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

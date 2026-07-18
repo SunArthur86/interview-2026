@@ -15,6 +15,7 @@ memory_points:
 - 多态属于运行时动态绑定，子类重写父类方法时，实际调用取决于对象的实际类型。
 - 静态方法、final方法及成员变量不具备多态性，因为它们在编译期就确定了。
 - 底层依赖虚方法表（vtable）实现；实战中常配合策略模式消除冗长的if-else。
+frequency: low
 ---
 
 # 说一说你对多态的理解？
@@ -106,6 +107,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

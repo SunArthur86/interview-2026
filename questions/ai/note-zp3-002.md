@@ -31,6 +31,7 @@ memory_points:
 - DPO目标：利用(好答案,坏答案)偏好对，类似SFT般稳定地学偏好
 - 为何不用RLHF：DPO通过数学转化去除了Reward Model，训练更简单稳定
 - 避坑指南：防止过度优化导致多样性下降，坏样本不能太差且要注意分布偏移
+frequency: medium
 ---
 
 # 为什么做了 SFT 还要做 DPO？
@@ -204,6 +205,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

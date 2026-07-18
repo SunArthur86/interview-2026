@@ -28,6 +28,7 @@ memory_points:
 - 高并发写入：用户行为入MQ异步消费，避免整点活动结算导致单线程CPU打饱和
 - 同分排名处理：将微小时间戳偏移量混入Score（score + (now-base)/1e9），完美解决同分按先后排
 - 深翻页优化：大偏移量ZREVRANGE极慢，所以改用ZCOUNT或反向查找避免性能雪崩
+frequency: high
 ---
 
 # 如何设计一个排行榜系统？支持亿级用户、实时更新、多种维度排序。
@@ -124,6 +125,7 @@ flowchart TD
     CHG[分数变更] --> MSG[消息驱动]
     MSG --> WS[WebSocket 推送前端]
     style ZS fill:#d4edda
+
 ```
 
 

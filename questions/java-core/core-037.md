@@ -14,6 +14,7 @@ memory_points:
 - 异常分受检异常（编译时强制try-catch，如IO异常）和非受检异常（运行时异常如空指针，不强制处理）
 - Error 是 JVM 严重错误（如OOM），程序自身无法处理；Exception 是程序逻辑或外部异常
 - throws 用于声明可能抛出的异常，而 throw 用于在方法体内手动抛出具体异常对象
+frequency: high
 ---
 
 # Exception（异常）是什么？
@@ -105,6 +106,45 @@ public class InvalidParameterException extends RuntimeException {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class C info
+    class CheckedException start
+    class ClassCastException process
+    class ClassNotFoundException decision
+    class D special
+    class D1 error
+    class D2 info
+    class D3 start
+    class E process
+    class E1 decision
+    class E2 special
+    class E3 error
+    class Error info
+    class Exception start
+    class F process
+    class G decision
+    class IOException special
+    class IndexOutOfBoundsException error
+    class NullPointerException info
+    class OutOfMemoryError start
+    class RuntimeException process
+    class SQLException decision
+    class StackOverflowError special
+    class Throwable error
+    class VirtualMachineError info
+    class catch start
+    class throws process
+    class try decision
     A[Throwable] --> B[Error 错误]
     A --> C[Exception 异常]
     B --> B1[OutOfMemoryError]

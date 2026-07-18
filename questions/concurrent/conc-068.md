@@ -15,6 +15,7 @@ memory_points:
 - 三大缺陷：存在ABA问题、高并发下自旋开销大、仅能保证单个变量的原子性。
 - ABA解决：引入版本号机制，Java提供AtomicStampedReference。
 - 高并发优化：AtomicInteger自旋竞争大，极高并发计数推荐使用LongAdder（分段CAS空间换时间）。
+frequency: high
 ---
 
 # 什么是CAS（比较并交换-乐观锁机制-锁自旋）？
@@ -130,6 +131,7 @@ flowchart TD
     style FAIL fill:#F44336,color:#fff
     style NOTE fill:#FF9800,color:#fff
     style LONGADDER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

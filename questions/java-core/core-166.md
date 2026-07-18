@@ -22,6 +22,7 @@ memory_points:
 - Collection三大子接口：List有序可重复，Set无序唯一，Queue按特定规则进出。
 - 遍历基石：Collection继承Iterable接口，使得所有单列集合支持foreach循环。
 - Fail-Fast保护：迭代时若发生结构修改会抛异常，修改元素必须用Iterator.remove()。
+frequency: medium
 ---
 
 # Java集合框架的接口继承关系是怎样的？
@@ -164,6 +165,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

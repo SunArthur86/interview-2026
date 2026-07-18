@@ -28,6 +28,7 @@ memory_points:
 - DSL结构：must用于全文评分检索，filter用于精确过滤且自带缓存，aggs用于分面统计
 - 性能优化：用keyword做聚合排序而非text，避免通配符前缀查询，用constant_score跳过打分
 - 混合策略：ES解决基础召回，向量解决语义歧义（如苹果手机vs水果），Redis抗热点查询
+frequency: high
 ---
 
 # 如何设计一个商品搜索系统？支持多维度筛选、排序和聚合。
@@ -122,6 +123,7 @@ flowchart TD
     RK --> FR[精排+业务加权]
     FR --> AGG[聚合统计筛选面]
     style RC fill:#ffe4b5
+
 ```
 
 

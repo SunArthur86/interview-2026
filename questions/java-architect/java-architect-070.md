@@ -10,9 +10,14 @@ tags:
 - 流处理
 - Java 协同
 feynman:
-  essence: Flink 实时计算是"数据流动时就算"，和 Java 服务的协同是"流处理 + 应用"的组合——Flink 负责重计算（窗口聚合/状态机/CEP 模式识别），Java 服务负责业务逻辑（事务/查询/RPC）。典型场景：Flink 算实时大屏（GMV 秒级更新）、实时风控（异常行为秒级拦截）、实时推荐（用户行为秒级反馈）。核心挑战是"Flink 流处理和 Java 事务的边界——谁做什么，数据怎么流转"。
-  analogy: 像工厂流水线。传送带（Flink 流）上产品流过，工位（算子）实时加工（聚合/检测）。但有些复杂工序（精细装配/质量仲裁）要送到独立车间（Java 服务）处理。传送带和车间协同——传送带快速过滤加工，复杂件送车间。Flink + Java 一样——流处理粗加工，复杂业务送 Java 服务。
-  first_principle: 为什么 Flink 不能包揽所有逻辑？因为 Flink 擅长"数据流计算"（窗口/聚合/状态），但不擅长"事务/查询/复杂业务逻辑"（这些 Java 服务更合适）。解法是"分工协同"——Flink 做实时计算（算特征/检测异常/聚合指标），结果发 Kafka 或调 Java 服务（业务处理）。两者通过 Kafka/RPC 解耦。
+  essence: Flink 实时计算是"数据流动时就算"，和 Java 服务的协同是"流处理 + 应用"的组合——Flink 负责重计算（窗口聚合/状态机/CEP
+    模式识别），Java 服务负责业务逻辑（事务/查询/RPC）。典型场景：Flink 算实时大屏（GMV 秒级更新）、实时风控（异常行为秒级拦截）、实时推荐（用户行为秒级反馈）。核心挑战是"Flink
+    流处理和 Java 事务的边界——谁做什么，数据怎么流转"。
+  analogy: 像工厂流水线。传送带（Flink 流）上产品流过，工位（算子）实时加工（聚合/检测）。但有些复杂工序（精细装配/质量仲裁）要送到独立车间（Java
+    服务）处理。传送带和车间协同——传送带快速过滤加工，复杂件送车间。Flink + Java 一样——流处理粗加工，复杂业务送 Java 服务。
+  first_principle: 为什么 Flink 不能包揽所有逻辑？因为 Flink 擅长"数据流计算"（窗口/聚合/状态），但不擅长"事务/查询/复杂业务逻辑"（这些
+    Java 服务更合适）。解法是"分工协同"——Flink 做实时计算（算特征/检测异常/聚合指标），结果发 Kafka 或调 Java 服务（业务处理）。两者通过
+    Kafka/RPC 解耦。
   key_points:
   - Flink 流处理：窗口聚合/状态计算/CEP 模式识别
   - Java 服务协同：Flink 算完发 Kafka，Java 消费处理业务
@@ -26,19 +31,24 @@ first_principle:
   - Java 服务擅长业务逻辑，但不擅长流处理（自己写流处理复杂）
   - 两者通过 Kafka/RPC 解耦协同
   - 实时性要求（秒级端到端延迟）
-  rebuild: Flink 流计算 + Kafka 解耦 + Java 服务业务。Flink 消费事件流，实时聚合/检测（窗口算指标、CEP 识别异常模式），结果发 Kafka 或直接调 Java 服务（Async I/O 不阻塞）。Java 服务消费 Kafka 做业务处理（写库/调下游/通知）。端到端 exactly-once（Kafka + Flink checkpoint + 事务 Sink）。监控 end_to_end_latency（端到端延迟，秒级）和 checkpoint_duration（checkpoint 耗时）。
+  rebuild: Flink 流计算 + Kafka 解耦 + Java 服务业务。Flink 消费事件流，实时聚合/检测（窗口算指标、CEP 识别异常模式），结果发
+    Kafka 或直接调 Java 服务（Async I/O 不阻塞）。Java 服务消费 Kafka 做业务处理（写库/调下游/通知）。端到端 exactly-once（Kafka
+    + Flink checkpoint + 事务 Sink）。监控 end_to_end_latency（端到端延迟，秒级）和 checkpoint_duration（checkpoint
+    耗时）。
 follow_up:
-  - Flink 作业怎么和 Spring Boot 应用集成？——Flink 作业独立部署（Flink 集群），通过 Kafka/HTTP 和 Spring Boot 通信。不在 Spring Boot 内跑 Flink（耦合）。
-  - Flink 状态怎么持久化（防宕机丢数据）？——Checkpoint（周期性快照状态到 HDFS/S3），故障恢复从 checkpoint。
-  - Exactly-once 怎么保证（不重复不丢）？——Source 端（Kafka offset）+ Flink（checkpoint）+ Sink 端（事务写/幂等）三端协同。
-  - Flink 作业怎么更新（不停服）？——Savepoint（状态快照）+ 停旧作业 + 从 savepoint 启新作业（状态延续）。
-  - 水位线（Watermark）怎么处理乱序事件？——Watermark 标记"时间进度"，晚到的事件（< watermark）丢弃或侧输出。
+- Flink 作业怎么和 Spring Boot 应用集成？——Flink 作业独立部署（Flink 集群），通过 Kafka/HTTP 和 Spring Boot
+  通信。不在 Spring Boot 内跑 Flink（耦合）。
+- Flink 状态怎么持久化（防宕机丢数据）？——Checkpoint（周期性快照状态到 HDFS/S3），故障恢复从 checkpoint。
+- Exactly-once 怎么保证（不重复不丢）？——Source 端（Kafka offset）+ Flink（checkpoint）+ Sink 端（事务写/幂等）三端协同。
+- Flink 作业怎么更新（不停服）？——Savepoint（状态快照）+ 停旧作业 + 从 savepoint 启新作业（状态延续）。
+- 水位线（Watermark）怎么处理乱序事件？——Watermark 标记"时间进度"，晚到的事件（< watermark）丢弃或侧输出。
 memory_points:
-  - Flink 流计算，Java 服务业务
-  - 协同：Kafka 解耦 or Async I/O
-  - 状态管理：Keyed State + Checkpoint
-  - Exactly-once：Source + Flink + Sink 三端
-  - Watermark：处理乱序事件
+- Flink 流计算，Java 服务业务
+- 协同：Kafka 解耦 or Async I/O
+- 状态管理：Keyed State + Checkpoint
+- Exactly-once：Source + Flink + Sink 三端
+- Watermark：处理乱序事件
+frequency: high
 ---
 
 # 【Java 后端架构师】Flink 实时计算与 Java 服务协同
@@ -567,6 +577,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

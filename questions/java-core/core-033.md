@@ -14,6 +14,7 @@ memory_points:
 - 来源不同：@Autowired 是 Spring 提供，而 @Resource 是 JDK（JSR-250）标准注解
 - 装配策略：@Autowired 默认按类型装配，而 @Resource 默认按名称装配
 - '@Autowired 多个实例时需配合 @Qualifier 或 @Primary，@Resource 找不到名称才回退按类型'
+frequency: high
 ---
 
 # @Autowired和@Resource注解有什么区别？
@@ -103,6 +104,40 @@ public class OrderController {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Autowired process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class JSR info
+    class K start
+    class L process
+    class M decision
+    class N special
+    class Qualifier error
+    class Resource info
+    class Spring start
+    class br process
+    class byName decision
+    class byType special
+    class false error
+    class name info
+    class required start
+    class setter process
+    class type decision
+    class vs special
     A["依赖注入 @Autowired vs @Resource"] --> B["@Autowired Spring 自带"]
     A --> C["@Resource JSR-250 标准"]
     B --> D[默认 byType]

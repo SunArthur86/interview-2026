@@ -30,6 +30,7 @@ memory_points:
 - 防幻觉看faithfulness（答案能否在上下文找到依据）
 - 切题度看answer_relevancy（从答案反推问题的相似度）
 - 查全率看context_recall，查准率看context_precision
+frequency: medium
 ---
 
 # RAG 有哪些缺陷？如何用指标评估 RAG 系统？
@@ -279,6 +280,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

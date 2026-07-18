@@ -15,6 +15,7 @@ memory_points:
 - 典型算法：AES最常用，DES已淘汰，严禁使用不安全的ECB模式
 - HTTPS混合加密：非对称加密传密钥，对称加密传数据解决性能与分发
 - 安全特性：优秀的算法具有雪崩效应，明文或密钥微变导致密文剧变
+frequency: low
 ---
 
 # 什么是对称加密？
@@ -121,6 +122,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

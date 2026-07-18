@@ -24,6 +24,7 @@ memory_points:
 - 三大特征：最优子结构、重叠子问题、无后效性（未来只看当前状态）
 - 解题五步法：定状态、推方程、设初值、定遍历、空间优化
 - 状态定义是灵魂：常用一维dp[i]或二维dp[i][j]，卡壳时尝试重定义状态
+frequency: low
 ---
 
 # 动态规划解题框架？怎么判断一道题该用DP？
@@ -249,6 +250,25 @@ def fib(n):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Case start
+    class Check process
+    class DP decision
+    class Greedy special
+    class Result error
+    class S1 info
+    class S2 start
+    class S3 process
+    class S4 decision
+    class S5 special
+    class Start error
+    class Step info
+    class br start
     Start[求最值问题] --> Check{是否满足<br/>三大特征?}
     Check-->|最优子结构<br/>且子问题独立| Greedy[尝试贪心算法]
     Check-->|重叠子问题<br/>且无后效性| DP[选择动态规划]

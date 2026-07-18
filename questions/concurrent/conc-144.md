@@ -25,6 +25,7 @@ memory_points:
 - 内存泄漏根因：Key 被 GC 回收变 null，但强引用的 Value 无法回收，造成驻留。
 - 为什么线程池危险：因为核心线程生命周期极长且会被复用，极易累积导致 OOM 或业务数据串用。
 - 最佳实践：使用后必须在 finally 中执行 remove() 清理，且建议用 static final 修饰。
+frequency: high
 ---
 
 # ThreadLocal 的内存泄漏原理是什么？为什么在线程池中使用 ThreadLocal 特别危险？
@@ -144,6 +145,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

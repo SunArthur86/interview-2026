@@ -9,7 +9,8 @@ tags:
 - 数据分析
 - 指标异常排查
 feynman:
-  essence: 订单量突然下降15%的排查要用"先确认数据准确性，再内外归因"的框架。第一步先排除数据问题（埋点丢失/链路延迟/口径变化），再按"内部因素（供给/产品/技术）"和"外部因素（天气/竞品/节假日/事件）"分层排查。核心方法：维度拆解（按城市/时段/车型/用户分层看是普降还是局部）+ 同环比对比 + 漏斗分析（曝光→下单→完成哪环掉了）。
+  essence: 订单量突然下降15%的排查要用"先确认数据准确性，再内外归因"的框架。第一步先排除数据问题（埋点丢失/链路延迟/口径变化），再按"内部因素（供给/产品/技术）"和"外部因素（天气/竞品/节假日/事件）"分层排查。核心方法：维度拆解（按城市/时段/车型/用户分层看是普降还是局部）+
+    同环比对比 + 漏斗分析（曝光→下单→完成哪环掉了）。
   analogy: 像医生看病——先确认体温计没坏（数据准确性），再看是局部症状还是全身（维度拆解），最后结合天气/饮食/接触史（内外归因）。不能上来就猜"是不是模型挂了"。
   first_principle: 指标异常 = 系统性变化或噪声。排查的本质是"定位变化的来源"——是数据本身的问题，还是业务真变了，变了在哪一层哪个维度。
   key_points:
@@ -30,6 +31,7 @@ memory_points:
 - 排查零步：必须先确认数据准确性（埋点丢失或延迟），避免数据故障造成的虚惊一场
 - 维度拆解：多维度下钻看是全局普降还是局部骤降，据此缩小业务排查范围
 - 漏斗定位：顺藤摸瓜找转化率掉落的环节（曝光-点击-下单-接单-完成），精准定位内外因
+frequency: medium
 ---
 
 # 【神州专车面经】某城市某天订单量突然下降15%，怎么排查？给分析框架
@@ -182,6 +184,24 @@ FROM order_dispatch_log GROUP BY dt;
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class R info
     A[某城市订单量突降15%告警] --> B{第一步:排除数据异常}
     B -->|是脏数据| C[检查埋点丢失/链路延迟]
     C -->|修复链路| R[排查完毕:虚惊一场]

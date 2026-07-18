@@ -10,9 +10,12 @@ tags:
 - 分布式训练
 - ZeRO
 feynman:
-  essence: DeepSpeed 是微软开源的大模型训练优化库，核心能力是 ZeRO（Zero Redundancy Optimizer）三阶段显存优化——ZeRO-1 分片优化器状态、ZeRO-2 分片梯度、ZeRO-3 分片模型参数，把单卡装不下的大模型分散到多卡。配套能力：混合精度、激活检查点（activation checkpointing，用算力换显存）、offload（卸载到 CPU/NVMe）。配合 Megatron-LM 做流水线/张量并行。
+  essence: DeepSpeed 是微软开源的大模型训练优化库，核心能力是 ZeRO（Zero Redundancy Optimizer）三阶段显存优化——ZeRO-1
+    分片优化器状态、ZeRO-2 分片梯度、ZeRO-3 分片模型参数，把单卡装不下的大模型分散到多卡。配套能力：混合精度、激活检查点（activation checkpointing，用算力换显存）、offload（卸载到
+    CPU/NVMe）。配合 Megatron-LM 做流水线/张量并行。
   analogy: 像搬家公司——一家搬不下的大件家具（大模型），DeepSpeed 拆散分到多辆车（多 GPU）上：优化器状态放车1（ZeRO-1）、梯度放车2（ZeRO-2）、连模型参数都分到各车（ZeRO-3）。激活检查点像"中途把不用的家具暂存仓库（CPU），要用再取回"，省空间但多跑腿。
-  first_principle: 大模型训练的瓶颈是显存。DeepSpeed 的本质是"消除冗余"——传统数据并行每卡存完整副本（冗余），ZeRO 把优化器/梯度/参数分片到各卡，消除冗余让总显存只受 GPU 数限制。
+  first_principle: 大模型训练的瓶颈是显存。DeepSpeed 的本质是"消除冗余"——传统数据并行每卡存完整副本（冗余），ZeRO 把优化器/梯度/参数分片到各卡，消除冗余让总显存只受
+    GPU 数限制。
   key_points:
   - 'ZeRO 三阶段: 优化器状态分片(Z1)+梯度分片(Z2)+参数分片(Z3)'
   - Z1省4倍显存，Z2再省一点，Z3让单卡只存1/N参数
@@ -33,6 +36,7 @@ memory_points:
 - ZeRO-3代价：显存随卡数线性降，但前向反向通信开销巨大
 - 激活检查点：用算力换显存，只存部分层，反向重算降显存
 - RLHF扩展：多模型共存显存爆炸，靠ZeRO-3+CPU卸载解决
+frequency: high
 ---
 
 # 【阶跃星辰面经】对 DeepSpeed 框架有没有了解
@@ -167,6 +171,33 @@ RLHF 训练要同时驻留多个模型：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class DeepSpeed error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class NVMe decision
+    class Offload special
+    class PP error
+    class S1 info
+    class ZeRO start
+    class br process
+    class gather decision
     A["单卡显存不足<br/>无法训练大模型"] --> B["DeepSpeed<br/>显存优化库"]
     B --> C["ZeRO<br/>消除数据并行冗余"]
     B --> D["Offload<br/>卸载至CPU/NVMe"]

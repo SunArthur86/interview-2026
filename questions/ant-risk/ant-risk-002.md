@@ -12,8 +12,10 @@ tags:
 - CAS
 feynman:
   essence: AQS 用一个 volatile int state + CLH 变种 FIFO 双向队列实现"独占/共享"两种同步语义，所有 JUC 锁都基于它。
-  analogy: AQS 像医院的叫号系统：state 是"现在叫到几号"，等待队列是排队的患者名单。独占锁（取号机只有一台）同时只有一个人能用，共享锁（取号机有 N 台）可以让 N 个人同时用。
-  first_principle: 如何在多线程下用"一个变量 + 一个队列"统一表达所有同步语义？state 表示资源状态，队列表示等待顺序，CAS 保证 state 修改原子。
+  analogy: AQS 像医院的叫号系统：state 是"现在叫到几号"，等待队列是排队的患者名单。独占锁（取号机只有一台）同时只有一个人能用，共享锁（取号机有
+    N 台）可以让 N 个人同时用。
+  first_principle: 如何在多线程下用"一个变量 + 一个队列"统一表达所有同步语义？state 表示资源状态，队列表示等待顺序，CAS 保证 state
+    修改原子。
   key_points:
   - state（volatile int）+ CLH 变种双向队列 = AQS 两件套
   - 独占模式（ReentrantLock）vs 共享模式（Semaphore/CountDownLatch）
@@ -26,7 +28,8 @@ first_principle:
   - 同步的本质是"资源争用"——同一时刻有限个线程能访问
   - 资源可用性可以用一个整数 state 表达
   - 等待线程需要 FIFO 排队避免饥饿
-  rebuild: 抽象出 state 字段 + 等待队列 = AbstractQueuedSynchronizer。子类只需重写 tryAcquire/tryRelease（独占）或 tryAcquireShared/tryReleaseShared（共享），即可复用整个排队、阻塞、唤醒机制。
+  rebuild: 抽象出 state 字段 + 等待队列 = AbstractQueuedSynchronizer。子类只需重写 tryAcquire/tryRelease（独占）或
+    tryAcquireShared/tryReleaseShared（共享），即可复用整个排队、阻塞、唤醒机制。
 follow_up:
 - AQS 的公平锁和非公平锁性能差多少？——非公平锁吞吐高约 20%-40%，因为减少了线程切换
 - 为什么 AQS 用 CLH 队列而不用普通队列？——CLH 的前驱节点 cancel 时能快速跳过，且 park/unpark 基于"前驱状态"判断，避免惊群
@@ -36,6 +39,7 @@ memory_points:
 - 模板方法模式：AQS 定义骨架（入队/阻塞/唤醒），子类实现 tryAcquire/tryRelease
 - 公平锁先排队后抢，非公平锁先抢后排（吞吐换公平）
 - park/unpark 比 wait/notify 优势：unpark 可以在 park 之前调用，不丢信号
+frequency: high
 ---
 
 # 【蚂蚁风控】AQS 原理？ReentrantLock 的公平锁和非公平锁是怎么实现的？风控系统里怎么用？
@@ -311,6 +315,7 @@ flowchart TD
 
     style B fill:#fff3e0
     style H fill:#e8f5e9
+
 ```
 
 ## 视频脚本

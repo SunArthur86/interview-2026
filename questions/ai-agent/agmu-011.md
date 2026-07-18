@@ -16,6 +16,7 @@ memory_points:
 - Crew 抽象角色分工与任务依赖，降低 Prompt 心智负担。
 - 支持 Sequential 顺序流和 Hierarchical 层级管理。
 - Task 输出自动作为下个 Task 输入，实现上下文传递。
+frequency: medium
 ---
 
 # CrewAI 的「Crew」抽象解决什么问题
@@ -135,6 +136,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -12,8 +12,8 @@ tags:
 - PyramidKV
 - 面经
 feynman:
-  essence: "稀疏注意力是在长上下文中只保留重要的KV Cache，丢弃不重要的，以恒定显存支持无限长对话"
-  analogy: "你在听一场3小时的会议。全程不可能记住每句话（全注意力=显存爆炸）。StreamingLLM=只记开头结论+最近5分钟；H2O=全程记最关键的金句；PyramidKV=会议前期多记细节、后期只记大纲"
+  essence: 稀疏注意力是在长上下文中只保留重要的KV Cache，丢弃不重要的，以恒定显存支持无限长对话
+  analogy: 你在听一场3小时的会议。全程不可能记住每句话（全注意力=显存爆炸）。StreamingLLM=只记开头结论+最近5分钟；H2O=全程记最关键的金句；PyramidKV=会议前期多记细节、后期只记大纲
   key_points:
   - 没有万能方案，必须结合token重要性分布实测选择
   - StreamingLLM：attention sink（开头）+滑动窗口，恒定显存，适合无限长对话
@@ -21,9 +21,10 @@ feynman:
   - PyramidKV：浅层大缓存捕全局，深层小缓存提速度，适合多任务
   - 核心权衡：保留率vs质量——保留越少越省显存但信息损失越大
 first_principle:
-  essence: "Self-Attention的计算是O(n²)，KV Cache存储是O(n)。长上下文中大部分token对最终输出的贡献极小（注意力分数趋近于0），可以安全丢弃"
-  derivation: "观察注意力矩阵发现：1) 开头几个token获得异常高的注意力分数（attention sink现象）；2) 近期token自然获得高注意力（局部性）；3) 中间区域大量token的注意力分数<0.01。因此可以设计策略只保留高注意力token的KV Cache，将O(n)降为O(k)，k<<n"
-  conclusion: "稀疏注意力的本质是注意力重要性排序+选择性保留，不同排序策略适合不同任务特征"
+  essence: Self-Attention的计算是O(n²)，KV Cache存储是O(n)。长上下文中大部分token对最终输出的贡献极小（注意力分数趋近于0），可以安全丢弃
+  derivation: 观察注意力矩阵发现：1) 开头几个token获得异常高的注意力分数（attention sink现象）；2) 近期token自然获得高注意力（局部性）；3)
+    中间区域大量token的注意力分数<0.01。因此可以设计策略只保留高注意力token的KV Cache，将O(n)降为O(k)，k<<n
+  conclusion: 稀疏注意力的本质是注意力重要性排序+选择性保留，不同排序策略适合不同任务特征
 follow_up:
 - Attention Sink现象的原因是什么？为什么开头token总获得高注意力？
 - 这三种方案能组合使用吗？比如StreamingLLM+H2O？
@@ -34,6 +35,7 @@ memory_points:
 - H2O→摘要/RAG（动态保留高注意力token）
 - PyramidKV→多任务（浅层大缓存+深层小缓存）
 - 核心洞察：没有万能方案，必须实测token重要性分布
+frequency: high
 ---
 
 # 【AI Infra推理优化】稀疏注意力方案怎么选？StreamingLLM vs H2O vs PyramidKV
@@ -199,6 +201,7 @@ flowchart TD
     style BATCH fill:#FF9800,color:#fff
     style CB fill:#F44336,color:#fff
     style RETRY fill:#9C27B0,color:#fff
+
 ```
 
 ## 结构化回答

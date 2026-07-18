@@ -16,6 +16,7 @@ memory_points:
 - 应用对比：字节流专攻二进制(图片等)，字符流专攻文本(防中文乱码)
 - 架构模式：节点流直接连数据源，处理流用装饰器模式包装并增强功能(如缓冲)
 - 防乱码：因为系统默认编码各异，所以用转换流时需显式指定UTF-8
+frequency: medium
 ---
 
 # 什么是IO流的分类？
@@ -111,6 +112,40 @@ try (OutputStreamWriter osw = new OutputStreamWriter(
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class BufferedInputStream error
+    class BufferedReader info
+    class C start
+    class C1 process
+    class D decision
+    class D1 special
+    class D2 error
+    class E info
+    class E1 start
+    class F process
+    class FileInputStream decision
+    class FileOutputStream special
+    class G error
+    class H info
+    class I start
+    class IO process
+    class InputStream decision
+    class InputStreamReader special
+    class Java error
+    class OutputStream info
+    class OutputStreamWriter start
+    class Reader process
+    class Writer decision
+    class br special
     A[Java IO 四大基类] --> B[InputStream 字节输入]
     A --> C[OutputStream 字节输出]
     A --> D[Reader 字符输入]

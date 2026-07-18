@@ -9,11 +9,13 @@ tags:
 - 影子库
 - 隔离
 feynman:
-  essence: "全链路压测在生产环境跑，最大风险是污染生产数据（产生假订单、扣真实库存、发假短信）。核心解法是\"压测流量打影子资源\"——压测请求带压测标（HTTP Header / ThreadLocal），全链路识别压测标后路由到影子库（orders_pt）、影子 MQ topic（order_events_pt）、影子 Redis key（pt_:）、影子 ES 索引（orders_pt）。压测流量和真实流量物理隔离，互不污染。"
+  essence: 全链路压测在生产环境跑，最大风险是污染生产数据（产生假订单、扣真实库存、发假短信）。核心解法是"压测流量打影子资源"——压测请求带压测标（HTTP
+    Header / ThreadLocal），全链路识别压测标后路由到影子库（orders_pt）、影子 MQ topic（order_events_pt）、影子
+    Redis key（pt_:）、影子 ES 索引（orders_pt）。压测流量和真实流量物理隔离，互不污染。
   analogy: 像 JD 双 11 前全链路压测——真实订单在"真仓库"（生产库），压测订单在"模拟仓库"（影子库）。压测请求贴"压测标"标签，全链路各环节识别标签后把货送到模拟仓库。真实用户和压测流量井水不犯河水。压测结束一键清理模拟仓库（影子表），不影响真仓库。
   first_principle: 生产环境压测最真实（真流量形态、真数据规模、真依赖链），但污染生产数据不可接受。本质矛盾是"用真环境压测"vs"不污染真数据"。解法是"影子资源"——压测流量打影子资源（表/Topic/Key/Index），真流量打真资源。全链路识别压测标后路由分流，物理隔离保证不串台。代价是影子资源要建一套、压测标全链路传递（线程池/MQ/异步要透传）。
   key_points:
-  - "压测标：HTTP Header（X-Pressure-Test: true）或 ThreadLocal 标记，全链路透传"
+  - '压测标：HTTP Header（X-Pressure-Test: true）或 ThreadLocal 标记，全链路透传'
   - 影子表：DB 层 orders → orders_pt，压测流量写影子表
   - 影子 Topic：MQ 层 order_events → order_events_pt
   - 影子 Key：Redis 层 order:123 → pt_order:123（前缀隔离）
@@ -25,19 +27,27 @@ first_principle:
   - 生产环境压测最真实（真流量形态、真数据规模、真依赖链路）
   - 但污染生产数据不可接受（假订单、扣真实库存、发虚假短信给真用户）
   - 全链路有多跳（应用 → DB → MQ → 下游应用 → 缓存 → ES），每跳都可能污染
-  rebuild: "用\"压测标 + 影子资源\"做物理隔离。压测请求带压测标（HTTP Header X-Pressure-Test: true），网关识别后注入 ThreadLocal 标记。全链路每个环节识别 ThreadLocal 后路由到影子资源——DB 写 orders_pt 表、MQ 发 order_events_pt topic、Redis 写 pt_:key、ES 写 orders_pt 索引。真流量打真资源，压测流量打影子资源，井水不犯河水。难点是压测标全链路透传——线程池切换会丢 ThreadLocal（用 TransmittableThreadLocal）、MQ 消费时消费端也要恢复压测标、异步任务（@Async、定时任务）要透传。压测结束一键清理影子资源。"
+  rebuild: '用"压测标 + 影子资源"做物理隔离。压测请求带压测标（HTTP Header X-Pressure-Test: true），网关识别后注入
+    ThreadLocal 标记。全链路每个环节识别 ThreadLocal 后路由到影子资源——DB 写 orders_pt 表、MQ 发 order_events_pt
+    topic、Redis 写 pt_:key、ES 写 orders_pt 索引。真流量打真资源，压测流量打影子资源，井水不犯河水。难点是压测标全链路透传——线程池切换会丢
+    ThreadLocal（用 TransmittableThreadLocal）、MQ 消费时消费端也要恢复压测标、异步任务（@Async、定时任务）要透传。压测结束一键清理影子资源。'
 follow_up:
-  - 压测标怎么全链路透传？——HTTP Header 透传 + ThreadLocal（用 TransmittableThreadLocal 解决线程池丢失）+ MQ 消息属性（properties.put("pressureTest","true")）+ Redis/DB 数据本身带标。每跳都要透传，漏一跳就串台
-  - 线程池为什么丢 ThreadLocal？——ThreadLocal 绑定线程，线程池复用线程（任务 A 的 ThreadLocal 残留影响任务 B）。用 TransmittableThreadLocal + TtlExecutors 包装线程池解决
-  - 影子表怎么路由？——MyBatis 拦截器或动态数据源，识别 ThreadLocal 压测标后把表名 orders 改成 orders_pt。或 ShardingSphere 的 shadow rule
-  - 压测数据怎么清理？——压测前记录影子资源（影子表、影子 key、影子 index），压测结束 TRUNCATE 影子表、FLUSHDB 影子 key、DELETE 影子 index。或用带 TTL 的 key 自动过期
-  - 怎么验证压测真没污染生产？——压测后对账（生产订单数 vs 真实订单数，差异 = 0）、用户审计（无真实用户收到压测短信）、库存对账（真实库存无异常扣减）
+- 压测标怎么全链路透传？——HTTP Header 透传 + ThreadLocal（用 TransmittableThreadLocal 解决线程池丢失）+ MQ
+  消息属性（properties.put("pressureTest","true")）+ Redis/DB 数据本身带标。每跳都要透传，漏一跳就串台
+- 线程池为什么丢 ThreadLocal？——ThreadLocal 绑定线程，线程池复用线程（任务 A 的 ThreadLocal 残留影响任务 B）。用 TransmittableThreadLocal
+  + TtlExecutors 包装线程池解决
+- 影子表怎么路由？——MyBatis 拦截器或动态数据源，识别 ThreadLocal 压测标后把表名 orders 改成 orders_pt。或 ShardingSphere
+  的 shadow rule
+- 压测数据怎么清理？——压测前记录影子资源（影子表、影子 key、影子 index），压测结束 TRUNCATE 影子表、FLUSHDB 影子 key、DELETE
+  影子 index。或用带 TTL 的 key 自动过期
+- 怎么验证压测真没污染生产？——压测后对账（生产订单数 vs 真实订单数，差异 = 0）、用户审计（无真实用户收到压测短信）、库存对账（真实库存无异常扣减）
 memory_points:
-  - "压测标：X-Pressure-Test: true Header + ThreadLocal，全链路透传"
-  - 影子资源：orders_pt 表 / order_events_pt topic / pt_:key / orders_pt index
-  - 线程池丢 ThreadLocal：用 TransmittableThreadLocal（阿里 TTL 框架）
-  - 清理：压测结束 TRUNCATE 影子表 + FLUSHDB 影子 key + DELETE 影子 index
-  - 验证：压测后对账生产数据，差异 = 0
+- '压测标：X-Pressure-Test: true Header + ThreadLocal，全链路透传'
+- 影子资源：orders_pt 表 / order_events_pt topic / pt_:key / orders_pt index
+- 线程池丢 ThreadLocal：用 TransmittableThreadLocal（阿里 TTL 框架）
+- 清理：压测结束 TRUNCATE 影子表 + FLUSHDB 影子 key + DELETE 影子 index
+- 验证：压测后对账生产数据，差异 = 0
+frequency: high
 ---
 
 # 【Java 后端架构师】全链路压测如何避免污染生产数据
@@ -595,6 +605,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

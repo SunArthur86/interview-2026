@@ -12,9 +12,12 @@ tags:
 - KV Cache
 - 推理优化
 feynman:
-  essence: LLM 推理优化三大手段：vLLM 用 PagedAttention 让 KV cache 像虚拟内存分页管理（吞吐 5-10 倍）、量化用 INT8/INT4 降精度换速度、KV Cache 复用减少重复计算。
-  analogy: vLLM 像操作系统的虚拟内存——把碎片化的 KV cache 用页表管理，利用率从 30% 到 90%；量化像压缩图片——精度略降但体积小几倍；KV Cache 像浏览器缓存——同会话不重复计算。
-  first_principle: LLM 推理瓶颈是显存（KV cache 占用大）和计算（自回归逐步生成），vLLM 优化显存利用、量化减少计算量、KV Cache 复用避免重复计算。
+  essence: LLM 推理优化三大手段：vLLM 用 PagedAttention 让 KV cache 像虚拟内存分页管理（吞吐 5-10 倍）、量化用
+    INT8/INT4 降精度换速度、KV Cache 复用减少重复计算。
+  analogy: vLLM 像操作系统的虚拟内存——把碎片化的 KV cache 用页表管理，利用率从 30% 到 90%；量化像压缩图片——精度略降但体积小几倍；KV
+    Cache 像浏览器缓存——同会话不重复计算。
+  first_principle: LLM 推理瓶颈是显存（KV cache 占用大）和计算（自回归逐步生成），vLLM 优化显存利用、量化减少计算量、KV Cache
+    复用避免重复计算。
   key_points:
   - vLLM/PagedAttention：KV cache 分页管理，吞吐 5-10 倍
   - 量化：INT8/INT4，精度损失小速度大幅提升
@@ -27,7 +30,8 @@ first_principle:
   - 显存有限（A100 80GB）
   - KV cache 是显存大头（长 prompt 几 GB）
   - 自回归生成串行（无法并行）
-  rebuild: PagedAttention 把 KV cache 分页（像虚拟内存）+ Continuous Batching 动态拼请求 + 量化降精度减计算量，三者组合提升单 GPU 吞吐 5-10 倍。
+  rebuild: PagedAttention 把 KV cache 分页（像虚拟内存）+ Continuous Batching 动态拼请求 + 量化降精度减计算量，三者组合提升单
+    GPU 吞吐 5-10 倍。
 follow_up:
 - KV cache 占多少显存？——大约每 token 2×layers×hidden×2bytes，70B 模型每 token ~100KB
 - 量化精度损失多大？——INT8 几乎无损，INT4 在风控这种结构化决策场景可接受
@@ -37,6 +41,7 @@ memory_points:
 - 量化 INT8/INT4：精度略降换速度
 - KV Cache：自回归中间结果缓存
 - Continuous Batching：动态拼 batch
+frequency: high
 ---
 
 # 【蚂蚁风控】LLM 推理怎么优化？vLLM 原理？怎么降本增效？
@@ -399,6 +404,33 @@ KV cache 是 LLM 推理的显存大头——每生成一个 token，要把之前
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class B1 decision
+    class B2 special
+    class Batching error
+    class C1 info
+    class C2 start
+    class C3 process
+    class C4 decision
+    class Continuous special
+    class D1 error
+    class D2 info
+    class D3 start
+    class Flash process
+    class GPU decision
+    class INT8 special
+    class Input error
+    class KV info
+    class Output start
+    class Prefix process
+    class Sched decision
     subgraph Input[推理请求入口]
         A1[系统Prompt前缀]
         A2[动态Few-shot指令]

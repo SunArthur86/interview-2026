@@ -31,6 +31,7 @@ memory_points:
 - 核心四要素：来源数字签名验，内容哈希校验，版本靠矩阵，安全靠灰度+回滚
 - 构建与分发：构建时HSM私钥签名生成manifest，CDN全球分发固件包
 - 车端校验流：验签名→校哈希→查兼容→双分区(A/B)写入→重启验证，自动回滚保平安
+frequency: high
 ---
 
 # 车载固件多版本迭代，如何设计后端校验架构，验证固件完整性、兼容性，避免异常固件导致车辆故障？
@@ -61,6 +62,41 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BUILD decision
+    class CDN special
+    class ECU error
+    class HSM info
+    class L1 start
+    class L3 process
+    class MTX decision
+    class PKG special
+    class RSA error
+    class S1 info
+    class S2 start
+    class S3 process
+    class S4 decision
+    class S5 special
+    class S6 error
+    class bin info
+    class br start
+    class compatibleModels process
+    class ecuList decision
+    class firmwareId special
+    class manifest error
+    class minVersion info
+    class partition start
+    class sha256 process
+    class signature decision
+    class version special
+    class vs error
     subgraph L1["固件构建与签名流水线"]
         BUILD["源码 → CI编译 → 固件包(.bin)"]
         HSM["HSM硬件安全模块<br/>私钥签名(RSA)"]

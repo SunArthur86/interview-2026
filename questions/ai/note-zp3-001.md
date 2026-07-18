@@ -19,7 +19,8 @@ feynman:
   - '主流模型: LLaMA/Qwen/GLM/DeepSeek都用RoPE'
 first_principle:
   essence: Attention只关心token间的相对位置，不关心绝对位置
-  derivation: 需要Q·K只依赖m-n(相对位置) → 对Q_m旋转θm、K_n旋转θn → Q_m·K_n = g(x_m, x_n, m-n) → 点积自然包含相对位置信息
+  derivation: 需要Q·K只依赖m-n(相对位置) → 对Q_m旋转θm、K_n旋转θn → Q_m·K_n = g(x_m, x_n, m-n) →
+    点积自然包含相对位置信息
   conclusion: RoPE用绝对位置的旋转变换巧妙实现了相对位置编码
 follow_up:
 - RoPE怎么实现长度外推？NTK-aware是什么？
@@ -30,6 +31,7 @@ memory_points:
 - 核心原理：Q/K做绝对旋转，点积自动内含相对位置(m-n)信息
 - 优势对比：相比绝对编码无额外参数，且天然具备相对位置感知能力
 - 长文本救星：通过NTK-aware scaling调大base，实现长度外推(如32K)
+frequency: medium
 ---
 
 # 详细讲讲 RoPE 旋转位置编码？还有哪些位置编码？为什么用 RoPE？
@@ -183,6 +185,7 @@ flowchart TD
     I --> J["最终输出: 支持长序列<br/>上下文的Attention Score"]
     style D2 fill:#e6ffe6,stroke:#009900
     style H fill:#fff2e6,stroke:#cc6600
+
 ```
 
 

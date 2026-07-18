@@ -29,6 +29,7 @@ memory_points:
 - 格式不可控用强Schema约束，推理总出错用CoT思维链
 - 回答不一致用Few-shot示例，有幻觉用限定上下文+诚实约束
 - 记住局限性：Prompt解决不了知识盲区、固有偏见和完全消除幻觉
+frequency: medium
 ---
 
 # 提示词工程能解决什么问题？
@@ -230,6 +231,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

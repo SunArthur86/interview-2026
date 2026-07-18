@@ -27,6 +27,7 @@ memory_points:
 - 固定大小通常512-1024 Token，需保留10%-15%重叠以维持上下文连贯
 - 代码文档用AST或函数级分块，QA对用Question-Answer独立分块
 - 避免在句子中间截断，优先按段落或标点符号切分
+frequency: medium
 ---
 
 # 在RAG系统中如何设计有效的Chunking策略？不同类型的文档应该用什么分块方法？
@@ -103,6 +104,24 @@ def reciprocal_rank_fusion(results_dict, k=60):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class D start
+    class E process
+    class F decision
+    class Question special
+    class Token error
+    class br info
     A[原始知识库文档] --> B{文档类型判断}
     B -->|通用文本| C1[固定大小分块<br/>512-1024 Token & 10%重叠]
     B -->|结构化文本| C2[递归字符分块<br/>按段落标点切分]

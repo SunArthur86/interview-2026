@@ -30,14 +30,15 @@ first_principle:
   - 流量有峰谷
   rebuild: 池化+多级缓存+弹性扩容+队列削峰。
 follow_up:
-  - 缓存击穿/穿透/雪崩？——击穿互斥锁/穿透布隆/雪崩随机 TTL
-  - 线程池怎么配？——CPU 密集 N+1，IO 密集 2N
-  - Kafka 削峰怎么不丢？——acks=all+消费限流+死信
+- 缓存击穿/穿透/雪崩？——击穿互斥锁/穿透布隆/雪崩随机 TTL
+- 线程池怎么配？——CPU 密集 N+1，IO 密集 2N
+- Kafka 削峰怎么不丢？——acks=all+消费限流+死信
 memory_points:
-  - 池化：HikariCP/线程池
-  - 缓存：Caffeine+Redis
-  - 扩容：HPA+分片
-  - 队列：Kafka 削峰
+- 池化：HikariCP/线程池
+- 缓存：Caffeine+Redis
+- 扩容：HPA+分片
+- 队列：Kafka 削峰
+frequency: high
 ---
 
 # 【拼多多内容】高并发四件套（池化/缓存/扩容/异步队列）？
@@ -252,6 +253,33 @@ Caffeine（本地）的存在是为了"扛热点 + 降 Redis 压力"。拼多多
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Cache special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class L1 process
+    class L2 decision
+    class L3 special
+    class Level error
+    class M info
+    class Multi start
+    class N process
+    class br decision
     A[客户端高频读取请求] --> B[网关应用]
     subgraph Multi-Level Cache
         B --> C[L1: Caffeine本地缓存<br/>扛热点纳秒级响应]

@@ -31,6 +31,7 @@ memory_points:
 - AI体验看速度：核心盯首字延迟(TTFW)与流式输出速率，防范主线程卡顿
 - AI价值看采纳：产物采纳率与分步接受率是检验业务效果的核心标尺
 - AI质量防幻觉：追踪重试率与任务放弃率，量化大模型输出不可靠的损耗
+frequency: low
 ---
 
 # 【月之暗面面经】你会用哪些指标判断桌面 AI 产品前端做得好不好？
@@ -429,6 +430,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -12,8 +12,8 @@ tags:
 - 线程池
 - 面经
 feynman:
-  essence: "ThreadLocal内存泄漏的根因是线程池中线程长期存活，其ThreadLocalMap持有Value的强引用导致Value无法被GC回收"
-  analogy: "想象酒店房间（线程）里有个私人储物柜（ThreadLocalMap）。退房时Key（房卡，弱引用）被回收，但Value（行李）还在柜子里。如果房间不退（线程池复用），行李永远拿不走——这就是内存泄漏"
+  essence: ThreadLocal内存泄漏的根因是线程池中线程长期存活，其ThreadLocalMap持有Value的强引用导致Value无法被GC回收
+  analogy: 想象酒店房间（线程）里有个私人储物柜（ThreadLocalMap）。退房时Key（房卡，弱引用）被回收，但Value（行李）还在柜子里。如果房间不退（线程池复用），行李永远拿不走——这就是内存泄漏
   key_points:
   - ThreadLocalMap的Key是弱引用（WeakReference），Value是强引用
   - Key被GC后变成null，但Value仍被Entry强引用——形成null→Value的泄漏链
@@ -21,9 +21,9 @@ feynman:
   - 解决方案：用完必须remove()，或使用try-finally确保清理
   - Key设计为弱引用是为了避免ThreadLocal对象本身无法被GC
 first_principle:
-  essence: "ThreadLocal的设计目标是'线程隔离'，但线程池复用打破了'线程生命周期=ThreadLocal生命周期'的假设"
-  derivation: "线程隔离需要Map存储→Map放在Thread对象上→Thread销毁时Map一起回收→但线程池复用线程→线程不销毁→Map不回收→Value泄漏→Key设为弱引用让ThreadLocal对象可回收→但Value仍是强引用→泄漏依然存在"
-  conclusion: "弱引用Key是设计妥协——保证ThreadLocal对象可回收，但无法解决Value泄漏。根因解法只有一条：用完必调remove()"
+  essence: ThreadLocal的设计目标是'线程隔离'，但线程池复用打破了'线程生命周期=ThreadLocal生命周期'的假设
+  derivation: 线程隔离需要Map存储→Map放在Thread对象上→Thread销毁时Map一起回收→但线程池复用线程→线程不销毁→Map不回收→Value泄漏→Key设为弱引用让ThreadLocal对象可回收→但Value仍是强引用→泄漏依然存在
+  conclusion: 弱引用Key是设计妥协——保证ThreadLocal对象可回收，但无法解决Value泄漏。根因解法只有一条：用完必调remove()
 follow_up:
 - 为什么不把Value也设为弱引用？（提示：Value被回收后get返回null，破坏语义）
 - InheritableThreadLocal和普通ThreadLocal有什么区别？
@@ -35,6 +35,7 @@ memory_points:
 - 线程池场景必须try-finally + remove()
 - Key设弱引用是为了ThreadLocal对象本身能被GC
 - ThreadLocalMap不是HashMap，是开放寻址法实现的
+frequency: high
 ---
 
 # 【拼多多 Java服务端】ThreadLocal内存泄漏，Key为什么是弱引用？线程池怎么清理？
@@ -240,6 +241,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

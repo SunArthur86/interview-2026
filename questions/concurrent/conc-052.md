@@ -15,6 +15,7 @@ memory_points:
 - 核心区别：Deque用单锁因双向操作会冲突，而单向Queue用双锁(读写分离)
 - 避坑要点：默认容量是Integer.MAX_VALUE，生产环境必须指定容量防OOM
 - 经典场景：ForkJoinPool的工作窃取算法，空闲线程从尾部窃取任务减少竞争
+frequency: high
 ---
 
 # LinkedBlockingDeque是什么？
@@ -120,6 +121,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

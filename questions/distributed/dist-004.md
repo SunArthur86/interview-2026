@@ -16,6 +16,7 @@ memory_points:
 - 组网优势：因为 RS 网关无需指向 LB，所以支持跨 VLAN 和跨机房网络部署
 - 真实IP痛点：因为源 IP 被替换，所以 RS 无法直接获取真实 CIP，必须依赖 TOA 模块或 HTTP 头
 - 性能代价：因为要维护海量的四元组连接追踪表，所以比 DR 模式更消耗内存
+frequency: low
 ---
 
 # LVS FULLNAT模式的工作原理是什么？
@@ -127,6 +128,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

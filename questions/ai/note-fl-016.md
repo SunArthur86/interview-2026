@@ -10,7 +10,8 @@ tags:
 - 链表
 - 双指针
 feynman:
-  essence: 合并两个有序链表用双指针 + dummy head。dummy 是哨兵节点，避免"头节点单独处理"的冗余逻辑。每次比较两链表当前节点，小的接到结果链表后，指针后移。最后把未空的链表直接接上。时间 O(m+n)，空间 O(1)（只动指针不创建新节点）。面试默认要求迭代（递归在长链表会爆栈）。
+  essence: 合并两个有序链表用双指针 + dummy head。dummy 是哨兵节点，避免"头节点单独处理"的冗余逻辑。每次比较两链表当前节点，小的接到结果链表后，指针后移。最后把未空的链表直接接上。时间
+    O(m+n)，空间 O(1)（只动指针不创建新节点）。面试默认要求迭代（递归在长链表会爆栈）。
   analogy: 像两个已经排好队的人合并成一队——每次比较两队队首谁矮，矮的先入新队，直到一队空了，另一队剩余的直接接后面。dummy 像一个虚拟队长，避免你纠结"第一个人怎么处理"。
   first_principle: 有序合并的本质是"双指针同步扫描，每次取较小者"。dummy head 把"头节点边界条件"统一成"普通节点处理"，消除特判。
   key_points:
@@ -32,6 +33,7 @@ memory_points:
 - 末尾提速：剩余链表直接用 cur.next = l1 if l1 else l2 接上，无需再进循环。
 - 复杂度：时间 O(m+n)，空间 O(1) 因为只改指针不建新节点。
 - 考点细节：迭代优于递归防长链表爆栈，判断用 <= 保证排序稳定性。
+frequency: medium
 ---
 
 # 【字节飞连面经】算法：合并两个有序链表（LeetCode 21）
@@ -139,6 +141,36 @@ def mergeKLists(lists):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class Dummy error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class O process
+    class Y decision
+    class Z special
+    class br error
+    class cur info
+    class dummy start
+    class if process
+    class l1 decision
+    class l2 special
+    class next error
+    class val info
     A["链表 l1 头指针"] --> C{"比较节点值<br/>l1.val <= l2.val ?"}
     B["链表 l2 头指针"] --> C
     Z["Dummy 哨兵头节点<br/>(消除特判)"] --> Y["cur 当前尾指针"]

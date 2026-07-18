@@ -32,6 +32,7 @@ memory_points:
 - CLIP范式(对比学习)：利用InfoNCE损失最大化匹配对相似度，拉开非匹配对距离
 - 轻量方案：保留各自Encoder，仅额外训练线性投影层将特征对齐到统一空间
 - 关键操作：必须对映射后的特征做L2归一化，再计算缩放点积相似度
+frequency: medium
 ---
 
 # 多模态检索中，图像和文本向量不在同一空间时，如何实现对齐？
@@ -211,6 +212,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

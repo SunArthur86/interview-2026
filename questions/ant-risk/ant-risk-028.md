@@ -35,6 +35,7 @@ memory_points:
 - 算法：轮询/随机/最少连接/一致性哈希
 - 隔离 4 级：线程池/信号量/集群/物理
 - 压测：单机/全链路/影子流量
+frequency: medium
 ---
 
 # 【蚂蚁风控】高可用——负载均衡、隔离、压测，怎么做？
@@ -452,6 +453,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

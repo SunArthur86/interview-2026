@@ -10,9 +10,12 @@ tags:
 - 多时区
 - 汇率
 feynman:
-  essence: 国际化的核心是"金额存本币 + 展示按用户币种 + 汇率快照冻结 + 时区 UTC 存储"。金额用 BigDecimal 存原始币种（防精度丢失），展示时按用户币种实时换算。下单时冻结汇率快照（防汇率波动导致价格变化）。时间统一存 UTC（带时区），展示按用户时区转换。
-  analogy: 像海关申报——所有商品以原产国货币标注（本币存储），但申报时按当天汇率换算成美元（展示币种）。汇率在申报那一刻锁定（汇率快照），之后汇率变了申报金额不变。所有时间记 UTC（世界标准时），各地按本地时区看。
-  first_principle: 国际化的难点是"汇率波动 + 时区差异 + 精度要求"。汇率实时变（下单到支付汇率可能变），必须冻结快照。金额不能用 double（浮点精度丢失），用 BigDecimal 或分（整数）。时间存 UTC 避免时区混乱，展示时转换。
+  essence: 国际化的核心是"金额存本币 + 展示按用户币种 + 汇率快照冻结 + 时区 UTC 存储"。金额用 BigDecimal 存原始币种（防精度丢失），展示时按用户币种实时换算。下单时冻结汇率快照（防汇率波动导致价格变化）。时间统一存
+    UTC（带时区），展示按用户时区转换。
+  analogy: 像海关申报——所有商品以原产国货币标注（本币存储），但申报时按当天汇率换算成美元（展示币种）。汇率在申报那一刻锁定（汇率快照），之后汇率变了申报金额不变。所有时间记
+    UTC（世界标准时），各地按本地时区看。
+  first_principle: 国际化的难点是"汇率波动 + 时区差异 + 精度要求"。汇率实时变（下单到支付汇率可能变），必须冻结快照。金额不能用 double（浮点精度丢失），用
+    BigDecimal 或分（整数）。时间存 UTC 避免时区混乱，展示时转换。
   key_points:
   - 金额存储：BigDecimal 或分（整数），存原始币种
   - 汇率快照：下单时冻结汇率（order 表存 rate + rate_version）
@@ -26,19 +29,23 @@ first_principle:
   - double 有浮点精度丢失（0.1 + 0.2 != 0.3），金额计算必须精确
   - 各地时区不同（美东 UTC-5，北京 UTC+8），存本地时间会混乱
   - 汇率来源要权威（央行/欧洲央行），不能自己定
-  rebuild: 金额用 BigDecimal 存原始币种（USD/CNY/EUR），不用 double。下单时冻结汇率快照——order 表存 rate 和 rate_version，后续结算用快照汇率（汇率变了订单金额不变）。汇率每日定时拉取（欧洲央行 API），存 rate 表带版本号。时间统一存 UTC（DB 用 TIMESTAMP 或 DATETIME + JVM 时区 UTC），展示时用 ZoneId 转用户时区。
+  rebuild: 金额用 BigDecimal 存原始币种（USD/CNY/EUR），不用 double。下单时冻结汇率快照——order 表存 rate 和
+    rate_version，后续结算用快照汇率（汇率变了订单金额不变）。汇率每日定时拉取（欧洲央行 API），存 rate 表带版本号。时间统一存 UTC（DB
+    用 TIMESTAMP 或 DATETIME + JVM 时区 UTC），展示时用 ZoneId 转用户时区。
 follow_up:
-  - 金额为什么不用 double？——浮点精度丢失。0.1 + 0.2 = 0.30000000000000004。金额必须用 BigDecimal 或分（整数）。
-  - 汇率快照怎么冻结？——下单时从 rate 表取最新汇率，存到 order 表（rate + rate_version）。后续结算、退款都用这个快照汇率，不随汇率波动变。
-  - 时区怎么存？——DB 存 UTC（TIMESTAMP 自带 UTC，或 DATETIME + JVM 设 UTC）。展示时用 ZoneId.of("Asia/Shanghai") 转本地时间。
-  - 汇率从哪来？——权威源。欧洲央行 ECB（欧元汇率）、央行（人民币汇率）、第三方（XE/OANDA）。每日定时拉取存 rate 表。
-  - 多币种对账怎么办？——所有金额先折算成基准币种（如 USD）做对账。用快照汇率折算保证一致。
+- 金额为什么不用 double？——浮点精度丢失。0.1 + 0.2 = 0.30000000000000004。金额必须用 BigDecimal 或分（整数）。
+- 汇率快照怎么冻结？——下单时从 rate 表取最新汇率，存到 order 表（rate + rate_version）。后续结算、退款都用这个快照汇率，不随汇率波动变。
+- 时区怎么存？——DB 存 UTC（TIMESTAMP 自带 UTC，或 DATETIME + JVM 设 UTC）。展示时用 ZoneId.of("Asia/Shanghai")
+  转本地时间。
+- 汇率从哪来？——权威源。欧洲央行 ECB（欧元汇率）、央行（人民币汇率）、第三方（XE/OANDA）。每日定时拉取存 rate 表。
+- 多币种对账怎么办？——所有金额先折算成基准币种（如 USD）做对账。用快照汇率折算保证一致。
 memory_points:
-  - 金额：BigDecimal 或分（整数），存原始币种，不用 double
-  - 汇率快照：下单冻结（order 表存 rate + rate_version），结算不随波动变
-  - 汇率源：ECB/央行，每日定时拉取，rate 表带版本号
-  - 时区：DB 存 UTC，展示按 ZoneId 转用户时区
-  - 对账：折算基准币种（如 USD），用快照汇率
+- 金额：BigDecimal 或分（整数），存原始币种，不用 double
+- 汇率快照：下单冻结（order 表存 rate + rate_version），结算不随波动变
+- 汇率源：ECB/央行，每日定时拉取，rate 表带版本号
+- 时区：DB 存 UTC，展示按 ZoneId 转用户时区
+- 对账：折算基准币种（如 USD），用快照汇率
+frequency: medium
 ---
 
 # 【Java 后端架构师】国际化多币种、多时区与汇率一致性
@@ -397,6 +404,27 @@ public class ReconcileService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ECB start
+    class ExternalSource process
+    class S1 decision
+    class System special
+    class T1 error
+    class T2 info
+    class T3 start
+    class T4 process
+    class T5 decision
+    class T6 special
+    class T7 error
+    class br info
+    class order start
+    class rate process
+    class version decision
     subgraph ExternalSource [外部汇率源]
         S1[欧洲央行 ECB / 央行]
     end

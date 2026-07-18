@@ -16,6 +16,7 @@ memory_points:
 - 缓冲流提效：因为BufferedStream自带缓冲区减少磁盘IO，所以性能大幅提升
 - 转换流桥接：InputStreamReader指定编码，是字节流转字符流的唯一桥梁
 - NIO核心对比：BIO单向阻塞面向流，NIO双向非阻塞面向Buffer+Channel
+frequency: medium
 ---
 
 # Java IO包的核心类有哪些？
@@ -104,6 +105,40 @@ try (BufferedReader reader = new BufferedReader(
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class BufferedInputStream error
+    class BufferedReader info
+    class C start
+    class C1 process
+    class D decision
+    class D1 special
+    class D2 error
+    class E info
+    class E1 start
+    class F process
+    class FileInputStream decision
+    class FileOutputStream special
+    class G error
+    class H info
+    class I start
+    class IO process
+    class InputStream decision
+    class InputStreamReader special
+    class Java error
+    class OutputStream info
+    class OutputStreamWriter start
+    class Reader process
+    class Writer decision
+    class br special
     A[Java IO 四大基类] --> B[InputStream 字节输入]
     A --> C[OutputStream 字节输出]
     A --> D[Reader 字符输入]

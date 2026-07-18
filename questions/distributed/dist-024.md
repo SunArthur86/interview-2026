@@ -17,6 +17,7 @@ memory_points:
 - 性能收益：因为不参与写 ACK，所以增加节点不会降低集群写性能。
 - 对比 Follower：Follower 既处理读也参与投票写，而 Observer 仅无权读。
 - 配置标记：在 zoo.cfg 的节点配置末尾增加 :observer 关键字启用。
+frequency: high
 ---
 
 # ZooKeeper中Observer角色的作用是什么？
@@ -117,6 +118,7 @@ flowchart TD
     style EVENTUAL fill:#9C27B0,color:#fff
     style FAIL_FAST fill:#F44336,color:#fff
     style COORD fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

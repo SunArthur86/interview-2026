@@ -11,7 +11,8 @@ tags:
 - 微服务
 - 服务治理
 feynman:
-  essence: Spring Cloud 用 Feign（声明式 RPC）+ Ribbon/LoadBalancer（负载）+ Sentinel/Hystrix（熔断限流）+ Nacos/Eureka（注册）组合，是微服务治理套件。
+  essence: Spring Cloud 用 Feign（声明式 RPC）+ Ribbon/LoadBalancer（负载）+ Sentinel/Hystrix（熔断限流）+
+    Nacos/Eureka（注册）组合，是微服务治理套件。
   analogy: Spring Cloud 像城市基础设施——Feign 是出租车（声明去哪）、注册中心是电话簿、熔断是保险丝、网关是收费站。
   first_principle: 微服务之间需要"调用+发现+容错+监控"，Spring Cloud 提供一套标准化方案。
   key_points:
@@ -28,15 +29,16 @@ first_principle:
   - 调用要简单（透明）
   rebuild: 注册中心+声明式 RPC+负载+熔断。
 follow_up:
-  - Feign 超时怎么配？——connectTimeout/readTimeout 区分建链和读取
-  - 熔断和限流区别？——熔断是保护自己（下游挂了不调用），限流是保护自己（请求太多拒绝）
-  - Nacos 和 Eureka 区别？——Nacos AP/CP 双模式+配置中心一体
+- Feign 超时怎么配？——connectTimeout/readTimeout 区分建链和读取
+- 熔断和限流区别？——熔断是保护自己（下游挂了不调用），限流是保护自己（请求太多拒绝）
+- Nacos 和 Eureka 区别？——Nacos AP/CP 双模式+配置中心一体
 memory_points:
-  - 注册：Nacos
-  - 调用：Feign（接口）
-  - 负载：LoadBalancer
-  - 熔断：Sentinel
-  - 网关：Gateway
+- 注册：Nacos
+- 调用：Feign（接口）
+- 负载：LoadBalancer
+- 熔断：Sentinel
+- 网关：Gateway
+frequency: high
 ---
 
 # 【拼多多内容】Spring Cloud + Feign 服务治理（内容中台）？
@@ -282,6 +284,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

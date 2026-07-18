@@ -17,6 +17,7 @@ memory_points:
 - IP与MAC对比：IP是端到端不变的全局逻辑地址，MAC是逐跳变化的局部物理地址。
 - 分片重组：因为中间路由器不重组以提高转发效率，所以仅在目标主机进行分片重组。
 - 关键报头：TTL防环路（过路由器减1），Protocol标识上层协议（TCP=6, UDP=17）。
+frequency: low
 ---
 
 # 什么是IP基础？
@@ -96,6 +97,33 @@ IP 地址由**网络号**（标识网络段）和**主机号**（标识主机）
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CIDR special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class IP error
+    class IPv4 info
+    class IPv6 start
+    class J process
+    class K decision
+    class L special
+    class M error
+    class NAT info
+    class br start
+    class vs process
+    class x decision
     A[IP 地址] --> B[IPv4 32 位<br/>4 字节点分十进制]
     A --> C[IPv6 128 位<br/>8 组十六进制]
     B --> D[分类 A/B/C/D/E]

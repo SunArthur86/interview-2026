@@ -16,6 +16,7 @@ memory_points:
 - 对比记忆：堆向高地址扩展且手动分配，栈向低地址扩展且自动分配
 - 核心划分：32位系统中1GB内核态与3GB用户态隔离
 - 排查命令：因为pmap能看内存映射，所以常用于排查内存泄漏
+frequency: medium
 ---
 
 # 什么是Linux 内存管理？
@@ -116,6 +117,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

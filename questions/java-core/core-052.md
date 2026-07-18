@@ -16,6 +16,7 @@ memory_points:
 - 跟随内容：throws后跟异常类名（可多个），throw后跟异常对象（仅一个）。
 - 职责区分：throws是声明警告（甩锅给调用者），throw是执行动作（真实抛出中断）。
 - 实战避坑：Spring声明式事务默认只对throw的RuntimeException回滚。
+frequency: low
 ---
 
 # Throw和throws的区别？
@@ -187,6 +188,45 @@ public class GlobalExceptionHandler {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class C info
+    class CheckedException start
+    class ClassCastException process
+    class ClassNotFoundException decision
+    class D special
+    class D1 error
+    class D2 info
+    class D3 start
+    class E process
+    class E1 decision
+    class E2 special
+    class E3 error
+    class Error info
+    class Exception start
+    class F process
+    class G decision
+    class IOException special
+    class IndexOutOfBoundsException error
+    class NullPointerException info
+    class OutOfMemoryError start
+    class RuntimeException process
+    class SQLException decision
+    class StackOverflowError special
+    class Throwable error
+    class VirtualMachineError info
+    class catch start
+    class throws process
+    class try decision
     A[Throwable] --> B[Error 错误]
     A --> C[Exception 异常]
     B --> B1[OutOfMemoryError]

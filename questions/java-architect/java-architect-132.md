@@ -9,9 +9,13 @@ tags:
 - mTLS
 - 最小权限
 feynman:
-  essence: 零信任的核心是"Never trust, always verify"——不再有"内网默认可信"假设。每个请求（无论来自内网还是外网）都要经过身份认证、设备验证、策略授权三道关。Java 后端落地三个抓手：(1) 服务间 mTLS 双向证书认证（替代 IP 白名单）；(2) 每个请求带 JWT/OAuth2 token，业务系统按 token + 上下文做策略授权（OPA/Cedar）；(3) 最小权限——默认拒绝，按需授权，定期回收。
-  analogy: 传统安全像"城堡护城河"——外敌进不来，城堡内畅通无阻。零信任像"机场安检"——不论你是机长还是乘客，每个登机口都要验票、查证件、过 X 光。城堡模型一旦内网被渗透（如钓鱼员工），攻击者畅通；零信任每个跳转都重新验，攻击者拿一个 token 只能做一个事。
-  first_principle: 为什么"内网默认可信"假设失效？因为云原生时代服务间调用复杂、移动办公、第三方集成、容器化部署——内网边界早已模糊。一个被钓鱼的员工笔记本就是内网跳板。零信任放弃"位置信任"，转向"身份 + 设备 + 上下文"信任。
+  essence: 零信任的核心是"Never trust, always verify"——不再有"内网默认可信"假设。每个请求（无论来自内网还是外网）都要经过身份认证、设备验证、策略授权三道关。Java
+    后端落地三个抓手：(1) 服务间 mTLS 双向证书认证（替代 IP 白名单）；(2) 每个请求带 JWT/OAuth2 token，业务系统按 token
+    + 上下文做策略授权（OPA/Cedar）；(3) 最小权限——默认拒绝，按需授权，定期回收。
+  analogy: 传统安全像"城堡护城河"——外敌进不来，城堡内畅通无阻。零信任像"机场安检"——不论你是机长还是乘客，每个登机口都要验票、查证件、过 X 光。城堡模型一旦内网被渗透（如钓鱼员工），攻击者畅通；零信任每个跳转都重新验，攻击者拿一个
+    token 只能做一个事。
+  first_principle: 为什么"内网默认可信"假设失效？因为云原生时代服务间调用复杂、移动办公、第三方集成、容器化部署——内网边界早已模糊。一个被钓鱼的员工笔记本就是内网跳板。零信任放弃"位置信任"，转向"身份
+    + 设备 + 上下文"信任。
   key_points:
   - 三道关：身份（Identity）+ 设备（Device）+ 上下文（Context/Policy）
   - 服务间认证：mTLS（双向 TLS，证书由内部 CA 签发）
@@ -24,19 +28,24 @@ first_principle:
   - 内网边界早已模糊（云、容器、移动办公、第三方集成）
   - 位置（IP）不等于身份，身份不等于权限
   - 单点凭证泄露是不可避免的，要靠"每跳验证 + 最小权限"限制爆炸半径
-  rebuild: 服务间全部 mTLS（证书由内部 CA 签发，证书带 service identity），每个请求带 OAuth2/JWT token（验签 + 验 scope），授权用 OPA 策略引擎按 user+resource+context 三元组判定。默认拒绝，所有 allow 必须显式策略授权。证书自动化签发和轮转（SPIFFE/SPIRE 或 Istio）。这样攻击者拿到一个 token 只能做一个事，拿到一个证书只能伪装一个服务，爆炸半径被收敛。
+  rebuild: 服务间全部 mTLS（证书由内部 CA 签发，证书带 service identity），每个请求带 OAuth2/JWT token（验签
+    + 验 scope），授权用 OPA 策略引擎按 user+resource+context 三元组判定。默认拒绝，所有 allow 必须显式策略授权。证书自动化签发和轮转（SPIFFE/SPIRE
+    或 Istio）。这样攻击者拿到一个 token 只能做一个事，拿到一个证书只能伪装一个服务，爆炸半径被收敛。
 follow_up:
-  - mTLS 证书怎么签发和轮转？——内部 CA（如 cfssl、HashiCorp Vault）签发，SPIFFE/SPIRE 自动化注入；Istio/Linkerd 通过控制面自动签发和轮转（默认 24 小时轮转）。
-  - 内网服务调内网服务也要 mTLS？——是的，这是零信任核心。即使内网也要 mTLS，因为"内网不可信"。
-  - 零信任对性能影响？——mTLS 握手有开销（首次 RTT），但 TLS 1.3 + session resumption + 长连接复用能降到纳秒级；策略引擎 OPA 决策 < 1ms（in-process）。
-  - 怎么渐进式落地零信任？——从敏感服务（资金、用户数据）开始，逐步扩散；先 mTLS（基础设施层），再 OAuth2（应用层），最后 OPA（策略层）；不一次重构。
-  - OPA 和 Cedar 怎么选？——OPA（Rego 语言）生态成熟、复杂场景强；Cedar（AWS 推出）语法简洁、易学；新项目选 Cedar，存量选 OPA。
+- mTLS 证书怎么签发和轮转？——内部 CA（如 cfssl、HashiCorp Vault）签发，SPIFFE/SPIRE 自动化注入；Istio/Linkerd
+  通过控制面自动签发和轮转（默认 24 小时轮转）。
+- 内网服务调内网服务也要 mTLS？——是的，这是零信任核心。即使内网也要 mTLS，因为"内网不可信"。
+- 零信任对性能影响？——mTLS 握手有开销（首次 RTT），但 TLS 1.3 + session resumption + 长连接复用能降到纳秒级；策略引擎
+  OPA 决策 < 1ms（in-process）。
+- 怎么渐进式落地零信任？——从敏感服务（资金、用户数据）开始，逐步扩散；先 mTLS（基础设施层），再 OAuth2（应用层），最后 OPA（策略层）；不一次重构。
+- OPA 和 Cedar 怎么选？——OPA（Rego 语言）生态成熟、复杂场景强；Cedar（AWS 推出）语法简洁、易学；新项目选 Cedar，存量选 OPA。
 memory_points:
-  - 三道关：Identity + Device + Policy
-  - mTLS：服务间双向认证，内部 CA 签发
-  - 每个请求验 JWT：scope + audience + expiration
-  - 策略引擎 OPA/Cedar：ABAC 优于 RBAC
-  - 最小权限：默认拒绝 + 按需授权 + 定期回收
+- 三道关：Identity + Device + Policy
+- mTLS：服务间双向认证，内部 CA 签发
+- 每个请求验 JWT：scope + audience + expiration
+- 策略引擎 OPA/Cedar：ABAC 优于 RBAC
+- 最小权限：默认拒绝 + 按需授权 + 定期回收
+frequency: medium
 ---
 
 # 【Java 后端架构师】零信任架构在 Java 后端中的落地
@@ -453,6 +462,37 @@ public void auditAndRevokeStaleScopes() {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ABAC process
+    class API decision
+    class B special
+    class C error
+    class Client info
+    class D start
+    class E process
+    class Edge decision
+    class Envoy special
+    class F error
+    class G info
+    class Gateway start
+    class H process
+    class ID decision
+    class Infra special
+    class Istiod error
+    class JWT info
+    class Java start
+    class Mesh process
+    class OPA decision
+    class Policy special
+    class Proxy error
+    class SPIFFE info
+    class mTLS start
     subgraph Client[客户端]
         A[外部请求发起]
     end

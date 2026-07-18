@@ -11,7 +11,8 @@ tags:
 - 稳定性治理
 - 钱学森工程
 feynman:
-  essence: 预案回滚是"故障前预演好的应急动作"，按场景准备预案（限流/降级/扩容/切流量），故障时一键执行；钱学森系统工程强调"预先研究 + 仿真验证 + 反复迭代"。
+  essence: 预案回滚是"故障前预演好的应急动作"，按场景准备预案（限流/降级/扩容/切流量），故障时一键执行；钱学森系统工程强调"预先研究 + 仿真验证
+    + 反复迭代"。
   analogy: 像消防演练——平时预演各种火情（预案），火灾时按演练动作执行（灭火/疏散/救援），而不是现场想怎么办。
   first_principle: 故障必然发生，临时决策慢且错，必须预案化、自动化、可演练。
   key_points:
@@ -28,14 +29,15 @@ first_principle:
   - 系统越复杂越需预案
   rebuild: 预案体系（场景化 + 自动化 + 可演练 + 反复迭代）。
 follow_up:
-  - 预案怎么自动化？——监控指标超阈值 → 触发动作（限流/扩容/切流）
-  - 回滚速度怎么提升？——蓝绿/金丝雀 + 版本管理 + 一键脚本
-  - 钱学森工程对 AI 中台的启示？——预先研究 + 仿真 + 迭代是系统工程通用方法
+- 预案怎么自动化？——监控指标超阈值 → 触发动作（限流/扩容/切流）
+- 回滚速度怎么提升？——蓝绿/金丝雀 + 版本管理 + 一键脚本
+- 钱学森工程对 AI 中台的启示？——预先研究 + 仿真 + 迭代是系统工程通用方法
 memory_points:
-  - 预案：限流/降级/扩容/切流
-  - 回滚：版本/配置/流量
-  - 钱学森：预研+仿真+迭代
-  - 自动化：监控→触发
+- 预案：限流/降级/扩容/切流
+- 回滚：版本/配置/流量
+- 钱学森：预研+仿真+迭代
+- 自动化：监控→触发
+frequency: high
 ---
 
 # 【拼多多 AI 中台】预案和回滚怎么做？钱学森工程理论怎么应用？
@@ -354,6 +356,28 @@ Netflix Chaos Monkey 思路：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class Auto decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class B4 start
+    class C1 process
+    class C2 decision
+    class C3 special
+    class Chaos error
+    class D1 info
+    class D2 start
+    class D3 process
+    class Monitor decision
+    class Rollback special
     subgraph Monitor[异常监控发现]
         A1[告警: 错误率飙升15%]
         A2[告警: GPU显存OOM]

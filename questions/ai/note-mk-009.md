@@ -30,6 +30,7 @@ memory_points:
 - 对象关联链路：Task产出Artifact，Task需申请Permission，Artifact触发Notification。
 - Task核心追踪：必须包含状态机、进度(0-100)、关联ID列表以及贯穿全局的traceId。
 - 独立解耦设计：输入引用抽象为独立对象以便管理上下文，授权对象确保文件系统安全。
+frequency: high
 ---
 
 # 【月之暗面面经】如果让你设计桌面 Agent 的任务中心，会有哪些关键对象？
@@ -314,6 +315,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

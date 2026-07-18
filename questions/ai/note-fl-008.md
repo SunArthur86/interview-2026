@@ -10,7 +10,8 @@ tags:
 - Coze
 - 低代码
 feynman:
-  essence: 扣子（Coze）这类低代码 Agent 平台核心价值是"让非工程师也能搭出可用的 Agent"——拖拽节点、可视化编排、内置常用工具。局限是复杂控制流和深度定制：自定义 state、复杂分支、深度集成时可视化反而成束缚。选型原则：流程标准+改动频繁+非技术参与→扣子；高QPS+复杂状态+深度集成→LangGraph。
+  essence: 扣子（Coze）这类低代码 Agent 平台核心价值是"让非工程师也能搭出可用的 Agent"——拖拽节点、可视化编排、内置常用工具。局限是复杂控制流和深度定制：自定义
+    state、复杂分支、深度集成时可视化反而成束缚。选型原则：流程标准+改动频繁+非技术参与→扣子；高QPS+复杂状态+深度集成→LangGraph。
   analogy: 扣子像宜家家具组装说明书——按图操作就能搭出能用的东西，但你想改成奇形怪状就不行了。LangGraph 像乐高散件——自由度无限但要会拼。
   first_principle: 工具的目标用户决定抽象层级。非技术用户需要"屏蔽复杂度"（可视化），工程师需要"暴露灵活度"（代码）。两种需求不可兼得，所以平台和框架分层共存。
   key_points:
@@ -32,6 +33,7 @@ memory_points:
 - 低代码局限：复杂控制流难表达，版本管理(JSON)难Review，存在平台锁定
 - 选型对比：高QPS/深定制选代码框架(LangGraph)，标准流程/非技术参与选扣子
 - 混合策略：扣子做原型/低代码沙箱让业务调参，LangGraph做生产底座
+frequency: medium
 ---
 
 # 【字节飞连面经】怎么看扣子（Coze）这类产品？低代码 Agent 平台优势和局限？
@@ -120,6 +122,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -42,6 +42,7 @@ memory_points:
 - 应用排查：查JVM（GC频率与OOM）与Jstack（看线程是BLOCKED还是WAITING）
 - DB排查：用EXPLAIN看是否全表扫，查ProcessList看是否有锁等待或连接打满
 - 偶发抖动：多为频繁Full GC的STW引起，或定时任务抢占底层资源导致
+frequency: medium
 ---
 
 # 如何排查线上接口突然变慢的问题？给出系统化的排查思路。
@@ -175,6 +176,7 @@ flowchart TD
     JV --> FIX[止血+根因修复]
     DB --> FIX
     style SCOPE fill:#ffe4b5
+
 ```
 
 

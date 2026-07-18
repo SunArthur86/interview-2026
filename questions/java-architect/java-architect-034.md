@@ -9,9 +9,11 @@ tags:
 - Outbox
 - 解耦
 feynman:
-  essence: EDA（事件驱动架构）让服务间通过事件异步解耦，消费方按需订阅不阻塞主流程；Outbox 模式用"业务表 + 事件表同事务写入 + 独立 relayer 投递 MQ"解决"本地 DB 与 MQ 发送原子性"，是微服务可靠事件的事实标准。
+  essence: EDA（事件驱动架构）让服务间通过事件异步解耦，消费方按需订阅不阻塞主流程；Outbox 模式用"业务表 + 事件表同事务写入 + 独立 relayer
+    投递 MQ"解决"本地 DB 与 MQ 发送原子性"，是微服务可靠事件的事实标准。
   analogy: 像 JD 仓库发货：EDA 是"发货后通过广播通知各部门（营销、风控、履约）各自处理"，不再打电话逐个通知；Outbox 是"出库单和通知单一起写进同一本台账（同事务），仓管员专门负责把通知单抄送给各部门（relayer）"，避免出库了但通知忘发。
-  first_principle: 微服务间 RPC 同步调用会形成强耦合（调用方等待、故障扩散、性能瓶颈）。EDA 把"调用"变成"发布事件 + 订阅"，消费方自治。但"DB 提交"与"事件发布"无原生事务，Outbox 把事件作为业务事务的一部分写入事件表（同事务），独立 relayer 异步投递 MQ，保证"DB 提交则事件必发"。
+  first_principle: 微服务间 RPC 同步调用会形成强耦合（调用方等待、故障扩散、性能瓶颈）。EDA 把"调用"变成"发布事件 + 订阅"，消费方自治。但"DB
+    提交"与"事件发布"无原生事务，Outbox 把事件作为业务事务的一部分写入事件表（同事务），独立 relayer 异步投递 MQ，保证"DB 提交则事件必发"。
   key_points:
   - EDA 三要素：事件（fact，已发生）、生产者（发布）、消费者（订阅）
   - 事件类型：事件通知（轻量）、事件携带状态转移（携带数据）、事件溯源（事件即状态）
@@ -24,19 +26,23 @@ first_principle:
   - 同步 RPC 形成调用图（A→B→C），任一节点故障扩散到全链路
   - 服务自治要求"我变了通知你们，怎么反应你们自己定"
   - DB 本地事务和 MQ 发送是两个独立系统，无原生原子
-  rebuild: EDA 让生产者只负责"发布事件"（已发生的业务事实），不关心谁订阅、怎么反应。消费方按需订阅，自治处理。解耦的关键是"事件是 fact（过去时），不是 command（祈使）"。Outbox 解决可靠投递——业务事务内同事务写业务表+事件表，独立 relayer 扫事件表投递 MQ，保证 DB 提交则事件必发；消费端 at-least-once + 业务幂等处理重复。
+  rebuild: EDA 让生产者只负责"发布事件"（已发生的业务事实），不关心谁订阅、怎么反应。消费方按需订阅，自治处理。解耦的关键是"事件是 fact（过去时），不是
+    command（祈使）"。Outbox 解决可靠投递——业务事务内同事务写业务表+事件表，独立 relayer 扫事件表投递 MQ，保证 DB 提交则事件必发；消费端
+    at-least-once + 业务幂等处理重复。
 follow_up:
-  - 事件和命令（command）区别？——事件是"已发生的事实"（过去时，OrderPlaced），命令是"请求对方做事"（祈使，PlaceOrder）。事件不可拒绝，命令可拒绝。EDA 用事件解耦
-  - Outbox 和事务消息区别？——事务消息是 MQ 厂商特性（RocketMQ），半消息+回查；Outbox 是设计模式，MQ 无关。Outbox 更通用，事务消息更高效
-  - Outbox 表会膨胀怎么办？——已投递的事件定期归档/删除（保留 7-30 天）。relayer 用 in-flight 状态 + 时间窗口避免误删
-  - 事件 schema 演进怎么办？——version 字段、forward/backward 兼容（新消费者读旧事件、旧消费者读新事件）、必要时做事件版本转换层
-  - 一个事件被多个消费者订阅，重复消费吗？——每个消费组独立 offset，互不影响。Outbox 只投递一次 MQ，MQ 自己做 fan-out
+- 事件和命令（command）区别？——事件是"已发生的事实"（过去时，OrderPlaced），命令是"请求对方做事"（祈使，PlaceOrder）。事件不可拒绝，命令可拒绝。EDA
+  用事件解耦
+- Outbox 和事务消息区别？——事务消息是 MQ 厂商特性（RocketMQ），半消息+回查；Outbox 是设计模式，MQ 无关。Outbox 更通用，事务消息更高效
+- Outbox 表会膨胀怎么办？——已投递的事件定期归档/删除（保留 7-30 天）。relayer 用 in-flight 状态 + 时间窗口避免误删
+- 事件 schema 演进怎么办？——version 字段、forward/backward 兼容（新消费者读旧事件、旧消费者读新事件）、必要时做事件版本转换层
+- 一个事件被多个消费者订阅，重复消费吗？——每个消费组独立 offset，互不影响。Outbox 只投递一次 MQ，MQ 自己做 fan-out
 memory_points:
-  - EDA：事件是 fact（已发生），不是 command（祈使）
-  - Outbox：业务表 + 事件表同事务写，独立 relayer 投递 MQ
-  - relayer 保证 at-least-once，消费端业务幂等
-  - 事件命名用过去时（OrderPlaced, PaymentConfirmed）
-  - 事件 schema 必须版本兼容（version 字段 + forward/backward）
+- EDA：事件是 fact（已发生），不是 command（祈使）
+- Outbox：业务表 + 事件表同事务写，独立 relayer 投递 MQ
+- relayer 保证 at-least-once，消费端业务幂等
+- 事件命名用过去时（OrderPlaced, PaymentConfirmed）
+- 事件 schema 必须版本兼容（version 字段 + forward/backward）
+frequency: high
 ---
 
 # 【Java 后端架构师】事件驱动架构与 Outbox 模式
@@ -447,6 +453,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

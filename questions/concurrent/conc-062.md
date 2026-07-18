@@ -15,6 +15,7 @@ memory_points:
 - 锁升级口诀：无锁 -> 偏向锁 -> 轻量级锁(自旋CAS) -> 重量级锁(内核态Monitor)，且不可逆。
 - 重量级锁：依赖操作系统 Monitor，涉及用户态与内核态切换，开销大。
 - 锁降级：锁升级是不可逆的（极端 JVM 内部 Safeepoint 除外）。
+frequency: high
 ---
 
 # synchronized关键字的底层原理是什么？
@@ -124,6 +125,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

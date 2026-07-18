@@ -9,9 +9,13 @@ tags:
 - JDK21
 - Loom
 feynman:
-  essence: 虚拟线程是把"线程 = 内核线程"这一 30 年假设打破的轻量级抽象——JVM 在少量 carrier（平台线程）上调度海量虚拟线程，遇到阻塞操作时把栈帧 unmount 到堆，让 carrier 立即服务其他虚拟线程。落地不是"开个开关"，而是要解决 ThreadLocal 泄漏、pinning、synchronized 阻塞、连接池上限、监控失真等真实工程问题。
-  analogy: 像把一辆大巴（carrier 线程）改成"地铁"：大巴固定 50 个座位（平台线程池），满员就拒载；地铁随时让乘客（虚拟线程）上车，到站下车（阻塞时 unmount）腾出车厢给新乘客，理论上能承载百万乘客，前提是乘客不要霸座（pinning）或带太多行李（ThreadLocal）。
-  first_principle: 平台线程的代价来自内核：1MB 栈 + 内核调度上下文 + TLS，万级线程就把内存和上下文切换压垮。虚拟线程把栈放到堆（可控几百字节到几 KB），由 JVM 而非内核调度，阻塞时不切换内核上下文而是 unmount 栈帧。代价消失了，"一请求一线程"才从奢供建模变成默认架构。
+  essence: 虚拟线程是把"线程 = 内核线程"这一 30 年假设打破的轻量级抽象——JVM 在少量 carrier（平台线程）上调度海量虚拟线程，遇到阻塞操作时把栈帧
+    unmount 到堆，让 carrier 立即服务其他虚拟线程。落地不是"开个开关"，而是要解决 ThreadLocal 泄漏、pinning、synchronized
+    阻塞、连接池上限、监控失真等真实工程问题。
+  analogy: 像把一辆大巴（carrier 线程）改成"地铁"：大巴固定 50 个座位（平台线程池），满员就拒载；地铁随时让乘客（虚拟线程）上车，到站下车（阻塞时
+    unmount）腾出车厢给新乘客，理论上能承载百万乘客，前提是乘客不要霸座（pinning）或带太多行李（ThreadLocal）。
+  first_principle: 平台线程的代价来自内核：1MB 栈 + 内核调度上下文 + TLS，万级线程就把内存和上下文切换压垮。虚拟线程把栈放到堆（可控几百字节到几
+    KB），由 JVM 而非内核调度，阻塞时不切换内核上下文而是 unmount 栈帧。代价消失了，"一请求一线程"才从奢供建模变成默认架构。
   key_points:
   - 虚拟线程 ≠ 平台线程：栈在堆、JVM 调度、阻塞 unmount，万级并发无压力
   - carrier 线程数 = ForkJoinPool 平台线程数（默认 CPU 核数），是真正的并发度上限
@@ -24,20 +28,27 @@ first_principle:
   - 阻塞 IO（DB/HTTP/RPC）占线程生命周期 99%+ 的时间，但 CPU 这段时间空闲
   - 内核线程切换成本（us 级 + TLB 刷新）是 JVM 调度成本（ns 级）的上千倍
   - 栈大小可以动态伸缩——深栈才需要大栈，浅栈只需几 KB
-  rebuild: 把线程拆成"调度载体（carrier 平台线程）"和"执行单元（虚拟线程）"两层。carrier 数量等于 CPU 核数（CPU 密集部分），虚拟线程数量等于并发请求数（IO 密集部分）。虚拟线程遇到阻塞 IO 时把 continuation unmount 到堆，carrier 立即调度下一个就绪的虚拟线程。这样既保留"同步代码 = 简单可读"的开发模型，又拿到接近 Reactor/CompletableFuture 的吞吐。
+  rebuild: 把线程拆成"调度载体（carrier 平台线程）"和"执行单元（虚拟线程）"两层。carrier 数量等于 CPU 核数（CPU 密集部分），虚拟线程数量等于并发请求数（IO
+    密集部分）。虚拟线程遇到阻塞 IO 时把 continuation unmount 到堆，carrier 立即调度下一个就绪的虚拟线程。这样既保留"同步代码
+    = 简单可读"的开发模型，又拿到接近 Reactor/CompletableFuture 的吞吐。
 follow_up:
-  - 虚拟线程能完全替代 Reactor/CompletableFuture 吗？——IO 编排上基本能，但背压、流式处理、超时组合仍是 Reactive 强项；CPU 密集任务用虚拟线程无收益（carrier 本身就是平台线程）
-  - synchronized 还能用吗？——能用但会 pinning，JDK 21 没改；JDK 24（JEP 491）才把 synchronized 改成可 unmount。生产建议先替换成 ReentrantLock
-  - 虚拟线程怎么监控？——JFR 的 jdk.VirtualThreadStart/Pinned/Submit 事件，jstack 看到 "mount" 或 carrier 信息；Micrometer 1.12+ 暴露 jvm.threads.virtual 指标
-  - 连接池要不要调大？——要！HikariCP 默认 maximumPoolSize=10，虚拟线程下会成为吞吐上限，按 后端承载能力 × 副本数 调
-  - ThreadLocal 在虚拟线程下的坑？——虚拟线程数量大，每个都有 ThreadLocal 等于内存 ×N，且 inheritable 透传会被复用 carrier 错乱；用 ScopedValue（JDK 21 预览）
+- 虚拟线程能完全替代 Reactor/CompletableFuture 吗？——IO 编排上基本能，但背压、流式处理、超时组合仍是 Reactive 强项；CPU
+  密集任务用虚拟线程无收益（carrier 本身就是平台线程）
+- synchronized 还能用吗？——能用但会 pinning，JDK 21 没改；JDK 24（JEP 491）才把 synchronized 改成可 unmount。生产建议先替换成
+  ReentrantLock
+- 虚拟线程怎么监控？——JFR 的 jdk.VirtualThreadStart/Pinned/Submit 事件，jstack 看到 "mount" 或 carrier
+  信息；Micrometer 1.12+ 暴露 jvm.threads.virtual 指标
+- 连接池要不要调大？——要！HikariCP 默认 maximumPoolSize=10，虚拟线程下会成为吞吐上限，按 后端承载能力 × 副本数 调
+- ThreadLocal 在虚拟线程下的坑？——虚拟线程数量大，每个都有 ThreadLocal 等于内存 ×N，且 inheritable 透传会被复用 carrier
+  错乱；用 ScopedValue（JDK 21 预览）
 memory_points:
-  - 虚拟线程 = 栈在堆 + JVM 调度 + 阻塞 unmount，承载百万 IO 并发
-  - carrier 数 = CPU 核数（CPU 并发上限），虚拟线程数 = IO 并发数
-  - 三大坑：synchronized pinning、ThreadLocal 泄漏、连接池成瓶颈
-  - 不要池化虚拟线程（用完即弃），但 HTTP/DB 连接池要按后端容量限
-  - 监控：JFR jdk.VirtualThreadPinned 事件 + jvm.threads.virtual 指标
-  - JDK 24（JEP 491）才彻底解决 synchronized pinning
+- 虚拟线程 = 栈在堆 + JVM 调度 + 阻塞 unmount，承载百万 IO 并发
+- carrier 数 = CPU 核数（CPU 并发上限），虚拟线程数 = IO 并发数
+- 三大坑：synchronized pinning、ThreadLocal 泄漏、连接池成瓶颈
+- 不要池化虚拟线程（用完即弃），但 HTTP/DB 连接池要按后端容量限
+- 监控：JFR jdk.VirtualThreadPinned 事件 + jvm.threads.virtual 指标
+- JDK 24（JEP 491）才彻底解决 synchronized pinning
+frequency: high
 ---
 
 # 【Java 后端架构师】JDK 21 虚拟线程在线上系统如何落地
@@ -361,6 +372,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -10,8 +10,11 @@ tags:
 - Echo服务
 - Netty
 feynman:
-  essence: Bootstrap/ServerBootstrap 是 Netty 的"启动装配器"，它把分散的组件（EventLoopGroup、Channel 类型、Pipeline、Handler）像搭积木一样组装成一个可运行的服务端/客户端。服务端用两个 Group（Boss 接连接、Worker 处理 I/O），客户端用一个 Group，最后 bind()/connect() 启动。
-  analogy: Bootstrap 像开店的"装修清单 + 开业流程"。你声明：用什么装修风格（Channel 类型）、招几类员工（EventLoopGroup）、每个工位的岗位职责（Pipeline/Handler），然后 ServerBootstrap.bind() = 正式剪彩开业接客；Bootstrap.connect() = 客户上门。Echo 服务端/客户端是经典的"回声"示例：客户端发什么，服务端就回什么。
+  essence: Bootstrap/ServerBootstrap 是 Netty 的"启动装配器"，它把分散的组件（EventLoopGroup、Channel
+    类型、Pipeline、Handler）像搭积木一样组装成一个可运行的服务端/客户端。服务端用两个 Group（Boss 接连接、Worker 处理 I/O），客户端用一个
+    Group，最后 bind()/connect() 启动。
+  analogy: Bootstrap 像开店的"装修清单 + 开业流程"。你声明：用什么装修风格（Channel 类型）、招几类员工（EventLoopGroup）、每个工位的岗位职责（Pipeline/Handler），然后
+    ServerBootstrap.bind() = 正式剪彩开业接客；Bootstrap.connect() = 客户上门。Echo 服务端/客户端是经典的"回声"示例：客户端发什么，服务端就回什么。
   key_points:
   - Bootstrap=把EventLoopGroup+Channel+Pipeline+Handler组装成可运行应用
   - 服务端用ServerBootstrap+2个Group(Boss接连接/Worker处理I/O)
@@ -25,14 +28,17 @@ first_principle:
   - 配置应该集中在一处(单一配置入口)
   rebuild: 从"装配组件"出发→设计Bootstrap作为装配器→链式API声明Channel类型/EventLoopGroup/Handler→服务端用ServerBootstrap配2个Group(Acceptor+IO处理)→调用bind()绑定端口监听→客户端用Bootstrap配1个Group→调用connect()连接远端→Echo示例验证:客户端发消息服务端原样回送。
 follow_up:
-  - 为什么服务端要拆 BossGroup 和 WorkerGroup？
-  - childHandler 和 handler 的区别？
-  - 如何优雅关闭 EventLoopGroup？
+- 为什么服务端要拆 BossGroup 和 WorkerGroup？
+- childHandler 和 handler 的区别？
+- 如何优雅关闭 EventLoopGroup？
 memory_points:
-  - 服务端引导5步：创建ServerBootstrap → 分配NioEventLoopGroup → 指定InetSocketAddress → 用ChannelInitializer初始化Channel → bind()
-  - 客户端引导5步：创建Bootstrap → 分配NioEventLoopGroup → 创建InetSocketAddress(连接目标) → 安装EchoClientHandler → connect()
-  - Echo运行：客户端发"Netty rocks!" → 服务端接收并回送 → 客户端报告返回消息
-  - 服务端 Ctrl+C 会触发客户端 exceptionCaught
+- 服务端引导5步：创建ServerBootstrap → 分配NioEventLoopGroup → 指定InetSocketAddress → 用ChannelInitializer初始化Channel
+  → bind()
+- 客户端引导5步：创建Bootstrap → 分配NioEventLoopGroup → 创建InetSocketAddress(连接目标) → 安装EchoClientHandler
+  → connect()
+- Echo运行：客户端发"Netty rocks!" → 服务端接收并回送 → 客户端报告返回消息
+- 服务端 Ctrl+C 会触发客户端 exceptionCaught
+frequency: high
 ---
 
 # Bootstrap 和 ServerBootstrap 的引导流程？
@@ -320,6 +326,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

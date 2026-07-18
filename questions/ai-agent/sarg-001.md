@@ -19,6 +19,7 @@ memory_points:
 - 基本流程：离线文档切片向量化 -> 在线查询检索 -> Prompt构建 -> LLM生成
 - 核心价值：降低幻觉（基于事实）、可解释性（引用来源）、低成本更新知识
 - 对比微调：RAG适合动态知识库，微调适合调整风格和推理模式
+frequency: medium
 ---
 
 # RAG的基本架构是什么？为什么需要RAG？
@@ -148,6 +149,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

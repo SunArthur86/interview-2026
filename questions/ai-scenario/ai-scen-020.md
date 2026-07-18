@@ -29,6 +29,7 @@ memory_points:
 - 策略路由：根据意图和对话历史判断阶段（开场/挖掘/谈判/促单）。
 - 实战优化：Prompt增加“预算探询强制节点”，过滤无效线索提升转化。
 - 推荐引擎：需求匹配产品矩阵，基于画像做个性化组合推荐。
+frequency: low
 ---
 
 # 如何设计一个AI销售助手？能理解客户需求、推荐产品、处理异议、引导成单。
@@ -174,6 +175,24 @@ handoff_rules:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Budget start
+    class CRM process
+    class Chat decision
+    class Conv special
+    class Engine error
+    class FSM info
+    class Filter start
+    class KB process
+    class Output decision
+    class Profile special
+    class Stage error
+    class Strategy info
     subgraph 数据输入层
         CRM[CRM历史与行为数据]
         Conv[实时对话信息]

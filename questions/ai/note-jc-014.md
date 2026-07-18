@@ -10,7 +10,8 @@ tags:
 - DP
 - 最短路
 feynman:
-  essence: 动态规划核心思想是"把大问题拆成子问题，存子问题的解避免重复计算"——适用条件是"最优子结构"（大问题最优解含子问题最优解）和"重叠子问题"（子问题被反复计算）。经典例子：斐波那契（重叠子问题）、背包（最优子结构）、最长公共子序列。最短路的逆推解法：从终点倒推，定义 dp[i]=从节点i到终点的最短距离，dp[i]=min(边(i,j)+dp[j])，子问题就是"从下一节点到终点的最短距离"。
+  essence: 动态规划核心思想是"把大问题拆成子问题，存子问题的解避免重复计算"——适用条件是"最优子结构"（大问题最优解含子问题最优解）和"重叠子问题"（子问题被反复计算）。经典例子：斐波那契（重叠子问题）、背包（最优子结构）、最长公共子序列。最短路的逆推解法：从终点倒推，定义
+    dp[i]=从节点i到终点的最短距离，dp[i]=min(边(i,j)+dp[j])，子问题就是"从下一节点到终点的最短距离"。
   analogy: 像算从家到公司最短路线——把路线分成一段段（家→地铁站、地铁站→公司），每段的最短路线算出来记在小本本上（存子问题），下次算相邻路段时直接用本子上的结果，不用重算。最短路逆推就是"从终点往回算"，到终点的距离是0，往前每步看"去下一站+下一站到终点"最短多少。
   first_principle: DP 的本质是"用空间换时间"——存子问题解，避免指数级重复计算。适用性取决于"最优子结构"（能拆）和"重叠子问题"（值得存）。
   key_points:
@@ -33,6 +34,7 @@ memory_points:
 - 适用条件：必须具备最优子结构与重叠子问题两大特征
 - 最短路逆推：定义 dp[i] 为到终点最短距离，公式 min(w(i,j)+dp[j])
 - 对比差异：逆推 DP 适合无环图(DAG)，有环图必须用 Dijkstra
+frequency: low
 ---
 
 # 【阶跃星辰面经】动态规划核心思想 + 最短路逆推子问题
@@ -184,6 +186,32 @@ DAG 最短路用逆推 DP（拓扑序处理）更简单；
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class D1 start
+    class DAG process
+    class DP decision
+    class Graph special
+    class S error
+    class T info
+    class br start
+    class dp process
+    class min decision
+    class w special
+    class w_A_T error
+    class w_B_T info
+    class w_S_A start
+    class w_S_B process
     subgraph Graph[有向带权图 DAG]
         direction LR
         S((起点 S)) -->|"w=2"| A((节点 A))

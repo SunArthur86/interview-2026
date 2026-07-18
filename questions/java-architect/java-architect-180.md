@@ -26,19 +26,23 @@ first_principle:
   - 心跳可能误判（网络抖动导致超时，但节点其实活着）
   - 任务重分配可能导致重复执行（原节点没死只是慢）
   - 某些任务不能重复执行（如扣款/发货，重复有副作用）
-  rebuild: 调度中心定期（30 秒）心跳探活执行器，连续 3 次超时（90 秒）标记失效。失效节点的正在执行任务重新入队，分配到健康节点（failover）。幂等保证重试安全——业务幂等键（唯一约束/状态机 CAS），相同请求只生效一次。调度层至少一次（at-least-once）+ 业务幂等 = 恰好一次效果。任务版本号（乐观锁）防多节点并发抢同一任务。
+  rebuild: 调度中心定期（30 秒）心跳探活执行器，连续 3 次超时（90 秒）标记失效。失效节点的正在执行任务重新入队，分配到健康节点（failover）。幂等保证重试安全——业务幂等键（唯一约束/状态机
+    CAS），相同请求只生效一次。调度层至少一次（at-least-once）+ 业务幂等 = 恰好一次效果。任务版本号（乐观锁）防多节点并发抢同一任务。
 follow_up:
-  - 怎么判断节点失效？——心跳。调度中心每 30 秒 ping 执行器，连续 3 次超时（90 秒无响应）标记失效。超时阈值要调（太短误判，太长恢复慢）。
-  - 失效节点的任务怎么办？——重新入队。正在执行的任务标记为"待重试"，调度中心分配到其他健康节点。幂等保证重试安全。
-  - 幂等怎么实现？——业务层。幂等键（唯一约束）：如订单退款用 refund_request_id 唯一索引。状态机 CAS：UPDATE WHERE status='PENDING'。分布式锁：SETNX lock:task:{taskId}。
-  - 怎么避免任务重复执行？——任务版本号。UPDATE task SET version=version+1, executor=me WHERE id=? AND version=?. 只有一个节点能成功（CAS）。
-  - 脑裂（split-brain）怎么办？——两个调度中心都以为自己是 leader。用 ZK/etcd 选主，只有 leader 能调度。或调度中心无状态 + 分布式锁。
+- 怎么判断节点失效？——心跳。调度中心每 30 秒 ping 执行器，连续 3 次超时（90 秒无响应）标记失效。超时阈值要调（太短误判，太长恢复慢）。
+- 失效节点的任务怎么办？——重新入队。正在执行的任务标记为"待重试"，调度中心分配到其他健康节点。幂等保证重试安全。
+- 幂等怎么实现？——业务层。幂等键（唯一约束）：如订单退款用 refund_request_id 唯一索引。状态机 CAS：UPDATE WHERE status='PENDING'。分布式锁：SETNX
+  lock:task:{taskId}。
+- 怎么避免任务重复执行？——任务版本号。UPDATE task SET version=version+1, executor=me WHERE id=? AND
+  version=?. 只有一个节点能成功（CAS）。
+- 脑裂（split-brain）怎么办？——两个调度中心都以为自己是 leader。用 ZK/etcd 选主，只有 leader 能调度。或调度中心无状态 + 分布式锁。
 memory_points:
-  - 心跳探活：30 秒 ping，3 次超时（90 秒）标记失效
-  - 任务重分配：失效节点的任务重新入队，分配到健康节点
-  - 幂等：幂等键（唯一约束）+ 状态机 CAS + 分布式锁
-  - 至少一次：调度层 at-least-once + 业务幂等 = 恰好一次
-  - 任务版本号：乐观锁 CAS 防并发抢任务
+- 心跳探活：30 秒 ping，3 次超时（90 秒）标记失效
+- 任务重分配：失效节点的任务重新入队，分配到健康节点
+- 幂等：幂等键（唯一约束）+ 状态机 CAS + 分布式锁
+- 至少一次：调度层 at-least-once + 业务幂等 = 恰好一次
+- 任务版本号：乐观锁 CAS 防并发抢任务
+frequency: medium
 ---
 
 # 【Java 后端架构师】分布式调度的失效转移与幂等执行
@@ -399,6 +403,21 @@ public class LeaderElection {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
     A[调度中心Leader] -->|下发任务| B(执行器节点A)
     A -->|下发任务| C(执行器节点B)
     A -.->|30秒心跳探活| B

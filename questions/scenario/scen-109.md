@@ -41,6 +41,7 @@ memory_points:
 - 性能对比：因本地缓存无网络开销极快（纳秒级），故可保护Redis免受高QPS冲击
 - 读写策略：读多写少用Cache-Aside（旁路），更新DB后删缓存而非更新缓存
 - 多级一致性保障：DB同步用Canal监听Binlog，Redis同步至本地用MQ广播删除指令
+frequency: high
 ---
 
 # 如何设计一个高性能的多级缓存架构？本地缓存、分布式缓存、CDN 如何协同？
@@ -158,6 +159,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

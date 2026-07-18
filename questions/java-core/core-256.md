@@ -16,6 +16,7 @@ memory_points:
 - 四大功能：文件抽象管理、目录层级管理、存储空间块分配回收。
 - 访问方式：顺序读写按流自动后移，随机读写用lseek任意定位。
 - 核心考点：硬链接同指一个inode不跨区，软链接指路径可跨区。
+frequency: low
 ---
 
 # 什么是文件系统？
@@ -121,6 +122,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -26,14 +26,15 @@ first_principle:
   - 资源必须有限可控
   rebuild: 线程池（预建复用 + 有界队列 + 拒绝策略 + 动态调参）。
 follow_up:
-  - 线程池怎么设置线程数？——CPU 密集 N+1，IO 密集 2N 或 N*(1+等待/计算)
-  - 队列满了怎么办？——拒绝策略（业务关键用 CallerRuns 反压，非关键丢弃）
-  - 怎么动态调整参数？——美团的动态线程池（配置中心 + setCorePoolSize 实时生效）
+- 线程池怎么设置线程数？——CPU 密集 N+1，IO 密集 2N 或 N*(1+等待/计算)
+- 队列满了怎么办？——拒绝策略（业务关键用 CallerRuns 反压，非关键丢弃）
+- 怎么动态调整参数？——美团的动态线程池（配置中心 + setCorePoolSize 实时生效）
 memory_points:
-  - 七参数：core/max/queue/keepAlive/factory/reject
-  - 流程：核心→队列→非核心→拒绝
-  - CPU 密集 N+1，IO 密集 2N
-  - 模型服务要隔离（在线/离线分开）
+- 七参数：core/max/queue/keepAlive/factory/reject
+- 流程：核心→队列→非核心→拒绝
+- CPU 密集 N+1，IO 密集 2N
+- 模型服务要隔离（在线/离线分开）
+frequency: high
 ---
 
 # 【拼多多 AI 中台】线程池怎么设计？模型服务场景怎么用？
@@ -189,6 +190,26 @@ public void onConfig(PoolConfig cfg) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Continuous decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class Triton process
     A[AI推理请求接入] --> B{线程池核心线程}
     B -- 有空闲 --> D[执行任务]
     B -- 无空闲 --> E[有界任务队列]

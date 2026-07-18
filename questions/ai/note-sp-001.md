@@ -12,15 +12,17 @@ tags:
 feynman:
   essence: RAG幻觉 = LLM在检索到的上下文不足或不相关时，用自身参数知识"编造"看似合理但实际错误的内容。限制幻觉 = 从检索质量、生成约束、后置校验三道防线层层过滤。
   analogy: 想象你是一个开卷考试的学生。如果你翻到的参考页码不对（检索失败），你可能凭记忆瞎编答案（幻觉）。限制幻觉就是：确保翻到正确的页（高召回检索）、只允许你引用书上的话（生成约束）、最后老师检查答案是否真的来自书本（后置校验）。
-  first_principle: 幻觉的根源是生成模型在"信息不足"时仍有"必须输出"的压力。解决路径 = 让信息充分（检索优化）+ 让模型知所不知（置信度感知）+ 兜底校验（外部验证）。
+  first_principle: 幻觉的根源是生成模型在"信息不足"时仍有"必须输出"的压力。解决路径 = 让信息充分（检索优化）+ 让模型知所不知（置信度感知）+
+    兜底校验（外部验证）。
   key_points:
-  - '检索层：提升召回率(混合检索+重排序)、过滤低相关chunk、查询改写'
-  - '生成层：Prompt约束(只基于context回答)、温度调低、结构化输出'
-  - '后置层：事实一致性校验(NLI)、引用溯源、置信度阈值过滤'
-  - '工程层：日志记录+人工反馈闭环、持续优化知识库'
+  - 检索层：提升召回率(混合检索+重排序)、过滤低相关chunk、查询改写
+  - 生成层：Prompt约束(只基于context回答)、温度调低、结构化输出
+  - 后置层：事实一致性校验(NLI)、引用溯源、置信度阈值过滤
+  - 工程层：日志记录+人工反馈闭环、持续优化知识库
 first_principle:
   essence: 幻觉的本质是"知识来源混淆"——模型分不清哪些信息来自检索上下文、哪些来自预训练权重。当检索质量高时模型可以锚定到正确事实；当检索失败时模型退化为自由生成。
-  derivation: LLM本质是概率生成模型 → 当context中信息充分时P(answer|context)高 → 当context不足时P(answer|context)≈P(answer|pretrain) → 预训练知识可能过时/错误 → 产生幻觉 → 所以需要在检索、生成、校验三个环节同时设防
+  derivation: LLM本质是概率生成模型 → 当context中信息充分时P(answer|context)高 → 当context不足时P(answer|context)≈P(answer|pretrain)
+    → 预训练知识可能过时/错误 → 产生幻觉 → 所以需要在检索、生成、校验三个环节同时设防
   conclusion: 限制幻觉的核心 = 高质量检索(让模型有据可依) + 生成约束(让模型不敢编) + 后置校验(编了也能拦住)
 follow_up:
 - 检索召回率已经90%了，为什么还会有幻觉？
@@ -31,6 +33,7 @@ memory_points:
 - 三道防线：检索优化(混合检索+Rerank) → 生成约束(Prompt+低温+引用) → 后置校验(NLI+溯源+阈值)
 - 核心指标：Faithfulness(答案是否忠于context)、Answer Relevance(答案是否回答了问题)、Context Precision(检索是否精准)
 - 工程实践：Ragas/TruLens评估框架 + 人工bad case收集 + 知识库持续迭代
+frequency: medium
 ---
 
 # 如何限制RAG幻觉？
@@ -47,6 +50,40 @@ RAG幻觉 = LLM在检索上下文不足/不相关时，用自身参数知识"编
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CITE start
+    class Cross process
+    class Encoder decision
+    class HR special
+    class HyDE error
+    class JSON info
+    class K start
+    class L1 process
+    class L2 decision
+    class L3 special
+    class NLI error
+    class Prompt info
+    class Q start
+    class QR process
+    class RR decision
+    class SP special
+    class Schema error
+    class System info
+    class TH start
+    class Temperature process
+    class Top decision
+    class answer special
+    class br error
+    class chunks info
+    class claim start
+    class context process
+    class source decision
+    class vs special
     Q["用户提问"]
     subgraph L1["第一道防线：检索优化"]
         QR["查询改写<br/>(多查询/HyDE)"]

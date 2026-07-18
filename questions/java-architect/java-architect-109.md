@@ -9,9 +9,12 @@ tags:
 - 性能画像
 - 诊断
 feynman:
-  essence: JFR（Java Flight Recorder，JDK 11+ 开源）是 JVM 内置的低开销持续性能画像——生产环境一直开（< 1% 开销），事件流式写入环形缓冲区，事故时 dump 最近 1 小时数据。它把 GC、内存、锁、IO、CPU、虚拟线程等画像合一，是"不重启 JVM 排查问题"的杀手锏。
-  analogy: 像飞机黑匣子：平时一直录（飞行数据、机舱对话），出事故时取出来回放。JFR 录 JVM 的"飞行数据"（GC、锁、IO、内存），事故时 dump 最近 1 小时回放，不用复现。
-  first_principle: JVM 性能问题的复现成本高（线上环境、生产数据、特殊流量），等"重启后开监控"常常问题已消失。JFR 让监控在生产常态化运行（< 1% 开销），事件存环形缓冲区（自动滚动），事后回放——把"事故后无法复现"变成"事故后必有数据"。
+  essence: JFR（Java Flight Recorder，JDK 11+ 开源）是 JVM 内置的低开销持续性能画像——生产环境一直开（< 1% 开销），事件流式写入环形缓冲区，事故时
+    dump 最近 1 小时数据。它把 GC、内存、锁、IO、CPU、虚拟线程等画像合一，是"不重启 JVM 排查问题"的杀手锏。
+  analogy: 像飞机黑匣子：平时一直录（飞行数据、机舱对话），出事故时取出来回放。JFR 录 JVM 的"飞行数据"（GC、锁、IO、内存），事故时 dump
+    最近 1 小时回放，不用复现。
+  first_principle: JVM 性能问题的复现成本高（线上环境、生产数据、特殊流量），等"重启后开监控"常常问题已消失。JFR 让监控在生产常态化运行（<
+    1% 开销），事件存环形缓冲区（自动滚动），事后回放——把"事故后无法复现"变成"事故后必有数据"。
   key_points:
   - JFR（JDK 11+ 开源）：JVM 内置，< 1% 开销，生产常开
   - jcmd JFR.start / JFR.dump / JFR.stop 在线控制
@@ -24,20 +27,25 @@ first_principle:
   - 重启会丢失现场（问题不再复现）
   - 传统监控（jstack/jmap）是侵入性的（STW 或开销大）
   - 性能问题需要"事件流"（什么时间发生什么），不是"快照"
-  rebuild: JFR 在 JVM 内部持续记录事件（GC、对象分配、锁竞争、IO、方法采样），事件按类型分到不同缓冲区，线程本地缓冲 → 全局缓冲 → 磁盘。开销 < 1%（HotSpot 高度优化），生产常驻。事故时 jcmd JFR.dump 取最近 N 小时数据，离线分析。从"事故后无法复现"变成"事故后必有数据"。
+  rebuild: JFR 在 JVM 内部持续记录事件（GC、对象分配、锁竞争、IO、方法采样），事件按类型分到不同缓冲区，线程本地缓冲 → 全局缓冲 → 磁盘。开销
+    < 1%（HotSpot 高度优化），生产常驻。事故时 jcmd JFR.dump 取最近 N 小时数据，离线分析。从"事故后无法复现"变成"事故后必有数据"。
 follow_up:
-  - JFR 和 async-profiler 区别？——JFR 是 JVM 内置（事件驱动，含锁/IO/对象分配），async-profiler 是外部工具（采样为主，火焰图好）。两者互补：JFR 全景画像常驻，async-profiler 深度采样按需
-  - JFR 开销真的小吗？——JDK 11+ 开源后实测 < 1%（OpenJDK 文档承诺 < 1%）。开 settings=profile 时 1-3%（更详细事件）
-  - 怎么看 JFR 数据？——jfr print（命令行，简单查询）、JDK Mission Control（GUI，深度分析）、Grafana JFR datasource（看板）、自定义解析（jfr tools 库）
-  - 事件阈值怎么定？——duration threshold（如 jdk.VirtualThreadPinned 默认 20ms）控制记录哪些事件。生产建议默认 settings，需要深度排查用 settings=profile
-  - 持续画像和按需画像区别？——continuous（maxage=1h maxsize=512m，常驻滚动）适合生产；profiling（duration=60s，详细事件）适合压测。两者可叠加
+- JFR 和 async-profiler 区别？——JFR 是 JVM 内置（事件驱动，含锁/IO/对象分配），async-profiler 是外部工具（采样为主，火焰图好）。两者互补：JFR
+  全景画像常驻，async-profiler 深度采样按需
+- JFR 开销真的小吗？——JDK 11+ 开源后实测 < 1%（OpenJDK 文档承诺 < 1%）。开 settings=profile 时 1-3%（更详细事件）
+- 怎么看 JFR 数据？——jfr print（命令行，简单查询）、JDK Mission Control（GUI，深度分析）、Grafana JFR datasource（看板）、自定义解析（jfr
+  tools 库）
+- 事件阈值怎么定？——duration threshold（如 jdk.VirtualThreadPinned 默认 20ms）控制记录哪些事件。生产建议默认 settings，需要深度排查用
+  settings=profile
+- 持续画像和按需画像区别？——continuous（maxage=1h maxsize=512m，常驻滚动）适合生产；profiling（duration=60s，详细事件）适合压测。两者可叠加
 memory_points:
-  - JFR（JDK 11+ 开源）：JVM 内置，< 1% 开销，生产常开
-  - jcmd JFR.start/dump/stop 在线控制
-  - continuous（生产常驻，maxage/maxsize 滚动）+ profiling（短期压测）
-  - 事件类型：GC、内存、锁、IO、CPU、虚拟线程、对象分配
-  - jdk.VirtualThreadPinned / jdk.GCPhasePause / jdk.ObjectAllocationSample
-  - 工具：jfr print（CLI）、JMC（GUI）、Grafana（看板）
+- JFR（JDK 11+ 开源）：JVM 内置，< 1% 开销，生产常开
+- jcmd JFR.start/dump/stop 在线控制
+- continuous（生产常驻，maxage/maxsize 滚动）+ profiling（短期压测）
+- 事件类型：GC、内存、锁、IO、CPU、虚拟线程、对象分配
+- jdk.VirtualThreadPinned / jdk.GCPhasePause / jdk.ObjectAllocationSample
+- 工具：jfr print（CLI）、JMC（GUI）、Grafana（看板）
+frequency: high
 ---
 
 # 【Java 后端架构师】JFR 在线诊断与持续性能画像
@@ -407,6 +415,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

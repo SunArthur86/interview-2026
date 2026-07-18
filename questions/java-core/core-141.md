@@ -25,6 +25,7 @@ memory_points:
 - 时间片轮转的缺点是时间片太小会导致频繁上下文切换开销过大
 follow_up: []
 tags: []
+frequency: low
 ---
 
 # 进程的调度算法有哪些？
@@ -118,6 +119,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

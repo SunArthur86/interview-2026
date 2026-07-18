@@ -26,14 +26,15 @@ first_principle:
   - 平台要标准化又灵活
   rebuild: AI 中台（分层架构 + 标准化接口 + 横切治理）。
 follow_up:
-  - 中台怎么避免过度设计？——按业务实际需求沉淀，不预设能力
-  - 业务方怎么接入？——SDK + 服务化 API + 自助控制台
-  - 大模型对中台影响？——新增 LLM 工程层（推理/RAG/Agent），传统 ML 仍保留
+- 中台怎么避免过度设计？——按业务实际需求沉淀，不预设能力
+- 业务方怎么接入？——SDK + 服务化 API + 自助控制台
+- 大模型对中台影响？——新增 LLM 工程层（推理/RAG/Agent），传统 ML 仍保留
 memory_points:
-  - 五层：数据/特征/模型/服务/应用
-  - 横切：实验/监控/调度
-  - LLM 层：推理/RAG/Agent/LLMOps
-  - 复用 + 标准 + 演进
+- 五层：数据/特征/模型/服务/应用
+- 横切：实验/监控/调度
+- LLM 层：推理/RAG/Agent/LLMOps
+- 复用 + 标准 + 演进
+frequency: low
 ---
 
 # 【拼多多 AI 中台】AI 中台整体架构怎么设计？
@@ -56,6 +57,59 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class Agent decision
+    class B special
+    class CDC error
+    class CPU info
+    class CROSS start
+    class Chat process
+    class DWD decision
+    class DWS special
+    class Drools error
+    class Flink info
+    class GPU start
+    class HDFS process
+    class Hive decision
+    class K8s special
+    class Kafka error
+    class L1 info
+    class L2 start
+    class L3 process
+    class L4 decision
+    class L5 special
+    class LLM error
+    class LoRA info
+    class ML start
+    class MLflow process
+    class MLlib decision
+    class ODS special
+    class PII error
+    class PyTorch info
+    class QLExpress start
+    class QPS process
+    class RAG decision
+    class RLHF special
+    class Redis error
+    class SFT info
+    class Spark start
+    class TRT process
+    class TensorFlow decision
+    class Triton special
+    class X1 error
+    class X2 info
+    class X3 start
+    class X4 process
+    class XGBoost decision
+    class br special
+    class vLLM error
     L1["数据层<br/>业务库 CDC → Kafka → 实时/离线计算 → ODS/DWD/DWS"]
     L2["特征层 特征平台<br/>离线特征仓 Hive/HDFS<br/>实时特征 Flink + Redis<br/>在线查询 API<br/>特征注册中心 血缘/版本/质量"]
     L3["模型层 训练 + 管理<br/>传统 ML: Spark MLlib / XGBoost<br/>深度学习: PyTorch / TensorFlow<br/>大模型: 预训练 / SFT / RLHF / LoRA<br/>模型注册中心 MLflow: 版本/血缘/部署"]

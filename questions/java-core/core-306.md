@@ -16,6 +16,7 @@ memory_points:
 - 运行时多态靠重写：因为运行期看实际对象，所以叫动态绑定。
 - 多态触发条件口诀：继承、重写、父类引用指向子类对象。
 - 动态调用原理：JVM 运行时通过查找堆内存对象的方法表，执行实际子类的方法。
+frequency: low
 ---
 
 # 编译时多态和运行时多态的区别？
@@ -136,6 +137,34 @@ public class PolymorphismDemo {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayList process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class Java info
+    class K start
+    class L process
+    class List decision
+    class M special
+    class Overload error
+    class Override info
+    class br start
+    class list process
+    class new decision
+    class vtable special
     A[Java 多态] --> B[编译时多态<br/>方法重载 Overload]
     A --> C[运行时多态<br/>方法重写 Override]
     C --> D[动态分派<br/>基于实际类型]

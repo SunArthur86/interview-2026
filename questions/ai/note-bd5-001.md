@@ -30,6 +30,7 @@ memory_points:
 - RAG检索无个性化的全局文档，记忆累积存储特定用户的独立画像
 - 因为用户常问'上次推荐的'，所以需要记忆提取历史结合RAG查询实时状态
 - 生产架构：每次会话先查用户记忆构建Prompt，再RAG检索外部知识生成回答
+frequency: high
 ---
 
 # 讲讲 RAG 和持久化记忆的区别
@@ -172,6 +173,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

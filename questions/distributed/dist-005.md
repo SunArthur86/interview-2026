@@ -16,6 +16,7 @@ memory_points:
 - 关键配置：因为响应必须原路返回，所以 RS 的默认网关必须强制指向 LB 的 DIP
 - 优缺点对比：因为支持端口映射且兼容性极佳，但双向流量全过 LB 易成性能瓶颈
 - 适用场景：适用于十几个节点的中小规模集群，或 RS 使用内网私有 IP 的场景
+frequency: medium
 ---
 
 # LVS NAT模式的工作原理是什么？
@@ -123,6 +124,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

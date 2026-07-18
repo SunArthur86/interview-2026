@@ -4,8 +4,17 @@ difficulty: L2
 category: java-architect
 subcategory: 降级
 title: 降级预案如何从静态开关演进到策略平台
-tags: [降级, 策略平台, 熔断, Sentinel, 兜底]
-related: [java-architect-145, java-architect-138, java-architect-147]
+tags:
+- 降级
+- 策略平台
+- 熔断
+- Sentinel
+- 兜底
+related:
+- java-architect-145
+- java-architect-138
+- java-architect-147
+frequency: high
 ---
 
 # 降级预案如何从静态开关演进到策略平台
@@ -381,6 +390,31 @@ P0 不降只限，P1 兜底返回，P2 可关，P3 大促停。
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class Mock start
+    class P0 process
+    class P1 decision
+    class P2 special
+    class P3 error
+    class RT info
+    class br start
     A["服务调用请求"] --> B["降级策略平台"]
     B --> C{"触发条件判断"}
     C -- "手动触发" --> D["一键执行降级"]

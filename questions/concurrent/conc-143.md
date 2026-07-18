@@ -24,6 +24,7 @@ memory_points:
 - 因为 LongAdder 分段加锁减少了冲突，所以高并发写吞吐量极高（空间换时间）。
 - 原理细节：Cell 数组使用 @Contended 解决了 CPU 缓存的伪共享问题。
 - 对比场景：需要强一致精确序列用 AtomicLong，允许弱一致的高并发监控统计用 LongAdder。
+frequency: high
 ---
 
 # 读写锁（ReadWriteLock）和 StampedLock 的原理与适用场景？什么时候用乐观读？
@@ -145,6 +146,7 @@ flowchart TB
     class RW,RWRead,RWWrite rw
     class ST,STOpt,STValidate,STUpgrade,STRead,STSuccess st
     class RWHunger pain
+
 ```
 
 

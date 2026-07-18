@@ -31,6 +31,7 @@ memory_points:
 - 看AI交互深度：真懂流式渲染性能优化、中断重试及幻觉降级体验，非仅套壳
 - 看桌面系统整合：深谙 IPC 通信瓶颈、多窗口与原生集成，而非纯页面开发
 - 看产物生命周期：思考过AI产物的预览、Diff确认、本地同步及安全越权风险
+frequency: low
 ---
 
 # 【月之暗面面经】你如何判断候选人真的做过 AI-Native 桌面产品，而不是普通 Web 前端？
@@ -320,6 +321,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

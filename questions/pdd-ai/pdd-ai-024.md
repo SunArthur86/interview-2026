@@ -49,6 +49,7 @@ memory_points:
 - 离线 Spark/Hive T+1，实时 Flink+Redis
 - 训推一致：同一份特征 DSL
 - 元数据：血缘/版本/注册中心
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】特征平台架构设计？实时离线怎么打通？
@@ -59,6 +60,33 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class Caffeine process
+    class Cassandra decision
+    class DSL special
+    class Feature error
+    class Flink info
+    class HBase start
+    class Hive process
+    class Kafka decision
+    class Log special
+    class Redis error
+    class Spark info
+    class Store start
+    class br process
+    class infer decision
+    class lt special
+    class meta error
+    class offline info
+    class owner start
+    class query process
+    class realtime decision
     infer["在线推理服务（毫秒级特征查询）"]
     query["在线查询层（聚合 + 降级 + 缓存）<br/>实时特征 Redis（&lt;1ms）<br/>离线特征 HBase/Cassandra（&lt;5ms）<br/>本地缓存 Caffeine（&lt;0.1ms）"]
     realtime["实时计算链路<br/>Kafka → Flink → Redis/HBase"]

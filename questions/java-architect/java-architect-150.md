@@ -4,8 +4,17 @@ difficulty: L4
 category: java-architect
 subcategory: MySQL
 title: MySQL 大事务、长事务与锁等待治理
-tags: [大事务, 长事务, 锁等待, InnoDB, MDL]
-related: [java-architect-149, java-architect-143, java-architect-141]
+tags:
+- 大事务
+- 长事务
+- 锁等待
+- InnoDB
+- MDL
+related:
+- java-architect-149
+- java-architect-143
+- java-architect-141
+frequency: high
 ---
 
 # MySQL 大事务、长事务与锁等待治理
@@ -347,6 +356,25 @@ JD 订单改 RC，死锁减八成，并发升三成。
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class innodb_trx start
     A[JD结算系统批量任务] --> B[扫1000万行大事务]
     B --> C[长事务持续运行]
     C --> D[持有行锁/间隙锁过久]

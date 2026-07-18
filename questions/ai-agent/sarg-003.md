@@ -19,6 +19,7 @@ memory_points:
 - 混合检索：Dense（向量语义）+ Sparse（关键词BM25）互补，效果最佳
 - 评估标准：参考MTEB排行榜Retrieval任务，而非总榜
 - 实战建议：通用选OpenAI，中文选BGE系列，长文档选支持8k长度的模型
+frequency: medium
 ---
 
 # 如何选择Embedding模型？
@@ -93,6 +94,33 @@ ensemble_retriever = EnsembleRetriever(
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class BGE start
+    class Benchmark process
+    class Choose decision
+    class Code special
+    class Code2 error
+    class Cost info
+    class Dim start
+    class Domain process
+    class E5 decision
+    class Embedding special
+    class Factors error
+    class GTE info
+    class Lang start
+    class MTEB process
+    class MaxLen decision
+    class Models special
+    class OpenAI error
+    class Voyage info
+    class code start
+    class embedding process
+    class text decision
     Choose["选 Embedding 模型"] --> Factors["考量因素"]
     Factors --> Lang["语言: 中/英/多语言"]
     Factors --> Dim["维度: 768/1024/1536"]

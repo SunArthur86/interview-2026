@@ -16,6 +16,7 @@ memory_points:
 - 线程协作：利用BlockingQueue安全传递数据或wait/notify通信
 - 并发工具：使用Exchanger交换数据，或CountDownLatch同步点协调
 - 易错点：ThreadLocal本质是线程隔离，绝对不属于线程间共享数据
+frequency: high
 ---
 
 # 如何在两个线程之间共享数据？
@@ -110,6 +111,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

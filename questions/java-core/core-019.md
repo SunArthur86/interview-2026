@@ -17,6 +17,7 @@ memory_points:
 - 加3代表有3个离开网络的包，收到新Dup ACK则cwnd加1
 - 恢复结束：收到新数据ACK时cwnd降为ssthresh，进入拥塞避免
 - 对比超时：超时降为1重启慢启动，快恢维持高速不从头开始
+frequency: low
 ---
 
 # 什么是快速恢复？
@@ -85,6 +86,32 @@ func onDupAck(tc *TCPConn) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ACK process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class Fast process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class Recovery special
+    class TCP error
+    class br info
+    class cwnd start
+    class ssthresh process
     A[TCP 快速恢复 Fast Recovery] --> B[触发: 3 个重复 ACK]
     B --> C[判定单个包丢失]
     C --> D[进入快速重传]

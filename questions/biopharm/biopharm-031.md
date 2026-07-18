@@ -12,37 +12,39 @@ tags:
 - IVF
 - 量化压缩
 feynman:
-  essence: "向量检索进阶是搞懂 ANN 算法如何在'召回率、速度、内存'三角中权衡——HNSW 图导航快准但费内存，IVF 分桶省内存可分布式，量化压缩把向量变小，按场景组合。"
-  analogy: "像在图书馆找书——暴力翻每本是精确（全表扫描，慢）；HNSW 是按'相似书聚类'+目录索引一层层缩小（图导航，快但建索引费空间）；IVF 是先分区分书架再区内找（分桶，省空间）；量化是把书名缩写成代号（压缩，省地方略损精度）。"
-  first_principle: "向量检索要在大规模高维空间找近邻，暴力 O(N) 不可行。ANN 算法的本质是'用可接受的精度损失换巨大的速度/内存收益'，不同算法在召回率-速度-内存三角中取舍。"
+  essence: 向量检索进阶是搞懂 ANN 算法如何在'召回率、速度、内存'三角中权衡——HNSW 图导航快准但费内存，IVF 分桶省内存可分布式，量化压缩把向量变小，按场景组合。
+  analogy: 像在图书馆找书——暴力翻每本是精确（全表扫描，慢）；HNSW 是按'相似书聚类'+目录索引一层层缩小（图导航，快但建索引费空间）；IVF 是先分区分书架再区内找（分桶，省空间）；量化是把书名缩写成代号（压缩，省地方略损精度）。
+  first_principle: 向量检索要在大规模高维空间找近邻，暴力 O(N) 不可行。ANN 算法的本质是'用可接受的精度损失换巨大的速度/内存收益'，不同算法在召回率-速度-内存三角中取舍。
   key_points:
-  - "三角：召回率 vs 查询速度 vs 内存占用"
-  - "HNSW：分层小世界图，导航式检索，快准但内存大"
-  - "IVF：倒排分桶，桶内搜索，省内存可分布式，需训练"
-  - "量化压缩：PQ/SQ 把向量压缩，省内存换少量精度"
-  - "组合：IVF+PQ（大规模省内存）、HNSW（中小规模高召回）"
+  - 三角：召回率 vs 查询速度 vs 内存占用
+  - HNSW：分层小世界图，导航式检索，快准但内存大
+  - IVF：倒排分桶，桶内搜索，省内存可分布式，需训练
+  - 量化压缩：PQ/SQ 把向量压缩，省内存换少量精度
+  - 组合：IVF+PQ（大规模省内存）、HNSW（中小规模高召回）
   socratic:
-  - "为什么不能每次查向量都算一遍余弦？"
-  - "HNSW 又快又准，为什么还要 IVF？"
-  - "十亿向量，HNSW 内存撑不住，怎么办？"
-  - "量化压缩把向量变小，精度损失多大？能用吗？"
-  - "召回率99%但每次查10秒，vs 召回率90%查10毫秒，怎么选？"
+  - 为什么不能每次查向量都算一遍余弦？
+  - HNSW 又快又准，为什么还要 IVF？
+  - 十亿向量，HNSW 内存撑不住，怎么办？
+  - 量化压缩把向量变小，精度损失多大？能用吗？
+  - 召回率99%但每次查10秒，vs 召回率90%查10毫秒，怎么选？
 first_principle:
-  problem: "如何在大规模高维向量空间中，按召回率-速度-内存三角选最优 ANN 算法？"
+  problem: 如何在大规模高维向量空间中，按召回率-速度-内存三角选最优 ANN 算法？
   axioms:
-  - "暴力检索 O(N) 大规模不可行"
-  - "ANN 用精度损失换速度/内存收益"
-  - "不同算法在三角中取舍"
-  rebuild: "按场景选——中小规模高召回选 HNSW（图导航快准内存大），大规模省内存选 IVF+PQ（分桶+压缩），分布式选 IVF；调参（HNSW 的 efSearch/IVF 的 nprobe）在三角中找平衡点。"
+  - 暴力检索 O(N) 大规模不可行
+  - ANN 用精度损失换速度/内存收益
+  - 不同算法在三角中取舍
+  rebuild: 按场景选——中小规模高召回选 HNSW（图导航快准内存大），大规模省内存选 IVF+PQ（分桶+压缩），分布式选 IVF；调参（HNSW 的
+    efSearch/IVF 的 nprobe）在三角中找平衡点。
 follow_up:
-- "HNSW 原理？——分层图，上层稀疏粗筛快速定位区域，下层稠密精细搜索；查询从顶层入口逐层下降，像走高速→省道→小路。"
-- "IVF 怎么训练？——用 k-means 把向量聚成 nlist 个桶，查询时找最近的 nprobe 个桶内搜索；nprobe 越大召回越高但越慢。"
-- "PQ 量化怎么做？——把向量切段，每段用码本聚类成小集合，向量变成码本索引串，省几倍到几十倍内存，精度小损。"
+- HNSW 原理？——分层图，上层稀疏粗筛快速定位区域，下层稠密精细搜索；查询从顶层入口逐层下降，像走高速→省道→小路。
+- IVF 怎么训练？——用 k-means 把向量聚成 nlist 个桶，查询时找最近的 nprobe 个桶内搜索；nprobe 越大召回越高但越慢。
+- PQ 量化怎么做？——把向量切段，每段用码本聚类成小集合，向量变成码本索引串，省几倍到几十倍内存，精度小损。
 memory_points:
-- "三角：召回率/速度/内存"
-- "HNSW 快准内存大（中小规模）"
-- "IVF+PQ 省内存（大规模）"
-- "调参（efSearch/nprobe）找平衡"
+- 三角：召回率/速度/内存
+- HNSW 快准内存大（中小规模）
+- IVF+PQ 省内存（大规模）
+- 调参（efSearch/nprobe）找平衡
+frequency: high
 ---
 
 # 【生物医药 AI】向量检索进阶怎么做（ANN/HNSW/IVF/量化）？
@@ -206,6 +208,28 @@ FP32 → INT8（每维单独量化）
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B1 process
+    class B2 decision
+    class C1 special
+    class C2 error
+    class D1 info
+    class D2 start
+    class E1 process
+    class E2 decision
+    class E3 special
+    class HNSW error
+    class IVF info
+    class Quantization start
+    class TradeOff process
+    class br decision
+    class efConstruction special
     A1["待检索的高维向量"]
 
     subgraph HNSW[图导航方案]

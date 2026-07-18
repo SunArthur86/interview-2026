@@ -28,6 +28,7 @@ memory_points:
 - 执行前做RBAC权限校验和资源归属检查，防越权
 - 高危操作（删除/转账）必须Human-in-the-Loop二次确认
 - 参数层需注入检测，扫描“ignore previous”等恶意指令
+frequency: medium
 ---
 
 # 如何设计AI Agent的工具调用（Tool Calling）安全边界？防止Agent执行危险操作。
@@ -156,6 +157,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

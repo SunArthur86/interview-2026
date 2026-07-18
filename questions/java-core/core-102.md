@@ -15,6 +15,7 @@ memory_points:
 - Error类：系统级错误(如OOM)，程序无法也不应捕获恢复
 - 受检异常：编译器强制try-catch或throws，多用于外部依赖(如IO异常)
 - 运行时异常：编译器不强制，多因代码逻辑缺陷(如空指针/越界)，可全局拦截
+frequency: high
 ---
 
 # 什么是异常分类？
@@ -128,6 +129,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -11,8 +11,8 @@ tags:
 - 精排
 - 面经
 feynman:
-  essence: "Reranker是检索结果的精排环节——用Cross-Encoder把query和doc拼在一起送入模型，通过深度交叉交互获得更高精度"
-  analogy: "召回阶段像海选——双塔模型快速从万人中挑出20个候选人（各打各的分，快但粗）。精排阶段像决赛——Cross-Encoder把query和doc放在一起仔细对比（交叉互动，慢但准）。两阶段架构=海选+决赛"
+  essence: Reranker是检索结果的精排环节——用Cross-Encoder把query和doc拼在一起送入模型，通过深度交叉交互获得更高精度
+  analogy: 召回阶段像海选——双塔模型快速从万人中挑出20个候选人（各打各的分，快但粗）。精排阶段像决赛——Cross-Encoder把query和doc放在一起仔细对比（交叉互动，慢但准）。两阶段架构=海选+决赛
   key_points:
   - Bi-Encoder（双塔）：query和doc分别编码再算相似度，速度快但无交叉交互
   - Cross-Encoder（交叉编码器）：query+doc拼接后一起过模型，精度高但慢
@@ -20,9 +20,9 @@ feynman:
   - 常用Reranker：bge-reranker、Cohere Rerank、Jina Reranker
   - 精排通常提升nDCG@5约10-20%
 first_principle:
-  essence: "检索精度取决于模型能否捕捉query和doc之间的细粒度交互。双塔模型因计算效率约束无法做到，Cross-Encoder可以"
-  derivation: "Bi-Encoder将query和doc分别编码为独立向量q和d，相似度=cos(q,d)。这种独立编码无法建模query中某个词与doc中某个词的交互（如query的'退货'与doc的'7天无理由'的因果关系）。Cross-Encoder将[CLS]query[SEP]doc[SEP]拼接后输入Transformer，self-attention自然建模所有词对之间的交互，输出直接是相关性分数。代价是每对query-doc都要过一次完整模型，无法预计算"
-  conclusion: "两阶段架构（召回+精排）是精度与速度的最优平衡——召回阶段用Bi-Encoder快速过滤，精排阶段用Cross-Encoder在少量候选上获得高精度"
+  essence: 检索精度取决于模型能否捕捉query和doc之间的细粒度交互。双塔模型因计算效率约束无法做到，Cross-Encoder可以
+  derivation: Bi-Encoder将query和doc分别编码为独立向量q和d，相似度=cos(q,d)。这种独立编码无法建模query中某个词与doc中某个词的交互（如query的'退货'与doc的'7天无理由'的因果关系）。Cross-Encoder将[CLS]query[SEP]doc[SEP]拼接后输入Transformer，self-attention自然建模所有词对之间的交互，输出直接是相关性分数。代价是每对query-doc都要过一次完整模型，无法预计算
+  conclusion: 两阶段架构（召回+精排）是精度与速度的最优平衡——召回阶段用Bi-Encoder快速过滤，精排阶段用Cross-Encoder在少量候选上获得高精度
 follow_up:
 - Cross-Encoder为什么不能预计算doc向量？
 - Reranker模型的训练数据怎么获取？（人工标注、点击日志、蒸馏）
@@ -33,6 +33,7 @@ memory_points:
 - Cross-Encoder=拼接输入→直接出分数，准但慢
 - 两阶段：召回Top20（快）→精排Top5（准）
 - 常用：bge-reranker、Cohere Rerank
+frequency: medium
 ---
 
 # 【RAG混合检索】Reranker是什么？为什么需要精排？
@@ -180,6 +181,7 @@ flowchart TD
     style VEC fill:#FF9800,color:#fff
     style BM fill:#9C27B0,color:#fff
     style RRF fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

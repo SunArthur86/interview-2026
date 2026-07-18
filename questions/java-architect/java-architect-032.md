@@ -9,9 +9,11 @@ tags:
 - 顺序
 - 幂等
 feynman:
-  essence: 消息顺序的本质是"局部有序"——同 key 进同分区保序；重复消费的根因是网络重试与 offset 提交滞后；幂等落库的工程解是"业务唯一键 + 数据库唯一索引"做最后兜底，而不是寄希望于 MQ 的 exactly-once。
+  essence: 消息顺序的本质是"局部有序"——同 key 进同分区保序；重复消费的根因是网络重试与 offset 提交滞后；幂等落库的工程解是"业务唯一键
+    + 数据库唯一索引"做最后兜底，而不是寄希望于 MQ 的 exactly-once。
   analogy: 像 JD 物流按订单号分拣：同一订单的"下单→支付→发货"必须走同一条传送带（同 key 同分区）才保序；快递员投递失败会重投（重复消费），收件人要凭取件码（幂等键）只取一次不重复签收。
-  first_principle: 全局有序与高吞吐不可兼得（全局有序意味着单分区单消费者）。所以工程上放弃全局有序，只承诺"按业务 key 局部有序"。重复消费无法从协议层根除（at-least-once 是默认），只能用幂等把"重复"转化为"幂等无害"。
+  first_principle: 全局有序与高吞吐不可兼得（全局有序意味着单分区单消费者）。所以工程上放弃全局有序，只承诺"按业务 key 局部有序"。重复消费无法从协议层根除（at-least-once
+    是默认），只能用幂等把"重复"转化为"幂等无害"。
   key_points:
   - 顺序保证靠分区：同 key 同分区严格有序，跨分区无序
   - 重复消费根因：producer 重试、consumer offset 提交前宕机、rebalance 重分配
@@ -24,19 +26,21 @@ first_principle:
   - 全局有序与高吞吐互斥（全局有序 = 单分区 = 串行）
   - 网络不可靠，重试必然带来重复
   - 数据库唯一索引是幂等的最后兜底，比任何应用层判重都可靠
-  rebuild: 把"全局有序"降级为"按业务 key 局部有序"（同订单/用户 key 进同分区），用 producer 幂等 + at-least-once 消费避免丢消息，重复消费用数据库唯一索引或状态机转化为幂等。三者组合：分区保序 + at-least-once 不丢 + 业务幂等去重 = 工程上的"可靠有序消费"。
+  rebuild: 把"全局有序"降级为"按业务 key 局部有序"（同订单/用户 key 进同分区），用 producer 幂等 + at-least-once
+    消费避免丢消息，重复消费用数据库唯一索引或状态机转化为幂等。三者组合：分区保序 + at-least-once 不丢 + 业务幂等去重 = 工程上的"可靠有序消费"。
 follow_up:
-  - 全局有序怎么办？——单分区单消费者，吞吐极低，只适合配置变更、Binlog 同步等低 QPS 场景；高 QPS 全局有序是反模式
-  - 顺序消息怎么扩容？——分区数固定时只能纵向扩（单消费者提速）；要横向扩必须重新设计 key 路由（如按 user_id % N 拆 N 个子 topic）
-  - Redis 令牌幂等可靠吗？——单独 Redis 不可靠（宕机丢令牌）。要 Redis + DB 双保险：Redis 快判重拦 99%，DB 唯一索引兜底拦 1%
-  - 状态机幂等怎么做？——定义合法状态转移（INIT→PAID→SHIPPED），消息带目标状态，UPDATE WHERE status IN (合法前置) 只命中一次
-  - 乱序怎么发现？——给消息加 seq 字段，消费端校验 seq 递增，断裂告警；或按业务时间戳对账发现后到的旧消息
+- 全局有序怎么办？——单分区单消费者，吞吐极低，只适合配置变更、Binlog 同步等低 QPS 场景；高 QPS 全局有序是反模式
+- 顺序消息怎么扩容？——分区数固定时只能纵向扩（单消费者提速）；要横向扩必须重新设计 key 路由（如按 user_id % N 拆 N 个子 topic）
+- Redis 令牌幂等可靠吗？——单独 Redis 不可靠（宕机丢令牌）。要 Redis + DB 双保险：Redis 快判重拦 99%，DB 唯一索引兜底拦 1%
+- 状态机幂等怎么做？——定义合法状态转移（INIT→PAID→SHIPPED），消息带目标状态，UPDATE WHERE status IN (合法前置) 只命中一次
+- 乱序怎么发现？——给消息加 seq 字段，消费端校验 seq 递增，断裂告警；或按业务时间戳对账发现后到的旧消息
 memory_points:
-  - 顺序 = 同 key 同分区，全局有序是反模式
-  - 重复根因 = producer 重试 + offset 滞后 + rebalance
-  - 幂等三件套：业务唯一键 + DB 唯一索引 + 状态机
-  - 顺序消费必须单分区单消费者，要并发就牺牲顺序
-  - at-least-once + 业务幂等是工业标准答案，exactly-once 跨系统是伪命题
+- 顺序 = 同 key 同分区，全局有序是反模式
+- 重复根因 = producer 重试 + offset 滞后 + rebalance
+- 幂等三件套：业务唯一键 + DB 唯一索引 + 状态机
+- 顺序消费必须单分区单消费者，要并发就牺牲顺序
+- at-least-once + 业务幂等是工业标准答案，exactly-once 跨系统是伪命题
+frequency: high
 ---
 
 # 【Java 后端架构师】消息顺序、重复消费与幂等落库
@@ -412,6 +416,45 @@ public void onMessage(OrderEvent event) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class At process
+    class B decision
+    class C special
+    class Cluster error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class INIT info
+    class J start
+    class K process
+    class Kafka decision
+    class Key special
+    class L error
+    class Least info
+    class M start
+    class N process
+    class O decision
+    class Offset special
+    class Once error
+    class Order_ID info
+    class Producer start
+    class Rebalance process
+    class Redis decision
+    class Seq special
+    class UPDATE error
+    class WHERE info
+    class hash start
+    class murmur2 process
+    class status decision
     A[Producer 生产者] -->|按 Order_ID 做 Key| B[Kafka Cluster]
     B -->|murmur2 hash| C[同 Key 路由至同分区]
     C --> D[单分区单消费者串行处理]

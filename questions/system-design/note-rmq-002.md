@@ -34,6 +34,7 @@ memory_points:
 - Broker瓶颈答：刷盘策略(ASYNC→更高效)、磁盘IO排查(iostat)、参数调优
 - 顺序消费场景不能直接加消费者——需按业务Key做分区，同Key消息同队列
 - 面试教训：别把Broker问题扯到分区数量上去，要说刷盘/IO/参数调优
+frequency: high
 ---
 
 # 【大厂二面】RocketMQ 消息积压怎么排查？
@@ -290,6 +291,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

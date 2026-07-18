@@ -9,11 +9,16 @@ tags:
 - JVM
 - 内存
 feynman:
-  essence: 容器化 JVM 参数的核心是"让 JVM 各内存区（堆/Metaspace/线程栈/直接内存/CodeCache/GC overhead）总和与容器 cgroup memory limit 对齐"。堆用 MaxRAMPercentage 自适应，非堆各区显式设上限，总水位留 25% 安全余量。CPU 用 CFS 调度，limit 过低导致 throttle 被 JVM 误判为 STW。
-  analogy: 像往一个固定容量（容器 limit）的行李箱里装东西。堆是最大的箱子（占 75%），元空间、线程栈、直接内存、JIT cache 是小袋子，还要留缝隙（GC overhead 和安全余量）。只算大箱子不算小袋子，拉链拉不上（OOMKilled）。
-  first_principle: JVM 进程内存 ≠ 堆内存。进程内存 = 堆 + Metaspace + 线程栈×N + 直接内存 + CodeCache + GC 内部结构 + JIT。容器的 memory limit 针对整个进程，任何一区失控都可能超限。L4 难度在于要精确量化每区水位并动态调优。
+  essence: 容器化 JVM 参数的核心是"让 JVM 各内存区（堆/Metaspace/线程栈/直接内存/CodeCache/GC overhead）总和与容器
+    cgroup memory limit 对齐"。堆用 MaxRAMPercentage 自适应，非堆各区显式设上限，总水位留 25% 安全余量。CPU 用
+    CFS 调度，limit 过低导致 throttle 被 JVM 误判为 STW。
+  analogy: 像往一个固定容量（容器 limit）的行李箱里装东西。堆是最大的箱子（占 75%），元空间、线程栈、直接内存、JIT cache 是小袋子，还要留缝隙（GC
+    overhead 和安全余量）。只算大箱子不算小袋子，拉链拉不上（OOMKilled）。
+  first_principle: JVM 进程内存 ≠ 堆内存。进程内存 = 堆 + Metaspace + 线程栈×N + 直接内存 + CodeCache
+    + GC 内部结构 + JIT。容器的 memory limit 针对整个进程，任何一区失控都可能超限。L4 难度在于要精确量化每区水位并动态调优。
   key_points:
-  - JVM 进程内存公式：堆 + Metaspace + (Xss × 线程数) + 直接内存 + CodeCache + GC overhead + 安全余量 < 容器 limit
+  - JVM 进程内存公式：堆 + Metaspace + (Xss × 线程数) + 直接内存 + CodeCache + GC overhead + 安全余量
+    < 容器 limit
   - 堆：MaxRAMPercentage=75（自适应），不用 -Xmx 硬编码
   - 非堆必须显式限制：MaxMetaspaceSize、MaxDirectMemorySize、Xss
   - GC overhead：G1 预留 10-20%（Region 元数据、marking bitmap），ZGC 预留更多（barrier、colored pointer）
@@ -25,20 +30,27 @@ first_principle:
   - 容器 memory limit 是整个进程的硬上限（含堆+非堆+JVM overhead）
   - 堆只是进程内存的一部分，非堆区（Metaspace、线程栈、直接内存）失控同样导致 OOMKilled
   - GC 收集器自身有内存开销（G1 Region 元数据、ZGC barrier），不能忽略
-  rebuild: 三步量化——第一，用 NMT（-XX:NativeMemoryTracking=detail）看 JVM 各区实际占用。第二，堆用 MaxRAMPercentage=75，非堆各区显式设上限（Metaspace 256M、DirectMemory 512M、Xss 512k），GC overhead 预留堆的 15%。第三，总和 < limit×0.75，留 25% 给容器开销和突发。监控 container_memory_working_set_bytes 接近 limit 时告警。
+  rebuild: 三步量化——第一，用 NMT（-XX:NativeMemoryTracking=detail）看 JVM 各区实际占用。第二，堆用 MaxRAMPercentage=75，非堆各区显式设上限（Metaspace
+    256M、DirectMemory 512M、Xss 512k），GC overhead 预留堆的 15%。第三，总和 < limit×0.75，留 25%
+    给容器开销和突发。监控 container_memory_working_set_bytes 接近 limit 时告警。
 follow_up:
-  - 怎么看 JVM 进程实际占了多少内存？——用 NMT（-XX:NativeMemoryTracking=detail），jcmd <pid> VM.native_memory summary 看各区分详细。或看 /proc/<pid>/status 的 VmRSS（进程实际驻留内存）
-  - 直接内存泄漏怎么排查？——jcmd <pid> VM.native_memory detail 看 Direct ByteBuffer 部分；或 unsafe.dumpMemory；或用 jemalloc heap profiling。Netty 的 directMemory 要监控 ResourceLeakDetector
-  - 线程栈占内存怎么算？——Xss（默认 1MB）× 线程数。200 线程 = 200MB。线程泄漏（线程池无上限）会让线程栈暴涨。监控 jvm_threads_live_threads，设线程池上限
-  - ZGC 比 G1 多占多少内存？——ZGC 有 barrier overhead（每个对象引用染色）和 concurrent marking 结构，额外占堆的 10-15%。64G 堆 ZGC 比 G1 多占 6-10G。小堆（<4G）ZGC 不划算
-  - -XX:ReservedCodeCacheSize 要设多少？——默认 240MB（JDK 11+），一般够用。如果 JIT 频繁（动态生成代码的框架如 Groovy），调到 512MB。CodeCache 满了会触发 deoptimization（回解释执行，性能骤降）
+- 怎么看 JVM 进程实际占了多少内存？——用 NMT（-XX:NativeMemoryTracking=detail），jcmd <pid> VM.native_memory
+  summary 看各区分详细。或看 /proc/<pid>/status 的 VmRSS（进程实际驻留内存）
+- 直接内存泄漏怎么排查？——jcmd <pid> VM.native_memory detail 看 Direct ByteBuffer 部分；或 unsafe.dumpMemory；或用
+  jemalloc heap profiling。Netty 的 directMemory 要监控 ResourceLeakDetector
+- 线程栈占内存怎么算？——Xss（默认 1MB）× 线程数。200 线程 = 200MB。线程泄漏（线程池无上限）会让线程栈暴涨。监控 jvm_threads_live_threads，设线程池上限
+- ZGC 比 G1 多占多少内存？——ZGC 有 barrier overhead（每个对象引用染色）和 concurrent marking 结构，额外占堆的
+  10-15%。64G 堆 ZGC 比 G1 多占 6-10G。小堆（<4G）ZGC 不划算
+- -XX:ReservedCodeCacheSize 要设多少？——默认 240MB（JDK 11+），一般够用。如果 JIT 频繁（动态生成代码的框架如 Groovy），调到
+  512MB。CodeCache 满了会触发 deoptimization（回解释执行，性能骤降）
 memory_points:
-  - 进程内存 = 堆 + Metaspace + Xss×线程数 + 直接内存 + CodeCache + GC overhead
-  - MaxRAMPercentage=75 设堆，非堆各区显式限制
-  - NMT（NativeMemoryTracking）看各区分详细
-  - GC overhead：G1 约 15%，ZGC 约 15-20%（含 barrier）
-  - 安全余量 25%，总水位 < limit×0.75
-  - 监控 container_memory_working_set_bytes，接近 limit 告警
+- 进程内存 = 堆 + Metaspace + Xss×线程数 + 直接内存 + CodeCache + GC overhead
+- MaxRAMPercentage=75 设堆，非堆各区显式限制
+- NMT（NativeMemoryTracking）看各区分详细
+- GC overhead：G1 约 15%，ZGC 约 15-20%（含 barrier）
+- 安全余量 25%，总水位 < limit×0.75
+- 监控 container_memory_working_set_bytes，接近 limit 告警
+frequency: high
 ---
 
 # 【Java 后端架构师】容器化 JVM 参数与内存水位
@@ -51,6 +63,66 @@ memory_points:
 
 ```mermaid
 graph TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class C start
+    class CGLIB process
+    class Class decision
+    class CodeCache special
+    class D error
+    class DirectByteBuffer info
+    class Eden start
+    class G process
+    class G1 decision
+    class GB special
+    class GC error
+    class Groovy info
+    class H start
+    class Heap process
+    class J decision
+    class JIT special
+    class JVM error
+    class Java info
+    class Klass start
+    class LIMIT process
+    class M decision
+    class MB special
+    class MaxDirectMemorySize error
+    class MaxMetaspaceSize info
+    class MaxRAMPercentage start
+    class Metaspace process
+    class NIO decision
+    class Netty special
+    class Old error
+    class Proxy info
+    class RSS start
+    class Region process
+    class ReservedCodeCacheSize decision
+    class Survivor special
+    class T error
+    class WARN info
+    class Xss start
+    class ZGC process
+    class barrier decision
+    class bitmap special
+    class br error
+    class card info
+    class colored start
+    class deoptimization process
+    class libjvm decision
+    class limit special
+    class mark error
+    class memory info
+    class overhead start
+    class pointer process
+    class remembered decision
+    class set special
+    class so error
+    class table info
     LIMIT["容器 memory limit = 8 GB<br/>JVM 进程 RSS ≈ 7.0-7.5 GB"]
     LIMIT --> H["1. Java 堆 Heap = 6 GB MaxRAMPercentage=75<br/>Eden + Survivor + Old G1/ZGC<br/>对象实例、数组"]
     LIMIT --> M["2. Metaspace = 256 MB MaxMetaspaceSize=256m<br/>Klass 元信息、常量池、方法字节码<br/>动态生成的 Class CGLIB/Groovy/反射 Proxy"]

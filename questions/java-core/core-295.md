@@ -15,6 +15,7 @@ memory_points:
 - 核心口诀：分已排序和未排序两区，将未排序元素依次插入到已排序区的正确位置
 - 性能对比：最好O(n)对基本有序数据极快，最坏和平均为O(n²)
 - 特性结论：空间O(1)且为稳定排序，是高级算法处理小规模数据的利器
+frequency: low
 ---
 
 # 插入排序的原理和时间复杂度是什么？
@@ -90,6 +91,39 @@ public void sort(int[] arr) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class M start
+    class N process
+    class O decision
+    class Online special
+    class P error
+    class Q info
+    class R start
+    class S process
+    class a decision
+    class br special
+    class i error
+    class j info
+    class key start
+    class low process
+    class n decision
     A[插入排序] --> B[类比整理扑克牌]
     B --> C[把当前元素插入前面已排序区]
     C --> D[从后向前比较]

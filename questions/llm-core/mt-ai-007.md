@@ -29,6 +29,7 @@ memory_points:
 - 因为T控制整体随机性，所以T越低越确定(代码T<0.3)，T越高越发散(创意T>0.7)
 - Top-P核基选：动态截断累积概率(常设0.9)，比Top-K固定截断更自然
 - 进阶加速：投机采样用小模型草拟+大模型验证，实现2-3倍无损加速
+frequency: medium
 ---
 
 # 【美团面经】了解大模型的解码策略吗？简要说一说
@@ -144,6 +145,12 @@ flowchart TD
     style N1 fill:#FF9800,color:#fff
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

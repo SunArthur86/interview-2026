@@ -10,7 +10,8 @@ tags:
 - 框架
 feynman:
   essence: Netty 是基于 Java NIO 的异步事件驱动网络框架，它把"高性能、可维护"的网络服务器/客户端开发从一件只有网络专家才能做对的事，变成一件普通工程师也能快速上手的事。
-  analogy: 原生 Java NIO 就像一台手动挡赛车——跑得快但离合、换挡、油离配合全要自己来，新手很容易熄火。Netty 就是给这台赛车装上了自动变速箱 + 辅助驾驶，你只需要踩油门（写业务逻辑），底层复杂操作它全帮你搞定。
+  analogy: 原生 Java NIO 就像一台手动挡赛车——跑得快但离合、换挡、油离配合全要自己来，新手很容易熄火。Netty 就是给这台赛车装上了自动变速箱
+    + 辅助驾驶，你只需要踩油门（写业务逻辑），底层复杂操作它全帮你搞定。
   key_points:
   - 本质=异步+事件驱动+基于NIO
   - 解决网络IO/多线程并发/编程技巧三大领域的复杂性
@@ -24,14 +25,15 @@ first_principle:
   - 可维护性 = 可测试 + 可模块化 + 可复用(设计模式)
   rebuild: 从"大量连接少量线程"第一性需求出发→Java提供了NIO的非阻塞能力，但API太难用→Netty用事件驱动模型封装NIO(连接/读写/异常都变成事件)→再分层抽象(Channel/EventLoop/Pipeline)把网络层和业务层解耦→最终业务开发只需写ChannelHandler。
 follow_up:
-  - Netty 相比直接用 Java NIO 简化了什么？
-  - Netty 为什么不基于 AIO？
-  - Mina 和 Netty 的区别？
+- Netty 相比直接用 Java NIO 简化了什么？
+- Netty 为什么不基于 AIO？
+- Mina 和 Netty 的区别？
 memory_points:
-  - 一句话定义：Netty是异步的、事件驱动的网络应用框架，用于快速开发可维护的高性能协议服务端/客户端
-  - 三大领域：网络IO + 多线程并发 + 编程技巧，Netty优雅地处理了它们
-  - 核心能力：让网络编程新手也能开发支撑2万并发且无性能损失的系统
-  - 五特性：Design设计 + Ease易用 + Performance性能 + Security安全 + Community社区
+- 一句话定义：Netty是异步的、事件驱动的网络应用框架，用于快速开发可维护的高性能协议服务端/客户端
+- 三大领域：网络IO + 多线程并发 + 编程技巧，Netty优雅地处理了它们
+- 核心能力：让网络编程新手也能开发支撑2万并发且无性能损失的系统
+- 五特性：Design设计 + Ease易用 + Performance性能 + Security安全 + Community社区
+frequency: high
 ---
 
 # Netty 是什么？为什么需要它？
@@ -242,6 +244,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

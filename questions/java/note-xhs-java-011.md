@@ -13,8 +13,8 @@ tags:
 - JVM
 - 面经
 feynman:
-  essence: "线上OOM排查的核心是拿到Heap Dump文件，用MAT分析大对象和引用链，定位是内存泄漏还是内存溢出"
-  analogy: "就像家里水管爆了——先关总阀（限流降级），然后拍照取证（Dump），最后请管道工（MAT）分析是哪个水管漏了（哪个对象泄漏了）"
+  essence: 线上OOM排查的核心是拿到Heap Dump文件，用MAT分析大对象和引用链，定位是内存泄漏还是内存溢出
+  analogy: 就像家里水管爆了——先关总阀（限流降级），然后拍照取证（Dump），最后请管道工（MAT）分析是哪个水管漏了（哪个对象泄漏了）
   key_points:
   - OOM类型：堆溢出、元空间溢出、GC开销超限、直接内存溢出
   - 排查核心：Heap Dump → MAT分析 → 找到GC Root引用链
@@ -22,9 +22,9 @@ feynman:
   - MAT关键视图：Dominator Tree（支配树）、Leak Suspects（泄漏嫌疑）
   - 常见泄漏：静态集合不断增长、ThreadLocal未清理、连接未关闭
 first_principle:
-  essence: "OOM的本质是'内存需求超过供给'。要么是泄漏（垃圾无法回收），要么是溢出（确实用太多了）"
-  derivation: "JVM堆有限→对象不断创建→GC回收速度跟不上→堆满→OutOfMemoryError→需要分析哪些对象占满了堆→Heap Dump→MAT找到引用链→定位代码"
-  conclusion: "排查OOM = 拿到Dump + 分析大对象 + 追溯GC Root → 定位泄漏源"
+  essence: OOM的本质是'内存需求超过供给'。要么是泄漏（垃圾无法回收），要么是溢出（确实用太多了）
+  derivation: JVM堆有限→对象不断创建→GC回收速度跟不上→堆满→OutOfMemoryError→需要分析哪些对象占满了堆→Heap Dump→MAT找到引用链→定位代码
+  conclusion: 排查OOM = 拿到Dump + 分析大对象 + 追溯GC Root → 定位泄漏源
 follow_up:
 - 如果OOM发生时没有生成Dump文件怎么办？（见note-xhs-java-012）
 - 元空间OOM和堆OOM的排查方法有什么不同？
@@ -36,6 +36,7 @@ memory_points:
 - Heap Dump参数：-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/path
 - MAT两大视图：Dominator Tree看谁占内存大，Leak Suspects自动分析
 - Retained Heap = 对象本身大小 + 它持有的所有引用大小
+frequency: high
 ---
 
 # 【拼多多 Java服务端】线上系统突然OOM了，怎么排查？
@@ -218,6 +219,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

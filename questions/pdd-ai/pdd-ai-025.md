@@ -28,14 +28,15 @@ first_principle:
   - 实验要快（数据/统计）
   rebuild: 实验平台（正交分流 + 双链路指标 + 显著性 + 加速技术）。
 follow_up:
-  - 千实验怎么不互相干扰？——正交分层（每层独立分流）
-  - 怎么缩短实验周期？——Interleaving 1-2 天，CUPED 减方差
-  - 指标冲突怎么决策？——核心指标优先 + 长期护栏 + 分群下钻
+- 千实验怎么不互相干扰？——正交分层（每层独立分流）
+- 怎么缩短实验周期？——Interleaving 1-2 天，CUPED 减方差
+- 指标冲突怎么决策？——核心指标优先 + 长期护栏 + 分群下钻
 memory_points:
-  - 分流：MurmurHash + 正交分层
-  - 指标：实时 Flink + 离线 Hive
-  - 显著性：p<0.05 + 效应大小
-  - 加速：Interleaving + CUPED
+- 分流：MurmurHash + 正交分层
+- 指标：实时 Flink + 离线 Hive
+- 显著性：p<0.05 + 效应大小
+- 加速：Interleaving + CUPED
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】实验平台架构怎么设计？A/B + 灰度怎么做？
@@ -46,6 +47,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ANALYZE start
+    class BIZ process
+    class COLLECT decision
+    class CONSOLE special
+    class CUPED error
+    class Flink info
+    class HTTP start
+    class Hive process
+    class Interleaving decision
+    class Kafka special
+    class MurmurHash error
+    class OFF info
+    class ROUTER start
+    class RT process
+    class SDK decision
+    class Spark special
+    class T error
+    class Web info
+    class br start
+    class layer process
+    class uid decision
     CONSOLE["实验运营后台 Web<br/>创建/编辑/审批/灰度/分析<br/>指标定义/分流配置"]
     ROUTER["分流服务 SDK/HTTP，毫秒级<br/>MurmurHash uid + layer % 10000<br/>正交分层 多实验互不干扰<br/>流量互斥/共享配置"]
     BIZ[业务系统 请求时调分流 SDK]

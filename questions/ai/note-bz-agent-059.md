@@ -31,6 +31,7 @@ memory_points:
 - 分块追问：定值需权衡（如选500保平衡），进阶用父子分块兼顾精准与上下文
 - 召回率低排查：查输入(语义鸿沟做改写)、查检索(加BM25混合)、查数据(分块是否切断语义)
 - 防幻觉三招：Prompt强约束 + 后处理做忠实度校验 + 强制标注信息来源
+frequency: medium
 ---
 
 # 美团 Agent 二面：知识库检索会怎么问到底？
@@ -242,6 +243,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

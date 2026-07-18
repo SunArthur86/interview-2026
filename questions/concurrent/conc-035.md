@@ -16,6 +16,7 @@ memory_points:
 - MVCC机制：快照读不加锁，靠 undo log + Read View 实现读写不阻塞
 - 隔离级别：RC 每次Select生成新视图，而 RR 仅首次生成视图保证可重复读
 - 实战秒杀：用 `UPDATE ... WHERE version=?` 乐观锁，避免 for update 长事务阻塞
+frequency: high
 ---
 
 # 数据库并发控制策略有哪些？
@@ -104,6 +105,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

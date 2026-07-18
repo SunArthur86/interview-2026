@@ -15,6 +15,7 @@ memory_points:
 - 验证流向：客户端从下往上，依次用上级公钥验证下级证书的签名。
 - 中间CA作用：隔离保护根证书私钥离线安全，便于分级管理吊销。
 - 断链避坑：Nginx配置需拼接完整链(服务器+中间)，否则部分端校验失败。
+frequency: medium
 ---
 
 # 什么是证书信任链？
@@ -113,6 +114,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

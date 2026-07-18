@@ -16,6 +16,7 @@ memory_points:
 - 优缺点对比：因为少一层代理所以性能好、架构简单，但多语言需各自实现SDK。
 - 高频对比：客户端发现直连服务端（1跳），而服务端发现经由LB代理（2跳）。
 - 容灾机制：因注册中心宕机有风险，所以客户端需开启本地缓存（如默认30s）兜底。
+frequency: medium
 ---
 
 # 微服务中客户端发现模式的工作原理是什么？
@@ -128,6 +129,7 @@ flowchart TD
     style EVENTUAL fill:#9C27B0,color:#fff
     style FAIL_FAST fill:#F44336,color:#fff
     style COORD fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

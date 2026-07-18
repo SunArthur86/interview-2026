@@ -22,6 +22,7 @@ memory_points:
 - 机制对比：TCP保活是发心跳探针防半开，HTTP保活是复用TCP连接防握手。
 - 默认参数：TCP保活通常默认关闭探测长达2小时，HTTP保活1.1后默认开启。
 - 实战避坑：因NAT超时断连，生产通常不依赖TCP探针，而由应用层发自定义心跳。
+frequency: low
 ---
 
 # TCP 的 Keepalive 和 HTTP 的 Keep-Alive 是一个东西吗？
@@ -128,6 +129,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

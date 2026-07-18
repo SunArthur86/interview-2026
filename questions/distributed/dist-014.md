@@ -17,6 +17,7 @@ memory_points:
 - 非业务功能：鉴权、限流熔断、协议转换与灰度发布等统一前置处理。
 - 高可用保障：网关自身须无状态，前置 LVS/Nginx 做负载并集群部署。
 - 性能避坑：复杂业务聚合会拖慢响应，建议下沉至后端 BFF 层处理。
+frequency: medium
 ---
 
 # 微服务中API网关的作用是什么？
@@ -124,6 +125,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

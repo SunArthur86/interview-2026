@@ -10,8 +10,11 @@ tags:
 - JSON
 - 结构化输出
 feynman:
-  essence: 让模型稳定输出标准 JSON Schema 的五层手段：①Prompt 层明确要求+给few-shot ②Schema 设计精简(字段少/命名直观/加description) ③模型层用支持 Structured Output 的接口(response_format json_schema)④Constrained Decoding(FSM 约束生成)⑤后处理兜底(regex提取/Pydantic校验/失败重试)。越靠前越便宜，越靠后越兜底。
-  analogy: 像让小学生写规范作文——先讲清楚要求(Prompt)，给范文(Schema+few-shot)，用作文格子纸(Structured Output API)，写错字涂改(Constrained Decoding)，最后老师检查批改(后处理)。
+  essence: 让模型稳定输出标准 JSON Schema 的五层手段：①Prompt 层明确要求+给few-shot ②Schema 设计精简(字段少/命名直观/加description)
+    ③模型层用支持 Structured Output 的接口(response_format json_schema)④Constrained Decoding(FSM
+    约束生成)⑤后处理兜底(regex提取/Pydantic校验/失败重试)。越靠前越便宜，越靠后越兜底。
+  analogy: 像让小学生写规范作文——先讲清楚要求(Prompt)，给范文(Schema+few-shot)，用作文格子纸(Structured Output
+    API)，写错字涂改(Constrained Decoding)，最后老师检查批改(后处理)。
   first_principle: JSON 输出的不稳定源于 LLM 生成的随机性。解法是从"引导"到"约束"到"兜底"多层防御，每层成本递增、可靠性递增。
   key_points:
   - 'Prompt层: 明确要求+给few-shot示范'
@@ -21,7 +24,8 @@ feynman:
   - '后处理兜底: regex提取/Pydantic校验/失败重试'
 first_principle:
   essence: JSON 稳定输出 = 引导 + 约束 + 兜底多层防御
-  derivation: LLM 生成随机 → 单层不可靠 → Prompt引导(便宜) → Schema设计(便宜) → API约束(中) → Decoding约束(中) → 后处理兜底(贵) → 多层配合
+  derivation: LLM 生成随机 → 单层不可靠 → Prompt引导(便宜) → Schema设计(便宜) → API约束(中) → Decoding约束(中)
+    → 后处理兜底(贵) → 多层配合
   conclusion: 没有"一句话搞定"的方法，是 5 层防御体系的工程问题
 follow_up:
 - Constrained Decoding 的 FSM 怎么构造？
@@ -33,6 +37,7 @@ memory_points:
 - 因果逻辑：因为模型靠description理解字段，所以命名直观和描述详尽至关重要
 - 约束解码原理：把JSON结构变FSM状态机，每步仅允许生成能转移到合法状态的token
 - 参数经验：chunk_size推荐200-500，overlap设10-20%防边界切断关键信息
+frequency: high
 ---
 
 # 【某讯面经】如何稳定让模型输出标准 JSON Schema？
@@ -232,6 +237,27 @@ def parse_model_output(raw: str) -> OrderInfo:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class Few start
+    class G process
+    class H decision
+    class I special
+    class Schema error
+    class br info
+    class shot start
+    class strict process
+    class true decision
     A["用户请求与目标JSON Schema"] --> B["Prompt层<br/>明确要求+Few-shot"]
     B --> C["API限制层<br/>strict=true"]
     C --> D["Schema设计层<br/>精简字段+枚举"]

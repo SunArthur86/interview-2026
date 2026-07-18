@@ -30,6 +30,7 @@ memory_points:
 - 两大顽疾：资源与结论冲突，以及互相推诿或重试导致的死循环
 - 防冲突四板斧：划定角色边界、共享资源加锁、引入投票/LLM仲裁机制、设定优先级抢占
 - 防死循环三招：全局步数硬上限兜底、状态指纹做环检测、失败次数熔断不再重试
+frequency: medium
 ---
 
 # 多 Agent 怎么避免冲突和无限循环？
@@ -289,6 +290,7 @@ flowchart TD
     style GW fill:#FF9800,color:#fff
     style SHARED fill:#9C27B0,color:#fff
     style JUDGE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

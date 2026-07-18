@@ -14,18 +14,20 @@ tags:
 - redo-log
 - 面经
 feynman:
-  essence: "两阶段提交是MySQL保证redo log和binlog一致性的协议：先写redo log(prepare)→再写binlog→最后提交redo log(commit)。崩溃恢复时根据两个日志的状态决定提交或回滚"
-  analogy: "两阶段提交就像签合同：第一步双方各签一份草稿（prepare），第二步互换确认无误后盖章生效（commit）。如果中途一方反悔（崩溃），根据草稿状态决定是作废还是继续"
+  essence: 两阶段提交是MySQL保证redo log和binlog一致性的协议：先写redo log(prepare)→再写binlog→最后提交redo
+    log(commit)。崩溃恢复时根据两个日志的状态决定提交或回滚
+  analogy: 两阶段提交就像签合同：第一步双方各签一份草稿（prepare），第二步互换确认无误后盖章生效（commit）。如果中途一方反悔（崩溃），根据草稿状态决定是作废还是继续
   key_points:
-  - "Phase 1: 写redo log(prepare状态)"
-  - "Phase 2: 写binlog → 写redo log(commit状态)"
+  - 'Phase 1: 写redo log(prepare状态)'
+  - 'Phase 2: 写binlog → 写redo log(commit状态)'
   - 崩溃恢复规则：有binlog+prepare → 提交；无binlog+prepare → 回滚
   - 核心矛盾：redo log(InnoDB)和binlog(Server)属于不同层，需要协议保证一致
   - 如果不2PC：redo写完binlog没写→主库有数据从库没有→主从不一致
 first_principle:
-  essence: "两阶段提交的本质是'跨系统原子性'——redo log和binlog必须同时成功或同时失败"
-  derivation: "redo log和binlog是独立的→可能一个成功一个失败→不一致→需要协调→2PC：先prepare redo→写binlog→commit redo→如果崩溃→检查binlog是否存在决定提交或回滚"
-  conclusion: "2PC = 分布式事务在MySQL内部的简化版，用prepare-commit两阶段+崩溃恢复规则保证日志一致性"
+  essence: 两阶段提交的本质是'跨系统原子性'——redo log和binlog必须同时成功或同时失败
+  derivation: redo log和binlog是独立的→可能一个成功一个失败→不一致→需要协调→2PC：先prepare redo→写binlog→commit
+    redo→如果崩溃→检查binlog是否存在决定提交或回滚
+  conclusion: 2PC = 分布式事务在MySQL内部的简化版，用prepare-commit两阶段+崩溃恢复规则保证日志一致性
 follow_up:
 - 如果redo log写完了，binlog写完了，但commit标志没写就崩溃了，怎么恢复？
 - MySQL的2PC和分布式事务的2PC(XA)有什么区别？
@@ -37,6 +39,7 @@ memory_points:
 - 崩溃恢复：binlog有记录→提交；binlog无记录→回滚
 - redo log和binlog不一致的后果：主从数据不一致
 - commit标志在redo log中，用XA ID关联binlog
+frequency: high
 ---
 
 # 【拼多多 Java服务端】两阶段提交（2PC）讲一下。崩溃恢复时怎么处理？
@@ -209,6 +212,29 @@ sync_binlog = 1  -- 每次提交都fsync binlog (推荐)
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class Commit decision
+    class Coordinator special
+    class P1 error
+    class P2 info
+    class Participant start
+    class Prepare process
+    class Voting decision
+    class YES special
+    class as error
+    class br info
+    class commit start
+    class log process
+    class prepare decision
+    class redo special
+    class rollback error
     autonumber
     participant C as 协调者 Coordinator
     participant P1 as 参与者1 Participant

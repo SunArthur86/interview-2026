@@ -25,6 +25,7 @@ memory_points:
 - 日志复制：Leader强制同步，获半数成功响应才提交(Committed)状态机
 - 安全性保障：因为Candidate日志必须比投票者新，所以保证含所有提交记录
 - 易理解原因：强Leader模型简化了冲突，且复杂问题被拆解三大独立子问题
+frequency: high
 ---
 
 # Raft 协议的 Leader 选举和日志复制流程是什么？为什么比 Paxos 更容易理解？
@@ -123,6 +124,7 @@ flowchart TD
     style COMMIT fill:#2196F3,color:#fff
     style VOTE fill:#9C27B0,color:#fff
     style STEP_DOWN fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

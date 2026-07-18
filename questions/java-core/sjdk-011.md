@@ -17,6 +17,7 @@ memory_points:
 - 模式匹配：switch支持类型匹配、when守卫、null处理及Record解构提取字段
 - 数据建模：Record作为不可变数据载体，自动生成全参及访问器；Sealed类限制继承配合穷举匹配
 - 集合统一：JDK 21引入Sequenced Collections，统一了List和Set等的正反向获取及操作API
+frequency: medium
 ---
 
 # JDK 17到JDK 21有哪些关键API改进？（除虚拟线程外）
@@ -108,6 +109,66 @@ String extractKey(Payment payment) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class B decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class B4 start
+    class C process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class C5 start
+    class CMS process
+    class Classes decision
+    class Collections special
+    class Concurrency error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class G1 special
+    class GC error
+    class Generational info
+    class H start
+    class HashMap process
+    class I decision
+    class J special
+    class JDK error
+    class K info
+    class LTS start
+    class Matching process
+    class Optional decision
+    class Parallel special
+    class Pattern error
+    class Records info
+    class Sealed start
+    class Sequenced process
+    class Stream decision
+    class String special
+    class Structured error
+    class Switch info
+    class Threads start
+    class Virtual process
+    class ZGC decision
+    class for special
+    class instanceof error
+    class isBlank info
+    class orElseThrow start
+    class repeat process
+    class strip decision
+    class switch special
+    class toList error
+    class zipWith info
     A[JDK 17-21 关键改进] --> B[JDK 17 LTS]
     B --> B1[Sealed Classes 密封类]
     B --> B2[Pattern Matching instanceof]

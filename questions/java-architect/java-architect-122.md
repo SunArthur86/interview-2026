@@ -9,9 +9,13 @@ tags:
 - Istio
 - 微服务
 feynman:
-  essence: Service Mesh（服务网格）把"服务间通信治理"（流量路由/熔断/重试/加密/可观测）从应用层下沉到基础设施层（Sidecar 代理）。代表实现 Istio：Envoy 作为 Sidecar 接管进出 Pod 的流量，用 VirtualService/DestinationRule 等 CRD 配置治理策略。适用边界：① 多语言生态（治理能力统一）；② 跨团队统一治理；③ 细粒度流量控制（灰度/AB 测试）。不适用：① 极致性能场景（Sidecar 增加 1-3ms 延迟）；② 简单单体；③ 小团队（运维成本高）。
+  essence: Service Mesh（服务网格）把"服务间通信治理"（流量路由/熔断/重试/加密/可观测）从应用层下沉到基础设施层（Sidecar 代理）。代表实现
+    Istio：Envoy 作为 Sidecar 接管进出 Pod 的流量，用 VirtualService/DestinationRule 等 CRD 配置治理策略。适用边界：①
+    多语言生态（治理能力统一）；② 跨团队统一治理；③ 细粒度流量控制（灰度/AB 测试）。不适用：① 极致性能场景（Sidecar 增加 1-3ms 延迟）；②
+    简单单体；③ 小团队（运维成本高）。
   analogy: 像高速公路的"智能收费+导航系统"——每辆车（服务）配一个智能副驾（Sidecar），副驾统一管导航（路由）、收费（计费）、限速（限流）、事故救援（熔断）。司机（业务代码）只管开车，治理交给副驾。换车不用重新培训司机（多语言统一）。
-  first_principle: 微服务治理在应用层（SDK）有三痛：① 多语言重复实现（Java/Go/Python 各一套）；② 升级困难（改 SDK 要改所有服务）；③ 治理逻辑和业务耦合。Service Mesh 把治理逻辑下沉到 Sidecar（独立进程），应用只管业务。本质是"解耦"——治理能力和业务代码分离，基础设施层统一管理。
+  first_principle: 微服务治理在应用层（SDK）有三痛：① 多语言重复实现（Java/Go/Python 各一套）；② 升级困难（改 SDK 要改所有服务）；③
+    治理逻辑和业务耦合。Service Mesh 把治理逻辑下沉到 Sidecar（独立进程），应用只管业务。本质是"解耦"——治理能力和业务代码分离，基础设施层统一管理。
   key_points:
   - Service Mesh = Sidecar 代理 + 控制面（Istio）
   - Istio = Envoy（数据面）+ istiod（控制面）
@@ -26,21 +30,29 @@ first_principle:
   - 治理逻辑（路由/熔断/重试）是横切关注点，不该耦合业务
   - 多语言重复实现 SDK 成本高
   - SDK 升级要改所有服务（灰度难）
-  rebuild: Service Mesh 把治理下沉到 Sidecar。Istio 架构：数据面（Envoy，每个 Pod 一个 Sidecar 代理进出流量）+ 控制面（istiod，下发配置）。流量路径：应用 → localhost Envoy → 远端 Envoy → 远端应用（应用无感知，以为直连）。治理配置用 CRD：VirtualService（路由权重，如 90% v1 + 10% v2 灰度）、DestinationRule（熔断/连接池）。Java 应用不用改代码（Feign 调 localhost Envoy）。适用：多语言生态统一治理、跨团队标准、灰度/AB 测试。不适用：极致性能（Sidecar 加 1-3ms）、简单架构、小团队（运维成本）。
+  rebuild: Service Mesh 把治理下沉到 Sidecar。Istio 架构：数据面（Envoy，每个 Pod 一个 Sidecar 代理进出流量）+
+    控制面（istiod，下发配置）。流量路径：应用 → localhost Envoy → 远端 Envoy → 远端应用（应用无感知，以为直连）。治理配置用
+    CRD：VirtualService（路由权重，如 90% v1 + 10% v2 灰度）、DestinationRule（熔断/连接池）。Java 应用不用改代码（Feign
+    调 localhost Envoy）。适用：多语言生态统一治理、跨团队标准、灰度/AB 测试。不适用：极致性能（Sidecar 加 1-3ms）、简单架构、小团队（运维成本）。
 follow_up:
-  - Sidecar 模式性能影响？——每个请求多 2 跳（本端 Envoy + 对端 Envoy），增加 1-3ms 延迟 + CPU 开销（Envoy 约 0.5 CPU/Pod）。可通过 Sidecar 资源限制 + 连接复用优化
-  - Istio 和 Spring Cloud 区别？——Spring Cloud 是 SDK（Java 限定，治理在应用内）；Istio 是 Sidecar（多语言，治理在基础设施）。两者可共存（Spring Cloud 应用 + Istio 网格）
-  - VirtualService 怎么做灰度？——按权重路由（90% v1 + 10% v2）或按 Header（userId 匹配到 v2）。流量在 Envoy 层分流，应用无感
-  - Ambient Mesh 是什么？——Istio 1.18+ 的新模式，用 ztunnel（L4）+ waypoint proxy（L7）替代 Sidecar，减少资源开销。Sidecar 模式仍支持
-  - 什么场景不要上 Service Mesh？——① 极致性能（每 ms 必争）；② 单体/简单架构；③ 小团队（运维复杂）；④ 内部高信任网络（不需要 mTLS）
+- Sidecar 模式性能影响？——每个请求多 2 跳（本端 Envoy + 对端 Envoy），增加 1-3ms 延迟 + CPU 开销（Envoy 约 0.5
+  CPU/Pod）。可通过 Sidecar 资源限制 + 连接复用优化
+- Istio 和 Spring Cloud 区别？——Spring Cloud 是 SDK（Java 限定，治理在应用内）；Istio 是 Sidecar（多语言，治理在基础设施）。两者可共存（Spring
+  Cloud 应用 + Istio 网格）
+- VirtualService 怎么做灰度？——按权重路由（90% v1 + 10% v2）或按 Header（userId 匹配到 v2）。流量在 Envoy
+  层分流，应用无感
+- Ambient Mesh 是什么？——Istio 1.18+ 的新模式，用 ztunnel（L4）+ waypoint proxy（L7）替代 Sidecar，减少资源开销。Sidecar
+  模式仍支持
+- 什么场景不要上 Service Mesh？——① 极致性能（每 ms 必争）；② 单体/简单架构；③ 小团队（运维复杂）；④ 内部高信任网络（不需要 mTLS）
 memory_points:
-  - Service Mesh = Sidecar 代理（数据面）+ 控制面（Istio）
-  - Istio：Envoy（数据面）+ istiod（控制面）
-  - VirtualService：流量路由（权重/Header 匹配）
-  - DestinationRule：负载均衡/熔断/连接池
-  - 流量路径：应用 → Envoy → Envoy → 应用（应用无感）
-  - 适用：多语言统一/细粒度流量控制/跨团队标准
-  - 不适用：极致性能/简单架构/小团队
+- Service Mesh = Sidecar 代理（数据面）+ 控制面（Istio）
+- Istio：Envoy（数据面）+ istiod（控制面）
+- VirtualService：流量路由（权重/Header 匹配）
+- DestinationRule：负载均衡/熔断/连接池
+- 流量路径：应用 → Envoy → Envoy → 应用（应用无感）
+- 适用：多语言统一/细粒度流量控制/跨团队标准
+- 不适用：极致性能/简单架构/小团队
+frequency: high
 ---
 
 # 【Java 后端架构师】Service Mesh 在 Java 微服务中的适用边界
@@ -487,6 +499,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 结构化回答

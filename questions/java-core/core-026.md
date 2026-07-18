@@ -20,6 +20,7 @@ memory_points:
 - I/O设备是计算机与外部交换信息的硬件，分为纯输入、纯输出、双向设备（如网卡/磁盘）
 - CPU参与度越来越少：轮询最耗时，中断驱动介入中等
 - DMA方式仅在传输首尾介入，适合高速块设备；通道则是独立处理器几乎不占用CPU
+frequency: low
 ---
 
 # 什么是输入/输出设备？
@@ -117,6 +118,34 @@ CPU 效率: 最低  ->  中等  ->  高 (块数据)  ->  极高 (完全自主)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CPU special
+    class Channel error
+    class D info
+    class DMA start
+    class E process
+    class F decision
+    class F1 special
+    class G error
+    class G1 info
+    class H start
+    class H1 process
+    class I decision
+    class Interrupt special
+    class J error
+    class K info
+    class O start
+    class Programming process
+    class VFS decision
+    class br special
     A[I/O 设备] --> B[块设备<br/>磁盘 随机访问]
     A --> C[字符设备<br/>键盘/串口 流式]
     A --> D[网络设备<br/>网卡]

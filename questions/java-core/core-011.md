@@ -26,6 +26,7 @@ memory_points:
 - 四大应用：远程代理(隐藏网络)、虚拟代理(延迟加载)、保护代理(权限)、智能引用(AOP)。
 - 对比动态代理：JDK底层用反射(需接口)，而CGLIB用继承生成子类(不能是final)。
 - 实战坑点：同类内部方法调用会绕过代理，导致Spring的@Transactional事务失效。
+frequency: medium
 ---
 
 # 什么是代理模式应用？
@@ -92,6 +93,41 @@ public class PerformanceProxy implements InvocationHandler {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AOP process
+    class B decision
+    class C special
+    class CGLIB error
+    class Client info
+    class D start
+    class E process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class InvocationHandler start
+    class J process
+    class JDK decision
+    class K special
+    class L error
+    class M info
+    class Mapper start
+    class MethodInterceptor process
+    class MyBatis decision
+    class N special
+    class O error
+    class Proxy info
+    class RPC start
+    class RealSubject process
+    class Spring decision
+    class Stub special
+    class br error
     A[代理模式 Proxy] --> B[客户端 Client]
     B --> C[代理对象 Proxy]
     C --> D[真实对象 RealSubject]

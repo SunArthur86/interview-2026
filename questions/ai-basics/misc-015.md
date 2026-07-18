@@ -22,6 +22,7 @@ memory_points:
 - 显存节省：Stage1省4倍，Stage2省8倍，Stage3省N倍
 - 通信代价：Stage3需频繁All-Gather，通信量约为Stage2的1.5倍
 - 选择策略：<7B用Stage1，7-70B用Stage2，>70B用Stage3
+frequency: high
 ---
 
 # ZeRO (Zero Redundancy Optimizer)的三级优化分别是什么?如何选择
@@ -99,6 +100,33 @@ GPU 3:  [W3] [G3] [Os3]
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class All process
+    class B decision
+    class C special
+    class CPU error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class Gather special
+    class H error
+    class I info
+    class J start
+    class K process
+    class L decision
+    class M special
+    class N error
+    class Offload info
+    class Stage start
+    class ZeRO process
+    class overlap decision
     A[大模型训练显存优化] --> B[ZeRO Stage 1 切优化器状态]
     A --> C[ZeRO Stage 2 再切梯度]
     A --> D[ZeRO Stage 3 再切模型参数]

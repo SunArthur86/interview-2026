@@ -19,6 +19,7 @@ memory_points:
 - Bi-Encoder独立编码速度快，用于召回；Cross-Encoder拼接交互精度高，用于重排。
 - 流程：Bi-Encoder召回Top-50 -> Cross-Encoder精排Top-5。
 - 代价：Cross-Encoder无法缓存向量，计算开销大，仅处理少量候选。
+frequency: medium
 ---
 
 # RAG中为什么需要Reranker?Cross-Encoder和Bi-Encoder有什么区别
@@ -152,6 +153,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

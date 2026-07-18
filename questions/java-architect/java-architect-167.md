@@ -9,9 +9,11 @@ tags:
 - 合并
 - 一致性
 feynman:
-  essence: 购物车架构的核心是"跨端合并 + 按商家分组 + 实时校验"。用户在 App 加购、在 PC 也加购，要合并成一份；不同商家的商品要分组（不同商家不同运费/优惠/发货）。合并逻辑的关键键是 userId+skuId（同一 SKU 合并数量），校验的关键是实时查 SKU 状态（上下架/价格/库存）避免结算时出错。
+  essence: 购物车架构的核心是"跨端合并 + 按商家分组 + 实时校验"。用户在 App 加购、在 PC 也加购，要合并成一份；不同商家的商品要分组（不同商家不同运费/优惠/发货）。合并逻辑的关键键是
+    userId+skuId（同一 SKU 合并数量），校验的关键是实时查 SKU 状态（上下架/价格/库存）避免结算时出错。
   analogy: 像超市购物车——你上午推了一车放了牛奶，下午换了个车又放了面包。结账时两个车的商品要合到一起（跨端合并），牛奶和面包按货架分区（商家分组），结账前收银员扫一下条码确认还在卖、价格没变（实时校验）。
-  first_principle: 购物车是"用户意图的暂存区"，不是交易数据（没下单前不产生资金/库存变动）。所以存储可用最终一致（Redis 主存 + 异步落 DB），但结算时必须强校验（SKU 状态实时查），因为购物车数据可能过期。
+  first_principle: 购物车是"用户意图的暂存区"，不是交易数据（没下单前不产生资金/库存变动）。所以存储可用最终一致（Redis 主存 + 异步落
+    DB），但结算时必须强校验（SKU 状态实时查），因为购物车数据可能过期。
   key_points:
   - 存储选型：Redis Hash 主存（读写快）+ MySQL 异步落盘（持久化）
   - 合并逻辑：同 userId+skuId 合并数量，不同 sku 规格独立存储
@@ -25,19 +27,23 @@ first_principle:
   - 用户跨端加购是常态，必须合并不能各自独立
   - SKU 状态（价格/上下架/库存）可能变化，购物车快照会过期
   - 不同商家的商品运费/优惠/发货不同，必须分组处理
-  rebuild: Redis Hash 存购物车（key=cart:userId，field=skuId，value=商品快照），跨端天然共享一份。加购时按 userId+skuId+skuSpec 合并（同规格加数量，不同规格独立条目）。查询时按 seller_id 分组返回前端。结算前实时查 SKU 中心校验状态/价格/限购/库存，过期数据更新或剔除。
+  rebuild: Redis Hash 存购物车（key=cart:userId，field=skuId，value=商品快照），跨端天然共享一份。加购时按 userId+skuId+skuSpec
+    合并（同规格加数量，不同规格独立条目）。查询时按 seller_id 分组返回前端。结算前实时查 SKU 中心校验状态/价格/限购/库存，过期数据更新或剔除。
 follow_up:
-  - 未登录购物车怎么处理？——用 device_id 存临时购物车（cart:device:xxx），登录时合并到用户购物车（device 购物车的商品 merge 到 user 购物车，同 skuId 合并数量），合并后清空 device 购物车。
-  - 购物车数据放 Redis 还是 MySQL？——Redis 主存（读写快，支持百万级用户同时操作），异步落 MySQL（持久化兜底，Redis 挂了能恢复）。热数据只放 Redis，冷数据（30 天未操作）下沉 MySQL。
-  - 加购时要不要锁库存？——不要。购物车只是"意向"，加购不锁库存（否则大量库存被占用）。库存锁定在下单时（创建订单扣减预占库存）。
-  - SKU 价格变了购物车怎么显示？——购物车存的是"加购时的价格快照"，展示时实时查 SKU 中心获取当前价格，展示"当前价"并标注"降价/涨价"。结算用当前价，不用快照价。
-  - 购物车上限多少？——单车上限 100-200 个 SKU（防恶意刷 + 性能考虑）。超上限提示"已达上限"。
+- 未登录购物车怎么处理？——用 device_id 存临时购物车（cart:device:xxx），登录时合并到用户购物车（device 购物车的商品 merge
+  到 user 购物车，同 skuId 合并数量），合并后清空 device 购物车。
+- 购物车数据放 Redis 还是 MySQL？——Redis 主存（读写快，支持百万级用户同时操作），异步落 MySQL（持久化兜底，Redis 挂了能恢复）。热数据只放
+  Redis，冷数据（30 天未操作）下沉 MySQL。
+- 加购时要不要锁库存？——不要。购物车只是"意向"，加购不锁库存（否则大量库存被占用）。库存锁定在下单时（创建订单扣减预占库存）。
+- SKU 价格变了购物车怎么显示？——购物车存的是"加购时的价格快照"，展示时实时查 SKU 中心获取当前价格，展示"当前价"并标注"降价/涨价"。结算用当前价，不用快照价。
+- 购物车上限多少？——单车上限 100-200 个 SKU（防恶意刷 + 性能考虑）。超上限提示"已达上限"。
 memory_points:
-  - 存储：Redis Hash（cart:userId）主存 + MySQL 异步落盘
-  - 合并：userId + skuId + skuSpec，同规格加数量，不同规格独立
-  - 分组：按 seller_id 分组，影响运费/优惠/拆单
-  - 校验：结算前实时查 SKU 状态/价格/限购/库存
-  - 未登录：device_id 临时车，登录时 merge 到 user 车
+- 存储：Redis Hash（cart:userId）主存 + MySQL 异步落盘
+- 合并：userId + skuId + skuSpec，同规格加数量，不同规格独立
+- 分组：按 seller_id 分组，影响运费/优惠/拆单
+- 校验：结算前实时查 SKU 状态/价格/限购/库存
+- 未登录：device_id 临时车，登录时 merge 到 user 车
+frequency: medium
 ---
 
 # 【Java 后端架构师】电商购物车架构与合并逻辑
@@ -359,6 +365,32 @@ public class CartCheckoutValidator {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class App process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class Hash special
+    class I error
+    class Login info
+    class Merge start
+    class MySQL process
+    class PC decision
+    class Redis special
+    class br error
+    class deviceId info
+    class seller_id start
+    class userId process
     A[多端客户端<br/>App/PC/小程序] -->|写入 deviceId| B[未登录临时车<br/>Redis Hash]
     A -->|写入 userId| C[已登录主车<br/>Redis Hash]
     B -->|Login Merge<br/>取较大数量| C

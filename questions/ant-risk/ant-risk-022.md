@@ -35,6 +35,7 @@ memory_points:
 - 离线 Spark + 实时 Flink 双轨，靠同一 SQL 保证一致
 - 在线 HBase + Redis，离线 Hive + Iceberg
 - 特征注册要带：定义、SQL、版本、owner、TTL
+frequency: medium
 ---
 
 # 【蚂蚁风控】设计一个特征平台，支持亿级用户、千万特征、毫秒级查询
@@ -58,6 +59,45 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class Batch process
+    class DSL decision
+    class Flink special
+    class HBase error
+    class Hive info
+    class Iceberg start
+    class L1 process
+    class L2A decision
+    class L2B special
+    class L3A error
+    class L3B info
+    class L4 start
+    class L5 process
+    class Map decision
+    class Pipeline special
+    class Point error
+    class Query info
+    class Redis start
+    class Spark process
+    class T decision
+    class br special
+    class feat_names error
+    class feature info
+    class getFeatures start
+    class name process
+    class owner decision
+    class sql special
+    class ttl error
+    class type info
+    class uid start
+    class version process
+    class yaml decision
     L1[特征定义层 DSL<br/>feature.yaml: name, type, sql, ttl, owner, version]
     L2A[离线 Spark<br/>T+1 跑批<br/>千亿数据]
     L2B[实时 Flink<br/>毫秒级流式<br/>增量更新]

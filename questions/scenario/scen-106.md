@@ -25,6 +25,7 @@ memory_points:
 - 双写期间切读要灰度（按尾号或1%->10%），新库读稳后停旧库，保留旧库防回滚
 - 成倍扩容(2的N次)最高效：路由仅从hash%N变为hash%2N，数据仅迁移一半
 - 数据校验：不逐行Select，用CRC32+Count快速比对，双写失败走补偿日志
+frequency: medium
 ---
 
 # 分库分表后如何做不停机的数据迁移和扩容？
@@ -111,6 +112,7 @@ flowchart TD
     EXP[倍数扩容] --> HALF[只迁一半数据]
     style FULL fill:#d4edda
     style FIX fill:#ffcccc
+
 ```
 
 

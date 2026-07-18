@@ -10,9 +10,11 @@ tags:
 - Continuous Batching
 - PagedAttention
 feynman:
-  essence: Continuous Batching在token级别动态拼batch，让不同长度请求共享GPU；Cascade Attention在共享前缀场景下复用KV Cache，避免重复计算
+  essence: Continuous Batching在token级别动态拼batch，让不同长度请求共享GPU；Cascade Attention在共享前缀场景下复用KV
+    Cache，避免重复计算
   analogy: Continuous Batching像拼车——不停有人上下车但车一直在跑；Cascade Attention像共享笔记——前面讲的共同内容大家共用一份，只有各自不同的部分单独记
-  first_principle: LLM推理瓶颈是显存(KV Cache)而非计算，Continuous Batching最大化GPU利用率，Cascade Attention最小化KV Cache冗余
+  first_principle: LLM推理瓶颈是显存(KV Cache)而非计算，Continuous Batching最大化GPU利用率，Cascade Attention最小化KV
+    Cache冗余
   key_points:
   - 'Continuous Batching: iteration级别动态拼batch，消除队头阻塞'
   - 'PagedAttention: KV Cache分页管理，减少显存碎片'
@@ -20,7 +22,8 @@ feynman:
   - Continuous batching在前，cascade attention在其之上优化
 first_principle:
   essence: GPU利用率最大化的核心是减少空闲等待
-  derivation: '传统batching: 同一batch必须等最长的完成 → 短请求GPU空闲 → 改为token级别动态调度 → 每个iteration可以加入/移除请求 → GPU持续满载'
+  derivation: '传统batching: 同一batch必须等最长的完成 → 短请求GPU空闲 → 改为token级别动态调度 → 每个iteration可以加入/移除请求
+    → GPU持续满载'
   conclusion: Continuous batching是在cascade attention之前实现的(它需要batch维度动态变化)
 follow_up:
 - PagedAttention和操作系统虚拟内存有什么关系？
@@ -31,6 +34,7 @@ memory_points:
 - Cascade Attention做共享前缀复用：因为多请求常共享系统提示词，所以只算一次KV Cache供全局复用。
 - 两者顺序：先Continuous Batching组batch，后Cascade Attention在组内检测并复用前缀。
 - VLM显存挑战：因为单张图产生上千视觉Token，所以极度依赖PagedAttention按需分配防OOM。
+frequency: high
 ---
 
 # VLM 的 Continuous Batching 是什么？Cascade Attention 在 Continuous Batch 之前还是之后做？
@@ -193,6 +197,7 @@ flowchart TD
     style PAGED fill:#FF9800,color:#fff
     style OFFLOAD fill:#F44336,color:#fff
     style BATCH fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

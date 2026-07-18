@@ -16,6 +16,7 @@ memory_points:
 - 切换开销：进程切换需刷新 TLB 及 L1/L2 缓存，开销远大于线程切换
 - 因为线程共享地址空间，所以切换时无需切换页表，开销相对较小
 - 锁竞争激烈会导致用户态与内核态频繁切换，监控可用 vmstat 看 cs 次数
+frequency: low
 ---
 
 # 什么是PCB-“切换桢”？
@@ -124,6 +125,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -33,6 +33,7 @@ memory_points:
 - 顺序维护：链表头部存最近访问，尾部存最久未使用（LRM）。
 - 操作口诀：读/写先移至表头，容量满则删尾结点。
 - 必须用虚拟头尾：因为能避免空指针判断，所以大幅简化边界处理。
+frequency: high
 ---
 
 # 手撕：力扣146.LRU缓存（带输入输出版本）
@@ -229,6 +230,28 @@ def delete_doubly(node):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CacheStructure special
+    class Client error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class Get special
+    class H error
+    class HashMap info
+    class I start
+    class Key process
+    class LRU decision
+    class Put special
     subgraph Client[客户端请求]
         A["发起 Get / Put 请求"]
     end

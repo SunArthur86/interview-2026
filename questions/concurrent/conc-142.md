@@ -9,7 +9,8 @@ tags:
 - JDK8
 feynman:
   essence: Promise 风格的 Java 异步编排链式工具，解决回调地狱。
-  analogy: 像餐厅流水线：supplyAsync 是点菜（开始任务），thenApply 是洗菜切菜（加工处理），thenCombine 是把菜和饭拼在一起（组合结果），allOf 是等所有菜上齐了再叫客人吃（并行汇总）。
+  analogy: 像餐厅流水线：supplyAsync 是点菜（开始任务），thenApply 是洗菜切菜（加工处理），thenCombine 是把菜和饭拼在一起（组合结果），allOf
+    是等所有菜上齐了再叫客人吃（并行汇总）。
   first_principle: 如何用非阻塞的链式调用解决多线程依赖与并行计算问题？
   key_points:
   - supplyAsync 创建，thenApply 变换（平铺），thenCompose 组合（嵌套扁平化）
@@ -26,6 +27,7 @@ memory_points:
 - 核心区别：thenCompose 用于串联依赖的异步任务，能扁平化嵌套（类似 flatMap）；thenCombine 用于并行汇聚两个独立任务。
 - 注意：强烈建议自定义线程池，避免默认的 ForkJoinPool 阻塞拖垮系统。
 - 异常处理：exceptionally 类似 catch 兜底，handle 可处理异常并转换，whenComplete 仅记录不改结果。
+frequency: high
 ---
 
 # CompletableFuture 如何实现异步编排？supplyAsync/thenApply/thenCompose 的区别？
@@ -153,6 +155,7 @@ flowchart TD
     style THREAD_POOL fill:#FF9800,color:#fff
     style COMPOSE fill:#9C27B0,color:#fff
     style EXCEPT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

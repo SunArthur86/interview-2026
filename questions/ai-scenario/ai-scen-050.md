@@ -28,6 +28,7 @@ memory_points:
 - 路由策略：简单句用NMT(快)，复杂/专业内容用LLM(准)；结合术语库和记忆库保证一致性。
 - 上下文管理：文档级翻译保持术语一致，风格指南控制语气，文化适配避免歧义。
 - 评估指标：BLEU/COMET评估质量，人工评分体验；低资源语种用Pivot Language或零样本翻译。
+frequency: low
 ---
 
 # 如何设计一个AI多语言翻译系统？支持高质量翻译、实时翻译、领域适配。
@@ -114,6 +115,27 @@ def route_translation(text):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BLEU decision
+    class C1 special
+    class C2 error
+    class C3 info
+    class COMET start
+    class E1 process
+    class E2 decision
+    class F special
+    class G error
+    class H info
+    class I start
+    class S1 process
+    class U decision
     U([多语言翻译请求]) --> A[输入清洗与语言检测]
     subgraph S1 [上下文管理配置]
         C1[行业专属术语库]

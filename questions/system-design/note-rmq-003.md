@@ -35,6 +35,7 @@ memory_points:
 - 半消息存在特殊Topic：RMQ_SYS_TRANS_HALF_TOPIC，commit后转投到真实Topic
 - 回查需实现checkLocalTransaction()，返回COMMIT/ROLLBACK/UNKNOWN
 - 事务消息本质=本地消息表的Broker托管版，无需自建消息表
+frequency: high
 ---
 
 # 【大厂二面】RocketMQ 事务消息的实现原理？
@@ -271,6 +272,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -28,6 +28,7 @@ memory_points:
 - 参数显存乘以16：AdamW混合精度训练中，每参数需16Bytes(权重2+梯度2+优化器状态12)。
 - 优化器状态是大头：FP32的主权重、动量m和v占据12Bytes，占整体显存超一半。
 - 总显存需四张卡：14B模型纯训练显存高达约224GB，需4张A100-80G才能装下。
+frequency: medium
 ---
 
 # 训练一个14B参数的FP16模型，理论上需要多少显存？
@@ -221,6 +222,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

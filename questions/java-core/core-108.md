@@ -16,6 +16,7 @@ memory_points:
 - 标签：@param表参数，@return表返回值，@throws表异常
 - 转义：因为HTML解析器易误判尖括号，所以泛型推荐用 {@code} 包裹
 - 区别：@see 生成独立段落，而 {@link} 在行内嵌入超链接
+frequency: low
 ---
 
 # 什么是文档注释？
@@ -85,6 +86,51 @@ public BigDecimal calculateDiscount(BigDecimal originalPrice, double discountRat
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HTML special
+    class I error
+    class IDE info
+    class J start
+    class Javadoc process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class O start
+    class P process
+    class Q decision
+    class R special
+    class S error
+    class Spring info
+    class SpringDoc start
+    class Xxx process
+    class author decision
+    class d special
+    class deprecated error
+    class doc info
+    class exception start
+    class java process
+    class javadoc decision
+    class param special
+    class return error
+    class see info
+    class since start
+    class throws process
+    class version decision
     A[文档注释 Javadoc] --> B["注释块 /** ... */"]
     B --> C[位于类/方法/字段声明前]
     D[常用标签] --> E["@param 参数说明"]

@@ -31,6 +31,7 @@ memory_points:
 - 链路：CDC监听变更→Kafka队列→微批聚合→增量Embedding。
 - 写入：采用双写与版本化索引，保证旧索引在线服务，新索引后台构建。
 - 一致性：追求有界延迟的最终一致性，通过灰度切换无缝上线。
+frequency: high
 ---
 
 # 【字节面经】业务知识库每天有大量文档新增和修改，如何设计一套实时增量更新方案，使检索结果保持低延迟且一致性可控？
@@ -63,6 +64,45 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class BS process
+    class Batch decision
+    class CDC special
+    class CMS error
+    class CP info
+    class CRUD start
+    class CS process
+    class Call decision
+    class Change special
+    class Chunking error
+    class Debezium info
+    class EA start
+    class EMB process
+    class Embedding decision
+    class Kafka special
+    class MQ error
+    class Processor info
+    class Q start
+    class Query process
+    class Splitter decision
+    class TITLE special
+    class Topic error
+    class VDB info
+    class V_ start
+    class V_n process
+    class Vn decision
+    class Vn1 special
+    class Wiki error
+    class br info
+    class doc start
+    class events process
+    class n decision
     TITLE["实时增量更新架构"]
     BS["业务系统 (Wiki/CMS)<br/>文档 CRUD 操作"]
     CDC["CDC 监听层 (Debezium)"]

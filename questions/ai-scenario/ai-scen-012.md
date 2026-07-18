@@ -28,6 +28,7 @@ memory_points:
 - 任务分解为DAG图，执行前做拓扑排序检测循环依赖
 - 设置Max Steps硬限制，防止LLM陷入无限拆分
 - 执行节点引入“状态校验”，失败时触发局部重规划
+frequency: medium
 ---
 
 # 如何设计AI Agent的规划（Planning）与推理（Reasoning）引擎？让Agent能自主分解复杂任务。
@@ -148,6 +149,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

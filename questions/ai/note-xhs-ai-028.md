@@ -10,8 +10,8 @@ tags:
 - vLLM
 - 面经
 feynman:
-  essence: "KV Cache量化是在显存容量和生成质量之间做权衡——用更少的bit存储注意力中间状态，换取更大的batch size和吞吐"
-  analogy: "像用压缩袋收纳冬衣：FP16是原样挂衣柜（占地方但不变形），INT8是真空压缩袋（省一半空间，拿出来基本恢复），FP8是更激进的压缩（H100的新式压缩袋，专为这种场景设计）"
+  essence: KV Cache量化是在显存容量和生成质量之间做权衡——用更少的bit存储注意力中间状态，换取更大的batch size和吞吐
+  analogy: 像用压缩袋收纳冬衣：FP16是原样挂衣柜（占地方但不变形），INT8是真空压缩袋（省一半空间，拿出来基本恢复），FP8是更激进的压缩（H100的新式压缩袋，专为这种场景设计）
   key_points:
   - 按硬件代际匹配精度：H100优先FP8(E4M3)，A100用INT8，老卡保FP16
   - 混合精度策略：前几层/Attention层保留FP16，后几层/FFN层量化
@@ -19,9 +19,10 @@ feynman:
   - FP8(E4M3)：4位指数+3位尾数，动态范围大但精度低
   - INT8：对称量化为主，需要校准确定scale factor
 first_principle:
-  essence: "KV Cache存储的是每层Self-Attention的K和V矩阵，在自回归生成时被反复读取。量化本质上是对这些浮点矩阵做有损压缩"
-  derivation: "KV Cache显存 = 2(num_layers × num_heads × head_dim × seq_len × batch × bytes_per_param)。以Llama-2-70B为例，batch=32、seq=4096时KV Cache占约40GB。FP16→INT8直接减半到20GB，释放的显存可容纳更多并发请求。量化的代价是引入舍入误差，在注意力计算时误差会通过softmax放大"
-  conclusion: "量化是推理服务提吞吐的最有效杠杆之一，但必须分层分场景施策，不能一刀切"
+  essence: KV Cache存储的是每层Self-Attention的K和V矩阵，在自回归生成时被反复读取。量化本质上是对这些浮点矩阵做有损压缩
+  derivation: KV Cache显存 = 2(num_layers × num_heads × head_dim × seq_len × batch ×
+    bytes_per_param)。以Llama-2-70B为例，batch=32、seq=4096时KV Cache占约40GB。FP16→INT8直接减半到20GB，释放的显存可容纳更多并发请求。量化的代价是引入舍入误差，在注意力计算时误差会通过softmax放大
+  conclusion: 量化是推理服务提吞吐的最有效杠杆之一，但必须分层分场景施策，不能一刀切
 follow_up:
 - FP8和INT8的精度差异具体有多大？有没有量化前后的PPL对比数据？
 - 除了KV Cache量化，还有哪些KV Cache压缩方案？（PagedAttention、GQA/MQA、Sparse Attention）
@@ -31,6 +32,7 @@ memory_points:
 - H100→FP8(E4M3)，A100→INT8，老卡→FP16
 - 混合精度：Attention层高精度保语义，FFN层激进量化省显存
 - 校准集必须覆盖长文本+工具调用，否则长序列生成崩溃
+frequency: high
 ---
 
 # 【AI Infra推理优化】KV Cache量化如何选精度？质量下降怎么办？
@@ -171,6 +173,7 @@ flowchart TD
     style PAGED fill:#FF9800,color:#fff
     style OFFLOAD fill:#F44336,color:#fff
     style BATCH fill:#9C27B0,color:#fff
+
 ```
 
 ## 结构化回答

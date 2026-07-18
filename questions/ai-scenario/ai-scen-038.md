@@ -29,6 +29,7 @@ memory_points:
 - 服务优化：异步队列管理，TensorRT/xFormers加速，Prompt结果缓存。
 - 边界处理：NSFW双重拦截，Prompt注入用System Prompt过滤。
 - 易错点：随机种子需全局一致，频繁加载LoRA致显存碎片化。
+frequency: high
 ---
 
 # 如何设计一个AI文生图系统？支持文字描述生成高质量图片、可控生成、批量生产。
@@ -120,6 +121,27 @@ def generate_controllable_image(prompt, pose_image):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class D1 error
+    class D2 info
+    class D3 start
+    class E process
+    class F decision
+    class F1 special
+    class F2 error
+    class F3 info
+    class G start
+    class IP process
+    class Real decision
     A["用户简短描述"] --> B["Prompt工程层"]
     B -->|LLM扩展| C[详细生成指令]
     C --> D["可控生成层"]

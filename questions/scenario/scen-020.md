@@ -29,6 +29,7 @@ memory_points:
 - 极致扛量：本地缓存（Caffeine）兜底拦截99%请求，彻底切断网络开销
 - 数据更新一致性：因多副本需同步，故用Lua脚本或Pipeline保证原子批量写入
 - 防击穿与降级：热点Key永不过期并异步刷新，超载则MQ削峰或直接限流降级
+frequency: high
 ---
 
 # 如何设计热点数据的缓存方案？比如某明星出轨新闻瞬间访问量暴增。
@@ -128,6 +129,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

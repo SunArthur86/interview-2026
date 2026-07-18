@@ -15,6 +15,7 @@ memory_points:
 - 痛点：因为TCP是流式传输，所以解码端必须处理半包和粘包问题
 - 对比：Protobuf二进制紧凑高效，而JSON文本可读性好但体积大
 - 禁忌：因为基于 tag 标识解析，所以 Protobuf 字段编号发布后严禁修改
+frequency: low
 ---
 
 # 什么是消息编解码？
@@ -86,6 +87,26 @@ public byte[] encode(String content) throws IOException {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class HTTP decision
+    class I special
+    class J error
+    class OK info
+    class br start
+    class vs process
     A[HTTP 状态码] --> B["1xx 信息<br/>协议切换等"]
     A --> C["2xx 成功<br/>200 OK/201 创建/206 分片"]
     A --> D["3xx 重定向<br/>301 永久/302 临时/304 缓存"]

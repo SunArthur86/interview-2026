@@ -11,7 +11,8 @@ tags:
 - 合规
 - 可解释
 feynman:
-  essence: FDE（Full-Stack Development Engineer for AI / 解决方案工程师）从客户需求到落地的全链路——理解业务、设计方案、推动落地、负责效果，是 AI 时代"懂技术 + 懂业务 + 懂客户"的复合角色。
+  essence: FDE（Full-Stack Development Engineer for AI / 解决方案工程师）从客户需求到落地的全链路——理解业务、设计方案、推动落地、负责效果，是
+    AI 时代"懂技术 + 懂业务 + 懂客户"的复合角色。
   analogy: FDE 像建筑师——客户说"要一栋楼"（需求），FDE 出图纸（方案）、找施工队（技术团队）、协调审批（合规）、最终交付钥匙（落地）。
   first_principle: AI 项目失败多因"技术不懂业务、业务不懂技术"，FDE 桥接两侧，把客户语言翻译成技术方案、把技术约束讲给客户，确保交付有价值。
   key_points:
@@ -35,6 +36,7 @@ memory_points:
 - 风控 FDE 核心场景：合规、可解释、监管对接
 - AI 项目失败 70% 因业务-技术脱节
 - FDE 价值：把"技术能做"变成"客户能用"
+frequency: low
 ---
 
 # 【蚂蚁风控】FDE 在风控 AI 项目中做什么？怎么落地一个 AI 风控解决方案？
@@ -473,6 +475,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 结构化回答

@@ -33,6 +33,7 @@ memory_points:
 - 解决策略：DAPO通过动态采样过滤掉无梯度信号的无效样本，凑满有效batch
 - 代价体现：当前模型完全答不出的超难全错样本被丢弃，丧失学习机会
 - 能力限制：因困难样本被剔除，故模型的能力天花板会被永久锁死
+frequency: medium
 ---
 
 # 【八股总结】DAPO 动态采样提升效率 & 零奖励样本剔除的代价
@@ -367,6 +368,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

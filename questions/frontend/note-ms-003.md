@@ -30,6 +30,7 @@ memory_points:
 - 核心定位：AI产物不是消息，而是结构化、可预览、有版本的工作对象
 - 架构三件套：任务分组侧栏、类型感知预览层、版本时间线操作栏
 - 核心交互：支持针对特定产物的局部重生成，而非全量重跑
+frequency: medium
 ---
 
 # 【月之暗面面经】如果一个 Agent 会生成站点、表格和 PPT，前端怎样组织产物面板？
@@ -51,6 +52,31 @@ memory_points:
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Artifact start
+    class Data process
+    class Detail decision
+    class PPT special
+    class Panel error
+    class Preview info
+    class Sidebar start
+    class Task process
+    class Timeline decision
+    class Toolbar special
+    class artifacts error
+    class br info
+    class iframe start
+    class taskId process
+    class type decision
+    class v1 special
+    class v2 error
+    class v3 info
+    class version start
     subgraph Panel["产物面板 (Artifact Panel)"]
         Sidebar["任务分组侧栏<br/>▼ Task #1<br/>  🌐 站点(2)<br/>  📊 表格(1)<br/>  📄 PPT(1)<br/>▶ Task #2<br/>  📁 工程(1)<br/>▶ Task #3<br/>+ 新任务"]
         subgraph Detail["产物详情区"]

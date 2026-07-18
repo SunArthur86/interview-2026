@@ -29,6 +29,7 @@ memory_points:
 - 极致降流：因为广播风暴易打满CPU，所以普通用户开启100ms聚合推送或采样丢弃。
 - 存储分级：实时走Redis缓存近千条，历史弹幕异步入ES/Mongo，容忍核心链路丢失。
 - 海量连接：单机维持近10万连接，底层利用堆外内存与零拷贝减轻GC与CPU压力。
+frequency: high
 ---
 
 # 如何设计直播弹幕系统？百万级用户同时在线，每秒十万条弹幕。
@@ -144,6 +145,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

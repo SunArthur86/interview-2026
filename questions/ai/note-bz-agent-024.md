@@ -29,6 +29,7 @@ memory_points:
 - 核心矛盾：无限增长的对话轮次与有限的LLM上下文窗口之间的冲突
 - 方案对比：滑动窗口最简但丢信息，摘要压缩保核心但有损，记忆检索最智能精准
 - 高分方案：摘要+近期窗口+向量检索动态组装，兼顾Token限制与历史信息召回
+frequency: medium
 ---
 
 # 多轮对话的上下文如何建模？
@@ -301,6 +302,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

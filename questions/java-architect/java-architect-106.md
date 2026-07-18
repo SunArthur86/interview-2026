@@ -9,9 +9,13 @@ tags:
 - 集合
 - API设计
 feynman:
-  essence: Sequenced Collections（JEP 431，JDK 21 GA）补齐了 Java 集合 API 30 年的缺口——一套统一的"有顺序集合"接口，提供 addFirst/addLast/getFirst/getLast/reversed 操作。从此不用记 List 用 add(0, x)、Deque 用 addFirst、LinkedHashSet 没办法拿最后一个元素这种碎片化 API。
-  analogy: 像图书管理员终于统一了"取书规则"——以前从书架拿第一本，List 用 get(0)、Deque 用 peekFirst、Set 根本没这能力；现在所有"有序集合"统一用 getFirst()，规则一致。
-  first_principle: 「有序」是集合的核心维度之一（有序 + 唯一 = Set；有序 + 可重复 = List；FIFO = Deque），但 Java 长期没抽象这个维度。SequencedCollection 把「有序」提为顶层接口，让所有有序集合共享 API。
+  essence: Sequenced Collections（JEP 431，JDK 21 GA）补齐了 Java 集合 API 30 年的缺口——一套统一的"有顺序集合"接口，提供
+    addFirst/addLast/getFirst/getLast/reversed 操作。从此不用记 List 用 add(0, x)、Deque 用 addFirst、LinkedHashSet
+    没办法拿最后一个元素这种碎片化 API。
+  analogy: 像图书管理员终于统一了"取书规则"——以前从书架拿第一本，List 用 get(0)、Deque 用 peekFirst、Set 根本没这能力；现在所有"有序集合"统一用
+    getFirst()，规则一致。
+  first_principle: 「有序」是集合的核心维度之一（有序 + 唯一 = Set；有序 + 可重复 = List；FIFO = Deque），但 Java
+    长期没抽象这个维度。SequencedCollection 把「有序」提为顶层接口，让所有有序集合共享 API。
   key_points:
   - SequencedCollection 接口（JDK 21）：addFirst/addLast/getFirst/getLast/removeFirst/removeLast/reversed
   - SequencedSet extends SequencedCollection（去重版）
@@ -24,20 +28,27 @@ first_principle:
   - 「有序」是独立维度，应该有独立接口
   - 取首尾、反转、按顺序遍历是高频操作，应该统一 API
   - 老集合（List/Deque/LinkedHashSet）顺序语义相同但 API 不同
-  rebuild: 引入 SequencedCollection（顶层）、SequencedSet（去重）、SequencedMap（键有序），提供 7 个统一方法。让 List、LinkedHashSet、LinkedHashMap、TreeMap、Deque 都实现这些接口，用统一 API 操作。代码不用关心底层是 List 还是 LinkedHashSet，直接 getFirst()。
+  rebuild: 引入 SequencedCollection（顶层）、SequencedSet（去重）、SequencedMap（键有序），提供 7 个统一方法。让
+    List、LinkedHashSet、LinkedHashMap、TreeMap、Deque 都实现这些接口，用统一 API 操作。代码不用关心底层是 List
+    还是 LinkedHashSet，直接 getFirst()。
 follow_up:
-  - SequencedCollection 和 Iterable 区别？——Iterable 只能正向遍历，SequencedCollection 还能反向遍历（reversed()）、取首尾、增删首尾
-  - 老代码要不要重构？——建议改。原来的 list.get(list.size()-1) 改 list.getLast()，可读性提升；deque.peekFirst() 改 deque.getFirst() 语义统一
-  - SequencedMap 怎么用？——entrySet() 返回 SequencedSet，firstEntry()/lastEntry()/pollFirstEntry()/pollLastEntry() 直接操作
-  - 性能怎么样？——ArrayList.getFirst() 是 O(1)；LinkedList 是 O(1)；TreeSet.getFirst() 是 O(log n)；不退化
-  - 和 Kotlin / Scala 集合对比？——Java 21 终于补齐。Kotlin 的 firstOrNull/lastOrNull/reversed 早就有，Java 21 用统一接口实现等价能力
+- SequencedCollection 和 Iterable 区别？——Iterable 只能正向遍历，SequencedCollection 还能反向遍历（reversed()）、取首尾、增删首尾
+- 老代码要不要重构？——建议改。原来的 list.get(list.size()-1) 改 list.getLast()，可读性提升；deque.peekFirst()
+  改 deque.getFirst() 语义统一
+- SequencedMap 怎么用？——entrySet() 返回 SequencedSet，firstEntry()/lastEntry()/pollFirstEntry()/pollLastEntry()
+  直接操作
+- 性能怎么样？——ArrayList.getFirst() 是 O(1)；LinkedList 是 O(1)；TreeSet.getFirst() 是 O(log
+  n)；不退化
+- 和 Kotlin / Scala 集合对比？——Java 21 终于补齐。Kotlin 的 firstOrNull/lastOrNull/reversed 早就有，Java
+  21 用统一接口实现等价能力
 memory_points:
-  - SequencedCollection（JDK 21 GA）：统一"有序集合"API
-  - 7 个方法：addFirst/addLast/getFirst/getLast/removeFirst/removeLast/reversed
-  - SequencedSet：去重有序集合（LinkedHashSet 实现）
-  - SequencedMap：键有序的 Map（LinkedHashMap/TreeMap 实现）
-  - 老集合都改造了：List/Deque/LinkedHashSet/LinkedHashMap 自动获得新接口
-  - reversed() 返回反向视图（不复制）
+- SequencedCollection（JDK 21 GA）：统一"有序集合"API
+- 7 个方法：addFirst/addLast/getFirst/getLast/removeFirst/removeLast/reversed
+- SequencedSet：去重有序集合（LinkedHashSet 实现）
+- SequencedMap：键有序的 Map（LinkedHashMap/TreeMap 实现）
+- 老集合都改造了：List/Deque/LinkedHashSet/LinkedHashMap 自动获得新接口
+- reversed() 返回反向视图（不复制）
+frequency: medium
 ---
 
 # 【Java 后端架构师】Sequenced Collections 对集合 API 设计的影响
@@ -356,6 +367,7 @@ flowchart TD
     style I fill:#d9ead3,stroke:#93c47d
     style J fill:#d9ead3,stroke:#93c47d
     style K fill:#d9ead3,stroke:#93c47d
+
 ```
 
 ## 视频脚本

@@ -26,6 +26,7 @@ memory_points:
 - 核心场景：远程代理、虚拟代理、保护代理、智能引用
 - 易混对比：代理控制访问，装饰器增强功能，适配器转换接口
 - 实战动态代理：JDK只能代理接口，CGLIB生成子类，常用于Spring AOP
+frequency: medium
 ---
 
 # 什么是代理模式？
@@ -139,6 +140,41 @@ public class TimingProxy implements InvocationHandler {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AOP process
+    class B decision
+    class C special
+    class CGLIB error
+    class Client info
+    class D start
+    class E process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class InvocationHandler start
+    class J process
+    class JDK decision
+    class K special
+    class L error
+    class M info
+    class Mapper start
+    class MethodInterceptor process
+    class MyBatis decision
+    class N special
+    class O error
+    class Proxy info
+    class RPC start
+    class RealSubject process
+    class Spring decision
+    class Stub special
+    class br error
     A[代理模式 Proxy] --> B[客户端 Client]
     B --> C[代理对象 Proxy]
     C --> D[真实对象 RealSubject]

@@ -20,7 +20,8 @@ feynman:
   - 'Instructions: 最高层prompt，定义Agent角色和目标'
 first_principle:
   essence: 分层控制 = 策略层(Instructions) + 约束层(Rules) + 能力层(Skills) + 协议层(MCP)
-  derivation: Agent需要知道目标 → Instructions → 需要知道边界 → Rules → 需要有能力 → Skills → 需要标准接口 → MCP → 四层缺一不可
+  derivation: Agent需要知道目标 → Instructions → 需要知道边界 → Rules → 需要有能力 → Skills → 需要标准接口
+    → MCP → 四层缺一不可
   conclusion: 不合并Rules和Skills因为它们的生命周期、更新频率、影响范围完全不同
 follow_up:
 - MCP协议的核心设计是什么？
@@ -31,6 +32,7 @@ memory_points:
 - 类比记忆：Rules如交通法规永久生效，Skills如开车技能按需调用
 - 因果句：因为Rules更新慢而Skills更新快，所以混写会导致代码耦合且挤占上下文
 - 核心结论：Rules管全局合规（不可违反），Skills管具体调用（按需执行）
+frequency: medium
 ---
 
 # Rules 和 Skills 有什么区别？为什么不把 Skills 的指导写进 Rules？
@@ -196,6 +198,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

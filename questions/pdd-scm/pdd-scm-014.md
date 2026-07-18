@@ -10,8 +10,10 @@ tags:
 - GC
 - G1
 feynman:
-  essence: JVM GC 用"分代回收（新生代复制、老年代标记整理）+ 不同收集器（G1 低延迟）"，调优目标是减少 Full GC、控制停顿时间，供应链大促 GC 调优是稳定性关键。
-  analogy: GC 像仓库定期清滞销品——新品（Eden）频繁清（Minor GC），长销品（Old）定期大清（Full GC），G1 像按价值分区清（回收收益最高的 Region 优先）。
+  essence: JVM GC 用"分代回收（新生代复制、老年代标记整理）+ 不同收集器（G1 低延迟）"，调优目标是减少 Full GC、控制停顿时间，供应链大促
+    GC 调优是稳定性关键。
+  analogy: GC 像仓库定期清滞销品——新品（Eden）频繁清（Minor GC），长销品（Old）定期大清（Full GC），G1 像按价值分区清（回收收益最高的
+    Region 优先）。
   first_principle: 弱分代假说（多数对象朝生夕灭）让分代回收成本最优；G1 用 Region 化把停顿可控。
   key_points:
   - 分代：新生代（Eden+S0+S1，复制）+ 老年代（标记整理）
@@ -34,6 +36,7 @@ memory_points:
 - G1：Region + 可预测停顿 + Mixed GC
 - JDK 9+ 默认 G1；JDK 15+ 移除 CMS
 - 调优目标：减少 Full GC、控停顿
+frequency: high
 ---
 
 # 【拼多多供应链】JVM GC 原理？G1 怎么调优？
@@ -203,6 +206,36 @@ ZGC 适合"超大堆 + 超低延迟"场景（堆 > 32GB、停顿 < 10ms），供
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class Eden info
+    class F start
+    class Full process
+    class G decision
+    class G1 special
+    class GC error
+    class H info
+    class Humongous start
+    class I process
+    class J decision
+    class K special
+    class MaxGCPauseMillis error
+    class Minor info
+    class Mixed start
+    class Old process
+    class Region decision
+    class Survivor special
+    class Young error
+    class jstat info
     subgraph 内存分代
         A[Eden 新生代分配]
         B[Survivor 存活区]

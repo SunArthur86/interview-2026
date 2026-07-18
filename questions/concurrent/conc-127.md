@@ -16,6 +16,7 @@ memory_points:
 - 单线程：全程一个NIO线程，防阻塞但无法利用多核
 - 多线程：1个接收线程 + N个处理线程，分离连接与IO
 - 主从模型：Main(收连接) + Sub(处理读写) + Worker池(处理业务)，Netty默认采用
+frequency: high
 ---
 
 # 高效的Reactor线程模型是什么？
@@ -134,6 +135,7 @@ flowchart TD
     style WORKER fill:#009688,color:#fff
     style BOSS fill:#9C27B0,color:#fff
     style ZERO_COPY fill:#2196F3,color:#fff
+
 ```
 
 ## 记忆要点

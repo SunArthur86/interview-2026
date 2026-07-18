@@ -33,6 +33,7 @@ memory_points:
 - 长尾分类：好长尾有深度多步推理(保留奖励)，坏长尾是低效死循环(截断惩罚)
 - 死循环检测：通过计算信息增益或新颖度，区分有效推理与无效冗余步骤
 - 同步训练缺陷：因需等待最长轨迹，导致99%的GPU空等，必须改用异步提升利用率
+frequency: medium
 ---
 
 # 【八股总结】多轮 Agentic RL 何时停止 rollout？长尾轨迹如何处理？
@@ -393,6 +394,27 @@ class ProductionAgenticTrainer:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class D info
+    class E start
+    class F1 process
+    class F2 decision
+    class G special
+    class H error
+    class Rollout info
+    class br start
+    class final_answer process
+    class max_turns decision
     A1["Rollout启动"] --> B{"停止条件检测"}
     B -->|"输出 final_answer"| C1["正常停止并给予奖励"]
     B -->|"达到 max_turns 上限"| C2["轻惩罚停止"]

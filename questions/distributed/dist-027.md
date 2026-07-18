@@ -16,6 +16,7 @@ memory_points:
 - 缺点一：因为所有参与者等待协调者指令，所以导致严重同步阻塞，并发极低
 - 缺点二：协调者在阶段二宕机会导致参与者死锁，引发单点故障与状态不确定
 - 缺点三：网络分区会导致部分节点收到Commit而部分未收到，引发数据不一致
+frequency: high
 ---
 
 # 什么是两阶段提交（2PC）协议？有什么缺点？
@@ -99,6 +100,30 @@ XA PREPARE 'xid_01';
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class Commit decision
+    class Coordinator special
+    class NO error
+    class P1 info
+    class P2 start
+    class P3 process
+    class Participant decision
+    class Prepare special
+    class YES error
+    class abort info
+    class as start
+    class commit process
+    class prepare decision
+    class redo special
+    class rollback error
+    class undo info
     participant C as Coordinator 协调者
     participant P1 as Participant 1
     participant P2 as Participant 2

@@ -17,6 +17,7 @@ memory_points:
 - 软优化：强制结构化发言（观点/证据），允许无新观点时 PASS。
 - 防死锁：引入 Moderator 仲裁，或设置外部真值校验打破集体幻觉。
 - 避坑指南：讨论适合创意类，高风险决策需配合确定性规则引擎。
+frequency: low
 ---
 
 # 民主讨论模式如何避免永远开不完会
@@ -144,6 +145,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

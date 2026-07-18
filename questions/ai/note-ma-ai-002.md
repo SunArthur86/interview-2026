@@ -11,18 +11,18 @@ tags:
 - Context检索
 - 面经
 feynman:
-  essence: "通过AST(抽象语法树)解析整个代码仓库，提取组件/函数/接口的结构信息，构建大模型可理解的知识库。让Agent按需加载上下文，而不是把整个仓库塞进Prompt"
-  analogy: "AST知识库就像图书馆的索引系统——你不需要读完所有书才能找到需要的信息。AST提取每本书的目录、关键词、摘要，你在索引卡片上查到位置后，只去读相关章节"
+  essence: 通过AST(抽象语法树)解析整个代码仓库，提取组件/函数/接口的结构信息，构建大模型可理解的知识库。让Agent按需加载上下文，而不是把整个仓库塞进Prompt
+  analogy: AST知识库就像图书馆的索引系统——你不需要读完所有书才能找到需要的信息。AST提取每本书的目录、关键词、摘要，你在索引卡片上查到位置后，只去读相关章节
   key_points:
-  - "AST解析提取: 组件结构、函数签名、类型定义、import依赖、调用关系"
-  - "按需加载: Agent只加载当前任务相关的上下文，不全量加载"
-  - "Git Diff增量更新: 只解析变更的文件，不用全量重建"
-  - "源码=Source of Truth: 知识库是缓存，以实际代码为准"
-  - "知识结构: 将AST转换为适合LLM理解的Markdown格式"
+  - 'AST解析提取: 组件结构、函数签名、类型定义、import依赖、调用关系'
+  - '按需加载: Agent只加载当前任务相关的上下文，不全量加载'
+  - 'Git Diff增量更新: 只解析变更的文件，不用全量重建'
+  - '源码=Source of Truth: 知识库是缓存，以实际代码为准'
+  - '知识结构: 将AST转换为适合LLM理解的Markdown格式'
 first_principle:
-  essence: "大模型Context Window有限(如128K Token)，一个大型代码仓库可能数十万行。必须'按需检索'而非'全量加载'"
-  derivation: "全量加载代码→Token爆炸→模型无法处理→需要索引→AST提取代码结构→建立知识库→按任务检索相关片段→只加载必要上下文"
-  conclusion: "AST知识库 = 代码结构化索引 + 按需上下文检索"
+  essence: 大模型Context Window有限(如128K Token)，一个大型代码仓库可能数十万行。必须'按需检索'而非'全量加载'
+  derivation: 全量加载代码→Token爆炸→模型无法处理→需要索引→AST提取代码结构→建立知识库→按任务检索相关片段→只加载必要上下文
+  conclusion: AST知识库 = 代码结构化索引 + 按需上下文检索
 follow_up:
 - AST解析用了哪些工具？TypeScript Compiler API vs Babel vs SWC？
 - 知识库如何持续更新？增量更新策略是什么？
@@ -30,10 +30,11 @@ follow_up:
 - 如何避免无关代码被加载到Context中？
 - 知识文件的粒度是什么？太粗太细各有什么问题？
 memory_points:
-- "AST提取: 组件/函数/类型/import/调用关系 → 结构化知识文件"
-- "按需加载: 只加载当前Task相关的代码片段"
-- "增量更新: Git Diff → 只重新解析变更文件"
-- "源码=Truth: 知识库可能过期，关键操作要读实际代码"
+- 'AST提取: 组件/函数/类型/import/调用关系 → 结构化知识文件'
+- '按需加载: 只加载当前Task相关的代码片段'
+- '增量更新: Git Diff → 只重新解析变更文件'
+- '源码=Truth: 知识库可能过期，关键操作要读实际代码'
+frequency: high
 ---
 
 # 【后端开发二面】Agent如何理解代码仓库？基于AST建立项目索引
@@ -341,6 +342,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 结构化回答

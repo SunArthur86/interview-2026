@@ -20,6 +20,7 @@ memory_points:
 - GQA/MQA：减少KV头数，推理侧透明(Llama3用8个KV头vs32个Q头)。
 - 量化收益：FP16→INT8省50%，→INT4省75%(需配SmoothQuant)。
 - 易错点：KV越大≠效果越好；Prefix Caching共享率低反成负担。
+frequency: low
 ---
 
 # 大模型部署有哪些方案？
@@ -166,6 +167,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

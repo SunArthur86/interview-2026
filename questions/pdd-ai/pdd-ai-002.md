@@ -28,14 +28,15 @@ first_principle:
   - 复合操作（读改写）默认非原子
   rebuild: 同步原语（volatile/CAS/锁）+ happens-before 语义保证三性。
 follow_up:
-  - synchronized 和 Lock 区别？——Lock 可中断/超时/公平/多条件，synchronized 是 JVM 内置更轻
-  - CAS 有什么问题？——ABA（用版本号 AtomicStampedReference）、自旋开销、只能单变量
-  - ConcurrentHashMap 1.8 怎么实现？——CAS + synchronized 锁桶 + 链表转红黑树
+- synchronized 和 Lock 区别？——Lock 可中断/超时/公平/多条件，synchronized 是 JVM 内置更轻
+- CAS 有什么问题？——ABA（用版本号 AtomicStampedReference）、自旋开销、只能单变量
+- ConcurrentHashMap 1.8 怎么实现？——CAS + synchronized 锁桶 + 链表转红黑树
 memory_points:
-  - 三性：可见性/原子性/有序性
-  - volatile 保证可见+禁排，不保证 i++
-  - AQS：CLH 队列 + state + 独占/共享模式
-  - 锁升级：偏向→轻量（自旋）→重量（OS）
+- 三性：可见性/原子性/有序性
+- volatile 保证可见+禁排，不保证 i++
+- AQS：CLH 队列 + state + 独占/共享模式
+- 锁升级：偏向→轻量（自旋）→重量（OS）
+frequency: high
 ---
 
 # 【拼多多 AI 中台】Java 并发三性与同步原语怎么用？
@@ -211,6 +212,28 @@ Java 并发的本质是**"对抗 CPU 缓存/重排，保证共享状态正确"**
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class B4 info
+    class C1 start
+    class C2 process
+    class C3 decision
+    class C4 special
+    class C5 error
+    class S1 info
+    class S2 start
+    class S3 process
+    class before decision
+    class happens special
     subgraph S1[并发核心机制]
         A1[JVM内存模型] -->|happens-before| A2[共享状态正确性]
     end

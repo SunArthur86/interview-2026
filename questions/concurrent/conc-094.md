@@ -17,6 +17,7 @@ memory_points:
 - 死锁四要素(缺一不可)：互斥、占有且等待、不可抢占、循环等待。
 - 预防死锁：破坏四要素，最常用是破坏循环等待(按序申请资源)或占有等待(一次性申请)。
 - 死锁避免：银行家算法，分配前试探并校验系统是否处于安全状态。
+frequency: high
 ---
 
 # 什么是死锁（DeadLock）？
@@ -116,6 +117,7 @@ flowchart TD
     style CYCLE fill:#F44336,color:#fff
     style JSTACK fill:#FF9800,color:#fff
     style FIX_C4 fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

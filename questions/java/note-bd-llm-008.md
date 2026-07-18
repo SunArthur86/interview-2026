@@ -32,6 +32,7 @@ memory_points:
 - 释放时机：遇IO阻塞主动释放，或被定时抢占（默认约5ms），CPU密集型难以释放
 - IO密集（如API调用）：因多在等待网络，故多线程有效，可大幅提升并发效率
 - CPU密集（如模型推理）：因持续占用且GIL不释放，故多线程无效，改用多进程加速
+frequency: high
 ---
 
 # 【字节面经】讲一下 Python 的 GIL 机制，在 I/O 密集和 CPU 密集的大模型任务里分别会有什么影响？
@@ -296,6 +297,34 @@ python3.13t  # free-threaded build
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class B decision
+    class C special
+    class CPU error
+    class CPY info
+    class CPython start
+    class D process
+    class E decision
+    class F special
+    class G error
+    class GIL info
+    class H start
+    class I process
+    class IO decision
+    class J special
+    class K error
+    class L info
+    class Multiprocessing start
+    class Python process
+    class SOL decision
+    class ob_refcnt special
     subgraph CPY[CPython 解释器内存管理]
         A[Python 对象] --> B{ob_refcnt 引用计数}
         B -->|多线程同时修改| C[竞态条件与内存泄漏]

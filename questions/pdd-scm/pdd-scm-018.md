@@ -34,6 +34,7 @@ memory_points:
 - 策略消除 if-else、工厂封装创建、观察者解耦、责任链串行
 - OCP 原则：对扩展开放，对修改封闭
 - Rule of Three：第三次重复才抽象
+frequency: high
 ---
 
 # 【拼多多供应链】设计模式在供应链怎么用？
@@ -224,6 +225,36 @@ class FullReductionStrategy implements PromotionStrategy {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class DISCOUNT error
+    class DiscountStrategy info
+    class E start
+    class F process
+    class FULL_REDUCTION decision
+    class FullReductionStrategy special
+    class G error
+    class GROUP_BUY info
+    class GroupBuyStrategy start
+    class H process
+    class I decision
+    class J special
+    class K error
+    class L info
+    class br start
+    class calculatePrice process
+    class get decision
+    class getPromoType special
+    class order error
+    class strategies info
     A["订单计算价格请求"] --> B["获取促销类型<br/>order.getPromoType"]
     B --> C{"策略工厂路由<br/>strategies.get"}
 

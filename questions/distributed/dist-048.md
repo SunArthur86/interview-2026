@@ -16,6 +16,7 @@ memory_points:
 - 百度UidGen：预生成双RingBuffer，屏蔽时钟微小抖动
 - 美团Leaf：本地时间对比ZK记录时间，若小于则拒绝启动防脏数据
 - 最佳实践：NTP开启平滑调整模式（-x），禁用大步长跃变
+frequency: medium
 ---
 
 # 雪花算法的时钟回拨问题如何解决？
@@ -121,6 +122,7 @@ flowchart TD
     style SNOW fill:#FF9800,color:#fff
     style SEG fill:#9C27B0,color:#fff
     style CLK fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

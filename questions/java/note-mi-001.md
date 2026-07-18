@@ -31,6 +31,7 @@ memory_points:
 - 核心参数：初始容量16，加载因子0.75，树化需链表长≥8且数组容量≥64
 - 树化双条件：链表≥8是触发点，但容量<64时只扩容不树化，退化阈值为6防频繁抖动
 - 扩容与插入：JDK8采用尾插法，扩容2倍后通过位运算将元素留原位或移至原索引+旧容量
+frequency: high
 ---
 
 # HashMap JDK8 底层原理是什么？
@@ -216,6 +217,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

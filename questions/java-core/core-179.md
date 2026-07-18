@@ -16,6 +16,7 @@ memory_points:
 - 核心对比：传输层TCP面向连接且可靠，UDP无连接但快，负责端到端通信。
 - 网络层核心：提供IP逻辑寻址与路由选择，对应OSI网络层。
 - 实战排查：ping通属于网络层正常，telnet端口不通排查应用层或防火墙。
+frequency: low
 ---
 
 # TCP/IP原理是什么？
@@ -124,6 +125,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

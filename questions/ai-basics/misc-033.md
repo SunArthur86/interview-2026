@@ -21,6 +21,7 @@ memory_points:
 - 示例选择策略：随机(基线)、相似度(常用)、多样性、投票。
 - 关键点：示例顺序影响大，3-5个效果最好，格式必须一致。
 - Self-Consistency：多路径生成+多数投票，可提升准确率5-15%。
+frequency: high
 ---
 
 # In-Context Learning (ICL) 的原理是什么?Few-shot示例如何选择
@@ -148,6 +149,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

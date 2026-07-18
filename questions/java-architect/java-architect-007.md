@@ -8,9 +8,13 @@ tags:
 - CompletableFuture
 - 治理
 feynman:
-  essence: CompletableFuture 的本质是把"回调地狱"变成"可编排的异步数据流"。它不是 Future 的简单升级，而是用 CompletionStage 接口把"任务完成后的动作"建模成链式图——串行、并行、组合、异常处理都变成声明式 API。
-  analogy: 像 Excel 公式链：A1 是原始数据，B1=A1×2，C1=B1+10。CompletableFuture 就是异步版的 Excel——supplyAsync 起 A1，thenApply 是 B1，thenCombine 是把两个 sheet 的结果合到 C1。哪个单元格慢了，下游自动等，不用你写 wait/notify。
-  first_principle: 为什么需要 CompletableFuture？因为 Future.get() 是阻塞的——编排"取 A、取 B、合并"必须手动起线程 + Future.get() 阻塞，代码丑且易错。CompletableFuture 用回调链 + CompletionStage 图，把"等待"变成"事件驱动"，让线程不被阻塞在 get() 上。
+  essence: CompletableFuture 的本质是把"回调地狱"变成"可编排的异步数据流"。它不是 Future 的简单升级，而是用 CompletionStage
+    接口把"任务完成后的动作"建模成链式图——串行、并行、组合、异常处理都变成声明式 API。
+  analogy: 像 Excel 公式链：A1 是原始数据，B1=A1×2，C1=B1+10。CompletableFuture 就是异步版的 Excel——supplyAsync
+    起 A1，thenApply 是 B1，thenCombine 是把两个 sheet 的结果合到 C1。哪个单元格慢了，下游自动等，不用你写 wait/notify。
+  first_principle: 为什么需要 CompletableFuture？因为 Future.get() 是阻塞的——编排"取 A、取 B、合并"必须手动起线程
+    + Future.get() 阻塞，代码丑且易错。CompletableFuture 用回调链 + CompletionStage 图，把"等待"变成"事件驱动"，让线程不被阻塞在
+    get() 上。
   key_points:
   - 创建：supplyAsync/ runAsync（默认 ForkJoinPool.commonPool）
   - 转换：thenApply（同步）、thenApplyAsync（异步切线程）
@@ -23,19 +27,23 @@ first_principle:
   - Future.get() 阻塞线程，编排 N 个依赖要 N 次阻塞，浪费线程
   - 回调能避免阻塞，但嵌套回调（回调地狱）不可读、不可维护
   - 任务的依赖关系可以建模成 DAG（有向无环图）
-  rebuild: CompletableFuture 把每个异步任务建模为图节点，依赖关系为边。任务完成时触发回调，回调内部又创建新节点，形成链/树/DAG。线程不被 get() 阻塞，由内部线程池驱动回调执行。API（thenApply/thenCombine/allOf）是 DAG 构造器，程序员声明式描述依赖，运行时调度执行。
+  rebuild: CompletableFuture 把每个异步任务建模为图节点，依赖关系为边。任务完成时触发回调，回调内部又创建新节点，形成链/树/DAG。线程不被
+    get() 阻塞，由内部线程池驱动回调执行。API（thenApply/thenCombine/allOf）是 DAG 构造器，程序员声明式描述依赖，运行时调度执行。
 follow_up:
-  - 为什么默认 ForkJoinPool.commonPool 不能用？——它是全局共享，所有未指定线程池的 CompletableFuture 都用它，一个慢任务拖垮全局；线程数 = CPU-1，IO 任务严重不够
-  - thenApply 和 thenApplyAsync 区别？——thenApply 用上游完成时的线程执行回调（可能调用方线程）；thenApplyAsync 强制切到指定线程池
-  - orTimeout/d completeTimeout 怎么用？——JDK 9+ 提供，CF 超时自动异常结束，避免下游永久等待
-  - allOf 返回的 CF 怎么拿结果？——allOf 只返回 CompletableFuture<Void>，要自己收集；或用 Stream + Stream.toList
-  - 异步链路怎么 traceId 透传？——默认不透传（线程切换丢 MDC），要自定义线程池 wrap Runnable 复制 MDC
+- 为什么默认 ForkJoinPool.commonPool 不能用？——它是全局共享，所有未指定线程池的 CompletableFuture 都用它，一个慢任务拖垮全局；线程数
+  = CPU-1，IO 任务严重不够
+- thenApply 和 thenApplyAsync 区别？——thenApply 用上游完成时的线程执行回调（可能调用方线程）；thenApplyAsync
+  强制切到指定线程池
+- orTimeout/d completeTimeout 怎么用？——JDK 9+ 提供，CF 超时自动异常结束，避免下游永久等待
+- allOf 返回的 CF 怎么拿结果？——allOf 只返回 CompletableFuture<Void>，要自己收集；或用 Stream + Stream.toList
+- 异步链路怎么 traceId 透传？——默认不透传（线程切换丢 MDC），要自定义线程池 wrap Runnable 复制 MDC
 memory_points:
-  - CompletableFuture 是异步 DAG 构造器，不是 Future 升级版
-  - 三大治理：显式线程池（禁用 commonPool）、必须设超时、必须异常兜底
-  - thenApply 同步 / thenApplyAsync 异步 / thenCompose 扁平化
-  - allOf 全成功 / anyOf 任一成功（容错用 anyOf + 超时）
-  - traceId 透传要 wrap 线程池复制 MDC，否则链路追踪断
+- CompletableFuture 是异步 DAG 构造器，不是 Future 升级版
+- 三大治理：显式线程池（禁用 commonPool）、必须设超时、必须异常兜底
+- thenApply 同步 / thenApplyAsync 异步 / thenCompose 扁平化
+- allOf 全成功 / anyOf 任一成功（容错用 anyOf + 超时）
+- traceId 透传要 wrap 线程池复制 MDC，否则链路追踪断
+frequency: high
 ---
 
 # 【Java 后端架构师】CompletableFuture 编排与异步链路治理
@@ -327,6 +335,32 @@ CompletableFuture<Data> result = CompletableFuture.anyOf(primary, secondary)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class CompletableFuture special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class MDC info
+    class Wrap start
+    class allOf process
+    class br decision
+    class commonPool special
+    class exceptionally error
+    class orTimeout info
+    class supplyAsync start
+    class traceId process
     A[商品详情页请求] --> B[CompletableFuture.supplyAsync<br/>商品基础信息]
     A --> C[CompletableFuture.supplyAsync<br/>价格数据]
     A --> D[CompletableFuture.supplyAsync<br/>库存状态]

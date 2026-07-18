@@ -29,6 +29,7 @@ memory_points:
 - 门禁阈值：指标下降<5%通过，>10%失败，5-10%需人工确认。
 - 成本控制：CI用Core Set(50条)，发布前用Full Set(500条)。
 - 边界处理：Judge不稳定取n=3众数，空输出直接判0分阻断。
+frequency: low
 ---
 
 # 如何设计CI中的AI质量门禁？在代码提交和发布前自动检测质量退化。
@@ -115,6 +116,26 @@ def run_quality_gate(candidate_model, golden_dataset, baseline_metrics):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class Golden process
+    class H decision
+    class I special
+    class J error
+    class LLM info
+    class Prompt start
+    class as process
     A[Prompt/模型配置变更] --> B[触发CI/CD流水线]
     B --> C[拉取Core Golden Set基准集]
     C --> D[新版本批量推理生成结果]

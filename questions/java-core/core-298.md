@@ -16,6 +16,7 @@ memory_points:
 - 并发推荐：JUC包下首选，ConcurrentHashMap（分段锁/CAS+syn）和CopyOnWriteList（读多写少）
 - 底层特性：HashMap底层是数组+链表/红黑树，ArrayDeque底层是循环数组
 - 不安全风险：HashMap多线程扩容易导致数据丢失或死循环（JDK1.7头插法成环）
+frequency: high
 ---
 
 # 有哪些集合是线程安全和线程不安全的？
@@ -101,6 +102,42 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayList process
+    class B decision
+    class BlockingQueue special
+    class C error
+    class CAS info
+    class Collections start
+    class ConcurrentHashMap process
+    class ConcurrentLinkedQueue decision
+    class ConcurrentModificationException special
+    class CopyOnWriteArrayList error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class HashMap error
+    class Hashtable info
+    class I start
+    class J process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class Vector start
+    class br process
+    class concurrent decision
+    class java special
+    class synchronizedXxx error
+    class util info
     A[集合线程安全] --> B[早期同步]
     A --> C[并发包 java.util.concurrent]
     B --> D[Vector 元素同步]

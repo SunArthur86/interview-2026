@@ -31,6 +31,7 @@ memory_points:
 - 存算降本：S3分层存PB级数据，AI预标注提效减负，人工仅做边缘精修
 - 任务调度：按难度和标注员技能动态分配，可视化看板实时跟踪进度
 - 质量校验：3人交叉标注算IoU，结合专家金标准抽检，保95%准确率
+frequency: high
 ---
 
 # PB级路测数据需人工+自动标注，如何设计后端架构，支持标注任务分配、进度跟踪与标注结果校验？
@@ -61,6 +62,31 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class F1 start
+    class IoU process
+    class Kafka decision
+    class L1 special
+    class L2 error
+    class L3 info
+    class L4 start
+    class L5 process
+    class P1 decision
+    class P2 special
+    class P3 error
+    class Q1 info
+    class Q2 start
+    class Q3 process
+    class Score decision
+    class T1 special
+    class T2 error
+    class T3 info
+    class br start
     L1["路测数据采集层<br/>车辆传感器数据 → Kafka → S3对象存储"]
     subgraph L2["数据预处理 + AI预标注"]
         P1["数据清洗<br/>去重/切分"]

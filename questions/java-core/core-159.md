@@ -16,6 +16,7 @@ memory_points:
 - 浅拷贝实现：重写clone()调super.clone()；深拷贝层层clone繁琐易漏。
 - 深拷贝推荐实现：序列化机制或JSON转换，将对象转为独立副本。
 - 选型对比：Cloneable性能极高但强耦合；序列化/JSON简单通用但性能偏低。
+frequency: low
 ---
 
 # Java中深拷贝和浅拷贝的区别是什么？如何实现深拷贝？
@@ -107,6 +108,40 @@ User copy = mapper.readValue(mapper.writeValueAsString(originalUser), User.class
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class B4 info
+    class C start
+    class C1 process
+    class C2 decision
+    class C3 special
+    class Cloneable error
+    class D info
+    class D1 start
+    class Deep process
+    class E decision
+    class F special
+    class G error
+    class H info
+    class I start
+    class J process
+    class JSON decision
+    class K special
+    class Object error
+    class Protobuf info
+    class Reference start
+    class Shallow process
+    class br decision
+    class clone special
     A[对象拷贝] --> B[浅拷贝 Shallow]
     A --> C[深拷贝 Deep]
     A --> D[引用拷贝 Reference]

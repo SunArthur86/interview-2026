@@ -20,6 +20,7 @@ memory_points:
 - 缓存策略：语义缓存防重复计算，Prompt Caching缓存长上下文前缀。
 - RAG优化：提高检索精度减少无关Token，动态截断保留最相关片段。
 - 自建部署：Token量极大时，自建vLLM加量化比API更划算。
+frequency: high
 ---
 
 # LLM应用的token成本如何优化？
@@ -89,6 +90,34 @@ def semantic_cache_check(query, cache_dict, embed_model, threshold=0.95):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class B decision
+    class Batch special
+    class C error
+    class Cache info
+    class Caching start
+    class D process
+    class E decision
+    class Embedding special
+    class F error
+    class G info
+    class GPT start
+    class H process
+    class Haiku decision
+    class I special
+    class J error
+    class Opus info
+    class Prompt start
+    class Redis process
+    class Semantic decision
+    class Token special
     A[客户端请求] --> B(Semantic Cache: Redis+Embedding)
     B -->|命中缓存| C[直接返回历史答案]
     B -->|未命中| D{Prompt 意图路由}

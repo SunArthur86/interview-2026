@@ -16,6 +16,7 @@ memory_points:
 - 去重铁律：只有当对象的hashCode相同且equals为true时，才判定为重复拒绝存入
 - 核心参数：初始容量16，负载因子0.75，链表超8且总数达64则树化
 - 避坑指南：自定义对象存入HashSet，必须严格重写hashCode与equals方法
+frequency: medium
 ---
 
 # HashSet（Hash表）是什么？
@@ -119,6 +120,37 @@ HashSet 内部
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class HashMap decision
+    class HashSet special
+    class I error
+    class J info
+    class K start
+    class Key process
+    class PRESENT decision
+    class add special
+    class br error
+    class e info
+    class equals start
+    class false process
+    class hash decision
+    class hashCode special
+    class n error
+    class put info
+    class true start
     A[调用 HashSet.add e] --> B[底层调用 HashMap.put e, PRESENT]
     B --> C[计算 e 的 hashCode]
     C --> D["定位桶 (n-1) & hash"]

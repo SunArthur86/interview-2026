@@ -28,6 +28,7 @@ memory_points:
 - Bitmap机制：因为位图极度压缩，所以1万人只需1.2KB，SETBIT标记已读，BITCOUNT统计数量。
 - 架构痛点：单一Bitmap Key过大易阻塞，大群需按UserId分桶映射至不同Key拆分存储。
 - 性能优化：用户点开会话时，利用Redis Pipeline批量SETBIT清除未读，减少网络开销。
+frequency: medium
 ---
 
 # 如何设计一个亿级用户的消息已读未读系统？
@@ -167,6 +168,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -10,9 +10,11 @@ tags:
 - 数据倾斜
 - Shuffle
 feynman:
-  essence: 数据倾斜本质是 Shuffle 阶段某个 key 的数据量远超其他，导致少数 task 处理巨量数据而其他 task 空闲。三类常见 key：①空值/null key ②热点业务 key（如某大V用户ID）③GroupBy 的高频 key。解法按场景：空值→过滤或加随机前缀打散；热点 key→加盐（salting，加随机前缀打散再聚合）；GroupBy→两阶段聚合（先局部聚合打散，再全局聚合）。
+  essence: 数据倾斜本质是 Shuffle 阶段某个 key 的数据量远超其他，导致少数 task 处理巨量数据而其他 task 空闲。三类常见 key：①空值/null
+    key ②热点业务 key（如某大V用户ID）③GroupBy 的高频 key。解法按场景：空值→过滤或加随机前缀打散；热点 key→加盐（salting，加随机前缀打散再聚合）；GroupBy→两阶段聚合（先局部聚合打散，再全局聚合）。
   analogy: 像超市结账——1000 个顾客里 999 个买几件东西，1 个买了整车。如果按"顾客ID"分到不同收银台，那个买整车的收银台排队1小时，其他收银台闲死。解法：把那个大客户的商品拆到多个收银台（加盐打散），最后再合并。
-  first_principle: 分布式计算的瓶颈是最慢的 task。Shuffle 按 key 分配，key 数据量不均导致 task 负载不均。倾斜解法的本质是"打散热点 key 再聚合"，用两阶段换负载均衡。
+  first_principle: 分布式计算的瓶颈是最慢的 task。Shuffle 按 key 分配，key 数据量不均导致 task 负载不均。倾斜解法的本质是"打散热点
+    key 再聚合"，用两阶段换负载均衡。
   key_points:
   - 倾斜本质：Shuffle 时某 key 数据量远超其他，少数 task 成为瓶颈
   - 三类常见key：空值/null、热点业务key(大V用户ID)、GroupBy高频key
@@ -31,6 +33,7 @@ memory_points:
 - 本质是Shuffle时某Key数据量极大，导致99%任务完成而个别Task极慢
 - 空值倾斜直接过滤或赋予随机Key打散，小表Join倾斜用MapJoin广播避免Shuffle
 - 热点Key倾斜用加盐法（扩容加随机前缀），GroupBy倾斜用两阶段聚合（局部加全局）
+frequency: medium
 ---
 
 # 【神州专车面经】数据倾斜怎么处理？
@@ -172,6 +175,23 @@ LIMIT 10;
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class NULL special
+    class br error
     A["Shuffle阶段<br/>某Key数据量极大"] --> B{"倾斜Key类型判定"}
     B -- "NULL/空值" --> C["过滤无用Key<br/>或赋予随机值打散"]
     B -- "热点业务Key" --> D["大表: 加盐扩容(加随机前缀)"]

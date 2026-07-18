@@ -34,6 +34,7 @@ memory_points:
 - 文档切分→Embedding→向量库→检索→拼 prompt→LLM
 - 供应链应用：规则问答/案例检索/运营助手
 - 防幻觉：决策必须引用证据
+frequency: medium
 ---
 
 # 【拼多多供应链】RAG 怎么用在供应链？
@@ -189,6 +190,32 @@ RAG 和 prompt 写死的区别在"知识更新"：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Cross special
+    class D1 error
+    class D2 info
+    class E start
+    class ES process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class K process
+    class L decision
+    class LLM special
+    class Milvus error
+    class Store info
+    class Top start
+    class br process
     A["运营自然语言提问<br/>(如:大额采购审批)"] --> B["LLM 查询改写"]
     B --> C{"混合检索引擎"}
     subgraph Store ["知识库 (Milvus/ES)"]

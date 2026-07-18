@@ -26,14 +26,15 @@ first_principle:
   - 读扩散成本 = 关注数
   rebuild: 推/拉/混合按用户类型动态选择。
 follow_up:
-  - 大 V 发 Feed 怎么处理？——不扩散，粉丝读时拉大 V 内容合并
-  - 收件箱大小有限怎么办？——固定窗口（如最近 1000 条），超出的不活跃用户丢
-  - 怎么避免活跃用户漏内容？——活跃标记+推，非活跃拉
+- 大 V 发 Feed 怎么处理？——不扩散，粉丝读时拉大 V 内容合并
+- 收件箱大小有限怎么办？——固定窗口（如最近 1000 条），超出的不活跃用户丢
+- 怎么避免活跃用户漏内容？——活跃标记+推，非活跃拉
 memory_points:
-  - 推：写扩散（适合普通用户）
-  - 拉：读扩散（适合大 V）
-  - 混合：普通推+大 V 拉
-  - 存储：Redis ZSet 按 score=时间
+- 推：写扩散（适合普通用户）
+- 拉：读扩散（适合大 V）
+- 混合：普通推+大 V 拉
+- 存储：Redis ZSet 按 score=时间
+frequency: medium
 ---
 
 # 【拼多多内容】Feed 流推拉模式怎么选？
@@ -239,6 +240,27 @@ Feed 流的正确性验证：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class D1 info
+    class D2 start
+    class E1 process
+    class E2 decision
+    class E3 special
+    class E4 error
+    class E5 info
+    class Redis start
+    class ZSet process
+    class br decision
     subgraph 混合模式分流
     A["博主发布新Feed"] --> B{"粉丝数阈值判断"}
     end

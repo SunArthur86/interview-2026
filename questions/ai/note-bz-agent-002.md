@@ -31,6 +31,7 @@ memory_points:
 - 规划范式：线性CoT、分支ToT、以及交替进行的ReAct（推理+行动）
 - 记忆分层：短期为上下文窗口，长期为向量库检索，任务记忆记录执行轨迹
 - 工具分类：分为感知类（读取环境如搜索）和行动类（改变环境如发邮件）
+frequency: medium
 ---
 
 # AI Agent 的核心能力有哪些？（规划、记忆、工具使用）
@@ -207,6 +208,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -19,6 +19,7 @@ memory_points:
 - 计算瓶颈对比：Prefill吃算力做O(N^2)矩阵乘，Decode吃显存带宽做大Cache读取。
 - 优化策略口诀：Pre用FlashAttn分块算，Dec靠量化投机采样，混批调靠vLLM连续批处理。
 - 长上下文避坑：Prompt极长时Prefill耗时O(N^2)激增，TTFT可能远超Decode时间。
+frequency: low
 ---
 
 # LLM推理的Prefill和Decode阶段有什么区别？
@@ -97,6 +98,23 @@ def profile_phase(stage, input_ids, past_kv=None):
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Compute start
+    class Decode process
+    class Memory decision
+    class N special
+    class O error
+    class Output info
+    class Prefill start
+    class Prompt process
+    class TPOT decision
+    class TTFT special
+    class br error
     Prompt[输入Prompt] --> Prefill[Prefill阶段<br/>并行算KV]
     Prefill --> TTFT[决定TTFT]
     Prefill --> Decode[Decode阶段<br/>串行读KV]

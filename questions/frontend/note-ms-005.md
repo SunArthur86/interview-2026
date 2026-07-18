@@ -30,6 +30,7 @@ memory_points:
 - 核心判据：状态在用户切走页面后还需看到，就属于任务层
 - 页面层存短暂UI状态：如草稿、弹窗开关、折叠状态，组件卸载即丢弃
 - 任务层存跨页/长生命状态：如任务队列、文件索引、上下文，需持久化
+frequency: medium
 ---
 
 # 【月之暗面面经】Vue 做桌面 AI 产品时，哪些状态应该在页面层，哪些要上升到任务层？
@@ -48,6 +49,49 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class AI special
+    class APP error
+    class App info
+    class Component start
+    class IndexedDB process
+    class P1 decision
+    class P2 special
+    class P3 error
+    class P4 info
+    class PAGE start
+    class Page process
+    class SQLite decision
+    class Store special
+    class T1 error
+    class T2 info
+    class T3 start
+    class T4 process
+    class TASK decision
+    class Task special
+    class artifacts error
+    class br info
+    class collapsed start
+    class context process
+    class draft decision
+    class electron special
+    class fileIndex error
+    class localStorage info
+    class modalOpen start
+    class selected process
+    class sessionStorage decision
+    class settings special
+    class store error
+    class taskQueue info
+    class windowState start
     subgraph APP["全局应用层 (App Store) - 生命周期: 整个应用运行期 | 持久化: electron-store / localStorage"]
         A1["用户配置 settings"]
         A2["主题/AI 模型选择"]

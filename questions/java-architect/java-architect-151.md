@@ -4,8 +4,17 @@ difficulty: L2
 category: java-architect
 subcategory: MySQL
 title: PostgreSQL 与 MySQL 在 Java 后端的选型
-tags: [PostgreSQL, MySQL, 选型, JSONB, CTE]
-related: [java-architect-149, java-architect-150, java-architect-152]
+tags:
+- PostgreSQL
+- MySQL
+- 选型
+- JSONB
+- CTE
+related:
+- java-architect-149
+- java-architect-150
+- java-architect-152
+frequency: high
 ---
 
 # PostgreSQL 与 MySQL 在 Java 后端的选型
@@ -348,6 +357,25 @@ JD 电商选 MySQL，到家配送选 PG。
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class A3 special
+    class B error
+    class B1 info
+    class B2 start
+    class B3 process
+    class C decision
+    class JSONB special
+    class MySQL error
+    class PostGIS info
+    class PostgreSQL start
     subgraph A [PostgreSQL 适用场景]
         direction TD
         A1[复杂分析查询: 多表JOIN/CTE递归]

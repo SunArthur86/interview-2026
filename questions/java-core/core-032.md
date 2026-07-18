@@ -15,6 +15,7 @@ memory_points:
 - 数组内存连续支持随机访问O(1)，但增删需移动元素较慢；链表靠指针非连续，增删快O(1)
 - 因为内存连续，数组对CPU缓存友好而链表较差；链表无需连续空间，能动态扩容
 - 链表已知节点增删时间O(1)，但按值或按索引查找必须遍历，时间复杂度为O(n)
+frequency: low
 ---
 
 # 链表和数组的区别是什么？链表的常见操作？
@@ -96,6 +97,30 @@ public ListNode reverseList(ListNode head) {
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class A4 special
+    class A5 error
+    class Array info
+    class L1 start
+    class L2 process
+    class L3 decision
+    class L4 special
+    class L5 error
+    class L6 info
+    class LinkedList start
+    class Note process
+    class O decision
+    class br special
+    class n error
+    class next info
     subgraph Array["数组"]
         A1[连续内存]
         A2["随机访问 O 1<br/>通过下标"]

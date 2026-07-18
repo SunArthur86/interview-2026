@@ -33,6 +33,7 @@ memory_points:
 - L3项目层：放代码库结构与核心文档，按需检索加载。
 - L4全局层：放用户偏好与跨项目长期历史，生命周期最长。
 - 目标：防Token爆炸与注意力稀释，最大化高频任务信息保留率。
+frequency: medium
 ---
 
 # 【腾讯面经】在分层上下文管理机制中，各层级分别负责什么内容？
@@ -481,6 +482,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -30,6 +30,7 @@ memory_points:
 - 强调控制权：草稿不直接写入目标，而是进入隔离区供用户审查并对比。
 - 版本机制兜底：即使到最后发布态不可逆，也必须依赖版本历史支持随时回退。
 - 防患于未然：前置拆分能有效拦截AI幻觉或错误覆盖，保障数据安全。
+frequency: low
 ---
 
 # 【月之暗面面经】桌面端为什么要把结果编辑、确认和发布拆成三步？
@@ -324,6 +325,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

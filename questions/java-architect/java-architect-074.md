@@ -9,9 +9,14 @@ tags:
 - Java
 - 资源
 feynman:
-  essence: K8s 上 Java 服务资源治理的核心矛盾是"容器 cgroup 限制"与"JVM 内存模型"的认知错位。K8s 用 request/limit 控制 CPU 和内存，JVM 按堆/非堆/直接内存划分，两者不对齐会导致 OOMKilled（容器超限被杀）或资源浪费（堆设太小）。CPU 限流（CFS throttle）会让 JVM STW 看起来像 GC 停顿。
-  analogy: 像把一头大象（JVM 完整内存模型：堆+栈+元空间+直接内存+GC overhead）关进一个精确到克的笼子（K8s memory limit）。笼子标了 4GB，但大象实际要吃堆 3GB + 元空间 512MB + 线程栈 512MB + GC overhead 512MB = 4.5GB，结果被饿死（OOMKilled）。
-  first_principle: 容器的 CPU/内存限制是硬约束（超了被 kill 或 throttle），JVM 看不到容器边界（早期版本按宿主机内存算）。要让 JVM 在容器里稳定运行，必须让 JVM 内存各区（堆+元空间+线程栈+直接内存+JIT+GC overhead）的总和小于容器 memory limit，且 CPU limit 要留余量避免 CFS throttle。
+  essence: K8s 上 Java 服务资源治理的核心矛盾是"容器 cgroup 限制"与"JVM 内存模型"的认知错位。K8s 用 request/limit
+    控制 CPU 和内存，JVM 按堆/非堆/直接内存划分，两者不对齐会导致 OOMKilled（容器超限被杀）或资源浪费（堆设太小）。CPU 限流（CFS throttle）会让
+    JVM STW 看起来像 GC 停顿。
+  analogy: 像把一头大象（JVM 完整内存模型：堆+栈+元空间+直接内存+GC overhead）关进一个精确到克的笼子（K8s memory limit）。笼子标了
+    4GB，但大象实际要吃堆 3GB + 元空间 512MB + 线程栈 512MB + GC overhead 512MB = 4.5GB，结果被饿死（OOMKilled）。
+  first_principle: 容器的 CPU/内存限制是硬约束（超了被 kill 或 throttle），JVM 看不到容器边界（早期版本按宿主机内存算）。要让
+    JVM 在容器里稳定运行，必须让 JVM 内存各区（堆+元空间+线程栈+直接内存+JIT+GC overhead）的总和小于容器 memory limit，且
+    CPU limit 要留余量避免 CFS throttle。
   key_points:
   - JVM 内存 ≠ 堆内存：总内存 = 堆 + Metaspace + 线程栈×线程数 + 直接内存 + JIT cache + GC overhead
   - 容器 memory limit 必须 > JVM 总内存 + 安全余量（通常留 25%）
@@ -24,20 +29,30 @@ first_principle:
   - 容器 memory limit 是硬上限，JVM 各内存区总和超了就被 OOMKilled（不是 OOM 异常，是内核 SIGKILL）
   - CPU limit 用 CFS 调度，超了被 throttle（不是报错，是进程暂停执行）
   - JVM 早期版本（8u191 前）不识别 cgroup，按宿主机内存算堆大小导致 OOMKilled
-  rebuild: 分三步——第一，算清 JVM 总内存（堆+元空间+线程栈+直接内存+GC overhead），确保 < 容器 memory limit × 0.75。第二，用 -XX:MaxRAMPercentage=75 替代 -Xmx（JDK 10+ 自动适配容器内存），加 -XX:+UseContainerSupport。第三，CPU request/limit 配置合理（request 用于调度，limit 用于 CFS），监控 container_cpu_cfs_throttled_seconds，throttle 高就调大 limit 或减并发。
+  rebuild: 分三步——第一，算清 JVM 总内存（堆+元空间+线程栈+直接内存+GC overhead），确保 < 容器 memory limit × 0.75。第二，用
+    -XX:MaxRAMPercentage=75 替代 -Xmx（JDK 10+ 自动适配容器内存），加 -XX:+UseContainerSupport。第三，CPU
+    request/limit 配置合理（request 用于调度，limit 用于 CFS），监控 container_cpu_cfs_throttled_seconds，throttle
+    高就调大 limit 或减并发。
 follow_up:
-  - OOMKilled 和 Java OOM 有什么区别？——OOMKilled 是内核 SIGKILL（容器超 memory limit），JVM 来不及打印堆栈，dmesg 或 kubectl describe 能看到 OOMKilled。Java OOM（java.lang.OutOfMemoryError）是 JVM 内部异常，能打堆栈，容器没超限
-  - 为什么 CPU limit 要用但不设太低？——CPU limit 设太低导致 CFS throttle（时间片用完后等到下个周期才能执行），JVM 看起来像偶发停顿，GC、网络处理都受影响。生产建议 request=limit（绑核避免 throttle）或 limit=2×request
-  - JVM 怎么看容器内存？——JDK 8u191+ 支持 -XX:+UseContainerSupport（默认开），能读 cgroup 内存限制。-XX:InitialRAMPercentage/MaxRAMPercentage 按容器内存百分比设堆
-  - HPA 基于 CPU 利用率，但 GC 时 CPU 会飙怎么办？——HPA 误判会频繁扩缩容。解法：HPA 阈值设宽（如 80% 而非 50%）、用自定义指标（QPS/RT）而非 CPU、GC 调优减少 Full GC
-  - Pod 重启（OOMKilled）怎么定位？——kubectl describe pod 看 Last State 的 Reason（OOMKilled）和 Exit Code（137）；kubectl get events 看 pod_restart_count；JVM 加 -XX:+HeapDumpOnOutOfMemorySeparator 但 OOMKilled 抓不到 dump（来不及）
+- OOMKilled 和 Java OOM 有什么区别？——OOMKilled 是内核 SIGKILL（容器超 memory limit），JVM 来不及打印堆栈，dmesg
+  或 kubectl describe 能看到 OOMKilled。Java OOM（java.lang.OutOfMemoryError）是 JVM 内部异常，能打堆栈，容器没超限
+- 为什么 CPU limit 要用但不设太低？——CPU limit 设太低导致 CFS throttle（时间片用完后等到下个周期才能执行），JVM 看起来像偶发停顿，GC、网络处理都受影响。生产建议
+  request=limit（绑核避免 throttle）或 limit=2×request
+- JVM 怎么看容器内存？——JDK 8u191+ 支持 -XX:+UseContainerSupport（默认开），能读 cgroup 内存限制。-XX:InitialRAMPercentage/MaxRAMPercentage
+  按容器内存百分比设堆
+- HPA 基于 CPU 利用率，但 GC 时 CPU 会飙怎么办？——HPA 误判会频繁扩缩容。解法：HPA 阈值设宽（如 80% 而非 50%）、用自定义指标（QPS/RT）而非
+  CPU、GC 调优减少 Full GC
+- Pod 重启（OOMKilled）怎么定位？——kubectl describe pod 看 Last State 的 Reason（OOMKilled）和 Exit
+  Code（137）；kubectl get events 看 pod_restart_count；JVM 加 -XX:+HeapDumpOnOutOfMemorySeparator
+  但 OOMKilled 抓不到 dump（来不及）
 memory_points:
-  - JVM 总内存 = 堆 + Metaspace + 线程栈×线程数 + 直接内存 + JIT + GC overhead
-  - 容器 memory limit > JVM 总内存 × 1.25（留 25% 余量）
-  - 用 MaxRAMPercentage=75 替代 -Xmx（自动适配容器）
-  - OOMKilled = 容器超限被内核杀（Exit Code 137），Java OOM = JVM 异常（能打堆栈）
-  - CFS throttle = CPU limit 被限流，监控 container_cpu_cfs_throttled_seconds
-  - HPA 用业务指标（QPS/RT）而非 CPU，避免 GC 抖动误扩缩
+- JVM 总内存 = 堆 + Metaspace + 线程栈×线程数 + 直接内存 + JIT + GC overhead
+- 容器 memory limit > JVM 总内存 × 1.25（留 25% 余量）
+- 用 MaxRAMPercentage=75 替代 -Xmx（自动适配容器）
+- OOMKilled = 容器超限被内核杀（Exit Code 137），Java OOM = JVM 异常（能打堆栈）
+- CFS throttle = CPU limit 被限流，监控 container_cpu_cfs_throttled_seconds
+- HPA 用业务指标（QPS/RT）而非 CPU，避免 GC 抖动误扩缩
+frequency: high
 ---
 
 # 【Java 后端架构师】Kubernetes 上 Java 服务的资源治理
@@ -50,6 +65,45 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CodeCache start
+    class Container process
+    class Direct decision
+    class DirectByteBuffer special
+    class Eden error
+    class G1 info
+    class GB start
+    class GC process
+    class Heap decision
+    class JIT special
+    class JVM error
+    class MB info
+    class MaxDirectMemorySize start
+    class MaxMetaspaceSize process
+    class MaxRAMPercentage decision
+    class Meta special
+    class Metaspace error
+    class NIO info
+    class Netty start
+    class OS process
+    class Old decision
+    class Region special
+    class ReservedCodeCacheSize error
+    class Safe info
+    class Stack start
+    class Survivor process
+    class XX decision
+    class Xss1m special
+    class br error
+    class cgroup info
+    class limit start
+    class memory process
+    class overhead decision
     Container["容器 memory limit = 8 GB"]
     Container --> JVM["JVM 进程总内存 ≈ 7.5 GB"]
     Container --> Safe["安全余量 = 512 MB (留给 OS、cgroup)"]

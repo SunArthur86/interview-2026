@@ -17,6 +17,7 @@ memory_points:
 - 层级设备：集线器在物理层，交换机在数据链路层，而路由器在网络层
 - 模型对比：TCP/IP四层模型将OSI上三层合并为应用层，下两层合并为网络接口层
 - ARP归属：ARP虽常被视为网络接口层协议，但因其IP与MAC地址转换职责多归于网络层
+frequency: low
 ---
 
 # 什么是OSI 七层参考模型？
@@ -123,6 +124,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -30,6 +30,7 @@ memory_points:
 - 底层原理：一次KV查询提取长链，通过3xx状态码重定向
 - 状态码选型：用302而非301，因每次回源可精准统计点击量
 - 缓存结合：请求先查Redis防穿透，未命中再查DB返回长URL
+frequency: high
 ---
 
 # 【滴滴面经】短链跳转的原理是什么？用的是什么 HTTP 状态码？
@@ -349,6 +350,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

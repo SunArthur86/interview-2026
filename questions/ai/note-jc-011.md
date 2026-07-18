@@ -10,8 +10,10 @@ tags:
 - 时间复杂度
 - BigO
 feynman:
-  essence: 时间复杂度用 Big-O 描述算法运行时间随输入规模 n 增长的上界，忽略常数和低阶项，只看增长趋势。O(1)常数<O(logn)对数<O(n)线性<O(nlogn)线性对数<O(n²)平方<O(2^n)指数<O(n!)阶乘。意义是"n 很大时谁更快"，不是"具体多少秒"。评估方法：数循环嵌套层数（一层n是O(n)，两层n是O(n²)），递归用主定理。
-  analogy: 像比较两个人的工资增长——A 每年涨100（O(1)，固定），B 每年涨工资的10%（O(n)，按比例），C 每年工资翻倍（O(2^n)，指数）。短期看不出差别，但 20 年后 C 远超 A/B。时间复杂度看的是"长期趋势"。
+  essence: 时间复杂度用 Big-O 描述算法运行时间随输入规模 n 增长的上界，忽略常数和低阶项，只看增长趋势。O(1)常数<O(logn)对数<O(n)线性<O(nlogn)线性对数<O(n²)平方<O(2^n)指数<O(n!)阶乘。意义是"n
+    很大时谁更快"，不是"具体多少秒"。评估方法：数循环嵌套层数（一层n是O(n)，两层n是O(n²)），递归用主定理。
+  analogy: 像比较两个人的工资增长——A 每年涨100（O(1)，固定），B 每年涨工资的10%（O(n)，按比例），C 每年工资翻倍（O(2^n)，指数）。短期看不出差别，但
+    20 年后 C 远超 A/B。时间复杂度看的是"长期趋势"。
   first_principle: 算法效率的衡量要独立于硬件（同算法不同机器时间不同）。用"操作次数随 n 的增长函数"抽象，Big-O 取上界并忽略常数，让效率比较与硬件无关。
   key_points:
   - Big-O 描述运行时间随 n 增长的上界，忽略常数和低阶项
@@ -33,6 +35,7 @@ memory_points:
 - 评估方法：循环嵌套定阶数，递归套用主定理算
 - 常数忽略：忽略低阶项与常数系数，只保留最高阶
 - 实用数据：1秒约10^8次操作，据此推算 n 的范围防超时
+frequency: medium
 ---
 
 # 【阶跃星辰面经】怎么理解时间复杂度
@@ -164,6 +167,28 @@ def f(n):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Big decision
+    class C special
+    class C1 error
+    class C2 info
+    class D start
+    class D1 process
+    class D2 decision
+    class D3 special
+    class E error
+    class F info
+    class O start
+    class br process
+    class log decision
+    class n special
     A["算法执行时间<br/>随输入规模n的变化"] -->|"忽略常数与低阶项<br/>提取主导项"| B["Big-O 渐进上界记号"]
     B --> C["评估方法"]
     B --> D["复杂度增长阶"]

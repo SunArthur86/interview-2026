@@ -10,7 +10,8 @@ tags:
 - 结算
 - 系统设计
 feynman:
-  essence: 结算对账系统是供应链的"财务大脑"，用"三单匹配（订单/到货/发票）+ T+1 全量对账 + 实时差异监控"保证资金流和信息流一致，日处理百亿 GMV。
+  essence: 结算对账系统是供应链的"财务大脑"，用"三单匹配（订单/到货/发票）+ T+1 全量对账 + 实时差异监控"保证资金流和信息流一致，日处理百亿
+    GMV。
   analogy: 对账像企业的"账房先生"——每天核对三本账（订单账/仓储账/财务账），三方一致才平账，不一致就查差异。
   first_principle: 资金不允许错，必须多源数据交叉验证（三单匹配）+ 全量对账兜底。
   key_points:
@@ -34,6 +35,7 @@ memory_points:
 - T+1 全量对账：订单 vs 仓储 vs 财务
 - 实时差异监控（负库存/金额异常告警）
 - 差异处理：自动调账 + 人工核查
+frequency: low
 ---
 
 # 【拼多多供应链】设计结算对账系统（日百亿 GMV）
@@ -201,6 +203,33 @@ MySQL 扛不住对账的数据量：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class FULL start
+    class G process
+    class H decision
+    class I special
+    class Iceberg error
+    class J info
+    class JOIN start
+    class K process
+    class L decision
+    class OUTER special
+    class S1 error
+    class S2 info
+    class S3 start
+    class Spark process
+    class T decision
     subgraph S1[业务系统数据源]
         A[订单系统记录]
         B[仓储系统记录]

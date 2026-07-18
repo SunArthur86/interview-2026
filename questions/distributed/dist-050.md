@@ -25,6 +25,7 @@ memory_points:
 - Redis锁是AP高并发但有失效风险，而ZK锁是CP强一致无时钟依赖
 - ZK锁原理：创建临时顺序节点，因为监听前一个节点，所以能避免羊群效应
 - Fencing Token（递增令牌）：解决锁过期后的并发冲突，旧Token操作被拒
+frequency: high
 ---
 
 # Redlock 算法为什么有争议？Redis 分布式锁和 ZooKeeper 分布式锁的本质区别？
@@ -117,6 +118,7 @@ flowchart TD
     style LUA fill:#009688,color:#fff
     style DOG fill:#9C27B0,color:#fff
     style WARN fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

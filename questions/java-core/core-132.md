@@ -16,6 +16,7 @@ memory_points:
 - 重写规则：外壳不能变，访问权限不能更严，受检异常不能更宽。
 - 重写进阶：JDK 5+ 支持协变返回类型（子类返回值可为父类返回值的子类）。
 - 实战避坑：RPC/AOP 场景中，重载难区分，内部方法自调用会导致重写失效。
+frequency: low
 ---
 
 # 方法的重载和重写有什么区别？
@@ -122,6 +123,26 @@ class Dog extends Animal {
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Note start
+    class O1 process
+    class O2 decision
+    class O3 special
+    class O4 error
+    class O5 info
+    class Overload start
+    class Override process
+    class R1 decision
+    class R2 special
+    class R3 error
+    class R4 info
+    class R5 start
+    class br process
     subgraph Overload["重载"]
         O1[同一类中]
         O2[方法名相同]

@@ -11,8 +11,8 @@ tags:
 - Prometheus
 - 面经
 feynman:
-  essence: "KV Cache可观测体系是推理服务的健康仪表盘——从显存利用率到业务SLA，四层监控金字塔确保问题无处遁形"
-  analogy: "像汽车仪表盘：资源层=油量表（显存），性能层=发动机转速（命中率/重算率），业务层=时速表（P99延迟），异常层=故障灯（OOM/evict告警）。只盯油表（显存利用率）就像只看油表开车——发动机过热都不知道"
+  essence: KV Cache可观测体系是推理服务的健康仪表盘——从显存利用率到业务SLA，四层监控金字塔确保问题无处遁形
+  analogy: 像汽车仪表盘：资源层=油量表（显存），性能层=发动机转速（命中率/重算率），业务层=时速表（P99延迟），异常层=故障灯（OOM/evict告警）。只盯油表（显存利用率）就像只看油表开车——发动机过热都不知道
   key_points:
   - 四层监控金字塔：资源层→性能层→业务层→异常层
   - KV Cache利用率<15%触发compaction
@@ -20,9 +20,10 @@ feynman:
   - P99 TPOT/TTFT vs SLO是业务层核心指标
   - eBPF零开销采样是加分方案
 first_principle:
-  essence: "推理服务的可观测性遵循Telemetry三支柱（Metrics+Logging+Tracing），但KV Cache引入了传统微服务没有的特殊维度"
-  derivation: "传统服务监控关注CPU/内存/QPS/延迟。KV Cache监控需要额外关注：1) Cache的命中率（影响延迟）；2) OOM重计算率（影响正确性）；3) Eviction频率（影响质量）；4) Block table miss率（offloading场景）。这些指标直接反映推理服务的健康度和成本效率"
-  conclusion: "完整的KV Cache可观测体系应该能回答：现在的显存用在哪了？命中率够不够？延迟达不达标？什么时候会OOM？"
+  essence: 推理服务的可观测性遵循Telemetry三支柱（Metrics+Logging+Tracing），但KV Cache引入了传统微服务没有的特殊维度
+  derivation: 传统服务监控关注CPU/内存/QPS/延迟。KV Cache监控需要额外关注：1) Cache的命中率（影响延迟）；2) OOM重计算率（影响正确性）；3)
+    Eviction频率（影响质量）；4) Block table miss率（offloading场景）。这些指标直接反映推理服务的健康度和成本效率
+  conclusion: 完整的KV Cache可观测体系应该能回答：现在的显存用在哪了？命中率够不够？延迟达不达标？什么时候会OOM？
 follow_up:
 - Prometheus+Grafana的具体dashboard怎么配置？
 - eBPF采样相比传统metric采集有什么优势？
@@ -33,6 +34,7 @@ memory_points:
 - KV利用率15%触发compaction，OOM重算>0%即故障
 - Prefix cache命中率<50%查prompt标准化
 - P99 TPOT/TTFT vs SLO + eBPF零开销采样
+frequency: high
 ---
 
 # 【AI Infra推理优化】如何构建KV Cache可观测体系？关键指标有哪些？
@@ -193,6 +195,7 @@ flowchart TD
     style PAGED fill:#FF9800,color:#fff
     style OFFLOAD fill:#F44336,color:#fff
     style BATCH fill:#9C27B0,color:#fff
+
 ```
 
 ## 结构化回答

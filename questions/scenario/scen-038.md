@@ -28,6 +28,7 @@ memory_points:
 - 心跳优化：因为高频写Redis压力大，所以网关本地缓存，快过期(如50s)才刷Redis
 - 广播优化：因为全推引发广播风暴，所以仅查好友与在线列表交集定向推送
 - 多端与弱网：弱网靠服务端超时判定离线，多端登录用JSON/Set记录设备ID
+frequency: medium
 ---
 
 # 如何设计一个实时在线状态系统？显示好友在线/离线状态。
@@ -128,6 +129,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

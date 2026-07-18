@@ -28,6 +28,7 @@ memory_points:
 - 选RAG：因为知识更新频繁或需溯源防幻觉，所以实时检索优于重训
 - 选微调：因为需定制输出格式或改变模型推理模式，所以需内化到权重
 - 黄金组合：先微调定制风格，再叠加RAG注入实时事实
+frequency: medium
 ---
 
 # RAG和微调应该如何取舍？什么情况下优先用RAG？什么情况下考虑微调？如何结合？
@@ -256,6 +257,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

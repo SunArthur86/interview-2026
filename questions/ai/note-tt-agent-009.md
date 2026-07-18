@@ -33,6 +33,7 @@ memory_points:
 - 因果句：因为高频标准场景要求低延迟且高合规，所以选固定工作流Workflow
 - 因果句：因为客诉等非标场景输入多变且需多步反思，所以必须用自研Agent
 - 口诀法：混合架构是趋势，标准查流程走捷径，长尾复杂推理交Agent
+frequency: medium
 ---
 
 # Workflow固定工作流和自主决策Agent怎么区分？什么场景选Workflow、什么必须自研Agent？
@@ -162,6 +163,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

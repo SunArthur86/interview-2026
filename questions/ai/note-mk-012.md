@@ -30,6 +30,7 @@ memory_points:
 - 五段式回放模型：完整记录输入、计划、执行、产物、人工修改全生命周期的切片。
 - 时间线交互设计：提供类似视频播放器的进度轴，可自由拖拽定位到特定执行步骤。
 - 快照上下文：选中任一历史节点时，能完整展示当时的输入素材、AI推理与产物变化。
+frequency: low
 ---
 
 # 【月之暗面面经】AI-Native 桌面产品怎样做结果回放，才能支持问题复盘和用户学习？
@@ -290,6 +291,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

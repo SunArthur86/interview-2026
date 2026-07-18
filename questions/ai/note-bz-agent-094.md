@@ -30,6 +30,7 @@ memory_points:
 - 需求澄清必做：先反问文档类型、并发量、准确度要求，展示不急于写代码的资深工程师思维
 - 关键决策必答Trade-off：选向量+BM25混合检索因为兼顾语义与关键词，加Rerank虽慢但能保精度
 - 风险应对方案：面对幻觉与高并发，必须主动抛出降级策略（限流/缓存/兜底）与安全保障
+frequency: medium
 ---
 
 # agent 模拟面试（结合项目场景题）怎么答？
@@ -235,6 +236,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

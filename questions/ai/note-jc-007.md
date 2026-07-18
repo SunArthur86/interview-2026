@@ -11,9 +11,13 @@ tags:
 - 一阶矩
 - 二阶矩
 feynman:
-  essence: Adam 优化器结合动量（Momentum，一阶矩指数移动平均）和自适应学习率（RMSProp，二阶矩指数移动平均）。一阶矩 m_t=β1·m_{t-1}+(1-β1)·g_t（动量方向），二阶矩 v_t=β2·v_{t-1}+(1-β2)·g_t²（梯度幅度）。偏差修正后更新 θ=θ-lr·m_hat/√v_hat。本质是"用历史梯度方向（动量）加速 + 用历史梯度幅度自适应调学习率（大幅小步小步大）"。
-  analogy: 像有经验的山地徒步者——一阶矩（动量）像记住之前走的方向（保持惯性，不会因一块石头就改向），二阶矩（RMSProp）像根据"这路陡不陡"调步幅（陡的地方小步稳，平的地方大步快）。两者结合就是 Adam。
-  first_principle: SGD 只用当前梯度（噪声大）。Momentum 加历史方向（平滑噪声、加速）。RMSProp 加历史幅度（自适应学习率）。Adam = Momentum + RMSProp，同时利用梯度的一阶和二阶统计量。
+  essence: Adam 优化器结合动量（Momentum，一阶矩指数移动平均）和自适应学习率（RMSProp，二阶矩指数移动平均）。一阶矩 m_t=β1·m_{t-1}+(1-β1)·g_t（动量方向），二阶矩
+    v_t=β2·v_{t-1}+(1-β2)·g_t²（梯度幅度）。偏差修正后更新 θ=θ-lr·m_hat/√v_hat。本质是"用历史梯度方向（动量）加速
+    + 用历史梯度幅度自适应调学习率（大幅小步小步大）"。
+  analogy: 像有经验的山地徒步者——一阶矩（动量）像记住之前走的方向（保持惯性，不会因一块石头就改向），二阶矩（RMSProp）像根据"这路陡不陡"调步幅（陡的地方小步稳，平的地方大步快）。两者结合就是
+    Adam。
+  first_principle: SGD 只用当前梯度（噪声大）。Momentum 加历史方向（平滑噪声、加速）。RMSProp 加历史幅度（自适应学习率）。Adam
+    = Momentum + RMSProp，同时利用梯度的一阶和二阶统计量。
   key_points:
   - 一阶矩 m_t = β1·m_{t-1}+(1-β1)·g_t（动量，梯度方向的EMA）
   - 二阶矩 v_t = β2·v_{t-1}+(1-β2)·g_t²（梯度幅度的EMA）
@@ -22,7 +26,8 @@ feynman:
   - 默认 β1=0.9, β2=0.999, ε=1e-8
 first_principle:
   essence: Adam = Momentum(一阶) + RMSProp(二阶)
-  derivation: SGD噪声大 → 加历史方向(Momentum,一阶矩)平滑 → 但各维度学习率一样 → 加历史幅度(RMSProp,二阶矩)自适应 → 两者结合=Adam
+  derivation: SGD噪声大 → 加历史方向(Momentum,一阶矩)平滑 → 但各维度学习率一样 → 加历史幅度(RMSProp,二阶矩)自适应 →
+    两者结合=Adam
   conclusion: Adam 用梯度的两个统计量（方向和幅度）做自适应更新，是深度学习默认优化器
 follow_up:
 - 为什么需要偏差修正？
@@ -34,6 +39,7 @@ memory_points:
 - 偏差修正原因：初值设0导致前几步严重低估，需除以(1-β^t)补偿
 - 超参记忆：LLM常用β2=0.95（非默认0.999）以更快适应梯度变化
 - 扩展：AdamW解耦了weight decay和自适应学习率，是LLM标配
+frequency: medium
 ---
 
 # 【阶跃星辰面经】Adam 优化器的公式：一阶矩、二阶矩、梯度更新
@@ -173,6 +179,38 @@ AdamW 修正：weight decay 直接作用在参数上，不和梯度耦合
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class EMA info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class LLM process
+    class Warmup decision
+    class Weights special
+    class br error
+    class g_t info
+    class lr start
+    class m process
+    class m_hat decision
+    class m_t special
+    class t error
+    class v info
+    class v_hat start
+    class v_t process
     A["参数 θ<br/>(Weights)"] --> B["前向传播计算Loss"]
     B --> C["反向传播计算梯度 g_t"]
     C --> D["指数移动平均 EMA"]

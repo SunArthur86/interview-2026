@@ -30,6 +30,7 @@ memory_points:
 - 目的：解决硬性切分导致的语义断裂，防止关键信息在切片交界处因缺少上下文而无法被理解。
 - Overlap保留相邻Chunk的重叠部分，经验值通常设为Chunk大小的10%-20%。
 - 最优解是语义切分：按段落和句子自然边界断开，而非固定Token数硬切。
+frequency: medium
 ---
 
 # 文档切片为什么要有Overlap？它主要解决什么问题？
@@ -191,6 +192,7 @@ flowchart TD
     style TBL fill:#FF9800,color:#fff
     size_note([过大→检索信号被平均<br/>过小→语义割裂]) -.-> SIZE
     style PARENT fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

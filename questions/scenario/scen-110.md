@@ -25,6 +25,7 @@ memory_points:
 - 分片键选择：推荐user_id，因买家维度查询最多，路由最精准
 - 基因法折中：将user_id后几位嵌入order_id，既保分散又支持订单维度的反查
 - 深度分页：禁用大OFFSET，改用游标WHERE id > last_id分页避免全表扫
+frequency: high
 ---
 
 # 电商订单系统日增千万级数据，如何设计存储方案？什么时候该分库分表？
@@ -130,6 +131,7 @@ flowchart TD
     AGG --> DW[(数仓 离线汇总)]
     style SH fill:#d4edda
     style AGG fill:#ffe4b5
+
 ```
 
 

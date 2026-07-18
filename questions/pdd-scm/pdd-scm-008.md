@@ -34,6 +34,7 @@ memory_points:
 - 幂等：生产端 enable.idempotence；消费端业务唯一键去重
 - min.insync.replicas=2（防数据丢失）
 - 消息积压：扩消费者 + 排查慢消费
+frequency: high
 ---
 
 # 【拼多多供应链】Kafka 怎么保证消息不丢不重？
@@ -258,6 +259,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

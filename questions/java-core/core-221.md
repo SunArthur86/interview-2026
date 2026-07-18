@@ -17,6 +17,7 @@ memory_points:
 - 红黑树原理：节点红黑相间，通过左旋、右旋、节点变色保持大致平衡，防止退化为链表
 - 对比 HashMap：HashMap 无序且 O(1) 查询，TreeMap 牺牲速度换取了强大的排序与范围查询
 - 高频考点：支持丰富的区间导航操作，如 subMap 截取子集，firstEntry 获取极值
+frequency: medium
 ---
 
 # 什么是treemap？
@@ -138,6 +139,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

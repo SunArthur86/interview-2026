@@ -16,6 +16,7 @@ memory_points:
 - 流量与拥塞控制：滑动窗口解决收发两端速率匹配（保护接收方），拥塞窗口控制网络注入量
 - 对比 UDP：TCP 面向连接可靠但慢（20B头），UDP 无连接不可靠但快（8B头）保留边界
 - 应用场景：TCP 用于文件/网页/邮件，UDP 用于视频直播/语音/游戏等
+frequency: low
 ---
 
 # 什么是TCP？
@@ -115,6 +116,27 @@ TCP 首部通常为 20 字节（不含选项），最长可达 60 字节。
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class C process
+    class ESTABLISHED decision
+    class FIN special
+    class S error
+    class SYN info
+    class TIME_WAIT start
+    class ack process
+    class as decision
+    class seq special
+    class u error
+    class v info
+    class w start
+    class x process
+    class y decision
     participant C as 客户端
     participant S as 服务端
     Note over C,S: 三次握手 建立连接

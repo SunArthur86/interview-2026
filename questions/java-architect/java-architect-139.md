@@ -9,9 +9,13 @@ tags:
 - 时间轮
 - 任务
 feynman:
-  essence: 延迟队列的本质是"消息在指定时间后才被消费"——支付 30 分钟未支付自动取消、订单 7 天后自动确认收货、优惠券到期提醒。三种实现：(1) Redis ZSet（score=到期时间戳，定时扫过期）；(2) 时间轮（HashedWheelTimer，把任务挂在轮盘的 slot 上，指针扫到就触发）；(3) RocketMQ 延迟等级 / Kafka + Delay Topic（基于特定延迟等级或分区策略）。时间轮是最高效的——O(1) 插入和触发，适合海量短延迟任务。
-  analogy: 像餐厅的"叫号系统"。Redis ZSet 是按"取餐时间"排序的列表，服务员定期扫"到时间的订单"叫号；时间轮是"传送带"——每个格子放一批订单，传送带每秒转一格，转到对应格子时叫那批订单；RocketMQ 延迟等级是"预设档位的传送带"（5s/10s/30s/1m...）。
-  first_principle: 为什么不用 Thread.sleep？因为 sleep 占线程，1 万个延迟任务要 1 万个线程，资源不可承受。延迟队列的本质是"用 1 个调度线程管理 N 个延迟任务"，关键是数据结构——ZSet 用排序（O(logN) 查找），时间轮用 hash + 链表（O(1) 插入）。
+  essence: 延迟队列的本质是"消息在指定时间后才被消费"——支付 30 分钟未支付自动取消、订单 7 天后自动确认收货、优惠券到期提醒。三种实现：(1)
+    Redis ZSet（score=到期时间戳，定时扫过期）；(2) 时间轮（HashedWheelTimer，把任务挂在轮盘的 slot 上，指针扫到就触发）；(3)
+    RocketMQ 延迟等级 / Kafka + Delay Topic（基于特定延迟等级或分区策略）。时间轮是最高效的——O(1) 插入和触发，适合海量短延迟任务。
+  analogy: 像餐厅的"叫号系统"。Redis ZSet 是按"取餐时间"排序的列表，服务员定期扫"到时间的订单"叫号；时间轮是"传送带"——每个格子放一批订单，传送带每秒转一格，转到对应格子时叫那批订单；RocketMQ
+    延迟等级是"预设档位的传送带"（5s/10s/30s/1m...）。
+  first_principle: 为什么不用 Thread.sleep？因为 sleep 占线程，1 万个延迟任务要 1 万个线程，资源不可承受。延迟队列的本质是"用
+    1 个调度线程管理 N 个延迟任务"，关键是数据结构——ZSet 用排序（O(logN) 查找），时间轮用 hash + 链表（O(1) 插入）。
   key_points:
   - Redis ZSet：score=到期时间戳，ZRANGEBYSCORE 扫描过期，简单通用
   - 时间轮（HashedWheelTimer）：O(1) 插入和触发，海量短延迟任务首选
@@ -24,19 +28,23 @@ first_principle:
   - 每个任务一个 timer/sleep 是不可行的（线程资源限制）
   - 定时扫表（DB SELECT WHERE expire_at < NOW()）压力随数据量增长
   - 任务可能取消、修改、批量到期（同一时刻 100 万任务到期）
-  rebuild: 用 Redis ZSet（轻量，score 排序）或时间轮（高效，O(1)）。时间轮把"到期时间"hash 到轮盘 slot，每个 slot 是任务链表；调度线程每 tick（如 100ms）推进一格，触发当前 slot 所有任务。多层时间轮处理长延迟（秒轮满进分轮）。海量任务用 Netty HashedWheelTimer 或自研分层时间轮。
+  rebuild: 用 Redis ZSet（轻量，score 排序）或时间轮（高效，O(1)）。时间轮把"到期时间"hash 到轮盘 slot，每个 slot
+    是任务链表；调度线程每 tick（如 100ms）推进一格，触发当前 slot 所有任务。多层时间轮处理长延迟（秒轮满进分轮）。海量任务用 Netty HashedWheelTimer
+    或自研分层时间轮。
 follow_up:
-  - Redis ZSet 怎么扫过期？——ZRANGEBYSCORE key 0 now LIMIT 0 100，循环拉取已到期任务。注意原子性（ZRANGEBYSCORE + ZREM 要 Lua）。
-  - 时间轮怎么处理长延迟？——单层时间轮有限（如 3600 slot × 1s = 1 小时）。超过用多层（时钟机制）：秒轮满转一圈，任务降级到分轮对应 slot。
-  - 时间轮任务取消怎么做？——任务对象持有 cancel 标志，调度线程触发时检查标志跳过；或维护任务到 slot 的反向索引，O(1) 移除。
-  - 同一时刻大量任务到期（如秒杀）怎么处理？——批量触发，但执行要异步（丢线程池），避免调度线程阻塞导致后续 tick 延迟。
-  - 延迟队列怎么持久化？——Redis ZSet 自带持久化（AOF）；时间轮是内存数据结构，重启丢任务，要配合 DB 持久化（任务表）。
+- Redis ZSet 怎么扫过期？——ZRANGEBYSCORE key 0 now LIMIT 0 100，循环拉取已到期任务。注意原子性（ZRANGEBYSCORE
+  + ZREM 要 Lua）。
+- 时间轮怎么处理长延迟？——单层时间轮有限（如 3600 slot × 1s = 1 小时）。超过用多层（时钟机制）：秒轮满转一圈，任务降级到分轮对应 slot。
+- 时间轮任务取消怎么做？——任务对象持有 cancel 标志，调度线程触发时检查标志跳过；或维护任务到 slot 的反向索引，O(1) 移除。
+- 同一时刻大量任务到期（如秒杀）怎么处理？——批量触发，但执行要异步（丢线程池），避免调度线程阻塞导致后续 tick 延迟。
+- 延迟队列怎么持久化？——Redis ZSet 自带持久化（AOF）；时间轮是内存数据结构，重启丢任务，要配合 DB 持久化（任务表）。
 memory_points:
-  - Redis ZSet：score=时间戳，ZRANGEBYSCORE + ZREM（Lua 原子）
-  - 时间轮：O(1) 插入触发，海量短延迟首选（Netty HashedWheelTimer）
-  - 多层时间轮：秒轮+分轮+时轮，处理长延迟（时钟机制）
-  - RocketMQ 延迟等级：18 档开箱即用，不适合任意延迟
-  - 选型：短延迟用时间轮，长延迟用 RocketMQ/DB
+- Redis ZSet：score=时间戳，ZRANGEBYSCORE + ZREM（Lua 原子）
+- 时间轮：O(1) 插入触发，海量短延迟首选（Netty HashedWheelTimer）
+- 多层时间轮：秒轮+分轮+时轮，处理长延迟（时钟机制）
+- RocketMQ 延迟等级：18 档开箱即用，不适合任意延迟
+- 选型：短延迟用时间轮，长延迟用 RocketMQ/DB
+frequency: high
 ---
 
 # 【Java 后端架构师】延迟队列与时间轮任务的架构设计
@@ -461,6 +469,28 @@ public class ReliableDelayService {
 
 ```mermaid
 graph TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class C error
+    class C1 info
+    class C2 start
+    class C3 process
+    class D decision
+    class D1 special
+    class O error
+    class Redis info
+    class RocketMQ start
+    class ZSet process
+    class br decision
+    class score special
     A["延迟队列架构设计"] --> B("短延迟海量任务<br/>(< 1小时, 千万级)")
     A --> C("中量分布式任务<br/>(< 100万, 跨实例)")
     A --> D("固定等级业务消息<br/>(开箱即用)")

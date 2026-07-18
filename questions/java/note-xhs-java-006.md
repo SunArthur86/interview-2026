@@ -35,6 +35,7 @@ memory_points:
 - jmap -dump必须在FGC前抓，否则可能OOM中断；用jmap -histo:live先快速看对象分布
 - MAT核心：Dominator Tree看谁占内存最大，Path to GC Roots看谁不释放
 - 常见泄露Top3：静态Map无限put、ThreadLocal忘remove、内部类隐式持有外部类引用
+frequency: high
 ---
 
 # 【大厂面试】线上 Java 内存占用过高怎样排查解决？
@@ -257,6 +258,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

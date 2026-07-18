@@ -30,6 +30,7 @@ memory_points:
 - 积木建材=LangChain：提供LLM/Prompt/Tool等标准化底层基础组件
 - 施工图纸=LangGraph：基于组件搭建图结构，支持循环/分支/状态控制的复杂编排
 - 质检系统=LangSmith：负责全链路的可观测、Trace调试、评估与监控
+frequency: high
 ---
 
 # LangChain / LangGraph / LangSmith 家族各自定位与区别？
@@ -202,6 +203,7 @@ flowchart TD
     style LG fill:#FF9800,color:#fff
     style LS fill:#9C27B0,color:#fff
     style STATE fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

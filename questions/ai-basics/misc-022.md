@@ -24,6 +24,7 @@ memory_points:
 - 加速原理：将串行生成转为并行验证，利用Tree Masking
 - 加速比：理论5-6x，实际2-3x，受接受率限制
 - 实战：开启Temperature会降低命中率，建议验证用Greedy
+frequency: high
 ---
 
 # Speculative Decoding的原理是什么?为什么能加速2-3倍
@@ -132,6 +133,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 记忆要点

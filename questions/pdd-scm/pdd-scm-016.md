@@ -11,7 +11,8 @@ tags:
 - CAS
 feynman:
   essence: JDK 8 的 ConcurrentHashMap 用"CAS+synchronized 桶锁"把锁粒度从 Segment（JDK 7）降到单个桶，读完全无锁（volatile）、写只锁单桶，并发度等于桶数。
-  analogy: ConcurrentHashMap 像有几千个独立储物柜的仓库——不同人用不同柜子互不干扰（CAS+synchronized 桶锁），JDK 7 的分段锁是大区分锁（只 16 个区）。
+  analogy: ConcurrentHashMap 像有几千个独立储物柜的仓库——不同人用不同柜子互不干扰（CAS+synchronized 桶锁），JDK
+    7 的分段锁是大区分锁（只 16 个区）。
   first_principle: 哈希表不同桶天然独立，把锁粒度细化到桶级，冲突概率从全表降到哈希冲突概率。
   key_points:
   - JDK 8：CAS+synchronized 桶锁，锁粒度=单桶
@@ -35,6 +36,7 @@ memory_points:
 - 读无锁（volatile），写只锁桶头节点
 - 链表≥8 转红黑树
 - CounterCell 分片计数避免单点竞争
+frequency: high
 ---
 
 # 【拼多多供应链】ConcurrentHashMap 原理？put 流程？
@@ -215,6 +217,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

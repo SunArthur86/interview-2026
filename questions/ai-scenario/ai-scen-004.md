@@ -28,6 +28,7 @@ memory_points:
 - 结构化处理：Markdown按标题层级切分，表格整表存+摘要，代码按函数切分
 - 元数据设计：必须包含Source、Page、Title、Time，支持权限过滤
 - Pipeline优化：异步流式处理，批量Embedding，实时更新索引
+frequency: high
 ---
 
 # 如何设计大规模文档处理的RAG Pipeline？日均新增10万+文档，需要实时索引和低延迟查询。
@@ -181,6 +182,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

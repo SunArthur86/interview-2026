@@ -30,6 +30,7 @@ memory_points:
 - 一人多领：改用Hash结构记录单领数量，在Lua内校验防超发
 - 数据一致性：Redis扣成功但MQ丢失，需用本地消息表或T+N对账任务修复
 - 核销防翻转：下单先锁券（预扣），支付成功才核销，取消订单再异步释放
+frequency: high
 ---
 
 # 如何设计优惠券系统？支持海量发放、领取、核销。
@@ -168,6 +169,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -9,9 +9,12 @@ tags:
 - CDC
 - 事件发布
 feynman:
-  essence: Outbox 模式解决"业务数据更新 + 事件发布"的原子性问题——传统模式（先更 DB 后发消息）会因发消息失败丢事件，Outbox 把事件和业务数据放同一事务写到一个 outbox 表，保证原子。CDC（Change Data Capture）异步监听 outbox 表变更（通过 binlog），把事件推到 Kafka。这样"业务事务原子写 outbox + CDC 异步推 Kafka"，实现可靠事件发布。
+  essence: Outbox 模式解决"业务数据更新 + 事件发布"的原子性问题——传统模式（先更 DB 后发消息）会因发消息失败丢事件，Outbox 把事件和业务数据放同一事务写到一个
+    outbox 表，保证原子。CDC（Change Data Capture）异步监听 outbox 表变更（通过 binlog），把事件推到 Kafka。这样"业务事务原子写
+    outbox + CDC 异步推 Kafka"，实现可靠事件发布。
   analogy: 像寄信。Outbox 是"邮局信箱"——你写信投到信箱（和业务操作一起，原子），不直接送给邮递员（避免送信失败丢信）。CDC 是"邮递员定期开信箱取信分发"——异步、可靠、不阻塞业务。
-  first_principle: 为什么不"先更 DB 后发消息"？因为 DB 提交和消息发送是两个系统，无法原子。发消息失败要么丢事件（业务已提交但消息没发），要么业务回滚（消息发了但业务失败）。Outbox 把"事件"变成业务事务的一部分（写 outbox 表），用 DB 本地事务保证原子，再用 CDC 异步推 Kafka。
+  first_principle: 为什么不"先更 DB 后发消息"？因为 DB 提交和消息发送是两个系统，无法原子。发消息失败要么丢事件（业务已提交但消息没发），要么业务回滚（消息发了但业务失败）。Outbox
+    把"事件"变成业务事务的一部分（写 outbox 表），用 DB 本地事务保证原子，再用 CDC 异步推 Kafka。
   key_points:
   - Outbox 表：和业务表同库，存待发布事件（id, aggregate_id, type, payload, status, created_at）
   - CDC：Debezium 监听 outbox 表 binlog，变更即推 Kafka
@@ -24,19 +27,24 @@ first_principle:
   - DB 提交和 Kafka 发送是两个系统，2PC 性能差不可行
   - 业务事务原子性是底线（数据不能错），事件丢失可补偿
   - 跨系统原子只能用"本地事务 + 异步同步"模式
-  rebuild: 业务事务里同时写 business 表和 outbox 表（一个本地事务，原子）。CDC（Debezium）监听 outbox 表 binlog，变更异步推 Kafka。这样事件发布是"at-least-once + 业务幂等"——CDC 重启可能重投，消费端按 event_id 去重。outbox 表定期清理（已发布事件归档），避免无限膨胀。
+  rebuild: 业务事务里同时写 business 表和 outbox 表（一个本地事务，原子）。CDC（Debezium）监听 outbox 表 binlog，变更异步推
+    Kafka。这样事件发布是"at-least-once + 业务幂等"——CDC 重启可能重投，消费端按 event_id 去重。outbox 表定期清理（已发布事件归档），避免无限膨胀。
 follow_up:
-  - Outbox 表会无限膨胀吗？——会。已发布事件定期归档/删除（如保留 7 天）。CDC 推 Kafka 后状态置 PUBLISHED，后台 job 清理。
-  - CDC 失败怎么办？——CDC 是 Debezium 实例，挂了 binlog 不消费（offset 不变），重启从上次 offset 继续。outbox 表会堆积，但 DB 扛得住（数据量可控）。
-  - 事件顺序怎么保证？——同一 aggregate_id 路由到同 Kafka 分区，单分区内按 created_at 顺序消费。跨 aggregate 无序（业务可接受）。
-  - Debezium 怎么部署？——独立服务（Connect 模式）或独立进程（Standalone），监听 MySQL binlog。生产用 Connect 集群（Kafka Connect）。
-  - Outbox 和 Saga 区别？——Outbox 解决"事件可靠发布"（一次操作一个事件）；Saga 解决"跨服务长事务"（多步操作链式补偿）。两者互补：Saga 用 Outbox 发补偿事件。
+- Outbox 表会无限膨胀吗？——会。已发布事件定期归档/删除（如保留 7 天）。CDC 推 Kafka 后状态置 PUBLISHED，后台 job 清理。
+- CDC 失败怎么办？——CDC 是 Debezium 实例，挂了 binlog 不消费（offset 不变），重启从上次 offset 继续。outbox 表会堆积，但
+  DB 扛得住（数据量可控）。
+- 事件顺序怎么保证？——同一 aggregate_id 路由到同 Kafka 分区，单分区内按 created_at 顺序消费。跨 aggregate 无序（业务可接受）。
+- Debezium 怎么部署？——独立服务（Connect 模式）或独立进程（Standalone），监听 MySQL binlog。生产用 Connect 集群（Kafka
+  Connect）。
+- Outbox 和 Saga 区别？——Outbox 解决"事件可靠发布"（一次操作一个事件）；Saga 解决"跨服务长事务"（多步操作链式补偿）。两者互补：Saga
+  用 Outbox 发补偿事件。
 memory_points:
-  - Outbox 表：业务事务原子写，存待发布事件
-  - CDC（Debezium）监听 binlog，异步推 Kafka
-  - 幂等：消费端按 event_id 去重
-  - 顺序：aggregate_id 路由同分区，单分区内按时间顺序
-  - 清理：已发布事件定期归档/删除
+- Outbox 表：业务事务原子写，存待发布事件
+- CDC（Debezium）监听 binlog，异步推 Kafka
+- 幂等：消费端按 event_id 去重
+- 顺序：aggregate_id 路由同分区，单分区内按时间顺序
+- 清理：已发布事件定期归档/删除
+frequency: high
 ---
 
 # 【Java 后端架构师】Outbox + CDC 如何保证事件可靠发布
@@ -424,6 +432,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

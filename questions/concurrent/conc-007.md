@@ -16,6 +16,7 @@ memory_points:
 - 异步获取：Future代表异步结果，因为get()会阻塞，所以务必设超时
 - 核心流程：线程池submit提交Callable任务并返回Future对象
 - 进阶方案：CompletableFuture支持回调编排，解决了Future的阻塞痛点
+frequency: medium
 ---
 
 # ExecutorService、Callable<Class>、Future有返回值线程是什么？
@@ -145,6 +146,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

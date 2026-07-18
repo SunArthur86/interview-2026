@@ -16,6 +16,7 @@ memory_points:
 - BPM 管确定性流程与强一致性，Agent 管非结构化推理。
 - 两者互补，BPM 常作为主控制器调用 Agent 子服务。
 - 涉及资金与权限的落账操作必须在 BPM 侧完成。
+frequency: medium
 ---
 
 # 企业里多 Agent 与「传统工作流引擎(BPM)」关系是什么
@@ -141,6 +142,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

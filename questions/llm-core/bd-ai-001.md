@@ -33,6 +33,7 @@ memory_points:
 - Claude Code：CLI Agent，自主执行命令和测试，适合环境搭建和批量修复。
 - Web Chat：适合架构设计、技术选型和Debug思路探讨，思考型任务。
 - 选型：补全用Copilot，重构用Cursor，自主任务用Claude Code，设计用Web。
+frequency: low
 ---
 
 # 【字节面经】平常用什么AI编程工具？各自的特点和使用场景是什么？
@@ -103,6 +104,29 @@ Rules:
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AI process
+    class B decision
+    class B1 special
+    class C error
+    class C1 info
+    class Claude start
+    class Code process
+    class Copilot decision
+    class Cursor special
+    class D error
+    class D1 info
+    class E start
+    class F process
+    class G decision
+    class GitHub special
+    class IDE error
     A[AI 编程工具] --> B[GitHub Copilot]
     A --> C[Cursor]
     A --> D[Claude Code]

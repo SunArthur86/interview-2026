@@ -27,14 +27,15 @@ first_principle:
   - 多下游订阅同一事件
   rebuild: 分区+副本+消费组的持久化队列。
 follow_up:
-  - 怎么保证不丢？——acks=all + 消费手动提交 + 死信队列
-  - 重复消费怎么办？——业务幂等（用 msgId 去重）
-  - 怎么保证顺序？——同一 key 进同一分区
+- 怎么保证不丢？——acks=all + 消费手动提交 + 死信队列
+- 重复消费怎么办？——业务幂等（用 msgId 去重）
+- 怎么保证顺序？——同一 key 进同一分区
 memory_points:
-  - 分区：并行单元
-  - 副本：Leader+Follower
-  - 消费者组：组内分区分担
-  - 三语义：最多/至少/恰好一次
+- 分区：并行单元
+- 副本：Leader+Follower
+- 消费者组：组内分区分担
+- 三语义：最多/至少/恰好一次
+frequency: high
 ---
 
 # 【拼多多内容】Kafka 在评价/直播事件流的应用？
@@ -241,6 +242,32 @@ Kafka 的 exactly-once 是"事务（transactional producer）+ 幂等生产（id
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class C1 start
+    class C2 process
+    class C3 decision
+    class C4 special
+    class N error
+    class Partition info
+    class Producer start
+    class TTL process
+    class acks decision
+    class all special
+    class br error
+    class liveId info
+    class msgId start
+    class reviewId process
     subgraph 生产端
     A1["评价提交服务"] --> A2["Producer<br/>acks=all"]
     A3["直播互动事件"] --> A2

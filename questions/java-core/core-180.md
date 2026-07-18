@@ -17,6 +17,7 @@ memory_points:
 - 核心参数：默认空闲2小时，每75秒探测一次，连续9次无响应则判死。
 - 局限性：TCP探针能查主机断网，但无法测应用死锁，故需应用层心跳。
 - SYN攻击防御：调大半连接队列，核心是开启SYN Cookies避免分配资源。
+frequency: low
 ---
 
 # TCP保活机制是什么？
@@ -107,6 +108,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

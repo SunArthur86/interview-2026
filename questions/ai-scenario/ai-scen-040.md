@@ -29,6 +29,7 @@ memory_points:
 - 引用生成：Prompt要求标注[citation:X]，反向验证ID存在性防幻觉。
 - 边界处理：实时事件强制调用新闻API，无答案直接拒答。
 - 核心价值：直接给答案而非链接，解决信息过载。
+frequency: high
 ---
 
 # 如何设计一个AI搜索引擎（类似Perplexity）？直接给出答案而非链接列表，支持引用溯源。
@@ -181,6 +182,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

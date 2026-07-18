@@ -16,6 +16,7 @@ memory_points:
 - 错误隔离靠沙箱执行、最小权限和 Validator 门禁。
 - 输出需经 Pydantic 校验，禁止直接执行自然语言指令。
 - 检查点机制确保失败后从安全节点重试而非从头开始。
+frequency: medium
 ---
 
 # 错误隔离在多 Agent 里如何实现
@@ -153,6 +154,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

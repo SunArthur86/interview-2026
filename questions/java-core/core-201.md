@@ -16,6 +16,7 @@ memory_points:
 - 底层结构：双向链表，首尾指针相连，首尾增删极快O(1)，但指定索引查询极慢O(n)。
 - 多面手特性：实现Deque接口，既可作队列(FIFO)使用，又可作栈(LIFO)使用。
 - 场景对比：因为内存开销大且CPU缓存不友好，所以作队列/栈时首选ArrayDeque而非LinkedList。
+frequency: low
 ---
 
 # 什么是LinkList（链表）？
@@ -80,6 +81,33 @@ System.out.println(stack.poll()); // 输出 1 (因为是链表，先来后到，
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class CSS start
+    class HTML process
+    class I1 decision
+    class I2 special
+    class I3 error
+    class I4 info
+    class I5 start
+    class L1 process
+    class L2 decision
+    class L3 special
+    class L4 error
+    class L5 info
+    class Note start
+    class at_import process
+    class br decision
+    class icon special
+    class import error
+    class link info
+    class module start
+    class preload process
+    class rel decision
     subgraph link["标签"]
         L1[HTML 标签]
         L2[并行下载 不阻塞]

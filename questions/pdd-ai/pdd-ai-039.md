@@ -27,14 +27,15 @@ first_principle:
   - 效果要可度量
   rebuild: FDE 解决方案（场景筛选+架构+POC+工程化+运营度量）。
 follow_up:
-  - 怎么判断场景适合 LLM？——创造性/泛化/对话类适合；精确计算/强规则不适合
-  - POC 怎么做？——小数据集验证可行性 + 评估指标 + 成本估算
-  - 怎么说服业务用 LLM？——量化 ROI（提效/降本/增收）+ POC 数据
+- 怎么判断场景适合 LLM？——创造性/泛化/对话类适合；精确计算/强规则不适合
+- POC 怎么做？——小数据集验证可行性 + 评估指标 + 成本估算
+- 怎么说服业务用 LLM？——量化 ROI（提效/降本/增收）+ POC 数据
 memory_points:
-  - FDE：业务↔技术桥梁
-  - 流程：拆解→方案→POC→开发→上线→运营
-  - 场景：创造/泛化/对话适合
-  - 度量：效果+成本
+- FDE：业务↔技术桥梁
+- 流程：拆解→方案→POC→开发→上线→运营
+- 场景：创造/泛化/对话适合
+- 度量：效果+成本
+frequency: low
 ---
 
 # 【拼多多 AI 中台】FDE 解决方案（大模型项目落地）怎么做？
@@ -403,6 +404,28 @@ POC 阶段确实要算成本，但有"预测误差"的客观原因。第一，**
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Bad decision
+    class C special
+    class Case error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class LLM info
+    class POC start
+    class ROI process
+    class S decision
+    class Z special
     A[业务方需求] --> B{场景适配判断}
     B -->|不适合 LLM| Z[传统方案替代]
     B -->|适合 LLM| C[架构设计与技术栈选型]

@@ -16,6 +16,7 @@ memory_points:
 - 时间复杂度：因数据分布均匀，所以理想可达 O(n)；因倾斜退化为链表，所以最差 O(n^2)。
 - 适用场景对比：数据分布均匀用桶排，范围小整数用计数排，海量数据可做外部排序。
 - 计算映射索引极易踩坑：因为浮点除法有精度损失，所以推荐转为乘法计算。
+frequency: low
 ---
 
 # 桶排序的原理和使用场景是什么？
@@ -99,6 +100,33 @@ for (int i = 0; i < bucketCount; i++) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class Bucket decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class N decision
+    class O special
+    class P error
+    class Q info
+    class br start
+    class k process
+    class n decision
     A[桶排序 Bucket] --> B[数据范围已知且均匀]
     B --> C[划分 k 个桶]
     C --> D[遍历元素分配到对应桶]

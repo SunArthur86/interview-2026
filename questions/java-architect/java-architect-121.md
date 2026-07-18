@@ -9,9 +9,13 @@ tags:
 - Pod 重启
 - 雪崩防控
 feynman:
-  essence: K8s 三探针（startup/liveness/readiness）+ 重启机制是服务自愈的核心，但配置不当会引发雪崩——liveness 误判导致 Pod 反复重启、readiness 失败导致流量摘除、级联重启打爆下游。核心原则：① startup 先判断启动完成（慢启动场景）；② liveness 只判"死锁/僵死"（不判慢）；③ readiness 判"能否接流量"（包含依赖检查）。配合优雅停机 + PDB + 限流，才能防控雪崩。
-  analogy: 像医院的"病人监护系统"——startup 是"术后苏醒监测"（确认病人清醒），liveness 是"心跳监测"（心跳停了=死亡，要抢救），readiness 是"能否接客"（病人能否被探视）。误判会误抢救（重启）或误隔离（摘流量），引发连锁反应（雪崩）。
-  first_principle: 探针的本质是"让 K8s 判断 Pod 健康状态，自动决策（重启/摘流量）"。但"健康"是多维的——能启动、能运行、能服务是不同状态。配置不当的代价：liveness 太敏感 → Pod 反复重启（JVM 预热慢，重启期间不接流量，雪崩）；readiness 检查下游 → 下游故障导致所有 Pod 摘流量（级联故障）。
+  essence: K8s 三探针（startup/liveness/readiness）+ 重启机制是服务自愈的核心，但配置不当会引发雪崩——liveness
+    误判导致 Pod 反复重启、readiness 失败导致流量摘除、级联重启打爆下游。核心原则：① startup 先判断启动完成（慢启动场景）；② liveness
+    只判"死锁/僵死"（不判慢）；③ readiness 判"能否接流量"（包含依赖检查）。配合优雅停机 + PDB + 限流，才能防控雪崩。
+  analogy: 像医院的"病人监护系统"——startup 是"术后苏醒监测"（确认病人清醒），liveness 是"心跳监测"（心跳停了=死亡，要抢救），readiness
+    是"能否接客"（病人能否被探视）。误判会误抢救（重启）或误隔离（摘流量），引发连锁反应（雪崩）。
+  first_principle: 探针的本质是"让 K8s 判断 Pod 健康状态，自动决策（重启/摘流量）"。但"健康"是多维的——能启动、能运行、能服务是不同状态。配置不当的代价：liveness
+    太敏感 → Pod 反复重启（JVM 预热慢，重启期间不接流量，雪崩）；readiness 检查下游 → 下游故障导致所有 Pod 摘流量（级联故障）。
   key_points:
   - 三探针：startup（启动完成）/liveness（存活）/readiness（接流量）
   - startup 先于 liveness（慢启动场景，JVM 预热期不杀 Pod）
@@ -25,21 +29,26 @@ first_principle:
   - 探针配置不当会误判（liveness 太敏感导致重启雪崩）
   - readiness 检查下游会导致级联（下游挂了，本服务也摘流量）
   - 重启期间不接流量，批量重启打爆服务
-  rebuild: "三探针分工。① startup：判\"启动完成\"，failureThreshold 大（10 次 × 10 秒 = 100 秒，覆盖 JVM 预热），期间 liveness 不生效（不杀 Pod）。② liveness：判\"死锁/僵死\"（如 GC 长时间 STW、死锁），timeout 短（1 秒），不判慢请求（慢不是死）。③ readiness：判\"能否接流量\"，只查本 Pod 状态（HTTP 200 + 本地资源），不查下游（下游故障不摘本 Pod 流量，避免级联）。配合：优雅停机（preStop 摘流量）+ PDB（minAvailable: 1，防批量重启）+ 限流（Sentinel，防下游慢打爆线程池）。"
+  rebuild: '三探针分工。① startup：判"启动完成"，failureThreshold 大（10 次 × 10 秒 = 100 秒，覆盖 JVM
+    预热），期间 liveness 不生效（不杀 Pod）。② liveness：判"死锁/僵死"（如 GC 长时间 STW、死锁），timeout 短（1 秒），不判慢请求（慢不是死）。③
+    readiness：判"能否接流量"，只查本 Pod 状态（HTTP 200 + 本地资源），不查下游（下游故障不摘本 Pod 流量，避免级联）。配合：优雅停机（preStop
+    摘流量）+ PDB（minAvailable: 1，防批量重启）+ 限流（Sentinel，防下游慢打爆线程池）。'
 follow_up:
-  - 三探针区别？——startup（启动完成，先于 liveness）；liveness（存活，失败重启）；readiness（接流量，失败摘流量不重启）
-  - 为什么 readiness 不能检查下游？——下游故障时，本服务 readiness 失败 → 全 Pod 摘流量 → 服务完全不可用（级联雪崩）。下游故障应靠熔断（Sentinel）降级
-  - liveness 失败会怎样？——K8s 重启 Pod（kill + 重新拉起）。重启期间（JVM 预热 10-30 秒）不接流量。频繁重启会雪崩
-  - startup 解决什么问题？——慢启动应用（如加载大模型、预热缓存）期间 liveness 误判杀 Pod。startup 先判断启动完成，期间 liveness 不生效
-  - 怎么防雪崩？——① liveness 不判慢；② readiness 不查下游；③ PDB 防批量重启；④ 优雅停机；⑤ 限流熔断
+- 三探针区别？——startup（启动完成，先于 liveness）；liveness（存活，失败重启）；readiness（接流量，失败摘流量不重启）
+- 为什么 readiness 不能检查下游？——下游故障时，本服务 readiness 失败 → 全 Pod 摘流量 → 服务完全不可用（级联雪崩）。下游故障应靠熔断（Sentinel）降级
+- liveness 失败会怎样？——K8s 重启 Pod（kill + 重新拉起）。重启期间（JVM 预热 10-30 秒）不接流量。频繁重启会雪崩
+- startup 解决什么问题？——慢启动应用（如加载大模型、预热缓存）期间 liveness 误判杀 Pod。startup 先判断启动完成，期间 liveness
+  不生效
+- 怎么防雪崩？——① liveness 不判慢；② readiness 不查下游；③ PDB 防批量重启；④ 优雅停机；⑤ 限流熔断
 memory_points:
-  - 三探针：startup（启动完成）/liveness（存活，重启）/readiness（接流量，摘流量）
-  - startup 先于 liveness（慢启动保护，JVM 预热期不杀）
-  - liveness 只判死锁/僵死，不判慢（慢不是死）
-  - readiness 不检查下游（防级联雪崩）
-  - 重启策略：Always（默认）
-  - PDB：PodDisruptionBudget，防批量重启（minAvailable）
-  - 配合：优雅停机 + 限流熔断（Sentinel）
+- 三探针：startup（启动完成）/liveness（存活，重启）/readiness（接流量，摘流量）
+- startup 先于 liveness（慢启动保护，JVM 预热期不杀）
+- liveness 只判死锁/僵死，不判慢（慢不是死）
+- readiness 不检查下游（防级联雪崩）
+- 重启策略：Always（默认）
+- PDB：PodDisruptionBudget，防批量重启（minAvailable）
+- 配合：优雅停机 + 限流熔断（Sentinel）
+frequency: high
 ---
 
 # 【Java 后端架构师】Pod 重启、探针与服务雪崩防控
@@ -52,6 +61,25 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ContainerCreating start
+    class Endpoints process
+    class JVM decision
+    class Pending special
+    class Pod error
+    class Running info
+    class br start
+    class failureThreshold process
+    class liveness decision
+    class probe special
+    class readiness error
+    class start info
+    class startup start
     start["启动期<br/>Pending → ContainerCreating → Running"]
     startup["startup probe（启动探针）<br/>判"启动完成" · 期间 liveness/readiness 不生效 · failureThreshold 大（覆盖 JVM 预热）"]
     liveness["liveness probe（存活探针）<br/>判"存活"（死锁/僵死） · 失败 → 重启 Pod"]
@@ -60,6 +88,12 @@ flowchart TB
     start --> startup
     startup -->|成功| liveness
     startup -.->|成功后并行| readiness
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 **三探针对比**（这张表面试必问）：

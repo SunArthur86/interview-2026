@@ -19,7 +19,8 @@ feynman:
   - 核心：PagedAttention+连续批处理
 first_principle:
   essence: 推理性能受限于显存带宽和GPU利用率。
-  derivation: LLM推理是memory-bound(显存带宽限制)。优化方向：1.减少显存占用(量化/KV Cache复用) 2.提高GPU利用率(连续批处理) 3.减少冗余计算(投机解码/MoE)。vLLM的PagedAttention同时优化了1和2。
+  derivation: LLM推理是memory-bound(显存带宽限制)。优化方向：1.减少显存占用(量化/KV Cache复用) 2.提高GPU利用率(连续批处理)
+    3.减少冗余计算(投机解码/MoE)。vLLM的PagedAttention同时优化了1和2。
   conclusion: 推理优化 = 减显存(量化) + 提利用率(批处理) + 减计算(投机/MoE)
 follow_up:
 - vLLM为什么快？——PagedAttention解决显存碎片+连续批处理
@@ -30,6 +31,7 @@ memory_points:
 - vLLM双核心：PagedAttention像虚拟内存消除显存碎片，连续批处理动态进出防GPU等待
 - 投机解码：小模型先猜大模型验证，实现质量无损的2-3倍加速
 - 量化降显存提速：INT8无感，INT4极致压缩；MoE架构按需激活提速
+frequency: high
 ---
 
 # 大模型推理性能优化方案？
@@ -275,6 +277,7 @@ flowchart TD
     style BATCH fill:#FF9800,color:#fff
     style CB fill:#F44336,color:#fff
     style RETRY fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -27,6 +27,7 @@ memory_points:
 - SFT打基础：指令微调学格式，算交叉熵，是所有后训练必经的第一步。
 - RLHF最复杂：训奖励模型+PPO强化学习，效果上限高但流程长、极不稳定。
 - DPO最优雅：无需RM和PPO，直接用偏好对通过交叉熵优化策略，简单稳定。
+frequency: medium
 ---
 
 # 详细说明SFT、RLHF和DPO三种后训练方法的核心流程、适用场景和优缺点
@@ -247,6 +248,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

@@ -27,14 +27,15 @@ first_principle:
   - 又需定制
   rebuild: 中台（共性能力）+ 业务前台（定制）。
 follow_up:
-  - 中台和微服务区别？——中台是能力复用理念，微服务是落地形式
-  - 怎么避免大泥球？——DDD 划域+能力开放+租户隔离
-  - 中台失败常见原因？——脱离业务+过度抽象+没有 owner
+- 中台和微服务区别？——中台是能力复用理念，微服务是落地形式
+- 怎么避免大泥球？——DDD 划域+能力开放+租户隔离
+- 中台失败常见原因？——脱离业务+过度抽象+没有 owner
 memory_points:
-  - 能力：生产/审核/存储/分发/分析
-  - DDD：内容/审核/用户/互动域
-  - 多租户：业务线隔离+共享
-  - 开放：API/SDK
+- 能力：生产/审核/存储/分发/分析
+- DDD：内容/审核/用户/互动域
+- 多租户：业务线隔离+共享
+- 开放：API/SDK
+frequency: low
 ---
 
 # 【拼多多内容】内容中台架构怎么设计？
@@ -329,6 +330,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

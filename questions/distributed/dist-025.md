@@ -17,6 +17,7 @@ memory_points:
 - 核心标识：Zxid 高 32 位是 epoch（纪元），低 32 位是计数器，用于判断数据新旧。
 - 选举逻辑：崩溃恢复时，因为要保证数据不丢，所以 Zxid 越大越优先当选 Leader。
 - 节点部署：因为只需过半 ACK 即可提交，所以奇数节点能用更少成本获得相同容灾率。
+frequency: high
 ---
 
 # ZooKeeper的ZAB协议的工作流程是什么？
@@ -122,6 +123,7 @@ flowchart TD
     style COMMIT fill:#2196F3,color:#fff
     style VOTE fill:#9C27B0,color:#fff
     style STEP_DOWN fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

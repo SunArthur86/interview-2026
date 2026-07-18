@@ -27,14 +27,15 @@ first_principle:
   - 多条件组合过滤
   rebuild: 倒排索引 + 分词 + BM25 算分。
 follow_up:
-  - ES 和 MySQL 区别？——ES 倒排擅长搜索/聚合，MySQL 正排擅长事务
-  - 深度分页怎么办？——scroll/search_after（不用 from+size）
-  - 怎么保证 ES 和 DB 一致？——canal 同步 binlog + 版本号去重
+- ES 和 MySQL 区别？——ES 倒排擅长搜索/聚合，MySQL 正排擅长事务
+- 深度分页怎么办？——scroll/search_after（不用 from+size）
+- 怎么保证 ES 和 DB 一致？——canal 同步 binlog + 版本号去重
 memory_points:
-  - 倒排：分词→Postings
-  - 分词：IK 中文
-  - 算分：BM25
-  - 深分页：search_after
+- 倒排：分词→Postings
+- 分词：IK 中文
+- 算分：BM25
+- 深分页：search_after
+frequency: high
 ---
 
 # 【拼多多内容】ES 原理与评价搜索场景？
@@ -245,6 +246,27 @@ search_after 的正确性验证：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class Postings decision
+    class S1 special
+    class S2 error
+    class S3 info
+    class br start
+    class ik_max_word process
+    class search_after decision
     subgraph S1[写入与同步链路]
         A[MySQL评价库] -->|Canal同步| B[ES集群]
     end

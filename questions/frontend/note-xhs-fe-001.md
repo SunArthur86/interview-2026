@@ -12,7 +12,8 @@ tags:
 - AI对话
 - 面经
 feynman:
-  essence: AI对话产品的SSE流式渲染如果在前端主线程处理，每个token到达都触发DOM更新，会导致Long Task和FPS骤降。优化核心是把渲染逻辑移到Web Worker，主线程只负责接收Buffer，用RequestAnimationFrame做节流。
+  essence: AI对话产品的SSE流式渲染如果在前端主线程处理，每个token到达都触发DOM更新，会导致Long Task和FPS骤降。优化核心是把渲染逻辑移到Web
+    Worker，主线程只负责接收Buffer，用RequestAnimationFrame做节流。
   analogy: 就像流水线包饺子——你一个人又接面又包又煮（主线程做所有事），手忙脚乱。优化是分工：一个人专门接面（Worker接收数据），一个人按节奏包（RAF节流渲染），一个人煮（主线程绘制）。
   key_points:
   - 问题根因：每来一个token就setState→重渲染→Long Task→掉帧
@@ -35,6 +36,7 @@ memory_points:
 - 每个token触发一次setState是性能杀手 → 改为Buffer累积+RAF按帧刷新
 - 断线体验：Last-Event-ID续传 + 0.1s淡入过渡 → 用户无感知
 - 面试工程思维："用户体验无感知"比"网络错误弹窗"高一个层次
+frequency: high
 ---
 
 # 【前端面试】AI 对话产品中 SSE 流式渲染如何优化？前端主线程被堵塞怎么解决？
@@ -303,6 +305,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

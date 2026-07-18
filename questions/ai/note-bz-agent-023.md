@@ -30,6 +30,7 @@ memory_points:
 - 核心纠偏：该说法错误混淆了“功能分类”与“技术实现”，显得缺乏深度
 - 正确认知：短期/长期是功能定义，上下文/向量库只是载体之一（如上下文也能塞长期画像）
 - 拔高回答：按功能分为工作、短期、情景、语义、画像五类，载体可独立选择（如KV/图库）
+frequency: high
 ---
 
 # "短期记忆=上下文、长期记忆=向量库"这样答对吗？
@@ -218,6 +219,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

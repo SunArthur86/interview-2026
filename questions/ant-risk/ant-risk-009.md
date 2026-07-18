@@ -26,9 +26,11 @@ first_principle:
   - 读用锁会阻塞写，性能差
   - 每次修改保留历史版本，可让读按"某个时刻"的快照读
   - 事务有"开始时间"概念，决定看到哪些版本
-  rebuild: 每行存版本链（undo log 链表），事务读时根据"事务开始时活跃事务列表"判定哪个版本对自己可见。RC 每次读重建可见性列表（看最新），RR 只建一次（看快照）。
+  rebuild: 每行存版本链（undo log 链表），事务读时根据"事务开始时活跃事务列表"判定哪个版本对自己可见。RC 每次读重建可见性列表（看最新），RR
+    只建一次（看快照）。
 follow_up:
-- 为什么 InnoDB 默认 RR 而不是 RC？——历史原因（binlog 主从复制要 RR 才能正确），现在 row-based binlog 下 RC 也安全；阿里 OB 默认 RC
+- 为什么 InnoDB 默认 RR 而不是 RC？——历史原因（binlog 主从复制要 RR 才能正确），现在 row-based binlog 下 RC 也安全；阿里
+  OB 默认 RC
 - 幻读怎么解决？——RR 下 InnoDB 用 Next-Key Lock（行锁+间隙锁）锁住范围，阻止插入
 - 长事务为什么危险？——undo 版本链无法 purge，导致回滚段膨胀、备份变慢
 memory_points:
@@ -36,6 +38,7 @@ memory_points:
 - RC 每次读都新建 read view，所以能看到新提交
 - 隐藏列 trx_id + roll_pointer 维护版本链
 - Next-Key Lock = Record Lock + Gap Lock（RR 解决幻读）
+frequency: high
 ---
 
 # 【蚂蚁风控】MySQL 事务隔离级别？MVCC 原理？InnoDB 怎么解决幻读？
@@ -293,6 +296,7 @@ flowchart TD
 
     style D fill:#e8f5e9
     style G fill:#ffebee
+
 ```
 
 ## 视频脚本

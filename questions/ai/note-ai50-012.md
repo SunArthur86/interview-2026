@@ -13,7 +13,8 @@ tags:
 feynman:
   essence: 不微调模型的情况下，通过外部记忆系统和经验库让Agent"记住"过去的成功和失败，逐步改进行为
   analogy: 就像新员工成长——不需要回炉重造(微调)，靠工作笔记(经验记忆)、同事反馈(评估循环)、SOP更新(Prompt迭代)就能越来越熟练
-  first_principle: 模型权重不可变时，Agent的"学习"只能发生在外部系统。本质是将"学习"从参数更新(Backprop)转为知识积累(Memory + Reflexion)
+  first_principle: 模型权重不可变时，Agent的"学习"只能发生在外部系统。本质是将"学习"从参数更新(Backprop)转为知识积累(Memory
+    + Reflexion)
   key_points:
   - '经验记忆: 记录成功和失败的案例，检索增强下次执行'
   - 'Reflexion机制: 执行后自我反思，将反思写入记忆'
@@ -32,6 +33,7 @@ memory_points:
 - 经验沉淀：每次执行的成功或失败轨迹向量化存储，作为下次决策的先验知识
 - 反思机制：执行失败后，让LLM分析错误原因并生成反思总结，更新到提示词中
 - 双引擎：Prompt动态优化与策略调整结合，让Agent越跑越聪明
+frequency: high
 ---
 
 # 不微调模型如何实现Agent自进化？
@@ -279,6 +281,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

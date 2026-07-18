@@ -9,9 +9,12 @@ tags:
 - 事务消息
 - 延迟消息
 feynman:
-  essence: RocketMQ 事务消息用"半消息（half message）+ 本地事务回查"解决"本地数据库提交与消息发送"的原子性，是分布式事务最终一致的工业解；延迟消息用固定延迟级别（1s/5s/10s/.../2h）+ 改写 topic 为 SCHEDULE_TOPIC_XXXX 实现定时投递，订单超时关单、延迟支付场景必备。
+  essence: RocketMQ 事务消息用"半消息（half message）+ 本地事务回查"解决"本地数据库提交与消息发送"的原子性，是分布式事务最终一致的工业解；延迟消息用固定延迟级别（1s/5s/10s/.../2h）+
+    改写 topic 为 SCHEDULE_TOPIC_XXXX 实现定时投递，订单超时关单、延迟支付场景必备。
   analogy: 像 JD 快递寄贵重物品：事务消息是"先开保价单（半消息），确认货真价实（本地事务回查 OK）再正式发车（commit 半消息）"；延迟消息是"快递员把包裹先放进定时柜（SCHEDULE_TOPIC），到点自动弹出派送"。
-  first_principle: 为什么本地 DB 提交和 MQ 发送不能简单串联？因为两者无原生事务。先 DB 后 MQ：DB 成功后进程崩溃 → 消息没发出去。先 MQ 后 DB：MQ 发了但 DB 失败 → 消息发了但本地没数据。事务消息的本质是"两阶段提交"——先发半消息（broker 不投递）→ 执行本地事务 → 根据结果 commit/rollback 半消息，再加回查机制兜底进程崩溃场景。
+  first_principle: 为什么本地 DB 提交和 MQ 发送不能简单串联？因为两者无原生事务。先 DB 后 MQ：DB 成功后进程崩溃 → 消息没发出去。先
+    MQ 后 DB：MQ 发了但 DB 失败 → 消息发了但本地没数据。事务消息的本质是"两阶段提交"——先发半消息（broker 不投递）→ 执行本地事务 →
+    根据结果 commit/rollback 半消息，再加回查机制兜底进程崩溃场景。
   key_points:
   - 事务消息四步：发送半消息 → 执行本地事务 → commit/rollback 半消息 → Broker 主动回查（兜底）
   - 半消息存内部 topic RMQ_SYS_TRANS_HALF_TOPIC，消费者不可见
@@ -24,19 +27,25 @@ first_principle:
   - 本地数据库事务和 MQ 发送是两个独立系统，无原生原子保证
   - 两阶段提交（2PC）性能差且阻塞，不适合高并发
   - 最终一致 + 补偿比强一致更现实，前提是有可靠的状态回查机制
-  rebuild: RocketMQ 事务消息用"半消息"把 MQ 发送分成两阶段。第一阶段发半消息到 broker，broker 存储但不投递（消费者不可见）。第二阶段执行本地 DB 事务，根据结果通知 broker commit（投递）或 rollback（丢弃）。若 producer 崩溃未通知，broker 定时回查 producer 的本地事务状态（业务实现 checkLocalTransaction），以此兜底进程崩溃。这套机制比 XA 轻量，比"本地消息表 + 定时扫表"省一次 DB 查询。
+  rebuild: RocketMQ 事务消息用"半消息"把 MQ 发送分成两阶段。第一阶段发半消息到 broker，broker 存储但不投递（消费者不可见）。第二阶段执行本地
+    DB 事务，根据结果通知 broker commit（投递）或 rollback（丢弃）。若 producer 崩溃未通知，broker 定时回查 producer
+    的本地事务状态（业务实现 checkLocalTransaction），以此兜底进程崩溃。这套机制比 XA 轻量，比"本地消息表 + 定时扫表"省一次 DB
+    查询。
 follow_up:
-  - 事务消息和本地消息表怎么选？——事务消息省一张消息表和扫表开销，但强依赖 RocketMQ；本地消息表方案 MQ 无关（Kafka/Rabbit 都行），但要维护扫表任务和去重。自建 MQ 选本地消息表，RocketMQ 选事务消息
-  - 事务回查接口怎么实现？——业务维护事务状态表（事务 ID + 状态），checkLocalTransaction 查表返回 COMMIT/ROLLBACK/UNKNOWN。UNKNOWN 时 broker 会继续重试，达到最大次数（默认 15 次）后默认 ROLLBACK
-  - 延迟消息为什么只有 18 个级别？——早期 RocketMQ 用固定延迟级别优化（同级别消息进同一 queue，按到期时间排序），降低实现复杂度。5.x 开始支持任意延迟时间（基于时间轮）
-  - 延迟消息能精确到秒吗？——4.x 最小 1s，5.x 支持任意时间精确到毫秒。但实际投递有秒级误差（broker 扫描周期），不能用于对精度敏感的场景
-  - 事务消息能保证消费端 exactly-once 吗？——不能。事务消息只保证"发送与本地事务原子"，消费端还是 at-least-once，必须业务幂等
+- 事务消息和本地消息表怎么选？——事务消息省一张消息表和扫表开销，但强依赖 RocketMQ；本地消息表方案 MQ 无关（Kafka/Rabbit 都行），但要维护扫表任务和去重。自建
+  MQ 选本地消息表，RocketMQ 选事务消息
+- 事务回查接口怎么实现？——业务维护事务状态表（事务 ID + 状态），checkLocalTransaction 查表返回 COMMIT/ROLLBACK/UNKNOWN。UNKNOWN
+  时 broker 会继续重试，达到最大次数（默认 15 次）后默认 ROLLBACK
+- 延迟消息为什么只有 18 个级别？——早期 RocketMQ 用固定延迟级别优化（同级别消息进同一 queue，按到期时间排序），降低实现复杂度。5.x 开始支持任意延迟时间（基于时间轮）
+- 延迟消息能精确到秒吗？——4.x 最小 1s，5.x 支持任意时间精确到毫秒。但实际投递有秒级误差（broker 扫描周期），不能用于对精度敏感的场景
+- 事务消息能保证消费端 exactly-once 吗？——不能。事务消息只保证"发送与本地事务原子"，消费端还是 at-least-once，必须业务幂等
 memory_points:
-  - 事务消息四步：半消息 → 本地事务 → commit/rollback → 回查兜底
-  - 半消息存 RMQ_SYS_TRANS_HALF_TOPIC，消费者不可见，commit 后改写真实 topic
-  - 回查接口实现 checkLocalTransaction，必须幂等 + 快速（默认 60s 超时）
-  - 延迟消息：setDelayTimeLevel(1-18) 或 5.x 的 setDeliverTime(timestamp)
-  - 延迟实现：改写 topic 为 SCHEDULE_TOPIC_XXXX，后台 ScheduleMessageService 扫描到期改回原 topic
+- 事务消息四步：半消息 → 本地事务 → commit/rollback → 回查兜底
+- 半消息存 RMQ_SYS_TRANS_HALF_TOPIC，消费者不可见，commit 后改写真实 topic
+- 回查接口实现 checkLocalTransaction，必须幂等 + 快速（默认 60s 超时）
+- 延迟消息：setDelayTimeLevel(1-18) 或 5.x 的 setDeliverTime(timestamp)
+- 延迟实现：改写 topic 为 SCHEDULE_TOPIC_XXXX，后台 ScheduleMessageService 扫描到期改回原 topic
+frequency: high
 ---
 
 # 【Java 后端架构师】RocketMQ 事务消息与延迟消息设计
@@ -402,6 +411,24 @@ public class OrderTimeoutConsumer implements RocketMQListener<TimeoutEvent> {
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Broker start
+    class Checker process
+    class Consumer decision
+    class DB special
+    class HALF_TOPIC error
+    class Half info
+    class Producer start
+    class RocketMQ process
+    class Rollback decision
+    class Unknown special
+    class as error
+    class br info
     participant Producer as 订单服务<br/>(Producer)
     participant Broker as RocketMQ<br/>Broker
     participant Half as 半消息Topic<br/>(HALF_TOPIC)

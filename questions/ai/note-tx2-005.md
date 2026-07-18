@@ -10,9 +10,11 @@ tags:
 - 文档分块
 - Chunking
 feynman:
-  essence: 文档分块四种方案——固定窗口(简单但可能切断语义)、递归分割(按分隔符层级递归，平衡)、语义分割(按句子/段落语义边界，质量高但慢)、结构感知(按文档结构标题/段落，最准但需结构化输入)。生产推荐递归分割(平衡)+结构感知(结构化文档)。chunk大小通常200-500 token，overlap 10-20%防边界信息丢失。
+  essence: 文档分块四种方案——固定窗口(简单但可能切断语义)、递归分割(按分隔符层级递归，平衡)、语义分割(按句子/段落语义边界，质量高但慢)、结构感知(按文档结构标题/段落，最准但需结构化输入)。生产推荐递归分割(平衡)+结构感知(结构化文档)。chunk大小通常200-500
+    token，overlap 10-20%防边界信息丢失。
   analogy: 像切蛋糕——固定窗口是闭眼按固定距离切(可能把草莓切两半)，递归分割是先按大格切再按小格切(平衡)，语义分割是看草莓位置绕着切(质量高但慢)，结构感知是按蛋糕本来的分层切(最准但蛋糕得有分层)。
-  first_principle: 分块的目标是"每个 chunk 是语义完整的检索单元"。太大→检索不精确(混入无关内容)，太小→语义不完整(检索到了但答不全)。最优 chunk 大小取决于文档类型和检索场景。
+  first_principle: 分块的目标是"每个 chunk 是语义完整的检索单元"。太大→检索不精确(混入无关内容)，太小→语义不完整(检索到了但答不全)。最优
+    chunk 大小取决于文档类型和检索场景。
   key_points:
   - '固定窗口: 按固定token数切，简单但可能切断语义'
   - '递归分割: 按分隔符层级(段落>句子>字)递归切，平衡'
@@ -33,6 +35,7 @@ memory_points:
 - 优缺对比：结构感知能保全文层级最准，但极度依赖输入文档的结构化解析质量
 - 参数铁律：chunk建议200-500 tokens，overlap保持10-20%防语义硬截断
 - 混合策略：生产中常先按文档结构感知切大块，超长再降级用递归兜底切小块
+frequency: medium
 ---
 
 # 【某讯面经】文档分块四种方案优缺点：固定窗口、递归分割、语义分割、结构感知分块
@@ -206,6 +209,23 @@ overlap: 10-20%（如 chunk_size=400, overlap=50-80）
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class Overlap decision
+    class Size special
+    class br error
     A["原始文档"] --> B{"文档类型判断"}
     B -- "结构化文档" --> C["结构感知分块<br/>按解析树/标题切"]
     B -- "通用文本" --> D["递归分割分块<br/>段落降级到句子"]

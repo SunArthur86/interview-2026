@@ -35,6 +35,7 @@ memory_points:
 - 类目树（三级）+ 属性模板（关键/销售/普通）
 - 销售属性笛卡尔积生成 SKU
 - 商品和价格/库存/营销解耦
+frequency: low
 ---
 
 # 【拼多多供应链】商品 SPU/SKU 怎么建模？千万级商品怎么管？
@@ -224,6 +225,33 @@ MongoDB 适合"属性 schema 频繁变 + 文档查询"场景，但供应链用 M
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Category special
+    class D error
+    class E info
+    class ES start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class L process
+    class M decision
+    class MySQL special
+    class N error
+    class Redis info
+    class attributes start
+    class br process
+    class iPhone decision
     subgraph 商品模型
         A[("类目树<br/>Category")] --> B["属性模板"]
         B --> C["商品SPU<br/>iPhone 15"]

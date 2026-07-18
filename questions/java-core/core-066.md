@@ -24,6 +24,7 @@ memory_points:
 - 特殊响应：1xx、204、304状态码均无响应体
 follow_up: []
 tags: []
+frequency: low
 ---
 
 # 什么是HTTP请求报文？
@@ -57,6 +58,46 @@ HTTP 请求报文主要由**请求行**、**请求头**、**请求体**构成。
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Accept start
+    class Agent process
+    class Body decision
+    class CRLF special
+    class Content error
+    class Cookie info
+    class GET start
+    class HTTP process
+    class Host decision
+    class Key special
+    class Method error
+    class Mozilla info
+    class Type start
+    class URI process
+    class User decision
+    class Value special
+    class admin error
+    class application info
+    class blank start
+    class body process
+    class br decision
+    class com special
+    class example error
+    class headers info
+    class html start
+    class index process
+    class json decision
+    class line special
+    class msg error
+    class password info
+    class sessionid start
+    class text process
+    class username decision
+    class www special
     msg["HTTP 请求报文"]
     line["1. 请求行<br/>Method GET · URI /index.html?... · HTTP/1.1"]
     headers["2. 请求头<br/>Host: www.example.com · User-Agent: Mozilla/5.0... · Accept: text/html · Content-Type: application/json · Cookie: sessionid=123456 · ...（更多 Key-Value 对）"]
@@ -67,6 +108,12 @@ flowchart TB
     msg --- headers
     msg --- blank
     msg --- body
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 #### 1. 请求行

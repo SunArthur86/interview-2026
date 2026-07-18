@@ -27,6 +27,7 @@ memory_points:
 - OOM解决：ZeRO-3分片参数、Checkpointing换激活显存、CPU Offload卸载冷数据
 - Hang诊断：开启NCCL_DEBUG看通信死锁，CUDA_LAUNCH_BLOCKING同步定位错误，py-spy查堆栈
 - 显存公式：总显存=权重+梯度+优化器+激活+KV，优化器状态占比最大
+frequency: high
 ---
 
 # 【智谱Infra面经】大模型训练低 MFU / OOM / hang 如何诊断？用哪些工具和指标？
@@ -107,11 +108,36 @@ model.layer[-1].register_forward_hook(check_nan)
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class Checkpointing start
+    class Fix process
+    class Hang decision
+    class Issue special
+    class NCCL error
+    class NCCL_DEBUG info
+    class Nsight start
+    class OOM process
+    class Offload decision
+    class Train special
+    class ZeRO error
+    class py info
+    class spy start
     Train[训练任务] --> Issue{问题}
     Issue -->|低MFU| Nsight[Nsight看通信重叠]
     Issue -->|OOM| ZeRO[ZeRO-3/Checkpointing/Offload]
     Issue -->|Hang| NCCL[NCCL_DEBUG/py-spy]
     Nsight --> Fix[算子融合/通信Overlap]
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 

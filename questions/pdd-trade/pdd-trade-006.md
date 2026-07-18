@@ -34,6 +34,7 @@ memory_points:
 - RBAC：角色-权限模型
 - JWT 主动失效：黑名单 + 短期 + Refresh
 - 三重校验：登录+权限+风控
+frequency: high
 ---
 
 # 【拼多多交易】登录鉴权怎么做？JWT 和 Session 怎么选？
@@ -186,6 +187,31 @@ Session 降级是高危场景，必须有测试和预案：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Cookie special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class HttpOnly special
+    class I error
+    class J info
+    class K start
+    class KV process
+    class RBAC decision
+    class Redis special
+    class Session error
+    class SessionId info
+    class Set start
     A[客户端输入账号密码] --> B(风控引擎: 校验设备/频次/异地)
     B -->|安全| C(网关: 解析 HttpOnly Cookie 获取 SessionId)
     C -->|无 SessionId| D[认证中心: 账号密码校验]

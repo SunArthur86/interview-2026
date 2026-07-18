@@ -16,6 +16,7 @@ memory_points:
 - 痛点解决：引入虚拟节点打散数据，解决物理节点少导致的数据倾斜
 - 容灾优势：节点宕机时其负载由多个邻居分担，而不是压垮单台相邻节点
 - 关键参数：Cassandra 每个物理节点默认配置 256 个虚拟节点
+frequency: medium
 ---
 
 # Cassandra一致Hash和虚拟节点是什么？
@@ -126,6 +127,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

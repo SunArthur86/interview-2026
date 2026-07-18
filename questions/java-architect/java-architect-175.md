@@ -9,9 +9,11 @@ tags:
 - 冷启动
 - 热点
 feynman:
-  essence: 内容 Feed 的核心是"推拉结合 + 冷启动策略 + 热点扩散控制"。推模式（写扩散）适合小粉丝量，拉模式（读扩散）适合大粉丝量。新内容冷启动靠"推荐流量池 + 兴趣标签匹配"。热点内容靠"缓存预热 + 限流降级"防击穿。
+  essence: 内容 Feed 的核心是"推拉结合 + 冷启动策略 + 热点扩散控制"。推模式（写扩散）适合小粉丝量，拉模式（读扩散）适合大粉丝量。新内容冷启动靠"推荐流量池
+    + 兴趣标签匹配"。热点内容靠"缓存预热 + 限流降级"防击穿。
   analogy: 像快递分拣——普通包裹走标准流程（拉模式，到站自取），VIP 件主动派送（推模式）。新店铺开业要做推广（冷启动流量池），爆款商品要提前备货到前置仓（热点缓存预热）。
-  first_principle: Feed 流的本质是"把内容按时间/相关性排序推送给用户"。难点是写扩散（大 V 发文要推给千万粉丝）和读扩散（用户刷 Feed 要聚合关注人的内容）的性能矛盾。
+  first_principle: Feed 流的本质是"把内容按时间/相关性排序推送给用户"。难点是写扩散（大 V 发文要推给千万粉丝）和读扩散（用户刷 Feed
+    要聚合关注人的内容）的性能矛盾。
   key_points:
   - 推拉结合：普通用户发推（写扩散到粉丝 inbox），大 V 发拉（粉丝读时实时拉）
   - 冷启动：新内容进推荐流量池（100 曝光），互动好则扩量到下一级池
@@ -25,19 +27,22 @@ first_principle:
   - 读扩散（拉）：用户读 Feed 聚合 N 个关注人 = N 次查询，关注人多慢
   - 新内容没有互动数据，推荐模型没法排序（冷启动）
   - 热点内容突发流量，缓存不预热会被击穿
-  rebuild: 推拉结合——普通用户（< 1万粉）发文写扩散到粉丝 inbox；大 V 发文不推，粉丝读时实时拉（inbox + outbox 合并）。新内容冷启动进推荐流量池逐步扩量。热点内容靠监控热度阈值触发缓存预热和 CDN 推送。
+  rebuild: 推拉结合——普通用户（< 1万粉）发文写扩散到粉丝 inbox；大 V 发文不推，粉丝读时实时拉（inbox + outbox 合并）。新内容冷启动进推荐流量池逐步扩量。热点内容靠监控热度阈值触发缓存预热和
+    CDN 推送。
 follow_up:
-  - 推拉边界怎么定？——粉丝数阈值。< 1万粉写扩散（推），> 1万粉读扩散（拉）。边界可配置，按系统负载动态调。
-  - inbox 怎么存？——Redis ZSet（member=contentId, score=timestamp），按时间倒序。限制 inbox 大小（最近 1000 条），超出淘汰旧的。
-  - 冷启动流量池怎么设计？——多级池。新内容进 100 曝光池，互动率（CTR/完播率）达标进 1000 池，再达标进 10000 池，以此类推。像漏斗逐步扩量。
-  - 热点怎么检测？——实时计算内容热度（阅读数/互动数增速）。增速超阈值标记热点，触发缓存预热 + CDN。监控 hot_content_count。
-  - Feed 刷不出新内容怎么办？——检查 inbox 是否有推、拉模式的 outbox 是否有新内容、推荐流是否正常。监控 feed_refresh_latency。
+- 推拉边界怎么定？——粉丝数阈值。< 1万粉写扩散（推），> 1万粉读扩散（拉）。边界可配置，按系统负载动态调。
+- inbox 怎么存？——Redis ZSet（member=contentId, score=timestamp），按时间倒序。限制 inbox 大小（最近 1000
+  条），超出淘汰旧的。
+- 冷启动流量池怎么设计？——多级池。新内容进 100 曝光池，互动率（CTR/完播率）达标进 1000 池，再达标进 10000 池，以此类推。像漏斗逐步扩量。
+- 热点怎么检测？——实时计算内容热度（阅读数/互动数增速）。增速超阈值标记热点，触发缓存预热 + CDN。监控 hot_content_count。
+- Feed 刷不出新内容怎么办？——检查 inbox 是否有推、拉模式的 outbox 是否有新内容、推荐流是否正常。监控 feed_refresh_latency。
 memory_points:
-  - 推拉结合：普通用户推（<1万粉），大 V 拉（>1万粉）
-  - inbox：Redis ZSet（contentId, timestamp），限 1000 条
-  - 冷启动：多级流量池（100→1k→10k），按互动率扩量
-  - 热点：热度增速阈值触发缓存预热 + CDN + 限流
-  - 两类 Feed：关注流（时间序）+ 推荐流（兴趣排序）
+- 推拉结合：普通用户推（<1万粉），大 V 拉（>1万粉）
+- inbox：Redis ZSet（contentId, timestamp），限 1000 条
+- 冷启动：多级流量池（100→1k→10k），按互动率扩量
+- 热点：热度增速阈值触发缓存预热 + CDN + 限流
+- 两类 Feed：关注流（时间序）+ 推荐流（兴趣排序）
+frequency: high
 ---
 
 # 【Java 后端架构师】内容 Feed 冷启动与热点扩散
@@ -359,6 +364,39 @@ public class FeedService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A3 decision
+    class B1 special
+    class B2 error
+    class C1 info
+    class C2 start
+    class CDN process
+    class D1 decision
+    class D2 special
+    class DB error
+    class E1 info
+    class F1 start
+    class Feed process
+    class G1 decision
+    class G2 special
+    class G3 error
+    class H1 info
+    class I1 start
+    class I2 process
+    class I3 decision
+    class Inbox special
+    class Outbox error
+    class Prefetch info
+    class Redis start
+    class ZSet process
+    class br decision
     A1["大V发文"] --> A2["写大V Outbox"]
     B1["普通用户发文"] --> B2["写扩散至粉丝 Inbox"]
     B2 --> C1[("Redis ZSet<br/>粉丝收件箱")] 

@@ -36,6 +36,7 @@ memory_points:
 - Redis层：DECR返回值<0说明超卖，Lua脚本保证check+扣减原子
 - 超卖根因：check和扣减不是原子操作 → 解决方案都是让它们原子化
 - 最终一致：Redis先扣→异步写DB→失败回滚Redis+通知用户
+frequency: high
 ---
 
 # 【美云智数终面】高并发下商品库存扣减，如何防止超卖？从数据库、缓存、消息队列三层设计方案
@@ -340,6 +341,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

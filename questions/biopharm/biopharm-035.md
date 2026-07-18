@@ -12,37 +12,42 @@ tags:
 - OLTP
 - 一体化
 feynman:
-  essence: "PostgreSQL+PGVector 是'把向量检索和业务事务合二为一'——一个库同时做 OLTP（增删改查）和向量检索，事务一致、权限统一、运维简单，中小规模 RAG 的甜点选型。"
-  analogy: "像把图书馆和办公室合在一起——书（向量）和业务档案（业务表）在同一个柜子，借书（检索）和办公（事务）原子完成，不用跑两个地方对账。FAISS/Milvus 是单独的图书馆，要和办公室对账。"
-  first_principle: "向量检索常需与业务元数据（权限/版本/标签）联合查询并保持一致。PGVector 的本质是'把向量作为一种数据类型集成进 PostgreSQL'，让向量检索和业务事务在同一数据库原子完成，省去多库对账的复杂度。"
+  essence: PostgreSQL+PGVector 是'把向量检索和业务事务合二为一'——一个库同时做 OLTP（增删改查）和向量检索，事务一致、权限统一、运维简单，中小规模
+    RAG 的甜点选型。
+  analogy: 像把图书馆和办公室合在一起——书（向量）和业务档案（业务表）在同一个柜子，借书（检索）和办公（事务）原子完成，不用跑两个地方对账。FAISS/Milvus
+    是单独的图书馆，要和办公室对账。
+  first_principle: 向量检索常需与业务元数据（权限/版本/标签）联合查询并保持一致。PGVector 的本质是'把向量作为一种数据类型集成进 PostgreSQL'，让向量检索和业务事务在同一数据库原子完成，省去多库对账的复杂度。
   key_points:
-  - "PGVector 是 PG 扩展，向量作为列类型，SQL 直接检索"
-  - "一体化优势：事务一致、权限统一、join 业务表、运维复用"
-  - "索引：HNSW（推荐）/ IVFFlat，百万级千万级可用"
-  - "适合：中小规模、强一致、多表联合、已有 PG 运维"
-  - "局限：超大规模（亿级）性能不如专用向量库"
+  - PGVector 是 PG 扩展，向量作为列类型，SQL 直接检索
+  - 一体化优势：事务一致、权限统一、join 业务表、运维复用
+  - 索引：HNSW（推荐）/ IVFFlat，百万级千万级可用
+  - 适合：中小规模、强一致、多表联合、已有 PG 运维
+  - 局限：超大规模（亿级）性能不如专用向量库
   socratic:
-  - "知识库文档向量要和权限表（谁能看）一起查，PGVector 和 Milvus 谁方便？"
-  - "向量插入和业务元数据更新，怎么保证一致？"
-  - "PGVector 能扛多少向量？什么时候该换 Milvus？"
-  - "为什么中小药企知识库推荐 PGVector？"
-  - "PGVector 的 HNSW 索引怎么建、怎么调？"
+  - 知识库文档向量要和权限表（谁能看）一起查，PGVector 和 Milvus 谁方便？
+  - 向量插入和业务元数据更新，怎么保证一致？
+  - PGVector 能扛多少向量？什么时候该换 Milvus？
+  - 为什么中小药企知识库推荐 PGVector？
+  - PGVector 的 HNSW 索引怎么建、怎么调？
 first_principle:
-  problem: "如何在中小规模场景下，让向量检索和业务事务一体化、一致、简单？"
+  problem: 如何在中小规模场景下，让向量检索和业务事务一体化、一致、简单？
   axioms:
-  - "向量检索常需联合业务元数据"
-  - "多库分离带来一致性和运维复杂度"
-  - "中小规模不需要专用向量库的复杂性"
-  rebuild: "用 PGVector 把向量作为 PG 列类型，向量检索和业务事务同库原子完成，HNSW 索引支撑千万级，事务/权限/join 统一，省去多库对账，是中小规模 RAG 甜点。"
+  - 向量检索常需联合业务元数据
+  - 多库分离带来一致性和运维复杂度
+  - 中小规模不需要专用向量库的复杂性
+  rebuild: 用 PGVector 把向量作为 PG 列类型，向量检索和业务事务同库原子完成，HNSW 索引支撑千万级，事务/权限/join 统一，省去多库对账，是中小规模
+    RAG 甜点。
 follow_up:
-- "HNSW 索引怎么建？——CREATE INDEX ... USING hnsw (vec vector_cosine_ops) WITH (m=16, ef_construction=64)；查询设 ef_search 调召回。"
-- "PGVector 性能极限？——千万级内好，更大要调参+分区+读写分离；亿级建议上专用向量库。"
-- "权限怎么落到检索？——向量表带 tenant_id/dept/role/sensitivity 列，检索 WHERE 预过滤，PG 的强项。"
+- HNSW 索引怎么建？——CREATE INDEX ... USING hnsw (vec vector_cosine_ops) WITH (m=16, ef_construction=64)；查询设
+  ef_search 调召回。
+- PGVector 性能极限？——千万级内好，更大要调参+分区+读写分离；亿级建议上专用向量库。
+- 权限怎么落到检索？——向量表带 tenant_id/dept/role/sensitivity 列，检索 WHERE 预过滤，PG 的强项。
 memory_points:
-- "PGVector：向量作 PG 列，SQL 检索"
-- "一体化：事务一致+权限统一+join"
-- "HNSW 索引，千万级可用"
-- "中小规模甜点，亿级换 Milvus"
+- PGVector：向量作 PG 列，SQL 检索
+- 一体化：事务一致+权限统一+join
+- HNSW 索引，千万级可用
+- 中小规模甜点，亿级换 Milvus
+frequency: high
 ---
 
 # 【生物医药 AI】PostgreSQL + PGVector 实战怎么做（OLTP+向量一体化）？
@@ -212,6 +217,33 @@ PGVector 本质是**"把向量检索集成进 PostgreSQL，让 OLTP 和向量检
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class B4 info
+    class B5 start
+    class C1 process
+    class C2 decision
+    class C3 special
+    class Client error
+    class HNSW info
+    class JOIN start
+    class OLTP process
+    class PG decision
+    class PGVector special
+    class PostgreSQL error
+    class RAG info
+    class RLS start
+    class Storage process
+    class WHERE decision
     subgraph Client [业务应用层]
         A1[RAG 检索请求] --> A2[元数据过滤与向量相似度联合查询]
     end

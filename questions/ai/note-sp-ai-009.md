@@ -31,6 +31,7 @@ memory_points:
 - 对齐双雄：RLHF是两阶段经典法，DPO是无强化学习的直推法。
 - RLHF核心：先训练奖励模型打分，再用PPO最大化奖励，同时用KL散度约束防偏离。
 - DPO对比RLHF：DPO省去奖励模型和强化学习，直接用偏好对数据优化策略，更简单稳定。
+frequency: medium
 ---
 
 # 简单讲一下大模型训练的对齐操作？
@@ -240,6 +241,7 @@ flowchart TD
     style DPO_MODEL fill:#009688,color:#fff
     style RM_MODEL fill:#FF9800,color:#fff
     style PPO fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

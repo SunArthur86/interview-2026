@@ -16,6 +16,7 @@ memory_points:
 - 自旋劣势：高并发下大量 CAS 失败导致 CPU 飙高，不保证有序性
 - ABA隐患：值从A变B再变A无法感知，需引入 AtomicStampedReference 加版本号
 - 性能进阶：高并发计数器推荐 LongAdder，用分散热点 Cell 数组减少自旋冲突
+frequency: high
 ---
 
 # Java atomic包中的原子类是如何实现的？
@@ -131,6 +132,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

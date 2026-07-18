@@ -26,14 +26,15 @@ first_principle:
   - LLM 有幻觉风险
   rebuild: 分层架构——核心规则化，长尾 Agent 化，Agent 受工具+额度+人工兜底约束。
 follow_up:
-  - Agent 怎么调交易系统？——Function Calling，封装 API 为 tool（查订单/退款）
-  - Agent 幻觉怎么办？——工具校验+额度限制+人工审核高额
-  - 核心交易能用 Agent 吗？——不建议，性能（秒级）和确定性（不能错）不满足
+- Agent 怎么调交易系统？——Function Calling，封装 API 为 tool（查订单/退款）
+- Agent 幻觉怎么办？——工具校验+额度限制+人工审核高额
+- 核心交易能用 Agent 吗？——不建议，性能（秒级）和确定性（不能错）不满足
 memory_points:
-  - 分层：核心规则化，长尾 Agent 化
-  - Agent = LLM + 工具 + 记忆
-  - 安全：工具校验+额度+人工兜底
-  - 落地优先：客服/退款/异常处置
+- 分层：核心规则化，长尾 Agent 化
+- Agent = LLM + 工具 + 记忆
+- 安全：工具校验+额度+人工兜底
+- 落地优先：客服/退款/异常处置
+frequency: high
 ---
 
 # 【拼多多交易】用 AI Agent 怎么改造交易系统？
@@ -234,6 +235,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 结构化回答

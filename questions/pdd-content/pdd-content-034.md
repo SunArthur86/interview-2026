@@ -29,15 +29,16 @@ first_principle:
   - 吞吐 vs 延迟权衡
   rebuild: KV Cache+连续批处理+量化+并行。
 follow_up:
-  - vLLM 为什么快？——PagedAttention（显存分页）+连续批处理
-  - 量化精度损失？——INT8 几乎无损/INT4 略降
-  - 怎么选推理框架？——vLLM（开源通用）/TensorRT-LLM（Nvidia 极致）
+- vLLM 为什么快？——PagedAttention（显存分页）+连续批处理
+- 量化精度损失？——INT8 几乎无损/INT4 略降
+- 怎么选推理框架？——vLLM（开源通用）/TensorRT-LLM（Nvidia 极致）
 memory_points:
-  - KV Cache：缓存 K/V 避免重算
-  - 连续批处理：动态拼请求
-  - 量化：INT8/INT4
-  - 并行：张量/Pipeline
-  - 框架：vLLM/TensorRT-LLM
+- KV Cache：缓存 K/V 避免重算
+- 连续批处理：动态拼请求
+- 量化：INT8/INT4
+- 并行：张量/Pipeline
+- 框架：vLLM/TensorRT-LLM
+frequency: high
 ---
 
 # 【拼多多内容】LLM 推理优化方案？
@@ -298,6 +299,37 @@ vLLM 的创新不在"有没有 KV Cache"（这是 Transformer 自带的），而
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AWQ start
+    class Batching process
+    class CB decision
+    class Cache special
+    class Caching error
+    class Continuous info
+    class DC start
+    class INT8 process
+    class KC decision
+    class KV special
+    class MEM error
+    class OUT info
+    class PA start
+    class PP process
+    class PR decision
+    class PagedAttention special
+    class Prefix error
+    class Prompt info
+    class Q start
+    class R1 process
+    class R2 decision
+    class R3 special
+    class SD error
+    class TP info
+    class br start
     subgraph 客户端请求接入
         R1[请求A Prompt] & R2[请求B Prompt] & R3[请求C Prompt] --> CB[Continuous Batching<br/>动态连续批处理]
     end

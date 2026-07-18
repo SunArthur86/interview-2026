@@ -31,6 +31,7 @@ memory_points:
 - 评估维度记三层：个体指标(准确率/延迟)、系统指标(通信轮次/冲突率)、经济指标(总成本/ROI)。
 - 系统效果看全局：不仅看单Agent成功率，更要端到端(E2E)成功率与协作效率。
 - 量化代码建两表：AgentMetrics记录单次执行，SystemMetrics聚合通信与冲突。
+frequency: medium
 ---
 
 # 多Agent系统的工作流程和效果量化评估
@@ -278,6 +279,7 @@ flowchart TD
     style DEPLOY fill:#009688,color:#fff
     style Q4 fill:#FF9800,color:#fff
     style ADJUST fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

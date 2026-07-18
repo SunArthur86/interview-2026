@@ -17,6 +17,7 @@ memory_points:
 - 可靠性对比：TCP保证可靠无差错有序到达，UDP尽最大努力交付且不保证顺序
 - 传输形式：TCP面向字节流（存在粘包），UDP面向报文保留数据边界
 - 流量控制：TCP有滑动窗口防拥塞，UDP无任何控制机制适合实时通信
+frequency: low
 ---
 
 # TCP与UDP的区别？
@@ -104,6 +105,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

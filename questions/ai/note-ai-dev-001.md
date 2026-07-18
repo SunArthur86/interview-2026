@@ -27,6 +27,7 @@ memory_points:
 - 核心是构建三层容错架构：输入层校验、中间层修复重试、输出层降级兜底。
 - 输入层做Schema校验挡住非法JSON；中间层附加报错和Few-shot让大模型修复重试。
 - 输出层做降级兜底，若多次重试失败则返回默认值、走规则引擎或直接转人工。
+frequency: high
 ---
 
 # Function Calling工程实现：如何设计容错机制？
@@ -283,6 +284,7 @@ flowchart TD
     style EXEC fill:#FF9800,color:#fff
     style FALL fill:#F44336,color:#fff
     style HITL fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

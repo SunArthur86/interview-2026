@@ -29,6 +29,7 @@ memory_points:
 - 上下文传播：跨进程靠透传Header（如HTTP的X-B3-TraceId），跨线程靠TTL传递。
 - 选型对比：SkyWalking靠Java Agent字节码增强实现零侵入，Jaeger更契合云原生多语言。
 - 性能优化：通过动态采样率、异步批量上报机制，避免链路追踪拖垮业务主流程。
+frequency: high
 ---
 
 # 如何设计微服务的链路追踪系统？快速定位跨服务调用问题。
@@ -162,6 +163,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

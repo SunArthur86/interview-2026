@@ -15,6 +15,7 @@ memory_points:
 - 适用场景：读多写少、竞争不激烈场景；写多冲突高时频繁重试消耗CPU大。
 - CAS三大痛点：ABA问题（加版本号解决）、只能保证单变量、自旋开销大。
 - 悲观锁对比：悲观锁读写均加锁，而乐观锁读不加锁，仅在写时校验。
+frequency: high
 ---
 
 # 什么是乐观锁？它的实现原理是什么？
@@ -93,6 +94,7 @@ flowchart TD
     class Update ok
     class ABA,Undetected,SpinRisk,CPUBusy risk
     class Stamp,LongAdder sol
+
 ```
 
 

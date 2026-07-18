@@ -16,6 +16,7 @@ memory_points:
 - 饿汉与懒汉：饿汉类加载即创建，懒汉延迟加载需处理并发安全
 - 双重检查(DCL)：必须加volatile修饰实例，禁止指令重排防拿半初始化对象
 - 最佳实践：静态内部类利用类加载保安全且懒加载；枚举天然防反射反序列化
+frequency: high
 ---
 
 # 什么是手写单例设计模式？
@@ -137,6 +138,50 @@ public class DataSourceSingleton {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Adapter process
+    class B decision
+    class B1 special
+    class B2 error
+    class B3 info
+    class B4 start
+    class Behavioral process
+    class Builder decision
+    class C special
+    class C1 error
+    class C2 info
+    class C3 start
+    class C4 process
+    class C5 decision
+    class Chain special
+    class Creational error
+    class D info
+    class D1 start
+    class D2 process
+    class D3 decision
+    class D4 special
+    class D5 error
+    class Decorator info
+    class E start
+    class F process
+    class Facade decision
+    class G special
+    class GoF error
+    class Method info
+    class Observer start
+    class Prototype process
+    class Proxy decision
+    class SOLID special
+    class Singleton error
+    class Strategy info
+    class Structural start
+    class Template process
     A[GoF 23 种设计模式] --> B[创建型 Creational]
     A --> C[结构型 Structural]
     A --> D[行为型 Behavioral]

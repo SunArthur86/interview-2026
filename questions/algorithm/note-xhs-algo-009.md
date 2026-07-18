@@ -12,8 +12,8 @@ tags:
 - 手撕代码
 - 面经
 feynman:
-  essence: "合并两棵二叉树：相同位置的节点值相加，不同位置的节点直接保留，用DFS递归同时遍历两棵树即可"
-  analogy: "想象两个部门的组织架构图要合并——同一个岗位有两个人，那合并后的岗位人数=两个部门人数之和；如果只有一个部门有这个岗位，就直接搬过来"
+  essence: 合并两棵二叉树：相同位置的节点值相加，不同位置的节点直接保留，用DFS递归同时遍历两棵树即可
+  analogy: 想象两个部门的组织架构图要合并——同一个岗位有两个人，那合并后的岗位人数=两个部门人数之和；如果只有一个部门有这个岗位，就直接搬过来
   key_points:
   - 两棵树同一位置节点值相加：t1.val + t2.val
   - 如果一边为null，直接返回另一边（递归终止条件）
@@ -21,9 +21,9 @@ feynman:
   - 时间复杂度O(min(N,M))，只遍历两棵树重叠部分
   - 面试现场可用BFS层序，但DFS递归代码最简洁
 first_principle:
-  essence: "树是递归结构——任何树操作都可以分解为'处理根节点 + 递归处理子树'"
-  derivation: "两棵树在同一位置有三种情况：(1)都存在→值相加 (2)只有一个存在→直接用那个 (3)都不存在→返回null。递归处理左右子树即可"
-  conclusion: "合并二叉树 = 同步DFS + 节点值相加 + null短路返回"
+  essence: 树是递归结构——任何树操作都可以分解为'处理根节点 + 递归处理子树'
+  derivation: 两棵树在同一位置有三种情况：(1)都存在→值相加 (2)只有一个存在→直接用那个 (3)都不存在→返回null。递归处理左右子树即可
+  conclusion: 合并二叉树 = 同步DFS + 节点值相加 + null短路返回
 follow_up:
 - 如果要求不修改原始树（创建新节点），代码怎么改？
 - BFS层序方式如何实现合并？和DFS有什么区别？
@@ -33,6 +33,7 @@ memory_points:
 - 核心三行：if (!t1) return t2; if (!t2) return t1; t1.val += t2.val
 - 递归处理：t1.left = merge(t1.left, t2.left); t1.right = merge(t1.right, t2.right)
 - 返回t1（原地修改）或创建新节点（不破坏原树）
+frequency: low
 ---
 
 # 【拼多多 Java服务端】力扣617：合并两棵二叉树
@@ -212,6 +213,25 @@ public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class br special
+    class node1 error
+    class node2 info
+    class val start
     A{"同步遍历两棵树<br/>node1, node2"} --> B{"node1 为空?"}
     B -- "是" --> C["返回 node2"]
     B -- "否" --> D{"node2 为空?"}

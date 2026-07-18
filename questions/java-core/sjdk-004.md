@@ -16,6 +16,7 @@ memory_points:
 - 语法：父类用permits指定子类，子类必须声明为final/sealed/non-sealed
 - 杀手锏：与Switch模式匹配结合，编译器能穷举检查所有可能分支
 - 对比：non-sealed用于打破限制，开放给第三方随意扩展，sealed则锁死
+frequency: medium
 ---
 
 # Sealed Classes（密封类）是什么？它和final、abstract有什么区别？
@@ -114,6 +115,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

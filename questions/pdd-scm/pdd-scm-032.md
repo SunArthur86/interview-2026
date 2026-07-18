@@ -34,6 +34,7 @@ memory_points:
 - 生成+抽取+分类三类能力
 - 关键场景人工复核
 - 成本：小模型日常+大模型复杂
+frequency: medium
 ---
 
 # 【拼多多供应链】LLM 在商品/采购的具体应用？
@@ -202,6 +203,31 @@ LLM 在供应链的价值是**"自动化文本脑力劳动"**：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class A3 special
+    class B error
+    class B1 info
+    class B2 start
+    class B3 process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class D1 info
+    class D2 start
+    class D3 process
+    class D4 decision
+    class E1 special
+    class F error
+    class LLM info
+    class br start
     A["供应商原始数据"] --> B("LLM 自动化处理")
     A1["商品图文描述"] --> B1["属性抽取 (颜色/材质)"]
     A2["供应商合同文本"] --> B2["风险条款审查与提取"]

@@ -26,7 +26,8 @@ first_principle:
   - 不同哈希桶逻辑独立，互不影响
   - 哈希冲突是低概率事件（好哈希函数下）
   - CAS 适合低竞争，synchronized 适合中高竞争（JDK6 后优化）
-  rebuild: 把锁从"表级"细化到"桶级"——读无锁（volatile），写 CAS+synchronized 单桶；扩容时多线程协助；size 用分片计数。冲突激烈时退化为红黑树保 O(logn)。
+  rebuild: 把锁从"表级"细化到"桶级"——读无锁（volatile），写 CAS+synchronized 单桶；扩容时多线程协助；size 用分片计数。冲突激烈时退化为红黑树保
+    O(logn)。
 follow_up:
 - 为什么 JDK8 放弃分段锁？——Segment 占内存，且并发度固定 16 无法扩展；CAS+桶锁并发度=桶数，更细
 - put 时桶为空怎么处理？——CAS 写入头节点，失败自旋重试
@@ -36,6 +37,7 @@ memory_points:
 - 8→红黑树阈值链表长度，6→退化阈值（避免反复转换抖动）
 - 读完全无锁（Node val 用 volatile），写只锁单个桶头节点
 - 扩容是并发的：发现扩容中帮迁移，迁移完一起扩 next
+frequency: high
 ---
 
 # 【蚂蚁风控】ConcurrentHashMap 在 JDK7 和 JDK8 的实现差异？put 流程是怎样的？
@@ -302,6 +304,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

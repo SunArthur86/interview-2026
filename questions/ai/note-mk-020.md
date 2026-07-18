@@ -31,6 +31,7 @@ memory_points:
 - 长任务回看：因为短任务掩盖了中断风险，所以需状态机与断点续跑支持
 - 产物落地：因为只读预览无法满足修改诉求，所以需提供版本历史与编辑链路
 - 并发状态：因为多窗口容易数据错位，所以需引入冲突仲裁保障一致性
+frequency: medium
 ---
 
 # 【月之暗面面经】AI-Native 桌面产品从 Demo 到商用，前端最容易在哪些点翻车？
@@ -221,6 +222,7 @@ flowchart TD
     style TUNE fill:#FF9800,color:#fff
     style DEPLOY fill:#9C27B0,color:#fff
     style EVAL fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

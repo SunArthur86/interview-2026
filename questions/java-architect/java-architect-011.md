@@ -8,13 +8,16 @@ tags:
 - Bean
 - 扩展点
 feynman:
-  essence: Bean 生命周期的本质是"Spring 对一个对象从生到死的全流程管控"——实例化→属性注入→初始化→使用→销毁，每个阶段都开放扩展点（Aware 接口、BeanPostProcessor、InitializingBean）。Spring 之所以强大，就是这套可插拔的扩展机制让框架能整合任何第三方库。
+  essence: Bean 生命周期的本质是"Spring 对一个对象从生到死的全流程管控"——实例化→属性注入→初始化→使用→销毁，每个阶段都开放扩展点（Aware
+    接口、BeanPostProcessor、InitializingBean）。Spring 之所以强大，就是这套可插拔的扩展机制让框架能整合任何第三方库。
   analogy: 像公务员入职流程：HR 创建档案（实例化）→ 分配办公室和同事（属性注入）→ 培训和宣誓（初始化）→ 上岗工作（使用）→ 退休离职（销毁）。每一步都有对应接口（Aware/PostProcessor）让"相关部门"介入处理。
-  first_principle: 为什么需要这么多扩展点？因为 IoC 容器要整合不同来源的 Bean（注解、XML、第三方 jar），每种 Bean 有不同的初始化需求（数据库连接要建池、RPC 要注册服务）。统一的"生命周期 + 扩展点"让 Spring 用一套流程处理所有 Bean，第三方通过实现扩展点接入。
+  first_principle: 为什么需要这么多扩展点？因为 IoC 容器要整合不同来源的 Bean（注解、XML、第三方 jar），每种 Bean 有不同的初始化需求（数据库连接要建池、RPC
+    要注册服务）。统一的"生命周期 + 扩展点"让 Spring 用一套流程处理所有 Bean，第三方通过实现扩展点接入。
   key_points:
   - 完整生命周期：实例化→属性注入→Aware 回调→BeanPostProcessor 前置→初始化→BeanPostProcessor 后置→使用→销毁
   - 4 类扩展点：Aware（注入容器资源）、BeanPostProcessor（前后置增强）、InitializingBean/disposableBean（初始化/销毁回调）、@PostConstruct/@PreDestroy（注解）
-  - BeanFactoryPostProcessor vs BeanPostProcessor：前者改 BeanDefinition（类元数据），后者改 Bean 实例
+  - BeanFactoryPostProcessor vs BeanPostProcessor：前者改 BeanDefinition（类元数据），后者改 Bean
+    实例
   - 三级缓存解决循环依赖（singletonObjects/earlySingletonObjects/singletonFactories）
   - Spring Boot 通过 ApplicationContext 启动，refresh() 触发完整流程
 first_principle:
@@ -23,19 +26,23 @@ first_principle:
   - Bean 的创建需求各异（注入方式、初始化逻辑、销毁资源）
   - 框架不能为每种 Bean 写定制代码，必须开放扩展点
   - 扩展点要有明确时序，让扩展者知道在哪一步介入
-  rebuild: 定义标准生命周期流程（实例化→注入→初始化→销毁），在关键节点开扩展接口：Aware 让 Bean 拿容器资源、BeanPostProcessor 让全局增强 Bean、InitializingBean 让 Bean 自定义初始化。Spring 内置功能（@Autowired、AOP、事务）本身就是通过这些扩展点实现的，第三方同理接入。
+  rebuild: 定义标准生命周期流程（实例化→注入→初始化→销毁），在关键节点开扩展接口：Aware 让 Bean 拿容器资源、BeanPostProcessor
+    让全局增强 Bean、InitializingBean 让 Bean 自定义初始化。Spring 内置功能（@Autowired、AOP、事务）本身就是通过这些扩展点实现的，第三方同理接入。
 follow_up:
-  - 循环依赖怎么解决？——三级缓存：singletonObjects（成品）、earlySingletonObjects（半成品）、singletonFactories（ObjectFactory 提前暴露）。A 注入 B、B 注入 A 时，A 实例化后先放三级缓存，B 拿到 A 的早期引用完成注入
-  - "@Autowired 和构造器注入区别？——构造器注入不可变（final 字段）、强制依赖、启动时暴露问题；@Autowired 字段注入可变、可选依赖、循环依赖时易踩坑。推荐构造器注入"
-  - BeanPostProcessor 和 BeanFactoryPostProcessor 区别？——前者操作 Bean 实例（AOP 代理就是在这步），后者操作 BeanDefinition（改类元数据，如 @ConfigurationProperties 绑定）
-  - 为什么 @PostConstruct 比 InitializingBean 好？——注解解耦不依赖 Spring 接口；但需要注解扫描支持
-  - "@Lazy 解决什么？——延迟初始化，首次使用才创建 Bean，打破循环依赖或加速启动"
+- 循环依赖怎么解决？——三级缓存：singletonObjects（成品）、earlySingletonObjects（半成品）、singletonFactories（ObjectFactory
+  提前暴露）。A 注入 B、B 注入 A 时，A 实例化后先放三级缓存，B 拿到 A 的早期引用完成注入
+- '@Autowired 和构造器注入区别？——构造器注入不可变（final 字段）、强制依赖、启动时暴露问题；@Autowired 字段注入可变、可选依赖、循环依赖时易踩坑。推荐构造器注入'
+- BeanPostProcessor 和 BeanFactoryPostProcessor 区别？——前者操作 Bean 实例（AOP 代理就是在这步），后者操作
+  BeanDefinition（改类元数据，如 @ConfigurationProperties 绑定）
+- 为什么 @PostConstruct 比 InitializingBean 好？——注解解耦不依赖 Spring 接口；但需要注解扫描支持
+- '@Lazy 解决什么？——延迟初始化，首次使用才创建 Bean，打破循环依赖或加速启动'
 memory_points:
-  - 生命周期 8 步：实例化→注入→Aware→前置→初始化→后置→使用→销毁
-  - 4 类扩展点：Aware/BeanPostProcessor/InitializingBean/@PostConstruct
-  - BeanPostProcessor 后置是 AOP 代理生成点（AbstractAutoProxyCreator）
-  - 三级缓存：成品/半成品/ObjectFactory，解决单例循环依赖（构造器循环无解）
-  - BeanFactoryPostProcessor 改元数据，BeanPostProcessor 改实例
+- 生命周期 8 步：实例化→注入→Aware→前置→初始化→后置→使用→销毁
+- 4 类扩展点：Aware/BeanPostProcessor/InitializingBean/@PostConstruct
+- BeanPostProcessor 后置是 AOP 代理生成点（AbstractAutoProxyCreator）
+- 三级缓存：成品/半成品/ObjectFactory，解决单例循环依赖（构造器循环无解）
+- BeanFactoryPostProcessor 改元数据，BeanPostProcessor 改实例
+frequency: high
 ---
 
 # 【Java 后端架构师】Spring Bean 生命周期与扩展点
@@ -410,6 +417,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

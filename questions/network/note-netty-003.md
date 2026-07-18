@@ -10,8 +10,10 @@ tags:
 - Netty
 - 架构选型
 feynman:
-  essence: Netty 选 NIO 而非 AIO，本质是因为在 Linux（服务端主流 OS）上，AIO 是用 epoll 强行模拟出来的，并不比直接用 NIO(epoll) 快，反而带来额外复杂度和回调地狱。既然底层是同一个东西，不如直接用更简单可控的 NIO。
-  analogy: AIO 像是"代驾服务"——你把车钥匙交给代驾（OS），它开完通知你。但 Linux 这个代驾公司其实没有真正的代驾，它是临时雇了个会开车的 epoll 司机来冒充（用 epoll 模拟 AIO）。既然最后都是同一个司机在开，你还不如直接雇这个 epoll 司机（NIO），省去中间转手，还能自己盯着路线。
+  essence: Netty 选 NIO 而非 AIO，本质是因为在 Linux（服务端主流 OS）上，AIO 是用 epoll 强行模拟出来的，并不比直接用
+    NIO(epoll) 快，反而带来额外复杂度和回调地狱。既然底层是同一个东西，不如直接用更简单可控的 NIO。
+  analogy: AIO 像是"代驾服务"——你把车钥匙交给代驾（OS），它开完通知你。但 Linux 这个代驾公司其实没有真正的代驾，它是临时雇了个会开车的
+    epoll 司机来冒充（用 epoll 模拟 AIO）。既然最后都是同一个司机在开，你还不如直接雇这个 epoll 司机（NIO），省去中间转手，还能自己盯着路线。
   key_points:
   - Netty官方结论:AIO在Unix系统上不比NIO(epoll)快
   - Linux没有真正的异步IO,AIO是用epoll模拟的
@@ -25,14 +27,15 @@ first_principle:
   - 框架选择要权衡"性能收益"vs"实现复杂度",无收益的复杂度是负担
   rebuild: 从"性能"出发→理论AIO最好,但Linux下AIO=epoll模拟→性能=NIO→AIO的异步回调模型反而让线程模型和异常处理更复杂→收益为0成本却上升→所以Netty果断回归NIO,用epoll+事件驱动+Future/回调自己实现"异步效果",反而更可控。
 follow_up:
-  - Linux AIO (io_uring) 出现后，Netty 会转向 AIO 吗？
-  - Windows 的 IOCP 是真正的 AIO，Netty 在 Windows 上会更快吗？
-  - epoll 的 LT（水平触发）和 ET（边缘触发）区别？
+- Linux AIO (io_uring) 出现后，Netty 会转向 AIO 吗？
+- Windows 的 IOCP 是真正的 AIO，Netty 在 Windows 上会更快吗？
+- epoll 的 LT（水平触发）和 ET（边缘触发）区别？
 memory_points:
-  - 一句话：Not faster than NIO(epoll) on unix systems —— Netty 官方原话
-  - 根因：Linux 没有真正的 AIO，AIO 是用 epoll 模拟的，底层和 NIO 一样
-  - 权衡：AIO 回调复杂（回调地狱、线程模型难），NIO 主动轮询更简单可控
-  - 历史：Netty 曾有 AIO 支持，后因收益不足移除
+- 一句话：Not faster than NIO(epoll) on unix systems —— Netty 官方原话
+- 根因：Linux 没有真正的 AIO，AIO 是用 epoll 模拟的，底层和 NIO 一样
+- 权衡：AIO 回调复杂（回调地狱、线程模型难），NIO 主动轮询更简单可控
+- 历史：Netty 曾有 AIO 支持，后因收益不足移除
+frequency: high
 ---
 
 # 为什么 Netty 使用 NIO 而不是 AIO？
@@ -251,6 +254,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

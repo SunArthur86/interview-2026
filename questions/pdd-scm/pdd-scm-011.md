@@ -11,7 +11,8 @@ tags:
 - Nacos
 - 网关
 feynman:
-  essence: Spring Cloud 微服务靠"注册中心（Nacos，服务发现）+ 网关（Gateway，统一入口）+ 配置中心（Nacos，动态配置）+ RPC（Feign/Dubbo）"四件套串联，供应链拆成商品/库存/订单/结算等几十个服务。
+  essence: Spring Cloud 微服务靠"注册中心（Nacos，服务发现）+ 网关（Gateway，统一入口）+ 配置中心（Nacos，动态配置）+
+    RPC（Feign/Dubbo）"四件套串联，供应链拆成商品/库存/订单/结算等几十个服务。
   analogy: 微服务像把大公司拆成事业部——注册中心是通讯录（找部门在哪），网关是前台（统一入口），配置中心是制度公告栏（动态生效）。
   first_principle: 单体扛不住规模，拆微服务后需要"自动发现 + 统一入口 + 动态配置"的基础设施。
   key_points:
@@ -35,6 +36,7 @@ memory_points:
 - Gateway：路由+过滤+限流，统一入口
 - Feign：声明式 HTTP + 整合 LoadBalancer/Sentinel
 - 客户端缓存实例列表，注册中心挂了仍可降级调用
+frequency: high
 ---
 
 # 【拼多多供应链】Spring Cloud 微服务怎么落地？供应链怎么拆？
@@ -243,6 +245,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

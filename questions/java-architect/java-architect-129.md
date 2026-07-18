@@ -9,8 +9,12 @@ tags:
 - 流式
 - 背压
 feynman:
-  essence: gRPC 流式接口（Server/Client/Bidi Streaming）让服务端可以持续推、客户端可以持续拉，但当下游消费速度 < 上游生产速度时，缓冲区会无限膨胀直至 OOM。背压（Backpressure）的本质是"让下游的反向压力传给上游"——下游处理慢就让上游慢点发。gRPC 用 HTTP/2 flow control（WINDOW_UPDATE 帧）做传输层背压，应用层用 Reactor/Flowable 的 `request(n)` 机制做语义背压。超时控制要分"流整体超时"和"单消息超时"，流式场景整体超时用 deadline，单消息超时用 per-message timeout。
-  analogy: 像水龙头接水池。客户端是水池，服务端是水龙头。如果水池出水口（消费）慢，水龙头还猛灌，水池溢出（OOM）。背压是水池满了通过水管把压力反向传给水龙头，让它自动关小。HTTP/2 flow control 是水管里内置的压力传感器，Reactors 是水池主动喊"再给我 100 升就够了"。
+  essence: gRPC 流式接口（Server/Client/Bidi Streaming）让服务端可以持续推、客户端可以持续拉，但当下游消费速度 < 上游生产速度时，缓冲区会无限膨胀直至
+    OOM。背压（Backpressure）的本质是"让下游的反向压力传给上游"——下游处理慢就让上游慢点发。gRPC 用 HTTP/2 flow control（WINDOW_UPDATE
+    帧）做传输层背压，应用层用 Reactor/Flowable 的 `request(n)` 机制做语义背压。超时控制要分"流整体超时"和"单消息超时"，流式场景整体超时用
+    deadline，单消息超时用 per-message timeout。
+  analogy: 像水龙头接水池。客户端是水池，服务端是水龙头。如果水池出水口（消费）慢，水龙头还猛灌，水池溢出（OOM）。背压是水池满了通过水管把压力反向传给水龙头，让它自动关小。HTTP/2
+    flow control 是水管里内置的压力传感器，Reactors 是水池主动喊"再给我 100 升就够了"。
   first_principle: 为什么 gRPC 流式比 REST 更需要背压？REST 是请求-响应模型，每次请求独立，慢了就超时；流式是长连接持续推，单条连接的内存压力随时间累积。如果不做背压，一个慢消费者会把服务端内存吃光。
   key_points:
   - 四种 gRPC 模式：Unary（一元）、Server Streaming、Client Streaming、Bidi Streaming
@@ -24,19 +28,27 @@ first_principle:
   - 流式接口的内存压力随消息速率和消费速率的差值线性累积
   - HTTP/2 内置 flow control 可以做传输层背压，但应用层缓冲可能绕过它
   - 慢消费者不能用"断开连接"粗暴处理（业务可能希望降级而非失败）
-  rebuild: HTTP/2 flow control 在传输层兜底（窗口耗尽自动暂停发送），应用层用 Reactor 的 `limitRate(100)` 控制向 HTTP/2 写入速率，下游慢则 Reactor backpressure 传到上游。超时用 deadline-on 流（如 30s）配 per-message timeout（如 5s），超过则取消流并清理资源。keepalive ping 检测假死连接，10s idle 关闭释放资源。
+  rebuild: HTTP/2 flow control 在传输层兜底（窗口耗尽自动暂停发送），应用层用 Reactor 的 `limitRate(100)`
+    控制向 HTTP/2 写入速率，下游慢则 Reactor backpressure 传到上游。超时用 deadline-on 流（如 30s）配 per-message
+    timeout（如 5s），超过则取消流并清理资源。keepalive ping 检测假死连接，10s idle 关闭释放资源。
 follow_up:
-  - HTTP/2 flow control 怎么工作？——每个 stream 有发送/接收窗口（默认 65535 字节），发送方扣窗口，接收方消费后 WINDOW_UPDATE 补。窗口耗尽则发送方暂停。WINDOW_UPDATE 太小会导致停-等，建议设大（如 1MB）。
-  - Reactor 的 onBackpressureBuffer/Drop/Latest 区别？——Buffer 攒到上限后 OverflowStrategy 决定：DROP 丢最新、LATEST 留最新丢旧、ERROR 抛异常。流式场景一般 DROP 或 LATEST（避免 OOM）。
-  - gRPC 怎么实现"流整体超时"？——客户端用 `withDeadlineAfter(30, SECONDS)`，服务端用 `onCancel` 回调清理资源；超时后客户端收到 DEADLINE_EXCEEDED。
-  - bidi streaming 怎么处理半连接？——客户端 close write 但还读，服务端检测 `onComplete` 后继续发，最后也 close。Spring gRPC 用 `StreamObserver.onCompleted()` 触发。
-  - 大消息体怎么办？——gRPC 默认单消息 4MB 上限（maxInboundMessageSize），大消息建议分片成 streaming 或用 out-of-band（如传 S3 URL）。
+- HTTP/2 flow control 怎么工作？——每个 stream 有发送/接收窗口（默认 65535 字节），发送方扣窗口，接收方消费后 WINDOW_UPDATE
+  补。窗口耗尽则发送方暂停。WINDOW_UPDATE 太小会导致停-等，建议设大（如 1MB）。
+- Reactor 的 onBackpressureBuffer/Drop/Latest 区别？——Buffer 攒到上限后 OverflowStrategy 决定：DROP
+  丢最新、LATEST 留最新丢旧、ERROR 抛异常。流式场景一般 DROP 或 LATEST（避免 OOM）。
+- gRPC 怎么实现"流整体超时"？——客户端用 `withDeadlineAfter(30, SECONDS)`，服务端用 `onCancel` 回调清理资源；超时后客户端收到
+  DEADLINE_EXCEEDED。
+- bidi streaming 怎么处理半连接？——客户端 close write 但还读，服务端检测 `onComplete` 后继续发，最后也 close。Spring
+  gRPC 用 `StreamObserver.onCompleted()` 触发。
+- 大消息体怎么办？——gRPC 默认单消息 4MB 上限（maxInboundMessageSize），大消息建议分片成 streaming 或用 out-of-band（如传
+  S3 URL）。
 memory_points:
-  - 四种模式：Unary/Server Stream/Client Stream/Bidi Stream
-  - HTTP/2 flow control + Reactor backpressure 双层背压
-  - 超时：deadline-on 流（30s）+ per-message（5s）+ keepalive（10s idle ping）
-  - maxInboundMessageSize 默认 4MB，大消息分片或 out-of-band
-  - 慢消费者策略：DROP/LATEST/限速，不能 Buffer 无限
+- 四种模式：Unary/Server Stream/Client Stream/Bidi Stream
+- HTTP/2 flow control + Reactor backpressure 双层背压
+- 超时：deadline-on 流（30s）+ per-message（5s）+ keepalive（10s idle ping）
+- maxInboundMessageSize 默认 4MB，大消息分片或 out-of-band
+- 慢消费者策略：DROP/LATEST/限速，不能 Buffer 无限
+frequency: high
 ---
 
 # 【Java 后端架构师】gRPC 流式接口的背压与超时控制
@@ -401,6 +413,39 @@ ReactorRiskEventServiceGrpc.ReactorRiskEventServiceStub stub =
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class BUFFER decision
+    class C special
+    class Client error
+    class Control info
+    class D start
+    class DROP process
+    class E decision
+    class ERROR special
+    class F error
+    class Flow info
+    class G start
+    class H process
+    class HTTP decision
+    class LATEST special
+    class Network error
+    class Publisher info
+    class Reactor start
+    class Service process
+    class TCP decision
+    class br special
+    class buffer error
+    class limitRate info
+    class n start
+    class onBackpressure process
+    class request decision
     subgraph Service ["服务端 (模型推理)"]
         A["Reactor Publisher<br/>发送事件流"]
     end

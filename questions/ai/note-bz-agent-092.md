@@ -30,6 +30,7 @@ memory_points:
 - AI名师核心机制：严禁直接给答案，因为目标是启发思维，所以必须采用苏格拉底式引导并动态评估学情
 - 数字人交互链路：ASR（听）→ LLM（带情感思考）→ TTS（情绪合成）→ Avatar（口型/动作渲染）
 - 数字人多模态咬合点：因为LLM输出了Emotion标签，所以直接驱动TTS语调和数字人表情的同步联动
+frequency: medium
 ---
 
 # 实战：垂直领域智能体（AI 名师机器人/数字人）怎么落地？
@@ -241,6 +242,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

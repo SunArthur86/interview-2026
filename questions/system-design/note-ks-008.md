@@ -14,7 +14,7 @@ tags:
 - 面经
 feynman:
   essence: Nacos同时支持AP和CP两种一致性模式。AP模式使用Distro协议（每个节点独立处理写请求，异步同步给其他节点），保证可用性和分区容错性，但允许短暂不一致。CP模式使用Raft协议（强领导者，多数派写入），保证强一致性，但领导者选举期间不可用。默认AP模式。
-  analogy: "AP模式就像微信群聊发消息——每个人(节点)都能收发消息(写请求)，稍微延迟没关系，但消息一定能发出去(高可用)。CP模式就像公司签字流程——必须找老板(Leader)签字，老板不在就等新老板选出来，但签字结果大家都一致(强一致)。Nacos默认用群聊(AP)，因为注册中心最怕不可用。"
+  analogy: AP模式就像微信群聊发消息——每个人(节点)都能收发消息(写请求)，稍微延迟没关系，但消息一定能发出去(高可用)。CP模式就像公司签字流程——必须找老板(Leader)签字，老板不在就等新老板选出来，但签字结果大家都一致(强一致)。Nacos默认用群聊(AP)，因为注册中心最怕不可用。
   key_points:
   - CAP理论：分区容错(P)必选，剩下的C(一致性)和A(可用性)二选一
   - Nacos AP模式：Distro协议，每节点可写，异步同步，最终一致，默认模式
@@ -23,7 +23,8 @@ feynman:
   - 配置管理可选CP：配置需要强一致，但Nacos配置默认也是AP
 first_principle:
   essence: 分布式系统中，网络分区(P)不可避免，必须在一致性(C)和可用性(A)之间做权衡
-  derivation: "CAP定理：分区容错(P)是网络环境的必然 → C和A只能选一个。注册中心场景：节点宕机时，如果选C(等数据同步完成) → 注册不可用 → 新服务注册不了 → 雪崩。如果选A(立即返回可能过期的数据) → 消费者可能拿到已下线的服务实例 → 调用失败重试即可。注册中心选AP更安全。"
+  derivation: CAP定理：分区容错(P)是网络环境的必然 → C和A只能选一个。注册中心场景：节点宕机时，如果选C(等数据同步完成) → 注册不可用
+    → 新服务注册不了 → 雪崩。如果选A(立即返回可能过期的数据) → 消费者可能拿到已下线的服务实例 → 调用失败重试即可。注册中心选AP更安全。
   conclusion: Nacos默认AP(Distro)保证服务注册高可用；需要强一致的配置数据可切换CP(Raft)。这是工业界对CAP权衡的成熟实践。
 follow_up:
 - Distro协议和Gossip协议有什么区别？
@@ -36,6 +37,7 @@ memory_points:
 - CP模式(Raft协议)：Leader统一写→多数派确认→强一致→选举期间不可用(约几秒)
 - 临时实例(ephemeral=true)走AP/Distro；永久实例(ephemeral=false)走CP/Raft
 - CAP选择：注册中心选AP(可用性>一致性)，因为拿到过期数据→重试，拿不到数据→雪崩
+frequency: high
 ---
 
 # 【面试题】Nacos AP 和 CP 实现原理
@@ -407,6 +409,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

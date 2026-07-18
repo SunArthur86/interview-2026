@@ -30,6 +30,7 @@ memory_points:
 - 表组织对比：MySQL聚簇索引（主键存行数据），而PgSQL非聚簇（堆表存行）
 - 回表机制差异：MySQL二级索引存主键需回表，而PgSQL所有索引存CTID必回表
 - 性能与场景：MySQL主键查询极快适合KV模式，PgSQL因JSONB和pgvector生态适合复杂查询
+frequency: high
 ---
 
 # MySQL和PgSQL的区别？分别用什么数据结构实现索引？
@@ -167,6 +168,7 @@ flowchart TD
     PR -.两次IO.-> OK2[灵活]
     style MC fill:#d4edda
     style PC fill:#ffe4b5
+
 ```
 
 

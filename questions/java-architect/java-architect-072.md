@@ -9,9 +9,13 @@ tags:
 - REST
 - gRPC
 feynman:
-  essence: 三种 API 风格本质是"协议描述能力 vs 传输效率 vs 生态成熟度"的三角取舍。REST 用 HTTP 语义（动词+资源+状态码）换取最大生态和可缓存性；gRPC 用 HTTP/2 + Protobuf 二进制换取低带宽低延迟、强类型契约和双向流；GraphQL 用"客户端声明所需字段"换取"一次往返拿到聚合数据"，代价是服务端解析和 N+1 风险。
+  essence: 三种 API 风格本质是"协议描述能力 vs 传输效率 vs 生态成熟度"的三角取舍。REST 用 HTTP 语义（动词+资源+状态码）换取最大生态和可缓存性；gRPC
+    用 HTTP/2 + Protobuf 二进制换取低带宽低延迟、强类型契约和双向流；GraphQL 用"客户端声明所需字段"换取"一次往返拿到聚合数据"，代价是服务端解析和
+    N+1 风险。
   analogy: REST 像去超市按货架（资源 URL）一件件取货；gRPC 像工厂流水线用标准料箱（Protobuf）高速传送；GraphQL 像点一份定制套餐，告诉后厨"只要这些字段"后厨一次配齐送来。
-  first_principle: API 是消费方和生产方之间的契约。契约的"描述粒度"决定灵活度（GraphQL 字段级 > REST 资源级 > gRPC 方法级），"传输编码"决定效率（Protobuf 二进制 > JSON 文本），"生态广度"决定接入成本（HTTP/REST 最高）。选型本质是回答：调用方是浏览器/移动端/内部服务？数据形态是聚合读还是简单 CRUD？对延迟和带宽有多敏感？
+  first_principle: API 是消费方和生产方之间的契约。契约的"描述粒度"决定灵活度（GraphQL 字段级 > REST 资源级 > gRPC
+    方法级），"传输编码"决定效率（Protobuf 二进制 > JSON 文本），"生态广度"决定接入成本（HTTP/REST 最高）。选型本质是回答：调用方是浏览器/移动端/内部服务？数据形态是聚合读还是简单
+    CRUD？对延迟和带宽有多敏感？
   key_points:
   - REST：HTTP/1.1 + JSON，资源导向，生态最广，可缓存，适合对外 BFF 和开放平台
   - gRPC：HTTP/2 + Protobuf，强类型 IDL 契约，双向流，适合内部服务间高性能调用
@@ -24,19 +28,25 @@ first_principle:
   - 外部调用方要求"易接入、文档友好、跨语言"，内部调用方要求"低延迟、强类型、低带宽"
   - 数据聚合（一个页面要 N 个资源）用多次 REST 往返效率低
   - 强类型契约（IDL）能消除客户端/服务端字段拼写错误，降低联调成本
-  rebuild: 分层协议组合——对外暴露 REST/GraphQL 网关（BFF），由 BFF 聚合下游；对内服务间用 gRPC（Protobuf IDL 契约 + HTTP/2 多路复用）。前端多变数据用 GraphQL（按需取字段），简单 CRUD 用 REST。gRPC-Gateway 或 grpc-web 做协议桥接。三种协议都通过同一个网关统一鉴权限流可观测。
+  rebuild: 分层协议组合——对外暴露 REST/GraphQL 网关（BFF），由 BFF 聚合下游；对内服务间用 gRPC（Protobuf IDL 契约
+    + HTTP/2 多路复用）。前端多变数据用 GraphQL（按需取字段），简单 CRUD 用 REST。gRPC-Gateway 或 grpc-web 做协议桥接。三种协议都通过同一个网关统一鉴权限流可观测。
 follow_up:
-  - gRPC 为什么比 REST 快？——HTTP/2 多路复用（一个 TCP 多请求）+ Protobuf 二进制（比 JSON 小 30-50%、解析快 5-10 倍）+ 头部压缩 HPACK。但浏览器原生不支持 gRPC，需 grpc-web 或网关转 HTTP
-  - GraphQL 的 N+1 问题怎么解？——一个查询触发 N 个关联查询（如查订单列表再逐个查用户）。解法是 DataLoader：按批次合并查询（收集 N 个 userId 后一次 batch 查 DB）
-  - "REST 怎么做版本兼容？——URI 版本（/v1/）、Header 版本（Accept: application/vnd.api+json;version=1）、或字段级 deprecation。生产用 URI 版本最直观，但 Header 版本更 RESTful"
-  - gRPC 的 .proto 变更怎么保证兼容？——遵循"只加字段不改字段编号、不删字段（用 reserved）、字段类型兼容（int32→int64）"。破坏性变更用新 service 或新包名
-  - GraphQL 怎么限流？——不能按请求次数（一个查询可能查 1 个字段也可能 100 个）。按"查询复杂度"（每个字段算 1 分，嵌套算倍数）限流，超阈值拒绝
+- gRPC 为什么比 REST 快？——HTTP/2 多路复用（一个 TCP 多请求）+ Protobuf 二进制（比 JSON 小 30-50%、解析快 5-10
+  倍）+ 头部压缩 HPACK。但浏览器原生不支持 gRPC，需 grpc-web 或网关转 HTTP
+- GraphQL 的 N+1 问题怎么解？——一个查询触发 N 个关联查询（如查订单列表再逐个查用户）。解法是 DataLoader：按批次合并查询（收集 N 个
+  userId 后一次 batch 查 DB）
+- 'REST 怎么做版本兼容？——URI 版本（/v1/）、Header 版本（Accept: application/vnd.api+json;version=1）、或字段级
+  deprecation。生产用 URI 版本最直观，但 Header 版本更 RESTful'
+- gRPC 的 .proto 变更怎么保证兼容？——遵循"只加字段不改字段编号、不删字段（用 reserved）、字段类型兼容（int32→int64）"。破坏性变更用新
+  service 或新包名
+- GraphQL 怎么限流？——不能按请求次数（一个查询可能查 1 个字段也可能 100 个）。按"查询复杂度"（每个字段算 1 分，嵌套算倍数）限流，超阈值拒绝
 memory_points:
-  - 对外 REST/GraphQL（BFF 聚合），对内 gRPC（高性能服务间调用）
-  - gRPC 三快：HTTP/2 多路复用、Protobuf 二进制、HPACK 头压缩
-  - GraphQL 三坑：N+1（用 DataLoader）、查询复杂度限流、缓存难（POST 单端点）
-  - Protobuf 兼容性：只加字段不改编号、用 reserved 标记删除字段
-  - 浏览器调 gRPC 要 grpc-web 或网关转 HTTP
+- 对外 REST/GraphQL（BFF 聚合），对内 gRPC（高性能服务间调用）
+- gRPC 三快：HTTP/2 多路复用、Protobuf 二进制、HPACK 头压缩
+- GraphQL 三坑：N+1（用 DataLoader）、查询复杂度限流、缓存难（POST 单端点）
+- Protobuf 兼容性：只加字段不改编号、用 reserved 标记删除字段
+- 浏览器调 gRPC 要 grpc-web 或网关转 HTTP
+frequency: high
 ---
 
 # 【Java 后端架构师】GraphQL、REST、gRPC 如何选型
@@ -450,6 +460,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -29,6 +29,7 @@ memory_points:
 - 滑块深防：前端不安全，核心在后端校验轨迹（加速度与平滑度）
 - 短信成本：同号请求复用旧码或提示频繁；防爆破锁定失败5次的IP
 - 安全铁律：SecureRandom生码、HTTPS明文不落日志、用完即删防重放
+frequency: low
 ---
 
 # 如何设计一个验证码系统？支持图形/短信/滑块多种形式。
@@ -133,6 +134,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

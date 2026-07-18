@@ -27,6 +27,7 @@ memory_points:
 - 存储设计：总信息用Redis Hash，拆分后明细金额用Redis List待Pop
 - 防超抢核心：Lua脚本单线程保原子性，读改写一气呵成不被插队
 - 幂等去重：Lua脚本开头必用hsetnx或Bitmap标记防并发狂点
+frequency: high
 ---
 
 # 如何设计微信抢红包系统？红包金额如何拆分？
@@ -142,6 +143,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

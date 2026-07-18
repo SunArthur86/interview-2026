@@ -11,7 +11,8 @@ tags:
 - 评价
 - ShardingSphere
 feynman:
-  essence: 分库分表把单表数据水平拆到多库多表，破解单库容量/QPS 瓶颈；评价/Feed 等高写入场景按 product_id/uid 分片，配合 ShardingSphere 路由。
+  essence: 分库分表把单表数据水平拆到多库多表，破解单库容量/QPS 瓶颈；评价/Feed 等高写入场景按 product_id/uid 分片，配合 ShardingSphere
+    路由。
   analogy: 分库分表像超市分流收银——一个收银台（单表）排队太长，开多个收银台（分片）按商品类别（分片键）分流。
   first_principle: 单库容量/QPS 有物理上限（约 1000 万行/单表 5K QPS），需水平拆分。
   key_points:
@@ -27,14 +28,15 @@ first_principle:
   - 跨片查询很贵
   rebuild: 垂直分库 + 水平分表（分片键路由）+ 中间件。
 follow_up:
-  - 分片键怎么选？——高频查询字段（评价用 product_id，Feed 用 uid）
-  - 跨片查询怎么办？——尽量带分片键；或建异构索引（ES）
-  - 扩容怎么平滑？——一致性 hash 或 2 倍法+双写灰度
+- 分片键怎么选？——高频查询字段（评价用 product_id，Feed 用 uid）
+- 跨片查询怎么办？——尽量带分片键；或建异构索引（ES）
+- 扩容怎么平滑？——一致性 hash 或 2 倍法+双写灰度
 memory_points:
-  - 垂直：按业务/字段分库
-  - 水平：按分片键分表
-  - 中间件：ShardingSphere
-  - 难点：跨片/事务/扩容
+- 垂直：按业务/字段分库
+- 水平：按分片键分表
+- 中间件：ShardingSphere
+- 难点：跨片/事务/扩容
+frequency: high
 ---
 
 # 【拼多多内容】评价库分库分表方案？
@@ -226,6 +228,29 @@ Feed 库分片：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C1 decision
+    class C2 special
+    class C3 error
+    class C4 info
+    class D1 start
+    class D2 process
+    class DB0 decision
+    class DB1 special
+    class DB2 error
+    class DB3 info
+    class S1 start
+    class S2 process
+    class S3 decision
+    class br special
+    class product_id error
     subgraph S1[路由层]
         A[ShardingSphere解析SQL]
         B{product_id Hash取模}

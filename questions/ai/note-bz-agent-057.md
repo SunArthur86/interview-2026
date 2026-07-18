@@ -29,6 +29,7 @@ memory_points:
 - 必用场景：多跳推理（如A收购B，B的创始人是谁）、复杂依赖与因果分析。
 - 图库构建：LLM抽取实体和关系构建图，并跑Leiden算法做社区检测。
 - 全局查询：GraphRAG先汇总各社区生成的摘要，再回答全局总结类问题。
+frequency: medium
 ---
 
 # 什么场景必须用 GraphRAG？知识图谱如何构建和应用？
@@ -250,6 +251,7 @@ flowchart TD
     style GRAPH fill:#FF9800,color:#fff
     style COMM fill:#9C27B0,color:#fff
     style MAP fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

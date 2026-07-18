@@ -15,6 +15,7 @@ memory_points:
 - 中断机制：interrupt()仅设标志位，遇阻塞(如sleep)抛异常并清标志，需重新调interrupt()恢复
 - 线程通信：wait/notify实现等待唤醒，必须持有相同对象的Monitor锁
 - 其他方法：yield()让步不释放锁，join()等待目标线程执行完毕
+frequency: medium
 ---
 
 # Java线程有哪些基本方法？各自的作用？
@@ -111,6 +112,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

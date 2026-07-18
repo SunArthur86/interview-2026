@@ -32,6 +32,7 @@ memory_points:
 - 三大步骤：进入节点时加入路径并扣减目标值，到达叶子判断是否归零，结束后撤销选择。
 - 防引用陷阱：找到合法路径时必须拷贝（如path[:]）再加入结果集，否则随回溯变空。
 - 复杂度分析：时间最坏O(n²)，空间(递归栈加路径)为O(n)。
+frequency: low
 ---
 
 # 手撕二叉树目标和（LeetCode 113. 路径总和 II）
@@ -209,6 +210,27 @@ if not node.left and not node.right and remaining == 0:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class Root special
+    class append error
+    class br info
+    class path start
+    class remaining process
+    class result decision
     A["Root 节点"] --> B["做选择: path 加入节点<br/>remaining 扣减节点值"]
     B --> C{"判断是否为叶子节点"}
     C -- "否" --> D["递归左/右子树"]

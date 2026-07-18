@@ -17,6 +17,7 @@ memory_points:
 - 生产禁忌：禁用 Executors 工厂，因为无界队列和无限线程极易导致 OOM
 - 正确姿势：必须用 ThreadPoolExecutor 自定义，强制使用有界队列防内存溢出
 - 参数配置：CPU密集型设核心数为 N+1，而 IO 密集型设为 2N 并配合有界队列
+frequency: high
 ---
 
 # Java 提供了哪几种线程池？各自的特点和适用场景？
@@ -132,6 +133,7 @@ flowchart TD
     style ABORT fill:#F44336,color:#fff
     style CALLER fill:#009688,color:#fff
     style RECYCLE fill:#FF9800,color:#fff
+
 ```
 
 ## 记忆要点

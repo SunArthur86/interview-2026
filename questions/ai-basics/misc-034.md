@@ -23,6 +23,7 @@ memory_points:
 - 参数设置：温度设为0，预留足够max_tokens防止截断
 - 后处理鲁棒性：正则提取JSON块，用json5容错解析，Pydantic校验
 - Few-shot作用：复杂结构给示例比单纯描述Schema更有效
+frequency: high
 ---
 
 # 如何设计结构化Prompt确保LLM稳定输出JSON?有哪些最佳实践
@@ -157,6 +158,7 @@ flowchart TD
     classDef process fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a;
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
+
 ```
 
 ## 记忆要点

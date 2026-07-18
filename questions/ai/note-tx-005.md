@@ -28,6 +28,7 @@ memory_points:
 - 行级隔离：共享存储配合metadata过滤，需在代码层强加隔离护栏防漏查。
 - 最佳架构：公共知识全局共享+私有记忆按user_id严格隔离。
 - 遗忘机制：更新合并冗余，按时间衰减或重要性递减淘汰防膨胀。
+frequency: high
 ---
 
 # 【腾讯面经】你的 Memory 是多用户的吗？有没有做用户隔离？遗忘机制怎么实现？
@@ -314,6 +315,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

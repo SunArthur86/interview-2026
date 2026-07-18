@@ -4,8 +4,17 @@ difficulty: L4
 category: java-architect
 subcategory: 限流
 title: 自适应限流与负载保护怎么做
-tags: [自适应限流, BBR, CPU 负载, Resilience4j, 负载保护]
-related: [java-architect-144, java-architect-138, java-architect-147]
+tags:
+- 自适应限流
+- BBR
+- CPU 负载
+- Resilience4j
+- 负载保护
+related:
+- java-architect-144
+- java-architect-138
+- java-architect-147
+frequency: high
 ---
 
 # 自适应限流与负载保护怎么做
@@ -360,6 +369,28 @@ Sentinel SystemRule，开箱即用最方便。
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class GC process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class M process
+    class br decision
+    class inflight special
     A["业务请求进入"] --> B["监控采集层"]
     subgraph 监控信号 ["实时系统指标"]
         B --> C["CPU利用率"]

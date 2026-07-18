@@ -21,6 +21,7 @@ memory_points:
 - 对比RNN：Self-Attention并行计算，长距离依赖O(1)；RNN串行，依赖O(N)。
 - 复杂度：Self-Attention为O(N²·d)，RNN为O(N·d²)。
 - 优势：并行度高，捕捉长距离信息能力强，注意力权重可解释。
+frequency: high
 ---
 
 # Transformer中的Self-Attention机制是什么?为什么比RNN更高效
@@ -79,6 +80,34 @@ output = model(input_tensor)
 
 ```mermaid
 flowchart LR
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class A3 special
+    class A4 error
+    class A5 info
+    class Attention start
+    class B process
+    class B1 decision
+    class B2 special
+    class C error
+    class K info
+    class O start
+    class Q process
+    class RNN decision
+    class Self special
+    class Softmax error
+    class V info
+    class X start
+    class br process
+    class d decision
+    class d_k special
     subgraph A["Self-Attention 核心流程"]
         direction TB
         A1["输入序列 X"] --> A2["线性变换生成 Q, K, V"]

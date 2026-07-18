@@ -20,7 +20,8 @@ feynman:
   - Redis缓存认证结果防重复提交
 first_principle:
   essence: 认证 = 身份核验(你是谁) + 资产核验(你有什么)。核验依赖第三方数据源(政府/机构API)，这是不可控的I/O瓶颈。系统设计核心是把这个慢I/O异步化，让用户体验不受影响。
-  derivation: 假设第三方认证API平均响应2-5s，同步等待 → 用户请求超时。异步化后：提交<100ms返回，后台异步认证，30s-2min内出结果。亿级用户分批处理，控制第三方API QPS不超限。
+  derivation: 假设第三方认证API平均响应2-5s，同步等待 → 用户请求超时。异步化后：提交<100ms返回，后台异步认证，30s-2min内出结果。亿级用户分批处理，控制第三方API
+    QPS不超限。
   conclusion: 架构 = 提交API(快速入队) + MQ异步认证 + 加密存储 + 状态轮询/推送 + 多国合规策略。
 follow_up:
 - 身份信息泄露怎么办？
@@ -31,6 +32,7 @@ memory_points:
 - 异步解耦：API秒级收件入队，第三方慢调API用MQ异步核验(指数退避重试)
 - 数据安全：敏感信息AES-256加密传输与脱敏存储，状态存Redis供快查
 - 全球合规：数据本地化，按国家/认证类型分Topic路由至多区域数据中心
+frequency: high
 ---
 
 # 亿级车主完成实名认证（身份、车辆信息核验），如何设计后端架构，保证核验高效、数据安全且符合全球合规要求？
@@ -331,6 +333,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

@@ -21,7 +21,8 @@ feynman:
   - 'ES设计: Mapping设计(分词器/索引类型) + 分片策略 + 深度分页优化'
 first_principle:
   essence: 数据存储应该遵循"各取所长"原则——每个引擎做自己最擅长的事，通过同步保持一致性。
-  derivation: MySQL B+Tree擅长精确查询但不擅长全文搜索 → ES倒排索引擅长全文搜索但不支持事务 → 业务同时需要两种能力 → 所以双写/同步 → 但双写有一致性问题 → 所以用Canal binlog做单向同步
+  derivation: MySQL B+Tree擅长精确查询但不擅长全文搜索 → ES倒排索引擅长全文搜索但不支持事务 → 业务同时需要两种能力 → 所以双写/同步
+    → 但双写有一致性问题 → 所以用Canal binlog做单向同步
   conclusion: MySQL(主存储) → Canal(增量同步) → ES(搜索副本) = 各取所长 + 最终一致
 follow_up:
 - Canal同步有延迟，用户搜索到的数据不是最新的怎么办？
@@ -29,10 +30,11 @@ follow_up:
 - ES的深度分页性能问题怎么解决？
 - 什么场景不适合用ES？
 memory_points:
-- "ES适用: 全文搜索/多维度过滤/聚合统计/模糊匹配"
-- "同步方案: Canal(binlog)增量同步 + 定时全量补偿 + MQ削峰"
-- "一致性: 秒级最终一致(非强一致) + 对账机制"
-- "ES Mapping设计: keyword(精确) vs text(分词) + 分片数 = 数据节点数"
+- 'ES适用: 全文搜索/多维度过滤/聚合统计/模糊匹配'
+- '同步方案: Canal(binlog)增量同步 + 定时全量补偿 + MQ削峰'
+- '一致性: 秒级最终一致(非强一致) + 对账机制'
+- 'ES Mapping设计: keyword(精确) vs text(分词) + 分片数 = 数据节点数'
+frequency: high
 ---
 
 # Elasticsearch查询场景与MySQL数据同步
@@ -289,6 +291,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 结构化回答
 

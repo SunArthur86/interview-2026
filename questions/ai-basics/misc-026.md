@@ -21,6 +21,7 @@ memory_points:
 - 最优策略：父子分块（Parent-Child），小块索引精准，大块生成上下文丰富。
 - 关键参数：chunk_size通常512-800，overlap设为10%-20%保连贯。
 - 实战：表格/代码块需特殊处理，避免截断；优先用Markdown结构切分。
+frequency: high
 ---
 
 # RAG中的文档分块(Chunking)有哪些策略?如何选择最优策略
@@ -135,6 +136,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

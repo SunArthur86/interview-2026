@@ -32,6 +32,7 @@ memory_points:
 - 口诀法：检测冲突不是全盘否定，而是触发异步画像更新（滑动窗口多次命中才改）
 - 因果句：因为RAG提供知识库素材而非话术，所以要用提示词强制模型重组语言
 - 因果句：为了防止回复僵硬照抄，可以通过N-gram重叠率等指标量化评估僵硬度
+frequency: high
 ---
 
 # 用户长期画像和当前会话信息冲突时，系统怎么处理？如何防止RAG内容导致模型回复僵硬？
@@ -177,6 +178,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -23,6 +23,7 @@ memory_points:
 - 对比优势：解决了标记-清除的内存碎片问题，且不像复制算法浪费一半空间
 - 适用场景：因移动对象开销大，专用于存活率高的老年代（如Serial Old收集器）
 - 劣势对比：因为整理过程需要修改引用且耗时，必须STW（停顿长）所以低延迟CMS不用它
+frequency: high
 ---
 
 # 标记整理（Mark-Compact）算法的原理是什么？
@@ -92,6 +93,36 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class C error
+    class C1 info
+    class C2 start
+    class C3 process
+    class Compact decision
+    class Copying special
+    class D error
+    class D1 info
+    class D2 start
+    class D3 process
+    class E decision
+    class Eden special
+    class F error
+    class G info
+    class GC start
+    class Mark process
+    class S0 decision
+    class S1 special
+    class Sweep error
+    class br info
     A[GC 算法] --> B[标记-清除<br/>Mark-Sweep]
     A --> C[复制<br/>Copying]
     A --> D[标记-整理<br/>Mark-Compact]

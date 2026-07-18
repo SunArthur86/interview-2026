@@ -9,9 +9,12 @@ tags:
 - RBAC
 - ABAC
 feynman:
-  essence: RBAC 解决"功能权限"（谁能调什么接口），ABAC 解决"数据权限"（谁能看哪条数据）。RBAC 是"用户-角色-权限"三元组，简单稳定；ABAC 是"属性+策略"动态决策，能表达"销售只能看自己负责区域的订单"。企业级系统两者叠加：RBAC 控制能否访问订单菜单，ABAC 控制访问后能看到哪些订单行。
-  analogy: 像写字楼的门禁系统。RBAC 是门卡——你有主管卡能进 10 楼（功能权限），没卡连电梯都上不了。ABAC 是楼层内的文件柜锁——同样是 10 楼的主管，张三只能开自己部门的柜子（数据权限），不能开李四部门的。门卡（RBAC）决定你能不能进，柜锁（ABAC）决定你进来后能看什么。
-  first_principle: 为什么 RBAC 不够用？因为"功能权限"是粗粒度的（能/不能调订单查询接口），但"数据权限"是细粒度的（同样是订单查询接口，不同人看到不同的订单集合）。如果把数据权限塞进 RBAC，角色会爆炸——每个销售负责的区域不同，就要建 N 个角色。ABAC 用"属性+规则"动态计算，避免角色爆炸。
+  essence: RBAC 解决"功能权限"（谁能调什么接口），ABAC 解决"数据权限"（谁能看哪条数据）。RBAC 是"用户-角色-权限"三元组，简单稳定；ABAC
+    是"属性+策略"动态决策，能表达"销售只能看自己负责区域的订单"。企业级系统两者叠加：RBAC 控制能否访问订单菜单，ABAC 控制访问后能看到哪些订单行。
+  analogy: 像写字楼的门禁系统。RBAC 是门卡——你有主管卡能进 10 楼（功能权限），没卡连电梯都上不了。ABAC 是楼层内的文件柜锁——同样是 10
+    楼的主管，张三只能开自己部门的柜子（数据权限），不能开李四部门的。门卡（RBAC）决定你能不能进，柜锁（ABAC）决定你进来后能看什么。
+  first_principle: 为什么 RBAC 不够用？因为"功能权限"是粗粒度的（能/不能调订单查询接口），但"数据权限"是细粒度的（同样是订单查询接口，不同人看到不同的订单集合）。如果把数据权限塞进
+    RBAC，角色会爆炸——每个销售负责的区域不同，就要建 N 个角色。ABAC 用"属性+规则"动态计算，避免角色爆炸。
   key_points:
   - RBAC0：User-Role-Permission 三元组；RBAC1 加角色继承；RBAC2 加职责分离（SoD）
   - ABAC：Subject（主体属性）+ Resource（资源属性）+ Environment（环境属性）+ Policy（策略）
@@ -24,19 +27,26 @@ first_principle:
   - 功能权限是静态的（菜单/按钮/API），适合用角色固化
   - 数据权限是动态的（每个人看到的数据范围不同），用属性规则计算
   - 数据权限必须落在 SQL 层（WHERE 条件），不能靠业务代码手动 if-else（容易漏）
-  rebuild: 功能层用 RBAC——User 绑定 Role，Role 绑定 Permission（API/菜单），启动时加载到内存。数据层用 ABAC——定义策略（如"销售只能看自己负责区域的订单"），运行时 MyBatis 拦截器解析策略，自动在 SQL 追加 WHERE org_id = currentUser.orgId。两层独立但叠加：RBAC 决定能否访问接口，ABAC 决定访问后的数据范围。
+  rebuild: 功能层用 RBAC——User 绑定 Role，Role 绑定 Permission（API/菜单），启动时加载到内存。数据层用 ABAC——定义策略（如"销售只能看自己负责区域的订单"），运行时
+    MyBatis 拦截器解析策略，自动在 SQL 追加 WHERE org_id = currentUser.orgId。两层独立但叠加：RBAC 决定能否访问接口，ABAC
+    决定访问后的数据范围。
 follow_up:
-  - 角色爆炸怎么办？——避免把"数据维度"塞进角色。角色只管功能（订单管理员/财务管理员），数据维度（负责区域）用 ABAC 动态算。一个用户一个角色 + N 个数据属性，比 N 个角色简单。
-  - 数据权限的 SQL 注入怎么做？——MyBatis Interceptor 拦截 SQL，解析表名，根据当前用户的属性追加 WHERE 条件。京东用自研的 DataPermissionInterceptor，配合 @DataScope 注解声明数据范围。
-  - 字段级权限怎么实现？——DTO 字段标注 @Sensitive，序列化时根据权限脱敏（手机号显示 138****8888）。用 Jackson 的 JsonSerializer 实现。
-  - 权限缓存怎么失效？——用户角色变化时，发事件主动失效该用户的权限缓存。角色权限变化时，失效所有持有该角色的用户缓存。不能纯靠 TTL，否则权限收回有延迟。
-  - Spring Security 怎么集成 RBAC？——@PreAuthorize("hasRole('ORDER_ADMIN')") 注解做方法级鉴权，自定义 UserDetailsService 加载用户角色。数据权限用自定义 PermissionEvaluator 或拦截器。
+- 角色爆炸怎么办？——避免把"数据维度"塞进角色。角色只管功能（订单管理员/财务管理员），数据维度（负责区域）用 ABAC 动态算。一个用户一个角色 + N 个数据属性，比
+  N 个角色简单。
+- 数据权限的 SQL 注入怎么做？——MyBatis Interceptor 拦截 SQL，解析表名，根据当前用户的属性追加 WHERE 条件。京东用自研的 DataPermissionInterceptor，配合
+  @DataScope 注解声明数据范围。
+- 字段级权限怎么实现？——DTO 字段标注 @Sensitive，序列化时根据权限脱敏（手机号显示 138****8888）。用 Jackson 的 JsonSerializer
+  实现。
+- 权限缓存怎么失效？——用户角色变化时，发事件主动失效该用户的权限缓存。角色权限变化时，失效所有持有该角色的用户缓存。不能纯靠 TTL，否则权限收回有延迟。
+- Spring Security 怎么集成 RBAC？——@PreAuthorize("hasRole('ORDER_ADMIN')") 注解做方法级鉴权，自定义
+  UserDetailsService 加载用户角色。数据权限用自定义 PermissionEvaluator 或拦截器。
 memory_points:
-  - RBAC = 功能权限（User-Role-Permission），ABAC = 数据权限（属性+策略）
-  - 数据权限三维度：行级（WHERE）、列级（脱敏）、操作级（查/改/删）
-  - SQL 拦截器自动追加 WHERE，不靠业务代码 if-else
-  - 权限缓存变更主动失效，不能纯 TTL
-  - 角色爆炸解法：功能用 RBAC，数据维度用 ABAC
+- RBAC = 功能权限（User-Role-Permission），ABAC = 数据权限（属性+策略）
+- 数据权限三维度：行级（WHERE）、列级（脱敏）、操作级（查/改/删）
+- SQL 拦截器自动追加 WHERE，不靠业务代码 if-else
+- 权限缓存变更主动失效，不能纯 TTL
+- 角色爆炸解法：功能用 RBAC，数据维度用 ABAC
+frequency: low
 ---
 
 # 【Java 后端架构师】权限模型 RBAC、ABAC 与数据权限
@@ -439,6 +449,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

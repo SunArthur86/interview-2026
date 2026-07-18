@@ -10,7 +10,8 @@ tags:
 - 离线在线一致
 - 训练营偏差
 feynman:
-  essence: 离线AUC高但线上效果差是经典"离线在线不一致"问题，分五类排查：①特征不一致（线上缺特征/计算逻辑不同/实时性不同）②数据分布不一致（训练集历史 vs 线上当下，分布漂移）③样本不一致（训练正负样本采样 vs 线上真实分布）④评估目标不一致（AUC是排序指标 vs 业务看转化/收入）⑤工程链路问题（特征延迟/模型版本错/缓存脏）。核心：离线模拟要尽可能贴近线上真实。
+  essence: 离线AUC高但线上效果差是经典"离线在线不一致"问题，分五类排查：①特征不一致（线上缺特征/计算逻辑不同/实时性不同）②数据分布不一致（训练集历史
+    vs 线上当下，分布漂移）③样本不一致（训练正负样本采样 vs 线上真实分布）④评估目标不一致（AUC是排序指标 vs 业务看转化/收入）⑤工程链路问题（特征延迟/模型版本错/缓存脏）。核心：离线模拟要尽可能贴近线上真实。
   analogy: 像驾校考试满分（离线AUC高）但上路老出事（线上效果差）——驾校场地平、规则固定、没突发；真实路况堵车、下雨、行人乱穿。训练环境和真实环境差异越大，离线成绩越不能反映真实水平。
   first_principle: 离线评估用历史数据，线上服务用实时数据。两者任何差异（特征/分布/样本/目标/链路）都会导致"离线好线上差"。解决的本质是"让离线模拟尽可能贴近线上"。
   key_points:
@@ -32,6 +33,7 @@ memory_points:
 - 因果句：因为线上线下代码隔离，所以特征不一致最常见，占比超60%需重点打日志排查
 - 对比句：离线历史数据易受时间或业务变动产生分布漂移，线上实时数据则会暴露采样偏差
 - 因果句：因为AUC仅评估全局排序能力，所以必须辅以GAUC和真实业务转化指标做评估
+frequency: medium
 ---
 
 # 【神州专车面经】模型离线 AUC 高但线上效果差，查哪些问题？
@@ -189,6 +191,25 @@ AUC：排序指标（把正样本排在负样本前面的概率）
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class AUC process
+    class B decision
+    class C special
+    class D error
+    class E info
+    class F start
+    class Flink process
+    class G decision
+    class Hive special
+    class Redis error
+    class Spark info
+    class br start
     subgraph 离线环境
         A["Spark/Hive 批处理<br/>离线训练特征"] --> B["历史数据集<br/>离线 AUC 评估"]
     end

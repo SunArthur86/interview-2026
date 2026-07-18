@@ -31,6 +31,7 @@ memory_points:
 - 双向链表原因：删除节点需找前驱，双向才能O(1)断开重连，单向需O(n)
 - 必须设哨兵节点：dummy head和tail互指，彻底免除边界空指针判断
 - 淘汰逻辑：新节点插入头部，满容量时直接淘汰tail.prev(最久未使用)
+frequency: high
 ---
 
 # 【字节面经】实现一个 LRU Cache，要求 get/put 均为 O(1)。
@@ -498,6 +499,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

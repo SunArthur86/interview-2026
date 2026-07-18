@@ -10,7 +10,8 @@ tags:
 feynman:
   essence: 低延迟 GC 的本质是把"对象移动"和"业务线程执行"并发化——读屏障/写屏障接管引用修正，让 STW 只剩下几次极短的初始标记和再标记，从而把"停顿"从"跟堆大小成正比"变成"跟堆大小无关"。
   analogy: 像搬家：G1 是"分区小搬家公司"挑值钱的房间先搬；ZGC 是"染色搬家法"——给每个家具贴颜色标签，搬家工人和你在房间里走动同时进行，靠标签识别哪些家具正在搬。你在屋里几乎感觉不到停顿。
-  first_principle: 为什么传统 GC 停顿和堆大小成正比？因为移动对象要修正所有指向它的引用，这要求堆处于一致状态，只能 STW。ZGC 的突破点：用染色指针（Colored Pointer）把"对象正在被移动"这个元信息编码进引用本身，让业务线程通过读屏障即时发现并自愈，把 O(堆) 的 STW 拆成 O(0) 的并发。
+  first_principle: 为什么传统 GC 停顿和堆大小成正比？因为移动对象要修正所有指向它的引用，这要求堆处于一致状态，只能 STW。ZGC 的突破点：用染色指针（Colored
+    Pointer）把"对象正在被移动"这个元信息编码进引用本身，让业务线程通过读屏障即时发现并自愈，把 O(堆) 的 STW 拆成 O(0) 的并发。
   key_points:
   - G1：Region 化堆 + 混合回收，停顿目标软可预测，JDK 9+ 默认
   - ZGC：染色指针 + 读屏障，停顿 < 1ms 且与堆无关，JDK 21 Generational GA
@@ -25,17 +26,18 @@ first_principle:
   - 读屏障的代价是每次指针解引用多几条指令，可以摊薄
   rebuild: 把"移动对象 + 修正引用"拆成两段：移动在并发阶段完成，引用修正推迟到业务线程访问时（读屏障触发）。这样 STW 只剩下几处必须冻结的根扫描快照，停顿与堆规模解耦。
 follow_up:
-  - ZGC 为什么 JDK 21 才分代？——早期单代 ZGC 的并发标记成本随存活对象线性增长，分代后 Young GC 只扫新生代，分配速率高场景吞吐提升 10%+
-  - G1 的 Mixed GC 和 ZGC 的 Concurrent Mark 区别？——G1 混合回收仍需疏散阶段 STW（可预测停顿），ZGC 疏散全程并发
-  - Shenandoah 和 ZGC 谁更快？——停顿接近，Shenandoah 用转发指针占堆 5-10% 额外开销，ZGC 依赖染色指针需 64 位地址空间
-  - 低延迟 GC 下还要不要调参？——要，重点是分配速率（影响并发标记能否跟上）和 Region 大小
-  - 容器里跑 ZGC 要注意什么？——堆 + 直接内存 + Metaspace 之和不能超 cgroup limit，否则 OOMKilled
+- ZGC 为什么 JDK 21 才分代？——早期单代 ZGC 的并发标记成本随存活对象线性增长，分代后 Young GC 只扫新生代，分配速率高场景吞吐提升 10%+
+- G1 的 Mixed GC 和 ZGC 的 Concurrent Mark 区别？——G1 混合回收仍需疏散阶段 STW（可预测停顿），ZGC 疏散全程并发
+- Shenandoah 和 ZGC 谁更快？——停顿接近，Shenandoah 用转发指针占堆 5-10% 额外开销，ZGC 依赖染色指针需 64 位地址空间
+- 低延迟 GC 下还要不要调参？——要，重点是分配速率（影响并发标记能否跟上）和 Region 大小
+- 容器里跑 ZGC 要注意什么？——堆 + 直接内存 + Metaspace 之和不能超 cgroup limit，否则 OOMKilled
 memory_points:
-  - 停顿来源：根扫描（短 STW）+ 对象移动（传统 STW，ZGC/Shenandoah 并发化）
-  - 三大并发化技术：染色指针（ZGC）、转发指针（Shenandoah Brooks）、读屏障
-  - 选型决策树：堆<32G+P99<200ms → G1；堆>32G 或 P99<10ms → ZGC；OpenJDK 生态+低延迟 → Shenandoah
-  - 低延迟 GC 的吞吐税：-XX:+UseZGC 比 G1 吞吐降 5-15%，CPU 多用 20%+
-  - 验证指标：jfr 看 gc/pause 翻倍仍 < 10ms，allocation_rate_mb_s 是否压垮并发标记
+- 停顿来源：根扫描（短 STW）+ 对象移动（传统 STW，ZGC/Shenandoah 并发化）
+- 三大并发化技术：染色指针（ZGC）、转发指针（Shenandoah Brooks）、读屏障
+- 选型决策树：堆<32G+P99<200ms → G1；堆>32G 或 P99<10ms → ZGC；OpenJDK 生态+低延迟 → Shenandoah
+- 低延迟 GC 的吞吐税：-XX:+UseZGC 比 G1 吞吐降 5-15%，CPU 多用 20%+
+- 验证指标：jfr 看 gc/pause 翻倍仍 < 10ms，allocation_rate_mb_s 是否压垮并发标记
+frequency: high
 ---
 
 # 【Java 后端架构师】G1、ZGC、Shenandoah 如何做低延迟选型
@@ -287,6 +289,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

@@ -9,13 +9,20 @@ tags:
 - N+1
 - 权限
 feynman:
-  essence: "GraphQL 的 N+1 问题本质是\"resolver 按字段拆分后，每个关联字段触发一次 DB 查询\"——查 100 个订单的收货人，若直接 `order.user()`，会发 100 次 SQL。解法是 DataLoader：把同一 tick 内的 N 次 `load(userId)` 攒成一次 batch 查询（`WHERE id IN (...)`），把 O(N) 次查询压成 O(1)。权限治理的本质是\"字段级鉴权\"——GraphQL 的颗粒度是字段，传统 REST 只能整接口鉴权，所以必须设计 field-level directive（如 `@auth(requires: \"ADMIN\")`）在 resolver 层强制校验。"
-  analogy: 像点外卖。REST 是套餐（一个 endpoint 一份菜单），GraphQL 是自助餐（自由组合菜品）。N+1 就是"每个人单独点一份米饭，老板跑了 100 趟"——DataLoader 是"等 16ms 内所有人的点单攒齐，一次性煮一大锅"。权限是"自助餐的 VIP 区"——某些高级菜（如用户手机号字段）只有 VIP 身份能取。
-  first_principle: "为什么 GraphQL 会有 N+1 而 REST 不会？因为 REST 一次返回固定结构（联表 JOIN 在 SQL 里做），GraphQL 每个 field 是独立 resolver，框架不知道 `order.user` 和 `order2.user` 可以合并。DataLoader 是把这个\"合并决策\"从开发者手里夺回来交给调度器。"
+  essence: 'GraphQL 的 N+1 问题本质是"resolver 按字段拆分后，每个关联字段触发一次 DB 查询"——查 100 个订单的收货人，若直接
+    `order.user()`，会发 100 次 SQL。解法是 DataLoader：把同一 tick 内的 N 次 `load(userId)` 攒成一次
+    batch 查询（`WHERE id IN (...)`），把 O(N) 次查询压成 O(1)。权限治理的本质是"字段级鉴权"——GraphQL 的颗粒度是字段，传统
+    REST 只能整接口鉴权，所以必须设计 field-level directive（如 `@auth(requires: "ADMIN")`）在 resolver
+    层强制校验。'
+  analogy: 像点外卖。REST 是套餐（一个 endpoint 一份菜单），GraphQL 是自助餐（自由组合菜品）。N+1 就是"每个人单独点一份米饭，老板跑了
+    100 趟"——DataLoader 是"等 16ms 内所有人的点单攒齐，一次性煮一大锅"。权限是"自助餐的 VIP 区"——某些高级菜（如用户手机号字段）只有
+    VIP 身份能取。
+  first_principle: 为什么 GraphQL 会有 N+1 而 REST 不会？因为 REST 一次返回固定结构（联表 JOIN 在 SQL 里做），GraphQL
+    每个 field 是独立 resolver，框架不知道 `order.user` 和 `order2.user` 可以合并。DataLoader 是把这个"合并决策"从开发者手里夺回来交给调度器。
   key_points:
   - DataLoader：request-scoped，同一 tick 攒批，去重，缓存
   - N+1 不只是 DB，还包括 RPC、HTTP、ES——任何 resolver 内的远程调用都要 DataLoader
-  - "字段级鉴权：用 schema directive `@auth` 在 resolver 拦截"
+  - 字段级鉴权：用 schema directive `@auth` 在 resolver 拦截
   - 查询复杂度限制：maxDepth（深度）、maxComplexity（复杂度评分）防恶意嵌套
   - 持久化查询（Persisted Query）：只允许客户端发 query hash，防 SDL 泄露 + 减小请求体
 first_principle:
@@ -24,19 +31,25 @@ first_principle:
   - 客户端自由度反向决定服务端复杂度——每多一个字段选择，服务端多一份保障成本
   - resolver 拆分天然产生 N+1，必须靠 batching 层治理
   - 字段是数据的最小颗粒，整接口鉴权粒度太粗
-  rebuild: "用 DataLoader 把同 tick 的 N 次 load 攒成 1 次 batch；用 `@auth` directive 在每个字段解析前做权限校验；用 maxDepth + maxComplexity + persisted query 在 query parse 阶段拦截恶意查询。这套组合让 GraphQL 既能享受字段灵活性，又能守住性能和安全的底线。"
+  rebuild: 用 DataLoader 把同 tick 的 N 次 load 攒成 1 次 batch；用 `@auth` directive 在每个字段解析前做权限校验；用
+    maxDepth + maxComplexity + persisted query 在 query parse 阶段拦截恶意查询。这套组合让 GraphQL
+    既能享受字段灵活性，又能守住性能和安全的底线。
 follow_up:
-  - DataLoader 缓存命中规则？——按 key 缓存，同一 request 内不重复 load；跨 request 不共享（避免脏缓存）。如需跨 request，用 L2 cache（Redis + DataLoader）。
-  - GraphQL 能完全替代 REST 吗？——不能。REST 适合稳定契约、强缓存（HTTP cache）、CDN 友好；GraphQL 适合客户端聚合、字段灵活。两者并存。
-  - 查询复杂度怎么算？——每个字段配 cost（如 scalar=1、object=2、list=5），递归累加，超过阈值（如 1000）拒绝。
-  - GraphQL 怎么做缓存？——HTTP 层难（POST + 自定义 body 不能 CDN 缓存），靠 persisted query + GET + HTTP cache；应用层用 DataLoader + Apollo Server 的 response cache directive。
-  - Subscription（长连接）怎么做权限？——WebSocket connect 时鉴权，后续 message 用 connect 时建立的 session，每次 message 还要校验权限（防 token 失效后仍订阅）。
+- DataLoader 缓存命中规则？——按 key 缓存，同一 request 内不重复 load；跨 request 不共享（避免脏缓存）。如需跨 request，用
+  L2 cache（Redis + DataLoader）。
+- GraphQL 能完全替代 REST 吗？——不能。REST 适合稳定契约、强缓存（HTTP cache）、CDN 友好；GraphQL 适合客户端聚合、字段灵活。两者并存。
+- 查询复杂度怎么算？——每个字段配 cost（如 scalar=1、object=2、list=5），递归累加，超过阈值（如 1000）拒绝。
+- GraphQL 怎么做缓存？——HTTP 层难（POST + 自定义 body 不能 CDN 缓存），靠 persisted query + GET + HTTP
+  cache；应用层用 DataLoader + Apollo Server 的 response cache directive。
+- Subscription（长连接）怎么做权限？——WebSocket connect 时鉴权，后续 message 用 connect 时建立的 session，每次
+  message 还要校验权限（防 token 失效后仍订阅）。
 memory_points:
-  - DataLoader：request-scoped batch + cache，根治 N+1
-  - "@auth directive：字段级鉴权"
-  - maxDepth + maxComplexity + persistedQuery：三道防线防恶意查询
-  - DataLoader 不只 DB——RPC、HTTP 都要包
-  - GraphQL 适合 BFF 聚合层，不适合做对外 OpenAPI
+- DataLoader：request-scoped batch + cache，根治 N+1
+- '@auth directive：字段级鉴权'
+- maxDepth + maxComplexity + persistedQuery：三道防线防恶意查询
+- DataLoader 不只 DB——RPC、HTTP 都要包
+- GraphQL 适合 BFF 聚合层，不适合做对外 OpenAPI
+frequency: medium
 ---
 
 # 【Java 后端架构师】GraphQL N+1 查询与权限治理
@@ -376,6 +389,35 @@ public class PersistedQueryCache {
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ADMIN start
+    class App process
+    class BFF decision
+    class DataLoader special
+    class GraphQL error
+    class JSON info
+    class Loader start
+    class Map process
+    class RPC decision
+    class Set special
+    class User error
+    class UserClient info
+    class as start
+    class auth process
+    class batch decision
+    class br special
+    class directive error
+    class id info
+    class load start
+    class query process
+    class tick decision
+    class user special
+    class userId error
     participant App as App客户端
     participant BFF as GraphQL BFF
     participant Loader as DataLoader

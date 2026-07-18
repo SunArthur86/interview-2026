@@ -20,7 +20,8 @@ feynman:
   - 安全保护(过充/过放/过温保护)
 first_principle:
   essence: 储能调度 = 优化问题(何时充何时放收益最大) + 控制问题(指令如何可靠下发执行) + 安全问题(不能损坏设备)。优化是经济模型，控制是通信问题，安全是工程问题。
-  derivation: 假设30万套Powerwall，每套13.5kWh → 总储能4GWh。电网高峰放电4GWh相当于一个中型电厂的调节能力。调度延迟每降低1s，电网频率响应更稳定。MQTT QoS1保证指令可靠到达。
+  derivation: 假设30万套Powerwall，每套13.5kWh → 总储能4GWh。电网高峰放电4GWh相当于一个中型电厂的调节能力。调度延迟每降低1s，电网频率响应更稳定。MQTT
+    QoS1保证指令可靠到达。
   conclusion: 架构 = 电网信号网关 + 调度优化引擎 + MQTT指令通道 + 实时状态流 + 安全保护层。
 follow_up:
 - 如何保证充放电指令100%到达每个设备？
@@ -31,6 +32,7 @@ memory_points:
 - 核心三步走：采集电网信号 → 调度引擎算最优指令(线性规划) → MQTT精准下发
 - 实时反馈：设备状态经MQTT上报，Kafka+Flink流式聚合写时序DB
 - 双重防过载：调度算经济最大化，设备端软硬结合防过充/过放/过温保护
+frequency: high
 ---
 
 # 数十万套储能设备根据电网需求充放电，如何设计后端架构，实现调度指令精准下发、状态实时反馈？
@@ -61,6 +63,33 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ACK start
+    class Broker process
+    class I1 decision
+    class I2 special
+    class I3 error
+    class Kafka info
+    class L1 start
+    class L2 process
+    class L3 decision
+    class L4 special
+    class L5 error
+    class MQTT info
+    class Megapack start
+    class Powerwall process
+    class QoS decision
+    class SOC special
+    class Topic error
+    class br info
+    class cmd start
+    class deviceId process
+    class dispatch decision
     subgraph L1["电网信号接入层"]
         I1["实时电价API<br/>峰谷时段"]
         I2["AGC频率信号<br/>频率偏差"]

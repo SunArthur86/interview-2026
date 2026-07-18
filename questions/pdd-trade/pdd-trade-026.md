@@ -28,14 +28,15 @@ first_principle:
   - 流量有峰谷
   rebuild: 池化复用 + 多级缓存 + 弹性扩容 + 队列削峰。
 follow_up:
-  - 缓存击穿/穿透/雪崩怎么防？——击穿（互斥锁/永不过期）/穿透（布隆过滤器）/雪崩（随机过期）
-  - 线程池怎么配？——CPU 密集 N+1，IO 密集 2N，结合压测
-  - Kafka 削峰怎么保证不丢？——acks=all + 消费限流 + 死信队列
+- 缓存击穿/穿透/雪崩怎么防？——击穿（互斥锁/永不过期）/穿透（布隆过滤器）/雪崩（随机过期）
+- 线程池怎么配？——CPU 密集 N+1，IO 密集 2N，结合压测
+- Kafka 削峰怎么保证不丢？——acks=all + 消费限流 + 死信队列
 memory_points:
-  - 池化：连接池/线程池/对象池
-  - 缓存：Caffeine + Redis 多级
-  - 扩容：无状态 HPA + 有状态分片
-  - 队列：Kafka 削峰 + 延时关单
+- 池化：连接池/线程池/对象池
+- 缓存：Caffeine + Redis 多级
+- 扩容：无状态 HPA + 有状态分片
+- 队列：Kafka 削峰 + 延时关单
+frequency: high
 ---
 
 # 【拼多多交易】高并发四件套：池化/缓存/扩容/异步队列？
@@ -219,6 +220,30 @@ TTL 长的问题是"数据陈旧"。商品价格/库存变了，缓存 24 小时
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class C1 special
+    class C2 error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class K start
+    class K8s process
+    class Kafka decision
+    class L special
+    class M error
+    class Sentinel info
     A[客户端高并发请求] --> B(网关层 Sentinel 限流)
     B --> C{多级缓存架构}
     subgraph Caffeine本地缓存

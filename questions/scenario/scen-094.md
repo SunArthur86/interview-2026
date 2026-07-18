@@ -28,6 +28,7 @@ memory_points:
 - 更新策略：先更新DB再删缓存，彻底解耦且防并发更新的脏数据。
 - 进阶一致性：推荐Canal监听Binlog+MQ异步删缓存，避免业务代码侵入。
 - 防雪崩兜底：给缓存TTL加上随机散列值，严格避免同一时刻集体过期。
+frequency: high
 ---
 
 # 如何设计一个缓存预热和缓存刷新机制？
@@ -136,6 +137,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

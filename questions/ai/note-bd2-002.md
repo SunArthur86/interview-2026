@@ -32,6 +32,7 @@ memory_points:
 - 摘要压缩：最常用策略，LLM总结旧对话，保留近期原文。
 - 选择性遗忘：基于当前Query的语义相关性裁剪并组合历史。
 - 实体抽取：提取用户画像和状态独立存库，减少Token消耗。
+frequency: medium
 ---
 
 # Agent上下文窗口满了怎么办？有哪些压缩方式？
@@ -288,6 +289,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -29,6 +29,7 @@ memory_points:
 - 存储设计：个人收件箱用Redis ZSet存储，以时间戳为Score保留近期千条。
 - 性能优化：采用ID缓存与游标分页，以应对高并发读取及深分页问题。
 - 数据一致：删帖或取消关注通过标记删除，读取时过滤并异步物理清理。
+frequency: high
 ---
 
 # 如何设计一个 Feed 流（信息流）系统？类似微博/Twitter首页。
@@ -150,6 +151,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -16,6 +16,7 @@ memory_points:
 - ReentrantLock对比synchronized：前者基于AQS灵活可中断，后者JVM自动释放
 - Synchronized锁升级单向不可逆：无锁 -> 偏向 -> 轻量 -> 重量级
 - 实战避坑：ReentrantLock必须在finally中手动unlock以防死锁泄漏
+frequency: medium
 ---
 
 # 你知道Java中有哪些锁吗是什么？
@@ -164,6 +165,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

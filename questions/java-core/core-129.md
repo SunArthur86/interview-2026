@@ -17,6 +17,7 @@ memory_points:
 - 细节：try/catch 遇 return 时，finally 会在 return 前执行（但不改变已存返回值）。
 - 资源管理：Java 7+ 推荐用 try-with-resources 自动关闭流，防内存泄漏。
 - 实战坑：Spring 默认只在抛出 RuntimeException 时回滚事务。
+frequency: high
 ---
 
 # 异常处理机制是什么？
@@ -97,6 +98,32 @@ public static void readFile(String path) throws IOException {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class JVM error
+    class K info
+    class L start
+    class M process
+    class br decision
+    class catch special
+    class finally error
+    class resources info
+    class try start
+    class with process
     A[异常处理流程] --> B[try 块执行]
     B --> C{是否抛出异常?}
     C -->|否| D[正常执行 finally]

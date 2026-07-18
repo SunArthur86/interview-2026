@@ -9,9 +9,11 @@ tags:
 - 限流
 - 降级
 feynman:
-  essence: AI 应用的成本治理本质是"按价值分配 token 预算"——高价值用户/场景用强模型，低价值用弱模型或缓存。限流防"一个用户烧光预算"，降级保证"模型挂了业务不停"。核心杠杆：模型路由（贵贱分级）、语义缓存（相似 query 复用）、token 预算（租户/用户级配额）、降级链（LLM → 规则 → 兜底文案）。
+  essence: AI 应用的成本治理本质是"按价值分配 token 预算"——高价值用户/场景用强模型，低价值用弱模型或缓存。限流防"一个用户烧光预算"，降级保证"模型挂了业务不停"。核心杠杆：模型路由（贵贱分级）、语义缓存（相似
+    query 复用）、token 预算（租户/用户级配额）、降级链（LLM → 规则 → 兜底文案）。
   analogy: 像旅行社的成本控制——VIP 客户用专属顾问（强模型），普通客户用 AI 客服（弱模型），常见问题查 FAQ（缓存），系统挂了给个模板回复（降级），每个客户有预算上限不能无限咨询。
-  first_principle: LLM 调用是按 token 计费的（GPT-4 约 $0.03/1K token），一个恶意用户构造超长 prompt 能在一分钟烧掉数千美元。成本失控是 AI 应用的头号风险，必须用预算、限流、缓存、路由四道闸兜住。
+  first_principle: LLM 调用是按 token 计费的（GPT-4 约 $0.03/1K token），一个恶意用户构造超长 prompt 能在一分钟烧掉数千美元。成本失控是
+    AI 应用的头号风险，必须用预算、限流、缓存、路由四道闸兜住。
   key_points:
   - 模型路由：简单 query → cheap 模型（GPT-3.5），复杂推理 → expensive（GPT-4）
   - 语义缓存：embedding query 相似度 > 0.95 命中缓存，复用历史回答
@@ -25,19 +27,25 @@ first_principle:
   - 强模型（GPT-4）比弱模型（GPT-3.5）贵 10-15 倍，但不是所有 query 都需要强模型
   - 模型服务可能挂（OpenAI 也有故障），业务不能 100% 依赖单一模型
   - 恶意用户可能构造超长 prompt 或高频调用攻击
-  rebuild: 四道闸——(1) 模型路由按 query 复杂度选模型；(2) 语义缓存复用相似 query 的回答；(3) token 预算按租户/用户限额；(4) 降级链保证模型挂了走规则或缓存。监控 cost_per_query、cache_hit_rate、model_distribution、fallback_rate。
+  rebuild: 四道闸——(1) 模型路由按 query 复杂度选模型；(2) 语义缓存复用相似 query 的回答；(3) token 预算按租户/用户限额；(4)
+    降级链保证模型挂了走规则或缓存。监控 cost_per_query、cache_hit_rate、model_distribution、fallback_rate。
 follow_up:
-  - 怎么判断 query 要用强模型还是弱模型？——规则 + 分类器。规则：字数/关键词（"紧急"/"投诉"用强模型）。分类器：用小模型（或 embedding + 阈值）判断意图复杂度，复杂的走强模型。
-  - 语义缓存怎么避免缓存污染？——key 用 query 的 embedding，相似度 > 0.95 才命中。但要做权限校验（A 用户的私有数据回答不能给 B）。缓存 TTL 短（1 小时），避免过期信息。
-  - token 预算超了怎么办？——分档：超额 10% 告警，超额 20% 降级到弱模型，超额 50% 拒绝服务。预算按业务价值分配（付费用户 > 免费用户）。
-  - 降级到规则引擎体验差怎么办？——降级不是常态，是兜底。平时优化模型可用性（多供应商：OpenAI + Claude + 自建），降级只在极端故障时触发。监控 fallback_rate < 1%。
-  - 怎么量化单个 query 的成本？——记录每次调用的 input_tokens + output_tokens，按模型单价算 cost。cost_per_query = 总成本 / 总 query 数。按用户/租户/场景维度聚合。
+- 怎么判断 query 要用强模型还是弱模型？——规则 + 分类器。规则：字数/关键词（"紧急"/"投诉"用强模型）。分类器：用小模型（或 embedding +
+  阈值）判断意图复杂度，复杂的走强模型。
+- 语义缓存怎么避免缓存污染？——key 用 query 的 embedding，相似度 > 0.95 才命中。但要做权限校验（A 用户的私有数据回答不能给 B）。缓存
+  TTL 短（1 小时），避免过期信息。
+- token 预算超了怎么办？——分档：超额 10% 告警，超额 20% 降级到弱模型，超额 50% 拒绝服务。预算按业务价值分配（付费用户 > 免费用户）。
+- 降级到规则引擎体验差怎么办？——降级不是常态，是兜底。平时优化模型可用性（多供应商：OpenAI + Claude + 自建），降级只在极端故障时触发。监控 fallback_rate
+  < 1%。
+- 怎么量化单个 query 的成本？——记录每次调用的 input_tokens + output_tokens，按模型单价算 cost。cost_per_query
+  = 总成本 / 总 query 数。按用户/租户/场景维度聚合。
 memory_points:
-  - 模型路由：简单→cheap 模型，复杂→expensive 模型，省 60%+ 成本
-  - 语义缓存：embedding 相似度 > 0.95 命中，省重复调用
-  - token 预算：租户/用户级日预算，超额降级或拒绝
-  - 限流：QPS + token/min 双限，防单用户烧钱
-  - 降级链：LLM → 规则 → 缓存 → 兜底文案，业务不断
+- 模型路由：简单→cheap 模型，复杂→expensive 模型，省 60%+ 成本
+- 语义缓存：embedding 相似度 > 0.95 命中，省重复调用
+- token 预算：租户/用户级日预算，超额降级或拒绝
+- 限流：QPS + token/min 双限，防单用户烧钱
+- 降级链：LLM → 规则 → 缓存 → 兜底文案，业务不断
+frequency: high
 ---
 
 # 【Java 后端架构师】AI 应用的成本预算、限流与降级
@@ -354,6 +362,27 @@ public class ResilientLlmService {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class GPT process
+    class H decision
+    class I special
+    class J error
+    class K info
+    class L start
+    class Query process
+    class Token decision
     A([用户 Query 请求]) --> B{第一道闸: 模型路由}
     B -- 简单/闲聊 --> C[弱模型 GPT-3.5]
     B -- 复杂/投诉 --> D[强模型 GPT-4]

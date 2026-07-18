@@ -29,6 +29,7 @@ memory_points:
 - 实现三方案：LLM零样本分类(推荐/灵活)、微调小模型(极速/死板)、规则兜底(混合)
 - 识别意图后必跟槽位填充，如意图是买票，槽位就是时间地点
 - 长尾意图走LLM，置信度低时反问用户澄清以处理意图模糊
+frequency: medium
 ---
 
 # 大模型意图识别是怎么做的？
@@ -205,6 +206,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

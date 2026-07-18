@@ -32,6 +32,7 @@ memory_points:
 - 核心挑战：多产品线知识隔离、多租户权限控制、LLM回答质量监控。
 - 隔离方案：产品线走物理或独立Collection隔离，而租户间靠鉴权与Metadata过滤。
 - 质量观测：因为LLM输出具不确定性，所以需构建实时评分与异常检测看板。
+frequency: high
 ---
 
 # 【字节面经】设计一个企业内部的智能客服系统，支持多产品线知识库隔离、多租户权限控制，以及回答质量可观测性监控，请描述整体架构。
@@ -563,6 +564,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

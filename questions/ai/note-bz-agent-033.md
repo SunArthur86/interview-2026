@@ -29,6 +29,7 @@ memory_points:
 - 因为工具超10个LLM易选晕，所以通过向量相似度检索按需动态加载工具子集
 - 策略工具分层：先按粗粒度业务域选定类别，再在小组内精准挑选具体工具
 - 高分关键：高危工具（如删除/支付）必须加入二次决策校验防误触
+frequency: medium
 ---
 
 # 能不能直接给 Agent 30 个以上的工具？有什么风险？
@@ -215,6 +216,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

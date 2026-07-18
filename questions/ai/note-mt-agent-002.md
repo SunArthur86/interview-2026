@@ -29,6 +29,7 @@ memory_points:
 - Workflow优势：应对流程固定的场景，因为步骤无需动态决策所以编排极稳定
 - Master+Sub优势：应对任务开放场景，因为主控能动态拆解调度所以灵活度高
 - 通信机制优化：子Agent间采用P2P直连通信，因为免去主控中转所以极大降低延迟
+frequency: medium
 ---
 
 # 【美团面经】你的Agent项目用的是什么架构？master加sub Agent还是workflow？为什么这么选型？
@@ -56,6 +57,29 @@ Agent面向的是**开放式用户请求**（如"帮我分析竞品并给建议"
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class AA start
+    class Agent process
+    class Analyst decision
+    class LLM special
+    class M1 error
+    class M2 info
+    class Master start
+    class Planner process
+    class REQ decision
+    class Request special
+    class SA error
+    class Search info
+    class User start
+    class WA process
+    class Web decision
+    class Writer special
+    class br error
     REQ["User Request<br/>'分析竞品并给建议'"]
     M1["Master Agent (任务拆解/聚合)<br/>Planner LLM 任务分解+排序"]
     SA["Search Agent (信息检索)<br/>Web/KB工具"]

@@ -28,14 +28,15 @@ first_principle:
   - 多模态需对齐到统一表示空间
   rebuild: VLM/多模态 LLM（视觉编码 + 投影 + LLM 推理）。
 follow_up:
-  - VLM 怎么训练？——预训练（图文对齐）+ SFT（指令微调）
-  - 多模态推理比纯文本慢吗？——视觉编码额外开销，需优化
-  - 商品图理解怎么做？——VLM 提取属性 → 入特征仓 → 推荐搜索用
+- VLM 怎么训练？——预训练（图文对齐）+ SFT（指令微调）
+- 多模态推理比纯文本慢吗？——视觉编码额外开销，需优化
+- 商品图理解怎么做？——VLM 提取属性 → 入特征仓 → 推荐搜索用
 memory_points:
-  - VLM：Qwen-VL/LLaVA/GPT-4V
-  - 架构：ViT + 投影 + LLM
-  - 语音：Whisper（ASR）/VITS（TTS）
-  - 应用：商品图/语音搜索/视频审核
+- VLM：Qwen-VL/LLaVA/GPT-4V
+- 架构：ViT + 投影 + LLM
+- 语音：Whisper（ASR）/VITS（TTS）
+- 应用：商品图/语音搜索/视频审核
+frequency: medium
 ---
 
 # 【拼多多 AI 中台】LLM 多模态应用（图文/语音）怎么落地？
@@ -342,6 +343,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

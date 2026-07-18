@@ -27,17 +27,19 @@ first_principle:
   - 权益有时效（过期失效），必须自动管理
   rebuild: 发放走 MQ 异步削峰 + 幂等键防重。核销走乐观锁（UPDATE WHERE status=ACTIVE AND version=?）+ 数据库唯一约束。核销记录和订单关联，订单取消时反向回退券状态。定时任务扫描过期权益。
 follow_up:
-  - 双 11 亿级发券怎么扛？——预生成 + MQ 削峰。发券请求进 MQ，消费者批量拉取批量写入（batch insert）。券码预生成（池化），发放时从池取。
-  - 券码怎么生成唯一？——雪花算法或预生成池。券码要不可猜测（防遍历），用 UUID 或加密序列。
-  - 核销并发怎么防重？——乐观锁 UPDATE WHERE status='ACTIVE' AND version=5，并发只有一个 affected=1。或 Redis 分布式锁（券维度）。
-  - 核销后订单取消券怎么退？——核销记录带 orderId，订单取消事件触发反向操作：UPDATE 券 status='ACTIVE'（恢复可用），记录回退日志。
-  - 过期券怎么处理？——定时任务（每天凌晨）扫描 expire_time < NOW() AND status='ACTIVE'，批量标记 EXPIRED。通知用户"您的券已过期"。
+- 双 11 亿级发券怎么扛？——预生成 + MQ 削峰。发券请求进 MQ，消费者批量拉取批量写入（batch insert）。券码预生成（池化），发放时从池取。
+- 券码怎么生成唯一？——雪花算法或预生成池。券码要不可猜测（防遍历），用 UUID 或加密序列。
+- 核销并发怎么防重？——乐观锁 UPDATE WHERE status='ACTIVE' AND version=5，并发只有一个 affected=1。或 Redis
+  分布式锁（券维度）。
+- 核销后订单取消券怎么退？——核销记录带 orderId，订单取消事件触发反向操作：UPDATE 券 status='ACTIVE'（恢复可用），记录回退日志。
+- 过期券怎么处理？——定时任务（每天凌晨）扫描 expire_time < NOW() AND status='ACTIVE'，批量标记 EXPIRED。通知用户"您的券已过期"。
 memory_points:
-  - 生命周期：ISSUED → ACTIVE → USED / EXPIRED
-  - 发放：MQ 异步 + 幂等键 + 批量写入
-  - 核销：乐观锁 UPDATE WHERE status/version + 唯一约束
-  - 补偿：发放失败重发、核销后取消回退
-  - 过期：定时任务扫描批量标记
+- 生命周期：ISSUED → ACTIVE → USED / EXPIRED
+- 发放：MQ 异步 + 幂等键 + 批量写入
+- 核销：乐观锁 UPDATE WHERE status/version + 唯一约束
+- 补偿：发放失败重发、核销后取消回退
+- 过期：定时任务扫描批量标记
+frequency: high
 ---
 
 # 【Java 后端架构师】会员权益系统的发放、核销与补偿
@@ -405,6 +407,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

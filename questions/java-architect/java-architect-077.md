@@ -25,20 +25,27 @@ first_principle:
   - 硬编码密钥会永久留存 Git 历史，删除提交无法彻底清除
   - 明文配置在 CI/CD 产物（镜像、日志）中泄露
   - 人工轮换不可靠（会忘、会拖延），必须自动化
-  rebuild: 三层治理——第一层，密钥集中存储到 Vault 或云 KMS，不进代码库。第二层，运行时动态注入：K8s 通过 Vault Agent Sidecar 或 External Secrets 拉取密钥挂载为临时文件/环境变量，应用读取后内存使用不落盘。第三层，自动轮换：cert-manager 管理 TLS 证书自动签发续期，数据库密码用 Vault 动态生成临时凭据。全程审计（谁、何时、访问什么密钥），日志脱敏（密钥不进日志）。
+  rebuild: 三层治理——第一层，密钥集中存储到 Vault 或云 KMS，不进代码库。第二层，运行时动态注入：K8s 通过 Vault Agent Sidecar
+    或 External Secrets 拉取密钥挂载为临时文件/环境变量，应用读取后内存使用不落盘。第三层，自动轮换：cert-manager 管理 TLS
+    证书自动签发续期，数据库密码用 Vault 动态生成临时凭据。全程审计（谁、何时、访问什么密钥），日志脱敏（密钥不进日志）。
 follow_up:
-  - K8s Secret 安全吗？——默认是 base64 编码（不是加密），etcd 里可读。要开启 etcd 静态加密（EncryptionConfiguration），或用 Vault/外部 Secret 系统替代。生产不建议用 K8s Secret 存高敏感密钥（如数据库密码），用 Vault 动态注入
-  - 证书过期了怎么办？——cert-manager 自动续期（Let's Encrypt 30 天前续、内部 CA 按配置）。关键是监控证书过期告警（cert-manager 指标 cert_expiration_timestamp），过期前人工介入
-  - 数据库密码怎么轮换不停服？——用 Vault 动态数据库凭据——Vault 连数据库管理员账号，按需生成临时账号密码（TTL 1 小时），应用用完自动销毁。或双密码轮换（新旧密码并存窗口期）
-  - 密钥泄漏到 Git 怎么彻底清除？——git filter-branch 或 BFG Repo-Cleaner 重写历史，但已 clone 的仓库无法清除。正确做法：立即轮换该密钥（视为已泄露），新密钥从 Vault 重新生成。预防用 pre-commit hook 扫描（truffleHog/git-secrets）
-  - 微服务间通信的 mTLS 怎么管理证书？——用 Istio/Linkerd Service Mesh 自动 mTLS，证书自动签发轮换（SPIFFE 身份），应用无感知。比手动管理双向 TLS 证书简单
+- K8s Secret 安全吗？——默认是 base64 编码（不是加密），etcd 里可读。要开启 etcd 静态加密（EncryptionConfiguration），或用
+  Vault/外部 Secret 系统替代。生产不建议用 K8s Secret 存高敏感密钥（如数据库密码），用 Vault 动态注入
+- 证书过期了怎么办？——cert-manager 自动续期（Let's Encrypt 30 天前续、内部 CA 按配置）。关键是监控证书过期告警（cert-manager
+  指标 cert_expiration_timestamp），过期前人工介入
+- 数据库密码怎么轮换不停服？——用 Vault 动态数据库凭据——Vault 连数据库管理员账号，按需生成临时账号密码（TTL 1 小时），应用用完自动销毁。或双密码轮换（新旧密码并存窗口期）
+- 密钥泄漏到 Git 怎么彻底清除？——git filter-branch 或 BFG Repo-Cleaner 重写历史，但已 clone 的仓库无法清除。正确做法：立即轮换该密钥（视为已泄露），新密钥从
+  Vault 重新生成。预防用 pre-commit hook 扫描（truffleHog/git-secrets）
+- 微服务间通信的 mTLS 怎么管理证书？——用 Istio/Linkerd Service Mesh 自动 mTLS，证书自动签发轮换（SPIFFE 身份），应用无感知。比手动管理双向
+  TLS 证书简单
 memory_points:
-  - 密钥不进代码库，存 Vault/KMS，运行时注入
-  - K8s Secret 是 base64 不是加密，要开 etcd 加密或用 Vault
-  - cert-manager 自动签发续期 TLS 证书
-  - Vault 动态数据库凭据（TTL 临时账号）
-  - 日志脱敏：密钥/密码/Token 不进日志
-  - 预防 Git 泄漏：pre-commit hook（truffleHog/git-secrets）
+- 密钥不进代码库，存 Vault/KMS，运行时注入
+- K8s Secret 是 base64 不是加密，要开 etcd 加密或用 Vault
+- cert-manager 自动签发续期 TLS 证书
+- Vault 动态数据库凭据（TTL 临时账号）
+- 日志脱敏：密钥/密码/Token 不进日志
+- 预防 Git 泄漏：pre-commit hook（truffleHog/git-secrets）
+frequency: high
 ---
 
 # 【Java 后端架构师】配置、密钥与证书的安全发布
@@ -446,6 +453,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

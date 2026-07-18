@@ -27,18 +27,20 @@ first_principle:
   - 每个工具的参数格式不同，需要标准化描述
   - 从自然语言提取结构化参数本身就是一个推理任务
   - 工具调用的安全性、可追溯性需要协议保证
-  rebuild: 定义标准化的工具描述格式（JSON Schema）→ LLM解析schema理解需要什么参数 → 从用户问句中提取并匹配参数 → MCP协议标准化封装请求 → 执行后结果整理为自然语言返回。
+  rebuild: 定义标准化的工具描述格式（JSON Schema）→ LLM解析schema理解需要什么参数 → 从用户问句中提取并匹配参数 → MCP协议标准化封装请求
+    → 执行后结果整理为自然语言返回。
 follow_up:
-  - MCP和OpenAI Function Calling有什么区别？
-  - 如果LLM提取的参数类型不对（比如该填数字填了字符串），怎么处理？
-  - 一个用户问句需要调用多个工具，MCP怎么编排？
-  - MCP工具调用失败了，怎么给用户一个友好的错误提示？
-  - 如何防止LLM调用不该调用的工具（权限控制）？
+- MCP和OpenAI Function Calling有什么区别？
+- 如果LLM提取的参数类型不对（比如该填数字填了字符串），怎么处理？
+- 一个用户问句需要调用多个工具，MCP怎么编排？
+- MCP工具调用失败了，怎么给用户一个友好的错误提示？
+- 如何防止LLM调用不该调用的工具（权限控制）？
 memory_points:
-  - MCP四步：意图识别→参数匹配→协议封装→结果整理
-  - 参数匹配靠：schema语义理解 + Few-shot示例 + 参数校验拦截
-  - MCP是Anthropic提出的跨平台标准协议，解决工具描述和调用的标准化问题
-  - 关键区别：MCP=协议标准，Function Calling=API实现
+- MCP四步：意图识别→参数匹配→协议封装→结果整理
+- 参数匹配靠：schema语义理解 + Few-shot示例 + 参数校验拦截
+- MCP是Anthropic提出的跨平台标准协议，解决工具描述和调用的标准化问题
+- 关键区别：MCP=协议标准，Function Calling=API实现
+frequency: high
 ---
 
 # 【高德AI面试】讲一下MCP调用全过程，LLM是怎么匹配工具参数的？
@@ -290,6 +292,7 @@ flowchart TD
     style FC fill:#FF9800,color:#fff
     style SKILL fill:#9C27B0,color:#fff
     style MCP fill:#2196F3,color:#fff
+
 ```
 
 ## 结构化回答

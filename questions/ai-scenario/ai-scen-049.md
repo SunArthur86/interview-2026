@@ -28,6 +28,7 @@ memory_points:
 - 架构四层：学情诊断(定位薄弱点)、个性化推荐(路径规划/难度适配)、智能辅导(答疑/错题分析)、评估反馈。
 - 推荐策略：协同过滤找相似题，知识图谱规划路径，DKT预测掌握度；需平衡探索与利用。
 - 边界处理：冷启动用入门测，知识盲区诚实说不知道，情绪崩溃触发安抚机制。
+frequency: low
 ---
 
 # 如何设计一个AI教育辅导系统？个性化学习路径、智能答疑、自适应测试。
@@ -115,6 +116,27 @@ def socratic_tutoring(question, history):
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B1 process
+    class B2 decision
+    class C special
+    class D error
+    class E1 info
+    class E2 start
+    class F1 process
+    class F2 decision
+    class F3 special
+    class G error
+    class H info
+    class S1 start
+    class S2 process
+    class U decision
     U([学生发起学习/提问]) --> A[学情诊断与画像更新]
     subgraph S1 [个性化推荐层]
         B1[学科知识图谱依赖计算]

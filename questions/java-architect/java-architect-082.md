@@ -9,9 +9,11 @@ tags:
 - 时钟回拨
 - 分布式
 feynman:
-  essence: 分布式系统的时间问题核心是"每台机器的时钟独立运行，不保证一致"。时钟回拨（NTP 同步、虚拟化漂移）会导致基于时间的逻辑出错（雪花 ID 重复、定时任务乱序、日志时间错乱、TTL 缓存失效异常）。时区问题导致跨地域数据时间错乱。解决：存储用 UTC、展示转本地时区、敏感逻辑用逻辑时钟（HLC/Lamport）或 NTP 严格同步。
+  essence: 分布式系统的时间问题核心是"每台机器的时钟独立运行，不保证一致"。时钟回拨（NTP 同步、虚拟化漂移）会导致基于时间的逻辑出错（雪花 ID 重复、定时任务乱序、日志时间错乱、TTL
+    缓存失效异常）。时区问题导致跨地域数据时间错乱。解决：存储用 UTC、展示转本地时区、敏感逻辑用逻辑时钟（HLC/Lamport）或 NTP 严格同步。
   analogy: 像多个城市各自挂钟，每个钟走得稍有不同（时钟漂移）。偶尔对表（NTP 同步）可能对慢了（回拨）。安排跨城会议时不能完全依赖各自的钟——要么用统一的"标准时间"（UTC），要么用"会议编号"（逻辑时钟）保证事件先后。
-  first_principle: 物理时钟在分布式系统中不可靠（漂移、回拨）。依赖物理时钟的逻辑（时间戳排序、定时触发、TTL 过期、ID 生成）都可能出错。本质对策是"存储统一 UTC、展示按需转时区、关键排序用逻辑时钟（Lamport/HLC）不依赖物理时间"。
+  first_principle: 物理时钟在分布式系统中不可靠（漂移、回拨）。依赖物理时钟的逻辑（时间戳排序、定时触发、TTL 过期、ID 生成）都可能出错。本质对策是"存储统一
+    UTC、展示按需转时区、关键排序用逻辑时钟（Lamport/HLC）不依赖物理时间"。
   key_points:
   - 时钟漂移：每台机器时钟运行速度略有不同（几毫秒/天），累积导致时钟差
   - 时钟回拨：NTP 同步、VM 迁移导致时间倒退，影响雪花 ID、定时任务、缓存 TTL
@@ -24,20 +26,27 @@ first_principle:
   - 物理时钟不可靠（漂移 + 回拨）
   - 时区不一致导致跨地域数据混乱
   - 依赖绝对时间戳排序的逻辑在分布式下可能出错
-  rebuild: 三层对策——第一层，存储用 UTC（DB 字段统一 UTC，避免时区混乱），展示时按用户时区转换（前端处理）。第二层，NTP 严格同步 + 监控时钟偏移（chronyd，偏移 > 50ms 告警）。第三层，关键排序不用物理时钟，用逻辑时钟（HLC：混合逻辑时钟，物理部分 + 逻辑计数器，保证 happened-before 关系）。雪花 ID 时钟回拨检测（参见 081 题）。
+  rebuild: 三层对策——第一层，存储用 UTC（DB 字段统一 UTC，避免时区混乱），展示时按用户时区转换（前端处理）。第二层，NTP 严格同步 + 监控时钟偏移（chronyd，偏移
+    > 50ms 告警）。第三层，关键排序不用物理时钟，用逻辑时钟（HLC：混合逻辑时钟，物理部分 + 逻辑计数器，保证 happened-before 关系）。雪花
+    ID 时钟回拨检测（参见 081 题）。
 follow_up:
-  - NTP 同步会回拨吗？——会。NTP 如果发现本地时间比标准时间快，会逐步调慢（ slewing 模式）或直接回调（stepping 模式，差值大时）。stepping 回调导致时间倒退（回拨）。用 chronyd 可以配置只 slew 不 step（平滑调整，不回拨，但调整慢）
-  - Java 怎么处理时区？——java.time（JDK 8+）。Instant（UTC 时间戳）、ZonedDateTime（带时区）、LocalDateTime（无时区）。DB 存 Instant/UTC，展示转 ZonedDateTime.ofInstant(instant, ZoneId.of("Asia/Shanghai"))
-  - HLC 是什么？——Hybrid Logical Clock，混合逻辑时钟。结构 = 物理时间戳 + 逻辑计数器。同一节点事件计数器递增，跨节点通信取较大物理时间 + 计数器。既保留物理时间近似值，又保证 happened-before 排序
-  - 分布式定时任务怎么保证不重复触发？——用分布式锁（同一时刻只有一个节点触发）或 Quartz 集群（DB 锁选主）。定时任务的实际触发时间可能因时钟漂移有几秒偏差，业务要容忍
-  - 日志时间不一致怎么排查？——确认所有节点 NTP 同步（chronyc tracking 看偏移），JVM 用 -Duser.timezone=UTC 统一时区，日志格式带 ISO 8601 时区后缀（2026-07-13T10:00:00+08:00）
+- NTP 同步会回拨吗？——会。NTP 如果发现本地时间比标准时间快，会逐步调慢（ slewing 模式）或直接回调（stepping 模式，差值大时）。stepping
+  回调导致时间倒退（回拨）。用 chronyd 可以配置只 slew 不 step（平滑调整，不回拨，但调整慢）
+- Java 怎么处理时区？——java.time（JDK 8+）。Instant（UTC 时间戳）、ZonedDateTime（带时区）、LocalDateTime（无时区）。DB
+  存 Instant/UTC，展示转 ZonedDateTime.ofInstant(instant, ZoneId.of("Asia/Shanghai"))
+- HLC 是什么？——Hybrid Logical Clock，混合逻辑时钟。结构 = 物理时间戳 + 逻辑计数器。同一节点事件计数器递增，跨节点通信取较大物理时间
+  + 计数器。既保留物理时间近似值，又保证 happened-before 排序
+- 分布式定时任务怎么保证不重复触发？——用分布式锁（同一时刻只有一个节点触发）或 Quartz 集群（DB 锁选主）。定时任务的实际触发时间可能因时钟漂移有几秒偏差，业务要容忍
+- 日志时间不一致怎么排查？——确认所有节点 NTP 同步（chronyc tracking 看偏移），JVM 用 -Duser.timezone=UTC 统一时区，日志格式带
+  ISO 8601 时区后缀（2026-07-13T10:00:00+08:00）
 memory_points:
-  - 存储用 UTC，展示转本地时区
-  - 时钟回拨：NTP/VM 导致时间倒退
-  - NTP 用 chronyd（slew 模式不回拨）
-  - 逻辑时钟：HLC（物理时间 + 逻辑计数器）
-  - Java 时间：Instant（UTC）、ZonedDateTime（带时区）
-  - 日志格式：ISO 8601 带时区后缀
+- 存储用 UTC，展示转本地时区
+- 时钟回拨：NTP/VM 导致时间倒退
+- NTP 用 chronyd（slew 模式不回拨）
+- 逻辑时钟：HLC（物理时间 + 逻辑计数器）
+- Java 时间：Instant（UTC）、ZonedDateTime（带时区）
+- 日志格式：ISO 8601 带时区后缀
+frequency: high
 ---
 
 # 【Java 后端架构师】时间、时区、时钟回拨与分布式系统
@@ -428,6 +437,28 @@ public class HLCClock {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Chronyd special
+    class D error
+    class E info
+    class F start
+    class G process
+    class H decision
+    class I special
+    class J error
+    class Java info
+    class K start
+    class NTP process
+    class before decision
+    class happened special
     subgraph 分布式时间方案
         A[物理时钟方案
 NTP/Chronyd] --> B[时间同步中心

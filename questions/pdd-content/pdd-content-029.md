@@ -29,15 +29,16 @@ first_principle:
   - 快速恢复比零故障更重要
   rebuild: 预案+灰度+回滚+演练+系统工程设计。
 follow_up:
-  - 灰度怎么设计？——按流量百分比/用户标签/地域逐步放量
-  - 数据回滚怎么办？——DDL 不可逆，需双写兼容+灰度
-  - 演练怎么做？——混沌工程（断网/杀进程/限流）
+- 灰度怎么设计？——按流量百分比/用户标签/地域逐步放量
+- 数据回滚怎么办？——DDL 不可逆，需双写兼容+灰度
+- 演练怎么做？——混沌工程（断网/杀进程/限流）
 memory_points:
-  - 灰度：金丝雀/蓝绿/滚动
-  - 回滚：版本/数据/配置
-  - 预案：故障剧本
-  - 演练：混沌工程
-  - 钱学森：系统工程+冗余+可靠
+- 灰度：金丝雀/蓝绿/滚动
+- 回滚：版本/数据/配置
+- 预案：故障剧本
+- 演练：混沌工程
+- 钱学森：系统工程+冗余+可靠
+frequency: low
 ---
 
 # 【拼多多内容】预案回滚与钱学森工程理论？
@@ -298,6 +299,23 @@ if (danmakuDegrade) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class Pod error
     A[新版本发布] --> B[金丝雀发布1%流量]
     B --> C{监控指标验证}
     C -->|异常| D[一键回滚老版本]

@@ -15,6 +15,7 @@ memory_points:
 - 高频考点：read()返回int，用0-255表示字节数据，-1代表读取结束
 - 性能优化：BufferedInputStream内置8KB缓冲区，大幅减少系统IO调用
 - 实用API：mark/reset支持流回推，available返回预估可读字节数
+frequency: low
 ---
 
 # 什么是字节输入流？
@@ -112,6 +113,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

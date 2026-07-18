@@ -17,6 +17,7 @@ memory_points:
 - poll改进：改用结构体数组，打破了1024数量限制，但仍是O(n)遍历。
 - epoll绝杀：红黑树增删结合就绪链表，事件驱动O(1)效率，基于mmap省拷贝。
 - 触发模式：epoll支持LT水平触发（默认）和ET边缘触发（需非阻塞）。
+frequency: medium
 ---
 
 # select/poll/epoll的区别和联系？
@@ -146,6 +147,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -24,6 +24,7 @@ memory_points:
 - 核心机制：synchronized基于Object Monitor，而ReentrantLock基于AQS队列
 - 灵活性：synchronized仅支持非公平且不可中断，而ReentrantLock支持公平/超时/多Condition
 - 选型口诀：因为底层优化差距极小，所以简单加锁用synchronized，高级特性选ReentrantLock
+frequency: high
 ---
 
 # synchronized 和 ReentrantLock 的区别？
@@ -377,6 +378,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

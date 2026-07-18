@@ -32,6 +32,7 @@ memory_points:
 - 因果句：因为模型不知道何时该用工具，所以Prompt必须规定明确的工具选择优先级
 - 对比句：模糊Schema导致乱传参，加入枚举类型与提取示例的精确Schema能大幅提效
 - 因果句：因为大模型缺乏边界感，所以必须注入意图明确的正反例Few-shot防误调用
+frequency: high
 ---
 
 # 怎么提升Function Call准确率？Prompt、Schema、Few-shot、异常重试四个维度优化方案？
@@ -211,6 +212,23 @@ async def function_call_with_retry(
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class D start
+    class E process
+    class Eval decision
+    class F special
+    class Few error
+    class M info
+    class P start
+    class R process
+    class S decision
+    class Start special
+    class br error
     Start["用户意图输入"] --> P{"Prompt维度优化<br/>工具选择决策树"}
     P --> S{"Schema精确化<br/>参数枚举与正则约束"}
     S --> F{"Few-shot示范<br/>正反例与边界Case"}

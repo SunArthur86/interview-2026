@@ -15,6 +15,7 @@ memory_points:
 - 遍历特性：中序遍历二叉搜索树必定得到一个严格递增的有序序列
 - 性能瓶颈：插入有序数据易退化为链表，查询复杂度由 O(logN) 降至 O(N)
 - 引申结构：为解决退化问题，引入平衡二叉树(AVL)或红黑树保证效率
+frequency: low
 ---
 
 # 什么是排序二叉树？
@@ -121,6 +122,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

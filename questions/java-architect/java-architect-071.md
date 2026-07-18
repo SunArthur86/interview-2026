@@ -10,9 +10,12 @@ tags:
 - 数据闭环
 - 中台
 feynman:
-  essence: 数据闭环是"在线业务产生数据 → 离线数仓分析 → 反哺在线业务"的循环。电商场景：用户浏览下单（在线）→ 数据进数仓分析用户偏好（离线）→ 算法用分析结果做推荐（在线）。核心矛盾是"离线批处理（小时/天级）vs 在线实时（秒级）"，解法是"湖仓一体（Data Lakehouse）+ Lambda/Kappa 架构"——离线数仓做深度分析，实时链路做即时反馈，两者数据统一存储（湖仓）。
+  essence: 数据闭环是"在线业务产生数据 → 离线数仓分析 → 反哺在线业务"的循环。电商场景：用户浏览下单（在线）→ 数据进数仓分析用户偏好（离线）→
+    算法用分析结果做推荐（在线）。核心矛盾是"离线批处理（小时/天级）vs 在线实时（秒级）"，解法是"湖仓一体（Data Lakehouse）+ Lambda/Kappa
+    架构"——离线数仓做深度分析，实时链路做即时反馈，两者数据统一存储（湖仓）。
   analogy: 像餐厅经营。点餐（在线业务）→ 月底汇总分析"哪道菜热销/哪时段客流大"（离线数仓）→ 据此调整菜单和备货（反哺在线）。如果只顾在线不做分析，盲目经营；只分析不反哺，数据白算。闭环是"业务→数据→洞察→业务优化"的飞轮。
-  first_principle: 为什么要有离线数仓（不能只靠在线数据库）？因为在线 DB 为事务优化（增删改查快），不适合复杂分析（亿级数据 GROUP BY/JOIN 慢）。数仓为分析优化（列存/分区/索引），支持大数据复杂查询。两者分工——在线 DB 跑业务，数仓跑分析，结果回流优化业务。
+  first_principle: 为什么要有离线数仓（不能只靠在线数据库）？因为在线 DB 为事务优化（增删改查快），不适合复杂分析（亿级数据 GROUP BY/JOIN
+    慢）。数仓为分析优化（列存/分区/索引），支持大数据复杂查询。两者分工——在线 DB 跑业务，数仓跑分析，结果回流优化业务。
   key_points:
   - 数据闭环：在线业务 → 数据采集 → 数仓分析 → 反哺在线
   - 数仓分层：ODS（原始）→ DWD（明细）→ DWS（汇总）→ ADS（应用）
@@ -26,19 +29,22 @@ first_principle:
   - 离线数仓分析深度（复杂查询），但延迟（天级）
   - 实时业务需要秒级反馈（离线不够快）
   - 数据要流动（在线→离线→在线闭环）
-  rebuild: 湖仓一体 + 分层架构 + 闭环。数据采集（在线 DB binlog → 数仓 ODS 层）。数仓分层——ODS（原始）→ DWD（明细清洗）→ DWS（主题汇总）→ ADS（应用指标）。湖仓一体——底层 Iceberg/Hudi（数据湖，海量原始 + ACID），上层 Hive/Spark SQL（数仓分析）。反哺——分析结果（用户标签/商品销量）写回在线 Redis/MySQL，供推荐/搜索用。实时链路（Flink）补充离线延迟。
+  rebuild: 湖仓一体 + 分层架构 + 闭环。数据采集（在线 DB binlog → 数仓 ODS 层）。数仓分层——ODS（原始）→ DWD（明细清洗）→
+    DWS（主题汇总）→ ADS（应用指标）。湖仓一体——底层 Iceberg/Hudi（数据湖，海量原始 + ACID），上层 Hive/Spark SQL（数仓分析）。反哺——分析结果（用户标签/商品销量）写回在线
+    Redis/MySQL，供推荐/搜索用。实时链路（Flink）补充离线延迟。
 follow_up:
-  - 数据怎么从在线到数仓（采集）？——CDC（binlog 采集，如 Canal/Debezium）实时同步，或定时批量抽取（ETL）。
-  - 数仓分层怎么设计？——ODS 原始（不加工）→ DWD 明细（清洗去噪）→ DWS 汇总（按主题/时间聚合）→ ADS 应用（直接给报表/模型用）。
-  - 湖仓一体和传统数仓区别？——湖仓（Iceberg/Hudi）支持 ACID + 时间旅行 + 流批一体，传统数仓（Hive）只支持批。
-  - 实时和离线怎么协同（Lambda）？——批层（离线全量，准）+ 流层（实时增量，快）+ 服务层（合并，对外）。
-  - 数据质量怎么保证？——数据治理（完整性/一致性/及时性），DQ 监控（每日跑批校验）。
+- 数据怎么从在线到数仓（采集）？——CDC（binlog 采集，如 Canal/Debezium）实时同步，或定时批量抽取（ETL）。
+- 数仓分层怎么设计？——ODS 原始（不加工）→ DWD 明细（清洗去噪）→ DWS 汇总（按主题/时间聚合）→ ADS 应用（直接给报表/模型用）。
+- 湖仓一体和传统数仓区别？——湖仓（Iceberg/Hudi）支持 ACID + 时间旅行 + 流批一体，传统数仓（Hive）只支持批。
+- 实时和离线怎么协同（Lambda）？——批层（离线全量，准）+ 流层（实时增量，快）+ 服务层（合并，对外）。
+- 数据质量怎么保证？——数据治理（完整性/一致性/及时性），DQ 监控（每日跑批校验）。
 memory_points:
-  - 闭环：在线→采集→数仓→反哺在线
-  - 分层：ODS→DWD→DWS→ADS
-  - 湖仓一体：Iceberg/Hudi（ACID + 流批一体）
-  - Lambda：批+流+服务
-  - 反哺：分析结果写回在线存储
+- 闭环：在线→采集→数仓→反哺在线
+- 分层：ODS→DWD→DWS→ADS
+- 湖仓一体：Iceberg/Hudi（ACID + 流批一体）
+- Lambda：批+流+服务
+- 反哺：分析结果写回在线存储
+frequency: low
 ---
 
 # 【Java 后端架构师】离线数仓、湖仓与在线服务的数据闭环
@@ -51,6 +57,27 @@ memory_points:
 
 ```mermaid
 flowchart TB
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class ADS start
+    class CDC process
+    class DWD decision
+    class DWS special
+    class ETL error
+    class MQ info
+    class ODS start
+    class binlog process
+    class br decision
+    class collect special
+    class dwd error
+    class dws info
+    class ods start
+    class online1 process
+    class online2 decision
     online1["在线业务（交易/搜索/推荐）"]
     collect["数据采集（CDC/MQ）"]
     ods["数仓 ODS（原始层）"]
@@ -63,6 +90,12 @@ flowchart TB
     ods -->|清洗加工| dwd
     dwd -->|聚合汇总| dws
     dws -->|反哺 写回在线存储| online2
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 **数仓分层架构**：

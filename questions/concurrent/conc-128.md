@@ -16,6 +16,7 @@ memory_points:
 - 核心(core)默认不回收，最大(max)限定上限，存活时间针对非核心线程
 - 任务队列与拒绝策略是限流与兜底关键
 - 配置策略：CPU密集型设为 N+1，IO密集型设为 2N (N为CPU核心数)
+frequency: high
 ---
 
 # 线程池的7个核心参数是什么？
@@ -149,6 +150,7 @@ flowchart TD
     classDef param fill:#e3f2fd,stroke:#1565c0
     class Core param
     class R1,R2,R3,R4 reject
+
 ```
 
 

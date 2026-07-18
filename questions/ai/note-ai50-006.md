@@ -30,6 +30,7 @@ memory_points:
 - 三层防线：输入层防发散、模型层降随机、输出层强校验。
 - 输入层靠RAG提供真实文档并用Prompt强约束（如要求只基于资料回答并标注来源）。
 - 模型层调低temperature（0.1-0.3）并强制JSON结构化输出限制自由发挥；输出层用NLI模型做事实一致性校验。
+frequency: medium
 ---
 
 # 防止大模型幻觉的工程和Prompt手段
@@ -247,6 +248,7 @@ flowchart TD
     style REFUSE fill:#FF9800,color:#fff
     style HALL fill:#F44336,color:#fff
     style REGEN fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

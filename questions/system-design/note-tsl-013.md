@@ -30,6 +30,7 @@ memory_points:
 - 多源适配：适配器屏蔽数十家承运商差异，统一清洗去重排序后写入Kafka
 - 统一状态机：拆解多式联运复杂节点(生产→海运→清关→交付)，驱动状态流转
 - 全链监控：ETA引擎预测到货，WebSocket推前端，规则引擎抓延误触发客服告警
+frequency: high
 ---
 
 # 全球数万笔车辆订单物流实时跟踪，如何设计后端架构，支持物流节点更新、异常预警与轨迹查询？
@@ -370,6 +371,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

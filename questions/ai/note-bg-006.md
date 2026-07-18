@@ -11,7 +11,8 @@ tags:
 - 工具调用
 - token mask
 feynman:
-  essence: Agentic RL训练Agent用工具解决问题。Agent loop是"模型生成→解析工具调用→执行工具→拼接结果→继续生成"的循环。Token mask的关键：只有模型自己生成的token参与loss，工具返回的observation token被mask掉，否则模型会"偷懒"去记忆工具输出而非学习调用策略。
+  essence: Agentic RL训练Agent用工具解决问题。Agent loop是"模型生成→解析工具调用→执行工具→拼接结果→继续生成"的循环。Token
+    mask的关键：只有模型自己生成的token参与loss，工具返回的observation token被mask掉，否则模型会"偷懒"去记忆工具输出而非学习调用策略。
   analogy: 像训练实习生用计算器算账——他按计算器（生成调用）、看屏幕数字（observation）、继续算。考核时只看他"按对按钮的决策"（生成的token），不能因为他看到了屏幕数字就给分（否则他会变成背数字而不是学算账）。
   first_principle: RL的目标是优化策略π(a|s)。在Agent场景，a=生成的token（含工具调用指令），s=当前上下文。工具返回的observation是环境给的状态转移，不是模型的动作，因此不能算loss——否则模型会优化"如何更好地接收observation"而非"如何更好地决策调用哪个工具"。
   key_points:
@@ -32,6 +33,7 @@ memory_points:
 - Agent Loop闭环：模型生成动作→解析工具→环境执行→拼接结果→继续生成
 - Loss Mask设计：因工具结果由系统产生，非模型能力，故必须置为False不参与反传
 - 架构特点：通过上下文拼接把多轮交互展平，形成有监督的连续生成序列
+frequency: high
 ---
 
 # 【八股总结】Agentic RL 的 Agent loop 如何运行？哪些 token 参与 loss？
@@ -413,6 +415,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -11,7 +11,8 @@ tags:
 - 训练
 - 数据
 feynman:
-  essence: AI Infra 是支撑大模型全生命周期的底层设施——数据（采集/标注/管理）、训练（分布式/优化）、推理（部署/服务）、监控（评估/迭代），相当于 AI 时代的"数据库 + 中间件"。
+  essence: AI Infra 是支撑大模型全生命周期的底层设施——数据（采集/标注/管理）、训练（分布式/优化）、推理（部署/服务）、监控（评估/迭代），相当于
+    AI 时代的"数据库 + 中间件"。
   analogy: AI Infra 像传统软件的"数据库+应用服务器+监控"——上层应用（Agent/LLM）跑在它上面，它管数据、训练、部署、监控的脏活累活。
   first_principle: 大模型从训练到生产涉及海量数据、巨大算力、复杂工程，单点工具不够；需要平台化的基础设施让 AI 开发像传统软件开发一样高效。
   key_points:
@@ -38,6 +39,7 @@ memory_points:
 - 训练：分布式（数据/张量/Pipeline 并行）+ checkpoint
 - 推理：vLLM + 量化 + GPU 池化
 - 风控特点：私有部署、实时、监管
+frequency: medium
 ---
 
 # 【蚂蚁风控】AI Infra 怎么设计？支撑大模型全生命周期
@@ -477,6 +479,33 @@ spec:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class A1 process
+    class A2 decision
+    class A3 special
+    class B1 error
+    class B2 info
+    class C1 start
+    class C2 process
+    class C3 decision
+    class D1 special
+    class D2 error
+    class D3 info
+    class D4 start
+    class DeepSpeed process
+    class PagedAttention decision
+    class PyTorch special
+    class S1 error
+    class S2 info
+    class S3 start
+    class S4 process
+    class vLLM decision
     subgraph S1[数据层]
         A1[风控决策日志] --> A2[特征平台]
         A3[标注数据Doccano] --> A2

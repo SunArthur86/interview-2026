@@ -16,6 +16,7 @@ memory_points:
 - 三大实现方案：阻塞同步（synchronized/Lock）、非阻塞同步（CAS/Atomic）、无同步方案（ThreadLocal/不可变）。
 - 锁对比：synchronized 是 JVM 关键字自动释放，ReentrantLock 是 API 需手动释放且支持公平与中断。
 - 因为 i++ 非原子，所以 volatile 不能保证线程安全，必须用 Atomic 类或锁。
+frequency: high
 ---
 
 # 什么是线程安全？
@@ -103,6 +104,7 @@ flowchart TB
     classDef means fill:#e3f2fd,stroke:#1565c0
     class L1,L2,L3,L4,L5 level
     class M1,M2,M3,M4,M5 means
+
 ```
 
 

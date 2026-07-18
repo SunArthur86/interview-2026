@@ -16,6 +16,7 @@ memory_points:
 - 核心价值：因为隔离地址空间，所以进程间内存互不干扰更安全
 - 硬件机制：MMU负责地址翻译，TLB作为高速缓存加速转换过程
 - 缺页调度：访问不存在的页触发缺页中断，触发磁盘与内存的Swap交互
+frequency: medium
 ---
 
 # 什么是虚拟内存？为什么需要虚拟内存？
@@ -122,6 +123,7 @@ flowchart TD
     style CRITICAL fill:#FF9800,color:#fff
     style DONE fill:#2196F3,color:#fff
     style HAZARD fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

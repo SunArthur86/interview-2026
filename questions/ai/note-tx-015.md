@@ -31,6 +31,7 @@ memory_points:
 - 分层逻辑：样板/测试AI主写(80%)，核心架构/算法人工主导(80%)
 - 人机协作金字塔：底座AI生成，中间人机共创，顶层人工决策把关
 - Agent故障四坑：工具调用异常、上下文断裂、死循环不收敛、状态不持久
+frequency: medium
 ---
 
 # 【腾讯面经】代码 AI 生成比例多少？做 Agent 踩过哪些坑？
@@ -455,6 +456,7 @@ flowchart TD
     style FB fill:#F44336,color:#fff
     style MEM_R fill:#9C27B0,color:#fff
     style PLAN fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

@@ -36,6 +36,7 @@ memory_points:
 - 分片键三大原则：高频、均匀、不可变
 - 全局 ID：雪花（去中心化）vs 号段（中心化批量发）
 - 跨库难题：事务（柔性事务）+ JOIN（业务组装）+ 聚合（异步汇总）
+frequency: high
 ---
 
 # 【蚂蚁风控】亿级数据的 MySQL 怎么扩展？分库分表方案？主从延迟怎么解决？
@@ -309,6 +310,23 @@ TiDB 确实支持任意二级索引查询、无需人工分片。但前面提过
 
 ```mermaid
 sequenceDiagram
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class App start
+    class ES process
+    class Hash decision
+    class INSERT special
+    class Master error
+    class Proxy info
+    class Slave start
+    class as process
+    class merchant_id decision
+    class time special
+    class uid error
     participant App as 风控应用服务
     participant Proxy as ShardingSphere代理
     participant Master as MySQL主库

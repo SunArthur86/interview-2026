@@ -15,6 +15,7 @@ memory_points:
 - 底层实现：代码块靠monitorenter/exit指令，方法靠ACC_SYNCHRONIZED标志。
 - 锁信息位置：存储在对象头的Mark Word中（含hashcode、GC年龄、锁状态）。
 - JDK1.6优化：引入偏向锁、轻量级锁、自旋锁，以及锁消除和锁粗化机制。
+frequency: high
 ---
 
 # 什么是Synchronized？
@@ -111,6 +112,7 @@ flowchart TD
     style THIN fill:#FF9800,color:#fff
     style MUTEX fill:#F44336,color:#fff
     style INFLATE fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

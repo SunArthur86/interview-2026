@@ -16,6 +16,7 @@ memory_points:
 - 编码原理：使用Varint变长编码，小数字占1字节，丢弃冗余字段名。
 - 兼容性强：基于字段编号识别，新增字段不影响旧版本解析（向后兼容）。
 - 实战坑点：二进制不可读，废弃字段必须用reserved标记以防编号复用错乱。
+frequency: medium
 ---
 
 # Protocol Buffer的原理和优势是什么？
@@ -133,6 +134,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

@@ -20,7 +20,8 @@ feynman:
   - 数据多级缓存降DB压力
 first_principle:
   essence: 充电桩调度 = 空间索引（找最近） + 状态管理（查空闲） + 分配策略（做决策）。空间索引是O(N)暴力搜索的瓶颈，必须用空间数据结构（GeoHash/R-Tree）降到O(logN)。
-  derivation: 全球数万充电桩，假设单城市1000个。用户请求时遍历1000个桩查距离=O(1000)，加上状态过滤和排序，单请求需10ms+。用Redis GEO的GEORADIUS，降到O(logN)≈0.1ms。
+  derivation: 全球数万充电桩，假设单城市1000个。用户请求时遍历1000个桩查距离=O(1000)，加上状态过滤和排序，单请求需10ms+。用Redis
+    GEO的GEORADIUS，降到O(logN)≈0.1ms。
   conclusion: 架构 = Redis GEO空间索引 + 实时状态WebSocket/MQ同步 + 调度算法(距离权重+负载权重) + 分布式锁防超分配。
 follow_up:
 - 多个用户同时抢占同一个充电桩怎么办？
@@ -32,6 +33,7 @@ memory_points:
 - 实时状态：充电桩心跳上报到MQ，消费后更新Redis状态，保证调度的实时准确性
 - 调度策略：不仅看距离，还需结合桩实时负载与电价，综合计算推荐最优解
 - 防超分配：分配瞬间通过分布式锁/状态校验占位，防止多车抢夺同一空闲桩
+frequency: high
 ---
 
 # 全球数万座充电桩实时调度，如何设计后端架构，实现用户就近分配充电桩，提升充电桩整体利用率？
@@ -60,6 +62,37 @@ memory_points:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class API start
+    class APP process
+    class App decision
+    class GEO special
+    class GEORADIUS error
+    class GW info
+    class HTTPS start
+    class IOT process
+    class IoT decision
+    class Kafka special
+    class MQ error
+    class MYSQL info
+    class MySQL start
+    class REDIS process
+    class Redis decision
+    class S1 special
+    class S2 error
+    class S3 info
+    class SVC start
+    class WebSocket process
+    class br decision
+    class charging special
+    class fault error
+    class idle info
+    class offline start
     APP["车辆 App / 车机端<br/>发送位置 + 充电需求 → 接收推荐列表"]
     GW["API 网关层<br/>鉴权 / 限流 / 请求路由"]
     subgraph SVC["充电调度服务"]

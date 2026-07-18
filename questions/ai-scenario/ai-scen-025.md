@@ -29,6 +29,7 @@ memory_points:
 - 端云协同：隐私/简单任务端侧，复杂/耗电任务上云；基于Prompt复杂度动态路由。
 - 性能优化：滑动窗口分段摘要、Speculative Decoding加速、内存映射按需加载。
 - 关键指标：iPhone 15 Pro跑1.5B INT4，内存约1GB，速度15-20 tokens/s。
+frequency: high
 ---
 
 # 如何设计端侧LLM部署方案？在手机或IoT设备上运行大语言模型。
@@ -194,6 +195,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

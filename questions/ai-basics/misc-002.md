@@ -23,6 +23,7 @@ memory_points:
 - RoPE原理：通过旋转矩阵将位置信息注入Q和K，内积自然包含相对位置。
 - RoPE优势：相对位置感知，长度外推能力强（训练4K可推理32K+），计算高效。
 - 实战：长文本推理常用NTK-aware Scaling而非简单插值，以保持注意力衰减特性。
+frequency: high
 ---
 
 # 主流大模型使用的位置编码有哪些?RoPE的原理和优势是什么
@@ -141,6 +142,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

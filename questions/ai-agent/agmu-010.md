@@ -16,6 +16,7 @@ memory_points:
 - AutoGen 重对话社交，LangGraph 重状态机与确定性。
 - AutoGen 状态隐式难恢复，LangGraph 显式 Checkpoint 支持断点续传。
 - AutoGen 适合脑暴探索，LangGraph 适合长链路生产任务。
+frequency: medium
 ---
 
 # AutoGen 和 LangGraph 多 Agent 有什么气质差异
@@ -134,6 +135,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

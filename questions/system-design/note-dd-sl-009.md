@@ -31,6 +31,7 @@ memory_points:
 - 核心方案：建立异构索引表（按user_id分片），先查出short_code列表，再批量路由回查主表详情
 - 方案对比：异构索引(通用首选)而ES倒排(适合复杂搜索)，用户维度副表(高频查询但需保证最终一致)
 - 分页处理：索引表先排好序，主表查询时利用Pipeline/MGET批量获取，避免内存放大
+frequency: high
 ---
 
 # 【滴滴面经】如果一个用户创建了很多短链，他要查看自己的短链列表，你怎么设计查询？
@@ -518,6 +519,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

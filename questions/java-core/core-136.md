@@ -15,6 +15,7 @@ memory_points:
 - 因为.forNme动态加载无编译期检查，所以常用于框架底层解析
 - 因为.class字面量在编译期确定，所以性能最高且不抛异常
 - 对比：已知实例用getClass，已知类用.class，仅知全限定名字符串用forName
+frequency: low
 ---
 
 # 获取Class对象的3种方法是什么？
@@ -127,6 +128,34 @@ public class BeanFactory {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class ArrayList process
+    class Arrays decision
+    class B special
+    class C error
+    class D info
+    class E start
+    class F process
+    class G decision
+    class H special
+    class I error
+    class J info
+    class MAX_ARRAY_SIZE start
+    class add process
+    class br decision
+    class capacity special
+    class copyOf error
+    class e info
+    class elementData start
+    class minCapacity process
+    class oldCap decision
+    class size special
     A[ArrayList 扩容] --> B["add 时检查 size+1 > capacity"]
     B --> C{需要扩容?}
     C -->|否| D[直接 elementData size = e]

@@ -16,6 +16,7 @@ memory_points:
 - 四层Vs七层：四层基于 IP+端口极速转发，而七层基于内容代理转发消耗 CPU 算力
 - 业务价值：因为能深度识别内容，所以支持按路径路由和灰度发布等精细化业务控制
 - 代表软件：四层典型是 LVS，而七层典型是 Nginx 或 HAProxy
+frequency: medium
 ---
 
 # 什么是七层负载均衡（内容交换）？
@@ -110,6 +111,7 @@ flowchart TD
     style L4LVS fill:#9C27B0,color:#fff
     style L7NG fill:#009688,color:#fff
     style EVICT fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

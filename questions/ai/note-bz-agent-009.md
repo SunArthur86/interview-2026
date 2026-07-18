@@ -10,7 +10,8 @@ tags:
 - Agent
 - 认知框架
 feynman:
-  essence: ReAct RAG Agent=把RAG(检索)变成Agent的"工具"，让Agent自主决定何时检索、检索什么、检索后如何推理。区别于固定流程的Naive RAG，它动态决策检索策略。
+  essence: ReAct RAG Agent=把RAG(检索)变成Agent的"工具"，让Agent自主决定何时检索、检索什么、检索后如何推理。区别于固定流程的Naive
+    RAG，它动态决策检索策略。
   analogy: 普通RAG像自动售货机（投币出货，固定流程），ReAct RAG像导购员（听需求→找商品→不够再找→推荐）。
   first_principle: Naive RAG是"一次性检索"，复杂问题需要多次检索/拆分检索。把检索作为Agent工具，让LLM动态决定检索策略，能解决多跳问答等问题。
   key_points:
@@ -30,6 +31,7 @@ memory_points:
 - 对比Naive RAG：Naive是固定单次检索，ReAct RAG是动态按需多次检索
 - 工具化：将向量数据库的检索功能封装为 retrieve 工具供Agent调用
 - 核心优势：解决复杂多跳问答，如A买了B，B的创始人是谁的链式推理
+frequency: medium
 ---
 
 # ReAct RAG Agent 如何实现？
@@ -254,6 +256,7 @@ flowchart TD
     style INS fill:#FF9800,color:#fff
     style RR fill:#9C27B0,color:#fff
     style LLM fill:#009688,color:#fff
+
 ```
 
 ## 记忆要点

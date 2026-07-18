@@ -29,6 +29,7 @@ memory_points:
 - 工具集成：自定义Tool通过Function Calling调用，数据库只读，内网网关隔离。
 - 异构适配：支持量化适配低显存卡，RAG增量更新保证知识时效。
 - 实战痛点：用RocksDB存KV Cache确保中间态数据不落盘，满足审计合规。
+frequency: medium
 ---
 
 # 设计一个Self-hosted的Agent框架。公司要求完全私有化部署，不依赖外部LLM API。
@@ -173,6 +174,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

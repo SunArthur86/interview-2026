@@ -54,6 +54,7 @@ memory_points:
 - 训练服务偏差：特征定义/计算/窗口不一致导致模型失效
 - 统一 SDK：训练和在线共享特征定义和计算逻辑
 - 实时特征：Flink 流式写 Redis（在线），Spark 批写 Hive（训练）
+frequency: medium
 ---
 
 # 【Java 后端架构师】推荐系统在线服务与特征一致性
@@ -492,6 +493,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

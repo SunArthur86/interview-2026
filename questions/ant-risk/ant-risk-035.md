@@ -12,8 +12,10 @@ tags:
 - Copilot
 - 研发效率
 feynman:
-  essence: AI 代码助手（Cursor/Claude Code/Copilot）把"写代码"从手敲变成对话——补全、Agent 多文件修改、终端执行，开发效率提升 30-50%，是工程师 AI 转型的最佳切入点。
-  analogy: 传统编程像用纸笔写稿（一字字敲），AI 代码助手像有秘书——你说意图，它写代码，你 review。Cursor 像 IDE 原生集成，Claude Code 像终端 Agent 能执行能调试。
+  essence: AI 代码助手（Cursor/Claude Code/Copilot）把"写代码"从手敲变成对话——补全、Agent 多文件修改、终端执行，开发效率提升
+    30-50%，是工程师 AI 转型的最佳切入点。
+  analogy: 传统编程像用纸笔写稿（一字字敲），AI 代码助手像有秘书——你说意图，它写代码，你 review。Cursor 像 IDE 原生集成，Claude
+    Code 像终端 Agent 能执行能调试。
   first_principle: 写代码的本质是"把意图转化为代码"，主要时间花在重复模式（CRUD）、查文档、调试。AI 擅长这些重复活，让人聚焦在"想清楚做什么"。
   key_points:
   - 工具分类：IDE 集成（Cursor）/ 终端 Agent（Claude Code）/ 补全（Copilot）
@@ -36,6 +38,7 @@ memory_points:
 - 场景：补全/重构/调试/文档/测试
 - 提效 30-50%，但必须人工 review
 - 风控场景注意：敏感代码、关联文件、配置误删
+frequency: medium
 ---
 
 # 【蚂蚁风控】怎么用 AI 代码助手改造研发流程？提效多少？
@@ -394,6 +397,28 @@ AI 不懂业务规则（"这个阈值为什么是 80"），可能改错
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class Agent process
+    class B decision
+    class C special
+    class Claude error
+    class Code info
+    class Cursor start
+    class D process
+    class E decision
+    class F special
+    class G error
+    class H info
+    class I start
+    class J process
+    class K decision
+    class L special
     A[开发者输入意图] --> B{选择AI代码助手}
     B --> C[Cursor Agent]
     B --> D[Claude Code]

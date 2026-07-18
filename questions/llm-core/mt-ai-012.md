@@ -30,6 +30,7 @@ memory_points:
 - DeepSeek技术报告必看：拆解MLA与MoE如何实现极端的显存压缩与低成本推理
 - 回答策略：读论文+实战结合(如通过调RoPE的base值实现长文外推解决信息截断)
 - 方法论：读论文不仅懂QKV公式，更要带入工程解决如长文本特征衰减等实际Bug
+frequency: low
 ---
 
 # 【美团面经】近一年读过什么 AI 论文/技术报告两次以上？对你有什么帮助？
@@ -123,6 +124,12 @@ flowchart TD
     style N2 fill:#4CAF50,color:#fff
     style N3 fill:#9C27B0,color:#fff
     style N4 fill:#f44336,color:#fff
+    subgraph Legend["图例"]
+        L1["🟢 开始/成功"]:::start
+        L2["🔵 主流程"]:::process
+        L3["🟠 判断/中间态"]:::decision
+        L4["🔴 失败/结束"]:::error
+    end
 ```
 
 ## 记忆要点

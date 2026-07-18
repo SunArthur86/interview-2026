@@ -28,6 +28,7 @@ memory_points:
 - 四维框架：效果(对不对)、效率(快不快)、成本(贵不贵)、体验(好不好)。
 - 效果最核心：看任务完成率、工具调用准确率、答案准确率。
 - 效率与成本：监控平均步数与P99延迟；衡量单任务Token消耗与API成本。
+frequency: medium
 ---
 
 # Agent 性能如何量化评估？
@@ -291,6 +292,7 @@ flowchart TD
     style DEPLOY fill:#009688,color:#fff
     style Q4 fill:#FF9800,color:#fff
     style ADJUST fill:#F44336,color:#fff
+
 ```
 
 ## 记忆要点

@@ -10,8 +10,9 @@ tags:
 - LangChain
 - 面经
 feynman:
-  essence: "Agent的记忆不是把所有对话塞进context window，而是用短期记忆(working memory)存当前上下文+长期记忆(long-term memory)存向量库，通过检索按需调用"
-  analogy: "短期记忆像你的工作台——只放当前正在处理的文件（context window）。长期记忆像档案柜——按标签分类存历史文件（向量库）。工作时从档案柜找相关文件放到工作台上，而不是把所有文件都堆在桌上"
+  essence: Agent的记忆不是把所有对话塞进context window，而是用短期记忆(working memory)存当前上下文+长期记忆(long-term
+    memory)存向量库，通过检索按需调用
+  analogy: 短期记忆像你的工作台——只放当前正在处理的文件（context window）。长期记忆像档案柜——按标签分类存历史文件（向量库）。工作时从档案柜找相关文件放到工作台上，而不是把所有文件都堆在桌上
   key_points:
   - 短期记忆：当前对话的context window，容量有限（4K-128K tokens）
   - 长期记忆：向量库存储历史对话/事实，按语义检索调用
@@ -19,9 +20,9 @@ feynman:
   - 核心挑战：什么时候触发检索、检索什么、怎么避免噪声
   - 常见实现：LangChain Memory + VectorStore，MemGPT架构
 first_principle:
-  essence: "LLM的context window是有限资源（即使128K也有上限）。记忆系统的本质是context管理——决定哪些历史信息进入当前上下文"
-  derivation: "如果Agent的每次对话都把全部历史放入context，token消耗线性增长，几轮后就超出context window。解决方案是把历史存到外部向量库，只在需要时检索最相关的片段注入context。这类似于人脑——你不会记住每次对话的每个字，而是记住关键信息，在需要时回忆"
-  conclusion: "记忆联动检索的关键是检索时机和检索质量——过早/过晚检索都会打断对话流畅性，检索到不相关的记忆会产生干扰"
+  essence: LLM的context window是有限资源（即使128K也有上限）。记忆系统的本质是context管理——决定哪些历史信息进入当前上下文
+  derivation: 如果Agent的每次对话都把全部历史放入context，token消耗线性增长，几轮后就超出context window。解决方案是把历史存到外部向量库，只在需要时检索最相关的片段注入context。这类似于人脑——你不会记住每次对话的每个字，而是记住关键信息，在需要时回忆
+  conclusion: 记忆联动检索的关键是检索时机和检索质量——过早/过晚检索都会打断对话流畅性，检索到不相关的记忆会产生干扰
 follow_up:
 - 怎么判断什么时候需要检索长期记忆？
 - 长期记忆存什么？原始对话还是提取的事实？
@@ -32,6 +33,7 @@ memory_points:
 - 联动：当前对话→生成query→向量库检索→注入context
 - 核心挑战：检索时机+检索质量+噪声控制
 - 实现：LangChain Memory + VectorStore / MemGPT
+frequency: high
 ---
 
 # 【AI Agent工程】短期长期记忆怎么在向量库联动检索？
@@ -232,6 +234,7 @@ flowchart TD
     style SHORT fill:#2196F3,color:#fff
     style WORK fill:#FF9800,color:#fff
     style DROP fill:#F44336,color:#fff
+
 ```
 
 ## 结构化回答

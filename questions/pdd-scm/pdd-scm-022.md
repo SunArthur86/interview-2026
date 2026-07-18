@@ -34,6 +34,7 @@ memory_points:
 - Canal 订阅 binlog 同步 ES 和下游
 - 缓存命中率 98%+
 - 商品是"主数据"，所有业务线共享
+frequency: high
 ---
 
 # 【拼多多供应链】设计商品中心（千万 SPU、亿 SKU）
@@ -195,6 +196,23 @@ ES 不适合高频更新：
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class A2 process
+    class A2a decision
+    class A2b special
+    class A3 error
+    class B1 info
+    class B2 start
+    class C1 process
+    class C2 decision
+    class C3 special
+    class C4 error
     subgraph 商品中心服务
         A1[商品管理后台] --> A2[MySQL分库分表]
         A1 -- 写入 --> A3[Canal解析Binlog]

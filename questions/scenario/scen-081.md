@@ -28,6 +28,7 @@ memory_points:
 - 防超卖与防重：利用Lua脚本保证原子性，校验Set防重与Decr库存扣减同步执行。
 - TTL自动回滚：创建订单时预占Redis库存并设TTL，超时未支付则自动过期回滚。
 - 一致性保障：Redis先快速回滚，再异步MQ通知DB回滚，且依赖订单状态机防重复回滚。
+frequency: high
 ---
 
 # 如何设计一个秒杀系统的库存预热和回滚机制？
@@ -140,6 +141,7 @@ flowchart TD
     WAIT -->|超时未付| ROLL[延时队列回滚库存]
     WAIT -->|支付完成| DONE[完成]
     style LUA fill:#d4edda
+
 ```
 
 

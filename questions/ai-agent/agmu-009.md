@@ -20,6 +20,7 @@ memory_points:
 - 对比自然语言：状态机显式流转，易于 Mock 回溯；自然语言隐式发散，难追踪。
 - 工程实践：自然语言作为状态机附件，流转由 LLM 输出特定指令触发。
 - 避坑指南：状态机限制流程走向而非 LLM 发挥空间，两者结合最佳。
+frequency: high
 ---
 
 # 多 Agent 系统为什么推荐状态机而不是纯自然语言传递一切
@@ -140,6 +141,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

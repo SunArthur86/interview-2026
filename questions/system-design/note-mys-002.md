@@ -36,6 +36,7 @@ memory_points:
 - 本地消息表=业务操作和消息写入同库事务→异步投递→消费方幂等
 - 选型口诀：要钱要命选TCC，普通业务选消息表
 - 所有方案的消费者都必须实现幂等性！
+frequency: high
 ---
 
 # 【美云智数终面】分布式事务场景你遇到过几种？2PC、TCC、本地消息表分别适用什么业务场景？
@@ -295,6 +296,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

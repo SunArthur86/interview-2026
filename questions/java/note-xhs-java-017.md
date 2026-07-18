@@ -28,16 +28,17 @@ first_principle:
   - 区分原因有助于调试和监控
   rebuild: 从OS三态出发，Java额外区分了"为什么等待"——等锁是BLOCKED，等通知是WAITING，等超时是TIMED_WAITING。这使得监控工具能精准定位线程卡住的原因。
 follow_up:
-  - BLOCKED和WAITING的本质区别是什么？能举例说明吗？
-  - 一个线程调用了sleep(1000)后，另一个线程能获取它持有的synchronized锁吗？
-  - 为什么start()方法不能调用两次？底层是怎么实现的？
-  - 线程在RUNNABLE状态时一定在消耗CPU吗？
-  - 如何用jstack诊断线程长时间处于BLOCKED状态的问题？
+- BLOCKED和WAITING的本质区别是什么？能举例说明吗？
+- 一个线程调用了sleep(1000)后，另一个线程能获取它持有的synchronized锁吗？
+- 为什么start()方法不能调用两次？底层是怎么实现的？
+- 线程在RUNNABLE状态时一定在消耗CPU吗？
+- 如何用jstack诊断线程长时间处于BLOCKED状态的问题？
 memory_points:
-  - 六状态口诀：新建运行阻塞等，超时等待终了停
-  - start()只能调一次——thread对象内部维护status标志
-  - BLOCKED只认synchronized——Lock.lock()对应的是WAITING
-  - sleep不释放锁，wait释放锁
+- 六状态口诀：新建运行阻塞等，超时等待终了停
+- start()只能调一次——thread对象内部维护status标志
+- BLOCKED只认synchronized——Lock.lock()对应的是WAITING
+- sleep不释放锁，wait释放锁
+frequency: high
 ---
 
 # 【拼多多一面】Java 线程生命周期及状态流转
@@ -273,6 +274,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 结构化回答

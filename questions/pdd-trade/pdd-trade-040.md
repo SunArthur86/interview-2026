@@ -11,7 +11,8 @@ tags:
 - LLM 应用
 - 学习路径
 feynman:
-  essence: Java 工程师转 AI 是"在已有工程能力上叠加 AI 应用层"——不用从零学算法，而是学 LLM 应用工程（Prompt/RAG/Agent/LLMOps），把"写 CRUD"升级为"搭 AI 应用"。
+  essence: Java 工程师转 AI 是"在已有工程能力上叠加 AI 应用层"——不用从零学算法，而是学 LLM 应用工程（Prompt/RAG/Agent/LLMOps），把"写
+    CRUD"升级为"搭 AI 应用"。
   analogy: 像"老司机开新车"——驾驶技术（工程能力）还在，只需学新车按钮（LLM API/RAG/Agent），不用重新学开车（数学/算法）。
   first_principle: AI 落地缺的不是算法科学家，而是能把 LLM 工程化上线的人，Java 工程师的分布式/工程经验正好补位。
   key_points:
@@ -27,14 +28,15 @@ first_principle:
   - 算法不必从零学
   rebuild: 学 AI 应用层（Prompt/RAG/Agent）+ 复用 Java 工程能力 + 业务落地。
 follow_up:
-  - 要不要学数学/算法？——应用层够用懂原理即可，深做研究才需
-  - Java 还是 Python？——工程层 Java 仍主力，模型层用 Python，混合最常见
-  - 怎么证明 AI 能力？——做一个端到端 RAG/Agent 项目（GitHub + 博客）
+- 要不要学数学/算法？——应用层够用懂原理即可，深做研究才需
+- Java 还是 Python？——工程层 Java 仍主力，模型层用 Python，混合最常见
+- 怎么证明 AI 能力？——做一个端到端 RAG/Agent 项目（GitHub + 博客）
 memory_points:
-  - 不学算法从零，学应用层（Prompt/RAG/Agent）
-  - 复用 Java 工程能力（分布式/高并发）
-  - 路径：API→RAG→Agent→LLMOps
-  - 证明：端到端项目
+- 不学算法从零，学应用层（Prompt/RAG/Agent）
+- 复用 Java 工程能力（分布式/高并发）
+- 路径：API→RAG→Agent→LLMOps
+- 证明：端到端项目
+frequency: medium
 ---
 
 # 【拼多多交易】Java 工程师怎么转 AI？
@@ -268,6 +270,7 @@ flowchart TD
     style S2 fill:#f3e5f5
     style S3 fill:#e8f5e9
     style S4 fill:#fff3e0
+
 ```
 
 ## 视频脚本

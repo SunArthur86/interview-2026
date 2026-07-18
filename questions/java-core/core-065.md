@@ -15,6 +15,7 @@ memory_points:
 - 强缓字段：1.0用Expires(绝对时间)，1.1用Cache-Control的max-age(相对秒数，优先级高)
 - 协商字段：Last-Modified/If-Modified-Since(秒级精度低)，ETag/If-None-Match(Hash精度高，优先)
 - 经典落地：带Hash的静态资源(如JS/CSS)用长强缓存，入口HTML文件用协商缓存
+frequency: medium
 ---
 
 # 什么是HTTP缓存有几种？
@@ -105,6 +106,45 @@ location ~* \.html$ {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class Cache special
+    class Control error
+    class D info
+    class E start
+    class ETag process
+    class Expires decision
+    class F special
+    class G error
+    class H info
+    class HTTP start
+    class I process
+    class If decision
+    class J special
+    class K error
+    class L info
+    class Last start
+    class M process
+    class Match decision
+    class Modified special
+    class N error
+    class None info
+    class Not start
+    class Since process
+    class age decision
+    class body special
+    class br error
+    class cache info
+    class from start
+    class max process
+    class network decision
     A[HTTP 缓存决策] --> B{本地有无缓存?}
     B -->|否| C[向服务器请求<br/>200 from network]
     B -->|是| D{Cache-Control/Expires<br/>是否过期?}

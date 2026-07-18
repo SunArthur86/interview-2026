@@ -16,6 +16,7 @@ memory_points:
 - 性能对比：JNI调用开销大且需手动管理内存，而FFM基于MethodHandle支持JIT内联优化
 - 内存管理：通过MemorySegment操作内存，利用Arena生命周期绑定实现自动释放防泄漏
 - 开发流程：JNI需繁琐编写C代码和生成头文件，而FFM纯Java实现符号查找和双向链接
+frequency: high
 ---
 
 # JDK 21中的Foreign Function & Memory API (FFM)是什么？与JNI有什么区别？
@@ -140,6 +141,7 @@ flowchart TD
     classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#b71c1c
     classDef storage fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238
     classDef async fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+
 ```
 ## 记忆要点
 

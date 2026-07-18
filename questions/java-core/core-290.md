@@ -16,6 +16,7 @@ memory_points:
 - 性能数据：时间复杂度稳定在O(n log n)，空间复杂度为O(n)
 - 特性对比：因为合并时元素相等不换位，所以它是稳定排序
 - 适用场景：因需O(n)额外空间，常用于外部排序或对稳定性要求高的场景
+frequency: medium
 ---
 
 # 序列化（深clone一中实现）是什么？
@@ -121,6 +122,40 @@ public class DeepCopyUtil {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class B1 decision
+    class B2 special
+    class B3 error
+    class B4 info
+    class C start
+    class C1 process
+    class C2 decision
+    class C3 special
+    class Cloneable error
+    class D info
+    class D1 start
+    class Deep process
+    class E decision
+    class F special
+    class G error
+    class H info
+    class I start
+    class J process
+    class JSON decision
+    class K special
+    class Object error
+    class Protobuf info
+    class Reference start
+    class Shallow process
+    class br decision
+    class clone special
     A[对象拷贝] --> B[浅拷贝 Shallow]
     A --> C[深拷贝 Deep]
     A --> D[引用拷贝 Reference]

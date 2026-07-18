@@ -9,9 +9,14 @@ tags:
 - OIDC
 - SSO
 feynman:
-  essence: OAuth2.1 是 OAuth2.0 的"整理 + 安全补丁"——强制 PKCE、废弃 implicit/password grant、明确 scope 规范。OIDC（OpenID Connect）是 OAuth2.0 的认证扩展层——OAuth2 解决"授权"（access token 能调什么 API），OIDC 解决"认证"（id token 证明用户是谁）。企业 SSO 用 OIDC 把多个内部系统统一到身份提供商（IdP），用户一次登录拿到 id token，所有系统都信任，不再各自维护账号。
-  analogy: 像酒店房卡 + 身份证。OAuth2 是房卡授权（房卡只能进房间，不能进别人房间，scope 限定）；OIDC 是酒店前台发的身份证验证（id token 证明你是张三，所有酒店设施都信任）。SSO 是连锁酒店集团——你在北京分店办了会员（一次登录），上海/广州分店都认（多系统信任）。
-  first_principle: 为什么企业需要 SSO？因为员工每天用 10+ 内部系统（HR、OA、工单、监控、CI/CD），每个系统独立账号要记 10 套密码、改密码影响 10 个系统、离职要注销 10 个账号。SSO 把"身份"集中到 IdP，业务系统只信任 IdP 发的 token，离职时 IdP 一关全断。
+  essence: OAuth2.1 是 OAuth2.0 的"整理 + 安全补丁"——强制 PKCE、废弃 implicit/password grant、明确
+    scope 规范。OIDC（OpenID Connect）是 OAuth2.0 的认证扩展层——OAuth2 解决"授权"（access token 能调什么
+    API），OIDC 解决"认证"（id token 证明用户是谁）。企业 SSO 用 OIDC 把多个内部系统统一到身份提供商（IdP），用户一次登录拿到
+    id token，所有系统都信任，不再各自维护账号。
+  analogy: 像酒店房卡 + 身份证。OAuth2 是房卡授权（房卡只能进房间，不能进别人房间，scope 限定）；OIDC 是酒店前台发的身份证验证（id
+    token 证明你是张三，所有酒店设施都信任）。SSO 是连锁酒店集团——你在北京分店办了会员（一次登录），上海/广州分店都认（多系统信任）。
+  first_principle: 为什么企业需要 SSO？因为员工每天用 10+ 内部系统（HR、OA、工单、监控、CI/CD），每个系统独立账号要记 10 套密码、改密码影响
+    10 个系统、离职要注销 10 个账号。SSO 把"身份"集中到 IdP，业务系统只信任 IdP 发的 token，离职时 IdP 一关全断。
   key_points:
   - OAuth2.1 强制 PKCE、废弃 implicit 和 password grant、明确 redirect_uri 严格匹配
   - OIDC 三种 flow：Authorization Code（最常用）、Implicit（废弃）、Hybrid（特殊场景）
@@ -24,19 +29,27 @@ first_principle:
   - 每个系统独立账号的密码管理、安全审计、离职注销成本随系统数线性增长
   - 业务系统不应该维护"我是谁"，应该信任专业 IdP
   - 集中化身份管理 = 集中化安全风险（IdP 挂了所有系统登录不了），需要 IdP 高可用
-  rebuild: 部署企业 IdP（如 Keycloak、Spring Authorization Server），所有业务系统配置为 IdP 的 OIDC client。员工访问业务系统 → 没 session 跳 IdP 登录 → 登录后 IdP 发 id_token + access_token 回业务系统 → 业务系统验签 id_token 拿到用户身份。第二次访问其他业务系统，IdP 已有 session 直接重定向回带 token，无需再登录。登出时 IdP 通过 back-channel 通知所有业务系统清理 session。
+  rebuild: 部署企业 IdP（如 Keycloak、Spring Authorization Server），所有业务系统配置为 IdP 的 OIDC client。员工访问业务系统
+    → 没 session 跳 IdP 登录 → 登录后 IdP 发 id_token + access_token 回业务系统 → 业务系统验签 id_token
+    拿到用户身份。第二次访问其他业务系统，IdP 已有 session 直接重定向回带 token，无需再登录。登出时 IdP 通过 back-channel
+    通知所有业务系统清理 session。
 follow_up:
-  - access_token 和 id_token 区别？——access_token 是授权令牌（调 API 用，opaque 或 JWT），id_token 是认证令牌（含用户身份信息，JWT 格式），OIDC 才有 id_token。
-  - PKCE 在 OAuth2.1 强制吗？——是的。OAuth2.1 所有 client（包括 confidential client）都强制 PKCE，因为 client_secret 在移动端无法安全存储。
-  - id_token 的 nonce 怎么用？——客户端发起授权时生成 nonce 存 session，id_token 里带回同 nonce，客户端校验匹配防重放。
-  - SLO 怎么保证所有系统都登出？——back-channel logout：IdP 调用每个业务系统的 logout endpoint（带 logout_token）；front-channel logout：IdP 用 iframe 触发每个业务系统登出。back-channel 更可靠。
-  - Spring Authorization Server 和 Keycloak 选哪个？——Keycloak 功能完整（开箱即用 UI、用户管理、social login）；Spring Authorization Server 是框架（需要自己写 UI、用户管理），灵活但工作量大。生产用 Keycloak 居多。
+- access_token 和 id_token 区别？——access_token 是授权令牌（调 API 用，opaque 或 JWT），id_token 是认证令牌（含用户身份信息，JWT
+  格式），OIDC 才有 id_token。
+- PKCE 在 OAuth2.1 强制吗？——是的。OAuth2.1 所有 client（包括 confidential client）都强制 PKCE，因为 client_secret
+  在移动端无法安全存储。
+- id_token 的 nonce 怎么用？——客户端发起授权时生成 nonce 存 session，id_token 里带回同 nonce，客户端校验匹配防重放。
+- SLO 怎么保证所有系统都登出？——back-channel logout：IdP 调用每个业务系统的 logout endpoint（带 logout_token）；front-channel
+  logout：IdP 用 iframe 触发每个业务系统登出。back-channel 更可靠。
+- Spring Authorization Server 和 Keycloak 选哪个？——Keycloak 功能完整（开箱即用 UI、用户管理、social login）；Spring
+  Authorization Server 是框架（需要自己写 UI、用户管理），灵活但工作量大。生产用 Keycloak 居多。
 memory_points:
-  - OAuth2.1：强制 PKCE、废弃 implicit/password、redirect_uri 严格匹配
-  - OIDC：OAuth2 + id_token，解决认证问题
-  - 三 token：access_token（授权）+ id_token（认证）+ refresh_token（续期）
-  - SSO：IdP 集中身份，业务系统信任 id_token
-  - SLO：back-channel logout 比 front-channel 可靠
+- OAuth2.1：强制 PKCE、废弃 implicit/password、redirect_uri 严格匹配
+- OIDC：OAuth2 + id_token，解决认证问题
+- 三 token：access_token（授权）+ id_token（认证）+ refresh_token（续期）
+- SSO：IdP 集中身份，业务系统信任 id_token
+- SLO：back-channel logout 比 front-channel 可靠
+frequency: medium
 ---
 
 # 【Java 后端架构师】OAuth2.1、OIDC 与企业 SSO 集成
@@ -480,6 +493,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
+
 ```
 
 ## 结构化回答

@@ -16,6 +16,7 @@ memory_points:
 - 口诀 PECS：频读用 extends（生产者），频写用 super（消费者）
 - 通配符：<?> 无边界只能读不能写（null除外）
 - 本质：伪泛型。因为编译后会类型擦除，所以运行时不存在泛型信息
+frequency: medium
 ---
 
 # 什么是泛型的使用？
@@ -109,6 +110,42 @@ public static void addNumbers(List<? super Integer> list) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class API process
+    class B decision
+    class C special
+    class Consumer error
+    class D info
+    class E start
+    class Erasure process
+    class F decision
+    class G special
+    class H error
+    class I info
+    class J start
+    class Java process
+    class K decision
+    class L special
+    class M error
+    class N info
+    class O start
+    class Object process
+    class PECS decision
+    class Provider special
+    class T error
+    class Type info
+    class V start
+    class bound process
+    class br decision
+    class extends special
+    class new error
+    class super info
     A[Java 泛型] --> B[类型参数化<br/>E T K V]
     A --> C[编译期类型检查]
     A --> D[类型擦除 Type Erasure]

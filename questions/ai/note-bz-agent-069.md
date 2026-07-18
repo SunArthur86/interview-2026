@@ -29,6 +29,7 @@ memory_points:
 - 客服/助手：定SOP流程，设明确边界，加安抚兜底机制防幻觉
 - 编程/技术：要求代码可直接运行，强约束格式，必带测试用例
 - 创意/分析：创意给Few-shot定基调，而分析要求展示一步步的数据推理链
+frequency: medium
 ---
 
 # 不同场景下提示词怎么写？
@@ -245,6 +246,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

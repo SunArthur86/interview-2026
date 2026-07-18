@@ -31,6 +31,7 @@ memory_points:
 - 左边界单调右移：遇重复时直接跳过，公式为 left = max(left, map[char]+1)。
 - 右边界逐个扩展：每流入一个新字符，即计算并更新最大窗口长度。
 - 空间换时间：时间复杂度O(1)每次操作，空间复杂度O(字符集大小)。
+frequency: medium
 ---
 
 # 【字节面经】给定一个字符串流，实现一个滑动窗口，返回当前窗口内的最长不重复子串长度。
@@ -695,6 +696,7 @@ flowchart TD
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef warn fill:#fee2e2,stroke:#ef4444,color:#7f1d1d;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

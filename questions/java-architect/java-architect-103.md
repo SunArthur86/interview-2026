@@ -9,9 +9,13 @@ tags:
 - 并发编排
 - 取消传播
 feynman:
-  essence: Structured Concurrency（JEP 505，JDK 24 正式）把"并发任务的生命周期"绑到代码块的词法作用域——StructuredTaskScope 内 fork 的子任务，必须在 scope 关闭前完成（或被取消）。它解决了 CompletableFuture 的"孤儿任务、取消不传播、错误处理散落"三大痛点，让并发编排回到 try-with-resources 的直觉。
-  analogy: 像公司项目管理：传统 CompletableFuture 是"开放式工单"（任务发出去就忘了，出错不知道，超时不取消）；StructuredTaskScope 是"项目里程碑"——所有子任务必须在里程碑关闭前完成或被显式取消，没有"游离任务"。
-  first_principle: 并发编程的复杂性来自"失控的任务"——子任务超时、异常、孤儿运行，让父任务无法干净退出。StructuredTaskScope 用词法作用域强制"父等子、子随父"，把分散的 Future 链收敛成结构化树。
+  essence: Structured Concurrency（JEP 505，JDK 24 正式）把"并发任务的生命周期"绑到代码块的词法作用域——StructuredTaskScope
+    内 fork 的子任务，必须在 scope 关闭前完成（或被取消）。它解决了 CompletableFuture 的"孤儿任务、取消不传播、错误处理散落"三大痛点，让并发编排回到
+    try-with-resources 的直觉。
+  analogy: 像公司项目管理：传统 CompletableFuture 是"开放式工单"（任务发出去就忘了，出错不知道，超时不取消）；StructuredTaskScope
+    是"项目里程碑"——所有子任务必须在里程碑关闭前完成或被显式取消，没有"游离任务"。
+  first_principle: 并发编程的复杂性来自"失控的任务"——子任务超时、异常、孤儿运行，让父任务无法干净退出。StructuredTaskScope
+    用词法作用域强制"父等子、子随父"，把分散的 Future 链收敛成结构化树。
   key_points:
   - StructuredTaskScope（JDK 21 预览、JDK 24 GA）：fork 子任务 + shutdown 策略
   - ShutdownOnSuccess：第一个成功就取消其他（适用"任何可用"模式）
@@ -24,20 +28,26 @@ first_principle:
   - 任务生命周期应该和代码块（词法作用域）绑定，不能游离
   - 一个任务失败/超时，应该能干净地取消整组兄弟任务
   - 父任务等待子任务是天经地义（结构化并发），不是性能损失
-  rebuild: 引入 StructuredTaskScope，把 N 个并发子任务包在 try-with-resources 块里。scope 内 fork 子任务（默认虚拟线程），通过 shutdown 策略（ShutdownOnSuccess / ShutdownOnFailure / 自定义）决定何时取消未完成子任务。scope 关闭时所有子任务必须结束（完成或被取消），保证没有孤儿任务。父任务在 scope.join() 等所有子任务，子任务异常通过 scope 抛给父。
+  rebuild: 引入 StructuredTaskScope，把 N 个并发子任务包在 try-with-resources 块里。scope 内 fork
+    子任务（默认虚拟线程），通过 shutdown 策略（ShutdownOnSuccess / ShutdownOnFailure / 自定义）决定何时取消未完成子任务。scope
+    关闭时所有子任务必须结束（完成或被取消），保证没有孤儿任务。父任务在 scope.join() 等所有子任务，子任务异常通过 scope 抛给父。
 follow_up:
-  - StructuredTaskScope 和 ExecutorService 区别？——前者是结构化（scope 关闭前子任务必须结束），后者是开放（submit 后任务游离，Future.cancel 不可靠）。前者强制父子绑定，后者是任务队列
-  - ShutdownOnSuccess 和 ShutdownOnFailure 怎么选？——"任何可用"（多机房读）用 Success（最快一个赢，取消其他）；"全部成功"（订单+库存+营销都要成）用 Failure（一个失败全取消）
-  - 怎么实现超时？——scope.joinUntil(deadline) 或 scope.orTimeout(duration)，到点 shutdown 取消所有子任务
-  - 子任务的异常怎么处理？——ShutdownOnFailure 把异常收集到 scope.throwIfFailed()，父任务统一处理；不会丢失任何一个子任务的异常
-  - 能跨线程透传 scope 吗？——不能。scope 是词法作用域绑定，不能像 ThreadLocal 那样透传。子任务继承父的 scope 是 StructuredTaskScope 的核心机制
+- StructuredTaskScope 和 ExecutorService 区别？——前者是结构化（scope 关闭前子任务必须结束），后者是开放（submit
+  后任务游离，Future.cancel 不可靠）。前者强制父子绑定，后者是任务队列
+- ShutdownOnSuccess 和 ShutdownOnFailure 怎么选？——"任何可用"（多机房读）用 Success（最快一个赢，取消其他）；"全部成功"（订单+库存+营销都要成）用
+  Failure（一个失败全取消）
+- 怎么实现超时？——scope.joinUntil(deadline) 或 scope.orTimeout(duration)，到点 shutdown 取消所有子任务
+- 子任务的异常怎么处理？——ShutdownOnFailure 把异常收集到 scope.throwIfFailed()，父任务统一处理；不会丢失任何一个子任务的异常
+- 能跨线程透传 scope 吗？——不能。scope 是词法作用域绑定，不能像 ThreadLocal 那样透传。子任务继承父的 scope 是 StructuredTaskScope
+  的核心机制
 memory_points:
-  - StructuredTaskScope = 词法作用域绑定的并发编排（JEP 505）
-  - ShutdownOnSuccess：第一个成功就取消其他（"任何可用"）
-  - ShutdownOnFailure：任一失败就取消其他（"全部成功"）
-  - 取消传播：scope.shutdown() 自动取消所有未完成子任务
-  - 与虚拟线程天生搭配：fork 默认创建虚拟线程
-  - 解决 CompletableFuture 三痛点：孤儿任务、取消不传播、错误散落
+- StructuredTaskScope = 词法作用域绑定的并发编排（JEP 505）
+- ShutdownOnSuccess：第一个成功就取消其他（"任何可用"）
+- ShutdownOnFailure：任一失败就取消其他（"全部成功"）
+- 取消传播：scope.shutdown() 自动取消所有未完成子任务
+- 与虚拟线程天生搭配：fork 默认创建虚拟线程
+- 解决 CompletableFuture 三痛点：孤儿任务、取消不传播、错误散落
+frequency: high
 ---
 
 # 【Java 后端架构师】Structured Concurrency 如何简化异步编排
@@ -364,6 +374,31 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A start
+    class B process
+    class C decision
+    class C1 special
+    class C2 error
+    class C3 info
+    class C4 start
+    class D process
+    class E decision
+    class F special
+    class Fork error
+    class G info
+    class H start
+    class ShutdownOnFailure process
+    class ShutdownOnSuccess decision
+    class StructuredTaskScope special
+    class br error
+    class joinUntil info
+    class scope start
     A["下单请求<br/>虚拟线程接收"] --> B["StructuredTaskScope<br/>开启作用域"]
     B --> C
     subgraph C ["并行 Fork 下游服务"]

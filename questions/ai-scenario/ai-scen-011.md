@@ -28,6 +28,7 @@ memory_points:
 - 短期记忆用摘要压缩替代原文，长期记忆用向量检索Top-K
 - 长期记忆分三类：用户画像、知识记忆、事件记忆
 - 需支持时间衰减和“选择性遗忘”，防止过时信息干扰
+frequency: medium
 ---
 
 # 如何设计AI Agent的记忆系统？支持短期对话记忆和长期知识积累。
@@ -158,6 +159,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

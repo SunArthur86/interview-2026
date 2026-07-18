@@ -19,6 +19,7 @@ memory_points:
 - 优势：以更少推理计算量达到大模型效果，总参数大但激活参数少。
 - Mixtral：8个专家选2个，粗粒度，均匀路由。
 - DeepSeek-MoE：细粒度多小专家+共享专家，减少冗余，专家专业化更强。
+frequency: low
 ---
 
 # MoE(Mixture of Experts)架构是什么?DeepSeek-MoE和Mixtral有什么区别
@@ -155,6 +156,7 @@ flowchart TD
     classDef decision fill:#fef3c7,stroke:#f59e0b,color:#78350f,stroke-width:2px;
     classDef store fill:#8b5cf6,stroke:#6d28d9,color:#fff;
     classDef danger fill:#b91c1c,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+
 ```
 
 ## 记忆要点

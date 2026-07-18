@@ -29,6 +29,7 @@ memory_points:
 - 普通Prompt求单次完成，而Agent Prompt求长期自主行动
 - 因为有自主行动目标，所以必须明确定义工具与行为流程边界
 - 输入输出需结构化：明确可用工具清单与规范的输出格式要求
+frequency: medium
 ---
 
 # Agent 提示词和普通提示词差在哪？（四层结构）
@@ -262,6 +263,7 @@ flowchart TD
     style VALID fill:#FF9800,color:#fff
     style REPAIR fill:#F44336,color:#fff
     style ITER fill:#9C27B0,color:#fff
+
 ```
 
 ## 记忆要点

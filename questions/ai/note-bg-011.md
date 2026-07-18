@@ -13,7 +13,8 @@ tags:
 feynman:
   essence: Agent上下文溢出时，策略有：截断（丢弃旧消息）、摘要（压缩历史）、选择性保留（保留关键信息）。工具返回结果太长时同理。不能轻易压缩的是：系统指令、当前任务、关键决策点、未完成的工具调用依赖。
   analogy: 像开会做笔记——会议太长笔记本写满时，你会：丢掉闲聊（截断）、把长讨论总结成要点（摘要）、但绝不能丢掉"会议目标"和"待办事项"（关键信息）。工具返回的长报告，你会提炼关键结论而非全文记录。
-  first_principle: Agent上下文的核心价值是"维持任务连贯性"。溢出处理的本质是"信息保真度vs空间限制"的权衡——必须保留对当前决策有关键影响的上下文，可以损失细节但不能损失任务主线。Claude Code类系统的做法是"分层管理+智能检索"。
+  first_principle: Agent上下文的核心价值是"维持任务连贯性"。溢出处理的本质是"信息保真度vs空间限制"的权衡——必须保留对当前决策有关键影响的上下文，可以损失细节但不能损失任务主线。Claude
+    Code类系统的做法是"分层管理+智能检索"。
   key_points:
   - 溢出处理：截断/摘要/选择性保留/外部记忆
   - 工具结果太长：裁剪关键部分 or 摘要 or 存外部按需检索
@@ -21,7 +22,8 @@ feynman:
   - Claude Code等：分层上下文 + 自动摘要 + 文件系统作为外部记忆
 first_principle:
   essence: 上下文窗口是有限的注意力资源，必须分配给"对当前决策最有价值的信息"
-  derivation: LLM的注意力是softmax，上下文越长，每个token的注意力权重越分散（attention dilution）。即使窗口没满，过长上下文也会导致"中间遗忘"(lost in the middle)。因此上下文管理不仅是"装不装得下"，更是"注意力分配优化"。
+  derivation: LLM的注意力是softmax，上下文越长，每个token的注意力权重越分散（attention dilution）。即使窗口没满，过长上下文也会导致"中间遗忘"(lost
+    in the middle)。因此上下文管理不仅是"装不装得下"，更是"注意力分配优化"。
   conclusion: 上下文管理 = 空间管理(防溢出) + 注意力管理(防稀释) + 连贯性管理(防遗忘)
 follow_up:
 - 如何检测上下文即将溢出？提前还是事后处理？
@@ -32,6 +34,7 @@ memory_points:
 - 摘要压缩：把老旧历史用LLM总结为几百字概要，并拼接近期几轮原始对话
 - 工具超长：调用前限制返回长度，或用LLM先抽取关键信息再喂回上下文
 - 分层管理：核心区常驻不变，摘要区折叠历史，临时区存工具结果随用随丢
+frequency: medium
 ---
 
 # 【八股总结】Agent 上下文窗口溢出怎么办？工具结果太长如何处理？
@@ -487,6 +490,23 @@ class ClaudeCodeContextManager:
 
 ```mermaid
 flowchart TD
+    classDef start fill:#4CAF50,color:#fff
+    classDef process fill:#2196F3,color:#fff
+    classDef decision fill:#FF9800,color:#fff
+    classDef special fill:#9C27B0,color:#fff
+    classDef error fill:#f44336,color:#fff
+    classDef info fill:#607D8B,color:#fff
+    class A1 start
+    class B process
+    class C1 decision
+    class D special
+    class E error
+    class F info
+    class G start
+    class H process
+    class I decision
+    class J special
+    class K error
     A1["Agent接收新消息"] --> B{"上下文Token检测"}
     B -->|"未超阈值"| C1["直接拼接送入大模型"]
     B -->|"触发窗口80%阈值"| D["执行上下文管理"]
