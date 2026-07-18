@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="tb" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker>
+<style>.t{font-size:12.5px;fill:#333;font-weight:600;text-anchor:middle}.s{font-size:10px;fill:#666;text-anchor:middle}.lbl{font-size:11px;fill:#555;font-weight:700;text-anchor:middle}</style></defs>
+<text x="280" y="26" text-anchor="middle" font-size="15" font-weight="700">Transformer Encoder vs Decoder Block</text>
+
+<!-- Encoder (left) -->
+<text x="140" y="56" class="lbl">Encoder Block (BERT)</text>
+<rect x="60" y="66" width="160" height="34" fill="#e3f2fd" stroke="#1565c0" rx="6"/><text x="140" y="88" class="t">Input Embedding + PE</text>
+<line x1="140" y1="100" x2="140" y2="110" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="60" y="112" width="160" height="34" fill="#fff3e0" stroke="#e65100" rx="6"/><text x="140" y="134" class="t">Multi-Head Attention</text>
+<text x="220" y="129" class="s" fill="#1565c0">双向</text>
+<line x1="140" y1="146" x2="140" y2="156" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="60" y="158" width="160" height="30" fill="#fce4ec" stroke="#880e4f" rx="6"/><text x="140" y="178" class="t">Add &amp; LayerNorm</text>
+<line x1="140" y1="188" x2="140" y2="198" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="60" y="200" width="160" height="34" fill="#f3e5f5" stroke="#6a1b9a" rx="6"/><text x="140" y="222" class="t">Feed Forward (FFN)</text>
+<line x1="140" y1="234" x2="140" y2="244" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="60" y="246" width="160" height="30" fill="#fce4ec" stroke="#880e4f" rx="6"/><text x="140" y="266" class="t">Add &amp; LayerNorm</text>
+<line x1="140" y1="276" x2="140" y2="286" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="70" y="288" width="140" height="30" fill="#e8f5e9" stroke="#2e7d32" rx="6"/><text x="140" y="308" class="t">输出（上下文表示）</text>
+<text x="140" y="335" class="s">每个 token 看到全部 token（含下文）</text>
+
+<!-- Decoder (right) -->
+<text x="420" y="56" class="lbl">Decoder Block (GPT)</text>
+<rect x="340" y="66" width="160" height="34" fill="#e3f2fd" stroke="#1565c0" rx="6"/><text x="420" y="88" class="t">Input Embedding + PE</text>
+<line x1="420" y1="100" x2="420" y2="110" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="340" y="112" width="160" height="34" fill="#fff3e0" stroke="#e65100" rx="6"/><text x="420" y="134" class="t">Masked Self-Attention</text>
+<text x="500" y="129" class="s" fill="#c62828">单向</text>
+<line x1="420" y1="146" x2="420" y2="156" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="340" y="158" width="160" height="30" fill="#fce4ec" stroke="#880e4f" rx="6"/><text x="420" y="178" class="t">Add &amp; LayerNorm</text>
+<line x1="420" y1="188" x2="420" y2="198" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="340" y="200" width="160" height="34" fill="#e8eaf6" stroke="#283593" rx="6"/><text x="420" y="222" class="t">Cross-Attention (可选)</text>
+<line x1="420" y1="234" x2="420" y2="244" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="340" y="246" width="160" height="30" fill="#fce4ec" stroke="#880e4f" rx="6"/><text x="420" y="266" class="t">FFN + Add&amp;Norm</text>
+<line x1="420" y1="276" x2="420" y2="286" stroke="#666" stroke-width="1.5" marker-end="url(#tb)"/>
+<rect x="350" y="288" width="140" height="30" fill="#e8f5e9" stroke="#2e7d32" rx="6"/><text x="420" y="308" class="t">输出（预测下一 token）</text>
+<text x="420" y="335" class="s">只能看上文（causal mask）</text>
+</svg>

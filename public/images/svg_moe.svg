@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 300" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><style>.t{font-size:12px;text-anchor:middle;fill:#333}</style></defs>
+<text x="275" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#333">MoE: Only Top-K Experts are Activated per Token</text>
+<!-- Input token -->
+<rect x="230" y="40" width="90" height="30" fill="#e3f2fd" stroke="#1565c0" rx="8"/><text x="275" y="59" class="t">Input Token</text>
+<line x1="275" y1="70" x2="275" y2="85" stroke="#666" stroke-width="1.5"/>
+<!-- Router/Gate -->
+<rect x="200" y="85" width="150" height="30" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="8"/>
+<text x="275" y="104" class="t" font-weight="600">🔀 Router / Gate</text>
+<text x="275" y="120" text-anchor="middle" font-size="10" fill="#666">scores all experts, picks Top-2</text>
+<!-- Expert boxes -->
+<g transform="translate(50,130)">
+<rect width="80" height="50" fill="#e8f5e9" stroke="#2e7d32" stroke-width="3" rx="6"/><text x="40" y="22" class="t">Expert 1</text><text x="40" y="38" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="600">✅ Selected</text>
+<rect x="100" y="0" width="80" height="50" fill="#fafafa" stroke="#bbb" stroke-width="1" rx="6"/><text x="140" y="22" class="t" fill="#999">Expert 2</text><text x="140" y="38" text-anchor="middle" font-size="10" fill="#999">❌</text>
+<rect x="200" y="0" width="80" height="50" fill="#e8f5e9" stroke="#2e7d32" stroke-width="3" rx="6"/><text x="240" y="22" class="t">Expert 3</text><text x="240" y="38" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="600">✅ Selected</text>
+<rect x="300" y="0" width="80" height="50" fill="#fafafa" stroke="#bbb" stroke-width="1" rx="6"/><text x="340" y="22" class="t" fill="#999">Expert 4</text><text x="340" y="38" text-anchor="middle" font-size="10" fill="#999">❌</text>
+<rect x="0" y="60" width="80" height="50" fill="#fafafa" stroke="#bbb" stroke-width="1" rx="6"/><text x="40" y="82" class="t" fill="#999">Expert 5</text><text x="40" y="98" text-anchor="middle" font-size="10" fill="#999">❌</text>
+<rect x="100" y="60" width="80" height="50" fill="#fafafa" stroke="#bbb" stroke-width="1" rx="6"/><text x="140" y="82" class="t" fill="#999">Expert 6</text><text x="140" y="98" text-anchor="middle" font-size="10" fill="#999">❌</text>
+<rect x="200" y="60" width="80" height="50" fill="#fafafa" stroke="#bbb" stroke-width="1" rx="6"/><text x="240" y="82" class="t" fill="#999">Expert 7</text><text x="240" y="98" text-anchor="middle" font-size="10" fill="#999">❌</text>
+<rect x="300" y="60" width="80" height="50" fill="#fafafa" stroke="#bbb" stroke-width="1" rx="6"/><text x="340" y="82" class="t" fill="#999">Expert 8</text><text x="340" y="98" text-anchor="middle" font-size="10" fill="#999">❌</text>
+</g>
+<!-- Arrows from router to selected experts -->
+<line x1="250" y1="115" x2="130" y2="130" stroke="#2e7d32" stroke-width="2"/>
+<line x1="300" y1="115" x2="330" y2="130" stroke="#2e7d32" stroke-width="2"/>
+<!-- Weighted sum -->
+<rect x="200" y="260" width="150" height="30" fill="#e3f2fd" stroke="#1565c0" rx="8"/>
+<text x="275" y="279" class="t">Weighted Sum → Output</text>
+<line x1="130" y1="180" x2="250" y2="260" stroke="#2e7d32" stroke-width="1.5"/>
+<line x1="330" y1="180" x2="300" y2="260" stroke="#2e7d32" stroke-width="1.5"/>
+</svg>

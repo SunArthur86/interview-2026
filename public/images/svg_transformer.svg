@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><style>.box{fill:#e3f2fd;stroke:#1565c0;stroke-width:2;rx:8}.lbl{font-size:13px;fill:#333;text-anchor:middle}.arr{stroke:#666;stroke-width:1.5;fill:none;marker-end:url(#a)}</style>
+<marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker></defs>
+<!-- Input -->
+<rect x="50" y="30" width="120" height="35" class="box"/><text x="110" y="52" class="lbl">Input Embedding</text>
+<rect x="50" y="75" width="120" height="30" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="6"/><text x="110" y="94" class="lbl">+ Positional Encoding</text>
+<line x1="110" y1="105" x2="110" y2="130" class="arr"/>
+<!-- Multi-Head Attention -->
+<rect x="30" y="130" width="160" height="50" fill="#e8eaf6" stroke="#283593" stroke-width="2" rx="8"/>
+<text x="110" y="152" class="lbl" style="font-weight:600">Multi-Head Self-Attention</text>
+<text x="110" y="168" class="lbl" style="font-size:11px;fill:#666">Q, K, V → softmax(QK^T/√d)V</text>
+<line x1="110" y1="180" x2="110" y2="195" class="arr"/>
+<!-- Add & Norm -->
+<rect x="40" y="195" width="140" height="30" fill="#e0f2f1" stroke="#00695c" stroke-width="2" rx="6"/>
+<text x="110" y="214" class="lbl">Add &amp; LayerNorm</text>
+<line x1="110" y1="225" x2="110" y2="240" class="arr"/>
+<!-- FFN -->
+<rect x="40" y="240" width="140" height="40" fill="#fce4ec" stroke="#880e4f" stroke-width="2" rx="8"/>
+<text x="110" y="258" class="lbl" style="font-weight:600">Feed Forward (FFN)</text>
+<text x="110" y="272" class="lbl" style="font-size:11px;fill:#666">Linear → SwiGLU → Linear</text>
+<line x1="110" y1="280" x2="110" y2="295" class="arr"/>
+<!-- Add & Norm 2 -->
+<rect x="40" y="295" width="140" height="30" fill="#e0f2f1" stroke="#00695c" stroke-width="2" rx="6"/>
+<text x="110" y="314" class="lbl">Add &amp; LayerNorm</text>
+<!-- Residual connections -->
+<path d="M 25,130 Q 15,130 15,195 L 40,195" stroke="#4caf50" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+<path d="M 25,195 Q 15,195 15,295 L 40,295" stroke="#4caf50" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+<!-- Right side: MHA detail -->
+<rect x="280" y="120" width="290" height="120" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2" rx="8"/>
+<text x="425" y="140" class="lbl" style="font-weight:600;color:#6a1b9a">Multi-Head Attention Detail</text>
+<rect x="300" y="150" width="60" height="25" fill="#bbdefb" stroke="#1565c0" rx="4"/><text x="330" y="167" class="lbl" style="font-size:11px">Head 1</text>
+<rect x="370" y="150" width="60" height="25" fill="#bbdefb" stroke="#1565c0" rx="4"/><text x="400" y="167" class="lbl" style="font-size:11px">Head 2</text>
+<rect x="440" y="150" width="60" height="25" fill="#bbdefb" stroke="#1565c0" rx="4"/><text x="470" y="167" class="lbl" style="font-size:11px">Head N</text>
+<line x1="330" y1="175" x2="330" y2="190" class="arr"/>
+<line x1="400" y1="175" x2="400" y2="190" class="arr"/>
+<line x1="470" y1="175" x2="470" y2="190" class="arr"/>
+<rect x="320" y="190" width="200" height="25" fill="#e1bee7" stroke="#6a1b9a" rx="4"/><text x="420" y="207" class="lbl" style="font-size:11px">Concat → Linear</text>
+<!-- Output -->
+<rect x="50" y="340" width="120" height="35" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="8"/>
+<text x="110" y="362" class="lbl">Output</text>
+<!-- N× label -->
+<text x="200" y="225" style="font-size:20px;font-weight:700;fill:#999">N×</text>
+</svg>

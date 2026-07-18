@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 200" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="f" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker>
+<style>.t{font-size:12px;text-anchor:middle;fill:#333;font-weight:600}.s{font-size:10px;fill:#666;text-anchor:middle}</style></defs>
+<text x="275" y="22" text-anchor="middle" font-size="14" font-weight="700">LLM Training Pipeline</text>
+<!-- Stage 1: Pre-training -->
+<rect x="20" y="40" width="120" height="80" fill="#e3f2fd" stroke="#1565c0" stroke-width="2" rx="10"/>
+<text x="80" y="60" class="t">1. Pre-training</text>
+<text x="80" y="77" class="s">Trillions of tokens</text>
+<text x="80" y="90" class="s">Next token prediction</text>
+<text x="80" y="103" class="s">Web + Code + Books</text>
+<text x="80" y="116" class="s">→ Base Model</text>
+<!-- Arrow -->
+<line x1="140" y1="80" x2="165" y2="80" stroke="#666" stroke-width="2" marker-end="url(#f)"/>
+<!-- Stage 2: SFT -->
+<rect x="170" y="40" width="120" height="80" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="10"/>
+<text x="230" y="60" class="t">2. SFT</text>
+<text x="230" y="77" class="s">Instruction tuning</text>
+<text x="230" y="90" class="s">High-quality Q&amp;A</text>
+<text x="230" y="103" class="s">LoRA / Full FT</text>
+<text x="230" y="116" class="s">→ Chat Model</text>
+<line x1="290" y1="80" x2="315" y2="80" stroke="#666" stroke-width="2" marker-end="url(#f)"/>
+<!-- Stage 3: Alignment -->
+<rect x="320" y="40" width="120" height="80" fill="#e8eaf6" stroke="#283593" stroke-width="2" rx="10"/>
+<text x="380" y="60" class="t">3. Alignment</text>
+<text x="380" y="77" class="s">RLHF / DPO</text>
+<text x="380" y="90" class="s">Human preferences</text>
+<text x="380" y="103" class="s">Safe + Helpful</text>
+<text x="380" y="116" class="s">→ Aligned Model</text>
+<line x1="440" y1="80" x2="465" y2="80" stroke="#666" stroke-width="2" marker-end="url(#f)"/>
+<!-- Result -->
+<rect x="470" y="55" width="70" height="50" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="10"/>
+<text x="505" y="80" class="t">🚀</text>
+<text x="505" y="96" class="s">Production</text>
+<!-- Param counts -->
+<text x="80" y="140" class="s">~15T tokens</text>
+<text x="230" y="140" class="s">~100K examples</text>
+<text x="380" y="140" class="s">~50K preferences</text>
+<!-- Cost indicators -->
+<text x="80" y="160" class="s" fill="#c62828">$$$ (GPU months)</text>
+<text x="230" y="160" class="s" fill="#e65100">$$ (days)</text>
+<text x="380" y="160" class="s" fill="#2e7d32">$ (hours)</text>
+</svg>

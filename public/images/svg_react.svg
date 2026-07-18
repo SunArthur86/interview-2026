@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="e" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0L10,5L0,10Z" fill="#1565c0"/></marker>
+<style>.t{font-size:13px;text-anchor:middle;fill:#333;font-weight:600}.s{font-size:10px;fill:#666;text-anchor:middle}</style></defs>
+<text x="250" y="25" text-anchor="middle" font-size="14" font-weight="700">ReAct: Reasoning + Acting Loop</text>
+<!-- Thought -->
+<rect x="170" y="50" width="160" height="45" fill="#e3f2fd" stroke="#1565c0" stroke-width="2" rx="10"/>
+<text x="250" y="70" class="t">💭 Thought</text>
+<text x="250" y="85" class="s">"I need to search for..."</text>
+<!-- Arrow down -->
+<path d="M 250,95 L 250,115" stroke="#1565c0" stroke-width="2" fill="none" marker-end="url(#e)"/>
+<!-- Action -->
+<rect x="170" y="120" width="160" height="45" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="10"/>
+<text x="250" y="140" class="t">🔧 Action</text>
+<text x="250" y="155" class="s">search("Beijing weather")</text>
+<!-- Arrow down -->
+<path d="M 250,165 L 250,185" stroke="#e65100" stroke-width="2" fill="none" marker-end="url(#e)"/>
+<!-- Observation -->
+<rect x="170" y="190" width="160" height="45" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="10"/>
+<text x="250" y="210" class="t">👁️ Observation</text>
+<text x="250" y="225" class="s">"Beijing: 晴, 25°C"</text>
+<!-- Loop arrow back to thought -->
+<path d="M 170,212 Q 80,212 80,72 Q 80,50 170,72" stroke="#9c27b0" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#e)"/>
+<text x="50" y="145" font-size="10" fill="#9c27b0" transform="rotate(-90 50,145)">Repeat until done</text>
+<!-- Final Answer -->
+<path d="M 330,72 Q 420,72 420,290 Q 420,310 330,310" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#e)"/>
+<rect x="170" y="290" width="160" height="40" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2" rx="10"/>
+<text x="250" y="315" class="t">✅ Final Answer</text>
+</svg>

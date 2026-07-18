@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 280" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="gd" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker>
+<style>.t{font-size:12px;fill:#333;font-weight:600;text-anchor:middle}.s{font-size:10.5px;fill:#666;text-anchor:middle}.lbl{font-size:11.5px;fill:#555;font-weight:700;text-anchor:middle}</style></defs>
+<text x="280" y="26" text-anchor="middle" font-size="15" font-weight="700">梯度下降与优化器对比</text>
+
+<!-- Left: gradient descent visual (loss surface) -->
+<text x="150" y="56" class="lbl">❶ 沿负梯度方向下降</text>
+<!-- Loss curve (parabola-ish) -->
+<path d="M 40,230 Q 90,80 150,90 Q 210,100 260,230" fill="none" stroke="#bbb" stroke-width="2"/>
+<text x="50" y="245" class="s">参数θ</text>
+<text x="30" y="120" class="s" transform="rotate(-90 30,120)">损失L</text>
+<!-- Steps -->
+<circle cx="80" cy="170" r="5" fill="#1565c0"/><text x="80" y="160" font-size="9" fill="#1565c0" text-anchor="middle">θ₁</text>
+<circle cx="120" cy="105" r="5" fill="#1565c0"/><text x="120" y="95" font-size="9" fill="#1565c0" text-anchor="middle">θ₂</text>
+<circle cx="150" cy="90" r="5" fill="#2e7d32"/><text x="150" y="80" font-size="9" fill="#2e7d32" text-anchor="middle">min</text>
+<path d="M 80,170 L 115,110" stroke="#1565c0" stroke-width="1.5" marker-end="url(#gd)" stroke-dasharray="3,2"/>
+<path d="M 120,105 L 145,93" stroke="#1565c0" stroke-width="1.5" marker-end="url(#gd)" stroke-dasharray="3,2"/>
+<text x="150" y="265" class="s">θ ← θ - η·∇L(θ)</text>
+
+<!-- Right: optimizer comparison -->
+<text x="420" y="56" class="lbl">❷ 优化器对比</text>
+<g font-size="11">
+  <rect x="310" y="72" width="220" height="32" fill="#e3f2fd" stroke="#1565c0" rx="6"/>
+  <text x="420" y="92" class="t">SGD：θ ← θ - η·∇L</text>
+  <rect x="310" y="108" width="220" height="32" fill="#fff3e0" stroke="#e65100" rx="6"/>
+  <text x="420" y="128" class="t">Momentum：加动量 v</text>
+  <rect x="310" y="144" width="220" height="32" fill="#e8f5e9" stroke="#2e7d32" rx="6"/>
+  <text x="420" y="164" class="t">Adam：动量 + 自适应学习率</text>
+  <rect x="310" y="180" width="220" height="32" fill="#f3e5f5" stroke="#6a1b9a" rx="6"/>
+  <text x="420" y="200" class="t">AdamW：Adam + 权重衰减</text>
+</g>
+<text x="420" y="225" class="s">大模型训练常用 AdamW</text>
+<text x="420" y="242" class="s">（Adam + 解耦的 L2 正则）</text>
+
+<text x="280" y="268" class="s" fill="#c62828">问题：学习率太大→发散/震荡，太小→收敛慢；</text>
+<text x="280" y="282" class="s" fill="#c62828">鞍点/局部最小、梯度消失/爆炸需用 warmup、clip、归一化缓解</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><style>.t{font-size:11px;text-anchor:middle;fill:#333}</style></defs>
+<text x="250" y="22" text-anchor="middle" font-size="14" font-weight="700">Quantization: Reduce Precision, Save Memory</text>
+<!-- FP16 -->
+<rect x="20" y="40" width="100" height="120" fill="#e3f2fd" stroke="#1565c0" stroke-width="2" rx="8"/>
+<text x="70" y="60" class="t" font-weight="600">FP16</text>
+<text x="70" y="80" class="t">16 bits/param</text>
+<text x="70" y="100" class="t" font-size="20" font-weight="700">26 GB</text>
+<text x="70" y="120" class="t" fill="#c62828">13B model</text>
+<text x="70" y="140" class="t" fill="#2e7d32">Best quality</text>
+<!-- INT8 -->
+<rect x="150" y="40" width="100" height="120" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="8"/>
+<text x="200" y="60" class="t" font-weight="600">INT8</text>
+<text x="200" y="80" class="t">8 bits/param</text>
+<text x="200" y="100" class="t" font-size="20" font-weight="700">13 GB</text>
+<text x="200" y="120" class="t" fill="#e65100">50% smaller</text>
+<text x="200" y="140" class="t" fill="#2e7d32">~0.5% loss</text>
+<!-- INT4 -->
+<rect x="280" y="40" width="100" height="120" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="8"/>
+<text x="330" y="60" class="t" font-weight="600">INT4</text>
+<text x="330" y="80" class="t">4 bits/param</text>
+<text x="330" y="100" class="t" font-size="20" font-weight="700">7 GB</text>
+<text x="330" y="120" class="t" fill="#2e7d32">75% smaller</text>
+<text x="330" y="140" class="t" fill="#2e7d32">~1% loss</text>
+<!-- Arrows -->
+<text x="135" y="105" font-size="18" fill="#666">→</text>
+<text x="265" y="105" font-size="18" fill="#666">→</text>
+<!-- Annotation -->
+<text x="430" y="80" class="t" fill="#1565c0" font-weight="600">Methods:</text>
+<text x="430" y="95" class="t" font-size="10" fill="#666">• GPTQ</text>
+<text x="430" y="108" class="t" font-size="10" fill="#666">• AWQ</text>
+<text x="430" y="121" class="t" font-size="10" fill="#666">• GGUF</text>
+<text x="430" y="134" class="t" font-size="10" fill="#666">• NF4/QLoRA</text>
+</svg>

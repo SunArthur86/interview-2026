@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="c" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker>
+<style>.tk{font-size:14px;fill:#333;font-weight:700;text-anchor:middle;font-family:monospace}.s{font-size:10.5px;fill:#666;text-anchor:middle}.lbl{font-size:12px;fill:#555;font-weight:700;text-anchor:middle}</style></defs>
+<text x="280" y="26" text-anchor="middle" font-size="15" font-weight="700">CLM vs MLM 语言建模</text>
+
+<!-- CLM (left) - predict next token, causal mask -->
+<text x="140" y="58" class="lbl">❶ CLM 因果语言建模 (GPT)</text>
+<text x="140" y="74" class="s">只能看上文，预测下一个词</text>
+<g font-family="monospace">
+  <rect x="40" y="86" width="44" height="32" fill="#e8f5e9" stroke="#2e7d32" rx="5"/><text x="62" y="107" class="tk">今</text>
+  <rect x="88" y="86" width="44" height="32" fill="#e8f5e9" stroke="#2e7d32" rx="5"/><text x="110" y="107" class="tk">天</text>
+  <rect x="136" y="86" width="44" height="32" fill="#e8f5e9" stroke="#2e7d32" rx="5"/><text x="158" y="107" class="tk">天</text>
+  <rect x="184" y="86" width="44" height="32" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="5"/><text x="206" y="107" class="tk">气</text>
+</g>
+<!-- arrows: each predicts next -->
+<line x1="84" y1="125" x2="86" y2="125" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#c)"/>
+<text x="140" y="146" class="s">→ 每个词预测下一个词</text>
+<text x="140" y="162" class="s">单向 (causal mask)</text>
+<rect x="50" y="178" width="180" height="34" fill="#e3f2fd" stroke="#1565c0" rx="8"/>
+<text x="140" y="200" class="s" font-weight="600">擅长：生成 (对话/写作/代码)</text>
+<text x="140" y="232" class="s">训练：自回归，可高效并行</text>
+
+<!-- MLM (right) - mask random tokens, bidirectional -->
+<text x="420" y="58" class="lbl">❷ MLM 掩码语言建模 (BERT)</text>
+<text x="420" y="74" class="s">挖空，双向看上下文填空</text>
+<g font-family="monospace">
+  <rect x="320" y="86" width="44" height="32" fill="#e8f5e9" stroke="#2e7d32" rx="5"/><text x="342" y="107" class="tk">今</text>
+  <rect x="368" y="86" width="44" height="32" fill="#fce4ec" stroke="#880e4f" stroke-width="2" rx="5"/><text x="390" y="107" class="tk">[M]</text>
+  <rect x="416" y="86" width="44" height="32" fill="#e8f5e9" stroke="#2e7d32" rx="5"/><text x="438" y="107" class="tk">天</text>
+  <rect x="464" y="86" width="44" height="32" fill="#e8f5e9" stroke="#2e7d32" rx="5"/><text x="486" y="107" class="tk">气</text>
+</g>
+<text x="420" y="146" class="s">→ 同时看左右猜挖空的词</text>
+<text x="420" y="162" class="s">双向 (无 mask)</text>
+<rect x="330" y="178" width="180" height="34" fill="#e3f2fd" stroke="#1565c0" rx="8"/>
+<text x="420" y="200" class="s" font-weight="600">擅长：理解 (分类/抽取/检索)</text>
+<text x="420" y="232" class="s">训练：随机 mask 15%，并行</text>
+
+<text x="280" y="270" text-anchor="middle" class="s">关键区别：能否看到「下文」 — CLM 不能，MLM 能</text>
+<text x="280" y="286" text-anchor="middle" class="s">现代大模型（GPT/LLaMA）多用 CLM，因其生成能力强且 scale up 后理解能力也强</text>
+</svg>

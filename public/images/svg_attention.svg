@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 280" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="b" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker></defs>
+<!-- Q, K, V inputs -->
+<rect x="30" y="30" width="60" height="30" fill="#e3f2fd" stroke="#1565c0" rx="6"/><text x="60" y="49" text-anchor="middle" font-size="14" font-weight="600">Q</text>
+<rect x="30" y="70" width="60" height="30" fill="#e3f2fd" stroke="#1565c0" rx="6"/><text x="60" y="89" text-anchor="middle" font-size="14" font-weight="600">K</text>
+<rect x="30" y="110" width="60" height="30" fill="#e3f2fd" stroke="#1565c0" rx="6"/><text x="60" y="129" text-anchor="middle" font-size="14" font-weight="600">V</text>
+<!-- MatMul QK^T -->
+<line x1="90" y1="55" x2="160" y2="80" stroke="#666" stroke-width="1.5" marker-end="url(#b)"/>
+<line x1="90" y1="85" x2="160" y2="80" stroke="#666" stroke-width="1.5" marker-end="url(#b)"/>
+<rect x="160" y="65" width="80" height="35" fill="#fff3e0" stroke="#e65100" rx="6"/>
+<text x="200" y="82" text-anchor="middle" font-size="11">MatMul</text><text x="200" y="95" text-anchor="middle" font-size="10" fill="#666">Q × K^T</text>
+<!-- Scale -->
+<line x1="240" y1="82" x2="280" y2="82" stroke="#666" stroke-width="1.5" marker-end="url(#b)"/>
+<rect x="280" y="65" width="60" height="35" fill="#fce4ec" stroke="#880e4f" rx="6"/>
+<text x="310" y="82" text-anchor="middle" font-size="11">Scale</text><text x="310" y="95" text-anchor="middle" font-size="10" fill="#666">÷√d_k</text>
+<!-- Softmax -->
+<line x1="340" y1="82" x2="380" y2="82" stroke="#666" stroke-width="1.5" marker-end="url(#b)"/>
+<rect x="380" y="65" width="70" height="35" fill="#e8eaf6" stroke="#283593" rx="6"/>
+<text x="415" y="82" text-anchor="middle" font-size="11">Softmax</text>
+<!-- MatMul with V -->
+<line x1="450" y1="82" x2="490" y2="82" stroke="#666" stroke-width="1.5" marker-end="url(#b)"/>
+<line x1="90" y1="125" x2="490" y2="110" stroke="#666" stroke-width="1.5" marker-end="url(#b)" stroke-dasharray="3,2"/>
+<rect x="490" y="65" width="50" height="35" fill="#fff3e0" stroke="#e65100" rx="6"/>
+<text x="515" y="82" text-anchor="middle" font-size="10">MatMul</text>
+<!-- Output -->
+<line x1="515" y1="100" x2="515" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#b)"/>
+<rect x="475" y="130" width="80" height="30" fill="#e8f5e9" stroke="#2e7d32" rx="6"/>
+<text x="515" y="150" text-anchor="middle" font-size="13" font-weight="600">Output</text>
+<!-- Attention weights visualization -->
+<text x="275" y="180" text-anchor="middle" font-size="12" fill="#333" font-weight="600">Attention Weights (softmax)</text>
+<g transform="translate(150,190)">
+<rect x="0" y="0" width="40" height="60" fill="#1565c0" opacity="0.9"/><text x="20" y="35" text-anchor="middle" font-size="10" fill="white" font-weight="600">0.7</text>
+<rect x="45" y="10" width="40" height="50" fill="#1565c0" opacity="0.6"/><text x="65" y="35" text-anchor="middle" font-size="10" fill="white">0.2</text>
+<rect x="90" y="20" width="40" height="40" fill="#1565c0" opacity="0.3"/><text x="110" y="40" text-anchor="middle" font-size="10" fill="#333">0.08</text>
+<rect x="135" y="25" width="40" height="35" fill="#1565c0" opacity="0.15"/><text x="155" y="42" text-anchor="middle" font-size="10" fill="#333">0.02</text>
+<rect x="180" y="27" width="40" height="33" fill="#1565c0" opacity="0.1"/><text x="200" y="42" text-anchor="middle" font-size="10" fill="#333">0</text>
+</g>
+<text x="200" y="270" text-anchor="middle" font-size="10" fill="#666">Token 1 attends more to Token 1 (self), less to others</text>
+</svg>

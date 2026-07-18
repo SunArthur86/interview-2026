@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 360" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker>
+<style>.t{font-size:13px;fill:#333;font-weight:600;text-anchor:middle}.s{font-size:10px;fill:#666;text-anchor:middle}</style></defs>
+<text x="290" y="26" text-anchor="middle" font-size="15" font-weight="700">AI Agent = LLM + 规划 + 记忆 + 工具</text>
+
+<!-- Center LLM brain -->
+<circle cx="290" cy="140" r="55" fill="#e3f2fd" stroke="#1565c0" stroke-width="2.5"/>
+<text x="290" y="135" class="t" font-size="15">🧠 LLM</text>
+<text x="290" y="153" class="s">认知核心</text>
+
+<!-- Planning (top-left) -->
+<rect x="40" y="60" width="130" height="50" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="10"/>
+<text x="105" y="82" class="t">📋 规划 Planning</text>
+<text x="105" y="98" class="s">拆解任务 / 决策下一步</text>
+<line x1="170" y1="95" x2="240" y2="120" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+
+<!-- Memory (top-right) -->
+<rect x="410" y="60" width="130" height="50" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="10"/>
+<text x="475" y="82" class="t">💾 记忆 Memory</text>
+<text x="475" y="98" class="s">短期上下文 + 长期检索</text>
+<line x1="410" y1="95" x2="340" y2="120" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+
+<!-- Tools (bottom-left) -->
+<rect x="40" y="180" width="130" height="50" fill="#fce4ec" stroke="#880e4f" stroke-width="2" rx="10"/>
+<text x="105" y="202" class="t">🔧 工具 Tools</text>
+<text x="105" y="218" class="s">搜索 / 代码 / API</text>
+<line x1="170" y1="195" x2="240" y2="165" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+
+<!-- Environment/Action (bottom-right) -->
+<rect x="410" y="180" width="130" height="50" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2" rx="10"/>
+<text x="475" y="202" class="t">🌍 环境 Environment</text>
+<text x="475" y="218" class="s">观察反馈 Observation</text>
+<line x1="410" y1="195" x2="340" y2="165" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+
+<!-- Closed loop -->
+<text x="290" y="250" text-anchor="middle" class="t" fill="#9c27b0">闭环：感知 → 思考 → 行动 → 反馈</text>
+<path d="M 105,230 Q 105,290 290,290 Q 475,290 475,230" stroke="#9c27b0" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#a)"/>
+
+<text x="290" y="320" text-anchor="middle" class="s">缺规划→乱做 / 缺记忆→重复 / 缺工具→光说不练</text>
+<text x="290" y="338" text-anchor="middle" class="s">本质区别于单次问答：Agent 有「自主决策循环」</text>
+</svg>

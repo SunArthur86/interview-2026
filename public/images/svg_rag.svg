@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="d" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker>
+<style>.b{rx:8}.t{font-size:12px;text-anchor:middle;fill:#333}.s{font-size:10px;text-anchor:middle;fill:#666}</style></defs>
+<!-- Offline section -->
+<rect x="10" y="10" width="270" height="220" fill="#f3e5f5" opacity="0.15" stroke="#9c27b0" stroke-dasharray="5,3" rx="10"/>
+<text x="145" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#9c27b0">📦 Offline: Indexing</text>
+<!-- Documents -->
+<rect x="30" y="40" width="100" height="30" fill="#e3f2fd" stroke="#1565c0" class="b"/><text x="80" y="59" class="t">📄 Documents</text>
+<line x1="80" y1="70" x2="80" y2="85" stroke="#666" stroke-width="1.5" marker-end="url(#d)"/>
+<!-- Chunking -->
+<rect x="30" y="85" width="100" height="30" fill="#fff3e0" stroke="#e65100" class="b"/><text x="80" y="104" class="t">✂️ Chunking</text>
+<text x="80" y="120" class="s">split into pieces</text>
+<line x1="80" y1="120" x2="80" y2="135" stroke="#666" stroke-width="1.5" marker-end="url(#d)"/>
+<!-- Embedding -->
+<rect x="30" y="135" width="100" height="30" fill="#e8eaf6" stroke="#283593" class="b"/><text x="80" y="154" class="t">🔢 Embedding</text>
+<text x="80" y="170" class="s">text → vectors</text>
+<line x1="130" y1="150" x2="180" y2="150" stroke="#666" stroke-width="1.5" marker-end="url(#d)"/>
+<!-- Vector DB -->
+<rect x="180" y="120" width="90" height="60" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="8"/>
+<text x="225" y="145" text-anchor="middle" font-size="12" font-weight="600" fill="#2e7d32">🗄️ Vector DB</text>
+<text x="225" y="162" class="s">Milvus/Pinecone</text>
+
+<!-- Online section -->
+<rect x="300" y="10" width="290" height="370" fill="#e3f2fd" opacity="0.15" stroke="#1565c0" stroke-dasharray="5,3" rx="10"/>
+<text x="445" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#1565c0">⚡ Online: Query</text>
+<!-- User Query -->
+<rect x="340" y="40" width="200" height="30" fill="#fce4ec" stroke="#880e4f" class="b"/><text x="440" y="59" class="t">❓ User Query</text>
+<line x1="440" y1="70" x2="440" y2="85" stroke="#666" stroke-width="1.5" marker-end="url(#d)"/>
+<!-- Embed query -->
+<rect x="350" y="85" width="180" height="25" fill="#e8eaf6" stroke="#283593" class="b"/><text x="440" y="102" class="t">🔢 Embed Query</text>
+<!-- Vector search arrow -->
+<line x1="350" y1="110" x2="270" y2="140" stroke="#ff5722" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#d)"/>
+<text x="310" y="120" font-size="10" fill="#ff5722">similarity search</text>
+<!-- Retrieve -->
+<rect x="350" y="125" width="180" height="25" fill="#fff3e0" stroke="#e65100" class="b"/><text x="440" y="142" class="t">🔍 Top-K Retrieved Chunks</text>
+<line x1="440" y1="150" x2="440" y2="165" stroke="#666" stroke-width="1.5" marker-end="url(#d)"/>
+<!-- Rerank (optional) -->
+<rect x="350" y="165" width="180" height="25" fill="#f3e5f5" stroke="#6a1b9a" class="b"/><text x="440" y="182" class="t">📊 Rerank (optional)</text>
+<line x1="440" y1="190" x2="440" y2="205" stroke="#666" stroke-width="1.5" marker-end="url(#d)"/>
+<!-- Prompt construction -->
+<rect x="340" y="205" width="200" height="35" fill="#e0f7fa" stroke="#006064" class="b"/>
+<text x="440" y="222" class="t">📝 Construct Prompt</text>
+<text x="440" y="234" class="s">context + question</text>
+<line x1="440" y1="240" x2="440" y2="255" stroke="#666" stroke-width="1.5" marker-end="url(#d)"/>
+<!-- LLM -->
+<rect x="350" y="255" width="180" height="35" fill="#e8eaf6" stroke="#283593" stroke-width="2" class="b"/>
+<text x="440" y="272" class="t" font-weight="600">🧠 LLM (GPT/Claude)</text>
+<text x="440" y="284" class="s">generate answer</text>
+<line x1="440" y1="290" x2="440" y2="305" stroke="#666" stroke-width="1.5" marker-end="url(#d)"/>
+<!-- Answer -->
+<rect x="350" y="305" width="180" height="30" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" class="b"/>
+<text x="440" y="324" class="t" font-weight="600">✅ Answer + Sources</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="sp" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker>
+<style>.t{font-size:12.5px;fill:#333;font-weight:600;text-anchor:middle}.s{font-size:10.5px;fill:#666;text-anchor:middle}.lbl{font-size:12px;fill:#555;font-weight:700;text-anchor:middle}</style></defs>
+<text x="280" y="26" text-anchor="middle" font-size="15" font-weight="700">投机采样 Speculative Decoding</text>
+
+<!-- Step 1: draft model generates fast -->
+<text x="280" y="56" class="lbl">❶ 小模型 (Draft) 快速生成几个候选 token</text>
+<rect x="60" y="68" width="160" height="40" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="8"/>
+<text x="140" y="93" class="t">🏃 草稿模型 (小/快)</text>
+<g>
+  <rect x="240" y="68" width="50" height="40" fill="#e8f5e9" stroke="#2e7d32" rx="6"/><text x="265" y="93" class="t">tok1</text>
+  <rect x="294" y="68" width="50" height="40" fill="#e8f5e9" stroke="#2e7d32" rx="6"/><text x="319" y="93" class="t">tok2</text>
+  <rect x="348" y="68" width="50" height="40" fill="#e8f5e9" stroke="#2e7d32" rx="6"/><text x="373" y="93" class="t">tok3</text>
+</g>
+<line x1="220" y1="88" x2="238" y2="88" stroke="#666" stroke-width="1.5" marker-end="url(#sp)"/>
+
+<!-- Step 2: big model verifies in parallel -->
+<text x="280" y="132" class="lbl">❷ 大模型 (Target) 一次性并行校验所有候选</text>
+<rect x="60" y="142" width="160" height="40" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="8"/>
+<text x="140" y="167" class="t">🎯 目标模型 (大/慢)</text>
+<g>
+  <rect x="240" y="142" width="50" height="40" fill="#e8f5e9" stroke="#2e7d32" rx="6"/><text x="265" y="167" class="t">✓</text>
+  <rect x="294" y="142" width="50" height="40" fill="#e8f5e9" stroke="#2e7d32" rx="6"/><text x="319" y="167" class="t">✓</text>
+  <rect x="348" y="142" width="50" height="40" fill="#ffebee" stroke="#c62828" stroke-width="2" rx="6"/><text x="373" y="167" class="t">✗</text>
+</g>
+<line x1="220" y1="162" x2="238" y2="162" stroke="#666" stroke-width="1.5" marker-end="url(#sp)"/>
+
+<!-- Step 3: accept matched, reject & resample -->
+<text x="280" y="206" class="lbl">❸ 接受一致的，拒绝后从分歧点重采样</text>
+<rect x="180" y="216" width="200" height="40" fill="#e3f2fd" stroke="#1565c0" rx="8"/>
+<text x="280" y="241" class="t">输出：tok1 tok2 [重新生成...]</text>
+
+<text x="280" y="276" text-anchor="middle" class="s" fill="#2e7d32">✓ 关键：校验是「并行」的 → 大模型一次前向校验多个 token，</text>
+<text x="280" y="292" text-anchor="middle" class="s" fill="#2e7d32">正确率高的草稿让总生成步数减少 → 整体加速 2-3x，且输出与大模型完全一致</text>
+</svg>

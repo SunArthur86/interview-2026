@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" style="background:#f8f9fa;border-radius:12px;font-family:system-ui,sans-serif">
+<defs><marker id="bt" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8Z" fill="#666"/></marker>
+<style>.tk{font-size:12px;fill:#333;font-weight:600;text-anchor:middle;font-family:monospace}.s{font-size:10.5px;fill:#666;text-anchor:middle}.lbl{font-size:12px;fill:#555;font-weight:700;text-anchor:middle}</style></defs>
+<text x="280" y="26" text-anchor="middle" font-size="15" font-weight="700">BPE 分词算法 (Byte Pair Encoding)</text>
+
+<!-- Step 1: characters -->
+<text x="280" y="56" class="lbl">❶ 初始：拆成单字符</text>
+<g>
+  <rect x="120" y="66" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="140" y="86" class="tk">l</text>
+  <rect x="162" y="66" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="182" y="86" class="tk">o</text>
+  <rect x="204" y="66" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="224" y="86" class="tk">w</text>
+  <rect x="246" y="66" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="266" y="86" class="tk">e</text>
+  <rect x="288" y="66" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="308" y="86" class="tk">r</text>
+</g>
+<line x1="280" y1="100" x2="280" y2="112" stroke="#666" stroke-width="1.5" marker-end="url(#bt)"/>
+
+<!-- Step 2: merge most frequent pair -->
+<text x="280" y="128" class="lbl">❷ 反复合并出现频率最高的相邻对</text>
+<g>
+  <rect x="120" y="138" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="140" y="158" class="tk">l</text>
+  <rect x="162" y="138" width="82" height="30" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="5"/><text x="203" y="158" class="tk">ow</text>
+  <rect x="246" y="138" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="266" y="158" class="tk">e</text>
+  <rect x="288" y="138" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="308" y="158" class="tk">r</text>
+</g>
+<text x="203" y="180" class="s" fill="#e65100">↑ o+w 合并</text>
+<line x1="280" y1="186" x2="280" y2="198" stroke="#666" stroke-width="1.5" marker-end="url(#bt)"/>
+
+<g>
+  <rect x="120" y="204" width="40" height="30" fill="#e3f2fd" stroke="#1565c0" rx="5"/><text x="140" y="224" class="tk">l</text>
+  <rect x="162" y="204" width="82" height="30" fill="#fff3e0" stroke="#e65100" stroke-width="2" rx="5"/><text x="203" y="224" class="tk">ow</text>
+  <rect x="246" y="204" width="82" height="30" fill="#fce4ec" stroke="#880e4f" stroke-width="2" rx="5"/><text x="287" y="224" class="tk">er</text>
+</g>
+<text x="287" y="246" class="s" fill="#880e4f">↑ e+r 合并</text>
+
+<!-- Result vocab -->
+<text x="280" y="270" class="lbl" fill="#2e7d32">✓ 最终词表：{l, o, w, e, r, ow, er, ...}</text>
+<text x="280" y="288" class="s">常见词整体编码（如 "the"），生僻词拆成子词/字符 → 平衡词表大小与覆盖率</text>
+</svg>
