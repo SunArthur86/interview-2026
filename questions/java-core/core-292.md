@@ -143,8 +143,8 @@ flowchart TD
     R2 --> MERGE
     MERGE --> TWOP["双指针i/j分别指向<br/>左右子数组首元素"]
     TWOP --> CMP{"arr[i] <= arr[j]?"}:::decision
-    CMP -->|是| TA["#quot;k++ = arr[i++"]<br/>左元素先入结果"]
-    CMP -->|否| TB["#quot;k++ = arr[j++"]<br/>右元素先入结果"]
+    CMP -->|是| TA["k++ = arr[i++<br/>左元素先入结果"]
+    CMP -->|否| TB["k++ = arr[j++<br/>右元素先入结果"]
     TA --> NXT{一方遍历完?}:::decision
     TB --> NXT
     NXT -->|否| CMP

@@ -136,10 +136,10 @@ flowchart TD
     AGG --> HANDLE
     HANDLE --> EXIT([作用域退出<br/>所有子线程必然结束]):::success
     SCOPE --> BENEFIT{核心价值}:::decision
-    BENEFIT ->|1 可观测性| OBS[子任务生命周期<br/>绑定父作用域]
-    BENEFIT ->|2 错误传播| ERR_PROP[子任务异常<br/>自动上报父]
-    BENEFIT ->|3 取消传播| CAN[父取消→子全部取消<br/>无泄漏]
-    BENEFIT ->|4 资源释放| REL[作用域结束<br/>资源必然释放]
+    BENEFIT --> |1 可观测性| OBS[子任务生命周期<br/>绑定父作用域]
+    BENEFIT --> |2 错误传播| ERR_PROP[子任务异常<br/>自动上报父]
+    BENEFIT --> |3 取消传播| CAN[父取消→子全部取消<br/>无泄漏]
+    BENEFIT --> |4 资源释放| REL[作用域结束<br/>资源必然释放]
         classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
     classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
     classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20

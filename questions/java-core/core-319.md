@@ -115,7 +115,7 @@ System.out.println(s); // Hello_World
 
 ```mermaid
 flowchart TD
-    NEW(["String s = #quot;abc#quot;"]):::start --> JMM["在堆中创建对象<br/>final char["]/byte[] value]
+    NEW(["String s = #quot;abc#quot;"]):::start --> JMM["在堆中创建对象<br/>final char[]/byte[] value"]
     JMM --> FINAL[value数组final<br/>不可重新赋值]
     FINAL --> IMM["内容不可变<br/>#quot;abc#quot;永远等于#quot;abc#quot;"]
     IMM --> BEN{不可变带来的好处}:::decision
@@ -131,7 +131,7 @@ flowchart TD
     NEW --> MOD{需要频繁修改?}:::decision
     MOD -->|否| USE_S[继续用String]
     MOD -->|是 拼接循环| SB[改用StringBuilder<br/>避免创建大量中间对象]
-    SB --> BUF["可变char["] 缓冲区<br/>append高效]
+    SB --> BUF["可变char[] 缓冲区<br/>append高效"]
         classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
     classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
     classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20

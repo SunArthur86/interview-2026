@@ -87,7 +87,7 @@ flowchart TD
     C --> E["对象::实例方法<br/>System.out::println"]
     C --> F["类名::实例方法<br/>String::length<br/>第一个参数作为接收者"]
     C --> G["类名::new<br/>构造引用 ArrayList::new"]
-    H[示例] --> I["list.forEachs -> System.out.printlns<br/>list.forEachSystem.out::println"]
+    H[示例] --> I["list.forEachs --> System.out.printlns<br/>list.forEachSystem.out::println"]
     J[本质] --> K[仍是函数式接口实例]
     J --> L[与 Lambda 等价]
     M[场景] --> N[Stream 链式调用]

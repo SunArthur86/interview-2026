@@ -79,7 +79,7 @@ names.sort(String::compareToIgnoreCase);
 
 ```mermaid
 flowchart TD
-    A["Lambda 表达式 Java 8"] --> B["(params) -> body"]
+    A["Lambda 表达式 Java 8"] --> B["(params) --> body"]
     A --> C[本质: 函数式接口实例]
     D[函数式接口] --> E[只有一个抽象方法]
     E --> F["@FunctionalInterface 标注"]

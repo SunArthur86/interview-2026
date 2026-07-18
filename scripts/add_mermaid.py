@@ -3656,7 +3656,8 @@ def _needs_quoting(text):
 
 def _quote_label(text):
     # Mermaid uses #quot; for an escaped quote inside a quoted label.
-    if '"' in text:
+    # Don't double-escape if already #quot;.
+    if '"' in text and '#quot;' not in text:
         text = text.replace('"', '#quot;')
     return '"' + text + '"'
 
@@ -3705,15 +3706,31 @@ def _sanitize_line(line):
                     opener = m_op.group(0)
                     content_start = id_end + len(opener)
                     closer_pat = re.compile(closer_re)
-                    m_close = closer_pat.search(line, content_start)
-                    if m_close:
-                        label = line[content_start:m_close.start()]
-                        close_str = m_close.group(0)
-                        new_label = _quote_label(label) if _needs_quoting(label) else label
-                        out.append(id_str + opener + new_label + close_str)
-                        i = m_close.end()
-                        matched = True
-                        break
+                    # Find the LAST occurrence of the closer on this line.
+                    # Mermaid parses greedily when label is quoted, so we want
+                    # the closing bracket that's followed by either :::, end of
+                    # line, or arrow chars.
+                    candidates = list(closer_pat.finditer(line, content_start))
+                    if not candidates:
+                        continue
+                    # Pick the last candidate whose position is followed by a
+                    # valid terminator (:::, -->, whitespace-then-end, |).
+                    chosen = None
+                    for cand in reversed(candidates):
+                        tail = line[cand.end():]
+                        if (not tail or tail.startswith(('::', ' ', '\t',
+                                '-->', '->', '-.->', '~', '|', '#'))) :
+                            chosen = cand
+                            break
+                    if chosen is None:
+                        chosen = candidates[-1]
+                    label = line[content_start:chosen.start()]
+                    close_str = chosen.group(0)
+                    new_label = _quote_label(label) if _needs_quoting(label) else label
+                    out.append(id_str + opener + new_label + close_str)
+                    i = chosen.end()
+                    matched = True
+                    break
             if matched:
                 continue
             out.append(id_str)

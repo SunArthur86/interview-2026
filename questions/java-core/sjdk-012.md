@@ -132,8 +132,8 @@ flowchart TD
     INVK2 --> ADV[优点: 无需C代码<br/>类型安全 内存可控]
     ARENA --> ADV
     ADV --> USE{典型应用}:::decision
-    USE ->|调用C库| CLIB["libc/OpenGL/CUDA<br/>无需包装"]
-    USE ->|零拷贝| ZERO[堆外内存<br/>直接与本地代码共享]
+    USE --> |调用C库| CLIB["libc/OpenGL/CUDA<br/>无需包装"]
+    USE --> |零拷贝| ZERO[堆外内存<br/>直接与本地代码共享]
         classDef start fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#0d47a1
     classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
     classDef success fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20

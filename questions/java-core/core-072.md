@@ -105,7 +105,7 @@ flowchart TD
     FLT --> F4[float 4字节 F后缀 IEEE754]
     FLT --> D8[double 8字节 默认浮点]
     REF --> CLS["类class: String/Object"]
-    REF --> ARR["数组array: int["]/Object[]]
+    REF --> ARR["数组array: int[]/Object[]"]
     REF --> IF["接口interface: List/Map"]
     B1 --> CACHE{包装类缓存机制}:::decision
     CACHE -->|Integer Cache -128~127| SH[相同地址 ==为true]
