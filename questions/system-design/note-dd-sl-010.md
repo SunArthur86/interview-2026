@@ -240,6 +240,10 @@ flowchart TD
     J --> K
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-sl-010.svg" alt="【滴滴面经】极端情况下，一个用户的短链可能分布在 64 张表里，这种情况下怎么提升查询性能？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心思路：把64表串行扫描变并发查询，因为串行是64倍延迟，所以并行降至Max(单表)延迟

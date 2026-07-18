@@ -128,6 +128,10 @@ public class MergeSort {
 *   **考点 2**：为什么归并排序比快速排序更稳定？（考察快排 O(n²) 的最坏情况和归并排序恒定 O(n log n) 的特性）
 *   **考点 3**：如何在单链表上实现归并排序？（考察链表归并无需额外空间，只需修改指针的特性）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-292.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心三步曲：选基准（Pivot）、分区排列（小的放左大的放右）、递归排序左右子序列

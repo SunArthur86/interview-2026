@@ -222,3 +222,8 @@ memory_points:
 **候选人**：只做Young GC老年代会涨到触发Full GC，Full GC单线程串行STW极长是灾难；Mixed GC分批回收老年代避免Full GC。
 **面试官**：Mixed GC暂停时间过长怎么调？
 **候选人**：调低IHOP、放宽MaxGCPauseMillis、增大堆、调G1HeapRegionSize、排查Humongous大对象分配，目标是STW在SLA内。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-013.svg" alt="【拼多多 Java服务端】G1收集器的Mixed GC触发条件是什么？Region大小怎么划分？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

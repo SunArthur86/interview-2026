@@ -91,6 +91,10 @@ public String buildUrl(String baseUrl, String query) throws UnsupportedEncodingE
 2. **URL 编码**：为什么要编码？（保留字符、非 ASCII 字符、不安全字符）以及 `%20` 与 `+` 的区别。
 3. **URN 的应用场景**：P2P 下载中的磁力链接（Magnet URI）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-081.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 概念对比：URI强调资源标识，而URL不仅标识还侧重提供具体的网络定位路径

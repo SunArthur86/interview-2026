@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">什么是Sequenced Collections（顺序集合）？Java 21…</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：统一所有集合访问首尾元素和逆序的API。</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="330" y="120" width="140" height="40" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="400" y="140" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Collection</text>
+<rect x="80" y="120" width="140" height="40" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="150" y="140" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Map</text>
+<rect x="60" y="190" width="130" height="40" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="125" y="210" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">List</text>
+<rect x="220" y="190" width="130" height="40" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="285" y="210" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Set</text>
+<rect x="380" y="190" width="130" height="40" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="445" y="210" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Queue</text>
+<line x1="380" y1="160" x2="120" y2="190" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="160" x2="280" y2="190" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="420" y1="160" x2="440" y2="190" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="30" y="260" width="100" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="80" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ArrayList</text>
+<text x="80" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(数组)</text>
+<line x1="110" y1="230" x2="80" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="140" y="260" width="100" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="190" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">LinkedList</text>
+<text x="190" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(双向链表)</text>
+<line x1="110" y1="230" x2="190" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="250" y="260" width="100" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="300" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Vector</text>
+<text x="300" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(线程安全)</text>
+<line x1="110" y1="230" x2="300" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="190" y="260" width="100" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="240" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">HashSet</text>
+<text x="240" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(HashMap)</text>
+<line x1="280" y1="230" x2="240" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="300" y="260" width="100" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="350" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">LinkedHashSet</text>
+<text x="350" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(链表+哈希)</text>
+<line x1="280" y1="230" x2="350" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="410" y="260" width="100" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="460" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">TreeSet</text>
+<text x="460" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(红黑树)</text>
+<line x1="280" y1="230" x2="460" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="350" y="260" width="100" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">PriorityQueue</text>
+<text x="400" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(堆)</text>
+<line x1="440" y1="230" x2="400" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="460" y="260" width="100" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="510" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ArrayDeque</text>
+<text x="510" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(双端数组)</text>
+<line x1="440" y1="230" x2="510" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="570" y="260" width="100" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="620" y="285" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">LinkedList</text>
+<line x1="440" y1="230" x2="620" y2="260" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="540" y="190" width="120" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="600" y="210" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">HashMap</text>
+<text x="600" y="220" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(数组+链表+树)</text>
+<line x1="150" y1="145" x2="600" y2="190" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="670" y="190" width="120" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="730" y="210" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">LinkedHashMap</text>
+<text x="730" y="220" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(链表)</text>
+<line x1="150" y1="145" x2="730" y2="190" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="540" y="260" width="120" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="600" y="280" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">TreeMap</text>
+<text x="600" y="290" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(红黑树)</text>
+<line x1="150" y1="145" x2="600" y2="260" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="670" y="260" width="120" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="730" y="274" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ConcurrentHash</text>
+<text x="730" y="285" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Map</text>
+<text x="730" y="296" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(线程安全)</text>
+<line x1="150" y1="145" x2="730" y2="260" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<text x="400" y="350" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">选型：查多用 HashMap，有序用 Linked，排序用 Tree，并发用 Concurrent</text>
+<text x="400" y="378" font-size="12" fill="#607D8B" text-anchor="middle">fail-fast：迭代时 modCount 校验，抛 ConcurrentModificationException</text>
+</svg>

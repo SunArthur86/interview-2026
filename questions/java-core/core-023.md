@@ -83,6 +83,10 @@ public class SignatureDemo {
 2. **私钥的作用**：为什么是"私钥加密，公钥解密"？（为了验证身份，即签名；公钥加密是为了保密，即加密）。
 3. **证书的作用**：如何确保拿到的公钥确实是服务器的，而不是中间人的？（引入数字证书 CA）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-023.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 摘要(如SHA-256)提取内容唯一指纹，保证数据完整性防篡改

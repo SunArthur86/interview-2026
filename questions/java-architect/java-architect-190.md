@@ -429,3 +429,7 @@ rules:
 | 1:05 | ADR 四要素示意/对比图 | "Status（状态）/Context（背景）/Decision（决策+替代方案）/Consequences（代价收益）" | ADR 四要素要点 |
 | 1:30 | 架构图分层画示意/对比图 | "高层给业务看，低层给开发看，不分层=没人看" | 架构图分层画要点 |
 | 1:55 | 总结卡 | "记住：C4 四层。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-190.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

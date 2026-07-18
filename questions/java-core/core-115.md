@@ -108,6 +108,10 @@ gcc main.o -o main
 **更新部署** | 困难（需重新编译整个程序） | 方便（只需替换 .so/.dll 文件） |
 **常见场景** | 嵌入式设备、内核模块、无依赖环境 | GUI 应用、服务器、操作系统服务 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-115.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四步曲：预处理(展开宏) -> 编译(生汇编) -> 汇编(生机器码.o) -> 链接(组合)

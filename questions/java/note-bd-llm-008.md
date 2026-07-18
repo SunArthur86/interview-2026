@@ -321,6 +321,11 @@ flowchart TD
     end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-bd-llm-008.svg" alt="【字节面经】讲一下 Python 的 GIL 机制，在 I/O 密集和 CPU 密集的大模型任务里分别会有什么影响？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
+
 ## 记忆要点
 
 - 一句话定义：GIL是CPython的互斥锁，因保护引用计数，故同一时刻仅单线程执行字节码

@@ -465,3 +465,7 @@ degradation:
 | 0:40 | 定位三板斧示意/对比图 | "看 lag 分布（分区倾斜 vs 全局慢）、看消费者 GC/慢 SQL、看上游突增" | 定位三板斧要点 |
 | 1:05 | 扩容示意/对比图 | "消费者数 ≤ 分区数；扩消费者前先确认分区数够" | 扩容要点 |
 | 1:55 | 总结卡 | "记住：定位。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-138.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

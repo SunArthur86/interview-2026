@@ -245,3 +245,7 @@ LIMIT 20;
 **候选人**：关键金额类字段不做冗余；展示类字段用CDC或对账任务兜底，并加监控告警捕获不一致。
 **面试官**：能不能给我一个你真正踩过坑的具体例子？
 **候选人**：之前订单详情页要JOIN五张表慢查询严重，我们把客户名和商品名冗余到订单表，查询从800ms降到30ms，同时用对账任务每天核对一致性。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-mys-001.svg" alt="【美云智数终面】复杂业务下如何做数据库表设计？三范式和反范式怎么取舍？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

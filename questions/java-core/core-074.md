@@ -94,6 +94,10 @@ ps -o pid,minflt,majflt,cmd -p <PID>
 3. **大页内存**：何时使用大页？减少 TLB Miss，适用于数据库等内存密集型应用。
 4. **Swap 分区**：Swap 在何时触发？swappiness 参数的含义。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-074.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心目的：因为提供独立连续的逻辑地址，所以实现了进程间的内存隔离与扩充

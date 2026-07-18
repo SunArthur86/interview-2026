@@ -90,6 +90,10 @@ flowchart TD
     M[稳定性] --> N[稳定 相等不交换]
     O[场景] --> P[小规模数据 教学]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-277.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心动作：相邻元素两两比较，逆序则交换，每轮将最大元素'沉底

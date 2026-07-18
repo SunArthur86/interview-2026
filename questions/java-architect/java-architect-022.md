@@ -433,3 +433,7 @@ flowchart TD
 | 0:15 | 锁状态转换图 | 先说核心：MVCC（多版本并发控制）的本质是"给每行数据维护多个版本，读事务读快照（不加锁），写事务加行锁写新版本"——让读写不互相阻塞，大幅提升并发。InnoDB 通过隐藏列（trx_。 | 核心定义 |
 | 0:30 | SQL EXPLAIN 截图 | 每次修改生成 undo log，通过 roll_pointer 链接成历史版本链。 | 版本链 |
 | 1:30 | 总结卡 | 一句话记忆：MVCC = 多版本（undo log 版本链）+ ReadView（可见性判断）。 下期可以接着聊：MVCC 解决了幻读吗。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-022.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

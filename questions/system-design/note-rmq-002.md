@@ -275,3 +275,7 @@ maxTransferCountOnMessageInMemory = 1000
 **候选人**：不一定，单条消费耗时高（慢SQL）扩并发无效；顺序消费场景不能随意扩破坏顺序；要分清是并发不够还是单条慢。
 **面试官**：积压处置有什么风险？
 **候选人**：扩消费者破坏顺序、下游被压垮、跳过堆积丢消息、降级影响业务，要按场景分级处置并监控验证。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-rmq-002.svg" alt="【大厂二面】RocketMQ 消息积压怎么排查？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

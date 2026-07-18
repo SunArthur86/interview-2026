@@ -108,6 +108,10 @@ memory_points:
 3. **如何选择温数据的存储介质？ES 还是 MySQL？**
    - 如果需要模糊搜索、任意字段组合查询，选 ES；如果主要是 ID 查询或简单范围查询，且需要事务支持，可选用廉价 MySQL 实例或 MongoDB。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-017.svg" alt="如何设计一个海量数据的冷热分离方案？热数据百亿，冷数据千亿。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 分层记忆：热配MySQL+Redis（<10ms），温存ES/Mongo，冷归档HBase/S3

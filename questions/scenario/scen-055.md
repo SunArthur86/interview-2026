@@ -130,6 +130,10 @@ public void asyncProcess() {
 }
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-055.svg" alt="如何设计微服务的链路追踪系统？快速定位跨服务调用问题。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心模型：一次完整的分布式请求为一个Trace，具体操作为Span，通过ParentID串联。

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">什么是Java代码执行与编译？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：源码转字节码实现跨平台，JVM解释/编译执行字节码。</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="40" y="200" width="87" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="84" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">源码</text>
+<text x="84" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Hello.java</text>
+<circle cx="58" cy="218" r="13" fill="#2196F3"/>
+<text x="58" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">1</text>
+<rect x="145" y="200" width="87" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="189" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">javac 编译</text>
+<text x="189" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">→ Hello.c</text>
+<text x="189" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">lass</text>
+<text x="189" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(字节码)</text>
+<circle cx="163.42857142857144" cy="218" r="13" fill="#4CAF50"/>
+<text x="163.42857142857144" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">2</text>
+<rect x="251" y="200" width="87" height="90" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="295" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ClassLoade</text>
+<text x="295" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">r</text>
+<text x="295" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">加载到内存</text>
+<circle cx="268.8571428571429" cy="218" r="13" fill="#FF9800"/>
+<text x="268.8571428571429" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">3</text>
+<rect x="356" y="200" width="87" height="90" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">字节码校验</text>
+<text x="400" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">+ 链接</text>
+<circle cx="374.28571428571433" cy="218" r="13" fill="#9C27B0"/>
+<text x="374.28571428571433" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text>
+<rect x="462" y="200" width="87" height="90" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="505" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">解释器</text>
+<text x="505" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">逐条解释执</text>
+<text x="505" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">行</text>
+<circle cx="479.7142857142858" cy="218" r="13" fill="#f44336"/>
+<text x="479.7142857142858" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text>
+<rect x="567" y="200" width="87" height="90" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="611" y="214" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">JIT (HotSp</text>
+<text x="611" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ot)</text>
+<text x="611" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">热点代码编</text>
+<text x="611" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">译</text>
+<text x="611" y="276" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">为机器码</text>
+<circle cx="585.1428571428572" cy="218" r="13" fill="#607D8B"/>
+<text x="585.1428571428572" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">6</text>
+<rect x="673" y="200" width="87" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="716" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">OS 执行</text>
+<text x="716" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">机器码</text>
+<circle cx="690.5714285714287" cy="218" r="13" fill="#2196F3"/>
+<text x="690.5714285714287" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">7</text>
+<line x1="127" y1="245" x2="145" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="233" y1="245" x2="251" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="338" y1="245" x2="356" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="444" y1="245" x2="462" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="549" y1="245" x2="567" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="655" y1="245" x2="673" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

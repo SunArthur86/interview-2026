@@ -106,6 +106,10 @@ memory_points:
 4. **秒杀系统中如何解决少卖（卖不完）的问题？**
    - Redis 扣减成功后入 MQ 必须高可靠（事务消息/本地消息表）；消费端消费失败必须重试。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-093.svg" alt="如何设计一个秒杀系统的流量削峰方案？保护后端不被压垮。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原则：层层拦截，读多写少，绝不让流量触碰核心DB。

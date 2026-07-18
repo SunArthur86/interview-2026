@@ -123,6 +123,10 @@ class Inode {
 }
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-255.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 连续分配：顺序快但碎片多，链表分配：零碎无外片但随机访问慢。

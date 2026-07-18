@@ -415,3 +415,7 @@ CREATE TABLE audit_log (
 | 0:15 | RBAC0示意/对比图 | "User-Role-Permission 三元组；RBAC1 加角色继承；RBAC2 加职责分离（SoD）" | RBAC0要点 |
 | 0:40 | ABAC示意/对比图 | "Subject（主体属性）+ Resource（资源属性）+ Environment（环境属性）+ Policy（策略）" | ABAC要点 |
 | 1:25 | 总结卡 | "记住：RBAC = 功能权限。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-049.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -262,6 +262,10 @@ public class LotteryService {
 3. **规则可观测性**：每条规则的执行结果记录日志/埋点，便于排查"为什么某用户没中奖"的线上问题，也方便做规则命中率分析。
 4. **安全失败策略**：规则执行抛异常时应有兜底——默认拒绝（安全优先）还是默认放行（可用性优先），取决于业务场景。抽奖类建议默认拒绝。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-re-001.svg" alt="【滴滴面经】你会把付费用户加权这种规则直接写死在抽奖流程里吗？为什么？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 结论：绝不能硬编码，因为规则与流程强耦合严重违反开闭原则（OCP）。

@@ -79,6 +79,10 @@ int main() {
 }
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-135.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 宏观流程：源代码经编译链接为可执行文件，Shell 加载至内存，CPU 读取指令并输出。

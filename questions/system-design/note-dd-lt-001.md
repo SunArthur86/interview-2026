@@ -402,6 +402,10 @@ public void restoreStock(Long prizeId) {
 
 三者不是冗余，而是**不同层面的安全保障**：Lua 管 Redis 层原子性，Redisson 管业务层一致性，DB 乐观锁管数据层兜底。在面试中，能讲清楚「为什么要三层」以及「每层各防什么问题」，就能体现对高并发系统的深度理解。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-lt-001.svg" alt="【滴滴面经】抽奖场景里，奖品库存超卖是怎么控制的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 超卖本质：因为并发下检查与扣减分离（TOCTOU），所以必须实现操作原子性。

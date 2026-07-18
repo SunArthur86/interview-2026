@@ -459,3 +459,7 @@ flowchart TD
 **面试官**：百万观众同时发弹幕，AC 自动机过滤会不会成为瓶颈（每条消息都要匹配）？
 
 **候选人**：AC 自动机是 O(n)（n 是消息长度），比逐个 contains 快百倍。单节点百万 QPS 时 AC 自动机 CPU 占用 < 10%（实测）。但如果词典超大（百万词），内存和构建时间有压力。优化：词典分级——常用敏感词（1000 个）放热 AC 自动机实时匹配，长尾词典（百万）放布隆过滤器快速排除。监控 sensitive_filter_latency（应 < 1ms）和 cpu_usage_on_filter。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-176.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

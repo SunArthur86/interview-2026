@@ -439,3 +439,7 @@ flowchart TD
 **面试官**：用户在 WiFi 和 4G 之间切换，IP 变了，连接怎么处理？
 
 **候选人**：IP 变了 TCP 连接会断（TCP 四元组变了）。客户端检测到网络变化主动重连，用 userId 鉴权（不是 IP）。服务端识别同一 userId 的新连接，替换旧 session（旧连接可能还没断，靠心跳超时清理）。重连后路由表更新（userId → 新节点）。风险：双连接期间消息可能推到旧连接（用户看不到）。兜底：客户端重连时拉取"最近 N 条消息"补全。监控 network_switch_reconnect_rate（网络切换重连率）。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-178.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

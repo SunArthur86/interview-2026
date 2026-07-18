@@ -431,3 +431,7 @@ flowchart TD
 | 1:05 | 汇率快照示意/对比图 | "下单时冻结汇率（order 表存 rate + rate_version）" | 汇率快照要点 |
 | 1:30 | 多币种换算示意/对比图 | "展示时按用户币种实时换算，交易按快照结算" | 多币种换算要点 |
 | 1:55 | 总结卡 | "记住：金额。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-185.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

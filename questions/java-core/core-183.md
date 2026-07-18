@@ -110,6 +110,10 @@ sequenceDiagram
     C->>S: ACK seq=u+1 ack=w+1
     Note over C: TIME_WAIT 2MSL 后关闭
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-183.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大机制：超时重传、快速重传、SACK、D-SACK，解决数据丢失恢复问题。

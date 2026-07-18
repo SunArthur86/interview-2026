@@ -149,6 +149,10 @@ flowchart TD
     Q[避坑] --> R[this 自调用 不走代理<br/>事务/AOP 失效]
     Q --> S[final 方法不会被增强]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-284.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - JDK代理：利用反射生成接口实现类，核心是InvocationHandler，因为基于接口所以类必须实现接口

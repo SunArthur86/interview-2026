@@ -268,3 +268,8 @@ JDK 动态代理要求"目标类实现接口"——它代理的是接口，用 `
 | 2:01 | 关键代码/伪代码片段 | "三级缓存解决singleton循环依赖+AOP代理问题" | 三级缓存 |
 | 2:54 | 对比表格 | "AOP默认JDK代理(有接口)/CGLIB(无接口)" | AOP默认JDK代理 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Spring 三级缓存为什么不能是两级缓存。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-004.svg" alt="Spring IOC、AOP 原理及依赖注入实现方式？（华为od Java一面） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

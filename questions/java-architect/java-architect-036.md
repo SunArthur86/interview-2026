@@ -453,3 +453,7 @@ GET /_cat/pending_tasks?v
 | 0:40 | Elasticsearch 倒排索引图 | text（分词）vs keyword（不分词，精确匹配/聚合），按查询模式选。 | mapping 设计 |
 | 1:05 | 搜索引擎架构图 | 分片数 = 数据量 / 单分片推荐 30-50GB；副本数 = 1（高可用）+ 动态调整。 | 分片数 = 数据量 / 单分片推荐 |
 | 2:30 | 总结卡 | 一句话记忆：倒排索引：分词建 term→doc list，是 ES 搜索快的根因。 下期可以接着聊：text 和 keyword 区别。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-036.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

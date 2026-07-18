@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】Scoped Values 与 ThreadLoca…</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：ScopedValue（JEP 506，JDK 24 GA）是 ThreadLocal 在虚拟线程时代的替代品——不可变…</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="60" y="110" width="320" height="180" rx="10" fill="#2196F311" stroke="#2196F3" stroke-width="2"/>
+<text x="220" y="138" font-size="15" fill="#2196F3" text-anchor="middle" font-weight="700">Thread A</text>
+<rect x="90" y="160" width="260" height="50" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="220" y="178" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ThreadLocalMap</text>
+<text x="220" y="192" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(每个线程独有)</text>
+<rect x="90" y="230" width="75" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="128" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
+<text x="128" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_1</text>
+<text x="128" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
+<rect x="170" y="230" width="75" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="208" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
+<text x="208" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_2</text>
+<text x="208" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
+<rect x="250" y="230" width="75" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="288" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
+<text x="288" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_3</text>
+<text x="288" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
+<rect x="420" y="110" width="320" height="180" rx="10" fill="#FF980011" stroke="#FF9800" stroke-width="2"/>
+<text x="580" y="138" font-size="15" fill="#FF9800" text-anchor="middle" font-weight="700">Thread B</text>
+<rect x="450" y="160" width="260" height="50" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="580" y="178" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ThreadLocalMap</text>
+<text x="580" y="192" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(每个线程独有)</text>
+<rect x="450" y="230" width="75" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="488" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
+<text x="488" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_1</text>
+<text x="488" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
+<rect x="530" y="230" width="75" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="568" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
+<text x="568" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_2</text>
+<text x="568" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
+<rect x="610" y="230" width="75" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="648" y="243" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Entry</text>
+<text x="648" y="255" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">key=TL_3</text>
+<text x="648" y="267" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">value=V</text>
+<rect x="60" y="320" width="680" height="220" rx="10" fill="#FFFFFF" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="400" y="346" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">关键特性</text>
+<rect x="80" y="354" width="320" height="44" rx="6" fill="#4CAF5022" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="94" y="372" font-size="12" fill="#4CAF50" font-weight="700">数据隔离</text>
+<text x="94" y="390" font-size="11" fill="#37474F">每个线程独立副本，无并发问题</text>
+<rect x="420" y="354" width="320" height="44" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="434" y="372" font-size="12" fill="#2196F3" font-weight="700">Entry 弱引用 Key</text>
+<text x="434" y="390" font-size="11" fill="#37474F">ThreadLocal 被 GC 后 key=null</text>
+<rect x="80" y="410" width="320" height="44" rx="6" fill="#f4433622" stroke="#f44336" stroke-width="1.5"/>
+<text x="94" y="428" font-size="12" fill="#f44336" font-weight="700">内存泄漏风险</text>
+<text x="94" y="446" font-size="11" fill="#37474F">value 强引用，需 remove() 释放</text>
+<rect x="420" y="410" width="320" height="44" rx="6" fill="#FF980022" stroke="#FF9800" stroke-width="1.5"/>
+<text x="434" y="428" font-size="12" fill="#FF9800" font-weight="700">InheritableThreadLocal</text>
+<text x="434" y="446" font-size="11" fill="#37474F">父子线程可继承值</text>
+<rect x="80" y="466" width="320" height="44" rx="6" fill="#9C27B022" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="94" y="484" font-size="12" fill="#9C27B0" font-weight="700">典型应用</text>
+<text x="94" y="502" font-size="11" fill="#37474F">SimpleDateFormat / 数据库连接 / 用户上下文</text>
+</svg>

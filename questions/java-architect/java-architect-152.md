@@ -329,3 +329,7 @@ HTAP 行存加列存，TiFlash 异步副本查得快。
 | 0:15 | TiDB 三层架构示意/对比图 | "TiDB 三层架构 —— TiDB/PD/TiKV/TiFlash" | TiDB 三层架构要点 |
 | 0:40 | Region 自动分片示意/对比图 | "Region 自动分片 —— 96MB 切片" | Region 自动分片要点 |
 | 1:25 | 总结卡 | "记住：TiDB 三层架构。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-152.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

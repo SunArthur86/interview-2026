@@ -78,6 +78,10 @@ memory_points:
     - 问：如何在 UDP 上实现可靠传输（如 QUIC 协议）？
     - 答：需要应用层实现 TCP 的机制，包括序列号、ACK 确认、超时重传和拥塞控制。QUIC 协议就是一个典型的例子，它基于 UDP 实现了可靠传输，解决了 TCP 的队头阻塞问题。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-049.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 连接对比：TCP面向连接需握手，而UDP无连接即发即走

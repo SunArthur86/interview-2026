@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】GraphQL N+1 查询与权限治理</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：GraphQL 的 N+1 问题本质是\&quot;resolver 按字段拆分后，每个关联字段触发一次 DB 查询\&quot;——查 1…</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="50" y="170" width="110" height="60" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="105" y="193" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">客户端</text>
+<text x="105" y="207" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Web/App</text>
+<line x1="160" y1="200" x2="220" y2="200" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="220" y="140" width="360" height="90" rx="8" fill="#2196F3" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="160" font-size="14" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">API Gateway</text>
+<text x="400" y="177" font-size="14" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">(Spring Cloud </text>
+<text x="400" y="193" font-size="14" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">Gateway / Kong</text>
+<text x="400" y="210" font-size="14" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600"> / Nginx)</text>
+<rect x="50" y="260" width="160" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="130" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">路由 Routing</text>
+<text x="130" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">path/host 转发</text>
+<rect x="220" y="260" width="160" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="300" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">认证 Auth</text>
+<text x="300" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">JWT/OAuth2</text>
+<rect x="390" y="260" width="160" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="470" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">限流 RateLimit</text>
+<text x="470" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">令牌桶</text>
+<rect x="560" y="260" width="160" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="640" y="279" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">熔断 Circuit</text>
+<text x="640" y="291" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Sentinel</text>
+<rect x="50" y="330" width="160" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="130" y="349" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">日志监控</text>
+<text x="130" y="361" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">access log</text>
+<rect x="220" y="330" width="160" height="50" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="300" y="349" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">协议转换</text>
+<text x="300" y="361" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">HTTP→RPC</text>
+<rect x="390" y="330" width="160" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="470" y="349" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">灰度发布</text>
+<text x="470" y="361" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Header 路由</text>
+<rect x="560" y="330" width="160" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="640" y="349" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">负载均衡</text>
+<text x="640" y="361" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Ribbon/LB</text>
+<rect x="240" y="410" width="110" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="295" y="435" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">用户服务</text>
+<line x1="400" y1="230" x2="295" y2="410" stroke="#FF9800" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="370" y="410" width="110" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="425" y="435" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">订单服务</text>
+<line x1="400" y1="230" x2="425" y2="410" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="500" y="410" width="110" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="555" y="435" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">商品服务</text>
+<line x1="400" y1="230" x2="555" y2="410" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<text x="400" y="500" font-size="12" fill="#607D8B" text-anchor="middle">同步网关：Spring Cloud Gateway (Reactor)  |  异步网关：Kong (OpenResty/Lua)</text>
+<text x="400" y="522" font-size="12" fill="#607D8B" text-anchor="middle">核心价值：统一入口 / 解耦 / 横切关注点收敛</text>
+</svg>

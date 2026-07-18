@@ -156,6 +156,10 @@ memory_points:
 3.  **Kafka 扩容时为何要增加 Partition？**
     *   *提示*：Kafka 的消费并发度由 Partition 数量和 Consumer Group 内的线程数决定（Min(分区数, 线程数)）。如果只扩 Broker 不扩 Partition，吞吐量无法线性提升。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-049.svg" alt="如何设计容量评估和扩容方案？应对大促/活动流量。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 容量公式：所需实例数 = 目标峰值QPS / (单机极限QPS × 0.8 安全水位)。

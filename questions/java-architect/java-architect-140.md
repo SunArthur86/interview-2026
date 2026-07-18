@@ -391,3 +391,7 @@ public void fallbackPublisher() {
 | 1:05 | CDC示意/对比图 | "Debezium 监听 outbox 表 binlog，变更即推 Kafka" | CDC要点 |
 | 1:30 | 幂等示意/对比图 | "消费端按 event_id 去重，CDC 重启可能重投" | 幂等要点 |
 | 1:55 | 总结卡 | "记住：Outbox 表。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-140.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

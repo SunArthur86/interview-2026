@@ -382,3 +382,7 @@ flowchart LR
 | 0:15 | 分布式架构图 | 先说核心：CAP 是"分区容忍下，一致性和可用性二选一"的定理——网络分区必然发生（P 必选），所以实际是 CP 还是 AP 的取舍。BASE 是 CAP 工程化的妥协方案：放弃强一致（。 | 核心定义 |
 | 0:30 | 事务隔离级别对比表 | Basically Available（基本可用）+ Soft state（软状态）+ Eventually consistent（最终一致）。 | BASE |
 | 1:30 | 总结卡 | 一句话记忆：CAP：P 必选，实际是 CP vs AP 二选一。 下期可以接着聊：CAP 中的 C 和 ACID 中的 C 是一回事吗。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-019.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

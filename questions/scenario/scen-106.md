@@ -113,6 +113,10 @@ flowchart TD
     style FIX fill:#ffcccc
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-106.svg" alt="分库分表后如何做不停机的数据迁移和扩容？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 不停机扩容首选双写方案：代码改造双写新库旧库，工具全量同步历史数据

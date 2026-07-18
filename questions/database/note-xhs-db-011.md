@@ -232,3 +232,7 @@ MongoDB 确实适合半结构化文档存储，但要看整体架构。如果系
 | 1:06 | Redis Lua 脚本执行截图分步演示 | "Redis做缓存/计数/排行榜，不做主存储" | Redis做缓存/计数 |
 | 1:57 | 关键代码/伪代码片段 | "必须用MySQL：范围查询、多表JOIN、事务一致性、精确聚合" | 必须用MySQL |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如何保证 MySQL 和 Redis 的数据一致性。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-xhs-db-011.svg" alt="场景题：笔记类型数据（直播/图文/视频，有类型关联关系）应该用 MySQL 还是 Redis 存？什么场景必须用 MySQL？（小红书Java一面） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

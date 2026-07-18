@@ -392,3 +392,7 @@ public class RuleDeploymentManager {
 | 0:40 | AAA示意/对比图 | "Authentication（认证）+ Authorization（授权）+ Audit（审计）" | AAA要点 |
 | 1:05 | 认证三要素示意/对比图 | "知识（密码）、拥有（手机/Token）、生物（指纹/人脸），多因素认证（MFA）" | 认证三要素要点 |
 | 1:55 | 总结卡 | "记住：AAA。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-051.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

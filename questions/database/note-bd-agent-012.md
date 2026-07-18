@@ -159,6 +159,10 @@ Gap Lock:    锁定 (20,25), (25,30), (30, +∞) 的间隙
 3. **Next-Key Lock**：能解释Record Lock + Gap Lock的组合
 4. **MySQL选RR的原因**：历史原因（binlog复制需要RR保证一致性），其他数据库大多默认RC
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-bd-agent-012.svg" alt="MySQL里脏读和幻读分别是什么？数据库怎么避免？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话区分：脏读读到未提交修改（UPDATE），幻读读到新插入行（INSERT）

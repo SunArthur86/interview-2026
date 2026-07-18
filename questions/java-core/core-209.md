@@ -88,6 +88,10 @@ Queue 是 Java 集合框架中表示队列的接口，继承自 Collection，遵
 3. **SynchronousQueue 的应用场景？**
    - 它不存储元素，直接传递。常用于 `Executors.newCachedThreadPool` 中，任务提交后直接交给线程执行，若无空闲线程则创建新线程，起到“握手”传递的作用。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-209.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心接口：继承 Collection，遵循 FIFO（先进先出），分普通队列与双端队列 Deque

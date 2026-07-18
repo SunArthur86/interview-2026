@@ -137,6 +137,10 @@ flowchart TD
     style CLK fill:#ffcccc
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-087.svg" alt="如何设计一个全局唯一订单号生成方案？包含时间、机器、序列号。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - Snowflake核心结构：1符+41毫秒+5机房+5机器+12序列，单机每秒约400万。

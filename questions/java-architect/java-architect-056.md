@@ -419,3 +419,7 @@ public class KeyExpiredListener implements MessageListener {
 | 0:15 | 库存模型示意/对比图 | "available（可用）+ frozen（预占）+ sold（已售）" | 库存模型要点 |
 | 0:40 | Redis Lua 原子扣减示意/对比图 | "if stock >= n then stock -= n return 1 else return 0" | Redis Lua 原子扣减要点 |
 | 1:25 | 总结卡 | "记住：库存模型。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-056.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

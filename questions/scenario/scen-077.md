@@ -138,6 +138,10 @@ flowchart TD
     style TRIE fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-077.svg" alt="如何设计搜索自动补全（Suggest）系统？输入即时推荐。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心存储：Redis ZSet方案。因为需高频前缀查询与权重排序，所以Key设计为前缀，Value存完整词及热度分数。

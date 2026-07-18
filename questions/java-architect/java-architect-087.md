@@ -441,3 +441,7 @@ flowchart TD
 | 0:15 | LLM 调用当外部不稳定依赖示意/对比图 | "超时、重试、熔断、降级、线程池隔离" | LLM 调用当外部不稳定依赖要点 |
 | 0:40 | 输入输出走 DTO 契约示意/对比图 | "输入输出走 DTO 契约 + JSON Schema 校验，不能让模型直接操作领域对象" | 输入输出走 DTO 契约要点 |
 | 1:25 | 总结卡 | "记住：LLM 当外部不稳定依赖。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-087.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

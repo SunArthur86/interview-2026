@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">变量可见性</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：保证多线程间变量的即时可见性与操作有序性</text>
+<!-- BODY_TOP=110 -->
+<rect x="60" y="110" width="680" height="60" rx="8" fill="#f44336"/>
+<text x="400" y="148" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">volatile 两大大语义：可见性 + 禁止指令重排（不保证原子性）</text>
+<rect x="60" y="200" width="220" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="170" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">可见性</text>
+<text x="170" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">写后立刻刷主存</text>
+<text x="170" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">读强制从主存读</text>
+<rect x="290" y="200" width="220" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">禁止重排序</text>
+<text x="400" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Memory Barrier</text>
+<text x="400" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">LoadLoad/Store</text>
+<text x="400" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Store</text>
+<rect x="520" y="200" width="220" height="90" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="630" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">不保证原子</text>
+<text x="630" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">i++ 仍非原子</text>
+<text x="630" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">需 AtomicXxx</text>
+<rect x="60" y="320" width="680" height="160" rx="10" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="344" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">JMM 内存模型视角</text>
+<rect x="80" y="360" width="200" height="50" rx="8" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="180" y="385" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">线程A 工作内存</text>
+<rect x="520" y="360" width="200" height="50" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="620" y="385" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">线程B 工作内存</text>
+<rect x="300" y="430" width="200" height="40" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="443" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">主内存</text>
+<text x="400" y="457" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">volatile 变量</text>
+<line x1="280" y1="385" x2="320" y2="450" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="300" y="412" font-size="11" fill="#4CAF50" text-anchor="middle" font-weight="600">write 刷主存</text>
+<line x1="480" y1="450" x2="520" y2="385" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="500" y="412" font-size="11" fill="#4CAF50" text-anchor="middle" font-weight="600">read 读主存</text>
+</svg>

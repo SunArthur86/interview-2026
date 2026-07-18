@@ -113,6 +113,10 @@ flowchart LR
     end
     Note["数组适合读多写少 查询场景<br/>链表适合频繁增删"]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-032.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 数组内存连续支持随机访问O(1)，但增删需移动元素较慢；链表靠指针非连续，增删快O(1)

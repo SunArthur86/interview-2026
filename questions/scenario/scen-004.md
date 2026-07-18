@@ -113,6 +113,10 @@ C-D: 1 (Total 2 - 1 Sold)
 2. **锁的粒度**：是锁整列车还是锁区间？（锁区间会降低并发，但锁整列车粒度太粗导致死锁；实际采用「分段锁」或基于 Redis Lua 脚本一次性扣减相关区间的原子操作）。
 3. **库存预占**：下单后 30 分钟不支付如何释放库存？（延时队列或定时任务扫描 `expire_time < now` 的订单，回滚 Redis 和 DB 库存，并触发候补队列）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-004.svg" alt="如何设计12306火车票售票系统？高峰期日访问量千亿级。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心难点：N站区间共享座位，余票本质是最大值矩阵的实时维护

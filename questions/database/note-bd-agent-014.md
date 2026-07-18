@@ -155,6 +155,10 @@ SkipList：
 3. **SSD的影响**：SSD随机IO比HDD快100倍，但仍然比顺序IO慢10倍，B+树仍然更优
 4. **混合方案**：有些数据库(如RocksDB)用LSM-Tree，针对SSD进一步优化写性能
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-bd-agent-014.svg" alt="为什么MySQL索引用B+树，而不是Redis跳表这类结构？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话核心：MySQL面向磁盘极力减少随机IO，而Redis纯内存操作指针跳转无瓶颈

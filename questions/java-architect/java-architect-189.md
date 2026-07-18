@@ -355,3 +355,7 @@ spring.cloud.kafka.binder.brokers=127.0.0.1:9092
 | 0:40 | PoC 评估矩阵示意/对比图 | "功能匹配度 / 性能 / 成本 / 风险 / 社区健康 五维度量化" | PoC 评估矩阵要点 |
 | 1:05 | PoC 目标是找边界，不是证明能示意/对比图 | "压到崩溃才知道天花板" | PoC 目标是找边界，不是证明能要点 |
 | 1:55 | 总结卡 | "记住：五维评估矩阵。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-189.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

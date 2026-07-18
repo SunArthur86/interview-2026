@@ -442,3 +442,7 @@ public class CachePurgeController {
 | 0:15 | CDN 回源示意/对比图 | "静态资源缓存，过期/未命中时回源中心" | CDN 回源要点 |
 | 0:40 | 边缘计算示意/对比图 | "边缘计算（Cloudflare Workers/ENS）：动态逻辑边缘执行，写回源中心" | 边缘计算要点 |
 | 1:25 | 总结卡 | "记住：CDN 回源。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-196.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

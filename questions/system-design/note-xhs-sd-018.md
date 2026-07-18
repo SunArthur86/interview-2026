@@ -316,3 +316,7 @@ public void releaseExpiredGroups() {
 | 2:01 | 关键代码/伪代码片段 | "状态机：开团(锁定库存) 到 待成团 到 成团(扣减库存) / 超时失败(释放库存)" | 状态机 |
 | 2:54 | 对比表格 | "关键：定时任务扫描超时拼团 + 分布式锁防止重复处理" | 关键 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：拼团超时自动失败的定时任务，如果任务执行慢导致库存长时间不释放，怎么办。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-018.svg" alt="【拼多多二面】设计一个拼团活动的抢购系统（防刷、限流、库存一致性） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

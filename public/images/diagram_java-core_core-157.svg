@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">Java NIO中Selector的作用是什么？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：单线程监控多通道，实现IO多路复用。</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="114" width="168" height="44" rx="8" fill="#2196F3"/>
+<text x="124" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">BIO 同步阻塞</text>
+<rect x="224" y="114" width="168" height="44" rx="8" fill="#FF9800"/>
+<text x="308" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">NIO 同步非阻塞</text>
+<rect x="408" y="114" width="168" height="44" rx="8" fill="#4CAF50"/>
+<text x="492" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">IO 多路复用</text>
+<rect x="592" y="114" width="168" height="44" rx="8" fill="#9C27B0"/>
+<text x="676" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">AIO 异步</text>
+<rect x="40" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">一连接一线程</text>
+<rect x="224" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">多路复用 Selector</text>
+<rect x="408" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">epoll/kqueue (OS 级)</text>
+<rect x="592" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">真正的异步回调</text>
+<rect x="40" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">accept()/read() 阻塞</text>
+<rect x="224" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Channel + Buffer</text>
+<rect x="408" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">事件驱动</text>
+<rect x="592" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Windows IOCP</text>
+<rect x="40" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">连接数少</text>
+<rect x="224" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">一个线程管多连接</text>
+<rect x="408" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Redis/Nginx 用</text>
+<rect x="592" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Linux 伪 AIO</text>
+<rect x="40" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">JDK 1.4 前</text>
+<rect x="224" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">JDK 1.4</text>
+<rect x="408" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">高性能首选</text>
+<rect x="592" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">JDK 1.7+</text>
+</svg>

@@ -84,6 +84,10 @@ tags: []
 2. 什么是饥饿？如何解决？（老化技术，即随着等待时间增加动态提升优先级）
 3. 时间片轮转中，时间片太大或太小会有什么影响？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-141.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 口诀：先来先服务、短作业优先、时间片轮转、优先级、多级队列

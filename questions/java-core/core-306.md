@@ -147,6 +147,10 @@ flowchart TD
     K[经典案例] --> L[List list = new ArrayList]
     K --> M[策略模式 注入不同实现]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-306.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 编译时多态靠重载：因为编译期看参数类型，所以叫静态绑定。

@@ -107,6 +107,10 @@ flowchart TD
     K[公网 IP vs 私网 IP] --> L["私网: 10.x/172.16-31/192.168"]
     K --> M[NAT 转换<br/>内网访问公网]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-198.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心特性：网络层无连接且不可靠，只提供尽力而为的寻址和路由。

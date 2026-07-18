@@ -107,6 +107,10 @@ flowchart TD
     style BLK fill:#ffcccc
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-031.svg" alt="如何设计一个分布式事务方案？对比2PC/TCC/Saga/本地消息表。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 方案口诀：2PC强一致阻塞性能差，TCC无锁高性能侵入大，Saga长事务需补偿，本地消息表简单最终一致

@@ -116,6 +116,10 @@ flowchart TD
     style SEC fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-015.svg" alt="如何设计一个分布式文件存储系统？类似七牛云/阿里云OSS。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 架构分层：系统分为API接入鉴权、MySQL元数据管理与物理块存储三层。

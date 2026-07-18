@@ -96,6 +96,10 @@ flowchart LR
     end
     Note["推荐: 用 link 加载 CSS<br/>避免 @import 影响首屏速度"]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-201.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 底层结构：双向链表，首尾指针相连，首尾增删极快O(1)，但指定索引查询极慢O(n)。

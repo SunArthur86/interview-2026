@@ -94,6 +94,10 @@ flowchart TD
     I --> J[LangChain/Git 模板化管理]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_eng-practice_eng-practice-s001.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 基础技巧：角色设定、任务分解、Few-shot（示例多样性）、输出格式约束、CoT。

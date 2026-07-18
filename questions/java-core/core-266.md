@@ -108,6 +108,10 @@ void lock_critical_memory(void *addr, size_t len) {
 }
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-266.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心思想：屏蔽物理内存离散，为进程提供连续且独立的逻辑地址空间。

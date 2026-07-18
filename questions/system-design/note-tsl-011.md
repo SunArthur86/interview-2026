@@ -260,6 +260,10 @@ public class DeviceStatusStream {
 - **设备端校验**：即使签名正确，设备也会检查指令合理性（SOC>90%不允许继续充电）
 - **硬件BMS**：电池管理系统硬件级保护，软件无法绕过
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-tsl-011.svg" alt="数十万套储能设备根据电网需求充放电，如何设计后端架构，实现调度指令精准下发、状态实时反馈？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心三步走：采集电网信号 → 调度引擎算最优指令(线性规划) → MQTT精准下发

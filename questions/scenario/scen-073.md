@@ -148,6 +148,10 @@ flowchart TD
     style ASG fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-073.svg" alt="如何设计外卖配送调度系统？类似美团/饿了么。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质模型：多约束条件下的最优分配，属于NP-Hard问题，需平衡响应时间与全局最优

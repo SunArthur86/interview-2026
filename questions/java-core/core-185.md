@@ -122,6 +122,10 @@ flowchart TD
     P[HTTPS/TLS] --> Q[服务端证书<br/>证明公钥归属]
     R[证书吊销] --> S[CRL/OCSP]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-185.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：Nginx的ngx_http_proxy_module指令，用于反向代理与请求转发。

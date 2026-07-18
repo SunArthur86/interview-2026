@@ -88,6 +88,10 @@ public int getData() {
 2. **异常丢失**：在 finally 中抛出异常，或在 finally 中 return，会导致 try/catch 块中的异常被吞掉。
 3. **性能影响**：现代 JVM 对 finally 优化很好，一般无需担心性能，但在极端高频路径下可通过代码结构调整优化。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-082.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 执行机制：编译器会将finally代码块逻辑复制到try/catch的所有正常与异常出口路径

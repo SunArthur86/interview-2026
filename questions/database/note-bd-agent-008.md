@@ -201,6 +201,10 @@ def pre_deduct_with_fallback(item_id, qty):
 3. **补偿体系**：MQ实时补偿 + 定时任务兜底对账
 4. **预扣回滚**：落库失败时释放Redis预扣，保证不超卖
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-bd-agent-008.svg" alt="Redis和MySQL同时存业务状态时，怎么保证最终一致性？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心主从：MySQL是唯一数据源，而Redis仅作临时过程态。

@@ -130,6 +130,10 @@ flowchart TD
     M[乱码根源] --> N[编码与解码字符集不一致]
     M --> O[字节流读字符截断]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-126.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 基本单元：字节流操作 8 位字节，字符流操作 16 位 Unicode 字符。

@@ -126,6 +126,10 @@ flowchart TD
     style ZS fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-067.svg" alt="如何设计一个排行榜系统？支持亿级用户、实时更新、多种维度排序。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心结构：Redis ZSet天然排序，亿级数据因单Key过载，所以需分桶/分片ZSet分散压力

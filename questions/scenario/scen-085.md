@@ -139,6 +139,10 @@ public Result seckill(Long userId, Long skuId) {
 - 容量使用率
 - 改进建议
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-085.svg" alt="如何设计一个秒杀系统的全链路追踪和监控？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 工具铁三角：Prometheus看指标数值，SkyWalking查链路拓扑，ELK捞文本日志。

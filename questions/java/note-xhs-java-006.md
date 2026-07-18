@@ -253,3 +253,8 @@ public class EventService {
 **候选人**：多次dump对比对象数量趋势、老年代持续上涨不回落就是泄漏；会自行回落的就是峰值，处置方式完全不同。
 **面试官**：dump Heap会影响线上，你怎么处理？
 **候选人**：低峰期操作、用live选项先GC减小体积、摘除单实例流量再dump，避免STW影响整体可用性。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-006.svg" alt="【大厂面试】线上 Java 内存占用过高怎样排查解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

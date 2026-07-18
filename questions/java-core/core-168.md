@@ -75,6 +75,10 @@ userMap.put(1001L, new User("Bob"));
 User bob = userMap.get(1001L); // O(1) 快速定位
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-168.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 数据结构对比：List是单列集合允许重复且有序，Map是双列双列Key不可重复。

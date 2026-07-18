@@ -105,6 +105,10 @@ flowchart TD
     M[替代方案] --> N[JSON Jackson/Fastjson]
     M --> O[Protobuf/Thrift<br/>跨语言 高效]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-162.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：序列化是将对象转为字节流，反序列化反之，用于跨网络传输或持久化。

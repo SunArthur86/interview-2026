@@ -99,6 +99,10 @@ flowchart TD
     K --> M[提高内聚]
     K --> N[便于复用]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-249.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：客户端不应被迫依赖它不需要的接口，大接口需拆分细化。

@@ -300,3 +300,7 @@ jfr print --events jdk.Compilation,jdk.CompilerPhase jit.jfr
 | 0:15 | JVM 内存分代图 | 先说核心：JIT 的本质是"用运行时数据指导优化"——只有热点代码才值得编译，只有没逃逸的对象才能在栈上分配。JVM 用 Profiling 收集谁热、谁逃逸，再决定编译/内联/标量替换。 | 核心定义 |
 | 0:30 | 性能优化对比图 | 方法调用计数器 + 回边计数器，默认 10000/17000 触发。 | 热点探测 |
 | 1:30 | 总结卡 | 一句话记忆：JIT 三层：解释 → C1 → C2，分层编译（Tiered Compilation）JDK 8 默认开启。 下期可以接着聊：为什么 JIT 不一开始就编译。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-004.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

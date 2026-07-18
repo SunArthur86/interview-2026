@@ -499,3 +499,7 @@ public class SettlementRetryService {
 | 0:15 | 清分（算钱）示意/对比图 | "按规则把订单金额拆分给各方（商家/平台/物流/营销补贴）" | 清分（算钱）要点 |
 | 0:40 | 结算（付钱）示意/对比图 | "资金划转，T+1 批量打款给商家" | 结算（付钱）要点 |
 | 1:25 | 总结卡 | "记住：清分算钱。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-061.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -445,3 +445,7 @@ public void checkTenantStorageQuota() {
 | 1:05 | 租户识别示意/对比图 | "域名（acme.saas.com）/ 请求头（X-Tenant-Id）/ JWT 中的 tenant claim" | 租户识别要点 |
 | 1:30 | 数据层隔离示意/对比图 | "MyBatis 拦截器自动追加 WHERE tenant_id=?，或动态数据源路由" | 数据层隔离要点 |
 | 1:55 | 总结卡 | "记住：三种隔离。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-050.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

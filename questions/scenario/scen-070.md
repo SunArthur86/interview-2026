@@ -116,6 +116,10 @@ public void process() {
 3. **失败重试的陷阱**：任务执行一半失败并重试，如何保证数据一致性？（业务逻辑必须实现幂等，或采用 TCC 思想，重试前先回滚或检查状态）
 4. **海量任务调度性能**：如果有 10 万个定时任务每秒触发，调度中心会成为瓶颈吗？（会，通常需要水平扩展调度中心，或使用网格计算架构如 PowerJob 将调度分散）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-070.svg" alt="如何设计一个分布式定时任务系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 单机痛点：多实例@Scheduled会重复执行甚至DB死锁，所以需引入分布式调度

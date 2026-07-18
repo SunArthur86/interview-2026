@@ -141,6 +141,10 @@ flowchart TD
     D --> D3[Generational ZGC]
     D --> D4[Pattern Matching switch]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-322.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 两大基石：Lambda表达式（简化代码）与Stream API（函数式处理集合）。

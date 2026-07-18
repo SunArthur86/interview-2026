@@ -103,6 +103,10 @@ flowchart TD
     G --> J
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_eng-practice_eng-practice-s004.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 模型路由：小模型处理简单任务，大模型处理复杂任务，先判后分。

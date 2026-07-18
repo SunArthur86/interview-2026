@@ -101,6 +101,10 @@ flowchart TD
     P --> R[IDE 智能提示]
     P --> S[Spring/SpringDoc 自动生成 API]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-108.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 工具：因为配合javadoc工具，所以能生成HTML格式的API文档

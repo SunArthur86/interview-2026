@@ -220,3 +220,7 @@ memory_points:
 | 1:06 | Spring Bean 生命周期图分步演示 | "客户端LB: Ribbon/Spring Cloud LoadBalancer — 去中心化、直接调用、无额外跳转" | 客户端LB |
 | 1:57 | 关键代码/伪代码片段 | "核心策略: 轮询 > 加权轮询 > 最少连接 > 一致性哈希" | 核心策略 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：一致性哈希的虚拟节点是什么？为什么需要。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-014.svg" alt="【拼多多 Java服务端】微服务有哪些负载均衡的方式？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

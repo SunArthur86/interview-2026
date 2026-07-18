@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">什么是单例模式的应用场景？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：确保全局唯一实例的设计模式</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="114" width="168" height="44" rx="8" fill="#2196F3"/>
+<text x="124" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">饿汉式</text>
+<rect x="224" y="114" width="168" height="44" rx="8" fill="#FF9800"/>
+<text x="308" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">懒汉式(DCL)</text>
+<rect x="408" y="114" width="168" height="44" rx="8" fill="#4CAF50"/>
+<text x="492" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">静态内部类</text>
+<rect x="592" y="114" width="168" height="44" rx="8" fill="#9C27B0"/>
+<text x="676" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">枚举</text>
+<rect x="40" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">类加载即创建</text>
+<rect x="224" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">双重检查锁</text>
+<rect x="408" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">利用类加载机制</text>
+<rect x="592" y="174" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Effective Java 推荐</text>
+<rect x="40" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">天然线程安全</text>
+<rect x="224" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">volatile 防指令重排</text>
+<rect x="408" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">天然线程安全</text>
+<rect x="592" y="249" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">天然防反射</text>
+<rect x="40" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">无法延迟加载</text>
+<rect x="224" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">延迟加载</text>
+<rect x="408" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">延迟加载</text>
+<rect x="592" y="324" width="168" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">天然防序列化</text>
+<rect x="40" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="124" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">可能浪费资源</text>
+<rect x="224" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="308" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">推荐写法</text>
+<rect x="408" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="492" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">推荐写法</text>
+<rect x="592" y="399" width="168" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="676" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">最简洁安全</text>
+</svg>

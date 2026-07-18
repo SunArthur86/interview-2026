@@ -286,3 +286,7 @@ SELECT * FROM account WHERE id=1 FOR UPDATE;  -- balance=200 (最新版本)
 | 2:01 | 关键代码/伪代码片段 | "RC vs RR关键: RC每次SELECT新建ReadView；RR复用第一次的ReadView" | RC vs RR关键 |
 | 2:54 | 对比表格 | "当前读: SELECT...FOR UPDATE / UPDATE / DELETE 加Next-Key Lock" | 当前读 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：MVCC的Undo Log版本链是怎么组织的。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-xhs-db-015.svg" alt="【拼多多 Java服务端】MySQL事务隔离等级有了解吗？是如何实现的？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

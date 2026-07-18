@@ -128,6 +128,10 @@ flowchart TD
     style IDEM fill:#ffe4b5
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-024.svg" alt="如何保证消息队列的消息不丢失？从生产到消费全链路分析。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 顺序消费前提：摒弃全局有序（极差），只用分区有序（同业务Key进同队列）

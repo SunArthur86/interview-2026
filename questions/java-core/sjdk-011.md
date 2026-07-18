@@ -126,6 +126,10 @@ flowchart TD
     I[GC 演进] --> J[Parallel/CMS 淘汰]
     I --> K[G1 默认 ZGC 低延迟]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_sjdk-011.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 语法糖：文本块用三引号，简化JSON/SQL；Stream直接用toList()替代collect收集

@@ -306,3 +306,7 @@ log.info("L1 Hit rate: {:.2f}%, Eviction: {}, Avg load time: {}ms",
 | 2:01 | 关键代码/伪代码片段 | "一致性：Redis Pub/Sub广播失效 > 短TTL > Canal binlog" | 一致性 |
 | 2:54 | 对比表格 | "AI场景：Embedding缓存+FAQ缓存可省大量API费用" | AI场景 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Caffeine 的 W-TinyLFU 淘汰算法比传统 LRU 好在哪。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-009.svg" alt="多级缓存方案如何设计？AI业务场景下的缓存策略？（入职Java复盘） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

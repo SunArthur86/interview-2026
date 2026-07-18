@@ -520,3 +520,7 @@ flowchart TD
 | 0:40 | Redis 数据结构图 | 热点 key 过期瞬间高并发；防护用互斥重建（分布式锁）或逻辑过期。 | 击穿 |
 | 1:05 | 概念结构示意图 | 大量 key 同时过期；防护用 TTL 加随机偏移、多级缓存。 | 雪崩 |
 | 2:30 | 总结卡 | 一句话记忆：穿透：查不存在 → 布隆过滤器 / 缓存空值。 下期可以接着聊：布隆过滤器为什么能防穿透。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-027.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

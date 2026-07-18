@@ -108,6 +108,10 @@ flowchart TD
     D --> D3[0-RTT 建联]
     D --> D4[连接迁移<br/>IP 变化不断流]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-060.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心区别记“长管缓带”：1.1支持长连接、管道化、强缓存(ETag)、断点续传

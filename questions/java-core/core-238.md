@@ -88,6 +88,10 @@ flowchart TD
     M[乱码根源] --> N[编码与解码字符集不一致]
     M --> O[字节流读字符截断]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-238.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：将字符集映射为计算机能存储的字节序列的规则

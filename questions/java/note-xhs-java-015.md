@@ -234,3 +234,8 @@ private static ThreadLocal<SimpleDateFormat> dateFormat =
 | 1:06 | JVM 内存结构图分步演示 | "Key是弱引用(WeakReference<ThreadLocal>)，Value是强引用" | Key是弱引用 |
 | 1:57 | 关键代码/伪代码片段 | "内存泄漏：线程池中线程复用，ThreadLocal不remove会导致Value泄漏" | 内存泄漏 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：ThreadLocal和Synchronized有什么区别。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-015.svg" alt="【拼多多 Java服务端】ThreadLocal有了解吗？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

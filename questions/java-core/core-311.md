@@ -168,6 +168,10 @@ flowchart TD
     M --> O[RxJava/Reactor 响应流]
     M --> P[Spring ApplicationEvent]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-311.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：主题状态一变，自动通知多个依赖的观察者，实现一对多联动

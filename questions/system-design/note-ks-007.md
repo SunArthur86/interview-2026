@@ -352,3 +352,7 @@ public Set<String> dedupByPartition(String inputFile, int partitions) throws IOE
 | 1:06 | 算法示意图分步演示 | "10亿元素1GB：m就是80亿bits就是1GB, k就是7, 假阳性率≈2.5%" | 10亿元素1GB |
 | 1:57 | 关键代码/伪代码片段 | "分治法：hash(name)%N分N个文件到每个文件独立布隆过滤器到合并" | 分治法 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：布隆过滤器的假阳性率如何计算？如何选择最优k值。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-ks-007.svg" alt="【快手Java一面】10亿用户昵称去重，内存限制1GB？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

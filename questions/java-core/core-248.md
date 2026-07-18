@@ -157,6 +157,10 @@ flowchart TD
     E[六大原则] --> F[SOLID 单一/开闭/里氏/接口/依赖]
     E --> G[迪米特法则/合成复用]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-248.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心：类仅有一个实例，并提供全局唯一访问点

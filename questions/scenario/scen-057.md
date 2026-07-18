@@ -128,6 +128,10 @@ spec:
 4. **数据平面崩溃对业务的影响？**
    答：Sidecar 与业务容器同生命周期，若 Sidecar 挂了，K8s 会重启整个 Pod。因此 Sidecar 的高可用性依赖于 K8s 的重启机制和 Envoy 自身的健壮性。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-057.svg" alt="如何设计 Service Mesh（服务网格）架构？Istio 的核心概念。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心机制：业务无感知，治理逻辑全下沉至Sidecar代理，进出流量必经。

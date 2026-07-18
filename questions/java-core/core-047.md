@@ -99,6 +99,10 @@ flowchart TD
     H --> J[hashCode 相等<br/>equals 不一定相等]
     K[finalize] --> L[JDK 9 已废弃<br/>不可靠]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-047.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 比较契约：重写equals必须重写hashCode，因为HashMap需保证相等对象哈希值一致

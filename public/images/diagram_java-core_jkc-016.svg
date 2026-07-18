@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">同步器的实现是ABS核心（state资源状态计数）</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：利用一个原子整数state标记资源状态，控制资源的获取与释放</text>
+<!-- BODY_TOP=110 -->
+<rect x="60" y="110" width="680" height="60" rx="8" fill="#2196F3" />
+<text x="400" y="148" font-size="17" fill="#FFFFFF" text-anchor="middle" font-weight="700">AQS = state + CLH 双向 FIFO 队列</text>
+<rect x="80" y="200" width="240" height="70" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="200" y="218" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">volatile int s</text>
+<text x="200" y="235" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">tate</text>
+<text x="200" y="252" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(同步状态)</text>
+<rect x="360" y="200" width="240" height="70" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="480" y="218" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">CAS 修改 state</text>
+<text x="480" y="235" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(compareAndSet</text>
+<text x="480" y="252" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">)</text>
+<line x1="320" y1="235" x2="360" y2="235" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="60" y="300" width="680" height="170" rx="10" fill="#FFFFFF" stroke="#9C27B0" stroke-width="2"/>
+<text x="80" y="324" font-size="14" fill="#9C27B0" font-weight="700">CLH 等待队列（双向链表，FIFO）</text>
+<rect x="100" y="350" width="140" height="70" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="170" y="377" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">head</text>
+<text x="170" y="393" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(哨兵)</text>
+<rect x="260" y="350" width="140" height="70" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="330" y="377" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Node 1</text>
+<text x="330" y="393" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">线程A</text>
+<text x="330" y="442" font-size="10" fill="#2196F3" text-anchor="middle">前驱唤醒</text>
+<line x1="240" y1="385" x2="260" y2="385" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="260" y1="395" x2="240" y2="395" stroke="#607D8B" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="420" y="350" width="140" height="70" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="490" y="377" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Node 2</text>
+<text x="490" y="393" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">线程B</text>
+<text x="490" y="442" font-size="10" fill="#FF9800" text-anchor="middle">park 阻塞</text>
+<line x1="400" y1="385" x2="420" y2="385" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="420" y1="395" x2="400" y2="395" stroke="#607D8B" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="580" y="350" width="140" height="70" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="650" y="377" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Node 3</text>
+<text x="650" y="393" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">线程C</text>
+<text x="650" y="442" font-size="10" fill="#f44336" text-anchor="middle">park 阻塞</text>
+<line x1="560" y1="385" x2="580" y2="385" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="580" y1="395" x2="560" y2="395" stroke="#607D8B" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<text x="400" y="494" font-size="12" fill="#607D8B" text-anchor="middle">实现：ReentrantLock / Semaphore / CountDownLatch / ReentrantReadWriteLock</text>
+</svg>

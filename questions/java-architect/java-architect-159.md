@@ -333,3 +333,7 @@ flowchart TD
 | 0:40 | 向量版本化示意/对比图 | "每个向量记录 embedding_model + model_version，绝不混用" | 向量版本化要点 |
 | 1:05 | 双索引切换示意/对比图 | "新索引后台重建，建好后原子切换别名，支持秒级回滚" | 双索引切换要点 |
 | 1:55 | 总结卡 | "记住：向量版本化。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-159.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

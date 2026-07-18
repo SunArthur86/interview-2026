@@ -429,3 +429,7 @@ flowchart TD
 | 0:15 | 概念结构示意图 | 先说核心：SLO（Service Level Objective）是"对用户承诺的可用性指标"（如 99.9% 成功率），错误预算（Error Budget = 100% - SLO）是。 | 核心定义 |
 | 0:30 | 流程图 | 可用性 99.9%（年宕机 8.76h）、成功率 99.95%、P99 < 500ms。 | SLO 典型 |
 | 1:30 | 总结卡 | 一句话记忆：SLI（指标）→ SLO（目标）→ 错误预算（额度）→ SLA（合同）。 下期可以接着聊：SLI 怎么选。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-038.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

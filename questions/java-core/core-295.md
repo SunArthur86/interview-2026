@@ -106,6 +106,10 @@ flowchart TD
     Q --> R[小数据 n 7 性能好<br/>快排/归并切换]
     Q --> S[在线排序 Online]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-295.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心口诀：分已排序和未排序两区，将未排序元素依次插入到已排序区的正确位置

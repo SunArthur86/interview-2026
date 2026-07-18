@@ -385,6 +385,10 @@ lock.tryLock(3, 10, TimeUnit.SECONDS);  // 10秒后自动释放，不续期
 
 在实际抽奖系统中，典型的分层是：**Lua 原子扣减（比纯 DECR 更安全）→ Redisson 锁（业务保护）→ DB 乐观锁（兜底）**。`INCR` 的思想是基础，Lua 脚本是其增强版（加了前置判断），Redisson 锁是更大粒度的保护——三者构成完整的并发安全体系。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-lt-002.svg" alt="【滴滴面经】Redis 的 incr 和 Redisson 锁你都用了，它们分别解决什么问题？为什么两个都要上？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 场景对比：incr解决单步原子计数（极快），而Redisson锁保护多步业务临界区。

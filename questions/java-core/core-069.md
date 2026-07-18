@@ -125,6 +125,10 @@ flowchart TD
     D & E --> G[字符流 文本 防乱码]
     H[设计模式] --> I[装饰器模式<br/>节点流+处理流]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-069.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四大基类：InputStream和OutputStream(字节)，Reader和Writer(字符)

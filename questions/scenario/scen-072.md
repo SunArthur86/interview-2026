@@ -157,6 +157,10 @@ flowchart TD
     style INSTANT fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-072.svg" alt="如何设计一个网盘系统？类似百度网盘，支持大文件上传下载。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 秒传原理：上传前先算文件MD5比对服务端，存在则直接加引用关系，零流量传输

@@ -348,3 +348,7 @@ CREATE INDEX idx_sku_wh ON inventory(sku_id, warehouse);
 | 0:40 | 分层下钻示意/对比图 | "用户感知 → 网关 → 应用 → 依赖（DB/缓存/RPC）→ 代码热点" | 分层下钻要点 |
 | 1:05 | 量化先行示意/对比图 | "先确定多慢、P99 还是 avg、哪个接口、什么时间" | 量化先行要点 |
 | 1:55 | 总结卡 | "记住：分层下钻。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-096.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

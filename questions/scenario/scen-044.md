@@ -113,6 +113,10 @@ flowchart LR
     style ALL fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-044.svg" alt="如何设计灰度发布方案？安全可控地发布新版本。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 灰度策略：按流量比例或用户特征灰度，配合金丝雀(单实例)和蓝绿发布(新老并行)

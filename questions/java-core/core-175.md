@@ -109,6 +109,10 @@ XACK stream:mystream mygroup 1643720000000-0
 3.  **List vs Stream 做消息队列**：List 有什么缺点？（不支持消息确认 ACK，消费者挂掉消息可能丢失；不支持 Group 消费；不支持回溯）。
 4.  **Pipeline**：Pipeline 也是为了解决网络往返（RTT）问题，它和多线程 IO 有什么区别？（Pipeline 是客户端批量发送命令，一次 IO；多线程 IO 是服务端并行处理多个 IO 请求）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-175.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心结论：6.0前纯单线程；6.0后网络IO多线程，命令执行仍单线程。

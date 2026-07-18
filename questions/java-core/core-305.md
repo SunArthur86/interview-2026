@@ -132,6 +132,10 @@ flowchart TD
     H --> I["TreeMap/TreeSet<br/>HashMap 树化"]
     H --> J[Linux CFS 调度]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-305.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 红黑树是自平衡二叉查找树，保证最长路径不超过最短路径的2倍。

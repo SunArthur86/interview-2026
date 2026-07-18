@@ -126,6 +126,10 @@ MySQL (Binlog)      Canal Server      Kafka           Consumer (ES)
 └───────────┘       └───────────┘      └───────┘      └───────────┘
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-026.svg" alt="如何设计一个全文搜索引擎？支持亿级文档的实时搜索。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 弃用MySQL原因：模糊查无法走索引，且不支持分词与相关度（BM25）排序

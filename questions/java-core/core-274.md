@@ -152,6 +152,10 @@ Java中不支持多继承，但是可以通过接口来实现
   2. final 修饰类：该类不可以被继承
   3. final 修饰方法：⼦类不能覆盖这个方法
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-274.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - OOP核心：先定数据结构（类），再写算法（方法），适合大规模开发

@@ -116,6 +116,10 @@ encryptedData += cipher.final('hex');
 2. **为什么不全用对称加密？**：密钥分发困难，在不安全网络上无法安全传输密钥。
 3. **中间人攻击**：在非对称加密阶段，如何防止黑客拦截并发送自己的公钥？（引出数字证书的概念）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-025.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 非对称加密慢但能安全交换密钥，而对称加密快适合数据传输，因各有优劣所以采用混合加密

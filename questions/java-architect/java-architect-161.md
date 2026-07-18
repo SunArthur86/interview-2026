@@ -379,3 +379,7 @@ flowchart TD
 | 0:15 | 风险三级示意/对比图 | "L1 低风险（只读/查询，自动）、L2 中风险（可逆修改，事后审计）、L3 高风险（不可逆/资金，事前审批）" | 风险三级要点 |
 | 0:40 | 审批网关示意/对比图 | "Agent 执行前拦截，高风险 pause 任务，推审批工单，人工 approve/reject 后 resume" | 审批网关要点 |
 | 1:25 | 总结卡 | "记住：风险三级。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-161.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

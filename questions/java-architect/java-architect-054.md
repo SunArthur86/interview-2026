@@ -451,3 +451,7 @@ public class OrderCompensationSaga {
 | 0:40 | 订单状态示意/对比图 | "待支付→已支付→已发货→已完成（主流程），待支付→已取消（取消）" | 订单状态要点 |
 | 1:05 | 状态机三要素示意/对比图 | "当前状态、目标状态、转换条件" | 状态机三要素要点 |
 | 1:55 | 总结卡 | "记住：订单状态。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-054.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

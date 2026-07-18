@@ -418,3 +418,7 @@ flowchart LR
 **面试官**：HNSW 的 ef 参数你怎么定？业务说"准确率要 99%"，你怎么翻译成工程参数？
 
 **候选人**：99% 是业务指标不是工程参数。我会建评测集，ef 从 64 起步逐步调大（128/256/512），跑 recall@10 曲线。发现 ef=200 时 recall@10 达到 96%，ef=512 才到 98%——边际收益递减。回去和业务对齐：96% 召回 + 上层 rerank 能不能接受？通常 recall 96% 配合业务兜底就够了，不一定非要 99%。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-158.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

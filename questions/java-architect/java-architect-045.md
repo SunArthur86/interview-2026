@@ -349,3 +349,7 @@ public class ErpOrderAdapter {
 | 0:15 | 战略设计示意/对比图 | "限界上下文划边界，上下文映射定协作（合作/共享内核/客户-供应商/防腐层）" | 战略设计要点 |
 | 0:40 | 战术设计示意/对比图 | "实体（有唯一标识）、值对象（无标识不可变）、聚合（一致性边界）、领域服务（无状态跨聚合逻辑）" | 战术设计要点 |
 | 1:25 | 总结卡 | "记住：战略 = 限界上下文 + 上。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-045.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

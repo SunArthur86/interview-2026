@@ -443,6 +443,10 @@ Step 5: 下线旧分片
 >
 > 在实现上，路由表配合三级缓存（Caffeine + Redis + MetaDB）可以做到 **<0.1ms 的平均路由延迟**，完全不会成为系统瓶颈。核心设计要点是：路由表持久化在 MetaDB、热数据缓存在 Redis、高频路由缓存到 JVM 本地，并通过 Pub/Sub 保证缓存一致性。"
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-sl-008.svg" alt="【滴滴面经】短链接数据分片之后，你又加了路由表，这个路由表具体是什么概念？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：路由表就是“短码→分片节点”的显式映射中枢，决定数据读写物理位置

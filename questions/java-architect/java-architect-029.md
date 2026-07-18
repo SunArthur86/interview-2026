@@ -508,3 +508,7 @@ flowchart TD
 | 0:15 | Redis 数据结构图 | 先说核心：Redis 高可用的本质是"数据分片解决单机容量/性能瓶颈，主从复制解决单点故障，自动故障转移解决人工干预延迟"。主从（一主多从，手动切换）→ 哨兵（Sentinel 监控+自。 | 核心定义 |
 | 0:30 | Sentinel 规则配置截图 | 监控+通知+自动故障转移+配置中心。 | 哨兵 Sentinel |
 | 1:30 | 总结卡 | 一句话记忆：主从：全量 RDB + 增量 repl_backlog。 下期可以接着聊：哨兵和 Cluster 什么区别，怎么选。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-029.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

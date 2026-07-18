@@ -526,3 +526,7 @@ public class SlidingWindowFeatureService {
 | 0:40 | 实时特征示意/对比图 | "短窗口（分钟/小时级）的聚合特征（点击数/销量/热度）" | 实时特征要点 |
 | 1:05 | 流批一体示意/对比图 | "Flink 流（实时增量）+ 批（历史回填），同口径" | 流批一体要点 |
 | 1:55 | 总结卡 | "记住：实时特征。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-069.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -457,3 +457,7 @@ public class RefundReconciliation {
 **面试官**：极速退款（收到退货单号即退款不等入库）如果用户填假单号怎么办？
 
 **候选人**：极速退款要校验物流单号真实性——调物流 API 验证单号有效且已揽收。再加用户信用分（历史退货质量/账号年龄），高信用用户极速退款，低信用走标准流程。监控 speedup_fraud_rate（极速退款欺诈率，应 < 0.5%）。欺诈的用户拉黑名单不再享极速退款。这是"信任换体验"的 trade-off，靠风控兜底。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-169.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

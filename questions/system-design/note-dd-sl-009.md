@@ -468,6 +468,10 @@ TTL:   60s（短链创建/删除时主动失效）
 
 > **一句话总结**：跨维度查询的银弹是**异构索引**——用空间（冗余存储）换时间（O(1) 查询），用一致性保障机制（双写 + 对账）兜底数据正确性。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-sl-009.svg" alt="【滴滴面经】如果一个用户创建了很多短链，他要查看自己的短链列表，你怎么设计查询？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质冲突：因为数据按ShortCode分片，所以按user_id查询会导致全分片扫描

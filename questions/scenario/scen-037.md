@@ -102,6 +102,10 @@ Client
 3. **大V粉丝看Feed太慢怎么优化？** 回答：分级拉取，只拉取大V最近 N 条，结合多线程并发拉取，客户端分页加载（无限滚动）。
 4. **评论盖楼如何实现？** 回答：一般只支持两级（主评论+回复），回复过多时点击"查看更多"分页加载，避免 N+1 查询。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-037.svg" alt="如何设计一个朋友圈/社交媒体动态系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心推拉模式：普通用户用推（写扩散读极快），大V（粉丝>5000）用拉（读扩散防写放大）

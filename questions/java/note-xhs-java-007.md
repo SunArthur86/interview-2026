@@ -332,3 +332,8 @@ public class ConcurrentLRUCache {
 **候选人**：HashMap提供O(1)定位节点，双向链表的指针操作是常数级，移动到头或淘汰尾都是O(1)，不依赖链表长度。
 **面试官**：synchronized锁整个LRU性能不行，怎么优化？
 **候选人**：用分段锁提高并发度，或借鉴Caffeine用RingBuffer缓冲读操作+异步更新LRU顺序，把锁竞争降到最低。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-007.svg" alt="【拼多多 Java服务端】手撕LRU缓存，要求并发安全 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

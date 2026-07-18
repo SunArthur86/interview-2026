@@ -285,3 +285,7 @@ public boolean payOrder(String orderNo) {
 **候选人**：不是，锁只保证串行不保证结果一致；锁内还要查是否已处理做业务校验，配合唯一索引才是真正幂等。
 **面试官**：什么操作必须幂等？
 **候选人**：写操作如扣款、创建订单、发消息必须幂等防止重复；纯读天然幂等；幂等有成本按业务必要性选型。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dx-001.svg" alt="【中国电信面试】微服务架构下，如何保证服务之间调用的幂等性？请列举至少两种实现方案 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

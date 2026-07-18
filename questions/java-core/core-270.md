@@ -86,6 +86,10 @@ server {
 2.  **证书链断裂怎么办？**：服务器配置不完整，未发送中间证书给客户端，导致客户端无法构建完整的信任链，通常浏览器会报错。
 3.  **自签名证书的信任链？**：自签名证书既是根证书也是服务器证书，除非手动导入信任库，否则无法通过验证。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-270.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三级结构：根CA(内置) -> 中间CA(中继签发) -> 服务器证书(底层)。

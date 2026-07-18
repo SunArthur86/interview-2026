@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">JAVA基础</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：将程序问题分为不可恢复的Error和可处理的Exception</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="330" y="120" width="140" height="50" rx="8" fill="#607D8B" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="145" font-size="15" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">Throwable</text>
+<rect x="140" y="200" width="160" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="220" y="217" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Error</text>
+<text x="220" y="233" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(JVM 错误)</text>
+<rect x="500" y="200" width="160" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="580" y="225" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Exception</text>
+<line x1="380" y1="170" x2="220" y2="200" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="420" y1="170" x2="580" y2="200" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="50" y="280" width="90" height="50" rx="8" fill="#f4433611" stroke="#f44336" stroke-width="2"/>
+<text x="95" y="300" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">OutOfMemoryErr</text>
+<text x="95" y="310" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">or</text>
+<line x1="220" y1="250" x2="95" y2="280" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="150" y="280" width="90" height="50" rx="8" fill="#f4433611" stroke="#f44336" stroke-width="2"/>
+<text x="195" y="300" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">StackOverflowE</text>
+<text x="195" y="310" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">rror</text>
+<line x1="220" y1="250" x2="195" y2="280" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="250" y="280" width="90" height="50" rx="8" fill="#f4433611" stroke="#f44336" stroke-width="2"/>
+<text x="295" y="300" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">NoClassDefFoun</text>
+<text x="295" y="310" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">dError</text>
+<line x1="220" y1="250" x2="295" y2="280" stroke="#f44336" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="380" y="280" width="180" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="470" y="283" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">RuntimeExcepti</text>
+<text x="470" y="298" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">on</text>
+<text x="470" y="312" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(运行期 非受检</text>
+<text x="470" y="327" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">)</text>
+<rect x="600" y="280" width="160" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="680" y="298" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">IOException 等</text>
+<text x="680" y="312" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(编译期 受检)</text>
+<line x1="580" y1="250" x2="470" y2="280" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="620" y1="250" x2="680" y2="280" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="60" y="360" width="165" height="44" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
+<text x="142" y="376" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">NullPointerExc</text>
+<text x="142" y="388" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">eption</text>
+<line x1="470" y1="330" x2="142" y2="360" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="235" y="360" width="165" height="44" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
+<text x="318" y="376" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ClassCastExcep</text>
+<text x="318" y="388" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">tion</text>
+<line x1="470" y1="330" x2="317" y2="360" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="410" y="360" width="165" height="44" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
+<text x="492" y="376" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ArrayIndexOutO</text>
+<text x="492" y="388" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">fBounds</text>
+<line x1="470" y1="330" x2="492" y2="360" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="585" y="360" width="165" height="44" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
+<text x="668" y="376" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ArithmeticExce</text>
+<text x="668" y="388" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ption</text>
+<line x1="470" y1="330" x2="667" y2="360" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<text x="400" y="440" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">Checked 必须捕获/声明 throws；Unchecked 可不处理</text>
+<text x="400" y="468" font-size="12" fill="#607D8B" text-anchor="middle">finally 一定执行(System.exit 前)；try-with-resources 自动关闭</text>
+</svg>

@@ -116,6 +116,10 @@ sequenceDiagram
     C->>S: 6. 后续用对称密钥加密通信
     Note over C,S: 非对称加密协商密钥<br/>对称加密传输数据
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-192.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质安全：HTTP+SSL/TLS，通过混合加密、摘要算法、数字证书保证安全。

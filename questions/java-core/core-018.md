@@ -104,6 +104,10 @@ flowchart TD
     G --> G1[扫到最远请求即反向<br/>不空跑]
     H[目标] --> I[减少寻道时间<br/>提升吞吐]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-018.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 目标：优化磁头移动轨迹，核心是减少寻道时间

@@ -429,3 +429,7 @@ flowchart TD
 **面试官**：灰度策略白名单 → 5% → 25% → 100%，但业务方催着"直接全量上线，赶活动"，你怎么应对？
 
 **候选人**：坚持灰度原则但要给业务方选择权。我会说：1) 风险量化——直接全量若出事故影响 100% 租户，灰度即使出问题只影响 5%；2) 折中方案——活动前 1 周开始灰度，活动时已经扩到 50%+（相对安全），活动后全量；3) 加速灰度——如果灰度 5% 错误率 = 0 且核心指标正常，可以把观察窗口从 24 小时缩到 4 小时（不是跳过 25% 直接 100%）。决策记录留档——业务方签字接受风险。监控 rollout_skip_count（跳过灰度步骤的次数，应 = 0，非 0 说明流程被绕过）。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-184.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

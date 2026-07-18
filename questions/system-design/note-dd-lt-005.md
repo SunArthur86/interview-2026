@@ -533,6 +533,10 @@ flowchart TD
     R3 --> RS
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-lt-005.svg" alt="【滴滴面经】如果奖品概率配置临时变了，概率查找表怎么更新？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心矛盾：读写频率极度不对称（读多写少），直接修改数组会导致读到半新半旧中间状态。

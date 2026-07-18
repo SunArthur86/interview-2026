@@ -104,6 +104,10 @@ while (true) {
 | 适用场景 | 连接数少、高延迟 | 连接数多、高并发（聊天、推送） |
 | 复杂度 | 简单 | 复杂（需处理 Buffer 状态、拆包粘包） |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-320.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大组件：Buffer（缓冲区）、Channel（双向通道）、Selector（多路复用器）。

@@ -418,3 +418,7 @@ flowchart TD
 **面试官**：对象存储回调可能被伪造（恶意用户直接调回调接口传假 fileId），怎么防？
 
 **候选人**：回调接口要校验签名——对象存储回调时带签名头（用对象存储的 AK/SK 签名），服务端验签。伪造请求没有正确签名会被拒。另外业务校验——回调带的 fileId 必须在 upload_task 表存在（TOKEN_ISSUED 状态），不存在的是伪造。双保险：签名校验（防外部伪造）+ 任务存在校验（防重放/瞎构造）。监控 invalid_callback_count（无效回调数，应 = 0，非 0 说明有伪造尝试）。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-182.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】云原生成本治理与资源利用率优化</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：FinOps（Cloud Financial Operations）是把云当作&quot;投资&quot;而非&quot;账单&quot;——用工程化方法优化云…</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="110" width="720" height="340" rx="10" fill="#FFFFFF" stroke="#2196F3" stroke-width="2"/>
+<text x="56" y="136" font-size="15" fill="#2196F3" font-weight="700">JVM 运行时数据区</text>
+<rect x="60" y="154" width="380" height="280" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="250" y="178" font-size="14" fill="#FF9800" text-anchor="middle" font-weight="700">堆 Heap（线程共享）</text>
+<rect x="80" y="194" width="340" height="62" rx="6" fill="#4CAF5022" stroke="#4CAF50"/>
+<text x="250" y="230" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">新生代 Eden</text>
+<rect x="80" y="270" width="340" height="62" rx="6" fill="#2196F322" stroke="#2196F3"/>
+<text x="250" y="306" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">Survivor 0/1</text>
+<rect x="80" y="346" width="340" height="62" rx="6" fill="#f4433622" stroke="#f44336"/>
+<text x="250" y="382" font-size="13" fill="#f44336" text-anchor="middle" font-weight="700">老年代 Old</text>
+<rect x="460" y="154" width="285" height="280" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="602" y="178" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">非堆 / 线程私有</text>
+<rect x="478" y="194" width="249" height="62" rx="6" fill="#9C27B022" stroke="#9C27B0"/>
+<text x="602" y="230" font-size="12" fill="#9C27B0" text-anchor="middle" font-weight="700">方法区/元空间</text>
+<rect x="478" y="270" width="249" height="62" rx="6" fill="#2196F322" stroke="#2196F3"/>
+<text x="602" y="306" font-size="12" fill="#2196F3" text-anchor="middle" font-weight="700">虚拟机栈 / 本地方法栈</text>
+<rect x="478" y="346" width="249" height="62" rx="6" fill="#4CAF5022" stroke="#4CAF50"/>
+<text x="602" y="382" font-size="12" fill="#4CAF50" text-anchor="middle" font-weight="700">程序计数器 PC</text>
+<text x="400" y="520" font-size="12" fill="#607D8B" text-anchor="middle">GC 主战场：新生代用复制算法，老年代用标记-整理</text>
+</svg>

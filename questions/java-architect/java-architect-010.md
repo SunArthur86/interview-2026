@@ -328,3 +328,7 @@ flux.log("category").subscribe();
 | 1:20 | 代码示例截图 | WebFlux 基于 Reactor + Netty，少量 EventLoop 线程处理海量请求。 | WebFlux 基于 Reactor |
 | 1:50 | 对比表格 | Mono（0/1 元素）和 Flux（0..N 元素）是 Reactor 的两种 Publisher。 | Mono（0/1 元素） |
 | 3:30 | 总结卡 | 一句话记忆：响应式流契约：Publisher/Subscriber/Subscription + request(n) 背压。 下期可以接着聊：WebFlux 和 MVC 性能差多少。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-010.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

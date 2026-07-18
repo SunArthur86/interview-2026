@@ -100,6 +100,10 @@ memory_points:
 2. **如何实现半开状态？** 回答：熔断器开启后，经过一个冷却窗口（Sleep Window），允许一个请求通过。如果成功，重置状态为 Closed；如果失败，重置计时器回到 Open。
 3. **为什么 Hystrix 放弃线程池隔离？** 回答：在高吞吐（如 QPS > 1000）场景下，线程池上下文切换消耗极大，且线程池本身也是有限资源，容易造成拒绝服务。Sentinel 选择了更轻量的信号量模式。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-040.svg" alt="如何设计熔断降级方案？保证系统在故障时仍能提供基本服务。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 熔断三态流转：Closed正常放行，失败率达阈值转Open全拒，冷却后Half-Open放行探测

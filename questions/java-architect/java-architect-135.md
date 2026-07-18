@@ -460,3 +460,7 @@ flowchart TD
 | 1:05 | WORM 存储示意/对比图 | "AWS S3 Object Lock、阿里云 OSS WORM、ES Snapshot" | WORM 存储要点 |
 | 1:30 | Hash Chain示意/对比图 | "每条日志含上一条 hash，局部篡改破坏链" | Hash Chain要点 |
 | 1:55 | 总结卡 | "记住：不可抵赖四性。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-135.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

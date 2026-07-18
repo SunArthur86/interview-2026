@@ -111,6 +111,10 @@ flowchart LR
     style ES fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-050.svg" alt="如何设计一个完整的日志收集分析系统？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 经典架构：采集层Filebeat → 缓冲层Kafka → 处理层Logstash → 存储层ES → 展示Kibana。

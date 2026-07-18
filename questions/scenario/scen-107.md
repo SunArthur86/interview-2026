@@ -91,6 +91,10 @@ memory_points:
 3. 如何保证任务的精确触发，即卡点执行？（答：通常结合“短间隔轮询”或“Netty 时间轮”，牺牲一点 CPU 换取精度）
 4. 如果任务量激增，Redis ZSet 读写性能下降怎么办？（答：拆分 Key，按业务类型或 Hash 分片到不同的 ZSet）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-107.svg" alt="如何设计一个支持百万级任务的延迟队列？要求精确触发、高可用。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 方案对比：DB轮询(量小)、Redis ZSet(中等<100万)、MQ延迟(高可靠)、时间轮(纯内存O(1))

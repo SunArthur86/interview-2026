@@ -89,6 +89,10 @@ flowchart TD
     M[缓存命中] --> N[命中率决定性能]
     N --> O[数据结构选择<br/>连续内存优先]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-285.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：程序执行和内存访问在短时间内局限于某个局部区域

@@ -130,6 +130,10 @@ public boolean deductStock(String skuId, int quantity) {
 - 热点商品独立分片
 - 读写分离
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-033.svg" alt="如何设计一个库存扣减系统？防超卖、支持高并发、最终一致。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 时机选择：下单减（防超卖但易占库存）、付款减（防占库存但易超卖）、预扣减（最佳平衡推荐）

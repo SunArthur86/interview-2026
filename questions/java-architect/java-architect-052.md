@@ -402,3 +402,7 @@ public TokenResponse exchangeCode(@RequestBody CodeExchangeRequest req) {
 | 0:15 | OAuth2 四种 Grant 示意/对比图 | "授权码（最安全，Web 应用）、密码（信任的客户端）、客户端凭证（服务间）、隐式（已废弃，用 PKCE 替代）" | OAuth2 四种 Grant 要点 |
 | 0:40 | JWT 三段示意/对比图 | "Header（算法）.Payload（声明）.Signature（签名）" | JWT 三段要点 |
 | 1:25 | 总结卡 | "记住：OAuth2 = 授权协议。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-052.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

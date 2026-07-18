@@ -94,6 +94,10 @@ public class BizException extends RuntimeException {
 2. **异常链**：如何捕获一个异常后抛出另一个异常，同时保留原始异常信息？（使用 `initCause()` 或带 cause 参数的构造函数）。
 3. **性能影响**：异常处理对性能有何影响？异常堆栈填充的开销？（创建异常对象和填充堆栈非常耗时，不要用异常控制流程）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-102.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 顶层体系：Throwable 分为 Error 和 Exception 两大核心分支

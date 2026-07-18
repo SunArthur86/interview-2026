@@ -326,3 +326,7 @@ flowchart TD
 | 0:15 | 落地五要素示意/对比图 | "方案质量 × 团队认同 × 资源协调 × 风险管控 × 持续跟踪" | 落地五要素要点 |
 | 0:40 | 说服业务示意/对比图 | "技术价值翻译成业务价值（ROI：省成本/提效率/降风险）" | 说服业务要点 |
 | 1:25 | 总结卡 | "记住：落地五要素。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-098.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

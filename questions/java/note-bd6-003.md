@@ -260,3 +260,8 @@ public enum Singleton {
 **候选人**：不行，new对象分分配内存、初始化、赋值三步可能重排，其他线程可能拿到未初始化对象；volatile用内存屏障禁止重排。
 **面试官**：有没有更优雅的单例写法？
 **候选人**：静态内部类利用类加载机制天然线程安全且懒加载；枚举单例还能防反射攻击，是Effective Java推荐写法。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-bd6-003.svg" alt="【字节三面手撕】实现双重检查锁（DCL）单例模式 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

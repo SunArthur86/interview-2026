@@ -106,6 +106,10 @@ flowchart TD
     E[分代收集] --> F[新生代 复制<br/>Eden+S0+S1]
     E --> G[老年代 标记整理]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-299.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心三步曲：标记存活对象、向内存一端移动整理、直接清理边界外的垃圾

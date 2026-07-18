@@ -299,3 +299,7 @@ public void checkAllShardsDone(String taskId) {
 **候选人**：千万行结果集会OOM、长事务锁表、连接超时、阻塞在线业务，必须流式查询分批处理。
 **面试官**：怎么控制对数据库的影响？
 **候选人**：读写分离走从库、限流控并发、避开高峰、流式查询、分片小事务，监控数据库负载必要时降级。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-bd6-001.svg" alt="【字节一面】使用普通数据库和Java原生手段，设计一个千万级数据量导出报表到OSS的流程 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

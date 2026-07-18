@@ -79,6 +79,10 @@ flowchart TD
     G --> I["401 vs 403<br/>未登录 vs 已登录但无权"]
     G --> J["502 vs 504<br/>上游响应无效 vs 等上游超时"]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-007.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 状态码分5类：1信息、2成功、3重定向、4客户端错误、5服务器错误。

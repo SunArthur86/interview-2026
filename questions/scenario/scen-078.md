@@ -102,6 +102,10 @@ public class SessionConfig {
 4. **大规模集群下，Redis Session会成为瓶颈吗？**
    - 读写QPS极高（每次请求都读写Redis），一般Redis扛得住。若扛不住，可对Session数据进行冷热分离（如将部分大字段存数据库，SessionID存Redis）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-078.svg" alt="如何设计一个分布式Session方案？微服务下Session如何管理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 方案选型：集中式存储高可用易扩展，适合主流微服务；而JWT无状态适合移动端与跨域SSO。

@@ -111,6 +111,10 @@ flowchart TD
     style TID fill:#ffe4b5
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-042.svg" alt="如何设计一个全链路监控系统？覆盖日志、指标、链路追踪。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 监控三支柱：Metrics指标准实时的系统状态，Logging详尽的上下文日志，Tracing请求拓扑与耗时

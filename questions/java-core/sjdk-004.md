@@ -81,6 +81,10 @@ public double area(Shape shape) {
 3. **Sealed Classes 对性能有影响吗？**
    编译时影响为主（类型检查），运行时会有极小的元数据开销，但 JVM 优化通常可以忽略不计。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_sjdk-004.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质：在全开放与final全封闭间提供第三选项，精确控制继承树范围

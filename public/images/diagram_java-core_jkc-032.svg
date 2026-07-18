@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">嵌入的Tomcat，无需部署WAR文件</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：将Web服务器内嵌在应用中，无需外部容器即可运行。</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="300" y="110" width="200" height="50" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="400" y="127" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Server (整个 T</text>
+<text x="400" y="143" font-size="14" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">omcat)</text>
+<rect x="300" y="180" width="200" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="191" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Service (≥1 C</text>
+<text x="400" y="205" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">onnector+1 Eng</text>
+<text x="400" y="219" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ine)</text>
+<line x1="400" y1="160" x2="400" y2="180" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="100" y="260" width="200" height="60" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="200" y="268" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Connector</text>
+<text x="200" y="283" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(HTTP/AJP/NIO)</text>
+<text x="200" y="297" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">接收请求解析协</text>
+<text x="200" y="312" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">议</text>
+<rect x="500" y="260" width="200" height="60" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="600" y="268" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Engine</text>
+<text x="600" y="283" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(Catalina 引擎</text>
+<text x="600" y="297" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">)</text>
+<text x="600" y="312" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">处理所有 Host</text>
+<line x1="400" y1="205" x2="200" y2="260" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="205" x2="600" y2="260" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="500" y="350" width="200" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="600" y="361" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Host (虚拟主机</text>
+<text x="600" y="375" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">)</text>
+<text x="600" y="389" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">localhost 等</text>
+<line x1="600" y1="320" x2="600" y2="350" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="500" y="420" width="200" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="600" y="438" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Context (单个 </text>
+<text x="600" y="452" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">WebApp)</text>
+<line x1="600" y1="400" x2="600" y2="420" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="500" y="490" width="200" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="600" y="508" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Wrapper (单个 </text>
+<text x="600" y="522" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Servlet)</text>
+<line x1="600" y1="470" x2="600" y2="490" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="60" y="350" width="380" height="190" rx="8" fill="#FFFFFF" stroke="#607D8B" stroke-width="1.5"/>
+<text x="80" y="374" font-size="13" fill="#607D8B" font-weight="700">线程模型 & 类加载</text>
+<circle cx="78" cy="394" r="4" fill="#4CAF50"/>
+<text x="92" y="398" font-size="12" fill="#37474F">Connector → Executor (线程池)</text>
+<circle cx="78" cy="420" r="4" fill="#FF9800"/>
+<text x="92" y="424" font-size="12" fill="#37474F">每个请求一个 Worker 线程</text>
+<circle cx="78" cy="446" r="4" fill="#9C27B0"/>
+<text x="92" y="450" font-size="12" fill="#37474F">WebAppClassLoader 打破双亲委派</text>
+<circle cx="78" cy="472" r="4" fill="#f44336"/>
+<text x="92" y="476" font-size="12" fill="#37474F">每个 Context 独立 ClassLoader</text>
+<circle cx="78" cy="498" r="4" fill="#2196F3"/>
+<text x="92" y="502" font-size="12" fill="#37474F">热部署原理：替换 ClassLoader</text>
+</svg>

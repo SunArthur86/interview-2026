@@ -369,3 +369,7 @@ klass 是元空间（Metaspace）里的指针
 | 0:15 | Compact Obje示意/对比图 | "Compact Object Headers（JEP 519，JDK 25 GA）：12B → 8B" | Compact Obje要点 |
 | 0:40 | 合并 mark word示意/对比图 | "合并 mark word + klass pointer 为一个 64 位字" | 合并 mark word要点 |
 | 1:25 | 总结卡 | "记住：Compact Object。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-107.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -171,6 +171,10 @@ kafka-consumer-groups --describe --group flink-consumer
 -- → 时间语义不对齐导致数据差异!
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-gz-001.svg" alt="如何保证 Kafka 到 Flink 的数据不丢失、不重复(Exactly-Once)？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话区分：两者底层同用B+树，但MySQL主键是聚簇索引，而PgSQL全是非聚簇的Heap表

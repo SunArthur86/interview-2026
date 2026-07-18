@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">Redis数据类型的应用场景是什么？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：命令执行单线程保证原子性，多线程处理网络IO。</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="114" width="720" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="56" y="139" font-size="15" fill="#2196F3" font-weight="700" dominant-baseline="middle">String 字符串</text>
+<text x="170" y="139" font-size="13" fill="#263238" dominant="middle">SDS 实现；set/get/incr；缓存/计数器/分布式锁</text>
+<rect x="40" y="180" width="720" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="56" y="205" font-size="15" fill="#4CAF50" font-weight="700" dominant-baseline="middle">Hash 哈希</text>
+<text x="170" y="205" font-size="13" fill="#263238" dominant="middle">field-value 表；hset/hget；存对象（用户信息）</text>
+<rect x="40" y="246" width="720" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="56" y="271" font-size="15" fill="#FF9800" font-weight="700" dominant-baseline="middle">List 列表</text>
+<text x="170" y="271" font-size="13" fill="#263238" dominant="middle">双向链表/压缩列表；lpush/rpop；消息队列/最新 N 条</text>
+<rect x="40" y="312" width="720" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="56" y="337" font-size="15" fill="#9C27B0" font-weight="700" dominant-baseline="middle">Set 集合</text>
+<text x="170" y="337" font-size="13" fill="#263238" dominant="middle">元素唯一；sadd/sinter；标签/共同好友</text>
+<rect x="40" y="378" width="720" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="56" y="403" font-size="15" fill="#f44336" font-weight="700" dominant-baseline="middle">ZSet 有序集合</text>
+<text x="170" y="403" font-size="13" fill="#263238" dominant="middle">跳表+字典；zadd/zrange；排行榜/延时队列</text>
+<rect x="40" y="444" width="720" height="50" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="56" y="469" font-size="15" fill="#607D8B" font-weight="700" dominant-baseline="middle">特殊：HyperLogLog/Bitmap/Geo/Stream</text>
+<text x="170" y="469" font-size="13" fill="#263238" dominant="middle">基数统计/位图/地理位置/消息流</text>
+</svg>

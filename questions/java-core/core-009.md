@@ -104,6 +104,10 @@ public class UserController {
 | @RequestHeader | HTTP Headers | 无 | 获取 Token、User-Agent |
 | @CookieValue | Cookies | 无 | 获取 SessionID、追踪信息 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-009.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 映射类：@RequestMapping通用，而@GetMapping/@PostMapping是语义化的组合注解。

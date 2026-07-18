@@ -446,3 +446,7 @@ ORDER BY create_time DESC LIMIT 20;
 | 0:40 | B+ 树索引结构图 | 叶子存整行 vs 叶子存主键（需回表）。 | 聚簇索引（主键）vs 二级索引 |
 | 1:05 | 概念结构示意图 | 联合索引 (a,b,c) 可用于 a、a,b、a,b,c，不能跳过 a 直接用 b。 | 最左前缀 |
 | 2:30 | 总结卡 | 一句话记忆：B+ 树：非叶子只存索引（扇出大），叶子存数据+链表（范围查询）。 下期可以接着聊：为什么索引用 B+ 树不用 B 树。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-021.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

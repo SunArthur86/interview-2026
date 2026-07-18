@@ -341,3 +341,7 @@ flowchart TD
 | 0:15 | Little's Law示意/对比图 | "L = λ × W（并发 = QPS × 平均延迟），容量估算的第一公式" | Little's Law要点 |
 | 0:40 | 业务→QPS 推导示意/对比图 | "DAU × 人均请求 × 峰值系数 ÷ 时长 = 峰值 QPS" | 业务→QPS 推导要点 |
 | 1:25 | 总结卡 | "记住：Little's Law。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-097.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

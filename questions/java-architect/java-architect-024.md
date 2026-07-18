@@ -447,3 +447,7 @@ public OrderVO queryOrder(Long userId, Long orderId) {
 | 0:40 | 延迟优化对比表 | 网络、大事务、慢 SQL、从库单线程 replay。 | 复制延迟来源 |
 | 1:05 | 一致性协议对比表 | 强制读主库、缓存过渡（写后缓存标记）、半同步复制。 | 写后读一致 |
 | 2:30 | 总结卡 | 一句话记忆：读写分离：写主库、读从库，分摊读压力。 下期可以接着聊：Seconds_Behind_Master 是什么。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-024.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

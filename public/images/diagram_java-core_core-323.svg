@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">HashMap JDK 8 的底层原理？为什么引入红黑树？扩容机制是怎样的？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：数组+链表+红黑树结构，红黑树解决长链表查询慢的问题。</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<text x="60" y="126" font-size="13" fill="#2196F3" font-weight="700" letter-spacing="0.5">HashMap = 数组(桶) + 链表 + 红黑树</text>
+<rect x="80" y="150" width="100" height="44" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="130" y="177" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">桶[0]</text>
+<rect x="80" y="206" width="100" height="44" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="130" y="233" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">桶[1]</text>
+<rect x="80" y="262" width="100" height="44" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="130" y="289" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">桶[2]</text>
+<rect x="80" y="318" width="100" height="44" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="130" y="345" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">桶[3]</text>
+<rect x="80" y="374" width="100" height="44" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="130" y="401" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">桶[4]</text>
+<rect x="80" y="430" width="100" height="44" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="130" y="457" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">桶[5]</text>
+<rect x="220" y="206" width="110" height="44" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="275" y="221" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Node</text>
+<text x="275" y="235" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">K=V</text>
+<rect x="340" y="206" width="110" height="44" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="395" y="221" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Node</text>
+<text x="395" y="235" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">K=V</text>
+<line x1="330" y1="228" x2="340" y2="228" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="460" y="206" width="110" height="44" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+<text x="515" y="221" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Node</text>
+<text x="515" y="235" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">K=V</text>
+<line x1="450" y1="228" x2="460" y2="228" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="220" y="374" width="110" height="44" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="275" y="389" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">链表&gt;8</text>
+<text x="275" y="403" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">&amp; 总数≥64</text>
+<line x1="330" y1="396" x2="360" y2="396" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="345" y="390" font-size="11" fill="#455A64" text-anchor="middle" font-weight="600">树化</text>
+<rect x="360" y="374" width="130" height="44" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="425" y="389" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">红黑树</text>
+<text x="425" y="403" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">O(logN)</text>
+<rect x="540" y="140" width="220" height="320" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="650" y="166" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">核心要点</text>
+<circle cx="558" cy="186" r="4" fill="#4CAF50"/>
+<text x="568" y="190" font-size="12" fill="#37474F">初始容量 16</text>
+<circle cx="558" cy="218" r="4" fill="#FF9800"/>
+<text x="568" y="222" font-size="12" fill="#37474F">负载因子 0.75</text>
+<circle cx="558" cy="250" r="4" fill="#9C27B0"/>
+<text x="568" y="254" font-size="12" fill="#37474F">扩容：容量翻倍</text>
+<circle cx="558" cy="282" r="4" fill="#f44336"/>
+<text x="568" y="286" font-size="12" fill="#37474F">链表→树：&gt;8 &amp; ≥64</text>
+<circle cx="558" cy="314" r="4" fill="#2196F3"/>
+<text x="568" y="318" font-size="12" fill="#37474F">树→链表：≤6</text>
+<circle cx="558" cy="346" r="4" fill="#607D8B"/>
+<text x="568" y="350" font-size="12" fill="#37474F">hash = (h=key.hashCode</text>
+<text x="568" y="364" font-size="12" fill="#37474F">())^h&gt;&gt;&gt;16</text>
+<circle cx="558" cy="378" r="4" fill="#4CAF50"/>
+<text x="568" y="382" font-size="12" fill="#37474F">定位：(n-1) &amp; hash</text>
+<circle cx="558" cy="410" r="4" fill="#FF9800"/>
+<text x="568" y="414" font-size="12" fill="#37474F">JDK8 起改为尾插法</text>
+</svg>

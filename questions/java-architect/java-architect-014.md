@@ -336,3 +336,7 @@ Nacos 配置层级（优先级从高到低）：
 | 0:15 | Spring Bean 生命周期图 | 先说核心：服务注册与发现的本质是"把实例地址从静态配置变成运行时动态注册表"——每个实例启动时向注册中心上报 IP:Port+元数据，调用方按服务名拉取实例列表并本地缓存，再用负载均衡挑。 | 核心定义 |
 | 0:30 | 配置中心推送图 | 临时实例走心跳保活（默认 5s），永久实例走主动探测；不一致时按"客户端上报优先"还是"服务端探测优先"区分。 | 临时实例走心跳保活（默认 5s） |
 | 1:30 | 总结卡 | 一句话记忆：Nacos 2.x = gRPC 长连接 + UDP 推送，1.x = HTTP 短轮询（30s）。 下期可以接着聊：Nacos 临时实例和永久实例区别。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-014.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

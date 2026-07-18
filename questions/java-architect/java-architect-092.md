@@ -307,3 +307,7 @@ flowchart TD
 | 0:15 | 评审三输出示意/对比图 | "ADR（决策记录）、风险矩阵（风险+兜底）、验证计划（指标+灰度+回滚）" | 评审三输出要点 |
 | 0:40 | 取舍要讲清示意/对比图 | "每个选择的换来了什么和付出了什么" | 取舍要讲清要点 |
 | 1:25 | 总结卡 | "记住：评审三输出。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-092.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

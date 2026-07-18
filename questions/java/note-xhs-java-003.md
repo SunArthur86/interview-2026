@@ -194,3 +194,8 @@ ConcurrentHashMap 是"弱一致"——get 不加锁，可能读到"正在被 put
 | 2:01 | 关键代码/伪代码片段 | "1.8引入红黑树优化最坏O(n)为O(log n)" | 1.8引入红黑树优化最坏 |
 | 2:54 | 对比表格 | "synchronized经过JVM锁升级优化后性能不输ReentrantLock" | synchronized |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：ConcurrentHashMap 的 get() 需要加锁吗？为什么。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-003.svg" alt="ConcurrentHashMap JDK 1.7 和 1.8 的差异与优化？（华为od Java一面） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

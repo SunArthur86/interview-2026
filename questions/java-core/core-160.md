@@ -123,6 +123,10 @@ flowchart TD
     F --> H[HashMap Node 静态内部]
     F --> I[回调函数]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-160.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四种类型：静态、成员、局部、匿名；口诀「静成局匿」对应不同作用域。

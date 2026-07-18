@@ -419,3 +419,7 @@ flowchart TD
 | 0:40 | 冷热判断示意/对比图 | "按时间（90 天前冷）、按状态（已完结订单冷）、按访问频率（近 30 天无访问冷）" | 冷热判断要点 |
 | 1:05 | 归档方式示意/对比图 | "mysqldump 导出 + 删除、pt-archiver 小批量迁移、binlog 同步到冷库" | 归档方式要点 |
 | 1:55 | 总结卡 | "记住：冷热判断。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-084.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

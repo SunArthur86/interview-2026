@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">观察者模式的原理是什么？Java中如何实现？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：对象间的一对多依赖，一变则全都收到通知。</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="330" y="130" width="180" height="60" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="420" y="144" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Subject 主题</text>
+<text x="420" y="160" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">维护 observers</text>
+<text x="420" y="176" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600"> 列表</text>
+<rect x="60" y="240" width="180" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="150" y="258" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Observer A</text>
+<text x="150" y="272" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(UI 更新)</text>
+<line x1="240" y1="265" x2="330" y2="170" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<text x="285" y="212" font-size="11" fill="#4CAF50" text-anchor="middle" font-weight="600">注册</text>
+<line x1="330" y1="170" x2="240" y2="265" stroke="#f44336" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="285" y="212" font-size="11" fill="#f44336" text-anchor="middle" font-weight="600">notify</text>
+<rect x="60" y="300" width="180" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="150" y="318" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Observer B</text>
+<text x="150" y="332" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(日志记录)</text>
+<line x1="240" y1="325" x2="330" y2="170" stroke="#FF9800" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<text x="285" y="242" font-size="11" fill="#FF9800" text-anchor="middle" font-weight="600">注册</text>
+<line x1="330" y1="170" x2="240" y2="325" stroke="#f44336" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="285" y="242" font-size="11" fill="#f44336" text-anchor="middle" font-weight="600">notify</text>
+<rect x="60" y="360" width="180" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="150" y="378" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Observer C</text>
+<text x="150" y="392" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(消息推送)</text>
+<line x1="240" y1="385" x2="330" y2="170" stroke="#9C27B0" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<text x="285" y="272" font-size="11" fill="#9C27B0" text-anchor="middle" font-weight="600">注册</text>
+<line x1="330" y1="170" x2="240" y2="385" stroke="#f44336" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="285" y="272" font-size="11" fill="#f44336" text-anchor="middle" font-weight="600">notify</text>
+<rect x="540" y="240" width="220" height="190" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="650" y="266" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">实际应用</text>
+<circle cx="558" cy="286" r="4" fill="#4CAF50"/>
+<text x="572" y="290" font-size="11" fill="#37404F">事件总线 EventBus</text>
+<circle cx="558" cy="310" r="4" fill="#FF9800"/>
+<text x="572" y="314" font-size="11" fill="#37404F">Spring ApplicationEvent</text>
+<circle cx="558" cy="334" r="4" fill="#9C27B0"/>
+<text x="572" y="338" font-size="11" fill="#37404F">RxJava/Reactor 响应式</text>
+<circle cx="558" cy="358" r="4" fill="#f44336"/>
+<text x="572" y="362" font-size="11" fill="#37404F">Vue/React 数据绑定</text>
+<circle cx="558" cy="382" r="4" fill="#2196F3"/>
+<text x="572" y="386" font-size="11" fill="#37404F">MQ 发布订阅模型</text>
+<text x="400" y="470" font-size="13" fill="#9C27B0" text-anchor="middle" font-weight="700">推模式 vs 拉模式  |  同步通知 vs 异步事件</text>
+</svg>

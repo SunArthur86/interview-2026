@@ -99,6 +99,10 @@ memory_points:
 3. **如何避免热点 Key 突然消失导致的缓存击穿？**
    - 永不过期 + 异步刷新，或者构建本地缓存作为二级保险。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-020.svg" alt="如何设计热点数据的缓存方案？比如某明星出轨新闻瞬间访问量暴增。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 热点探测三招：客户端聚合上报、网关滑动窗口拦截、Redis LFU策略统计

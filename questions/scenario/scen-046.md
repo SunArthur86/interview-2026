@@ -177,6 +177,10 @@ flowchart TD
     style SCOPE fill:#ffe4b5
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-046.svg" alt="如何排查线上接口突然变慢的问题？给出系统化的排查思路。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 排查六步法：确认现象 → 看监控 → 查常见原因 → 快速止血 → 根因分析 → 长期优化

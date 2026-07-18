@@ -446,3 +446,7 @@ flowchart TD
 | 0:15 | 六大质量维度示意/对比图 | "完整性（非空）、准确性（值正确）、一致性（跨表/跨系统）、唯一性（无重复）、及时性（延迟可控）、有效性（格式合规）" | 六大质量维度要点 |
 | 0:40 | 三层拦截示意/对比图 | "事前（写入前同步校验，失败拒绝）、事中（Flink 流式实时校验）、事后（离线批量巡检对账）" | 三层拦截要点 |
 | 1:25 | 总结卡 | "记住：六维度。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-157.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

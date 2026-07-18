@@ -390,3 +390,7 @@ flowchart TD
 | 1:05 | 三个信号指标示意/对比图 | "三个信号指标 —— CPU、Load、RT" | 三个信号指标要点 |
 | 1:30 | 要点 4 详解 | "这部分看正文对比表和代码示例。" | 要点 4 |
 | 1:55 | 总结卡 | "记住：静态限流的痛点。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-145.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

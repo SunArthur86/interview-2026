@@ -450,3 +450,7 @@ spec:
 | 0:15 | 多集群 K8s示意/对比图 | "跨机房/地域部署，容灾 + 就近接入" | 多集群 K8s要点 |
 | 0:40 | 容灾等级示意/对比图 | "同城双活 / 两地三中心 / 异地灾备" | 容灾等级要点 |
 | 1:25 | 总结卡 | "记住：多集群 K8s。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-124.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

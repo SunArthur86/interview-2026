@@ -670,3 +670,7 @@ flowchart TD
 | 1:20 | 一致性协议对比表 | TTL / 广播失效（Pub-Sub/MQ）/ binlog 订阅 / 版本号。 | 一致性方案 |
 | 1:50 | 概念结构示意图 | 互斥重建（防并发重建）。 | 缓存击穿 |
 | 3:30 | 总结卡 | 一句话记忆：L1 Caffeine（本地）→ L2 Redis（集中）→ L3 DB。 下期可以接着聊：本地缓存和分布式缓存什么区别。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-030.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

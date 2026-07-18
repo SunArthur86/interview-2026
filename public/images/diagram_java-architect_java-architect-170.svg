@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】营销活动系统的规则冲突与预算控制</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：营销活动系统的核心是&quot;规则优先级仲裁 + 预算账户原子扣减&quot;。多个优惠（满减/优惠券/折扣/赠品）可能同时命中，必须按优…</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="280" y="130" width="240" height="60" rx="8" fill="#2196F3" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="133" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">CAS(V, Expecte</text>
+<text x="400" y="151" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">d, New)</text>
+<text x="400" y="169" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Compare And Sw</text>
+<text x="400" y="187" font-size="15" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ap</text>
+<rect x="60" y="220" width="200" height="80" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="160" y="252" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">① 读取 V</text>
+<text x="160" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">当前内存值</text>
+<rect x="280" y="220" width="200" height="80" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="380" y="252" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">② 比较 V == E</text>
+<text x="380" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">xpected?</text>
+<rect x="500" y="220" width="200" height="80" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="600" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">③ 相等 → 写</text>
+<text x="600" y="252" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">入 New</text>
+<text x="600" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">不等 → 重试/</text>
+<text x="600" y="283" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">放弃</text>
+<line x1="260" y1="260" x2="280" y2="260" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="480" y1="260" x2="500" y2="260" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="60" y="340" width="680" height="200" rx="10" fill="#f4433611" stroke="#f44336" stroke-width="2"/>
+<text x="400" y="366" font-size="15" fill="#f44336" text-anchor="middle" font-weight="700">ABA 问题与解决</text>
+<rect x="80" y="390" width="120" height="56" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="140" y="418" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">A</text>
+<rect x="210" y="390" width="120" height="56" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="270" y="418" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">B</text>
+<line x1="200" y1="418" x2="210" y2="418" stroke="#f44336" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="340" y="390" width="120" height="56" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="418" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">A</text>
+<line x1="330" y1="418" x2="340" y2="418" stroke="#f44336" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="470" y="390" width="120" height="56" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="530" y="411" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">CAS 仍成功</text>
+<text x="530" y="425" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(虽经历变化)</text>
+<line x1="460" y1="418" x2="470" y2="418" stroke="#f44336" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="600" y="390" width="120" height="56" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="660" y="404" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">AtomicStampedR</text>
+<text x="660" y="418" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">eference</text>
+<text x="660" y="432" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">加版本号解决</text>
+<line x1="590" y1="418" x2="600" y2="418" stroke="#f44336" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="510" font-size="12" fill="#607D8B" text-anchor="middle">底层：Unsafe.compareAndSwap*  |  应用：AtomicInteger/Long/Reference</text>
+</svg>

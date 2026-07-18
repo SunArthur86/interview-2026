@@ -112,6 +112,10 @@ flowchart TD
     I --> D
     D --> J[size++]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-143.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 触发时机：因为添加元素时size达到容量上限，所以触发扩容

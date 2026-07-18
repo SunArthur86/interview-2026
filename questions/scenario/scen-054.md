@@ -142,6 +142,10 @@ flowchart TD
     style REG fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-054.svg" alt="如何设计服务注册与发现机制？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 模式对比：客户端发现（如Nacos）重SDK负载均衡，服务端发现（如K8s）重代理转发。

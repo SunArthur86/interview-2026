@@ -293,3 +293,7 @@ public class HotKeyDetector {
 **候选人**：不够，互斥锁只防击穿但单Key仍是热点、单节点压力没分散，必须配合多副本打散和多级缓存。
 **面试官**：热点Key怎么提前发现？
 **候选人**：监控Redis QPS TopN、业务预判官宣大促、大数据分析访问模式，提前识别并预热多副本和本地缓存。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-011.svg" alt="【系统设计】明星官宣离婚，热点缓存怎么扛？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

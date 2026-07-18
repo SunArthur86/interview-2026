@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">编译时多态和运行时多态的区别？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：编译时看参数类型定方法，运行时看实际对象定方法。</text>
+<!-- BODY_TOP=110 -->
+<rect x="60" y="110" width="680" height="50" rx="8" fill="#9C27B0"/>
+<text x="400" y="142" font-size="15" fill="#FFFFFF" text-anchor="middle" font-weight="700">面向对象四大特性：封装 / 继承 / 多态 / 抽象</text>
+<rect x="60" y="180" width="160" height="200" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="140" y="206" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">封装 Encapsulation</text>
+<text x="74" y="234" font-size="11" fill="#37404F">• 隐藏实现细节</text>
+<text x="74" y="270" font-size="11" fill="#37404F">• private + getter/setter</text>
+<text x="74" y="306" font-size="11" fill="#37404F">• 降低耦合</text>
+<text x="74" y="342" font-size="11" fill="#37404F">• 保护数据完整性</text>
+<rect x="235" y="180" width="160" height="200" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="315" y="206" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">继承 Inheritance</text>
+<text x="249" y="234" font-size="11" fill="#37404F">• 代码复用</text>
+<text x="249" y="270" font-size="11" fill="#37404F">• extends 关键字</text>
+<text x="249" y="306" font-size="11" fill="#37404F">• 单继承(类)/多实现(接口)</text>
+<text x="249" y="342" font-size="11" fill="#37404F">• is-a 关系</text>
+<rect x="410" y="180" width="160" height="200" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="490" y="206" font-size="13" fill="#FF9800" text-anchor="middle" font-weight="700">多态 Polymorphism</text>
+<text x="424" y="234" font-size="11" fill="#37404F">• 同一接口不同表现</text>
+<text x="424" y="270" font-size="11" fill="#37404F">• 重写 Override + 向上转型</text>
+<text x="424" y="306" font-size="11" fill="#37404F">• 动态分派(invokevirtual)</text>
+<text x="424" y="342" font-size="11" fill="#37404F">• 运行期确定</text>
+<rect x="585" y="180" width="160" height="200" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="665" y="206" font-size="13" fill="#9C27B0" text-anchor="middle" font-weight="700">抽象 Abstraction</text>
+<text x="599" y="234" font-size="11" fill="#37404F">• 抓住核心忽略细节</text>
+<text x="599" y="270" font-size="11" fill="#37404F">• abstract class / interface</text>
+<text x="599" y="306" font-size="11" fill="#37404F">• 定义契约</text>
+<text x="599" y="342" font-size="11" fill="#37404F">• 面向接口编程</text>
+<text x="400" y="430" font-size="13" fill="#2196F3" text-anchor="middle" font-weight="700">底层：多态 = 运行期根据实际对象类型分派（invokevirtual）</text>
+<text x="400" y="460" font-size="12" fill="#607D8B" text-anchor="middle">重载 Overload (静态分派，编译期) ≠ 重写 Override (动态分派，运行期)</text>
+<text x="400" y="486" font-size="12" fill="#607D8B" text-anchor="middle">JDK 8: 接口支持 default / static 方法；JDK 9+: private 方法</text>
+</svg>

@@ -424,3 +424,7 @@ public Order recover(Exception e, OrderRequest req) {
 | 1:05 | 幂等 key 三种生成方式示意/对比图 | "UUID、业务唯一键（订单号+操作）、hash(请求体)" | 幂等 key 三种生成方式要点 |
 | 1:30 | 幂等三件套示意/对比图 | "唯一索引兜底 + Redis SETNX 令牌 + 状态机" | 幂等三件套要点 |
 | 1:55 | 总结卡 | "记住：GET/PUT/DELETE。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-130.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

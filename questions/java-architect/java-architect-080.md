@@ -468,3 +468,7 @@ public void verifyReconcile() {
 | 1:05 | 不漏示意/对比图 | "任务持久化（DB/MQ）+ ACK 机制，崩溃后重投" | 不漏要点 |
 | 1:30 | 分片示意/对比图 | "XXL-JOB ShardingItem，按分片号处理不同数据（水平扩展）" | 分片要点 |
 | 1:55 | 总结卡 | "记住：不重。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-080.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

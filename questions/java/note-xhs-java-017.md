@@ -248,3 +248,8 @@ public class ThreadStateDemo {
 | 0:15 | 加锁/解锁时序图 | "六状态口诀：新建运行阻塞等，超时等待终了停" | 六状态口诀 |
 | 1:02 | 加锁/解锁时序图分步演示 | "start()只能调一次——thread对象内部维护status标志" | start()只能调一次 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：BLOCKED和WAITING的本质区别是什么？能举例说明吗。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-017.svg" alt="【拼多多一面】Java 线程生命周期及状态流转 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

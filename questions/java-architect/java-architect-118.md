@@ -462,3 +462,7 @@ flowchart TD
 | 0:15 | 线程泄漏示意/对比图 | "线程数无限增长 → OOM: unable to create new native thread" | 线程泄漏要点 |
 | 0:40 | 连接泄漏示意/对比图 | "连接不归还 → 连接池耗尽 → 请求阻塞" | 连接泄漏要点 |
 | 1:25 | 总结卡 | "记住：线程泄漏。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-118.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

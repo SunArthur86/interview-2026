@@ -132,6 +132,10 @@ K8s API Server (Delete Pod)
 4. **Spring Cloud 中 RefreshScope 的原理是什么？**
    答：RefreshScope 是一个自定义的 Scope，当配置变更时，ContextRefresher 会触发该 Scope 缓存清理。下次访问 Bean 时，Spring 会重新创建 Bean 实例并绑定新的属性。注意这会导致 Bean 内部的状态丢失（除非通过 @ConfigurationProperties 绑定）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-060.svg" alt="如何设计微服务的优雅上下线和热更新方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 优雅上线：因JIT需预热，故延迟注册并先加载缓存，健康检查通过后再放量。

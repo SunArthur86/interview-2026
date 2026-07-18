@@ -129,6 +129,10 @@ flowchart TD
     style WS fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-071.svg" alt="如何设计一个实时数据大屏系统？类似双11大屏。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心痛点：大屏严禁直接联表查DB，必须走预聚合链路

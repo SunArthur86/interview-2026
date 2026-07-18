@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】Spring Bean 生命周期与扩展点</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：Bean 生命周期的本质是&quot;Spring 对一个对象从生到死的全流程管控&quot;——实例化→属性注入→初始化→使用→销毁，每个…</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="40" y="200" width="74" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="77" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">实例化</text>
+<text x="77" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Instantia</text>
+<text x="77" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">tionExcep</text>
+<text x="77" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">tion</text>
+<circle cx="58" cy="218" r="13" fill="#2196F3"/>
+<text x="58" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">1</text>
+<rect x="132" y="200" width="74" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="169" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">属性赋值</text>
+<text x="169" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">populateB</text>
+<text x="169" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ean</text>
+<text x="169" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(DI 注入)</text>
+<circle cx="150.25" cy="218" r="13" fill="#4CAF50"/>
+<text x="150.25" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">2</text>
+<rect x="224" y="200" width="74" height="90" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="262" y="206" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Aware 回</text>
+<text x="262" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">调</text>
+<text x="262" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">BeanNameA</text>
+<text x="262" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ware</text>
+<text x="262" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">BeanFacto</text>
+<text x="262" y="284" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ryAware</text>
+<circle cx="242.5" cy="218" r="13" fill="#FF9800"/>
+<text x="242.5" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">3</text>
+<rect x="317" y="200" width="74" height="90" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="354" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">BeanPostP</text>
+<text x="354" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">rocessor</text>
+<text x="354" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">before</text>
+<circle cx="334.75" cy="218" r="13" fill="#9C27B0"/>
+<text x="334.75" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text>
+<rect x="409" y="200" width="74" height="90" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="446" y="214" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">初始化</text>
+<text x="446" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@PostCons</text>
+<text x="446" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">truct</text>
+<text x="446" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">init-meth</text>
+<text x="446" y="276" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">od</text>
+<circle cx="427.0" cy="218" r="13" fill="#f44336"/>
+<text x="427.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text>
+<rect x="501" y="200" width="74" height="90" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="538" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">BeanPostP</text>
+<text x="538" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">rocessor</text>
+<text x="538" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">after (AO</text>
+<text x="538" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">P 代理)</text>
+<circle cx="519.25" cy="218" r="13" fill="#607D8B"/>
+<text x="519.25" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">6</text>
+<rect x="594" y="200" width="74" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="631" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">使用</text>
+<circle cx="611.5" cy="218" r="13" fill="#2196F3"/>
+<text x="611.5" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">7</text>
+<rect x="686" y="200" width="74" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="723" y="214" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">销毁</text>
+<text x="723" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@PreDestr</text>
+<text x="723" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">oy</text>
+<text x="723" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">destroy-m</text>
+<text x="723" y="276" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ethod</text>
+<circle cx="703.75" cy="218" r="13" fill="#4CAF50"/>
+<text x="703.75" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">8</text>
+<line x1="114" y1="245" x2="132" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="206" y1="245" x2="224" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="299" y1="245" x2="317" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="391" y1="245" x2="409" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="483" y1="245" x2="501" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="576" y1="245" x2="594" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="668" y1="245" x2="686" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

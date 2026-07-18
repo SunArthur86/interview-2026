@@ -489,3 +489,7 @@ public class BudgetService {
 | 0:15 | 券状态机示意/对比图 | "待领取(CREATED)→已领取(CLAIMED)→已使用(USED)/已过期(EXPIRED)，非法跳转拦截" | 券状态机要点 |
 | 0:40 | 防超领示意/对比图 | "Redis Lua 原子扣减库存 + 用户领取次数限制" | 防超领要点 |
 | 1:25 | 总结卡 | "记住：券状态机。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-059.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

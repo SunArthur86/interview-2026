@@ -387,3 +387,7 @@ flowchart TD
 **面试官**：内容安全 API 检测到有害内容返回兜底文案，但兜底文案千篇一律用户会腻，怎么办？
 
 **候选人**：兜底文案按场景分——投诉场景"抱歉这条回复有误，正在为您转人工"；闲聊场景"我们换个话题吧"。但根本是降低 block_rate（拦截率），正常回答不应频繁触发兜底。如果 block_rate > 5%，说明模型输出质量差（频繁生成敏感词），要优化 prompt 或换模型，而不是优化兜底文案。兜底是兜底不是常态。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-166.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

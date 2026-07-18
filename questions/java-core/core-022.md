@@ -98,6 +98,10 @@ while (true) {
 2. **流量控制与拥塞控制的区别**：流量控制是端到端的（防止淹没接收方），拥塞控制是全局性的（防止淹没网络）。
 3. **糊涂窗口综合征 (SWS)**：如何避免微小数据包的传输？（接收方延迟确认，发送方 Nagle 算法）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-022.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心目的：接收方通告剩余缓冲区大小，防止被发送方淹没(点对点)

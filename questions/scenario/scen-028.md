@@ -102,6 +102,10 @@ memory_points:
 3. **评估指标**：AUC和GAUC的区别？AUC衡量排序能力，GAUC衡量用户维度的平均排序能力（更符合业务）。
 4. **实时性**：如何实现实时推荐？（Flink实时计算用户短期兴趣画像，更新Embedding）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-028.svg" alt="如何设计一个推荐系统？类似抖音/淘宝的个性化推荐。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四层漏斗架构：召回（海量到千级）、粗排（千到百，轻量快）、精排（百到十，深模预估）、重排（打散去重）

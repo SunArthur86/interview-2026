@@ -119,6 +119,10 @@ flowchart TD
     O[递归] --> P[客户端↔LDNS<br/>替你查到底]
     Q[迭代] --> R[LDNS↔各级<br/>逐级指路]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-027.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 递归查询：你问我我必答到底，客户端负担轻而服务器负担重（多用于客户端查Local DNS）

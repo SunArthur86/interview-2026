@@ -297,3 +297,7 @@ DORA 团队用 6 年时间调研了全球 3 万多家团队（Google《Accelerat
 | 0:15 | DORA 四指标示意/对比图 | "部署频率 Deployment Frequency、变更前置时间 Lead Time for Changes、变更失败率 Change Failure Ra……" | DORA 四指标要点 |
 | 0:40 | 自动采集优先示意/对比图 | "从 Git/CI/CD/监控系统拿数据，禁止人工填表" | 自动采集优先要点 |
 | 1:25 | 总结卡 | "记住：DORA 四指标。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-187.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

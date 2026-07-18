@@ -394,3 +394,7 @@ flowchart TD
 | 0:40 | pinning 三大元凶示意/对比图 | "synchronized 块内阻塞、JNI/native 阻塞、Object.wait（已部分修复）" | pinning 三大元凶要点 |
 | 1:05 | 诊断利器示意/对比图 | "JFR jdk.VirtualThreadPinned 事件，含 duration + 堆栈" | 诊断利器要点 |
 | 1:55 | 总结卡 | "记住：pinning = 虚拟线程。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-102.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

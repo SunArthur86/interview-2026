@@ -107,6 +107,10 @@ while (true) {
 2. **为什么 ET 模式比 LT 模式高效？**：LT 模式内核只要没处理完就会反复通知，导致上下文切换频繁；ET 模式只通知一次，减少了系统调用的次数，但对编程要求高，必须循环 `read` 直到返回 EAGAIN。
 3. **Java NIO 对应哪种模型？**：在 Linux 上，Java NIO 的 `Selector` 底层默认使用 Epoll（JDK 1.5 update 10 之后），在 Mac 上使用 Kqueue，实现了对多路复用的跨平台封装。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-073.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - IO多路复用演进：Select有1024上限且轮询，Poll突破限制但依然轮询(O(n))

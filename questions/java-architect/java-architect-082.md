@@ -465,3 +465,7 @@ happened-before]
 | 0:15 | 时钟漂移示意/对比图 | "每台机器时钟运行速度略有不同（几毫秒/天），累积导致时钟差" | 时钟漂移要点 |
 | 0:40 | 时钟回拨示意/对比图 | "NTP 同步、VM 迁移导致时间倒退，影响雪花 ID、定时任务、缓存 TTL" | 时钟回拨要点 |
 | 1:25 | 总结卡 | "记住：存储用 UTC。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-082.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

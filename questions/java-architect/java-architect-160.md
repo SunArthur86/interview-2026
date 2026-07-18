@@ -383,3 +383,7 @@ flowchart TD
 | 1:05 | 重排核心示意/对比图 | "cross-encoder（bge-reranker）比双塔精度高 10-20%，但慢 10 倍，只重排 Top-50" | 重排核心要点 |
 | 1:30 | RRF 融合示意/对比图 | "向量 + BM25 两路召回用 RRF 合并，score = Σ 1/(k+rank)，k=60" | RRF 融合要点 |
 | 1:55 | 总结卡 | "记住：评测三指标。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-160.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

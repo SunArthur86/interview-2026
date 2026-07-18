@@ -315,3 +315,7 @@ async function streamChat(prompt, lastEventId = 0) {
 | 2:01 | 关键代码/伪代码片段 | "服务端用SseEmitter(Spring)/text/event-stream实现" | 服务端用 |
 | 2:54 | 对比表格 | "断线重连核心：Redis缓存事件+seq序号+从断点重放" | 断线重连核心 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：SSE 在 Nginx 反向代理时需要注意什么配置。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-007.svg" alt="AI应用中 SSE 流式响应如何设计断线重连？（入职Java复盘） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

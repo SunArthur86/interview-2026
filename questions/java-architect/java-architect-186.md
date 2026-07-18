@@ -441,3 +441,7 @@ public class PhysicalDeletionService {
 | 0:40 | 软删除示意/对比图 | "标记 is_deleted=1，不物理删（可恢复 + 审计）" | 软删除要点 |
 | 1:05 | 级联清理示意/对比图 | "DB（用户表+订单+地址）+ 缓存 + ES + 对象存储 + 日志 + 备份" | 级联清理要点 |
 | 1:55 | 总结卡 | "记住：软删除。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-186.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

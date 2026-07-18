@@ -94,6 +94,10 @@ public class OrderDelayTask implements Delayed {
 1.  **与 Timer/ScheduledExecutor 的区别**：DelayQueue 只是一个数据结构，需要配合外部线程使用（如死循环获取），而 `ScheduledThreadPoolExecutor` 封装了线程池和 DelayQueue，功能更完善。
 2.  **时间精度问题**：如果任务执行时间过长，会不会影响后续任务的执行？（DelayQueue 只管取出，执行耗时由消费者线程决定，若任务阻塞会导致后续任务延迟处理）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-148.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：无界阻塞队列，底层基于PriorityQueue小顶堆，按到期时间排序

@@ -103,6 +103,10 @@ public abstract class BaseDao<T> {
 | 获取 Class 对象 | 需显式传递 `Class clazz` | 直接 `T::class.java` 获取 |
 | 性能开销 | 无额外开销 | inline 函数可能导致代码量增加 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-318.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：编译期生效，运行时擦除。无界变Object，有界变上界。

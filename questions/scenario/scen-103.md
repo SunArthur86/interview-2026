@@ -87,6 +87,10 @@ memory_points:
 3. **Sentinel 集群限流**：Token Server 挂了怎么办？（Client 会自动切换到本地限流模式（降级）或连接备用 Token Server）。
 4. **限流后的策略**：是直接拒绝 429，还是排队？（高并发场景建议直接拒绝，排队会堆积线程导致网关 OOM）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-103.svg" alt="如何设计一个支撑千万级并发的网关限流系统？对比单机限流与分布式限流的方案。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 千万并发需分层限流：CDN/Nginx层(L3)拦截恶意流量，网关层(L4)做精确业务限流

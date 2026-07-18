@@ -343,3 +343,7 @@ rules:
 | 0:15 | 分级评审示意/对比图 | "核心链路/数据迁移/外部接口必评审；小改动走 PR review 轻流程" | 分级评审要点 |
 | 0:40 | RFC + ADR 是治理的两件示意/对比图 | "RFC 讨方案，ADR 记决策" | RFC + ADR 是治理的两件要点 |
 | 1:25 | 总结卡 | "记住：分级评审。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-188.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

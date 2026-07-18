@@ -261,3 +261,7 @@ EXPLAIN SELECT id, name FROM users WHERE name = 'Alice';
 | 1:06 | B+ 树索引结构图分步演示 | "3层B+树可存约2000万行(InnoDB页16KB, 假设键8B+指针6B)" | 3层B+树可存约2000 |
 | 1:57 | 关键代码/伪代码片段 | "聚簇索引就是数据行本身按主键B+树组织；二级索引就是键值到主键值到回表" | 聚簇索引=数据行本身按主 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：为什么B+树比B树更适合做数据库索引。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-xhs-db-016.svg" alt="【拼多多 Java服务端】MySQL索引底层用的什么数据结构？和其他数据结构相比有什么优势？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

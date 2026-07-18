@@ -112,6 +112,10 @@ flowchart TD
     D --> H[CopyOnWriteArraySet<br/>线程安全]
     A --> I[典型场景<br/>去重 集合运算]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-212.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心特性：继承 Collection，元素不可重复（靠 equals 判断），无索引，最多允许一个 null

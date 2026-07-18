@@ -125,6 +125,10 @@ function integrate(op, docArray) {
 【性能优化】
 - **本地优先**
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-036.svg" alt="如何设计一个在线协同编辑系统？类似Google Docs / 腾讯文档。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心难点：多人实时并发编辑引发的内容冲突与一致性，防抖与最终收敛是关键

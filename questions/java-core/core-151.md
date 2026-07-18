@@ -118,6 +118,10 @@ flowchart TD
     K --> M
     L --> M
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-151.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 独有顽疾：JDK1.7多线程扩容并发执行transfer方法引发环形链表，导致CPU飙升100%

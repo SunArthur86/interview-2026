@@ -354,3 +354,7 @@ public List<Comment> getComments(Long videoId, int page, int size) {
 | 2:01 | 关键代码/伪代码片段 | "读取路径：用户请求到Caffeine到Redis ZSet(按时间排序)到MySQL分页" | 读取路径 |
 | 2:54 | 对比表格 | "分片键选择video_id：同一视频的评论在同一分片，避免跨库查询" | 分片键选择 |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：评论的排序规则是什么？如何处理热评vs最新评论。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-ks-006.svg" alt="【快手Java一面】如何设计快手评论系统，确保高并发写入和实时展示？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

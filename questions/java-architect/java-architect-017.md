@@ -443,3 +443,7 @@ public class PaymentCallbackService {
 | 0:15 | 微服务架构图 | 先说核心：超时、重试、幂等是分布式调用的"稳定性三件套"——超时防止无限等待拖垮调用方，重试容忍瞬时故障提升成功率，幂等保证重试不产生副作用。三者配合的数学本质是：超时切断长尾、重试把 。 | 核心定义 |
 | 0:30 | RPC 调用流程图 | 固定间隔、指数退避（Exponential Backoff）、抖动（Jitter），避免惊群。 | 重试策略 |
 | 1:30 | 总结卡 | 一句话记忆：超时三层：连接超时（短）、读超时（P99×3-5）、全局超时（兜底）。 下期可以接着聊：超时时间设多少合适。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-017.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

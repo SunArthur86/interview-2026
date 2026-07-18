@@ -537,3 +537,7 @@ public class ImageProcessWorker implements RocketMQListener<ImageMessage> {
 | 0:15 | 上传触发示意/对比图 | "文件上传后发消息到队列，立即返回 URL（原图可用）" | 上传触发要点 |
 | 0:40 | 异步处理示意/对比图 | "工作节点消费消息，做转码/压缩/水印/缩略图" | 异步处理要点 |
 | 1:25 | 总结卡 | "记住：上传后异步。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-079.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -91,6 +91,10 @@ flowchart TD
     G --> I[contains/isEmpty]
     G --> J[iterator/toArray]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-189.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：Java单列集合的根接口，继承Iterable接口，存储不唯一的对象。

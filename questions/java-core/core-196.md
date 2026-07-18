@@ -125,6 +125,10 @@ flowchart TD
     K --> M
     L --> M
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-196.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 底层结构演进：JDK1.8为数组+链表+红黑树（解决哈希冲突退化）。

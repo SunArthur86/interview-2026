@@ -117,6 +117,10 @@ memory_points:
 3. **连接泄露**：应用重启时旧连接未关闭导致自愈失败怎么办？（配置K8s preStop Hook，利用sleep等待连接排空）
 4. **状态恢复**：有状态服务（如Kafka、ES）故障时，如何实现自愈？（使用Operator管理状态集，严格按顺序滚动重启）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-045.svg" alt="如何设计一个故障自愈系统？自动检测、诊断和恢复服务。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 自愈闭环：监控采集 → 异常检测 → 根因定位 → 决策评估 → 自动执行 → 效果验证

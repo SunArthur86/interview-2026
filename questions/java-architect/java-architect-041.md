@@ -435,3 +435,7 @@ setUp(
 | 0:15 | 压测四模型示意/对比图 | "基准（单接口极限）、负载（阶梯找拐点）、压力（超量找瓶颈）、稳定性（长时间）" | 压测四模型要点 |
 | 0:40 | 单机拐点示意/对比图 | "P99 突增、CPU > 80%、连接池打满，对应 QPS 即容量上限" | 单机拐点要点 |
 | 1:25 | 总结卡 | "记住：压测四模型。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-041.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

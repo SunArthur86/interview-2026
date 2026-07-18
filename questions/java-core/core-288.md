@@ -116,6 +116,10 @@ flowchart TD
     P --> R[RPC 服务发现]
     P --> S[数据库中间件]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-288.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 简单基础：轮询（均等）、加权（按性能分配比例）、随机（大数定律近似轮询）

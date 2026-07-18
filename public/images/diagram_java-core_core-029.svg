@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">抽象工厂模式和工厂方法模式的区别是什么？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：工厂方法生产单一产品，抽象工厂生产成套的产品族。</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="114" width="229" height="44" rx="8" fill="#2196F3"/>
+<text x="155" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">简单工厂</text>
+<rect x="285" y="114" width="229" height="44" rx="8" fill="#FF9800"/>
+<text x="400" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">工厂方法</text>
+<rect x="531" y="114" width="229" height="44" rx="8" fill="#4CAF50"/>
+<text x="645" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">抽象工厂</text>
+<rect x="40" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">一个工厂方法</text>
+<rect x="285" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">每产品一工厂</text>
+<rect x="531" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">工厂创建产品族</text>
+<rect x="40" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">if/switch 判断</text>
+<rect x="285" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">符合开闭原则</text>
+<rect x="531" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">多维度产品</text>
+<rect x="40" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">违反开闭原则</text>
+<rect x="285" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">类爆炸</text>
+<rect x="531" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">加新产品需改接口</text>
+<rect x="40" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">场景：少量产品</text>
+<rect x="285" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">场景：产品族扩展</text>
+<rect x="531" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">场景：跨平台 UI</text>
+</svg>

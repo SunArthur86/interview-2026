@@ -401,3 +401,7 @@ public class KmsKeyService {
 | 0:15 | 签名算法示意/对比图 | "HMAC-SHA256(secret, method+path+body+timestamp+nonce)" | 签名算法要点 |
 | 0:40 | 防重放三要素示意/对比图 | "timestamp（5 分钟窗口）+ nonce（一次性）+ signature（防篡改）" | 防重放三要素要点 |
 | 1:25 | 总结卡 | "记住：签名 = HMAC-SHA2。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-053.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

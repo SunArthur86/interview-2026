@@ -85,6 +85,10 @@ public Data readWithRepair(String key) {
 }
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-253.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心场景：多副本分布式数据库中，解决网络分区导致的数据不一致。

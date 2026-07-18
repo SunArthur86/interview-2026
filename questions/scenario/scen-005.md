@@ -106,6 +106,10 @@ User Action                   Cache Layer               Async Layer
 2. **热点处理**：明星发博瞬间数千万点赞，Redis 集群如何抗住？（使用本地缓存 Guava/Caffeine 做一级缓存，Redis 做二级，异步刷盘，容忍短时计数误差）。
 3. **分库分表 Key**：点赞记录表怎么分？（通常按 `target_id` 分片，保证同一内容的点赞记录在一起，方便查询；但查询某用户点赞了谁时需反向查询或冗余表）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-005.svg" alt="如何设计微博/朋友圈点赞系统？日活数亿，每秒点赞数十万。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 双链路设计：写路径用Set防重并异步批量刷DB，读路径ZSet展示前N条点赞

@@ -96,6 +96,10 @@ memory_points:
 3. **如果Redis挂了怎么办？** 回答：降级为只读模式（显示离线）或使用本地内存状态（不准确但可用），配合 Redis Sentinel 快速故障转移。
 4. **如何实现"隐身"但对特定人可见？** 回答：引入逻辑状态层，物理状态（在线/离线）与逻辑状态（展示/隐身）分离。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-038.svg" alt="如何设计一个实时在线状态系统？显示好友在线/离线状态。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 状态存储：Redis Hash存在线状态，设置60秒TTL自动清理僵死连接

@@ -330,3 +330,7 @@ cut-over 原子 RENAME，毫秒切换业务无感。
 | 0:15 | 原生 DDL 的风险示意/对比图 | "原生 DDL 的风险 —— 锁表、MDL 等待、长事务雪崩" | 原生 DDL 的风险要点 |
 | 0:40 | gh-ost 工作原理示意/对比图 | "gh-ost 工作原理 —— 影子表 + binlog 同步" | gh-ost 工作原理要点 |
 | 1:25 | 总结卡 | "记住：原生 DDL 的风险。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-149.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

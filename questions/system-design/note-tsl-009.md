@@ -268,6 +268,10 @@ public class DiagnosticWebSocket {
 2. **离线诊断**：工程师可提前下发诊断脚本，车辆离线执行后上报结果
 3. **渐进恢复**：网络恢复后按优先级补传（严重故障优先）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-tsl-009.svg" alt="工程师远程诊断车辆故障，如何设计后端架构，支持实时获取车载故障数据、远程调试且不影响车辆行驶？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 高并发双通道：MQTT百万级长连接接入，Kafka做海量诊断数据流缓冲

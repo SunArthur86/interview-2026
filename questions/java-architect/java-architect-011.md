@@ -385,3 +385,7 @@ public class OrderService {
 | 0:15 | Spring Bean 生命周期图 | 先说核心：Bean 生命周期的本质是"Spring 对一个对象从生到死的全流程管控"——实例化→属性注入→初始化→使用→销毁，每个阶段都开放扩展点（Aware 接口、BeanPostPr。 | 核心定义 |
 | 0:30 | 概念结构示意图 | Aware（注入容器资源）、BeanPostProcessor（前后置增强）。 | 4 类扩展点 |
 | 1:30 | 总结卡 | 一句话记忆：生命周期 8 步：实例化→注入→Aware→前置→初始化→后置→使用→销毁。 下期可以接着聊：循环依赖怎么解决。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-011.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -116,6 +116,10 @@ func IsAllowed(userID, notifyType string, limit int64) bool {
 | **邮件** | 中 | 分钟级 | 中(可能入垃圾箱) | 账单、周报、营销 |
 | **站内信** | 低 | 秒级 | 100%(需登录) | 系统公告、消息中心 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-079.svg" alt="如何设计一个消息通知中心？统一管理APP/短信/邮件/站内信通知。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心架构：业务系统→API→消息队列→处理引擎→多渠道，利用MQ实现业务与通道解耦。

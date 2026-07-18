@@ -299,3 +299,7 @@ Kafka Consumer Lag = LogEndOffset - ConsumerOffset
 | 1:06 | 消息队列架构图分步演示 | "三步应急：扩容Consumer到跳过非关键消息到ConsumerLag监控确认" | 三步应急 |
 | 1:57 | 关键代码/伪代码片段 | "ConsumerLag 就是 LogEndOffset - ConsumerOffset 就是 还没消费的消息数" | ConsumerLag |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：Kafka的Consumer数量为什么不能超过Partition数量。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-ks-005.svg" alt="【快手Java一面】Kafka消费者宕机后，积压100万消息，如何快速恢复？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

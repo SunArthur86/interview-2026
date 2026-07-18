@@ -114,6 +114,10 @@ flowchart TD
     K --> M[ArrayList 迭代 ConcurrentModificationException]
     K --> N[非线程安全原因<br/>非原子/指令重排/可见性]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-298.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 老牌安全：Vector/Hashtable方法全锁（性能差淘汰），Collections包装类迭代需手动加锁

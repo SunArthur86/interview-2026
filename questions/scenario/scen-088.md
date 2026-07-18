@@ -133,6 +133,10 @@ flowchart TD
     style ERR fill:#ffcccc
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-088.svg" alt="如何设计一个电商订单状态机？管理订单生命周期。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义法：用「状态+事件=下一状态」的合法转移Map表控制流转，非法抛异常。

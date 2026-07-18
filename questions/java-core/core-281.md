@@ -152,6 +152,10 @@ flowchart TD
     Q --> S[大整数排序]
     T[限制] --> U[需可拆分位<br/>浮点数不适合]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-281.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心原理：非比较排序，按位分配入桶收集，从低位到高位迭代

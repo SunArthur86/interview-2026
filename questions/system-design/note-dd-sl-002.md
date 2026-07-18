@@ -302,6 +302,10 @@ public class RedirectController {
 
 > **面试技巧：** 这个问题的考察点是"你不仅知道怎么做，还知道为什么"。301 vs 302 的选择背后是**可统计性**与**缓存效率**的工程权衡。能讲清楚这个 trade-off，就是高级工程师的水准。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-sl-002.svg" alt="【滴滴面经】短链跳转的原理是什么？用的是什么 HTTP 状态码？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 底层原理：一次KV查询提取长链，通过3xx状态码重定向

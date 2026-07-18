@@ -236,3 +236,8 @@ public class ContextInterceptor implements HandlerInterceptor {
 **候选人**：Value泄漏根因是线程池线程长期存活持有ThreadLocalMap，必须手动remove；线程池场景用完必须在finally里清理。
 **面试官**：线程池里不remove还有什么风险？
 **候选人**：除了泄漏还有脏数据——线程复用会读到上个任务的ThreadLocal值造成业务串号，所以必须强制remove。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-008.svg" alt="【拼多多 Java服务端】ThreadLocal内存泄漏，Key为什么是弱引用？线程池怎么清理？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

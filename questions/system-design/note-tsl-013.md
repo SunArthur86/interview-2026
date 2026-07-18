@@ -312,6 +312,10 @@ public class LogisticsAlertEngine {
 3. **客服介入**：自动创建工单，客服联系海关/报关行跟进
 4. **补偿方案**：严重延误提供补偿（如免费升级交付/积分补偿）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-tsl-013.svg" alt="全球数万笔车辆订单物流实时跟踪，如何设计后端架构，支持物流节点更新、异常预警与轨迹查询？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 多源适配：适配器屏蔽数十家承运商差异，统一清洗去重排序后写入Kafka

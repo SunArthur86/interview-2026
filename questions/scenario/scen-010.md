@@ -119,6 +119,10 @@ func FanoutPost(post *Post, followerIDs []int64) {
     pipe.Exec(ctx)
 }
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-010.svg" alt="如何设计一个 Feed 流（信息流）系统？类似微博/Twitter首页。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心方案对比：推模式读快写放大，拉模式写快读慢，最终选混合模式。

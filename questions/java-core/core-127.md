@@ -197,6 +197,10 @@ flowchart TD
     M[对比] --> N[匿名内部类<br/>无类名 一次性]
     M --> O[成员内部类 全局可见]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-127.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 作用域：定义在方法或作用域块内，仅在当前块内可见，不能加访问修饰符。

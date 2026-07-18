@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">什么是字符串拼接发生了什么？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：基于StringBuilder和常量池的内存操作</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="60" y="110" width="680" height="60" rx="8" fill="#2196F3"/>
+<text x="400" y="138" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">String 不可变（final char[]/byte[]）→ 可常量池共享 → 线程安全 → hashCode 缓存</text>
+<text x="400" y="160" font-size="11" fill="#FFFFFF" text-anchor="middle">JDK 7+ 字符串常量池移到堆中</text>
+<text x="60" y="200" font-size="13" fill="#9C27B0" font-weight="700" letter-spacing="0.5">三种创建方式对比</text>
+<rect x="60" y="220" width="220" height="100" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="170" y="248" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">字面量
+&quot;abc&quot;</text>
+<text x="170" y="278" font-size="11" fill="#37404F" text-anchor="middle">常量池引用</text>
+<text x="170" y="292" font-size="11" fill="#37404F" text-anchor="middle">相同字面量共享</text>
+<rect x="290" y="220" width="220" height="100" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="248" font-size="13" fill="#FF9800" text-anchor="middle" font-weight="700">new String(&quot;abc&quot;)</text>
+<text x="400" y="278" font-size="11" fill="#37404F" text-anchor="middle">堆 new + 常量池</text>
+<text x="400" y="292" font-size="11" fill="#37404F" text-anchor="middle">创建 1~2 个对象</text>
+<rect x="520" y="220" width="220" height="100" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="630" y="248" font-size="13" fill="#f44336" text-anchor="middle" font-weight="700">intern()</text>
+<text x="630" y="278" font-size="11" fill="#37404F" text-anchor="middle">native 方法</text>
+<text x="630" y="292" font-size="11" fill="#37404F" text-anchor="middle">池有则返回池对象</text>
+<text x="630" y="306" font-size="11" fill="#37404F" text-anchor="middle">池无则 JDK7+ 入堆引用</text>
+<rect x="60" y="350" width="680" height="180" rx="10" fill="#FFFFFF" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="80" y="374" font-size="13" fill="#4CAF50" font-weight="700">经典面试题</text>
+<circle cx="78" cy="396" r="4" fill="#4CAF50"/>
+<text x="92" y="400" font-size="11" fill="#37474F">s1=&quot;ab&quot;; s2=&quot;a&quot;+&quot;b&quot;;  s1==s2  →  true (编译期常量折叠)</text>
+<circle cx="78" cy="426" r="4" fill="#FF9800"/>
+<text x="92" y="430" font-size="11" fill="#37474F">s1=&quot;ab&quot;; s3=&quot;a&quot;; s4=s3+&quot;b&quot;;  s1==s4  →  false (变量拼接→堆</text>
+<text x="92" y="444" font-size="11" fill="#37474F">)</text>
+<circle cx="78" cy="456" r="4" fill="#9C27B0"/>
+<text x="92" y="460" font-size="11" fill="#37474F">s5 = new String(&quot;a&quot;)+new String(&quot;b&quot;); s5.intern()==s1  →  t</text>
+<text x="92" y="474" font-size="11" fill="#37474F">rue (JDK7+)</text>
+<circle cx="78" cy="486" r="4" fill="#f44336"/>
+<text x="92" y="490" font-size="11" fill="#37474F">StringBuilder.append() 在循环中优于 + 拼接（避免中间对象）</text>
+</svg>

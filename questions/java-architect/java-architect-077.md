@@ -425,3 +425,7 @@ git filter-branch --tree-filter 'rm -f application-prod.yml' HEAD
 | 0:15 | 密钥与代码分离示意/对比图 | "Vault/KMS/AWS Secrets Manager 集中存储，运行时注入" | 密钥与代码分离要点 |
 | 0:40 | 动态注入示意/对比图 | "K8s Secret、环境变量、Sidecar 挂载，不落盘" | 动态注入要点 |
 | 1:25 | 总结卡 | "记住：密钥不进代码库。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-077.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

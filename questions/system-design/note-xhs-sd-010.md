@@ -394,3 +394,7 @@ Trace: user_id=1001 request_id=abc123
 | 2:01 | 关键代码/伪代码片段 | "可观测三支柱：Metrics+Logging+Tracing" | 可观测三支柱 |
 | 2:54 | 对比表格 | "Metrics: Prometheus+Grafana+Micrometer" | Metrics |
 | 3:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：K8s 中如何做滚动更新和优雅停机。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-010.svg" alt="K8s 环境下的配置管理与可观测性方案如何设计？（入职Java复盘） - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

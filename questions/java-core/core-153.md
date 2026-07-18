@@ -97,6 +97,10 @@ flowchart TD
     K --> M
     L --> M
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-153.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 线程对比：HashMap非线程安全，Hashtable全表加synchronized锁并发性能极差

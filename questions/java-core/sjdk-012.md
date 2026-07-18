@@ -108,6 +108,10 @@ try (Arena arena = Arena.ofConfined()) {
 | **线程安全** | 需自行处理并发访问 | Confined (单线程) / Shared (多线程) 模型可选 |
 | **安全性** | 可访问任意内存地址，极易导致 JVM Crash | 提供访问边界检查，类型安全 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_sjdk-012.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：FFM是JDK替代JNI的全新方案，提供高效且类型安全的本地代码调用与堆外内存管理

@@ -416,3 +416,7 @@ P2 预案（分钟级生效）：切流 —— 需主管批准（影响大）
 | 0:15 | 容量公式示意/对比图 | "(峰值 QPS × 安全系数 1.5-2) ÷ 单机容量 = 所需机器数" | 容量公式要点 |
 | 0:40 | 全链路压测示意/对比图 | "生产环境压测（影子库/影子流量），验证容量" | 全链路压测要点 |
 | 1:25 | 总结卡 | "记住：容量公式。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-194.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -104,6 +104,10 @@ memory_points:
 3. **号段模式 ID 连续性**：为什么重启后 ID 会不连续？（内存中剩余的号段丢失了，重启后从新的号段开始，中间出现空洞，对业务无影响但审计时需注意）。
 4. **雪花算法 WorkerID 分配**：在 Docker/K8s 动态扩缩容环境下，如何保证 WorkerID 不冲突？（使用 ZooKeeper 持久顺序节点自动注册，或基于 IP Hash 生成，但需注意 IP 漂移）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-104.svg" alt="如何设计一个高性能的分布式 ID 生成方案？对比 Snowflake、号段、UUID 的优劣。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - UUID无序太长致页分裂，仅做非主键Token；Snowflake趋势递增做业务主键

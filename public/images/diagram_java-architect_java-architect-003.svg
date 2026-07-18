@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】类加载机制、双亲委派与 SPI 扩展</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：类加载的本质是&quot;把字节码变成 Class 对象 + 隔离命名空间&quot;。双亲委派是为了安全（核心类不被篡改），SPI/打破委…</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="240" y="130" width="320" height="46" rx="6" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="400" y="150" font-size="14" fill="#607D8B" text-anchor="middle" font-weight="700">Bootstrap ClassLoader</text>
+<text x="400" y="168" font-size="11" fill="#546E7A" text-anchor="middle">加载 rt.jar (JAVA_HOME/lib)</text>
+<rect x="260" y="186" width="280" height="46" rx="6" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="400" y="206" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">Extension ClassLoader</text>
+<text x="400" y="224" font-size="11" fill="#546E7A" text-anchor="middle">加载 ext/*.jar (JAVA_HOME/lib/ext)</text>
+<rect x="280" y="242" width="240" height="46" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="400" y="262" font-size="14" fill="#2196F3" text-anchor="middle" font-weight="700">Application ClassLoader</text>
+<text x="400" y="280" font-size="11" fill="#546E7A" text-anchor="middle">加载 classpath / 用户类</text>
+<rect x="300" y="298" width="200" height="46" rx="6" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="318" font-size="14" fill="#FF9800" text-anchor="middle" font-weight="700">Custom ClassLoader</text>
+<text x="400" y="336" font-size="11" fill="#546E7A" text-anchor="middle">自定义 (tomcat/热部署)</text>
+<rect x="540" y="360" width="220" height="160" rx="8" fill="#FFFFFF" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="650" y="386" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">双亲委派模型</text>
+<circle cx="558" cy="406" r="4" fill="#4CAF50"/>
+<text x="572" y="410" font-size="12" fill="#37474F">① 自底向上询问</text>
+<circle cx="558" cy="428" r="4" fill="#4CAF50"/>
+<text x="572" y="432" font-size="12" fill="#37474F">② 父加载器先加载</text>
+<circle cx="558" cy="450" r="4" fill="#4CAF50"/>
+<text x="572" y="454" font-size="12" fill="#37474F">③ 父加载不到才自己加载</text>
+<circle cx="558" cy="472" r="4" fill="#4CAF50"/>
+<text x="572" y="476" font-size="12" fill="#37474F">④ 防止核心类被篡改</text>
+<circle cx="558" cy="494" r="4" fill="#4CAF50"/>
+<text x="572" y="498" font-size="12" fill="#37474F">⑤ Tomcat 打破此模型</text>
+<text x="60" y="380" font-size="13" fill="#2196F3" font-weight="700" letter-spacing="0.5">类加载过程</text>
+<rect x="60" y="400" width="80" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="100" y="425" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">加载</text>
+<rect x="150" y="400" width="80" height="50" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="190" y="425" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">验证</text>
+<line x1="140" y1="425" x2="150" y2="425" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="240" y="400" width="80" height="50" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="280" y="425" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">准备</text>
+<line x1="230" y1="425" x2="240" y2="425" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="330" y="400" width="80" height="50" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="370" y="425" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">解析</text>
+<line x1="320" y1="425" x2="330" y2="425" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="420" y="400" width="80" height="50" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="460" y="425" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">初始化</text>
+<line x1="410" y1="425" x2="420" y2="425" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

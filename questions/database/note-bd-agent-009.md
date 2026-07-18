@@ -165,6 +165,10 @@ lock_key = f"lock:user:{user_id}:action:buy:item:{item_id}"
 3. **锁粒度设计**：提到按orderId/groupId控制，体现并发优化意识
 4. **安全释放**：强调Lua脚本校验value，避免误删他人锁
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-bd-agent-009.svg" alt="Redis里的分布式锁你们具体用了什么方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心结论：长链路用Redisson+watchdog（支付结算），短耗时用SetNX+过期时间（库存限流）

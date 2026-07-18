@@ -121,6 +121,10 @@ flowchart TD
     D -.必须 try-catch/throws.-> F[编译期检查]
     E -.可try-catch.-> G[运行期抛出]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-037.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 异常分受检异常（编译时强制try-catch，如IO异常）和非受检异常（运行时异常如空指针，不强制处理）

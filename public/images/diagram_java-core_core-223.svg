@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">什么是代理模式？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：使用代理对象控制对真实对象的访问，以此增强功能。</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="114" width="229" height="44" rx="8" fill="#2196F3"/>
+<text x="155" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">静态代理</text>
+<rect x="285" y="114" width="229" height="44" rx="8" fill="#FF9800"/>
+<text x="400" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">JDK 动态代理</text>
+<rect x="531" y="114" width="229" height="44" rx="8" fill="#4CAF50"/>
+<text x="645" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">CGLIB 动态代理</text>
+<rect x="40" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">编译期确定</text>
+<rect x="285" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">基于接口</text>
+<rect x="531" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">基于继承</text>
+<rect x="40" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">实现相同接口</text>
+<rect x="285" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Proxy.newProxyInstance</text>
+<rect x="531" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Enhancer.create</text>
+<rect x="40" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">需手写代理类</text>
+<rect x="285" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">InvocationHandler</text>
+<rect x="531" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">MethodInterceptor</text>
+<rect x="40" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">一个代理一个主题</text>
+<rect x="285" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Spring AOP 默认(有接口)</text>
+<rect x="531" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">不能代理 final 类/方法</text>
+</svg>

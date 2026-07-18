@@ -293,6 +293,10 @@ public void calculateUtilization() {
 2. **路径规划引导**：长途出行时推荐沿途充电站
 3. **超充网络规划**：基于历史充电数据优化选址
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-tsl-004.svg" alt="全球数万座充电桩实时调度，如何设计后端架构，实现用户就近分配充电桩，提升充电桩整体利用率？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 空间索引：Redis GEO存储坐标，用GEORADIUS快速圈出附近桩，天然支持距离排序

@@ -134,6 +134,10 @@ memory_points:
 3. **治理旧技术债**：如果遗留系统很烂，是重构还是重写？（答：绞杀者模式，逐步替换，而非大爆炸式重写）
 4. **多语言生态选择**：微服务下不同服务用不同语言，如何保证选型不混乱？（答：统一通讯协议如 gRPC，限制核心技术栈数量，避免烟囱式架构）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-061.svg" alt="如何做技术选型？评估和选择适合团队的技术方案。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 评估维度：不仅看功能性能，更要看社区活跃度、学习成本与运维总成本。

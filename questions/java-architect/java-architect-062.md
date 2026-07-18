@@ -478,3 +478,7 @@ public class RealtimeReconcileService {
 | 0:15 | 双向比对示意/对比图 | "平台账 vs 渠道账，找出平台有渠道无（短款）/渠道有平台无（长款）" | 双向比对要点 |
 | 0:40 | 差错分类示意/对比图 | "自动处理（重试/补单）vs 人工处理（复杂/异常）" | 差错分类要点 |
 | 1:25 | 总结卡 | "记住：双向对账。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-062.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

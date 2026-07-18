@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">常用设计模式</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：解决特定软件设计问题的成熟方案。</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="114" width="720" height="78" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="56" y="153" font-size="15" fill="#2196F3" font-weight="700" dominant-baseline="middle">创建型（5 种）</text>
+<text x="170" y="153" font-size="13" fill="#263238" dominant="middle">单例 / 工厂方法 / 抽象工厂 / 建造者 / 原型</text>
+<rect x="40" y="208" width="720" height="78" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="56" y="247" font-size="15" fill="#4CAF50" font-weight="700" dominant-baseline="middle">结构型（7 种）</text>
+<text x="170" y="247" font-size="13" fill="#263238" dominant="middle">适配器 / 装饰器 / 代理 / 外观 / 桥接 / 组合 / 享元</text>
+<rect x="40" y="302" width="720" height="78" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="56" y="341" font-size="15" fill="#FF9800" font-weight="700" dominant-baseline="middle">行为型（11 种）</text>
+<text x="170" y="332" font-size="13" fill="#263238" dominant="middle">策略 / 模板方法 / 观察者 / 责任链 / 命令 / 状态 / </text>
+<text x="170" y="348" font-size="13" fill="#263238" dominant="middle">迭代器 / 中介者 / 备忘录 / 访问者 / 解释器</text>
+<rect x="40" y="396" width="720" height="78" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="56" y="435" font-size="15" fill="#9C27B0" font-weight="700" dominant-baseline="middle">6 大原则</text>
+<text x="170" y="426" font-size="13" fill="#263238" dominant="middle">单一职责 / 里氏替换 / 依赖倒置 / 接口隔离 / 迪米特</text>
+<text x="170" y="442" font-size="13" fill="#263238" dominant="middle"> / 开闭原则</text>
+</svg>

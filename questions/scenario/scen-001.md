@@ -114,6 +114,10 @@ end
 2. **跳转状态码**：301 和 302 的区别及对浏览器缓存、统计数据准确性的影响（302 浏览器不缓存，统计更准）。
 3. **哈希冲突**：如果使用 MurmurHash 直接生成短码，发生冲突如何处理？（加随机后缀重试，或强行递增 ID 覆盖，通常不推荐直接哈希作为最终短码）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-001.svg" alt="如何设计一个短链系统？数据量约百亿级别，日均访问量十亿次。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 发号器三方案：自增Base62、号段模式Leaf、雪花算法（需防时钟回拨）

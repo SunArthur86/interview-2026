@@ -105,6 +105,10 @@ memory_points:
 4. **Kafka 消费者频繁 Rebalance 怎么排查？**
    - 检查 `max.poll.interval.ms` 是否过短；GC 是否频繁导致 Stop-the-world；网络是否不稳定导致心跳超时。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-092.svg" alt="如何设计消息积压的处理方案？百万级消息积压如何快速消费？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 扩容限制：消费者实例数绝不能超过Topic分区数，否则多余节点空转。

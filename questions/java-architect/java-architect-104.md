@@ -386,3 +386,7 @@ flowchart TD
 | 0:15 | ScopedValue（JDK 示意/对比图 | "不可变、bounded to scope、自动清理" | ScopedValue（JDK 要点 |
 | 0:40 | ThreadLocal 的坑示意/对比图 | "百万虚拟线程下内存爆炸、继承在 carrier 切换时错乱、永不清理泄漏" | ThreadLocal 的坑要点 |
 | 1:25 | 总结卡 | "记住：ScopedValue。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-104.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

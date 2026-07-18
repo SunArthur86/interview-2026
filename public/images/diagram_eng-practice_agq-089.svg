@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">大模型的 Context Window 限制怎么突破</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：结合RAG、摘要和窗口策略绕过长度限制。</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="60" y="130" width="130" height="70" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="125" y="165" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">用户提问</text>
+<rect x="200" y="130" width="130" height="70" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="265" y="158" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Query 改写</text>
+<text x="265" y="172" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">/ 向量化</text>
+<line x1="190" y1="165" x2="200" y2="165" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="340" y="130" width="130" height="70" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="405" y="158" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">向量库召回</text>
+<text x="405" y="172" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(Top-K)</text>
+<line x1="330" y1="165" x2="340" y2="165" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="480" y="130" width="130" height="70" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="545" y="158" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Rerank</text>
+<text x="545" y="172" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">精排</text>
+<line x1="470" y1="165" x2="480" y2="165" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="620" y="130" width="130" height="70" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="685" y="158" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Prompt 拼接</text>
+<text x="685" y="172" font-size="12" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Context</text>
+<line x1="610" y1="165" x2="620" y2="165" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="340" y="240" width="130" height="60" rx="8" fill="#2196F3" stroke="#FF9800" stroke-width="2"/>
+<text x="405" y="262" font-size="13" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">LLM 生成</text>
+<text x="405" y="278" font-size="13" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="600">(引用回答)</text>
+<line x1="690" y1="200" x2="470" y2="240" stroke="#2196F3" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="50" y="330" width="700" height="200" rx="8" fill="#FFFFFF" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="70" y="354" font-size="13" fill="#9C27B0" font-weight="700">核心优化点</text>
+<rect x="70" y="362" width="220" height="56" rx="6" fill="#4CAF5022" stroke="#4CAF50" stroke-width="1.5"/>
+<text x="82" y="380" font-size="12" fill="#4CAF50" font-weight="700">Chunking 切片</text>
+<text x="82" y="400" font-size="11" fill="#37474F">语义切块 256-512 token</text>
+<rect x="300" y="362" width="220" height="56" rx="6" fill="#2196F322" stroke="#2196F3" stroke-width="1.5"/>
+<text x="312" y="380" font-size="12" fill="#2196F3" font-weight="700">Embedding</text>
+<text x="312" y="400" font-size="11" fill="#37474F">bge/m3e 多语言向量</text>
+<rect x="530" y="362" width="220" height="56" rx="6" fill="#FF980022" stroke="#FF9800" stroke-width="1.5"/>
+<text x="542" y="380" font-size="12" fill="#FF9800" font-weight="700">Vector DB</text>
+<text x="542" y="400" font-size="11" fill="#37474F">Milvus/Qdrant/PgVector</text>
+<rect x="70" y="426" width="220" height="56" rx="6" fill="#9C27B022" stroke="#9C27B0" stroke-width="1.5"/>
+<text x="82" y="444" font-size="12" fill="#9C27B0" font-weight="700">Hybrid Search</text>
+<text x="82" y="464" font-size="11" fill="#37474F">向量+BM25 关键词融合</text>
+<rect x="300" y="426" width="220" height="56" rx="6" fill="#f4433622" stroke="#f44336" stroke-width="1.5"/>
+<text x="312" y="444" font-size="12" fill="#f44336" font-weight="700">Rerank</text>
+<text x="312" y="464" font-size="11" fill="#37474F">bge-reranker 精排 Top-K</text>
+<rect x="530" y="426" width="220" height="56" rx="6" fill="#607D8B22" stroke="#607D8B" stroke-width="1.5"/>
+<text x="542" y="444" font-size="12" fill="#607D8B" font-weight="700">上下文压缩</text>
+<text x="542" y="464" font-size="11" fill="#37474F">LongLLMLingua 压缩</text>
+</svg>

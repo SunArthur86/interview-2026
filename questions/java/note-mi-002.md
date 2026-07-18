@@ -173,6 +173,11 @@ flowchart TD
     E --> M
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-mi-002.svg" alt="线程池怎么配置？线上拒绝策略怎么选？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
+
 ## 记忆要点
 
 - 公式口诀：CPU密集型配置核数+1，而IO密集型配置核数×2（或除以计算占比）

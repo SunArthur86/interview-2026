@@ -142,6 +142,10 @@ flowchart TB
 4. **领域模型如何映射到数据库表？**
    - 追问点：聚合根是否对应一张表？值对象如何持久化？
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-051.svg" alt="如何从单体架构演进到微服务架构？微服务拆分的原则和方法。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 拆分原则：基于DDD领域驱动设计，保证单一职责与数据自治（拆服务必拆库）。

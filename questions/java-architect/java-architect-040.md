@@ -448,3 +448,7 @@ public class DegradationController {
 | 1:20 | 流程图 | 故障时返回保底（默认值、缓存、简化逻辑），用户感知"功能受限"非"系统挂了"。 | 降级 |
 | 1:50 | 代码示例截图 | 线程池隔离（强隔离，资源耗尽只影响一个池）vs 信号量隔离（轻量，无队列）。 | 隔离舱 |
 | 3:30 | 总结卡 | 一句话记忆：熔断三态：Closed/Open/Half-Open，Open 快速失败、Half-Open 试探。 下期可以接着聊：熔断和限流区别。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-040.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

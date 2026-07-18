@@ -94,6 +94,10 @@ res.cookie('sessionId', sessionId, {
 2.  **安全性问题**：如何防止 Cookie 被劫持？（使用 HttpOnly、Secure、SameSite 属性）。
 3.  **分布式 Session**：在多服务器集群环境下，Session 如何共享？（Session 粘滞、集中式存储如 Redis）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-147.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心四步：服务端下发响应头(Set-Cookie) -> 浏览器本地存储 -> 请求自动携带 -> 服务端读取识别。

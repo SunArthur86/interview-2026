@@ -119,6 +119,10 @@ flowchart TD
     N --> P[JUnit 测试]
     N --> Q[ButterKnife View 绑定]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-165.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 工作三步曲：用@interface定义，打标签使用，最后配合解析器发挥作用。

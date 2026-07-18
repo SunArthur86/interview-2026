@@ -383,3 +383,7 @@ maxsize=512m：磁盘文件最大 512MB，满了自动滚动
 | 0:15 | JFR（JDK 11+ 开源）示意/对比图 | "JVM 内置，< 1% 开销，生产常开" | JFR（JDK 11+ 开源）要点 |
 | 0:40 | jcmd JFR.sta示意/对比图 | "jcmd JFR.start / JFR.dump / JFR.stop 在线控制" | jcmd JFR.sta要点 |
 | 1:25 | 总结卡 | "记住：JFR。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-109.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

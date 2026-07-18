@@ -88,6 +88,10 @@ if [ $INODE_USAGE -gt 90 ]; then
 fi
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-256.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：操作系统在存储设备上组织文件的方法和数据结构。

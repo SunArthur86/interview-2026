@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】微服务拆分边界如何从领域模型推导</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：微服务拆分边界的本质是&quot;找到业务的限界上下文（Bounded Context）&quot;——一组高内聚的业务概念和规则形成一个边…</text>
+<!-- BODY_TOP=110 -->
+<text x="60" y="126" font-size="13" fill="#2196F3" font-weight="700" letter-spacing="0.5">ACID 四大特性</text>
+<rect x="60" y="146" width="160" height="80" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="140" y="174" font-size="15" fill="#4CAF50" text-anchor="middle" font-weight="700">A 原子性</text>
+<text x="140" y="200" font-size="11" fill="#37474F" text-anchor="middle">全部成功或全部回滚</text>
+<rect x="235" y="146" width="160" height="80" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="315" y="174" font-size="15" fill="#2196F3" text-anchor="middle" font-weight="700">C 一致性</text>
+<text x="315" y="200" font-size="11" fill="#37474F" text-anchor="middle">数据约束不被破坏</text>
+<rect x="410" y="146" width="160" height="80" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="490" y="174" font-size="15" fill="#FF9800" text-anchor="middle" font-weight="700">I 隔离性</text>
+<text x="490" y="200" font-size="11" fill="#37474F" text-anchor="middle">并发事务互不干扰</text>
+<rect x="585" y="146" width="160" height="80" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="665" y="174" font-size="15" fill="#9C27B0" text-anchor="middle" font-weight="700">D 持久性</text>
+<text x="665" y="200" font-size="11" fill="#37474F" text-anchor="middle">提交后永久保存</text>
+<text x="60" y="266" font-size="13" fill="#9C27B0" font-weight="700" letter-spacing="0.5">四种隔离级别（→ 隔离性递增，性能递减）</text>
+<rect x="60" y="286" width="160" height="100" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="140" y="308" font-size="11" fill="#f44336" text-anchor="middle" font-weight="700">READ UNCOMMITTED</text>
+<text x="140" y="332" font-size="13" fill="#263238" text-anchor="middle" font-weight="700">读未提交</text>
+<text x="140" y="358" font-size="10" fill="#546E7A" text-anchor="middle">脏读 / 不可重复读 / 幻读</text>
+<rect x="235" y="286" width="160" height="100" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="315" y="308" font-size="11" fill="#FF9800" text-anchor="middle" font-weight="700">READ COMMITTED</text>
+<text x="315" y="332" font-size="13" fill="#263238" text-anchor="middle" font-weight="700">读已提交</text>
+<text x="315" y="358" font-size="10" fill="#546E7A" text-anchor="middle">不可重复读 / 幻读</text>
+<rect x="410" y="286" width="160" height="100" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="490" y="308" font-size="11" fill="#2196F3" text-anchor="middle" font-weight="700">REPEATABLE READ</text>
+<text x="490" y="332" font-size="13" fill="#263238" text-anchor="middle" font-weight="700">可重复读
+MySQL 默认</text>
+<text x="490" y="358" font-size="10" fill="#546E7A" text-anchor="middle">幻读</text>
+<rect x="585" y="286" width="160" height="100" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="665" y="308" font-size="11" fill="#4CAF50" text-anchor="middle" font-weight="700">SERIALIZABLE</text>
+<text x="665" y="332" font-size="13" fill="#263238" text-anchor="middle" font-weight="700">串行化</text>
+<text x="665" y="358" font-size="10" fill="#546E7A" text-anchor="middle">无（性能最差）</text>
+<text x="60" y="422" font-size="13" fill="#4CAF50" font-weight="700">7 大传播行为：REQUIRED(默认) / REQUIRES_NEW / NESTED / SUPPORTS / NOT_SUPPORTED / NEVER / MANDATORY</text>
+<text x="60" y="448" font-size="12" fill="#607D8B">@Transactional 失效场景：非 public / 自调用 / 异常被吞 / 默认只回滚 RuntimeException</text>
+</svg>

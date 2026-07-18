@@ -393,3 +393,7 @@ flowchart TD
 | 0:15 | StructuredTa示意/对比图 | "StructuredTaskScope（JDK 21 预览、JDK 24 GA）：fork 子任务 + shutdown 策略" | StructuredTa要点 |
 | 0:40 | ShutdownOnSucces示意/对比图 | "第一个成功就取消其他（适用任何可用模式）" | ShutdownOnSucces要点 |
 | 1:25 | 总结卡 | "记住：StructuredTask。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-103.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

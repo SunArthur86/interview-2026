@@ -110,6 +110,10 @@ return {1, amount}
 2. **二倍均值法细节**：为什么要 `× 2`？（保证均值稳定，避免后续抢到的金额忽大忽小，确保每人抢到的金额期望值相同）。
 3. **幂等性**：用户疯狂点击按钮，如何防止抢到多个？（Lua 脚本中先用 Set/Bitmap 记录 `hset red_packet_id user_id 1`，若已存在则直接返回错误）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-003.svg" alt="如何设计微信抢红包系统？红包金额如何拆分？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 金额拆分：必记微信二倍均值法，公式=随机(0.01, 剩余金额/剩余人数×2)

@@ -499,3 +499,7 @@ flowchart TD
 | 0:15 | 锁状态转换图 | 先说核心：Redis 分布式锁的本质是"用 SET NX PX 原子命令实现互斥，用过期时间防死锁，用唯一 value（UUID）+ Lua 原子删锁防误删"。正确性挑战有三个边界：锁超。 | 核心定义 |
 | 0:30 | Redis 数据结构图 | Lua 脚本（判断 value 相等才删，防误删）。 | 解锁 |
 | 1:30 | 总结卡 | 一句话记忆：基础锁：SET key uuid NX PX 30000（原子加锁 + 过期防死锁）。 下期可以接着聊：为什么解锁要 Lua 脚本。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-028.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

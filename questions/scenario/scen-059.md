@@ -127,6 +127,10 @@ memory_points:
 4. **数据中台的数据“脏乱差”问题怎么治理？**
    答：建立数据标准（命名规范、指标口径），引入数据质量监控（DQC），利用元数据管理追踪血缘，并实施数据生命周期管理（冷热分层）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-059.svg" alt="如何设计中台架构？业务中台、数据中台、技术中台。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心思想：将通用能力下沉，避免各业务线重复造轮子。

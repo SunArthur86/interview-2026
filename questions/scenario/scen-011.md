@@ -115,6 +115,10 @@ flowchart TD
     style TB fill:#ffe4b5
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-011.svg" alt="如何设计一个在线排队系统？类似小米抢购、医院挂号排队。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 数据结构：选Redis ZSet而非List，因为ZSet能以O(log N)极速返回排队名次。

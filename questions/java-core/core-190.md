@@ -119,6 +119,10 @@ flowchart TD
     D --> D3[0-RTT 建联]
     D --> D4[连接迁移<br/>IP 变化不断流]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-190.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大核心：二进制分帧、多路复用、HPACK头部压缩，彻底解决HTTP1.1的慢。

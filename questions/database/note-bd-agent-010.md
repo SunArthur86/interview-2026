@@ -185,6 +185,10 @@ flowchart TD
     style RS fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-bd-agent-010.svg" alt="直接用SetNX做分布式锁会有什么问题？和Redisson有什么区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三大问题：因为业务耗时不确定，所以过期时间难定；且无自动续期易致锁提前释放，存在删他人锁风险

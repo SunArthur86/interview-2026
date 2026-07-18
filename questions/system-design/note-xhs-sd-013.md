@@ -289,3 +289,7 @@ public class OrderTimeoutHandler {
 **候选人**：DB扛不住百万并发、库存行锁竞争严重，要用缓存预扣+MQ削峰层层保护DB，Redis预扣+DB最终扣减+对账。
 **面试官**：纯Redis扣减够吗？
 **候选人**：不够，Redis宕机会丢数据、内存有限不是最终账本，要Redis预扣+DB最终扣减+对账兜底保证一致性。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-xhs-sd-013.svg" alt="【系统设计】如何设计12306抢票系统，支持百万并发？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

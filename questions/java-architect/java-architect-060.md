@@ -501,3 +501,7 @@ public class ChannelReconcileService {
 | 1:05 | 流水追加写示意/对比图 | "INSERT only，不可 UPDATE/DELETE，哈希链防篡改" | 流水追加写要点 |
 | 1:30 | 余额一致性示意/对比图 | "余额表 = SUM(流水)，定时对账修正" | 余额一致性要点 |
 | 1:55 | 总结卡 | "记住：复式记账。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-060.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

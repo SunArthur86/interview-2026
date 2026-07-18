@@ -464,3 +464,7 @@ flowchart TD
 | 0:15 | KEDA = K8s 事示意/对比图 | "KEDA = K8s 事件驱动伸缩（基于外部信号，非 CPU）" | KEDA = K8s 事要点 |
 | 0:40 | ScaledObject示意/对比图 | "定义伸缩对象 + 触发器（trigger）" | ScaledObject要点 |
 | 1:25 | 总结卡 | "记住：KEDA = K8s 事件驱。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-119.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

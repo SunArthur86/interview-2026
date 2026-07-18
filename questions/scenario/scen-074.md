@@ -142,6 +142,10 @@ ABAC更灵活但更复杂，适合大型企业。
 - 自定义PermissionEvaluator
 - 注解 + AOP实现声明式权限控制
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-074.svg" alt="如何设计一个权限管理系统（RBAC/ABAC）？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心模型：RBAC基于静态角色(用户-角色-权限)，简单直观；ABAC基于动态属性，极灵活

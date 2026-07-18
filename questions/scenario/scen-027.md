@@ -124,6 +124,10 @@ flowchart TD
     style RC fill:#ffe4b5
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-027.svg" alt="如何设计一个商品搜索系统？支持多维度筛选、排序和聚合。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 架构四层：查询理解（意图/改写）、召回（倒排+向量）、排序（粗排BM25+精排预估CTR/CVR）、展示

@@ -290,6 +290,10 @@ public class PointsRecordConsumer implements RocketMQListener<PointRecordMessage
 - **批次管理**：每笔积分独立记录过期时间，过期时精确扣减对应批次
 - **提前提醒**：过期前7天/1天/当天多轮推送提醒
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-tsl-003.svg" alt="亿级车主积分获取、兑换、过期管理，如何设计后端架构，保证积分计算准确，支持高并发兑换且实时同步状态？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 模型分离：汇总表存总余额，流水表(按月分表)记明细，因为亿级流水必须按时间归档

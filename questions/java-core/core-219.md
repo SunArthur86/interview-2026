@@ -143,6 +143,10 @@ sequenceDiagram
     C->>S: ACK seq=u+1 ack=w+1
     Note over C: TIME_WAIT 2MSL 后关闭
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-219.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 本质成因：TCP 是面向字节流的协议，底层无消息边界保护，而 UDP 面向报文不粘包

@@ -432,3 +432,7 @@ flowchart TD
 **面试官**：预算账户分片（budget:123:0~9）扣减时，怎么知道用户该扣哪个子账户？
 
 **候选人**：用户 hash 到固定子账户（hash(userId) % 10），保证同一用户每次扣同一子账户（避免重复扣）。但问题：某子账户余额不足时其他子账户还有钱，用户被误拒。解决：先查"本用户子账户"够不够，不够再向其他子账户"借"（跨子账户扣减，要跨片事务）。或者更简单——分片只用于写热点分散，查询时合并所有子账户余额判断。监控 cross_shard_borrow_rate（跨片借用的比例，过高说明分片不均）。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-170.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

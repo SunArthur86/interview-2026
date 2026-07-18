@@ -229,3 +229,7 @@ aof-use-rdb-preamble yes
 | 0:15 | Redis Lua 脚本执行截图 | "RDB口诀：快照小恢复快，但两次快照间数据可能丢" | RDB口诀 |
 | 1:02 | Redis Lua 脚本执行截图分步演示 | "AOF口诀：日志全不丢数据，但文件大恢复慢" | AOF口诀 |
 | 1:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：RDB的bgsave过程中如果有写请求，Redis怎么保证数据一致性。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_database_note-xhs-db-017.svg" alt="【拼多多一面】Redis 持久化方式(RDB/AOF)及优缺点 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

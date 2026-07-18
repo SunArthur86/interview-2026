@@ -95,6 +95,10 @@ memory_points:
 3. **什么是 Bundle 的生命周期状态？**
    - INSTALLED -> RESOLVED -> STARTING -> ACTIVE -> STOPPING -> UNINSTALLED。RESOLVED 表示依赖满足但未启动。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-208.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心定义：Java 平台的模块化规范，核心单元叫 Bundle，实现物理隔离与高内聚低耦合

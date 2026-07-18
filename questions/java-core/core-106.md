@@ -119,6 +119,10 @@ flowchart TD
     P[HTTPS/TLS] --> Q[服务端证书<br/>证明公钥归属]
     R[证书吊销] --> S[CRL/OCSP]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-106.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心作用：由权威CA背书，防中间人攻击，证明“公钥确实属于该实体”

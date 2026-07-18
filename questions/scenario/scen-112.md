@@ -99,6 +99,10 @@ if (remaining != null && remaining >= 0) {
 | **Redis Lua** | 内存原子操作 | 高 (~10w+) | 最终一致 (异步回写DB) | 秒杀主流程 |
 | **本地预扣减** | AtomicInteger | 极高 (~50w+) | 弱一致性 (可能少卖) | 极端瞬时洪峰 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-112.svg" alt="秒杀系统如何做到「绝不超卖」？从缓存到数据库的全链路库存扣减方案。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 超卖根因：查库存与扣减非原子操作，导致并发读旧值

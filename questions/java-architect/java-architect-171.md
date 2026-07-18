@@ -399,3 +399,7 @@ public class BenefitExpireScheduler {
 **面试官**：双 11 给 PLUS 会员发券，亿级用户里有 5000 万 PLUS，发放任务跑多久？
 
 **候选人**：5000 万用户分批进 Kafka——每批 1 万用户，共 5000 批，并发消费 100 个分区，每批 batch insert 500 条约 50ms，单批处理 1 秒内。总时长 = 5000 批 / 100 分区 × 1 秒 = 50 秒左右。但要预留缓冲（消费者启动、DB 压力），实际 2-5 分钟。监控 issue_throughput（发放速率，应稳定在 10 万/秒以上）。发完后跑分桶校验确认无漏发。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-171.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -396,3 +396,7 @@ flowchart TD
 | 0:15 | 版本化示意/对比图 | "prompt 存 DB/Git，每次改动生成新版本，线上只跑已发布版本" | 版本化要点 |
 | 0:40 | 参数化示意/对比图 | "模板（系统提示）与变量（用户输入/检索结果）分离，用占位符注入" | 参数化要点 |
 | 1:25 | 总结卡 | "记住：Prompt 是软代码。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-091.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

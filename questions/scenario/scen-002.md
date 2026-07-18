@@ -102,6 +102,10 @@ return 1
 2. **预热策略**：库存为什么要预热到 Redis？如何保证 Redis 和 DB 数据一致？（秒杀开始前统一写入，扣减 Redis 成功才视为抢购资格，DB 异步扣减，允许短暂不一致）。
 3. **Redis 脚本**：为什么库存扣减必须使用 Lua 脚本？（保证「查询库存」和「扣减库存」的原子性，防止并发竞态）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-002.svg" alt="如何设计一个秒杀系统？假设某商品1000件，瞬时并发100万。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 防超卖三道防线：网关限流、Redis预扣(Lua原子性)、DB乐观锁兜底

@@ -500,3 +500,7 @@ Level 5: 预测规划（预测业务→前置架构）
 | 1:05 | 因果链示意/对比图 | "指标→用户动作→系统动作→架构能力" | 因果链要点 |
 | 1:30 | 从业务指标反推架构能力实战案例 | "实战：从 GMV 下降到技术方案" | 实战案例 |
 | 1:55 | 总结卡 | "记住：北极星指标 + 拆解公式。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-200.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

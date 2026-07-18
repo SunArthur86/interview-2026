@@ -112,6 +112,10 @@ memory_points:
 3. **第三方服务**：压测请求打到第三方支付/物流接口怎么办？（Mock挡板，模拟返回）
 4. **结果分析**：如何区分压测产生的日志和监控数据，避免影响告警？（日志打标，监控系统过滤压测Tag）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-043.svg" alt="如何设计全链路压测方案？模拟真实大促流量验证系统容量。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心数据隔离：流量打Header标记，请求路由到专属的影子库表、影子Redis和影子MQ

@@ -330,3 +330,7 @@ Pact（行为契约）    ──► 描述消费方实际使用的子集
 | 0:15 | Pact 是 CDC 主流实现（示意/对比图 | "JVM、Pact-Broker、Pact-Go）" | Pact 是 CDC 主流实现（要点 |
 | 0:40 | 消费方写 Pact示意/对比图 | "消费方写 Pact（expected request + minimal response）→ 上传 Broker" | 消费方写 Pact要点 |
 | 1:25 | 总结卡 | "记住：CDC。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-127.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

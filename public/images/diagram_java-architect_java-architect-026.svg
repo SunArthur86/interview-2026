@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】Redis 缓存模式与一致性治理</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：缓存模式的本质是&quot;用空间换时间——把热点数据放内存加速读取&quot;。Cache-Aside（旁路缓存）是业务代码同时管理缓存和…</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="114" width="229" height="44" rx="8" fill="#2196F3"/>
+<text x="155" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">Cache Aside 旁路</text>
+<rect x="285" y="114" width="229" height="44" rx="8" fill="#FF9800"/>
+<text x="400" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">Read/Write Through</text>
+<rect x="531" y="114" width="229" height="44" rx="8" fill="#4CAF50"/>
+<text x="645" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">Write Behind</text>
+<rect x="40" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">最常用</text>
+<rect x="285" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">缓存主导</text>
+<rect x="531" y="174" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="212" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">异步回写</text>
+<rect x="40" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">读：先查缓存，miss 查 DB 回填</text>
+<rect x="285" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">应用只操作缓存</text>
+<rect x="531" y="249" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="286" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">写：只更新缓存</text>
+<rect x="40" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">写：更新 DB，再删缓存</text>
+<rect x="285" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">缓存同步写回 DB</text>
+<rect x="531" y="324" width="229" height="75" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="362" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">后台批量刷 DB</text>
+<rect x="40" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">问题：并发下短暂不一致</text>
+<rect x="285" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">对应用透明</text>
+<rect x="531" y="399" width="229" height="75" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="436" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">性能最高，可能丢数据</text>
+</svg>

@@ -248,3 +248,7 @@ public class RedisSyncConsumer implements RocketMQListener<CdcEvent> {
 **候选人**：CDC监听Binlog准实时秒级、只同步增量高效无侵入；定时全量延迟大资源浪费对源库压力大。
 **面试官**：CDC怎么保证不丢数据？
 **候选人**：Binlog位点管理+MQ持久化+消费ack+幂等+定期对账兜底，故障注入测试验证可靠性。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-bd6-002.svg" alt="【字节一面】基于 CDC 思想设计一个数据同步系统：单一数据源同步到多个下游系统，使用 MQ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -107,6 +107,10 @@ memory_points:
 3. **如何防止请求中的 Body 被篡改？**
    - 必须将 Body 的内容（或 Body 的 Hash）参与签名计算。任何字节的变动都会导致签名不一致。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-097.svg" alt="如何设计一个防接口重放攻击的方案？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三要素防重放：时间戳(Timestamp)保时效、随机数(Nonce)保唯一、签名(Signature)防篡改

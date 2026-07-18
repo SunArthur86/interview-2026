@@ -96,6 +96,10 @@ flowchart TD
     J[目的] --> K[避免回到慢启动<br/>不浪费带宽]
     L[对比慢启动] --> M[超时才回 cwnd=1]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-019.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 触发条件：连续收到3个重复ACK，判定为网络轻微拥塞

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】分布式 ID 雪花算法与趋势递增</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：雪花算法（Snowflake）用 64 位 long 拼接三段信息——时间戳（41 位，约 69 年）+ 机器 ID（1…</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="60" y="110" width="680" height="50" rx="8" fill="#2196F3"/>
+<text x="400" y="142" font-size="15" fill="#FFFFFF" text-anchor="middle" font-weight="700">InnoDB B+ 树索引：非叶子节点存索引键，叶子节点存数据(聚簇) / 主键(二级)</text>
+<rect x="340" y="180" width="120" height="40" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="400" y="193" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">根节点</text>
+<text x="400" y="207" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">10 | 20 | 30</text>
+<rect x="80" y="250" width="150" height="40" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="155" y="263" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">中间节点</text>
+<text x="155" y="277" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">&lt;10</text>
+<line x1="400" y1="220" x2="155" y2="250" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="255" y="250" width="150" height="40" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="330" y="263" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">中间节点</text>
+<text x="330" y="277" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">10-20</text>
+<line x1="400" y1="220" x2="330" y2="250" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="430" y="250" width="150" height="40" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="505" y="263" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">中间节点</text>
+<text x="505" y="277" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">20-30</text>
+<line x1="400" y1="220" x2="505" y2="250" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="605" y="250" width="150" height="40" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="680" y="263" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">中间节点</text>
+<text x="680" y="277" font-size="11" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">&gt;30</text>
+<line x1="400" y1="220" x2="680" y2="250" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="325" font-size="12" fill="#4CAF50" text-anchor="middle" font-weight="700">叶子节点（双向链表，范围查询友好）</text>
+<rect x="80" y="340" width="150" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="155" y="353" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">叶子</text>
+<text x="155" y="365" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">1,4,7</text>
+<text x="155" y="377" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">+ 主键 ID</text>
+<rect x="255" y="340" width="150" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="330" y="353" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">叶子</text>
+<text x="330" y="365" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">10,13,17</text>
+<text x="330" y="377" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">+ 主键 ID</text>
+<line x1="245" y1="365" x2="225" y2="365" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="225" y1="375" x2="245" y2="375" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="430" y="340" width="150" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="505" y="353" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">叶子</text>
+<text x="505" y="365" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">20,23,27</text>
+<text x="505" y="377" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">+ 主键 ID</text>
+<line x1="420" y1="365" x2="400" y2="365" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="400" y1="375" x2="420" y2="375" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="605" y="340" width="150" height="50" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="680" y="353" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">叶子</text>
+<text x="680" y="365" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">30,35,40</text>
+<text x="680" y="377" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">+ 主键 ID</text>
+<line x1="595" y1="365" x2="575" y2="365" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="575" y1="375" x2="595" y2="375" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="60" y="420" width="340" height="130" rx="8" fill="#9C27B011" stroke="#9C27B0" stroke-width="2"/>
+<text x="230" y="446" font-size="14" fill="#9C27B0" text-anchor="middle" font-weight="700">聚簇索引 (Clustered)</text>
+<circle cx="80" cy="466" r="4" fill="#9C27B0"/>
+<text x="94" y="470" font-size="11" fill="#37474F">叶子节点存整行数据</text>
+<circle cx="80" cy="486" r="4" fill="#9C27B0"/>
+<text x="94" y="490" font-size="11" fill="#37474F">一张表只有一个</text>
+<circle cx="80" cy="506" r="4" fill="#9C27B0"/>
+<text x="94" y="510" font-size="11" fill="#37474F">默认主键 / 第一个 NOT NULL UNIQUE</text>
+<circle cx="80" cy="526" r="4" fill="#9C27B0"/>
+<text x="94" y="530" font-size="11" fill="#37474F">查询主键快</text>
+<rect x="420" y="420" width="320" height="130" rx="8" fill="#FF980011" stroke="#FF9800" stroke-width="2"/>
+<text x="580" y="446" font-size="14" fill="#FF9800" text-anchor="middle" font-weight="700">二级索引 (Secondary)</text>
+<circle cx="440" cy="466" r="4" fill="#FF9800"/>
+<text x="454" y="470" font-size="11" fill="#37404F">叶子节点存索引列+主键</text>
+<circle cx="440" cy="486" r="4" fill="#FF9800"/>
+<text x="454" y="490" font-size="11" fill="#37404F">可有多个</text>
+<circle cx="440" cy="506" r="4" fill="#FF9800"/>
+<text x="454" y="510" font-size="11" fill="#37404F">查询需&quot;回表&quot;再到聚簇查</text>
+<circle cx="440" cy="526" r="4" fill="#FF9800"/>
+<text x="454" y="530" font-size="11" fill="#37404F">覆盖索引避免回表</text>
+</svg>

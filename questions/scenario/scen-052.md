@@ -126,6 +126,10 @@ flowchart TD
     style GW fill:#ffe4b5
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-052.svg" alt="如何设计API网关？统一鉴权、限流、路由、监控。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心职责：统一入口处理非业务横切关注点（鉴权、限流、路由、协议转换、监控）。

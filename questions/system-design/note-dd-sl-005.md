@@ -238,6 +238,10 @@ flowchart TD
     E -.->|缓存穿透导致排队| I[慢查询与连接等待]
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-sl-005.svg" alt="【滴滴面经】压测过程中，实际性能瓶颈在哪里？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 排查顺序：从网络、应用CPU到Redis和DB，依链路逐层定位

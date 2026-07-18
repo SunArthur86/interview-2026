@@ -305,6 +305,10 @@ public class ShortLinkService {
 
 > **面试技巧：** STAR 法则的精髓是 **Why（为什么做）→ How（怎么做）→ What results（效果如何）**。每个环节都要有数据支撑，让面试官感受到你对项目的全局掌控力和量化思维。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-sl-001.svg" alt="【滴滴面经】做短链项目的出发点是什么？用了哪些技术？最后达到了什么效果？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 业务痛点：长链致短信成本增加，且无法精准统计点击转化

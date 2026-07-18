@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】大规模定时任务分片与抢占</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：大规模定时任务的核心是&quot;分片广播 + 抢占锁&quot;。分片广播（XXL-Job ShardingBroadcast）把任务按 …</text>
+<!-- BODY_TOP=110 -->
+<rect x="40" y="114" width="229" height="44" rx="8" fill="#2196F3"/>
+<text x="155" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">数据库</text>
+<rect x="285" y="114" width="229" height="44" rx="8" fill="#FF9800"/>
+<text x="400" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">Redis (SETNX)</text>
+<rect x="531" y="114" width="229" height="44" rx="8" fill="#4CAF50"/>
+<text x="645" y="142" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="700">Zookeeper</text>
+<rect x="40" y="174" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">唯一索引</text>
+<rect x="285" y="174" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">SET NX PX</text>
+<rect x="531" y="174" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="204" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">临时顺序节点</text>
+<rect x="40" y="234" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">for update 行锁</text>
+<rect x="285" y="234" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Redlock 算法</text>
+<rect x="531" y="234" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="264" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">Curator InterProcessMutex</text>
+<rect x="40" y="294" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">实现简单</text>
+<rect x="285" y="294" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">性能高</text>
+<rect x="531" y="294" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="324" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">CP 强一致</text>
+<rect x="40" y="354" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">性能差</text>
+<rect x="285" y="354" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">需守护线程续期</text>
+<rect x="531" y="354" width="229" height="60" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="384" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">性能中等</text>
+<rect x="40" y="414" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="155" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">需定时清理</text>
+<rect x="285" y="414" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="400" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">AP 模型有风险</text>
+<rect x="531" y="414" width="229" height="60" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+<text x="645" y="444" font-size="12" fill="#37474F" text-anchor="middle" dominant-baseline="middle">可靠性最高</text>
+</svg>

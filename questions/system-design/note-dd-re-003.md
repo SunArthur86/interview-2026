@@ -338,6 +338,10 @@ public String toDotGraph() {
 >
 > 如果规则量继续增长到百级别，再考虑引入 Drools 或自研 DSL 配置化方案，实现规则与代码解耦。」
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-re-003.svg" alt="【滴滴面经】如果后面不是加一个规则，而是连续加十几个规则，会不会越来越乱？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 数量阈值：规则超10个线性链必乱，需升级树或分组结构

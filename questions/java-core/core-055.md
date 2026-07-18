@@ -66,6 +66,10 @@ Active Side (e.g. Client)       Passive Side (e.g. Server)
 3.  **CLOSE_WAIT 状态**：如果服务端出现大量 CLOSE_WAIT，通常意味着代码层面未正确关闭流（如未调用 `close()` 或 Socket 未读到底）。
 4.  **MSL 典型值**：Linux 默认通常为 30秒 或 60秒，因此 TIME_WAIT 默认为 60秒 或 120秒。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-055.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - MSL定义：报文在网络中的最大生存时间。

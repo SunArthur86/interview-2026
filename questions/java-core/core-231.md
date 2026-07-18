@@ -113,6 +113,10 @@ app.get('/api/data', (req, res) => {
 | **数据来源** | 浏览器本地缓存（未过期不请求） | 服务器验证（请求头发送，但无 body） |
 | **优先级** | 高（若命中，不走协商） | 低（强缓存失效后才触发） |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-231.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 触发前提：强制缓存已失效，需向服务器询问资源是否更新

@@ -118,6 +118,10 @@ else
 end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-008.svg" alt="如何设计一个春运红包雨系统？春晚期间瞬时并发千万级。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心难点：瞬时峰值极高，必须通过预热拆分与本地缓存化解中心节点压力。

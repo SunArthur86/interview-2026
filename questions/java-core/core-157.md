@@ -94,6 +94,10 @@ while (true) {
 ### 实战案例
 在维护一个基于原生 NIO 的推送系统时，遇到过由于未及时处理 `SelectionKey` 导致的“空轮询”bug，使得 CPU 占用率飙升。通过引入 Netty（其对 Selector 的 Bug 进行了修复和优化），问题得到彻底解决。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-157.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话核心：I/O多路复用，单线程管理海量Channel，极度减少线程上下文切换开销

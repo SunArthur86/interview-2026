@@ -413,3 +413,7 @@ public void reconcile() {
 | 0:15 | Facade 路由是核心示意/对比图 | "入口统一，内部按功能路由到新/旧系统" | Facade 路由是核心要点 |
 | 0:40 | 渐进迁移示意/对比图 | "新功能在新系统，旧功能逐步替换，每步可回滚" | 渐进迁移要点 |
 | 1:25 | 总结卡 | "记住：绞杀者模式。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-191.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

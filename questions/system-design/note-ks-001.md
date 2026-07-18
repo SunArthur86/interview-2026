@@ -294,3 +294,7 @@ jstack 输出里每个 BLOCKED 线程会显示"waiting to lock <0x000000076b8a12
 | 1:06 | MySQL EXPLAIN 执行计划截图分步演示 | "MySQL CPU正常就是排除数据库，重点查应用层：线程阻塞、连接池耗尽、Full GC" | MySQL CPU正常 |
 | 1:57 | 关键代码/伪代码片段 | "SkyWalking是分布式链路追踪的核心——一个请求在所有微服务中的耗时一目了然" | SkyWalking是分 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：如果链路追踪发现是某个下游RPC服务变慢，如何进一步排查。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-ks-001.svg" alt="【快手Java一面】促销活动时订单服务TP99从50ms飙到2s，MySQL CPU正常，如何快速定位？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

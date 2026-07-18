@@ -142,6 +142,10 @@ url=http://169.254.169.254/latest/meta-data/  # 云服务器元数据
 3. **SameSite Cookie 属性**：Lax 和 Strict 的区别？（答：Strict 禁止所有跨站 Cookie 发送；Lax 允许部分安全请求（如 Get 链接跳转）发送 Cookie，平衡了安全与用户体验。Chrome 默认设为 Lax）
 4. **SSRF 绕过内网检测**：攻击者可能会用 `http://0177.0.0.1` (8进制) 或 `http://[::]` (IPv6) 代替 127.0.0.1，如何防御？（答：必须将输入的 URL 域名解析为 IP 地址，然后将 IP 地址转换为标准的长整型数值进行范围比对，直接拦截私有网段）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-065.svg" alt="如何防范常见的Web安全攻击？SQL注入/XSS/CSRF/SSRF等。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - SQL注入：因拼接SQL有风险，故强用参数化查询与ORM井号占位符。

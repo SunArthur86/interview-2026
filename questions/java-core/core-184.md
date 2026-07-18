@@ -96,6 +96,10 @@ flowchart TD
     M[对比] --> N[gRPC HTTP/2+Protobuf]
     M --> O[Dubbo Hessian2/Kryo]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-184.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心作用：IDL定义+生成跨语言代码，解决异构系统高效RPC通信。

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】LongAdder、ConcurrentHashMa…</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：LongAdder 和 ConcurrentHashMap 的共同本质是&quot;用空间换并发度&quot;——把一个热点变量拆成多个 C…</text>
+<!-- BODY_TOP=110 -->
+<rect x="50" y="110" width="700" height="50" rx="8" fill="#2196F3"/>
+<text x="400" y="142" font-size="15" fill="#FFFFFF" text-anchor="middle" font-weight="700">JDK 7: Segment 分段锁  |  JDK 8: Node 数组 + CAS + synchronized 锁桶</text>
+<rect x="50" y="180" width="340" height="180" rx="8" fill="#FF980011" stroke="#FF9800" stroke-width="2"/>
+<text x="220" y="206" font-size="14" fill="#FF9800" text-anchor="middle" font-weight="700">JDK 7：Segment[]</text>
+<text x="220" y="232" font-size="11" fill="#546E7A" text-anchor="middle">默认 16 段，每段独立锁（并发度=段数）</text>
+<rect x="70" y="250" width="70" height="50" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="105" y="269" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Seg0</text>
+<text x="105" y="281" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ReentrantLock</text>
+<rect x="70" y="310" width="70" height="36" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="105" y="328" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">HashEntry[]</text>
+<rect x="148" y="250" width="70" height="50" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="183" y="269" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Seg1</text>
+<text x="183" y="281" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ReentrantLock</text>
+<rect x="148" y="310" width="70" height="36" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="183" y="328" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">HashEntry[]</text>
+<rect x="226" y="250" width="70" height="50" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="261" y="269" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Seg2</text>
+<text x="261" y="281" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ReentrantLock</text>
+<rect x="226" y="310" width="70" height="36" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="261" y="328" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">HashEntry[]</text>
+<rect x="304" y="250" width="70" height="50" rx="8" fill="#FFFFFF" stroke="#FF9800" stroke-width="2"/>
+<text x="339" y="269" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">Seg3</text>
+<text x="339" y="281" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ReentrantLock</text>
+<rect x="304" y="310" width="70" height="36" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="339" y="328" font-size="10" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">HashEntry[]</text>
+<rect x="410" y="180" width="340" height="180" rx="8" fill="#4CAF5011" stroke="#4CAF50" stroke-width="2"/>
+<text x="580" y="206" font-size="14" fill="#4CAF50" text-anchor="middle" font-weight="700">JDK 8：Node[]</text>
+<text x="580" y="232" font-size="11" fill="#546E7A" text-anchor="middle">锁粒度细化到桶；CAS 写入 + synchronized 锁头节点</text>
+<rect x="430" y="250" width="42" height="36" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="451" y="268" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">[0]</text>
+<rect x="480" y="250" width="42" height="36" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="501" y="268" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">[1]</text>
+<rect x="530" y="250" width="42" height="36" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="551" y="268" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">[2]</text>
+<rect x="580" y="250" width="42" height="36" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="601" y="268" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">[3]</text>
+<rect x="630" y="250" width="42" height="36" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="651" y="268" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">[4]</text>
+<rect x="680" y="250" width="42" height="36" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="701" y="268" font-size="9" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">[5]</text>
+<text x="580" y="310" font-size="11" fill="#4CAF50" text-anchor="middle">链表>8 & 数组≥64 → 红黑树 (TreeBin)</text>
+<text x="580" y="332" font-size="11" fill="#4CAF50" text-anchor="middle">sizeCtl 控制；transfer 多线程辅助扩容</text>
+<text x="60" y="390" font-size="13" fill="#9C27B0" font-weight="700">核心 API：putIfAbsent / computeIfAbsent / sizeCtl / ForwardingNode</text>
+<text x="60" y="414" font-size="12" fill="#607D8B">读操作无锁(volatile Node) / 写 CAS+sync / 扩容并发迁移 / size 弱一致</text>
+</svg>

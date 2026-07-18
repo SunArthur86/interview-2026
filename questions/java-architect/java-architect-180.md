@@ -452,3 +452,7 @@ flowchart TD
 **面试官**：ZK 选主保证唯一 leader，但如果 ZK 本身挂了呢？
 
 **候选人**：ZK 集群是 3/5 节点（多数派存活就能工作），单 ZK 挂不影响。如果 ZK 集群整体挂（少数情况），调度中心没有 leader 就停止调度（宁可停也不脑裂）。已分配的任务执行器继续执行（不依赖 ZK），只是新任务不分配。ZK 恢复后重新选主继续。极端兜底：手动指定一个调度中心为 leader（运维介入）。监控 zk_connection_loss_alert（ZK 连接丢失告警）和 schedule_pause_duration（调度暂停时长，应 < 1 分钟）。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-180.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

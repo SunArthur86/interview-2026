@@ -457,3 +457,7 @@ public class OrderService {
 | 0:15 | 分库分表架构图 | 先说核心：分库分表的本质是"把单机存不下的数据按维度拆到多个库表，用哈希或范围路由分散负载"。路由维度选 user_id（按用户拆，单用户数据在一个分片），扩容用"倍数翻倍"（2 库→4。 | 核心定义 |
 | 0:30 | 概念结构示意图 | 用户维度（user_id 哈希）、时间维度（按月分表）、地理维度。 | 路由维度 |
 | 1:30 | 总结卡 | 一句话记忆：分库（连接/TPS）vs 分表（数据量/磁盘），通常分库分表一起做。 下期可以接着聊：分库分表后主键怎么生成。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-023.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -126,6 +126,10 @@ memory_points:
 3. **团伙攻击识别**：单点看不出问题，如何发现刷单团伙？（答：构建知识图谱，通过手机号、设备ID、IP、收货地址等节点建立关系，发现强连通子图）
 4. **误杀处理**：风控太严误伤正常用户怎么办？（答：设置申诉通道，策略上线先 Shadow 模式（只记录不拦截）校验准确率，动态调整阈值）
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-062.svg" alt="如何设计一个防刷系统？防止黄牛/机器人/恶意攻击。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 四层防御：网络层(WAF/IP限频)、设备层(指纹)、行为层(轨迹/验证码)、业务层(图谱)。

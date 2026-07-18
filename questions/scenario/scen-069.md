@@ -141,6 +141,10 @@ flowchart TD
     style LUA fill:#d4edda
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-069.svg" alt="如何设计抽奖系统？保证公平、防刷、高并发。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心流程：风控限流 -> Lua脚本内（扣抽奖次数 + 算概率 + 扣奖品库存）保证原子性

@@ -113,6 +113,10 @@ func (s *PushService) BatchPush(roomID string, msgs []Message) {
 2. **弱网环境**：用户网络波动时，如何保证弹幕不卡顿？（答：客户端心跳检测，自动重连；服务端维护消息队列，重连后断点续传或放弃历史消息）。
 3. **广播风暴**：百万人的直播间，一条弹幕要推百万次，CPU 直接打满怎么办？（答：使用组播协议优化内网传输；或者按用户等级分层，对普通用户进行采样/丢弃）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-007.svg" alt="如何设计直播弹幕系统？百万级用户同时在线，每秒十万条弹幕。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 架构链路：长连接接入→按房间隔离的Topic→消费推送给用户，连接路由存Redis。

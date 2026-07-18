@@ -428,3 +428,7 @@ native-image --pgo=profile.iprof -jar app.jar app-optimized
 | 1:05 | 代价示意/对比图 | "无 JIT（峰值吞吐降 10-30%）、反射/动态代理要配置、构建慢（5-10 分钟）" | 代价要点 |
 | 1:30 | reflect示意/对比图 | "config.json / resource-config.json / proxy-config.json 配置文件" | reflect要点 |
 | 1:55 | 总结卡 | "记住：Native Image。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-110.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -111,6 +111,10 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 | **代码可读性** | 回调地狱或复杂的链式调用 | 结构化代码块，同步风格编写异步逻辑 |
 | **调试难度** | 线程栈支离破碎，难以追踪 | 保留线程调用树，Stack Trace 清晰直观 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_sjdk-010.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 一句话定义：将并发任务视为一个单元，生命周期与代码块绑定，消灭孤儿线程

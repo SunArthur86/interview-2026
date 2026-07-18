@@ -262,6 +262,10 @@ flowchart LR
     end
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-dd-lt-004.svg" alt="【滴滴面经】为什么这个场景需要优化到 O(1)？原始算法复杂度是多少？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 原始算法：累加概率前缀和遍历匹配，时间复杂度为O(K)，包含多次浮点计算与分支预测。

@@ -319,6 +319,11 @@ final boolean nonfairTryAcquire(int acquires) {
 
 > **面试一句话**：`synchronized` 是 JVM 内置的自动锁，简单安全；`ReentrantLock` 是基于 AQS 的 API 层手动锁，功能强大但需要小心释放。JDK 6+ 两者性能接近，无高级需求时优先 `synchronized`。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-java-001.svg" alt="synchronized 和 ReentrantLock 的区别？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
+
 ## 记忆要点
 
 - 层级与释放：synchronized是JVM关键字且自动释放锁，而ReentrantLock是API层需手动unlock

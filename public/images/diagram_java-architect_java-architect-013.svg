@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">【Java 后端架构师】Spring Boot 自动配置原理与 starte…</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：自动配置的本质是&quot;约定优于配置 + 条件化 Bean 注册&quot;——starter 声明一组 Bean 定义，@Condit…</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<rect x="40" y="200" width="105" height="90" rx="8" fill="#2196F322" stroke="#2196F3" stroke-width="2"/>
+<text x="92" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@SpringBootAp</text>
+<text x="92" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">plication</text>
+<text x="92" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">启动</text>
+<circle cx="58" cy="218" r="13" fill="#2196F3"/>
+<text x="58" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">1</text>
+<rect x="163" y="200" width="105" height="90" rx="8" fill="#4CAF5022" stroke="#4CAF50" stroke-width="2"/>
+<text x="216" y="206" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@EnableAutoCo</text>
+<text x="216" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">nfiguration</text>
+<text x="216" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">@Import(AutoC</text>
+<text x="216" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">onfigurationI</text>
+<text x="216" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">mportSelector</text>
+<text x="216" y="284" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">)</text>
+<circle cx="181.0" cy="218" r="13" fill="#4CAF50"/>
+<text x="181.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">2</text>
+<rect x="286" y="200" width="105" height="90" rx="8" fill="#FF980022" stroke="#FF9800" stroke-width="2"/>
+<text x="338" y="198" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">读取 META-INF</text>
+<text x="338" y="214" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">/spring.facto</text>
+<text x="338" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ries</text>
+<text x="338" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(spring-boot </text>
+<text x="338" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">3: AutoConfig</text>
+<text x="338" y="276" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">uration.impor</text>
+<text x="338" y="292" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">ts)</text>
+<circle cx="304.0" cy="218" r="13" fill="#FF9800"/>
+<text x="304.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">3</text>
+<rect x="409" y="200" width="105" height="90" rx="8" fill="#9C27B022" stroke="#9C27B0" stroke-width="2"/>
+<text x="462" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">过滤 @Conditi</text>
+<text x="462" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">onal</text>
+<text x="462" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">条件装配</text>
+<circle cx="427.0" cy="218" r="13" fill="#9C27B0"/>
+<text x="427.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text>
+<rect x="532" y="200" width="105" height="90" rx="8" fill="#f4433622" stroke="#f44336" stroke-width="2"/>
+<text x="584" y="229" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">满足条件 → </text>
+<text x="584" y="245" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">注册 Bean</text>
+<text x="584" y="261" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">到容器</text>
+<circle cx="550.0" cy="218" r="13" fill="#f44336"/>
+<text x="550.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text>
+<rect x="655" y="200" width="105" height="90" rx="8" fill="#607D8B22" stroke="#607D8B" stroke-width="2"/>
+<text x="708" y="222" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">用户配置优先</text>
+<text x="708" y="237" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">(@Conditional</text>
+<text x="708" y="253" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">OnMissingBean</text>
+<text x="708" y="268" font-size="13" fill="#263238" text-anchor="middle" dominant-baseline="middle" font-weight="600">)</text>
+<circle cx="673.0" cy="218" r="13" fill="#607D8B"/>
+<text x="673.0" y="223" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">6</text>
+<line x1="145" y1="245" x2="163" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="268" y1="245" x2="286" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="391" y1="245" x2="409" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="514" y1="245" x2="532" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="637" y1="245" x2="655" y2="245" stroke="#455A64" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

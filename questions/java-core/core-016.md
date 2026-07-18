@@ -139,6 +139,10 @@ flowchart TD
     M[乱码根源] --> N[编码与解码字符集不一致]
     M --> O[字节流读字符截断]
 ```
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-016.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心策略是高频字符用短码，低频字符用长码，节省空间

@@ -109,6 +109,10 @@ System.out.println(s); // Hello_World
 | 性能 | 低（涉及对象创建） | 高 | 较低（锁开销） |
 | 适用场景 | 少量操作、常量、Map Key | 大量单线程字符串操作 | 大量多线程字符串操作 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-319.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 底层实现：类用final修饰防继承，核心数组(byte[]/char[])用private final修饰防修改。

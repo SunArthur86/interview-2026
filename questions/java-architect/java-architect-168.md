@@ -366,3 +366,7 @@ public enum FulfillmentStatus {
 **面试官**：路由算法多目标打分，权重（距离 0.3 + 时效 0.3 + 成本 0.2 + 库存 0.2）怎么调？
 
 **候选人**：权重不能拍脑袋，要按业务策略和 A/B 调。大促前时效优先（权重调成 0.5），平时成本优先（成本 0.4）。A/B 验证——不同权重组合跑 1 周对比 delivery_promise_achievement 和 fulfillment_cost_rate，选 Pareto 最优。权重要可配置（配置中心动态调）不发版。监控 route_strategy_change_frequency（频繁调权说明策略不稳）。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-168.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

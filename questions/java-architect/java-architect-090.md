@@ -407,3 +407,7 @@ public class QualityGuard {
 | 1:05 | 降级链示意/对比图 | "主模型（贵强）→ 备模型（便宜次）→ 规则引擎（确定性兜底），按 RT/错误率/预算触发" | 降级链要点 |
 | 1:30 | 模型路由示意/对比图 | "按任务复杂度路由（cheap 模型分类、expensive 模型生成），省 60%+ 成本" | 模型路由要点 |
 | 1:55 | 总结卡 | "记住：网关四职责。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-090.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

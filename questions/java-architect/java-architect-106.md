@@ -368,3 +368,7 @@ flowchart TD
 | 0:15 | SequencedCol示意/对比图 | "SequencedCollection 接口（JDK 21）：addFirst/addLast/getFirst/getLast/removeFirst/r……" | SequencedCol要点 |
 | 0:40 | SequencedSet示意/对比图 | "SequencedSet extends SequencedCollection（去重版）" | SequencedSet要点 |
 | 1:25 | 总结卡 | "记住：SequencedColle。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-106.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

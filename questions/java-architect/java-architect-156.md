@@ -440,3 +440,7 @@ flowchart TD
 | 0:40 | Checkpoint 原理示意/对比图 | "Checkpoint 原理 —— Chandy-Lamport + Barrier，必考" | Checkpoint 原理要点 |
 | 1:05 | 对齐 vs 非对齐示意/对比图 | "对齐 vs 非对齐 —— 反压场景的关键" | 对齐 vs 非对齐要点 |
 | 1:55 | 总结卡 | "记住：State 五种类型。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-156.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

@@ -91,6 +91,10 @@ memory_points:
 3.  **状态机设计**：完整的状态流转包含哪些？（WAITING -> SCANNED -> CONFIRMED / EXPIRED / CANCELED）。
 4.  **安全性**：如果二维码被截图发给别人怎么办？（通常扫码后会显示具体 APP 的头像和信息，防止盲扫；或者 Token 极短时间失效）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-294.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 三端交互流转：PC请求生成UUID状态(待扫)、APP扫码改状态(已扫)、APP确认发Token(已确认)

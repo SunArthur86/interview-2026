@@ -407,3 +407,7 @@ flowchart TD
 | 0:15 | 降级 vs 熔断 vs 限流示意/对比图 | "降级 vs 熔断 vs 限流 —— 三个机制目的不同" | 降级 vs 熔断 vs 限流要点 |
 | 0:40 | 四级降级分级示意/对比图 | "四级降级分级 —— P0 不降、P3 可关" | 四级降级分级要点 |
 | 1:25 | 总结卡 | "记住：降级 vs 熔断 vs 限流。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-146.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

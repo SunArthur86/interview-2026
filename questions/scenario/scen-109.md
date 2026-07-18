@@ -129,6 +129,10 @@ LoadingCache<String, UserConfig> localCache = Caffeine.newBuilder()
 | **容量** | 受限于 JVM 堆内存 | 受限于集群内存 (可扩展至 TB) |
 | **应用场景** | 配置信息、字典表、极热点数据 | 用户Session、购物车、通用缓存 |
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-109.svg" alt="如何设计一个高性能的多级缓存架构？本地缓存、分布式缓存、CDN 如何协同？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 多级缓存：请求走向为CDN→Nginx→本地→Redis→DB，越靠前性能越高

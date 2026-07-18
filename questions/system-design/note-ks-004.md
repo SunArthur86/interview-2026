@@ -355,3 +355,7 @@ public class ZkWorkerIdAssigner {
 | 1:06 | Redis Lua 脚本执行截图分步演示 | "冲突两大根因：时钟回播(NTP同步) + WorkerID重复(手动配置)" | 冲突两大根因 |
 | 1:57 | 关键代码/伪代码片段 | "时钟回拨解法：记录lastTimestamp到回拨<5ms则等待到>5ms则抛异常/借用未来时间" | 时钟回拨解法 |
 | 2:50 | 总结卡 | "核心抓住这条主线，下期咱们接着聊：雪花算法为什么用64位？128位有什么问题。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_system-design_note-ks-004.svg" alt="【快手Java一面】分库分表后，雪花算法生成的ID出现冲突，如何解决？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

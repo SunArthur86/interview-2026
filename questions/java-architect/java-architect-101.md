@@ -337,3 +337,7 @@ try {
 | 0:15 | 虚拟线程 ≠ 平台线程示意/对比图 | "栈在堆、JVM 调度、阻塞 unmount，万级并发无压力" | 虚拟线程 ≠ 平台线程要点 |
 | 0:40 | carrier 线程数示意/对比图 | "carrier 线程数 = ForkJoinPool 平台线程数（默认 CPU 核数），是真正的并发度上限" | carrier 线程数要点 |
 | 1:25 | 总结卡 | "记住：虚拟线程 = 栈在堆 + J。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-101.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

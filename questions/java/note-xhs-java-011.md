@@ -214,3 +214,8 @@ jmap -dump:format=b,file=/data/dumps/manual.hprof <pid>
 **候选人**：重启会丢失现场，下次还会复现；必须先dump保留证据定位根因，再重启恢复服务。
 **面试官**：dump文件很大怎么处理？
 **候选人**：配-XX:+HeapDumpOnOutOfMemoryError自动dump到大磁盘、设置轮转保留、dump后压缩传输、监控磁盘避免写满。
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java_note-xhs-java-011.svg" alt="【拼多多 Java服务端】线上系统突然OOM了，怎么排查？ - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+

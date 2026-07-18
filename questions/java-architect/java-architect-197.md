@@ -443,3 +443,7 @@ Quarkus (Native): 0.02-0.05s 启动（GraalVM + Quarkus）
 | 0:15 | 冷启动原因示意/对比图 | "JVM 类加载 + JIT 编译 + 框架初始化（Spring Boot 5-10s）" | 冷启动原因要点 |
 | 0:40 | AWS SnapStart示意/对比图 | "CRIU 内存快照，启动 5s → 200ms（仅 Prime 支持的 Lambda）" | AWS SnapStart要点 |
 | 1:25 | 总结卡 | "记住：冷启动原因。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-197.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

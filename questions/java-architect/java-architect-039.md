@@ -495,3 +495,7 @@ public class RateLimitHandler {
 | 0:40 | 概念结构示意图 | 容量（允许突发上限）、速率（平均 QPS）。 | 令牌桶参数 |
 | 1:05 | 流程图 | 单机用 Sentinel/Resilience4j，集群用 Redis+Lua 或 Sentinel 集群模式。 | 单机限流 vs 集群限流 |
 | 2:30 | 总结卡 | 一句话记忆：四算法：计数器（边界突冲）、滑动窗口（平滑）、漏桶（匀速无突发）、令牌桶（匀速+突发）。 下期可以接着聊：令牌桶和漏桶区别。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-039.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

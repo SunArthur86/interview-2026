@@ -117,6 +117,10 @@ flowchart TD
     style CLK fill:#ffcccc
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-013.svg" alt="如何设计一个分布式 UUID / ID 生成器？要求全局唯一、趋势递增、高可用。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 方案对比：UUID本地生成但无序致索引差，数据库自增受限单点瓶颈。

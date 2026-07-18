@@ -135,6 +135,10 @@ flowchart TD
     style DIFF fill:#ffcccc
 ```
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_scenario_scen-032.svg" alt="如何设计一个对账系统？保证支付/订单/资金数据分毫不差。 - 核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 核心流程：拉取T+1账单 → 数据清洗对齐格式 → 全等匹配（交易号+金额+状态） → 差异生成报告

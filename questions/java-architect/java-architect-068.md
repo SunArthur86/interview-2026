@@ -503,3 +503,7 @@ public class DecisionExplainService {
 | 0:15 | 决策三态示意/对比图 | "PASS（放行）/ CHALLENGE（人机验证/二次确认）/ REJECT（拒绝）" | 决策三态要点 |
 | 0:40 | 规则引擎示意/对比图 | "条件→动作，DSL 配置（不发版）" | 规则引擎要点 |
 | 1:25 | 总结卡 | "记住：决策三态。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-068.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

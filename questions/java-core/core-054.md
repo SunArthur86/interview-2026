@@ -91,6 +91,10 @@ net.ipv4.tcp_syn_retries = 2
 2.  **第三次握手丢包**：客户端发了 ACK 但丢了，客户端认为已连接，服务端认为未连接。此时会发生什么？（服务端重传 SYN+ACK，客户端再次响应 ACK）。
 3.  **全连接队列与半连接队列**：握手过程中涉及的两个队列长度限制及溢出行为（`net.core.somaxconn`, `tcp_max_syn_backlog`）。
 
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-core_core-054.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
+
 ## 记忆要点
 
 - 握手流程：C发SYN(x) -> S回SYN+ACK(y) -> C发ACK(y+1)。

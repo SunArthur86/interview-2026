@@ -503,3 +503,7 @@ public void checkLocalTransaction(MessageExt msg) {
 | 0:40 | 事务隔离级别对比表 | Try（资源预留）-Confirm（确认）-Cancel（回滚），业务侵入强，适合资金类强一致。 | TCC |
 | 1:05 | 概念结构示意图 | 长事务拆成 N 个子事务，每个配补偿操作，失败时倒序执行补偿，最终一致。 | Saga |
 | 2:30 | 总结卡 | 一句话记忆：XA = 两阶段（Prepare+Commit），强一致但阻塞，基本不用。 下期可以接着聊：TCC 的 Try 阶段冻结资金怎么实现。 | 收尾总结 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-018.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />

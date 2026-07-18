@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<rect width="800" height="500" fill="#FAFBFC"/>
+<rect x="0" y="0" width="800" height="64" fill="#2196F3"/>
+<rect x="0" y="0" width="8" height="64" fill="#FF9800"/>
+<text x="28" y="40" font-size="22" font-weight="700" fill="#FFFFFF" text-rendering="geometricPrecision">什么是TCP三次握手/四次挥手？</text>
+<text x="28" y="552" font-size="0"></text>
+<text x="28" y="92" font-size="14" fill="#37474F" font-style="italic">核心：三次握手建立连接，四次挥手断开连接</text>
+<!-- BODY_TOP=110 -->
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#455A64"/>
+</marker>
+<marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#4CAF50"/>
+</marker>
+</defs>
+<line x1="200" y1="140" x2="200" y2="450" stroke="#2196F3" stroke-width="2" stroke-dasharray="4,3"/>
+<line x1="600" y1="140" x2="600" y2="450" stroke="#FF9800" stroke-width="2" stroke-dasharray="4,3"/>
+<rect x="130" y="116" width="140" height="38" rx="8" fill="#2196F3"/>
+<text x="200" y="140" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">Client 客户端</text>
+<rect x="530" y="116" width="140" height="38" rx="8" fill="#FF9800"/>
+<text x="600" y="140" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">Server 服务端</text>
+<line x1="600" y1="190" x2="200" y2="190" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="182" font-size="12" fill="#4CAF50" text-anchor="middle" font-weight="700">SYN=1, seq=x</text>
+<text x="400" y="208" font-size="11" fill="#607D8B" text-anchor="middle">CLOSED → SYN_SENT</text>
+<line x1="200" y1="270" x2="600" y2="270" stroke="#FF9800" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="262" font-size="12" fill="#FF9800" text-anchor="middle" font-weight="700">SYN=1, ACK=1, seq=y, ack=x+1</text>
+<text x="400" y="288" font-size="11" fill="#607D8B" text-anchor="middle">LISTEN → SYN_RCVD</text>
+<line x1="600" y1="350" x2="200" y2="350" stroke="#2196F3" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="342" font-size="12" fill="#2196F3" text-anchor="middle" font-weight="700">ACK=1, seq=x+1, ack=y+1</text>
+<text x="400" y="368" font-size="11" fill="#607D8B" text-anchor="middle">ESTABLISHED</text>
+<rect x="120" y="400" width="160" height="38" rx="8" fill="#4CAF5022" stroke="#4CAF50"/>
+<text x="200" y="424" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">ESTABLISHED</text>
+<rect x="520" y="400" width="160" height="38" rx="8" fill="#4CAF5022" stroke="#4CAF50"/>
+<text x="600" y="424" font-size="13" fill="#4CAF50" text-anchor="middle" font-weight="700">ESTABLISHED</text>
+<text x="400" y="470" font-size="13" fill="#9C27B0" text-anchor="middle" font-weight="700">三次握手 = 双方确认收发能力，防止历史连接</text>
+</svg>

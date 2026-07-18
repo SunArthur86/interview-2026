@@ -431,3 +431,7 @@ slo:
 | 0:40 | Micrometer 是示意/对比图 | "Micrometer 是指标门面（SLF4J 模式），支持多后端" | Micrometer 是要点 |
 | 1:05 | 四种指标类型示意/对比图 | "Counter（递增）/Gauge（瞬时值）/Histogram（分布）/Timer（延迟+计数）" | 四种指标类型要点 |
 | 1:55 | 总结卡 | "记住：Micrometer 是指标。下期见。" | 收尾 |
+
+## 核心知识点图
+
+<img src="/interview-2026/images/diagram_java-architect_java-architect-114.svg" alt="核心知识点图" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px;margin:1em 0;" />
